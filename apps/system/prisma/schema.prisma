@@ -1,0 +1,227 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Division {
+  id            String     @id @default(uuid())
+  department_id String
+  department    Department @relation(fields: [department_id], references: [id], onDelete: Restrict)
+  code          String     @unique
+  name          String
+  status        Int        @default(1)
+  created_at    DateTime   @default(now())
+  updated_at    DateTime   @updatedAt
+  is_deleted    Boolean    @default(false)
+
+  @@map("division")
+}
+
+model Department {
+  id         String     @id @default(uuid())
+  code       String     @unique
+  name       String
+  status     Int        @default(1)
+  created_at DateTime   @default(now())
+  updated_at DateTime   @updatedAt
+  is_deleted Boolean    @default(false)
+  employees  Employee[]
+  Division   Division[]
+
+  @@map("department")
+}
+
+model Employee {
+  id              String     @id @default(uuid())
+  user            User?
+  employee_number String     @unique
+  firstname       String
+  middlename      String?
+  lastname        String
+  department_id   String
+  department      Department @relation(fields: [department_id], references: [id])
+
+  jo_approver_setting   JOApproverSetting?   @relation("JOApproverSetting")
+  meqs_approver_setting MEQSApproverSetting? @relation("MEQSApproverSetting")
+  po_approver_setting   POApproverSetting?   @relation("POApproverSetting")
+  rv_approver_setting   RVApproverSetting?   @relation("RVApproverSetting")
+  spr_approver_setting  SPRApproverSetting?  @relation("SPRApproverSetting")
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  is_deleted Boolean  @default(false)
+
+  @@map("employee")
+}
+
+model Classification {
+  id   String @id @default(uuid())
+  name String
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  is_deleted Boolean  @default(false)
+
+  @@map("classification")
+}
+
+model User {
+  id          String   @id @default(uuid())
+  employee_id String   @unique
+  employee    Employee @relation(fields: [employee_id], references: [id], onDelete: Cascade)
+
+  username String @unique
+  password String
+  status   Int    @default(1)
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  is_deleted Boolean  @default(false)
+
+  user_permissions UserPermission[]
+
+  @@map("user")
+}
+
+model UserPermission {
+  id String @id @default(uuid())
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  is_deleted Boolean  @default(false)
+
+  user    User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id String
+
+  submodule    SubModule @relation(fields: [submodule_id], references: [id], onDelete: Restrict)
+  submodule_id String
+
+  @@map("user_permission")
+}
+
+model Service {
+  id   String @id @default(uuid())
+  name String @unique
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  is_deleted Boolean  @default(false)
+
+  features Feature[] @relation("ServiceToFeature")
+
+  @@map("service")
+}
+
+model Feature {
+  id   String @id @default(uuid())
+  name String @unique
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  is_deleted Boolean  @default(false)
+
+  service    Service  @relation("ServiceToFeature", fields: [service_id], references: [id], onDelete: Cascade)
+  modules    Module[] @relation("FeatureToModule")
+  service_id String
+
+  @@map("feature")
+}
+
+model Module {
+  id   String @id @default(uuid())
+  name String @unique
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  is_deleted Boolean  @default(false)
+
+  feature    Feature     @relation("FeatureToModule", fields: [feature_id], references: [id], onDelete: Cascade)
+  submodules SubModule[] @relation("ModuleToSubModule")
+  feature_id String
+
+  @@map("module")
+}
+
+model SubModule {
+  id   String @id @default(uuid())
+  name String @unique
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  is_deleted Boolean  @default(false)
+
+  module           Module           @relation("ModuleToSubModule", fields: [module_id], references: [id], onDelete: Cascade)
+  module_id        String
+  user_permissions UserPermission[]
+
+  @@map("submodule")
+}
+
+model JOApproverSetting {
+  id          String   @id @default(uuid())
+  label       String
+  order       Int      @unique
+  approver_id String   @unique
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+  is_deleted  Boolean  @default(false)
+  approver    Employee @relation("JOApproverSetting", fields: [approver_id], references: [id])
+
+  @@map("jo_approver_setting")
+}
+
+model RVApproverSetting {
+  id          String   @id @default(uuid())
+  approver_id String   @unique
+  label       String
+  order       Int      @unique
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+  is_deleted  Boolean  @default(false)
+  approver    Employee @relation("RVApproverSetting", fields: [approver_id], references: [id])
+
+  @@map("rv_approver_setting")
+}
+
+model SPRApproverSetting {
+  id          String   @id @default(uuid())
+  approver_id String   @unique
+  label       String
+  order       Int      @unique
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+  is_deleted  Boolean  @default(false)
+  approver    Employee @relation("SPRApproverSetting", fields: [approver_id], references: [id])
+
+  @@map("spr_approver_setting")
+}
+
+model MEQSApproverSetting {
+  id          String   @id @default(uuid())
+  approver_id String   @unique
+  label       String
+  order       Int      @unique
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+  is_deleted  Boolean  @default(false)
+  approver    Employee @relation("MEQSApproverSetting", fields: [approver_id], references: [id])
+
+  @@map("meqs_approver_setting")
+}
+
+model POApproverSetting {
+  id          String   @id @default(uuid())
+  approver_id String   @unique
+  label       String
+  order       Int      @unique
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+  is_deleted  Boolean  @default(false)
+  approver    Employee @relation("POApproverSetting", fields: [approver_id], references: [id])
+
+  @@map("po_approver_setting")
+}
