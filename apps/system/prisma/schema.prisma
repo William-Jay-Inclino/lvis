@@ -37,7 +37,6 @@ model Department {
 
 model Employee {
   id              String     @id @default(uuid())
-  user            User?
   employee_number String     @unique
   firstname       String
   middlename      String?
@@ -70,9 +69,7 @@ model Classification {
 }
 
 model User {
-  id          String   @id @default(uuid())
-  employee_id String   @unique
-  employee    Employee @relation(fields: [employee_id], references: [id], onDelete: Cascade)
+  id String @id @default(uuid())
 
   username String @unique
   password String

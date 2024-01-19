@@ -6,6 +6,8 @@ import {
   ApolloFederationDriverConfig,
 } from '@nestjs/apollo';
 import { EmployeeModule } from './employee/employee.module';
+import { UserModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module';
 
 
 @Module({
@@ -17,7 +19,9 @@ import { EmployeeModule } from './employee/employee.module';
       },
     }),
     DepartmentModule,
-    EmployeeModule
+    EmployeeModule,
+    UserModule,
+    AuthModule
   ],
   controllers: [],
   providers: [],
