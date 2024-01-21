@@ -1,0 +1,13 @@
+
+- This will run the development databases
+- "-d" will run in the background
+docker-compose up -d system-db warehouse-db
+
+- This will run the test databases
+docker-compose up -d system-test-db warehouse-test-db
+
+- This will stop and remove the containers 
+docker-compose down 
+
+- This will stop the containers 
+docker-compose stop

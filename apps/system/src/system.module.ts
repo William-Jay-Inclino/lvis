@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { DepartmentModule } from './department/department.module';
 import { GraphQLModule } from '@nestjs/graphql';
 import {
@@ -6,10 +7,15 @@ import {
   ApolloFederationDriverConfig,
 } from '@nestjs/apollo';
 import { EmployeeModule } from './employee/employee.module';
+import { UserModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module';
 
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     GraphQLModule.forRoot<ApolloFederationDriverConfig>({
       driver: ApolloFederationDriver,
       autoSchemaFile: {
@@ -17,7 +23,9 @@ import { EmployeeModule } from './employee/employee.module';
       },
     }),
     DepartmentModule,
-    EmployeeModule
+    EmployeeModule,
+    UserModule,
+    AuthModule
   ],
   controllers: [],
   providers: [],

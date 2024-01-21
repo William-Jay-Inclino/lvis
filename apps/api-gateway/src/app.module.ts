@@ -1,43 +1,98 @@
 import { ApolloGatewayDriver, ApolloGatewayDriverConfig } from '@nestjs/apollo';
-import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import { Module, UnauthorizedException } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { IntrospectAndCompose, RemoteGraphQLDataSource } from '@apollo/gateway';
-import { authContext } from './auth.context';
+import { HttpModule } from '@nestjs/axios';
+import { verify } from 'jsonwebtoken'
+
+const getToken = (authToken: string) => {
+
+  const match = authToken.match(/^Bearer (.*)$/)
+  if(!match || match.length > 2) {
+    throw new UnauthorizedException('Invalid token');
+  }
+
+  return match[1]
+
+}
+
+const decodeToken = (tokenString: string) => {
+
+  console.log('process.env.JWT_SECRET_KEY', process.env.SYSTEM_URL)
+
+  const decoded = verify(tokenString, process.env.JWT_SECRET_KEY)
+
+  if(!decoded) {
+    throw new UnauthorizedException('Invalid token');
+  }
+
+  return decoded
+
+}
+
+
+function handleAuth({ req }) {
+
+  try {
+
+    if(req.headers.authorization) {
+      const token = getToken(req.headers.authorization)
+      const decoded = decodeToken(token)
+      console.log('decode', decoded)
+
+      return {
+        user: decoded,
+        authorization: req.headers.authorization
+      }
+    }
+
+  } catch (error) {
+    throw new UnauthorizedException('Invalid token');
+  }
+
+}
+
+
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+
     GraphQLModule.forRoot<ApolloGatewayDriverConfig>({
       driver: ApolloGatewayDriver,
       server: {
         // cors: true,
-        // context: authContext,
+        context: handleAuth
       },
       gateway: {
         supergraphSdl: new IntrospectAndCompose({
           subgraphs: [
             {
               name: 'system',
-              url: 'http://localhost:4000/graphql',
+              url: process.env.SYSTEM_URL,
             },
             {
               name: 'warehouse',
-              url: 'http://localhost:4001/graphql',
+              url: process.env.WAREHOUSE_URL,
             },
           ],
         }),
-        // buildService({ url }) {
-        //   return new RemoteGraphQLDataSource({
-        //     url,
-        //     willSendRequest({ request, context }) {
-        //       request.http.headers.set(
-        //         'user',
-        //         context.user ? JSON.stringify(context.user) : null,
-        //       );
-        //     },
-        //   });
-        // },
+        buildService({ url }) {
+          return new RemoteGraphQLDataSource({
+            url,
+            willSendRequest({ request, context }) {
+              // console.log('context', context)
+              request.http.headers.set('user', context.user ? context.user : null);
+              request.http.headers.set('authorization', context.authorization ? context.authorization : null);
+            },
+          });
+        },
       },
     }),
+    HttpModule
   ],
   controllers: [],
   providers: [],
