@@ -6,6 +6,7 @@ import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from '../auth/guards/gql-auth.guard';
 import { CurrentUser } from '../auth/current-user.decorator';
 
+@UseGuards(GqlAuthGuard)
 @Resolver(() => User)
 export class UserResolver {
   constructor(private readonly userService: UserService) {}
@@ -14,8 +15,7 @@ export class UserResolver {
   createUser(@Args('input') createUserInput: CreateUserInput) {
     return this.userService.create(createUserInput);
   }
-
-  @UseGuards(GqlAuthGuard)
+  
   @Query(() => [User])
   users(@CurrentUser() user: User) {
     console.log('current-user', user)

@@ -1,12 +1,10 @@
 import { ApolloGatewayDriver, ApolloGatewayDriverConfig } from '@nestjs/apollo';
-import { HttpException, Module, UnauthorizedException } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import { Module, UnauthorizedException } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { IntrospectAndCompose, RemoteGraphQLDataSource } from '@apollo/gateway';
-import { authContext } from './auth.context';
 import { HttpModule } from '@nestjs/axios';
 import { verify } from 'jsonwebtoken'
-import { JwtService } from '@nestjs/jwt';
-
 
 const getToken = (authToken: string) => {
 
@@ -20,7 +18,10 @@ const getToken = (authToken: string) => {
 }
 
 const decodeToken = (tokenString: string) => {
-  const decoded = verify(tokenString, 'secret')
+
+  console.log('process.env.JWT_SECRET_KEY', process.env.SYSTEM_URL)
+
+  const decoded = verify(tokenString, process.env.JWT_SECRET_KEY)
 
   if(!decoded) {
     throw new UnauthorizedException('Invalid token');
@@ -56,11 +57,14 @@ function handleAuth({ req }) {
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+
     GraphQLModule.forRoot<ApolloGatewayDriverConfig>({
       driver: ApolloGatewayDriver,
       server: {
         // cors: true,
-        // context: authContext,
         context: handleAuth
       },
       gateway: {
@@ -68,11 +72,11 @@ function handleAuth({ req }) {
           subgraphs: [
             {
               name: 'system',
-              url: 'http://localhost:4001/graphql',
+              url: process.env.SYSTEM_URL,
             },
             {
               name: 'warehouse',
-              url: 'http://localhost:4002/graphql',
+              url: process.env.WAREHOUSE_URL,
             },
           ],
         }),
