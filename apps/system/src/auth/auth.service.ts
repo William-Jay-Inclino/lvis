@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { User } from 'apps/system/src/user/entities/user.entity';
-import { UserService } from 'apps/system/src/user/user.service';
+import { UserService } from '../user/user.service';
 
 @Injectable()
 export class AuthService {
@@ -11,44 +11,42 @@ export class AuthService {
         private readonly userService: UserService
     ) {}
 
-    async validateUser(username: string, password: string): Promise<User | null> {
+    async validateUser(username: string, password: string) {
         // TODO 
         const user = await this.userService.findByUserName(username)
 
-        if(!user){
-            return null
+        if(user && user.password === password){
+
+            const { password, ...result } = user 
+            return result
         }
 
-        const passwordIsValid = password === user.password
-        return passwordIsValid ? user : null
+        return null
 
     }
 
-    login(user: User): { user: User, access_token: string } {
-        // TODO 
-        const payload = {
-            username: user.username,
-            sub: user.id
-        }
-
+    async login(user: User): Promise<{ user: User, access_token: string }> {
+        const payload = { username: user.username, sub: user.id };
+        console.log('login user', user)
         return {
-            user: user,
+            user,
             access_token: this.jwtService.sign(payload),
-        }
+        };
     }
 
-    async verify(token: string): Promise<User> {
-        const decoded = this.jwtService.verify(token, {
-            secret: 'secret'
-        })
-
-        const user = this.userService.findByUserName(decoded.username);
-
-        if (!user) {
-            throw new Error('Unable to get the user from decoded token.');
+    async validateToken(token: string): Promise<User | null> {
+        if (!token) {
+            return null; // No token provided, return null or handle differently based on your needs
         }
 
-        return user;
+        try {
+            const decoded = this.jwtService.verify(token);
+            const user = await this.userService.findOne(decoded.sub);
+            return user;
+        } catch (error) {
+            // Token is invalid or expired
+            return null;
+        }
     }
 
 }

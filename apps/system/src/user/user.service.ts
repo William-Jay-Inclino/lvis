@@ -6,7 +6,14 @@ import { faker } from '@faker-js/faker';
 @Injectable()
 export class UserService {
 
-  private readonly users: User[] = []
+  private readonly users: User[] = [
+    {
+      id: faker.string.uuid(),
+      username: 'jay',
+      password: 'jay123',
+      status: 1
+    }
+  ]
 
   create(input: CreateUserInput): User {
     
@@ -18,6 +25,8 @@ export class UserService {
 
     this.users.push(x)
 
+    console.log('users', this.users)
+
     return x
   }
 
@@ -25,11 +34,16 @@ export class UserService {
     return this.users
   }
 
-  findOne(id: string) {
-    return this.users.find(i => i.id === id)
+  async findOne(id: string): Promise<User | null> {
+    const user = this.users.find(i => i.id === id)
+    if(user){
+      return user 
+    }
+    return null
   }
 
   async findByUserName(username: string): Promise<User>{
+    console.log('users', this.users)
     return this.users.find(i => i.username === username)
   }
 

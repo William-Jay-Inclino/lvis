@@ -2,6 +2,9 @@ import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { UserService } from './user.service';
 import { User } from './entities/user.entity';
 import { CreateUserInput } from './dto/create-user.input';
+import { UseGuards } from '@nestjs/common';
+import { GqlAuthGuard } from '../auth/guards/gql-auth.guard';
+import { CurrentUser } from '../auth/current-user.decorator';
 
 @Resolver(() => User)
 export class UserResolver {
@@ -12,8 +15,10 @@ export class UserResolver {
     return this.userService.create(createUserInput);
   }
 
+  @UseGuards(GqlAuthGuard)
   @Query(() => [User])
-  users() {
+  users(@CurrentUser() user: User) {
+    console.log('current-user', user)
     return this.userService.findAll();
   }
 
@@ -21,4 +26,10 @@ export class UserResolver {
   user(@Args('id') id: string) {
     return this.userService.findOne(id);
   }
+
+  @Query(() => User)
+  getUserByUserName(@Args('username') username: string) {
+    return this.userService.findByUserName(username);
+  }
+
 }

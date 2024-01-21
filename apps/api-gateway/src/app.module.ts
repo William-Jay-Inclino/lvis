@@ -1,9 +1,58 @@
 import { ApolloGatewayDriver, ApolloGatewayDriverConfig } from '@nestjs/apollo';
-import { Module } from '@nestjs/common';
+import { HttpException, Module, UnauthorizedException } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { IntrospectAndCompose, RemoteGraphQLDataSource } from '@apollo/gateway';
 import { authContext } from './auth.context';
-import { AuthModule } from '../../system/src/auth/auth.module';
+import { HttpModule } from '@nestjs/axios';
+import { verify } from 'jsonwebtoken'
+import { JwtService } from '@nestjs/jwt';
+
+
+const getToken = (authToken: string) => {
+
+  const match = authToken.match(/^Bearer (.*)$/)
+  if(!match || match.length > 2) {
+    throw new UnauthorizedException('Invalid token');
+  }
+
+  return match[1]
+
+}
+
+const decodeToken = (tokenString: string) => {
+  const decoded = verify(tokenString, 'secret')
+
+  if(!decoded) {
+    throw new UnauthorizedException('Invalid token');
+  }
+
+  return decoded
+
+}
+
+
+function handleAuth({ req }) {
+
+  try {
+
+    if(req.headers.authorization) {
+      const token = getToken(req.headers.authorization)
+      const decoded = decodeToken(token)
+      console.log('decode', decoded)
+
+      return {
+        user: decoded,
+        authorization: req.headers.authorization
+      }
+    }
+
+  } catch (error) {
+    throw new UnauthorizedException('Invalid token');
+  }
+
+}
+
+
 
 @Module({
   imports: [
@@ -11,7 +60,8 @@ import { AuthModule } from '../../system/src/auth/auth.module';
       driver: ApolloGatewayDriver,
       server: {
         // cors: true,
-        context: authContext,
+        // context: authContext,
+        context: handleAuth
       },
       gateway: {
         supergraphSdl: new IntrospectAndCompose({
@@ -30,16 +80,15 @@ import { AuthModule } from '../../system/src/auth/auth.module';
           return new RemoteGraphQLDataSource({
             url,
             willSendRequest({ request, context }) {
-              request.http.headers.set(
-                'user',
-                context.user ? JSON.stringify(context.user) : null,
-              );
+              // console.log('context', context)
+              request.http.headers.set('user', context.user ? context.user : null);
+              request.http.headers.set('authorization', context.authorization ? context.authorization : null);
             },
           });
         },
       },
     }),
-    AuthModule,
+    HttpModule
   ],
   controllers: [],
   providers: [],
