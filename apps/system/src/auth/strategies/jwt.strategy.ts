@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common'
+import { Injectable, NotFoundException } from '@nestjs/common'
 import { PassportStrategy } from '@nestjs/passport';
 import { User } from 'apps/system/src/user/entities/user.entity';
 import { UserService } from 'apps/system/src/user/user.service';
@@ -16,6 +16,12 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     }
 
     async validate(validationPayload: { username: string, sub: string }): Promise<User | null> {
-        return this.usersService.findByUserName(validationPayload.username);
+        const user = this.usersService.findByUserName(validationPayload.username);
+
+        if (!user) {
+            throw new NotFoundException('User not found');
+        }
+
+        return user
     }
 }

@@ -1,4 +1,4 @@
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { CreateUserInput } from './dto/create-user.input';
 import { User } from './entities/user.entity';
 import { faker } from '@faker-js/faker'; 
@@ -37,15 +37,29 @@ export class UserService {
 
   async findOne(id: string): Promise<User | null> {
 
-    return await this.prisma.user.findUniqueOrThrow({
+    const user = await this.prisma.user.findUnique({
       where: {id, is_deleted: false}
     })
+
+    if(!user){
+      throw new NotFoundException("User not found")
+    }
+
+    return user
+
   }
 
-  async findByUserName(username: string): Promise<User>{
-    return await this.prisma.user.findUniqueOrThrow({
+  async findByUserName(username: string): Promise<User | null>{
+    const user = await this.prisma.user.findUnique({
       where: {username}
     })
+
+    if(!user){
+      throw new NotFoundException("User not found")
+    }
+
+    return user
+
   }
 
   async update(id: string, input: UpdateUserInput): Promise<User> {

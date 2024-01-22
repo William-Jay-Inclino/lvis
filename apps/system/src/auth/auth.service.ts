@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { User } from 'apps/system/src/user/entities/user.entity';
 import { UserService } from '../user/user.service';
@@ -23,7 +23,7 @@ export class AuthService {
             return user
         }
 
-        return null
+        throw new UnauthorizedException('Invalid credentials');
 
     }
 
