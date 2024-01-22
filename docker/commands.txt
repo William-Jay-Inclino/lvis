@@ -11,3 +11,12 @@ docker-compose down
 
 - This will stop the containers 
 docker-compose stop
+
+- Stop and remove db
+docker compose rm system-db -s -f -v
+
+- Start db 
+docker compose up system-db -d
+
+- Migrate database (must be on prisma src directory)
+npx prisma migrate dev 

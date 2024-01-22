@@ -10,7 +10,7 @@ export class User {
   username: string;
 
   @Field({nullable: true})
-  password?: string;
+  password: string;
 
   @Field(() => Int)
   status: number;

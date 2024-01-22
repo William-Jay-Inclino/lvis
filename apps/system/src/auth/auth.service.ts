@@ -11,14 +11,16 @@ export class AuthService {
         private readonly userService: UserService
     ) {}
 
-    async validateUser(username: string, password: string) {
-        // TODO 
+    async validateUser(username: string, password: string): Promise<User> {
+
+        console.log('AuthService: validateUser()', username, password)
+
         const user = await this.userService.findByUserName(username)
 
-        if(user && user.password === password){
+        console.log('user', user)
 
-            const { password, ...result } = user 
-            return result
+        if(user && user.password === password){
+            return user
         }
 
         return null
