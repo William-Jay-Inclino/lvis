@@ -9,6 +9,8 @@ import {
 import { EmployeeModule } from './employee/employee.module';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
+import { PrismaModule } from './__prisma__/prisma.module';
+import { SeederModule } from './__seeder__/seeder.module';
 
 
 @Module({
@@ -25,7 +27,9 @@ import { AuthModule } from './auth/auth.module';
     DepartmentModule,
     EmployeeModule,
     UserModule,
-    AuthModule
+    AuthModule,
+    PrismaModule,
+    SeederModule
   ],
   controllers: [],
   providers: [],

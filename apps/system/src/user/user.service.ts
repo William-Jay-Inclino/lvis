@@ -1,50 +1,91 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { CreateUserInput } from './dto/create-user.input';
 import { User } from './entities/user.entity';
 import { faker } from '@faker-js/faker'; 
+import { PrismaService } from '../__prisma__/prisma.service';
+import { UpdateUserInput } from './dto/update-user.input';
 
 @Injectable()
 export class UserService {
 
-  private readonly users: User[] = [
-    {
-      id: faker.string.uuid(),
-      username: 'jay',
-      password: 'jay123',
-      status: 1
-    }
-  ]
+  constructor(private readonly prisma: PrismaService) {}
 
-  create(input: CreateUserInput): User {
+  async create(input: CreateUserInput): Promise<User> {
     
-    const x = new User()
-    x.id = faker.string.uuid()
-    x.username = input.username
-    x.password = input.password
-    x.status = 1
+    try {
+            
+        const item = await this.prisma.user.create({
+            data: { ...input }
+        })
 
-    this.users.push(x)
+        return await this.findOne(item.id)
 
-    console.log('users', this.users)
+    } catch (error) {
+        console.log(`Failed to create user: ${error.message}`);
+        throw new InternalServerErrorException('Failed to create user');
+    }
 
-    return x
   }
 
-  findAll() {
-    return this.users
+  async findAll(): Promise<User[]> {
+    return await this.prisma.user.findMany({
+      where: {
+          is_deleted: false
+      }
+    })
   }
 
   async findOne(id: string): Promise<User | null> {
-    const user = this.users.find(i => i.id === id)
-    if(user){
-      return user 
+
+    const user = await this.prisma.user.findUnique({
+      where: {id, is_deleted: false}
+    })
+
+    if(!user){
+      throw new NotFoundException("User not found")
     }
-    return null
+
+    return user
+
   }
 
-  async findByUserName(username: string): Promise<User>{
-    console.log('users', this.users)
-    return this.users.find(i => i.username === username)
+  async findByUserName(username: string): Promise<User | null>{
+    const user = await this.prisma.user.findUnique({
+      where: {username}
+    })
+
+    if(!user){
+      throw new NotFoundException("User not found")
+    }
+
+    return user
+
+  }
+
+  async update(id: string, input: UpdateUserInput): Promise<User> {
+        
+    const item = await this.prisma.user.update( {
+        where: { id },
+        data: { ...input }
+    } )
+
+    return await this.findOne(item.id)
+
+  }
+
+  async remove(id: string): Promise<boolean> {
+        
+    await this.findOne(id)
+    
+    await this.prisma.user.update({
+        where: { id },
+        data: {
+            is_deleted: true
+        }
+    })
+
+    return true
+
   }
 
 }
