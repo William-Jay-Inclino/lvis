@@ -15,7 +15,7 @@ import {
         federation: 2,
       },
     }),
-    BrandModule
+    BrandModule,
   ],
   controllers: [],
   providers: [],
