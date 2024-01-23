@@ -5,6 +5,7 @@ import {
   ApolloFederationDriver,
   ApolloFederationDriverConfig,
 } from '@nestjs/apollo';
+import { AuthModule } from './auth/auth.module';
 
 
 @Module({
@@ -16,6 +17,7 @@ import {
       },
     }),
     BrandModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],

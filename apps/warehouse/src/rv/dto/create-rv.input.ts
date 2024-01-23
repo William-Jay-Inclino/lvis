@@ -3,7 +3,7 @@ import { Transform, Type } from 'class-transformer';
 import { IsArray, IsDate, IsInt, IsNotEmpty, IsOptional, IsString, ValidateNested } from 'class-validator';
 import { CreateItemInput } from '../../item/dto/create-item.input';
 import { CreateRvApproverInput } from './create-rv-approver.input';
-import { APPROVAL_STATUS } from 'src/__common__/entities';
+import { APPROVAL_STATUS } from '../../__common__/types';
 
 @InputType()
 export class CreateRvInput {

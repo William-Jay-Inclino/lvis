@@ -1,8 +1,8 @@
 import { Transform, Type } from 'class-transformer';
 import { IsNotEmpty, IsString, IsDate, IsOptional, IsArray, ValidateNested, IsInt } from 'class-validator';
 import { InputType, Field, Int, registerEnumType } from '@nestjs/graphql';
-import { CreateItemInput } from 'src/item/dto/create-item.input';
-import { APPROVAL_STATUS } from 'src/__common__/entities';
+import { APPROVAL_STATUS } from '../../__common__/types';
+import { CreateItemInput } from '../../item/dto/create-item.input';
 
 
 registerEnumType(APPROVAL_STATUS, {

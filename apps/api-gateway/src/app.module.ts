@@ -3,7 +3,6 @@ import { ConfigModule } from '@nestjs/config';
 import { Module, UnauthorizedException } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { IntrospectAndCompose, RemoteGraphQLDataSource } from '@apollo/gateway';
-import { HttpModule } from '@nestjs/axios';
 import { verify } from 'jsonwebtoken'
 
 const getToken = (authToken: string) => {
@@ -18,8 +17,6 @@ const getToken = (authToken: string) => {
 }
 
 const decodeToken = (tokenString: string) => {
-
-  console.log('process.env.JWT_SECRET_KEY', process.env.SYSTEM_URL)
 
   const decoded = verify(tokenString, process.env.JWT_SECRET_KEY)
 
@@ -92,7 +89,6 @@ function handleAuth({ req }) {
         },
       },
     }),
-    HttpModule
   ],
   controllers: [],
   providers: [],

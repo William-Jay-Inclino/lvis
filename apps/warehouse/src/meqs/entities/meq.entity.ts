@@ -1,11 +1,10 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
-import { REQUEST_TYPE } from './meqs.enums';
 import { MEQSApprover } from './meqs-approver.entity';
 import { MEQSItem } from './meqs-item.entity';
 import { JO } from '../../jo/entities/jo.entity';
 import { RV } from '../../rv/entities/rv.entity';
 import { SPR } from '../../spr/entities/spr.entity';
-import { APPROVAL_STATUS } from '../../__common__/types';
+import { APPROVAL_STATUS, REQUEST_TYPE } from '../../__common__/types';
 import { Employee } from 'apps/system/src/employee/entities/employee.entity';
 import { PO } from '../../po/entities/po.entity';
 
