@@ -25,13 +25,14 @@ export class UserResolver {
     return this.userService.findAll();
   }
 
-  @UseGuards(GqlAuthGuard)
+  // @UseGuards(GqlAuthGuard)
   @Query(() => User)
   user(@CurrentUser() user: User, @Args('id') id: string) {
     console.log('user: current-user', user)
     return this.userService.findOne(id);
   }
   
+  @UseGuards(GqlAuthGuard)
   @Query(() => User)
   getUserByUserName(@Args('username') username: string) {
     return this.userService.findByUserName(username);

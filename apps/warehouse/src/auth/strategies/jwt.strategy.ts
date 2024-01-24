@@ -1,5 +1,5 @@
 import { HttpService } from '@nestjs/axios';
-import { Injectable, NotFoundException } from '@nestjs/common'
+import { Injectable, Logger, NotFoundException } from '@nestjs/common'
 import { PassportStrategy } from '@nestjs/passport';
 import { User } from 'apps/system/src/user/entities/user.entity';
 import { ExtractJwt, Strategy } from "passport-jwt";
@@ -8,6 +8,9 @@ import { catchError, firstValueFrom } from 'rxjs';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
+
+    private readonly logger = new Logger(JwtStrategy.name);
+
     constructor(
         private readonly httpService: HttpService
     ) {
@@ -20,11 +23,11 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
     async validate(validationPayload: { username: string, sub: string }): Promise<User | null> {
 
-        console.log('JwtStrategy validationPayload', validationPayload)
+        this.logger.log('JwtStrategy validationPayload', validationPayload)
 
         const query = `
             query{
-                getUserByUserName(username: "${validationPayload.username}") {
+                user(id: "${validationPayload.sub}") {
                     id
                     username
                 }
@@ -44,7 +47,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
         console.log('data', data)
 
-        const user = data.data.getUserByUserName
+        const user = data.data.user
 
         console.log('user', user)
 
