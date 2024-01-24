@@ -1,4 +1,5 @@
 generator client {
+  output   = "./generated/client"
   provider = "prisma-client-js"
 }
 
@@ -78,7 +79,6 @@ model Canvass {
   purpose         String
   notes           String?
   requested_by_id String
-  noted_by_id     String
   is_referenced   Boolean       @default(false)
   created_at      DateTime      @default(now())
   updated_at      DateTime      @updatedAt
@@ -143,18 +143,18 @@ model JO {
 }
 
 model JOApprover {
-  id            String    @id @default(uuid())
-  jo_id         String
-  approver_id   String
-  date_approval DateTime?
-  notes         String?
-  status        Int
-  label         String
-  order         Int
-  created_at    DateTime  @default(now())
-  updated_at    DateTime  @updatedAt
-  is_deleted    Boolean   @default(false)
-  jo            JO        @relation(fields: [jo_id], references: [id])
+  id                String    @id @default(uuid())
+  jo_id             String
+  approver_proxy_id String?
+  date_approval     DateTime?
+  notes             String?
+  status            Int
+  label             String
+  order             Int
+  created_at        DateTime  @default(now())
+  updated_at        DateTime  @updatedAt
+  is_deleted        Boolean   @default(false)
+  jo                JO        @relation(fields: [jo_id], references: [id])
 
   @@map("jo_approver")
 }
@@ -182,18 +182,19 @@ model RV {
 }
 
 model RVApprover {
-  id            String    @id @default(uuid())
-  rv_id         String
-  approver_id   String
-  date_approval DateTime?
-  notes         String?
-  status        Int
-  label         String
-  order         Int
-  created_at    DateTime  @default(now())
-  updated_at    DateTime  @updatedAt
-  is_deleted    Boolean   @default(false)
-  rv            RV        @relation(fields: [rv_id], references: [id])
+  id                String    @id @default(uuid())
+  rv_id             String
+  approver_id       String
+  approver_proxy_id String?
+  date_approval     DateTime?
+  notes             String?
+  status            Int
+  label             String
+  order             Int
+  created_at        DateTime  @default(now())
+  updated_at        DateTime  @updatedAt
+  is_deleted        Boolean   @default(false)
+  rv                RV        @relation(fields: [rv_id], references: [id])
 
   @@map("rv_approver")
 }
@@ -221,18 +222,19 @@ model SPR {
 }
 
 model SPRApprover {
-  id            String    @id @default(uuid())
-  spr_id        String
-  approver_id   String
-  date_approval DateTime?
-  notes         String?
-  status        Int
-  label         String
-  order         Int
-  created_at    DateTime  @default(now())
-  updated_at    DateTime  @updatedAt
-  is_deleted    Boolean   @default(false)
-  spr           SPR       @relation(fields: [spr_id], references: [id])
+  id                String    @id @default(uuid())
+  spr_id            String
+  approver_id       String
+  approver_proxy_id String?
+  date_approval     DateTime?
+  notes             String?
+  status            Int
+  label             String
+  order             Int
+  created_at        DateTime  @default(now())
+  updated_at        DateTime  @updatedAt
+  is_deleted        Boolean   @default(false)
+  spr               SPR       @relation(fields: [spr_id], references: [id])
 
   @@map("spr_approver")
 }
@@ -289,18 +291,19 @@ model MEQSSupplierAttachment {
 }
 
 model MEQSApprover {
-  id            String    @id @default(uuid())
-  meqs_id       String
-  approver_id   String
-  date_approval DateTime?
-  notes         String?
-  status        Int
-  label         String
-  order         Int
-  created_at    DateTime  @default(now())
-  updated_at    DateTime  @updatedAt
-  is_deleted    Boolean   @default(false)
-  meqs          MEQS      @relation(fields: [meqs_id], references: [id])
+  id                String    @id @default(uuid())
+  meqs_id           String
+  approver_id       String
+  approver_proxy_id String?
+  date_approval     DateTime?
+  notes             String?
+  status            Int
+  label             String
+  order             Int
+  created_at        DateTime  @default(now())
+  updated_at        DateTime  @updatedAt
+  is_deleted        Boolean   @default(false)
+  meqs              MEQS      @relation(fields: [meqs_id], references: [id])
 
   @@map("meqs_approver")
 }
@@ -322,18 +325,19 @@ model PO {
 }
 
 model POApprover {
-  id            String    @id @default(uuid())
-  po_id         String
-  approver_id   String
-  date_approval DateTime?
-  notes         String?
-  status        Int
-  label         String
-  order         Int
-  created_at    DateTime  @default(now())
-  updated_at    DateTime  @updatedAt
-  is_deleted    Boolean   @default(false)
-  po            PO        @relation(fields: [po_id], references: [id])
+  id                String    @id @default(uuid())
+  po_id             String
+  approver_id       String
+  approver_proxy_id String?
+  date_approval     DateTime?
+  notes             String?
+  status            Int
+  label             String
+  order             Int
+  created_at        DateTime  @default(now())
+  updated_at        DateTime  @updatedAt
+  is_deleted        Boolean   @default(false)
+  po                PO        @relation(fields: [po_id], references: [id])
 
   @@map("po_approver")
 }
