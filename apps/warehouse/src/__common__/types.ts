@@ -12,6 +12,7 @@ export interface Unit {
 export interface Vehicle {
     id: string 
     name: string 
+    plate_number: string
 }
 
 export interface Supplier {
