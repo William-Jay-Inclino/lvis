@@ -6,6 +6,8 @@ import {
   ApolloFederationDriverConfig,
 } from '@nestjs/apollo';
 import { AuthModule } from './auth/auth.module';
+import { SeederModule } from './__seeder__/seeder.module';
+import { PrismaModule } from './__prisma__/prisma.module';
 
 
 @Module({
@@ -18,6 +20,8 @@ import { AuthModule } from './auth/auth.module';
     }),
     BrandModule,
     AuthModule,
+    SeederModule,
+    PrismaModule
   ],
   controllers: [],
   providers: [],

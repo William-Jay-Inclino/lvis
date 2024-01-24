@@ -19,4 +19,4 @@ docker compose rm system-db -s -f -v
 docker compose up system-db -d
 
 - Migrate database (must be on prisma src directory)
-npx prisma migrate dev 
+pnpm run migrate:dev / pnpx prisma migrate dev

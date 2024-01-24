@@ -7,12 +7,12 @@ import { PrismaClient } from 'apps/warehouse/prisma/generated/client';
 export class PrismaService extends PrismaClient {
     constructor(config: ConfigService){
 
-        console.log("config.get('DATABASE_URL')", config.get('DATABASE_URL'))
+        console.log("config.get('DATABASE_URL')", config.get('WAREHOUSE_DATABASE_URL'))
 
         super({
             datasources: {
                 db: {
-                    url: config.get('DATABASE_URL'),
+                    url: config.get('WAREHOUSE_DATABASE_URL'),
                 }
             }
         })

@@ -25,12 +25,13 @@ export class SeederService {
               await this.seedPOApproverSetting();
               await this.seedUserTable();
               await this.seedUserEmployeeTable();
-
             });
+            
+            console.log('Seeding done')
           } catch (error) {
             console.error('Transaction failed. Rolling back...', error);
           }
-      }
+    }
 
     async seedService() {
         console.log('seeding service table...')

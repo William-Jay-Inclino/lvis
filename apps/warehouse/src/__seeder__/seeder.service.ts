@@ -9,6 +9,18 @@ export class SeederService {
 
     async seedData() {
         console.log('Seeding data...');
+    
+        try {
+            await this.prisma.$transaction(async () => {
+              await this.seedSupplier();
+              await this.seedUnit();
+              await this.seedBrand();
+              await this.seedVehicle();
+            });
+            console.log('Seeding done')
+          } catch (error) {
+            console.error('Transaction failed. Rolling back...', error);
+          }
     }
 
     async seedSupplier() {

@@ -1,5 +1,5 @@
 import { InputType, Field, registerEnumType } from '@nestjs/graphql';
-import { Role } from '@prisma/client';
+import { Role } from 'apps/system/prisma/generated/client';
 import { IsNotEmpty, IsOptional } from 'class-validator';
 
 registerEnumType(Role, {

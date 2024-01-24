@@ -5,7 +5,7 @@ import { LocalAuthGuard } from "./guards/local-auth.guard";
 import { User } from "../user/entities/user.entity";
 import { CreateUserInput } from "../user/dto/create-user.input";
 import { UserService } from "../user/user.service";
-import { Role } from "@prisma/client";
+import { Role } from "apps/system/prisma/generated/client";
 
 @Controller('auth')
 export class AuthController {
