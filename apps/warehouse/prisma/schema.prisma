@@ -84,9 +84,9 @@ model Canvass {
   updated_at      DateTime      @updatedAt
   is_deleted      Boolean       @default(false)
   canvass_items   CanvassItem[]
-  jos             JO?
-  rvs             RV?
-  sprs            SPR?
+  jo              JO?
+  rv              RV?
+  spr             SPR?
 
   @@map("canvass")
 }

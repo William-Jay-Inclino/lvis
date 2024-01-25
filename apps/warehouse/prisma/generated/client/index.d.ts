@@ -7913,9 +7913,9 @@ export namespace Prisma {
     updated_at?: boolean
     is_deleted?: boolean
     canvass_items?: boolean | Canvass$canvass_itemsArgs<ExtArgs>
-    jos?: boolean | Canvass$josArgs<ExtArgs>
-    rvs?: boolean | Canvass$rvsArgs<ExtArgs>
-    sprs?: boolean | Canvass$sprsArgs<ExtArgs>
+    jo?: boolean | Canvass$joArgs<ExtArgs>
+    rv?: boolean | Canvass$rvArgs<ExtArgs>
+    spr?: boolean | Canvass$sprArgs<ExtArgs>
     _count?: boolean | CanvassCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["canvass"]>
 
@@ -7934,9 +7934,9 @@ export namespace Prisma {
 
   export type CanvassInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     canvass_items?: boolean | Canvass$canvass_itemsArgs<ExtArgs>
-    jos?: boolean | Canvass$josArgs<ExtArgs>
-    rvs?: boolean | Canvass$rvsArgs<ExtArgs>
-    sprs?: boolean | Canvass$sprsArgs<ExtArgs>
+    jo?: boolean | Canvass$joArgs<ExtArgs>
+    rv?: boolean | Canvass$rvArgs<ExtArgs>
+    spr?: boolean | Canvass$sprArgs<ExtArgs>
     _count?: boolean | CanvassCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -7945,9 +7945,9 @@ export namespace Prisma {
     name: "Canvass"
     objects: {
       canvass_items: Prisma.$CanvassItemPayload<ExtArgs>[]
-      jos: Prisma.$JOPayload<ExtArgs> | null
-      rvs: Prisma.$RVPayload<ExtArgs> | null
-      sprs: Prisma.$SPRPayload<ExtArgs> | null
+      jo: Prisma.$JOPayload<ExtArgs> | null
+      rv: Prisma.$RVPayload<ExtArgs> | null
+      spr: Prisma.$SPRPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -8327,11 +8327,11 @@ export namespace Prisma {
 
     canvass_items<T extends Canvass$canvass_itemsArgs<ExtArgs> = {}>(args?: Subset<T, Canvass$canvass_itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CanvassItemPayload<ExtArgs>, T, 'findMany'> | Null>;
 
-    jos<T extends Canvass$josArgs<ExtArgs> = {}>(args?: Subset<T, Canvass$josArgs<ExtArgs>>): Prisma__JOClient<$Result.GetResult<Prisma.$JOPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+    jo<T extends Canvass$joArgs<ExtArgs> = {}>(args?: Subset<T, Canvass$joArgs<ExtArgs>>): Prisma__JOClient<$Result.GetResult<Prisma.$JOPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
 
-    rvs<T extends Canvass$rvsArgs<ExtArgs> = {}>(args?: Subset<T, Canvass$rvsArgs<ExtArgs>>): Prisma__RVClient<$Result.GetResult<Prisma.$RVPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+    rv<T extends Canvass$rvArgs<ExtArgs> = {}>(args?: Subset<T, Canvass$rvArgs<ExtArgs>>): Prisma__RVClient<$Result.GetResult<Prisma.$RVPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
 
-    sprs<T extends Canvass$sprsArgs<ExtArgs> = {}>(args?: Subset<T, Canvass$sprsArgs<ExtArgs>>): Prisma__SPRClient<$Result.GetResult<Prisma.$SPRPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+    spr<T extends Canvass$sprArgs<ExtArgs> = {}>(args?: Subset<T, Canvass$sprArgs<ExtArgs>>): Prisma__SPRClient<$Result.GetResult<Prisma.$SPRPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -8704,9 +8704,9 @@ export namespace Prisma {
 
 
   /**
-   * Canvass.jos
+   * Canvass.jo
    */
-  export type Canvass$josArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Canvass$joArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the JO
      */
@@ -8720,9 +8720,9 @@ export namespace Prisma {
 
 
   /**
-   * Canvass.rvs
+   * Canvass.rv
    */
-  export type Canvass$rvsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Canvass$rvArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the RV
      */
@@ -8736,9 +8736,9 @@ export namespace Prisma {
 
 
   /**
-   * Canvass.sprs
+   * Canvass.spr
    */
-  export type Canvass$sprsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Canvass$sprArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the SPR
      */
@@ -24001,9 +24001,9 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"Canvass"> | Date | string
     is_deleted?: BoolFilter<"Canvass"> | boolean
     canvass_items?: CanvassItemListRelationFilter
-    jos?: XOR<JONullableRelationFilter, JOWhereInput> | null
-    rvs?: XOR<RVNullableRelationFilter, RVWhereInput> | null
-    sprs?: XOR<SPRNullableRelationFilter, SPRWhereInput> | null
+    jo?: XOR<JONullableRelationFilter, JOWhereInput> | null
+    rv?: XOR<RVNullableRelationFilter, RVWhereInput> | null
+    spr?: XOR<SPRNullableRelationFilter, SPRWhereInput> | null
   }
 
   export type CanvassOrderByWithRelationInput = {
@@ -24018,9 +24018,9 @@ export namespace Prisma {
     updated_at?: SortOrder
     is_deleted?: SortOrder
     canvass_items?: CanvassItemOrderByRelationAggregateInput
-    jos?: JOOrderByWithRelationInput
-    rvs?: RVOrderByWithRelationInput
-    sprs?: SPROrderByWithRelationInput
+    jo?: JOOrderByWithRelationInput
+    rv?: RVOrderByWithRelationInput
+    spr?: SPROrderByWithRelationInput
   }
 
   export type CanvassWhereUniqueInput = Prisma.AtLeast<{
@@ -24038,9 +24038,9 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"Canvass"> | Date | string
     is_deleted?: BoolFilter<"Canvass"> | boolean
     canvass_items?: CanvassItemListRelationFilter
-    jos?: XOR<JONullableRelationFilter, JOWhereInput> | null
-    rvs?: XOR<RVNullableRelationFilter, RVWhereInput> | null
-    sprs?: XOR<SPRNullableRelationFilter, SPRWhereInput> | null
+    jo?: XOR<JONullableRelationFilter, JOWhereInput> | null
+    rv?: XOR<RVNullableRelationFilter, RVWhereInput> | null
+    spr?: XOR<SPRNullableRelationFilter, SPRWhereInput> | null
   }, "id" | "rc_number">
 
   export type CanvassOrderByWithAggregationInput = {
@@ -25671,9 +25671,9 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     canvass_items?: CanvassItemCreateNestedManyWithoutCanvassInput
-    jos?: JOCreateNestedOneWithoutCanvassInput
-    rvs?: RVCreateNestedOneWithoutCanvassInput
-    sprs?: SPRCreateNestedOneWithoutCanvassInput
+    jo?: JOCreateNestedOneWithoutCanvassInput
+    rv?: RVCreateNestedOneWithoutCanvassInput
+    spr?: SPRCreateNestedOneWithoutCanvassInput
   }
 
   export type CanvassUncheckedCreateInput = {
@@ -25688,9 +25688,9 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     canvass_items?: CanvassItemUncheckedCreateNestedManyWithoutCanvassInput
-    jos?: JOUncheckedCreateNestedOneWithoutCanvassInput
-    rvs?: RVUncheckedCreateNestedOneWithoutCanvassInput
-    sprs?: SPRUncheckedCreateNestedOneWithoutCanvassInput
+    jo?: JOUncheckedCreateNestedOneWithoutCanvassInput
+    rv?: RVUncheckedCreateNestedOneWithoutCanvassInput
+    spr?: SPRUncheckedCreateNestedOneWithoutCanvassInput
   }
 
   export type CanvassUpdateInput = {
@@ -25705,9 +25705,9 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     canvass_items?: CanvassItemUpdateManyWithoutCanvassNestedInput
-    jos?: JOUpdateOneWithoutCanvassNestedInput
-    rvs?: RVUpdateOneWithoutCanvassNestedInput
-    sprs?: SPRUpdateOneWithoutCanvassNestedInput
+    jo?: JOUpdateOneWithoutCanvassNestedInput
+    rv?: RVUpdateOneWithoutCanvassNestedInput
+    spr?: SPRUpdateOneWithoutCanvassNestedInput
   }
 
   export type CanvassUncheckedUpdateInput = {
@@ -25722,9 +25722,9 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     canvass_items?: CanvassItemUncheckedUpdateManyWithoutCanvassNestedInput
-    jos?: JOUncheckedUpdateOneWithoutCanvassNestedInput
-    rvs?: RVUncheckedUpdateOneWithoutCanvassNestedInput
-    sprs?: SPRUncheckedUpdateOneWithoutCanvassNestedInput
+    jo?: JOUncheckedUpdateOneWithoutCanvassNestedInput
+    rv?: RVUncheckedUpdateOneWithoutCanvassNestedInput
+    spr?: SPRUncheckedUpdateOneWithoutCanvassNestedInput
   }
 
   export type CanvassCreateManyInput = {
@@ -25924,7 +25924,7 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     jo_approvers?: JOApproverCreateNestedManyWithoutJoInput
-    canvass: CanvassCreateNestedOneWithoutJosInput
+    canvass: CanvassCreateNestedOneWithoutJoInput
     meqs?: MEQSCreateNestedOneWithoutJoInput
   }
 
@@ -25962,7 +25962,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     jo_approvers?: JOApproverUpdateManyWithoutJoNestedInput
-    canvass?: CanvassUpdateOneRequiredWithoutJosNestedInput
+    canvass?: CanvassUpdateOneRequiredWithoutJoNestedInput
     meqs?: MEQSUpdateOneWithoutJoNestedInput
   }
 
@@ -26147,7 +26147,7 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     meqs?: MEQSCreateNestedOneWithoutRvInput
-    canvass: CanvassCreateNestedOneWithoutRvsInput
+    canvass: CanvassCreateNestedOneWithoutRvInput
     rv_approvers?: RVApproverCreateNestedManyWithoutRvInput
   }
 
@@ -26185,7 +26185,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     meqs?: MEQSUpdateOneWithoutRvNestedInput
-    canvass?: CanvassUpdateOneRequiredWithoutRvsNestedInput
+    canvass?: CanvassUpdateOneRequiredWithoutRvNestedInput
     rv_approvers?: RVApproverUpdateManyWithoutRvNestedInput
   }
 
@@ -26375,7 +26375,7 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     meqs?: MEQSCreateNestedOneWithoutSprInput
-    canvass: CanvassCreateNestedOneWithoutSprsInput
+    canvass: CanvassCreateNestedOneWithoutSprInput
     vehicle: VehicleCreateNestedOneWithoutSprsInput
     spr_approvers?: SPRApproverCreateNestedManyWithoutSprInput
   }
@@ -26411,7 +26411,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     meqs?: MEQSUpdateOneWithoutSprNestedInput
-    canvass?: CanvassUpdateOneRequiredWithoutSprsNestedInput
+    canvass?: CanvassUpdateOneRequiredWithoutSprNestedInput
     vehicle?: VehicleUpdateOneRequiredWithoutSprsNestedInput
     spr_approvers?: SPRApproverUpdateManyWithoutSprNestedInput
   }
@@ -28927,9 +28927,9 @@ export namespace Prisma {
     connect?: JOApproverWhereUniqueInput | JOApproverWhereUniqueInput[]
   }
 
-  export type CanvassCreateNestedOneWithoutJosInput = {
-    create?: XOR<CanvassCreateWithoutJosInput, CanvassUncheckedCreateWithoutJosInput>
-    connectOrCreate?: CanvassCreateOrConnectWithoutJosInput
+  export type CanvassCreateNestedOneWithoutJoInput = {
+    create?: XOR<CanvassCreateWithoutJoInput, CanvassUncheckedCreateWithoutJoInput>
+    connectOrCreate?: CanvassCreateOrConnectWithoutJoInput
     connect?: CanvassWhereUniqueInput
   }
 
@@ -28966,12 +28966,12 @@ export namespace Prisma {
     deleteMany?: JOApproverScalarWhereInput | JOApproverScalarWhereInput[]
   }
 
-  export type CanvassUpdateOneRequiredWithoutJosNestedInput = {
-    create?: XOR<CanvassCreateWithoutJosInput, CanvassUncheckedCreateWithoutJosInput>
-    connectOrCreate?: CanvassCreateOrConnectWithoutJosInput
-    upsert?: CanvassUpsertWithoutJosInput
+  export type CanvassUpdateOneRequiredWithoutJoNestedInput = {
+    create?: XOR<CanvassCreateWithoutJoInput, CanvassUncheckedCreateWithoutJoInput>
+    connectOrCreate?: CanvassCreateOrConnectWithoutJoInput
+    upsert?: CanvassUpsertWithoutJoInput
     connect?: CanvassWhereUniqueInput
-    update?: XOR<XOR<CanvassUpdateToOneWithWhereWithoutJosInput, CanvassUpdateWithoutJosInput>, CanvassUncheckedUpdateWithoutJosInput>
+    update?: XOR<XOR<CanvassUpdateToOneWithWhereWithoutJoInput, CanvassUpdateWithoutJoInput>, CanvassUncheckedUpdateWithoutJoInput>
   }
 
   export type MEQSUpdateOneWithoutJoNestedInput = {
@@ -29032,9 +29032,9 @@ export namespace Prisma {
     connect?: MEQSWhereUniqueInput
   }
 
-  export type CanvassCreateNestedOneWithoutRvsInput = {
-    create?: XOR<CanvassCreateWithoutRvsInput, CanvassUncheckedCreateWithoutRvsInput>
-    connectOrCreate?: CanvassCreateOrConnectWithoutRvsInput
+  export type CanvassCreateNestedOneWithoutRvInput = {
+    create?: XOR<CanvassCreateWithoutRvInput, CanvassUncheckedCreateWithoutRvInput>
+    connectOrCreate?: CanvassCreateOrConnectWithoutRvInput
     connect?: CanvassWhereUniqueInput
   }
 
@@ -29068,12 +29068,12 @@ export namespace Prisma {
     update?: XOR<XOR<MEQSUpdateToOneWithWhereWithoutRvInput, MEQSUpdateWithoutRvInput>, MEQSUncheckedUpdateWithoutRvInput>
   }
 
-  export type CanvassUpdateOneRequiredWithoutRvsNestedInput = {
-    create?: XOR<CanvassCreateWithoutRvsInput, CanvassUncheckedCreateWithoutRvsInput>
-    connectOrCreate?: CanvassCreateOrConnectWithoutRvsInput
-    upsert?: CanvassUpsertWithoutRvsInput
+  export type CanvassUpdateOneRequiredWithoutRvNestedInput = {
+    create?: XOR<CanvassCreateWithoutRvInput, CanvassUncheckedCreateWithoutRvInput>
+    connectOrCreate?: CanvassCreateOrConnectWithoutRvInput
+    upsert?: CanvassUpsertWithoutRvInput
     connect?: CanvassWhereUniqueInput
-    update?: XOR<XOR<CanvassUpdateToOneWithWhereWithoutRvsInput, CanvassUpdateWithoutRvsInput>, CanvassUncheckedUpdateWithoutRvsInput>
+    update?: XOR<XOR<CanvassUpdateToOneWithWhereWithoutRvInput, CanvassUpdateWithoutRvInput>, CanvassUncheckedUpdateWithoutRvInput>
   }
 
   export type RVApproverUpdateManyWithoutRvNestedInput = {
@@ -29134,9 +29134,9 @@ export namespace Prisma {
     connect?: MEQSWhereUniqueInput
   }
 
-  export type CanvassCreateNestedOneWithoutSprsInput = {
-    create?: XOR<CanvassCreateWithoutSprsInput, CanvassUncheckedCreateWithoutSprsInput>
-    connectOrCreate?: CanvassCreateOrConnectWithoutSprsInput
+  export type CanvassCreateNestedOneWithoutSprInput = {
+    create?: XOR<CanvassCreateWithoutSprInput, CanvassUncheckedCreateWithoutSprInput>
+    connectOrCreate?: CanvassCreateOrConnectWithoutSprInput
     connect?: CanvassWhereUniqueInput
   }
 
@@ -29176,12 +29176,12 @@ export namespace Prisma {
     update?: XOR<XOR<MEQSUpdateToOneWithWhereWithoutSprInput, MEQSUpdateWithoutSprInput>, MEQSUncheckedUpdateWithoutSprInput>
   }
 
-  export type CanvassUpdateOneRequiredWithoutSprsNestedInput = {
-    create?: XOR<CanvassCreateWithoutSprsInput, CanvassUncheckedCreateWithoutSprsInput>
-    connectOrCreate?: CanvassCreateOrConnectWithoutSprsInput
-    upsert?: CanvassUpsertWithoutSprsInput
+  export type CanvassUpdateOneRequiredWithoutSprNestedInput = {
+    create?: XOR<CanvassCreateWithoutSprInput, CanvassUncheckedCreateWithoutSprInput>
+    connectOrCreate?: CanvassCreateOrConnectWithoutSprInput
+    upsert?: CanvassUpsertWithoutSprInput
     connect?: CanvassWhereUniqueInput
-    update?: XOR<XOR<CanvassUpdateToOneWithWhereWithoutSprsInput, CanvassUpdateWithoutSprsInput>, CanvassUncheckedUpdateWithoutSprsInput>
+    update?: XOR<XOR<CanvassUpdateToOneWithWhereWithoutSprInput, CanvassUpdateWithoutSprInput>, CanvassUncheckedUpdateWithoutSprInput>
   }
 
   export type VehicleUpdateOneRequiredWithoutSprsNestedInput = {
@@ -30020,7 +30020,7 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     meqs?: MEQSCreateNestedOneWithoutSprInput
-    canvass: CanvassCreateNestedOneWithoutSprsInput
+    canvass: CanvassCreateNestedOneWithoutSprInput
     spr_approvers?: SPRApproverCreateNestedManyWithoutSprInput
   }
 
@@ -30603,9 +30603,9 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    jos?: JOCreateNestedOneWithoutCanvassInput
-    rvs?: RVCreateNestedOneWithoutCanvassInput
-    sprs?: SPRCreateNestedOneWithoutCanvassInput
+    jo?: JOCreateNestedOneWithoutCanvassInput
+    rv?: RVCreateNestedOneWithoutCanvassInput
+    spr?: SPRCreateNestedOneWithoutCanvassInput
   }
 
   export type CanvassUncheckedCreateWithoutCanvass_itemsInput = {
@@ -30619,9 +30619,9 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    jos?: JOUncheckedCreateNestedOneWithoutCanvassInput
-    rvs?: RVUncheckedCreateNestedOneWithoutCanvassInput
-    sprs?: SPRUncheckedCreateNestedOneWithoutCanvassInput
+    jo?: JOUncheckedCreateNestedOneWithoutCanvassInput
+    rv?: RVUncheckedCreateNestedOneWithoutCanvassInput
+    spr?: SPRUncheckedCreateNestedOneWithoutCanvassInput
   }
 
   export type CanvassCreateOrConnectWithoutCanvass_itemsInput = {
@@ -30680,9 +30680,9 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    jos?: JOUpdateOneWithoutCanvassNestedInput
-    rvs?: RVUpdateOneWithoutCanvassNestedInput
-    sprs?: SPRUpdateOneWithoutCanvassNestedInput
+    jo?: JOUpdateOneWithoutCanvassNestedInput
+    rv?: RVUpdateOneWithoutCanvassNestedInput
+    spr?: SPRUpdateOneWithoutCanvassNestedInput
   }
 
   export type CanvassUncheckedUpdateWithoutCanvass_itemsInput = {
@@ -30696,9 +30696,9 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    jos?: JOUncheckedUpdateOneWithoutCanvassNestedInput
-    rvs?: RVUncheckedUpdateOneWithoutCanvassNestedInput
-    sprs?: SPRUncheckedUpdateOneWithoutCanvassNestedInput
+    jo?: JOUncheckedUpdateOneWithoutCanvassNestedInput
+    rv?: RVUncheckedUpdateOneWithoutCanvassNestedInput
+    spr?: SPRUncheckedUpdateOneWithoutCanvassNestedInput
   }
 
   export type ItemUpsertWithoutCanvass_itemInput = {
@@ -30892,7 +30892,7 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type CanvassCreateWithoutJosInput = {
+  export type CanvassCreateWithoutJoInput = {
     id?: string
     rc_number: string
     date_requested: Date | string
@@ -30904,11 +30904,11 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     canvass_items?: CanvassItemCreateNestedManyWithoutCanvassInput
-    rvs?: RVCreateNestedOneWithoutCanvassInput
-    sprs?: SPRCreateNestedOneWithoutCanvassInput
+    rv?: RVCreateNestedOneWithoutCanvassInput
+    spr?: SPRCreateNestedOneWithoutCanvassInput
   }
 
-  export type CanvassUncheckedCreateWithoutJosInput = {
+  export type CanvassUncheckedCreateWithoutJoInput = {
     id?: string
     rc_number: string
     date_requested: Date | string
@@ -30920,13 +30920,13 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     canvass_items?: CanvassItemUncheckedCreateNestedManyWithoutCanvassInput
-    rvs?: RVUncheckedCreateNestedOneWithoutCanvassInput
-    sprs?: SPRUncheckedCreateNestedOneWithoutCanvassInput
+    rv?: RVUncheckedCreateNestedOneWithoutCanvassInput
+    spr?: SPRUncheckedCreateNestedOneWithoutCanvassInput
   }
 
-  export type CanvassCreateOrConnectWithoutJosInput = {
+  export type CanvassCreateOrConnectWithoutJoInput = {
     where: CanvassWhereUniqueInput
-    create: XOR<CanvassCreateWithoutJosInput, CanvassUncheckedCreateWithoutJosInput>
+    create: XOR<CanvassCreateWithoutJoInput, CanvassUncheckedCreateWithoutJoInput>
   }
 
   export type MEQSCreateWithoutJoInput = {
@@ -30999,18 +30999,18 @@ export namespace Prisma {
     is_deleted?: BoolFilter<"JOApprover"> | boolean
   }
 
-  export type CanvassUpsertWithoutJosInput = {
-    update: XOR<CanvassUpdateWithoutJosInput, CanvassUncheckedUpdateWithoutJosInput>
-    create: XOR<CanvassCreateWithoutJosInput, CanvassUncheckedCreateWithoutJosInput>
+  export type CanvassUpsertWithoutJoInput = {
+    update: XOR<CanvassUpdateWithoutJoInput, CanvassUncheckedUpdateWithoutJoInput>
+    create: XOR<CanvassCreateWithoutJoInput, CanvassUncheckedCreateWithoutJoInput>
     where?: CanvassWhereInput
   }
 
-  export type CanvassUpdateToOneWithWhereWithoutJosInput = {
+  export type CanvassUpdateToOneWithWhereWithoutJoInput = {
     where?: CanvassWhereInput
-    data: XOR<CanvassUpdateWithoutJosInput, CanvassUncheckedUpdateWithoutJosInput>
+    data: XOR<CanvassUpdateWithoutJoInput, CanvassUncheckedUpdateWithoutJoInput>
   }
 
-  export type CanvassUpdateWithoutJosInput = {
+  export type CanvassUpdateWithoutJoInput = {
     id?: StringFieldUpdateOperationsInput | string
     rc_number?: StringFieldUpdateOperationsInput | string
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -31022,11 +31022,11 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     canvass_items?: CanvassItemUpdateManyWithoutCanvassNestedInput
-    rvs?: RVUpdateOneWithoutCanvassNestedInput
-    sprs?: SPRUpdateOneWithoutCanvassNestedInput
+    rv?: RVUpdateOneWithoutCanvassNestedInput
+    spr?: SPRUpdateOneWithoutCanvassNestedInput
   }
 
-  export type CanvassUncheckedUpdateWithoutJosInput = {
+  export type CanvassUncheckedUpdateWithoutJoInput = {
     id?: StringFieldUpdateOperationsInput | string
     rc_number?: StringFieldUpdateOperationsInput | string
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -31038,8 +31038,8 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     canvass_items?: CanvassItemUncheckedUpdateManyWithoutCanvassNestedInput
-    rvs?: RVUncheckedUpdateOneWithoutCanvassNestedInput
-    sprs?: SPRUncheckedUpdateOneWithoutCanvassNestedInput
+    rv?: RVUncheckedUpdateOneWithoutCanvassNestedInput
+    spr?: SPRUncheckedUpdateOneWithoutCanvassNestedInput
   }
 
   export type MEQSUpsertWithoutJoInput = {
@@ -31099,7 +31099,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    canvass: CanvassCreateNestedOneWithoutJosInput
+    canvass: CanvassCreateNestedOneWithoutJoInput
     meqs?: MEQSCreateNestedOneWithoutJoInput
   }
 
@@ -31151,7 +31151,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    canvass?: CanvassUpdateOneRequiredWithoutJosNestedInput
+    canvass?: CanvassUpdateOneRequiredWithoutJoNestedInput
     meqs?: MEQSUpdateOneWithoutJoNestedInput
   }
 
@@ -31210,7 +31210,7 @@ export namespace Prisma {
     create: XOR<MEQSCreateWithoutRvInput, MEQSUncheckedCreateWithoutRvInput>
   }
 
-  export type CanvassCreateWithoutRvsInput = {
+  export type CanvassCreateWithoutRvInput = {
     id?: string
     rc_number: string
     date_requested: Date | string
@@ -31222,11 +31222,11 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     canvass_items?: CanvassItemCreateNestedManyWithoutCanvassInput
-    jos?: JOCreateNestedOneWithoutCanvassInput
-    sprs?: SPRCreateNestedOneWithoutCanvassInput
+    jo?: JOCreateNestedOneWithoutCanvassInput
+    spr?: SPRCreateNestedOneWithoutCanvassInput
   }
 
-  export type CanvassUncheckedCreateWithoutRvsInput = {
+  export type CanvassUncheckedCreateWithoutRvInput = {
     id?: string
     rc_number: string
     date_requested: Date | string
@@ -31238,13 +31238,13 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     canvass_items?: CanvassItemUncheckedCreateNestedManyWithoutCanvassInput
-    jos?: JOUncheckedCreateNestedOneWithoutCanvassInput
-    sprs?: SPRUncheckedCreateNestedOneWithoutCanvassInput
+    jo?: JOUncheckedCreateNestedOneWithoutCanvassInput
+    spr?: SPRUncheckedCreateNestedOneWithoutCanvassInput
   }
 
-  export type CanvassCreateOrConnectWithoutRvsInput = {
+  export type CanvassCreateOrConnectWithoutRvInput = {
     where: CanvassWhereUniqueInput
-    create: XOR<CanvassCreateWithoutRvsInput, CanvassUncheckedCreateWithoutRvsInput>
+    create: XOR<CanvassCreateWithoutRvInput, CanvassUncheckedCreateWithoutRvInput>
   }
 
   export type RVApproverCreateWithoutRvInput = {
@@ -31328,18 +31328,18 @@ export namespace Prisma {
     meqs_suppliers?: MEQSSupplierUncheckedUpdateManyWithoutMeqsNestedInput
   }
 
-  export type CanvassUpsertWithoutRvsInput = {
-    update: XOR<CanvassUpdateWithoutRvsInput, CanvassUncheckedUpdateWithoutRvsInput>
-    create: XOR<CanvassCreateWithoutRvsInput, CanvassUncheckedCreateWithoutRvsInput>
+  export type CanvassUpsertWithoutRvInput = {
+    update: XOR<CanvassUpdateWithoutRvInput, CanvassUncheckedUpdateWithoutRvInput>
+    create: XOR<CanvassCreateWithoutRvInput, CanvassUncheckedCreateWithoutRvInput>
     where?: CanvassWhereInput
   }
 
-  export type CanvassUpdateToOneWithWhereWithoutRvsInput = {
+  export type CanvassUpdateToOneWithWhereWithoutRvInput = {
     where?: CanvassWhereInput
-    data: XOR<CanvassUpdateWithoutRvsInput, CanvassUncheckedUpdateWithoutRvsInput>
+    data: XOR<CanvassUpdateWithoutRvInput, CanvassUncheckedUpdateWithoutRvInput>
   }
 
-  export type CanvassUpdateWithoutRvsInput = {
+  export type CanvassUpdateWithoutRvInput = {
     id?: StringFieldUpdateOperationsInput | string
     rc_number?: StringFieldUpdateOperationsInput | string
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -31351,11 +31351,11 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     canvass_items?: CanvassItemUpdateManyWithoutCanvassNestedInput
-    jos?: JOUpdateOneWithoutCanvassNestedInput
-    sprs?: SPRUpdateOneWithoutCanvassNestedInput
+    jo?: JOUpdateOneWithoutCanvassNestedInput
+    spr?: SPRUpdateOneWithoutCanvassNestedInput
   }
 
-  export type CanvassUncheckedUpdateWithoutRvsInput = {
+  export type CanvassUncheckedUpdateWithoutRvInput = {
     id?: StringFieldUpdateOperationsInput | string
     rc_number?: StringFieldUpdateOperationsInput | string
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -31367,8 +31367,8 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     canvass_items?: CanvassItemUncheckedUpdateManyWithoutCanvassNestedInput
-    jos?: JOUncheckedUpdateOneWithoutCanvassNestedInput
-    sprs?: SPRUncheckedUpdateOneWithoutCanvassNestedInput
+    jo?: JOUncheckedUpdateOneWithoutCanvassNestedInput
+    spr?: SPRUncheckedUpdateOneWithoutCanvassNestedInput
   }
 
   export type RVApproverUpsertWithWhereUniqueWithoutRvInput = {
@@ -31420,7 +31420,7 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     meqs?: MEQSCreateNestedOneWithoutRvInput
-    canvass: CanvassCreateNestedOneWithoutRvsInput
+    canvass: CanvassCreateNestedOneWithoutRvInput
   }
 
   export type RVUncheckedCreateWithoutRv_approversInput = {
@@ -31472,7 +31472,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     meqs?: MEQSUpdateOneWithoutRvNestedInput
-    canvass?: CanvassUpdateOneRequiredWithoutRvsNestedInput
+    canvass?: CanvassUpdateOneRequiredWithoutRvNestedInput
   }
 
   export type RVUncheckedUpdateWithoutRv_approversInput = {
@@ -31530,7 +31530,7 @@ export namespace Prisma {
     create: XOR<MEQSCreateWithoutSprInput, MEQSUncheckedCreateWithoutSprInput>
   }
 
-  export type CanvassCreateWithoutSprsInput = {
+  export type CanvassCreateWithoutSprInput = {
     id?: string
     rc_number: string
     date_requested: Date | string
@@ -31542,11 +31542,11 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     canvass_items?: CanvassItemCreateNestedManyWithoutCanvassInput
-    jos?: JOCreateNestedOneWithoutCanvassInput
-    rvs?: RVCreateNestedOneWithoutCanvassInput
+    jo?: JOCreateNestedOneWithoutCanvassInput
+    rv?: RVCreateNestedOneWithoutCanvassInput
   }
 
-  export type CanvassUncheckedCreateWithoutSprsInput = {
+  export type CanvassUncheckedCreateWithoutSprInput = {
     id?: string
     rc_number: string
     date_requested: Date | string
@@ -31558,13 +31558,13 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     canvass_items?: CanvassItemUncheckedCreateNestedManyWithoutCanvassInput
-    jos?: JOUncheckedCreateNestedOneWithoutCanvassInput
-    rvs?: RVUncheckedCreateNestedOneWithoutCanvassInput
+    jo?: JOUncheckedCreateNestedOneWithoutCanvassInput
+    rv?: RVUncheckedCreateNestedOneWithoutCanvassInput
   }
 
-  export type CanvassCreateOrConnectWithoutSprsInput = {
+  export type CanvassCreateOrConnectWithoutSprInput = {
     where: CanvassWhereUniqueInput
-    create: XOR<CanvassCreateWithoutSprsInput, CanvassUncheckedCreateWithoutSprsInput>
+    create: XOR<CanvassCreateWithoutSprInput, CanvassUncheckedCreateWithoutSprInput>
   }
 
   export type VehicleCreateWithoutSprsInput = {
@@ -31671,18 +31671,18 @@ export namespace Prisma {
     meqs_suppliers?: MEQSSupplierUncheckedUpdateManyWithoutMeqsNestedInput
   }
 
-  export type CanvassUpsertWithoutSprsInput = {
-    update: XOR<CanvassUpdateWithoutSprsInput, CanvassUncheckedUpdateWithoutSprsInput>
-    create: XOR<CanvassCreateWithoutSprsInput, CanvassUncheckedCreateWithoutSprsInput>
+  export type CanvassUpsertWithoutSprInput = {
+    update: XOR<CanvassUpdateWithoutSprInput, CanvassUncheckedUpdateWithoutSprInput>
+    create: XOR<CanvassCreateWithoutSprInput, CanvassUncheckedCreateWithoutSprInput>
     where?: CanvassWhereInput
   }
 
-  export type CanvassUpdateToOneWithWhereWithoutSprsInput = {
+  export type CanvassUpdateToOneWithWhereWithoutSprInput = {
     where?: CanvassWhereInput
-    data: XOR<CanvassUpdateWithoutSprsInput, CanvassUncheckedUpdateWithoutSprsInput>
+    data: XOR<CanvassUpdateWithoutSprInput, CanvassUncheckedUpdateWithoutSprInput>
   }
 
-  export type CanvassUpdateWithoutSprsInput = {
+  export type CanvassUpdateWithoutSprInput = {
     id?: StringFieldUpdateOperationsInput | string
     rc_number?: StringFieldUpdateOperationsInput | string
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -31694,11 +31694,11 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     canvass_items?: CanvassItemUpdateManyWithoutCanvassNestedInput
-    jos?: JOUpdateOneWithoutCanvassNestedInput
-    rvs?: RVUpdateOneWithoutCanvassNestedInput
+    jo?: JOUpdateOneWithoutCanvassNestedInput
+    rv?: RVUpdateOneWithoutCanvassNestedInput
   }
 
-  export type CanvassUncheckedUpdateWithoutSprsInput = {
+  export type CanvassUncheckedUpdateWithoutSprInput = {
     id?: StringFieldUpdateOperationsInput | string
     rc_number?: StringFieldUpdateOperationsInput | string
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -31710,8 +31710,8 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     canvass_items?: CanvassItemUncheckedUpdateManyWithoutCanvassNestedInput
-    jos?: JOUncheckedUpdateOneWithoutCanvassNestedInput
-    rvs?: RVUncheckedUpdateOneWithoutCanvassNestedInput
+    jo?: JOUncheckedUpdateOneWithoutCanvassNestedInput
+    rv?: RVUncheckedUpdateOneWithoutCanvassNestedInput
   }
 
   export type VehicleUpsertWithoutSprsInput = {
@@ -31790,7 +31790,7 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     meqs?: MEQSCreateNestedOneWithoutSprInput
-    canvass: CanvassCreateNestedOneWithoutSprsInput
+    canvass: CanvassCreateNestedOneWithoutSprInput
     vehicle: VehicleCreateNestedOneWithoutSprsInput
   }
 
@@ -31840,7 +31840,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     meqs?: MEQSUpdateOneWithoutSprNestedInput
-    canvass?: CanvassUpdateOneRequiredWithoutSprsNestedInput
+    canvass?: CanvassUpdateOneRequiredWithoutSprNestedInput
     vehicle?: VehicleUpdateOneRequiredWithoutSprsNestedInput
   }
 
@@ -31876,7 +31876,7 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     jo_approvers?: JOApproverCreateNestedManyWithoutJoInput
-    canvass: CanvassCreateNestedOneWithoutJosInput
+    canvass: CanvassCreateNestedOneWithoutJoInput
   }
 
   export type JOUncheckedCreateWithoutMeqsInput = {
@@ -31916,7 +31916,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    canvass: CanvassCreateNestedOneWithoutRvsInput
+    canvass: CanvassCreateNestedOneWithoutRvInput
     rv_approvers?: RVApproverCreateNestedManyWithoutRvInput
   }
 
@@ -31955,7 +31955,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    canvass: CanvassCreateNestedOneWithoutSprsInput
+    canvass: CanvassCreateNestedOneWithoutSprInput
     vehicle: VehicleCreateNestedOneWithoutSprsInput
     spr_approvers?: SPRApproverCreateNestedManyWithoutSprInput
   }
@@ -32080,7 +32080,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     jo_approvers?: JOApproverUpdateManyWithoutJoNestedInput
-    canvass?: CanvassUpdateOneRequiredWithoutJosNestedInput
+    canvass?: CanvassUpdateOneRequiredWithoutJoNestedInput
   }
 
   export type JOUncheckedUpdateWithoutMeqsInput = {
@@ -32126,7 +32126,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    canvass?: CanvassUpdateOneRequiredWithoutRvsNestedInput
+    canvass?: CanvassUpdateOneRequiredWithoutRvNestedInput
     rv_approvers?: RVApproverUpdateManyWithoutRvNestedInput
   }
 
@@ -32171,7 +32171,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    canvass?: CanvassUpdateOneRequiredWithoutSprsNestedInput
+    canvass?: CanvassUpdateOneRequiredWithoutSprNestedInput
     vehicle?: VehicleUpdateOneRequiredWithoutSprsNestedInput
     spr_approvers?: SPRApproverUpdateManyWithoutSprNestedInput
   }
@@ -33045,7 +33045,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     meqs?: MEQSUpdateOneWithoutSprNestedInput
-    canvass?: CanvassUpdateOneRequiredWithoutSprsNestedInput
+    canvass?: CanvassUpdateOneRequiredWithoutSprNestedInput
     spr_approvers?: SPRApproverUpdateManyWithoutSprNestedInput
   }
 

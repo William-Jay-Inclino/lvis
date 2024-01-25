@@ -1,5 +1,5 @@
 import { Field, Int, ObjectType } from "@nestjs/graphql";
-import { Employee } from "apps/system/src/employee/entities/employee.entity";
+// import { Employee } from "apps/system/src/employee/entities/employee.entity";
 
 
 @ObjectType()
@@ -11,8 +11,8 @@ export class RVApproverSetting {
     @Field(() => String)
     approver_id: string
 
-    @Field(() => Employee)
-    approver: Employee
+    // @Field(() => Employee)
+    // approver: Employee
 
     @Field(() => String)
     label: string

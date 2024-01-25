@@ -29,11 +29,11 @@ export class UpdateCanvassInput {
   @IsString()
   requested_by_id?: string;
 
-  @Field(() => [CreateItemInput], {nullable: true})
-  @IsOptional()
-  @IsArray()
-  @ValidateNested({ each: true })
-  @Type(() => CreateItemInput)
-  items?: CreateItemInput[];
+  // @Field(() => [CreateItemInput], {nullable: true})
+  // @IsOptional()
+  // @IsArray()
+  // @ValidateNested({ each: true })
+  // @Type(() => CreateItemInput)
+  // items?: CreateItemInput[];
 
 }

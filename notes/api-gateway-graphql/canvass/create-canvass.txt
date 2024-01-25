@@ -1,0 +1,37 @@
+mutation{
+  createCanvass(input: {
+    date_requested: "2024-01-01",
+    purpose: "purpose",
+    notes: "notes",
+    requested_by_id: "aa45c2b4-29a7-4683-bba4-a06181d43698",
+    items: [
+      {
+        description: "desc1x",
+        brand_id: "af96de49-302b-4124-8006-6fbe14d1f6f6",
+        unit_id: "045567b0-3f99-48b1-8c22-35816d59bceb",
+        quantity: 2
+      }
+    ]
+  }) {
+    id,
+    rc_number
+    date_requested
+    purpose
+    notes 
+    requested_by_id
+    canvass_items{
+      item{
+        description
+        brand{
+          id 
+          name
+        }
+        unit{
+          id
+          name
+        }
+        quantity
+      }
+    }
+  }
+}
