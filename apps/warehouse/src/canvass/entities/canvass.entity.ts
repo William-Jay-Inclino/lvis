@@ -3,6 +3,7 @@ import { CanvassItem } from './canvass-item.entity';
 import { JO } from '../../jo/entities/jo.entity';
 import { RV } from '../../rv/entities/rv.entity';
 import { SPR } from '../../spr/entities/spr.entity';
+import { Employee } from './employee.entity';
 
 @ObjectType()
 export class Canvass {
@@ -24,6 +25,9 @@ export class Canvass {
 
   @Field(() => String)
   requested_by_id: string;
+
+  @Field(() => Employee)
+  requested_by?: Employee;
 
   @Field(() => [CanvassItem])
   canvass_items: CanvassItem[];

@@ -6,14 +6,6 @@ export class CreateEmployeeInput {
 
   @Field(() => String)
   @IsNotEmpty()
-  employee_number: string;
-
-  @Field(() => String)
-  @IsNotEmpty()
-  department_id: string;
-
-  @Field(() => String)
-  @IsNotEmpty()
   firstname: string;
 
   @Field(() => String, {nullable: true})

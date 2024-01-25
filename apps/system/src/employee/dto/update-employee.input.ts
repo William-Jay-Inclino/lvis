@@ -4,14 +4,6 @@ import { InputType, Field, Int, PartialType } from '@nestjs/graphql';
 
 @InputType()
 export class UpdateEmployeeInput extends PartialType(CreateEmployeeInput) {
-  
-  @Field(() => String, {nullable: true})
-  @IsOptional()
-  employee_number?: string;
-
-  @Field(() => String, {nullable: true})
-  @IsOptional()
-  department_id?: string;
 
   @Field(() => String, {nullable: true})
   @IsOptional()

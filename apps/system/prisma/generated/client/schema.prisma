@@ -35,20 +35,16 @@ model Department {
   created_at DateTime   @default(now())
   updated_at DateTime   @updatedAt
   is_deleted Boolean    @default(false)
-  employees  Employee[]
   Division   Division[]
 
   @@map("department")
 }
 
 model Employee {
-  id              String     @id @default(uuid())
-  employee_number String     @unique
-  firstname       String
-  middlename      String?
-  lastname        String
-  department_id   String
-  department      Department @relation(fields: [department_id], references: [id])
+  id         String  @id @default(uuid())
+  firstname  String
+  middlename String?
+  lastname   String
 
   jo_approver_setting   JOApproverSetting?   @relation("JOApproverSetting")
   meqs_approver_setting MEQSApproverSetting? @relation("MEQSApproverSetting")

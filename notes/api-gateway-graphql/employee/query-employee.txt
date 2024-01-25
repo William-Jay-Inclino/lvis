@@ -1,0 +1,13 @@
+query{
+  employee(id: "aa45c2b4-29a7-4683-bba4-a06181d43698"){
+    id 
+    firstname
+    middlename
+    lastname
+    canvasses{
+      rc_number
+      purpose
+      notes
+    }
+  }
+}
