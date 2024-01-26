@@ -4,8 +4,6 @@ import { Brand } from './entities/brand.entity';
 import { CreateBrandInput } from './dto/create-brand.input';
 import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from '../auth/guards/gql-auth.guard';
-import { CurrentUser } from '../auth/current-user.decorator';
-import { User } from 'apps/system/src/user/entities/user.entity';
 
 @UseGuards(GqlAuthGuard)
 @Resolver(() => Brand)
@@ -18,8 +16,7 @@ export class BrandResolver {
   }
 
   @Query(() => [Brand])
-  brands(@CurrentUser() user: User) {
-    console.log('brand current-user', user)
+  brands() {
     return this.brandService.findAll();
   }
 

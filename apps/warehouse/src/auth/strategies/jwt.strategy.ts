@@ -45,11 +45,11 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
             ),
         );
 
-        console.log('data', data)
+        // console.log('data', data)
 
         const user = data.data.user
 
-        console.log('user', user)
+        // console.log('user', user)
 
         if (!user) {
             throw new NotFoundException('User not found');

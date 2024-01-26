@@ -3,14 +3,23 @@ import { Canvass } from './entities/canvass.entity';
 import { CanvassService } from './canvass.service';
 import { CreateCanvassInput } from './dto/create-canvass.input';
 import { Employee } from './entities/employee.entity';
+import { CurrentAuthUser } from '../auth/current-auth-user.decorator';
+import { GqlAuthGuard } from '../auth/guards/gql-auth.guard';
+import { UseGuards } from '@nestjs/common';
+import { AuthUser } from '../__common__/auth-user.entity';
 
+@UseGuards(GqlAuthGuard)
 @Resolver( () => Canvass)
 export class CanvassResolver {
 
     constructor(private readonly canvassService: CanvassService) {}
 
     @Mutation( () => Canvass)
-    createCanvass(@Args('input') createCanvassInput: CreateCanvassInput) {
+    createCanvass(
+        @Args('input') createCanvassInput: CreateCanvassInput, 
+        @CurrentAuthUser() authUser: AuthUser
+    ) {
+        this.canvassService.setAuthUser(authUser)
         return this.canvassService.create(createCanvassInput)
     }
 

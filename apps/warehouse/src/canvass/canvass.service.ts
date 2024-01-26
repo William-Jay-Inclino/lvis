@@ -2,22 +2,36 @@ import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../__prisma__/prisma.service';
 import { CreateCanvassInput } from './dto/create-canvass.input';
 import { Canvass, Prisma } from 'apps/warehouse/prisma/generated/client';
+import { catchError, firstValueFrom } from 'rxjs';
+import { HttpService } from '@nestjs/axios';
+import { AuthUser } from '../__common__/auth-user.entity';
 
 @Injectable()
 export class CanvassService {
 
     private readonly logger = new Logger(CanvassService.name);
+    private authUser: AuthUser
 
-    constructor(private readonly prisma: PrismaService) {}
+    constructor(
+        private readonly httpService: HttpService,
+        private readonly prisma: PrismaService
+    ) {}
+    
+    setAuthUser(authUser: AuthUser){
+        this.authUser = authUser
+    }
 
     async create(input: CreateCanvassInput): Promise<Canvass> {
 
         this.logger.log('create()', input)
 
-        if(!this.isValidRequestedById(input.requested_by_id)){
+        const isValidRequestedById = await this.isValidRequestedById(input.requested_by_id)
+
+        if(!isValidRequestedById){
             throw new NotFoundException('Requested by ID not found')
         }
 
+        console.log('valid')
         const rcNumber = await this.getLatestRcNumber()
 
         const data: Prisma.CanvassCreateInput = {
@@ -120,9 +134,45 @@ export class CanvassService {
         }
     }
 
+    // check if employee exist
     private async isValidRequestedById(requested_by_id: string): Promise<boolean> {
-        // TODO
-        this.logger.log('isValidRequestedById()', requested_by_id)
+        
+        this.logger.log('isValidRequestedById', requested_by_id)
+
+        // console.log('this.authUser', this.authUser)
+
+        const query = `
+            query{
+                employee(id: "${requested_by_id}") {
+                    id
+                }
+            }
+        `;
+
+        const { data } = await firstValueFrom(
+            this.httpService.post(process.env.API_GATEWAY_URL, 
+            { query },
+            {
+                headers: {
+                    Authorization: this.authUser.authorization,
+                    'Content-Type': 'application/json'
+                }
+            }  
+            ).pipe(
+              catchError((error) => {
+                throw error
+              }),
+            ),
+        );
+
+        console.log('data', data)
+
+        if(!data || !data.data || !data.data.employee){
+            console.log('employee not found')
+            return false 
+        }
+        const employee = data.data.employee 
+        console.log('employee', employee)
         return true 
 
     }

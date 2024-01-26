@@ -215,155 +215,117 @@ export const modules: Module[] = [
     }
 ]
 
-const depId1 = departments[0].id
-const depId2 = departments[1].id
-const depId3 = departments[2].id
-
 export const employees: Employee[] = [
     // Imd. Sup. = 0
     {
         id: faker.string.uuid(),
-        department_id: depId1,
         firstname: 'Ana Maria',
         middlename: 'Lourdes',
         lastname: 'Pastor',
-        employee_number: faker.string.uuid()
     },
     // Budget Officer = 1
     {
         id: faker.string.uuid(),
-        department_id: depId2,
         firstname: 'Suan',
         middlename: null,
         lastname: 'Ricaflor',
-        employee_number: faker.string.uuid()
     },
     // AUDIT = 2
     {
         id: faker.string.uuid(),
-        department_id: depId2,
         firstname: 'Marlon',
         middlename: null,
         lastname: 'Sanico',
-        employee_number: faker.string.uuid()
     },
     // GM / OIC = 3
     {
         id: faker.string.uuid(),
-        department_id: depId1,
         firstname: 'Jannie Ann',
         middlename: null,
         lastname: 'Dayandayan',
-        employee_number: faker.string.uuid()
     },
     // 1st CPC Member = 4
     {
         id: faker.string.uuid(),
-        department_id: depId1,
         firstname: 'Jhun Rey',
         middlename: null,
         lastname: 'Nahine',
-        employee_number: faker.string.uuid()
     },
     // 2nd CPC Member = 5
     {
         id: faker.string.uuid(),
-        department_id: depId1,
         firstname: 'Gretchen',
         middlename: null,
         lastname: 'Tagalog',
-        employee_number: faker.string.uuid()
     },
     // Witness = 6
     {
         id: faker.string.uuid(),
-        department_id: depId1,
         firstname: 'Dionic',
         middlename: null,
         lastname: 'De La Pena',
-        employee_number: faker.string.uuid()
     },
     // CPC Chairman = 7
     {
         id: faker.string.uuid(),
-        department_id: depId1,
         firstname: 'Anthony',
         middlename: null,
         lastname: 'Cecilio',
-        employee_number: faker.string.uuid()
     },
     // Finance Manager = 8
     {
         id: faker.string.uuid(),
-        department_id: depId1,
         firstname: 'Frances Paula',
         middlename: null,
         lastname: 'Lumacang',
-        employee_number: faker.string.uuid()
     },
     {
         id: faker.string.uuid(),
-        department_id: depId1,
         firstname: 'William Jay',
         middlename: 'Intales',
         lastname: 'Inclino',
-        employee_number: faker.string.uuid()
     },
     {
         id: faker.string.uuid(),
-        department_id: depId1,
         firstname: 'Joshua',
         middlename: 'X',
         lastname: 'Tayag',
-        employee_number: faker.string.uuid()
     },
     {
         id: faker.string.uuid(),
-        department_id: depId1,
         firstname: 'Jessa',
         middlename: 'X',
         lastname: 'Pelones',
-        employee_number: faker.string.uuid()
     },
     {
         id: faker.string.uuid(),
-        department_id: depId2,
         firstname: 'Joseph Ken',
         middlename: 'X',
         lastname: 'Estrera',
-        employee_number: faker.string.uuid()
     },
     {
         id: faker.string.uuid(),
-        department_id: depId2,
         firstname: 'Jared',
         middlename: 'X',
         lastname: 'Singcol',
-        employee_number: faker.string.uuid()
     },
     {
         id: faker.string.uuid(),
-        department_id: depId3,
         firstname: 'Hannah Grace',
         middlename: 'Bioco',
         lastname: 'Tudio',
-        employee_number: faker.string.uuid()
     },
     {
         id: faker.string.uuid(),
-        department_id: depId3,
         firstname: 'Jessa',
         middlename: '',
         lastname: 'Valida',
-        employee_number: faker.string.uuid()
     },
     {
         id: faker.string.uuid(),
-        department_id: depId3,
         firstname: 'Roger',
         middlename: '',
         lastname: 'Laurente',
-        employee_number: faker.string.uuid()
     }
 ]
 

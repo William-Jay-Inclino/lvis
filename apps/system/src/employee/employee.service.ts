@@ -28,7 +28,7 @@ export class EmployeeService {
 	}
 
 	async findAll(): Promise<Employee[]> {
-		return this.prisma.employee.findMany( {
+		return await this.prisma.employee.findMany( {
 			where: {
 				is_deleted: false 
 			},
@@ -36,8 +36,8 @@ export class EmployeeService {
 		} )
 	}
 
-	async findOne(id: string): Promise<Employee> {
-		const item = this.prisma.employee.findUnique({
+	async findOne(id: string): Promise<Employee | null> {
+		const item = await this.prisma.employee.findUnique({
 			where: { id }
 		})
 
