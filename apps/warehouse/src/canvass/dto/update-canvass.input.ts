@@ -1,9 +1,8 @@
 // update-canvass.input.ts
 
 import { InputType, Field } from '@nestjs/graphql';
-import { Transform, Type } from 'class-transformer';
-import { IsArray, IsDate, ValidateNested, IsOptional, IsString } from 'class-validator';
-import { CreateItemInput } from '../../item/dto/create-item.input';
+import { Transform } from 'class-transformer';
+import { IsDate, IsOptional, IsString } from 'class-validator';
 
 @InputType()
 export class UpdateCanvassInput {

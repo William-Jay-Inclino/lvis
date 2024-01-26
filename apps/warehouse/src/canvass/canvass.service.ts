@@ -5,6 +5,8 @@ import { Canvass, Prisma } from 'apps/warehouse/prisma/generated/client';
 import { catchError, firstValueFrom } from 'rxjs';
 import { HttpService } from '@nestjs/axios';
 import { AuthUser } from '../__common__/auth-user.entity';
+import { UpdateCanvassInput } from './dto/update-canvass.input';
+import { WarehouseRemoveResponse } from '../__common__/classes';
 
 @Injectable()
 export class CanvassService {
@@ -61,6 +63,37 @@ export class CanvassService {
         this.logger.log('Successfully created canvass')
 
         return await this.findOne(created.id)
+
+    }
+
+    async update(id: string, input: UpdateCanvassInput): Promise<Canvass> {
+        this.logger.log('update()', input)
+
+        const existingItem = await this.findOne(id)
+
+        if(input.requested_by_id){
+            const isValidRequestedById = await this.isValidRequestedById(input.requested_by_id)
+
+            if(!isValidRequestedById){
+                throw new NotFoundException('Requested by ID not found')
+            }
+        }
+
+        const data: Prisma.CanvassUpdateInput = {
+            date_requested: input.date_requested ? new Date(input.date_requested) : existingItem.date_requested,
+            purpose: input.purpose ?? existingItem.purpose,
+            notes: input.notes ?? existingItem.notes,
+            requested_by_id: input.requested_by_id ?? existingItem.requested_by_id
+        }
+
+        const updated = await this.prisma.canvass.update({
+            data,
+            where: { id }
+        })
+
+        this.logger.log('Successfully updated canvass')
+
+        return await this.findOne(updated.id)
 
     }
 
@@ -184,5 +217,28 @@ export class CanvassService {
             }
         })
     }
+
+    async remove(id: string): Promise<WarehouseRemoveResponse> {
+
+		const existingItem = await this.findOne(id)
+
+        if(existingItem.is_referenced){
+            return {
+                success: false,
+                msg: "Unable to delete. Canvass is reference"
+            }
+        }
+
+		await this.prisma.canvass.update( {
+			where: { id },
+			data: { is_deleted: true }
+		} )
+
+		return {
+			success: true,
+			msg: "Canvass successfully deleted"
+		}
+
+	}
 
 }

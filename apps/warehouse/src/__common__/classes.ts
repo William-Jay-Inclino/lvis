@@ -1,7 +1,7 @@
 import { Field, ObjectType } from "@nestjs/graphql";
 
 @ObjectType()
-export class SystemRemoveResponse {
+export class WarehouseRemoveResponse {
   @Field(() => Boolean)
   success: boolean;
 

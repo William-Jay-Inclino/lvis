@@ -171,7 +171,7 @@ model JOApproverSetting {
   created_at  DateTime @default(now())
   updated_at  DateTime @updatedAt
   is_deleted  Boolean  @default(false)
-  approver    Employee @relation("JOApproverSetting", fields: [approver_id], references: [id])
+  approver    Employee @relation("JOApproverSetting", fields: [approver_id], references: [id], onDelete: Restrict)
 
   @@map("jo_approver_setting")
 }
@@ -184,7 +184,7 @@ model RVApproverSetting {
   created_at  DateTime @default(now())
   updated_at  DateTime @updatedAt
   is_deleted  Boolean  @default(false)
-  approver    Employee @relation("RVApproverSetting", fields: [approver_id], references: [id])
+  approver    Employee @relation("RVApproverSetting", fields: [approver_id], references: [id], onDelete: Restrict)
 
   @@map("rv_approver_setting")
 }
@@ -197,7 +197,7 @@ model SPRApproverSetting {
   created_at  DateTime @default(now())
   updated_at  DateTime @updatedAt
   is_deleted  Boolean  @default(false)
-  approver    Employee @relation("SPRApproverSetting", fields: [approver_id], references: [id])
+  approver    Employee @relation("SPRApproverSetting", fields: [approver_id], references: [id], onDelete: Restrict)
 
   @@map("spr_approver_setting")
 }
@@ -210,7 +210,7 @@ model MEQSApproverSetting {
   created_at  DateTime @default(now())
   updated_at  DateTime @updatedAt
   is_deleted  Boolean  @default(false)
-  approver    Employee @relation("MEQSApproverSetting", fields: [approver_id], references: [id])
+  approver    Employee @relation("MEQSApproverSetting", fields: [approver_id], references: [id], onDelete: Restrict)
 
   @@map("meqs_approver_setting")
 }
@@ -223,7 +223,7 @@ model POApproverSetting {
   created_at  DateTime @default(now())
   updated_at  DateTime @updatedAt
   is_deleted  Boolean  @default(false)
-  approver    Employee @relation("POApproverSetting", fields: [approver_id], references: [id])
+  approver    Employee @relation("POApproverSetting", fields: [approver_id], references: [id], onDelete: Restrict)
 
   @@map("po_approver_setting")
 }

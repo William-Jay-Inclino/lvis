@@ -1,7 +1,6 @@
 import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { CreateUserInput } from './dto/create-user.input';
 import { User } from './entities/user.entity';
-import { faker } from '@faker-js/faker'; 
 import { PrismaService } from '../__prisma__/prisma.service';
 import { UpdateUserInput } from './dto/update-user.input';
 
@@ -41,8 +40,10 @@ export class UserService {
       where: {id, is_deleted: false}
     })
 
+    console.log('user', user)
+    
     if(!user){
-      throw new NotFoundException("User not found")
+      return null
     }
 
     return user
@@ -55,7 +56,7 @@ export class UserService {
     })
 
     if(!user){
-      throw new NotFoundException("User not found")
+      return null
     }
 
     return user
