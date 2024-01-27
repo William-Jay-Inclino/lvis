@@ -1,6 +1,6 @@
 import { Field, ObjectType } from "@nestjs/graphql";
 import { RV } from "./rv.entity";
-import { Item } from "../../item/entities/item.entity";
+// import { Item } from "../../canvass-item/entities/canvass-item.entity";
 
 
 @ObjectType()
@@ -18,8 +18,8 @@ export class RVItem {
     @Field(() => String)
     item_id: string;
     
-    @Field(() => Item)
-    item: Item;
+    // @Field(() => Item)
+    // item: Item;
 
     @Field(() => Date)
     created_at: Date;

@@ -2,7 +2,7 @@ import { Transform, Type } from 'class-transformer';
 import { IsNotEmpty, IsString, IsDate, IsOptional, IsArray, ValidateNested, IsInt } from 'class-validator';
 import { InputType, Field, Int, registerEnumType } from '@nestjs/graphql';
 import { APPROVAL_STATUS } from '../../__common__/types';
-import { CreateItemInput } from '../../item/dto/create-item.input';
+// import { CreateItemInput } from '../../canvass-item/dto/create-canvass-item.input';
 
 
 registerEnumType(APPROVAL_STATUS, {
@@ -39,12 +39,12 @@ export class UpdateRvInput {
   @IsDate()
   work_order_date?: string;
 
-  @Field(() => [CreateItemInput], {nullable: true})
-  @IsOptional()
-  @IsArray()
-  @ValidateNested({ each: true })
-  @Type(() => CreateItemInput)
-  items?: CreateItemInput[];
+  // @Field(() => [CreateItemInput], {nullable: true})
+  // @IsOptional()
+  // @IsArray()
+  // @ValidateNested({ each: true })
+  // @Type(() => CreateItemInput)
+  // items?: CreateItemInput[];
 
   @Field(() => String, {nullable: true})
   @IsOptional()

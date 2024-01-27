@@ -3,7 +3,6 @@ import { Transform, Type } from 'class-transformer';
 import { IsArray, IsDate, IsInt, IsNotEmpty, IsOptional, IsString, ValidateNested } from 'class-validator';
 import { CreateMeqsApproverInput } from './create-meqs-approver.input';
 import { APPROVAL_STATUS, REQUEST_TYPE } from '../../__common__/types'
-import { CreateItemWithSupplierInput } from '../../item/dto/create-item-with-suppliers.input';
 
 @InputType()
 export class CreateMeqsInput {
@@ -54,12 +53,12 @@ export class CreateMeqsInput {
   @IsNotEmpty()
   status: APPROVAL_STATUS;
 
-  @Field(() => [CreateItemWithSupplierInput])
-  @IsNotEmpty()
-  @IsArray()
-  @ValidateNested({ each: true })
-  @Type(() => CreateItemWithSupplierInput)
-  items: CreateItemWithSupplierInput[];
+  // @Field(() => [CreateItemWithSupplierInput])
+  // @IsNotEmpty()
+  // @IsArray()
+  // @ValidateNested({ each: true })
+  // @Type(() => CreateItemWithSupplierInput)
+  // items: CreateItemWithSupplierInput[];
 
   @Field(() => [CreateMeqsApproverInput])
   @IsNotEmpty()

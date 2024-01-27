@@ -3,7 +3,6 @@ import { Transform, Type } from 'class-transformer';
 import { IsArray, IsDate, IsInt, IsNotEmpty, IsOptional, IsString, ValidateNested } from 'class-validator';
 import { CreatePoApproverInput } from './create-po-approver.input';
 import { APPROVAL_STATUS } from '../../__common__/types';
-import { CreateItemWithSupplierInput } from '../../item/dto/create-item-with-suppliers.input';
 
 @InputType()
 export class CreatePoInput {
@@ -49,12 +48,12 @@ export class CreatePoInput {
   @IsNotEmpty()
   status: APPROVAL_STATUS;
 
-  @Field(() => [CreateItemWithSupplierInput])
-  @IsNotEmpty()
-  @IsArray()
-  @ValidateNested({ each: true })
-  @Type(() => CreateItemWithSupplierInput)
-  items: CreateItemWithSupplierInput[];
+  // @Field(() => [CreateItemWithSupplierInput])
+  // @IsNotEmpty()
+  // @IsArray()
+  // @ValidateNested({ each: true })
+  // @Type(() => CreateItemWithSupplierInput)
+  // items: CreateItemWithSupplierInput[];
 
   @Field(() => [CreatePoApproverInput])
   @IsNotEmpty()

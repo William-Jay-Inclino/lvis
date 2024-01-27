@@ -43,16 +43,12 @@ export class CanvassService {
             notes: input.notes,
             requested_by_id: input.requested_by_id,
             canvass_items: {
-                create: input.items.map((item) => {
+                create: input.canvass_items.map((item) => {
                     return {
-                        item: {
-                            create: {
-                                description: item.description,
-                                brand: item.brand_id ? { connect: { id: item.brand_id } } : undefined,
-                                unit: { connect: { id: item.unit_id } },
-                                quantity: item.quantity
-                            }
-                        }
+                        description: item.description,
+                        brand: item.brand_id ? { connect: { id: item.brand_id } } : undefined,
+                        unit: { connect: { id: item.unit_id } },
+                        quantity: item.quantity
                     }
                 })
             }
@@ -101,14 +97,10 @@ export class CanvassService {
         return this.prisma.canvass.findMany({
             include: {
                 canvass_items: {
-                include: {
-                    item: {
                     include: {
                         unit: true, 
                         brand: true
                     }
-                    }
-                }
                 }, 
             },
             where: {
@@ -127,14 +119,10 @@ export class CanvassService {
         const item = await this.prisma.canvass.findUnique({
           include: {
             canvass_items: {
-              include: {
-                item: {
-                  include: {
+                include: {
                     unit: true, 
                     brand: true
-                  }
                 }
-              }
             }, 
           },
           where: { id }

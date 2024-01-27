@@ -141,8 +141,9 @@ exports.Prisma.VehicleScalarFieldEnum = {
   is_deleted: 'is_deleted'
 };
 
-exports.Prisma.ItemScalarFieldEnum = {
+exports.Prisma.CanvassItemScalarFieldEnum = {
   id: 'id',
+  canvass_id: 'canvass_id',
   description: 'description',
   brand_id: 'brand_id',
   unit_id: 'unit_id',
@@ -160,27 +161,6 @@ exports.Prisma.CanvassScalarFieldEnum = {
   notes: 'notes',
   requested_by_id: 'requested_by_id',
   is_referenced: 'is_referenced',
-  created_at: 'created_at',
-  updated_at: 'updated_at',
-  is_deleted: 'is_deleted'
-};
-
-exports.Prisma.CanvassItemScalarFieldEnum = {
-  id: 'id',
-  canvass_id: 'canvass_id',
-  item_id: 'item_id',
-  created_at: 'created_at',
-  updated_at: 'updated_at',
-  is_deleted: 'is_deleted'
-};
-
-exports.Prisma.SupplierItemScalarFieldEnum = {
-  id: 'id',
-  item_id: 'item_id',
-  supplier_id: 'supplier_id',
-  price: 'price',
-  is_awarded: 'is_awarded',
-  notes: 'notes',
   created_at: 'created_at',
   updated_at: 'updated_at',
   is_deleted: 'is_deleted'
@@ -306,6 +286,18 @@ exports.Prisma.MEQSSupplierScalarFieldEnum = {
   is_deleted: 'is_deleted'
 };
 
+exports.Prisma.MEQSSupplierItemScalarFieldEnum = {
+  id: 'id',
+  canvass_item_id: 'canvass_item_id',
+  meqs_supplier_id: 'meqs_supplier_id',
+  price: 'price',
+  is_awarded: 'is_awarded',
+  notes: 'notes',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  is_deleted: 'is_deleted'
+};
+
 exports.Prisma.MEQSSupplierAttachmentScalarFieldEnum = {
   id: 'id',
   meqs_supplier_id: 'meqs_supplier_id',
@@ -378,10 +370,8 @@ exports.Prisma.ModelName = {
   Unit: 'Unit',
   Brand: 'Brand',
   Vehicle: 'Vehicle',
-  Item: 'Item',
-  Canvass: 'Canvass',
   CanvassItem: 'CanvassItem',
-  SupplierItem: 'SupplierItem',
+  Canvass: 'Canvass',
   JO: 'JO',
   JOApprover: 'JOApprover',
   RV: 'RV',
@@ -390,6 +380,7 @@ exports.Prisma.ModelName = {
   SPRApprover: 'SPRApprover',
   MEQS: 'MEQS',
   MEQSSupplier: 'MEQSSupplier',
+  MEQSSupplierItem: 'MEQSSupplierItem',
   MEQSSupplierAttachment: 'MEQSSupplierAttachment',
   MEQSApprover: 'MEQSApprover',
   PO: 'PO',

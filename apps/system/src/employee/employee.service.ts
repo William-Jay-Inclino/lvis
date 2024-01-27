@@ -3,7 +3,7 @@ import { CreateEmployeeInput } from './dto/create-employee.input';
 import { PrismaService } from '../__prisma__/prisma.service';
 import { Employee, Prisma } from 'apps/system/prisma/generated/client';
 import { UpdateEmployeeInput } from './dto/update-employee.input';
-import { RemoveDataResponse } from '../__common__/classes';
+import { SystemRemoveResponse } from '../__common__/classes';
 
 @Injectable()
 export class EmployeeService {
@@ -70,7 +70,7 @@ export class EmployeeService {
 		return await this.findOne(updated.id)
 	}
 
-	async remove(id: string): Promise<RemoveDataResponse> {
+	async remove(id: string): Promise<SystemRemoveResponse> {
 
 		const existingItem = await this.findOne(id)
 

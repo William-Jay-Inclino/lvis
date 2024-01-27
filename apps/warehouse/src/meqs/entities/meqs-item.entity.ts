@@ -1,6 +1,6 @@
 import { Field, ObjectType } from "@nestjs/graphql";
 import { MEQS } from "./meq.entity";
-import { Item } from "../../item/entities/item.entity";
+import { Item } from "../../canvass-item/entities/canvass-item.entity";
 
 
 @ObjectType()

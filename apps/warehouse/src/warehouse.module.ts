@@ -9,6 +9,7 @@ import { AuthModule } from './auth/auth.module';
 import { SeederModule } from './__seeder__/seeder.module';
 import { PrismaModule } from './__prisma__/prisma.module';
 import { CanvassModule } from './canvass/canvass.module';
+import { CanvassItemModule } from './canvass-item/canvass-item.module';
 
 
 @Module({
@@ -23,7 +24,8 @@ import { CanvassModule } from './canvass/canvass.module';
     AuthModule,
     SeederModule,
     PrismaModule,
-    CanvassModule
+    CanvassModule,
+    CanvassItemModule,
   ],
   controllers: [],
   providers: [],
