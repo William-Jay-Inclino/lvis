@@ -13,6 +13,7 @@ import { CanvassItemModule } from './canvass-item/canvass-item.module';
 import { EmployeeModule } from './employee/employee.module';
 import { RvService } from './rv/rv.service';
 import { RvModule } from './rv/rv.module';
+import { ClassificationModule } from './classification/classification.module';
 
 
 @Module({
@@ -31,6 +32,7 @@ import { RvModule } from './rv/rv.module';
     CanvassItemModule,
     EmployeeModule,
     RvModule,
+    ClassificationModule,
   ],
   controllers: [],
   providers: [RvService],

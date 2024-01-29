@@ -4,18 +4,31 @@ import { PrismaService } from '../__prisma__/prisma.service';
 import { Prisma, RV } from 'apps/warehouse/prisma/generated/client';
 import { CreateRvInput } from './dto/create-rv.input';
 import { APPROVAL_STATUS } from '../__common__/types';
+import { EmployeeService } from '../employee/employee.service';
+import { AuthUser } from '../__common__/auth-user.entity';
 
 @Injectable()
 export class RvService {
 
     private readonly logger = new Logger(CanvassService.name);
+    private authUser: AuthUser
 
     constructor(
-        private readonly prisma: PrismaService
+        private readonly prisma: PrismaService,
+        private readonly employeeService: EmployeeService
     ) {}
     
+    setAuthUser(authUser: AuthUser){
+        this.authUser = authUser
+    }
     
     async create(input: CreateRvInput): Promise<RV> {
+
+        const isValidSupervisorId = await this.employeeService.isEmployeeExist(input.supervisor_id, this.authUser)
+
+        if(!isValidSupervisorId){
+            throw new NotFoundException('Supervisor ID not valid')
+        }
 
         const rvNumber = await this.getLatestRcNumber()
 
@@ -24,7 +37,6 @@ export class RvService {
             date_requested: new Date(input.date_requested),
             work_order_no: input.work_order_no ?? null,
             work_order_date: input.work_order_date ? new Date(input.date_requested) : null,
-            classification_id: input.classification_id,
             supervisor_id: input.supervisor_id,
             canvass: { connect: { id: input.canvass_id } },
             rv_approvers: {
@@ -103,6 +115,8 @@ export class RvService {
             }
 		} )
 	}
+
+
 
     private async getLatestRcNumber(): Promise<string> {
         const currentYear = new Date().getFullYear().toString().slice(-2);
