@@ -1,8 +1,11 @@
 import { Module } from '@nestjs/common';
 import { RvResolver } from './rv.resolver';
 import { RvService } from './rv.service';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({
-  providers: [RvResolver, RvService]
+  imports: [HttpModule],
+  providers: [RvResolver, RvService],
+  exports: [RvService]
 })
 export class RvModule {}

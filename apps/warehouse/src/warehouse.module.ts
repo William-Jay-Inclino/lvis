@@ -13,6 +13,8 @@ import { CanvassItemModule } from './canvass-item/canvass-item.module';
 import { EmployeeModule } from './employee/employee.module';
 import { RvService } from './rv/rv.service';
 import { RvModule } from './rv/rv.module';
+import { ClassificationModule } from './classification/classification.module';
+import { HttpModule } from '@nestjs/axios';
 
 
 @Module({
@@ -23,6 +25,7 @@ import { RvModule } from './rv/rv.module';
         federation: 2,
       },
     }),
+    HttpModule,
     BrandModule,
     AuthModule,
     SeederModule,
@@ -31,6 +34,7 @@ import { RvModule } from './rv/rv.module';
     CanvassItemModule,
     EmployeeModule,
     RvModule,
+    ClassificationModule,
   ],
   controllers: [],
   providers: [RvService],

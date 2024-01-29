@@ -1,6 +1,5 @@
 import { Field, ObjectType } from "@nestjs/graphql";
 import { PO } from "./po.entity";
-import { Item } from "../../canvass-item/entities/canvass-item.entity";
 
 
 @ObjectType()
@@ -18,8 +17,8 @@ export class POItem {
     @Field(() => String)
     item_id: string;
     
-    @Field(() => Item)
-    item: Item;
+    // @Field(() => Item)
+    // item: Item;
 
     @Field(() => Date)
     created_at: Date;

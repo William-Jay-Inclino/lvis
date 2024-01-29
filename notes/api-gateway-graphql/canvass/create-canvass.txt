@@ -1,37 +1,37 @@
-mutation{
-  createCanvass(input: {
-    date_requested: "2024-01-01",
-    purpose: "purpose",
-    notes: "notes",
-    requested_by_id: "aa45c2b4-29a7-4683-bba4-a06181d43698",
-    items: [
-      {
-        description: "desc1x",
-        brand_id: "af96de49-302b-4124-8006-6fbe14d1f6f6",
-        unit_id: "045567b0-3f99-48b1-8c22-35816d59bceb",
-        quantity: 2
-      }
-    ]
-  }) {
-    id,
+mutation {
+  createCanvass(
+    input: {
+      date_requested: "2024-01-01"
+      purpose: "xxx"
+      notes: "xxxx"
+      requested_by_id: "f79c6309-8446-487a-bd06-5cada63707f8"
+      canvass_items: [
+        {
+          description: "desc1x"
+          brand_id: "262cdb69-1a8b-48e6-9d99-ea319b594db3"
+          unit_id: "6d0fec57-29d6-46f6-927b-da40ead446cd"
+          quantity: 2
+        }
+      ]
+    }
+  ) {
+    id
     rc_number
     date_requested
     purpose
-    notes 
+    notes
     requested_by_id
-    canvass_items{
-      item{
-        description
-        brand{
-          id 
-          name
-        }
-        unit{
-          id
-          name
-        }
-        quantity
+    canvass_items {
+      description
+      brand {
+        id
+        name
       }
+      unit {
+        id
+        name
+      }
+      quantity
     }
   }
 }

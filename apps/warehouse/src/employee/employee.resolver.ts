@@ -17,14 +17,14 @@ export class EmployeeResolver {
         return this.canvassService.forEmployee(employee.id)
     }
 
-    // @ResolveField( () => [RV])
-    // rvs_supervisor(@Parent() employee: Employee) {
-    //     return this.rvService.forEmployeeSupervisor(employee.id)
-    // }
+    @ResolveField( () => [RV])
+    rvs_supervisor(@Parent() employee: Employee) {
+        return this.rvService.forEmployeeSupervisor(employee.id)
+    }
 
-    // @ResolveField( () => [RV])
-    // rvs_canceller(@Parent() employee: Employee) {
-    //     return this.rvService.forEmployeeCanceller(employee.id)
-    // }
+    @ResolveField( () => [RV])
+    rvs_canceller(@Parent() employee: Employee) {
+        return this.rvService.forEmployeeCanceller(employee.id)
+    }
 
 }
