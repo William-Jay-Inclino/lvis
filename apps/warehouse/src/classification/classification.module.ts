@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
-import { ClassificationService } from './classification.service';
 import { HttpModule } from '@nestjs/axios';
+import { ClassificationResolver } from './classification.resolver';
+import { RvService } from '../rv/rv.service';
 
 @Module({
   imports: [HttpModule],
-  providers: [ClassificationService],
-  exports: [ClassificationService]
+  providers: [ClassificationResolver, RvService],
 })
 export class ClassificationModule {}

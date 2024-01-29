@@ -14,6 +14,7 @@ import { EmployeeModule } from './employee/employee.module';
 import { RvService } from './rv/rv.service';
 import { RvModule } from './rv/rv.module';
 import { ClassificationModule } from './classification/classification.module';
+import { HttpModule } from '@nestjs/axios';
 
 
 @Module({
@@ -24,6 +25,7 @@ import { ClassificationModule } from './classification/classification.module';
         federation: 2,
       },
     }),
+    HttpModule,
     BrandModule,
     AuthModule,
     SeederModule,

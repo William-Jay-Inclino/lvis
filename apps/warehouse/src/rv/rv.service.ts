@@ -4,8 +4,10 @@ import { PrismaService } from '../__prisma__/prisma.service';
 import { Prisma, RV } from 'apps/warehouse/prisma/generated/client';
 import { CreateRvInput } from './dto/create-rv.input';
 import { APPROVAL_STATUS } from '../__common__/types';
-import { EmployeeService } from '../employee/employee.service';
 import { AuthUser } from '../__common__/auth-user.entity';
+import { UpdateRvInput } from './dto/update-rv.input';
+import { catchError, firstValueFrom } from 'rxjs';
+import { HttpService } from '@nestjs/axios';
 
 @Injectable()
 export class RvService {
@@ -15,7 +17,7 @@ export class RvService {
 
     constructor(
         private readonly prisma: PrismaService,
-        private readonly employeeService: EmployeeService
+        private readonly httpService: HttpService,
     ) {}
     
     setAuthUser(authUser: AuthUser){
@@ -24,7 +26,7 @@ export class RvService {
     
     async create(input: CreateRvInput): Promise<RV> {
 
-        const isValidSupervisorId = await this.employeeService.isEmployeeExist(input.supervisor_id, this.authUser)
+        const isValidSupervisorId = await this.isEmployeeExist(input.supervisor_id, this.authUser)
 
         if(!isValidSupervisorId){
             throw new NotFoundException('Supervisor ID not valid')
@@ -56,6 +58,48 @@ export class RvService {
         this.logger.log('Successfully created RV')
 
 		return await this.findOne(created.id)
+
+    }
+
+    async update(id: string, input: UpdateRvInput): Promise<RV> {
+
+        this.logger.log('update()')
+
+        const existingItem = await this.findOne(id)
+
+        if(input.supervisor_id){
+            const isValidSupervisorId = await this.isEmployeeExist(input.supervisor_id, this.authUser)
+
+            if(!isValidSupervisorId){
+                throw new NotFoundException('Supervisor ID not valid')
+            }
+        }
+
+        if(input.classification_id){
+            const isValidClassificationId = await this.isClassificationExist(input.classification_id, this.authUser)
+
+            if(!isValidClassificationId){
+                throw new NotFoundException('Classification ID not valid')
+            }
+        }
+
+        const data: Prisma.RVUpdateInput = {
+            supervisor_id: input.supervisor_id ?? existingItem.supervisor_id,
+            classification_id: input.classification_id ?? existingItem.classification_id,
+            date_requested: input.date_requested ? new Date(input.date_requested) : existingItem.date_requested,
+            work_order_no: input.work_order_no ?? existingItem.work_order_no,
+            work_order_date: input.work_order_date ? new Date(input.work_order_date) : existingItem.work_order_date,
+            status: input.status ?? existingItem.status
+        }
+
+        const updated = await this.prisma.rV.update({
+            data,
+            where: { id }
+        })
+
+        this.logger.log('Successfully updated RV')
+
+        return await this.findOne(updated.id)
 
     }
 
@@ -116,8 +160,6 @@ export class RvService {
 		} )
 	}
 
-
-
     private async getLatestRcNumber(): Promise<string> {
         const currentYear = new Date().getFullYear().toString().slice(-2);
     
@@ -159,6 +201,90 @@ export class RvService {
                 classification_id: classificationId
             }
         })
+    }
+
+    private async isClassificationExist(classification_id: string, authUser: AuthUser): Promise<boolean> {
+    
+        this.logger.log('isClassificationExist', classification_id)
+
+        // console.log('this.authUser', this.authUser)
+
+        const query = `
+            query{
+                classification(id: "${classification_id}") {
+                    id
+                }
+            }
+        `;
+
+        const { data } = await firstValueFrom(
+            this.httpService.post(process.env.API_GATEWAY_URL, 
+            { query },
+            {
+                headers: {
+                    Authorization: authUser.authorization,
+                    'Content-Type': 'application/json'
+                }
+            }  
+            ).pipe(
+                catchError((error) => {
+                    throw error
+                }),
+            ),
+        );
+
+        console.log('data', data)
+
+        if(!data || !data.data || !data.data.classification){
+            console.log('classification not found')
+            return false 
+        }
+        const classification = data.data.classification 
+        console.log('classification', classification)
+        return true 
+
+    }
+
+    private async isEmployeeExist(employee_id: string, authUser: AuthUser): Promise<boolean> {
+    
+        this.logger.log('isEmployeeExist', employee_id)
+
+        // console.log('this.authUser', this.authUser)
+
+        const query = `
+            query{
+                employee(id: "${employee_id}") {
+                    id
+                }
+            }
+        `;
+
+        const { data } = await firstValueFrom(
+            this.httpService.post(process.env.API_GATEWAY_URL, 
+            { query },
+            {
+                headers: {
+                    Authorization: authUser.authorization,
+                    'Content-Type': 'application/json'
+                }
+            }  
+            ).pipe(
+                catchError((error) => {
+                    throw error
+                }),
+            ),
+        );
+
+        console.log('data', data)
+
+        if(!data || !data.data || !data.data.employee){
+            console.log('employee not found')
+            return false 
+        }
+        const employee = data.data.employee 
+        console.log('employee', employee)
+        return true 
+
     }
 
 }

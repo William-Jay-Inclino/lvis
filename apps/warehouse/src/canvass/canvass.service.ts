@@ -5,7 +5,8 @@ import { Canvass, Prisma } from 'apps/warehouse/prisma/generated/client';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { UpdateCanvassInput } from './dto/update-canvass.input';
 import { WarehouseRemoveResponse } from '../__common__/classes';
-import { EmployeeService } from '../employee/employee.service';
+import { catchError, firstValueFrom } from 'rxjs';
+import { HttpService } from '@nestjs/axios';
 
 @Injectable()
 export class CanvassService {
@@ -15,7 +16,7 @@ export class CanvassService {
 
     constructor(
         private readonly prisma: PrismaService,
-        private readonly employeeService: EmployeeService
+        private readonly httpService: HttpService,
     ) {}
     
     setAuthUser(authUser: AuthUser){
@@ -27,7 +28,7 @@ export class CanvassService {
         this.logger.log('create()', input)
 
         // const isValidRequestedById = await this.isValidRequestedById(input.requested_by_id)
-        const isValidRequestedById = await this.employeeService.isEmployeeExist(input.requested_by_id, this.authUser)
+        const isValidRequestedById = await this.isEmployeeExist(input.requested_by_id, this.authUser)
 
         if(!isValidRequestedById){
             throw new NotFoundException('Requested by ID not valid')
@@ -69,7 +70,7 @@ export class CanvassService {
 
         if(input.requested_by_id){
             // const isValidRequestedById = await this.isValidRequestedById(input.requested_by_id)
-            const isValidRequestedById = await this.employeeService.isEmployeeExist(input.requested_by_id, this.authUser)
+            const isValidRequestedById = await this.isEmployeeExist(input.requested_by_id, this.authUser)
 
             if(!isValidRequestedById){
                 throw new NotFoundException('Requested by ID not found')
@@ -186,5 +187,47 @@ export class CanvassService {
 		}
 
 	}
+
+    private async isEmployeeExist(employee_id: string, authUser: AuthUser): Promise<boolean> {
+    
+        this.logger.log('isEmployeeExist', employee_id)
+
+        // console.log('this.authUser', this.authUser)
+
+        const query = `
+            query{
+                employee(id: "${employee_id}") {
+                    id
+                }
+            }
+        `;
+
+        const { data } = await firstValueFrom(
+            this.httpService.post(process.env.API_GATEWAY_URL, 
+            { query },
+            {
+                headers: {
+                    Authorization: authUser.authorization,
+                    'Content-Type': 'application/json'
+                }
+            }  
+            ).pipe(
+                catchError((error) => {
+                    throw error
+                }),
+            ),
+        );
+
+        console.log('data', data)
+
+        if(!data || !data.data || !data.data.employee){
+            console.log('employee not found')
+            return false 
+        }
+        const employee = data.data.employee 
+        console.log('employee', employee)
+        return true 
+
+    }
 
 }
