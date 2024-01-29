@@ -134,23 +134,25 @@ model JOApprover {
 }
 
 model RV {
-  id                String       @id @default(uuid())
-  rv_number         String       @unique
-  date_requested    DateTime
-  canvass_id        String       @unique
-  work_order_no     String?
-  work_order_date   DateTime?
+  id                String    @id @default(uuid())
+  canvass_id        String    @unique
+  canvass           Canvass   @relation(fields: [canvass_id], references: [id])
   classification_id String?
   supervisor_id     String
-  status            Int          @default(1)
   canceller_id      String?
-  is_referenced     Boolean      @default(false)
-  created_at        DateTime     @default(now())
-  updated_at        DateTime     @updatedAt
-  is_deleted        Boolean      @default(false)
-  meqs              MEQS?
-  canvass           Canvass      @relation(fields: [canvass_id], references: [id])
-  rv_approvers      RVApprover[]
+  rv_number         String    @unique
+  date_requested    DateTime
+  work_order_no     String?
+  work_order_date   DateTime?
+  status            Int       @default(1)
+  is_referenced     Boolean   @default(false)
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  is_deleted Boolean  @default(false)
+
+  meqs         MEQS?
+  rv_approvers RVApprover[]
 
   @@map("request_voucher")
 }

@@ -2,7 +2,7 @@ import { ObjectType, Field, ID } from '@nestjs/graphql';
 import { JO } from '../../jo/entities/jo.entity';
 import { RV } from '../../rv/entities/rv.entity';
 import { SPR } from '../../spr/entities/spr.entity';
-import { Employee } from './employee.entity';
+import { Employee } from '../../employee/entities/employee.entity';
 import { CanvassItem } from '../../canvass-item/entities/canvass-item.entity';
 
 @ObjectType()

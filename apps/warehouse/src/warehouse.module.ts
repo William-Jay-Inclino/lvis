@@ -10,6 +10,9 @@ import { SeederModule } from './__seeder__/seeder.module';
 import { PrismaModule } from './__prisma__/prisma.module';
 import { CanvassModule } from './canvass/canvass.module';
 import { CanvassItemModule } from './canvass-item/canvass-item.module';
+import { EmployeeModule } from './employee/employee.module';
+import { RvService } from './rv/rv.service';
+import { RvModule } from './rv/rv.module';
 
 
 @Module({
@@ -26,8 +29,10 @@ import { CanvassItemModule } from './canvass-item/canvass-item.module';
     PrismaModule,
     CanvassModule,
     CanvassItemModule,
+    EmployeeModule,
+    RvModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [RvService],
 })
 export class WarehouseModule {}

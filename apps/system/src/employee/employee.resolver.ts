@@ -5,6 +5,7 @@ import { CreateEmployeeInput } from './dto/create-employee.input';
 import { UpdateEmployeeInput } from './dto/update-employee.input';
 import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from '../auth/guards/gql-auth.guard';
+import { SystemRemoveResponse } from '../__common__/classes';
 // import { UpdateEmployeeInput } from './dto/update-employee.input';
 
 @UseGuards(GqlAuthGuard)
@@ -35,8 +36,8 @@ export class EmployeeResolver {
     return this.employeeService.update(id, updateEmployeeInput);
   }
 
-  @Mutation(() => Boolean)
-  removeEmployee(@Args('id', { type: () => String }) id: string) {
+  @Mutation(() => SystemRemoveResponse)
+  removeEmployee(@Args('id') id: string) {
     return this.employeeService.remove(id);
   }
 

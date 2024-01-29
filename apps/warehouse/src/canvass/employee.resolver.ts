@@ -1,5 +1,5 @@
 import { Parent, ResolveField, Resolver } from '@nestjs/graphql';
-import { Employee } from './entities/employee.entity';
+import { Employee } from '../employee/entities/employee.entity';
 import { CanvassService } from './canvass.service';
 import { Canvass } from './entities/canvass.entity';
 
