@@ -12,6 +12,7 @@ import { AuthModule } from './auth/auth.module';
 import { PrismaModule } from './__prisma__/prisma.module';
 import { SeederModule } from './__seeder__/seeder.module';
 import { RvApproverSettingModule } from './rv-approver-setting/rv-approver-setting.module';
+import { ClassificationModule } from './classification/classification.module';
 
 
 @Module({
@@ -31,7 +32,8 @@ import { RvApproverSettingModule } from './rv-approver-setting/rv-approver-setti
     AuthModule,
     PrismaModule,
     SeederModule,
-    RvApproverSettingModule
+    RvApproverSettingModule,
+    ClassificationModule
   ],
   controllers: [],
   providers: [],
