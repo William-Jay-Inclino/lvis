@@ -1,8 +1,8 @@
 import { ObjectType, Field, Int, ID } from '@nestjs/graphql';
-import { RVApprover } from './rv-approver.entity';
 import { Canvass } from '../../canvass/entities/canvass.entity';
 import { Employee } from '../../employee/entities/employee.entity';
 import { Classification } from '../../classification/entities/classification.entity';
+import { RVApprover } from '../../rv-approver/entities/rv-approver.entity';
 // import { Employee } from 'apps/system/src/employee/entities/employee.entity';
 // import { Classification } from 'apps/system/src/classification/entities/classification.entity';
 

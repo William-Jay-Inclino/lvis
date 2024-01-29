@@ -10824,15 +10824,15 @@ export namespace Prisma {
 
   export type RVMinAggregateOutputType = {
     id: string | null
-    rv_number: string | null
-    date_requested: Date | null
     canvass_id: string | null
-    work_order_no: string | null
-    work_order_date: Date | null
     classification_id: string | null
     supervisor_id: string | null
-    status: number | null
     canceller_id: string | null
+    rv_number: string | null
+    date_requested: Date | null
+    work_order_no: string | null
+    work_order_date: Date | null
+    status: number | null
     is_referenced: boolean | null
     created_at: Date | null
     updated_at: Date | null
@@ -10841,15 +10841,15 @@ export namespace Prisma {
 
   export type RVMaxAggregateOutputType = {
     id: string | null
-    rv_number: string | null
-    date_requested: Date | null
     canvass_id: string | null
-    work_order_no: string | null
-    work_order_date: Date | null
     classification_id: string | null
     supervisor_id: string | null
-    status: number | null
     canceller_id: string | null
+    rv_number: string | null
+    date_requested: Date | null
+    work_order_no: string | null
+    work_order_date: Date | null
+    status: number | null
     is_referenced: boolean | null
     created_at: Date | null
     updated_at: Date | null
@@ -10858,15 +10858,15 @@ export namespace Prisma {
 
   export type RVCountAggregateOutputType = {
     id: number
-    rv_number: number
-    date_requested: number
     canvass_id: number
-    work_order_no: number
-    work_order_date: number
     classification_id: number
     supervisor_id: number
-    status: number
     canceller_id: number
+    rv_number: number
+    date_requested: number
+    work_order_no: number
+    work_order_date: number
+    status: number
     is_referenced: number
     created_at: number
     updated_at: number
@@ -10885,15 +10885,15 @@ export namespace Prisma {
 
   export type RVMinAggregateInputType = {
     id?: true
-    rv_number?: true
-    date_requested?: true
     canvass_id?: true
-    work_order_no?: true
-    work_order_date?: true
     classification_id?: true
     supervisor_id?: true
-    status?: true
     canceller_id?: true
+    rv_number?: true
+    date_requested?: true
+    work_order_no?: true
+    work_order_date?: true
+    status?: true
     is_referenced?: true
     created_at?: true
     updated_at?: true
@@ -10902,15 +10902,15 @@ export namespace Prisma {
 
   export type RVMaxAggregateInputType = {
     id?: true
-    rv_number?: true
-    date_requested?: true
     canvass_id?: true
-    work_order_no?: true
-    work_order_date?: true
     classification_id?: true
     supervisor_id?: true
-    status?: true
     canceller_id?: true
+    rv_number?: true
+    date_requested?: true
+    work_order_no?: true
+    work_order_date?: true
+    status?: true
     is_referenced?: true
     created_at?: true
     updated_at?: true
@@ -10919,15 +10919,15 @@ export namespace Prisma {
 
   export type RVCountAggregateInputType = {
     id?: true
-    rv_number?: true
-    date_requested?: true
     canvass_id?: true
-    work_order_no?: true
-    work_order_date?: true
     classification_id?: true
     supervisor_id?: true
-    status?: true
     canceller_id?: true
+    rv_number?: true
+    date_requested?: true
+    work_order_no?: true
+    work_order_date?: true
+    status?: true
     is_referenced?: true
     created_at?: true
     updated_at?: true
@@ -11023,15 +11023,15 @@ export namespace Prisma {
 
   export type RVGroupByOutputType = {
     id: string
-    rv_number: string
-    date_requested: Date
     canvass_id: string
-    work_order_no: string | null
-    work_order_date: Date | null
     classification_id: string | null
     supervisor_id: string
-    status: number
     canceller_id: string | null
+    rv_number: string
+    date_requested: Date
+    work_order_no: string | null
+    work_order_date: Date | null
+    status: number
     is_referenced: boolean
     created_at: Date
     updated_at: Date
@@ -11059,36 +11059,36 @@ export namespace Prisma {
 
   export type RVSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    rv_number?: boolean
-    date_requested?: boolean
     canvass_id?: boolean
-    work_order_no?: boolean
-    work_order_date?: boolean
     classification_id?: boolean
     supervisor_id?: boolean
-    status?: boolean
     canceller_id?: boolean
+    rv_number?: boolean
+    date_requested?: boolean
+    work_order_no?: boolean
+    work_order_date?: boolean
+    status?: boolean
     is_referenced?: boolean
     created_at?: boolean
     updated_at?: boolean
     is_deleted?: boolean
-    meqs?: boolean | RV$meqsArgs<ExtArgs>
     canvass?: boolean | CanvassDefaultArgs<ExtArgs>
+    meqs?: boolean | RV$meqsArgs<ExtArgs>
     rv_approvers?: boolean | RV$rv_approversArgs<ExtArgs>
     _count?: boolean | RVCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["rV"]>
 
   export type RVSelectScalar = {
     id?: boolean
-    rv_number?: boolean
-    date_requested?: boolean
     canvass_id?: boolean
-    work_order_no?: boolean
-    work_order_date?: boolean
     classification_id?: boolean
     supervisor_id?: boolean
-    status?: boolean
     canceller_id?: boolean
+    rv_number?: boolean
+    date_requested?: boolean
+    work_order_no?: boolean
+    work_order_date?: boolean
+    status?: boolean
     is_referenced?: boolean
     created_at?: boolean
     updated_at?: boolean
@@ -11096,8 +11096,8 @@ export namespace Prisma {
   }
 
   export type RVInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    meqs?: boolean | RV$meqsArgs<ExtArgs>
     canvass?: boolean | CanvassDefaultArgs<ExtArgs>
+    meqs?: boolean | RV$meqsArgs<ExtArgs>
     rv_approvers?: boolean | RV$rv_approversArgs<ExtArgs>
     _count?: boolean | RVCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -11106,21 +11106,21 @@ export namespace Prisma {
   export type $RVPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "RV"
     objects: {
-      meqs: Prisma.$MEQSPayload<ExtArgs> | null
       canvass: Prisma.$CanvassPayload<ExtArgs>
+      meqs: Prisma.$MEQSPayload<ExtArgs> | null
       rv_approvers: Prisma.$RVApproverPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      rv_number: string
-      date_requested: Date
       canvass_id: string
-      work_order_no: string | null
-      work_order_date: Date | null
       classification_id: string | null
       supervisor_id: string
-      status: number
       canceller_id: string | null
+      rv_number: string
+      date_requested: Date
+      work_order_no: string | null
+      work_order_date: Date | null
+      status: number
       is_referenced: boolean
       created_at: Date
       updated_at: Date
@@ -11490,9 +11490,9 @@ export namespace Prisma {
   export interface Prisma__RVClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
-    meqs<T extends RV$meqsArgs<ExtArgs> = {}>(args?: Subset<T, RV$meqsArgs<ExtArgs>>): Prisma__MEQSClient<$Result.GetResult<Prisma.$MEQSPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
-
     canvass<T extends CanvassDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CanvassDefaultArgs<ExtArgs>>): Prisma__CanvassClient<$Result.GetResult<Prisma.$CanvassPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    meqs<T extends RV$meqsArgs<ExtArgs> = {}>(args?: Subset<T, RV$meqsArgs<ExtArgs>>): Prisma__MEQSClient<$Result.GetResult<Prisma.$MEQSPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
 
     rv_approvers<T extends RV$rv_approversArgs<ExtArgs> = {}>(args?: Subset<T, RV$rv_approversArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RVApproverPayload<ExtArgs>, T, 'findMany'> | Null>;
 
@@ -11525,15 +11525,15 @@ export namespace Prisma {
    */ 
   interface RVFieldRefs {
     readonly id: FieldRef<"RV", 'String'>
-    readonly rv_number: FieldRef<"RV", 'String'>
-    readonly date_requested: FieldRef<"RV", 'DateTime'>
     readonly canvass_id: FieldRef<"RV", 'String'>
-    readonly work_order_no: FieldRef<"RV", 'String'>
-    readonly work_order_date: FieldRef<"RV", 'DateTime'>
     readonly classification_id: FieldRef<"RV", 'String'>
     readonly supervisor_id: FieldRef<"RV", 'String'>
-    readonly status: FieldRef<"RV", 'Int'>
     readonly canceller_id: FieldRef<"RV", 'String'>
+    readonly rv_number: FieldRef<"RV", 'String'>
+    readonly date_requested: FieldRef<"RV", 'DateTime'>
+    readonly work_order_no: FieldRef<"RV", 'String'>
+    readonly work_order_date: FieldRef<"RV", 'DateTime'>
+    readonly status: FieldRef<"RV", 'Int'>
     readonly is_referenced: FieldRef<"RV", 'Boolean'>
     readonly created_at: FieldRef<"RV", 'DateTime'>
     readonly updated_at: FieldRef<"RV", 'DateTime'>
@@ -22362,15 +22362,15 @@ export namespace Prisma {
 
   export const RVScalarFieldEnum: {
     id: 'id',
-    rv_number: 'rv_number',
-    date_requested: 'date_requested',
     canvass_id: 'canvass_id',
-    work_order_no: 'work_order_no',
-    work_order_date: 'work_order_date',
     classification_id: 'classification_id',
     supervisor_id: 'supervisor_id',
-    status: 'status',
     canceller_id: 'canceller_id',
+    rv_number: 'rv_number',
+    date_requested: 'date_requested',
+    work_order_no: 'work_order_no',
+    work_order_date: 'work_order_date',
+    status: 'status',
     is_referenced: 'is_referenced',
     created_at: 'created_at',
     updated_at: 'updated_at',
@@ -23248,78 +23248,78 @@ export namespace Prisma {
     OR?: RVWhereInput[]
     NOT?: RVWhereInput | RVWhereInput[]
     id?: StringFilter<"RV"> | string
-    rv_number?: StringFilter<"RV"> | string
-    date_requested?: DateTimeFilter<"RV"> | Date | string
     canvass_id?: StringFilter<"RV"> | string
-    work_order_no?: StringNullableFilter<"RV"> | string | null
-    work_order_date?: DateTimeNullableFilter<"RV"> | Date | string | null
     classification_id?: StringNullableFilter<"RV"> | string | null
     supervisor_id?: StringFilter<"RV"> | string
-    status?: IntFilter<"RV"> | number
     canceller_id?: StringNullableFilter<"RV"> | string | null
+    rv_number?: StringFilter<"RV"> | string
+    date_requested?: DateTimeFilter<"RV"> | Date | string
+    work_order_no?: StringNullableFilter<"RV"> | string | null
+    work_order_date?: DateTimeNullableFilter<"RV"> | Date | string | null
+    status?: IntFilter<"RV"> | number
     is_referenced?: BoolFilter<"RV"> | boolean
     created_at?: DateTimeFilter<"RV"> | Date | string
     updated_at?: DateTimeFilter<"RV"> | Date | string
     is_deleted?: BoolFilter<"RV"> | boolean
-    meqs?: XOR<MEQSNullableRelationFilter, MEQSWhereInput> | null
     canvass?: XOR<CanvassRelationFilter, CanvassWhereInput>
+    meqs?: XOR<MEQSNullableRelationFilter, MEQSWhereInput> | null
     rv_approvers?: RVApproverListRelationFilter
   }
 
   export type RVOrderByWithRelationInput = {
     id?: SortOrder
-    rv_number?: SortOrder
-    date_requested?: SortOrder
     canvass_id?: SortOrder
-    work_order_no?: SortOrderInput | SortOrder
-    work_order_date?: SortOrderInput | SortOrder
     classification_id?: SortOrderInput | SortOrder
     supervisor_id?: SortOrder
-    status?: SortOrder
     canceller_id?: SortOrderInput | SortOrder
+    rv_number?: SortOrder
+    date_requested?: SortOrder
+    work_order_no?: SortOrderInput | SortOrder
+    work_order_date?: SortOrderInput | SortOrder
+    status?: SortOrder
     is_referenced?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
-    meqs?: MEQSOrderByWithRelationInput
     canvass?: CanvassOrderByWithRelationInput
+    meqs?: MEQSOrderByWithRelationInput
     rv_approvers?: RVApproverOrderByRelationAggregateInput
   }
 
   export type RVWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    rv_number?: string
     canvass_id?: string
+    rv_number?: string
     AND?: RVWhereInput | RVWhereInput[]
     OR?: RVWhereInput[]
     NOT?: RVWhereInput | RVWhereInput[]
+    classification_id?: StringNullableFilter<"RV"> | string | null
+    supervisor_id?: StringFilter<"RV"> | string
+    canceller_id?: StringNullableFilter<"RV"> | string | null
     date_requested?: DateTimeFilter<"RV"> | Date | string
     work_order_no?: StringNullableFilter<"RV"> | string | null
     work_order_date?: DateTimeNullableFilter<"RV"> | Date | string | null
-    classification_id?: StringNullableFilter<"RV"> | string | null
-    supervisor_id?: StringFilter<"RV"> | string
     status?: IntFilter<"RV"> | number
-    canceller_id?: StringNullableFilter<"RV"> | string | null
     is_referenced?: BoolFilter<"RV"> | boolean
     created_at?: DateTimeFilter<"RV"> | Date | string
     updated_at?: DateTimeFilter<"RV"> | Date | string
     is_deleted?: BoolFilter<"RV"> | boolean
-    meqs?: XOR<MEQSNullableRelationFilter, MEQSWhereInput> | null
     canvass?: XOR<CanvassRelationFilter, CanvassWhereInput>
+    meqs?: XOR<MEQSNullableRelationFilter, MEQSWhereInput> | null
     rv_approvers?: RVApproverListRelationFilter
-  }, "id" | "rv_number" | "canvass_id">
+  }, "id" | "canvass_id" | "rv_number">
 
   export type RVOrderByWithAggregationInput = {
     id?: SortOrder
-    rv_number?: SortOrder
-    date_requested?: SortOrder
     canvass_id?: SortOrder
-    work_order_no?: SortOrderInput | SortOrder
-    work_order_date?: SortOrderInput | SortOrder
     classification_id?: SortOrderInput | SortOrder
     supervisor_id?: SortOrder
-    status?: SortOrder
     canceller_id?: SortOrderInput | SortOrder
+    rv_number?: SortOrder
+    date_requested?: SortOrder
+    work_order_no?: SortOrderInput | SortOrder
+    work_order_date?: SortOrderInput | SortOrder
+    status?: SortOrder
     is_referenced?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -23336,15 +23336,15 @@ export namespace Prisma {
     OR?: RVScalarWhereWithAggregatesInput[]
     NOT?: RVScalarWhereWithAggregatesInput | RVScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"RV"> | string
-    rv_number?: StringWithAggregatesFilter<"RV"> | string
-    date_requested?: DateTimeWithAggregatesFilter<"RV"> | Date | string
     canvass_id?: StringWithAggregatesFilter<"RV"> | string
-    work_order_no?: StringNullableWithAggregatesFilter<"RV"> | string | null
-    work_order_date?: DateTimeNullableWithAggregatesFilter<"RV"> | Date | string | null
     classification_id?: StringNullableWithAggregatesFilter<"RV"> | string | null
     supervisor_id?: StringWithAggregatesFilter<"RV"> | string
-    status?: IntWithAggregatesFilter<"RV"> | number
     canceller_id?: StringNullableWithAggregatesFilter<"RV"> | string | null
+    rv_number?: StringWithAggregatesFilter<"RV"> | string
+    date_requested?: DateTimeWithAggregatesFilter<"RV"> | Date | string
+    work_order_no?: StringNullableWithAggregatesFilter<"RV"> | string | null
+    work_order_date?: DateTimeNullableWithAggregatesFilter<"RV"> | Date | string | null
+    status?: IntWithAggregatesFilter<"RV"> | number
     is_referenced?: BoolWithAggregatesFilter<"RV"> | boolean
     created_at?: DateTimeWithAggregatesFilter<"RV"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"RV"> | Date | string
@@ -24903,34 +24903,34 @@ export namespace Prisma {
 
   export type RVCreateInput = {
     id?: string
+    classification_id?: string | null
+    supervisor_id: string
+    canceller_id?: string | null
     rv_number: string
     date_requested: Date | string
     work_order_no?: string | null
     work_order_date?: Date | string | null
-    classification_id?: string | null
-    supervisor_id: string
     status?: number
-    canceller_id?: string | null
     is_referenced?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    meqs?: MEQSCreateNestedOneWithoutRvInput
     canvass: CanvassCreateNestedOneWithoutRvInput
+    meqs?: MEQSCreateNestedOneWithoutRvInput
     rv_approvers?: RVApproverCreateNestedManyWithoutRvInput
   }
 
   export type RVUncheckedCreateInput = {
     id?: string
-    rv_number: string
-    date_requested: Date | string
     canvass_id: string
-    work_order_no?: string | null
-    work_order_date?: Date | string | null
     classification_id?: string | null
     supervisor_id: string
-    status?: number
     canceller_id?: string | null
+    rv_number: string
+    date_requested: Date | string
+    work_order_no?: string | null
+    work_order_date?: Date | string | null
+    status?: number
     is_referenced?: boolean
     created_at?: Date | string
     updated_at?: Date | string
@@ -24941,34 +24941,34 @@ export namespace Prisma {
 
   export type RVUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    classification_id?: NullableStringFieldUpdateOperationsInput | string | null
+    supervisor_id?: StringFieldUpdateOperationsInput | string
+    canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
     rv_number?: StringFieldUpdateOperationsInput | string
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
     work_order_no?: NullableStringFieldUpdateOperationsInput | string | null
     work_order_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    classification_id?: NullableStringFieldUpdateOperationsInput | string | null
-    supervisor_id?: StringFieldUpdateOperationsInput | string
     status?: IntFieldUpdateOperationsInput | number
-    canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
     is_referenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    meqs?: MEQSUpdateOneWithoutRvNestedInput
     canvass?: CanvassUpdateOneRequiredWithoutRvNestedInput
+    meqs?: MEQSUpdateOneWithoutRvNestedInput
     rv_approvers?: RVApproverUpdateManyWithoutRvNestedInput
   }
 
   export type RVUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    rv_number?: StringFieldUpdateOperationsInput | string
-    date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
     canvass_id?: StringFieldUpdateOperationsInput | string
-    work_order_no?: NullableStringFieldUpdateOperationsInput | string | null
-    work_order_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     classification_id?: NullableStringFieldUpdateOperationsInput | string | null
     supervisor_id?: StringFieldUpdateOperationsInput | string
-    status?: IntFieldUpdateOperationsInput | number
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    rv_number?: StringFieldUpdateOperationsInput | string
+    date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
+    work_order_no?: NullableStringFieldUpdateOperationsInput | string | null
+    work_order_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: IntFieldUpdateOperationsInput | number
     is_referenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24979,15 +24979,15 @@ export namespace Prisma {
 
   export type RVCreateManyInput = {
     id?: string
-    rv_number: string
-    date_requested: Date | string
     canvass_id: string
-    work_order_no?: string | null
-    work_order_date?: Date | string | null
     classification_id?: string | null
     supervisor_id: string
-    status?: number
     canceller_id?: string | null
+    rv_number: string
+    date_requested: Date | string
+    work_order_no?: string | null
+    work_order_date?: Date | string | null
+    status?: number
     is_referenced?: boolean
     created_at?: Date | string
     updated_at?: Date | string
@@ -24996,14 +24996,14 @@ export namespace Prisma {
 
   export type RVUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    classification_id?: NullableStringFieldUpdateOperationsInput | string | null
+    supervisor_id?: StringFieldUpdateOperationsInput | string
+    canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
     rv_number?: StringFieldUpdateOperationsInput | string
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
     work_order_no?: NullableStringFieldUpdateOperationsInput | string | null
     work_order_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    classification_id?: NullableStringFieldUpdateOperationsInput | string | null
-    supervisor_id?: StringFieldUpdateOperationsInput | string
     status?: IntFieldUpdateOperationsInput | number
-    canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
     is_referenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -25012,15 +25012,15 @@ export namespace Prisma {
 
   export type RVUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    rv_number?: StringFieldUpdateOperationsInput | string
-    date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
     canvass_id?: StringFieldUpdateOperationsInput | string
-    work_order_no?: NullableStringFieldUpdateOperationsInput | string | null
-    work_order_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     classification_id?: NullableStringFieldUpdateOperationsInput | string | null
     supervisor_id?: StringFieldUpdateOperationsInput | string
-    status?: IntFieldUpdateOperationsInput | number
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    rv_number?: StringFieldUpdateOperationsInput | string
+    date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
+    work_order_no?: NullableStringFieldUpdateOperationsInput | string | null
+    work_order_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: IntFieldUpdateOperationsInput | number
     is_referenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -26544,15 +26544,15 @@ export namespace Prisma {
 
   export type RVCountOrderByAggregateInput = {
     id?: SortOrder
-    rv_number?: SortOrder
-    date_requested?: SortOrder
     canvass_id?: SortOrder
-    work_order_no?: SortOrder
-    work_order_date?: SortOrder
     classification_id?: SortOrder
     supervisor_id?: SortOrder
-    status?: SortOrder
     canceller_id?: SortOrder
+    rv_number?: SortOrder
+    date_requested?: SortOrder
+    work_order_no?: SortOrder
+    work_order_date?: SortOrder
+    status?: SortOrder
     is_referenced?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -26565,15 +26565,15 @@ export namespace Prisma {
 
   export type RVMaxOrderByAggregateInput = {
     id?: SortOrder
-    rv_number?: SortOrder
-    date_requested?: SortOrder
     canvass_id?: SortOrder
-    work_order_no?: SortOrder
-    work_order_date?: SortOrder
     classification_id?: SortOrder
     supervisor_id?: SortOrder
-    status?: SortOrder
     canceller_id?: SortOrder
+    rv_number?: SortOrder
+    date_requested?: SortOrder
+    work_order_no?: SortOrder
+    work_order_date?: SortOrder
+    status?: SortOrder
     is_referenced?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -26582,15 +26582,15 @@ export namespace Prisma {
 
   export type RVMinOrderByAggregateInput = {
     id?: SortOrder
-    rv_number?: SortOrder
-    date_requested?: SortOrder
     canvass_id?: SortOrder
-    work_order_no?: SortOrder
-    work_order_date?: SortOrder
     classification_id?: SortOrder
     supervisor_id?: SortOrder
-    status?: SortOrder
     canceller_id?: SortOrder
+    rv_number?: SortOrder
+    date_requested?: SortOrder
+    work_order_no?: SortOrder
+    work_order_date?: SortOrder
+    status?: SortOrder
     is_referenced?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -27756,16 +27756,16 @@ export namespace Prisma {
     update?: XOR<XOR<JOUpdateToOneWithWhereWithoutJo_approversInput, JOUpdateWithoutJo_approversInput>, JOUncheckedUpdateWithoutJo_approversInput>
   }
 
-  export type MEQSCreateNestedOneWithoutRvInput = {
-    create?: XOR<MEQSCreateWithoutRvInput, MEQSUncheckedCreateWithoutRvInput>
-    connectOrCreate?: MEQSCreateOrConnectWithoutRvInput
-    connect?: MEQSWhereUniqueInput
-  }
-
   export type CanvassCreateNestedOneWithoutRvInput = {
     create?: XOR<CanvassCreateWithoutRvInput, CanvassUncheckedCreateWithoutRvInput>
     connectOrCreate?: CanvassCreateOrConnectWithoutRvInput
     connect?: CanvassWhereUniqueInput
+  }
+
+  export type MEQSCreateNestedOneWithoutRvInput = {
+    create?: XOR<MEQSCreateWithoutRvInput, MEQSUncheckedCreateWithoutRvInput>
+    connectOrCreate?: MEQSCreateOrConnectWithoutRvInput
+    connect?: MEQSWhereUniqueInput
   }
 
   export type RVApproverCreateNestedManyWithoutRvInput = {
@@ -27788,6 +27788,14 @@ export namespace Prisma {
     connect?: RVApproverWhereUniqueInput | RVApproverWhereUniqueInput[]
   }
 
+  export type CanvassUpdateOneRequiredWithoutRvNestedInput = {
+    create?: XOR<CanvassCreateWithoutRvInput, CanvassUncheckedCreateWithoutRvInput>
+    connectOrCreate?: CanvassCreateOrConnectWithoutRvInput
+    upsert?: CanvassUpsertWithoutRvInput
+    connect?: CanvassWhereUniqueInput
+    update?: XOR<XOR<CanvassUpdateToOneWithWhereWithoutRvInput, CanvassUpdateWithoutRvInput>, CanvassUncheckedUpdateWithoutRvInput>
+  }
+
   export type MEQSUpdateOneWithoutRvNestedInput = {
     create?: XOR<MEQSCreateWithoutRvInput, MEQSUncheckedCreateWithoutRvInput>
     connectOrCreate?: MEQSCreateOrConnectWithoutRvInput
@@ -27796,14 +27804,6 @@ export namespace Prisma {
     delete?: MEQSWhereInput | boolean
     connect?: MEQSWhereUniqueInput
     update?: XOR<XOR<MEQSUpdateToOneWithWhereWithoutRvInput, MEQSUpdateWithoutRvInput>, MEQSUncheckedUpdateWithoutRvInput>
-  }
-
-  export type CanvassUpdateOneRequiredWithoutRvNestedInput = {
-    create?: XOR<CanvassCreateWithoutRvInput, CanvassUncheckedCreateWithoutRvInput>
-    connectOrCreate?: CanvassCreateOrConnectWithoutRvInput
-    upsert?: CanvassUpsertWithoutRvInput
-    connect?: CanvassWhereUniqueInput
-    update?: XOR<XOR<CanvassUpdateToOneWithWhereWithoutRvInput, CanvassUpdateWithoutRvInput>, CanvassUncheckedUpdateWithoutRvInput>
   }
 
   export type RVApproverUpdateManyWithoutRvNestedInput = {
@@ -29154,14 +29154,14 @@ export namespace Prisma {
 
   export type RVCreateWithoutCanvassInput = {
     id?: string
+    classification_id?: string | null
+    supervisor_id: string
+    canceller_id?: string | null
     rv_number: string
     date_requested: Date | string
     work_order_no?: string | null
     work_order_date?: Date | string | null
-    classification_id?: string | null
-    supervisor_id: string
     status?: number
-    canceller_id?: string | null
     is_referenced?: boolean
     created_at?: Date | string
     updated_at?: Date | string
@@ -29172,14 +29172,14 @@ export namespace Prisma {
 
   export type RVUncheckedCreateWithoutCanvassInput = {
     id?: string
+    classification_id?: string | null
+    supervisor_id: string
+    canceller_id?: string | null
     rv_number: string
     date_requested: Date | string
     work_order_no?: string | null
     work_order_date?: Date | string | null
-    classification_id?: string | null
-    supervisor_id: string
     status?: number
-    canceller_id?: string | null
     is_referenced?: boolean
     created_at?: Date | string
     updated_at?: Date | string
@@ -29308,14 +29308,14 @@ export namespace Prisma {
 
   export type RVUpdateWithoutCanvassInput = {
     id?: StringFieldUpdateOperationsInput | string
+    classification_id?: NullableStringFieldUpdateOperationsInput | string | null
+    supervisor_id?: StringFieldUpdateOperationsInput | string
+    canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
     rv_number?: StringFieldUpdateOperationsInput | string
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
     work_order_no?: NullableStringFieldUpdateOperationsInput | string | null
     work_order_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    classification_id?: NullableStringFieldUpdateOperationsInput | string | null
-    supervisor_id?: StringFieldUpdateOperationsInput | string
     status?: IntFieldUpdateOperationsInput | number
-    canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
     is_referenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -29326,14 +29326,14 @@ export namespace Prisma {
 
   export type RVUncheckedUpdateWithoutCanvassInput = {
     id?: StringFieldUpdateOperationsInput | string
+    classification_id?: NullableStringFieldUpdateOperationsInput | string | null
+    supervisor_id?: StringFieldUpdateOperationsInput | string
+    canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
     rv_number?: StringFieldUpdateOperationsInput | string
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
     work_order_no?: NullableStringFieldUpdateOperationsInput | string | null
     work_order_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    classification_id?: NullableStringFieldUpdateOperationsInput | string | null
-    supervisor_id?: StringFieldUpdateOperationsInput | string
     status?: IntFieldUpdateOperationsInput | number
-    canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
     is_referenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -29704,43 +29704,6 @@ export namespace Prisma {
     meqs?: MEQSUncheckedUpdateOneWithoutJoNestedInput
   }
 
-  export type MEQSCreateWithoutRvInput = {
-    id?: string
-    meqs_number: string
-    request_type?: number
-    meqs_date: Date | string
-    status?: number
-    canceller_id?: string | null
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-    jo?: JOCreateNestedOneWithoutMeqsInput
-    spr?: SPRCreateNestedOneWithoutMeqsInput
-    meqs_approvers?: MEQSApproverCreateNestedManyWithoutMeqsInput
-    meqs_suppliers?: MEQSSupplierCreateNestedManyWithoutMeqsInput
-  }
-
-  export type MEQSUncheckedCreateWithoutRvInput = {
-    id?: string
-    jo_id?: string | null
-    spr_id?: string | null
-    meqs_number: string
-    request_type?: number
-    meqs_date: Date | string
-    status?: number
-    canceller_id?: string | null
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-    meqs_approvers?: MEQSApproverUncheckedCreateNestedManyWithoutMeqsInput
-    meqs_suppliers?: MEQSSupplierUncheckedCreateNestedManyWithoutMeqsInput
-  }
-
-  export type MEQSCreateOrConnectWithoutRvInput = {
-    where: MEQSWhereUniqueInput
-    create: XOR<MEQSCreateWithoutRvInput, MEQSUncheckedCreateWithoutRvInput>
-  }
-
   export type CanvassCreateWithoutRvInput = {
     id?: string
     rc_number: string
@@ -29776,6 +29739,43 @@ export namespace Prisma {
   export type CanvassCreateOrConnectWithoutRvInput = {
     where: CanvassWhereUniqueInput
     create: XOR<CanvassCreateWithoutRvInput, CanvassUncheckedCreateWithoutRvInput>
+  }
+
+  export type MEQSCreateWithoutRvInput = {
+    id?: string
+    meqs_number: string
+    request_type?: number
+    meqs_date: Date | string
+    status?: number
+    canceller_id?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    jo?: JOCreateNestedOneWithoutMeqsInput
+    spr?: SPRCreateNestedOneWithoutMeqsInput
+    meqs_approvers?: MEQSApproverCreateNestedManyWithoutMeqsInput
+    meqs_suppliers?: MEQSSupplierCreateNestedManyWithoutMeqsInput
+  }
+
+  export type MEQSUncheckedCreateWithoutRvInput = {
+    id?: string
+    jo_id?: string | null
+    spr_id?: string | null
+    meqs_number: string
+    request_type?: number
+    meqs_date: Date | string
+    status?: number
+    canceller_id?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    meqs_approvers?: MEQSApproverUncheckedCreateNestedManyWithoutMeqsInput
+    meqs_suppliers?: MEQSSupplierUncheckedCreateNestedManyWithoutMeqsInput
+  }
+
+  export type MEQSCreateOrConnectWithoutRvInput = {
+    where: MEQSWhereUniqueInput
+    create: XOR<MEQSCreateWithoutRvInput, MEQSUncheckedCreateWithoutRvInput>
   }
 
   export type RVApproverCreateWithoutRvInput = {
@@ -29814,49 +29814,6 @@ export namespace Prisma {
   export type RVApproverCreateManyRvInputEnvelope = {
     data: RVApproverCreateManyRvInput | RVApproverCreateManyRvInput[]
     skipDuplicates?: boolean
-  }
-
-  export type MEQSUpsertWithoutRvInput = {
-    update: XOR<MEQSUpdateWithoutRvInput, MEQSUncheckedUpdateWithoutRvInput>
-    create: XOR<MEQSCreateWithoutRvInput, MEQSUncheckedCreateWithoutRvInput>
-    where?: MEQSWhereInput
-  }
-
-  export type MEQSUpdateToOneWithWhereWithoutRvInput = {
-    where?: MEQSWhereInput
-    data: XOR<MEQSUpdateWithoutRvInput, MEQSUncheckedUpdateWithoutRvInput>
-  }
-
-  export type MEQSUpdateWithoutRvInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    meqs_number?: StringFieldUpdateOperationsInput | string
-    request_type?: IntFieldUpdateOperationsInput | number
-    meqs_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    status?: IntFieldUpdateOperationsInput | number
-    canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    jo?: JOUpdateOneWithoutMeqsNestedInput
-    spr?: SPRUpdateOneWithoutMeqsNestedInput
-    meqs_approvers?: MEQSApproverUpdateManyWithoutMeqsNestedInput
-    meqs_suppliers?: MEQSSupplierUpdateManyWithoutMeqsNestedInput
-  }
-
-  export type MEQSUncheckedUpdateWithoutRvInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    jo_id?: NullableStringFieldUpdateOperationsInput | string | null
-    spr_id?: NullableStringFieldUpdateOperationsInput | string | null
-    meqs_number?: StringFieldUpdateOperationsInput | string
-    request_type?: IntFieldUpdateOperationsInput | number
-    meqs_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    status?: IntFieldUpdateOperationsInput | number
-    canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    meqs_approvers?: MEQSApproverUncheckedUpdateManyWithoutMeqsNestedInput
-    meqs_suppliers?: MEQSSupplierUncheckedUpdateManyWithoutMeqsNestedInput
   }
 
   export type CanvassUpsertWithoutRvInput = {
@@ -29902,6 +29859,49 @@ export namespace Prisma {
     spr?: SPRUncheckedUpdateOneWithoutCanvassNestedInput
   }
 
+  export type MEQSUpsertWithoutRvInput = {
+    update: XOR<MEQSUpdateWithoutRvInput, MEQSUncheckedUpdateWithoutRvInput>
+    create: XOR<MEQSCreateWithoutRvInput, MEQSUncheckedCreateWithoutRvInput>
+    where?: MEQSWhereInput
+  }
+
+  export type MEQSUpdateToOneWithWhereWithoutRvInput = {
+    where?: MEQSWhereInput
+    data: XOR<MEQSUpdateWithoutRvInput, MEQSUncheckedUpdateWithoutRvInput>
+  }
+
+  export type MEQSUpdateWithoutRvInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    meqs_number?: StringFieldUpdateOperationsInput | string
+    request_type?: IntFieldUpdateOperationsInput | number
+    meqs_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: IntFieldUpdateOperationsInput | number
+    canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    jo?: JOUpdateOneWithoutMeqsNestedInput
+    spr?: SPRUpdateOneWithoutMeqsNestedInput
+    meqs_approvers?: MEQSApproverUpdateManyWithoutMeqsNestedInput
+    meqs_suppliers?: MEQSSupplierUpdateManyWithoutMeqsNestedInput
+  }
+
+  export type MEQSUncheckedUpdateWithoutRvInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    jo_id?: NullableStringFieldUpdateOperationsInput | string | null
+    spr_id?: NullableStringFieldUpdateOperationsInput | string | null
+    meqs_number?: StringFieldUpdateOperationsInput | string
+    request_type?: IntFieldUpdateOperationsInput | number
+    meqs_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: IntFieldUpdateOperationsInput | number
+    canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    meqs_approvers?: MEQSApproverUncheckedUpdateManyWithoutMeqsNestedInput
+    meqs_suppliers?: MEQSSupplierUncheckedUpdateManyWithoutMeqsNestedInput
+  }
+
   export type RVApproverUpsertWithWhereUniqueWithoutRvInput = {
     where: RVApproverWhereUniqueInput
     update: XOR<RVApproverUpdateWithoutRvInput, RVApproverUncheckedUpdateWithoutRvInput>
@@ -29938,33 +29938,33 @@ export namespace Prisma {
 
   export type RVCreateWithoutRv_approversInput = {
     id?: string
+    classification_id?: string | null
+    supervisor_id: string
+    canceller_id?: string | null
     rv_number: string
     date_requested: Date | string
     work_order_no?: string | null
     work_order_date?: Date | string | null
-    classification_id?: string | null
-    supervisor_id: string
     status?: number
-    canceller_id?: string | null
     is_referenced?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    meqs?: MEQSCreateNestedOneWithoutRvInput
     canvass: CanvassCreateNestedOneWithoutRvInput
+    meqs?: MEQSCreateNestedOneWithoutRvInput
   }
 
   export type RVUncheckedCreateWithoutRv_approversInput = {
     id?: string
-    rv_number: string
-    date_requested: Date | string
     canvass_id: string
-    work_order_no?: string | null
-    work_order_date?: Date | string | null
     classification_id?: string | null
     supervisor_id: string
-    status?: number
     canceller_id?: string | null
+    rv_number: string
+    date_requested: Date | string
+    work_order_no?: string | null
+    work_order_date?: Date | string | null
+    status?: number
     is_referenced?: boolean
     created_at?: Date | string
     updated_at?: Date | string
@@ -29990,33 +29990,33 @@ export namespace Prisma {
 
   export type RVUpdateWithoutRv_approversInput = {
     id?: StringFieldUpdateOperationsInput | string
+    classification_id?: NullableStringFieldUpdateOperationsInput | string | null
+    supervisor_id?: StringFieldUpdateOperationsInput | string
+    canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
     rv_number?: StringFieldUpdateOperationsInput | string
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
     work_order_no?: NullableStringFieldUpdateOperationsInput | string | null
     work_order_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    classification_id?: NullableStringFieldUpdateOperationsInput | string | null
-    supervisor_id?: StringFieldUpdateOperationsInput | string
     status?: IntFieldUpdateOperationsInput | number
-    canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
     is_referenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    meqs?: MEQSUpdateOneWithoutRvNestedInput
     canvass?: CanvassUpdateOneRequiredWithoutRvNestedInput
+    meqs?: MEQSUpdateOneWithoutRvNestedInput
   }
 
   export type RVUncheckedUpdateWithoutRv_approversInput = {
     id?: StringFieldUpdateOperationsInput | string
-    rv_number?: StringFieldUpdateOperationsInput | string
-    date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
     canvass_id?: StringFieldUpdateOperationsInput | string
-    work_order_no?: NullableStringFieldUpdateOperationsInput | string | null
-    work_order_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     classification_id?: NullableStringFieldUpdateOperationsInput | string | null
     supervisor_id?: StringFieldUpdateOperationsInput | string
-    status?: IntFieldUpdateOperationsInput | number
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    rv_number?: StringFieldUpdateOperationsInput | string
+    date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
+    work_order_no?: NullableStringFieldUpdateOperationsInput | string | null
+    work_order_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: IntFieldUpdateOperationsInput | number
     is_referenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -30435,14 +30435,14 @@ export namespace Prisma {
 
   export type RVCreateWithoutMeqsInput = {
     id?: string
+    classification_id?: string | null
+    supervisor_id: string
+    canceller_id?: string | null
     rv_number: string
     date_requested: Date | string
     work_order_no?: string | null
     work_order_date?: Date | string | null
-    classification_id?: string | null
-    supervisor_id: string
     status?: number
-    canceller_id?: string | null
     is_referenced?: boolean
     created_at?: Date | string
     updated_at?: Date | string
@@ -30453,15 +30453,15 @@ export namespace Prisma {
 
   export type RVUncheckedCreateWithoutMeqsInput = {
     id?: string
-    rv_number: string
-    date_requested: Date | string
     canvass_id: string
-    work_order_no?: string | null
-    work_order_date?: Date | string | null
     classification_id?: string | null
     supervisor_id: string
-    status?: number
     canceller_id?: string | null
+    rv_number: string
+    date_requested: Date | string
+    work_order_no?: string | null
+    work_order_date?: Date | string | null
+    status?: number
     is_referenced?: boolean
     created_at?: Date | string
     updated_at?: Date | string
@@ -30645,14 +30645,14 @@ export namespace Prisma {
 
   export type RVUpdateWithoutMeqsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    classification_id?: NullableStringFieldUpdateOperationsInput | string | null
+    supervisor_id?: StringFieldUpdateOperationsInput | string
+    canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
     rv_number?: StringFieldUpdateOperationsInput | string
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
     work_order_no?: NullableStringFieldUpdateOperationsInput | string | null
     work_order_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    classification_id?: NullableStringFieldUpdateOperationsInput | string | null
-    supervisor_id?: StringFieldUpdateOperationsInput | string
     status?: IntFieldUpdateOperationsInput | number
-    canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
     is_referenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -30663,15 +30663,15 @@ export namespace Prisma {
 
   export type RVUncheckedUpdateWithoutMeqsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    rv_number?: StringFieldUpdateOperationsInput | string
-    date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
     canvass_id?: StringFieldUpdateOperationsInput | string
-    work_order_no?: NullableStringFieldUpdateOperationsInput | string | null
-    work_order_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     classification_id?: NullableStringFieldUpdateOperationsInput | string | null
     supervisor_id?: StringFieldUpdateOperationsInput | string
-    status?: IntFieldUpdateOperationsInput | number
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    rv_number?: StringFieldUpdateOperationsInput | string
+    date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
+    work_order_no?: NullableStringFieldUpdateOperationsInput | string | null
+    work_order_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: IntFieldUpdateOperationsInput | number
     is_referenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string

@@ -170,7 +170,7 @@ model RVApprover {
   created_at        DateTime  @default(now())
   updated_at        DateTime  @updatedAt
   is_deleted        Boolean   @default(false)
-  rv                RV        @relation(fields: [rv_id], references: [id])
+  rv                RV        @relation(fields: [rv_id], references: [id], onDelete: Cascade)
 
   @@map("rv_approver")
 }

@@ -5,6 +5,7 @@ import { RvService } from './rv.service';
 import { Employee } from '../employee/entities/employee.entity';
 import { Classification } from '../classification/entities/classification.entity';
 import { UpdateRvInput } from './dto/update-rv.input';
+import { WarehouseRemoveResponse } from '../__common__/classes';
 
 @Resolver( () => RV)
 export class RvResolver {
@@ -32,6 +33,11 @@ export class RvResolver {
       @Args('input') updateRvInput: UpdateRvInput
     ) {
       return this.rvService.update(id, updateRvInput);
+    }
+
+    @Mutation(() => WarehouseRemoveResponse)
+    removeEmployee(@Args('id') id: string) {
+      return this.rvService.remove(id);
     }
 
     @ResolveField( () => Employee)
