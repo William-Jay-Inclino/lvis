@@ -1,14 +1,15 @@
-import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { ObjectType, Field, Int, ID } from '@nestjs/graphql';
 import { RVApprover } from './rv-approver.entity';
 import { Canvass } from '../../canvass/entities/canvass.entity';
 import { Employee } from '../../employee/entities/employee.entity';
+import { Classification } from '../../classification/entities/classification.entity';
 // import { Employee } from 'apps/system/src/employee/entities/employee.entity';
 // import { Classification } from 'apps/system/src/classification/entities/classification.entity';
 
 @ObjectType()
 export class RV {
   
-  @Field(() => String)
+  @Field(() => ID)
   id: string;
 
   @Field(() => String)
@@ -24,7 +25,7 @@ export class RV {
   supervisor_id: string;
 
   @Field(() => String, {nullable: true})
-  canceller_id: string;
+  canceller_id: string | null;
 
   @Field(() => String)
   rv_number: string;
@@ -46,14 +47,5 @@ export class RV {
 
   @Field(() => [RVApprover])
   rv_approvers: RVApprover[];
-
-  @Field(() => Employee)
-  supervisor: Employee;
-
-  // @Field(() => Classification, {nullable: true})
-  // classification: Classification | null
-
-  @Field(() => Employee, {nullable: true})
-  canceller: Employee;
 
 }

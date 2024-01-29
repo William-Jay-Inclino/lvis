@@ -1,9 +1,11 @@
-import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, ResolveReference } from '@nestjs/graphql';
 import { ClassificationService } from './classification.service';
 import { Classification } from './entities/classification.entity';
 import { CreateClassificationInput } from './dto/create-classification.input';
 import { UpdateClassificationInput } from './dto/update-classification.input';
-
+import { GqlAuthGuard } from '../auth/guards/gql-auth.guard';
+import { UseGuards } from '@nestjs/common';
+@UseGuards(GqlAuthGuard)
 @Resolver(() => Classification)
 export class ClassificationResolver {
   constructor(private readonly classificationService: ClassificationService) {}
@@ -35,4 +37,10 @@ export class ClassificationResolver {
   removeClassification(@Args('id') id: string) {
     return this.classificationService.remove(id);
   }
+
+  @ResolveReference()
+  async resolveReference(reference: { __typename: string, id: string }): Promise<Classification> {
+    return await this.classificationService.findOne(reference.id)
+  }
+
 }

@@ -137,20 +137,28 @@ export class RvService {
         }
     }
 
-    // async forEmployeeSupervisor(employeeId: string): Promise<RV[]> {
-    //     return await this.prisma.rV.findMany({
-    //         where: {
-    //             supervisor_id: employeeId
-    //         }
-    //     })
-    // }
+    async forEmployeeSupervisor(employeeId: string): Promise<RV[]> {
+        return await this.prisma.rV.findMany({
+            where: {
+                supervisor_id: employeeId
+            }
+        })
+    }
 
-    // async forEmployeeCanceller(employeeId: string): Promise<RV[]> {
-    //     return await this.prisma.rV.findMany({
-    //         where: {
-    //             canceller_id: employeeId
-    //         }
-    //     })
-    // }
+    async forEmployeeCanceller(employeeId: string): Promise<RV[]> {
+        return await this.prisma.rV.findMany({
+            where: {
+                canceller_id: employeeId
+            }
+        })
+    }
+
+    async forClassification(classificationId: string): Promise<RV[]> {
+        return await this.prisma.rV.findMany({
+            where: {
+                classification_id: classificationId
+            }
+        })
+    }
 
 }

@@ -1,9 +1,11 @@
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import { RV } from './entities/rv.entity';
 import { CreateRvInput } from './dto/create-rv.input';
 import { RvService } from './rv.service';
+import { Employee } from '../employee/entities/employee.entity';
+import { Classification } from '../classification/entities/classification.entity';
 
-@Resolver()
+@Resolver( () => RV)
 export class RvResolver {
 
     constructor(private readonly rvService: RvService) {}
@@ -23,14 +25,25 @@ export class RvResolver {
         return this.rvService.findOne(id);
     }
 
-    // @ResolveField( () => Employee)
-    // supervisor(@Parent() rv: RV): any {
-    //     return { __typename: 'Supervisor', id: rv.supervisor_id }
-    // }
+    @ResolveField( () => Employee)
+    supervisor(@Parent() rv: RV): any {
+        return { __typename: 'Employee', id: rv.supervisor_id }
+    }
 
-    // @ResolveField( () => Employee)
-    // canceller(@Parent() rv: RV): any {
-    //     return { __typename: 'Canceller', id: rv.canceller_id }
-    // }
+    @ResolveField( () => Employee, { nullable: true })
+    canceller(@Parent() rv: RV): any {
+        if(!rv.canceller_id){
+            return null
+        }
+        return { __typename: 'Employee', id: rv.canceller_id }
+    }
+
+    @ResolveField( () => Classification, { nullable: true })
+    classification(@Parent() rv: RV): any {
+        if(!rv.classification_id){
+            return null
+        }
+        return { __typename: 'Classification', id: rv.classification_id }
+    }
 
 }
