@@ -36,6 +36,15 @@
       "compilerOptions": {
         "tsConfigPath": "apps/warehouse/tsconfig.app.json"
       }
+    },
+    "classes": {
+      "type": "library",
+      "root": "libs/classes",
+      "entryFile": "index",
+      "sourceRoot": "libs/classes/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/classes/tsconfig.lib.json"
+      }
     }
   }
 }

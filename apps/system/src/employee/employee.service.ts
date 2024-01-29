@@ -1,34 +1,89 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { CreateEmployeeInput } from './dto/create-employee.input';
-import { Employee } from './entities/employee.entity';
-// import { UpdateDepartmentInput } from './dto/update-department.input';
-import { faker } from '@faker-js/faker'; 
+import { PrismaService } from '../__prisma__/prisma.service';
+import { Employee, Prisma } from 'apps/system/prisma/generated/client';
+import { UpdateEmployeeInput } from './dto/update-employee.input';
+import { SystemRemoveResponse } from '../__common__/classes';
 
 @Injectable()
 export class EmployeeService {
 
-  private readonly employees: Employee[] = []
+	private readonly logger = new Logger(EmployeeService.name);
 
-  create(input: CreateEmployeeInput): Employee {
-    
-    const x = new Employee()
-    x.id = faker.string.uuid()
-    x.firstname = input.firstname
-    x.middlename = input.middlename
-    x.lastname = input.lastname
-    x.department_id = input.department_id
-    x.employee_number = input.employee_number
+	constructor(private readonly prisma: PrismaService) {}
 
-    this.employees.push(x)
+	async create(input: CreateEmployeeInput): Promise<Employee> {
 
-    return x
-  }
+		const data: Prisma.EmployeeCreateInput = {
+			firstname: input.firstname,
+			middlename: input.middlename,
+			lastname: input.lastname
+		}
 
-  findAll() {
-    return this.employees
-  }
+		const created = await this.prisma.employee.create( { data } )
 
-  findOne(id: string) {
-    return this.employees.find(i => i.id === id)
-  }
+		this.logger.log('Successfully created Employee')
+
+		return await this.findOne(created.id)
+	}
+
+	async findAll(): Promise<Employee[]> {
+		return await this.prisma.employee.findMany( {
+			where: {
+				is_deleted: false 
+			},
+			orderBy: [{ lastname: 'asc' }, { firstname: 'asc' }],
+		} )
+	}
+
+	async findOne(id: string): Promise<Employee | null> {
+		const item = await this.prisma.employee.findUnique({
+			where: { id }
+		})
+
+		if(!item){
+            throw new NotFoundException('Employee not found')
+        }
+
+        return item
+	}
+
+	async update(id: string, input: UpdateEmployeeInput): Promise<Employee> {
+
+		const existingItem = await this.findOne(id)
+
+		const data: Prisma.EmployeeUpdateInput = {
+			firstname: input.firstname ?? existingItem.firstname,
+			middlename: input.middlename ?? existingItem.middlename,
+			lastname: input.lastname ?? existingItem.lastname
+		}
+
+		const updated = await this.prisma.employee.update({ 
+			data,
+			where: {
+				id
+			}
+		 })
+
+		this.logger.log('Successfully updated Employee')
+
+		return await this.findOne(updated.id)
+	}
+
+	async remove(id: string): Promise<SystemRemoveResponse> {
+
+		const existingItem = await this.findOne(id)
+
+		await this.prisma.employee.update( {
+			where: { id },
+			data: { is_deleted: true }
+		} )
+
+		return {
+			success: true,
+			msg: "Employee successfully deleted"
+		}
+
+	}
+
 }

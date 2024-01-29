@@ -1,10 +1,9 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
-import { SupplierItem } from './supplier-item.entity';
 import { Brand } from '../../brand/entities/brand.entity';
 import { Unit } from '../../unit/entities/unit.entity';
 
 @ObjectType()
-export class Item {
+export class CanvassItem {
 
   @Field(() => String)
   id: string;
@@ -26,15 +25,6 @@ export class Item {
 
   @Field(() => Int)
   quantity: string;
-
-  @Field(() => Date)
-  created_at: Date;
-
-  @Field(() => Date)
-  updated_at: Date;
-
-  @Field(() => [SupplierItem], {nullable: true})
-  supplier_items?: SupplierItem[];
 
 }
 

@@ -1,15 +1,10 @@
 import { InputType, Field } from '@nestjs/graphql';
 import { Transform, Type } from 'class-transformer';
 import { IsArray, IsDate, IsNotEmpty, IsOptional, IsString, ValidateNested } from 'class-validator';
-import { CreateItemInput } from '../../item/dto/create-item.input';
+import { CreateCanvassItemInput } from '../../canvass-item/dto/create-canvass-item.input';
 
 @InputType()
 export class CreateCanvassInput {
-
-  @Field(() => String)
-  @IsNotEmpty()
-  @IsString()
-  rc_number: string;
 
   @Field(() => String)
   @IsNotEmpty()
@@ -32,11 +27,11 @@ export class CreateCanvassInput {
   @IsString()
   requested_by_id: string;
 
-  @Field(() => [CreateItemInput])
+  @Field(() => [CreateCanvassItemInput])
   @IsNotEmpty()
   @IsArray()
   @ValidateNested({ each: true })
-  @Type(() => CreateItemInput)
-  items: CreateItemInput[];
+  @Type(() => CreateCanvassItemInput)
+  canvass_items: CreateCanvassItemInput[];
 
 }

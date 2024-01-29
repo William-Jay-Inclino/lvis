@@ -130,11 +130,9 @@ exports.Prisma.DepartmentScalarFieldEnum = {
 
 exports.Prisma.EmployeeScalarFieldEnum = {
   id: 'id',
-  employee_number: 'employee_number',
   firstname: 'firstname',
   middlename: 'middlename',
   lastname: 'lastname',
-  department_id: 'department_id',
   created_at: 'created_at',
   updated_at: 'updated_at',
   is_deleted: 'is_deleted'

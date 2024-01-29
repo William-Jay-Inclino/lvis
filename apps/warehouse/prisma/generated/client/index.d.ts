@@ -34,25 +34,15 @@ export type Brand = $Result.DefaultSelection<Prisma.$BrandPayload>
  */
 export type Vehicle = $Result.DefaultSelection<Prisma.$VehiclePayload>
 /**
- * Model Item
- * 
- */
-export type Item = $Result.DefaultSelection<Prisma.$ItemPayload>
-/**
- * Model Canvass
- * 
- */
-export type Canvass = $Result.DefaultSelection<Prisma.$CanvassPayload>
-/**
  * Model CanvassItem
  * 
  */
 export type CanvassItem = $Result.DefaultSelection<Prisma.$CanvassItemPayload>
 /**
- * Model SupplierItem
+ * Model Canvass
  * 
  */
-export type SupplierItem = $Result.DefaultSelection<Prisma.$SupplierItemPayload>
+export type Canvass = $Result.DefaultSelection<Prisma.$CanvassPayload>
 /**
  * Model JO
  * 
@@ -93,6 +83,11 @@ export type MEQS = $Result.DefaultSelection<Prisma.$MEQSPayload>
  * 
  */
 export type MEQSSupplier = $Result.DefaultSelection<Prisma.$MEQSSupplierPayload>
+/**
+ * Model MEQSSupplierItem
+ * 
+ */
+export type MEQSSupplierItem = $Result.DefaultSelection<Prisma.$MEQSSupplierItemPayload>
 /**
  * Model MEQSSupplierAttachment
  * 
@@ -277,26 +272,6 @@ export class PrismaClient<
   get vehicle(): Prisma.VehicleDelegate<ExtArgs>;
 
   /**
-   * `prisma.item`: Exposes CRUD operations for the **Item** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Items
-    * const items = await prisma.item.findMany()
-    * ```
-    */
-  get item(): Prisma.ItemDelegate<ExtArgs>;
-
-  /**
-   * `prisma.canvass`: Exposes CRUD operations for the **Canvass** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Canvasses
-    * const canvasses = await prisma.canvass.findMany()
-    * ```
-    */
-  get canvass(): Prisma.CanvassDelegate<ExtArgs>;
-
-  /**
    * `prisma.canvassItem`: Exposes CRUD operations for the **CanvassItem** model.
     * Example usage:
     * ```ts
@@ -307,14 +282,14 @@ export class PrismaClient<
   get canvassItem(): Prisma.CanvassItemDelegate<ExtArgs>;
 
   /**
-   * `prisma.supplierItem`: Exposes CRUD operations for the **SupplierItem** model.
+   * `prisma.canvass`: Exposes CRUD operations for the **Canvass** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more SupplierItems
-    * const supplierItems = await prisma.supplierItem.findMany()
+    * // Fetch zero or more Canvasses
+    * const canvasses = await prisma.canvass.findMany()
     * ```
     */
-  get supplierItem(): Prisma.SupplierItemDelegate<ExtArgs>;
+  get canvass(): Prisma.CanvassDelegate<ExtArgs>;
 
   /**
    * `prisma.jO`: Exposes CRUD operations for the **JO** model.
@@ -395,6 +370,16 @@ export class PrismaClient<
     * ```
     */
   get mEQSSupplier(): Prisma.MEQSSupplierDelegate<ExtArgs>;
+
+  /**
+   * `prisma.mEQSSupplierItem`: Exposes CRUD operations for the **MEQSSupplierItem** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more MEQSSupplierItems
+    * const mEQSSupplierItems = await prisma.mEQSSupplierItem.findMany()
+    * ```
+    */
+  get mEQSSupplierItem(): Prisma.MEQSSupplierItemDelegate<ExtArgs>;
 
   /**
    * `prisma.mEQSSupplierAttachment`: Exposes CRUD operations for the **MEQSSupplierAttachment** model.
@@ -909,10 +894,8 @@ export namespace Prisma {
     Unit: 'Unit',
     Brand: 'Brand',
     Vehicle: 'Vehicle',
-    Item: 'Item',
-    Canvass: 'Canvass',
     CanvassItem: 'CanvassItem',
-    SupplierItem: 'SupplierItem',
+    Canvass: 'Canvass',
     JO: 'JO',
     JOApprover: 'JOApprover',
     RV: 'RV',
@@ -921,6 +904,7 @@ export namespace Prisma {
     SPRApprover: 'SPRApprover',
     MEQS: 'MEQS',
     MEQSSupplier: 'MEQSSupplier',
+    MEQSSupplierItem: 'MEQSSupplierItem',
     MEQSSupplierAttachment: 'MEQSSupplierAttachment',
     MEQSApprover: 'MEQSApprover',
     PO: 'PO',
@@ -941,7 +925,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'supplier' | 'unit' | 'brand' | 'vehicle' | 'item' | 'canvass' | 'canvassItem' | 'supplierItem' | 'jO' | 'jOApprover' | 'rV' | 'rVApprover' | 'sPR' | 'sPRApprover' | 'mEQS' | 'mEQSSupplier' | 'mEQSSupplierAttachment' | 'mEQSApprover' | 'pO' | 'pOApprover'
+      modelProps: 'supplier' | 'unit' | 'brand' | 'vehicle' | 'canvassItem' | 'canvass' | 'jO' | 'jOApprover' | 'rV' | 'rVApprover' | 'sPR' | 'sPRApprover' | 'mEQS' | 'mEQSSupplier' | 'mEQSSupplierItem' | 'mEQSSupplierAttachment' | 'mEQSApprover' | 'pO' | 'pOApprover'
       txIsolationLevel: Prisma.TransactionIsolationLevel
     },
     model: {
@@ -1209,138 +1193,6 @@ export namespace Prisma {
           }
         }
       }
-      Item: {
-        payload: Prisma.$ItemPayload<ExtArgs>
-        fields: Prisma.ItemFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.ItemFindUniqueArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ItemPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.ItemFindUniqueOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ItemPayload>
-          }
-          findFirst: {
-            args: Prisma.ItemFindFirstArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ItemPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.ItemFindFirstOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ItemPayload>
-          }
-          findMany: {
-            args: Prisma.ItemFindManyArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ItemPayload>[]
-          }
-          create: {
-            args: Prisma.ItemCreateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ItemPayload>
-          }
-          createMany: {
-            args: Prisma.ItemCreateManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
-          }
-          delete: {
-            args: Prisma.ItemDeleteArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ItemPayload>
-          }
-          update: {
-            args: Prisma.ItemUpdateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ItemPayload>
-          }
-          deleteMany: {
-            args: Prisma.ItemDeleteManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
-          }
-          updateMany: {
-            args: Prisma.ItemUpdateManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
-          }
-          upsert: {
-            args: Prisma.ItemUpsertArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ItemPayload>
-          }
-          aggregate: {
-            args: Prisma.ItemAggregateArgs<ExtArgs>,
-            result: $Utils.Optional<AggregateItem>
-          }
-          groupBy: {
-            args: Prisma.ItemGroupByArgs<ExtArgs>,
-            result: $Utils.Optional<ItemGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.ItemCountArgs<ExtArgs>,
-            result: $Utils.Optional<ItemCountAggregateOutputType> | number
-          }
-        }
-      }
-      Canvass: {
-        payload: Prisma.$CanvassPayload<ExtArgs>
-        fields: Prisma.CanvassFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.CanvassFindUniqueArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$CanvassPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.CanvassFindUniqueOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$CanvassPayload>
-          }
-          findFirst: {
-            args: Prisma.CanvassFindFirstArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$CanvassPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.CanvassFindFirstOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$CanvassPayload>
-          }
-          findMany: {
-            args: Prisma.CanvassFindManyArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$CanvassPayload>[]
-          }
-          create: {
-            args: Prisma.CanvassCreateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$CanvassPayload>
-          }
-          createMany: {
-            args: Prisma.CanvassCreateManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
-          }
-          delete: {
-            args: Prisma.CanvassDeleteArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$CanvassPayload>
-          }
-          update: {
-            args: Prisma.CanvassUpdateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$CanvassPayload>
-          }
-          deleteMany: {
-            args: Prisma.CanvassDeleteManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
-          }
-          updateMany: {
-            args: Prisma.CanvassUpdateManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
-          }
-          upsert: {
-            args: Prisma.CanvassUpsertArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$CanvassPayload>
-          }
-          aggregate: {
-            args: Prisma.CanvassAggregateArgs<ExtArgs>,
-            result: $Utils.Optional<AggregateCanvass>
-          }
-          groupBy: {
-            args: Prisma.CanvassGroupByArgs<ExtArgs>,
-            result: $Utils.Optional<CanvassGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.CanvassCountArgs<ExtArgs>,
-            result: $Utils.Optional<CanvassCountAggregateOutputType> | number
-          }
-        }
-      }
       CanvassItem: {
         payload: Prisma.$CanvassItemPayload<ExtArgs>
         fields: Prisma.CanvassItemFieldRefs
@@ -1407,69 +1259,69 @@ export namespace Prisma {
           }
         }
       }
-      SupplierItem: {
-        payload: Prisma.$SupplierItemPayload<ExtArgs>
-        fields: Prisma.SupplierItemFieldRefs
+      Canvass: {
+        payload: Prisma.$CanvassPayload<ExtArgs>
+        fields: Prisma.CanvassFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.SupplierItemFindUniqueArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$SupplierItemPayload> | null
+            args: Prisma.CanvassFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$CanvassPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.SupplierItemFindUniqueOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$SupplierItemPayload>
+            args: Prisma.CanvassFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$CanvassPayload>
           }
           findFirst: {
-            args: Prisma.SupplierItemFindFirstArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$SupplierItemPayload> | null
+            args: Prisma.CanvassFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$CanvassPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.SupplierItemFindFirstOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$SupplierItemPayload>
+            args: Prisma.CanvassFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$CanvassPayload>
           }
           findMany: {
-            args: Prisma.SupplierItemFindManyArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$SupplierItemPayload>[]
+            args: Prisma.CanvassFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$CanvassPayload>[]
           }
           create: {
-            args: Prisma.SupplierItemCreateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$SupplierItemPayload>
+            args: Prisma.CanvassCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$CanvassPayload>
           }
           createMany: {
-            args: Prisma.SupplierItemCreateManyArgs<ExtArgs>,
+            args: Prisma.CanvassCreateManyArgs<ExtArgs>,
             result: Prisma.BatchPayload
           }
           delete: {
-            args: Prisma.SupplierItemDeleteArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$SupplierItemPayload>
+            args: Prisma.CanvassDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$CanvassPayload>
           }
           update: {
-            args: Prisma.SupplierItemUpdateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$SupplierItemPayload>
+            args: Prisma.CanvassUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$CanvassPayload>
           }
           deleteMany: {
-            args: Prisma.SupplierItemDeleteManyArgs<ExtArgs>,
+            args: Prisma.CanvassDeleteManyArgs<ExtArgs>,
             result: Prisma.BatchPayload
           }
           updateMany: {
-            args: Prisma.SupplierItemUpdateManyArgs<ExtArgs>,
+            args: Prisma.CanvassUpdateManyArgs<ExtArgs>,
             result: Prisma.BatchPayload
           }
           upsert: {
-            args: Prisma.SupplierItemUpsertArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$SupplierItemPayload>
+            args: Prisma.CanvassUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$CanvassPayload>
           }
           aggregate: {
-            args: Prisma.SupplierItemAggregateArgs<ExtArgs>,
-            result: $Utils.Optional<AggregateSupplierItem>
+            args: Prisma.CanvassAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateCanvass>
           }
           groupBy: {
-            args: Prisma.SupplierItemGroupByArgs<ExtArgs>,
-            result: $Utils.Optional<SupplierItemGroupByOutputType>[]
+            args: Prisma.CanvassGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<CanvassGroupByOutputType>[]
           }
           count: {
-            args: Prisma.SupplierItemCountArgs<ExtArgs>,
-            result: $Utils.Optional<SupplierItemCountAggregateOutputType> | number
+            args: Prisma.CanvassCountArgs<ExtArgs>,
+            result: $Utils.Optional<CanvassCountAggregateOutputType> | number
           }
         }
       }
@@ -2001,6 +1853,72 @@ export namespace Prisma {
           }
         }
       }
+      MEQSSupplierItem: {
+        payload: Prisma.$MEQSSupplierItemPayload<ExtArgs>
+        fields: Prisma.MEQSSupplierItemFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MEQSSupplierItemFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$MEQSSupplierItemPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MEQSSupplierItemFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$MEQSSupplierItemPayload>
+          }
+          findFirst: {
+            args: Prisma.MEQSSupplierItemFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$MEQSSupplierItemPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MEQSSupplierItemFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$MEQSSupplierItemPayload>
+          }
+          findMany: {
+            args: Prisma.MEQSSupplierItemFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$MEQSSupplierItemPayload>[]
+          }
+          create: {
+            args: Prisma.MEQSSupplierItemCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$MEQSSupplierItemPayload>
+          }
+          createMany: {
+            args: Prisma.MEQSSupplierItemCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.MEQSSupplierItemDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$MEQSSupplierItemPayload>
+          }
+          update: {
+            args: Prisma.MEQSSupplierItemUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$MEQSSupplierItemPayload>
+          }
+          deleteMany: {
+            args: Prisma.MEQSSupplierItemDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MEQSSupplierItemUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.MEQSSupplierItemUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$MEQSSupplierItemPayload>
+          }
+          aggregate: {
+            args: Prisma.MEQSSupplierItemAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateMEQSSupplierItem>
+          }
+          groupBy: {
+            args: Prisma.MEQSSupplierItemGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<MEQSSupplierItemGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MEQSSupplierItemCountArgs<ExtArgs>,
+            result: $Utils.Optional<MEQSSupplierItemCountAggregateOutputType> | number
+          }
+        }
+      }
       MEQSSupplierAttachment: {
         payload: Prisma.$MEQSSupplierAttachmentPayload<ExtArgs>
         fields: Prisma.MEQSSupplierAttachmentFieldRefs
@@ -2415,12 +2333,12 @@ export namespace Prisma {
 
   export type SupplierCountOutputType = {
     MEQSSupplier: number
-    supplier_items: number
+    meqs_supplier_items: number
   }
 
   export type SupplierCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     MEQSSupplier?: boolean | SupplierCountOutputTypeCountMEQSSupplierArgs
-    supplier_items?: boolean | SupplierCountOutputTypeCountSupplier_itemsArgs
+    meqs_supplier_items?: boolean | SupplierCountOutputTypeCountMeqs_supplier_itemsArgs
   }
 
   // Custom InputTypes
@@ -2447,8 +2365,8 @@ export namespace Prisma {
   /**
    * SupplierCountOutputType without action
    */
-  export type SupplierCountOutputTypeCountSupplier_itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: SupplierItemWhereInput
+  export type SupplierCountOutputTypeCountMeqs_supplier_itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MEQSSupplierItemWhereInput
   }
 
 
@@ -2458,11 +2376,11 @@ export namespace Prisma {
    */
 
   export type UnitCountOutputType = {
-    items: number
+    canvass_items: number
   }
 
   export type UnitCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    items?: boolean | UnitCountOutputTypeCountItemsArgs
+    canvass_items?: boolean | UnitCountOutputTypeCountCanvass_itemsArgs
   }
 
   // Custom InputTypes
@@ -2481,8 +2399,8 @@ export namespace Prisma {
   /**
    * UnitCountOutputType without action
    */
-  export type UnitCountOutputTypeCountItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ItemWhereInput
+  export type UnitCountOutputTypeCountCanvass_itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CanvassItemWhereInput
   }
 
 
@@ -2492,11 +2410,11 @@ export namespace Prisma {
    */
 
   export type BrandCountOutputType = {
-    items: number
+    canvass_items: number
   }
 
   export type BrandCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    items?: boolean | BrandCountOutputTypeCountItemsArgs
+    canvass_items?: boolean | BrandCountOutputTypeCountCanvass_itemsArgs
   }
 
   // Custom InputTypes
@@ -2515,8 +2433,8 @@ export namespace Prisma {
   /**
    * BrandCountOutputType without action
    */
-  export type BrandCountOutputTypeCountItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ItemWhereInput
+  export type BrandCountOutputTypeCountCanvass_itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CanvassItemWhereInput
   }
 
 
@@ -2556,35 +2474,35 @@ export namespace Prisma {
 
 
   /**
-   * Count Type ItemCountOutputType
+   * Count Type CanvassItemCountOutputType
    */
 
-  export type ItemCountOutputType = {
-    supplier_items: number
+  export type CanvassItemCountOutputType = {
+    meqs_supplier_items: number
   }
 
-  export type ItemCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    supplier_items?: boolean | ItemCountOutputTypeCountSupplier_itemsArgs
+  export type CanvassItemCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    meqs_supplier_items?: boolean | CanvassItemCountOutputTypeCountMeqs_supplier_itemsArgs
   }
 
   // Custom InputTypes
 
   /**
-   * ItemCountOutputType without action
+   * CanvassItemCountOutputType without action
    */
-  export type ItemCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CanvassItemCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the ItemCountOutputType
+     * Select specific fields to fetch from the CanvassItemCountOutputType
      */
-    select?: ItemCountOutputTypeSelect<ExtArgs> | null
+    select?: CanvassItemCountOutputTypeSelect<ExtArgs> | null
   }
 
 
   /**
-   * ItemCountOutputType without action
+   * CanvassItemCountOutputType without action
    */
-  export type ItemCountOutputTypeCountSupplier_itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: SupplierItemWhereInput
+  export type CanvassItemCountOutputTypeCountMeqs_supplier_itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MEQSSupplierItemWhereInput
   }
 
 
@@ -3014,7 +2932,7 @@ export namespace Prisma {
     updated_at?: boolean
     is_deleted?: boolean
     MEQSSupplier?: boolean | Supplier$MEQSSupplierArgs<ExtArgs>
-    supplier_items?: boolean | Supplier$supplier_itemsArgs<ExtArgs>
+    meqs_supplier_items?: boolean | Supplier$meqs_supplier_itemsArgs<ExtArgs>
     _count?: boolean | SupplierCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["supplier"]>
 
@@ -3029,7 +2947,7 @@ export namespace Prisma {
 
   export type SupplierInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     MEQSSupplier?: boolean | Supplier$MEQSSupplierArgs<ExtArgs>
-    supplier_items?: boolean | Supplier$supplier_itemsArgs<ExtArgs>
+    meqs_supplier_items?: boolean | Supplier$meqs_supplier_itemsArgs<ExtArgs>
     _count?: boolean | SupplierCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -3038,7 +2956,7 @@ export namespace Prisma {
     name: "Supplier"
     objects: {
       MEQSSupplier: Prisma.$MEQSSupplierPayload<ExtArgs>[]
-      supplier_items: Prisma.$SupplierItemPayload<ExtArgs>[]
+      meqs_supplier_items: Prisma.$MEQSSupplierItemPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3414,7 +3332,7 @@ export namespace Prisma {
 
     MEQSSupplier<T extends Supplier$MEQSSupplierArgs<ExtArgs> = {}>(args?: Subset<T, Supplier$MEQSSupplierArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MEQSSupplierPayload<ExtArgs>, T, 'findMany'> | Null>;
 
-    supplier_items<T extends Supplier$supplier_itemsArgs<ExtArgs> = {}>(args?: Subset<T, Supplier$supplier_itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SupplierItemPayload<ExtArgs>, T, 'findMany'> | Null>;
+    meqs_supplier_items<T extends Supplier$meqs_supplier_itemsArgs<ExtArgs> = {}>(args?: Subset<T, Supplier$meqs_supplier_itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MEQSSupplierItemPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -3783,23 +3701,23 @@ export namespace Prisma {
 
 
   /**
-   * Supplier.supplier_items
+   * Supplier.meqs_supplier_items
    */
-  export type Supplier$supplier_itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Supplier$meqs_supplier_itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the SupplierItem
+     * Select specific fields to fetch from the MEQSSupplierItem
      */
-    select?: SupplierItemSelect<ExtArgs> | null
+    select?: MEQSSupplierItemSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: SupplierItemInclude<ExtArgs> | null
-    where?: SupplierItemWhereInput
-    orderBy?: SupplierItemOrderByWithRelationInput | SupplierItemOrderByWithRelationInput[]
-    cursor?: SupplierItemWhereUniqueInput
+    include?: MEQSSupplierItemInclude<ExtArgs> | null
+    where?: MEQSSupplierItemWhereInput
+    orderBy?: MEQSSupplierItemOrderByWithRelationInput | MEQSSupplierItemOrderByWithRelationInput[]
+    cursor?: MEQSSupplierItemWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: SupplierItemScalarFieldEnum | SupplierItemScalarFieldEnum[]
+    distinct?: MEQSSupplierItemScalarFieldEnum | MEQSSupplierItemScalarFieldEnum[]
   }
 
 
@@ -3983,7 +3901,7 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     is_deleted?: boolean
-    items?: boolean | Unit$itemsArgs<ExtArgs>
+    canvass_items?: boolean | Unit$canvass_itemsArgs<ExtArgs>
     _count?: boolean | UnitCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["unit"]>
 
@@ -3996,7 +3914,7 @@ export namespace Prisma {
   }
 
   export type UnitInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    items?: boolean | Unit$itemsArgs<ExtArgs>
+    canvass_items?: boolean | Unit$canvass_itemsArgs<ExtArgs>
     _count?: boolean | UnitCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -4004,7 +3922,7 @@ export namespace Prisma {
   export type $UnitPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Unit"
     objects: {
-      items: Prisma.$ItemPayload<ExtArgs>[]
+      canvass_items: Prisma.$CanvassItemPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4377,7 +4295,7 @@ export namespace Prisma {
   export interface Prisma__UnitClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
-    items<T extends Unit$itemsArgs<ExtArgs> = {}>(args?: Subset<T, Unit$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, 'findMany'> | Null>;
+    canvass_items<T extends Unit$canvass_itemsArgs<ExtArgs> = {}>(args?: Subset<T, Unit$canvass_itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CanvassItemPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -4724,23 +4642,23 @@ export namespace Prisma {
 
 
   /**
-   * Unit.items
+   * Unit.canvass_items
    */
-  export type Unit$itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Unit$canvass_itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Item
+     * Select specific fields to fetch from the CanvassItem
      */
-    select?: ItemSelect<ExtArgs> | null
+    select?: CanvassItemSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: ItemInclude<ExtArgs> | null
-    where?: ItemWhereInput
-    orderBy?: ItemOrderByWithRelationInput | ItemOrderByWithRelationInput[]
-    cursor?: ItemWhereUniqueInput
+    include?: CanvassItemInclude<ExtArgs> | null
+    where?: CanvassItemWhereInput
+    orderBy?: CanvassItemOrderByWithRelationInput | CanvassItemOrderByWithRelationInput[]
+    cursor?: CanvassItemWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: ItemScalarFieldEnum | ItemScalarFieldEnum[]
+    distinct?: CanvassItemScalarFieldEnum | CanvassItemScalarFieldEnum[]
   }
 
 
@@ -4924,7 +4842,7 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     is_deleted?: boolean
-    items?: boolean | Brand$itemsArgs<ExtArgs>
+    canvass_items?: boolean | Brand$canvass_itemsArgs<ExtArgs>
     _count?: boolean | BrandCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["brand"]>
 
@@ -4937,7 +4855,7 @@ export namespace Prisma {
   }
 
   export type BrandInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    items?: boolean | Brand$itemsArgs<ExtArgs>
+    canvass_items?: boolean | Brand$canvass_itemsArgs<ExtArgs>
     _count?: boolean | BrandCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -4945,7 +4863,7 @@ export namespace Prisma {
   export type $BrandPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Brand"
     objects: {
-      items: Prisma.$ItemPayload<ExtArgs>[]
+      canvass_items: Prisma.$CanvassItemPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -5318,7 +5236,7 @@ export namespace Prisma {
   export interface Prisma__BrandClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
-    items<T extends Brand$itemsArgs<ExtArgs> = {}>(args?: Subset<T, Brand$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, 'findMany'> | Null>;
+    canvass_items<T extends Brand$canvass_itemsArgs<ExtArgs> = {}>(args?: Subset<T, Brand$canvass_itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CanvassItemPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -5665,23 +5583,23 @@ export namespace Prisma {
 
 
   /**
-   * Brand.items
+   * Brand.canvass_items
    */
-  export type Brand$itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Brand$canvass_itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Item
+     * Select specific fields to fetch from the CanvassItem
      */
-    select?: ItemSelect<ExtArgs> | null
+    select?: CanvassItemSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: ItemInclude<ExtArgs> | null
-    where?: ItemWhereInput
-    orderBy?: ItemOrderByWithRelationInput | ItemOrderByWithRelationInput[]
-    cursor?: ItemWhereUniqueInput
+    include?: CanvassItemInclude<ExtArgs> | null
+    where?: CanvassItemWhereInput
+    orderBy?: CanvassItemOrderByWithRelationInput | CanvassItemOrderByWithRelationInput[]
+    cursor?: CanvassItemWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: ItemScalarFieldEnum | ItemScalarFieldEnum[]
+    distinct?: CanvassItemScalarFieldEnum | CanvassItemScalarFieldEnum[]
   }
 
 
@@ -6654,27 +6572,28 @@ export namespace Prisma {
 
 
   /**
-   * Model Item
+   * Model CanvassItem
    */
 
-  export type AggregateItem = {
-    _count: ItemCountAggregateOutputType | null
-    _avg: ItemAvgAggregateOutputType | null
-    _sum: ItemSumAggregateOutputType | null
-    _min: ItemMinAggregateOutputType | null
-    _max: ItemMaxAggregateOutputType | null
+  export type AggregateCanvassItem = {
+    _count: CanvassItemCountAggregateOutputType | null
+    _avg: CanvassItemAvgAggregateOutputType | null
+    _sum: CanvassItemSumAggregateOutputType | null
+    _min: CanvassItemMinAggregateOutputType | null
+    _max: CanvassItemMaxAggregateOutputType | null
   }
 
-  export type ItemAvgAggregateOutputType = {
+  export type CanvassItemAvgAggregateOutputType = {
     quantity: number | null
   }
 
-  export type ItemSumAggregateOutputType = {
+  export type CanvassItemSumAggregateOutputType = {
     quantity: number | null
   }
 
-  export type ItemMinAggregateOutputType = {
+  export type CanvassItemMinAggregateOutputType = {
     id: string | null
+    canvass_id: string | null
     description: string | null
     brand_id: string | null
     unit_id: string | null
@@ -6684,8 +6603,9 @@ export namespace Prisma {
     is_deleted: boolean | null
   }
 
-  export type ItemMaxAggregateOutputType = {
+  export type CanvassItemMaxAggregateOutputType = {
     id: string | null
+    canvass_id: string | null
     description: string | null
     brand_id: string | null
     unit_id: string | null
@@ -6695,8 +6615,9 @@ export namespace Prisma {
     is_deleted: boolean | null
   }
 
-  export type ItemCountAggregateOutputType = {
+  export type CanvassItemCountAggregateOutputType = {
     id: number
+    canvass_id: number
     description: number
     brand_id: number
     unit_id: number
@@ -6708,16 +6629,17 @@ export namespace Prisma {
   }
 
 
-  export type ItemAvgAggregateInputType = {
+  export type CanvassItemAvgAggregateInputType = {
     quantity?: true
   }
 
-  export type ItemSumAggregateInputType = {
+  export type CanvassItemSumAggregateInputType = {
     quantity?: true
   }
 
-  export type ItemMinAggregateInputType = {
+  export type CanvassItemMinAggregateInputType = {
     id?: true
+    canvass_id?: true
     description?: true
     brand_id?: true
     unit_id?: true
@@ -6727,8 +6649,9 @@ export namespace Prisma {
     is_deleted?: true
   }
 
-  export type ItemMaxAggregateInputType = {
+  export type CanvassItemMaxAggregateInputType = {
     id?: true
+    canvass_id?: true
     description?: true
     brand_id?: true
     unit_id?: true
@@ -6738,8 +6661,9 @@ export namespace Prisma {
     is_deleted?: true
   }
 
-  export type ItemCountAggregateInputType = {
+  export type CanvassItemCountAggregateInputType = {
     id?: true
+    canvass_id?: true
     description?: true
     brand_id?: true
     unit_id?: true
@@ -6750,94 +6674,95 @@ export namespace Prisma {
     _all?: true
   }
 
-  export type ItemAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CanvassItemAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Item to aggregate.
+     * Filter which CanvassItem to aggregate.
      */
-    where?: ItemWhereInput
+    where?: CanvassItemWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Items to fetch.
+     * Determine the order of CanvassItems to fetch.
      */
-    orderBy?: ItemOrderByWithRelationInput | ItemOrderByWithRelationInput[]
+    orderBy?: CanvassItemOrderByWithRelationInput | CanvassItemOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: ItemWhereUniqueInput
+    cursor?: CanvassItemWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Items from the position of the cursor.
+     * Take `±n` CanvassItems from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Items.
+     * Skip the first `n` CanvassItems.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned Items
+     * Count returned CanvassItems
     **/
-    _count?: true | ItemCountAggregateInputType
+    _count?: true | CanvassItemCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
-    _avg?: ItemAvgAggregateInputType
+    _avg?: CanvassItemAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to sum
     **/
-    _sum?: ItemSumAggregateInputType
+    _sum?: CanvassItemSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: ItemMinAggregateInputType
+    _min?: CanvassItemMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: ItemMaxAggregateInputType
+    _max?: CanvassItemMaxAggregateInputType
   }
 
-  export type GetItemAggregateType<T extends ItemAggregateArgs> = {
-        [P in keyof T & keyof AggregateItem]: P extends '_count' | 'count'
+  export type GetCanvassItemAggregateType<T extends CanvassItemAggregateArgs> = {
+        [P in keyof T & keyof AggregateCanvassItem]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateItem[P]>
-      : GetScalarType<T[P], AggregateItem[P]>
+        : GetScalarType<T[P], AggregateCanvassItem[P]>
+      : GetScalarType<T[P], AggregateCanvassItem[P]>
   }
 
 
 
 
-  export type ItemGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ItemWhereInput
-    orderBy?: ItemOrderByWithAggregationInput | ItemOrderByWithAggregationInput[]
-    by: ItemScalarFieldEnum[] | ItemScalarFieldEnum
-    having?: ItemScalarWhereWithAggregatesInput
+  export type CanvassItemGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CanvassItemWhereInput
+    orderBy?: CanvassItemOrderByWithAggregationInput | CanvassItemOrderByWithAggregationInput[]
+    by: CanvassItemScalarFieldEnum[] | CanvassItemScalarFieldEnum
+    having?: CanvassItemScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: ItemCountAggregateInputType | true
-    _avg?: ItemAvgAggregateInputType
-    _sum?: ItemSumAggregateInputType
-    _min?: ItemMinAggregateInputType
-    _max?: ItemMaxAggregateInputType
+    _count?: CanvassItemCountAggregateInputType | true
+    _avg?: CanvassItemAvgAggregateInputType
+    _sum?: CanvassItemSumAggregateInputType
+    _min?: CanvassItemMinAggregateInputType
+    _max?: CanvassItemMaxAggregateInputType
   }
 
-  export type ItemGroupByOutputType = {
+  export type CanvassItemGroupByOutputType = {
     id: string
+    canvass_id: string
     description: string
     brand_id: string | null
     unit_id: string
@@ -6845,29 +6770,30 @@ export namespace Prisma {
     created_at: Date
     updated_at: Date
     is_deleted: boolean
-    _count: ItemCountAggregateOutputType | null
-    _avg: ItemAvgAggregateOutputType | null
-    _sum: ItemSumAggregateOutputType | null
-    _min: ItemMinAggregateOutputType | null
-    _max: ItemMaxAggregateOutputType | null
+    _count: CanvassItemCountAggregateOutputType | null
+    _avg: CanvassItemAvgAggregateOutputType | null
+    _sum: CanvassItemSumAggregateOutputType | null
+    _min: CanvassItemMinAggregateOutputType | null
+    _max: CanvassItemMaxAggregateOutputType | null
   }
 
-  type GetItemGroupByPayload<T extends ItemGroupByArgs> = Prisma.PrismaPromise<
+  type GetCanvassItemGroupByPayload<T extends CanvassItemGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<ItemGroupByOutputType, T['by']> &
+      PickEnumerable<CanvassItemGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof ItemGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof CanvassItemGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], ItemGroupByOutputType[P]>
-            : GetScalarType<T[P], ItemGroupByOutputType[P]>
+              : GetScalarType<T[P], CanvassItemGroupByOutputType[P]>
+            : GetScalarType<T[P], CanvassItemGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type ItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type CanvassItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    canvass_id?: boolean
     description?: boolean
     brand_id?: boolean
     unit_id?: boolean
@@ -6875,15 +6801,16 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     is_deleted?: boolean
-    canvass_item?: boolean | Item$canvass_itemArgs<ExtArgs>
-    brand?: boolean | Item$brandArgs<ExtArgs>
+    canvass?: boolean | CanvassDefaultArgs<ExtArgs>
+    brand?: boolean | CanvassItem$brandArgs<ExtArgs>
     unit?: boolean | UnitDefaultArgs<ExtArgs>
-    supplier_items?: boolean | Item$supplier_itemsArgs<ExtArgs>
-    _count?: boolean | ItemCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["item"]>
+    meqs_supplier_items?: boolean | CanvassItem$meqs_supplier_itemsArgs<ExtArgs>
+    _count?: boolean | CanvassItemCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["canvassItem"]>
 
-  export type ItemSelectScalar = {
+  export type CanvassItemSelectScalar = {
     id?: boolean
+    canvass_id?: boolean
     description?: boolean
     brand_id?: boolean
     unit_id?: boolean
@@ -6893,25 +6820,26 @@ export namespace Prisma {
     is_deleted?: boolean
   }
 
-  export type ItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    canvass_item?: boolean | Item$canvass_itemArgs<ExtArgs>
-    brand?: boolean | Item$brandArgs<ExtArgs>
+  export type CanvassItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    canvass?: boolean | CanvassDefaultArgs<ExtArgs>
+    brand?: boolean | CanvassItem$brandArgs<ExtArgs>
     unit?: boolean | UnitDefaultArgs<ExtArgs>
-    supplier_items?: boolean | Item$supplier_itemsArgs<ExtArgs>
-    _count?: boolean | ItemCountOutputTypeDefaultArgs<ExtArgs>
+    meqs_supplier_items?: boolean | CanvassItem$meqs_supplier_itemsArgs<ExtArgs>
+    _count?: boolean | CanvassItemCountOutputTypeDefaultArgs<ExtArgs>
   }
 
 
-  export type $ItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Item"
+  export type $CanvassItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "CanvassItem"
     objects: {
-      canvass_item: Prisma.$CanvassItemPayload<ExtArgs> | null
+      canvass: Prisma.$CanvassPayload<ExtArgs>
       brand: Prisma.$BrandPayload<ExtArgs> | null
       unit: Prisma.$UnitPayload<ExtArgs>
-      supplier_items: Prisma.$SupplierItemPayload<ExtArgs>[]
+      meqs_supplier_items: Prisma.$MEQSSupplierItemPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
+      canvass_id: string
       description: string
       brand_id: string | null
       unit_id: string
@@ -6919,160 +6847,160 @@ export namespace Prisma {
       created_at: Date
       updated_at: Date
       is_deleted: boolean
-    }, ExtArgs["result"]["item"]>
+    }, ExtArgs["result"]["canvassItem"]>
     composites: {}
   }
 
 
-  type ItemGetPayload<S extends boolean | null | undefined | ItemDefaultArgs> = $Result.GetResult<Prisma.$ItemPayload, S>
+  type CanvassItemGetPayload<S extends boolean | null | undefined | CanvassItemDefaultArgs> = $Result.GetResult<Prisma.$CanvassItemPayload, S>
 
-  type ItemCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
-    Omit<ItemFindManyArgs, 'select' | 'include' | 'distinct'> & {
-      select?: ItemCountAggregateInputType | true
+  type CanvassItemCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<CanvassItemFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: CanvassItemCountAggregateInputType | true
     }
 
-  export interface ItemDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Item'], meta: { name: 'Item' } }
+  export interface CanvassItemDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['CanvassItem'], meta: { name: 'CanvassItem' } }
     /**
-     * Find zero or one Item that matches the filter.
-     * @param {ItemFindUniqueArgs} args - Arguments to find a Item
+     * Find zero or one CanvassItem that matches the filter.
+     * @param {CanvassItemFindUniqueArgs} args - Arguments to find a CanvassItem
      * @example
-     * // Get one Item
-     * const item = await prisma.item.findUnique({
+     * // Get one CanvassItem
+     * const canvassItem = await prisma.canvassItem.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
     **/
-    findUnique<T extends ItemFindUniqueArgs<ExtArgs>>(
-      args: SelectSubset<T, ItemFindUniqueArgs<ExtArgs>>
-    ): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+    findUnique<T extends CanvassItemFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, CanvassItemFindUniqueArgs<ExtArgs>>
+    ): Prisma__CanvassItemClient<$Result.GetResult<Prisma.$CanvassItemPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
 
     /**
-     * Find one Item that matches the filter or throw an error  with `error.code='P2025'` 
+     * Find one CanvassItem that matches the filter or throw an error  with `error.code='P2025'` 
      *     if no matches were found.
-     * @param {ItemFindUniqueOrThrowArgs} args - Arguments to find a Item
+     * @param {CanvassItemFindUniqueOrThrowArgs} args - Arguments to find a CanvassItem
      * @example
-     * // Get one Item
-     * const item = await prisma.item.findUniqueOrThrow({
+     * // Get one CanvassItem
+     * const canvassItem = await prisma.canvassItem.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
     **/
-    findUniqueOrThrow<T extends ItemFindUniqueOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, ItemFindUniqueOrThrowArgs<ExtArgs>>
-    ): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+    findUniqueOrThrow<T extends CanvassItemFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, CanvassItemFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__CanvassItemClient<$Result.GetResult<Prisma.$CanvassItemPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
 
     /**
-     * Find the first Item that matches the filter.
+     * Find the first CanvassItem that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ItemFindFirstArgs} args - Arguments to find a Item
+     * @param {CanvassItemFindFirstArgs} args - Arguments to find a CanvassItem
      * @example
-     * // Get one Item
-     * const item = await prisma.item.findFirst({
+     * // Get one CanvassItem
+     * const canvassItem = await prisma.canvassItem.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
     **/
-    findFirst<T extends ItemFindFirstArgs<ExtArgs>>(
-      args?: SelectSubset<T, ItemFindFirstArgs<ExtArgs>>
-    ): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+    findFirst<T extends CanvassItemFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, CanvassItemFindFirstArgs<ExtArgs>>
+    ): Prisma__CanvassItemClient<$Result.GetResult<Prisma.$CanvassItemPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
 
     /**
-     * Find the first Item that matches the filter or
+     * Find the first CanvassItem that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ItemFindFirstOrThrowArgs} args - Arguments to find a Item
+     * @param {CanvassItemFindFirstOrThrowArgs} args - Arguments to find a CanvassItem
      * @example
-     * // Get one Item
-     * const item = await prisma.item.findFirstOrThrow({
+     * // Get one CanvassItem
+     * const canvassItem = await prisma.canvassItem.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
     **/
-    findFirstOrThrow<T extends ItemFindFirstOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, ItemFindFirstOrThrowArgs<ExtArgs>>
-    ): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+    findFirstOrThrow<T extends CanvassItemFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, CanvassItemFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__CanvassItemClient<$Result.GetResult<Prisma.$CanvassItemPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
 
     /**
-     * Find zero or more Items that matches the filter.
+     * Find zero or more CanvassItems that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ItemFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @param {CanvassItemFindManyArgs=} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all Items
-     * const items = await prisma.item.findMany()
+     * // Get all CanvassItems
+     * const canvassItems = await prisma.canvassItem.findMany()
      * 
-     * // Get first 10 Items
-     * const items = await prisma.item.findMany({ take: 10 })
+     * // Get first 10 CanvassItems
+     * const canvassItems = await prisma.canvassItem.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const itemWithIdOnly = await prisma.item.findMany({ select: { id: true } })
+     * const canvassItemWithIdOnly = await prisma.canvassItem.findMany({ select: { id: true } })
      * 
     **/
-    findMany<T extends ItemFindManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, ItemFindManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, 'findMany'>>
+    findMany<T extends CanvassItemFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, CanvassItemFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CanvassItemPayload<ExtArgs>, T, 'findMany'>>
 
     /**
-     * Create a Item.
-     * @param {ItemCreateArgs} args - Arguments to create a Item.
+     * Create a CanvassItem.
+     * @param {CanvassItemCreateArgs} args - Arguments to create a CanvassItem.
      * @example
-     * // Create one Item
-     * const Item = await prisma.item.create({
+     * // Create one CanvassItem
+     * const CanvassItem = await prisma.canvassItem.create({
      *   data: {
-     *     // ... data to create a Item
+     *     // ... data to create a CanvassItem
      *   }
      * })
      * 
     **/
-    create<T extends ItemCreateArgs<ExtArgs>>(
-      args: SelectSubset<T, ItemCreateArgs<ExtArgs>>
-    ): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+    create<T extends CanvassItemCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, CanvassItemCreateArgs<ExtArgs>>
+    ): Prisma__CanvassItemClient<$Result.GetResult<Prisma.$CanvassItemPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
 
     /**
-     * Create many Items.
-     *     @param {ItemCreateManyArgs} args - Arguments to create many Items.
+     * Create many CanvassItems.
+     *     @param {CanvassItemCreateManyArgs} args - Arguments to create many CanvassItems.
      *     @example
-     *     // Create many Items
-     *     const item = await prisma.item.createMany({
+     *     // Create many CanvassItems
+     *     const canvassItem = await prisma.canvassItem.createMany({
      *       data: {
      *         // ... provide data here
      *       }
      *     })
      *     
     **/
-    createMany<T extends ItemCreateManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, ItemCreateManyArgs<ExtArgs>>
+    createMany<T extends CanvassItemCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, CanvassItemCreateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Delete a Item.
-     * @param {ItemDeleteArgs} args - Arguments to delete one Item.
+     * Delete a CanvassItem.
+     * @param {CanvassItemDeleteArgs} args - Arguments to delete one CanvassItem.
      * @example
-     * // Delete one Item
-     * const Item = await prisma.item.delete({
+     * // Delete one CanvassItem
+     * const CanvassItem = await prisma.canvassItem.delete({
      *   where: {
-     *     // ... filter to delete one Item
+     *     // ... filter to delete one CanvassItem
      *   }
      * })
      * 
     **/
-    delete<T extends ItemDeleteArgs<ExtArgs>>(
-      args: SelectSubset<T, ItemDeleteArgs<ExtArgs>>
-    ): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+    delete<T extends CanvassItemDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, CanvassItemDeleteArgs<ExtArgs>>
+    ): Prisma__CanvassItemClient<$Result.GetResult<Prisma.$CanvassItemPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
 
     /**
-     * Update one Item.
-     * @param {ItemUpdateArgs} args - Arguments to update one Item.
+     * Update one CanvassItem.
+     * @param {CanvassItemUpdateArgs} args - Arguments to update one CanvassItem.
      * @example
-     * // Update one Item
-     * const item = await prisma.item.update({
+     * // Update one CanvassItem
+     * const canvassItem = await prisma.canvassItem.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -7082,34 +7010,34 @@ export namespace Prisma {
      * })
      * 
     **/
-    update<T extends ItemUpdateArgs<ExtArgs>>(
-      args: SelectSubset<T, ItemUpdateArgs<ExtArgs>>
-    ): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+    update<T extends CanvassItemUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, CanvassItemUpdateArgs<ExtArgs>>
+    ): Prisma__CanvassItemClient<$Result.GetResult<Prisma.$CanvassItemPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
 
     /**
-     * Delete zero or more Items.
-     * @param {ItemDeleteManyArgs} args - Arguments to filter Items to delete.
+     * Delete zero or more CanvassItems.
+     * @param {CanvassItemDeleteManyArgs} args - Arguments to filter CanvassItems to delete.
      * @example
-     * // Delete a few Items
-     * const { count } = await prisma.item.deleteMany({
+     * // Delete a few CanvassItems
+     * const { count } = await prisma.canvassItem.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
     **/
-    deleteMany<T extends ItemDeleteManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, ItemDeleteManyArgs<ExtArgs>>
+    deleteMany<T extends CanvassItemDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, CanvassItemDeleteManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Items.
+     * Update zero or more CanvassItems.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ItemUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {CanvassItemUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many Items
-     * const item = await prisma.item.updateMany({
+     * // Update many CanvassItems
+     * const canvassItem = await prisma.canvassItem.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -7119,59 +7047,59 @@ export namespace Prisma {
      * })
      * 
     **/
-    updateMany<T extends ItemUpdateManyArgs<ExtArgs>>(
-      args: SelectSubset<T, ItemUpdateManyArgs<ExtArgs>>
+    updateMany<T extends CanvassItemUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, CanvassItemUpdateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create or update one Item.
-     * @param {ItemUpsertArgs} args - Arguments to update or create a Item.
+     * Create or update one CanvassItem.
+     * @param {CanvassItemUpsertArgs} args - Arguments to update or create a CanvassItem.
      * @example
-     * // Update or create a Item
-     * const item = await prisma.item.upsert({
+     * // Update or create a CanvassItem
+     * const canvassItem = await prisma.canvassItem.upsert({
      *   create: {
-     *     // ... data to create a Item
+     *     // ... data to create a CanvassItem
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the Item we want to update
+     *     // ... the filter for the CanvassItem we want to update
      *   }
      * })
     **/
-    upsert<T extends ItemUpsertArgs<ExtArgs>>(
-      args: SelectSubset<T, ItemUpsertArgs<ExtArgs>>
-    ): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+    upsert<T extends CanvassItemUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, CanvassItemUpsertArgs<ExtArgs>>
+    ): Prisma__CanvassItemClient<$Result.GetResult<Prisma.$CanvassItemPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
 
     /**
-     * Count the number of Items.
+     * Count the number of CanvassItems.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ItemCountArgs} args - Arguments to filter Items to count.
+     * @param {CanvassItemCountArgs} args - Arguments to filter CanvassItems to count.
      * @example
-     * // Count the number of Items
-     * const count = await prisma.item.count({
+     * // Count the number of CanvassItems
+     * const count = await prisma.canvassItem.count({
      *   where: {
-     *     // ... the filter for the Items we want to count
+     *     // ... the filter for the CanvassItems we want to count
      *   }
      * })
     **/
-    count<T extends ItemCountArgs>(
-      args?: Subset<T, ItemCountArgs>,
+    count<T extends CanvassItemCountArgs>(
+      args?: Subset<T, CanvassItemCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], ItemCountAggregateOutputType>
+          : GetScalarType<T['select'], CanvassItemCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a Item.
+     * Allows you to perform aggregations operations on a CanvassItem.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ItemAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {CanvassItemAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -7191,13 +7119,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends ItemAggregateArgs>(args: Subset<T, ItemAggregateArgs>): Prisma.PrismaPromise<GetItemAggregateType<T>>
+    aggregate<T extends CanvassItemAggregateArgs>(args: Subset<T, CanvassItemAggregateArgs>): Prisma.PrismaPromise<GetCanvassItemAggregateType<T>>
 
     /**
-     * Group by Item.
+     * Group by CanvassItem.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ItemGroupByArgs} args - Group by arguments.
+     * @param {CanvassItemGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -7212,14 +7140,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends ItemGroupByArgs,
+      T extends CanvassItemGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: ItemGroupByArgs['orderBy'] }
-        : { orderBy?: ItemGroupByArgs['orderBy'] },
+        ? { orderBy: CanvassItemGroupByArgs['orderBy'] }
+        : { orderBy?: CanvassItemGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -7268,29 +7196,29 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, ItemGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetItemGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, CanvassItemGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCanvassItemGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the Item model
+   * Fields of the CanvassItem model
    */
-  readonly fields: ItemFieldRefs;
+  readonly fields: CanvassItemFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for Item.
+   * The delegate class that acts as a "Promise-like" for CanvassItem.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__ItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__CanvassItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
-    canvass_item<T extends Item$canvass_itemArgs<ExtArgs> = {}>(args?: Subset<T, Item$canvass_itemArgs<ExtArgs>>): Prisma__CanvassItemClient<$Result.GetResult<Prisma.$CanvassItemPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+    canvass<T extends CanvassDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CanvassDefaultArgs<ExtArgs>>): Prisma__CanvassClient<$Result.GetResult<Prisma.$CanvassPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
-    brand<T extends Item$brandArgs<ExtArgs> = {}>(args?: Subset<T, Item$brandArgs<ExtArgs>>): Prisma__BrandClient<$Result.GetResult<Prisma.$BrandPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+    brand<T extends CanvassItem$brandArgs<ExtArgs> = {}>(args?: Subset<T, CanvassItem$brandArgs<ExtArgs>>): Prisma__BrandClient<$Result.GetResult<Prisma.$BrandPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
 
     unit<T extends UnitDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UnitDefaultArgs<ExtArgs>>): Prisma__UnitClient<$Result.GetResult<Prisma.$UnitPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
-    supplier_items<T extends Item$supplier_itemsArgs<ExtArgs> = {}>(args?: Subset<T, Item$supplier_itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SupplierItemPayload<ExtArgs>, T, 'findMany'> | Null>;
+    meqs_supplier_items<T extends CanvassItem$meqs_supplier_itemsArgs<ExtArgs> = {}>(args?: Subset<T, CanvassItem$meqs_supplier_itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MEQSSupplierItemPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -7317,332 +7245,27 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the Item model
+   * Fields of the CanvassItem model
    */ 
-  interface ItemFieldRefs {
-    readonly id: FieldRef<"Item", 'String'>
-    readonly description: FieldRef<"Item", 'String'>
-    readonly brand_id: FieldRef<"Item", 'String'>
-    readonly unit_id: FieldRef<"Item", 'String'>
-    readonly quantity: FieldRef<"Item", 'Int'>
-    readonly created_at: FieldRef<"Item", 'DateTime'>
-    readonly updated_at: FieldRef<"Item", 'DateTime'>
-    readonly is_deleted: FieldRef<"Item", 'Boolean'>
+  interface CanvassItemFieldRefs {
+    readonly id: FieldRef<"CanvassItem", 'String'>
+    readonly canvass_id: FieldRef<"CanvassItem", 'String'>
+    readonly description: FieldRef<"CanvassItem", 'String'>
+    readonly brand_id: FieldRef<"CanvassItem", 'String'>
+    readonly unit_id: FieldRef<"CanvassItem", 'String'>
+    readonly quantity: FieldRef<"CanvassItem", 'Int'>
+    readonly created_at: FieldRef<"CanvassItem", 'DateTime'>
+    readonly updated_at: FieldRef<"CanvassItem", 'DateTime'>
+    readonly is_deleted: FieldRef<"CanvassItem", 'Boolean'>
   }
     
 
   // Custom InputTypes
 
   /**
-   * Item findUnique
+   * CanvassItem findUnique
    */
-  export type ItemFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Item
-     */
-    select?: ItemSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: ItemInclude<ExtArgs> | null
-    /**
-     * Filter, which Item to fetch.
-     */
-    where: ItemWhereUniqueInput
-  }
-
-
-  /**
-   * Item findUniqueOrThrow
-   */
-  export type ItemFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Item
-     */
-    select?: ItemSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: ItemInclude<ExtArgs> | null
-    /**
-     * Filter, which Item to fetch.
-     */
-    where: ItemWhereUniqueInput
-  }
-
-
-  /**
-   * Item findFirst
-   */
-  export type ItemFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Item
-     */
-    select?: ItemSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: ItemInclude<ExtArgs> | null
-    /**
-     * Filter, which Item to fetch.
-     */
-    where?: ItemWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Items to fetch.
-     */
-    orderBy?: ItemOrderByWithRelationInput | ItemOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Items.
-     */
-    cursor?: ItemWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Items from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Items.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Items.
-     */
-    distinct?: ItemScalarFieldEnum | ItemScalarFieldEnum[]
-  }
-
-
-  /**
-   * Item findFirstOrThrow
-   */
-  export type ItemFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Item
-     */
-    select?: ItemSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: ItemInclude<ExtArgs> | null
-    /**
-     * Filter, which Item to fetch.
-     */
-    where?: ItemWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Items to fetch.
-     */
-    orderBy?: ItemOrderByWithRelationInput | ItemOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Items.
-     */
-    cursor?: ItemWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Items from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Items.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Items.
-     */
-    distinct?: ItemScalarFieldEnum | ItemScalarFieldEnum[]
-  }
-
-
-  /**
-   * Item findMany
-   */
-  export type ItemFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Item
-     */
-    select?: ItemSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: ItemInclude<ExtArgs> | null
-    /**
-     * Filter, which Items to fetch.
-     */
-    where?: ItemWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Items to fetch.
-     */
-    orderBy?: ItemOrderByWithRelationInput | ItemOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Items.
-     */
-    cursor?: ItemWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Items from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Items.
-     */
-    skip?: number
-    distinct?: ItemScalarFieldEnum | ItemScalarFieldEnum[]
-  }
-
-
-  /**
-   * Item create
-   */
-  export type ItemCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Item
-     */
-    select?: ItemSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: ItemInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Item.
-     */
-    data: XOR<ItemCreateInput, ItemUncheckedCreateInput>
-  }
-
-
-  /**
-   * Item createMany
-   */
-  export type ItemCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Items.
-     */
-    data: ItemCreateManyInput | ItemCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-
-  /**
-   * Item update
-   */
-  export type ItemUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Item
-     */
-    select?: ItemSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: ItemInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Item.
-     */
-    data: XOR<ItemUpdateInput, ItemUncheckedUpdateInput>
-    /**
-     * Choose, which Item to update.
-     */
-    where: ItemWhereUniqueInput
-  }
-
-
-  /**
-   * Item updateMany
-   */
-  export type ItemUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Items.
-     */
-    data: XOR<ItemUpdateManyMutationInput, ItemUncheckedUpdateManyInput>
-    /**
-     * Filter which Items to update
-     */
-    where?: ItemWhereInput
-  }
-
-
-  /**
-   * Item upsert
-   */
-  export type ItemUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Item
-     */
-    select?: ItemSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: ItemInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Item to update in case it exists.
-     */
-    where: ItemWhereUniqueInput
-    /**
-     * In case the Item found by the `where` argument doesn't exist, create a new Item with this data.
-     */
-    create: XOR<ItemCreateInput, ItemUncheckedCreateInput>
-    /**
-     * In case the Item was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<ItemUpdateInput, ItemUncheckedUpdateInput>
-  }
-
-
-  /**
-   * Item delete
-   */
-  export type ItemDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Item
-     */
-    select?: ItemSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: ItemInclude<ExtArgs> | null
-    /**
-     * Filter which Item to delete.
-     */
-    where: ItemWhereUniqueInput
-  }
-
-
-  /**
-   * Item deleteMany
-   */
-  export type ItemDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Items to delete
-     */
-    where?: ItemWhereInput
-  }
-
-
-  /**
-   * Item.canvass_item
-   */
-  export type Item$canvass_itemArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CanvassItemFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the CanvassItem
      */
@@ -7651,14 +7274,304 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well.
      */
     include?: CanvassItemInclude<ExtArgs> | null
+    /**
+     * Filter, which CanvassItem to fetch.
+     */
+    where: CanvassItemWhereUniqueInput
+  }
+
+
+  /**
+   * CanvassItem findUniqueOrThrow
+   */
+  export type CanvassItemFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CanvassItem
+     */
+    select?: CanvassItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: CanvassItemInclude<ExtArgs> | null
+    /**
+     * Filter, which CanvassItem to fetch.
+     */
+    where: CanvassItemWhereUniqueInput
+  }
+
+
+  /**
+   * CanvassItem findFirst
+   */
+  export type CanvassItemFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CanvassItem
+     */
+    select?: CanvassItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: CanvassItemInclude<ExtArgs> | null
+    /**
+     * Filter, which CanvassItem to fetch.
+     */
+    where?: CanvassItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CanvassItems to fetch.
+     */
+    orderBy?: CanvassItemOrderByWithRelationInput | CanvassItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CanvassItems.
+     */
+    cursor?: CanvassItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CanvassItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CanvassItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CanvassItems.
+     */
+    distinct?: CanvassItemScalarFieldEnum | CanvassItemScalarFieldEnum[]
+  }
+
+
+  /**
+   * CanvassItem findFirstOrThrow
+   */
+  export type CanvassItemFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CanvassItem
+     */
+    select?: CanvassItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: CanvassItemInclude<ExtArgs> | null
+    /**
+     * Filter, which CanvassItem to fetch.
+     */
+    where?: CanvassItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CanvassItems to fetch.
+     */
+    orderBy?: CanvassItemOrderByWithRelationInput | CanvassItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CanvassItems.
+     */
+    cursor?: CanvassItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CanvassItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CanvassItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CanvassItems.
+     */
+    distinct?: CanvassItemScalarFieldEnum | CanvassItemScalarFieldEnum[]
+  }
+
+
+  /**
+   * CanvassItem findMany
+   */
+  export type CanvassItemFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CanvassItem
+     */
+    select?: CanvassItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: CanvassItemInclude<ExtArgs> | null
+    /**
+     * Filter, which CanvassItems to fetch.
+     */
+    where?: CanvassItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CanvassItems to fetch.
+     */
+    orderBy?: CanvassItemOrderByWithRelationInput | CanvassItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing CanvassItems.
+     */
+    cursor?: CanvassItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CanvassItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CanvassItems.
+     */
+    skip?: number
+    distinct?: CanvassItemScalarFieldEnum | CanvassItemScalarFieldEnum[]
+  }
+
+
+  /**
+   * CanvassItem create
+   */
+  export type CanvassItemCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CanvassItem
+     */
+    select?: CanvassItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: CanvassItemInclude<ExtArgs> | null
+    /**
+     * The data needed to create a CanvassItem.
+     */
+    data: XOR<CanvassItemCreateInput, CanvassItemUncheckedCreateInput>
+  }
+
+
+  /**
+   * CanvassItem createMany
+   */
+  export type CanvassItemCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many CanvassItems.
+     */
+    data: CanvassItemCreateManyInput | CanvassItemCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * CanvassItem update
+   */
+  export type CanvassItemUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CanvassItem
+     */
+    select?: CanvassItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: CanvassItemInclude<ExtArgs> | null
+    /**
+     * The data needed to update a CanvassItem.
+     */
+    data: XOR<CanvassItemUpdateInput, CanvassItemUncheckedUpdateInput>
+    /**
+     * Choose, which CanvassItem to update.
+     */
+    where: CanvassItemWhereUniqueInput
+  }
+
+
+  /**
+   * CanvassItem updateMany
+   */
+  export type CanvassItemUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update CanvassItems.
+     */
+    data: XOR<CanvassItemUpdateManyMutationInput, CanvassItemUncheckedUpdateManyInput>
+    /**
+     * Filter which CanvassItems to update
+     */
     where?: CanvassItemWhereInput
   }
 
 
   /**
-   * Item.brand
+   * CanvassItem upsert
    */
-  export type Item$brandArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CanvassItemUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CanvassItem
+     */
+    select?: CanvassItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: CanvassItemInclude<ExtArgs> | null
+    /**
+     * The filter to search for the CanvassItem to update in case it exists.
+     */
+    where: CanvassItemWhereUniqueInput
+    /**
+     * In case the CanvassItem found by the `where` argument doesn't exist, create a new CanvassItem with this data.
+     */
+    create: XOR<CanvassItemCreateInput, CanvassItemUncheckedCreateInput>
+    /**
+     * In case the CanvassItem was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CanvassItemUpdateInput, CanvassItemUncheckedUpdateInput>
+  }
+
+
+  /**
+   * CanvassItem delete
+   */
+  export type CanvassItemDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CanvassItem
+     */
+    select?: CanvassItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: CanvassItemInclude<ExtArgs> | null
+    /**
+     * Filter which CanvassItem to delete.
+     */
+    where: CanvassItemWhereUniqueInput
+  }
+
+
+  /**
+   * CanvassItem deleteMany
+   */
+  export type CanvassItemDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CanvassItems to delete
+     */
+    where?: CanvassItemWhereInput
+  }
+
+
+  /**
+   * CanvassItem.brand
+   */
+  export type CanvassItem$brandArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Brand
      */
@@ -7672,38 +7585,38 @@ export namespace Prisma {
 
 
   /**
-   * Item.supplier_items
+   * CanvassItem.meqs_supplier_items
    */
-  export type Item$supplier_itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CanvassItem$meqs_supplier_itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the SupplierItem
+     * Select specific fields to fetch from the MEQSSupplierItem
      */
-    select?: SupplierItemSelect<ExtArgs> | null
+    select?: MEQSSupplierItemSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: SupplierItemInclude<ExtArgs> | null
-    where?: SupplierItemWhereInput
-    orderBy?: SupplierItemOrderByWithRelationInput | SupplierItemOrderByWithRelationInput[]
-    cursor?: SupplierItemWhereUniqueInput
+    include?: MEQSSupplierItemInclude<ExtArgs> | null
+    where?: MEQSSupplierItemWhereInput
+    orderBy?: MEQSSupplierItemOrderByWithRelationInput | MEQSSupplierItemOrderByWithRelationInput[]
+    cursor?: MEQSSupplierItemWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: SupplierItemScalarFieldEnum | SupplierItemScalarFieldEnum[]
+    distinct?: MEQSSupplierItemScalarFieldEnum | MEQSSupplierItemScalarFieldEnum[]
   }
 
 
   /**
-   * Item without action
+   * CanvassItem without action
    */
-  export type ItemDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CanvassItemDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Item
+     * Select specific fields to fetch from the CanvassItem
      */
-    select?: ItemSelect<ExtArgs> | null
+    select?: CanvassItemSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: ItemInclude<ExtArgs> | null
+    include?: CanvassItemInclude<ExtArgs> | null
   }
 
 
@@ -7913,9 +7826,9 @@ export namespace Prisma {
     updated_at?: boolean
     is_deleted?: boolean
     canvass_items?: boolean | Canvass$canvass_itemsArgs<ExtArgs>
-    jos?: boolean | Canvass$josArgs<ExtArgs>
-    rvs?: boolean | Canvass$rvsArgs<ExtArgs>
-    sprs?: boolean | Canvass$sprsArgs<ExtArgs>
+    jo?: boolean | Canvass$joArgs<ExtArgs>
+    rv?: boolean | Canvass$rvArgs<ExtArgs>
+    spr?: boolean | Canvass$sprArgs<ExtArgs>
     _count?: boolean | CanvassCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["canvass"]>
 
@@ -7934,9 +7847,9 @@ export namespace Prisma {
 
   export type CanvassInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     canvass_items?: boolean | Canvass$canvass_itemsArgs<ExtArgs>
-    jos?: boolean | Canvass$josArgs<ExtArgs>
-    rvs?: boolean | Canvass$rvsArgs<ExtArgs>
-    sprs?: boolean | Canvass$sprsArgs<ExtArgs>
+    jo?: boolean | Canvass$joArgs<ExtArgs>
+    rv?: boolean | Canvass$rvArgs<ExtArgs>
+    spr?: boolean | Canvass$sprArgs<ExtArgs>
     _count?: boolean | CanvassCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -7945,9 +7858,9 @@ export namespace Prisma {
     name: "Canvass"
     objects: {
       canvass_items: Prisma.$CanvassItemPayload<ExtArgs>[]
-      jos: Prisma.$JOPayload<ExtArgs> | null
-      rvs: Prisma.$RVPayload<ExtArgs> | null
-      sprs: Prisma.$SPRPayload<ExtArgs> | null
+      jo: Prisma.$JOPayload<ExtArgs> | null
+      rv: Prisma.$RVPayload<ExtArgs> | null
+      spr: Prisma.$SPRPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -8327,11 +8240,11 @@ export namespace Prisma {
 
     canvass_items<T extends Canvass$canvass_itemsArgs<ExtArgs> = {}>(args?: Subset<T, Canvass$canvass_itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CanvassItemPayload<ExtArgs>, T, 'findMany'> | Null>;
 
-    jos<T extends Canvass$josArgs<ExtArgs> = {}>(args?: Subset<T, Canvass$josArgs<ExtArgs>>): Prisma__JOClient<$Result.GetResult<Prisma.$JOPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+    jo<T extends Canvass$joArgs<ExtArgs> = {}>(args?: Subset<T, Canvass$joArgs<ExtArgs>>): Prisma__JOClient<$Result.GetResult<Prisma.$JOPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
 
-    rvs<T extends Canvass$rvsArgs<ExtArgs> = {}>(args?: Subset<T, Canvass$rvsArgs<ExtArgs>>): Prisma__RVClient<$Result.GetResult<Prisma.$RVPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+    rv<T extends Canvass$rvArgs<ExtArgs> = {}>(args?: Subset<T, Canvass$rvArgs<ExtArgs>>): Prisma__RVClient<$Result.GetResult<Prisma.$RVPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
 
-    sprs<T extends Canvass$sprsArgs<ExtArgs> = {}>(args?: Subset<T, Canvass$sprsArgs<ExtArgs>>): Prisma__SPRClient<$Result.GetResult<Prisma.$SPRPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+    spr<T extends Canvass$sprArgs<ExtArgs> = {}>(args?: Subset<T, Canvass$sprArgs<ExtArgs>>): Prisma__SPRClient<$Result.GetResult<Prisma.$SPRPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -8704,9 +8617,9 @@ export namespace Prisma {
 
 
   /**
-   * Canvass.jos
+   * Canvass.jo
    */
-  export type Canvass$josArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Canvass$joArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the JO
      */
@@ -8720,9 +8633,9 @@ export namespace Prisma {
 
 
   /**
-   * Canvass.rvs
+   * Canvass.rv
    */
-  export type Canvass$rvsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Canvass$rvArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the RV
      */
@@ -8736,9 +8649,9 @@ export namespace Prisma {
 
 
   /**
-   * Canvass.sprs
+   * Canvass.spr
    */
-  export type Canvass$sprsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Canvass$sprArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the SPR
      */
@@ -8763,1941 +8676,6 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well.
      */
     include?: CanvassInclude<ExtArgs> | null
-  }
-
-
-
-  /**
-   * Model CanvassItem
-   */
-
-  export type AggregateCanvassItem = {
-    _count: CanvassItemCountAggregateOutputType | null
-    _min: CanvassItemMinAggregateOutputType | null
-    _max: CanvassItemMaxAggregateOutputType | null
-  }
-
-  export type CanvassItemMinAggregateOutputType = {
-    id: string | null
-    canvass_id: string | null
-    item_id: string | null
-    created_at: Date | null
-    updated_at: Date | null
-    is_deleted: boolean | null
-  }
-
-  export type CanvassItemMaxAggregateOutputType = {
-    id: string | null
-    canvass_id: string | null
-    item_id: string | null
-    created_at: Date | null
-    updated_at: Date | null
-    is_deleted: boolean | null
-  }
-
-  export type CanvassItemCountAggregateOutputType = {
-    id: number
-    canvass_id: number
-    item_id: number
-    created_at: number
-    updated_at: number
-    is_deleted: number
-    _all: number
-  }
-
-
-  export type CanvassItemMinAggregateInputType = {
-    id?: true
-    canvass_id?: true
-    item_id?: true
-    created_at?: true
-    updated_at?: true
-    is_deleted?: true
-  }
-
-  export type CanvassItemMaxAggregateInputType = {
-    id?: true
-    canvass_id?: true
-    item_id?: true
-    created_at?: true
-    updated_at?: true
-    is_deleted?: true
-  }
-
-  export type CanvassItemCountAggregateInputType = {
-    id?: true
-    canvass_id?: true
-    item_id?: true
-    created_at?: true
-    updated_at?: true
-    is_deleted?: true
-    _all?: true
-  }
-
-  export type CanvassItemAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which CanvassItem to aggregate.
-     */
-    where?: CanvassItemWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of CanvassItems to fetch.
-     */
-    orderBy?: CanvassItemOrderByWithRelationInput | CanvassItemOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: CanvassItemWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` CanvassItems from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` CanvassItems.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned CanvassItems
-    **/
-    _count?: true | CanvassItemCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: CanvassItemMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: CanvassItemMaxAggregateInputType
-  }
-
-  export type GetCanvassItemAggregateType<T extends CanvassItemAggregateArgs> = {
-        [P in keyof T & keyof AggregateCanvassItem]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateCanvassItem[P]>
-      : GetScalarType<T[P], AggregateCanvassItem[P]>
-  }
-
-
-
-
-  export type CanvassItemGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: CanvassItemWhereInput
-    orderBy?: CanvassItemOrderByWithAggregationInput | CanvassItemOrderByWithAggregationInput[]
-    by: CanvassItemScalarFieldEnum[] | CanvassItemScalarFieldEnum
-    having?: CanvassItemScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: CanvassItemCountAggregateInputType | true
-    _min?: CanvassItemMinAggregateInputType
-    _max?: CanvassItemMaxAggregateInputType
-  }
-
-  export type CanvassItemGroupByOutputType = {
-    id: string
-    canvass_id: string
-    item_id: string
-    created_at: Date
-    updated_at: Date
-    is_deleted: boolean
-    _count: CanvassItemCountAggregateOutputType | null
-    _min: CanvassItemMinAggregateOutputType | null
-    _max: CanvassItemMaxAggregateOutputType | null
-  }
-
-  type GetCanvassItemGroupByPayload<T extends CanvassItemGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<CanvassItemGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof CanvassItemGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], CanvassItemGroupByOutputType[P]>
-            : GetScalarType<T[P], CanvassItemGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type CanvassItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    canvass_id?: boolean
-    item_id?: boolean
-    created_at?: boolean
-    updated_at?: boolean
-    is_deleted?: boolean
-    canvass?: boolean | CanvassDefaultArgs<ExtArgs>
-    item?: boolean | ItemDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["canvassItem"]>
-
-  export type CanvassItemSelectScalar = {
-    id?: boolean
-    canvass_id?: boolean
-    item_id?: boolean
-    created_at?: boolean
-    updated_at?: boolean
-    is_deleted?: boolean
-  }
-
-  export type CanvassItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    canvass?: boolean | CanvassDefaultArgs<ExtArgs>
-    item?: boolean | ItemDefaultArgs<ExtArgs>
-  }
-
-
-  export type $CanvassItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "CanvassItem"
-    objects: {
-      canvass: Prisma.$CanvassPayload<ExtArgs>
-      item: Prisma.$ItemPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      canvass_id: string
-      item_id: string
-      created_at: Date
-      updated_at: Date
-      is_deleted: boolean
-    }, ExtArgs["result"]["canvassItem"]>
-    composites: {}
-  }
-
-
-  type CanvassItemGetPayload<S extends boolean | null | undefined | CanvassItemDefaultArgs> = $Result.GetResult<Prisma.$CanvassItemPayload, S>
-
-  type CanvassItemCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
-    Omit<CanvassItemFindManyArgs, 'select' | 'include' | 'distinct'> & {
-      select?: CanvassItemCountAggregateInputType | true
-    }
-
-  export interface CanvassItemDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['CanvassItem'], meta: { name: 'CanvassItem' } }
-    /**
-     * Find zero or one CanvassItem that matches the filter.
-     * @param {CanvassItemFindUniqueArgs} args - Arguments to find a CanvassItem
-     * @example
-     * // Get one CanvassItem
-     * const canvassItem = await prisma.canvassItem.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findUnique<T extends CanvassItemFindUniqueArgs<ExtArgs>>(
-      args: SelectSubset<T, CanvassItemFindUniqueArgs<ExtArgs>>
-    ): Prisma__CanvassItemClient<$Result.GetResult<Prisma.$CanvassItemPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
-
-    /**
-     * Find one CanvassItem that matches the filter or throw an error  with `error.code='P2025'` 
-     *     if no matches were found.
-     * @param {CanvassItemFindUniqueOrThrowArgs} args - Arguments to find a CanvassItem
-     * @example
-     * // Get one CanvassItem
-     * const canvassItem = await prisma.canvassItem.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findUniqueOrThrow<T extends CanvassItemFindUniqueOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, CanvassItemFindUniqueOrThrowArgs<ExtArgs>>
-    ): Prisma__CanvassItemClient<$Result.GetResult<Prisma.$CanvassItemPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
-
-    /**
-     * Find the first CanvassItem that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {CanvassItemFindFirstArgs} args - Arguments to find a CanvassItem
-     * @example
-     * // Get one CanvassItem
-     * const canvassItem = await prisma.canvassItem.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findFirst<T extends CanvassItemFindFirstArgs<ExtArgs>>(
-      args?: SelectSubset<T, CanvassItemFindFirstArgs<ExtArgs>>
-    ): Prisma__CanvassItemClient<$Result.GetResult<Prisma.$CanvassItemPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
-
-    /**
-     * Find the first CanvassItem that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {CanvassItemFindFirstOrThrowArgs} args - Arguments to find a CanvassItem
-     * @example
-     * // Get one CanvassItem
-     * const canvassItem = await prisma.canvassItem.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findFirstOrThrow<T extends CanvassItemFindFirstOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, CanvassItemFindFirstOrThrowArgs<ExtArgs>>
-    ): Prisma__CanvassItemClient<$Result.GetResult<Prisma.$CanvassItemPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
-
-    /**
-     * Find zero or more CanvassItems that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {CanvassItemFindManyArgs=} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all CanvassItems
-     * const canvassItems = await prisma.canvassItem.findMany()
-     * 
-     * // Get first 10 CanvassItems
-     * const canvassItems = await prisma.canvassItem.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const canvassItemWithIdOnly = await prisma.canvassItem.findMany({ select: { id: true } })
-     * 
-    **/
-    findMany<T extends CanvassItemFindManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, CanvassItemFindManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CanvassItemPayload<ExtArgs>, T, 'findMany'>>
-
-    /**
-     * Create a CanvassItem.
-     * @param {CanvassItemCreateArgs} args - Arguments to create a CanvassItem.
-     * @example
-     * // Create one CanvassItem
-     * const CanvassItem = await prisma.canvassItem.create({
-     *   data: {
-     *     // ... data to create a CanvassItem
-     *   }
-     * })
-     * 
-    **/
-    create<T extends CanvassItemCreateArgs<ExtArgs>>(
-      args: SelectSubset<T, CanvassItemCreateArgs<ExtArgs>>
-    ): Prisma__CanvassItemClient<$Result.GetResult<Prisma.$CanvassItemPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
-
-    /**
-     * Create many CanvassItems.
-     *     @param {CanvassItemCreateManyArgs} args - Arguments to create many CanvassItems.
-     *     @example
-     *     // Create many CanvassItems
-     *     const canvassItem = await prisma.canvassItem.createMany({
-     *       data: {
-     *         // ... provide data here
-     *       }
-     *     })
-     *     
-    **/
-    createMany<T extends CanvassItemCreateManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, CanvassItemCreateManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Delete a CanvassItem.
-     * @param {CanvassItemDeleteArgs} args - Arguments to delete one CanvassItem.
-     * @example
-     * // Delete one CanvassItem
-     * const CanvassItem = await prisma.canvassItem.delete({
-     *   where: {
-     *     // ... filter to delete one CanvassItem
-     *   }
-     * })
-     * 
-    **/
-    delete<T extends CanvassItemDeleteArgs<ExtArgs>>(
-      args: SelectSubset<T, CanvassItemDeleteArgs<ExtArgs>>
-    ): Prisma__CanvassItemClient<$Result.GetResult<Prisma.$CanvassItemPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
-
-    /**
-     * Update one CanvassItem.
-     * @param {CanvassItemUpdateArgs} args - Arguments to update one CanvassItem.
-     * @example
-     * // Update one CanvassItem
-     * const canvassItem = await prisma.canvassItem.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-    **/
-    update<T extends CanvassItemUpdateArgs<ExtArgs>>(
-      args: SelectSubset<T, CanvassItemUpdateArgs<ExtArgs>>
-    ): Prisma__CanvassItemClient<$Result.GetResult<Prisma.$CanvassItemPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
-
-    /**
-     * Delete zero or more CanvassItems.
-     * @param {CanvassItemDeleteManyArgs} args - Arguments to filter CanvassItems to delete.
-     * @example
-     * // Delete a few CanvassItems
-     * const { count } = await prisma.canvassItem.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-    **/
-    deleteMany<T extends CanvassItemDeleteManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, CanvassItemDeleteManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more CanvassItems.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {CanvassItemUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many CanvassItems
-     * const canvassItem = await prisma.canvassItem.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-    **/
-    updateMany<T extends CanvassItemUpdateManyArgs<ExtArgs>>(
-      args: SelectSubset<T, CanvassItemUpdateManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create or update one CanvassItem.
-     * @param {CanvassItemUpsertArgs} args - Arguments to update or create a CanvassItem.
-     * @example
-     * // Update or create a CanvassItem
-     * const canvassItem = await prisma.canvassItem.upsert({
-     *   create: {
-     *     // ... data to create a CanvassItem
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the CanvassItem we want to update
-     *   }
-     * })
-    **/
-    upsert<T extends CanvassItemUpsertArgs<ExtArgs>>(
-      args: SelectSubset<T, CanvassItemUpsertArgs<ExtArgs>>
-    ): Prisma__CanvassItemClient<$Result.GetResult<Prisma.$CanvassItemPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
-
-    /**
-     * Count the number of CanvassItems.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {CanvassItemCountArgs} args - Arguments to filter CanvassItems to count.
-     * @example
-     * // Count the number of CanvassItems
-     * const count = await prisma.canvassItem.count({
-     *   where: {
-     *     // ... the filter for the CanvassItems we want to count
-     *   }
-     * })
-    **/
-    count<T extends CanvassItemCountArgs>(
-      args?: Subset<T, CanvassItemCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], CanvassItemCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a CanvassItem.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {CanvassItemAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends CanvassItemAggregateArgs>(args: Subset<T, CanvassItemAggregateArgs>): Prisma.PrismaPromise<GetCanvassItemAggregateType<T>>
-
-    /**
-     * Group by CanvassItem.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {CanvassItemGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends CanvassItemGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: CanvassItemGroupByArgs['orderBy'] }
-        : { orderBy?: CanvassItemGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, CanvassItemGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCanvassItemGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the CanvassItem model
-   */
-  readonly fields: CanvassItemFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for CanvassItem.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__CanvassItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: 'PrismaPromise';
-
-    canvass<T extends CanvassDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CanvassDefaultArgs<ExtArgs>>): Prisma__CanvassClient<$Result.GetResult<Prisma.$CanvassPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
-
-    item<T extends ItemDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ItemDefaultArgs<ExtArgs>>): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
-
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
-  }
-
-
-
-  /**
-   * Fields of the CanvassItem model
-   */ 
-  interface CanvassItemFieldRefs {
-    readonly id: FieldRef<"CanvassItem", 'String'>
-    readonly canvass_id: FieldRef<"CanvassItem", 'String'>
-    readonly item_id: FieldRef<"CanvassItem", 'String'>
-    readonly created_at: FieldRef<"CanvassItem", 'DateTime'>
-    readonly updated_at: FieldRef<"CanvassItem", 'DateTime'>
-    readonly is_deleted: FieldRef<"CanvassItem", 'Boolean'>
-  }
-    
-
-  // Custom InputTypes
-
-  /**
-   * CanvassItem findUnique
-   */
-  export type CanvassItemFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the CanvassItem
-     */
-    select?: CanvassItemSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: CanvassItemInclude<ExtArgs> | null
-    /**
-     * Filter, which CanvassItem to fetch.
-     */
-    where: CanvassItemWhereUniqueInput
-  }
-
-
-  /**
-   * CanvassItem findUniqueOrThrow
-   */
-  export type CanvassItemFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the CanvassItem
-     */
-    select?: CanvassItemSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: CanvassItemInclude<ExtArgs> | null
-    /**
-     * Filter, which CanvassItem to fetch.
-     */
-    where: CanvassItemWhereUniqueInput
-  }
-
-
-  /**
-   * CanvassItem findFirst
-   */
-  export type CanvassItemFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the CanvassItem
-     */
-    select?: CanvassItemSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: CanvassItemInclude<ExtArgs> | null
-    /**
-     * Filter, which CanvassItem to fetch.
-     */
-    where?: CanvassItemWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of CanvassItems to fetch.
-     */
-    orderBy?: CanvassItemOrderByWithRelationInput | CanvassItemOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for CanvassItems.
-     */
-    cursor?: CanvassItemWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` CanvassItems from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` CanvassItems.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of CanvassItems.
-     */
-    distinct?: CanvassItemScalarFieldEnum | CanvassItemScalarFieldEnum[]
-  }
-
-
-  /**
-   * CanvassItem findFirstOrThrow
-   */
-  export type CanvassItemFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the CanvassItem
-     */
-    select?: CanvassItemSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: CanvassItemInclude<ExtArgs> | null
-    /**
-     * Filter, which CanvassItem to fetch.
-     */
-    where?: CanvassItemWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of CanvassItems to fetch.
-     */
-    orderBy?: CanvassItemOrderByWithRelationInput | CanvassItemOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for CanvassItems.
-     */
-    cursor?: CanvassItemWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` CanvassItems from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` CanvassItems.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of CanvassItems.
-     */
-    distinct?: CanvassItemScalarFieldEnum | CanvassItemScalarFieldEnum[]
-  }
-
-
-  /**
-   * CanvassItem findMany
-   */
-  export type CanvassItemFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the CanvassItem
-     */
-    select?: CanvassItemSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: CanvassItemInclude<ExtArgs> | null
-    /**
-     * Filter, which CanvassItems to fetch.
-     */
-    where?: CanvassItemWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of CanvassItems to fetch.
-     */
-    orderBy?: CanvassItemOrderByWithRelationInput | CanvassItemOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing CanvassItems.
-     */
-    cursor?: CanvassItemWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` CanvassItems from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` CanvassItems.
-     */
-    skip?: number
-    distinct?: CanvassItemScalarFieldEnum | CanvassItemScalarFieldEnum[]
-  }
-
-
-  /**
-   * CanvassItem create
-   */
-  export type CanvassItemCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the CanvassItem
-     */
-    select?: CanvassItemSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: CanvassItemInclude<ExtArgs> | null
-    /**
-     * The data needed to create a CanvassItem.
-     */
-    data: XOR<CanvassItemCreateInput, CanvassItemUncheckedCreateInput>
-  }
-
-
-  /**
-   * CanvassItem createMany
-   */
-  export type CanvassItemCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many CanvassItems.
-     */
-    data: CanvassItemCreateManyInput | CanvassItemCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-
-  /**
-   * CanvassItem update
-   */
-  export type CanvassItemUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the CanvassItem
-     */
-    select?: CanvassItemSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: CanvassItemInclude<ExtArgs> | null
-    /**
-     * The data needed to update a CanvassItem.
-     */
-    data: XOR<CanvassItemUpdateInput, CanvassItemUncheckedUpdateInput>
-    /**
-     * Choose, which CanvassItem to update.
-     */
-    where: CanvassItemWhereUniqueInput
-  }
-
-
-  /**
-   * CanvassItem updateMany
-   */
-  export type CanvassItemUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update CanvassItems.
-     */
-    data: XOR<CanvassItemUpdateManyMutationInput, CanvassItemUncheckedUpdateManyInput>
-    /**
-     * Filter which CanvassItems to update
-     */
-    where?: CanvassItemWhereInput
-  }
-
-
-  /**
-   * CanvassItem upsert
-   */
-  export type CanvassItemUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the CanvassItem
-     */
-    select?: CanvassItemSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: CanvassItemInclude<ExtArgs> | null
-    /**
-     * The filter to search for the CanvassItem to update in case it exists.
-     */
-    where: CanvassItemWhereUniqueInput
-    /**
-     * In case the CanvassItem found by the `where` argument doesn't exist, create a new CanvassItem with this data.
-     */
-    create: XOR<CanvassItemCreateInput, CanvassItemUncheckedCreateInput>
-    /**
-     * In case the CanvassItem was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<CanvassItemUpdateInput, CanvassItemUncheckedUpdateInput>
-  }
-
-
-  /**
-   * CanvassItem delete
-   */
-  export type CanvassItemDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the CanvassItem
-     */
-    select?: CanvassItemSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: CanvassItemInclude<ExtArgs> | null
-    /**
-     * Filter which CanvassItem to delete.
-     */
-    where: CanvassItemWhereUniqueInput
-  }
-
-
-  /**
-   * CanvassItem deleteMany
-   */
-  export type CanvassItemDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which CanvassItems to delete
-     */
-    where?: CanvassItemWhereInput
-  }
-
-
-  /**
-   * CanvassItem without action
-   */
-  export type CanvassItemDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the CanvassItem
-     */
-    select?: CanvassItemSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: CanvassItemInclude<ExtArgs> | null
-  }
-
-
-
-  /**
-   * Model SupplierItem
-   */
-
-  export type AggregateSupplierItem = {
-    _count: SupplierItemCountAggregateOutputType | null
-    _avg: SupplierItemAvgAggregateOutputType | null
-    _sum: SupplierItemSumAggregateOutputType | null
-    _min: SupplierItemMinAggregateOutputType | null
-    _max: SupplierItemMaxAggregateOutputType | null
-  }
-
-  export type SupplierItemAvgAggregateOutputType = {
-    price: number | null
-  }
-
-  export type SupplierItemSumAggregateOutputType = {
-    price: number | null
-  }
-
-  export type SupplierItemMinAggregateOutputType = {
-    id: string | null
-    item_id: string | null
-    supplier_id: string | null
-    price: number | null
-    is_awarded: boolean | null
-    notes: string | null
-    created_at: Date | null
-    updated_at: Date | null
-    is_deleted: boolean | null
-  }
-
-  export type SupplierItemMaxAggregateOutputType = {
-    id: string | null
-    item_id: string | null
-    supplier_id: string | null
-    price: number | null
-    is_awarded: boolean | null
-    notes: string | null
-    created_at: Date | null
-    updated_at: Date | null
-    is_deleted: boolean | null
-  }
-
-  export type SupplierItemCountAggregateOutputType = {
-    id: number
-    item_id: number
-    supplier_id: number
-    price: number
-    is_awarded: number
-    notes: number
-    created_at: number
-    updated_at: number
-    is_deleted: number
-    _all: number
-  }
-
-
-  export type SupplierItemAvgAggregateInputType = {
-    price?: true
-  }
-
-  export type SupplierItemSumAggregateInputType = {
-    price?: true
-  }
-
-  export type SupplierItemMinAggregateInputType = {
-    id?: true
-    item_id?: true
-    supplier_id?: true
-    price?: true
-    is_awarded?: true
-    notes?: true
-    created_at?: true
-    updated_at?: true
-    is_deleted?: true
-  }
-
-  export type SupplierItemMaxAggregateInputType = {
-    id?: true
-    item_id?: true
-    supplier_id?: true
-    price?: true
-    is_awarded?: true
-    notes?: true
-    created_at?: true
-    updated_at?: true
-    is_deleted?: true
-  }
-
-  export type SupplierItemCountAggregateInputType = {
-    id?: true
-    item_id?: true
-    supplier_id?: true
-    price?: true
-    is_awarded?: true
-    notes?: true
-    created_at?: true
-    updated_at?: true
-    is_deleted?: true
-    _all?: true
-  }
-
-  export type SupplierItemAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which SupplierItem to aggregate.
-     */
-    where?: SupplierItemWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of SupplierItems to fetch.
-     */
-    orderBy?: SupplierItemOrderByWithRelationInput | SupplierItemOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: SupplierItemWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` SupplierItems from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` SupplierItems.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned SupplierItems
-    **/
-    _count?: true | SupplierItemCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: SupplierItemAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: SupplierItemSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: SupplierItemMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: SupplierItemMaxAggregateInputType
-  }
-
-  export type GetSupplierItemAggregateType<T extends SupplierItemAggregateArgs> = {
-        [P in keyof T & keyof AggregateSupplierItem]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateSupplierItem[P]>
-      : GetScalarType<T[P], AggregateSupplierItem[P]>
-  }
-
-
-
-
-  export type SupplierItemGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: SupplierItemWhereInput
-    orderBy?: SupplierItemOrderByWithAggregationInput | SupplierItemOrderByWithAggregationInput[]
-    by: SupplierItemScalarFieldEnum[] | SupplierItemScalarFieldEnum
-    having?: SupplierItemScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: SupplierItemCountAggregateInputType | true
-    _avg?: SupplierItemAvgAggregateInputType
-    _sum?: SupplierItemSumAggregateInputType
-    _min?: SupplierItemMinAggregateInputType
-    _max?: SupplierItemMaxAggregateInputType
-  }
-
-  export type SupplierItemGroupByOutputType = {
-    id: string
-    item_id: string
-    supplier_id: string
-    price: number
-    is_awarded: boolean
-    notes: string | null
-    created_at: Date
-    updated_at: Date
-    is_deleted: boolean
-    _count: SupplierItemCountAggregateOutputType | null
-    _avg: SupplierItemAvgAggregateOutputType | null
-    _sum: SupplierItemSumAggregateOutputType | null
-    _min: SupplierItemMinAggregateOutputType | null
-    _max: SupplierItemMaxAggregateOutputType | null
-  }
-
-  type GetSupplierItemGroupByPayload<T extends SupplierItemGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<SupplierItemGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof SupplierItemGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], SupplierItemGroupByOutputType[P]>
-            : GetScalarType<T[P], SupplierItemGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type SupplierItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    item_id?: boolean
-    supplier_id?: boolean
-    price?: boolean
-    is_awarded?: boolean
-    notes?: boolean
-    created_at?: boolean
-    updated_at?: boolean
-    is_deleted?: boolean
-    item?: boolean | ItemDefaultArgs<ExtArgs>
-    supplier?: boolean | SupplierDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["supplierItem"]>
-
-  export type SupplierItemSelectScalar = {
-    id?: boolean
-    item_id?: boolean
-    supplier_id?: boolean
-    price?: boolean
-    is_awarded?: boolean
-    notes?: boolean
-    created_at?: boolean
-    updated_at?: boolean
-    is_deleted?: boolean
-  }
-
-  export type SupplierItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    item?: boolean | ItemDefaultArgs<ExtArgs>
-    supplier?: boolean | SupplierDefaultArgs<ExtArgs>
-  }
-
-
-  export type $SupplierItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "SupplierItem"
-    objects: {
-      item: Prisma.$ItemPayload<ExtArgs>
-      supplier: Prisma.$SupplierPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      item_id: string
-      supplier_id: string
-      price: number
-      is_awarded: boolean
-      notes: string | null
-      created_at: Date
-      updated_at: Date
-      is_deleted: boolean
-    }, ExtArgs["result"]["supplierItem"]>
-    composites: {}
-  }
-
-
-  type SupplierItemGetPayload<S extends boolean | null | undefined | SupplierItemDefaultArgs> = $Result.GetResult<Prisma.$SupplierItemPayload, S>
-
-  type SupplierItemCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
-    Omit<SupplierItemFindManyArgs, 'select' | 'include' | 'distinct'> & {
-      select?: SupplierItemCountAggregateInputType | true
-    }
-
-  export interface SupplierItemDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SupplierItem'], meta: { name: 'SupplierItem' } }
-    /**
-     * Find zero or one SupplierItem that matches the filter.
-     * @param {SupplierItemFindUniqueArgs} args - Arguments to find a SupplierItem
-     * @example
-     * // Get one SupplierItem
-     * const supplierItem = await prisma.supplierItem.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findUnique<T extends SupplierItemFindUniqueArgs<ExtArgs>>(
-      args: SelectSubset<T, SupplierItemFindUniqueArgs<ExtArgs>>
-    ): Prisma__SupplierItemClient<$Result.GetResult<Prisma.$SupplierItemPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
-
-    /**
-     * Find one SupplierItem that matches the filter or throw an error  with `error.code='P2025'` 
-     *     if no matches were found.
-     * @param {SupplierItemFindUniqueOrThrowArgs} args - Arguments to find a SupplierItem
-     * @example
-     * // Get one SupplierItem
-     * const supplierItem = await prisma.supplierItem.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findUniqueOrThrow<T extends SupplierItemFindUniqueOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, SupplierItemFindUniqueOrThrowArgs<ExtArgs>>
-    ): Prisma__SupplierItemClient<$Result.GetResult<Prisma.$SupplierItemPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
-
-    /**
-     * Find the first SupplierItem that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SupplierItemFindFirstArgs} args - Arguments to find a SupplierItem
-     * @example
-     * // Get one SupplierItem
-     * const supplierItem = await prisma.supplierItem.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findFirst<T extends SupplierItemFindFirstArgs<ExtArgs>>(
-      args?: SelectSubset<T, SupplierItemFindFirstArgs<ExtArgs>>
-    ): Prisma__SupplierItemClient<$Result.GetResult<Prisma.$SupplierItemPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
-
-    /**
-     * Find the first SupplierItem that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SupplierItemFindFirstOrThrowArgs} args - Arguments to find a SupplierItem
-     * @example
-     * // Get one SupplierItem
-     * const supplierItem = await prisma.supplierItem.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findFirstOrThrow<T extends SupplierItemFindFirstOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, SupplierItemFindFirstOrThrowArgs<ExtArgs>>
-    ): Prisma__SupplierItemClient<$Result.GetResult<Prisma.$SupplierItemPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
-
-    /**
-     * Find zero or more SupplierItems that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SupplierItemFindManyArgs=} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all SupplierItems
-     * const supplierItems = await prisma.supplierItem.findMany()
-     * 
-     * // Get first 10 SupplierItems
-     * const supplierItems = await prisma.supplierItem.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const supplierItemWithIdOnly = await prisma.supplierItem.findMany({ select: { id: true } })
-     * 
-    **/
-    findMany<T extends SupplierItemFindManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, SupplierItemFindManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SupplierItemPayload<ExtArgs>, T, 'findMany'>>
-
-    /**
-     * Create a SupplierItem.
-     * @param {SupplierItemCreateArgs} args - Arguments to create a SupplierItem.
-     * @example
-     * // Create one SupplierItem
-     * const SupplierItem = await prisma.supplierItem.create({
-     *   data: {
-     *     // ... data to create a SupplierItem
-     *   }
-     * })
-     * 
-    **/
-    create<T extends SupplierItemCreateArgs<ExtArgs>>(
-      args: SelectSubset<T, SupplierItemCreateArgs<ExtArgs>>
-    ): Prisma__SupplierItemClient<$Result.GetResult<Prisma.$SupplierItemPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
-
-    /**
-     * Create many SupplierItems.
-     *     @param {SupplierItemCreateManyArgs} args - Arguments to create many SupplierItems.
-     *     @example
-     *     // Create many SupplierItems
-     *     const supplierItem = await prisma.supplierItem.createMany({
-     *       data: {
-     *         // ... provide data here
-     *       }
-     *     })
-     *     
-    **/
-    createMany<T extends SupplierItemCreateManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, SupplierItemCreateManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Delete a SupplierItem.
-     * @param {SupplierItemDeleteArgs} args - Arguments to delete one SupplierItem.
-     * @example
-     * // Delete one SupplierItem
-     * const SupplierItem = await prisma.supplierItem.delete({
-     *   where: {
-     *     // ... filter to delete one SupplierItem
-     *   }
-     * })
-     * 
-    **/
-    delete<T extends SupplierItemDeleteArgs<ExtArgs>>(
-      args: SelectSubset<T, SupplierItemDeleteArgs<ExtArgs>>
-    ): Prisma__SupplierItemClient<$Result.GetResult<Prisma.$SupplierItemPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
-
-    /**
-     * Update one SupplierItem.
-     * @param {SupplierItemUpdateArgs} args - Arguments to update one SupplierItem.
-     * @example
-     * // Update one SupplierItem
-     * const supplierItem = await prisma.supplierItem.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-    **/
-    update<T extends SupplierItemUpdateArgs<ExtArgs>>(
-      args: SelectSubset<T, SupplierItemUpdateArgs<ExtArgs>>
-    ): Prisma__SupplierItemClient<$Result.GetResult<Prisma.$SupplierItemPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
-
-    /**
-     * Delete zero or more SupplierItems.
-     * @param {SupplierItemDeleteManyArgs} args - Arguments to filter SupplierItems to delete.
-     * @example
-     * // Delete a few SupplierItems
-     * const { count } = await prisma.supplierItem.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-    **/
-    deleteMany<T extends SupplierItemDeleteManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, SupplierItemDeleteManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more SupplierItems.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SupplierItemUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many SupplierItems
-     * const supplierItem = await prisma.supplierItem.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-    **/
-    updateMany<T extends SupplierItemUpdateManyArgs<ExtArgs>>(
-      args: SelectSubset<T, SupplierItemUpdateManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create or update one SupplierItem.
-     * @param {SupplierItemUpsertArgs} args - Arguments to update or create a SupplierItem.
-     * @example
-     * // Update or create a SupplierItem
-     * const supplierItem = await prisma.supplierItem.upsert({
-     *   create: {
-     *     // ... data to create a SupplierItem
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the SupplierItem we want to update
-     *   }
-     * })
-    **/
-    upsert<T extends SupplierItemUpsertArgs<ExtArgs>>(
-      args: SelectSubset<T, SupplierItemUpsertArgs<ExtArgs>>
-    ): Prisma__SupplierItemClient<$Result.GetResult<Prisma.$SupplierItemPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
-
-    /**
-     * Count the number of SupplierItems.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SupplierItemCountArgs} args - Arguments to filter SupplierItems to count.
-     * @example
-     * // Count the number of SupplierItems
-     * const count = await prisma.supplierItem.count({
-     *   where: {
-     *     // ... the filter for the SupplierItems we want to count
-     *   }
-     * })
-    **/
-    count<T extends SupplierItemCountArgs>(
-      args?: Subset<T, SupplierItemCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], SupplierItemCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a SupplierItem.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SupplierItemAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends SupplierItemAggregateArgs>(args: Subset<T, SupplierItemAggregateArgs>): Prisma.PrismaPromise<GetSupplierItemAggregateType<T>>
-
-    /**
-     * Group by SupplierItem.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SupplierItemGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends SupplierItemGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: SupplierItemGroupByArgs['orderBy'] }
-        : { orderBy?: SupplierItemGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, SupplierItemGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSupplierItemGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the SupplierItem model
-   */
-  readonly fields: SupplierItemFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for SupplierItem.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__SupplierItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: 'PrismaPromise';
-
-    item<T extends ItemDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ItemDefaultArgs<ExtArgs>>): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
-
-    supplier<T extends SupplierDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SupplierDefaultArgs<ExtArgs>>): Prisma__SupplierClient<$Result.GetResult<Prisma.$SupplierPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
-
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
-  }
-
-
-
-  /**
-   * Fields of the SupplierItem model
-   */ 
-  interface SupplierItemFieldRefs {
-    readonly id: FieldRef<"SupplierItem", 'String'>
-    readonly item_id: FieldRef<"SupplierItem", 'String'>
-    readonly supplier_id: FieldRef<"SupplierItem", 'String'>
-    readonly price: FieldRef<"SupplierItem", 'Float'>
-    readonly is_awarded: FieldRef<"SupplierItem", 'Boolean'>
-    readonly notes: FieldRef<"SupplierItem", 'String'>
-    readonly created_at: FieldRef<"SupplierItem", 'DateTime'>
-    readonly updated_at: FieldRef<"SupplierItem", 'DateTime'>
-    readonly is_deleted: FieldRef<"SupplierItem", 'Boolean'>
-  }
-    
-
-  // Custom InputTypes
-
-  /**
-   * SupplierItem findUnique
-   */
-  export type SupplierItemFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SupplierItem
-     */
-    select?: SupplierItemSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: SupplierItemInclude<ExtArgs> | null
-    /**
-     * Filter, which SupplierItem to fetch.
-     */
-    where: SupplierItemWhereUniqueInput
-  }
-
-
-  /**
-   * SupplierItem findUniqueOrThrow
-   */
-  export type SupplierItemFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SupplierItem
-     */
-    select?: SupplierItemSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: SupplierItemInclude<ExtArgs> | null
-    /**
-     * Filter, which SupplierItem to fetch.
-     */
-    where: SupplierItemWhereUniqueInput
-  }
-
-
-  /**
-   * SupplierItem findFirst
-   */
-  export type SupplierItemFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SupplierItem
-     */
-    select?: SupplierItemSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: SupplierItemInclude<ExtArgs> | null
-    /**
-     * Filter, which SupplierItem to fetch.
-     */
-    where?: SupplierItemWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of SupplierItems to fetch.
-     */
-    orderBy?: SupplierItemOrderByWithRelationInput | SupplierItemOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for SupplierItems.
-     */
-    cursor?: SupplierItemWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` SupplierItems from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` SupplierItems.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of SupplierItems.
-     */
-    distinct?: SupplierItemScalarFieldEnum | SupplierItemScalarFieldEnum[]
-  }
-
-
-  /**
-   * SupplierItem findFirstOrThrow
-   */
-  export type SupplierItemFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SupplierItem
-     */
-    select?: SupplierItemSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: SupplierItemInclude<ExtArgs> | null
-    /**
-     * Filter, which SupplierItem to fetch.
-     */
-    where?: SupplierItemWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of SupplierItems to fetch.
-     */
-    orderBy?: SupplierItemOrderByWithRelationInput | SupplierItemOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for SupplierItems.
-     */
-    cursor?: SupplierItemWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` SupplierItems from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` SupplierItems.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of SupplierItems.
-     */
-    distinct?: SupplierItemScalarFieldEnum | SupplierItemScalarFieldEnum[]
-  }
-
-
-  /**
-   * SupplierItem findMany
-   */
-  export type SupplierItemFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SupplierItem
-     */
-    select?: SupplierItemSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: SupplierItemInclude<ExtArgs> | null
-    /**
-     * Filter, which SupplierItems to fetch.
-     */
-    where?: SupplierItemWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of SupplierItems to fetch.
-     */
-    orderBy?: SupplierItemOrderByWithRelationInput | SupplierItemOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing SupplierItems.
-     */
-    cursor?: SupplierItemWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` SupplierItems from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` SupplierItems.
-     */
-    skip?: number
-    distinct?: SupplierItemScalarFieldEnum | SupplierItemScalarFieldEnum[]
-  }
-
-
-  /**
-   * SupplierItem create
-   */
-  export type SupplierItemCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SupplierItem
-     */
-    select?: SupplierItemSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: SupplierItemInclude<ExtArgs> | null
-    /**
-     * The data needed to create a SupplierItem.
-     */
-    data: XOR<SupplierItemCreateInput, SupplierItemUncheckedCreateInput>
-  }
-
-
-  /**
-   * SupplierItem createMany
-   */
-  export type SupplierItemCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many SupplierItems.
-     */
-    data: SupplierItemCreateManyInput | SupplierItemCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-
-  /**
-   * SupplierItem update
-   */
-  export type SupplierItemUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SupplierItem
-     */
-    select?: SupplierItemSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: SupplierItemInclude<ExtArgs> | null
-    /**
-     * The data needed to update a SupplierItem.
-     */
-    data: XOR<SupplierItemUpdateInput, SupplierItemUncheckedUpdateInput>
-    /**
-     * Choose, which SupplierItem to update.
-     */
-    where: SupplierItemWhereUniqueInput
-  }
-
-
-  /**
-   * SupplierItem updateMany
-   */
-  export type SupplierItemUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update SupplierItems.
-     */
-    data: XOR<SupplierItemUpdateManyMutationInput, SupplierItemUncheckedUpdateManyInput>
-    /**
-     * Filter which SupplierItems to update
-     */
-    where?: SupplierItemWhereInput
-  }
-
-
-  /**
-   * SupplierItem upsert
-   */
-  export type SupplierItemUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SupplierItem
-     */
-    select?: SupplierItemSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: SupplierItemInclude<ExtArgs> | null
-    /**
-     * The filter to search for the SupplierItem to update in case it exists.
-     */
-    where: SupplierItemWhereUniqueInput
-    /**
-     * In case the SupplierItem found by the `where` argument doesn't exist, create a new SupplierItem with this data.
-     */
-    create: XOR<SupplierItemCreateInput, SupplierItemUncheckedCreateInput>
-    /**
-     * In case the SupplierItem was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<SupplierItemUpdateInput, SupplierItemUncheckedUpdateInput>
-  }
-
-
-  /**
-   * SupplierItem delete
-   */
-  export type SupplierItemDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SupplierItem
-     */
-    select?: SupplierItemSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: SupplierItemInclude<ExtArgs> | null
-    /**
-     * Filter which SupplierItem to delete.
-     */
-    where: SupplierItemWhereUniqueInput
-  }
-
-
-  /**
-   * SupplierItem deleteMany
-   */
-  export type SupplierItemDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which SupplierItems to delete
-     */
-    where?: SupplierItemWhereInput
-  }
-
-
-  /**
-   * SupplierItem without action
-   */
-  export type SupplierItemDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SupplierItem
-     */
-    select?: SupplierItemSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: SupplierItemInclude<ExtArgs> | null
   }
 
 
@@ -19235,6 +17213,1007 @@ export namespace Prisma {
 
 
   /**
+   * Model MEQSSupplierItem
+   */
+
+  export type AggregateMEQSSupplierItem = {
+    _count: MEQSSupplierItemCountAggregateOutputType | null
+    _avg: MEQSSupplierItemAvgAggregateOutputType | null
+    _sum: MEQSSupplierItemSumAggregateOutputType | null
+    _min: MEQSSupplierItemMinAggregateOutputType | null
+    _max: MEQSSupplierItemMaxAggregateOutputType | null
+  }
+
+  export type MEQSSupplierItemAvgAggregateOutputType = {
+    price: number | null
+  }
+
+  export type MEQSSupplierItemSumAggregateOutputType = {
+    price: number | null
+  }
+
+  export type MEQSSupplierItemMinAggregateOutputType = {
+    id: string | null
+    canvass_item_id: string | null
+    meqs_supplier_id: string | null
+    price: number | null
+    is_awarded: boolean | null
+    notes: string | null
+    created_at: Date | null
+    updated_at: Date | null
+    is_deleted: boolean | null
+  }
+
+  export type MEQSSupplierItemMaxAggregateOutputType = {
+    id: string | null
+    canvass_item_id: string | null
+    meqs_supplier_id: string | null
+    price: number | null
+    is_awarded: boolean | null
+    notes: string | null
+    created_at: Date | null
+    updated_at: Date | null
+    is_deleted: boolean | null
+  }
+
+  export type MEQSSupplierItemCountAggregateOutputType = {
+    id: number
+    canvass_item_id: number
+    meqs_supplier_id: number
+    price: number
+    is_awarded: number
+    notes: number
+    created_at: number
+    updated_at: number
+    is_deleted: number
+    _all: number
+  }
+
+
+  export type MEQSSupplierItemAvgAggregateInputType = {
+    price?: true
+  }
+
+  export type MEQSSupplierItemSumAggregateInputType = {
+    price?: true
+  }
+
+  export type MEQSSupplierItemMinAggregateInputType = {
+    id?: true
+    canvass_item_id?: true
+    meqs_supplier_id?: true
+    price?: true
+    is_awarded?: true
+    notes?: true
+    created_at?: true
+    updated_at?: true
+    is_deleted?: true
+  }
+
+  export type MEQSSupplierItemMaxAggregateInputType = {
+    id?: true
+    canvass_item_id?: true
+    meqs_supplier_id?: true
+    price?: true
+    is_awarded?: true
+    notes?: true
+    created_at?: true
+    updated_at?: true
+    is_deleted?: true
+  }
+
+  export type MEQSSupplierItemCountAggregateInputType = {
+    id?: true
+    canvass_item_id?: true
+    meqs_supplier_id?: true
+    price?: true
+    is_awarded?: true
+    notes?: true
+    created_at?: true
+    updated_at?: true
+    is_deleted?: true
+    _all?: true
+  }
+
+  export type MEQSSupplierItemAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MEQSSupplierItem to aggregate.
+     */
+    where?: MEQSSupplierItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MEQSSupplierItems to fetch.
+     */
+    orderBy?: MEQSSupplierItemOrderByWithRelationInput | MEQSSupplierItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MEQSSupplierItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MEQSSupplierItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MEQSSupplierItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned MEQSSupplierItems
+    **/
+    _count?: true | MEQSSupplierItemCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: MEQSSupplierItemAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: MEQSSupplierItemSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MEQSSupplierItemMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MEQSSupplierItemMaxAggregateInputType
+  }
+
+  export type GetMEQSSupplierItemAggregateType<T extends MEQSSupplierItemAggregateArgs> = {
+        [P in keyof T & keyof AggregateMEQSSupplierItem]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMEQSSupplierItem[P]>
+      : GetScalarType<T[P], AggregateMEQSSupplierItem[P]>
+  }
+
+
+
+
+  export type MEQSSupplierItemGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MEQSSupplierItemWhereInput
+    orderBy?: MEQSSupplierItemOrderByWithAggregationInput | MEQSSupplierItemOrderByWithAggregationInput[]
+    by: MEQSSupplierItemScalarFieldEnum[] | MEQSSupplierItemScalarFieldEnum
+    having?: MEQSSupplierItemScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MEQSSupplierItemCountAggregateInputType | true
+    _avg?: MEQSSupplierItemAvgAggregateInputType
+    _sum?: MEQSSupplierItemSumAggregateInputType
+    _min?: MEQSSupplierItemMinAggregateInputType
+    _max?: MEQSSupplierItemMaxAggregateInputType
+  }
+
+  export type MEQSSupplierItemGroupByOutputType = {
+    id: string
+    canvass_item_id: string
+    meqs_supplier_id: string
+    price: number
+    is_awarded: boolean
+    notes: string | null
+    created_at: Date
+    updated_at: Date
+    is_deleted: boolean
+    _count: MEQSSupplierItemCountAggregateOutputType | null
+    _avg: MEQSSupplierItemAvgAggregateOutputType | null
+    _sum: MEQSSupplierItemSumAggregateOutputType | null
+    _min: MEQSSupplierItemMinAggregateOutputType | null
+    _max: MEQSSupplierItemMaxAggregateOutputType | null
+  }
+
+  type GetMEQSSupplierItemGroupByPayload<T extends MEQSSupplierItemGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MEQSSupplierItemGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MEQSSupplierItemGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MEQSSupplierItemGroupByOutputType[P]>
+            : GetScalarType<T[P], MEQSSupplierItemGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MEQSSupplierItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    canvass_item_id?: boolean
+    meqs_supplier_id?: boolean
+    price?: boolean
+    is_awarded?: boolean
+    notes?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    is_deleted?: boolean
+    canvass_item?: boolean | CanvassItemDefaultArgs<ExtArgs>
+    meqs_supplier?: boolean | SupplierDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["mEQSSupplierItem"]>
+
+  export type MEQSSupplierItemSelectScalar = {
+    id?: boolean
+    canvass_item_id?: boolean
+    meqs_supplier_id?: boolean
+    price?: boolean
+    is_awarded?: boolean
+    notes?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    is_deleted?: boolean
+  }
+
+  export type MEQSSupplierItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    canvass_item?: boolean | CanvassItemDefaultArgs<ExtArgs>
+    meqs_supplier?: boolean | SupplierDefaultArgs<ExtArgs>
+  }
+
+
+  export type $MEQSSupplierItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "MEQSSupplierItem"
+    objects: {
+      canvass_item: Prisma.$CanvassItemPayload<ExtArgs>
+      meqs_supplier: Prisma.$SupplierPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      canvass_item_id: string
+      meqs_supplier_id: string
+      price: number
+      is_awarded: boolean
+      notes: string | null
+      created_at: Date
+      updated_at: Date
+      is_deleted: boolean
+    }, ExtArgs["result"]["mEQSSupplierItem"]>
+    composites: {}
+  }
+
+
+  type MEQSSupplierItemGetPayload<S extends boolean | null | undefined | MEQSSupplierItemDefaultArgs> = $Result.GetResult<Prisma.$MEQSSupplierItemPayload, S>
+
+  type MEQSSupplierItemCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<MEQSSupplierItemFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: MEQSSupplierItemCountAggregateInputType | true
+    }
+
+  export interface MEQSSupplierItemDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MEQSSupplierItem'], meta: { name: 'MEQSSupplierItem' } }
+    /**
+     * Find zero or one MEQSSupplierItem that matches the filter.
+     * @param {MEQSSupplierItemFindUniqueArgs} args - Arguments to find a MEQSSupplierItem
+     * @example
+     * // Get one MEQSSupplierItem
+     * const mEQSSupplierItem = await prisma.mEQSSupplierItem.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends MEQSSupplierItemFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, MEQSSupplierItemFindUniqueArgs<ExtArgs>>
+    ): Prisma__MEQSSupplierItemClient<$Result.GetResult<Prisma.$MEQSSupplierItemPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one MEQSSupplierItem that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {MEQSSupplierItemFindUniqueOrThrowArgs} args - Arguments to find a MEQSSupplierItem
+     * @example
+     * // Get one MEQSSupplierItem
+     * const mEQSSupplierItem = await prisma.mEQSSupplierItem.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends MEQSSupplierItemFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, MEQSSupplierItemFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__MEQSSupplierItemClient<$Result.GetResult<Prisma.$MEQSSupplierItemPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first MEQSSupplierItem that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MEQSSupplierItemFindFirstArgs} args - Arguments to find a MEQSSupplierItem
+     * @example
+     * // Get one MEQSSupplierItem
+     * const mEQSSupplierItem = await prisma.mEQSSupplierItem.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends MEQSSupplierItemFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, MEQSSupplierItemFindFirstArgs<ExtArgs>>
+    ): Prisma__MEQSSupplierItemClient<$Result.GetResult<Prisma.$MEQSSupplierItemPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first MEQSSupplierItem that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MEQSSupplierItemFindFirstOrThrowArgs} args - Arguments to find a MEQSSupplierItem
+     * @example
+     * // Get one MEQSSupplierItem
+     * const mEQSSupplierItem = await prisma.mEQSSupplierItem.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends MEQSSupplierItemFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, MEQSSupplierItemFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__MEQSSupplierItemClient<$Result.GetResult<Prisma.$MEQSSupplierItemPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more MEQSSupplierItems that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MEQSSupplierItemFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all MEQSSupplierItems
+     * const mEQSSupplierItems = await prisma.mEQSSupplierItem.findMany()
+     * 
+     * // Get first 10 MEQSSupplierItems
+     * const mEQSSupplierItems = await prisma.mEQSSupplierItem.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const mEQSSupplierItemWithIdOnly = await prisma.mEQSSupplierItem.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends MEQSSupplierItemFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, MEQSSupplierItemFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MEQSSupplierItemPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a MEQSSupplierItem.
+     * @param {MEQSSupplierItemCreateArgs} args - Arguments to create a MEQSSupplierItem.
+     * @example
+     * // Create one MEQSSupplierItem
+     * const MEQSSupplierItem = await prisma.mEQSSupplierItem.create({
+     *   data: {
+     *     // ... data to create a MEQSSupplierItem
+     *   }
+     * })
+     * 
+    **/
+    create<T extends MEQSSupplierItemCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, MEQSSupplierItemCreateArgs<ExtArgs>>
+    ): Prisma__MEQSSupplierItemClient<$Result.GetResult<Prisma.$MEQSSupplierItemPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many MEQSSupplierItems.
+     *     @param {MEQSSupplierItemCreateManyArgs} args - Arguments to create many MEQSSupplierItems.
+     *     @example
+     *     // Create many MEQSSupplierItems
+     *     const mEQSSupplierItem = await prisma.mEQSSupplierItem.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends MEQSSupplierItemCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, MEQSSupplierItemCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a MEQSSupplierItem.
+     * @param {MEQSSupplierItemDeleteArgs} args - Arguments to delete one MEQSSupplierItem.
+     * @example
+     * // Delete one MEQSSupplierItem
+     * const MEQSSupplierItem = await prisma.mEQSSupplierItem.delete({
+     *   where: {
+     *     // ... filter to delete one MEQSSupplierItem
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends MEQSSupplierItemDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, MEQSSupplierItemDeleteArgs<ExtArgs>>
+    ): Prisma__MEQSSupplierItemClient<$Result.GetResult<Prisma.$MEQSSupplierItemPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one MEQSSupplierItem.
+     * @param {MEQSSupplierItemUpdateArgs} args - Arguments to update one MEQSSupplierItem.
+     * @example
+     * // Update one MEQSSupplierItem
+     * const mEQSSupplierItem = await prisma.mEQSSupplierItem.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends MEQSSupplierItemUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, MEQSSupplierItemUpdateArgs<ExtArgs>>
+    ): Prisma__MEQSSupplierItemClient<$Result.GetResult<Prisma.$MEQSSupplierItemPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more MEQSSupplierItems.
+     * @param {MEQSSupplierItemDeleteManyArgs} args - Arguments to filter MEQSSupplierItems to delete.
+     * @example
+     * // Delete a few MEQSSupplierItems
+     * const { count } = await prisma.mEQSSupplierItem.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends MEQSSupplierItemDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, MEQSSupplierItemDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MEQSSupplierItems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MEQSSupplierItemUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many MEQSSupplierItems
+     * const mEQSSupplierItem = await prisma.mEQSSupplierItem.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends MEQSSupplierItemUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, MEQSSupplierItemUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one MEQSSupplierItem.
+     * @param {MEQSSupplierItemUpsertArgs} args - Arguments to update or create a MEQSSupplierItem.
+     * @example
+     * // Update or create a MEQSSupplierItem
+     * const mEQSSupplierItem = await prisma.mEQSSupplierItem.upsert({
+     *   create: {
+     *     // ... data to create a MEQSSupplierItem
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the MEQSSupplierItem we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends MEQSSupplierItemUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, MEQSSupplierItemUpsertArgs<ExtArgs>>
+    ): Prisma__MEQSSupplierItemClient<$Result.GetResult<Prisma.$MEQSSupplierItemPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of MEQSSupplierItems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MEQSSupplierItemCountArgs} args - Arguments to filter MEQSSupplierItems to count.
+     * @example
+     * // Count the number of MEQSSupplierItems
+     * const count = await prisma.mEQSSupplierItem.count({
+     *   where: {
+     *     // ... the filter for the MEQSSupplierItems we want to count
+     *   }
+     * })
+    **/
+    count<T extends MEQSSupplierItemCountArgs>(
+      args?: Subset<T, MEQSSupplierItemCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MEQSSupplierItemCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a MEQSSupplierItem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MEQSSupplierItemAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MEQSSupplierItemAggregateArgs>(args: Subset<T, MEQSSupplierItemAggregateArgs>): Prisma.PrismaPromise<GetMEQSSupplierItemAggregateType<T>>
+
+    /**
+     * Group by MEQSSupplierItem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MEQSSupplierItemGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MEQSSupplierItemGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MEQSSupplierItemGroupByArgs['orderBy'] }
+        : { orderBy?: MEQSSupplierItemGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MEQSSupplierItemGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMEQSSupplierItemGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the MEQSSupplierItem model
+   */
+  readonly fields: MEQSSupplierItemFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for MEQSSupplierItem.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MEQSSupplierItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+    canvass_item<T extends CanvassItemDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CanvassItemDefaultArgs<ExtArgs>>): Prisma__CanvassItemClient<$Result.GetResult<Prisma.$CanvassItemPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    meqs_supplier<T extends SupplierDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SupplierDefaultArgs<ExtArgs>>): Prisma__SupplierClient<$Result.GetResult<Prisma.$SupplierPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the MEQSSupplierItem model
+   */ 
+  interface MEQSSupplierItemFieldRefs {
+    readonly id: FieldRef<"MEQSSupplierItem", 'String'>
+    readonly canvass_item_id: FieldRef<"MEQSSupplierItem", 'String'>
+    readonly meqs_supplier_id: FieldRef<"MEQSSupplierItem", 'String'>
+    readonly price: FieldRef<"MEQSSupplierItem", 'Float'>
+    readonly is_awarded: FieldRef<"MEQSSupplierItem", 'Boolean'>
+    readonly notes: FieldRef<"MEQSSupplierItem", 'String'>
+    readonly created_at: FieldRef<"MEQSSupplierItem", 'DateTime'>
+    readonly updated_at: FieldRef<"MEQSSupplierItem", 'DateTime'>
+    readonly is_deleted: FieldRef<"MEQSSupplierItem", 'Boolean'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * MEQSSupplierItem findUnique
+   */
+  export type MEQSSupplierItemFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MEQSSupplierItem
+     */
+    select?: MEQSSupplierItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: MEQSSupplierItemInclude<ExtArgs> | null
+    /**
+     * Filter, which MEQSSupplierItem to fetch.
+     */
+    where: MEQSSupplierItemWhereUniqueInput
+  }
+
+
+  /**
+   * MEQSSupplierItem findUniqueOrThrow
+   */
+  export type MEQSSupplierItemFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MEQSSupplierItem
+     */
+    select?: MEQSSupplierItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: MEQSSupplierItemInclude<ExtArgs> | null
+    /**
+     * Filter, which MEQSSupplierItem to fetch.
+     */
+    where: MEQSSupplierItemWhereUniqueInput
+  }
+
+
+  /**
+   * MEQSSupplierItem findFirst
+   */
+  export type MEQSSupplierItemFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MEQSSupplierItem
+     */
+    select?: MEQSSupplierItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: MEQSSupplierItemInclude<ExtArgs> | null
+    /**
+     * Filter, which MEQSSupplierItem to fetch.
+     */
+    where?: MEQSSupplierItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MEQSSupplierItems to fetch.
+     */
+    orderBy?: MEQSSupplierItemOrderByWithRelationInput | MEQSSupplierItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MEQSSupplierItems.
+     */
+    cursor?: MEQSSupplierItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MEQSSupplierItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MEQSSupplierItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MEQSSupplierItems.
+     */
+    distinct?: MEQSSupplierItemScalarFieldEnum | MEQSSupplierItemScalarFieldEnum[]
+  }
+
+
+  /**
+   * MEQSSupplierItem findFirstOrThrow
+   */
+  export type MEQSSupplierItemFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MEQSSupplierItem
+     */
+    select?: MEQSSupplierItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: MEQSSupplierItemInclude<ExtArgs> | null
+    /**
+     * Filter, which MEQSSupplierItem to fetch.
+     */
+    where?: MEQSSupplierItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MEQSSupplierItems to fetch.
+     */
+    orderBy?: MEQSSupplierItemOrderByWithRelationInput | MEQSSupplierItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MEQSSupplierItems.
+     */
+    cursor?: MEQSSupplierItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MEQSSupplierItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MEQSSupplierItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MEQSSupplierItems.
+     */
+    distinct?: MEQSSupplierItemScalarFieldEnum | MEQSSupplierItemScalarFieldEnum[]
+  }
+
+
+  /**
+   * MEQSSupplierItem findMany
+   */
+  export type MEQSSupplierItemFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MEQSSupplierItem
+     */
+    select?: MEQSSupplierItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: MEQSSupplierItemInclude<ExtArgs> | null
+    /**
+     * Filter, which MEQSSupplierItems to fetch.
+     */
+    where?: MEQSSupplierItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MEQSSupplierItems to fetch.
+     */
+    orderBy?: MEQSSupplierItemOrderByWithRelationInput | MEQSSupplierItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing MEQSSupplierItems.
+     */
+    cursor?: MEQSSupplierItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MEQSSupplierItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MEQSSupplierItems.
+     */
+    skip?: number
+    distinct?: MEQSSupplierItemScalarFieldEnum | MEQSSupplierItemScalarFieldEnum[]
+  }
+
+
+  /**
+   * MEQSSupplierItem create
+   */
+  export type MEQSSupplierItemCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MEQSSupplierItem
+     */
+    select?: MEQSSupplierItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: MEQSSupplierItemInclude<ExtArgs> | null
+    /**
+     * The data needed to create a MEQSSupplierItem.
+     */
+    data: XOR<MEQSSupplierItemCreateInput, MEQSSupplierItemUncheckedCreateInput>
+  }
+
+
+  /**
+   * MEQSSupplierItem createMany
+   */
+  export type MEQSSupplierItemCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many MEQSSupplierItems.
+     */
+    data: MEQSSupplierItemCreateManyInput | MEQSSupplierItemCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * MEQSSupplierItem update
+   */
+  export type MEQSSupplierItemUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MEQSSupplierItem
+     */
+    select?: MEQSSupplierItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: MEQSSupplierItemInclude<ExtArgs> | null
+    /**
+     * The data needed to update a MEQSSupplierItem.
+     */
+    data: XOR<MEQSSupplierItemUpdateInput, MEQSSupplierItemUncheckedUpdateInput>
+    /**
+     * Choose, which MEQSSupplierItem to update.
+     */
+    where: MEQSSupplierItemWhereUniqueInput
+  }
+
+
+  /**
+   * MEQSSupplierItem updateMany
+   */
+  export type MEQSSupplierItemUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update MEQSSupplierItems.
+     */
+    data: XOR<MEQSSupplierItemUpdateManyMutationInput, MEQSSupplierItemUncheckedUpdateManyInput>
+    /**
+     * Filter which MEQSSupplierItems to update
+     */
+    where?: MEQSSupplierItemWhereInput
+  }
+
+
+  /**
+   * MEQSSupplierItem upsert
+   */
+  export type MEQSSupplierItemUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MEQSSupplierItem
+     */
+    select?: MEQSSupplierItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: MEQSSupplierItemInclude<ExtArgs> | null
+    /**
+     * The filter to search for the MEQSSupplierItem to update in case it exists.
+     */
+    where: MEQSSupplierItemWhereUniqueInput
+    /**
+     * In case the MEQSSupplierItem found by the `where` argument doesn't exist, create a new MEQSSupplierItem with this data.
+     */
+    create: XOR<MEQSSupplierItemCreateInput, MEQSSupplierItemUncheckedCreateInput>
+    /**
+     * In case the MEQSSupplierItem was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MEQSSupplierItemUpdateInput, MEQSSupplierItemUncheckedUpdateInput>
+  }
+
+
+  /**
+   * MEQSSupplierItem delete
+   */
+  export type MEQSSupplierItemDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MEQSSupplierItem
+     */
+    select?: MEQSSupplierItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: MEQSSupplierItemInclude<ExtArgs> | null
+    /**
+     * Filter which MEQSSupplierItem to delete.
+     */
+    where: MEQSSupplierItemWhereUniqueInput
+  }
+
+
+  /**
+   * MEQSSupplierItem deleteMany
+   */
+  export type MEQSSupplierItemDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MEQSSupplierItems to delete
+     */
+    where?: MEQSSupplierItemWhereInput
+  }
+
+
+  /**
+   * MEQSSupplierItem without action
+   */
+  export type MEQSSupplierItemDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MEQSSupplierItem
+     */
+    select?: MEQSSupplierItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: MEQSSupplierItemInclude<ExtArgs> | null
+  }
+
+
+
+  /**
    * Model MEQSSupplierAttachment
    */
 
@@ -23313,8 +22292,9 @@ export namespace Prisma {
   export type VehicleScalarFieldEnum = (typeof VehicleScalarFieldEnum)[keyof typeof VehicleScalarFieldEnum]
 
 
-  export const ItemScalarFieldEnum: {
+  export const CanvassItemScalarFieldEnum: {
     id: 'id',
+    canvass_id: 'canvass_id',
     description: 'description',
     brand_id: 'brand_id',
     unit_id: 'unit_id',
@@ -23324,7 +22304,7 @@ export namespace Prisma {
     is_deleted: 'is_deleted'
   };
 
-  export type ItemScalarFieldEnum = (typeof ItemScalarFieldEnum)[keyof typeof ItemScalarFieldEnum]
+  export type CanvassItemScalarFieldEnum = (typeof CanvassItemScalarFieldEnum)[keyof typeof CanvassItemScalarFieldEnum]
 
 
   export const CanvassScalarFieldEnum: {
@@ -23341,33 +22321,6 @@ export namespace Prisma {
   };
 
   export type CanvassScalarFieldEnum = (typeof CanvassScalarFieldEnum)[keyof typeof CanvassScalarFieldEnum]
-
-
-  export const CanvassItemScalarFieldEnum: {
-    id: 'id',
-    canvass_id: 'canvass_id',
-    item_id: 'item_id',
-    created_at: 'created_at',
-    updated_at: 'updated_at',
-    is_deleted: 'is_deleted'
-  };
-
-  export type CanvassItemScalarFieldEnum = (typeof CanvassItemScalarFieldEnum)[keyof typeof CanvassItemScalarFieldEnum]
-
-
-  export const SupplierItemScalarFieldEnum: {
-    id: 'id',
-    item_id: 'item_id',
-    supplier_id: 'supplier_id',
-    price: 'price',
-    is_awarded: 'is_awarded',
-    notes: 'notes',
-    created_at: 'created_at',
-    updated_at: 'updated_at',
-    is_deleted: 'is_deleted'
-  };
-
-  export type SupplierItemScalarFieldEnum = (typeof SupplierItemScalarFieldEnum)[keyof typeof SupplierItemScalarFieldEnum]
 
 
   export const JOScalarFieldEnum: {
@@ -23512,6 +22465,21 @@ export namespace Prisma {
   };
 
   export type MEQSSupplierScalarFieldEnum = (typeof MEQSSupplierScalarFieldEnum)[keyof typeof MEQSSupplierScalarFieldEnum]
+
+
+  export const MEQSSupplierItemScalarFieldEnum: {
+    id: 'id',
+    canvass_item_id: 'canvass_item_id',
+    meqs_supplier_id: 'meqs_supplier_id',
+    price: 'price',
+    is_awarded: 'is_awarded',
+    notes: 'notes',
+    created_at: 'created_at',
+    updated_at: 'updated_at',
+    is_deleted: 'is_deleted'
+  };
+
+  export type MEQSSupplierItemScalarFieldEnum = (typeof MEQSSupplierItemScalarFieldEnum)[keyof typeof MEQSSupplierItemScalarFieldEnum]
 
 
   export const MEQSSupplierAttachmentScalarFieldEnum: {
@@ -23683,7 +22651,7 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"Supplier"> | Date | string
     is_deleted?: BoolFilter<"Supplier"> | boolean
     MEQSSupplier?: MEQSSupplierListRelationFilter
-    supplier_items?: SupplierItemListRelationFilter
+    meqs_supplier_items?: MEQSSupplierItemListRelationFilter
   }
 
   export type SupplierOrderByWithRelationInput = {
@@ -23694,7 +22662,7 @@ export namespace Prisma {
     updated_at?: SortOrder
     is_deleted?: SortOrder
     MEQSSupplier?: MEQSSupplierOrderByRelationAggregateInput
-    supplier_items?: SupplierItemOrderByRelationAggregateInput
+    meqs_supplier_items?: MEQSSupplierItemOrderByRelationAggregateInput
   }
 
   export type SupplierWhereUniqueInput = Prisma.AtLeast<{
@@ -23708,7 +22676,7 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"Supplier"> | Date | string
     is_deleted?: BoolFilter<"Supplier"> | boolean
     MEQSSupplier?: MEQSSupplierListRelationFilter
-    supplier_items?: SupplierItemListRelationFilter
+    meqs_supplier_items?: MEQSSupplierItemListRelationFilter
   }, "id">
 
   export type SupplierOrderByWithAggregationInput = {
@@ -23744,7 +22712,7 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"Unit"> | Date | string
     updated_at?: DateTimeFilter<"Unit"> | Date | string
     is_deleted?: BoolFilter<"Unit"> | boolean
-    items?: ItemListRelationFilter
+    canvass_items?: CanvassItemListRelationFilter
   }
 
   export type UnitOrderByWithRelationInput = {
@@ -23753,7 +22721,7 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
-    items?: ItemOrderByRelationAggregateInput
+    canvass_items?: CanvassItemOrderByRelationAggregateInput
   }
 
   export type UnitWhereUniqueInput = Prisma.AtLeast<{
@@ -23765,7 +22733,7 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"Unit"> | Date | string
     updated_at?: DateTimeFilter<"Unit"> | Date | string
     is_deleted?: BoolFilter<"Unit"> | boolean
-    items?: ItemListRelationFilter
+    canvass_items?: CanvassItemListRelationFilter
   }, "id">
 
   export type UnitOrderByWithAggregationInput = {
@@ -23799,7 +22767,7 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"Brand"> | Date | string
     updated_at?: DateTimeFilter<"Brand"> | Date | string
     is_deleted?: BoolFilter<"Brand"> | boolean
-    items?: ItemListRelationFilter
+    canvass_items?: CanvassItemListRelationFilter
   }
 
   export type BrandOrderByWithRelationInput = {
@@ -23808,7 +22776,7 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
-    items?: ItemOrderByRelationAggregateInput
+    canvass_items?: CanvassItemOrderByRelationAggregateInput
   }
 
   export type BrandWhereUniqueInput = Prisma.AtLeast<{
@@ -23820,7 +22788,7 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"Brand"> | Date | string
     updated_at?: DateTimeFilter<"Brand"> | Date | string
     is_deleted?: BoolFilter<"Brand"> | boolean
-    items?: ItemListRelationFilter
+    canvass_items?: CanvassItemListRelationFilter
   }, "id">
 
   export type BrandOrderByWithAggregationInput = {
@@ -23905,26 +22873,28 @@ export namespace Prisma {
     is_deleted?: BoolWithAggregatesFilter<"Vehicle"> | boolean
   }
 
-  export type ItemWhereInput = {
-    AND?: ItemWhereInput | ItemWhereInput[]
-    OR?: ItemWhereInput[]
-    NOT?: ItemWhereInput | ItemWhereInput[]
-    id?: StringFilter<"Item"> | string
-    description?: StringFilter<"Item"> | string
-    brand_id?: StringNullableFilter<"Item"> | string | null
-    unit_id?: StringFilter<"Item"> | string
-    quantity?: IntFilter<"Item"> | number
-    created_at?: DateTimeFilter<"Item"> | Date | string
-    updated_at?: DateTimeFilter<"Item"> | Date | string
-    is_deleted?: BoolFilter<"Item"> | boolean
-    canvass_item?: XOR<CanvassItemNullableRelationFilter, CanvassItemWhereInput> | null
+  export type CanvassItemWhereInput = {
+    AND?: CanvassItemWhereInput | CanvassItemWhereInput[]
+    OR?: CanvassItemWhereInput[]
+    NOT?: CanvassItemWhereInput | CanvassItemWhereInput[]
+    id?: StringFilter<"CanvassItem"> | string
+    canvass_id?: StringFilter<"CanvassItem"> | string
+    description?: StringFilter<"CanvassItem"> | string
+    brand_id?: StringNullableFilter<"CanvassItem"> | string | null
+    unit_id?: StringFilter<"CanvassItem"> | string
+    quantity?: IntFilter<"CanvassItem"> | number
+    created_at?: DateTimeFilter<"CanvassItem"> | Date | string
+    updated_at?: DateTimeFilter<"CanvassItem"> | Date | string
+    is_deleted?: BoolFilter<"CanvassItem"> | boolean
+    canvass?: XOR<CanvassRelationFilter, CanvassWhereInput>
     brand?: XOR<BrandNullableRelationFilter, BrandWhereInput> | null
     unit?: XOR<UnitRelationFilter, UnitWhereInput>
-    supplier_items?: SupplierItemListRelationFilter
+    meqs_supplier_items?: MEQSSupplierItemListRelationFilter
   }
 
-  export type ItemOrderByWithRelationInput = {
+  export type CanvassItemOrderByWithRelationInput = {
     id?: SortOrder
+    canvass_id?: SortOrder
     description?: SortOrder
     brand_id?: SortOrderInput | SortOrder
     unit_id?: SortOrder
@@ -23932,32 +22902,34 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
-    canvass_item?: CanvassItemOrderByWithRelationInput
+    canvass?: CanvassOrderByWithRelationInput
     brand?: BrandOrderByWithRelationInput
     unit?: UnitOrderByWithRelationInput
-    supplier_items?: SupplierItemOrderByRelationAggregateInput
+    meqs_supplier_items?: MEQSSupplierItemOrderByRelationAggregateInput
   }
 
-  export type ItemWhereUniqueInput = Prisma.AtLeast<{
+  export type CanvassItemWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    AND?: ItemWhereInput | ItemWhereInput[]
-    OR?: ItemWhereInput[]
-    NOT?: ItemWhereInput | ItemWhereInput[]
-    description?: StringFilter<"Item"> | string
-    brand_id?: StringNullableFilter<"Item"> | string | null
-    unit_id?: StringFilter<"Item"> | string
-    quantity?: IntFilter<"Item"> | number
-    created_at?: DateTimeFilter<"Item"> | Date | string
-    updated_at?: DateTimeFilter<"Item"> | Date | string
-    is_deleted?: BoolFilter<"Item"> | boolean
-    canvass_item?: XOR<CanvassItemNullableRelationFilter, CanvassItemWhereInput> | null
+    AND?: CanvassItemWhereInput | CanvassItemWhereInput[]
+    OR?: CanvassItemWhereInput[]
+    NOT?: CanvassItemWhereInput | CanvassItemWhereInput[]
+    canvass_id?: StringFilter<"CanvassItem"> | string
+    description?: StringFilter<"CanvassItem"> | string
+    brand_id?: StringNullableFilter<"CanvassItem"> | string | null
+    unit_id?: StringFilter<"CanvassItem"> | string
+    quantity?: IntFilter<"CanvassItem"> | number
+    created_at?: DateTimeFilter<"CanvassItem"> | Date | string
+    updated_at?: DateTimeFilter<"CanvassItem"> | Date | string
+    is_deleted?: BoolFilter<"CanvassItem"> | boolean
+    canvass?: XOR<CanvassRelationFilter, CanvassWhereInput>
     brand?: XOR<BrandNullableRelationFilter, BrandWhereInput> | null
     unit?: XOR<UnitRelationFilter, UnitWhereInput>
-    supplier_items?: SupplierItemListRelationFilter
+    meqs_supplier_items?: MEQSSupplierItemListRelationFilter
   }, "id">
 
-  export type ItemOrderByWithAggregationInput = {
+  export type CanvassItemOrderByWithAggregationInput = {
     id?: SortOrder
+    canvass_id?: SortOrder
     description?: SortOrder
     brand_id?: SortOrderInput | SortOrder
     unit_id?: SortOrder
@@ -23965,25 +22937,26 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
-    _count?: ItemCountOrderByAggregateInput
-    _avg?: ItemAvgOrderByAggregateInput
-    _max?: ItemMaxOrderByAggregateInput
-    _min?: ItemMinOrderByAggregateInput
-    _sum?: ItemSumOrderByAggregateInput
+    _count?: CanvassItemCountOrderByAggregateInput
+    _avg?: CanvassItemAvgOrderByAggregateInput
+    _max?: CanvassItemMaxOrderByAggregateInput
+    _min?: CanvassItemMinOrderByAggregateInput
+    _sum?: CanvassItemSumOrderByAggregateInput
   }
 
-  export type ItemScalarWhereWithAggregatesInput = {
-    AND?: ItemScalarWhereWithAggregatesInput | ItemScalarWhereWithAggregatesInput[]
-    OR?: ItemScalarWhereWithAggregatesInput[]
-    NOT?: ItemScalarWhereWithAggregatesInput | ItemScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Item"> | string
-    description?: StringWithAggregatesFilter<"Item"> | string
-    brand_id?: StringNullableWithAggregatesFilter<"Item"> | string | null
-    unit_id?: StringWithAggregatesFilter<"Item"> | string
-    quantity?: IntWithAggregatesFilter<"Item"> | number
-    created_at?: DateTimeWithAggregatesFilter<"Item"> | Date | string
-    updated_at?: DateTimeWithAggregatesFilter<"Item"> | Date | string
-    is_deleted?: BoolWithAggregatesFilter<"Item"> | boolean
+  export type CanvassItemScalarWhereWithAggregatesInput = {
+    AND?: CanvassItemScalarWhereWithAggregatesInput | CanvassItemScalarWhereWithAggregatesInput[]
+    OR?: CanvassItemScalarWhereWithAggregatesInput[]
+    NOT?: CanvassItemScalarWhereWithAggregatesInput | CanvassItemScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"CanvassItem"> | string
+    canvass_id?: StringWithAggregatesFilter<"CanvassItem"> | string
+    description?: StringWithAggregatesFilter<"CanvassItem"> | string
+    brand_id?: StringNullableWithAggregatesFilter<"CanvassItem"> | string | null
+    unit_id?: StringWithAggregatesFilter<"CanvassItem"> | string
+    quantity?: IntWithAggregatesFilter<"CanvassItem"> | number
+    created_at?: DateTimeWithAggregatesFilter<"CanvassItem"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"CanvassItem"> | Date | string
+    is_deleted?: BoolWithAggregatesFilter<"CanvassItem"> | boolean
   }
 
   export type CanvassWhereInput = {
@@ -24001,9 +22974,9 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"Canvass"> | Date | string
     is_deleted?: BoolFilter<"Canvass"> | boolean
     canvass_items?: CanvassItemListRelationFilter
-    jos?: XOR<JONullableRelationFilter, JOWhereInput> | null
-    rvs?: XOR<RVNullableRelationFilter, RVWhereInput> | null
-    sprs?: XOR<SPRNullableRelationFilter, SPRWhereInput> | null
+    jo?: XOR<JONullableRelationFilter, JOWhereInput> | null
+    rv?: XOR<RVNullableRelationFilter, RVWhereInput> | null
+    spr?: XOR<SPRNullableRelationFilter, SPRWhereInput> | null
   }
 
   export type CanvassOrderByWithRelationInput = {
@@ -24018,9 +22991,9 @@ export namespace Prisma {
     updated_at?: SortOrder
     is_deleted?: SortOrder
     canvass_items?: CanvassItemOrderByRelationAggregateInput
-    jos?: JOOrderByWithRelationInput
-    rvs?: RVOrderByWithRelationInput
-    sprs?: SPROrderByWithRelationInput
+    jo?: JOOrderByWithRelationInput
+    rv?: RVOrderByWithRelationInput
+    spr?: SPROrderByWithRelationInput
   }
 
   export type CanvassWhereUniqueInput = Prisma.AtLeast<{
@@ -24038,9 +23011,9 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"Canvass"> | Date | string
     is_deleted?: BoolFilter<"Canvass"> | boolean
     canvass_items?: CanvassItemListRelationFilter
-    jos?: XOR<JONullableRelationFilter, JOWhereInput> | null
-    rvs?: XOR<RVNullableRelationFilter, RVWhereInput> | null
-    sprs?: XOR<SPRNullableRelationFilter, SPRWhereInput> | null
+    jo?: XOR<JONullableRelationFilter, JOWhereInput> | null
+    rv?: XOR<RVNullableRelationFilter, RVWhereInput> | null
+    spr?: XOR<SPRNullableRelationFilter, SPRWhereInput> | null
   }, "id" | "rc_number">
 
   export type CanvassOrderByWithAggregationInput = {
@@ -24073,149 +23046,6 @@ export namespace Prisma {
     created_at?: DateTimeWithAggregatesFilter<"Canvass"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"Canvass"> | Date | string
     is_deleted?: BoolWithAggregatesFilter<"Canvass"> | boolean
-  }
-
-  export type CanvassItemWhereInput = {
-    AND?: CanvassItemWhereInput | CanvassItemWhereInput[]
-    OR?: CanvassItemWhereInput[]
-    NOT?: CanvassItemWhereInput | CanvassItemWhereInput[]
-    id?: StringFilter<"CanvassItem"> | string
-    canvass_id?: StringFilter<"CanvassItem"> | string
-    item_id?: StringFilter<"CanvassItem"> | string
-    created_at?: DateTimeFilter<"CanvassItem"> | Date | string
-    updated_at?: DateTimeFilter<"CanvassItem"> | Date | string
-    is_deleted?: BoolFilter<"CanvassItem"> | boolean
-    canvass?: XOR<CanvassRelationFilter, CanvassWhereInput>
-    item?: XOR<ItemRelationFilter, ItemWhereInput>
-  }
-
-  export type CanvassItemOrderByWithRelationInput = {
-    id?: SortOrder
-    canvass_id?: SortOrder
-    item_id?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-    is_deleted?: SortOrder
-    canvass?: CanvassOrderByWithRelationInput
-    item?: ItemOrderByWithRelationInput
-  }
-
-  export type CanvassItemWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    item_id?: string
-    AND?: CanvassItemWhereInput | CanvassItemWhereInput[]
-    OR?: CanvassItemWhereInput[]
-    NOT?: CanvassItemWhereInput | CanvassItemWhereInput[]
-    canvass_id?: StringFilter<"CanvassItem"> | string
-    created_at?: DateTimeFilter<"CanvassItem"> | Date | string
-    updated_at?: DateTimeFilter<"CanvassItem"> | Date | string
-    is_deleted?: BoolFilter<"CanvassItem"> | boolean
-    canvass?: XOR<CanvassRelationFilter, CanvassWhereInput>
-    item?: XOR<ItemRelationFilter, ItemWhereInput>
-  }, "id" | "item_id">
-
-  export type CanvassItemOrderByWithAggregationInput = {
-    id?: SortOrder
-    canvass_id?: SortOrder
-    item_id?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-    is_deleted?: SortOrder
-    _count?: CanvassItemCountOrderByAggregateInput
-    _max?: CanvassItemMaxOrderByAggregateInput
-    _min?: CanvassItemMinOrderByAggregateInput
-  }
-
-  export type CanvassItemScalarWhereWithAggregatesInput = {
-    AND?: CanvassItemScalarWhereWithAggregatesInput | CanvassItemScalarWhereWithAggregatesInput[]
-    OR?: CanvassItemScalarWhereWithAggregatesInput[]
-    NOT?: CanvassItemScalarWhereWithAggregatesInput | CanvassItemScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"CanvassItem"> | string
-    canvass_id?: StringWithAggregatesFilter<"CanvassItem"> | string
-    item_id?: StringWithAggregatesFilter<"CanvassItem"> | string
-    created_at?: DateTimeWithAggregatesFilter<"CanvassItem"> | Date | string
-    updated_at?: DateTimeWithAggregatesFilter<"CanvassItem"> | Date | string
-    is_deleted?: BoolWithAggregatesFilter<"CanvassItem"> | boolean
-  }
-
-  export type SupplierItemWhereInput = {
-    AND?: SupplierItemWhereInput | SupplierItemWhereInput[]
-    OR?: SupplierItemWhereInput[]
-    NOT?: SupplierItemWhereInput | SupplierItemWhereInput[]
-    id?: StringFilter<"SupplierItem"> | string
-    item_id?: StringFilter<"SupplierItem"> | string
-    supplier_id?: StringFilter<"SupplierItem"> | string
-    price?: FloatFilter<"SupplierItem"> | number
-    is_awarded?: BoolFilter<"SupplierItem"> | boolean
-    notes?: StringNullableFilter<"SupplierItem"> | string | null
-    created_at?: DateTimeFilter<"SupplierItem"> | Date | string
-    updated_at?: DateTimeFilter<"SupplierItem"> | Date | string
-    is_deleted?: BoolFilter<"SupplierItem"> | boolean
-    item?: XOR<ItemRelationFilter, ItemWhereInput>
-    supplier?: XOR<SupplierRelationFilter, SupplierWhereInput>
-  }
-
-  export type SupplierItemOrderByWithRelationInput = {
-    id?: SortOrder
-    item_id?: SortOrder
-    supplier_id?: SortOrder
-    price?: SortOrder
-    is_awarded?: SortOrder
-    notes?: SortOrderInput | SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-    is_deleted?: SortOrder
-    item?: ItemOrderByWithRelationInput
-    supplier?: SupplierOrderByWithRelationInput
-  }
-
-  export type SupplierItemWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: SupplierItemWhereInput | SupplierItemWhereInput[]
-    OR?: SupplierItemWhereInput[]
-    NOT?: SupplierItemWhereInput | SupplierItemWhereInput[]
-    item_id?: StringFilter<"SupplierItem"> | string
-    supplier_id?: StringFilter<"SupplierItem"> | string
-    price?: FloatFilter<"SupplierItem"> | number
-    is_awarded?: BoolFilter<"SupplierItem"> | boolean
-    notes?: StringNullableFilter<"SupplierItem"> | string | null
-    created_at?: DateTimeFilter<"SupplierItem"> | Date | string
-    updated_at?: DateTimeFilter<"SupplierItem"> | Date | string
-    is_deleted?: BoolFilter<"SupplierItem"> | boolean
-    item?: XOR<ItemRelationFilter, ItemWhereInput>
-    supplier?: XOR<SupplierRelationFilter, SupplierWhereInput>
-  }, "id">
-
-  export type SupplierItemOrderByWithAggregationInput = {
-    id?: SortOrder
-    item_id?: SortOrder
-    supplier_id?: SortOrder
-    price?: SortOrder
-    is_awarded?: SortOrder
-    notes?: SortOrderInput | SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-    is_deleted?: SortOrder
-    _count?: SupplierItemCountOrderByAggregateInput
-    _avg?: SupplierItemAvgOrderByAggregateInput
-    _max?: SupplierItemMaxOrderByAggregateInput
-    _min?: SupplierItemMinOrderByAggregateInput
-    _sum?: SupplierItemSumOrderByAggregateInput
-  }
-
-  export type SupplierItemScalarWhereWithAggregatesInput = {
-    AND?: SupplierItemScalarWhereWithAggregatesInput | SupplierItemScalarWhereWithAggregatesInput[]
-    OR?: SupplierItemScalarWhereWithAggregatesInput[]
-    NOT?: SupplierItemScalarWhereWithAggregatesInput | SupplierItemScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"SupplierItem"> | string
-    item_id?: StringWithAggregatesFilter<"SupplierItem"> | string
-    supplier_id?: StringWithAggregatesFilter<"SupplierItem"> | string
-    price?: FloatWithAggregatesFilter<"SupplierItem"> | number
-    is_awarded?: BoolWithAggregatesFilter<"SupplierItem"> | boolean
-    notes?: StringNullableWithAggregatesFilter<"SupplierItem"> | string | null
-    created_at?: DateTimeWithAggregatesFilter<"SupplierItem"> | Date | string
-    updated_at?: DateTimeWithAggregatesFilter<"SupplierItem"> | Date | string
-    is_deleted?: BoolWithAggregatesFilter<"SupplierItem"> | boolean
   }
 
   export type JOWhereInput = {
@@ -24994,6 +23824,86 @@ export namespace Prisma {
     is_deleted?: BoolWithAggregatesFilter<"MEQSSupplier"> | boolean
   }
 
+  export type MEQSSupplierItemWhereInput = {
+    AND?: MEQSSupplierItemWhereInput | MEQSSupplierItemWhereInput[]
+    OR?: MEQSSupplierItemWhereInput[]
+    NOT?: MEQSSupplierItemWhereInput | MEQSSupplierItemWhereInput[]
+    id?: StringFilter<"MEQSSupplierItem"> | string
+    canvass_item_id?: StringFilter<"MEQSSupplierItem"> | string
+    meqs_supplier_id?: StringFilter<"MEQSSupplierItem"> | string
+    price?: FloatFilter<"MEQSSupplierItem"> | number
+    is_awarded?: BoolFilter<"MEQSSupplierItem"> | boolean
+    notes?: StringNullableFilter<"MEQSSupplierItem"> | string | null
+    created_at?: DateTimeFilter<"MEQSSupplierItem"> | Date | string
+    updated_at?: DateTimeFilter<"MEQSSupplierItem"> | Date | string
+    is_deleted?: BoolFilter<"MEQSSupplierItem"> | boolean
+    canvass_item?: XOR<CanvassItemRelationFilter, CanvassItemWhereInput>
+    meqs_supplier?: XOR<SupplierRelationFilter, SupplierWhereInput>
+  }
+
+  export type MEQSSupplierItemOrderByWithRelationInput = {
+    id?: SortOrder
+    canvass_item_id?: SortOrder
+    meqs_supplier_id?: SortOrder
+    price?: SortOrder
+    is_awarded?: SortOrder
+    notes?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+    canvass_item?: CanvassItemOrderByWithRelationInput
+    meqs_supplier?: SupplierOrderByWithRelationInput
+  }
+
+  export type MEQSSupplierItemWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: MEQSSupplierItemWhereInput | MEQSSupplierItemWhereInput[]
+    OR?: MEQSSupplierItemWhereInput[]
+    NOT?: MEQSSupplierItemWhereInput | MEQSSupplierItemWhereInput[]
+    canvass_item_id?: StringFilter<"MEQSSupplierItem"> | string
+    meqs_supplier_id?: StringFilter<"MEQSSupplierItem"> | string
+    price?: FloatFilter<"MEQSSupplierItem"> | number
+    is_awarded?: BoolFilter<"MEQSSupplierItem"> | boolean
+    notes?: StringNullableFilter<"MEQSSupplierItem"> | string | null
+    created_at?: DateTimeFilter<"MEQSSupplierItem"> | Date | string
+    updated_at?: DateTimeFilter<"MEQSSupplierItem"> | Date | string
+    is_deleted?: BoolFilter<"MEQSSupplierItem"> | boolean
+    canvass_item?: XOR<CanvassItemRelationFilter, CanvassItemWhereInput>
+    meqs_supplier?: XOR<SupplierRelationFilter, SupplierWhereInput>
+  }, "id">
+
+  export type MEQSSupplierItemOrderByWithAggregationInput = {
+    id?: SortOrder
+    canvass_item_id?: SortOrder
+    meqs_supplier_id?: SortOrder
+    price?: SortOrder
+    is_awarded?: SortOrder
+    notes?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+    _count?: MEQSSupplierItemCountOrderByAggregateInput
+    _avg?: MEQSSupplierItemAvgOrderByAggregateInput
+    _max?: MEQSSupplierItemMaxOrderByAggregateInput
+    _min?: MEQSSupplierItemMinOrderByAggregateInput
+    _sum?: MEQSSupplierItemSumOrderByAggregateInput
+  }
+
+  export type MEQSSupplierItemScalarWhereWithAggregatesInput = {
+    AND?: MEQSSupplierItemScalarWhereWithAggregatesInput | MEQSSupplierItemScalarWhereWithAggregatesInput[]
+    OR?: MEQSSupplierItemScalarWhereWithAggregatesInput[]
+    NOT?: MEQSSupplierItemScalarWhereWithAggregatesInput | MEQSSupplierItemScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"MEQSSupplierItem"> | string
+    canvass_item_id?: StringWithAggregatesFilter<"MEQSSupplierItem"> | string
+    meqs_supplier_id?: StringWithAggregatesFilter<"MEQSSupplierItem"> | string
+    price?: FloatWithAggregatesFilter<"MEQSSupplierItem"> | number
+    is_awarded?: BoolWithAggregatesFilter<"MEQSSupplierItem"> | boolean
+    notes?: StringNullableWithAggregatesFilter<"MEQSSupplierItem"> | string | null
+    created_at?: DateTimeWithAggregatesFilter<"MEQSSupplierItem"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"MEQSSupplierItem"> | Date | string
+    is_deleted?: BoolWithAggregatesFilter<"MEQSSupplierItem"> | boolean
+  }
+
   export type MEQSSupplierAttachmentWhereInput = {
     AND?: MEQSSupplierAttachmentWhereInput | MEQSSupplierAttachmentWhereInput[]
     OR?: MEQSSupplierAttachmentWhereInput[]
@@ -25326,7 +24236,7 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     MEQSSupplier?: MEQSSupplierCreateNestedManyWithoutSupplierInput
-    supplier_items?: SupplierItemCreateNestedManyWithoutSupplierInput
+    meqs_supplier_items?: MEQSSupplierItemCreateNestedManyWithoutMeqs_supplierInput
   }
 
   export type SupplierUncheckedCreateInput = {
@@ -25337,7 +24247,7 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     MEQSSupplier?: MEQSSupplierUncheckedCreateNestedManyWithoutSupplierInput
-    supplier_items?: SupplierItemUncheckedCreateNestedManyWithoutSupplierInput
+    meqs_supplier_items?: MEQSSupplierItemUncheckedCreateNestedManyWithoutMeqs_supplierInput
   }
 
   export type SupplierUpdateInput = {
@@ -25348,7 +24258,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     MEQSSupplier?: MEQSSupplierUpdateManyWithoutSupplierNestedInput
-    supplier_items?: SupplierItemUpdateManyWithoutSupplierNestedInput
+    meqs_supplier_items?: MEQSSupplierItemUpdateManyWithoutMeqs_supplierNestedInput
   }
 
   export type SupplierUncheckedUpdateInput = {
@@ -25359,7 +24269,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     MEQSSupplier?: MEQSSupplierUncheckedUpdateManyWithoutSupplierNestedInput
-    supplier_items?: SupplierItemUncheckedUpdateManyWithoutSupplierNestedInput
+    meqs_supplier_items?: MEQSSupplierItemUncheckedUpdateManyWithoutMeqs_supplierNestedInput
   }
 
   export type SupplierCreateManyInput = {
@@ -25395,7 +24305,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    items?: ItemCreateNestedManyWithoutUnitInput
+    canvass_items?: CanvassItemCreateNestedManyWithoutUnitInput
   }
 
   export type UnitUncheckedCreateInput = {
@@ -25404,7 +24314,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    items?: ItemUncheckedCreateNestedManyWithoutUnitInput
+    canvass_items?: CanvassItemUncheckedCreateNestedManyWithoutUnitInput
   }
 
   export type UnitUpdateInput = {
@@ -25413,7 +24323,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    items?: ItemUpdateManyWithoutUnitNestedInput
+    canvass_items?: CanvassItemUpdateManyWithoutUnitNestedInput
   }
 
   export type UnitUncheckedUpdateInput = {
@@ -25422,7 +24332,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    items?: ItemUncheckedUpdateManyWithoutUnitNestedInput
+    canvass_items?: CanvassItemUncheckedUpdateManyWithoutUnitNestedInput
   }
 
   export type UnitCreateManyInput = {
@@ -25455,7 +24365,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    items?: ItemCreateNestedManyWithoutBrandInput
+    canvass_items?: CanvassItemCreateNestedManyWithoutBrandInput
   }
 
   export type BrandUncheckedCreateInput = {
@@ -25464,7 +24374,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    items?: ItemUncheckedCreateNestedManyWithoutBrandInput
+    canvass_items?: CanvassItemUncheckedCreateNestedManyWithoutBrandInput
   }
 
   export type BrandUpdateInput = {
@@ -25473,7 +24383,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    items?: ItemUpdateManyWithoutBrandNestedInput
+    canvass_items?: CanvassItemUpdateManyWithoutBrandNestedInput
   }
 
   export type BrandUncheckedUpdateInput = {
@@ -25482,7 +24392,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    items?: ItemUncheckedUpdateManyWithoutBrandNestedInput
+    canvass_items?: CanvassItemUncheckedUpdateManyWithoutBrandNestedInput
   }
 
   export type BrandCreateManyInput = {
@@ -25576,21 +24486,22 @@ export namespace Prisma {
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
-  export type ItemCreateInput = {
+  export type CanvassItemCreateInput = {
     id?: string
     description: string
     quantity: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    canvass_item?: CanvassItemCreateNestedOneWithoutItemInput
-    brand?: BrandCreateNestedOneWithoutItemsInput
-    unit: UnitCreateNestedOneWithoutItemsInput
-    supplier_items?: SupplierItemCreateNestedManyWithoutItemInput
+    canvass: CanvassCreateNestedOneWithoutCanvass_itemsInput
+    brand?: BrandCreateNestedOneWithoutCanvass_itemsInput
+    unit: UnitCreateNestedOneWithoutCanvass_itemsInput
+    meqs_supplier_items?: MEQSSupplierItemCreateNestedManyWithoutCanvass_itemInput
   }
 
-  export type ItemUncheckedCreateInput = {
+  export type CanvassItemUncheckedCreateInput = {
     id?: string
+    canvass_id: string
     description: string
     brand_id?: string | null
     unit_id: string
@@ -25598,25 +24509,25 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    canvass_item?: CanvassItemUncheckedCreateNestedOneWithoutItemInput
-    supplier_items?: SupplierItemUncheckedCreateNestedManyWithoutItemInput
+    meqs_supplier_items?: MEQSSupplierItemUncheckedCreateNestedManyWithoutCanvass_itemInput
   }
 
-  export type ItemUpdateInput = {
+  export type CanvassItemUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    canvass_item?: CanvassItemUpdateOneWithoutItemNestedInput
-    brand?: BrandUpdateOneWithoutItemsNestedInput
-    unit?: UnitUpdateOneRequiredWithoutItemsNestedInput
-    supplier_items?: SupplierItemUpdateManyWithoutItemNestedInput
+    canvass?: CanvassUpdateOneRequiredWithoutCanvass_itemsNestedInput
+    brand?: BrandUpdateOneWithoutCanvass_itemsNestedInput
+    unit?: UnitUpdateOneRequiredWithoutCanvass_itemsNestedInput
+    meqs_supplier_items?: MEQSSupplierItemUpdateManyWithoutCanvass_itemNestedInput
   }
 
-  export type ItemUncheckedUpdateInput = {
+  export type CanvassItemUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    canvass_id?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     brand_id?: NullableStringFieldUpdateOperationsInput | string | null
     unit_id?: StringFieldUpdateOperationsInput | string
@@ -25624,12 +24535,12 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    canvass_item?: CanvassItemUncheckedUpdateOneWithoutItemNestedInput
-    supplier_items?: SupplierItemUncheckedUpdateManyWithoutItemNestedInput
+    meqs_supplier_items?: MEQSSupplierItemUncheckedUpdateManyWithoutCanvass_itemNestedInput
   }
 
-  export type ItemCreateManyInput = {
+  export type CanvassItemCreateManyInput = {
     id?: string
+    canvass_id: string
     description: string
     brand_id?: string | null
     unit_id: string
@@ -25639,7 +24550,7 @@ export namespace Prisma {
     is_deleted?: boolean
   }
 
-  export type ItemUpdateManyMutationInput = {
+  export type CanvassItemUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
@@ -25648,8 +24559,9 @@ export namespace Prisma {
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
-  export type ItemUncheckedUpdateManyInput = {
+  export type CanvassItemUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
+    canvass_id?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     brand_id?: NullableStringFieldUpdateOperationsInput | string | null
     unit_id?: StringFieldUpdateOperationsInput | string
@@ -25671,9 +24583,9 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     canvass_items?: CanvassItemCreateNestedManyWithoutCanvassInput
-    jos?: JOCreateNestedOneWithoutCanvassInput
-    rvs?: RVCreateNestedOneWithoutCanvassInput
-    sprs?: SPRCreateNestedOneWithoutCanvassInput
+    jo?: JOCreateNestedOneWithoutCanvassInput
+    rv?: RVCreateNestedOneWithoutCanvassInput
+    spr?: SPRCreateNestedOneWithoutCanvassInput
   }
 
   export type CanvassUncheckedCreateInput = {
@@ -25688,9 +24600,9 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     canvass_items?: CanvassItemUncheckedCreateNestedManyWithoutCanvassInput
-    jos?: JOUncheckedCreateNestedOneWithoutCanvassInput
-    rvs?: RVUncheckedCreateNestedOneWithoutCanvassInput
-    sprs?: SPRUncheckedCreateNestedOneWithoutCanvassInput
+    jo?: JOUncheckedCreateNestedOneWithoutCanvassInput
+    rv?: RVUncheckedCreateNestedOneWithoutCanvassInput
+    spr?: SPRUncheckedCreateNestedOneWithoutCanvassInput
   }
 
   export type CanvassUpdateInput = {
@@ -25705,9 +24617,9 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     canvass_items?: CanvassItemUpdateManyWithoutCanvassNestedInput
-    jos?: JOUpdateOneWithoutCanvassNestedInput
-    rvs?: RVUpdateOneWithoutCanvassNestedInput
-    sprs?: SPRUpdateOneWithoutCanvassNestedInput
+    jo?: JOUpdateOneWithoutCanvassNestedInput
+    rv?: RVUpdateOneWithoutCanvassNestedInput
+    spr?: SPRUpdateOneWithoutCanvassNestedInput
   }
 
   export type CanvassUncheckedUpdateInput = {
@@ -25722,9 +24634,9 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     canvass_items?: CanvassItemUncheckedUpdateManyWithoutCanvassNestedInput
-    jos?: JOUncheckedUpdateOneWithoutCanvassNestedInput
-    rvs?: RVUncheckedUpdateOneWithoutCanvassNestedInput
-    sprs?: SPRUncheckedUpdateOneWithoutCanvassNestedInput
+    jo?: JOUncheckedUpdateOneWithoutCanvassNestedInput
+    rv?: RVUncheckedUpdateOneWithoutCanvassNestedInput
+    spr?: SPRUncheckedUpdateOneWithoutCanvassNestedInput
   }
 
   export type CanvassCreateManyInput = {
@@ -25766,149 +24678,6 @@ export namespace Prisma {
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
-  export type CanvassItemCreateInput = {
-    id?: string
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-    canvass: CanvassCreateNestedOneWithoutCanvass_itemsInput
-    item: ItemCreateNestedOneWithoutCanvass_itemInput
-  }
-
-  export type CanvassItemUncheckedCreateInput = {
-    id?: string
-    canvass_id: string
-    item_id: string
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-  }
-
-  export type CanvassItemUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    canvass?: CanvassUpdateOneRequiredWithoutCanvass_itemsNestedInput
-    item?: ItemUpdateOneRequiredWithoutCanvass_itemNestedInput
-  }
-
-  export type CanvassItemUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    canvass_id?: StringFieldUpdateOperationsInput | string
-    item_id?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type CanvassItemCreateManyInput = {
-    id?: string
-    canvass_id: string
-    item_id: string
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-  }
-
-  export type CanvassItemUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type CanvassItemUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    canvass_id?: StringFieldUpdateOperationsInput | string
-    item_id?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type SupplierItemCreateInput = {
-    id?: string
-    price: number
-    is_awarded?: boolean
-    notes?: string | null
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-    item: ItemCreateNestedOneWithoutSupplier_itemsInput
-    supplier: SupplierCreateNestedOneWithoutSupplier_itemsInput
-  }
-
-  export type SupplierItemUncheckedCreateInput = {
-    id?: string
-    item_id: string
-    supplier_id: string
-    price: number
-    is_awarded?: boolean
-    notes?: string | null
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-  }
-
-  export type SupplierItemUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
-    is_awarded?: BoolFieldUpdateOperationsInput | boolean
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    item?: ItemUpdateOneRequiredWithoutSupplier_itemsNestedInput
-    supplier?: SupplierUpdateOneRequiredWithoutSupplier_itemsNestedInput
-  }
-
-  export type SupplierItemUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    item_id?: StringFieldUpdateOperationsInput | string
-    supplier_id?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
-    is_awarded?: BoolFieldUpdateOperationsInput | boolean
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type SupplierItemCreateManyInput = {
-    id?: string
-    item_id: string
-    supplier_id: string
-    price: number
-    is_awarded?: boolean
-    notes?: string | null
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-  }
-
-  export type SupplierItemUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
-    is_awarded?: BoolFieldUpdateOperationsInput | boolean
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type SupplierItemUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    item_id?: StringFieldUpdateOperationsInput | string
-    supplier_id?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
-    is_awarded?: BoolFieldUpdateOperationsInput | boolean
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-  }
-
   export type JOCreateInput = {
     id?: string
     jo_number: string
@@ -25924,7 +24693,7 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     jo_approvers?: JOApproverCreateNestedManyWithoutJoInput
-    canvass: CanvassCreateNestedOneWithoutJosInput
+    canvass: CanvassCreateNestedOneWithoutJoInput
     meqs?: MEQSCreateNestedOneWithoutJoInput
   }
 
@@ -25962,7 +24731,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     jo_approvers?: JOApproverUpdateManyWithoutJoNestedInput
-    canvass?: CanvassUpdateOneRequiredWithoutJosNestedInput
+    canvass?: CanvassUpdateOneRequiredWithoutJoNestedInput
     meqs?: MEQSUpdateOneWithoutJoNestedInput
   }
 
@@ -26147,7 +24916,7 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     meqs?: MEQSCreateNestedOneWithoutRvInput
-    canvass: CanvassCreateNestedOneWithoutRvsInput
+    canvass: CanvassCreateNestedOneWithoutRvInput
     rv_approvers?: RVApproverCreateNestedManyWithoutRvInput
   }
 
@@ -26185,7 +24954,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     meqs?: MEQSUpdateOneWithoutRvNestedInput
-    canvass?: CanvassUpdateOneRequiredWithoutRvsNestedInput
+    canvass?: CanvassUpdateOneRequiredWithoutRvNestedInput
     rv_approvers?: RVApproverUpdateManyWithoutRvNestedInput
   }
 
@@ -26375,7 +25144,7 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     meqs?: MEQSCreateNestedOneWithoutSprInput
-    canvass: CanvassCreateNestedOneWithoutSprsInput
+    canvass: CanvassCreateNestedOneWithoutSprInput
     vehicle: VehicleCreateNestedOneWithoutSprsInput
     spr_approvers?: SPRApproverCreateNestedManyWithoutSprInput
   }
@@ -26411,7 +25180,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     meqs?: MEQSUpdateOneWithoutSprNestedInput
-    canvass?: CanvassUpdateOneRequiredWithoutSprsNestedInput
+    canvass?: CanvassUpdateOneRequiredWithoutSprNestedInput
     vehicle?: VehicleUpdateOneRequiredWithoutSprsNestedInput
     spr_approvers?: SPRApproverUpdateManyWithoutSprNestedInput
   }
@@ -26772,6 +25541,88 @@ export namespace Prisma {
     supplier_id?: StringFieldUpdateOperationsInput | string
     payment_terms?: StringFieldUpdateOperationsInput | string
     is_referenced?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type MEQSSupplierItemCreateInput = {
+    id?: string
+    price: number
+    is_awarded?: boolean
+    notes?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    canvass_item: CanvassItemCreateNestedOneWithoutMeqs_supplier_itemsInput
+    meqs_supplier: SupplierCreateNestedOneWithoutMeqs_supplier_itemsInput
+  }
+
+  export type MEQSSupplierItemUncheckedCreateInput = {
+    id?: string
+    canvass_item_id: string
+    meqs_supplier_id: string
+    price: number
+    is_awarded?: boolean
+    notes?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
+  export type MEQSSupplierItemUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    price?: FloatFieldUpdateOperationsInput | number
+    is_awarded?: BoolFieldUpdateOperationsInput | boolean
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    canvass_item?: CanvassItemUpdateOneRequiredWithoutMeqs_supplier_itemsNestedInput
+    meqs_supplier?: SupplierUpdateOneRequiredWithoutMeqs_supplier_itemsNestedInput
+  }
+
+  export type MEQSSupplierItemUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    canvass_item_id?: StringFieldUpdateOperationsInput | string
+    meqs_supplier_id?: StringFieldUpdateOperationsInput | string
+    price?: FloatFieldUpdateOperationsInput | number
+    is_awarded?: BoolFieldUpdateOperationsInput | boolean
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type MEQSSupplierItemCreateManyInput = {
+    id?: string
+    canvass_item_id: string
+    meqs_supplier_id: string
+    price: number
+    is_awarded?: boolean
+    notes?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
+  export type MEQSSupplierItemUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    price?: FloatFieldUpdateOperationsInput | number
+    is_awarded?: BoolFieldUpdateOperationsInput | boolean
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type MEQSSupplierItemUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    canvass_item_id?: StringFieldUpdateOperationsInput | string
+    meqs_supplier_id?: StringFieldUpdateOperationsInput | string
+    price?: FloatFieldUpdateOperationsInput | number
+    is_awarded?: BoolFieldUpdateOperationsInput | boolean
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -27171,17 +26022,17 @@ export namespace Prisma {
     none?: MEQSSupplierWhereInput
   }
 
-  export type SupplierItemListRelationFilter = {
-    every?: SupplierItemWhereInput
-    some?: SupplierItemWhereInput
-    none?: SupplierItemWhereInput
+  export type MEQSSupplierItemListRelationFilter = {
+    every?: MEQSSupplierItemWhereInput
+    some?: MEQSSupplierItemWhereInput
+    none?: MEQSSupplierItemWhereInput
   }
 
   export type MEQSSupplierOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
-  export type SupplierItemOrderByRelationAggregateInput = {
+  export type MEQSSupplierItemOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -27252,13 +26103,13 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
-  export type ItemListRelationFilter = {
-    every?: ItemWhereInput
-    some?: ItemWhereInput
-    none?: ItemWhereInput
+  export type CanvassItemListRelationFilter = {
+    every?: CanvassItemWhereInput
+    some?: CanvassItemWhereInput
+    none?: CanvassItemWhereInput
   }
 
-  export type ItemOrderByRelationAggregateInput = {
+  export type CanvassItemOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -27373,9 +26224,9 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
-  export type CanvassItemNullableRelationFilter = {
-    is?: CanvassItemWhereInput | null
-    isNot?: CanvassItemWhereInput | null
+  export type CanvassRelationFilter = {
+    is?: CanvassWhereInput
+    isNot?: CanvassWhereInput
   }
 
   export type BrandNullableRelationFilter = {
@@ -27393,8 +26244,9 @@ export namespace Prisma {
     nulls?: NullsOrder
   }
 
-  export type ItemCountOrderByAggregateInput = {
+  export type CanvassItemCountOrderByAggregateInput = {
     id?: SortOrder
+    canvass_id?: SortOrder
     description?: SortOrder
     brand_id?: SortOrder
     unit_id?: SortOrder
@@ -27404,12 +26256,13 @@ export namespace Prisma {
     is_deleted?: SortOrder
   }
 
-  export type ItemAvgOrderByAggregateInput = {
+  export type CanvassItemAvgOrderByAggregateInput = {
     quantity?: SortOrder
   }
 
-  export type ItemMaxOrderByAggregateInput = {
+  export type CanvassItemMaxOrderByAggregateInput = {
     id?: SortOrder
+    canvass_id?: SortOrder
     description?: SortOrder
     brand_id?: SortOrder
     unit_id?: SortOrder
@@ -27419,8 +26272,9 @@ export namespace Prisma {
     is_deleted?: SortOrder
   }
 
-  export type ItemMinOrderByAggregateInput = {
+  export type CanvassItemMinOrderByAggregateInput = {
     id?: SortOrder
+    canvass_id?: SortOrder
     description?: SortOrder
     brand_id?: SortOrder
     unit_id?: SortOrder
@@ -27430,7 +26284,7 @@ export namespace Prisma {
     is_deleted?: SortOrder
   }
 
-  export type ItemSumOrderByAggregateInput = {
+  export type CanvassItemSumOrderByAggregateInput = {
     quantity?: SortOrder
   }
 
@@ -27468,12 +26322,6 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
-  export type CanvassItemListRelationFilter = {
-    every?: CanvassItemWhereInput
-    some?: CanvassItemWhereInput
-    none?: CanvassItemWhereInput
-  }
-
   export type JONullableRelationFilter = {
     is?: JOWhereInput | null
     isNot?: JOWhereInput | null
@@ -27487,10 +26335,6 @@ export namespace Prisma {
   export type SPRNullableRelationFilter = {
     is?: SPRWhereInput | null
     isNot?: SPRWhereInput | null
-  }
-
-  export type CanvassItemOrderByRelationAggregateInput = {
-    _count?: SortOrder
   }
 
   export type CanvassCountOrderByAggregateInput = {
@@ -27530,119 +26374,6 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
-  }
-
-  export type CanvassRelationFilter = {
-    is?: CanvassWhereInput
-    isNot?: CanvassWhereInput
-  }
-
-  export type ItemRelationFilter = {
-    is?: ItemWhereInput
-    isNot?: ItemWhereInput
-  }
-
-  export type CanvassItemCountOrderByAggregateInput = {
-    id?: SortOrder
-    canvass_id?: SortOrder
-    item_id?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-    is_deleted?: SortOrder
-  }
-
-  export type CanvassItemMaxOrderByAggregateInput = {
-    id?: SortOrder
-    canvass_id?: SortOrder
-    item_id?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-    is_deleted?: SortOrder
-  }
-
-  export type CanvassItemMinOrderByAggregateInput = {
-    id?: SortOrder
-    canvass_id?: SortOrder
-    item_id?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-    is_deleted?: SortOrder
-  }
-
-  export type FloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
-  }
-
-  export type SupplierRelationFilter = {
-    is?: SupplierWhereInput
-    isNot?: SupplierWhereInput
-  }
-
-  export type SupplierItemCountOrderByAggregateInput = {
-    id?: SortOrder
-    item_id?: SortOrder
-    supplier_id?: SortOrder
-    price?: SortOrder
-    is_awarded?: SortOrder
-    notes?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-    is_deleted?: SortOrder
-  }
-
-  export type SupplierItemAvgOrderByAggregateInput = {
-    price?: SortOrder
-  }
-
-  export type SupplierItemMaxOrderByAggregateInput = {
-    id?: SortOrder
-    item_id?: SortOrder
-    supplier_id?: SortOrder
-    price?: SortOrder
-    is_awarded?: SortOrder
-    notes?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-    is_deleted?: SortOrder
-  }
-
-  export type SupplierItemMinOrderByAggregateInput = {
-    id?: SortOrder
-    item_id?: SortOrder
-    supplier_id?: SortOrder
-    price?: SortOrder
-    is_awarded?: SortOrder
-    notes?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-    is_deleted?: SortOrder
-  }
-
-  export type SupplierItemSumOrderByAggregateInput = {
-    price?: SortOrder
-  }
-
-  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedFloatFilter<$PrismaModel>
-    _min?: NestedFloatFilter<$PrismaModel>
-    _max?: NestedFloatFilter<$PrismaModel>
   }
 
   export type JOApproverListRelationFilter = {
@@ -28131,6 +26862,11 @@ export namespace Prisma {
     isNot?: MEQSWhereInput
   }
 
+  export type SupplierRelationFilter = {
+    is?: SupplierWhereInput
+    isNot?: SupplierWhereInput
+  }
+
   export type MEQSSupplierAttachmentListRelationFilter = {
     every?: MEQSSupplierAttachmentWhereInput
     some?: MEQSSupplierAttachmentWhereInput
@@ -28177,6 +26913,82 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
+  }
+
+  export type FloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type CanvassItemRelationFilter = {
+    is?: CanvassItemWhereInput
+    isNot?: CanvassItemWhereInput
+  }
+
+  export type MEQSSupplierItemCountOrderByAggregateInput = {
+    id?: SortOrder
+    canvass_item_id?: SortOrder
+    meqs_supplier_id?: SortOrder
+    price?: SortOrder
+    is_awarded?: SortOrder
+    notes?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+  }
+
+  export type MEQSSupplierItemAvgOrderByAggregateInput = {
+    price?: SortOrder
+  }
+
+  export type MEQSSupplierItemMaxOrderByAggregateInput = {
+    id?: SortOrder
+    canvass_item_id?: SortOrder
+    meqs_supplier_id?: SortOrder
+    price?: SortOrder
+    is_awarded?: SortOrder
+    notes?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+  }
+
+  export type MEQSSupplierItemMinOrderByAggregateInput = {
+    id?: SortOrder
+    canvass_item_id?: SortOrder
+    meqs_supplier_id?: SortOrder
+    price?: SortOrder
+    is_awarded?: SortOrder
+    notes?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+  }
+
+  export type MEQSSupplierItemSumOrderByAggregateInput = {
+    price?: SortOrder
+  }
+
+  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
   }
 
   export type MEQSSupplierRelationFilter = {
@@ -28387,11 +27199,11 @@ export namespace Prisma {
     connect?: MEQSSupplierWhereUniqueInput | MEQSSupplierWhereUniqueInput[]
   }
 
-  export type SupplierItemCreateNestedManyWithoutSupplierInput = {
-    create?: XOR<SupplierItemCreateWithoutSupplierInput, SupplierItemUncheckedCreateWithoutSupplierInput> | SupplierItemCreateWithoutSupplierInput[] | SupplierItemUncheckedCreateWithoutSupplierInput[]
-    connectOrCreate?: SupplierItemCreateOrConnectWithoutSupplierInput | SupplierItemCreateOrConnectWithoutSupplierInput[]
-    createMany?: SupplierItemCreateManySupplierInputEnvelope
-    connect?: SupplierItemWhereUniqueInput | SupplierItemWhereUniqueInput[]
+  export type MEQSSupplierItemCreateNestedManyWithoutMeqs_supplierInput = {
+    create?: XOR<MEQSSupplierItemCreateWithoutMeqs_supplierInput, MEQSSupplierItemUncheckedCreateWithoutMeqs_supplierInput> | MEQSSupplierItemCreateWithoutMeqs_supplierInput[] | MEQSSupplierItemUncheckedCreateWithoutMeqs_supplierInput[]
+    connectOrCreate?: MEQSSupplierItemCreateOrConnectWithoutMeqs_supplierInput | MEQSSupplierItemCreateOrConnectWithoutMeqs_supplierInput[]
+    createMany?: MEQSSupplierItemCreateManyMeqs_supplierInputEnvelope
+    connect?: MEQSSupplierItemWhereUniqueInput | MEQSSupplierItemWhereUniqueInput[]
   }
 
   export type MEQSSupplierUncheckedCreateNestedManyWithoutSupplierInput = {
@@ -28401,11 +27213,11 @@ export namespace Prisma {
     connect?: MEQSSupplierWhereUniqueInput | MEQSSupplierWhereUniqueInput[]
   }
 
-  export type SupplierItemUncheckedCreateNestedManyWithoutSupplierInput = {
-    create?: XOR<SupplierItemCreateWithoutSupplierInput, SupplierItemUncheckedCreateWithoutSupplierInput> | SupplierItemCreateWithoutSupplierInput[] | SupplierItemUncheckedCreateWithoutSupplierInput[]
-    connectOrCreate?: SupplierItemCreateOrConnectWithoutSupplierInput | SupplierItemCreateOrConnectWithoutSupplierInput[]
-    createMany?: SupplierItemCreateManySupplierInputEnvelope
-    connect?: SupplierItemWhereUniqueInput | SupplierItemWhereUniqueInput[]
+  export type MEQSSupplierItemUncheckedCreateNestedManyWithoutMeqs_supplierInput = {
+    create?: XOR<MEQSSupplierItemCreateWithoutMeqs_supplierInput, MEQSSupplierItemUncheckedCreateWithoutMeqs_supplierInput> | MEQSSupplierItemCreateWithoutMeqs_supplierInput[] | MEQSSupplierItemUncheckedCreateWithoutMeqs_supplierInput[]
+    connectOrCreate?: MEQSSupplierItemCreateOrConnectWithoutMeqs_supplierInput | MEQSSupplierItemCreateOrConnectWithoutMeqs_supplierInput[]
+    createMany?: MEQSSupplierItemCreateManyMeqs_supplierInputEnvelope
+    connect?: MEQSSupplierItemWhereUniqueInput | MEQSSupplierItemWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -28434,18 +27246,18 @@ export namespace Prisma {
     deleteMany?: MEQSSupplierScalarWhereInput | MEQSSupplierScalarWhereInput[]
   }
 
-  export type SupplierItemUpdateManyWithoutSupplierNestedInput = {
-    create?: XOR<SupplierItemCreateWithoutSupplierInput, SupplierItemUncheckedCreateWithoutSupplierInput> | SupplierItemCreateWithoutSupplierInput[] | SupplierItemUncheckedCreateWithoutSupplierInput[]
-    connectOrCreate?: SupplierItemCreateOrConnectWithoutSupplierInput | SupplierItemCreateOrConnectWithoutSupplierInput[]
-    upsert?: SupplierItemUpsertWithWhereUniqueWithoutSupplierInput | SupplierItemUpsertWithWhereUniqueWithoutSupplierInput[]
-    createMany?: SupplierItemCreateManySupplierInputEnvelope
-    set?: SupplierItemWhereUniqueInput | SupplierItemWhereUniqueInput[]
-    disconnect?: SupplierItemWhereUniqueInput | SupplierItemWhereUniqueInput[]
-    delete?: SupplierItemWhereUniqueInput | SupplierItemWhereUniqueInput[]
-    connect?: SupplierItemWhereUniqueInput | SupplierItemWhereUniqueInput[]
-    update?: SupplierItemUpdateWithWhereUniqueWithoutSupplierInput | SupplierItemUpdateWithWhereUniqueWithoutSupplierInput[]
-    updateMany?: SupplierItemUpdateManyWithWhereWithoutSupplierInput | SupplierItemUpdateManyWithWhereWithoutSupplierInput[]
-    deleteMany?: SupplierItemScalarWhereInput | SupplierItemScalarWhereInput[]
+  export type MEQSSupplierItemUpdateManyWithoutMeqs_supplierNestedInput = {
+    create?: XOR<MEQSSupplierItemCreateWithoutMeqs_supplierInput, MEQSSupplierItemUncheckedCreateWithoutMeqs_supplierInput> | MEQSSupplierItemCreateWithoutMeqs_supplierInput[] | MEQSSupplierItemUncheckedCreateWithoutMeqs_supplierInput[]
+    connectOrCreate?: MEQSSupplierItemCreateOrConnectWithoutMeqs_supplierInput | MEQSSupplierItemCreateOrConnectWithoutMeqs_supplierInput[]
+    upsert?: MEQSSupplierItemUpsertWithWhereUniqueWithoutMeqs_supplierInput | MEQSSupplierItemUpsertWithWhereUniqueWithoutMeqs_supplierInput[]
+    createMany?: MEQSSupplierItemCreateManyMeqs_supplierInputEnvelope
+    set?: MEQSSupplierItemWhereUniqueInput | MEQSSupplierItemWhereUniqueInput[]
+    disconnect?: MEQSSupplierItemWhereUniqueInput | MEQSSupplierItemWhereUniqueInput[]
+    delete?: MEQSSupplierItemWhereUniqueInput | MEQSSupplierItemWhereUniqueInput[]
+    connect?: MEQSSupplierItemWhereUniqueInput | MEQSSupplierItemWhereUniqueInput[]
+    update?: MEQSSupplierItemUpdateWithWhereUniqueWithoutMeqs_supplierInput | MEQSSupplierItemUpdateWithWhereUniqueWithoutMeqs_supplierInput[]
+    updateMany?: MEQSSupplierItemUpdateManyWithWhereWithoutMeqs_supplierInput | MEQSSupplierItemUpdateManyWithWhereWithoutMeqs_supplierInput[]
+    deleteMany?: MEQSSupplierItemScalarWhereInput | MEQSSupplierItemScalarWhereInput[]
   }
 
   export type MEQSSupplierUncheckedUpdateManyWithoutSupplierNestedInput = {
@@ -28462,102 +27274,102 @@ export namespace Prisma {
     deleteMany?: MEQSSupplierScalarWhereInput | MEQSSupplierScalarWhereInput[]
   }
 
-  export type SupplierItemUncheckedUpdateManyWithoutSupplierNestedInput = {
-    create?: XOR<SupplierItemCreateWithoutSupplierInput, SupplierItemUncheckedCreateWithoutSupplierInput> | SupplierItemCreateWithoutSupplierInput[] | SupplierItemUncheckedCreateWithoutSupplierInput[]
-    connectOrCreate?: SupplierItemCreateOrConnectWithoutSupplierInput | SupplierItemCreateOrConnectWithoutSupplierInput[]
-    upsert?: SupplierItemUpsertWithWhereUniqueWithoutSupplierInput | SupplierItemUpsertWithWhereUniqueWithoutSupplierInput[]
-    createMany?: SupplierItemCreateManySupplierInputEnvelope
-    set?: SupplierItemWhereUniqueInput | SupplierItemWhereUniqueInput[]
-    disconnect?: SupplierItemWhereUniqueInput | SupplierItemWhereUniqueInput[]
-    delete?: SupplierItemWhereUniqueInput | SupplierItemWhereUniqueInput[]
-    connect?: SupplierItemWhereUniqueInput | SupplierItemWhereUniqueInput[]
-    update?: SupplierItemUpdateWithWhereUniqueWithoutSupplierInput | SupplierItemUpdateWithWhereUniqueWithoutSupplierInput[]
-    updateMany?: SupplierItemUpdateManyWithWhereWithoutSupplierInput | SupplierItemUpdateManyWithWhereWithoutSupplierInput[]
-    deleteMany?: SupplierItemScalarWhereInput | SupplierItemScalarWhereInput[]
+  export type MEQSSupplierItemUncheckedUpdateManyWithoutMeqs_supplierNestedInput = {
+    create?: XOR<MEQSSupplierItemCreateWithoutMeqs_supplierInput, MEQSSupplierItemUncheckedCreateWithoutMeqs_supplierInput> | MEQSSupplierItemCreateWithoutMeqs_supplierInput[] | MEQSSupplierItemUncheckedCreateWithoutMeqs_supplierInput[]
+    connectOrCreate?: MEQSSupplierItemCreateOrConnectWithoutMeqs_supplierInput | MEQSSupplierItemCreateOrConnectWithoutMeqs_supplierInput[]
+    upsert?: MEQSSupplierItemUpsertWithWhereUniqueWithoutMeqs_supplierInput | MEQSSupplierItemUpsertWithWhereUniqueWithoutMeqs_supplierInput[]
+    createMany?: MEQSSupplierItemCreateManyMeqs_supplierInputEnvelope
+    set?: MEQSSupplierItemWhereUniqueInput | MEQSSupplierItemWhereUniqueInput[]
+    disconnect?: MEQSSupplierItemWhereUniqueInput | MEQSSupplierItemWhereUniqueInput[]
+    delete?: MEQSSupplierItemWhereUniqueInput | MEQSSupplierItemWhereUniqueInput[]
+    connect?: MEQSSupplierItemWhereUniqueInput | MEQSSupplierItemWhereUniqueInput[]
+    update?: MEQSSupplierItemUpdateWithWhereUniqueWithoutMeqs_supplierInput | MEQSSupplierItemUpdateWithWhereUniqueWithoutMeqs_supplierInput[]
+    updateMany?: MEQSSupplierItemUpdateManyWithWhereWithoutMeqs_supplierInput | MEQSSupplierItemUpdateManyWithWhereWithoutMeqs_supplierInput[]
+    deleteMany?: MEQSSupplierItemScalarWhereInput | MEQSSupplierItemScalarWhereInput[]
   }
 
-  export type ItemCreateNestedManyWithoutUnitInput = {
-    create?: XOR<ItemCreateWithoutUnitInput, ItemUncheckedCreateWithoutUnitInput> | ItemCreateWithoutUnitInput[] | ItemUncheckedCreateWithoutUnitInput[]
-    connectOrCreate?: ItemCreateOrConnectWithoutUnitInput | ItemCreateOrConnectWithoutUnitInput[]
-    createMany?: ItemCreateManyUnitInputEnvelope
-    connect?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+  export type CanvassItemCreateNestedManyWithoutUnitInput = {
+    create?: XOR<CanvassItemCreateWithoutUnitInput, CanvassItemUncheckedCreateWithoutUnitInput> | CanvassItemCreateWithoutUnitInput[] | CanvassItemUncheckedCreateWithoutUnitInput[]
+    connectOrCreate?: CanvassItemCreateOrConnectWithoutUnitInput | CanvassItemCreateOrConnectWithoutUnitInput[]
+    createMany?: CanvassItemCreateManyUnitInputEnvelope
+    connect?: CanvassItemWhereUniqueInput | CanvassItemWhereUniqueInput[]
   }
 
-  export type ItemUncheckedCreateNestedManyWithoutUnitInput = {
-    create?: XOR<ItemCreateWithoutUnitInput, ItemUncheckedCreateWithoutUnitInput> | ItemCreateWithoutUnitInput[] | ItemUncheckedCreateWithoutUnitInput[]
-    connectOrCreate?: ItemCreateOrConnectWithoutUnitInput | ItemCreateOrConnectWithoutUnitInput[]
-    createMany?: ItemCreateManyUnitInputEnvelope
-    connect?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+  export type CanvassItemUncheckedCreateNestedManyWithoutUnitInput = {
+    create?: XOR<CanvassItemCreateWithoutUnitInput, CanvassItemUncheckedCreateWithoutUnitInput> | CanvassItemCreateWithoutUnitInput[] | CanvassItemUncheckedCreateWithoutUnitInput[]
+    connectOrCreate?: CanvassItemCreateOrConnectWithoutUnitInput | CanvassItemCreateOrConnectWithoutUnitInput[]
+    createMany?: CanvassItemCreateManyUnitInputEnvelope
+    connect?: CanvassItemWhereUniqueInput | CanvassItemWhereUniqueInput[]
   }
 
-  export type ItemUpdateManyWithoutUnitNestedInput = {
-    create?: XOR<ItemCreateWithoutUnitInput, ItemUncheckedCreateWithoutUnitInput> | ItemCreateWithoutUnitInput[] | ItemUncheckedCreateWithoutUnitInput[]
-    connectOrCreate?: ItemCreateOrConnectWithoutUnitInput | ItemCreateOrConnectWithoutUnitInput[]
-    upsert?: ItemUpsertWithWhereUniqueWithoutUnitInput | ItemUpsertWithWhereUniqueWithoutUnitInput[]
-    createMany?: ItemCreateManyUnitInputEnvelope
-    set?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
-    disconnect?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
-    delete?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
-    connect?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
-    update?: ItemUpdateWithWhereUniqueWithoutUnitInput | ItemUpdateWithWhereUniqueWithoutUnitInput[]
-    updateMany?: ItemUpdateManyWithWhereWithoutUnitInput | ItemUpdateManyWithWhereWithoutUnitInput[]
-    deleteMany?: ItemScalarWhereInput | ItemScalarWhereInput[]
+  export type CanvassItemUpdateManyWithoutUnitNestedInput = {
+    create?: XOR<CanvassItemCreateWithoutUnitInput, CanvassItemUncheckedCreateWithoutUnitInput> | CanvassItemCreateWithoutUnitInput[] | CanvassItemUncheckedCreateWithoutUnitInput[]
+    connectOrCreate?: CanvassItemCreateOrConnectWithoutUnitInput | CanvassItemCreateOrConnectWithoutUnitInput[]
+    upsert?: CanvassItemUpsertWithWhereUniqueWithoutUnitInput | CanvassItemUpsertWithWhereUniqueWithoutUnitInput[]
+    createMany?: CanvassItemCreateManyUnitInputEnvelope
+    set?: CanvassItemWhereUniqueInput | CanvassItemWhereUniqueInput[]
+    disconnect?: CanvassItemWhereUniqueInput | CanvassItemWhereUniqueInput[]
+    delete?: CanvassItemWhereUniqueInput | CanvassItemWhereUniqueInput[]
+    connect?: CanvassItemWhereUniqueInput | CanvassItemWhereUniqueInput[]
+    update?: CanvassItemUpdateWithWhereUniqueWithoutUnitInput | CanvassItemUpdateWithWhereUniqueWithoutUnitInput[]
+    updateMany?: CanvassItemUpdateManyWithWhereWithoutUnitInput | CanvassItemUpdateManyWithWhereWithoutUnitInput[]
+    deleteMany?: CanvassItemScalarWhereInput | CanvassItemScalarWhereInput[]
   }
 
-  export type ItemUncheckedUpdateManyWithoutUnitNestedInput = {
-    create?: XOR<ItemCreateWithoutUnitInput, ItemUncheckedCreateWithoutUnitInput> | ItemCreateWithoutUnitInput[] | ItemUncheckedCreateWithoutUnitInput[]
-    connectOrCreate?: ItemCreateOrConnectWithoutUnitInput | ItemCreateOrConnectWithoutUnitInput[]
-    upsert?: ItemUpsertWithWhereUniqueWithoutUnitInput | ItemUpsertWithWhereUniqueWithoutUnitInput[]
-    createMany?: ItemCreateManyUnitInputEnvelope
-    set?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
-    disconnect?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
-    delete?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
-    connect?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
-    update?: ItemUpdateWithWhereUniqueWithoutUnitInput | ItemUpdateWithWhereUniqueWithoutUnitInput[]
-    updateMany?: ItemUpdateManyWithWhereWithoutUnitInput | ItemUpdateManyWithWhereWithoutUnitInput[]
-    deleteMany?: ItemScalarWhereInput | ItemScalarWhereInput[]
+  export type CanvassItemUncheckedUpdateManyWithoutUnitNestedInput = {
+    create?: XOR<CanvassItemCreateWithoutUnitInput, CanvassItemUncheckedCreateWithoutUnitInput> | CanvassItemCreateWithoutUnitInput[] | CanvassItemUncheckedCreateWithoutUnitInput[]
+    connectOrCreate?: CanvassItemCreateOrConnectWithoutUnitInput | CanvassItemCreateOrConnectWithoutUnitInput[]
+    upsert?: CanvassItemUpsertWithWhereUniqueWithoutUnitInput | CanvassItemUpsertWithWhereUniqueWithoutUnitInput[]
+    createMany?: CanvassItemCreateManyUnitInputEnvelope
+    set?: CanvassItemWhereUniqueInput | CanvassItemWhereUniqueInput[]
+    disconnect?: CanvassItemWhereUniqueInput | CanvassItemWhereUniqueInput[]
+    delete?: CanvassItemWhereUniqueInput | CanvassItemWhereUniqueInput[]
+    connect?: CanvassItemWhereUniqueInput | CanvassItemWhereUniqueInput[]
+    update?: CanvassItemUpdateWithWhereUniqueWithoutUnitInput | CanvassItemUpdateWithWhereUniqueWithoutUnitInput[]
+    updateMany?: CanvassItemUpdateManyWithWhereWithoutUnitInput | CanvassItemUpdateManyWithWhereWithoutUnitInput[]
+    deleteMany?: CanvassItemScalarWhereInput | CanvassItemScalarWhereInput[]
   }
 
-  export type ItemCreateNestedManyWithoutBrandInput = {
-    create?: XOR<ItemCreateWithoutBrandInput, ItemUncheckedCreateWithoutBrandInput> | ItemCreateWithoutBrandInput[] | ItemUncheckedCreateWithoutBrandInput[]
-    connectOrCreate?: ItemCreateOrConnectWithoutBrandInput | ItemCreateOrConnectWithoutBrandInput[]
-    createMany?: ItemCreateManyBrandInputEnvelope
-    connect?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+  export type CanvassItemCreateNestedManyWithoutBrandInput = {
+    create?: XOR<CanvassItemCreateWithoutBrandInput, CanvassItemUncheckedCreateWithoutBrandInput> | CanvassItemCreateWithoutBrandInput[] | CanvassItemUncheckedCreateWithoutBrandInput[]
+    connectOrCreate?: CanvassItemCreateOrConnectWithoutBrandInput | CanvassItemCreateOrConnectWithoutBrandInput[]
+    createMany?: CanvassItemCreateManyBrandInputEnvelope
+    connect?: CanvassItemWhereUniqueInput | CanvassItemWhereUniqueInput[]
   }
 
-  export type ItemUncheckedCreateNestedManyWithoutBrandInput = {
-    create?: XOR<ItemCreateWithoutBrandInput, ItemUncheckedCreateWithoutBrandInput> | ItemCreateWithoutBrandInput[] | ItemUncheckedCreateWithoutBrandInput[]
-    connectOrCreate?: ItemCreateOrConnectWithoutBrandInput | ItemCreateOrConnectWithoutBrandInput[]
-    createMany?: ItemCreateManyBrandInputEnvelope
-    connect?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+  export type CanvassItemUncheckedCreateNestedManyWithoutBrandInput = {
+    create?: XOR<CanvassItemCreateWithoutBrandInput, CanvassItemUncheckedCreateWithoutBrandInput> | CanvassItemCreateWithoutBrandInput[] | CanvassItemUncheckedCreateWithoutBrandInput[]
+    connectOrCreate?: CanvassItemCreateOrConnectWithoutBrandInput | CanvassItemCreateOrConnectWithoutBrandInput[]
+    createMany?: CanvassItemCreateManyBrandInputEnvelope
+    connect?: CanvassItemWhereUniqueInput | CanvassItemWhereUniqueInput[]
   }
 
-  export type ItemUpdateManyWithoutBrandNestedInput = {
-    create?: XOR<ItemCreateWithoutBrandInput, ItemUncheckedCreateWithoutBrandInput> | ItemCreateWithoutBrandInput[] | ItemUncheckedCreateWithoutBrandInput[]
-    connectOrCreate?: ItemCreateOrConnectWithoutBrandInput | ItemCreateOrConnectWithoutBrandInput[]
-    upsert?: ItemUpsertWithWhereUniqueWithoutBrandInput | ItemUpsertWithWhereUniqueWithoutBrandInput[]
-    createMany?: ItemCreateManyBrandInputEnvelope
-    set?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
-    disconnect?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
-    delete?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
-    connect?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
-    update?: ItemUpdateWithWhereUniqueWithoutBrandInput | ItemUpdateWithWhereUniqueWithoutBrandInput[]
-    updateMany?: ItemUpdateManyWithWhereWithoutBrandInput | ItemUpdateManyWithWhereWithoutBrandInput[]
-    deleteMany?: ItemScalarWhereInput | ItemScalarWhereInput[]
+  export type CanvassItemUpdateManyWithoutBrandNestedInput = {
+    create?: XOR<CanvassItemCreateWithoutBrandInput, CanvassItemUncheckedCreateWithoutBrandInput> | CanvassItemCreateWithoutBrandInput[] | CanvassItemUncheckedCreateWithoutBrandInput[]
+    connectOrCreate?: CanvassItemCreateOrConnectWithoutBrandInput | CanvassItemCreateOrConnectWithoutBrandInput[]
+    upsert?: CanvassItemUpsertWithWhereUniqueWithoutBrandInput | CanvassItemUpsertWithWhereUniqueWithoutBrandInput[]
+    createMany?: CanvassItemCreateManyBrandInputEnvelope
+    set?: CanvassItemWhereUniqueInput | CanvassItemWhereUniqueInput[]
+    disconnect?: CanvassItemWhereUniqueInput | CanvassItemWhereUniqueInput[]
+    delete?: CanvassItemWhereUniqueInput | CanvassItemWhereUniqueInput[]
+    connect?: CanvassItemWhereUniqueInput | CanvassItemWhereUniqueInput[]
+    update?: CanvassItemUpdateWithWhereUniqueWithoutBrandInput | CanvassItemUpdateWithWhereUniqueWithoutBrandInput[]
+    updateMany?: CanvassItemUpdateManyWithWhereWithoutBrandInput | CanvassItemUpdateManyWithWhereWithoutBrandInput[]
+    deleteMany?: CanvassItemScalarWhereInput | CanvassItemScalarWhereInput[]
   }
 
-  export type ItemUncheckedUpdateManyWithoutBrandNestedInput = {
-    create?: XOR<ItemCreateWithoutBrandInput, ItemUncheckedCreateWithoutBrandInput> | ItemCreateWithoutBrandInput[] | ItemUncheckedCreateWithoutBrandInput[]
-    connectOrCreate?: ItemCreateOrConnectWithoutBrandInput | ItemCreateOrConnectWithoutBrandInput[]
-    upsert?: ItemUpsertWithWhereUniqueWithoutBrandInput | ItemUpsertWithWhereUniqueWithoutBrandInput[]
-    createMany?: ItemCreateManyBrandInputEnvelope
-    set?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
-    disconnect?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
-    delete?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
-    connect?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
-    update?: ItemUpdateWithWhereUniqueWithoutBrandInput | ItemUpdateWithWhereUniqueWithoutBrandInput[]
-    updateMany?: ItemUpdateManyWithWhereWithoutBrandInput | ItemUpdateManyWithWhereWithoutBrandInput[]
-    deleteMany?: ItemScalarWhereInput | ItemScalarWhereInput[]
+  export type CanvassItemUncheckedUpdateManyWithoutBrandNestedInput = {
+    create?: XOR<CanvassItemCreateWithoutBrandInput, CanvassItemUncheckedCreateWithoutBrandInput> | CanvassItemCreateWithoutBrandInput[] | CanvassItemUncheckedCreateWithoutBrandInput[]
+    connectOrCreate?: CanvassItemCreateOrConnectWithoutBrandInput | CanvassItemCreateOrConnectWithoutBrandInput[]
+    upsert?: CanvassItemUpsertWithWhereUniqueWithoutBrandInput | CanvassItemUpsertWithWhereUniqueWithoutBrandInput[]
+    createMany?: CanvassItemCreateManyBrandInputEnvelope
+    set?: CanvassItemWhereUniqueInput | CanvassItemWhereUniqueInput[]
+    disconnect?: CanvassItemWhereUniqueInput | CanvassItemWhereUniqueInput[]
+    delete?: CanvassItemWhereUniqueInput | CanvassItemWhereUniqueInput[]
+    connect?: CanvassItemWhereUniqueInput | CanvassItemWhereUniqueInput[]
+    update?: CanvassItemUpdateWithWhereUniqueWithoutBrandInput | CanvassItemUpdateWithWhereUniqueWithoutBrandInput[]
+    updateMany?: CanvassItemUpdateManyWithWhereWithoutBrandInput | CanvassItemUpdateManyWithWhereWithoutBrandInput[]
+    deleteMany?: CanvassItemScalarWhereInput | CanvassItemScalarWhereInput[]
   }
 
   export type SPRCreateNestedManyWithoutVehicleInput = {
@@ -28602,42 +27414,36 @@ export namespace Prisma {
     deleteMany?: SPRScalarWhereInput | SPRScalarWhereInput[]
   }
 
-  export type CanvassItemCreateNestedOneWithoutItemInput = {
-    create?: XOR<CanvassItemCreateWithoutItemInput, CanvassItemUncheckedCreateWithoutItemInput>
-    connectOrCreate?: CanvassItemCreateOrConnectWithoutItemInput
-    connect?: CanvassItemWhereUniqueInput
+  export type CanvassCreateNestedOneWithoutCanvass_itemsInput = {
+    create?: XOR<CanvassCreateWithoutCanvass_itemsInput, CanvassUncheckedCreateWithoutCanvass_itemsInput>
+    connectOrCreate?: CanvassCreateOrConnectWithoutCanvass_itemsInput
+    connect?: CanvassWhereUniqueInput
   }
 
-  export type BrandCreateNestedOneWithoutItemsInput = {
-    create?: XOR<BrandCreateWithoutItemsInput, BrandUncheckedCreateWithoutItemsInput>
-    connectOrCreate?: BrandCreateOrConnectWithoutItemsInput
+  export type BrandCreateNestedOneWithoutCanvass_itemsInput = {
+    create?: XOR<BrandCreateWithoutCanvass_itemsInput, BrandUncheckedCreateWithoutCanvass_itemsInput>
+    connectOrCreate?: BrandCreateOrConnectWithoutCanvass_itemsInput
     connect?: BrandWhereUniqueInput
   }
 
-  export type UnitCreateNestedOneWithoutItemsInput = {
-    create?: XOR<UnitCreateWithoutItemsInput, UnitUncheckedCreateWithoutItemsInput>
-    connectOrCreate?: UnitCreateOrConnectWithoutItemsInput
+  export type UnitCreateNestedOneWithoutCanvass_itemsInput = {
+    create?: XOR<UnitCreateWithoutCanvass_itemsInput, UnitUncheckedCreateWithoutCanvass_itemsInput>
+    connectOrCreate?: UnitCreateOrConnectWithoutCanvass_itemsInput
     connect?: UnitWhereUniqueInput
   }
 
-  export type SupplierItemCreateNestedManyWithoutItemInput = {
-    create?: XOR<SupplierItemCreateWithoutItemInput, SupplierItemUncheckedCreateWithoutItemInput> | SupplierItemCreateWithoutItemInput[] | SupplierItemUncheckedCreateWithoutItemInput[]
-    connectOrCreate?: SupplierItemCreateOrConnectWithoutItemInput | SupplierItemCreateOrConnectWithoutItemInput[]
-    createMany?: SupplierItemCreateManyItemInputEnvelope
-    connect?: SupplierItemWhereUniqueInput | SupplierItemWhereUniqueInput[]
+  export type MEQSSupplierItemCreateNestedManyWithoutCanvass_itemInput = {
+    create?: XOR<MEQSSupplierItemCreateWithoutCanvass_itemInput, MEQSSupplierItemUncheckedCreateWithoutCanvass_itemInput> | MEQSSupplierItemCreateWithoutCanvass_itemInput[] | MEQSSupplierItemUncheckedCreateWithoutCanvass_itemInput[]
+    connectOrCreate?: MEQSSupplierItemCreateOrConnectWithoutCanvass_itemInput | MEQSSupplierItemCreateOrConnectWithoutCanvass_itemInput[]
+    createMany?: MEQSSupplierItemCreateManyCanvass_itemInputEnvelope
+    connect?: MEQSSupplierItemWhereUniqueInput | MEQSSupplierItemWhereUniqueInput[]
   }
 
-  export type CanvassItemUncheckedCreateNestedOneWithoutItemInput = {
-    create?: XOR<CanvassItemCreateWithoutItemInput, CanvassItemUncheckedCreateWithoutItemInput>
-    connectOrCreate?: CanvassItemCreateOrConnectWithoutItemInput
-    connect?: CanvassItemWhereUniqueInput
-  }
-
-  export type SupplierItemUncheckedCreateNestedManyWithoutItemInput = {
-    create?: XOR<SupplierItemCreateWithoutItemInput, SupplierItemUncheckedCreateWithoutItemInput> | SupplierItemCreateWithoutItemInput[] | SupplierItemUncheckedCreateWithoutItemInput[]
-    connectOrCreate?: SupplierItemCreateOrConnectWithoutItemInput | SupplierItemCreateOrConnectWithoutItemInput[]
-    createMany?: SupplierItemCreateManyItemInputEnvelope
-    connect?: SupplierItemWhereUniqueInput | SupplierItemWhereUniqueInput[]
+  export type MEQSSupplierItemUncheckedCreateNestedManyWithoutCanvass_itemInput = {
+    create?: XOR<MEQSSupplierItemCreateWithoutCanvass_itemInput, MEQSSupplierItemUncheckedCreateWithoutCanvass_itemInput> | MEQSSupplierItemCreateWithoutCanvass_itemInput[] | MEQSSupplierItemUncheckedCreateWithoutCanvass_itemInput[]
+    connectOrCreate?: MEQSSupplierItemCreateOrConnectWithoutCanvass_itemInput | MEQSSupplierItemCreateOrConnectWithoutCanvass_itemInput[]
+    createMany?: MEQSSupplierItemCreateManyCanvass_itemInputEnvelope
+    connect?: MEQSSupplierItemWhereUniqueInput | MEQSSupplierItemWhereUniqueInput[]
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -28648,74 +27454,62 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type CanvassItemUpdateOneWithoutItemNestedInput = {
-    create?: XOR<CanvassItemCreateWithoutItemInput, CanvassItemUncheckedCreateWithoutItemInput>
-    connectOrCreate?: CanvassItemCreateOrConnectWithoutItemInput
-    upsert?: CanvassItemUpsertWithoutItemInput
-    disconnect?: CanvassItemWhereInput | boolean
-    delete?: CanvassItemWhereInput | boolean
-    connect?: CanvassItemWhereUniqueInput
-    update?: XOR<XOR<CanvassItemUpdateToOneWithWhereWithoutItemInput, CanvassItemUpdateWithoutItemInput>, CanvassItemUncheckedUpdateWithoutItemInput>
+  export type CanvassUpdateOneRequiredWithoutCanvass_itemsNestedInput = {
+    create?: XOR<CanvassCreateWithoutCanvass_itemsInput, CanvassUncheckedCreateWithoutCanvass_itemsInput>
+    connectOrCreate?: CanvassCreateOrConnectWithoutCanvass_itemsInput
+    upsert?: CanvassUpsertWithoutCanvass_itemsInput
+    connect?: CanvassWhereUniqueInput
+    update?: XOR<XOR<CanvassUpdateToOneWithWhereWithoutCanvass_itemsInput, CanvassUpdateWithoutCanvass_itemsInput>, CanvassUncheckedUpdateWithoutCanvass_itemsInput>
   }
 
-  export type BrandUpdateOneWithoutItemsNestedInput = {
-    create?: XOR<BrandCreateWithoutItemsInput, BrandUncheckedCreateWithoutItemsInput>
-    connectOrCreate?: BrandCreateOrConnectWithoutItemsInput
-    upsert?: BrandUpsertWithoutItemsInput
+  export type BrandUpdateOneWithoutCanvass_itemsNestedInput = {
+    create?: XOR<BrandCreateWithoutCanvass_itemsInput, BrandUncheckedCreateWithoutCanvass_itemsInput>
+    connectOrCreate?: BrandCreateOrConnectWithoutCanvass_itemsInput
+    upsert?: BrandUpsertWithoutCanvass_itemsInput
     disconnect?: BrandWhereInput | boolean
     delete?: BrandWhereInput | boolean
     connect?: BrandWhereUniqueInput
-    update?: XOR<XOR<BrandUpdateToOneWithWhereWithoutItemsInput, BrandUpdateWithoutItemsInput>, BrandUncheckedUpdateWithoutItemsInput>
+    update?: XOR<XOR<BrandUpdateToOneWithWhereWithoutCanvass_itemsInput, BrandUpdateWithoutCanvass_itemsInput>, BrandUncheckedUpdateWithoutCanvass_itemsInput>
   }
 
-  export type UnitUpdateOneRequiredWithoutItemsNestedInput = {
-    create?: XOR<UnitCreateWithoutItemsInput, UnitUncheckedCreateWithoutItemsInput>
-    connectOrCreate?: UnitCreateOrConnectWithoutItemsInput
-    upsert?: UnitUpsertWithoutItemsInput
+  export type UnitUpdateOneRequiredWithoutCanvass_itemsNestedInput = {
+    create?: XOR<UnitCreateWithoutCanvass_itemsInput, UnitUncheckedCreateWithoutCanvass_itemsInput>
+    connectOrCreate?: UnitCreateOrConnectWithoutCanvass_itemsInput
+    upsert?: UnitUpsertWithoutCanvass_itemsInput
     connect?: UnitWhereUniqueInput
-    update?: XOR<XOR<UnitUpdateToOneWithWhereWithoutItemsInput, UnitUpdateWithoutItemsInput>, UnitUncheckedUpdateWithoutItemsInput>
+    update?: XOR<XOR<UnitUpdateToOneWithWhereWithoutCanvass_itemsInput, UnitUpdateWithoutCanvass_itemsInput>, UnitUncheckedUpdateWithoutCanvass_itemsInput>
   }
 
-  export type SupplierItemUpdateManyWithoutItemNestedInput = {
-    create?: XOR<SupplierItemCreateWithoutItemInput, SupplierItemUncheckedCreateWithoutItemInput> | SupplierItemCreateWithoutItemInput[] | SupplierItemUncheckedCreateWithoutItemInput[]
-    connectOrCreate?: SupplierItemCreateOrConnectWithoutItemInput | SupplierItemCreateOrConnectWithoutItemInput[]
-    upsert?: SupplierItemUpsertWithWhereUniqueWithoutItemInput | SupplierItemUpsertWithWhereUniqueWithoutItemInput[]
-    createMany?: SupplierItemCreateManyItemInputEnvelope
-    set?: SupplierItemWhereUniqueInput | SupplierItemWhereUniqueInput[]
-    disconnect?: SupplierItemWhereUniqueInput | SupplierItemWhereUniqueInput[]
-    delete?: SupplierItemWhereUniqueInput | SupplierItemWhereUniqueInput[]
-    connect?: SupplierItemWhereUniqueInput | SupplierItemWhereUniqueInput[]
-    update?: SupplierItemUpdateWithWhereUniqueWithoutItemInput | SupplierItemUpdateWithWhereUniqueWithoutItemInput[]
-    updateMany?: SupplierItemUpdateManyWithWhereWithoutItemInput | SupplierItemUpdateManyWithWhereWithoutItemInput[]
-    deleteMany?: SupplierItemScalarWhereInput | SupplierItemScalarWhereInput[]
+  export type MEQSSupplierItemUpdateManyWithoutCanvass_itemNestedInput = {
+    create?: XOR<MEQSSupplierItemCreateWithoutCanvass_itemInput, MEQSSupplierItemUncheckedCreateWithoutCanvass_itemInput> | MEQSSupplierItemCreateWithoutCanvass_itemInput[] | MEQSSupplierItemUncheckedCreateWithoutCanvass_itemInput[]
+    connectOrCreate?: MEQSSupplierItemCreateOrConnectWithoutCanvass_itemInput | MEQSSupplierItemCreateOrConnectWithoutCanvass_itemInput[]
+    upsert?: MEQSSupplierItemUpsertWithWhereUniqueWithoutCanvass_itemInput | MEQSSupplierItemUpsertWithWhereUniqueWithoutCanvass_itemInput[]
+    createMany?: MEQSSupplierItemCreateManyCanvass_itemInputEnvelope
+    set?: MEQSSupplierItemWhereUniqueInput | MEQSSupplierItemWhereUniqueInput[]
+    disconnect?: MEQSSupplierItemWhereUniqueInput | MEQSSupplierItemWhereUniqueInput[]
+    delete?: MEQSSupplierItemWhereUniqueInput | MEQSSupplierItemWhereUniqueInput[]
+    connect?: MEQSSupplierItemWhereUniqueInput | MEQSSupplierItemWhereUniqueInput[]
+    update?: MEQSSupplierItemUpdateWithWhereUniqueWithoutCanvass_itemInput | MEQSSupplierItemUpdateWithWhereUniqueWithoutCanvass_itemInput[]
+    updateMany?: MEQSSupplierItemUpdateManyWithWhereWithoutCanvass_itemInput | MEQSSupplierItemUpdateManyWithWhereWithoutCanvass_itemInput[]
+    deleteMany?: MEQSSupplierItemScalarWhereInput | MEQSSupplierItemScalarWhereInput[]
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
   }
 
-  export type CanvassItemUncheckedUpdateOneWithoutItemNestedInput = {
-    create?: XOR<CanvassItemCreateWithoutItemInput, CanvassItemUncheckedCreateWithoutItemInput>
-    connectOrCreate?: CanvassItemCreateOrConnectWithoutItemInput
-    upsert?: CanvassItemUpsertWithoutItemInput
-    disconnect?: CanvassItemWhereInput | boolean
-    delete?: CanvassItemWhereInput | boolean
-    connect?: CanvassItemWhereUniqueInput
-    update?: XOR<XOR<CanvassItemUpdateToOneWithWhereWithoutItemInput, CanvassItemUpdateWithoutItemInput>, CanvassItemUncheckedUpdateWithoutItemInput>
-  }
-
-  export type SupplierItemUncheckedUpdateManyWithoutItemNestedInput = {
-    create?: XOR<SupplierItemCreateWithoutItemInput, SupplierItemUncheckedCreateWithoutItemInput> | SupplierItemCreateWithoutItemInput[] | SupplierItemUncheckedCreateWithoutItemInput[]
-    connectOrCreate?: SupplierItemCreateOrConnectWithoutItemInput | SupplierItemCreateOrConnectWithoutItemInput[]
-    upsert?: SupplierItemUpsertWithWhereUniqueWithoutItemInput | SupplierItemUpsertWithWhereUniqueWithoutItemInput[]
-    createMany?: SupplierItemCreateManyItemInputEnvelope
-    set?: SupplierItemWhereUniqueInput | SupplierItemWhereUniqueInput[]
-    disconnect?: SupplierItemWhereUniqueInput | SupplierItemWhereUniqueInput[]
-    delete?: SupplierItemWhereUniqueInput | SupplierItemWhereUniqueInput[]
-    connect?: SupplierItemWhereUniqueInput | SupplierItemWhereUniqueInput[]
-    update?: SupplierItemUpdateWithWhereUniqueWithoutItemInput | SupplierItemUpdateWithWhereUniqueWithoutItemInput[]
-    updateMany?: SupplierItemUpdateManyWithWhereWithoutItemInput | SupplierItemUpdateManyWithWhereWithoutItemInput[]
-    deleteMany?: SupplierItemScalarWhereInput | SupplierItemScalarWhereInput[]
+  export type MEQSSupplierItemUncheckedUpdateManyWithoutCanvass_itemNestedInput = {
+    create?: XOR<MEQSSupplierItemCreateWithoutCanvass_itemInput, MEQSSupplierItemUncheckedCreateWithoutCanvass_itemInput> | MEQSSupplierItemCreateWithoutCanvass_itemInput[] | MEQSSupplierItemUncheckedCreateWithoutCanvass_itemInput[]
+    connectOrCreate?: MEQSSupplierItemCreateOrConnectWithoutCanvass_itemInput | MEQSSupplierItemCreateOrConnectWithoutCanvass_itemInput[]
+    upsert?: MEQSSupplierItemUpsertWithWhereUniqueWithoutCanvass_itemInput | MEQSSupplierItemUpsertWithWhereUniqueWithoutCanvass_itemInput[]
+    createMany?: MEQSSupplierItemCreateManyCanvass_itemInputEnvelope
+    set?: MEQSSupplierItemWhereUniqueInput | MEQSSupplierItemWhereUniqueInput[]
+    disconnect?: MEQSSupplierItemWhereUniqueInput | MEQSSupplierItemWhereUniqueInput[]
+    delete?: MEQSSupplierItemWhereUniqueInput | MEQSSupplierItemWhereUniqueInput[]
+    connect?: MEQSSupplierItemWhereUniqueInput | MEQSSupplierItemWhereUniqueInput[]
+    update?: MEQSSupplierItemUpdateWithWhereUniqueWithoutCanvass_itemInput | MEQSSupplierItemUpdateWithWhereUniqueWithoutCanvass_itemInput[]
+    updateMany?: MEQSSupplierItemUpdateManyWithWhereWithoutCanvass_itemInput | MEQSSupplierItemUpdateManyWithWhereWithoutCanvass_itemInput[]
+    deleteMany?: MEQSSupplierItemScalarWhereInput | MEQSSupplierItemScalarWhereInput[]
   }
 
   export type CanvassItemCreateNestedManyWithoutCanvassInput = {
@@ -28856,70 +27650,6 @@ export namespace Prisma {
     update?: XOR<XOR<SPRUpdateToOneWithWhereWithoutCanvassInput, SPRUpdateWithoutCanvassInput>, SPRUncheckedUpdateWithoutCanvassInput>
   }
 
-  export type CanvassCreateNestedOneWithoutCanvass_itemsInput = {
-    create?: XOR<CanvassCreateWithoutCanvass_itemsInput, CanvassUncheckedCreateWithoutCanvass_itemsInput>
-    connectOrCreate?: CanvassCreateOrConnectWithoutCanvass_itemsInput
-    connect?: CanvassWhereUniqueInput
-  }
-
-  export type ItemCreateNestedOneWithoutCanvass_itemInput = {
-    create?: XOR<ItemCreateWithoutCanvass_itemInput, ItemUncheckedCreateWithoutCanvass_itemInput>
-    connectOrCreate?: ItemCreateOrConnectWithoutCanvass_itemInput
-    connect?: ItemWhereUniqueInput
-  }
-
-  export type CanvassUpdateOneRequiredWithoutCanvass_itemsNestedInput = {
-    create?: XOR<CanvassCreateWithoutCanvass_itemsInput, CanvassUncheckedCreateWithoutCanvass_itemsInput>
-    connectOrCreate?: CanvassCreateOrConnectWithoutCanvass_itemsInput
-    upsert?: CanvassUpsertWithoutCanvass_itemsInput
-    connect?: CanvassWhereUniqueInput
-    update?: XOR<XOR<CanvassUpdateToOneWithWhereWithoutCanvass_itemsInput, CanvassUpdateWithoutCanvass_itemsInput>, CanvassUncheckedUpdateWithoutCanvass_itemsInput>
-  }
-
-  export type ItemUpdateOneRequiredWithoutCanvass_itemNestedInput = {
-    create?: XOR<ItemCreateWithoutCanvass_itemInput, ItemUncheckedCreateWithoutCanvass_itemInput>
-    connectOrCreate?: ItemCreateOrConnectWithoutCanvass_itemInput
-    upsert?: ItemUpsertWithoutCanvass_itemInput
-    connect?: ItemWhereUniqueInput
-    update?: XOR<XOR<ItemUpdateToOneWithWhereWithoutCanvass_itemInput, ItemUpdateWithoutCanvass_itemInput>, ItemUncheckedUpdateWithoutCanvass_itemInput>
-  }
-
-  export type ItemCreateNestedOneWithoutSupplier_itemsInput = {
-    create?: XOR<ItemCreateWithoutSupplier_itemsInput, ItemUncheckedCreateWithoutSupplier_itemsInput>
-    connectOrCreate?: ItemCreateOrConnectWithoutSupplier_itemsInput
-    connect?: ItemWhereUniqueInput
-  }
-
-  export type SupplierCreateNestedOneWithoutSupplier_itemsInput = {
-    create?: XOR<SupplierCreateWithoutSupplier_itemsInput, SupplierUncheckedCreateWithoutSupplier_itemsInput>
-    connectOrCreate?: SupplierCreateOrConnectWithoutSupplier_itemsInput
-    connect?: SupplierWhereUniqueInput
-  }
-
-  export type FloatFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
-  export type ItemUpdateOneRequiredWithoutSupplier_itemsNestedInput = {
-    create?: XOR<ItemCreateWithoutSupplier_itemsInput, ItemUncheckedCreateWithoutSupplier_itemsInput>
-    connectOrCreate?: ItemCreateOrConnectWithoutSupplier_itemsInput
-    upsert?: ItemUpsertWithoutSupplier_itemsInput
-    connect?: ItemWhereUniqueInput
-    update?: XOR<XOR<ItemUpdateToOneWithWhereWithoutSupplier_itemsInput, ItemUpdateWithoutSupplier_itemsInput>, ItemUncheckedUpdateWithoutSupplier_itemsInput>
-  }
-
-  export type SupplierUpdateOneRequiredWithoutSupplier_itemsNestedInput = {
-    create?: XOR<SupplierCreateWithoutSupplier_itemsInput, SupplierUncheckedCreateWithoutSupplier_itemsInput>
-    connectOrCreate?: SupplierCreateOrConnectWithoutSupplier_itemsInput
-    upsert?: SupplierUpsertWithoutSupplier_itemsInput
-    connect?: SupplierWhereUniqueInput
-    update?: XOR<XOR<SupplierUpdateToOneWithWhereWithoutSupplier_itemsInput, SupplierUpdateWithoutSupplier_itemsInput>, SupplierUncheckedUpdateWithoutSupplier_itemsInput>
-  }
-
   export type JOApproverCreateNestedManyWithoutJoInput = {
     create?: XOR<JOApproverCreateWithoutJoInput, JOApproverUncheckedCreateWithoutJoInput> | JOApproverCreateWithoutJoInput[] | JOApproverUncheckedCreateWithoutJoInput[]
     connectOrCreate?: JOApproverCreateOrConnectWithoutJoInput | JOApproverCreateOrConnectWithoutJoInput[]
@@ -28927,9 +27657,9 @@ export namespace Prisma {
     connect?: JOApproverWhereUniqueInput | JOApproverWhereUniqueInput[]
   }
 
-  export type CanvassCreateNestedOneWithoutJosInput = {
-    create?: XOR<CanvassCreateWithoutJosInput, CanvassUncheckedCreateWithoutJosInput>
-    connectOrCreate?: CanvassCreateOrConnectWithoutJosInput
+  export type CanvassCreateNestedOneWithoutJoInput = {
+    create?: XOR<CanvassCreateWithoutJoInput, CanvassUncheckedCreateWithoutJoInput>
+    connectOrCreate?: CanvassCreateOrConnectWithoutJoInput
     connect?: CanvassWhereUniqueInput
   }
 
@@ -28966,12 +27696,12 @@ export namespace Prisma {
     deleteMany?: JOApproverScalarWhereInput | JOApproverScalarWhereInput[]
   }
 
-  export type CanvassUpdateOneRequiredWithoutJosNestedInput = {
-    create?: XOR<CanvassCreateWithoutJosInput, CanvassUncheckedCreateWithoutJosInput>
-    connectOrCreate?: CanvassCreateOrConnectWithoutJosInput
-    upsert?: CanvassUpsertWithoutJosInput
+  export type CanvassUpdateOneRequiredWithoutJoNestedInput = {
+    create?: XOR<CanvassCreateWithoutJoInput, CanvassUncheckedCreateWithoutJoInput>
+    connectOrCreate?: CanvassCreateOrConnectWithoutJoInput
+    upsert?: CanvassUpsertWithoutJoInput
     connect?: CanvassWhereUniqueInput
-    update?: XOR<XOR<CanvassUpdateToOneWithWhereWithoutJosInput, CanvassUpdateWithoutJosInput>, CanvassUncheckedUpdateWithoutJosInput>
+    update?: XOR<XOR<CanvassUpdateToOneWithWhereWithoutJoInput, CanvassUpdateWithoutJoInput>, CanvassUncheckedUpdateWithoutJoInput>
   }
 
   export type MEQSUpdateOneWithoutJoNestedInput = {
@@ -29032,9 +27762,9 @@ export namespace Prisma {
     connect?: MEQSWhereUniqueInput
   }
 
-  export type CanvassCreateNestedOneWithoutRvsInput = {
-    create?: XOR<CanvassCreateWithoutRvsInput, CanvassUncheckedCreateWithoutRvsInput>
-    connectOrCreate?: CanvassCreateOrConnectWithoutRvsInput
+  export type CanvassCreateNestedOneWithoutRvInput = {
+    create?: XOR<CanvassCreateWithoutRvInput, CanvassUncheckedCreateWithoutRvInput>
+    connectOrCreate?: CanvassCreateOrConnectWithoutRvInput
     connect?: CanvassWhereUniqueInput
   }
 
@@ -29068,12 +27798,12 @@ export namespace Prisma {
     update?: XOR<XOR<MEQSUpdateToOneWithWhereWithoutRvInput, MEQSUpdateWithoutRvInput>, MEQSUncheckedUpdateWithoutRvInput>
   }
 
-  export type CanvassUpdateOneRequiredWithoutRvsNestedInput = {
-    create?: XOR<CanvassCreateWithoutRvsInput, CanvassUncheckedCreateWithoutRvsInput>
-    connectOrCreate?: CanvassCreateOrConnectWithoutRvsInput
-    upsert?: CanvassUpsertWithoutRvsInput
+  export type CanvassUpdateOneRequiredWithoutRvNestedInput = {
+    create?: XOR<CanvassCreateWithoutRvInput, CanvassUncheckedCreateWithoutRvInput>
+    connectOrCreate?: CanvassCreateOrConnectWithoutRvInput
+    upsert?: CanvassUpsertWithoutRvInput
     connect?: CanvassWhereUniqueInput
-    update?: XOR<XOR<CanvassUpdateToOneWithWhereWithoutRvsInput, CanvassUpdateWithoutRvsInput>, CanvassUncheckedUpdateWithoutRvsInput>
+    update?: XOR<XOR<CanvassUpdateToOneWithWhereWithoutRvInput, CanvassUpdateWithoutRvInput>, CanvassUncheckedUpdateWithoutRvInput>
   }
 
   export type RVApproverUpdateManyWithoutRvNestedInput = {
@@ -29134,9 +27864,9 @@ export namespace Prisma {
     connect?: MEQSWhereUniqueInput
   }
 
-  export type CanvassCreateNestedOneWithoutSprsInput = {
-    create?: XOR<CanvassCreateWithoutSprsInput, CanvassUncheckedCreateWithoutSprsInput>
-    connectOrCreate?: CanvassCreateOrConnectWithoutSprsInput
+  export type CanvassCreateNestedOneWithoutSprInput = {
+    create?: XOR<CanvassCreateWithoutSprInput, CanvassUncheckedCreateWithoutSprInput>
+    connectOrCreate?: CanvassCreateOrConnectWithoutSprInput
     connect?: CanvassWhereUniqueInput
   }
 
@@ -29176,12 +27906,12 @@ export namespace Prisma {
     update?: XOR<XOR<MEQSUpdateToOneWithWhereWithoutSprInput, MEQSUpdateWithoutSprInput>, MEQSUncheckedUpdateWithoutSprInput>
   }
 
-  export type CanvassUpdateOneRequiredWithoutSprsNestedInput = {
-    create?: XOR<CanvassCreateWithoutSprsInput, CanvassUncheckedCreateWithoutSprsInput>
-    connectOrCreate?: CanvassCreateOrConnectWithoutSprsInput
-    upsert?: CanvassUpsertWithoutSprsInput
+  export type CanvassUpdateOneRequiredWithoutSprNestedInput = {
+    create?: XOR<CanvassCreateWithoutSprInput, CanvassUncheckedCreateWithoutSprInput>
+    connectOrCreate?: CanvassCreateOrConnectWithoutSprInput
+    upsert?: CanvassUpsertWithoutSprInput
     connect?: CanvassWhereUniqueInput
-    update?: XOR<XOR<CanvassUpdateToOneWithWhereWithoutSprsInput, CanvassUpdateWithoutSprsInput>, CanvassUncheckedUpdateWithoutSprsInput>
+    update?: XOR<XOR<CanvassUpdateToOneWithWhereWithoutSprInput, CanvassUpdateWithoutSprInput>, CanvassUncheckedUpdateWithoutSprInput>
   }
 
   export type VehicleUpdateOneRequiredWithoutSprsNestedInput = {
@@ -29478,6 +28208,42 @@ export namespace Prisma {
     update?: XOR<XOR<POUpdateToOneWithWhereWithoutMeqs_supplierInput, POUpdateWithoutMeqs_supplierInput>, POUncheckedUpdateWithoutMeqs_supplierInput>
   }
 
+  export type CanvassItemCreateNestedOneWithoutMeqs_supplier_itemsInput = {
+    create?: XOR<CanvassItemCreateWithoutMeqs_supplier_itemsInput, CanvassItemUncheckedCreateWithoutMeqs_supplier_itemsInput>
+    connectOrCreate?: CanvassItemCreateOrConnectWithoutMeqs_supplier_itemsInput
+    connect?: CanvassItemWhereUniqueInput
+  }
+
+  export type SupplierCreateNestedOneWithoutMeqs_supplier_itemsInput = {
+    create?: XOR<SupplierCreateWithoutMeqs_supplier_itemsInput, SupplierUncheckedCreateWithoutMeqs_supplier_itemsInput>
+    connectOrCreate?: SupplierCreateOrConnectWithoutMeqs_supplier_itemsInput
+    connect?: SupplierWhereUniqueInput
+  }
+
+  export type FloatFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type CanvassItemUpdateOneRequiredWithoutMeqs_supplier_itemsNestedInput = {
+    create?: XOR<CanvassItemCreateWithoutMeqs_supplier_itemsInput, CanvassItemUncheckedCreateWithoutMeqs_supplier_itemsInput>
+    connectOrCreate?: CanvassItemCreateOrConnectWithoutMeqs_supplier_itemsInput
+    upsert?: CanvassItemUpsertWithoutMeqs_supplier_itemsInput
+    connect?: CanvassItemWhereUniqueInput
+    update?: XOR<XOR<CanvassItemUpdateToOneWithWhereWithoutMeqs_supplier_itemsInput, CanvassItemUpdateWithoutMeqs_supplier_itemsInput>, CanvassItemUncheckedUpdateWithoutMeqs_supplier_itemsInput>
+  }
+
+  export type SupplierUpdateOneRequiredWithoutMeqs_supplier_itemsNestedInput = {
+    create?: XOR<SupplierCreateWithoutMeqs_supplier_itemsInput, SupplierUncheckedCreateWithoutMeqs_supplier_itemsInput>
+    connectOrCreate?: SupplierCreateOrConnectWithoutMeqs_supplier_itemsInput
+    upsert?: SupplierUpsertWithoutMeqs_supplier_itemsInput
+    connect?: SupplierWhereUniqueInput
+    update?: XOR<XOR<SupplierUpdateToOneWithWhereWithoutMeqs_supplier_itemsInput, SupplierUpdateWithoutMeqs_supplier_itemsInput>, SupplierUncheckedUpdateWithoutMeqs_supplier_itemsInput>
+  }
+
   export type MEQSSupplierCreateNestedOneWithoutAttachmentsInput = {
     create?: XOR<MEQSSupplierCreateWithoutAttachmentsInput, MEQSSupplierUncheckedCreateWithoutAttachmentsInput>
     connectOrCreate?: MEQSSupplierCreateOrConnectWithoutAttachmentsInput
@@ -29725,22 +28491,6 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
-  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedFloatFilter<$PrismaModel>
-    _min?: NestedFloatFilter<$PrismaModel>
-    _max?: NestedFloatFilter<$PrismaModel>
-  }
-
   export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -29764,6 +28514,22 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
   }
 
   export type MEQSSupplierCreateWithoutSupplierInput = {
@@ -29800,7 +28566,7 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type SupplierItemCreateWithoutSupplierInput = {
+  export type MEQSSupplierItemCreateWithoutMeqs_supplierInput = {
     id?: string
     price: number
     is_awarded?: boolean
@@ -29808,12 +28574,12 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    item: ItemCreateNestedOneWithoutSupplier_itemsInput
+    canvass_item: CanvassItemCreateNestedOneWithoutMeqs_supplier_itemsInput
   }
 
-  export type SupplierItemUncheckedCreateWithoutSupplierInput = {
+  export type MEQSSupplierItemUncheckedCreateWithoutMeqs_supplierInput = {
     id?: string
-    item_id: string
+    canvass_item_id: string
     price: number
     is_awarded?: boolean
     notes?: string | null
@@ -29822,13 +28588,13 @@ export namespace Prisma {
     is_deleted?: boolean
   }
 
-  export type SupplierItemCreateOrConnectWithoutSupplierInput = {
-    where: SupplierItemWhereUniqueInput
-    create: XOR<SupplierItemCreateWithoutSupplierInput, SupplierItemUncheckedCreateWithoutSupplierInput>
+  export type MEQSSupplierItemCreateOrConnectWithoutMeqs_supplierInput = {
+    where: MEQSSupplierItemWhereUniqueInput
+    create: XOR<MEQSSupplierItemCreateWithoutMeqs_supplierInput, MEQSSupplierItemUncheckedCreateWithoutMeqs_supplierInput>
   }
 
-  export type SupplierItemCreateManySupplierInputEnvelope = {
-    data: SupplierItemCreateManySupplierInput | SupplierItemCreateManySupplierInput[]
+  export type MEQSSupplierItemCreateManyMeqs_supplierInputEnvelope = {
+    data: MEQSSupplierItemCreateManyMeqs_supplierInput | MEQSSupplierItemCreateManyMeqs_supplierInput[]
     skipDuplicates?: boolean
   }
 
@@ -29862,149 +28628,150 @@ export namespace Prisma {
     is_deleted?: BoolFilter<"MEQSSupplier"> | boolean
   }
 
-  export type SupplierItemUpsertWithWhereUniqueWithoutSupplierInput = {
-    where: SupplierItemWhereUniqueInput
-    update: XOR<SupplierItemUpdateWithoutSupplierInput, SupplierItemUncheckedUpdateWithoutSupplierInput>
-    create: XOR<SupplierItemCreateWithoutSupplierInput, SupplierItemUncheckedCreateWithoutSupplierInput>
+  export type MEQSSupplierItemUpsertWithWhereUniqueWithoutMeqs_supplierInput = {
+    where: MEQSSupplierItemWhereUniqueInput
+    update: XOR<MEQSSupplierItemUpdateWithoutMeqs_supplierInput, MEQSSupplierItemUncheckedUpdateWithoutMeqs_supplierInput>
+    create: XOR<MEQSSupplierItemCreateWithoutMeqs_supplierInput, MEQSSupplierItemUncheckedCreateWithoutMeqs_supplierInput>
   }
 
-  export type SupplierItemUpdateWithWhereUniqueWithoutSupplierInput = {
-    where: SupplierItemWhereUniqueInput
-    data: XOR<SupplierItemUpdateWithoutSupplierInput, SupplierItemUncheckedUpdateWithoutSupplierInput>
+  export type MEQSSupplierItemUpdateWithWhereUniqueWithoutMeqs_supplierInput = {
+    where: MEQSSupplierItemWhereUniqueInput
+    data: XOR<MEQSSupplierItemUpdateWithoutMeqs_supplierInput, MEQSSupplierItemUncheckedUpdateWithoutMeqs_supplierInput>
   }
 
-  export type SupplierItemUpdateManyWithWhereWithoutSupplierInput = {
-    where: SupplierItemScalarWhereInput
-    data: XOR<SupplierItemUpdateManyMutationInput, SupplierItemUncheckedUpdateManyWithoutSupplierInput>
+  export type MEQSSupplierItemUpdateManyWithWhereWithoutMeqs_supplierInput = {
+    where: MEQSSupplierItemScalarWhereInput
+    data: XOR<MEQSSupplierItemUpdateManyMutationInput, MEQSSupplierItemUncheckedUpdateManyWithoutMeqs_supplierInput>
   }
 
-  export type SupplierItemScalarWhereInput = {
-    AND?: SupplierItemScalarWhereInput | SupplierItemScalarWhereInput[]
-    OR?: SupplierItemScalarWhereInput[]
-    NOT?: SupplierItemScalarWhereInput | SupplierItemScalarWhereInput[]
-    id?: StringFilter<"SupplierItem"> | string
-    item_id?: StringFilter<"SupplierItem"> | string
-    supplier_id?: StringFilter<"SupplierItem"> | string
-    price?: FloatFilter<"SupplierItem"> | number
-    is_awarded?: BoolFilter<"SupplierItem"> | boolean
-    notes?: StringNullableFilter<"SupplierItem"> | string | null
-    created_at?: DateTimeFilter<"SupplierItem"> | Date | string
-    updated_at?: DateTimeFilter<"SupplierItem"> | Date | string
-    is_deleted?: BoolFilter<"SupplierItem"> | boolean
+  export type MEQSSupplierItemScalarWhereInput = {
+    AND?: MEQSSupplierItemScalarWhereInput | MEQSSupplierItemScalarWhereInput[]
+    OR?: MEQSSupplierItemScalarWhereInput[]
+    NOT?: MEQSSupplierItemScalarWhereInput | MEQSSupplierItemScalarWhereInput[]
+    id?: StringFilter<"MEQSSupplierItem"> | string
+    canvass_item_id?: StringFilter<"MEQSSupplierItem"> | string
+    meqs_supplier_id?: StringFilter<"MEQSSupplierItem"> | string
+    price?: FloatFilter<"MEQSSupplierItem"> | number
+    is_awarded?: BoolFilter<"MEQSSupplierItem"> | boolean
+    notes?: StringNullableFilter<"MEQSSupplierItem"> | string | null
+    created_at?: DateTimeFilter<"MEQSSupplierItem"> | Date | string
+    updated_at?: DateTimeFilter<"MEQSSupplierItem"> | Date | string
+    is_deleted?: BoolFilter<"MEQSSupplierItem"> | boolean
   }
 
-  export type ItemCreateWithoutUnitInput = {
+  export type CanvassItemCreateWithoutUnitInput = {
     id?: string
     description: string
     quantity: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    canvass_item?: CanvassItemCreateNestedOneWithoutItemInput
-    brand?: BrandCreateNestedOneWithoutItemsInput
-    supplier_items?: SupplierItemCreateNestedManyWithoutItemInput
+    canvass: CanvassCreateNestedOneWithoutCanvass_itemsInput
+    brand?: BrandCreateNestedOneWithoutCanvass_itemsInput
+    meqs_supplier_items?: MEQSSupplierItemCreateNestedManyWithoutCanvass_itemInput
   }
 
-  export type ItemUncheckedCreateWithoutUnitInput = {
+  export type CanvassItemUncheckedCreateWithoutUnitInput = {
     id?: string
+    canvass_id: string
     description: string
     brand_id?: string | null
     quantity: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    canvass_item?: CanvassItemUncheckedCreateNestedOneWithoutItemInput
-    supplier_items?: SupplierItemUncheckedCreateNestedManyWithoutItemInput
+    meqs_supplier_items?: MEQSSupplierItemUncheckedCreateNestedManyWithoutCanvass_itemInput
   }
 
-  export type ItemCreateOrConnectWithoutUnitInput = {
-    where: ItemWhereUniqueInput
-    create: XOR<ItemCreateWithoutUnitInput, ItemUncheckedCreateWithoutUnitInput>
+  export type CanvassItemCreateOrConnectWithoutUnitInput = {
+    where: CanvassItemWhereUniqueInput
+    create: XOR<CanvassItemCreateWithoutUnitInput, CanvassItemUncheckedCreateWithoutUnitInput>
   }
 
-  export type ItemCreateManyUnitInputEnvelope = {
-    data: ItemCreateManyUnitInput | ItemCreateManyUnitInput[]
+  export type CanvassItemCreateManyUnitInputEnvelope = {
+    data: CanvassItemCreateManyUnitInput | CanvassItemCreateManyUnitInput[]
     skipDuplicates?: boolean
   }
 
-  export type ItemUpsertWithWhereUniqueWithoutUnitInput = {
-    where: ItemWhereUniqueInput
-    update: XOR<ItemUpdateWithoutUnitInput, ItemUncheckedUpdateWithoutUnitInput>
-    create: XOR<ItemCreateWithoutUnitInput, ItemUncheckedCreateWithoutUnitInput>
+  export type CanvassItemUpsertWithWhereUniqueWithoutUnitInput = {
+    where: CanvassItemWhereUniqueInput
+    update: XOR<CanvassItemUpdateWithoutUnitInput, CanvassItemUncheckedUpdateWithoutUnitInput>
+    create: XOR<CanvassItemCreateWithoutUnitInput, CanvassItemUncheckedCreateWithoutUnitInput>
   }
 
-  export type ItemUpdateWithWhereUniqueWithoutUnitInput = {
-    where: ItemWhereUniqueInput
-    data: XOR<ItemUpdateWithoutUnitInput, ItemUncheckedUpdateWithoutUnitInput>
+  export type CanvassItemUpdateWithWhereUniqueWithoutUnitInput = {
+    where: CanvassItemWhereUniqueInput
+    data: XOR<CanvassItemUpdateWithoutUnitInput, CanvassItemUncheckedUpdateWithoutUnitInput>
   }
 
-  export type ItemUpdateManyWithWhereWithoutUnitInput = {
-    where: ItemScalarWhereInput
-    data: XOR<ItemUpdateManyMutationInput, ItemUncheckedUpdateManyWithoutUnitInput>
+  export type CanvassItemUpdateManyWithWhereWithoutUnitInput = {
+    where: CanvassItemScalarWhereInput
+    data: XOR<CanvassItemUpdateManyMutationInput, CanvassItemUncheckedUpdateManyWithoutUnitInput>
   }
 
-  export type ItemScalarWhereInput = {
-    AND?: ItemScalarWhereInput | ItemScalarWhereInput[]
-    OR?: ItemScalarWhereInput[]
-    NOT?: ItemScalarWhereInput | ItemScalarWhereInput[]
-    id?: StringFilter<"Item"> | string
-    description?: StringFilter<"Item"> | string
-    brand_id?: StringNullableFilter<"Item"> | string | null
-    unit_id?: StringFilter<"Item"> | string
-    quantity?: IntFilter<"Item"> | number
-    created_at?: DateTimeFilter<"Item"> | Date | string
-    updated_at?: DateTimeFilter<"Item"> | Date | string
-    is_deleted?: BoolFilter<"Item"> | boolean
+  export type CanvassItemScalarWhereInput = {
+    AND?: CanvassItemScalarWhereInput | CanvassItemScalarWhereInput[]
+    OR?: CanvassItemScalarWhereInput[]
+    NOT?: CanvassItemScalarWhereInput | CanvassItemScalarWhereInput[]
+    id?: StringFilter<"CanvassItem"> | string
+    canvass_id?: StringFilter<"CanvassItem"> | string
+    description?: StringFilter<"CanvassItem"> | string
+    brand_id?: StringNullableFilter<"CanvassItem"> | string | null
+    unit_id?: StringFilter<"CanvassItem"> | string
+    quantity?: IntFilter<"CanvassItem"> | number
+    created_at?: DateTimeFilter<"CanvassItem"> | Date | string
+    updated_at?: DateTimeFilter<"CanvassItem"> | Date | string
+    is_deleted?: BoolFilter<"CanvassItem"> | boolean
   }
 
-  export type ItemCreateWithoutBrandInput = {
+  export type CanvassItemCreateWithoutBrandInput = {
     id?: string
     description: string
     quantity: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    canvass_item?: CanvassItemCreateNestedOneWithoutItemInput
-    unit: UnitCreateNestedOneWithoutItemsInput
-    supplier_items?: SupplierItemCreateNestedManyWithoutItemInput
+    canvass: CanvassCreateNestedOneWithoutCanvass_itemsInput
+    unit: UnitCreateNestedOneWithoutCanvass_itemsInput
+    meqs_supplier_items?: MEQSSupplierItemCreateNestedManyWithoutCanvass_itemInput
   }
 
-  export type ItemUncheckedCreateWithoutBrandInput = {
+  export type CanvassItemUncheckedCreateWithoutBrandInput = {
     id?: string
+    canvass_id: string
     description: string
     unit_id: string
     quantity: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    canvass_item?: CanvassItemUncheckedCreateNestedOneWithoutItemInput
-    supplier_items?: SupplierItemUncheckedCreateNestedManyWithoutItemInput
+    meqs_supplier_items?: MEQSSupplierItemUncheckedCreateNestedManyWithoutCanvass_itemInput
   }
 
-  export type ItemCreateOrConnectWithoutBrandInput = {
-    where: ItemWhereUniqueInput
-    create: XOR<ItemCreateWithoutBrandInput, ItemUncheckedCreateWithoutBrandInput>
+  export type CanvassItemCreateOrConnectWithoutBrandInput = {
+    where: CanvassItemWhereUniqueInput
+    create: XOR<CanvassItemCreateWithoutBrandInput, CanvassItemUncheckedCreateWithoutBrandInput>
   }
 
-  export type ItemCreateManyBrandInputEnvelope = {
-    data: ItemCreateManyBrandInput | ItemCreateManyBrandInput[]
+  export type CanvassItemCreateManyBrandInputEnvelope = {
+    data: CanvassItemCreateManyBrandInput | CanvassItemCreateManyBrandInput[]
     skipDuplicates?: boolean
   }
 
-  export type ItemUpsertWithWhereUniqueWithoutBrandInput = {
-    where: ItemWhereUniqueInput
-    update: XOR<ItemUpdateWithoutBrandInput, ItemUncheckedUpdateWithoutBrandInput>
-    create: XOR<ItemCreateWithoutBrandInput, ItemUncheckedCreateWithoutBrandInput>
+  export type CanvassItemUpsertWithWhereUniqueWithoutBrandInput = {
+    where: CanvassItemWhereUniqueInput
+    update: XOR<CanvassItemUpdateWithoutBrandInput, CanvassItemUncheckedUpdateWithoutBrandInput>
+    create: XOR<CanvassItemCreateWithoutBrandInput, CanvassItemUncheckedCreateWithoutBrandInput>
   }
 
-  export type ItemUpdateWithWhereUniqueWithoutBrandInput = {
-    where: ItemWhereUniqueInput
-    data: XOR<ItemUpdateWithoutBrandInput, ItemUncheckedUpdateWithoutBrandInput>
+  export type CanvassItemUpdateWithWhereUniqueWithoutBrandInput = {
+    where: CanvassItemWhereUniqueInput
+    data: XOR<CanvassItemUpdateWithoutBrandInput, CanvassItemUncheckedUpdateWithoutBrandInput>
   }
 
-  export type ItemUpdateManyWithWhereWithoutBrandInput = {
-    where: ItemScalarWhereInput
-    data: XOR<ItemUpdateManyMutationInput, ItemUncheckedUpdateManyWithoutBrandInput>
+  export type CanvassItemUpdateManyWithWhereWithoutBrandInput = {
+    where: CanvassItemScalarWhereInput
+    data: XOR<CanvassItemUpdateManyMutationInput, CanvassItemUncheckedUpdateManyWithoutBrandInput>
   }
 
   export type SPRCreateWithoutVehicleInput = {
@@ -30020,7 +28787,7 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     meqs?: MEQSCreateNestedOneWithoutSprInput
-    canvass: CanvassCreateNestedOneWithoutSprsInput
+    canvass: CanvassCreateNestedOneWithoutSprInput
     spr_approvers?: SPRApproverCreateNestedManyWithoutSprInput
   }
 
@@ -30086,28 +28853,44 @@ export namespace Prisma {
     is_deleted?: BoolFilter<"SPR"> | boolean
   }
 
-  export type CanvassItemCreateWithoutItemInput = {
+  export type CanvassCreateWithoutCanvass_itemsInput = {
     id?: string
+    rc_number: string
+    date_requested: Date | string
+    purpose: string
+    notes?: string | null
+    requested_by_id: string
+    is_referenced?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    canvass: CanvassCreateNestedOneWithoutCanvass_itemsInput
+    jo?: JOCreateNestedOneWithoutCanvassInput
+    rv?: RVCreateNestedOneWithoutCanvassInput
+    spr?: SPRCreateNestedOneWithoutCanvassInput
   }
 
-  export type CanvassItemUncheckedCreateWithoutItemInput = {
+  export type CanvassUncheckedCreateWithoutCanvass_itemsInput = {
     id?: string
-    canvass_id: string
+    rc_number: string
+    date_requested: Date | string
+    purpose: string
+    notes?: string | null
+    requested_by_id: string
+    is_referenced?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    jo?: JOUncheckedCreateNestedOneWithoutCanvassInput
+    rv?: RVUncheckedCreateNestedOneWithoutCanvassInput
+    spr?: SPRUncheckedCreateNestedOneWithoutCanvassInput
   }
 
-  export type CanvassItemCreateOrConnectWithoutItemInput = {
-    where: CanvassItemWhereUniqueInput
-    create: XOR<CanvassItemCreateWithoutItemInput, CanvassItemUncheckedCreateWithoutItemInput>
+  export type CanvassCreateOrConnectWithoutCanvass_itemsInput = {
+    where: CanvassWhereUniqueInput
+    create: XOR<CanvassCreateWithoutCanvass_itemsInput, CanvassUncheckedCreateWithoutCanvass_itemsInput>
   }
 
-  export type BrandCreateWithoutItemsInput = {
+  export type BrandCreateWithoutCanvass_itemsInput = {
     id?: string
     name: string
     created_at?: Date | string
@@ -30115,7 +28898,7 @@ export namespace Prisma {
     is_deleted?: boolean
   }
 
-  export type BrandUncheckedCreateWithoutItemsInput = {
+  export type BrandUncheckedCreateWithoutCanvass_itemsInput = {
     id?: string
     name: string
     created_at?: Date | string
@@ -30123,12 +28906,12 @@ export namespace Prisma {
     is_deleted?: boolean
   }
 
-  export type BrandCreateOrConnectWithoutItemsInput = {
+  export type BrandCreateOrConnectWithoutCanvass_itemsInput = {
     where: BrandWhereUniqueInput
-    create: XOR<BrandCreateWithoutItemsInput, BrandUncheckedCreateWithoutItemsInput>
+    create: XOR<BrandCreateWithoutCanvass_itemsInput, BrandUncheckedCreateWithoutCanvass_itemsInput>
   }
 
-  export type UnitCreateWithoutItemsInput = {
+  export type UnitCreateWithoutCanvass_itemsInput = {
     id?: string
     name: string
     created_at?: Date | string
@@ -30136,7 +28919,7 @@ export namespace Prisma {
     is_deleted?: boolean
   }
 
-  export type UnitUncheckedCreateWithoutItemsInput = {
+  export type UnitUncheckedCreateWithoutCanvass_itemsInput = {
     id?: string
     name: string
     created_at?: Date | string
@@ -30144,12 +28927,12 @@ export namespace Prisma {
     is_deleted?: boolean
   }
 
-  export type UnitCreateOrConnectWithoutItemsInput = {
+  export type UnitCreateOrConnectWithoutCanvass_itemsInput = {
     where: UnitWhereUniqueInput
-    create: XOR<UnitCreateWithoutItemsInput, UnitUncheckedCreateWithoutItemsInput>
+    create: XOR<UnitCreateWithoutCanvass_itemsInput, UnitUncheckedCreateWithoutCanvass_itemsInput>
   }
 
-  export type SupplierItemCreateWithoutItemInput = {
+  export type MEQSSupplierItemCreateWithoutCanvass_itemInput = {
     id?: string
     price: number
     is_awarded?: boolean
@@ -30157,12 +28940,12 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    supplier: SupplierCreateNestedOneWithoutSupplier_itemsInput
+    meqs_supplier: SupplierCreateNestedOneWithoutMeqs_supplier_itemsInput
   }
 
-  export type SupplierItemUncheckedCreateWithoutItemInput = {
+  export type MEQSSupplierItemUncheckedCreateWithoutCanvass_itemInput = {
     id?: string
-    supplier_id: string
+    meqs_supplier_id: string
     price: number
     is_awarded?: boolean
     notes?: string | null
@@ -30171,55 +28954,71 @@ export namespace Prisma {
     is_deleted?: boolean
   }
 
-  export type SupplierItemCreateOrConnectWithoutItemInput = {
-    where: SupplierItemWhereUniqueInput
-    create: XOR<SupplierItemCreateWithoutItemInput, SupplierItemUncheckedCreateWithoutItemInput>
+  export type MEQSSupplierItemCreateOrConnectWithoutCanvass_itemInput = {
+    where: MEQSSupplierItemWhereUniqueInput
+    create: XOR<MEQSSupplierItemCreateWithoutCanvass_itemInput, MEQSSupplierItemUncheckedCreateWithoutCanvass_itemInput>
   }
 
-  export type SupplierItemCreateManyItemInputEnvelope = {
-    data: SupplierItemCreateManyItemInput | SupplierItemCreateManyItemInput[]
+  export type MEQSSupplierItemCreateManyCanvass_itemInputEnvelope = {
+    data: MEQSSupplierItemCreateManyCanvass_itemInput | MEQSSupplierItemCreateManyCanvass_itemInput[]
     skipDuplicates?: boolean
   }
 
-  export type CanvassItemUpsertWithoutItemInput = {
-    update: XOR<CanvassItemUpdateWithoutItemInput, CanvassItemUncheckedUpdateWithoutItemInput>
-    create: XOR<CanvassItemCreateWithoutItemInput, CanvassItemUncheckedCreateWithoutItemInput>
-    where?: CanvassItemWhereInput
+  export type CanvassUpsertWithoutCanvass_itemsInput = {
+    update: XOR<CanvassUpdateWithoutCanvass_itemsInput, CanvassUncheckedUpdateWithoutCanvass_itemsInput>
+    create: XOR<CanvassCreateWithoutCanvass_itemsInput, CanvassUncheckedCreateWithoutCanvass_itemsInput>
+    where?: CanvassWhereInput
   }
 
-  export type CanvassItemUpdateToOneWithWhereWithoutItemInput = {
-    where?: CanvassItemWhereInput
-    data: XOR<CanvassItemUpdateWithoutItemInput, CanvassItemUncheckedUpdateWithoutItemInput>
+  export type CanvassUpdateToOneWithWhereWithoutCanvass_itemsInput = {
+    where?: CanvassWhereInput
+    data: XOR<CanvassUpdateWithoutCanvass_itemsInput, CanvassUncheckedUpdateWithoutCanvass_itemsInput>
   }
 
-  export type CanvassItemUpdateWithoutItemInput = {
+  export type CanvassUpdateWithoutCanvass_itemsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    rc_number?: StringFieldUpdateOperationsInput | string
+    date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
+    purpose?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    requested_by_id?: StringFieldUpdateOperationsInput | string
+    is_referenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    canvass?: CanvassUpdateOneRequiredWithoutCanvass_itemsNestedInput
+    jo?: JOUpdateOneWithoutCanvassNestedInput
+    rv?: RVUpdateOneWithoutCanvassNestedInput
+    spr?: SPRUpdateOneWithoutCanvassNestedInput
   }
 
-  export type CanvassItemUncheckedUpdateWithoutItemInput = {
+  export type CanvassUncheckedUpdateWithoutCanvass_itemsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    canvass_id?: StringFieldUpdateOperationsInput | string
+    rc_number?: StringFieldUpdateOperationsInput | string
+    date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
+    purpose?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    requested_by_id?: StringFieldUpdateOperationsInput | string
+    is_referenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    jo?: JOUncheckedUpdateOneWithoutCanvassNestedInput
+    rv?: RVUncheckedUpdateOneWithoutCanvassNestedInput
+    spr?: SPRUncheckedUpdateOneWithoutCanvassNestedInput
   }
 
-  export type BrandUpsertWithoutItemsInput = {
-    update: XOR<BrandUpdateWithoutItemsInput, BrandUncheckedUpdateWithoutItemsInput>
-    create: XOR<BrandCreateWithoutItemsInput, BrandUncheckedCreateWithoutItemsInput>
+  export type BrandUpsertWithoutCanvass_itemsInput = {
+    update: XOR<BrandUpdateWithoutCanvass_itemsInput, BrandUncheckedUpdateWithoutCanvass_itemsInput>
+    create: XOR<BrandCreateWithoutCanvass_itemsInput, BrandUncheckedCreateWithoutCanvass_itemsInput>
     where?: BrandWhereInput
   }
 
-  export type BrandUpdateToOneWithWhereWithoutItemsInput = {
+  export type BrandUpdateToOneWithWhereWithoutCanvass_itemsInput = {
     where?: BrandWhereInput
-    data: XOR<BrandUpdateWithoutItemsInput, BrandUncheckedUpdateWithoutItemsInput>
+    data: XOR<BrandUpdateWithoutCanvass_itemsInput, BrandUncheckedUpdateWithoutCanvass_itemsInput>
   }
 
-  export type BrandUpdateWithoutItemsInput = {
+  export type BrandUpdateWithoutCanvass_itemsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -30227,7 +29026,7 @@ export namespace Prisma {
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
-  export type BrandUncheckedUpdateWithoutItemsInput = {
+  export type BrandUncheckedUpdateWithoutCanvass_itemsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -30235,18 +29034,18 @@ export namespace Prisma {
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
-  export type UnitUpsertWithoutItemsInput = {
-    update: XOR<UnitUpdateWithoutItemsInput, UnitUncheckedUpdateWithoutItemsInput>
-    create: XOR<UnitCreateWithoutItemsInput, UnitUncheckedCreateWithoutItemsInput>
+  export type UnitUpsertWithoutCanvass_itemsInput = {
+    update: XOR<UnitUpdateWithoutCanvass_itemsInput, UnitUncheckedUpdateWithoutCanvass_itemsInput>
+    create: XOR<UnitCreateWithoutCanvass_itemsInput, UnitUncheckedCreateWithoutCanvass_itemsInput>
     where?: UnitWhereInput
   }
 
-  export type UnitUpdateToOneWithWhereWithoutItemsInput = {
+  export type UnitUpdateToOneWithWhereWithoutCanvass_itemsInput = {
     where?: UnitWhereInput
-    data: XOR<UnitUpdateWithoutItemsInput, UnitUncheckedUpdateWithoutItemsInput>
+    data: XOR<UnitUpdateWithoutCanvass_itemsInput, UnitUncheckedUpdateWithoutCanvass_itemsInput>
   }
 
-  export type UnitUpdateWithoutItemsInput = {
+  export type UnitUpdateWithoutCanvass_itemsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -30254,7 +29053,7 @@ export namespace Prisma {
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
-  export type UnitUncheckedUpdateWithoutItemsInput = {
+  export type UnitUncheckedUpdateWithoutCanvass_itemsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -30262,36 +29061,44 @@ export namespace Prisma {
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
-  export type SupplierItemUpsertWithWhereUniqueWithoutItemInput = {
-    where: SupplierItemWhereUniqueInput
-    update: XOR<SupplierItemUpdateWithoutItemInput, SupplierItemUncheckedUpdateWithoutItemInput>
-    create: XOR<SupplierItemCreateWithoutItemInput, SupplierItemUncheckedCreateWithoutItemInput>
+  export type MEQSSupplierItemUpsertWithWhereUniqueWithoutCanvass_itemInput = {
+    where: MEQSSupplierItemWhereUniqueInput
+    update: XOR<MEQSSupplierItemUpdateWithoutCanvass_itemInput, MEQSSupplierItemUncheckedUpdateWithoutCanvass_itemInput>
+    create: XOR<MEQSSupplierItemCreateWithoutCanvass_itemInput, MEQSSupplierItemUncheckedCreateWithoutCanvass_itemInput>
   }
 
-  export type SupplierItemUpdateWithWhereUniqueWithoutItemInput = {
-    where: SupplierItemWhereUniqueInput
-    data: XOR<SupplierItemUpdateWithoutItemInput, SupplierItemUncheckedUpdateWithoutItemInput>
+  export type MEQSSupplierItemUpdateWithWhereUniqueWithoutCanvass_itemInput = {
+    where: MEQSSupplierItemWhereUniqueInput
+    data: XOR<MEQSSupplierItemUpdateWithoutCanvass_itemInput, MEQSSupplierItemUncheckedUpdateWithoutCanvass_itemInput>
   }
 
-  export type SupplierItemUpdateManyWithWhereWithoutItemInput = {
-    where: SupplierItemScalarWhereInput
-    data: XOR<SupplierItemUpdateManyMutationInput, SupplierItemUncheckedUpdateManyWithoutItemInput>
+  export type MEQSSupplierItemUpdateManyWithWhereWithoutCanvass_itemInput = {
+    where: MEQSSupplierItemScalarWhereInput
+    data: XOR<MEQSSupplierItemUpdateManyMutationInput, MEQSSupplierItemUncheckedUpdateManyWithoutCanvass_itemInput>
   }
 
   export type CanvassItemCreateWithoutCanvassInput = {
     id?: string
+    description: string
+    quantity: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    item: ItemCreateNestedOneWithoutCanvass_itemInput
+    brand?: BrandCreateNestedOneWithoutCanvass_itemsInput
+    unit: UnitCreateNestedOneWithoutCanvass_itemsInput
+    meqs_supplier_items?: MEQSSupplierItemCreateNestedManyWithoutCanvass_itemInput
   }
 
   export type CanvassItemUncheckedCreateWithoutCanvassInput = {
     id?: string
-    item_id: string
+    description: string
+    brand_id?: string | null
+    unit_id: string
+    quantity: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    meqs_supplier_items?: MEQSSupplierItemUncheckedCreateNestedManyWithoutCanvass_itemInput
   }
 
   export type CanvassItemCreateOrConnectWithoutCanvassInput = {
@@ -30441,18 +29248,6 @@ export namespace Prisma {
     data: XOR<CanvassItemUpdateManyMutationInput, CanvassItemUncheckedUpdateManyWithoutCanvassInput>
   }
 
-  export type CanvassItemScalarWhereInput = {
-    AND?: CanvassItemScalarWhereInput | CanvassItemScalarWhereInput[]
-    OR?: CanvassItemScalarWhereInput[]
-    NOT?: CanvassItemScalarWhereInput | CanvassItemScalarWhereInput[]
-    id?: StringFilter<"CanvassItem"> | string
-    canvass_id?: StringFilter<"CanvassItem"> | string
-    item_id?: StringFilter<"CanvassItem"> | string
-    created_at?: DateTimeFilter<"CanvassItem"> | Date | string
-    updated_at?: DateTimeFilter<"CanvassItem"> | Date | string
-    is_deleted?: BoolFilter<"CanvassItem"> | boolean
-  }
-
   export type JOUpsertWithoutCanvassInput = {
     update: XOR<JOUpdateWithoutCanvassInput, JOUncheckedUpdateWithoutCanvassInput>
     create: XOR<JOCreateWithoutCanvassInput, JOUncheckedCreateWithoutCanvassInput>
@@ -30592,270 +29387,6 @@ export namespace Prisma {
     spr_approvers?: SPRApproverUncheckedUpdateManyWithoutSprNestedInput
   }
 
-  export type CanvassCreateWithoutCanvass_itemsInput = {
-    id?: string
-    rc_number: string
-    date_requested: Date | string
-    purpose: string
-    notes?: string | null
-    requested_by_id: string
-    is_referenced?: boolean
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-    jos?: JOCreateNestedOneWithoutCanvassInput
-    rvs?: RVCreateNestedOneWithoutCanvassInput
-    sprs?: SPRCreateNestedOneWithoutCanvassInput
-  }
-
-  export type CanvassUncheckedCreateWithoutCanvass_itemsInput = {
-    id?: string
-    rc_number: string
-    date_requested: Date | string
-    purpose: string
-    notes?: string | null
-    requested_by_id: string
-    is_referenced?: boolean
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-    jos?: JOUncheckedCreateNestedOneWithoutCanvassInput
-    rvs?: RVUncheckedCreateNestedOneWithoutCanvassInput
-    sprs?: SPRUncheckedCreateNestedOneWithoutCanvassInput
-  }
-
-  export type CanvassCreateOrConnectWithoutCanvass_itemsInput = {
-    where: CanvassWhereUniqueInput
-    create: XOR<CanvassCreateWithoutCanvass_itemsInput, CanvassUncheckedCreateWithoutCanvass_itemsInput>
-  }
-
-  export type ItemCreateWithoutCanvass_itemInput = {
-    id?: string
-    description: string
-    quantity: number
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-    brand?: BrandCreateNestedOneWithoutItemsInput
-    unit: UnitCreateNestedOneWithoutItemsInput
-    supplier_items?: SupplierItemCreateNestedManyWithoutItemInput
-  }
-
-  export type ItemUncheckedCreateWithoutCanvass_itemInput = {
-    id?: string
-    description: string
-    brand_id?: string | null
-    unit_id: string
-    quantity: number
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-    supplier_items?: SupplierItemUncheckedCreateNestedManyWithoutItemInput
-  }
-
-  export type ItemCreateOrConnectWithoutCanvass_itemInput = {
-    where: ItemWhereUniqueInput
-    create: XOR<ItemCreateWithoutCanvass_itemInput, ItemUncheckedCreateWithoutCanvass_itemInput>
-  }
-
-  export type CanvassUpsertWithoutCanvass_itemsInput = {
-    update: XOR<CanvassUpdateWithoutCanvass_itemsInput, CanvassUncheckedUpdateWithoutCanvass_itemsInput>
-    create: XOR<CanvassCreateWithoutCanvass_itemsInput, CanvassUncheckedCreateWithoutCanvass_itemsInput>
-    where?: CanvassWhereInput
-  }
-
-  export type CanvassUpdateToOneWithWhereWithoutCanvass_itemsInput = {
-    where?: CanvassWhereInput
-    data: XOR<CanvassUpdateWithoutCanvass_itemsInput, CanvassUncheckedUpdateWithoutCanvass_itemsInput>
-  }
-
-  export type CanvassUpdateWithoutCanvass_itemsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    rc_number?: StringFieldUpdateOperationsInput | string
-    date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
-    purpose?: StringFieldUpdateOperationsInput | string
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    requested_by_id?: StringFieldUpdateOperationsInput | string
-    is_referenced?: BoolFieldUpdateOperationsInput | boolean
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    jos?: JOUpdateOneWithoutCanvassNestedInput
-    rvs?: RVUpdateOneWithoutCanvassNestedInput
-    sprs?: SPRUpdateOneWithoutCanvassNestedInput
-  }
-
-  export type CanvassUncheckedUpdateWithoutCanvass_itemsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    rc_number?: StringFieldUpdateOperationsInput | string
-    date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
-    purpose?: StringFieldUpdateOperationsInput | string
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    requested_by_id?: StringFieldUpdateOperationsInput | string
-    is_referenced?: BoolFieldUpdateOperationsInput | boolean
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    jos?: JOUncheckedUpdateOneWithoutCanvassNestedInput
-    rvs?: RVUncheckedUpdateOneWithoutCanvassNestedInput
-    sprs?: SPRUncheckedUpdateOneWithoutCanvassNestedInput
-  }
-
-  export type ItemUpsertWithoutCanvass_itemInput = {
-    update: XOR<ItemUpdateWithoutCanvass_itemInput, ItemUncheckedUpdateWithoutCanvass_itemInput>
-    create: XOR<ItemCreateWithoutCanvass_itemInput, ItemUncheckedCreateWithoutCanvass_itemInput>
-    where?: ItemWhereInput
-  }
-
-  export type ItemUpdateToOneWithWhereWithoutCanvass_itemInput = {
-    where?: ItemWhereInput
-    data: XOR<ItemUpdateWithoutCanvass_itemInput, ItemUncheckedUpdateWithoutCanvass_itemInput>
-  }
-
-  export type ItemUpdateWithoutCanvass_itemInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    brand?: BrandUpdateOneWithoutItemsNestedInput
-    unit?: UnitUpdateOneRequiredWithoutItemsNestedInput
-    supplier_items?: SupplierItemUpdateManyWithoutItemNestedInput
-  }
-
-  export type ItemUncheckedUpdateWithoutCanvass_itemInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    brand_id?: NullableStringFieldUpdateOperationsInput | string | null
-    unit_id?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    supplier_items?: SupplierItemUncheckedUpdateManyWithoutItemNestedInput
-  }
-
-  export type ItemCreateWithoutSupplier_itemsInput = {
-    id?: string
-    description: string
-    quantity: number
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-    canvass_item?: CanvassItemCreateNestedOneWithoutItemInput
-    brand?: BrandCreateNestedOneWithoutItemsInput
-    unit: UnitCreateNestedOneWithoutItemsInput
-  }
-
-  export type ItemUncheckedCreateWithoutSupplier_itemsInput = {
-    id?: string
-    description: string
-    brand_id?: string | null
-    unit_id: string
-    quantity: number
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-    canvass_item?: CanvassItemUncheckedCreateNestedOneWithoutItemInput
-  }
-
-  export type ItemCreateOrConnectWithoutSupplier_itemsInput = {
-    where: ItemWhereUniqueInput
-    create: XOR<ItemCreateWithoutSupplier_itemsInput, ItemUncheckedCreateWithoutSupplier_itemsInput>
-  }
-
-  export type SupplierCreateWithoutSupplier_itemsInput = {
-    id?: string
-    name: string
-    contact: string
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-    MEQSSupplier?: MEQSSupplierCreateNestedManyWithoutSupplierInput
-  }
-
-  export type SupplierUncheckedCreateWithoutSupplier_itemsInput = {
-    id?: string
-    name: string
-    contact: string
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-    MEQSSupplier?: MEQSSupplierUncheckedCreateNestedManyWithoutSupplierInput
-  }
-
-  export type SupplierCreateOrConnectWithoutSupplier_itemsInput = {
-    where: SupplierWhereUniqueInput
-    create: XOR<SupplierCreateWithoutSupplier_itemsInput, SupplierUncheckedCreateWithoutSupplier_itemsInput>
-  }
-
-  export type ItemUpsertWithoutSupplier_itemsInput = {
-    update: XOR<ItemUpdateWithoutSupplier_itemsInput, ItemUncheckedUpdateWithoutSupplier_itemsInput>
-    create: XOR<ItemCreateWithoutSupplier_itemsInput, ItemUncheckedCreateWithoutSupplier_itemsInput>
-    where?: ItemWhereInput
-  }
-
-  export type ItemUpdateToOneWithWhereWithoutSupplier_itemsInput = {
-    where?: ItemWhereInput
-    data: XOR<ItemUpdateWithoutSupplier_itemsInput, ItemUncheckedUpdateWithoutSupplier_itemsInput>
-  }
-
-  export type ItemUpdateWithoutSupplier_itemsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    canvass_item?: CanvassItemUpdateOneWithoutItemNestedInput
-    brand?: BrandUpdateOneWithoutItemsNestedInput
-    unit?: UnitUpdateOneRequiredWithoutItemsNestedInput
-  }
-
-  export type ItemUncheckedUpdateWithoutSupplier_itemsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    brand_id?: NullableStringFieldUpdateOperationsInput | string | null
-    unit_id?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    canvass_item?: CanvassItemUncheckedUpdateOneWithoutItemNestedInput
-  }
-
-  export type SupplierUpsertWithoutSupplier_itemsInput = {
-    update: XOR<SupplierUpdateWithoutSupplier_itemsInput, SupplierUncheckedUpdateWithoutSupplier_itemsInput>
-    create: XOR<SupplierCreateWithoutSupplier_itemsInput, SupplierUncheckedCreateWithoutSupplier_itemsInput>
-    where?: SupplierWhereInput
-  }
-
-  export type SupplierUpdateToOneWithWhereWithoutSupplier_itemsInput = {
-    where?: SupplierWhereInput
-    data: XOR<SupplierUpdateWithoutSupplier_itemsInput, SupplierUncheckedUpdateWithoutSupplier_itemsInput>
-  }
-
-  export type SupplierUpdateWithoutSupplier_itemsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    contact?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    MEQSSupplier?: MEQSSupplierUpdateManyWithoutSupplierNestedInput
-  }
-
-  export type SupplierUncheckedUpdateWithoutSupplier_itemsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    contact?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    MEQSSupplier?: MEQSSupplierUncheckedUpdateManyWithoutSupplierNestedInput
-  }
-
   export type JOApproverCreateWithoutJoInput = {
     id?: string
     approver_proxy_id?: string | null
@@ -30892,7 +29423,7 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type CanvassCreateWithoutJosInput = {
+  export type CanvassCreateWithoutJoInput = {
     id?: string
     rc_number: string
     date_requested: Date | string
@@ -30904,11 +29435,11 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     canvass_items?: CanvassItemCreateNestedManyWithoutCanvassInput
-    rvs?: RVCreateNestedOneWithoutCanvassInput
-    sprs?: SPRCreateNestedOneWithoutCanvassInput
+    rv?: RVCreateNestedOneWithoutCanvassInput
+    spr?: SPRCreateNestedOneWithoutCanvassInput
   }
 
-  export type CanvassUncheckedCreateWithoutJosInput = {
+  export type CanvassUncheckedCreateWithoutJoInput = {
     id?: string
     rc_number: string
     date_requested: Date | string
@@ -30920,13 +29451,13 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     canvass_items?: CanvassItemUncheckedCreateNestedManyWithoutCanvassInput
-    rvs?: RVUncheckedCreateNestedOneWithoutCanvassInput
-    sprs?: SPRUncheckedCreateNestedOneWithoutCanvassInput
+    rv?: RVUncheckedCreateNestedOneWithoutCanvassInput
+    spr?: SPRUncheckedCreateNestedOneWithoutCanvassInput
   }
 
-  export type CanvassCreateOrConnectWithoutJosInput = {
+  export type CanvassCreateOrConnectWithoutJoInput = {
     where: CanvassWhereUniqueInput
-    create: XOR<CanvassCreateWithoutJosInput, CanvassUncheckedCreateWithoutJosInput>
+    create: XOR<CanvassCreateWithoutJoInput, CanvassUncheckedCreateWithoutJoInput>
   }
 
   export type MEQSCreateWithoutJoInput = {
@@ -30999,18 +29530,18 @@ export namespace Prisma {
     is_deleted?: BoolFilter<"JOApprover"> | boolean
   }
 
-  export type CanvassUpsertWithoutJosInput = {
-    update: XOR<CanvassUpdateWithoutJosInput, CanvassUncheckedUpdateWithoutJosInput>
-    create: XOR<CanvassCreateWithoutJosInput, CanvassUncheckedCreateWithoutJosInput>
+  export type CanvassUpsertWithoutJoInput = {
+    update: XOR<CanvassUpdateWithoutJoInput, CanvassUncheckedUpdateWithoutJoInput>
+    create: XOR<CanvassCreateWithoutJoInput, CanvassUncheckedCreateWithoutJoInput>
     where?: CanvassWhereInput
   }
 
-  export type CanvassUpdateToOneWithWhereWithoutJosInput = {
+  export type CanvassUpdateToOneWithWhereWithoutJoInput = {
     where?: CanvassWhereInput
-    data: XOR<CanvassUpdateWithoutJosInput, CanvassUncheckedUpdateWithoutJosInput>
+    data: XOR<CanvassUpdateWithoutJoInput, CanvassUncheckedUpdateWithoutJoInput>
   }
 
-  export type CanvassUpdateWithoutJosInput = {
+  export type CanvassUpdateWithoutJoInput = {
     id?: StringFieldUpdateOperationsInput | string
     rc_number?: StringFieldUpdateOperationsInput | string
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -31022,11 +29553,11 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     canvass_items?: CanvassItemUpdateManyWithoutCanvassNestedInput
-    rvs?: RVUpdateOneWithoutCanvassNestedInput
-    sprs?: SPRUpdateOneWithoutCanvassNestedInput
+    rv?: RVUpdateOneWithoutCanvassNestedInput
+    spr?: SPRUpdateOneWithoutCanvassNestedInput
   }
 
-  export type CanvassUncheckedUpdateWithoutJosInput = {
+  export type CanvassUncheckedUpdateWithoutJoInput = {
     id?: StringFieldUpdateOperationsInput | string
     rc_number?: StringFieldUpdateOperationsInput | string
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -31038,8 +29569,8 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     canvass_items?: CanvassItemUncheckedUpdateManyWithoutCanvassNestedInput
-    rvs?: RVUncheckedUpdateOneWithoutCanvassNestedInput
-    sprs?: SPRUncheckedUpdateOneWithoutCanvassNestedInput
+    rv?: RVUncheckedUpdateOneWithoutCanvassNestedInput
+    spr?: SPRUncheckedUpdateOneWithoutCanvassNestedInput
   }
 
   export type MEQSUpsertWithoutJoInput = {
@@ -31099,7 +29630,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    canvass: CanvassCreateNestedOneWithoutJosInput
+    canvass: CanvassCreateNestedOneWithoutJoInput
     meqs?: MEQSCreateNestedOneWithoutJoInput
   }
 
@@ -31151,7 +29682,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    canvass?: CanvassUpdateOneRequiredWithoutJosNestedInput
+    canvass?: CanvassUpdateOneRequiredWithoutJoNestedInput
     meqs?: MEQSUpdateOneWithoutJoNestedInput
   }
 
@@ -31210,7 +29741,7 @@ export namespace Prisma {
     create: XOR<MEQSCreateWithoutRvInput, MEQSUncheckedCreateWithoutRvInput>
   }
 
-  export type CanvassCreateWithoutRvsInput = {
+  export type CanvassCreateWithoutRvInput = {
     id?: string
     rc_number: string
     date_requested: Date | string
@@ -31222,11 +29753,11 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     canvass_items?: CanvassItemCreateNestedManyWithoutCanvassInput
-    jos?: JOCreateNestedOneWithoutCanvassInput
-    sprs?: SPRCreateNestedOneWithoutCanvassInput
+    jo?: JOCreateNestedOneWithoutCanvassInput
+    spr?: SPRCreateNestedOneWithoutCanvassInput
   }
 
-  export type CanvassUncheckedCreateWithoutRvsInput = {
+  export type CanvassUncheckedCreateWithoutRvInput = {
     id?: string
     rc_number: string
     date_requested: Date | string
@@ -31238,13 +29769,13 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     canvass_items?: CanvassItemUncheckedCreateNestedManyWithoutCanvassInput
-    jos?: JOUncheckedCreateNestedOneWithoutCanvassInput
-    sprs?: SPRUncheckedCreateNestedOneWithoutCanvassInput
+    jo?: JOUncheckedCreateNestedOneWithoutCanvassInput
+    spr?: SPRUncheckedCreateNestedOneWithoutCanvassInput
   }
 
-  export type CanvassCreateOrConnectWithoutRvsInput = {
+  export type CanvassCreateOrConnectWithoutRvInput = {
     where: CanvassWhereUniqueInput
-    create: XOR<CanvassCreateWithoutRvsInput, CanvassUncheckedCreateWithoutRvsInput>
+    create: XOR<CanvassCreateWithoutRvInput, CanvassUncheckedCreateWithoutRvInput>
   }
 
   export type RVApproverCreateWithoutRvInput = {
@@ -31328,18 +29859,18 @@ export namespace Prisma {
     meqs_suppliers?: MEQSSupplierUncheckedUpdateManyWithoutMeqsNestedInput
   }
 
-  export type CanvassUpsertWithoutRvsInput = {
-    update: XOR<CanvassUpdateWithoutRvsInput, CanvassUncheckedUpdateWithoutRvsInput>
-    create: XOR<CanvassCreateWithoutRvsInput, CanvassUncheckedCreateWithoutRvsInput>
+  export type CanvassUpsertWithoutRvInput = {
+    update: XOR<CanvassUpdateWithoutRvInput, CanvassUncheckedUpdateWithoutRvInput>
+    create: XOR<CanvassCreateWithoutRvInput, CanvassUncheckedCreateWithoutRvInput>
     where?: CanvassWhereInput
   }
 
-  export type CanvassUpdateToOneWithWhereWithoutRvsInput = {
+  export type CanvassUpdateToOneWithWhereWithoutRvInput = {
     where?: CanvassWhereInput
-    data: XOR<CanvassUpdateWithoutRvsInput, CanvassUncheckedUpdateWithoutRvsInput>
+    data: XOR<CanvassUpdateWithoutRvInput, CanvassUncheckedUpdateWithoutRvInput>
   }
 
-  export type CanvassUpdateWithoutRvsInput = {
+  export type CanvassUpdateWithoutRvInput = {
     id?: StringFieldUpdateOperationsInput | string
     rc_number?: StringFieldUpdateOperationsInput | string
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -31351,11 +29882,11 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     canvass_items?: CanvassItemUpdateManyWithoutCanvassNestedInput
-    jos?: JOUpdateOneWithoutCanvassNestedInput
-    sprs?: SPRUpdateOneWithoutCanvassNestedInput
+    jo?: JOUpdateOneWithoutCanvassNestedInput
+    spr?: SPRUpdateOneWithoutCanvassNestedInput
   }
 
-  export type CanvassUncheckedUpdateWithoutRvsInput = {
+  export type CanvassUncheckedUpdateWithoutRvInput = {
     id?: StringFieldUpdateOperationsInput | string
     rc_number?: StringFieldUpdateOperationsInput | string
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -31367,8 +29898,8 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     canvass_items?: CanvassItemUncheckedUpdateManyWithoutCanvassNestedInput
-    jos?: JOUncheckedUpdateOneWithoutCanvassNestedInput
-    sprs?: SPRUncheckedUpdateOneWithoutCanvassNestedInput
+    jo?: JOUncheckedUpdateOneWithoutCanvassNestedInput
+    spr?: SPRUncheckedUpdateOneWithoutCanvassNestedInput
   }
 
   export type RVApproverUpsertWithWhereUniqueWithoutRvInput = {
@@ -31420,7 +29951,7 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     meqs?: MEQSCreateNestedOneWithoutRvInput
-    canvass: CanvassCreateNestedOneWithoutRvsInput
+    canvass: CanvassCreateNestedOneWithoutRvInput
   }
 
   export type RVUncheckedCreateWithoutRv_approversInput = {
@@ -31472,7 +30003,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     meqs?: MEQSUpdateOneWithoutRvNestedInput
-    canvass?: CanvassUpdateOneRequiredWithoutRvsNestedInput
+    canvass?: CanvassUpdateOneRequiredWithoutRvNestedInput
   }
 
   export type RVUncheckedUpdateWithoutRv_approversInput = {
@@ -31530,7 +30061,7 @@ export namespace Prisma {
     create: XOR<MEQSCreateWithoutSprInput, MEQSUncheckedCreateWithoutSprInput>
   }
 
-  export type CanvassCreateWithoutSprsInput = {
+  export type CanvassCreateWithoutSprInput = {
     id?: string
     rc_number: string
     date_requested: Date | string
@@ -31542,11 +30073,11 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     canvass_items?: CanvassItemCreateNestedManyWithoutCanvassInput
-    jos?: JOCreateNestedOneWithoutCanvassInput
-    rvs?: RVCreateNestedOneWithoutCanvassInput
+    jo?: JOCreateNestedOneWithoutCanvassInput
+    rv?: RVCreateNestedOneWithoutCanvassInput
   }
 
-  export type CanvassUncheckedCreateWithoutSprsInput = {
+  export type CanvassUncheckedCreateWithoutSprInput = {
     id?: string
     rc_number: string
     date_requested: Date | string
@@ -31558,13 +30089,13 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     canvass_items?: CanvassItemUncheckedCreateNestedManyWithoutCanvassInput
-    jos?: JOUncheckedCreateNestedOneWithoutCanvassInput
-    rvs?: RVUncheckedCreateNestedOneWithoutCanvassInput
+    jo?: JOUncheckedCreateNestedOneWithoutCanvassInput
+    rv?: RVUncheckedCreateNestedOneWithoutCanvassInput
   }
 
-  export type CanvassCreateOrConnectWithoutSprsInput = {
+  export type CanvassCreateOrConnectWithoutSprInput = {
     where: CanvassWhereUniqueInput
-    create: XOR<CanvassCreateWithoutSprsInput, CanvassUncheckedCreateWithoutSprsInput>
+    create: XOR<CanvassCreateWithoutSprInput, CanvassUncheckedCreateWithoutSprInput>
   }
 
   export type VehicleCreateWithoutSprsInput = {
@@ -31671,18 +30202,18 @@ export namespace Prisma {
     meqs_suppliers?: MEQSSupplierUncheckedUpdateManyWithoutMeqsNestedInput
   }
 
-  export type CanvassUpsertWithoutSprsInput = {
-    update: XOR<CanvassUpdateWithoutSprsInput, CanvassUncheckedUpdateWithoutSprsInput>
-    create: XOR<CanvassCreateWithoutSprsInput, CanvassUncheckedCreateWithoutSprsInput>
+  export type CanvassUpsertWithoutSprInput = {
+    update: XOR<CanvassUpdateWithoutSprInput, CanvassUncheckedUpdateWithoutSprInput>
+    create: XOR<CanvassCreateWithoutSprInput, CanvassUncheckedCreateWithoutSprInput>
     where?: CanvassWhereInput
   }
 
-  export type CanvassUpdateToOneWithWhereWithoutSprsInput = {
+  export type CanvassUpdateToOneWithWhereWithoutSprInput = {
     where?: CanvassWhereInput
-    data: XOR<CanvassUpdateWithoutSprsInput, CanvassUncheckedUpdateWithoutSprsInput>
+    data: XOR<CanvassUpdateWithoutSprInput, CanvassUncheckedUpdateWithoutSprInput>
   }
 
-  export type CanvassUpdateWithoutSprsInput = {
+  export type CanvassUpdateWithoutSprInput = {
     id?: StringFieldUpdateOperationsInput | string
     rc_number?: StringFieldUpdateOperationsInput | string
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -31694,11 +30225,11 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     canvass_items?: CanvassItemUpdateManyWithoutCanvassNestedInput
-    jos?: JOUpdateOneWithoutCanvassNestedInput
-    rvs?: RVUpdateOneWithoutCanvassNestedInput
+    jo?: JOUpdateOneWithoutCanvassNestedInput
+    rv?: RVUpdateOneWithoutCanvassNestedInput
   }
 
-  export type CanvassUncheckedUpdateWithoutSprsInput = {
+  export type CanvassUncheckedUpdateWithoutSprInput = {
     id?: StringFieldUpdateOperationsInput | string
     rc_number?: StringFieldUpdateOperationsInput | string
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -31710,8 +30241,8 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     canvass_items?: CanvassItemUncheckedUpdateManyWithoutCanvassNestedInput
-    jos?: JOUncheckedUpdateOneWithoutCanvassNestedInput
-    rvs?: RVUncheckedUpdateOneWithoutCanvassNestedInput
+    jo?: JOUncheckedUpdateOneWithoutCanvassNestedInput
+    rv?: RVUncheckedUpdateOneWithoutCanvassNestedInput
   }
 
   export type VehicleUpsertWithoutSprsInput = {
@@ -31790,7 +30321,7 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     meqs?: MEQSCreateNestedOneWithoutSprInput
-    canvass: CanvassCreateNestedOneWithoutSprsInput
+    canvass: CanvassCreateNestedOneWithoutSprInput
     vehicle: VehicleCreateNestedOneWithoutSprsInput
   }
 
@@ -31840,7 +30371,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     meqs?: MEQSUpdateOneWithoutSprNestedInput
-    canvass?: CanvassUpdateOneRequiredWithoutSprsNestedInput
+    canvass?: CanvassUpdateOneRequiredWithoutSprNestedInput
     vehicle?: VehicleUpdateOneRequiredWithoutSprsNestedInput
   }
 
@@ -31876,7 +30407,7 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     jo_approvers?: JOApproverCreateNestedManyWithoutJoInput
-    canvass: CanvassCreateNestedOneWithoutJosInput
+    canvass: CanvassCreateNestedOneWithoutJoInput
   }
 
   export type JOUncheckedCreateWithoutMeqsInput = {
@@ -31916,7 +30447,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    canvass: CanvassCreateNestedOneWithoutRvsInput
+    canvass: CanvassCreateNestedOneWithoutRvInput
     rv_approvers?: RVApproverCreateNestedManyWithoutRvInput
   }
 
@@ -31955,7 +30486,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    canvass: CanvassCreateNestedOneWithoutSprsInput
+    canvass: CanvassCreateNestedOneWithoutSprInput
     vehicle: VehicleCreateNestedOneWithoutSprsInput
     spr_approvers?: SPRApproverCreateNestedManyWithoutSprInput
   }
@@ -32080,7 +30611,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     jo_approvers?: JOApproverUpdateManyWithoutJoNestedInput
-    canvass?: CanvassUpdateOneRequiredWithoutJosNestedInput
+    canvass?: CanvassUpdateOneRequiredWithoutJoNestedInput
   }
 
   export type JOUncheckedUpdateWithoutMeqsInput = {
@@ -32126,7 +30657,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    canvass?: CanvassUpdateOneRequiredWithoutRvsNestedInput
+    canvass?: CanvassUpdateOneRequiredWithoutRvNestedInput
     rv_approvers?: RVApproverUpdateManyWithoutRvNestedInput
   }
 
@@ -32171,7 +30702,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    canvass?: CanvassUpdateOneRequiredWithoutSprsNestedInput
+    canvass?: CanvassUpdateOneRequiredWithoutSprNestedInput
     vehicle?: VehicleUpdateOneRequiredWithoutSprsNestedInput
     spr_approvers?: SPRApproverUpdateManyWithoutSprNestedInput
   }
@@ -32287,7 +30818,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    supplier_items?: SupplierItemCreateNestedManyWithoutSupplierInput
+    meqs_supplier_items?: MEQSSupplierItemCreateNestedManyWithoutMeqs_supplierInput
   }
 
   export type SupplierUncheckedCreateWithoutMEQSSupplierInput = {
@@ -32297,7 +30828,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    supplier_items?: SupplierItemUncheckedCreateNestedManyWithoutSupplierInput
+    meqs_supplier_items?: MEQSSupplierItemUncheckedCreateNestedManyWithoutMeqs_supplierInput
   }
 
   export type SupplierCreateOrConnectWithoutMEQSSupplierInput = {
@@ -32421,7 +30952,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    supplier_items?: SupplierItemUpdateManyWithoutSupplierNestedInput
+    meqs_supplier_items?: MEQSSupplierItemUpdateManyWithoutMeqs_supplierNestedInput
   }
 
   export type SupplierUncheckedUpdateWithoutMEQSSupplierInput = {
@@ -32431,7 +30962,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    supplier_items?: SupplierItemUncheckedUpdateManyWithoutSupplierNestedInput
+    meqs_supplier_items?: MEQSSupplierItemUncheckedUpdateManyWithoutMeqs_supplierNestedInput
   }
 
   export type MEQSSupplierAttachmentUpsertWithWhereUniqueWithoutMeqs_supplierInput = {
@@ -32495,6 +31026,126 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     po_approvers?: POApproverUncheckedUpdateManyWithoutPoNestedInput
+  }
+
+  export type CanvassItemCreateWithoutMeqs_supplier_itemsInput = {
+    id?: string
+    description: string
+    quantity: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    canvass: CanvassCreateNestedOneWithoutCanvass_itemsInput
+    brand?: BrandCreateNestedOneWithoutCanvass_itemsInput
+    unit: UnitCreateNestedOneWithoutCanvass_itemsInput
+  }
+
+  export type CanvassItemUncheckedCreateWithoutMeqs_supplier_itemsInput = {
+    id?: string
+    canvass_id: string
+    description: string
+    brand_id?: string | null
+    unit_id: string
+    quantity: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
+  export type CanvassItemCreateOrConnectWithoutMeqs_supplier_itemsInput = {
+    where: CanvassItemWhereUniqueInput
+    create: XOR<CanvassItemCreateWithoutMeqs_supplier_itemsInput, CanvassItemUncheckedCreateWithoutMeqs_supplier_itemsInput>
+  }
+
+  export type SupplierCreateWithoutMeqs_supplier_itemsInput = {
+    id?: string
+    name: string
+    contact: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    MEQSSupplier?: MEQSSupplierCreateNestedManyWithoutSupplierInput
+  }
+
+  export type SupplierUncheckedCreateWithoutMeqs_supplier_itemsInput = {
+    id?: string
+    name: string
+    contact: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    MEQSSupplier?: MEQSSupplierUncheckedCreateNestedManyWithoutSupplierInput
+  }
+
+  export type SupplierCreateOrConnectWithoutMeqs_supplier_itemsInput = {
+    where: SupplierWhereUniqueInput
+    create: XOR<SupplierCreateWithoutMeqs_supplier_itemsInput, SupplierUncheckedCreateWithoutMeqs_supplier_itemsInput>
+  }
+
+  export type CanvassItemUpsertWithoutMeqs_supplier_itemsInput = {
+    update: XOR<CanvassItemUpdateWithoutMeqs_supplier_itemsInput, CanvassItemUncheckedUpdateWithoutMeqs_supplier_itemsInput>
+    create: XOR<CanvassItemCreateWithoutMeqs_supplier_itemsInput, CanvassItemUncheckedCreateWithoutMeqs_supplier_itemsInput>
+    where?: CanvassItemWhereInput
+  }
+
+  export type CanvassItemUpdateToOneWithWhereWithoutMeqs_supplier_itemsInput = {
+    where?: CanvassItemWhereInput
+    data: XOR<CanvassItemUpdateWithoutMeqs_supplier_itemsInput, CanvassItemUncheckedUpdateWithoutMeqs_supplier_itemsInput>
+  }
+
+  export type CanvassItemUpdateWithoutMeqs_supplier_itemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    canvass?: CanvassUpdateOneRequiredWithoutCanvass_itemsNestedInput
+    brand?: BrandUpdateOneWithoutCanvass_itemsNestedInput
+    unit?: UnitUpdateOneRequiredWithoutCanvass_itemsNestedInput
+  }
+
+  export type CanvassItemUncheckedUpdateWithoutMeqs_supplier_itemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    canvass_id?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    brand_id?: NullableStringFieldUpdateOperationsInput | string | null
+    unit_id?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type SupplierUpsertWithoutMeqs_supplier_itemsInput = {
+    update: XOR<SupplierUpdateWithoutMeqs_supplier_itemsInput, SupplierUncheckedUpdateWithoutMeqs_supplier_itemsInput>
+    create: XOR<SupplierCreateWithoutMeqs_supplier_itemsInput, SupplierUncheckedCreateWithoutMeqs_supplier_itemsInput>
+    where?: SupplierWhereInput
+  }
+
+  export type SupplierUpdateToOneWithWhereWithoutMeqs_supplier_itemsInput = {
+    where?: SupplierWhereInput
+    data: XOR<SupplierUpdateWithoutMeqs_supplier_itemsInput, SupplierUncheckedUpdateWithoutMeqs_supplier_itemsInput>
+  }
+
+  export type SupplierUpdateWithoutMeqs_supplier_itemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    contact?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    MEQSSupplier?: MEQSSupplierUpdateManyWithoutSupplierNestedInput
+  }
+
+  export type SupplierUncheckedUpdateWithoutMeqs_supplier_itemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    contact?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    MEQSSupplier?: MEQSSupplierUncheckedUpdateManyWithoutSupplierNestedInput
   }
 
   export type MEQSSupplierCreateWithoutAttachmentsInput = {
@@ -32851,9 +31502,9 @@ export namespace Prisma {
     is_deleted?: boolean
   }
 
-  export type SupplierItemCreateManySupplierInput = {
+  export type MEQSSupplierItemCreateManyMeqs_supplierInput = {
     id?: string
-    item_id: string
+    canvass_item_id: string
     price: number
     is_awarded?: boolean
     notes?: string | null
@@ -32896,7 +31547,7 @@ export namespace Prisma {
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
-  export type SupplierItemUpdateWithoutSupplierInput = {
+  export type MEQSSupplierItemUpdateWithoutMeqs_supplierInput = {
     id?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
     is_awarded?: BoolFieldUpdateOperationsInput | boolean
@@ -32904,23 +31555,12 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    item?: ItemUpdateOneRequiredWithoutSupplier_itemsNestedInput
+    canvass_item?: CanvassItemUpdateOneRequiredWithoutMeqs_supplier_itemsNestedInput
   }
 
-  export type SupplierItemUncheckedUpdateWithoutSupplierInput = {
+  export type MEQSSupplierItemUncheckedUpdateWithoutMeqs_supplierInput = {
     id?: StringFieldUpdateOperationsInput | string
-    item_id?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
-    is_awarded?: BoolFieldUpdateOperationsInput | boolean
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type SupplierItemUncheckedUpdateManyWithoutSupplierInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    item_id?: StringFieldUpdateOperationsInput | string
+    canvass_item_id?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
     is_awarded?: BoolFieldUpdateOperationsInput | boolean
     notes?: NullableStringFieldUpdateOperationsInput | string | null
@@ -32929,8 +31569,20 @@ export namespace Prisma {
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
-  export type ItemCreateManyUnitInput = {
+  export type MEQSSupplierItemUncheckedUpdateManyWithoutMeqs_supplierInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    canvass_item_id?: StringFieldUpdateOperationsInput | string
+    price?: FloatFieldUpdateOperationsInput | number
+    is_awarded?: BoolFieldUpdateOperationsInput | boolean
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type CanvassItemCreateManyUnitInput = {
     id?: string
+    canvass_id: string
     description: string
     brand_id?: string | null
     quantity: number
@@ -32939,42 +31591,44 @@ export namespace Prisma {
     is_deleted?: boolean
   }
 
-  export type ItemUpdateWithoutUnitInput = {
+  export type CanvassItemUpdateWithoutUnitInput = {
     id?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    canvass_item?: CanvassItemUpdateOneWithoutItemNestedInput
-    brand?: BrandUpdateOneWithoutItemsNestedInput
-    supplier_items?: SupplierItemUpdateManyWithoutItemNestedInput
+    canvass?: CanvassUpdateOneRequiredWithoutCanvass_itemsNestedInput
+    brand?: BrandUpdateOneWithoutCanvass_itemsNestedInput
+    meqs_supplier_items?: MEQSSupplierItemUpdateManyWithoutCanvass_itemNestedInput
   }
 
-  export type ItemUncheckedUpdateWithoutUnitInput = {
+  export type CanvassItemUncheckedUpdateWithoutUnitInput = {
     id?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    brand_id?: NullableStringFieldUpdateOperationsInput | string | null
-    quantity?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    canvass_item?: CanvassItemUncheckedUpdateOneWithoutItemNestedInput
-    supplier_items?: SupplierItemUncheckedUpdateManyWithoutItemNestedInput
-  }
-
-  export type ItemUncheckedUpdateManyWithoutUnitInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    canvass_id?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     brand_id?: NullableStringFieldUpdateOperationsInput | string | null
     quantity?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    meqs_supplier_items?: MEQSSupplierItemUncheckedUpdateManyWithoutCanvass_itemNestedInput
   }
 
-  export type ItemCreateManyBrandInput = {
+  export type CanvassItemUncheckedUpdateManyWithoutUnitInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    canvass_id?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    brand_id?: NullableStringFieldUpdateOperationsInput | string | null
+    quantity?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type CanvassItemCreateManyBrandInput = {
     id?: string
+    canvass_id: string
     description: string
     unit_id: string
     quantity: number
@@ -32983,32 +31637,33 @@ export namespace Prisma {
     is_deleted?: boolean
   }
 
-  export type ItemUpdateWithoutBrandInput = {
+  export type CanvassItemUpdateWithoutBrandInput = {
     id?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    canvass_item?: CanvassItemUpdateOneWithoutItemNestedInput
-    unit?: UnitUpdateOneRequiredWithoutItemsNestedInput
-    supplier_items?: SupplierItemUpdateManyWithoutItemNestedInput
+    canvass?: CanvassUpdateOneRequiredWithoutCanvass_itemsNestedInput
+    unit?: UnitUpdateOneRequiredWithoutCanvass_itemsNestedInput
+    meqs_supplier_items?: MEQSSupplierItemUpdateManyWithoutCanvass_itemNestedInput
   }
 
-  export type ItemUncheckedUpdateWithoutBrandInput = {
+  export type CanvassItemUncheckedUpdateWithoutBrandInput = {
     id?: StringFieldUpdateOperationsInput | string
+    canvass_id?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     unit_id?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    canvass_item?: CanvassItemUncheckedUpdateOneWithoutItemNestedInput
-    supplier_items?: SupplierItemUncheckedUpdateManyWithoutItemNestedInput
+    meqs_supplier_items?: MEQSSupplierItemUncheckedUpdateManyWithoutCanvass_itemNestedInput
   }
 
-  export type ItemUncheckedUpdateManyWithoutBrandInput = {
+  export type CanvassItemUncheckedUpdateManyWithoutBrandInput = {
     id?: StringFieldUpdateOperationsInput | string
+    canvass_id?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     unit_id?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
@@ -33045,7 +31700,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     meqs?: MEQSUpdateOneWithoutSprNestedInput
-    canvass?: CanvassUpdateOneRequiredWithoutSprsNestedInput
+    canvass?: CanvassUpdateOneRequiredWithoutSprNestedInput
     spr_approvers?: SPRApproverUpdateManyWithoutSprNestedInput
   }
 
@@ -33081,9 +31736,9 @@ export namespace Prisma {
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
-  export type SupplierItemCreateManyItemInput = {
+  export type MEQSSupplierItemCreateManyCanvass_itemInput = {
     id?: string
-    supplier_id: string
+    meqs_supplier_id: string
     price: number
     is_awarded?: boolean
     notes?: string | null
@@ -33092,7 +31747,7 @@ export namespace Prisma {
     is_deleted?: boolean
   }
 
-  export type SupplierItemUpdateWithoutItemInput = {
+  export type MEQSSupplierItemUpdateWithoutCanvass_itemInput = {
     id?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
     is_awarded?: BoolFieldUpdateOperationsInput | boolean
@@ -33100,12 +31755,12 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    supplier?: SupplierUpdateOneRequiredWithoutSupplier_itemsNestedInput
+    meqs_supplier?: SupplierUpdateOneRequiredWithoutMeqs_supplier_itemsNestedInput
   }
 
-  export type SupplierItemUncheckedUpdateWithoutItemInput = {
+  export type MEQSSupplierItemUncheckedUpdateWithoutCanvass_itemInput = {
     id?: StringFieldUpdateOperationsInput | string
-    supplier_id?: StringFieldUpdateOperationsInput | string
+    meqs_supplier_id?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
     is_awarded?: BoolFieldUpdateOperationsInput | boolean
     notes?: NullableStringFieldUpdateOperationsInput | string | null
@@ -33114,9 +31769,9 @@ export namespace Prisma {
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
-  export type SupplierItemUncheckedUpdateManyWithoutItemInput = {
+  export type MEQSSupplierItemUncheckedUpdateManyWithoutCanvass_itemInput = {
     id?: StringFieldUpdateOperationsInput | string
-    supplier_id?: StringFieldUpdateOperationsInput | string
+    meqs_supplier_id?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
     is_awarded?: BoolFieldUpdateOperationsInput | boolean
     notes?: NullableStringFieldUpdateOperationsInput | string | null
@@ -33127,7 +31782,10 @@ export namespace Prisma {
 
   export type CanvassItemCreateManyCanvassInput = {
     id?: string
-    item_id: string
+    description: string
+    brand_id?: string | null
+    unit_id: string
+    quantity: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -33135,23 +31793,34 @@ export namespace Prisma {
 
   export type CanvassItemUpdateWithoutCanvassInput = {
     id?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    item?: ItemUpdateOneRequiredWithoutCanvass_itemNestedInput
+    brand?: BrandUpdateOneWithoutCanvass_itemsNestedInput
+    unit?: UnitUpdateOneRequiredWithoutCanvass_itemsNestedInput
+    meqs_supplier_items?: MEQSSupplierItemUpdateManyWithoutCanvass_itemNestedInput
   }
 
   export type CanvassItemUncheckedUpdateWithoutCanvassInput = {
     id?: StringFieldUpdateOperationsInput | string
-    item_id?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    brand_id?: NullableStringFieldUpdateOperationsInput | string | null
+    unit_id?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    meqs_supplier_items?: MEQSSupplierItemUncheckedUpdateManyWithoutCanvass_itemNestedInput
   }
 
   export type CanvassItemUncheckedUpdateManyWithoutCanvassInput = {
     id?: StringFieldUpdateOperationsInput | string
-    item_id?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    brand_id?: NullableStringFieldUpdateOperationsInput | string | null
+    unit_id?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -33531,9 +32200,9 @@ export namespace Prisma {
      */
     export type VehicleCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = VehicleCountOutputTypeDefaultArgs<ExtArgs>
     /**
-     * @deprecated Use ItemCountOutputTypeDefaultArgs instead
+     * @deprecated Use CanvassItemCountOutputTypeDefaultArgs instead
      */
-    export type ItemCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ItemCountOutputTypeDefaultArgs<ExtArgs>
+    export type CanvassItemCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = CanvassItemCountOutputTypeDefaultArgs<ExtArgs>
     /**
      * @deprecated Use CanvassCountOutputTypeDefaultArgs instead
      */
@@ -33579,21 +32248,13 @@ export namespace Prisma {
      */
     export type VehicleArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = VehicleDefaultArgs<ExtArgs>
     /**
-     * @deprecated Use ItemDefaultArgs instead
-     */
-    export type ItemArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ItemDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use CanvassDefaultArgs instead
-     */
-    export type CanvassArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = CanvassDefaultArgs<ExtArgs>
-    /**
      * @deprecated Use CanvassItemDefaultArgs instead
      */
     export type CanvassItemArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = CanvassItemDefaultArgs<ExtArgs>
     /**
-     * @deprecated Use SupplierItemDefaultArgs instead
+     * @deprecated Use CanvassDefaultArgs instead
      */
-    export type SupplierItemArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = SupplierItemDefaultArgs<ExtArgs>
+    export type CanvassArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = CanvassDefaultArgs<ExtArgs>
     /**
      * @deprecated Use JODefaultArgs instead
      */
@@ -33626,6 +32287,10 @@ export namespace Prisma {
      * @deprecated Use MEQSSupplierDefaultArgs instead
      */
     export type MEQSSupplierArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = MEQSSupplierDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use MEQSSupplierItemDefaultArgs instead
+     */
+    export type MEQSSupplierItemArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = MEQSSupplierItemDefaultArgs<ExtArgs>
     /**
      * @deprecated Use MEQSSupplierAttachmentDefaultArgs instead
      */

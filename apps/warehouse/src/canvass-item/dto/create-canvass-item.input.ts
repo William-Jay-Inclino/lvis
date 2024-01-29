@@ -2,7 +2,12 @@ import { InputType, Int, Field } from '@nestjs/graphql';
 import { IsInt, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 @InputType()
-export class CreateItemInput {
+export class CreateCanvassItemInput {
+
+  @Field(() => String, {nullable: true})
+  @IsOptional()
+  @IsString()
+  canvass_id?: string | null;
 
   @Field(() => String)
   @IsNotEmpty()

@@ -4,13 +4,26 @@ import { User } from './entities/user.entity';
 import { CreateUserInput } from './dto/create-user.input';
 import { CurrentUser } from '../auth/current-user.decorator';
 import { UpdateUserInput } from './dto/update-user.input';
-import { UseGuards } from '@nestjs/common';
+import { Logger, NotFoundException, UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from '../auth/guards/gql-auth.guard';
 
 
 @Resolver(() => User)
 export class UserResolver {
+
+  private readonly logger = new Logger(UserResolver.name);
+
   constructor(private readonly userService: UserService) {}
+
+  @Query(() => User)
+  async validateUserId(@Args('id') id: string) {
+    const userFound = await this.userService.findOne(id);
+    console.log('userFound', userFound)
+    if(!userFound){
+      throw new NotFoundException("User not found")
+    }
+    return userFound
+  }
 
   @UseGuards(GqlAuthGuard)
   @Mutation(() => User)
@@ -25,17 +38,26 @@ export class UserResolver {
     return this.userService.findAll();
   }
 
-  // @UseGuards(GqlAuthGuard)
+  @UseGuards(GqlAuthGuard)
   @Query(() => User)
-  user(@CurrentUser() user: User, @Args('id') id: string) {
+  async user(@CurrentUser() user: User, @Args('id') id: string) {
     console.log('user: current-user', user)
-    return this.userService.findOne(id);
+    const userFound = await this.userService.findOne(id);
+    console.log('userFound', userFound)
+    if(!userFound){
+      throw new NotFoundException("User not found")
+    }
+    return userFound
   }
   
   @UseGuards(GqlAuthGuard)
   @Query(() => User)
-  getUserByUserName(@Args('username') username: string) {
-    return this.userService.findByUserName(username);
+  async getUserByUserName(@Args('username') username: string) {
+    const userFound = await this.userService.findByUserName(username);
+    if(!userFound){
+      throw new NotFoundException("User not found")
+    }
+    return userFound
   }
 
   @UseGuards(GqlAuthGuard)

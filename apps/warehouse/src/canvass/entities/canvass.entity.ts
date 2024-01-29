@@ -1,18 +1,21 @@
-import { ObjectType, Field } from '@nestjs/graphql';
-import { CanvassItem } from './canvass-item.entity';
-import { Employee } from 'apps/system/src/employee/entities/employee.entity';
+import { ObjectType, Field, ID } from '@nestjs/graphql';
+import { JO } from '../../jo/entities/jo.entity';
+import { RV } from '../../rv/entities/rv.entity';
+import { SPR } from '../../spr/entities/spr.entity';
+import { Employee } from '../../employee/entities/employee.entity';
+import { CanvassItem } from '../../canvass-item/entities/canvass-item.entity';
 
 @ObjectType()
 export class Canvass {
 
-  @Field(() => String)
+  @Field(() => ID)
   id: string;
 
   @Field(() => String)
   rc_number: string;
 
-  @Field(() => String)
-  date_requested: string;
+  @Field(() => Date)
+  date_requested: Date;
 
   @Field(() => String)
   purpose: string;
@@ -24,13 +27,7 @@ export class Canvass {
   requested_by_id: string;
 
   @Field(() => Employee)
-  requested_by: Employee;
-
-  @Field(() => String)
-  noted_by_id: string;
-
-  @Field(() => Employee)
-  noted_by: Employee;
+  requested_by?: Employee;
 
   @Field(() => [CanvassItem])
   canvass_items: CanvassItem[];
@@ -38,20 +35,23 @@ export class Canvass {
   @Field(() => Boolean)
   is_referenced: boolean;
 
+  @Field( () => JO)
+  jo?: JO
+
+  @Field( () => RV)
+  rv?: RV
+
+  @Field( () => SPR)
+  spr?: SPR
+
   @Field(() => Date)
   created_at: Date;
 
   @Field(() => Date)
   updated_at: Date;
+
 }
 
 
-@ObjectType()
-export class RemoveCanvassResponse {
-  @Field(() => Boolean)
-  success: boolean;
 
-  @Field(() => String)
-  msg: string;
-}
 

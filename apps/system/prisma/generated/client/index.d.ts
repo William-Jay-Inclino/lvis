@@ -2021,12 +2021,10 @@ export namespace Prisma {
    */
 
   export type DepartmentCountOutputType = {
-    employees: number
     Division: number
   }
 
   export type DepartmentCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    employees?: boolean | DepartmentCountOutputTypeCountEmployeesArgs
     Division?: boolean | DepartmentCountOutputTypeCountDivisionArgs
   }
 
@@ -2040,14 +2038,6 @@ export namespace Prisma {
      * Select specific fields to fetch from the DepartmentCountOutputType
      */
     select?: DepartmentCountOutputTypeSelect<ExtArgs> | null
-  }
-
-
-  /**
-   * DepartmentCountOutputType without action
-   */
-  export type DepartmentCountOutputTypeCountEmployeesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: EmployeeWhereInput
   }
 
 
@@ -3399,7 +3389,6 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     is_deleted?: boolean
-    employees?: boolean | Department$employeesArgs<ExtArgs>
     Division?: boolean | Department$DivisionArgs<ExtArgs>
     _count?: boolean | DepartmentCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["department"]>
@@ -3415,7 +3404,6 @@ export namespace Prisma {
   }
 
   export type DepartmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    employees?: boolean | Department$employeesArgs<ExtArgs>
     Division?: boolean | Department$DivisionArgs<ExtArgs>
     _count?: boolean | DepartmentCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -3424,7 +3412,6 @@ export namespace Prisma {
   export type $DepartmentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Department"
     objects: {
-      employees: Prisma.$EmployeePayload<ExtArgs>[]
       Division: Prisma.$DivisionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -3800,8 +3787,6 @@ export namespace Prisma {
   export interface Prisma__DepartmentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
-    employees<T extends Department$employeesArgs<ExtArgs> = {}>(args?: Subset<T, Department$employeesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, 'findMany'> | Null>;
-
     Division<T extends Department$DivisionArgs<ExtArgs> = {}>(args?: Subset<T, Department$DivisionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DivisionPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     /**
@@ -4151,27 +4136,6 @@ export namespace Prisma {
 
 
   /**
-   * Department.employees
-   */
-  export type Department$employeesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Employee
-     */
-    select?: EmployeeSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: EmployeeInclude<ExtArgs> | null
-    where?: EmployeeWhereInput
-    orderBy?: EmployeeOrderByWithRelationInput | EmployeeOrderByWithRelationInput[]
-    cursor?: EmployeeWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: EmployeeScalarFieldEnum | EmployeeScalarFieldEnum[]
-  }
-
-
-  /**
    * Department.Division
    */
   export type Department$DivisionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4220,11 +4184,9 @@ export namespace Prisma {
 
   export type EmployeeMinAggregateOutputType = {
     id: string | null
-    employee_number: string | null
     firstname: string | null
     middlename: string | null
     lastname: string | null
-    department_id: string | null
     created_at: Date | null
     updated_at: Date | null
     is_deleted: boolean | null
@@ -4232,11 +4194,9 @@ export namespace Prisma {
 
   export type EmployeeMaxAggregateOutputType = {
     id: string | null
-    employee_number: string | null
     firstname: string | null
     middlename: string | null
     lastname: string | null
-    department_id: string | null
     created_at: Date | null
     updated_at: Date | null
     is_deleted: boolean | null
@@ -4244,11 +4204,9 @@ export namespace Prisma {
 
   export type EmployeeCountAggregateOutputType = {
     id: number
-    employee_number: number
     firstname: number
     middlename: number
     lastname: number
-    department_id: number
     created_at: number
     updated_at: number
     is_deleted: number
@@ -4258,11 +4216,9 @@ export namespace Prisma {
 
   export type EmployeeMinAggregateInputType = {
     id?: true
-    employee_number?: true
     firstname?: true
     middlename?: true
     lastname?: true
-    department_id?: true
     created_at?: true
     updated_at?: true
     is_deleted?: true
@@ -4270,11 +4226,9 @@ export namespace Prisma {
 
   export type EmployeeMaxAggregateInputType = {
     id?: true
-    employee_number?: true
     firstname?: true
     middlename?: true
     lastname?: true
-    department_id?: true
     created_at?: true
     updated_at?: true
     is_deleted?: true
@@ -4282,11 +4236,9 @@ export namespace Prisma {
 
   export type EmployeeCountAggregateInputType = {
     id?: true
-    employee_number?: true
     firstname?: true
     middlename?: true
     lastname?: true
-    department_id?: true
     created_at?: true
     updated_at?: true
     is_deleted?: true
@@ -4367,11 +4319,9 @@ export namespace Prisma {
 
   export type EmployeeGroupByOutputType = {
     id: string
-    employee_number: string
     firstname: string
     middlename: string | null
     lastname: string
-    department_id: string
     created_at: Date
     updated_at: Date
     is_deleted: boolean
@@ -4396,15 +4346,12 @@ export namespace Prisma {
 
   export type EmployeeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    employee_number?: boolean
     firstname?: boolean
     middlename?: boolean
     lastname?: boolean
-    department_id?: boolean
     created_at?: boolean
     updated_at?: boolean
     is_deleted?: boolean
-    department?: boolean | DepartmentDefaultArgs<ExtArgs>
     jo_approver_setting?: boolean | Employee$jo_approver_settingArgs<ExtArgs>
     meqs_approver_setting?: boolean | Employee$meqs_approver_settingArgs<ExtArgs>
     po_approver_setting?: boolean | Employee$po_approver_settingArgs<ExtArgs>
@@ -4415,18 +4362,15 @@ export namespace Prisma {
 
   export type EmployeeSelectScalar = {
     id?: boolean
-    employee_number?: boolean
     firstname?: boolean
     middlename?: boolean
     lastname?: boolean
-    department_id?: boolean
     created_at?: boolean
     updated_at?: boolean
     is_deleted?: boolean
   }
 
   export type EmployeeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    department?: boolean | DepartmentDefaultArgs<ExtArgs>
     jo_approver_setting?: boolean | Employee$jo_approver_settingArgs<ExtArgs>
     meqs_approver_setting?: boolean | Employee$meqs_approver_settingArgs<ExtArgs>
     po_approver_setting?: boolean | Employee$po_approver_settingArgs<ExtArgs>
@@ -4439,7 +4383,6 @@ export namespace Prisma {
   export type $EmployeePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Employee"
     objects: {
-      department: Prisma.$DepartmentPayload<ExtArgs>
       jo_approver_setting: Prisma.$JOApproverSettingPayload<ExtArgs> | null
       meqs_approver_setting: Prisma.$MEQSApproverSettingPayload<ExtArgs> | null
       po_approver_setting: Prisma.$POApproverSettingPayload<ExtArgs> | null
@@ -4449,11 +4392,9 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      employee_number: string
       firstname: string
       middlename: string | null
       lastname: string
-      department_id: string
       created_at: Date
       updated_at: Date
       is_deleted: boolean
@@ -4822,8 +4763,6 @@ export namespace Prisma {
   export interface Prisma__EmployeeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
-    department<T extends DepartmentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DepartmentDefaultArgs<ExtArgs>>): Prisma__DepartmentClient<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
-
     jo_approver_setting<T extends Employee$jo_approver_settingArgs<ExtArgs> = {}>(args?: Subset<T, Employee$jo_approver_settingArgs<ExtArgs>>): Prisma__JOApproverSettingClient<$Result.GetResult<Prisma.$JOApproverSettingPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
 
     meqs_approver_setting<T extends Employee$meqs_approver_settingArgs<ExtArgs> = {}>(args?: Subset<T, Employee$meqs_approver_settingArgs<ExtArgs>>): Prisma__MEQSApproverSettingClient<$Result.GetResult<Prisma.$MEQSApproverSettingPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
@@ -4865,11 +4804,9 @@ export namespace Prisma {
    */ 
   interface EmployeeFieldRefs {
     readonly id: FieldRef<"Employee", 'String'>
-    readonly employee_number: FieldRef<"Employee", 'String'>
     readonly firstname: FieldRef<"Employee", 'String'>
     readonly middlename: FieldRef<"Employee", 'String'>
     readonly lastname: FieldRef<"Employee", 'String'>
-    readonly department_id: FieldRef<"Employee", 'String'>
     readonly created_at: FieldRef<"Employee", 'DateTime'>
     readonly updated_at: FieldRef<"Employee", 'DateTime'>
     readonly is_deleted: FieldRef<"Employee", 'Boolean'>
@@ -16831,11 +16768,9 @@ export namespace Prisma {
 
   export const EmployeeScalarFieldEnum: {
     id: 'id',
-    employee_number: 'employee_number',
     firstname: 'firstname',
     middlename: 'middlename',
     lastname: 'lastname',
-    department_id: 'department_id',
     created_at: 'created_at',
     updated_at: 'updated_at',
     is_deleted: 'is_deleted'
@@ -17185,7 +17120,6 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"Department"> | Date | string
     updated_at?: DateTimeFilter<"Department"> | Date | string
     is_deleted?: BoolFilter<"Department"> | boolean
-    employees?: EmployeeListRelationFilter
     Division?: DivisionListRelationFilter
   }
 
@@ -17197,7 +17131,6 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
-    employees?: EmployeeOrderByRelationAggregateInput
     Division?: DivisionOrderByRelationAggregateInput
   }
 
@@ -17212,7 +17145,6 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"Department"> | Date | string
     updated_at?: DateTimeFilter<"Department"> | Date | string
     is_deleted?: BoolFilter<"Department"> | boolean
-    employees?: EmployeeListRelationFilter
     Division?: DivisionListRelationFilter
   }, "id" | "code">
 
@@ -17249,15 +17181,12 @@ export namespace Prisma {
     OR?: EmployeeWhereInput[]
     NOT?: EmployeeWhereInput | EmployeeWhereInput[]
     id?: StringFilter<"Employee"> | string
-    employee_number?: StringFilter<"Employee"> | string
     firstname?: StringFilter<"Employee"> | string
     middlename?: StringNullableFilter<"Employee"> | string | null
     lastname?: StringFilter<"Employee"> | string
-    department_id?: StringFilter<"Employee"> | string
     created_at?: DateTimeFilter<"Employee"> | Date | string
     updated_at?: DateTimeFilter<"Employee"> | Date | string
     is_deleted?: BoolFilter<"Employee"> | boolean
-    department?: XOR<DepartmentRelationFilter, DepartmentWhereInput>
     jo_approver_setting?: XOR<JOApproverSettingNullableRelationFilter, JOApproverSettingWhereInput> | null
     meqs_approver_setting?: XOR<MEQSApproverSettingNullableRelationFilter, MEQSApproverSettingWhereInput> | null
     po_approver_setting?: XOR<POApproverSettingNullableRelationFilter, POApproverSettingWhereInput> | null
@@ -17268,15 +17197,12 @@ export namespace Prisma {
 
   export type EmployeeOrderByWithRelationInput = {
     id?: SortOrder
-    employee_number?: SortOrder
     firstname?: SortOrder
     middlename?: SortOrderInput | SortOrder
     lastname?: SortOrder
-    department_id?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
-    department?: DepartmentOrderByWithRelationInput
     jo_approver_setting?: JOApproverSettingOrderByWithRelationInput
     meqs_approver_setting?: MEQSApproverSettingOrderByWithRelationInput
     po_approver_setting?: POApproverSettingOrderByWithRelationInput
@@ -17287,33 +17213,28 @@ export namespace Prisma {
 
   export type EmployeeWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    employee_number?: string
     AND?: EmployeeWhereInput | EmployeeWhereInput[]
     OR?: EmployeeWhereInput[]
     NOT?: EmployeeWhereInput | EmployeeWhereInput[]
     firstname?: StringFilter<"Employee"> | string
     middlename?: StringNullableFilter<"Employee"> | string | null
     lastname?: StringFilter<"Employee"> | string
-    department_id?: StringFilter<"Employee"> | string
     created_at?: DateTimeFilter<"Employee"> | Date | string
     updated_at?: DateTimeFilter<"Employee"> | Date | string
     is_deleted?: BoolFilter<"Employee"> | boolean
-    department?: XOR<DepartmentRelationFilter, DepartmentWhereInput>
     jo_approver_setting?: XOR<JOApproverSettingNullableRelationFilter, JOApproverSettingWhereInput> | null
     meqs_approver_setting?: XOR<MEQSApproverSettingNullableRelationFilter, MEQSApproverSettingWhereInput> | null
     po_approver_setting?: XOR<POApproverSettingNullableRelationFilter, POApproverSettingWhereInput> | null
     rv_approver_setting?: XOR<RVApproverSettingNullableRelationFilter, RVApproverSettingWhereInput> | null
     spr_approver_setting?: XOR<SPRApproverSettingNullableRelationFilter, SPRApproverSettingWhereInput> | null
     user_employee?: XOR<UserEmployeeNullableRelationFilter, UserEmployeeWhereInput> | null
-  }, "id" | "employee_number">
+  }, "id">
 
   export type EmployeeOrderByWithAggregationInput = {
     id?: SortOrder
-    employee_number?: SortOrder
     firstname?: SortOrder
     middlename?: SortOrderInput | SortOrder
     lastname?: SortOrder
-    department_id?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -17327,11 +17248,9 @@ export namespace Prisma {
     OR?: EmployeeScalarWhereWithAggregatesInput[]
     NOT?: EmployeeScalarWhereWithAggregatesInput | EmployeeScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Employee"> | string
-    employee_number?: StringWithAggregatesFilter<"Employee"> | string
     firstname?: StringWithAggregatesFilter<"Employee"> | string
     middlename?: StringNullableWithAggregatesFilter<"Employee"> | string | null
     lastname?: StringWithAggregatesFilter<"Employee"> | string
-    department_id?: StringWithAggregatesFilter<"Employee"> | string
     created_at?: DateTimeWithAggregatesFilter<"Employee"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"Employee"> | Date | string
     is_deleted?: BoolWithAggregatesFilter<"Employee"> | boolean
@@ -18190,7 +18109,6 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    employees?: EmployeeCreateNestedManyWithoutDepartmentInput
     Division?: DivisionCreateNestedManyWithoutDepartmentInput
   }
 
@@ -18202,7 +18120,6 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    employees?: EmployeeUncheckedCreateNestedManyWithoutDepartmentInput
     Division?: DivisionUncheckedCreateNestedManyWithoutDepartmentInput
   }
 
@@ -18214,7 +18131,6 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    employees?: EmployeeUpdateManyWithoutDepartmentNestedInput
     Division?: DivisionUpdateManyWithoutDepartmentNestedInput
   }
 
@@ -18226,7 +18142,6 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    employees?: EmployeeUncheckedUpdateManyWithoutDepartmentNestedInput
     Division?: DivisionUncheckedUpdateManyWithoutDepartmentNestedInput
   }
 
@@ -18262,14 +18177,12 @@ export namespace Prisma {
 
   export type EmployeeCreateInput = {
     id?: string
-    employee_number: string
     firstname: string
     middlename?: string | null
     lastname: string
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    department: DepartmentCreateNestedOneWithoutEmployeesInput
     jo_approver_setting?: JOApproverSettingCreateNestedOneWithoutApproverInput
     meqs_approver_setting?: MEQSApproverSettingCreateNestedOneWithoutApproverInput
     po_approver_setting?: POApproverSettingCreateNestedOneWithoutApproverInput
@@ -18280,11 +18193,9 @@ export namespace Prisma {
 
   export type EmployeeUncheckedCreateInput = {
     id?: string
-    employee_number: string
     firstname: string
     middlename?: string | null
     lastname: string
-    department_id: string
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -18298,14 +18209,12 @@ export namespace Prisma {
 
   export type EmployeeUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    employee_number?: StringFieldUpdateOperationsInput | string
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    department?: DepartmentUpdateOneRequiredWithoutEmployeesNestedInput
     jo_approver_setting?: JOApproverSettingUpdateOneWithoutApproverNestedInput
     meqs_approver_setting?: MEQSApproverSettingUpdateOneWithoutApproverNestedInput
     po_approver_setting?: POApproverSettingUpdateOneWithoutApproverNestedInput
@@ -18316,11 +18225,9 @@ export namespace Prisma {
 
   export type EmployeeUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    employee_number?: StringFieldUpdateOperationsInput | string
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
-    department_id?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -18334,11 +18241,9 @@ export namespace Prisma {
 
   export type EmployeeCreateManyInput = {
     id?: string
-    employee_number: string
     firstname: string
     middlename?: string | null
     lastname: string
-    department_id: string
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -18346,7 +18251,6 @@ export namespace Prisma {
 
   export type EmployeeUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    employee_number?: StringFieldUpdateOperationsInput | string
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
@@ -18357,11 +18261,9 @@ export namespace Prisma {
 
   export type EmployeeUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    employee_number?: StringFieldUpdateOperationsInput | string
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
-    department_id?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -19311,20 +19213,10 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
-  export type EmployeeListRelationFilter = {
-    every?: EmployeeWhereInput
-    some?: EmployeeWhereInput
-    none?: EmployeeWhereInput
-  }
-
   export type DivisionListRelationFilter = {
     every?: DivisionWhereInput
     some?: DivisionWhereInput
     none?: DivisionWhereInput
-  }
-
-  export type EmployeeOrderByRelationAggregateInput = {
-    _count?: SortOrder
   }
 
   export type DivisionOrderByRelationAggregateInput = {
@@ -19421,11 +19313,9 @@ export namespace Prisma {
 
   export type EmployeeCountOrderByAggregateInput = {
     id?: SortOrder
-    employee_number?: SortOrder
     firstname?: SortOrder
     middlename?: SortOrder
     lastname?: SortOrder
-    department_id?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -19433,11 +19323,9 @@ export namespace Prisma {
 
   export type EmployeeMaxOrderByAggregateInput = {
     id?: SortOrder
-    employee_number?: SortOrder
     firstname?: SortOrder
     middlename?: SortOrder
     lastname?: SortOrder
-    department_id?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -19445,11 +19333,9 @@ export namespace Prisma {
 
   export type EmployeeMinOrderByAggregateInput = {
     id?: SortOrder
-    employee_number?: SortOrder
     firstname?: SortOrder
     middlename?: SortOrder
     lastname?: SortOrder
-    department_id?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -19966,13 +19852,6 @@ export namespace Prisma {
     update?: XOR<XOR<DepartmentUpdateToOneWithWhereWithoutDivisionInput, DepartmentUpdateWithoutDivisionInput>, DepartmentUncheckedUpdateWithoutDivisionInput>
   }
 
-  export type EmployeeCreateNestedManyWithoutDepartmentInput = {
-    create?: XOR<EmployeeCreateWithoutDepartmentInput, EmployeeUncheckedCreateWithoutDepartmentInput> | EmployeeCreateWithoutDepartmentInput[] | EmployeeUncheckedCreateWithoutDepartmentInput[]
-    connectOrCreate?: EmployeeCreateOrConnectWithoutDepartmentInput | EmployeeCreateOrConnectWithoutDepartmentInput[]
-    createMany?: EmployeeCreateManyDepartmentInputEnvelope
-    connect?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
-  }
-
   export type DivisionCreateNestedManyWithoutDepartmentInput = {
     create?: XOR<DivisionCreateWithoutDepartmentInput, DivisionUncheckedCreateWithoutDepartmentInput> | DivisionCreateWithoutDepartmentInput[] | DivisionUncheckedCreateWithoutDepartmentInput[]
     connectOrCreate?: DivisionCreateOrConnectWithoutDepartmentInput | DivisionCreateOrConnectWithoutDepartmentInput[]
@@ -19980,32 +19859,11 @@ export namespace Prisma {
     connect?: DivisionWhereUniqueInput | DivisionWhereUniqueInput[]
   }
 
-  export type EmployeeUncheckedCreateNestedManyWithoutDepartmentInput = {
-    create?: XOR<EmployeeCreateWithoutDepartmentInput, EmployeeUncheckedCreateWithoutDepartmentInput> | EmployeeCreateWithoutDepartmentInput[] | EmployeeUncheckedCreateWithoutDepartmentInput[]
-    connectOrCreate?: EmployeeCreateOrConnectWithoutDepartmentInput | EmployeeCreateOrConnectWithoutDepartmentInput[]
-    createMany?: EmployeeCreateManyDepartmentInputEnvelope
-    connect?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
-  }
-
   export type DivisionUncheckedCreateNestedManyWithoutDepartmentInput = {
     create?: XOR<DivisionCreateWithoutDepartmentInput, DivisionUncheckedCreateWithoutDepartmentInput> | DivisionCreateWithoutDepartmentInput[] | DivisionUncheckedCreateWithoutDepartmentInput[]
     connectOrCreate?: DivisionCreateOrConnectWithoutDepartmentInput | DivisionCreateOrConnectWithoutDepartmentInput[]
     createMany?: DivisionCreateManyDepartmentInputEnvelope
     connect?: DivisionWhereUniqueInput | DivisionWhereUniqueInput[]
-  }
-
-  export type EmployeeUpdateManyWithoutDepartmentNestedInput = {
-    create?: XOR<EmployeeCreateWithoutDepartmentInput, EmployeeUncheckedCreateWithoutDepartmentInput> | EmployeeCreateWithoutDepartmentInput[] | EmployeeUncheckedCreateWithoutDepartmentInput[]
-    connectOrCreate?: EmployeeCreateOrConnectWithoutDepartmentInput | EmployeeCreateOrConnectWithoutDepartmentInput[]
-    upsert?: EmployeeUpsertWithWhereUniqueWithoutDepartmentInput | EmployeeUpsertWithWhereUniqueWithoutDepartmentInput[]
-    createMany?: EmployeeCreateManyDepartmentInputEnvelope
-    set?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
-    disconnect?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
-    delete?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
-    connect?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
-    update?: EmployeeUpdateWithWhereUniqueWithoutDepartmentInput | EmployeeUpdateWithWhereUniqueWithoutDepartmentInput[]
-    updateMany?: EmployeeUpdateManyWithWhereWithoutDepartmentInput | EmployeeUpdateManyWithWhereWithoutDepartmentInput[]
-    deleteMany?: EmployeeScalarWhereInput | EmployeeScalarWhereInput[]
   }
 
   export type DivisionUpdateManyWithoutDepartmentNestedInput = {
@@ -20022,20 +19880,6 @@ export namespace Prisma {
     deleteMany?: DivisionScalarWhereInput | DivisionScalarWhereInput[]
   }
 
-  export type EmployeeUncheckedUpdateManyWithoutDepartmentNestedInput = {
-    create?: XOR<EmployeeCreateWithoutDepartmentInput, EmployeeUncheckedCreateWithoutDepartmentInput> | EmployeeCreateWithoutDepartmentInput[] | EmployeeUncheckedCreateWithoutDepartmentInput[]
-    connectOrCreate?: EmployeeCreateOrConnectWithoutDepartmentInput | EmployeeCreateOrConnectWithoutDepartmentInput[]
-    upsert?: EmployeeUpsertWithWhereUniqueWithoutDepartmentInput | EmployeeUpsertWithWhereUniqueWithoutDepartmentInput[]
-    createMany?: EmployeeCreateManyDepartmentInputEnvelope
-    set?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
-    disconnect?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
-    delete?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
-    connect?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
-    update?: EmployeeUpdateWithWhereUniqueWithoutDepartmentInput | EmployeeUpdateWithWhereUniqueWithoutDepartmentInput[]
-    updateMany?: EmployeeUpdateManyWithWhereWithoutDepartmentInput | EmployeeUpdateManyWithWhereWithoutDepartmentInput[]
-    deleteMany?: EmployeeScalarWhereInput | EmployeeScalarWhereInput[]
-  }
-
   export type DivisionUncheckedUpdateManyWithoutDepartmentNestedInput = {
     create?: XOR<DivisionCreateWithoutDepartmentInput, DivisionUncheckedCreateWithoutDepartmentInput> | DivisionCreateWithoutDepartmentInput[] | DivisionUncheckedCreateWithoutDepartmentInput[]
     connectOrCreate?: DivisionCreateOrConnectWithoutDepartmentInput | DivisionCreateOrConnectWithoutDepartmentInput[]
@@ -20048,12 +19892,6 @@ export namespace Prisma {
     update?: DivisionUpdateWithWhereUniqueWithoutDepartmentInput | DivisionUpdateWithWhereUniqueWithoutDepartmentInput[]
     updateMany?: DivisionUpdateManyWithWhereWithoutDepartmentInput | DivisionUpdateManyWithWhereWithoutDepartmentInput[]
     deleteMany?: DivisionScalarWhereInput | DivisionScalarWhereInput[]
-  }
-
-  export type DepartmentCreateNestedOneWithoutEmployeesInput = {
-    create?: XOR<DepartmentCreateWithoutEmployeesInput, DepartmentUncheckedCreateWithoutEmployeesInput>
-    connectOrCreate?: DepartmentCreateOrConnectWithoutEmployeesInput
-    connect?: DepartmentWhereUniqueInput
   }
 
   export type JOApproverSettingCreateNestedOneWithoutApproverInput = {
@@ -20130,14 +19968,6 @@ export namespace Prisma {
 
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
-  }
-
-  export type DepartmentUpdateOneRequiredWithoutEmployeesNestedInput = {
-    create?: XOR<DepartmentCreateWithoutEmployeesInput, DepartmentUncheckedCreateWithoutEmployeesInput>
-    connectOrCreate?: DepartmentCreateOrConnectWithoutEmployeesInput
-    upsert?: DepartmentUpsertWithoutEmployeesInput
-    connect?: DepartmentWhereUniqueInput
-    update?: XOR<XOR<DepartmentUpdateToOneWithWhereWithoutEmployeesInput, DepartmentUpdateWithoutEmployeesInput>, DepartmentUncheckedUpdateWithoutEmployeesInput>
   }
 
   export type JOApproverSettingUpdateOneWithoutApproverNestedInput = {
@@ -20792,7 +20622,6 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    employees?: EmployeeCreateNestedManyWithoutDepartmentInput
   }
 
   export type DepartmentUncheckedCreateWithoutDivisionInput = {
@@ -20803,7 +20632,6 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    employees?: EmployeeUncheckedCreateNestedManyWithoutDepartmentInput
   }
 
   export type DepartmentCreateOrConnectWithoutDivisionInput = {
@@ -20830,7 +20658,6 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    employees?: EmployeeUpdateManyWithoutDepartmentNestedInput
   }
 
   export type DepartmentUncheckedUpdateWithoutDivisionInput = {
@@ -20841,51 +20668,6 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    employees?: EmployeeUncheckedUpdateManyWithoutDepartmentNestedInput
-  }
-
-  export type EmployeeCreateWithoutDepartmentInput = {
-    id?: string
-    employee_number: string
-    firstname: string
-    middlename?: string | null
-    lastname: string
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-    jo_approver_setting?: JOApproverSettingCreateNestedOneWithoutApproverInput
-    meqs_approver_setting?: MEQSApproverSettingCreateNestedOneWithoutApproverInput
-    po_approver_setting?: POApproverSettingCreateNestedOneWithoutApproverInput
-    rv_approver_setting?: RVApproverSettingCreateNestedOneWithoutApproverInput
-    spr_approver_setting?: SPRApproverSettingCreateNestedOneWithoutApproverInput
-    user_employee?: UserEmployeeCreateNestedOneWithoutEmployeeInput
-  }
-
-  export type EmployeeUncheckedCreateWithoutDepartmentInput = {
-    id?: string
-    employee_number: string
-    firstname: string
-    middlename?: string | null
-    lastname: string
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-    jo_approver_setting?: JOApproverSettingUncheckedCreateNestedOneWithoutApproverInput
-    meqs_approver_setting?: MEQSApproverSettingUncheckedCreateNestedOneWithoutApproverInput
-    po_approver_setting?: POApproverSettingUncheckedCreateNestedOneWithoutApproverInput
-    rv_approver_setting?: RVApproverSettingUncheckedCreateNestedOneWithoutApproverInput
-    spr_approver_setting?: SPRApproverSettingUncheckedCreateNestedOneWithoutApproverInput
-    user_employee?: UserEmployeeUncheckedCreateNestedOneWithoutEmployeeInput
-  }
-
-  export type EmployeeCreateOrConnectWithoutDepartmentInput = {
-    where: EmployeeWhereUniqueInput
-    create: XOR<EmployeeCreateWithoutDepartmentInput, EmployeeUncheckedCreateWithoutDepartmentInput>
-  }
-
-  export type EmployeeCreateManyDepartmentInputEnvelope = {
-    data: EmployeeCreateManyDepartmentInput | EmployeeCreateManyDepartmentInput[]
-    skipDuplicates?: boolean
   }
 
   export type DivisionCreateWithoutDepartmentInput = {
@@ -20918,37 +20700,6 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type EmployeeUpsertWithWhereUniqueWithoutDepartmentInput = {
-    where: EmployeeWhereUniqueInput
-    update: XOR<EmployeeUpdateWithoutDepartmentInput, EmployeeUncheckedUpdateWithoutDepartmentInput>
-    create: XOR<EmployeeCreateWithoutDepartmentInput, EmployeeUncheckedCreateWithoutDepartmentInput>
-  }
-
-  export type EmployeeUpdateWithWhereUniqueWithoutDepartmentInput = {
-    where: EmployeeWhereUniqueInput
-    data: XOR<EmployeeUpdateWithoutDepartmentInput, EmployeeUncheckedUpdateWithoutDepartmentInput>
-  }
-
-  export type EmployeeUpdateManyWithWhereWithoutDepartmentInput = {
-    where: EmployeeScalarWhereInput
-    data: XOR<EmployeeUpdateManyMutationInput, EmployeeUncheckedUpdateManyWithoutDepartmentInput>
-  }
-
-  export type EmployeeScalarWhereInput = {
-    AND?: EmployeeScalarWhereInput | EmployeeScalarWhereInput[]
-    OR?: EmployeeScalarWhereInput[]
-    NOT?: EmployeeScalarWhereInput | EmployeeScalarWhereInput[]
-    id?: StringFilter<"Employee"> | string
-    employee_number?: StringFilter<"Employee"> | string
-    firstname?: StringFilter<"Employee"> | string
-    middlename?: StringNullableFilter<"Employee"> | string | null
-    lastname?: StringFilter<"Employee"> | string
-    department_id?: StringFilter<"Employee"> | string
-    created_at?: DateTimeFilter<"Employee"> | Date | string
-    updated_at?: DateTimeFilter<"Employee"> | Date | string
-    is_deleted?: BoolFilter<"Employee"> | boolean
-  }
-
   export type DivisionUpsertWithWhereUniqueWithoutDepartmentInput = {
     where: DivisionWhereUniqueInput
     update: XOR<DivisionUpdateWithoutDepartmentInput, DivisionUncheckedUpdateWithoutDepartmentInput>
@@ -20977,33 +20728,6 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"Division"> | Date | string
     updated_at?: DateTimeFilter<"Division"> | Date | string
     is_deleted?: BoolFilter<"Division"> | boolean
-  }
-
-  export type DepartmentCreateWithoutEmployeesInput = {
-    id?: string
-    code: string
-    name: string
-    status?: number
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-    Division?: DivisionCreateNestedManyWithoutDepartmentInput
-  }
-
-  export type DepartmentUncheckedCreateWithoutEmployeesInput = {
-    id?: string
-    code: string
-    name: string
-    status?: number
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-    Division?: DivisionUncheckedCreateNestedManyWithoutDepartmentInput
-  }
-
-  export type DepartmentCreateOrConnectWithoutEmployeesInput = {
-    where: DepartmentWhereUniqueInput
-    create: XOR<DepartmentCreateWithoutEmployeesInput, DepartmentUncheckedCreateWithoutEmployeesInput>
   }
 
   export type JOApproverSettingCreateWithoutApproverInput = {
@@ -21140,39 +20864,6 @@ export namespace Prisma {
   export type UserEmployeeCreateOrConnectWithoutEmployeeInput = {
     where: UserEmployeeWhereUniqueInput
     create: XOR<UserEmployeeCreateWithoutEmployeeInput, UserEmployeeUncheckedCreateWithoutEmployeeInput>
-  }
-
-  export type DepartmentUpsertWithoutEmployeesInput = {
-    update: XOR<DepartmentUpdateWithoutEmployeesInput, DepartmentUncheckedUpdateWithoutEmployeesInput>
-    create: XOR<DepartmentCreateWithoutEmployeesInput, DepartmentUncheckedCreateWithoutEmployeesInput>
-    where?: DepartmentWhereInput
-  }
-
-  export type DepartmentUpdateToOneWithWhereWithoutEmployeesInput = {
-    where?: DepartmentWhereInput
-    data: XOR<DepartmentUpdateWithoutEmployeesInput, DepartmentUncheckedUpdateWithoutEmployeesInput>
-  }
-
-  export type DepartmentUpdateWithoutEmployeesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    code?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    status?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    Division?: DivisionUpdateManyWithoutDepartmentNestedInput
-  }
-
-  export type DepartmentUncheckedUpdateWithoutEmployeesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    code?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    status?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    Division?: DivisionUncheckedUpdateManyWithoutDepartmentNestedInput
   }
 
   export type JOApproverSettingUpsertWithoutApproverInput = {
@@ -21480,14 +21171,12 @@ export namespace Prisma {
 
   export type EmployeeCreateWithoutUser_employeeInput = {
     id?: string
-    employee_number: string
     firstname: string
     middlename?: string | null
     lastname: string
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    department: DepartmentCreateNestedOneWithoutEmployeesInput
     jo_approver_setting?: JOApproverSettingCreateNestedOneWithoutApproverInput
     meqs_approver_setting?: MEQSApproverSettingCreateNestedOneWithoutApproverInput
     po_approver_setting?: POApproverSettingCreateNestedOneWithoutApproverInput
@@ -21497,11 +21186,9 @@ export namespace Prisma {
 
   export type EmployeeUncheckedCreateWithoutUser_employeeInput = {
     id?: string
-    employee_number: string
     firstname: string
     middlename?: string | null
     lastname: string
-    department_id: string
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -21565,14 +21252,12 @@ export namespace Prisma {
 
   export type EmployeeUpdateWithoutUser_employeeInput = {
     id?: StringFieldUpdateOperationsInput | string
-    employee_number?: StringFieldUpdateOperationsInput | string
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    department?: DepartmentUpdateOneRequiredWithoutEmployeesNestedInput
     jo_approver_setting?: JOApproverSettingUpdateOneWithoutApproverNestedInput
     meqs_approver_setting?: MEQSApproverSettingUpdateOneWithoutApproverNestedInput
     po_approver_setting?: POApproverSettingUpdateOneWithoutApproverNestedInput
@@ -21582,11 +21267,9 @@ export namespace Prisma {
 
   export type EmployeeUncheckedUpdateWithoutUser_employeeInput = {
     id?: StringFieldUpdateOperationsInput | string
-    employee_number?: StringFieldUpdateOperationsInput | string
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
-    department_id?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -21969,14 +21652,12 @@ export namespace Prisma {
 
   export type EmployeeCreateWithoutJo_approver_settingInput = {
     id?: string
-    employee_number: string
     firstname: string
     middlename?: string | null
     lastname: string
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    department: DepartmentCreateNestedOneWithoutEmployeesInput
     meqs_approver_setting?: MEQSApproverSettingCreateNestedOneWithoutApproverInput
     po_approver_setting?: POApproverSettingCreateNestedOneWithoutApproverInput
     rv_approver_setting?: RVApproverSettingCreateNestedOneWithoutApproverInput
@@ -21986,11 +21667,9 @@ export namespace Prisma {
 
   export type EmployeeUncheckedCreateWithoutJo_approver_settingInput = {
     id?: string
-    employee_number: string
     firstname: string
     middlename?: string | null
     lastname: string
-    department_id: string
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -22019,14 +21698,12 @@ export namespace Prisma {
 
   export type EmployeeUpdateWithoutJo_approver_settingInput = {
     id?: StringFieldUpdateOperationsInput | string
-    employee_number?: StringFieldUpdateOperationsInput | string
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    department?: DepartmentUpdateOneRequiredWithoutEmployeesNestedInput
     meqs_approver_setting?: MEQSApproverSettingUpdateOneWithoutApproverNestedInput
     po_approver_setting?: POApproverSettingUpdateOneWithoutApproverNestedInput
     rv_approver_setting?: RVApproverSettingUpdateOneWithoutApproverNestedInput
@@ -22036,11 +21713,9 @@ export namespace Prisma {
 
   export type EmployeeUncheckedUpdateWithoutJo_approver_settingInput = {
     id?: StringFieldUpdateOperationsInput | string
-    employee_number?: StringFieldUpdateOperationsInput | string
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
-    department_id?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -22053,14 +21728,12 @@ export namespace Prisma {
 
   export type EmployeeCreateWithoutRv_approver_settingInput = {
     id?: string
-    employee_number: string
     firstname: string
     middlename?: string | null
     lastname: string
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    department: DepartmentCreateNestedOneWithoutEmployeesInput
     jo_approver_setting?: JOApproverSettingCreateNestedOneWithoutApproverInput
     meqs_approver_setting?: MEQSApproverSettingCreateNestedOneWithoutApproverInput
     po_approver_setting?: POApproverSettingCreateNestedOneWithoutApproverInput
@@ -22070,11 +21743,9 @@ export namespace Prisma {
 
   export type EmployeeUncheckedCreateWithoutRv_approver_settingInput = {
     id?: string
-    employee_number: string
     firstname: string
     middlename?: string | null
     lastname: string
-    department_id: string
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -22103,14 +21774,12 @@ export namespace Prisma {
 
   export type EmployeeUpdateWithoutRv_approver_settingInput = {
     id?: StringFieldUpdateOperationsInput | string
-    employee_number?: StringFieldUpdateOperationsInput | string
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    department?: DepartmentUpdateOneRequiredWithoutEmployeesNestedInput
     jo_approver_setting?: JOApproverSettingUpdateOneWithoutApproverNestedInput
     meqs_approver_setting?: MEQSApproverSettingUpdateOneWithoutApproverNestedInput
     po_approver_setting?: POApproverSettingUpdateOneWithoutApproverNestedInput
@@ -22120,11 +21789,9 @@ export namespace Prisma {
 
   export type EmployeeUncheckedUpdateWithoutRv_approver_settingInput = {
     id?: StringFieldUpdateOperationsInput | string
-    employee_number?: StringFieldUpdateOperationsInput | string
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
-    department_id?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -22137,14 +21804,12 @@ export namespace Prisma {
 
   export type EmployeeCreateWithoutSpr_approver_settingInput = {
     id?: string
-    employee_number: string
     firstname: string
     middlename?: string | null
     lastname: string
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    department: DepartmentCreateNestedOneWithoutEmployeesInput
     jo_approver_setting?: JOApproverSettingCreateNestedOneWithoutApproverInput
     meqs_approver_setting?: MEQSApproverSettingCreateNestedOneWithoutApproverInput
     po_approver_setting?: POApproverSettingCreateNestedOneWithoutApproverInput
@@ -22154,11 +21819,9 @@ export namespace Prisma {
 
   export type EmployeeUncheckedCreateWithoutSpr_approver_settingInput = {
     id?: string
-    employee_number: string
     firstname: string
     middlename?: string | null
     lastname: string
-    department_id: string
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -22187,14 +21850,12 @@ export namespace Prisma {
 
   export type EmployeeUpdateWithoutSpr_approver_settingInput = {
     id?: StringFieldUpdateOperationsInput | string
-    employee_number?: StringFieldUpdateOperationsInput | string
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    department?: DepartmentUpdateOneRequiredWithoutEmployeesNestedInput
     jo_approver_setting?: JOApproverSettingUpdateOneWithoutApproverNestedInput
     meqs_approver_setting?: MEQSApproverSettingUpdateOneWithoutApproverNestedInput
     po_approver_setting?: POApproverSettingUpdateOneWithoutApproverNestedInput
@@ -22204,11 +21865,9 @@ export namespace Prisma {
 
   export type EmployeeUncheckedUpdateWithoutSpr_approver_settingInput = {
     id?: StringFieldUpdateOperationsInput | string
-    employee_number?: StringFieldUpdateOperationsInput | string
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
-    department_id?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -22221,14 +21880,12 @@ export namespace Prisma {
 
   export type EmployeeCreateWithoutMeqs_approver_settingInput = {
     id?: string
-    employee_number: string
     firstname: string
     middlename?: string | null
     lastname: string
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    department: DepartmentCreateNestedOneWithoutEmployeesInput
     jo_approver_setting?: JOApproverSettingCreateNestedOneWithoutApproverInput
     po_approver_setting?: POApproverSettingCreateNestedOneWithoutApproverInput
     rv_approver_setting?: RVApproverSettingCreateNestedOneWithoutApproverInput
@@ -22238,11 +21895,9 @@ export namespace Prisma {
 
   export type EmployeeUncheckedCreateWithoutMeqs_approver_settingInput = {
     id?: string
-    employee_number: string
     firstname: string
     middlename?: string | null
     lastname: string
-    department_id: string
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -22271,14 +21926,12 @@ export namespace Prisma {
 
   export type EmployeeUpdateWithoutMeqs_approver_settingInput = {
     id?: StringFieldUpdateOperationsInput | string
-    employee_number?: StringFieldUpdateOperationsInput | string
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    department?: DepartmentUpdateOneRequiredWithoutEmployeesNestedInput
     jo_approver_setting?: JOApproverSettingUpdateOneWithoutApproverNestedInput
     po_approver_setting?: POApproverSettingUpdateOneWithoutApproverNestedInput
     rv_approver_setting?: RVApproverSettingUpdateOneWithoutApproverNestedInput
@@ -22288,11 +21941,9 @@ export namespace Prisma {
 
   export type EmployeeUncheckedUpdateWithoutMeqs_approver_settingInput = {
     id?: StringFieldUpdateOperationsInput | string
-    employee_number?: StringFieldUpdateOperationsInput | string
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
-    department_id?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -22305,14 +21956,12 @@ export namespace Prisma {
 
   export type EmployeeCreateWithoutPo_approver_settingInput = {
     id?: string
-    employee_number: string
     firstname: string
     middlename?: string | null
     lastname: string
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    department: DepartmentCreateNestedOneWithoutEmployeesInput
     jo_approver_setting?: JOApproverSettingCreateNestedOneWithoutApproverInput
     meqs_approver_setting?: MEQSApproverSettingCreateNestedOneWithoutApproverInput
     rv_approver_setting?: RVApproverSettingCreateNestedOneWithoutApproverInput
@@ -22322,11 +21971,9 @@ export namespace Prisma {
 
   export type EmployeeUncheckedCreateWithoutPo_approver_settingInput = {
     id?: string
-    employee_number: string
     firstname: string
     middlename?: string | null
     lastname: string
-    department_id: string
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -22355,14 +22002,12 @@ export namespace Prisma {
 
   export type EmployeeUpdateWithoutPo_approver_settingInput = {
     id?: StringFieldUpdateOperationsInput | string
-    employee_number?: StringFieldUpdateOperationsInput | string
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    department?: DepartmentUpdateOneRequiredWithoutEmployeesNestedInput
     jo_approver_setting?: JOApproverSettingUpdateOneWithoutApproverNestedInput
     meqs_approver_setting?: MEQSApproverSettingUpdateOneWithoutApproverNestedInput
     rv_approver_setting?: RVApproverSettingUpdateOneWithoutApproverNestedInput
@@ -22372,11 +22017,9 @@ export namespace Prisma {
 
   export type EmployeeUncheckedUpdateWithoutPo_approver_settingInput = {
     id?: StringFieldUpdateOperationsInput | string
-    employee_number?: StringFieldUpdateOperationsInput | string
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
-    department_id?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -22385,17 +22028,6 @@ export namespace Prisma {
     rv_approver_setting?: RVApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
     spr_approver_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
     user_employee?: UserEmployeeUncheckedUpdateOneWithoutEmployeeNestedInput
-  }
-
-  export type EmployeeCreateManyDepartmentInput = {
-    id?: string
-    employee_number: string
-    firstname: string
-    middlename?: string | null
-    lastname: string
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
   }
 
   export type DivisionCreateManyDepartmentInput = {
@@ -22406,51 +22038,6 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-  }
-
-  export type EmployeeUpdateWithoutDepartmentInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    employee_number?: StringFieldUpdateOperationsInput | string
-    firstname?: StringFieldUpdateOperationsInput | string
-    middlename?: NullableStringFieldUpdateOperationsInput | string | null
-    lastname?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    jo_approver_setting?: JOApproverSettingUpdateOneWithoutApproverNestedInput
-    meqs_approver_setting?: MEQSApproverSettingUpdateOneWithoutApproverNestedInput
-    po_approver_setting?: POApproverSettingUpdateOneWithoutApproverNestedInput
-    rv_approver_setting?: RVApproverSettingUpdateOneWithoutApproverNestedInput
-    spr_approver_setting?: SPRApproverSettingUpdateOneWithoutApproverNestedInput
-    user_employee?: UserEmployeeUpdateOneWithoutEmployeeNestedInput
-  }
-
-  export type EmployeeUncheckedUpdateWithoutDepartmentInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    employee_number?: StringFieldUpdateOperationsInput | string
-    firstname?: StringFieldUpdateOperationsInput | string
-    middlename?: NullableStringFieldUpdateOperationsInput | string | null
-    lastname?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    jo_approver_setting?: JOApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
-    meqs_approver_setting?: MEQSApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
-    po_approver_setting?: POApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
-    rv_approver_setting?: RVApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
-    spr_approver_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
-    user_employee?: UserEmployeeUncheckedUpdateOneWithoutEmployeeNestedInput
-  }
-
-  export type EmployeeUncheckedUpdateManyWithoutDepartmentInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    employee_number?: StringFieldUpdateOperationsInput | string
-    firstname?: StringFieldUpdateOperationsInput | string
-    middlename?: NullableStringFieldUpdateOperationsInput | string | null
-    lastname?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type DivisionUpdateWithoutDepartmentInput = {

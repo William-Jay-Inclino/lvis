@@ -1,14 +1,11 @@
-import { ObjectType, Field } from '@nestjs/graphql';
-import { Department } from '../../department/entities/department.entity';
+import { ObjectType, Field, ID, Directive } from '@nestjs/graphql';
 
 @ObjectType()
+@Directive('@key(fields: "id")')
 export class Employee {
 
-  @Field(() => String)
+  @Field(() => ID)
   id: string;
-
-  @Field(() => String)
-  employee_number: string;
 
   @Field(() => String)
   firstname: string;
@@ -18,11 +15,5 @@ export class Employee {
 
   @Field(() => String)
   lastname: string;
-
-  @Field(() => String)
-  department_id: string;
-
-  @Field(() => Department)
-  department?: Department;
 
 }

@@ -8,6 +8,11 @@ import {
 import { AuthModule } from './auth/auth.module';
 import { SeederModule } from './__seeder__/seeder.module';
 import { PrismaModule } from './__prisma__/prisma.module';
+import { CanvassModule } from './canvass/canvass.module';
+import { CanvassItemModule } from './canvass-item/canvass-item.module';
+import { EmployeeModule } from './employee/employee.module';
+import { RvService } from './rv/rv.service';
+import { RvModule } from './rv/rv.module';
 
 
 @Module({
@@ -21,9 +26,13 @@ import { PrismaModule } from './__prisma__/prisma.module';
     BrandModule,
     AuthModule,
     SeederModule,
-    PrismaModule
+    PrismaModule,
+    CanvassModule,
+    CanvassItemModule,
+    EmployeeModule,
+    RvModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [RvService],
 })
 export class WarehouseModule {}
