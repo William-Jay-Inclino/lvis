@@ -16,6 +16,7 @@ import { RvModule } from './rv/rv.module';
 import { ClassificationModule } from './classification/classification.module';
 import { HttpModule } from '@nestjs/axios';
 import { RvApproverModule } from './rv-approver/rv-approver.module';
+import { MeqsApproverModule } from './meqs-approver/meqs-approver.module';
 
 
 @Module({
@@ -37,6 +38,7 @@ import { RvApproverModule } from './rv-approver/rv-approver.module';
     RvModule,
     ClassificationModule,
     RvApproverModule,
+    MeqsApproverModule,
   ],
   controllers: [],
   providers: [RvService],
