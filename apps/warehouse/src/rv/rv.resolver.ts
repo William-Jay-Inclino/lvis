@@ -5,15 +5,23 @@ import { RvService } from './rv.service';
 import { Employee } from '../employee/entities/employee.entity';
 import { Classification } from '../classification/entities/classification.entity';
 import { UpdateRvInput } from './dto/update-rv.input';
-import { WarehouseRemoveResponse } from '../__common__/classes';
+import { CurrentAuthUser } from '../auth/current-auth-user.decorator';
+import { AuthUser } from '../__common__/auth-user.entity';
+import { GqlAuthGuard } from '../auth/guards/gql-auth.guard';
+import { UseGuards } from '@nestjs/common';
 
+@UseGuards(GqlAuthGuard)
 @Resolver( () => RV)
 export class RvResolver {
 
     constructor(private readonly rvService: RvService) {}
 
     @Mutation(() => RV)
-    createRv(@Args('input') createRvInput: CreateRvInput) {
+    createRv(
+        @Args('input') createRvInput: CreateRvInput,
+        @CurrentAuthUser() authUser: AuthUser
+    ) {
+        this.rvService.setAuthUser(authUser)
         return this.rvService.create(createRvInput);
     }
 
@@ -33,11 +41,6 @@ export class RvResolver {
       @Args('input') updateRvInput: UpdateRvInput
     ) {
       return this.rvService.update(id, updateRvInput);
-    }
-
-    @Mutation(() => WarehouseRemoveResponse)
-    removeEmployee(@Args('id') id: string) {
-      return this.rvService.remove(id);
     }
 
     @ResolveField( () => Employee)

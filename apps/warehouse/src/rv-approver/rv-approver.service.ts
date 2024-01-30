@@ -111,8 +111,50 @@ export class RvApproverService {
 
     }
 
-    update(id: number, updateRvApproverInput: UpdateRvApproverInput) {
-        return `This action updates a #${id} rvApprover`;
+    async update(id: string, input: UpdateRvApproverInput): Promise<RVApprover> {
+        this.logger.log('update()')
+
+        const existingItem = await this.findOne(id)
+
+        if(input.approver_id){
+
+            const isValidApproverId = await this.isEmployeeExist(input.approver_id, this.authUser)
+
+            if(!isValidApproverId){
+                throw new NotFoundException('Approver ID not valid')
+            }
+
+        }
+
+        if(input.approver_proxy_id){
+
+            const isValidApproverProxyId = await this.isEmployeeExist(input.approver_proxy_id, this.authUser)
+
+            if(!isValidApproverProxyId){
+                throw new NotFoundException('Approver Proxy ID not valid')
+            }
+
+        }
+
+        const data: Prisma.RVApproverUpdateInput = {
+            approver_id: input.approver_id ?? existingItem.approver_id,
+            approver_proxy_id: input.approver_proxy_id ?? existingItem.approver_proxy_id,
+            date_approval: input.date_approval ? new Date(input.date_approval) : existingItem.date_approval,
+            notes: input.notes ?? existingItem.notes,
+            status: input.status ?? existingItem.status,
+            label: input.label ?? existingItem.label,
+            order: input.order ?? existingItem.order,
+        }
+
+        const updated = await this.prisma.rVApprover.update({
+            data,
+            where: { id }
+        })
+
+        this.logger.log('Successfully updated RV Approver')
+
+        return await this.findOne(updated.id)
+
     }
 
     async remove(id: string): Promise<WarehouseRemoveResponse> {

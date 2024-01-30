@@ -1,5 +1,5 @@
 import { InputType, Int, Field } from '@nestjs/graphql';
-import { IsInt, IsNotEmpty, IsString } from 'class-validator';
+import { IsInt, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 @InputType()
 export class CreateRvApproverSettingInput {
@@ -8,6 +8,11 @@ export class CreateRvApproverSettingInput {
   @IsNotEmpty()
   @IsString()
   approver_id: string;
+
+  @Field(() => String, { nullable: true })
+  @IsOptional()
+  @IsString()
+  approver_proxy_id?: string | null
 
   @Field()
   @IsNotEmpty()
