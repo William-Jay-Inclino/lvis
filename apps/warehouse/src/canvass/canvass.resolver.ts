@@ -11,6 +11,7 @@ import { UpdateCanvassInput } from './dto/update-canvass.input';
 import { WarehouseRemoveResponse } from '../__common__/classes';
 
 
+@UseGuards(GqlAuthGuard)
 @Resolver( () => Canvass)
 export class CanvassResolver {
 
@@ -19,7 +20,7 @@ export class CanvassResolver {
     constructor(private readonly canvassService: CanvassService) {}
 
     @Mutation( () => Canvass)
-    @UseGuards(GqlAuthGuard)
+    
     createCanvass(
         @Args('input') createCanvassInput: CreateCanvassInput, 
         @CurrentAuthUser() authUser: AuthUser

@@ -2051,6 +2051,40 @@ export namespace Prisma {
 
 
   /**
+   * Count Type EmployeeCountOutputType
+   */
+
+  export type EmployeeCountOutputType = {
+    RVApproverSetting: number
+  }
+
+  export type EmployeeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    RVApproverSetting?: boolean | EmployeeCountOutputTypeCountRVApproverSettingArgs
+  }
+
+  // Custom InputTypes
+
+  /**
+   * EmployeeCountOutputType without action
+   */
+  export type EmployeeCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmployeeCountOutputType
+     */
+    select?: EmployeeCountOutputTypeSelect<ExtArgs> | null
+  }
+
+
+  /**
+   * EmployeeCountOutputType without action
+   */
+  export type EmployeeCountOutputTypeCountRVApproverSettingArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RVApproverSettingWhereInput
+  }
+
+
+
+  /**
    * Count Type UserCountOutputType
    */
 
@@ -4357,7 +4391,14 @@ export namespace Prisma {
     po_approver_setting?: boolean | Employee$po_approver_settingArgs<ExtArgs>
     rv_approver_setting?: boolean | Employee$rv_approver_settingArgs<ExtArgs>
     spr_approver_setting?: boolean | Employee$spr_approver_settingArgs<ExtArgs>
+    jo_approver_proxy_setting?: boolean | Employee$jo_approver_proxy_settingArgs<ExtArgs>
+    meqs_approver_proxy_setting?: boolean | Employee$meqs_approver_proxy_settingArgs<ExtArgs>
+    po_approver_proxy_setting?: boolean | Employee$po_approver_proxy_settingArgs<ExtArgs>
+    rv_approver_proxy_setting?: boolean | Employee$rv_approver_proxy_settingArgs<ExtArgs>
+    spr_approver_proxy_setting?: boolean | Employee$spr_approver_proxy_settingArgs<ExtArgs>
     user_employee?: boolean | Employee$user_employeeArgs<ExtArgs>
+    RVApproverSetting?: boolean | Employee$RVApproverSettingArgs<ExtArgs>
+    _count?: boolean | EmployeeCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["employee"]>
 
   export type EmployeeSelectScalar = {
@@ -4376,7 +4417,14 @@ export namespace Prisma {
     po_approver_setting?: boolean | Employee$po_approver_settingArgs<ExtArgs>
     rv_approver_setting?: boolean | Employee$rv_approver_settingArgs<ExtArgs>
     spr_approver_setting?: boolean | Employee$spr_approver_settingArgs<ExtArgs>
+    jo_approver_proxy_setting?: boolean | Employee$jo_approver_proxy_settingArgs<ExtArgs>
+    meqs_approver_proxy_setting?: boolean | Employee$meqs_approver_proxy_settingArgs<ExtArgs>
+    po_approver_proxy_setting?: boolean | Employee$po_approver_proxy_settingArgs<ExtArgs>
+    rv_approver_proxy_setting?: boolean | Employee$rv_approver_proxy_settingArgs<ExtArgs>
+    spr_approver_proxy_setting?: boolean | Employee$spr_approver_proxy_settingArgs<ExtArgs>
     user_employee?: boolean | Employee$user_employeeArgs<ExtArgs>
+    RVApproverSetting?: boolean | Employee$RVApproverSettingArgs<ExtArgs>
+    _count?: boolean | EmployeeCountOutputTypeDefaultArgs<ExtArgs>
   }
 
 
@@ -4388,7 +4436,13 @@ export namespace Prisma {
       po_approver_setting: Prisma.$POApproverSettingPayload<ExtArgs> | null
       rv_approver_setting: Prisma.$RVApproverSettingPayload<ExtArgs> | null
       spr_approver_setting: Prisma.$SPRApproverSettingPayload<ExtArgs> | null
+      jo_approver_proxy_setting: Prisma.$JOApproverSettingPayload<ExtArgs> | null
+      meqs_approver_proxy_setting: Prisma.$MEQSApproverSettingPayload<ExtArgs> | null
+      po_approver_proxy_setting: Prisma.$POApproverSettingPayload<ExtArgs> | null
+      rv_approver_proxy_setting: Prisma.$RVApproverSettingPayload<ExtArgs> | null
+      spr_approver_proxy_setting: Prisma.$SPRApproverSettingPayload<ExtArgs> | null
       user_employee: Prisma.$UserEmployeePayload<ExtArgs> | null
+      RVApproverSetting: Prisma.$RVApproverSettingPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4773,7 +4827,19 @@ export namespace Prisma {
 
     spr_approver_setting<T extends Employee$spr_approver_settingArgs<ExtArgs> = {}>(args?: Subset<T, Employee$spr_approver_settingArgs<ExtArgs>>): Prisma__SPRApproverSettingClient<$Result.GetResult<Prisma.$SPRApproverSettingPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
 
+    jo_approver_proxy_setting<T extends Employee$jo_approver_proxy_settingArgs<ExtArgs> = {}>(args?: Subset<T, Employee$jo_approver_proxy_settingArgs<ExtArgs>>): Prisma__JOApproverSettingClient<$Result.GetResult<Prisma.$JOApproverSettingPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+
+    meqs_approver_proxy_setting<T extends Employee$meqs_approver_proxy_settingArgs<ExtArgs> = {}>(args?: Subset<T, Employee$meqs_approver_proxy_settingArgs<ExtArgs>>): Prisma__MEQSApproverSettingClient<$Result.GetResult<Prisma.$MEQSApproverSettingPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+
+    po_approver_proxy_setting<T extends Employee$po_approver_proxy_settingArgs<ExtArgs> = {}>(args?: Subset<T, Employee$po_approver_proxy_settingArgs<ExtArgs>>): Prisma__POApproverSettingClient<$Result.GetResult<Prisma.$POApproverSettingPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+
+    rv_approver_proxy_setting<T extends Employee$rv_approver_proxy_settingArgs<ExtArgs> = {}>(args?: Subset<T, Employee$rv_approver_proxy_settingArgs<ExtArgs>>): Prisma__RVApproverSettingClient<$Result.GetResult<Prisma.$RVApproverSettingPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+
+    spr_approver_proxy_setting<T extends Employee$spr_approver_proxy_settingArgs<ExtArgs> = {}>(args?: Subset<T, Employee$spr_approver_proxy_settingArgs<ExtArgs>>): Prisma__SPRApproverSettingClient<$Result.GetResult<Prisma.$SPRApproverSettingPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+
     user_employee<T extends Employee$user_employeeArgs<ExtArgs> = {}>(args?: Subset<T, Employee$user_employeeArgs<ExtArgs>>): Prisma__UserEmployeeClient<$Result.GetResult<Prisma.$UserEmployeePayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+
+    RVApproverSetting<T extends Employee$RVApproverSettingArgs<ExtArgs> = {}>(args?: Subset<T, Employee$RVApproverSettingArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RVApproverSettingPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -5202,6 +5268,86 @@ export namespace Prisma {
 
 
   /**
+   * Employee.jo_approver_proxy_setting
+   */
+  export type Employee$jo_approver_proxy_settingArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the JOApproverSetting
+     */
+    select?: JOApproverSettingSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: JOApproverSettingInclude<ExtArgs> | null
+    where?: JOApproverSettingWhereInput
+  }
+
+
+  /**
+   * Employee.meqs_approver_proxy_setting
+   */
+  export type Employee$meqs_approver_proxy_settingArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MEQSApproverSetting
+     */
+    select?: MEQSApproverSettingSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: MEQSApproverSettingInclude<ExtArgs> | null
+    where?: MEQSApproverSettingWhereInput
+  }
+
+
+  /**
+   * Employee.po_approver_proxy_setting
+   */
+  export type Employee$po_approver_proxy_settingArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the POApproverSetting
+     */
+    select?: POApproverSettingSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: POApproverSettingInclude<ExtArgs> | null
+    where?: POApproverSettingWhereInput
+  }
+
+
+  /**
+   * Employee.rv_approver_proxy_setting
+   */
+  export type Employee$rv_approver_proxy_settingArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RVApproverSetting
+     */
+    select?: RVApproverSettingSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: RVApproverSettingInclude<ExtArgs> | null
+    where?: RVApproverSettingWhereInput
+  }
+
+
+  /**
+   * Employee.spr_approver_proxy_setting
+   */
+  export type Employee$spr_approver_proxy_settingArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SPRApproverSetting
+     */
+    select?: SPRApproverSettingSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SPRApproverSettingInclude<ExtArgs> | null
+    where?: SPRApproverSettingWhereInput
+  }
+
+
+  /**
    * Employee.user_employee
    */
   export type Employee$user_employeeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5214,6 +5360,27 @@ export namespace Prisma {
      */
     include?: UserEmployeeInclude<ExtArgs> | null
     where?: UserEmployeeWhereInput
+  }
+
+
+  /**
+   * Employee.RVApproverSetting
+   */
+  export type Employee$RVApproverSettingArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RVApproverSetting
+     */
+    select?: RVApproverSettingSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: RVApproverSettingInclude<ExtArgs> | null
+    where?: RVApproverSettingWhereInput
+    orderBy?: RVApproverSettingOrderByWithRelationInput | RVApproverSettingOrderByWithRelationInput[]
+    cursor?: RVApproverSettingWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RVApproverSettingScalarFieldEnum | RVApproverSettingScalarFieldEnum[]
   }
 
 
@@ -11880,6 +12047,7 @@ export namespace Prisma {
     label: string | null
     order: number | null
     approver_id: string | null
+    approver_proxy_id: string | null
     created_at: Date | null
     updated_at: Date | null
     is_deleted: boolean | null
@@ -11890,6 +12058,7 @@ export namespace Prisma {
     label: string | null
     order: number | null
     approver_id: string | null
+    approver_proxy_id: string | null
     created_at: Date | null
     updated_at: Date | null
     is_deleted: boolean | null
@@ -11900,6 +12069,7 @@ export namespace Prisma {
     label: number
     order: number
     approver_id: number
+    approver_proxy_id: number
     created_at: number
     updated_at: number
     is_deleted: number
@@ -11920,6 +12090,7 @@ export namespace Prisma {
     label?: true
     order?: true
     approver_id?: true
+    approver_proxy_id?: true
     created_at?: true
     updated_at?: true
     is_deleted?: true
@@ -11930,6 +12101,7 @@ export namespace Prisma {
     label?: true
     order?: true
     approver_id?: true
+    approver_proxy_id?: true
     created_at?: true
     updated_at?: true
     is_deleted?: true
@@ -11940,6 +12112,7 @@ export namespace Prisma {
     label?: true
     order?: true
     approver_id?: true
+    approver_proxy_id?: true
     created_at?: true
     updated_at?: true
     is_deleted?: true
@@ -12037,6 +12210,7 @@ export namespace Prisma {
     label: string
     order: number
     approver_id: string
+    approver_proxy_id: string | null
     created_at: Date
     updated_at: Date
     is_deleted: boolean
@@ -12066,10 +12240,12 @@ export namespace Prisma {
     label?: boolean
     order?: boolean
     approver_id?: boolean
+    approver_proxy_id?: boolean
     created_at?: boolean
     updated_at?: boolean
     is_deleted?: boolean
     approver?: boolean | EmployeeDefaultArgs<ExtArgs>
+    approver_proxy?: boolean | JOApproverSetting$approver_proxyArgs<ExtArgs>
   }, ExtArgs["result"]["jOApproverSetting"]>
 
   export type JOApproverSettingSelectScalar = {
@@ -12077,6 +12253,7 @@ export namespace Prisma {
     label?: boolean
     order?: boolean
     approver_id?: boolean
+    approver_proxy_id?: boolean
     created_at?: boolean
     updated_at?: boolean
     is_deleted?: boolean
@@ -12084,6 +12261,7 @@ export namespace Prisma {
 
   export type JOApproverSettingInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     approver?: boolean | EmployeeDefaultArgs<ExtArgs>
+    approver_proxy?: boolean | JOApproverSetting$approver_proxyArgs<ExtArgs>
   }
 
 
@@ -12091,12 +12269,14 @@ export namespace Prisma {
     name: "JOApproverSetting"
     objects: {
       approver: Prisma.$EmployeePayload<ExtArgs>
+      approver_proxy: Prisma.$EmployeePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       label: string
       order: number
       approver_id: string
+      approver_proxy_id: string | null
       created_at: Date
       updated_at: Date
       is_deleted: boolean
@@ -12467,6 +12647,8 @@ export namespace Prisma {
 
     approver<T extends EmployeeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EmployeeDefaultArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
+    approver_proxy<T extends JOApproverSetting$approver_proxyArgs<ExtArgs> = {}>(args?: Subset<T, JOApproverSetting$approver_proxyArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -12499,6 +12681,7 @@ export namespace Prisma {
     readonly label: FieldRef<"JOApproverSetting", 'String'>
     readonly order: FieldRef<"JOApproverSetting", 'Int'>
     readonly approver_id: FieldRef<"JOApproverSetting", 'String'>
+    readonly approver_proxy_id: FieldRef<"JOApproverSetting", 'String'>
     readonly created_at: FieldRef<"JOApproverSetting", 'DateTime'>
     readonly updated_at: FieldRef<"JOApproverSetting", 'DateTime'>
     readonly is_deleted: FieldRef<"JOApproverSetting", 'Boolean'>
@@ -12814,6 +12997,22 @@ export namespace Prisma {
 
 
   /**
+   * JOApproverSetting.approver_proxy
+   */
+  export type JOApproverSetting$approver_proxyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Employee
+     */
+    select?: EmployeeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: EmployeeInclude<ExtArgs> | null
+    where?: EmployeeWhereInput
+  }
+
+
+  /**
    * JOApproverSetting without action
    */
   export type JOApproverSettingDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -12852,31 +13051,37 @@ export namespace Prisma {
   export type RVApproverSettingMinAggregateOutputType = {
     id: string | null
     approver_id: string | null
+    approver_proxy_id: string | null
     label: string | null
     order: number | null
     created_at: Date | null
     updated_at: Date | null
     is_deleted: boolean | null
+    employeeId: string | null
   }
 
   export type RVApproverSettingMaxAggregateOutputType = {
     id: string | null
     approver_id: string | null
+    approver_proxy_id: string | null
     label: string | null
     order: number | null
     created_at: Date | null
     updated_at: Date | null
     is_deleted: boolean | null
+    employeeId: string | null
   }
 
   export type RVApproverSettingCountAggregateOutputType = {
     id: number
     approver_id: number
+    approver_proxy_id: number
     label: number
     order: number
     created_at: number
     updated_at: number
     is_deleted: number
+    employeeId: number
     _all: number
   }
 
@@ -12892,31 +13097,37 @@ export namespace Prisma {
   export type RVApproverSettingMinAggregateInputType = {
     id?: true
     approver_id?: true
+    approver_proxy_id?: true
     label?: true
     order?: true
     created_at?: true
     updated_at?: true
     is_deleted?: true
+    employeeId?: true
   }
 
   export type RVApproverSettingMaxAggregateInputType = {
     id?: true
     approver_id?: true
+    approver_proxy_id?: true
     label?: true
     order?: true
     created_at?: true
     updated_at?: true
     is_deleted?: true
+    employeeId?: true
   }
 
   export type RVApproverSettingCountAggregateInputType = {
     id?: true
     approver_id?: true
+    approver_proxy_id?: true
     label?: true
     order?: true
     created_at?: true
     updated_at?: true
     is_deleted?: true
+    employeeId?: true
     _all?: true
   }
 
@@ -13009,11 +13220,13 @@ export namespace Prisma {
   export type RVApproverSettingGroupByOutputType = {
     id: string
     approver_id: string
+    approver_proxy_id: string | null
     label: string
     order: number
     created_at: Date
     updated_at: Date
     is_deleted: boolean
+    employeeId: string | null
     _count: RVApproverSettingCountAggregateOutputType | null
     _avg: RVApproverSettingAvgAggregateOutputType | null
     _sum: RVApproverSettingSumAggregateOutputType | null
@@ -13038,26 +13251,34 @@ export namespace Prisma {
   export type RVApproverSettingSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     approver_id?: boolean
+    approver_proxy_id?: boolean
     label?: boolean
     order?: boolean
     created_at?: boolean
     updated_at?: boolean
     is_deleted?: boolean
+    employeeId?: boolean
     approver?: boolean | EmployeeDefaultArgs<ExtArgs>
+    approver_proxy?: boolean | RVApproverSetting$approver_proxyArgs<ExtArgs>
+    Employee?: boolean | RVApproverSetting$EmployeeArgs<ExtArgs>
   }, ExtArgs["result"]["rVApproverSetting"]>
 
   export type RVApproverSettingSelectScalar = {
     id?: boolean
     approver_id?: boolean
+    approver_proxy_id?: boolean
     label?: boolean
     order?: boolean
     created_at?: boolean
     updated_at?: boolean
     is_deleted?: boolean
+    employeeId?: boolean
   }
 
   export type RVApproverSettingInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     approver?: boolean | EmployeeDefaultArgs<ExtArgs>
+    approver_proxy?: boolean | RVApproverSetting$approver_proxyArgs<ExtArgs>
+    Employee?: boolean | RVApproverSetting$EmployeeArgs<ExtArgs>
   }
 
 
@@ -13065,15 +13286,19 @@ export namespace Prisma {
     name: "RVApproverSetting"
     objects: {
       approver: Prisma.$EmployeePayload<ExtArgs>
+      approver_proxy: Prisma.$EmployeePayload<ExtArgs> | null
+      Employee: Prisma.$EmployeePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       approver_id: string
+      approver_proxy_id: string | null
       label: string
       order: number
       created_at: Date
       updated_at: Date
       is_deleted: boolean
+      employeeId: string | null
     }, ExtArgs["result"]["rVApproverSetting"]>
     composites: {}
   }
@@ -13441,6 +13666,10 @@ export namespace Prisma {
 
     approver<T extends EmployeeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EmployeeDefaultArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
+    approver_proxy<T extends RVApproverSetting$approver_proxyArgs<ExtArgs> = {}>(args?: Subset<T, RVApproverSetting$approver_proxyArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+
+    Employee<T extends RVApproverSetting$EmployeeArgs<ExtArgs> = {}>(args?: Subset<T, RVApproverSetting$EmployeeArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -13471,11 +13700,13 @@ export namespace Prisma {
   interface RVApproverSettingFieldRefs {
     readonly id: FieldRef<"RVApproverSetting", 'String'>
     readonly approver_id: FieldRef<"RVApproverSetting", 'String'>
+    readonly approver_proxy_id: FieldRef<"RVApproverSetting", 'String'>
     readonly label: FieldRef<"RVApproverSetting", 'String'>
     readonly order: FieldRef<"RVApproverSetting", 'Int'>
     readonly created_at: FieldRef<"RVApproverSetting", 'DateTime'>
     readonly updated_at: FieldRef<"RVApproverSetting", 'DateTime'>
     readonly is_deleted: FieldRef<"RVApproverSetting", 'Boolean'>
+    readonly employeeId: FieldRef<"RVApproverSetting", 'String'>
   }
     
 
@@ -13788,6 +14019,38 @@ export namespace Prisma {
 
 
   /**
+   * RVApproverSetting.approver_proxy
+   */
+  export type RVApproverSetting$approver_proxyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Employee
+     */
+    select?: EmployeeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: EmployeeInclude<ExtArgs> | null
+    where?: EmployeeWhereInput
+  }
+
+
+  /**
+   * RVApproverSetting.Employee
+   */
+  export type RVApproverSetting$EmployeeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Employee
+     */
+    select?: EmployeeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: EmployeeInclude<ExtArgs> | null
+    where?: EmployeeWhereInput
+  }
+
+
+  /**
    * RVApproverSetting without action
    */
   export type RVApproverSettingDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -13826,6 +14089,7 @@ export namespace Prisma {
   export type SPRApproverSettingMinAggregateOutputType = {
     id: string | null
     approver_id: string | null
+    approver_proxy_id: string | null
     label: string | null
     order: number | null
     created_at: Date | null
@@ -13836,6 +14100,7 @@ export namespace Prisma {
   export type SPRApproverSettingMaxAggregateOutputType = {
     id: string | null
     approver_id: string | null
+    approver_proxy_id: string | null
     label: string | null
     order: number | null
     created_at: Date | null
@@ -13846,6 +14111,7 @@ export namespace Prisma {
   export type SPRApproverSettingCountAggregateOutputType = {
     id: number
     approver_id: number
+    approver_proxy_id: number
     label: number
     order: number
     created_at: number
@@ -13866,6 +14132,7 @@ export namespace Prisma {
   export type SPRApproverSettingMinAggregateInputType = {
     id?: true
     approver_id?: true
+    approver_proxy_id?: true
     label?: true
     order?: true
     created_at?: true
@@ -13876,6 +14143,7 @@ export namespace Prisma {
   export type SPRApproverSettingMaxAggregateInputType = {
     id?: true
     approver_id?: true
+    approver_proxy_id?: true
     label?: true
     order?: true
     created_at?: true
@@ -13886,6 +14154,7 @@ export namespace Prisma {
   export type SPRApproverSettingCountAggregateInputType = {
     id?: true
     approver_id?: true
+    approver_proxy_id?: true
     label?: true
     order?: true
     created_at?: true
@@ -13983,6 +14252,7 @@ export namespace Prisma {
   export type SPRApproverSettingGroupByOutputType = {
     id: string
     approver_id: string
+    approver_proxy_id: string | null
     label: string
     order: number
     created_at: Date
@@ -14012,17 +14282,20 @@ export namespace Prisma {
   export type SPRApproverSettingSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     approver_id?: boolean
+    approver_proxy_id?: boolean
     label?: boolean
     order?: boolean
     created_at?: boolean
     updated_at?: boolean
     is_deleted?: boolean
     approver?: boolean | EmployeeDefaultArgs<ExtArgs>
+    approver_proxy?: boolean | SPRApproverSetting$approver_proxyArgs<ExtArgs>
   }, ExtArgs["result"]["sPRApproverSetting"]>
 
   export type SPRApproverSettingSelectScalar = {
     id?: boolean
     approver_id?: boolean
+    approver_proxy_id?: boolean
     label?: boolean
     order?: boolean
     created_at?: boolean
@@ -14032,6 +14305,7 @@ export namespace Prisma {
 
   export type SPRApproverSettingInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     approver?: boolean | EmployeeDefaultArgs<ExtArgs>
+    approver_proxy?: boolean | SPRApproverSetting$approver_proxyArgs<ExtArgs>
   }
 
 
@@ -14039,10 +14313,12 @@ export namespace Prisma {
     name: "SPRApproverSetting"
     objects: {
       approver: Prisma.$EmployeePayload<ExtArgs>
+      approver_proxy: Prisma.$EmployeePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       approver_id: string
+      approver_proxy_id: string | null
       label: string
       order: number
       created_at: Date
@@ -14415,6 +14691,8 @@ export namespace Prisma {
 
     approver<T extends EmployeeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EmployeeDefaultArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
+    approver_proxy<T extends SPRApproverSetting$approver_proxyArgs<ExtArgs> = {}>(args?: Subset<T, SPRApproverSetting$approver_proxyArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -14445,6 +14723,7 @@ export namespace Prisma {
   interface SPRApproverSettingFieldRefs {
     readonly id: FieldRef<"SPRApproverSetting", 'String'>
     readonly approver_id: FieldRef<"SPRApproverSetting", 'String'>
+    readonly approver_proxy_id: FieldRef<"SPRApproverSetting", 'String'>
     readonly label: FieldRef<"SPRApproverSetting", 'String'>
     readonly order: FieldRef<"SPRApproverSetting", 'Int'>
     readonly created_at: FieldRef<"SPRApproverSetting", 'DateTime'>
@@ -14762,6 +15041,22 @@ export namespace Prisma {
 
 
   /**
+   * SPRApproverSetting.approver_proxy
+   */
+  export type SPRApproverSetting$approver_proxyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Employee
+     */
+    select?: EmployeeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: EmployeeInclude<ExtArgs> | null
+    where?: EmployeeWhereInput
+  }
+
+
+  /**
    * SPRApproverSetting without action
    */
   export type SPRApproverSettingDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -14800,6 +15095,7 @@ export namespace Prisma {
   export type MEQSApproverSettingMinAggregateOutputType = {
     id: string | null
     approver_id: string | null
+    approver_proxy_id: string | null
     label: string | null
     order: number | null
     created_at: Date | null
@@ -14810,6 +15106,7 @@ export namespace Prisma {
   export type MEQSApproverSettingMaxAggregateOutputType = {
     id: string | null
     approver_id: string | null
+    approver_proxy_id: string | null
     label: string | null
     order: number | null
     created_at: Date | null
@@ -14820,6 +15117,7 @@ export namespace Prisma {
   export type MEQSApproverSettingCountAggregateOutputType = {
     id: number
     approver_id: number
+    approver_proxy_id: number
     label: number
     order: number
     created_at: number
@@ -14840,6 +15138,7 @@ export namespace Prisma {
   export type MEQSApproverSettingMinAggregateInputType = {
     id?: true
     approver_id?: true
+    approver_proxy_id?: true
     label?: true
     order?: true
     created_at?: true
@@ -14850,6 +15149,7 @@ export namespace Prisma {
   export type MEQSApproverSettingMaxAggregateInputType = {
     id?: true
     approver_id?: true
+    approver_proxy_id?: true
     label?: true
     order?: true
     created_at?: true
@@ -14860,6 +15160,7 @@ export namespace Prisma {
   export type MEQSApproverSettingCountAggregateInputType = {
     id?: true
     approver_id?: true
+    approver_proxy_id?: true
     label?: true
     order?: true
     created_at?: true
@@ -14957,6 +15258,7 @@ export namespace Prisma {
   export type MEQSApproverSettingGroupByOutputType = {
     id: string
     approver_id: string
+    approver_proxy_id: string | null
     label: string
     order: number
     created_at: Date
@@ -14986,17 +15288,20 @@ export namespace Prisma {
   export type MEQSApproverSettingSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     approver_id?: boolean
+    approver_proxy_id?: boolean
     label?: boolean
     order?: boolean
     created_at?: boolean
     updated_at?: boolean
     is_deleted?: boolean
     approver?: boolean | EmployeeDefaultArgs<ExtArgs>
+    approver_proxy?: boolean | MEQSApproverSetting$approver_proxyArgs<ExtArgs>
   }, ExtArgs["result"]["mEQSApproverSetting"]>
 
   export type MEQSApproverSettingSelectScalar = {
     id?: boolean
     approver_id?: boolean
+    approver_proxy_id?: boolean
     label?: boolean
     order?: boolean
     created_at?: boolean
@@ -15006,6 +15311,7 @@ export namespace Prisma {
 
   export type MEQSApproverSettingInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     approver?: boolean | EmployeeDefaultArgs<ExtArgs>
+    approver_proxy?: boolean | MEQSApproverSetting$approver_proxyArgs<ExtArgs>
   }
 
 
@@ -15013,10 +15319,12 @@ export namespace Prisma {
     name: "MEQSApproverSetting"
     objects: {
       approver: Prisma.$EmployeePayload<ExtArgs>
+      approver_proxy: Prisma.$EmployeePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       approver_id: string
+      approver_proxy_id: string | null
       label: string
       order: number
       created_at: Date
@@ -15389,6 +15697,8 @@ export namespace Prisma {
 
     approver<T extends EmployeeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EmployeeDefaultArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
+    approver_proxy<T extends MEQSApproverSetting$approver_proxyArgs<ExtArgs> = {}>(args?: Subset<T, MEQSApproverSetting$approver_proxyArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -15419,6 +15729,7 @@ export namespace Prisma {
   interface MEQSApproverSettingFieldRefs {
     readonly id: FieldRef<"MEQSApproverSetting", 'String'>
     readonly approver_id: FieldRef<"MEQSApproverSetting", 'String'>
+    readonly approver_proxy_id: FieldRef<"MEQSApproverSetting", 'String'>
     readonly label: FieldRef<"MEQSApproverSetting", 'String'>
     readonly order: FieldRef<"MEQSApproverSetting", 'Int'>
     readonly created_at: FieldRef<"MEQSApproverSetting", 'DateTime'>
@@ -15736,6 +16047,22 @@ export namespace Prisma {
 
 
   /**
+   * MEQSApproverSetting.approver_proxy
+   */
+  export type MEQSApproverSetting$approver_proxyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Employee
+     */
+    select?: EmployeeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: EmployeeInclude<ExtArgs> | null
+    where?: EmployeeWhereInput
+  }
+
+
+  /**
    * MEQSApproverSetting without action
    */
   export type MEQSApproverSettingDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -15774,6 +16101,7 @@ export namespace Prisma {
   export type POApproverSettingMinAggregateOutputType = {
     id: string | null
     approver_id: string | null
+    approver_proxy_id: string | null
     label: string | null
     order: number | null
     created_at: Date | null
@@ -15784,6 +16112,7 @@ export namespace Prisma {
   export type POApproverSettingMaxAggregateOutputType = {
     id: string | null
     approver_id: string | null
+    approver_proxy_id: string | null
     label: string | null
     order: number | null
     created_at: Date | null
@@ -15794,6 +16123,7 @@ export namespace Prisma {
   export type POApproverSettingCountAggregateOutputType = {
     id: number
     approver_id: number
+    approver_proxy_id: number
     label: number
     order: number
     created_at: number
@@ -15814,6 +16144,7 @@ export namespace Prisma {
   export type POApproverSettingMinAggregateInputType = {
     id?: true
     approver_id?: true
+    approver_proxy_id?: true
     label?: true
     order?: true
     created_at?: true
@@ -15824,6 +16155,7 @@ export namespace Prisma {
   export type POApproverSettingMaxAggregateInputType = {
     id?: true
     approver_id?: true
+    approver_proxy_id?: true
     label?: true
     order?: true
     created_at?: true
@@ -15834,6 +16166,7 @@ export namespace Prisma {
   export type POApproverSettingCountAggregateInputType = {
     id?: true
     approver_id?: true
+    approver_proxy_id?: true
     label?: true
     order?: true
     created_at?: true
@@ -15931,6 +16264,7 @@ export namespace Prisma {
   export type POApproverSettingGroupByOutputType = {
     id: string
     approver_id: string
+    approver_proxy_id: string | null
     label: string
     order: number
     created_at: Date
@@ -15960,17 +16294,20 @@ export namespace Prisma {
   export type POApproverSettingSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     approver_id?: boolean
+    approver_proxy_id?: boolean
     label?: boolean
     order?: boolean
     created_at?: boolean
     updated_at?: boolean
     is_deleted?: boolean
     approver?: boolean | EmployeeDefaultArgs<ExtArgs>
+    approver_proxy?: boolean | POApproverSetting$approver_proxyArgs<ExtArgs>
   }, ExtArgs["result"]["pOApproverSetting"]>
 
   export type POApproverSettingSelectScalar = {
     id?: boolean
     approver_id?: boolean
+    approver_proxy_id?: boolean
     label?: boolean
     order?: boolean
     created_at?: boolean
@@ -15980,6 +16317,7 @@ export namespace Prisma {
 
   export type POApproverSettingInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     approver?: boolean | EmployeeDefaultArgs<ExtArgs>
+    approver_proxy?: boolean | POApproverSetting$approver_proxyArgs<ExtArgs>
   }
 
 
@@ -15987,10 +16325,12 @@ export namespace Prisma {
     name: "POApproverSetting"
     objects: {
       approver: Prisma.$EmployeePayload<ExtArgs>
+      approver_proxy: Prisma.$EmployeePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       approver_id: string
+      approver_proxy_id: string | null
       label: string
       order: number
       created_at: Date
@@ -16363,6 +16703,8 @@ export namespace Prisma {
 
     approver<T extends EmployeeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EmployeeDefaultArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
+    approver_proxy<T extends POApproverSetting$approver_proxyArgs<ExtArgs> = {}>(args?: Subset<T, POApproverSetting$approver_proxyArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -16393,6 +16735,7 @@ export namespace Prisma {
   interface POApproverSettingFieldRefs {
     readonly id: FieldRef<"POApproverSetting", 'String'>
     readonly approver_id: FieldRef<"POApproverSetting", 'String'>
+    readonly approver_proxy_id: FieldRef<"POApproverSetting", 'String'>
     readonly label: FieldRef<"POApproverSetting", 'String'>
     readonly order: FieldRef<"POApproverSetting", 'Int'>
     readonly created_at: FieldRef<"POApproverSetting", 'DateTime'>
@@ -16710,6 +17053,22 @@ export namespace Prisma {
 
 
   /**
+   * POApproverSetting.approver_proxy
+   */
+  export type POApproverSetting$approver_proxyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Employee
+     */
+    select?: EmployeeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: EmployeeInclude<ExtArgs> | null
+    where?: EmployeeWhereInput
+  }
+
+
+  /**
    * POApproverSetting without action
    */
   export type POApproverSettingDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -16868,6 +17227,7 @@ export namespace Prisma {
     label: 'label',
     order: 'order',
     approver_id: 'approver_id',
+    approver_proxy_id: 'approver_proxy_id',
     created_at: 'created_at',
     updated_at: 'updated_at',
     is_deleted: 'is_deleted'
@@ -16879,11 +17239,13 @@ export namespace Prisma {
   export const RVApproverSettingScalarFieldEnum: {
     id: 'id',
     approver_id: 'approver_id',
+    approver_proxy_id: 'approver_proxy_id',
     label: 'label',
     order: 'order',
     created_at: 'created_at',
     updated_at: 'updated_at',
-    is_deleted: 'is_deleted'
+    is_deleted: 'is_deleted',
+    employeeId: 'employeeId'
   };
 
   export type RVApproverSettingScalarFieldEnum = (typeof RVApproverSettingScalarFieldEnum)[keyof typeof RVApproverSettingScalarFieldEnum]
@@ -16892,6 +17254,7 @@ export namespace Prisma {
   export const SPRApproverSettingScalarFieldEnum: {
     id: 'id',
     approver_id: 'approver_id',
+    approver_proxy_id: 'approver_proxy_id',
     label: 'label',
     order: 'order',
     created_at: 'created_at',
@@ -16905,6 +17268,7 @@ export namespace Prisma {
   export const MEQSApproverSettingScalarFieldEnum: {
     id: 'id',
     approver_id: 'approver_id',
+    approver_proxy_id: 'approver_proxy_id',
     label: 'label',
     order: 'order',
     created_at: 'created_at',
@@ -16918,6 +17282,7 @@ export namespace Prisma {
   export const POApproverSettingScalarFieldEnum: {
     id: 'id',
     approver_id: 'approver_id',
+    approver_proxy_id: 'approver_proxy_id',
     label: 'label',
     order: 'order',
     created_at: 'created_at',
@@ -17192,7 +17557,13 @@ export namespace Prisma {
     po_approver_setting?: XOR<POApproverSettingNullableRelationFilter, POApproverSettingWhereInput> | null
     rv_approver_setting?: XOR<RVApproverSettingNullableRelationFilter, RVApproverSettingWhereInput> | null
     spr_approver_setting?: XOR<SPRApproverSettingNullableRelationFilter, SPRApproverSettingWhereInput> | null
+    jo_approver_proxy_setting?: XOR<JOApproverSettingNullableRelationFilter, JOApproverSettingWhereInput> | null
+    meqs_approver_proxy_setting?: XOR<MEQSApproverSettingNullableRelationFilter, MEQSApproverSettingWhereInput> | null
+    po_approver_proxy_setting?: XOR<POApproverSettingNullableRelationFilter, POApproverSettingWhereInput> | null
+    rv_approver_proxy_setting?: XOR<RVApproverSettingNullableRelationFilter, RVApproverSettingWhereInput> | null
+    spr_approver_proxy_setting?: XOR<SPRApproverSettingNullableRelationFilter, SPRApproverSettingWhereInput> | null
     user_employee?: XOR<UserEmployeeNullableRelationFilter, UserEmployeeWhereInput> | null
+    RVApproverSetting?: RVApproverSettingListRelationFilter
   }
 
   export type EmployeeOrderByWithRelationInput = {
@@ -17208,7 +17579,13 @@ export namespace Prisma {
     po_approver_setting?: POApproverSettingOrderByWithRelationInput
     rv_approver_setting?: RVApproverSettingOrderByWithRelationInput
     spr_approver_setting?: SPRApproverSettingOrderByWithRelationInput
+    jo_approver_proxy_setting?: JOApproverSettingOrderByWithRelationInput
+    meqs_approver_proxy_setting?: MEQSApproverSettingOrderByWithRelationInput
+    po_approver_proxy_setting?: POApproverSettingOrderByWithRelationInput
+    rv_approver_proxy_setting?: RVApproverSettingOrderByWithRelationInput
+    spr_approver_proxy_setting?: SPRApproverSettingOrderByWithRelationInput
     user_employee?: UserEmployeeOrderByWithRelationInput
+    RVApproverSetting?: RVApproverSettingOrderByRelationAggregateInput
   }
 
   export type EmployeeWhereUniqueInput = Prisma.AtLeast<{
@@ -17227,7 +17604,13 @@ export namespace Prisma {
     po_approver_setting?: XOR<POApproverSettingNullableRelationFilter, POApproverSettingWhereInput> | null
     rv_approver_setting?: XOR<RVApproverSettingNullableRelationFilter, RVApproverSettingWhereInput> | null
     spr_approver_setting?: XOR<SPRApproverSettingNullableRelationFilter, SPRApproverSettingWhereInput> | null
+    jo_approver_proxy_setting?: XOR<JOApproverSettingNullableRelationFilter, JOApproverSettingWhereInput> | null
+    meqs_approver_proxy_setting?: XOR<MEQSApproverSettingNullableRelationFilter, MEQSApproverSettingWhereInput> | null
+    po_approver_proxy_setting?: XOR<POApproverSettingNullableRelationFilter, POApproverSettingWhereInput> | null
+    rv_approver_proxy_setting?: XOR<RVApproverSettingNullableRelationFilter, RVApproverSettingWhereInput> | null
+    spr_approver_proxy_setting?: XOR<SPRApproverSettingNullableRelationFilter, SPRApproverSettingWhereInput> | null
     user_employee?: XOR<UserEmployeeNullableRelationFilter, UserEmployeeWhereInput> | null
+    RVApproverSetting?: RVApproverSettingListRelationFilter
   }, "id">
 
   export type EmployeeOrderByWithAggregationInput = {
@@ -17698,10 +18081,12 @@ export namespace Prisma {
     label?: StringFilter<"JOApproverSetting"> | string
     order?: IntFilter<"JOApproverSetting"> | number
     approver_id?: StringFilter<"JOApproverSetting"> | string
+    approver_proxy_id?: StringNullableFilter<"JOApproverSetting"> | string | null
     created_at?: DateTimeFilter<"JOApproverSetting"> | Date | string
     updated_at?: DateTimeFilter<"JOApproverSetting"> | Date | string
     is_deleted?: BoolFilter<"JOApproverSetting"> | boolean
     approver?: XOR<EmployeeRelationFilter, EmployeeWhereInput>
+    approver_proxy?: XOR<EmployeeNullableRelationFilter, EmployeeWhereInput> | null
   }
 
   export type JOApproverSettingOrderByWithRelationInput = {
@@ -17709,16 +18094,19 @@ export namespace Prisma {
     label?: SortOrder
     order?: SortOrder
     approver_id?: SortOrder
+    approver_proxy_id?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
     approver?: EmployeeOrderByWithRelationInput
+    approver_proxy?: EmployeeOrderByWithRelationInput
   }
 
   export type JOApproverSettingWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     order?: number
     approver_id?: string
+    approver_proxy_id?: string
     AND?: JOApproverSettingWhereInput | JOApproverSettingWhereInput[]
     OR?: JOApproverSettingWhereInput[]
     NOT?: JOApproverSettingWhereInput | JOApproverSettingWhereInput[]
@@ -17727,13 +18115,15 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"JOApproverSetting"> | Date | string
     is_deleted?: BoolFilter<"JOApproverSetting"> | boolean
     approver?: XOR<EmployeeRelationFilter, EmployeeWhereInput>
-  }, "id" | "order" | "approver_id">
+    approver_proxy?: XOR<EmployeeNullableRelationFilter, EmployeeWhereInput> | null
+  }, "id" | "order" | "approver_id" | "approver_proxy_id">
 
   export type JOApproverSettingOrderByWithAggregationInput = {
     id?: SortOrder
     label?: SortOrder
     order?: SortOrder
     approver_id?: SortOrder
+    approver_proxy_id?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -17752,6 +18142,7 @@ export namespace Prisma {
     label?: StringWithAggregatesFilter<"JOApproverSetting"> | string
     order?: IntWithAggregatesFilter<"JOApproverSetting"> | number
     approver_id?: StringWithAggregatesFilter<"JOApproverSetting"> | string
+    approver_proxy_id?: StringNullableWithAggregatesFilter<"JOApproverSetting"> | string | null
     created_at?: DateTimeWithAggregatesFilter<"JOApproverSetting"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"JOApproverSetting"> | Date | string
     is_deleted?: BoolWithAggregatesFilter<"JOApproverSetting"> | boolean
@@ -17763,28 +18154,37 @@ export namespace Prisma {
     NOT?: RVApproverSettingWhereInput | RVApproverSettingWhereInput[]
     id?: StringFilter<"RVApproverSetting"> | string
     approver_id?: StringFilter<"RVApproverSetting"> | string
+    approver_proxy_id?: StringNullableFilter<"RVApproverSetting"> | string | null
     label?: StringFilter<"RVApproverSetting"> | string
     order?: IntFilter<"RVApproverSetting"> | number
     created_at?: DateTimeFilter<"RVApproverSetting"> | Date | string
     updated_at?: DateTimeFilter<"RVApproverSetting"> | Date | string
     is_deleted?: BoolFilter<"RVApproverSetting"> | boolean
+    employeeId?: StringNullableFilter<"RVApproverSetting"> | string | null
     approver?: XOR<EmployeeRelationFilter, EmployeeWhereInput>
+    approver_proxy?: XOR<EmployeeNullableRelationFilter, EmployeeWhereInput> | null
+    Employee?: XOR<EmployeeNullableRelationFilter, EmployeeWhereInput> | null
   }
 
   export type RVApproverSettingOrderByWithRelationInput = {
     id?: SortOrder
     approver_id?: SortOrder
+    approver_proxy_id?: SortOrderInput | SortOrder
     label?: SortOrder
     order?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
+    employeeId?: SortOrderInput | SortOrder
     approver?: EmployeeOrderByWithRelationInput
+    approver_proxy?: EmployeeOrderByWithRelationInput
+    Employee?: EmployeeOrderByWithRelationInput
   }
 
   export type RVApproverSettingWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     approver_id?: string
+    approver_proxy_id?: string
     order?: number
     AND?: RVApproverSettingWhereInput | RVApproverSettingWhereInput[]
     OR?: RVApproverSettingWhereInput[]
@@ -17793,17 +18193,22 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"RVApproverSetting"> | Date | string
     updated_at?: DateTimeFilter<"RVApproverSetting"> | Date | string
     is_deleted?: BoolFilter<"RVApproverSetting"> | boolean
+    employeeId?: StringNullableFilter<"RVApproverSetting"> | string | null
     approver?: XOR<EmployeeRelationFilter, EmployeeWhereInput>
-  }, "id" | "approver_id" | "order">
+    approver_proxy?: XOR<EmployeeNullableRelationFilter, EmployeeWhereInput> | null
+    Employee?: XOR<EmployeeNullableRelationFilter, EmployeeWhereInput> | null
+  }, "id" | "approver_id" | "approver_proxy_id" | "order">
 
   export type RVApproverSettingOrderByWithAggregationInput = {
     id?: SortOrder
     approver_id?: SortOrder
+    approver_proxy_id?: SortOrderInput | SortOrder
     label?: SortOrder
     order?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
+    employeeId?: SortOrderInput | SortOrder
     _count?: RVApproverSettingCountOrderByAggregateInput
     _avg?: RVApproverSettingAvgOrderByAggregateInput
     _max?: RVApproverSettingMaxOrderByAggregateInput
@@ -17817,11 +18222,13 @@ export namespace Prisma {
     NOT?: RVApproverSettingScalarWhereWithAggregatesInput | RVApproverSettingScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"RVApproverSetting"> | string
     approver_id?: StringWithAggregatesFilter<"RVApproverSetting"> | string
+    approver_proxy_id?: StringNullableWithAggregatesFilter<"RVApproverSetting"> | string | null
     label?: StringWithAggregatesFilter<"RVApproverSetting"> | string
     order?: IntWithAggregatesFilter<"RVApproverSetting"> | number
     created_at?: DateTimeWithAggregatesFilter<"RVApproverSetting"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"RVApproverSetting"> | Date | string
     is_deleted?: BoolWithAggregatesFilter<"RVApproverSetting"> | boolean
+    employeeId?: StringNullableWithAggregatesFilter<"RVApproverSetting"> | string | null
   }
 
   export type SPRApproverSettingWhereInput = {
@@ -17830,28 +18237,33 @@ export namespace Prisma {
     NOT?: SPRApproverSettingWhereInput | SPRApproverSettingWhereInput[]
     id?: StringFilter<"SPRApproverSetting"> | string
     approver_id?: StringFilter<"SPRApproverSetting"> | string
+    approver_proxy_id?: StringNullableFilter<"SPRApproverSetting"> | string | null
     label?: StringFilter<"SPRApproverSetting"> | string
     order?: IntFilter<"SPRApproverSetting"> | number
     created_at?: DateTimeFilter<"SPRApproverSetting"> | Date | string
     updated_at?: DateTimeFilter<"SPRApproverSetting"> | Date | string
     is_deleted?: BoolFilter<"SPRApproverSetting"> | boolean
     approver?: XOR<EmployeeRelationFilter, EmployeeWhereInput>
+    approver_proxy?: XOR<EmployeeNullableRelationFilter, EmployeeWhereInput> | null
   }
 
   export type SPRApproverSettingOrderByWithRelationInput = {
     id?: SortOrder
     approver_id?: SortOrder
+    approver_proxy_id?: SortOrderInput | SortOrder
     label?: SortOrder
     order?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
     approver?: EmployeeOrderByWithRelationInput
+    approver_proxy?: EmployeeOrderByWithRelationInput
   }
 
   export type SPRApproverSettingWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     approver_id?: string
+    approver_proxy_id?: string
     order?: number
     AND?: SPRApproverSettingWhereInput | SPRApproverSettingWhereInput[]
     OR?: SPRApproverSettingWhereInput[]
@@ -17861,11 +18273,13 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"SPRApproverSetting"> | Date | string
     is_deleted?: BoolFilter<"SPRApproverSetting"> | boolean
     approver?: XOR<EmployeeRelationFilter, EmployeeWhereInput>
-  }, "id" | "approver_id" | "order">
+    approver_proxy?: XOR<EmployeeNullableRelationFilter, EmployeeWhereInput> | null
+  }, "id" | "approver_id" | "approver_proxy_id" | "order">
 
   export type SPRApproverSettingOrderByWithAggregationInput = {
     id?: SortOrder
     approver_id?: SortOrder
+    approver_proxy_id?: SortOrderInput | SortOrder
     label?: SortOrder
     order?: SortOrder
     created_at?: SortOrder
@@ -17884,6 +18298,7 @@ export namespace Prisma {
     NOT?: SPRApproverSettingScalarWhereWithAggregatesInput | SPRApproverSettingScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"SPRApproverSetting"> | string
     approver_id?: StringWithAggregatesFilter<"SPRApproverSetting"> | string
+    approver_proxy_id?: StringNullableWithAggregatesFilter<"SPRApproverSetting"> | string | null
     label?: StringWithAggregatesFilter<"SPRApproverSetting"> | string
     order?: IntWithAggregatesFilter<"SPRApproverSetting"> | number
     created_at?: DateTimeWithAggregatesFilter<"SPRApproverSetting"> | Date | string
@@ -17897,28 +18312,33 @@ export namespace Prisma {
     NOT?: MEQSApproverSettingWhereInput | MEQSApproverSettingWhereInput[]
     id?: StringFilter<"MEQSApproverSetting"> | string
     approver_id?: StringFilter<"MEQSApproverSetting"> | string
+    approver_proxy_id?: StringNullableFilter<"MEQSApproverSetting"> | string | null
     label?: StringFilter<"MEQSApproverSetting"> | string
     order?: IntFilter<"MEQSApproverSetting"> | number
     created_at?: DateTimeFilter<"MEQSApproverSetting"> | Date | string
     updated_at?: DateTimeFilter<"MEQSApproverSetting"> | Date | string
     is_deleted?: BoolFilter<"MEQSApproverSetting"> | boolean
     approver?: XOR<EmployeeRelationFilter, EmployeeWhereInput>
+    approver_proxy?: XOR<EmployeeNullableRelationFilter, EmployeeWhereInput> | null
   }
 
   export type MEQSApproverSettingOrderByWithRelationInput = {
     id?: SortOrder
     approver_id?: SortOrder
+    approver_proxy_id?: SortOrderInput | SortOrder
     label?: SortOrder
     order?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
     approver?: EmployeeOrderByWithRelationInput
+    approver_proxy?: EmployeeOrderByWithRelationInput
   }
 
   export type MEQSApproverSettingWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     approver_id?: string
+    approver_proxy_id?: string
     order?: number
     AND?: MEQSApproverSettingWhereInput | MEQSApproverSettingWhereInput[]
     OR?: MEQSApproverSettingWhereInput[]
@@ -17928,11 +18348,13 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"MEQSApproverSetting"> | Date | string
     is_deleted?: BoolFilter<"MEQSApproverSetting"> | boolean
     approver?: XOR<EmployeeRelationFilter, EmployeeWhereInput>
-  }, "id" | "approver_id" | "order">
+    approver_proxy?: XOR<EmployeeNullableRelationFilter, EmployeeWhereInput> | null
+  }, "id" | "approver_id" | "approver_proxy_id" | "order">
 
   export type MEQSApproverSettingOrderByWithAggregationInput = {
     id?: SortOrder
     approver_id?: SortOrder
+    approver_proxy_id?: SortOrderInput | SortOrder
     label?: SortOrder
     order?: SortOrder
     created_at?: SortOrder
@@ -17951,6 +18373,7 @@ export namespace Prisma {
     NOT?: MEQSApproverSettingScalarWhereWithAggregatesInput | MEQSApproverSettingScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"MEQSApproverSetting"> | string
     approver_id?: StringWithAggregatesFilter<"MEQSApproverSetting"> | string
+    approver_proxy_id?: StringNullableWithAggregatesFilter<"MEQSApproverSetting"> | string | null
     label?: StringWithAggregatesFilter<"MEQSApproverSetting"> | string
     order?: IntWithAggregatesFilter<"MEQSApproverSetting"> | number
     created_at?: DateTimeWithAggregatesFilter<"MEQSApproverSetting"> | Date | string
@@ -17964,28 +18387,33 @@ export namespace Prisma {
     NOT?: POApproverSettingWhereInput | POApproverSettingWhereInput[]
     id?: StringFilter<"POApproverSetting"> | string
     approver_id?: StringFilter<"POApproverSetting"> | string
+    approver_proxy_id?: StringNullableFilter<"POApproverSetting"> | string | null
     label?: StringFilter<"POApproverSetting"> | string
     order?: IntFilter<"POApproverSetting"> | number
     created_at?: DateTimeFilter<"POApproverSetting"> | Date | string
     updated_at?: DateTimeFilter<"POApproverSetting"> | Date | string
     is_deleted?: BoolFilter<"POApproverSetting"> | boolean
     approver?: XOR<EmployeeRelationFilter, EmployeeWhereInput>
+    approver_proxy?: XOR<EmployeeNullableRelationFilter, EmployeeWhereInput> | null
   }
 
   export type POApproverSettingOrderByWithRelationInput = {
     id?: SortOrder
     approver_id?: SortOrder
+    approver_proxy_id?: SortOrderInput | SortOrder
     label?: SortOrder
     order?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
     approver?: EmployeeOrderByWithRelationInput
+    approver_proxy?: EmployeeOrderByWithRelationInput
   }
 
   export type POApproverSettingWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     approver_id?: string
+    approver_proxy_id?: string
     order?: number
     AND?: POApproverSettingWhereInput | POApproverSettingWhereInput[]
     OR?: POApproverSettingWhereInput[]
@@ -17995,11 +18423,13 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"POApproverSetting"> | Date | string
     is_deleted?: BoolFilter<"POApproverSetting"> | boolean
     approver?: XOR<EmployeeRelationFilter, EmployeeWhereInput>
-  }, "id" | "approver_id" | "order">
+    approver_proxy?: XOR<EmployeeNullableRelationFilter, EmployeeWhereInput> | null
+  }, "id" | "approver_id" | "approver_proxy_id" | "order">
 
   export type POApproverSettingOrderByWithAggregationInput = {
     id?: SortOrder
     approver_id?: SortOrder
+    approver_proxy_id?: SortOrderInput | SortOrder
     label?: SortOrder
     order?: SortOrder
     created_at?: SortOrder
@@ -18018,6 +18448,7 @@ export namespace Prisma {
     NOT?: POApproverSettingScalarWhereWithAggregatesInput | POApproverSettingScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"POApproverSetting"> | string
     approver_id?: StringWithAggregatesFilter<"POApproverSetting"> | string
+    approver_proxy_id?: StringNullableWithAggregatesFilter<"POApproverSetting"> | string | null
     label?: StringWithAggregatesFilter<"POApproverSetting"> | string
     order?: IntWithAggregatesFilter<"POApproverSetting"> | number
     created_at?: DateTimeWithAggregatesFilter<"POApproverSetting"> | Date | string
@@ -18188,7 +18619,13 @@ export namespace Prisma {
     po_approver_setting?: POApproverSettingCreateNestedOneWithoutApproverInput
     rv_approver_setting?: RVApproverSettingCreateNestedOneWithoutApproverInput
     spr_approver_setting?: SPRApproverSettingCreateNestedOneWithoutApproverInput
+    jo_approver_proxy_setting?: JOApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    meqs_approver_proxy_setting?: MEQSApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    po_approver_proxy_setting?: POApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    rv_approver_proxy_setting?: RVApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    spr_approver_proxy_setting?: SPRApproverSettingCreateNestedOneWithoutApprover_proxyInput
     user_employee?: UserEmployeeCreateNestedOneWithoutEmployeeInput
+    RVApproverSetting?: RVApproverSettingCreateNestedManyWithoutEmployeeInput
   }
 
   export type EmployeeUncheckedCreateInput = {
@@ -18204,7 +18641,13 @@ export namespace Prisma {
     po_approver_setting?: POApproverSettingUncheckedCreateNestedOneWithoutApproverInput
     rv_approver_setting?: RVApproverSettingUncheckedCreateNestedOneWithoutApproverInput
     spr_approver_setting?: SPRApproverSettingUncheckedCreateNestedOneWithoutApproverInput
+    jo_approver_proxy_setting?: JOApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    meqs_approver_proxy_setting?: MEQSApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    po_approver_proxy_setting?: POApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    rv_approver_proxy_setting?: RVApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    spr_approver_proxy_setting?: SPRApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
     user_employee?: UserEmployeeUncheckedCreateNestedOneWithoutEmployeeInput
+    RVApproverSetting?: RVApproverSettingUncheckedCreateNestedManyWithoutEmployeeInput
   }
 
   export type EmployeeUpdateInput = {
@@ -18220,7 +18663,13 @@ export namespace Prisma {
     po_approver_setting?: POApproverSettingUpdateOneWithoutApproverNestedInput
     rv_approver_setting?: RVApproverSettingUpdateOneWithoutApproverNestedInput
     spr_approver_setting?: SPRApproverSettingUpdateOneWithoutApproverNestedInput
+    jo_approver_proxy_setting?: JOApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    meqs_approver_proxy_setting?: MEQSApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    po_approver_proxy_setting?: POApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    rv_approver_proxy_setting?: RVApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    spr_approver_proxy_setting?: SPRApproverSettingUpdateOneWithoutApprover_proxyNestedInput
     user_employee?: UserEmployeeUpdateOneWithoutEmployeeNestedInput
+    RVApproverSetting?: RVApproverSettingUpdateManyWithoutEmployeeNestedInput
   }
 
   export type EmployeeUncheckedUpdateInput = {
@@ -18236,7 +18685,13 @@ export namespace Prisma {
     po_approver_setting?: POApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
     rv_approver_setting?: RVApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
     spr_approver_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
+    jo_approver_proxy_setting?: JOApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    meqs_approver_proxy_setting?: MEQSApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    po_approver_proxy_setting?: POApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    rv_approver_proxy_setting?: RVApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    spr_approver_proxy_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
     user_employee?: UserEmployeeUncheckedUpdateOneWithoutEmployeeNestedInput
+    RVApproverSetting?: RVApproverSettingUncheckedUpdateManyWithoutEmployeeNestedInput
   }
 
   export type EmployeeCreateManyInput = {
@@ -18732,6 +19187,7 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     approver: EmployeeCreateNestedOneWithoutJo_approver_settingInput
+    approver_proxy?: EmployeeCreateNestedOneWithoutJo_approver_proxy_settingInput
   }
 
   export type JOApproverSettingUncheckedCreateInput = {
@@ -18739,6 +19195,7 @@ export namespace Prisma {
     label: string
     order: number
     approver_id: string
+    approver_proxy_id?: string | null
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -18752,6 +19209,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     approver?: EmployeeUpdateOneRequiredWithoutJo_approver_settingNestedInput
+    approver_proxy?: EmployeeUpdateOneWithoutJo_approver_proxy_settingNestedInput
   }
 
   export type JOApproverSettingUncheckedUpdateInput = {
@@ -18759,6 +19217,7 @@ export namespace Prisma {
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
     approver_id?: StringFieldUpdateOperationsInput | string
+    approver_proxy_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -18769,6 +19228,7 @@ export namespace Prisma {
     label: string
     order: number
     approver_id: string
+    approver_proxy_id?: string | null
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -18788,6 +19248,7 @@ export namespace Prisma {
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
     approver_id?: StringFieldUpdateOperationsInput | string
+    approver_proxy_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -18801,16 +19262,20 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     approver: EmployeeCreateNestedOneWithoutRv_approver_settingInput
+    approver_proxy?: EmployeeCreateNestedOneWithoutRv_approver_proxy_settingInput
+    Employee?: EmployeeCreateNestedOneWithoutRVApproverSettingInput
   }
 
   export type RVApproverSettingUncheckedCreateInput = {
     id?: string
     approver_id: string
+    approver_proxy_id?: string | null
     label: string
     order: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    employeeId?: string | null
   }
 
   export type RVApproverSettingUpdateInput = {
@@ -18821,26 +19286,32 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     approver?: EmployeeUpdateOneRequiredWithoutRv_approver_settingNestedInput
+    approver_proxy?: EmployeeUpdateOneWithoutRv_approver_proxy_settingNestedInput
+    Employee?: EmployeeUpdateOneWithoutRVApproverSettingNestedInput
   }
 
   export type RVApproverSettingUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     approver_id?: StringFieldUpdateOperationsInput | string
+    approver_proxy_id?: NullableStringFieldUpdateOperationsInput | string | null
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    employeeId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type RVApproverSettingCreateManyInput = {
     id?: string
     approver_id: string
+    approver_proxy_id?: string | null
     label: string
     order: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    employeeId?: string | null
   }
 
   export type RVApproverSettingUpdateManyMutationInput = {
@@ -18855,11 +19326,13 @@ export namespace Prisma {
   export type RVApproverSettingUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     approver_id?: StringFieldUpdateOperationsInput | string
+    approver_proxy_id?: NullableStringFieldUpdateOperationsInput | string | null
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    employeeId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SPRApproverSettingCreateInput = {
@@ -18870,11 +19343,13 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     approver: EmployeeCreateNestedOneWithoutSpr_approver_settingInput
+    approver_proxy?: EmployeeCreateNestedOneWithoutSpr_approver_proxy_settingInput
   }
 
   export type SPRApproverSettingUncheckedCreateInput = {
     id?: string
     approver_id: string
+    approver_proxy_id?: string | null
     label: string
     order: number
     created_at?: Date | string
@@ -18890,11 +19365,13 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     approver?: EmployeeUpdateOneRequiredWithoutSpr_approver_settingNestedInput
+    approver_proxy?: EmployeeUpdateOneWithoutSpr_approver_proxy_settingNestedInput
   }
 
   export type SPRApproverSettingUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     approver_id?: StringFieldUpdateOperationsInput | string
+    approver_proxy_id?: NullableStringFieldUpdateOperationsInput | string | null
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -18905,6 +19382,7 @@ export namespace Prisma {
   export type SPRApproverSettingCreateManyInput = {
     id?: string
     approver_id: string
+    approver_proxy_id?: string | null
     label: string
     order: number
     created_at?: Date | string
@@ -18924,6 +19402,7 @@ export namespace Prisma {
   export type SPRApproverSettingUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     approver_id?: StringFieldUpdateOperationsInput | string
+    approver_proxy_id?: NullableStringFieldUpdateOperationsInput | string | null
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -18939,11 +19418,13 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     approver: EmployeeCreateNestedOneWithoutMeqs_approver_settingInput
+    approver_proxy?: EmployeeCreateNestedOneWithoutMeqs_approver_proxy_settingInput
   }
 
   export type MEQSApproverSettingUncheckedCreateInput = {
     id?: string
     approver_id: string
+    approver_proxy_id?: string | null
     label: string
     order: number
     created_at?: Date | string
@@ -18959,11 +19440,13 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     approver?: EmployeeUpdateOneRequiredWithoutMeqs_approver_settingNestedInput
+    approver_proxy?: EmployeeUpdateOneWithoutMeqs_approver_proxy_settingNestedInput
   }
 
   export type MEQSApproverSettingUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     approver_id?: StringFieldUpdateOperationsInput | string
+    approver_proxy_id?: NullableStringFieldUpdateOperationsInput | string | null
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -18974,6 +19457,7 @@ export namespace Prisma {
   export type MEQSApproverSettingCreateManyInput = {
     id?: string
     approver_id: string
+    approver_proxy_id?: string | null
     label: string
     order: number
     created_at?: Date | string
@@ -18993,6 +19477,7 @@ export namespace Prisma {
   export type MEQSApproverSettingUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     approver_id?: StringFieldUpdateOperationsInput | string
+    approver_proxy_id?: NullableStringFieldUpdateOperationsInput | string | null
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -19008,11 +19493,13 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     approver: EmployeeCreateNestedOneWithoutPo_approver_settingInput
+    approver_proxy?: EmployeeCreateNestedOneWithoutPo_approver_proxy_settingInput
   }
 
   export type POApproverSettingUncheckedCreateInput = {
     id?: string
     approver_id: string
+    approver_proxy_id?: string | null
     label: string
     order: number
     created_at?: Date | string
@@ -19028,11 +19515,13 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     approver?: EmployeeUpdateOneRequiredWithoutPo_approver_settingNestedInput
+    approver_proxy?: EmployeeUpdateOneWithoutPo_approver_proxy_settingNestedInput
   }
 
   export type POApproverSettingUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     approver_id?: StringFieldUpdateOperationsInput | string
+    approver_proxy_id?: NullableStringFieldUpdateOperationsInput | string | null
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -19043,6 +19532,7 @@ export namespace Prisma {
   export type POApproverSettingCreateManyInput = {
     id?: string
     approver_id: string
+    approver_proxy_id?: string | null
     label: string
     order: number
     created_at?: Date | string
@@ -19062,6 +19552,7 @@ export namespace Prisma {
   export type POApproverSettingUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     approver_id?: StringFieldUpdateOperationsInput | string
+    approver_proxy_id?: NullableStringFieldUpdateOperationsInput | string | null
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -19306,9 +19797,19 @@ export namespace Prisma {
     isNot?: UserEmployeeWhereInput | null
   }
 
+  export type RVApproverSettingListRelationFilter = {
+    every?: RVApproverSettingWhereInput
+    some?: RVApproverSettingWhereInput
+    none?: RVApproverSettingWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
+  }
+
+  export type RVApproverSettingOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type EmployeeCountOrderByAggregateInput = {
@@ -19628,11 +20129,17 @@ export namespace Prisma {
     feature_id?: SortOrder
   }
 
+  export type EmployeeNullableRelationFilter = {
+    is?: EmployeeWhereInput | null
+    isNot?: EmployeeWhereInput | null
+  }
+
   export type JOApproverSettingCountOrderByAggregateInput = {
     id?: SortOrder
     label?: SortOrder
     order?: SortOrder
     approver_id?: SortOrder
+    approver_proxy_id?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -19647,6 +20154,7 @@ export namespace Prisma {
     label?: SortOrder
     order?: SortOrder
     approver_id?: SortOrder
+    approver_proxy_id?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -19657,6 +20165,7 @@ export namespace Prisma {
     label?: SortOrder
     order?: SortOrder
     approver_id?: SortOrder
+    approver_proxy_id?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -19669,11 +20178,13 @@ export namespace Prisma {
   export type RVApproverSettingCountOrderByAggregateInput = {
     id?: SortOrder
     approver_id?: SortOrder
+    approver_proxy_id?: SortOrder
     label?: SortOrder
     order?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
+    employeeId?: SortOrder
   }
 
   export type RVApproverSettingAvgOrderByAggregateInput = {
@@ -19683,21 +20194,25 @@ export namespace Prisma {
   export type RVApproverSettingMaxOrderByAggregateInput = {
     id?: SortOrder
     approver_id?: SortOrder
+    approver_proxy_id?: SortOrder
     label?: SortOrder
     order?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
+    employeeId?: SortOrder
   }
 
   export type RVApproverSettingMinOrderByAggregateInput = {
     id?: SortOrder
     approver_id?: SortOrder
+    approver_proxy_id?: SortOrder
     label?: SortOrder
     order?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
+    employeeId?: SortOrder
   }
 
   export type RVApproverSettingSumOrderByAggregateInput = {
@@ -19707,6 +20222,7 @@ export namespace Prisma {
   export type SPRApproverSettingCountOrderByAggregateInput = {
     id?: SortOrder
     approver_id?: SortOrder
+    approver_proxy_id?: SortOrder
     label?: SortOrder
     order?: SortOrder
     created_at?: SortOrder
@@ -19721,6 +20237,7 @@ export namespace Prisma {
   export type SPRApproverSettingMaxOrderByAggregateInput = {
     id?: SortOrder
     approver_id?: SortOrder
+    approver_proxy_id?: SortOrder
     label?: SortOrder
     order?: SortOrder
     created_at?: SortOrder
@@ -19731,6 +20248,7 @@ export namespace Prisma {
   export type SPRApproverSettingMinOrderByAggregateInput = {
     id?: SortOrder
     approver_id?: SortOrder
+    approver_proxy_id?: SortOrder
     label?: SortOrder
     order?: SortOrder
     created_at?: SortOrder
@@ -19745,6 +20263,7 @@ export namespace Prisma {
   export type MEQSApproverSettingCountOrderByAggregateInput = {
     id?: SortOrder
     approver_id?: SortOrder
+    approver_proxy_id?: SortOrder
     label?: SortOrder
     order?: SortOrder
     created_at?: SortOrder
@@ -19759,6 +20278,7 @@ export namespace Prisma {
   export type MEQSApproverSettingMaxOrderByAggregateInput = {
     id?: SortOrder
     approver_id?: SortOrder
+    approver_proxy_id?: SortOrder
     label?: SortOrder
     order?: SortOrder
     created_at?: SortOrder
@@ -19769,6 +20289,7 @@ export namespace Prisma {
   export type MEQSApproverSettingMinOrderByAggregateInput = {
     id?: SortOrder
     approver_id?: SortOrder
+    approver_proxy_id?: SortOrder
     label?: SortOrder
     order?: SortOrder
     created_at?: SortOrder
@@ -19783,6 +20304,7 @@ export namespace Prisma {
   export type POApproverSettingCountOrderByAggregateInput = {
     id?: SortOrder
     approver_id?: SortOrder
+    approver_proxy_id?: SortOrder
     label?: SortOrder
     order?: SortOrder
     created_at?: SortOrder
@@ -19797,6 +20319,7 @@ export namespace Prisma {
   export type POApproverSettingMaxOrderByAggregateInput = {
     id?: SortOrder
     approver_id?: SortOrder
+    approver_proxy_id?: SortOrder
     label?: SortOrder
     order?: SortOrder
     created_at?: SortOrder
@@ -19807,6 +20330,7 @@ export namespace Prisma {
   export type POApproverSettingMinOrderByAggregateInput = {
     id?: SortOrder
     approver_id?: SortOrder
+    approver_proxy_id?: SortOrder
     label?: SortOrder
     order?: SortOrder
     created_at?: SortOrder
@@ -19924,10 +20448,47 @@ export namespace Prisma {
     connect?: SPRApproverSettingWhereUniqueInput
   }
 
+  export type JOApproverSettingCreateNestedOneWithoutApprover_proxyInput = {
+    create?: XOR<JOApproverSettingCreateWithoutApprover_proxyInput, JOApproverSettingUncheckedCreateWithoutApprover_proxyInput>
+    connectOrCreate?: JOApproverSettingCreateOrConnectWithoutApprover_proxyInput
+    connect?: JOApproverSettingWhereUniqueInput
+  }
+
+  export type MEQSApproverSettingCreateNestedOneWithoutApprover_proxyInput = {
+    create?: XOR<MEQSApproverSettingCreateWithoutApprover_proxyInput, MEQSApproverSettingUncheckedCreateWithoutApprover_proxyInput>
+    connectOrCreate?: MEQSApproverSettingCreateOrConnectWithoutApprover_proxyInput
+    connect?: MEQSApproverSettingWhereUniqueInput
+  }
+
+  export type POApproverSettingCreateNestedOneWithoutApprover_proxyInput = {
+    create?: XOR<POApproverSettingCreateWithoutApprover_proxyInput, POApproverSettingUncheckedCreateWithoutApprover_proxyInput>
+    connectOrCreate?: POApproverSettingCreateOrConnectWithoutApprover_proxyInput
+    connect?: POApproverSettingWhereUniqueInput
+  }
+
+  export type RVApproverSettingCreateNestedOneWithoutApprover_proxyInput = {
+    create?: XOR<RVApproverSettingCreateWithoutApprover_proxyInput, RVApproverSettingUncheckedCreateWithoutApprover_proxyInput>
+    connectOrCreate?: RVApproverSettingCreateOrConnectWithoutApprover_proxyInput
+    connect?: RVApproverSettingWhereUniqueInput
+  }
+
+  export type SPRApproverSettingCreateNestedOneWithoutApprover_proxyInput = {
+    create?: XOR<SPRApproverSettingCreateWithoutApprover_proxyInput, SPRApproverSettingUncheckedCreateWithoutApprover_proxyInput>
+    connectOrCreate?: SPRApproverSettingCreateOrConnectWithoutApprover_proxyInput
+    connect?: SPRApproverSettingWhereUniqueInput
+  }
+
   export type UserEmployeeCreateNestedOneWithoutEmployeeInput = {
     create?: XOR<UserEmployeeCreateWithoutEmployeeInput, UserEmployeeUncheckedCreateWithoutEmployeeInput>
     connectOrCreate?: UserEmployeeCreateOrConnectWithoutEmployeeInput
     connect?: UserEmployeeWhereUniqueInput
+  }
+
+  export type RVApproverSettingCreateNestedManyWithoutEmployeeInput = {
+    create?: XOR<RVApproverSettingCreateWithoutEmployeeInput, RVApproverSettingUncheckedCreateWithoutEmployeeInput> | RVApproverSettingCreateWithoutEmployeeInput[] | RVApproverSettingUncheckedCreateWithoutEmployeeInput[]
+    connectOrCreate?: RVApproverSettingCreateOrConnectWithoutEmployeeInput | RVApproverSettingCreateOrConnectWithoutEmployeeInput[]
+    createMany?: RVApproverSettingCreateManyEmployeeInputEnvelope
+    connect?: RVApproverSettingWhereUniqueInput | RVApproverSettingWhereUniqueInput[]
   }
 
   export type JOApproverSettingUncheckedCreateNestedOneWithoutApproverInput = {
@@ -19960,10 +20521,47 @@ export namespace Prisma {
     connect?: SPRApproverSettingWhereUniqueInput
   }
 
+  export type JOApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput = {
+    create?: XOR<JOApproverSettingCreateWithoutApprover_proxyInput, JOApproverSettingUncheckedCreateWithoutApprover_proxyInput>
+    connectOrCreate?: JOApproverSettingCreateOrConnectWithoutApprover_proxyInput
+    connect?: JOApproverSettingWhereUniqueInput
+  }
+
+  export type MEQSApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput = {
+    create?: XOR<MEQSApproverSettingCreateWithoutApprover_proxyInput, MEQSApproverSettingUncheckedCreateWithoutApprover_proxyInput>
+    connectOrCreate?: MEQSApproverSettingCreateOrConnectWithoutApprover_proxyInput
+    connect?: MEQSApproverSettingWhereUniqueInput
+  }
+
+  export type POApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput = {
+    create?: XOR<POApproverSettingCreateWithoutApprover_proxyInput, POApproverSettingUncheckedCreateWithoutApprover_proxyInput>
+    connectOrCreate?: POApproverSettingCreateOrConnectWithoutApprover_proxyInput
+    connect?: POApproverSettingWhereUniqueInput
+  }
+
+  export type RVApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput = {
+    create?: XOR<RVApproverSettingCreateWithoutApprover_proxyInput, RVApproverSettingUncheckedCreateWithoutApprover_proxyInput>
+    connectOrCreate?: RVApproverSettingCreateOrConnectWithoutApprover_proxyInput
+    connect?: RVApproverSettingWhereUniqueInput
+  }
+
+  export type SPRApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput = {
+    create?: XOR<SPRApproverSettingCreateWithoutApprover_proxyInput, SPRApproverSettingUncheckedCreateWithoutApprover_proxyInput>
+    connectOrCreate?: SPRApproverSettingCreateOrConnectWithoutApprover_proxyInput
+    connect?: SPRApproverSettingWhereUniqueInput
+  }
+
   export type UserEmployeeUncheckedCreateNestedOneWithoutEmployeeInput = {
     create?: XOR<UserEmployeeCreateWithoutEmployeeInput, UserEmployeeUncheckedCreateWithoutEmployeeInput>
     connectOrCreate?: UserEmployeeCreateOrConnectWithoutEmployeeInput
     connect?: UserEmployeeWhereUniqueInput
+  }
+
+  export type RVApproverSettingUncheckedCreateNestedManyWithoutEmployeeInput = {
+    create?: XOR<RVApproverSettingCreateWithoutEmployeeInput, RVApproverSettingUncheckedCreateWithoutEmployeeInput> | RVApproverSettingCreateWithoutEmployeeInput[] | RVApproverSettingUncheckedCreateWithoutEmployeeInput[]
+    connectOrCreate?: RVApproverSettingCreateOrConnectWithoutEmployeeInput | RVApproverSettingCreateOrConnectWithoutEmployeeInput[]
+    createMany?: RVApproverSettingCreateManyEmployeeInputEnvelope
+    connect?: RVApproverSettingWhereUniqueInput | RVApproverSettingWhereUniqueInput[]
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
@@ -20020,6 +20618,56 @@ export namespace Prisma {
     update?: XOR<XOR<SPRApproverSettingUpdateToOneWithWhereWithoutApproverInput, SPRApproverSettingUpdateWithoutApproverInput>, SPRApproverSettingUncheckedUpdateWithoutApproverInput>
   }
 
+  export type JOApproverSettingUpdateOneWithoutApprover_proxyNestedInput = {
+    create?: XOR<JOApproverSettingCreateWithoutApprover_proxyInput, JOApproverSettingUncheckedCreateWithoutApprover_proxyInput>
+    connectOrCreate?: JOApproverSettingCreateOrConnectWithoutApprover_proxyInput
+    upsert?: JOApproverSettingUpsertWithoutApprover_proxyInput
+    disconnect?: JOApproverSettingWhereInput | boolean
+    delete?: JOApproverSettingWhereInput | boolean
+    connect?: JOApproverSettingWhereUniqueInput
+    update?: XOR<XOR<JOApproverSettingUpdateToOneWithWhereWithoutApprover_proxyInput, JOApproverSettingUpdateWithoutApprover_proxyInput>, JOApproverSettingUncheckedUpdateWithoutApprover_proxyInput>
+  }
+
+  export type MEQSApproverSettingUpdateOneWithoutApprover_proxyNestedInput = {
+    create?: XOR<MEQSApproverSettingCreateWithoutApprover_proxyInput, MEQSApproverSettingUncheckedCreateWithoutApprover_proxyInput>
+    connectOrCreate?: MEQSApproverSettingCreateOrConnectWithoutApprover_proxyInput
+    upsert?: MEQSApproverSettingUpsertWithoutApprover_proxyInput
+    disconnect?: MEQSApproverSettingWhereInput | boolean
+    delete?: MEQSApproverSettingWhereInput | boolean
+    connect?: MEQSApproverSettingWhereUniqueInput
+    update?: XOR<XOR<MEQSApproverSettingUpdateToOneWithWhereWithoutApprover_proxyInput, MEQSApproverSettingUpdateWithoutApprover_proxyInput>, MEQSApproverSettingUncheckedUpdateWithoutApprover_proxyInput>
+  }
+
+  export type POApproverSettingUpdateOneWithoutApprover_proxyNestedInput = {
+    create?: XOR<POApproverSettingCreateWithoutApprover_proxyInput, POApproverSettingUncheckedCreateWithoutApprover_proxyInput>
+    connectOrCreate?: POApproverSettingCreateOrConnectWithoutApprover_proxyInput
+    upsert?: POApproverSettingUpsertWithoutApprover_proxyInput
+    disconnect?: POApproverSettingWhereInput | boolean
+    delete?: POApproverSettingWhereInput | boolean
+    connect?: POApproverSettingWhereUniqueInput
+    update?: XOR<XOR<POApproverSettingUpdateToOneWithWhereWithoutApprover_proxyInput, POApproverSettingUpdateWithoutApprover_proxyInput>, POApproverSettingUncheckedUpdateWithoutApprover_proxyInput>
+  }
+
+  export type RVApproverSettingUpdateOneWithoutApprover_proxyNestedInput = {
+    create?: XOR<RVApproverSettingCreateWithoutApprover_proxyInput, RVApproverSettingUncheckedCreateWithoutApprover_proxyInput>
+    connectOrCreate?: RVApproverSettingCreateOrConnectWithoutApprover_proxyInput
+    upsert?: RVApproverSettingUpsertWithoutApprover_proxyInput
+    disconnect?: RVApproverSettingWhereInput | boolean
+    delete?: RVApproverSettingWhereInput | boolean
+    connect?: RVApproverSettingWhereUniqueInput
+    update?: XOR<XOR<RVApproverSettingUpdateToOneWithWhereWithoutApprover_proxyInput, RVApproverSettingUpdateWithoutApprover_proxyInput>, RVApproverSettingUncheckedUpdateWithoutApprover_proxyInput>
+  }
+
+  export type SPRApproverSettingUpdateOneWithoutApprover_proxyNestedInput = {
+    create?: XOR<SPRApproverSettingCreateWithoutApprover_proxyInput, SPRApproverSettingUncheckedCreateWithoutApprover_proxyInput>
+    connectOrCreate?: SPRApproverSettingCreateOrConnectWithoutApprover_proxyInput
+    upsert?: SPRApproverSettingUpsertWithoutApprover_proxyInput
+    disconnect?: SPRApproverSettingWhereInput | boolean
+    delete?: SPRApproverSettingWhereInput | boolean
+    connect?: SPRApproverSettingWhereUniqueInput
+    update?: XOR<XOR<SPRApproverSettingUpdateToOneWithWhereWithoutApprover_proxyInput, SPRApproverSettingUpdateWithoutApprover_proxyInput>, SPRApproverSettingUncheckedUpdateWithoutApprover_proxyInput>
+  }
+
   export type UserEmployeeUpdateOneWithoutEmployeeNestedInput = {
     create?: XOR<UserEmployeeCreateWithoutEmployeeInput, UserEmployeeUncheckedCreateWithoutEmployeeInput>
     connectOrCreate?: UserEmployeeCreateOrConnectWithoutEmployeeInput
@@ -20028,6 +20676,20 @@ export namespace Prisma {
     delete?: UserEmployeeWhereInput | boolean
     connect?: UserEmployeeWhereUniqueInput
     update?: XOR<XOR<UserEmployeeUpdateToOneWithWhereWithoutEmployeeInput, UserEmployeeUpdateWithoutEmployeeInput>, UserEmployeeUncheckedUpdateWithoutEmployeeInput>
+  }
+
+  export type RVApproverSettingUpdateManyWithoutEmployeeNestedInput = {
+    create?: XOR<RVApproverSettingCreateWithoutEmployeeInput, RVApproverSettingUncheckedCreateWithoutEmployeeInput> | RVApproverSettingCreateWithoutEmployeeInput[] | RVApproverSettingUncheckedCreateWithoutEmployeeInput[]
+    connectOrCreate?: RVApproverSettingCreateOrConnectWithoutEmployeeInput | RVApproverSettingCreateOrConnectWithoutEmployeeInput[]
+    upsert?: RVApproverSettingUpsertWithWhereUniqueWithoutEmployeeInput | RVApproverSettingUpsertWithWhereUniqueWithoutEmployeeInput[]
+    createMany?: RVApproverSettingCreateManyEmployeeInputEnvelope
+    set?: RVApproverSettingWhereUniqueInput | RVApproverSettingWhereUniqueInput[]
+    disconnect?: RVApproverSettingWhereUniqueInput | RVApproverSettingWhereUniqueInput[]
+    delete?: RVApproverSettingWhereUniqueInput | RVApproverSettingWhereUniqueInput[]
+    connect?: RVApproverSettingWhereUniqueInput | RVApproverSettingWhereUniqueInput[]
+    update?: RVApproverSettingUpdateWithWhereUniqueWithoutEmployeeInput | RVApproverSettingUpdateWithWhereUniqueWithoutEmployeeInput[]
+    updateMany?: RVApproverSettingUpdateManyWithWhereWithoutEmployeeInput | RVApproverSettingUpdateManyWithWhereWithoutEmployeeInput[]
+    deleteMany?: RVApproverSettingScalarWhereInput | RVApproverSettingScalarWhereInput[]
   }
 
   export type JOApproverSettingUncheckedUpdateOneWithoutApproverNestedInput = {
@@ -20080,6 +20742,56 @@ export namespace Prisma {
     update?: XOR<XOR<SPRApproverSettingUpdateToOneWithWhereWithoutApproverInput, SPRApproverSettingUpdateWithoutApproverInput>, SPRApproverSettingUncheckedUpdateWithoutApproverInput>
   }
 
+  export type JOApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput = {
+    create?: XOR<JOApproverSettingCreateWithoutApprover_proxyInput, JOApproverSettingUncheckedCreateWithoutApprover_proxyInput>
+    connectOrCreate?: JOApproverSettingCreateOrConnectWithoutApprover_proxyInput
+    upsert?: JOApproverSettingUpsertWithoutApprover_proxyInput
+    disconnect?: JOApproverSettingWhereInput | boolean
+    delete?: JOApproverSettingWhereInput | boolean
+    connect?: JOApproverSettingWhereUniqueInput
+    update?: XOR<XOR<JOApproverSettingUpdateToOneWithWhereWithoutApprover_proxyInput, JOApproverSettingUpdateWithoutApprover_proxyInput>, JOApproverSettingUncheckedUpdateWithoutApprover_proxyInput>
+  }
+
+  export type MEQSApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput = {
+    create?: XOR<MEQSApproverSettingCreateWithoutApprover_proxyInput, MEQSApproverSettingUncheckedCreateWithoutApprover_proxyInput>
+    connectOrCreate?: MEQSApproverSettingCreateOrConnectWithoutApprover_proxyInput
+    upsert?: MEQSApproverSettingUpsertWithoutApprover_proxyInput
+    disconnect?: MEQSApproverSettingWhereInput | boolean
+    delete?: MEQSApproverSettingWhereInput | boolean
+    connect?: MEQSApproverSettingWhereUniqueInput
+    update?: XOR<XOR<MEQSApproverSettingUpdateToOneWithWhereWithoutApprover_proxyInput, MEQSApproverSettingUpdateWithoutApprover_proxyInput>, MEQSApproverSettingUncheckedUpdateWithoutApprover_proxyInput>
+  }
+
+  export type POApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput = {
+    create?: XOR<POApproverSettingCreateWithoutApprover_proxyInput, POApproverSettingUncheckedCreateWithoutApprover_proxyInput>
+    connectOrCreate?: POApproverSettingCreateOrConnectWithoutApprover_proxyInput
+    upsert?: POApproverSettingUpsertWithoutApprover_proxyInput
+    disconnect?: POApproverSettingWhereInput | boolean
+    delete?: POApproverSettingWhereInput | boolean
+    connect?: POApproverSettingWhereUniqueInput
+    update?: XOR<XOR<POApproverSettingUpdateToOneWithWhereWithoutApprover_proxyInput, POApproverSettingUpdateWithoutApprover_proxyInput>, POApproverSettingUncheckedUpdateWithoutApprover_proxyInput>
+  }
+
+  export type RVApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput = {
+    create?: XOR<RVApproverSettingCreateWithoutApprover_proxyInput, RVApproverSettingUncheckedCreateWithoutApprover_proxyInput>
+    connectOrCreate?: RVApproverSettingCreateOrConnectWithoutApprover_proxyInput
+    upsert?: RVApproverSettingUpsertWithoutApprover_proxyInput
+    disconnect?: RVApproverSettingWhereInput | boolean
+    delete?: RVApproverSettingWhereInput | boolean
+    connect?: RVApproverSettingWhereUniqueInput
+    update?: XOR<XOR<RVApproverSettingUpdateToOneWithWhereWithoutApprover_proxyInput, RVApproverSettingUpdateWithoutApprover_proxyInput>, RVApproverSettingUncheckedUpdateWithoutApprover_proxyInput>
+  }
+
+  export type SPRApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput = {
+    create?: XOR<SPRApproverSettingCreateWithoutApprover_proxyInput, SPRApproverSettingUncheckedCreateWithoutApprover_proxyInput>
+    connectOrCreate?: SPRApproverSettingCreateOrConnectWithoutApprover_proxyInput
+    upsert?: SPRApproverSettingUpsertWithoutApprover_proxyInput
+    disconnect?: SPRApproverSettingWhereInput | boolean
+    delete?: SPRApproverSettingWhereInput | boolean
+    connect?: SPRApproverSettingWhereUniqueInput
+    update?: XOR<XOR<SPRApproverSettingUpdateToOneWithWhereWithoutApprover_proxyInput, SPRApproverSettingUpdateWithoutApprover_proxyInput>, SPRApproverSettingUncheckedUpdateWithoutApprover_proxyInput>
+  }
+
   export type UserEmployeeUncheckedUpdateOneWithoutEmployeeNestedInput = {
     create?: XOR<UserEmployeeCreateWithoutEmployeeInput, UserEmployeeUncheckedCreateWithoutEmployeeInput>
     connectOrCreate?: UserEmployeeCreateOrConnectWithoutEmployeeInput
@@ -20088,6 +20800,20 @@ export namespace Prisma {
     delete?: UserEmployeeWhereInput | boolean
     connect?: UserEmployeeWhereUniqueInput
     update?: XOR<XOR<UserEmployeeUpdateToOneWithWhereWithoutEmployeeInput, UserEmployeeUpdateWithoutEmployeeInput>, UserEmployeeUncheckedUpdateWithoutEmployeeInput>
+  }
+
+  export type RVApproverSettingUncheckedUpdateManyWithoutEmployeeNestedInput = {
+    create?: XOR<RVApproverSettingCreateWithoutEmployeeInput, RVApproverSettingUncheckedCreateWithoutEmployeeInput> | RVApproverSettingCreateWithoutEmployeeInput[] | RVApproverSettingUncheckedCreateWithoutEmployeeInput[]
+    connectOrCreate?: RVApproverSettingCreateOrConnectWithoutEmployeeInput | RVApproverSettingCreateOrConnectWithoutEmployeeInput[]
+    upsert?: RVApproverSettingUpsertWithWhereUniqueWithoutEmployeeInput | RVApproverSettingUpsertWithWhereUniqueWithoutEmployeeInput[]
+    createMany?: RVApproverSettingCreateManyEmployeeInputEnvelope
+    set?: RVApproverSettingWhereUniqueInput | RVApproverSettingWhereUniqueInput[]
+    disconnect?: RVApproverSettingWhereUniqueInput | RVApproverSettingWhereUniqueInput[]
+    delete?: RVApproverSettingWhereUniqueInput | RVApproverSettingWhereUniqueInput[]
+    connect?: RVApproverSettingWhereUniqueInput | RVApproverSettingWhereUniqueInput[]
+    update?: RVApproverSettingUpdateWithWhereUniqueWithoutEmployeeInput | RVApproverSettingUpdateWithWhereUniqueWithoutEmployeeInput[]
+    updateMany?: RVApproverSettingUpdateManyWithWhereWithoutEmployeeInput | RVApproverSettingUpdateManyWithWhereWithoutEmployeeInput[]
+    deleteMany?: RVApproverSettingScalarWhereInput | RVApproverSettingScalarWhereInput[]
   }
 
   export type UserPermissionCreateNestedManyWithoutUserInput = {
@@ -20384,6 +21110,12 @@ export namespace Prisma {
     connect?: EmployeeWhereUniqueInput
   }
 
+  export type EmployeeCreateNestedOneWithoutJo_approver_proxy_settingInput = {
+    create?: XOR<EmployeeCreateWithoutJo_approver_proxy_settingInput, EmployeeUncheckedCreateWithoutJo_approver_proxy_settingInput>
+    connectOrCreate?: EmployeeCreateOrConnectWithoutJo_approver_proxy_settingInput
+    connect?: EmployeeWhereUniqueInput
+  }
+
   export type EmployeeUpdateOneRequiredWithoutJo_approver_settingNestedInput = {
     create?: XOR<EmployeeCreateWithoutJo_approver_settingInput, EmployeeUncheckedCreateWithoutJo_approver_settingInput>
     connectOrCreate?: EmployeeCreateOrConnectWithoutJo_approver_settingInput
@@ -20392,9 +21124,31 @@ export namespace Prisma {
     update?: XOR<XOR<EmployeeUpdateToOneWithWhereWithoutJo_approver_settingInput, EmployeeUpdateWithoutJo_approver_settingInput>, EmployeeUncheckedUpdateWithoutJo_approver_settingInput>
   }
 
+  export type EmployeeUpdateOneWithoutJo_approver_proxy_settingNestedInput = {
+    create?: XOR<EmployeeCreateWithoutJo_approver_proxy_settingInput, EmployeeUncheckedCreateWithoutJo_approver_proxy_settingInput>
+    connectOrCreate?: EmployeeCreateOrConnectWithoutJo_approver_proxy_settingInput
+    upsert?: EmployeeUpsertWithoutJo_approver_proxy_settingInput
+    disconnect?: EmployeeWhereInput | boolean
+    delete?: EmployeeWhereInput | boolean
+    connect?: EmployeeWhereUniqueInput
+    update?: XOR<XOR<EmployeeUpdateToOneWithWhereWithoutJo_approver_proxy_settingInput, EmployeeUpdateWithoutJo_approver_proxy_settingInput>, EmployeeUncheckedUpdateWithoutJo_approver_proxy_settingInput>
+  }
+
   export type EmployeeCreateNestedOneWithoutRv_approver_settingInput = {
     create?: XOR<EmployeeCreateWithoutRv_approver_settingInput, EmployeeUncheckedCreateWithoutRv_approver_settingInput>
     connectOrCreate?: EmployeeCreateOrConnectWithoutRv_approver_settingInput
+    connect?: EmployeeWhereUniqueInput
+  }
+
+  export type EmployeeCreateNestedOneWithoutRv_approver_proxy_settingInput = {
+    create?: XOR<EmployeeCreateWithoutRv_approver_proxy_settingInput, EmployeeUncheckedCreateWithoutRv_approver_proxy_settingInput>
+    connectOrCreate?: EmployeeCreateOrConnectWithoutRv_approver_proxy_settingInput
+    connect?: EmployeeWhereUniqueInput
+  }
+
+  export type EmployeeCreateNestedOneWithoutRVApproverSettingInput = {
+    create?: XOR<EmployeeCreateWithoutRVApproverSettingInput, EmployeeUncheckedCreateWithoutRVApproverSettingInput>
+    connectOrCreate?: EmployeeCreateOrConnectWithoutRVApproverSettingInput
     connect?: EmployeeWhereUniqueInput
   }
 
@@ -20406,9 +21160,35 @@ export namespace Prisma {
     update?: XOR<XOR<EmployeeUpdateToOneWithWhereWithoutRv_approver_settingInput, EmployeeUpdateWithoutRv_approver_settingInput>, EmployeeUncheckedUpdateWithoutRv_approver_settingInput>
   }
 
+  export type EmployeeUpdateOneWithoutRv_approver_proxy_settingNestedInput = {
+    create?: XOR<EmployeeCreateWithoutRv_approver_proxy_settingInput, EmployeeUncheckedCreateWithoutRv_approver_proxy_settingInput>
+    connectOrCreate?: EmployeeCreateOrConnectWithoutRv_approver_proxy_settingInput
+    upsert?: EmployeeUpsertWithoutRv_approver_proxy_settingInput
+    disconnect?: EmployeeWhereInput | boolean
+    delete?: EmployeeWhereInput | boolean
+    connect?: EmployeeWhereUniqueInput
+    update?: XOR<XOR<EmployeeUpdateToOneWithWhereWithoutRv_approver_proxy_settingInput, EmployeeUpdateWithoutRv_approver_proxy_settingInput>, EmployeeUncheckedUpdateWithoutRv_approver_proxy_settingInput>
+  }
+
+  export type EmployeeUpdateOneWithoutRVApproverSettingNestedInput = {
+    create?: XOR<EmployeeCreateWithoutRVApproverSettingInput, EmployeeUncheckedCreateWithoutRVApproverSettingInput>
+    connectOrCreate?: EmployeeCreateOrConnectWithoutRVApproverSettingInput
+    upsert?: EmployeeUpsertWithoutRVApproverSettingInput
+    disconnect?: EmployeeWhereInput | boolean
+    delete?: EmployeeWhereInput | boolean
+    connect?: EmployeeWhereUniqueInput
+    update?: XOR<XOR<EmployeeUpdateToOneWithWhereWithoutRVApproverSettingInput, EmployeeUpdateWithoutRVApproverSettingInput>, EmployeeUncheckedUpdateWithoutRVApproverSettingInput>
+  }
+
   export type EmployeeCreateNestedOneWithoutSpr_approver_settingInput = {
     create?: XOR<EmployeeCreateWithoutSpr_approver_settingInput, EmployeeUncheckedCreateWithoutSpr_approver_settingInput>
     connectOrCreate?: EmployeeCreateOrConnectWithoutSpr_approver_settingInput
+    connect?: EmployeeWhereUniqueInput
+  }
+
+  export type EmployeeCreateNestedOneWithoutSpr_approver_proxy_settingInput = {
+    create?: XOR<EmployeeCreateWithoutSpr_approver_proxy_settingInput, EmployeeUncheckedCreateWithoutSpr_approver_proxy_settingInput>
+    connectOrCreate?: EmployeeCreateOrConnectWithoutSpr_approver_proxy_settingInput
     connect?: EmployeeWhereUniqueInput
   }
 
@@ -20420,9 +21200,25 @@ export namespace Prisma {
     update?: XOR<XOR<EmployeeUpdateToOneWithWhereWithoutSpr_approver_settingInput, EmployeeUpdateWithoutSpr_approver_settingInput>, EmployeeUncheckedUpdateWithoutSpr_approver_settingInput>
   }
 
+  export type EmployeeUpdateOneWithoutSpr_approver_proxy_settingNestedInput = {
+    create?: XOR<EmployeeCreateWithoutSpr_approver_proxy_settingInput, EmployeeUncheckedCreateWithoutSpr_approver_proxy_settingInput>
+    connectOrCreate?: EmployeeCreateOrConnectWithoutSpr_approver_proxy_settingInput
+    upsert?: EmployeeUpsertWithoutSpr_approver_proxy_settingInput
+    disconnect?: EmployeeWhereInput | boolean
+    delete?: EmployeeWhereInput | boolean
+    connect?: EmployeeWhereUniqueInput
+    update?: XOR<XOR<EmployeeUpdateToOneWithWhereWithoutSpr_approver_proxy_settingInput, EmployeeUpdateWithoutSpr_approver_proxy_settingInput>, EmployeeUncheckedUpdateWithoutSpr_approver_proxy_settingInput>
+  }
+
   export type EmployeeCreateNestedOneWithoutMeqs_approver_settingInput = {
     create?: XOR<EmployeeCreateWithoutMeqs_approver_settingInput, EmployeeUncheckedCreateWithoutMeqs_approver_settingInput>
     connectOrCreate?: EmployeeCreateOrConnectWithoutMeqs_approver_settingInput
+    connect?: EmployeeWhereUniqueInput
+  }
+
+  export type EmployeeCreateNestedOneWithoutMeqs_approver_proxy_settingInput = {
+    create?: XOR<EmployeeCreateWithoutMeqs_approver_proxy_settingInput, EmployeeUncheckedCreateWithoutMeqs_approver_proxy_settingInput>
+    connectOrCreate?: EmployeeCreateOrConnectWithoutMeqs_approver_proxy_settingInput
     connect?: EmployeeWhereUniqueInput
   }
 
@@ -20434,9 +21230,25 @@ export namespace Prisma {
     update?: XOR<XOR<EmployeeUpdateToOneWithWhereWithoutMeqs_approver_settingInput, EmployeeUpdateWithoutMeqs_approver_settingInput>, EmployeeUncheckedUpdateWithoutMeqs_approver_settingInput>
   }
 
+  export type EmployeeUpdateOneWithoutMeqs_approver_proxy_settingNestedInput = {
+    create?: XOR<EmployeeCreateWithoutMeqs_approver_proxy_settingInput, EmployeeUncheckedCreateWithoutMeqs_approver_proxy_settingInput>
+    connectOrCreate?: EmployeeCreateOrConnectWithoutMeqs_approver_proxy_settingInput
+    upsert?: EmployeeUpsertWithoutMeqs_approver_proxy_settingInput
+    disconnect?: EmployeeWhereInput | boolean
+    delete?: EmployeeWhereInput | boolean
+    connect?: EmployeeWhereUniqueInput
+    update?: XOR<XOR<EmployeeUpdateToOneWithWhereWithoutMeqs_approver_proxy_settingInput, EmployeeUpdateWithoutMeqs_approver_proxy_settingInput>, EmployeeUncheckedUpdateWithoutMeqs_approver_proxy_settingInput>
+  }
+
   export type EmployeeCreateNestedOneWithoutPo_approver_settingInput = {
     create?: XOR<EmployeeCreateWithoutPo_approver_settingInput, EmployeeUncheckedCreateWithoutPo_approver_settingInput>
     connectOrCreate?: EmployeeCreateOrConnectWithoutPo_approver_settingInput
+    connect?: EmployeeWhereUniqueInput
+  }
+
+  export type EmployeeCreateNestedOneWithoutPo_approver_proxy_settingInput = {
+    create?: XOR<EmployeeCreateWithoutPo_approver_proxy_settingInput, EmployeeUncheckedCreateWithoutPo_approver_proxy_settingInput>
+    connectOrCreate?: EmployeeCreateOrConnectWithoutPo_approver_proxy_settingInput
     connect?: EmployeeWhereUniqueInput
   }
 
@@ -20446,6 +21258,16 @@ export namespace Prisma {
     upsert?: EmployeeUpsertWithoutPo_approver_settingInput
     connect?: EmployeeWhereUniqueInput
     update?: XOR<XOR<EmployeeUpdateToOneWithWhereWithoutPo_approver_settingInput, EmployeeUpdateWithoutPo_approver_settingInput>, EmployeeUncheckedUpdateWithoutPo_approver_settingInput>
+  }
+
+  export type EmployeeUpdateOneWithoutPo_approver_proxy_settingNestedInput = {
+    create?: XOR<EmployeeCreateWithoutPo_approver_proxy_settingInput, EmployeeUncheckedCreateWithoutPo_approver_proxy_settingInput>
+    connectOrCreate?: EmployeeCreateOrConnectWithoutPo_approver_proxy_settingInput
+    upsert?: EmployeeUpsertWithoutPo_approver_proxy_settingInput
+    disconnect?: EmployeeWhereInput | boolean
+    delete?: EmployeeWhereInput | boolean
+    connect?: EmployeeWhereUniqueInput
+    update?: XOR<XOR<EmployeeUpdateToOneWithWhereWithoutPo_approver_proxy_settingInput, EmployeeUpdateWithoutPo_approver_proxy_settingInput>, EmployeeUncheckedUpdateWithoutPo_approver_proxy_settingInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -20737,12 +21559,14 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    approver_proxy?: EmployeeCreateNestedOneWithoutJo_approver_proxy_settingInput
   }
 
   export type JOApproverSettingUncheckedCreateWithoutApproverInput = {
     id?: string
     label: string
     order: number
+    approver_proxy_id?: string | null
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -20760,10 +21584,12 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    approver_proxy?: EmployeeCreateNestedOneWithoutMeqs_approver_proxy_settingInput
   }
 
   export type MEQSApproverSettingUncheckedCreateWithoutApproverInput = {
     id?: string
+    approver_proxy_id?: string | null
     label: string
     order: number
     created_at?: Date | string
@@ -20783,10 +21609,12 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    approver_proxy?: EmployeeCreateNestedOneWithoutPo_approver_proxy_settingInput
   }
 
   export type POApproverSettingUncheckedCreateWithoutApproverInput = {
     id?: string
+    approver_proxy_id?: string | null
     label: string
     order: number
     created_at?: Date | string
@@ -20806,15 +21634,19 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    approver_proxy?: EmployeeCreateNestedOneWithoutRv_approver_proxy_settingInput
+    Employee?: EmployeeCreateNestedOneWithoutRVApproverSettingInput
   }
 
   export type RVApproverSettingUncheckedCreateWithoutApproverInput = {
     id?: string
+    approver_proxy_id?: string | null
     label: string
     order: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    employeeId?: string | null
   }
 
   export type RVApproverSettingCreateOrConnectWithoutApproverInput = {
@@ -20829,10 +21661,12 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    approver_proxy?: EmployeeCreateNestedOneWithoutSpr_approver_proxy_settingInput
   }
 
   export type SPRApproverSettingUncheckedCreateWithoutApproverInput = {
     id?: string
+    approver_proxy_id?: string | null
     label: string
     order: number
     created_at?: Date | string
@@ -20843,6 +21677,133 @@ export namespace Prisma {
   export type SPRApproverSettingCreateOrConnectWithoutApproverInput = {
     where: SPRApproverSettingWhereUniqueInput
     create: XOR<SPRApproverSettingCreateWithoutApproverInput, SPRApproverSettingUncheckedCreateWithoutApproverInput>
+  }
+
+  export type JOApproverSettingCreateWithoutApprover_proxyInput = {
+    id?: string
+    label: string
+    order: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    approver: EmployeeCreateNestedOneWithoutJo_approver_settingInput
+  }
+
+  export type JOApproverSettingUncheckedCreateWithoutApprover_proxyInput = {
+    id?: string
+    label: string
+    order: number
+    approver_id: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
+  export type JOApproverSettingCreateOrConnectWithoutApprover_proxyInput = {
+    where: JOApproverSettingWhereUniqueInput
+    create: XOR<JOApproverSettingCreateWithoutApprover_proxyInput, JOApproverSettingUncheckedCreateWithoutApprover_proxyInput>
+  }
+
+  export type MEQSApproverSettingCreateWithoutApprover_proxyInput = {
+    id?: string
+    label: string
+    order: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    approver: EmployeeCreateNestedOneWithoutMeqs_approver_settingInput
+  }
+
+  export type MEQSApproverSettingUncheckedCreateWithoutApprover_proxyInput = {
+    id?: string
+    approver_id: string
+    label: string
+    order: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
+  export type MEQSApproverSettingCreateOrConnectWithoutApprover_proxyInput = {
+    where: MEQSApproverSettingWhereUniqueInput
+    create: XOR<MEQSApproverSettingCreateWithoutApprover_proxyInput, MEQSApproverSettingUncheckedCreateWithoutApprover_proxyInput>
+  }
+
+  export type POApproverSettingCreateWithoutApprover_proxyInput = {
+    id?: string
+    label: string
+    order: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    approver: EmployeeCreateNestedOneWithoutPo_approver_settingInput
+  }
+
+  export type POApproverSettingUncheckedCreateWithoutApprover_proxyInput = {
+    id?: string
+    approver_id: string
+    label: string
+    order: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
+  export type POApproverSettingCreateOrConnectWithoutApprover_proxyInput = {
+    where: POApproverSettingWhereUniqueInput
+    create: XOR<POApproverSettingCreateWithoutApprover_proxyInput, POApproverSettingUncheckedCreateWithoutApprover_proxyInput>
+  }
+
+  export type RVApproverSettingCreateWithoutApprover_proxyInput = {
+    id?: string
+    label: string
+    order: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    approver: EmployeeCreateNestedOneWithoutRv_approver_settingInput
+    Employee?: EmployeeCreateNestedOneWithoutRVApproverSettingInput
+  }
+
+  export type RVApproverSettingUncheckedCreateWithoutApprover_proxyInput = {
+    id?: string
+    approver_id: string
+    label: string
+    order: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    employeeId?: string | null
+  }
+
+  export type RVApproverSettingCreateOrConnectWithoutApprover_proxyInput = {
+    where: RVApproverSettingWhereUniqueInput
+    create: XOR<RVApproverSettingCreateWithoutApprover_proxyInput, RVApproverSettingUncheckedCreateWithoutApprover_proxyInput>
+  }
+
+  export type SPRApproverSettingCreateWithoutApprover_proxyInput = {
+    id?: string
+    label: string
+    order: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    approver: EmployeeCreateNestedOneWithoutSpr_approver_settingInput
+  }
+
+  export type SPRApproverSettingUncheckedCreateWithoutApprover_proxyInput = {
+    id?: string
+    approver_id: string
+    label: string
+    order: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
+  export type SPRApproverSettingCreateOrConnectWithoutApprover_proxyInput = {
+    where: SPRApproverSettingWhereUniqueInput
+    create: XOR<SPRApproverSettingCreateWithoutApprover_proxyInput, SPRApproverSettingUncheckedCreateWithoutApprover_proxyInput>
   }
 
   export type UserEmployeeCreateWithoutEmployeeInput = {
@@ -20866,6 +21827,38 @@ export namespace Prisma {
     create: XOR<UserEmployeeCreateWithoutEmployeeInput, UserEmployeeUncheckedCreateWithoutEmployeeInput>
   }
 
+  export type RVApproverSettingCreateWithoutEmployeeInput = {
+    id?: string
+    label: string
+    order: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    approver: EmployeeCreateNestedOneWithoutRv_approver_settingInput
+    approver_proxy?: EmployeeCreateNestedOneWithoutRv_approver_proxy_settingInput
+  }
+
+  export type RVApproverSettingUncheckedCreateWithoutEmployeeInput = {
+    id?: string
+    approver_id: string
+    approver_proxy_id?: string | null
+    label: string
+    order: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
+  export type RVApproverSettingCreateOrConnectWithoutEmployeeInput = {
+    where: RVApproverSettingWhereUniqueInput
+    create: XOR<RVApproverSettingCreateWithoutEmployeeInput, RVApproverSettingUncheckedCreateWithoutEmployeeInput>
+  }
+
+  export type RVApproverSettingCreateManyEmployeeInputEnvelope = {
+    data: RVApproverSettingCreateManyEmployeeInput | RVApproverSettingCreateManyEmployeeInput[]
+    skipDuplicates?: boolean
+  }
+
   export type JOApproverSettingUpsertWithoutApproverInput = {
     update: XOR<JOApproverSettingUpdateWithoutApproverInput, JOApproverSettingUncheckedUpdateWithoutApproverInput>
     create: XOR<JOApproverSettingCreateWithoutApproverInput, JOApproverSettingUncheckedCreateWithoutApproverInput>
@@ -20884,12 +21877,14 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    approver_proxy?: EmployeeUpdateOneWithoutJo_approver_proxy_settingNestedInput
   }
 
   export type JOApproverSettingUncheckedUpdateWithoutApproverInput = {
     id?: StringFieldUpdateOperationsInput | string
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    approver_proxy_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -20913,10 +21908,12 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    approver_proxy?: EmployeeUpdateOneWithoutMeqs_approver_proxy_settingNestedInput
   }
 
   export type MEQSApproverSettingUncheckedUpdateWithoutApproverInput = {
     id?: StringFieldUpdateOperationsInput | string
+    approver_proxy_id?: NullableStringFieldUpdateOperationsInput | string | null
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -20942,10 +21939,12 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    approver_proxy?: EmployeeUpdateOneWithoutPo_approver_proxy_settingNestedInput
   }
 
   export type POApproverSettingUncheckedUpdateWithoutApproverInput = {
     id?: StringFieldUpdateOperationsInput | string
+    approver_proxy_id?: NullableStringFieldUpdateOperationsInput | string | null
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -20971,15 +21970,19 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    approver_proxy?: EmployeeUpdateOneWithoutRv_approver_proxy_settingNestedInput
+    Employee?: EmployeeUpdateOneWithoutRVApproverSettingNestedInput
   }
 
   export type RVApproverSettingUncheckedUpdateWithoutApproverInput = {
     id?: StringFieldUpdateOperationsInput | string
+    approver_proxy_id?: NullableStringFieldUpdateOperationsInput | string | null
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    employeeId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SPRApproverSettingUpsertWithoutApproverInput = {
@@ -21000,10 +22003,169 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    approver_proxy?: EmployeeUpdateOneWithoutSpr_approver_proxy_settingNestedInput
   }
 
   export type SPRApproverSettingUncheckedUpdateWithoutApproverInput = {
     id?: StringFieldUpdateOperationsInput | string
+    approver_proxy_id?: NullableStringFieldUpdateOperationsInput | string | null
+    label?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type JOApproverSettingUpsertWithoutApprover_proxyInput = {
+    update: XOR<JOApproverSettingUpdateWithoutApprover_proxyInput, JOApproverSettingUncheckedUpdateWithoutApprover_proxyInput>
+    create: XOR<JOApproverSettingCreateWithoutApprover_proxyInput, JOApproverSettingUncheckedCreateWithoutApprover_proxyInput>
+    where?: JOApproverSettingWhereInput
+  }
+
+  export type JOApproverSettingUpdateToOneWithWhereWithoutApprover_proxyInput = {
+    where?: JOApproverSettingWhereInput
+    data: XOR<JOApproverSettingUpdateWithoutApprover_proxyInput, JOApproverSettingUncheckedUpdateWithoutApprover_proxyInput>
+  }
+
+  export type JOApproverSettingUpdateWithoutApprover_proxyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    approver?: EmployeeUpdateOneRequiredWithoutJo_approver_settingNestedInput
+  }
+
+  export type JOApproverSettingUncheckedUpdateWithoutApprover_proxyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    approver_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type MEQSApproverSettingUpsertWithoutApprover_proxyInput = {
+    update: XOR<MEQSApproverSettingUpdateWithoutApprover_proxyInput, MEQSApproverSettingUncheckedUpdateWithoutApprover_proxyInput>
+    create: XOR<MEQSApproverSettingCreateWithoutApprover_proxyInput, MEQSApproverSettingUncheckedCreateWithoutApprover_proxyInput>
+    where?: MEQSApproverSettingWhereInput
+  }
+
+  export type MEQSApproverSettingUpdateToOneWithWhereWithoutApprover_proxyInput = {
+    where?: MEQSApproverSettingWhereInput
+    data: XOR<MEQSApproverSettingUpdateWithoutApprover_proxyInput, MEQSApproverSettingUncheckedUpdateWithoutApprover_proxyInput>
+  }
+
+  export type MEQSApproverSettingUpdateWithoutApprover_proxyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    approver?: EmployeeUpdateOneRequiredWithoutMeqs_approver_settingNestedInput
+  }
+
+  export type MEQSApproverSettingUncheckedUpdateWithoutApprover_proxyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    approver_id?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type POApproverSettingUpsertWithoutApprover_proxyInput = {
+    update: XOR<POApproverSettingUpdateWithoutApprover_proxyInput, POApproverSettingUncheckedUpdateWithoutApprover_proxyInput>
+    create: XOR<POApproverSettingCreateWithoutApprover_proxyInput, POApproverSettingUncheckedCreateWithoutApprover_proxyInput>
+    where?: POApproverSettingWhereInput
+  }
+
+  export type POApproverSettingUpdateToOneWithWhereWithoutApprover_proxyInput = {
+    where?: POApproverSettingWhereInput
+    data: XOR<POApproverSettingUpdateWithoutApprover_proxyInput, POApproverSettingUncheckedUpdateWithoutApprover_proxyInput>
+  }
+
+  export type POApproverSettingUpdateWithoutApprover_proxyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    approver?: EmployeeUpdateOneRequiredWithoutPo_approver_settingNestedInput
+  }
+
+  export type POApproverSettingUncheckedUpdateWithoutApprover_proxyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    approver_id?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type RVApproverSettingUpsertWithoutApprover_proxyInput = {
+    update: XOR<RVApproverSettingUpdateWithoutApprover_proxyInput, RVApproverSettingUncheckedUpdateWithoutApprover_proxyInput>
+    create: XOR<RVApproverSettingCreateWithoutApprover_proxyInput, RVApproverSettingUncheckedCreateWithoutApprover_proxyInput>
+    where?: RVApproverSettingWhereInput
+  }
+
+  export type RVApproverSettingUpdateToOneWithWhereWithoutApprover_proxyInput = {
+    where?: RVApproverSettingWhereInput
+    data: XOR<RVApproverSettingUpdateWithoutApprover_proxyInput, RVApproverSettingUncheckedUpdateWithoutApprover_proxyInput>
+  }
+
+  export type RVApproverSettingUpdateWithoutApprover_proxyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    approver?: EmployeeUpdateOneRequiredWithoutRv_approver_settingNestedInput
+    Employee?: EmployeeUpdateOneWithoutRVApproverSettingNestedInput
+  }
+
+  export type RVApproverSettingUncheckedUpdateWithoutApprover_proxyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    approver_id?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    employeeId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type SPRApproverSettingUpsertWithoutApprover_proxyInput = {
+    update: XOR<SPRApproverSettingUpdateWithoutApprover_proxyInput, SPRApproverSettingUncheckedUpdateWithoutApprover_proxyInput>
+    create: XOR<SPRApproverSettingCreateWithoutApprover_proxyInput, SPRApproverSettingUncheckedCreateWithoutApprover_proxyInput>
+    where?: SPRApproverSettingWhereInput
+  }
+
+  export type SPRApproverSettingUpdateToOneWithWhereWithoutApprover_proxyInput = {
+    where?: SPRApproverSettingWhereInput
+    data: XOR<SPRApproverSettingUpdateWithoutApprover_proxyInput, SPRApproverSettingUncheckedUpdateWithoutApprover_proxyInput>
+  }
+
+  export type SPRApproverSettingUpdateWithoutApprover_proxyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    approver?: EmployeeUpdateOneRequiredWithoutSpr_approver_settingNestedInput
+  }
+
+  export type SPRApproverSettingUncheckedUpdateWithoutApprover_proxyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    approver_id?: StringFieldUpdateOperationsInput | string
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21036,6 +22198,37 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type RVApproverSettingUpsertWithWhereUniqueWithoutEmployeeInput = {
+    where: RVApproverSettingWhereUniqueInput
+    update: XOR<RVApproverSettingUpdateWithoutEmployeeInput, RVApproverSettingUncheckedUpdateWithoutEmployeeInput>
+    create: XOR<RVApproverSettingCreateWithoutEmployeeInput, RVApproverSettingUncheckedCreateWithoutEmployeeInput>
+  }
+
+  export type RVApproverSettingUpdateWithWhereUniqueWithoutEmployeeInput = {
+    where: RVApproverSettingWhereUniqueInput
+    data: XOR<RVApproverSettingUpdateWithoutEmployeeInput, RVApproverSettingUncheckedUpdateWithoutEmployeeInput>
+  }
+
+  export type RVApproverSettingUpdateManyWithWhereWithoutEmployeeInput = {
+    where: RVApproverSettingScalarWhereInput
+    data: XOR<RVApproverSettingUpdateManyMutationInput, RVApproverSettingUncheckedUpdateManyWithoutEmployeeInput>
+  }
+
+  export type RVApproverSettingScalarWhereInput = {
+    AND?: RVApproverSettingScalarWhereInput | RVApproverSettingScalarWhereInput[]
+    OR?: RVApproverSettingScalarWhereInput[]
+    NOT?: RVApproverSettingScalarWhereInput | RVApproverSettingScalarWhereInput[]
+    id?: StringFilter<"RVApproverSetting"> | string
+    approver_id?: StringFilter<"RVApproverSetting"> | string
+    approver_proxy_id?: StringNullableFilter<"RVApproverSetting"> | string | null
+    label?: StringFilter<"RVApproverSetting"> | string
+    order?: IntFilter<"RVApproverSetting"> | number
+    created_at?: DateTimeFilter<"RVApproverSetting"> | Date | string
+    updated_at?: DateTimeFilter<"RVApproverSetting"> | Date | string
+    is_deleted?: BoolFilter<"RVApproverSetting"> | boolean
+    employeeId?: StringNullableFilter<"RVApproverSetting"> | string | null
   }
 
   export type UserPermissionCreateWithoutUserInput = {
@@ -21182,6 +22375,12 @@ export namespace Prisma {
     po_approver_setting?: POApproverSettingCreateNestedOneWithoutApproverInput
     rv_approver_setting?: RVApproverSettingCreateNestedOneWithoutApproverInput
     spr_approver_setting?: SPRApproverSettingCreateNestedOneWithoutApproverInput
+    jo_approver_proxy_setting?: JOApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    meqs_approver_proxy_setting?: MEQSApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    po_approver_proxy_setting?: POApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    rv_approver_proxy_setting?: RVApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    spr_approver_proxy_setting?: SPRApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    RVApproverSetting?: RVApproverSettingCreateNestedManyWithoutEmployeeInput
   }
 
   export type EmployeeUncheckedCreateWithoutUser_employeeInput = {
@@ -21197,6 +22396,12 @@ export namespace Prisma {
     po_approver_setting?: POApproverSettingUncheckedCreateNestedOneWithoutApproverInput
     rv_approver_setting?: RVApproverSettingUncheckedCreateNestedOneWithoutApproverInput
     spr_approver_setting?: SPRApproverSettingUncheckedCreateNestedOneWithoutApproverInput
+    jo_approver_proxy_setting?: JOApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    meqs_approver_proxy_setting?: MEQSApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    po_approver_proxy_setting?: POApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    rv_approver_proxy_setting?: RVApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    spr_approver_proxy_setting?: SPRApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    RVApproverSetting?: RVApproverSettingUncheckedCreateNestedManyWithoutEmployeeInput
   }
 
   export type EmployeeCreateOrConnectWithoutUser_employeeInput = {
@@ -21263,6 +22468,12 @@ export namespace Prisma {
     po_approver_setting?: POApproverSettingUpdateOneWithoutApproverNestedInput
     rv_approver_setting?: RVApproverSettingUpdateOneWithoutApproverNestedInput
     spr_approver_setting?: SPRApproverSettingUpdateOneWithoutApproverNestedInput
+    jo_approver_proxy_setting?: JOApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    meqs_approver_proxy_setting?: MEQSApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    po_approver_proxy_setting?: POApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    rv_approver_proxy_setting?: RVApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    spr_approver_proxy_setting?: SPRApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    RVApproverSetting?: RVApproverSettingUpdateManyWithoutEmployeeNestedInput
   }
 
   export type EmployeeUncheckedUpdateWithoutUser_employeeInput = {
@@ -21278,6 +22489,12 @@ export namespace Prisma {
     po_approver_setting?: POApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
     rv_approver_setting?: RVApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
     spr_approver_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
+    jo_approver_proxy_setting?: JOApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    meqs_approver_proxy_setting?: MEQSApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    po_approver_proxy_setting?: POApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    rv_approver_proxy_setting?: RVApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    spr_approver_proxy_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    RVApproverSetting?: RVApproverSettingUncheckedUpdateManyWithoutEmployeeNestedInput
   }
 
   export type UserCreateWithoutUser_permissionsInput = {
@@ -21662,7 +22879,13 @@ export namespace Prisma {
     po_approver_setting?: POApproverSettingCreateNestedOneWithoutApproverInput
     rv_approver_setting?: RVApproverSettingCreateNestedOneWithoutApproverInput
     spr_approver_setting?: SPRApproverSettingCreateNestedOneWithoutApproverInput
+    jo_approver_proxy_setting?: JOApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    meqs_approver_proxy_setting?: MEQSApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    po_approver_proxy_setting?: POApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    rv_approver_proxy_setting?: RVApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    spr_approver_proxy_setting?: SPRApproverSettingCreateNestedOneWithoutApprover_proxyInput
     user_employee?: UserEmployeeCreateNestedOneWithoutEmployeeInput
+    RVApproverSetting?: RVApproverSettingCreateNestedManyWithoutEmployeeInput
   }
 
   export type EmployeeUncheckedCreateWithoutJo_approver_settingInput = {
@@ -21677,12 +22900,65 @@ export namespace Prisma {
     po_approver_setting?: POApproverSettingUncheckedCreateNestedOneWithoutApproverInput
     rv_approver_setting?: RVApproverSettingUncheckedCreateNestedOneWithoutApproverInput
     spr_approver_setting?: SPRApproverSettingUncheckedCreateNestedOneWithoutApproverInput
+    jo_approver_proxy_setting?: JOApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    meqs_approver_proxy_setting?: MEQSApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    po_approver_proxy_setting?: POApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    rv_approver_proxy_setting?: RVApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    spr_approver_proxy_setting?: SPRApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
     user_employee?: UserEmployeeUncheckedCreateNestedOneWithoutEmployeeInput
+    RVApproverSetting?: RVApproverSettingUncheckedCreateNestedManyWithoutEmployeeInput
   }
 
   export type EmployeeCreateOrConnectWithoutJo_approver_settingInput = {
     where: EmployeeWhereUniqueInput
     create: XOR<EmployeeCreateWithoutJo_approver_settingInput, EmployeeUncheckedCreateWithoutJo_approver_settingInput>
+  }
+
+  export type EmployeeCreateWithoutJo_approver_proxy_settingInput = {
+    id?: string
+    firstname: string
+    middlename?: string | null
+    lastname: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    jo_approver_setting?: JOApproverSettingCreateNestedOneWithoutApproverInput
+    meqs_approver_setting?: MEQSApproverSettingCreateNestedOneWithoutApproverInput
+    po_approver_setting?: POApproverSettingCreateNestedOneWithoutApproverInput
+    rv_approver_setting?: RVApproverSettingCreateNestedOneWithoutApproverInput
+    spr_approver_setting?: SPRApproverSettingCreateNestedOneWithoutApproverInput
+    meqs_approver_proxy_setting?: MEQSApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    po_approver_proxy_setting?: POApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    rv_approver_proxy_setting?: RVApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    spr_approver_proxy_setting?: SPRApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    user_employee?: UserEmployeeCreateNestedOneWithoutEmployeeInput
+    RVApproverSetting?: RVApproverSettingCreateNestedManyWithoutEmployeeInput
+  }
+
+  export type EmployeeUncheckedCreateWithoutJo_approver_proxy_settingInput = {
+    id?: string
+    firstname: string
+    middlename?: string | null
+    lastname: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    jo_approver_setting?: JOApproverSettingUncheckedCreateNestedOneWithoutApproverInput
+    meqs_approver_setting?: MEQSApproverSettingUncheckedCreateNestedOneWithoutApproverInput
+    po_approver_setting?: POApproverSettingUncheckedCreateNestedOneWithoutApproverInput
+    rv_approver_setting?: RVApproverSettingUncheckedCreateNestedOneWithoutApproverInput
+    spr_approver_setting?: SPRApproverSettingUncheckedCreateNestedOneWithoutApproverInput
+    meqs_approver_proxy_setting?: MEQSApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    po_approver_proxy_setting?: POApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    rv_approver_proxy_setting?: RVApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    spr_approver_proxy_setting?: SPRApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    user_employee?: UserEmployeeUncheckedCreateNestedOneWithoutEmployeeInput
+    RVApproverSetting?: RVApproverSettingUncheckedCreateNestedManyWithoutEmployeeInput
+  }
+
+  export type EmployeeCreateOrConnectWithoutJo_approver_proxy_settingInput = {
+    where: EmployeeWhereUniqueInput
+    create: XOR<EmployeeCreateWithoutJo_approver_proxy_settingInput, EmployeeUncheckedCreateWithoutJo_approver_proxy_settingInput>
   }
 
   export type EmployeeUpsertWithoutJo_approver_settingInput = {
@@ -21708,7 +22984,13 @@ export namespace Prisma {
     po_approver_setting?: POApproverSettingUpdateOneWithoutApproverNestedInput
     rv_approver_setting?: RVApproverSettingUpdateOneWithoutApproverNestedInput
     spr_approver_setting?: SPRApproverSettingUpdateOneWithoutApproverNestedInput
+    jo_approver_proxy_setting?: JOApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    meqs_approver_proxy_setting?: MEQSApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    po_approver_proxy_setting?: POApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    rv_approver_proxy_setting?: RVApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    spr_approver_proxy_setting?: SPRApproverSettingUpdateOneWithoutApprover_proxyNestedInput
     user_employee?: UserEmployeeUpdateOneWithoutEmployeeNestedInput
+    RVApproverSetting?: RVApproverSettingUpdateManyWithoutEmployeeNestedInput
   }
 
   export type EmployeeUncheckedUpdateWithoutJo_approver_settingInput = {
@@ -21723,7 +23005,66 @@ export namespace Prisma {
     po_approver_setting?: POApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
     rv_approver_setting?: RVApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
     spr_approver_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
+    jo_approver_proxy_setting?: JOApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    meqs_approver_proxy_setting?: MEQSApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    po_approver_proxy_setting?: POApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    rv_approver_proxy_setting?: RVApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    spr_approver_proxy_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
     user_employee?: UserEmployeeUncheckedUpdateOneWithoutEmployeeNestedInput
+    RVApproverSetting?: RVApproverSettingUncheckedUpdateManyWithoutEmployeeNestedInput
+  }
+
+  export type EmployeeUpsertWithoutJo_approver_proxy_settingInput = {
+    update: XOR<EmployeeUpdateWithoutJo_approver_proxy_settingInput, EmployeeUncheckedUpdateWithoutJo_approver_proxy_settingInput>
+    create: XOR<EmployeeCreateWithoutJo_approver_proxy_settingInput, EmployeeUncheckedCreateWithoutJo_approver_proxy_settingInput>
+    where?: EmployeeWhereInput
+  }
+
+  export type EmployeeUpdateToOneWithWhereWithoutJo_approver_proxy_settingInput = {
+    where?: EmployeeWhereInput
+    data: XOR<EmployeeUpdateWithoutJo_approver_proxy_settingInput, EmployeeUncheckedUpdateWithoutJo_approver_proxy_settingInput>
+  }
+
+  export type EmployeeUpdateWithoutJo_approver_proxy_settingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstname?: StringFieldUpdateOperationsInput | string
+    middlename?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    jo_approver_setting?: JOApproverSettingUpdateOneWithoutApproverNestedInput
+    meqs_approver_setting?: MEQSApproverSettingUpdateOneWithoutApproverNestedInput
+    po_approver_setting?: POApproverSettingUpdateOneWithoutApproverNestedInput
+    rv_approver_setting?: RVApproverSettingUpdateOneWithoutApproverNestedInput
+    spr_approver_setting?: SPRApproverSettingUpdateOneWithoutApproverNestedInput
+    meqs_approver_proxy_setting?: MEQSApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    po_approver_proxy_setting?: POApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    rv_approver_proxy_setting?: RVApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    spr_approver_proxy_setting?: SPRApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    user_employee?: UserEmployeeUpdateOneWithoutEmployeeNestedInput
+    RVApproverSetting?: RVApproverSettingUpdateManyWithoutEmployeeNestedInput
+  }
+
+  export type EmployeeUncheckedUpdateWithoutJo_approver_proxy_settingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstname?: StringFieldUpdateOperationsInput | string
+    middlename?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    jo_approver_setting?: JOApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
+    meqs_approver_setting?: MEQSApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
+    po_approver_setting?: POApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
+    rv_approver_setting?: RVApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
+    spr_approver_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
+    meqs_approver_proxy_setting?: MEQSApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    po_approver_proxy_setting?: POApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    rv_approver_proxy_setting?: RVApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    spr_approver_proxy_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    user_employee?: UserEmployeeUncheckedUpdateOneWithoutEmployeeNestedInput
+    RVApproverSetting?: RVApproverSettingUncheckedUpdateManyWithoutEmployeeNestedInput
   }
 
   export type EmployeeCreateWithoutRv_approver_settingInput = {
@@ -21738,7 +23079,13 @@ export namespace Prisma {
     meqs_approver_setting?: MEQSApproverSettingCreateNestedOneWithoutApproverInput
     po_approver_setting?: POApproverSettingCreateNestedOneWithoutApproverInput
     spr_approver_setting?: SPRApproverSettingCreateNestedOneWithoutApproverInput
+    jo_approver_proxy_setting?: JOApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    meqs_approver_proxy_setting?: MEQSApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    po_approver_proxy_setting?: POApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    rv_approver_proxy_setting?: RVApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    spr_approver_proxy_setting?: SPRApproverSettingCreateNestedOneWithoutApprover_proxyInput
     user_employee?: UserEmployeeCreateNestedOneWithoutEmployeeInput
+    RVApproverSetting?: RVApproverSettingCreateNestedManyWithoutEmployeeInput
   }
 
   export type EmployeeUncheckedCreateWithoutRv_approver_settingInput = {
@@ -21753,12 +23100,112 @@ export namespace Prisma {
     meqs_approver_setting?: MEQSApproverSettingUncheckedCreateNestedOneWithoutApproverInput
     po_approver_setting?: POApproverSettingUncheckedCreateNestedOneWithoutApproverInput
     spr_approver_setting?: SPRApproverSettingUncheckedCreateNestedOneWithoutApproverInput
+    jo_approver_proxy_setting?: JOApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    meqs_approver_proxy_setting?: MEQSApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    po_approver_proxy_setting?: POApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    rv_approver_proxy_setting?: RVApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    spr_approver_proxy_setting?: SPRApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
     user_employee?: UserEmployeeUncheckedCreateNestedOneWithoutEmployeeInput
+    RVApproverSetting?: RVApproverSettingUncheckedCreateNestedManyWithoutEmployeeInput
   }
 
   export type EmployeeCreateOrConnectWithoutRv_approver_settingInput = {
     where: EmployeeWhereUniqueInput
     create: XOR<EmployeeCreateWithoutRv_approver_settingInput, EmployeeUncheckedCreateWithoutRv_approver_settingInput>
+  }
+
+  export type EmployeeCreateWithoutRv_approver_proxy_settingInput = {
+    id?: string
+    firstname: string
+    middlename?: string | null
+    lastname: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    jo_approver_setting?: JOApproverSettingCreateNestedOneWithoutApproverInput
+    meqs_approver_setting?: MEQSApproverSettingCreateNestedOneWithoutApproverInput
+    po_approver_setting?: POApproverSettingCreateNestedOneWithoutApproverInput
+    rv_approver_setting?: RVApproverSettingCreateNestedOneWithoutApproverInput
+    spr_approver_setting?: SPRApproverSettingCreateNestedOneWithoutApproverInput
+    jo_approver_proxy_setting?: JOApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    meqs_approver_proxy_setting?: MEQSApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    po_approver_proxy_setting?: POApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    spr_approver_proxy_setting?: SPRApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    user_employee?: UserEmployeeCreateNestedOneWithoutEmployeeInput
+    RVApproverSetting?: RVApproverSettingCreateNestedManyWithoutEmployeeInput
+  }
+
+  export type EmployeeUncheckedCreateWithoutRv_approver_proxy_settingInput = {
+    id?: string
+    firstname: string
+    middlename?: string | null
+    lastname: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    jo_approver_setting?: JOApproverSettingUncheckedCreateNestedOneWithoutApproverInput
+    meqs_approver_setting?: MEQSApproverSettingUncheckedCreateNestedOneWithoutApproverInput
+    po_approver_setting?: POApproverSettingUncheckedCreateNestedOneWithoutApproverInput
+    rv_approver_setting?: RVApproverSettingUncheckedCreateNestedOneWithoutApproverInput
+    spr_approver_setting?: SPRApproverSettingUncheckedCreateNestedOneWithoutApproverInput
+    jo_approver_proxy_setting?: JOApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    meqs_approver_proxy_setting?: MEQSApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    po_approver_proxy_setting?: POApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    spr_approver_proxy_setting?: SPRApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    user_employee?: UserEmployeeUncheckedCreateNestedOneWithoutEmployeeInput
+    RVApproverSetting?: RVApproverSettingUncheckedCreateNestedManyWithoutEmployeeInput
+  }
+
+  export type EmployeeCreateOrConnectWithoutRv_approver_proxy_settingInput = {
+    where: EmployeeWhereUniqueInput
+    create: XOR<EmployeeCreateWithoutRv_approver_proxy_settingInput, EmployeeUncheckedCreateWithoutRv_approver_proxy_settingInput>
+  }
+
+  export type EmployeeCreateWithoutRVApproverSettingInput = {
+    id?: string
+    firstname: string
+    middlename?: string | null
+    lastname: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    jo_approver_setting?: JOApproverSettingCreateNestedOneWithoutApproverInput
+    meqs_approver_setting?: MEQSApproverSettingCreateNestedOneWithoutApproverInput
+    po_approver_setting?: POApproverSettingCreateNestedOneWithoutApproverInput
+    rv_approver_setting?: RVApproverSettingCreateNestedOneWithoutApproverInput
+    spr_approver_setting?: SPRApproverSettingCreateNestedOneWithoutApproverInput
+    jo_approver_proxy_setting?: JOApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    meqs_approver_proxy_setting?: MEQSApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    po_approver_proxy_setting?: POApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    rv_approver_proxy_setting?: RVApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    spr_approver_proxy_setting?: SPRApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    user_employee?: UserEmployeeCreateNestedOneWithoutEmployeeInput
+  }
+
+  export type EmployeeUncheckedCreateWithoutRVApproverSettingInput = {
+    id?: string
+    firstname: string
+    middlename?: string | null
+    lastname: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    jo_approver_setting?: JOApproverSettingUncheckedCreateNestedOneWithoutApproverInput
+    meqs_approver_setting?: MEQSApproverSettingUncheckedCreateNestedOneWithoutApproverInput
+    po_approver_setting?: POApproverSettingUncheckedCreateNestedOneWithoutApproverInput
+    rv_approver_setting?: RVApproverSettingUncheckedCreateNestedOneWithoutApproverInput
+    spr_approver_setting?: SPRApproverSettingUncheckedCreateNestedOneWithoutApproverInput
+    jo_approver_proxy_setting?: JOApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    meqs_approver_proxy_setting?: MEQSApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    po_approver_proxy_setting?: POApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    rv_approver_proxy_setting?: RVApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    spr_approver_proxy_setting?: SPRApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    user_employee?: UserEmployeeUncheckedCreateNestedOneWithoutEmployeeInput
+  }
+
+  export type EmployeeCreateOrConnectWithoutRVApproverSettingInput = {
+    where: EmployeeWhereUniqueInput
+    create: XOR<EmployeeCreateWithoutRVApproverSettingInput, EmployeeUncheckedCreateWithoutRVApproverSettingInput>
   }
 
   export type EmployeeUpsertWithoutRv_approver_settingInput = {
@@ -21784,7 +23231,13 @@ export namespace Prisma {
     meqs_approver_setting?: MEQSApproverSettingUpdateOneWithoutApproverNestedInput
     po_approver_setting?: POApproverSettingUpdateOneWithoutApproverNestedInput
     spr_approver_setting?: SPRApproverSettingUpdateOneWithoutApproverNestedInput
+    jo_approver_proxy_setting?: JOApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    meqs_approver_proxy_setting?: MEQSApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    po_approver_proxy_setting?: POApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    rv_approver_proxy_setting?: RVApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    spr_approver_proxy_setting?: SPRApproverSettingUpdateOneWithoutApprover_proxyNestedInput
     user_employee?: UserEmployeeUpdateOneWithoutEmployeeNestedInput
+    RVApproverSetting?: RVApproverSettingUpdateManyWithoutEmployeeNestedInput
   }
 
   export type EmployeeUncheckedUpdateWithoutRv_approver_settingInput = {
@@ -21799,6 +23252,118 @@ export namespace Prisma {
     meqs_approver_setting?: MEQSApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
     po_approver_setting?: POApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
     spr_approver_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
+    jo_approver_proxy_setting?: JOApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    meqs_approver_proxy_setting?: MEQSApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    po_approver_proxy_setting?: POApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    rv_approver_proxy_setting?: RVApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    spr_approver_proxy_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    user_employee?: UserEmployeeUncheckedUpdateOneWithoutEmployeeNestedInput
+    RVApproverSetting?: RVApproverSettingUncheckedUpdateManyWithoutEmployeeNestedInput
+  }
+
+  export type EmployeeUpsertWithoutRv_approver_proxy_settingInput = {
+    update: XOR<EmployeeUpdateWithoutRv_approver_proxy_settingInput, EmployeeUncheckedUpdateWithoutRv_approver_proxy_settingInput>
+    create: XOR<EmployeeCreateWithoutRv_approver_proxy_settingInput, EmployeeUncheckedCreateWithoutRv_approver_proxy_settingInput>
+    where?: EmployeeWhereInput
+  }
+
+  export type EmployeeUpdateToOneWithWhereWithoutRv_approver_proxy_settingInput = {
+    where?: EmployeeWhereInput
+    data: XOR<EmployeeUpdateWithoutRv_approver_proxy_settingInput, EmployeeUncheckedUpdateWithoutRv_approver_proxy_settingInput>
+  }
+
+  export type EmployeeUpdateWithoutRv_approver_proxy_settingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstname?: StringFieldUpdateOperationsInput | string
+    middlename?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    jo_approver_setting?: JOApproverSettingUpdateOneWithoutApproverNestedInput
+    meqs_approver_setting?: MEQSApproverSettingUpdateOneWithoutApproverNestedInput
+    po_approver_setting?: POApproverSettingUpdateOneWithoutApproverNestedInput
+    rv_approver_setting?: RVApproverSettingUpdateOneWithoutApproverNestedInput
+    spr_approver_setting?: SPRApproverSettingUpdateOneWithoutApproverNestedInput
+    jo_approver_proxy_setting?: JOApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    meqs_approver_proxy_setting?: MEQSApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    po_approver_proxy_setting?: POApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    spr_approver_proxy_setting?: SPRApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    user_employee?: UserEmployeeUpdateOneWithoutEmployeeNestedInput
+    RVApproverSetting?: RVApproverSettingUpdateManyWithoutEmployeeNestedInput
+  }
+
+  export type EmployeeUncheckedUpdateWithoutRv_approver_proxy_settingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstname?: StringFieldUpdateOperationsInput | string
+    middlename?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    jo_approver_setting?: JOApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
+    meqs_approver_setting?: MEQSApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
+    po_approver_setting?: POApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
+    rv_approver_setting?: RVApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
+    spr_approver_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
+    jo_approver_proxy_setting?: JOApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    meqs_approver_proxy_setting?: MEQSApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    po_approver_proxy_setting?: POApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    spr_approver_proxy_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    user_employee?: UserEmployeeUncheckedUpdateOneWithoutEmployeeNestedInput
+    RVApproverSetting?: RVApproverSettingUncheckedUpdateManyWithoutEmployeeNestedInput
+  }
+
+  export type EmployeeUpsertWithoutRVApproverSettingInput = {
+    update: XOR<EmployeeUpdateWithoutRVApproverSettingInput, EmployeeUncheckedUpdateWithoutRVApproverSettingInput>
+    create: XOR<EmployeeCreateWithoutRVApproverSettingInput, EmployeeUncheckedCreateWithoutRVApproverSettingInput>
+    where?: EmployeeWhereInput
+  }
+
+  export type EmployeeUpdateToOneWithWhereWithoutRVApproverSettingInput = {
+    where?: EmployeeWhereInput
+    data: XOR<EmployeeUpdateWithoutRVApproverSettingInput, EmployeeUncheckedUpdateWithoutRVApproverSettingInput>
+  }
+
+  export type EmployeeUpdateWithoutRVApproverSettingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstname?: StringFieldUpdateOperationsInput | string
+    middlename?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    jo_approver_setting?: JOApproverSettingUpdateOneWithoutApproverNestedInput
+    meqs_approver_setting?: MEQSApproverSettingUpdateOneWithoutApproverNestedInput
+    po_approver_setting?: POApproverSettingUpdateOneWithoutApproverNestedInput
+    rv_approver_setting?: RVApproverSettingUpdateOneWithoutApproverNestedInput
+    spr_approver_setting?: SPRApproverSettingUpdateOneWithoutApproverNestedInput
+    jo_approver_proxy_setting?: JOApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    meqs_approver_proxy_setting?: MEQSApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    po_approver_proxy_setting?: POApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    rv_approver_proxy_setting?: RVApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    spr_approver_proxy_setting?: SPRApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    user_employee?: UserEmployeeUpdateOneWithoutEmployeeNestedInput
+  }
+
+  export type EmployeeUncheckedUpdateWithoutRVApproverSettingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstname?: StringFieldUpdateOperationsInput | string
+    middlename?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    jo_approver_setting?: JOApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
+    meqs_approver_setting?: MEQSApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
+    po_approver_setting?: POApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
+    rv_approver_setting?: RVApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
+    spr_approver_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
+    jo_approver_proxy_setting?: JOApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    meqs_approver_proxy_setting?: MEQSApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    po_approver_proxy_setting?: POApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    rv_approver_proxy_setting?: RVApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    spr_approver_proxy_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
     user_employee?: UserEmployeeUncheckedUpdateOneWithoutEmployeeNestedInput
   }
 
@@ -21814,7 +23379,13 @@ export namespace Prisma {
     meqs_approver_setting?: MEQSApproverSettingCreateNestedOneWithoutApproverInput
     po_approver_setting?: POApproverSettingCreateNestedOneWithoutApproverInput
     rv_approver_setting?: RVApproverSettingCreateNestedOneWithoutApproverInput
+    jo_approver_proxy_setting?: JOApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    meqs_approver_proxy_setting?: MEQSApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    po_approver_proxy_setting?: POApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    rv_approver_proxy_setting?: RVApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    spr_approver_proxy_setting?: SPRApproverSettingCreateNestedOneWithoutApprover_proxyInput
     user_employee?: UserEmployeeCreateNestedOneWithoutEmployeeInput
+    RVApproverSetting?: RVApproverSettingCreateNestedManyWithoutEmployeeInput
   }
 
   export type EmployeeUncheckedCreateWithoutSpr_approver_settingInput = {
@@ -21829,12 +23400,65 @@ export namespace Prisma {
     meqs_approver_setting?: MEQSApproverSettingUncheckedCreateNestedOneWithoutApproverInput
     po_approver_setting?: POApproverSettingUncheckedCreateNestedOneWithoutApproverInput
     rv_approver_setting?: RVApproverSettingUncheckedCreateNestedOneWithoutApproverInput
+    jo_approver_proxy_setting?: JOApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    meqs_approver_proxy_setting?: MEQSApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    po_approver_proxy_setting?: POApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    rv_approver_proxy_setting?: RVApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    spr_approver_proxy_setting?: SPRApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
     user_employee?: UserEmployeeUncheckedCreateNestedOneWithoutEmployeeInput
+    RVApproverSetting?: RVApproverSettingUncheckedCreateNestedManyWithoutEmployeeInput
   }
 
   export type EmployeeCreateOrConnectWithoutSpr_approver_settingInput = {
     where: EmployeeWhereUniqueInput
     create: XOR<EmployeeCreateWithoutSpr_approver_settingInput, EmployeeUncheckedCreateWithoutSpr_approver_settingInput>
+  }
+
+  export type EmployeeCreateWithoutSpr_approver_proxy_settingInput = {
+    id?: string
+    firstname: string
+    middlename?: string | null
+    lastname: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    jo_approver_setting?: JOApproverSettingCreateNestedOneWithoutApproverInput
+    meqs_approver_setting?: MEQSApproverSettingCreateNestedOneWithoutApproverInput
+    po_approver_setting?: POApproverSettingCreateNestedOneWithoutApproverInput
+    rv_approver_setting?: RVApproverSettingCreateNestedOneWithoutApproverInput
+    spr_approver_setting?: SPRApproverSettingCreateNestedOneWithoutApproverInput
+    jo_approver_proxy_setting?: JOApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    meqs_approver_proxy_setting?: MEQSApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    po_approver_proxy_setting?: POApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    rv_approver_proxy_setting?: RVApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    user_employee?: UserEmployeeCreateNestedOneWithoutEmployeeInput
+    RVApproverSetting?: RVApproverSettingCreateNestedManyWithoutEmployeeInput
+  }
+
+  export type EmployeeUncheckedCreateWithoutSpr_approver_proxy_settingInput = {
+    id?: string
+    firstname: string
+    middlename?: string | null
+    lastname: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    jo_approver_setting?: JOApproverSettingUncheckedCreateNestedOneWithoutApproverInput
+    meqs_approver_setting?: MEQSApproverSettingUncheckedCreateNestedOneWithoutApproverInput
+    po_approver_setting?: POApproverSettingUncheckedCreateNestedOneWithoutApproverInput
+    rv_approver_setting?: RVApproverSettingUncheckedCreateNestedOneWithoutApproverInput
+    spr_approver_setting?: SPRApproverSettingUncheckedCreateNestedOneWithoutApproverInput
+    jo_approver_proxy_setting?: JOApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    meqs_approver_proxy_setting?: MEQSApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    po_approver_proxy_setting?: POApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    rv_approver_proxy_setting?: RVApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    user_employee?: UserEmployeeUncheckedCreateNestedOneWithoutEmployeeInput
+    RVApproverSetting?: RVApproverSettingUncheckedCreateNestedManyWithoutEmployeeInput
+  }
+
+  export type EmployeeCreateOrConnectWithoutSpr_approver_proxy_settingInput = {
+    where: EmployeeWhereUniqueInput
+    create: XOR<EmployeeCreateWithoutSpr_approver_proxy_settingInput, EmployeeUncheckedCreateWithoutSpr_approver_proxy_settingInput>
   }
 
   export type EmployeeUpsertWithoutSpr_approver_settingInput = {
@@ -21860,7 +23484,13 @@ export namespace Prisma {
     meqs_approver_setting?: MEQSApproverSettingUpdateOneWithoutApproverNestedInput
     po_approver_setting?: POApproverSettingUpdateOneWithoutApproverNestedInput
     rv_approver_setting?: RVApproverSettingUpdateOneWithoutApproverNestedInput
+    jo_approver_proxy_setting?: JOApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    meqs_approver_proxy_setting?: MEQSApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    po_approver_proxy_setting?: POApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    rv_approver_proxy_setting?: RVApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    spr_approver_proxy_setting?: SPRApproverSettingUpdateOneWithoutApprover_proxyNestedInput
     user_employee?: UserEmployeeUpdateOneWithoutEmployeeNestedInput
+    RVApproverSetting?: RVApproverSettingUpdateManyWithoutEmployeeNestedInput
   }
 
   export type EmployeeUncheckedUpdateWithoutSpr_approver_settingInput = {
@@ -21875,7 +23505,66 @@ export namespace Prisma {
     meqs_approver_setting?: MEQSApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
     po_approver_setting?: POApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
     rv_approver_setting?: RVApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
+    jo_approver_proxy_setting?: JOApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    meqs_approver_proxy_setting?: MEQSApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    po_approver_proxy_setting?: POApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    rv_approver_proxy_setting?: RVApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    spr_approver_proxy_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
     user_employee?: UserEmployeeUncheckedUpdateOneWithoutEmployeeNestedInput
+    RVApproverSetting?: RVApproverSettingUncheckedUpdateManyWithoutEmployeeNestedInput
+  }
+
+  export type EmployeeUpsertWithoutSpr_approver_proxy_settingInput = {
+    update: XOR<EmployeeUpdateWithoutSpr_approver_proxy_settingInput, EmployeeUncheckedUpdateWithoutSpr_approver_proxy_settingInput>
+    create: XOR<EmployeeCreateWithoutSpr_approver_proxy_settingInput, EmployeeUncheckedCreateWithoutSpr_approver_proxy_settingInput>
+    where?: EmployeeWhereInput
+  }
+
+  export type EmployeeUpdateToOneWithWhereWithoutSpr_approver_proxy_settingInput = {
+    where?: EmployeeWhereInput
+    data: XOR<EmployeeUpdateWithoutSpr_approver_proxy_settingInput, EmployeeUncheckedUpdateWithoutSpr_approver_proxy_settingInput>
+  }
+
+  export type EmployeeUpdateWithoutSpr_approver_proxy_settingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstname?: StringFieldUpdateOperationsInput | string
+    middlename?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    jo_approver_setting?: JOApproverSettingUpdateOneWithoutApproverNestedInput
+    meqs_approver_setting?: MEQSApproverSettingUpdateOneWithoutApproverNestedInput
+    po_approver_setting?: POApproverSettingUpdateOneWithoutApproverNestedInput
+    rv_approver_setting?: RVApproverSettingUpdateOneWithoutApproverNestedInput
+    spr_approver_setting?: SPRApproverSettingUpdateOneWithoutApproverNestedInput
+    jo_approver_proxy_setting?: JOApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    meqs_approver_proxy_setting?: MEQSApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    po_approver_proxy_setting?: POApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    rv_approver_proxy_setting?: RVApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    user_employee?: UserEmployeeUpdateOneWithoutEmployeeNestedInput
+    RVApproverSetting?: RVApproverSettingUpdateManyWithoutEmployeeNestedInput
+  }
+
+  export type EmployeeUncheckedUpdateWithoutSpr_approver_proxy_settingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstname?: StringFieldUpdateOperationsInput | string
+    middlename?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    jo_approver_setting?: JOApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
+    meqs_approver_setting?: MEQSApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
+    po_approver_setting?: POApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
+    rv_approver_setting?: RVApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
+    spr_approver_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
+    jo_approver_proxy_setting?: JOApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    meqs_approver_proxy_setting?: MEQSApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    po_approver_proxy_setting?: POApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    rv_approver_proxy_setting?: RVApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    user_employee?: UserEmployeeUncheckedUpdateOneWithoutEmployeeNestedInput
+    RVApproverSetting?: RVApproverSettingUncheckedUpdateManyWithoutEmployeeNestedInput
   }
 
   export type EmployeeCreateWithoutMeqs_approver_settingInput = {
@@ -21890,7 +23579,13 @@ export namespace Prisma {
     po_approver_setting?: POApproverSettingCreateNestedOneWithoutApproverInput
     rv_approver_setting?: RVApproverSettingCreateNestedOneWithoutApproverInput
     spr_approver_setting?: SPRApproverSettingCreateNestedOneWithoutApproverInput
+    jo_approver_proxy_setting?: JOApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    meqs_approver_proxy_setting?: MEQSApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    po_approver_proxy_setting?: POApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    rv_approver_proxy_setting?: RVApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    spr_approver_proxy_setting?: SPRApproverSettingCreateNestedOneWithoutApprover_proxyInput
     user_employee?: UserEmployeeCreateNestedOneWithoutEmployeeInput
+    RVApproverSetting?: RVApproverSettingCreateNestedManyWithoutEmployeeInput
   }
 
   export type EmployeeUncheckedCreateWithoutMeqs_approver_settingInput = {
@@ -21905,12 +23600,65 @@ export namespace Prisma {
     po_approver_setting?: POApproverSettingUncheckedCreateNestedOneWithoutApproverInput
     rv_approver_setting?: RVApproverSettingUncheckedCreateNestedOneWithoutApproverInput
     spr_approver_setting?: SPRApproverSettingUncheckedCreateNestedOneWithoutApproverInput
+    jo_approver_proxy_setting?: JOApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    meqs_approver_proxy_setting?: MEQSApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    po_approver_proxy_setting?: POApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    rv_approver_proxy_setting?: RVApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    spr_approver_proxy_setting?: SPRApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
     user_employee?: UserEmployeeUncheckedCreateNestedOneWithoutEmployeeInput
+    RVApproverSetting?: RVApproverSettingUncheckedCreateNestedManyWithoutEmployeeInput
   }
 
   export type EmployeeCreateOrConnectWithoutMeqs_approver_settingInput = {
     where: EmployeeWhereUniqueInput
     create: XOR<EmployeeCreateWithoutMeqs_approver_settingInput, EmployeeUncheckedCreateWithoutMeqs_approver_settingInput>
+  }
+
+  export type EmployeeCreateWithoutMeqs_approver_proxy_settingInput = {
+    id?: string
+    firstname: string
+    middlename?: string | null
+    lastname: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    jo_approver_setting?: JOApproverSettingCreateNestedOneWithoutApproverInput
+    meqs_approver_setting?: MEQSApproverSettingCreateNestedOneWithoutApproverInput
+    po_approver_setting?: POApproverSettingCreateNestedOneWithoutApproverInput
+    rv_approver_setting?: RVApproverSettingCreateNestedOneWithoutApproverInput
+    spr_approver_setting?: SPRApproverSettingCreateNestedOneWithoutApproverInput
+    jo_approver_proxy_setting?: JOApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    po_approver_proxy_setting?: POApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    rv_approver_proxy_setting?: RVApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    spr_approver_proxy_setting?: SPRApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    user_employee?: UserEmployeeCreateNestedOneWithoutEmployeeInput
+    RVApproverSetting?: RVApproverSettingCreateNestedManyWithoutEmployeeInput
+  }
+
+  export type EmployeeUncheckedCreateWithoutMeqs_approver_proxy_settingInput = {
+    id?: string
+    firstname: string
+    middlename?: string | null
+    lastname: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    jo_approver_setting?: JOApproverSettingUncheckedCreateNestedOneWithoutApproverInput
+    meqs_approver_setting?: MEQSApproverSettingUncheckedCreateNestedOneWithoutApproverInput
+    po_approver_setting?: POApproverSettingUncheckedCreateNestedOneWithoutApproverInput
+    rv_approver_setting?: RVApproverSettingUncheckedCreateNestedOneWithoutApproverInput
+    spr_approver_setting?: SPRApproverSettingUncheckedCreateNestedOneWithoutApproverInput
+    jo_approver_proxy_setting?: JOApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    po_approver_proxy_setting?: POApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    rv_approver_proxy_setting?: RVApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    spr_approver_proxy_setting?: SPRApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    user_employee?: UserEmployeeUncheckedCreateNestedOneWithoutEmployeeInput
+    RVApproverSetting?: RVApproverSettingUncheckedCreateNestedManyWithoutEmployeeInput
+  }
+
+  export type EmployeeCreateOrConnectWithoutMeqs_approver_proxy_settingInput = {
+    where: EmployeeWhereUniqueInput
+    create: XOR<EmployeeCreateWithoutMeqs_approver_proxy_settingInput, EmployeeUncheckedCreateWithoutMeqs_approver_proxy_settingInput>
   }
 
   export type EmployeeUpsertWithoutMeqs_approver_settingInput = {
@@ -21936,7 +23684,13 @@ export namespace Prisma {
     po_approver_setting?: POApproverSettingUpdateOneWithoutApproverNestedInput
     rv_approver_setting?: RVApproverSettingUpdateOneWithoutApproverNestedInput
     spr_approver_setting?: SPRApproverSettingUpdateOneWithoutApproverNestedInput
+    jo_approver_proxy_setting?: JOApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    meqs_approver_proxy_setting?: MEQSApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    po_approver_proxy_setting?: POApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    rv_approver_proxy_setting?: RVApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    spr_approver_proxy_setting?: SPRApproverSettingUpdateOneWithoutApprover_proxyNestedInput
     user_employee?: UserEmployeeUpdateOneWithoutEmployeeNestedInput
+    RVApproverSetting?: RVApproverSettingUpdateManyWithoutEmployeeNestedInput
   }
 
   export type EmployeeUncheckedUpdateWithoutMeqs_approver_settingInput = {
@@ -21951,7 +23705,66 @@ export namespace Prisma {
     po_approver_setting?: POApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
     rv_approver_setting?: RVApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
     spr_approver_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
+    jo_approver_proxy_setting?: JOApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    meqs_approver_proxy_setting?: MEQSApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    po_approver_proxy_setting?: POApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    rv_approver_proxy_setting?: RVApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    spr_approver_proxy_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
     user_employee?: UserEmployeeUncheckedUpdateOneWithoutEmployeeNestedInput
+    RVApproverSetting?: RVApproverSettingUncheckedUpdateManyWithoutEmployeeNestedInput
+  }
+
+  export type EmployeeUpsertWithoutMeqs_approver_proxy_settingInput = {
+    update: XOR<EmployeeUpdateWithoutMeqs_approver_proxy_settingInput, EmployeeUncheckedUpdateWithoutMeqs_approver_proxy_settingInput>
+    create: XOR<EmployeeCreateWithoutMeqs_approver_proxy_settingInput, EmployeeUncheckedCreateWithoutMeqs_approver_proxy_settingInput>
+    where?: EmployeeWhereInput
+  }
+
+  export type EmployeeUpdateToOneWithWhereWithoutMeqs_approver_proxy_settingInput = {
+    where?: EmployeeWhereInput
+    data: XOR<EmployeeUpdateWithoutMeqs_approver_proxy_settingInput, EmployeeUncheckedUpdateWithoutMeqs_approver_proxy_settingInput>
+  }
+
+  export type EmployeeUpdateWithoutMeqs_approver_proxy_settingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstname?: StringFieldUpdateOperationsInput | string
+    middlename?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    jo_approver_setting?: JOApproverSettingUpdateOneWithoutApproverNestedInput
+    meqs_approver_setting?: MEQSApproverSettingUpdateOneWithoutApproverNestedInput
+    po_approver_setting?: POApproverSettingUpdateOneWithoutApproverNestedInput
+    rv_approver_setting?: RVApproverSettingUpdateOneWithoutApproverNestedInput
+    spr_approver_setting?: SPRApproverSettingUpdateOneWithoutApproverNestedInput
+    jo_approver_proxy_setting?: JOApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    po_approver_proxy_setting?: POApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    rv_approver_proxy_setting?: RVApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    spr_approver_proxy_setting?: SPRApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    user_employee?: UserEmployeeUpdateOneWithoutEmployeeNestedInput
+    RVApproverSetting?: RVApproverSettingUpdateManyWithoutEmployeeNestedInput
+  }
+
+  export type EmployeeUncheckedUpdateWithoutMeqs_approver_proxy_settingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstname?: StringFieldUpdateOperationsInput | string
+    middlename?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    jo_approver_setting?: JOApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
+    meqs_approver_setting?: MEQSApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
+    po_approver_setting?: POApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
+    rv_approver_setting?: RVApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
+    spr_approver_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
+    jo_approver_proxy_setting?: JOApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    po_approver_proxy_setting?: POApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    rv_approver_proxy_setting?: RVApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    spr_approver_proxy_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    user_employee?: UserEmployeeUncheckedUpdateOneWithoutEmployeeNestedInput
+    RVApproverSetting?: RVApproverSettingUncheckedUpdateManyWithoutEmployeeNestedInput
   }
 
   export type EmployeeCreateWithoutPo_approver_settingInput = {
@@ -21966,7 +23779,13 @@ export namespace Prisma {
     meqs_approver_setting?: MEQSApproverSettingCreateNestedOneWithoutApproverInput
     rv_approver_setting?: RVApproverSettingCreateNestedOneWithoutApproverInput
     spr_approver_setting?: SPRApproverSettingCreateNestedOneWithoutApproverInput
+    jo_approver_proxy_setting?: JOApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    meqs_approver_proxy_setting?: MEQSApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    po_approver_proxy_setting?: POApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    rv_approver_proxy_setting?: RVApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    spr_approver_proxy_setting?: SPRApproverSettingCreateNestedOneWithoutApprover_proxyInput
     user_employee?: UserEmployeeCreateNestedOneWithoutEmployeeInput
+    RVApproverSetting?: RVApproverSettingCreateNestedManyWithoutEmployeeInput
   }
 
   export type EmployeeUncheckedCreateWithoutPo_approver_settingInput = {
@@ -21981,12 +23800,65 @@ export namespace Prisma {
     meqs_approver_setting?: MEQSApproverSettingUncheckedCreateNestedOneWithoutApproverInput
     rv_approver_setting?: RVApproverSettingUncheckedCreateNestedOneWithoutApproverInput
     spr_approver_setting?: SPRApproverSettingUncheckedCreateNestedOneWithoutApproverInput
+    jo_approver_proxy_setting?: JOApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    meqs_approver_proxy_setting?: MEQSApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    po_approver_proxy_setting?: POApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    rv_approver_proxy_setting?: RVApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    spr_approver_proxy_setting?: SPRApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
     user_employee?: UserEmployeeUncheckedCreateNestedOneWithoutEmployeeInput
+    RVApproverSetting?: RVApproverSettingUncheckedCreateNestedManyWithoutEmployeeInput
   }
 
   export type EmployeeCreateOrConnectWithoutPo_approver_settingInput = {
     where: EmployeeWhereUniqueInput
     create: XOR<EmployeeCreateWithoutPo_approver_settingInput, EmployeeUncheckedCreateWithoutPo_approver_settingInput>
+  }
+
+  export type EmployeeCreateWithoutPo_approver_proxy_settingInput = {
+    id?: string
+    firstname: string
+    middlename?: string | null
+    lastname: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    jo_approver_setting?: JOApproverSettingCreateNestedOneWithoutApproverInput
+    meqs_approver_setting?: MEQSApproverSettingCreateNestedOneWithoutApproverInput
+    po_approver_setting?: POApproverSettingCreateNestedOneWithoutApproverInput
+    rv_approver_setting?: RVApproverSettingCreateNestedOneWithoutApproverInput
+    spr_approver_setting?: SPRApproverSettingCreateNestedOneWithoutApproverInput
+    jo_approver_proxy_setting?: JOApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    meqs_approver_proxy_setting?: MEQSApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    rv_approver_proxy_setting?: RVApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    spr_approver_proxy_setting?: SPRApproverSettingCreateNestedOneWithoutApprover_proxyInput
+    user_employee?: UserEmployeeCreateNestedOneWithoutEmployeeInput
+    RVApproverSetting?: RVApproverSettingCreateNestedManyWithoutEmployeeInput
+  }
+
+  export type EmployeeUncheckedCreateWithoutPo_approver_proxy_settingInput = {
+    id?: string
+    firstname: string
+    middlename?: string | null
+    lastname: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    jo_approver_setting?: JOApproverSettingUncheckedCreateNestedOneWithoutApproverInput
+    meqs_approver_setting?: MEQSApproverSettingUncheckedCreateNestedOneWithoutApproverInput
+    po_approver_setting?: POApproverSettingUncheckedCreateNestedOneWithoutApproverInput
+    rv_approver_setting?: RVApproverSettingUncheckedCreateNestedOneWithoutApproverInput
+    spr_approver_setting?: SPRApproverSettingUncheckedCreateNestedOneWithoutApproverInput
+    jo_approver_proxy_setting?: JOApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    meqs_approver_proxy_setting?: MEQSApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    rv_approver_proxy_setting?: RVApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    spr_approver_proxy_setting?: SPRApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
+    user_employee?: UserEmployeeUncheckedCreateNestedOneWithoutEmployeeInput
+    RVApproverSetting?: RVApproverSettingUncheckedCreateNestedManyWithoutEmployeeInput
+  }
+
+  export type EmployeeCreateOrConnectWithoutPo_approver_proxy_settingInput = {
+    where: EmployeeWhereUniqueInput
+    create: XOR<EmployeeCreateWithoutPo_approver_proxy_settingInput, EmployeeUncheckedCreateWithoutPo_approver_proxy_settingInput>
   }
 
   export type EmployeeUpsertWithoutPo_approver_settingInput = {
@@ -22012,7 +23884,13 @@ export namespace Prisma {
     meqs_approver_setting?: MEQSApproverSettingUpdateOneWithoutApproverNestedInput
     rv_approver_setting?: RVApproverSettingUpdateOneWithoutApproverNestedInput
     spr_approver_setting?: SPRApproverSettingUpdateOneWithoutApproverNestedInput
+    jo_approver_proxy_setting?: JOApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    meqs_approver_proxy_setting?: MEQSApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    po_approver_proxy_setting?: POApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    rv_approver_proxy_setting?: RVApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    spr_approver_proxy_setting?: SPRApproverSettingUpdateOneWithoutApprover_proxyNestedInput
     user_employee?: UserEmployeeUpdateOneWithoutEmployeeNestedInput
+    RVApproverSetting?: RVApproverSettingUpdateManyWithoutEmployeeNestedInput
   }
 
   export type EmployeeUncheckedUpdateWithoutPo_approver_settingInput = {
@@ -22027,7 +23905,66 @@ export namespace Prisma {
     meqs_approver_setting?: MEQSApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
     rv_approver_setting?: RVApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
     spr_approver_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
+    jo_approver_proxy_setting?: JOApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    meqs_approver_proxy_setting?: MEQSApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    po_approver_proxy_setting?: POApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    rv_approver_proxy_setting?: RVApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    spr_approver_proxy_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
     user_employee?: UserEmployeeUncheckedUpdateOneWithoutEmployeeNestedInput
+    RVApproverSetting?: RVApproverSettingUncheckedUpdateManyWithoutEmployeeNestedInput
+  }
+
+  export type EmployeeUpsertWithoutPo_approver_proxy_settingInput = {
+    update: XOR<EmployeeUpdateWithoutPo_approver_proxy_settingInput, EmployeeUncheckedUpdateWithoutPo_approver_proxy_settingInput>
+    create: XOR<EmployeeCreateWithoutPo_approver_proxy_settingInput, EmployeeUncheckedCreateWithoutPo_approver_proxy_settingInput>
+    where?: EmployeeWhereInput
+  }
+
+  export type EmployeeUpdateToOneWithWhereWithoutPo_approver_proxy_settingInput = {
+    where?: EmployeeWhereInput
+    data: XOR<EmployeeUpdateWithoutPo_approver_proxy_settingInput, EmployeeUncheckedUpdateWithoutPo_approver_proxy_settingInput>
+  }
+
+  export type EmployeeUpdateWithoutPo_approver_proxy_settingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstname?: StringFieldUpdateOperationsInput | string
+    middlename?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    jo_approver_setting?: JOApproverSettingUpdateOneWithoutApproverNestedInput
+    meqs_approver_setting?: MEQSApproverSettingUpdateOneWithoutApproverNestedInput
+    po_approver_setting?: POApproverSettingUpdateOneWithoutApproverNestedInput
+    rv_approver_setting?: RVApproverSettingUpdateOneWithoutApproverNestedInput
+    spr_approver_setting?: SPRApproverSettingUpdateOneWithoutApproverNestedInput
+    jo_approver_proxy_setting?: JOApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    meqs_approver_proxy_setting?: MEQSApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    rv_approver_proxy_setting?: RVApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    spr_approver_proxy_setting?: SPRApproverSettingUpdateOneWithoutApprover_proxyNestedInput
+    user_employee?: UserEmployeeUpdateOneWithoutEmployeeNestedInput
+    RVApproverSetting?: RVApproverSettingUpdateManyWithoutEmployeeNestedInput
+  }
+
+  export type EmployeeUncheckedUpdateWithoutPo_approver_proxy_settingInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstname?: StringFieldUpdateOperationsInput | string
+    middlename?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    jo_approver_setting?: JOApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
+    meqs_approver_setting?: MEQSApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
+    po_approver_setting?: POApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
+    rv_approver_setting?: RVApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
+    spr_approver_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
+    jo_approver_proxy_setting?: JOApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    meqs_approver_proxy_setting?: MEQSApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    rv_approver_proxy_setting?: RVApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    spr_approver_proxy_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
+    user_employee?: UserEmployeeUncheckedUpdateOneWithoutEmployeeNestedInput
+    RVApproverSetting?: RVApproverSettingUncheckedUpdateManyWithoutEmployeeNestedInput
   }
 
   export type DivisionCreateManyDepartmentInput = {
@@ -22065,6 +24002,50 @@ export namespace Prisma {
     code?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     status?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type RVApproverSettingCreateManyEmployeeInput = {
+    id?: string
+    approver_id: string
+    approver_proxy_id?: string | null
+    label: string
+    order: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
+  export type RVApproverSettingUpdateWithoutEmployeeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    approver?: EmployeeUpdateOneRequiredWithoutRv_approver_settingNestedInput
+    approver_proxy?: EmployeeUpdateOneWithoutRv_approver_proxy_settingNestedInput
+  }
+
+  export type RVApproverSettingUncheckedUpdateWithoutEmployeeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    approver_id?: StringFieldUpdateOperationsInput | string
+    approver_proxy_id?: NullableStringFieldUpdateOperationsInput | string | null
+    label?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type RVApproverSettingUncheckedUpdateManyWithoutEmployeeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    approver_id?: StringFieldUpdateOperationsInput | string
+    approver_proxy_id?: NullableStringFieldUpdateOperationsInput | string | null
+    label?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -22211,6 +24192,10 @@ export namespace Prisma {
      * @deprecated Use DepartmentCountOutputTypeDefaultArgs instead
      */
     export type DepartmentCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = DepartmentCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use EmployeeCountOutputTypeDefaultArgs instead
+     */
+    export type EmployeeCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = EmployeeCountOutputTypeDefaultArgs<ExtArgs>
     /**
      * @deprecated Use UserCountOutputTypeDefaultArgs instead
      */

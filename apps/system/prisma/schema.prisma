@@ -52,10 +52,17 @@ model Employee {
   rv_approver_setting   RVApproverSetting?   @relation("RVApproverSetting")
   spr_approver_setting  SPRApproverSetting?  @relation("SPRApproverSetting")
 
-  created_at    DateTime      @default(now())
-  updated_at    DateTime      @updatedAt
-  is_deleted    Boolean       @default(false)
-  user_employee UserEmployee?
+  jo_approver_proxy_setting   JOApproverSetting?   @relation("JOApproverProxySetting")
+  meqs_approver_proxy_setting MEQSApproverSetting? @relation("MEQSApproverProxySetting")
+  po_approver_proxy_setting   POApproverSetting?   @relation("POApproverProxySetting")
+  rv_approver_proxy_setting   RVApproverSetting?   @relation("RVApproverProxySetting")
+  spr_approver_proxy_setting  SPRApproverSetting?  @relation("SPRApproverProxySetting")
+
+  created_at        DateTime            @default(now())
+  updated_at        DateTime            @updatedAt
+  is_deleted        Boolean             @default(false)
+  user_employee     UserEmployee?
+  RVApproverSetting RVApproverSetting[]
 
   @@map("employee")
 }
@@ -164,66 +171,79 @@ model Module {
 }
 
 model JOApproverSetting {
-  id          String   @id @default(uuid())
-  label       String
-  order       Int      @unique
-  approver_id String   @unique
-  created_at  DateTime @default(now())
-  updated_at  DateTime @updatedAt
-  is_deleted  Boolean  @default(false)
-  approver    Employee @relation("JOApproverSetting", fields: [approver_id], references: [id], onDelete: Restrict)
+  id                String   @id @default(uuid())
+  label             String
+  order             Int      @unique
+  approver_id       String   @unique
+  approver_proxy_id String?  @unique
+  created_at        DateTime @default(now())
+  updated_at        DateTime @updatedAt
+  is_deleted        Boolean  @default(false)
+
+  approver       Employee  @relation("JOApproverSetting", fields: [approver_id], references: [id], onDelete: Restrict)
+  approver_proxy Employee? @relation("JOApproverProxySetting", fields: [approver_proxy_id], references: [id], onDelete: Restrict)
 
   @@map("jo_approver_setting")
 }
 
 model RVApproverSetting {
-  id          String   @id @default(uuid())
-  approver_id String   @unique
-  label       String
-  order       Int      @unique
-  created_at  DateTime @default(now())
-  updated_at  DateTime @updatedAt
-  is_deleted  Boolean  @default(false)
-  approver    Employee @relation("RVApproverSetting", fields: [approver_id], references: [id], onDelete: Restrict)
+  id                String    @id @default(uuid())
+  approver_id       String    @unique
+  approver_proxy_id String?   @unique
+  label             String
+  order             Int       @unique
+  created_at        DateTime  @default(now())
+  updated_at        DateTime  @updatedAt
+  is_deleted        Boolean   @default(false)
+  approver          Employee  @relation("RVApproverSetting", fields: [approver_id], references: [id], onDelete: Restrict)
+  approver_proxy    Employee? @relation("RVApproverProxySetting", fields: [approver_proxy_id], references: [id], onDelete: Restrict)
+  Employee          Employee? @relation(fields: [employeeId], references: [id])
+  employeeId        String?
 
   @@map("rv_approver_setting")
 }
 
 model SPRApproverSetting {
-  id          String   @id @default(uuid())
-  approver_id String   @unique
-  label       String
-  order       Int      @unique
-  created_at  DateTime @default(now())
-  updated_at  DateTime @updatedAt
-  is_deleted  Boolean  @default(false)
-  approver    Employee @relation("SPRApproverSetting", fields: [approver_id], references: [id], onDelete: Restrict)
+  id                String    @id @default(uuid())
+  approver_id       String    @unique
+  approver_proxy_id String?   @unique
+  label             String
+  order             Int       @unique
+  created_at        DateTime  @default(now())
+  updated_at        DateTime  @updatedAt
+  is_deleted        Boolean   @default(false)
+  approver          Employee  @relation("SPRApproverSetting", fields: [approver_id], references: [id], onDelete: Restrict)
+  approver_proxy    Employee? @relation("SPRApproverProxySetting", fields: [approver_proxy_id], references: [id], onDelete: Restrict)
 
   @@map("spr_approver_setting")
 }
 
 model MEQSApproverSetting {
-  id          String   @id @default(uuid())
-  approver_id String   @unique
-  label       String
-  order       Int      @unique
-  created_at  DateTime @default(now())
-  updated_at  DateTime @updatedAt
-  is_deleted  Boolean  @default(false)
-  approver    Employee @relation("MEQSApproverSetting", fields: [approver_id], references: [id], onDelete: Restrict)
+  id                String    @id @default(uuid())
+  approver_id       String    @unique
+  approver_proxy_id String?   @unique
+  label             String
+  order             Int       @unique
+  created_at        DateTime  @default(now())
+  updated_at        DateTime  @updatedAt
+  is_deleted        Boolean   @default(false)
+  approver          Employee  @relation("MEQSApproverSetting", fields: [approver_id], references: [id], onDelete: Restrict)
+  approver_proxy    Employee? @relation("MEQSApproverProxySetting", fields: [approver_proxy_id], references: [id], onDelete: Restrict)
 
   @@map("meqs_approver_setting")
 }
 
 model POApproverSetting {
-  id          String   @id @default(uuid())
-  approver_id String   @unique
-  label       String
-  order       Int      @unique
-  created_at  DateTime @default(now())
-  updated_at  DateTime @updatedAt
-  is_deleted  Boolean  @default(false)
-  approver    Employee @relation("POApproverSetting", fields: [approver_id], references: [id], onDelete: Restrict)
+  id                String    @id @default(uuid())
+  approver_id       String    @unique
+  approver_proxy_id String?   @unique
+  label             String
+  order             Int       @unique
+  created_at        DateTime  @default(now())
+  updated_at        DateTime  @updatedAt
+  is_deleted        Boolean   @default(false)
+  approver          Employee  @relation("POApproverSetting", fields: [approver_id], references: [id], onDelete: Restrict)
+  approver_proxy    Employee? @relation("POApproverProxySetting", fields: [approver_proxy_id], references: [id], onDelete: Restrict)
 
   @@map("po_approver_setting")
 }

@@ -1,7 +1,7 @@
 import { InputType, Field } from '@nestjs/graphql';
 import { Transform, Type } from 'class-transformer';
 import { IsArray, IsDate, IsNotEmpty, IsOptional, IsString, ValidateNested } from 'class-validator';
-import { CreateRvApproverInput } from './create-rv-approver.input';
+import { CreateRvApproverInput } from '../../rv-approver/dto/create-rv-approver.input';
 
 @InputType()
 export class CreateRvInput {

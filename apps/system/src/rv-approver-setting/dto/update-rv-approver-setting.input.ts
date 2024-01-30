@@ -10,6 +10,11 @@ export class UpdateRvApproverSettingInput extends PartialType(CreateRvApproverSe
   @IsString()
   approver_id?: string;
 
+  @Field(() => String, { nullable: true })
+  @IsOptional()
+  @IsString()
+  approver_proxy_id?: string | null
+
   @Field(() => String, {nullable: true})
   @IsOptional()
   @IsString()

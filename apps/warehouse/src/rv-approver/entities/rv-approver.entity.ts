@@ -1,5 +1,5 @@
 import { Field, Int, ObjectType } from "@nestjs/graphql";
-import { RV } from "./rv.entity";
+import { RV } from "../../rv/entities/rv.entity";
 // import { Employee } from "apps/system/src/employee/entities/employee.entity";
 
 
@@ -12,15 +12,9 @@ export class RVApprover {
     @Field(() => String)
     approver_id: string
 
-    // @Field(() => Employee)
-    // approver: Employee
+    @Field(() => String, { nullable: true })
+    approver_proxy_id: string | null
 
-    @Field(() => String)
-    rv_id: string
-
-    @Field(() => RV)
-    rv: RV
-    
     @Field(() => String, {nullable: true})
     date_approval: string | null
     
@@ -36,9 +30,15 @@ export class RVApprover {
     @Field(() => Int)
     order: number
 
-    @Field(() => Date)
-    created_at: Date;
-  
-    @Field(() => Date)
-    updated_at: Date;
+    // @Field(() => Employee)
+    // approver: Employee
+
+    @Field(() => String)
+    rv_id: string
+
+    @Field(() => RV)
+    rv: RV
+    
+
+    
 }

@@ -8,6 +8,7 @@ import { AuthUser } from '../__common__/auth-user.entity';
 import { UpdateRvInput } from './dto/update-rv.input';
 import { catchError, firstValueFrom } from 'rxjs';
 import { HttpService } from '@nestjs/axios';
+import { WarehouseRemoveResponse } from '../__common__/classes';
 
 @Injectable()
 export class RvService {
@@ -119,6 +120,9 @@ export class RvService {
                 rv_approvers: {
                     orderBy: {
                         order: 'asc'
+                    },
+                    where: {
+                        is_deleted: false
                     }
                 }
             },
@@ -138,6 +142,9 @@ export class RvService {
                 rv_approvers: {
                     orderBy: {
                         order: 'asc'
+                    },
+                    where: {
+                        is_deleted: false
                     }
                 },
                 canvass: {
@@ -158,6 +165,22 @@ export class RvService {
                 rv_number: 'desc'
             }
 		} )
+	}
+
+    async remove(id: string): Promise<WarehouseRemoveResponse> {
+
+		const existingItem = await this.findOne(id)
+
+		await this.prisma.rV.update( {
+			where: { id },
+			data: { is_deleted: true }
+		} )
+
+		return {
+			success: true,
+			msg: "RV successfully deleted"
+		}
+
 	}
 
     private async getLatestRcNumber(): Promise<string> {

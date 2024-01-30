@@ -16,6 +16,7 @@ export class RvApproverSettingService {
 
 		const data: Prisma.RVApproverSettingCreateInput = {
 			approver: { connect: { id: input.approver_id } },
+			approver_proxy: input.approver_proxy_id ? { connect: { id: input.approver_id } } : null,
 			label: input.label,
 			order: input.order
 		}
@@ -60,8 +61,19 @@ export class RvApproverSettingService {
 
 		const existingItem = await this.findOne(id)
 
+		let approver_proxy = undefined
+
+        if(input.approver_proxy_id){
+            approver_proxy = {
+                connect: { id: input.approver_proxy_id }
+            }
+        }else{
+            approver_proxy = existingItem.approver_proxy_id ? { connect: { id: existingItem.approver_proxy_id } } : undefined
+        }
+
 		const data: Prisma.RVApproverSettingUpdateInput = {
 			approver: input.approver_id ? { connect: { id: input.approver_id } } : { connect: { id: existingItem.approver_id } },
+			approver_proxy,
 			label: input.label ?? existingItem.label,
 			order: input.order ?? existingItem.order
 		}

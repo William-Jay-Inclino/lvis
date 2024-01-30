@@ -206,6 +206,7 @@ exports.Prisma.JOApproverSettingScalarFieldEnum = {
   label: 'label',
   order: 'order',
   approver_id: 'approver_id',
+  approver_proxy_id: 'approver_proxy_id',
   created_at: 'created_at',
   updated_at: 'updated_at',
   is_deleted: 'is_deleted'
@@ -214,16 +215,19 @@ exports.Prisma.JOApproverSettingScalarFieldEnum = {
 exports.Prisma.RVApproverSettingScalarFieldEnum = {
   id: 'id',
   approver_id: 'approver_id',
+  approver_proxy_id: 'approver_proxy_id',
   label: 'label',
   order: 'order',
   created_at: 'created_at',
   updated_at: 'updated_at',
-  is_deleted: 'is_deleted'
+  is_deleted: 'is_deleted',
+  employeeId: 'employeeId'
 };
 
 exports.Prisma.SPRApproverSettingScalarFieldEnum = {
   id: 'id',
   approver_id: 'approver_id',
+  approver_proxy_id: 'approver_proxy_id',
   label: 'label',
   order: 'order',
   created_at: 'created_at',
@@ -234,6 +238,7 @@ exports.Prisma.SPRApproverSettingScalarFieldEnum = {
 exports.Prisma.MEQSApproverSettingScalarFieldEnum = {
   id: 'id',
   approver_id: 'approver_id',
+  approver_proxy_id: 'approver_proxy_id',
   label: 'label',
   order: 'order',
   created_at: 'created_at',
@@ -244,6 +249,7 @@ exports.Prisma.MEQSApproverSettingScalarFieldEnum = {
 exports.Prisma.POApproverSettingScalarFieldEnum = {
   id: 'id',
   approver_id: 'approver_id',
+  approver_proxy_id: 'approver_proxy_id',
   label: 'label',
   order: 'order',
   created_at: 'created_at',
