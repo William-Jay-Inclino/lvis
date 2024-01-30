@@ -205,7 +205,8 @@ export class RvService {
     async forEmployeeSupervisor(employeeId: string): Promise<RV[]> {
         return await this.prisma.rV.findMany({
             where: {
-                supervisor_id: employeeId
+                supervisor_id: employeeId,
+                is_deleted: false
             }
         })
     }
@@ -213,7 +214,8 @@ export class RvService {
     async forEmployeeCanceller(employeeId: string): Promise<RV[]> {
         return await this.prisma.rV.findMany({
             where: {
-                canceller_id: employeeId
+                canceller_id: employeeId,
+                is_deleted: false
             }
         })
     }
@@ -221,7 +223,8 @@ export class RvService {
     async forClassification(classificationId: string): Promise<RV[]> {
         return await this.prisma.rV.findMany({
             where: {
-                classification_id: classificationId
+                classification_id: classificationId,
+                is_deleted: false
             }
         })
     }

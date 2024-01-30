@@ -9,13 +9,4 @@ export class Employee {
   @Field(() => ID)
   id: string;
 
-  @Field(() => [Canvass])
-  canvasses?: Canvass[]
-
-  @Field(() => [RV])
-  rvs_supervisor?: RV[]
-
-  @Field(() => [RV])
-  rvs_canceller?: RV[]
-
 }

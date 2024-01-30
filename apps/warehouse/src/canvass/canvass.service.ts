@@ -160,7 +160,8 @@ export class CanvassService {
     async forEmployee(employeeId: string): Promise<Canvass[]> {
         return await this.prisma.canvass.findMany({
             where: {
-                requested_by_id: employeeId
+                requested_by_id: employeeId,
+                is_deleted: false
             }
         })
     }

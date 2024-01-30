@@ -1,4 +1,4 @@
-import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, ResolveField, Parent } from '@nestjs/graphql';
 import { RvApproverService } from './rv-approver.service';
 import { RVApprover } from './entities/rv-approver.entity';
 import { CreateRvApproverInput } from './dto/create-rv-approver.input';
@@ -8,6 +8,7 @@ import { GqlAuthGuard } from '../auth/guards/gql-auth.guard';
 import { UseGuards } from '@nestjs/common';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { CurrentAuthUser } from '../auth/current-auth-user.decorator';
+import { Employee } from '../employee/entities/employee.entity';
 
 @UseGuards(GqlAuthGuard)
 @Resolver(() => RVApprover)
@@ -45,4 +46,19 @@ export class RvApproverResolver {
   removeRvApprover(@Args('id') id: string) {
     return this.rvApproverService.remove(id);
   }
+
+  @ResolveField( () => Employee)
+  approver(@Parent() rvApprover: RVApprover): any {
+    return { __typename: 'Employee', id: rvApprover.approver_id }
+  }
+
+  @ResolveField( () => Employee, { nullable: true })
+  approver_proxy(@Parent() rvApprover: RVApprover): any {
+
+    if(!rvApprover.approver_proxy_id){
+      return null
+    }
+    return { __typename: 'Employee', id: rvApprover.approver_proxy_id }
+  }
+
 }

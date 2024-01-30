@@ -215,5 +215,13 @@ export class RvApproverService {
 
     }
 
+    async forEmployee(employeeId: string): Promise<RVApprover[]> {
+        return await this.prisma.rVApprover.findMany({
+            where: {
+                approver_id: employeeId,
+                is_deleted: false
+            }
+        })
+    }
 
 }
