@@ -1,6 +1,7 @@
 import { ObjectType, Field, ID } from '@nestjs/graphql';
-import { MEQS } from '../../meqs/entities/meq.entity';
 import { Supplier } from '../../supplier/entities/supplier.entity';
+import { MeqsSupplierItem } from '../../meqs-supplier-item/entities/meqs-supplier-item.entity';
+import { MeqsSupplierAttachment } from '../../meqs-supplier-attachment/entities/meqs-supplier-attachment.entity';
 
 @ObjectType()
 export class MeqsSupplier {
@@ -25,5 +26,11 @@ export class MeqsSupplier {
 
   @Field(() => Boolean)
   is_referenced: boolean;
+
+  @Field(() => [MeqsSupplierItem])
+  meqs_supplier_items: MeqsSupplierItem[];
+
+  @Field(() => [MeqsSupplierAttachment])
+  attachments: MeqsSupplierAttachment[];
 
 }
