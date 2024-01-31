@@ -255,15 +255,17 @@ model MEQSSupplier {
 }
 
 model MEQSSupplierItem {
-  id               String   @id @default(uuid())
+  id               String  @id @default(uuid())
   canvass_item_id  String
   meqs_supplier_id String
   price            Float
-  is_awarded       Boolean  @default(false)
+  is_awarded       Boolean @default(false)
   notes            String?
-  created_at       DateTime @default(now())
-  updated_at       DateTime @updatedAt
-  is_deleted       Boolean  @default(false)
+  vat_type         Int     @default(1)
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  is_deleted Boolean  @default(false)
 
   canvass_item  CanvassItem @relation(fields: [canvass_item_id], references: [id], onDelete: Cascade)
   meqs_supplier Supplier    @relation(fields: [meqs_supplier_id], references: [id], onDelete: Cascade)
@@ -278,7 +280,7 @@ model MEQSSupplierAttachment {
   created_at       DateTime     @default(now())
   updated_at       DateTime     @updatedAt
   is_deleted       Boolean      @default(false)
-  meqs_supplier    MEQSSupplier @relation(fields: [meqs_supplier_id], references: [id])
+  meqs_supplier    MEQSSupplier @relation(fields: [meqs_supplier_id], references: [id], onDelete: Cascade)
 
   @@map("meqs_supplier_attachment")
 }

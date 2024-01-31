@@ -54,23 +54,23 @@ export class MeqsApproverService {
         this.logger.log('Successfully created mEQSApprover')
 
         return await this.findOne(created.id)
-        }
+    }
 
     async findAll(): Promise<MEQSApprover[]> {
         return await this.prisma.mEQSApprover.findMany({
-        include: {
-            meqs: {
-              include: {
-                  rv: true,
-                  spr: true,
-                  jo: true
-              }
+            include: {
+                meqs: {
+                include: {
+                    rv: true,
+                    spr: true,
+                    jo: true
+                }
+                }
+            },
+            where: { is_deleted: false },
+            orderBy: {
+                label: 'asc'
             }
-        },
-        where: { is_deleted: false },
-        orderBy: {
-            label: 'asc'
-        }
         })
     }
 
@@ -129,10 +129,10 @@ export class MeqsApproverService {
         })
 
         if(!item){
-        throw new NotFoundException('MEQS Approver not found')
-    }
+            throw new NotFoundException('MEQS Approver not found')
+        }
 
-    return item
+        return item
 
     }
 

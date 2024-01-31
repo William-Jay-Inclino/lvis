@@ -90,7 +90,8 @@ export class RvService {
             date_requested: input.date_requested ? new Date(input.date_requested) : existingItem.date_requested,
             work_order_no: input.work_order_no ?? existingItem.work_order_no,
             work_order_date: input.work_order_date ? new Date(input.work_order_date) : existingItem.work_order_date,
-            status: input.status ?? existingItem.status
+            status: input.status ?? existingItem.status,
+            is_referenced: input.is_referenced ?? existingItem.is_referenced
         }
 
         const updated = await this.prisma.rV.update({

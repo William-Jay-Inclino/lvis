@@ -1,5 +1,5 @@
 import { Transform} from 'class-transformer';
-import { IsString, IsDate, IsOptional, IsInt } from 'class-validator';
+import { IsString, IsDate, IsOptional, IsInt, IsBoolean } from 'class-validator';
 import { InputType, Field, Int } from '@nestjs/graphql';
 import { APPROVAL_STATUS } from '../../__common__/types';
 
@@ -37,5 +37,10 @@ export class UpdateRvInput {
   @IsInt()
   @IsOptional()
   status?: APPROVAL_STATUS;
+
+  @Field(() => Boolean, {nullable: true})
+  @IsBoolean()
+  @IsOptional()
+  is_referenced?: boolean;
 
 }

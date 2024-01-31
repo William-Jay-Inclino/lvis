@@ -81,7 +81,8 @@ export class CanvassService {
             date_requested: input.date_requested ? new Date(input.date_requested) : existingItem.date_requested,
             purpose: input.purpose ?? existingItem.purpose,
             notes: input.notes ?? existingItem.notes,
-            requested_by_id: input.requested_by_id ?? existingItem.requested_by_id
+            requested_by_id: input.requested_by_id ?? existingItem.requested_by_id,
+            is_referenced: input.is_referenced ?? existingItem.is_referenced,
         }
 
         const updated = await this.prisma.canvass.update({

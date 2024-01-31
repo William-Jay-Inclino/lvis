@@ -17,6 +17,9 @@ import { ClassificationModule } from './classification/classification.module';
 import { HttpModule } from '@nestjs/axios';
 import { RvApproverModule } from './rv-approver/rv-approver.module';
 import { MeqsApproverModule } from './meqs-approver/meqs-approver.module';
+import { MeqsSupplierModule } from './meqs-supplier/meqs-supplier.module';
+import { MeqsSupplierItemModule } from './meqs-supplier-item/meqs-supplier-item.module';
+import { MeqsSupplierAttachmentModule } from './meqs-supplier-attachment/meqs-supplier-attachment.module';
 
 
 @Module({
@@ -39,6 +42,9 @@ import { MeqsApproverModule } from './meqs-approver/meqs-approver.module';
     ClassificationModule,
     RvApproverModule,
     MeqsApproverModule,
+    MeqsSupplierModule,
+    MeqsSupplierItemModule,
+    MeqsSupplierAttachmentModule,
   ],
   controllers: [],
   providers: [RvService],
