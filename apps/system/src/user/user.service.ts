@@ -1,30 +1,30 @@
-import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { CreateUserInput } from './dto/create-user.input';
-import { User } from './entities/user.entity';
 import { PrismaService } from '../__prisma__/prisma.service';
 import { UpdateUserInput } from './dto/update-user.input';
+import { Prisma, Role, User } from 'apps/system/prisma/generated/client';
 
 @Injectable()
 export class UserService {
 
+  private readonly logger = new Logger(UserService.name);
+
   constructor(private readonly prisma: PrismaService) {}
 
-  async create(input: CreateUserInput): Promise<User> {
-    
-    try {
-            
-        const item = await this.prisma.user.create({
-            data: { ...input }
-        })
+	async create(input: CreateUserInput): Promise<User> {
 
-        return await this.findOne(item.id)
+		const data: Prisma.UserCreateInput = {
+			username: input.username,
+			password: input.password,
+      role: input.role ?? Role.USER
+		}
 
-    } catch (error) {
-        console.log(`Failed to create user: ${error.message}`);
-        throw new InternalServerErrorException('Failed to create user');
-    }
+		const created = await this.prisma.user.create( { data } )
 
-  }
+		this.logger.log('Successfully created User')
+
+		return created
+	}
 
   async findAll(): Promise<User[]> {
     return await this.prisma.user.findMany({
@@ -64,13 +64,22 @@ export class UserService {
   }
 
   async update(id: string, input: UpdateUserInput): Promise<User> {
+
+    const existingUser = await this.findOne(id)
+
+    const data: Prisma.UserUpdateInput = {
+      password: input.password ?? existingUser.password,
+    }
         
-    const item = await this.prisma.user.update( {
+    const updated = await this.prisma.user.update( {
         where: { id },
-        data: { ...input }
+       data
     } )
 
-    return await this.findOne(item.id)
+    this.logger.log('Successfully updated User')
+
+		return updated
+
 
   }
 

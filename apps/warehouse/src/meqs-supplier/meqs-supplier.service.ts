@@ -20,11 +20,17 @@ export class MeqsSupplierService {
             payment_terms: input.payment_terms
         }
 
-        const created = await this.prisma.mEQSSupplier.create( { data } )
+        const created = await this.prisma.mEQSSupplier.create({
+            data,
+            include: {
+                meqs: true,
+                supplier: true
+            }
+        })
 
         this.logger.log('Successfully created MEQSSupplier')
 
-        return await this.findOne(created.id)
+        return created
 
     }
 
@@ -69,12 +75,16 @@ export class MeqsSupplierService {
 
         const updated = await this.prisma.mEQSSupplier.update({
             data,
-            where: { id }
+            where: { id },
+            include: {
+                meqs: true,
+                supplier: true
+            }
         })
 
         this.logger.log('Successfully updated MEQS Supplier')
 
-        return await this.findOne(updated.id)
+        return updated
 
     }
 

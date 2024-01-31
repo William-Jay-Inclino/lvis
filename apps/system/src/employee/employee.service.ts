@@ -24,7 +24,8 @@ export class EmployeeService {
 
 		this.logger.log('Successfully created Employee')
 
-		return await this.findOne(created.id)
+		return created 
+
 	}
 
 	async findAll(): Promise<Employee[]> {
@@ -58,16 +59,18 @@ export class EmployeeService {
 			lastname: input.lastname ?? existingItem.lastname
 		}
 
+		
 		const updated = await this.prisma.employee.update({ 
 			data,
 			where: {
 				id
 			}
-		 })
-
+		})
+		
 		this.logger.log('Successfully updated Employee')
 
-		return await this.findOne(updated.id)
+		return updated
+
 	}
 
 	async remove(id: string): Promise<SystemRemoveResponse> {

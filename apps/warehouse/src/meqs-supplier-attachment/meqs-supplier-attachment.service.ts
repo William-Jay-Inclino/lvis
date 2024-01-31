@@ -20,11 +20,16 @@ export class MeqsSupplierAttachmentService {
             src: input.src
         }
 
-        const created = await this.prisma.mEQSSupplierAttachment.create( { data } )
+        const created = await this.prisma.mEQSSupplierAttachment.create({
+            data,
+            include: {
+                meqs_supplier: true
+            }
+        })
 
         this.logger.log('Successfully created MEQS Supplier Attachment')
 
-        return await this.findOne(created.id)
+        return created
 
 
     }
@@ -65,12 +70,15 @@ export class MeqsSupplierAttachmentService {
 
         const updated = await this.prisma.mEQSSupplierAttachment.update({
             data,
-            where: { id }
+            where: { id },
+            include: {
+                meqs_supplier: true
+            }
         })
 
         this.logger.log('Successfully updated MEQS Supplier Attachment')
 
-        return await this.findOne(updated.id)
+        return updated
 
     }
 

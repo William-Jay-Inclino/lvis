@@ -22,7 +22,7 @@ export class ClassificationService {
 
 		this.logger.log('Successfully created Classification')
 
-		return await this.findOne(created.id)
+		return created
 	}
 
 	async findAll(): Promise<Classification[]> {
@@ -65,7 +65,7 @@ export class ClassificationService {
 
 		this.logger.log('Successfully updated Classification')
 
-		return await this.findOne(updated.id)
+		return updated
 	}
 
 	async remove(id: string): Promise<SystemRemoveResponse> {

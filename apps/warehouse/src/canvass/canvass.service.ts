@@ -55,11 +55,21 @@ export class CanvassService {
             }
         }
 
-        const created = await this.prisma.canvass.create( { data } )
+        const created = await this.prisma.canvass.create({
+            data,
+            include: {
+                canvass_items: {
+                    include: {
+                        unit: true, 
+                        brand: true
+                    }
+                }, 
+            }
+        })
 
         this.logger.log('Successfully created canvass')
 
-        return await this.findOne(created.id)
+        return created
 
     }
 
@@ -69,7 +79,6 @@ export class CanvassService {
         const existingItem = await this.findOne(id)
 
         if(input.requested_by_id){
-            // const isValidRequestedById = await this.isValidRequestedById(input.requested_by_id)
             const isValidRequestedById = await this.isEmployeeExist(input.requested_by_id, this.authUser)
 
             if(!isValidRequestedById){
@@ -87,12 +96,20 @@ export class CanvassService {
 
         const updated = await this.prisma.canvass.update({
             data,
-            where: { id }
+            where: { id },
+            include: {
+                canvass_items: {
+                    include: {
+                        unit: true, 
+                        brand: true
+                    }
+                }, 
+            }
         })
 
         this.logger.log('Successfully updated canvass')
 
-        return await this.findOne(updated.id)
+        return updated
 
     }
 

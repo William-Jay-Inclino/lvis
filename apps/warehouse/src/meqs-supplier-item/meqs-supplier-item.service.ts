@@ -23,11 +23,17 @@ export class MeqsSupplierItemService {
 			vat_type: input.vat_type
 		}
 
-		const created = await this.prisma.mEQSSupplierItem.create( { data } )
+		const created = await this.prisma.mEQSSupplierItem.create({
+			data,
+			include: {
+				meqs_supplier: true,
+				canvass_item: true
+			}
+		})
 
 		this.logger.log('Successfully created MEQSSupplier')
 
-		return await this.findOne(created.id)
+		return created
 
 	}
 
@@ -72,12 +78,16 @@ export class MeqsSupplierItemService {
 
 		const updated = await this.prisma.mEQSSupplierItem.update({ 
 			data,
-			where: { id }
+			where: { id },
+			include: {
+				meqs_supplier: true,
+				canvass_item: true
+			}
 		 })
 
 		this.logger.log('Successfully updated MEQS Supplier Item')
 
-		return await this.findOne(updated.id)
+		return updated
 
 	}
 
