@@ -33,4 +33,10 @@ export class MeqsSupplier {
   @Field(() => [MeqsSupplierAttachment])
   attachments: MeqsSupplierAttachment[];
 
+  @Field(() => Date)
+  created_at: Date;
+
+  @Field(() => Date)
+  updated_at: Date;
+
 }

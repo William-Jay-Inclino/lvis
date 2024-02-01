@@ -14,6 +14,54 @@ export class MeqsApproverService {
 
     private readonly logger = new Logger(MeqsApproverService.name);
     private authUser: AuthUser
+    private includedFields = {
+        meqs: {
+            include: {
+                rv: {
+                    include: {
+                        canvass: {
+                            include: {
+                                canvass_items: {
+                                    include: {
+                                        unit: true,
+                                        brand: true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                spr: {
+                    include: {
+                        canvass: {
+                            include: {
+                                canvass_items: {
+                                    include: {
+                                        unit: true,
+                                        brand: true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                jo: {
+                    include: {
+                        canvass: {
+                            include: {
+                                canvass_items: {
+                                    include: {
+                                        unit: true,
+                                        brand: true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 
 	constructor(
         private readonly prisma: PrismaService,
@@ -49,24 +97,19 @@ export class MeqsApproverService {
         status: APPROVAL_STATUS.PENDING
         }
 
-        const created = await this.prisma.mEQSApprover.create( { data } )
+        const created = await this.prisma.mEQSApprover.create({
+            data,
+            include: this.includedFields
+        })
 
         this.logger.log('Successfully created mEQSApprover')
 
-        return await this.findOne(created.id)
+        return created
     }
 
     async findAll(): Promise<MEQSApprover[]> {
         return await this.prisma.mEQSApprover.findMany({
-            include: {
-                meqs: {
-                include: {
-                    rv: true,
-                    spr: true,
-                    jo: true
-                }
-                }
-            },
+            include: this.includedFields,
             where: { is_deleted: false },
             orderBy: {
                 label: 'asc'
@@ -74,58 +117,11 @@ export class MeqsApproverService {
         })
     }
 
-    findOne(id: string): Promise<MEQSApprover | null> {
+    async findOne(id: string): Promise<MEQSApprover | null> {
         
-        const item = this.prisma.mEQSApprover.findUnique({
-        where: { id },
-        include: {
-            meqs: {
-                include: {
-                    rv: {
-                        include: {
-                            canvass: {
-                                include: {
-                                    canvass_items: {
-                                        include: {
-                                            unit: true,
-                                            brand: true
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    spr: {
-                        include: {
-                            canvass: {
-                                include: {
-                                    canvass_items: {
-                                        include: {
-                                            unit: true,
-                                            brand: true
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    jo: {
-                        include: {
-                            canvass: {
-                                include: {
-                                    canvass_items: {
-                                        include: {
-                                            unit: true,
-                                            brand: true
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        const item = await this.prisma.mEQSApprover.findUnique({
+            where: { id },
+            include: this.includedFields
         })
 
         if(!item){
@@ -173,12 +169,13 @@ export class MeqsApproverService {
 
         const updated = await this.prisma.mEQSApprover.update({
             data,
-            where: { id }
+            where: { id },
+            include: this.includedFields
         })
 
         this.logger.log('Successfully updated MEQS Approver')
 
-        return await this.findOne(updated.id)
+        return updated
 
     }
 

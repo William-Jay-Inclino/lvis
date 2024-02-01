@@ -6,13 +6,16 @@ import { RvService } from '../rv/rv.service';
 import { RV } from '../rv/entities/rv.entity';
 import { RvApproverService } from '../rv-approver/rv-approver.service';
 import { RVApprover } from '../rv-approver/entities/rv-approver.entity';
+import { MEQS } from '../meqs/entities/meq.entity';
+import { MeqsService } from '../meqs/meqs.service';
 
 @Resolver(() => Employee)
 export class EmployeeResolver {
     constructor(
         private readonly canvassService: CanvassService,
         private readonly rvService: RvService,
-        private readonly rvApproverService: RvApproverService
+        private readonly rvApproverService: RvApproverService,
+        private readonly meqsService: MeqsService,
     ) {}
 
     @ResolveField( () => [Canvass])
@@ -33,6 +36,11 @@ export class EmployeeResolver {
     @ResolveField( () => [RVApprover])
     rv_approvals(@Parent() employee: Employee) {
         return this.rvApproverService.forEmployee(employee.id)
+    }
+
+    @ResolveField( () => [MEQS])
+    meqs(@Parent() employee: Employee) {
+        return this.meqsService.forEmployee(employee.id)
     }
 
 }

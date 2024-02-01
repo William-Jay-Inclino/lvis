@@ -1,7 +1,5 @@
 import { ObjectType, Field, Int, ID } from '@nestjs/graphql';
 import { Canvass } from '../../canvass/entities/canvass.entity';
-import { Employee } from '../../employee/entities/employee.entity';
-import { Classification } from '../../classification/entities/classification.entity';
 import { RVApprover } from '../../rv-approver/entities/rv-approver.entity';
 // import { Employee } from 'apps/system/src/employee/entities/employee.entity';
 // import { Classification } from 'apps/system/src/classification/entities/classification.entity';
@@ -48,4 +46,10 @@ export class RV {
   @Field(() => [RVApprover])
   rv_approvers: RVApprover[];
 
+  @Field(() => Date)
+  created_at: Date;
+
+  @Field(() => Date)
+  updated_at: Date;
+  
 }

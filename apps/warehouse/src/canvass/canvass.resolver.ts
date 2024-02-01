@@ -21,13 +21,13 @@ export class CanvassResolver {
 
     @Mutation( () => Canvass)
     
-    createCanvass(
+    async createCanvass(
         @Args('input') createCanvassInput: CreateCanvassInput, 
         @CurrentAuthUser() authUser: AuthUser
     ) {
         // this.logger.log(authUser)
         this.canvassService.setAuthUser(authUser)
-        return this.canvassService.create(createCanvassInput)
+        return await this.canvassService.create(createCanvassInput)
     }
 
     @Query(() => [Canvass])
@@ -42,11 +42,13 @@ export class CanvassResolver {
     }
 
     @Mutation(() => Canvass)
-    updateCanvass(
+    async updateCanvass(
       @Args('id') id: string,
-      @Args('input') updateCanvassInput: UpdateCanvassInput
+      @Args('input') updateCanvassInput: UpdateCanvassInput,
+      @CurrentAuthUser() authUser: AuthUser
     ) {
-      return this.canvassService.update(id, updateCanvassInput);
+      this.canvassService.setAuthUser(authUser)
+      return await this.canvassService.update(id, updateCanvassInput);
     }
   
     @Mutation(() => WarehouseRemoveResponse)

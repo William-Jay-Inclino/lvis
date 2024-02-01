@@ -34,4 +34,10 @@ export class MEQSApprover {
   // @Field(() => MEQS)
   // meqs: MEQS
 
+  @Field(() => Date)
+  created_at: Date;
+
+  @Field(() => Date)
+  updated_at: Date;
+
 }

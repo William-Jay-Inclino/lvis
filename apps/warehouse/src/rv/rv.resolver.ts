@@ -17,12 +17,12 @@ export class RvResolver {
     constructor(private readonly rvService: RvService) {}
 
     @Mutation(() => RV)
-    createRv(
+    async createRv(
         @Args('input') createRvInput: CreateRvInput,
         @CurrentAuthUser() authUser: AuthUser
     ) {
         this.rvService.setAuthUser(authUser)
-        return this.rvService.create(createRvInput);
+        return await this.rvService.create(createRvInput);
     }
 
     @Query(() => [RV])
@@ -36,11 +36,13 @@ export class RvResolver {
     }
 
     @Mutation(() => RV)
-    updateRv(
+    async updateRv(
       @Args('id') id: string,
-      @Args('input') updateRvInput: UpdateRvInput
+      @Args('input') updateRvInput: UpdateRvInput,
+      @CurrentAuthUser() authUser: AuthUser
     ) {
-      return this.rvService.update(id, updateRvInput);
+        this.rvService.setAuthUser(authUser)
+        return await this.rvService.update(id, updateRvInput);
     }
 
     @ResolveField( () => Employee)

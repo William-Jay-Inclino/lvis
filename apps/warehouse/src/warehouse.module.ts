@@ -20,6 +20,9 @@ import { MeqsApproverModule } from './meqs-approver/meqs-approver.module';
 import { MeqsSupplierModule } from './meqs-supplier/meqs-supplier.module';
 import { MeqsSupplierItemModule } from './meqs-supplier-item/meqs-supplier-item.module';
 import { MeqsSupplierAttachmentModule } from './meqs-supplier-attachment/meqs-supplier-attachment.module';
+import { MeqsService } from './meqs/meqs.service';
+import { MeqsResolver } from './meqs/meqs.resolver';
+import { MeqsModule } from './meqs/meqs.module';
 
 
 @Module({
@@ -45,8 +48,9 @@ import { MeqsSupplierAttachmentModule } from './meqs-supplier-attachment/meqs-su
     MeqsSupplierModule,
     MeqsSupplierItemModule,
     MeqsSupplierAttachmentModule,
+    MeqsModule,
   ],
   controllers: [],
-  providers: [RvService],
+  providers: [RvService, MeqsService, MeqsResolver],
 })
 export class WarehouseModule {}

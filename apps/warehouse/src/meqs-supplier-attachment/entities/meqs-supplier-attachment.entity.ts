@@ -12,4 +12,10 @@ export class MeqsSupplierAttachment {
   @Field(() => String)
   src: string;
 
+  @Field(() => Date)
+  created_at: Date;
+
+  @Field(() => Date)
+  updated_at: Date;
+
 }

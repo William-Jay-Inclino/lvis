@@ -3,7 +3,7 @@ import { IsBoolean, IsInt, IsNotEmpty, IsNumber, IsOptional, IsString } from 'cl
 import { VAT_TYPE } from '../../__common__/types';
 
 @InputType()
-export class CreateMeqsSupplierItemInput {
+export class CreateMeqsSupplierItemSubInput {
 
   @Field()
   @IsNotEmpty()

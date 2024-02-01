@@ -89,4 +89,17 @@ export class EmployeeService {
 
 	}
 
+	async validateEmployeeIds(ids: string[]): Promise<boolean> {
+
+		const exisitingIds = await this.prisma.employee.findMany({
+			where: {
+				id: { in: ids }
+			},
+			select: { id: true }
+		})
+
+		return exisitingIds.length === ids.length
+
+	}
+
 }
