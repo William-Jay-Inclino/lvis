@@ -23,6 +23,7 @@ import { MeqsSupplierAttachmentModule } from './meqs-supplier-attachment/meqs-su
 import { MeqsService } from './meqs/meqs.service';
 import { MeqsResolver } from './meqs/meqs.resolver';
 import { MeqsModule } from './meqs/meqs.module';
+import { UnitModule } from './unit/unit.module';
 
 
 @Module({
@@ -49,6 +50,7 @@ import { MeqsModule } from './meqs/meqs.module';
     MeqsSupplierItemModule,
     MeqsSupplierAttachmentModule,
     MeqsModule,
+    UnitModule
   ],
   controllers: [],
   providers: [RvService, MeqsService, MeqsResolver],

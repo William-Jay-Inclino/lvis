@@ -61,6 +61,7 @@ export class MeqsService {
         this.logger.log('create()')
 
         // ================================= VALIDATIONS =================================
+        
         if(!input.jo_id || !input.rv_id || !input.spr_id){
             throw new BadRequestException("Please provide 1 reference either jo, rv, or spr")
         }

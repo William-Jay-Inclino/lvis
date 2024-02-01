@@ -58,26 +58,26 @@ export class RvApproverService {
 
     async findAll(): Promise<RVApprover[]> {
         return await this.prisma.rVApprover.findMany({
-        include: {
-            rv: {
             include: {
-                canvass: {
+                rv: {
                 include: {
-                    canvass_items: {
+                    canvass: {
                     include: {
-                        unit: true,
-                        brand: true
+                        canvass_items: {
+                        include: {
+                            unit: true,
+                            brand: true
+                        }
+                        }
                     }
                     }
                 }
                 }
+            },
+            where: { is_deleted: false },
+            orderBy: {
+                label: 'asc'
             }
-            }
-        },
-        where: { is_deleted: false },
-        orderBy: {
-            label: 'asc'
-        }
         })
     }
 
@@ -109,6 +109,67 @@ export class RvApproverService {
 
     return item
 
+    }
+
+    async findByRvId(rvId: string): Promise<RVApprover[]> {
+
+        this.logger.log('findByRvId()', rvId)
+
+        return await this.prisma.rVApprover.findMany({
+            include: {
+                rv: {
+                include: {
+                    canvass: {
+                    include: {
+                        canvass_items: {
+                        include: {
+                            unit: true,
+                            brand: true
+                        }
+                        }
+                    }
+                    }
+                }
+                }
+            },
+            where: {
+                is_deleted: false,
+                rv_id: rvId
+            },
+            orderBy: {
+                label: 'asc'
+            }
+        })
+    }
+
+    async findByRvNumber(rvNumber: string): Promise<RVApprover[]> {
+        return await this.prisma.rVApprover.findMany({
+            include: {
+                rv: {
+                include: {
+                    canvass: {
+                    include: {
+                        canvass_items: {
+                        include: {
+                            unit: true,
+                            brand: true
+                        }
+                        }
+                    }
+                    }
+                }
+                }
+            },
+            where: {
+                is_deleted: false,
+                rv: {
+                    rv_number: rvNumber
+                }
+            },
+            orderBy: {
+                label: 'asc'
+            }
+        })
     }
 
     async update(id: string, input: UpdateRvApproverInput): Promise<RVApprover> {

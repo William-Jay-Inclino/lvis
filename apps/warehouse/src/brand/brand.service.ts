@@ -1,30 +1,93 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { CreateBrandInput } from './dto/create-brand.input';
-import { Brand } from './entities/brand.entity';
-// import { UpdateDepartmentInput } from './dto/update-department.input';
 import { faker } from '@faker-js/faker'; 
+import { PrismaService } from '../__prisma__/prisma.service';
+import { Brand, Prisma } from 'apps/warehouse/prisma/generated/client';
+import { UpdateBrandInput } from './dto/update-brand.input';
+import { WarehouseRemoveResponse } from '../__common__/classes';
 
 @Injectable()
 export class BrandService {
 
-  private readonly brands: Brand[] = []
+  private readonly logger = new Logger(BrandService.name);
 
-  create(input: CreateBrandInput): Brand {
-    
-    const x = new Brand()
-    x.id = faker.string.uuid()
-    x.name = input.name
+	constructor(private readonly prisma: PrismaService) {}
 
-    this.brands.push(x)
+    async create(input: CreateBrandInput): Promise<Brand> {
 
-    return x
-  }
+        const data: Prisma.BrandCreateInput = {
+            name: input.name
+        }
 
-  findAll() {
-    return this.brands
-  }
+        const created = await this.prisma.brand.create({
+            data
+        })
 
-  findOne(id: string) {
-    return this.brands.find(i => i.id === id)
-  }
+        this.logger.log('Successfully created Brand')
+
+        return created 
+
+    }
+
+    async findAll(): Promise<Brand[]> {
+		return await this.prisma.brand.findMany( {
+			where: {
+				is_deleted: false 
+			}
+		} )
+	}
+
+	async findOne(id: string): Promise<Brand | null> {
+
+		const item = await this.prisma.brand.findUnique({
+			where: { id }
+		})
+
+		console.log('item', item, id)
+
+		if(!item){
+            throw new NotFoundException('Brand not found')
+        }
+
+        return item
+	}
+
+    async update(id: string, input: UpdateBrandInput): Promise<Brand> {
+
+		const existingItem = await this.findOne(id)
+
+		const data: Prisma.BrandUpdateInput = {
+			name: input.name ?? existingItem.name
+		}
+
+		
+		const updated = await this.prisma.brand.update({ 
+			data,
+			where: {
+				id
+			}
+		})
+		
+		this.logger.log('Successfully updated Brand')
+
+		return updated
+
+	}
+
+    async remove(id: string): Promise<WarehouseRemoveResponse> {
+
+		const existingItem = await this.findOne(id)
+
+		await this.prisma.brand.update( {
+			where: { id },
+			data: { is_deleted: true }
+		} )
+
+		return {
+			success: true,
+			msg: "Brand successfully deleted"
+		}
+
+	}
+
 }

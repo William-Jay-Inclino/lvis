@@ -40,5 +40,8 @@ export class RVApprover {
   
     @Field(() => Date)
     updated_at: Date;
+
+    @Field(() => Boolean)
+    is_deleted: boolean;
     
 }

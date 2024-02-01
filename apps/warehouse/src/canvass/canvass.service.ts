@@ -27,14 +27,12 @@ export class CanvassService {
 
         this.logger.log('create()', input)
 
-        // const isValidRequestedById = await this.isValidRequestedById(input.requested_by_id)
         const isValidRequestedById = await this.isEmployeeExist(input.requested_by_id, this.authUser)
 
         if(!isValidRequestedById){
             throw new NotFoundException('Requested by ID not valid')
         }
 
-        console.log('valid')
         const rcNumber = await this.getLatestRcNumber()
 
         const data: Prisma.CanvassCreateInput = {

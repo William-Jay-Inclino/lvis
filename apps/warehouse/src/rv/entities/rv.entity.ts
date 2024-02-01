@@ -51,5 +51,8 @@ export class RV {
 
   @Field(() => Date)
   updated_at: Date;
+
+  @Field(() => Boolean)
+  is_deleted: boolean;
   
 }
