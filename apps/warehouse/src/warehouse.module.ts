@@ -24,7 +24,7 @@ import { MeqsService } from './meqs/meqs.service';
 import { MeqsResolver } from './meqs/meqs.resolver';
 import { MeqsModule } from './meqs/meqs.module';
 import { UnitModule } from './unit/unit.module';
-import { FileUploadModule } from './__file-upload__/file-upload.module';
+import { SupplierModule } from './supplier/supplier.module';
 
 
 @Module({
@@ -52,7 +52,7 @@ import { FileUploadModule } from './__file-upload__/file-upload.module';
     MeqsSupplierAttachmentModule,
     MeqsModule,
     UnitModule,
-    FileUploadModule
+    SupplierModule
   ],
   controllers: [],
   providers: [RvService, MeqsService, MeqsResolver],

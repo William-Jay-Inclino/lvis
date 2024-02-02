@@ -32,6 +32,7 @@ export class MeqsService {
         meqs_approvers: true,
         meqs_suppliers: {
             include: {
+                supplier: true,
                 attachments: true,
                 meqs_supplier_items: {
                     include: {
@@ -62,7 +63,7 @@ export class MeqsService {
 
         // ================================= VALIDATIONS =================================
         
-        if(!input.jo_id || !input.rv_id || !input.spr_id){
+        if(!input.jo_id && !input.rv_id && !input.spr_id){
             throw new BadRequestException("Please provide 1 reference either jo, rv, or spr")
         }
 
@@ -274,12 +275,16 @@ export class MeqsService {
     
             console.log('data', data);
     
-            if (!data || !data.data || !data.validateEmployeeIds) {
+            if (!data || !data.data) {
                 console.log('No data returned');
                 return false;
             }
-    
-            return data.data.validateEmployeeIds;
+
+            if(data.data.validateEmployeeIds){
+                return data.data.validateEmployeeIds;
+            }
+            
+            return false
     
         } catch (error) {
             console.error('Error querying employees:', error.message);

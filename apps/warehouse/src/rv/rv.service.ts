@@ -76,6 +76,7 @@ export class RvService {
                 create: input.approvers.map(i => {
                     return {
                         approver_id: i.approver_id,
+                        approver_proxy_id: i.approver_proxy_id ?? undefined,
                         label: i.label,
                         order: i.order,
                         status: APPROVAL_STATUS.PENDING

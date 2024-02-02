@@ -31,8 +31,8 @@ export class MeqsResolver {
 
     @Query(() => MEQS)
     meq(
-        @Args('id') id: string,
-        @Args('meqs_number') meqs_number: string
+        @Args('id', {nullable: true}) id?: string,
+        @Args('meqs_number', {nullable: true}) meqs_number?: string
     ) {
         if(id){
             return this.meqsService.findOne(id);

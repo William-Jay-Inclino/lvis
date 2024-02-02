@@ -1,6 +1,5 @@
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { CreateBrandInput } from './dto/create-brand.input';
-import { faker } from '@faker-js/faker'; 
 import { PrismaService } from '../__prisma__/prisma.service';
 import { Brand, Prisma } from 'apps/warehouse/prisma/generated/client';
 import { UpdateBrandInput } from './dto/update-brand.input';

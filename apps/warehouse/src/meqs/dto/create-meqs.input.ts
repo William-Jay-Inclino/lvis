@@ -23,11 +23,6 @@ export class CreateMeqsInput {
   @IsString()
   spr_id: string | null;
 
-  @Field(() => String)
-  @IsNotEmpty()
-  @IsString()
-  meqs_number: string;
-
   @Field(() => Int)
   @IsNotEmpty()
   @IsInt()
