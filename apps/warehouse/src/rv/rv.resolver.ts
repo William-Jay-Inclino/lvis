@@ -36,8 +36,16 @@ export class RvResolver {
     }
 
     @Query(() => RV)
-    rv(@Args('id') id: string) {
-        return this.rvService.findOne(id);
+    rv(
+        @Args('id') id: string,
+        @Args('rv_number') rv_number: string
+    ) {
+        if(id){
+            return this.rvService.findOne(id);
+        }
+        if(rv_number){
+            return this.rvService.findByRvNumber(rv_number)
+        }
     }
 
     @Mutation(() => RV)

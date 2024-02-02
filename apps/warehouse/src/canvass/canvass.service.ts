@@ -13,6 +13,14 @@ export class CanvassService {
 
     private readonly logger = new Logger(CanvassService.name);
     private authUser: AuthUser
+    private includedFields = {
+        canvass_items: {
+            include: {
+                unit: true, 
+                brand: true
+            }
+        }, 
+    }
 
     constructor(
         private readonly prisma: PrismaService,
@@ -55,14 +63,7 @@ export class CanvassService {
 
         const created = await this.prisma.canvass.create({
             data,
-            include: {
-                canvass_items: {
-                    include: {
-                        unit: true, 
-                        brand: true
-                    }
-                }, 
-            }
+            include: this.includedFields
         })
 
         this.logger.log('Successfully created canvass')
@@ -95,14 +96,7 @@ export class CanvassService {
         const updated = await this.prisma.canvass.update({
             data,
             where: { id },
-            include: {
-                canvass_items: {
-                    include: {
-                        unit: true, 
-                        brand: true
-                    }
-                }, 
-            }
+            include: this.includedFields
         })
 
         this.logger.log('Successfully updated canvass')
@@ -113,14 +107,7 @@ export class CanvassService {
 
     async findAll(): Promise<Canvass[]> {
         return this.prisma.canvass.findMany({
-            include: {
-                canvass_items: {
-                    include: {
-                        unit: true, 
-                        brand: true
-                    }
-                }, 
-            },
+            include: this.includedFields,
             where: {
                 is_deleted: false
             },
@@ -135,15 +122,25 @@ export class CanvassService {
         this.logger.log('findOne()', id)
 
         const item = await this.prisma.canvass.findUnique({
-          include: {
-            canvass_items: {
-                include: {
-                    unit: true, 
-                    brand: true
-                }
-            }, 
-          },
+          include: this.includedFields,
           where: { id }
+        })
+
+        if(!item){
+            throw new NotFoundException('Canvass not found')
+        }
+
+        return item
+        
+    }
+
+    async findByRcNumber(rc_number: string): Promise<Canvass> {
+        
+        this.logger.log('findByRcNumber()', rc_number)
+
+        const item = await this.prisma.canvass.findUnique({
+          include: this.includedFields,
+          where: { rc_number }
         })
 
         if(!item){

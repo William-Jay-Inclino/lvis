@@ -167,6 +167,19 @@ export class RvService {
         return item
 	}
 
+    async findByRvNumber(rv_number: string): Promise<RV | null> {
+		const item = await this.prisma.rV.findUnique({
+            include: this.includedFields,
+			where: { rv_number }
+		})
+
+		if(!item){
+            throw new NotFoundException('RV not found')
+        }
+
+        return item
+	}
+
     async findAll(): Promise<RV[]> {
 		return await this.prisma.rV.findMany( {
             include: this.includedFields,

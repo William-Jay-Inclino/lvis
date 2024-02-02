@@ -30,8 +30,16 @@ export class MeqsResolver {
     }
 
     @Query(() => MEQS)
-    meq(@Args('id') id: string) {
-        return this.meqsService.findOne(id);
+    meq(
+        @Args('id') id: string,
+        @Args('meqs_number') meqs_number: string
+    ) {
+        if(id){
+            return this.meqsService.findOne(id);
+        }
+        if(meqs_number){
+            return this.meqsService.findByMeqsNumber(meqs_number)
+        }
     }
 
     @Mutation(() => MEQS)

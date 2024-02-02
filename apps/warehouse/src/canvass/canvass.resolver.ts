@@ -36,9 +36,16 @@ export class CanvassResolver {
     }
 
     @Query(() => Canvass)
-    canvass(@Args('id', { type: () => String }) id: string) {
-        console.log('canvass')
+    canvass(
+      @Args('id') id: string,
+      @Args('rc_number') rc_number: string
+    ) {
+      if(id){
         return this.canvassService.findOne(id);
+      }
+      if(rc_number){
+        return this.canvassService.findByRcNumber(rc_number)
+      }
     }
 
     @Mutation(() => Canvass)

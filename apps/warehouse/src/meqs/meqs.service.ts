@@ -208,6 +208,21 @@ export class MeqsService {
 
     }
 
+    async findByMeqsNumber(meqs_number: string): Promise<MEQS | null> {
+
+        const item = await this.prisma.mEQS.findUnique({
+            where: { meqs_number },
+            include: this.includedFields
+        })
+
+        if(!item){
+            throw new NotFoundException('MEQS not found')
+        }
+
+        return item
+
+    }
+
     private async getLatestMeqsNumber(): Promise<string> {
         const currentYear = new Date().getFullYear().toString().slice(-2);
     
