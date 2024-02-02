@@ -9,6 +9,7 @@ import { UseGuards } from '@nestjs/common';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { CurrentAuthUser } from '../auth/current-auth-user.decorator';
 import { Employee } from '../employee/entities/employee.entity';
+import { RV } from '../rv/entities/rv.entity';
 
 @UseGuards(GqlAuthGuard)
 @Resolver(() => RVApprover)
@@ -25,12 +26,21 @@ export class RvApproverResolver {
   }
 
   @Query(() => [RVApprover])
-  rvApprovers() {
-    return this.rvApproverService.findAll();
+  rv_approvers(
+    @Args('rv_id', {nullable: true}) rv_id?: string,
+    @Args('rv_number', {nullable: true}) rv_number?: string,
+  ) {
+    if(rv_id){
+      return this.rvApproverService.findByRvId(rv_id)
+    }
+    if(rv_number){
+      return this.rvApproverService.findByRvNumber(rv_number)
+    }
+    // return this.rvApproverService.findAll();
   }
 
   @Query(() => RVApprover)
-  rvApprover(@Args('id') id: string) {
+  rv_approver(@Args('id') id: string) {
     return this.rvApproverService.findOne(id);
   }
 

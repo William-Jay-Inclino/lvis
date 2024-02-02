@@ -16,6 +16,15 @@ import { RvModule } from './rv/rv.module';
 import { ClassificationModule } from './classification/classification.module';
 import { HttpModule } from '@nestjs/axios';
 import { RvApproverModule } from './rv-approver/rv-approver.module';
+import { MeqsApproverModule } from './meqs-approver/meqs-approver.module';
+import { MeqsSupplierModule } from './meqs-supplier/meqs-supplier.module';
+import { MeqsSupplierItemModule } from './meqs-supplier-item/meqs-supplier-item.module';
+import { MeqsSupplierAttachmentModule } from './meqs-supplier-attachment/meqs-supplier-attachment.module';
+import { MeqsService } from './meqs/meqs.service';
+import { MeqsResolver } from './meqs/meqs.resolver';
+import { MeqsModule } from './meqs/meqs.module';
+import { UnitModule } from './unit/unit.module';
+import { SupplierModule } from './supplier/supplier.module';
 
 
 @Module({
@@ -37,8 +46,15 @@ import { RvApproverModule } from './rv-approver/rv-approver.module';
     RvModule,
     ClassificationModule,
     RvApproverModule,
+    MeqsApproverModule,
+    MeqsSupplierModule,
+    MeqsSupplierItemModule,
+    MeqsSupplierAttachmentModule,
+    MeqsModule,
+    UnitModule,
+    SupplierModule
   ],
   controllers: [],
-  providers: [RvService],
+  providers: [RvService, MeqsService, MeqsResolver],
 })
 export class WarehouseModule {}

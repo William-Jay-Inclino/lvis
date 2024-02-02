@@ -32,11 +32,17 @@ export class CanvassItemService {
 			quantity: input.quantity
 		}
 
-		const created = await this.prisma.canvassItem.create( { data } )
+		const created = await this.prisma.canvassItem.create({
+			data,
+			include: {
+                unit: true,
+                brand: true
+            }
+		})
 
-		this.logger.log('Successfully created item')
+		this.logger.log('Successfully created canvass')
 
-		return await this.findOne(created.id)
+		return created
 	}
 
 	async findAll(): Promise<CanvassItem[]> {
@@ -96,12 +102,16 @@ export class CanvassItemService {
 			data,
 			where: {
 				id
-			}
+			},
+			include: {
+                unit: true,
+                brand: true
+            }
 		 })
 
-		this.logger.log('Successfully updated Item')
+		this.logger.log('Successfully updated Canvass')
 
-		return await this.findOne(updated.id)
+		return updated
 	}
 
 	async remove(id: string): Promise<WarehouseRemoveResponse> {

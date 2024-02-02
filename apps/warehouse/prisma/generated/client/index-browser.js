@@ -17,11 +17,11 @@ exports.$Enums = {}
 
 /**
  * Prisma Client JS version: 5.8.1
- * Query Engine version: 78caf6feeaed953168c64e15a249c3e9a033ebe2
+ * Query Engine version: 23fdc5965b1e05fc54e5f26ed3de66776b93de64
  */
 Prisma.prismaVersion = {
   client: "5.8.1",
-  engine: "78caf6feeaed953168c64e15a249c3e9a033ebe2"
+  engine: "23fdc5965b1e05fc54e5f26ed3de66776b93de64"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -293,6 +293,7 @@ exports.Prisma.MEQSSupplierItemScalarFieldEnum = {
   price: 'price',
   is_awarded: 'is_awarded',
   notes: 'notes',
+  vat_type: 'vat_type',
   created_at: 'created_at',
   updated_at: 'updated_at',
   is_deleted: 'is_deleted'

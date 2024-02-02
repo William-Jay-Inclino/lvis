@@ -42,7 +42,23 @@ export class EmployeeResolver {
   }
 
   @ResolveReference()
-  async resolveReference(reference: { __typename: string, id: string }): Promise<Employee> {
-    return await this.employeeService.findOne(reference.id)
+  async resolveReference(reference: { __typename: string, id?: string, ids?: string[] }): Promise<Employee | Employee[]> {
+
+    console.log('reference', reference)
+
+    if(reference.__typename === 'Employee'){
+      return await this.employeeService.findOne(reference.id)
+    }
+
+    if(reference.__typename === 'Employees'){
+      return await this.employeeService.findByIds(reference.ids)
+    }
+
   }
+
+  @Query(() => Boolean)
+  async validateEmployeeIds(@Args('ids', { type: () => [String] }) ids: string[]): Promise<boolean> {
+    return this.employeeService.validateEmployeeIds(ids);
+  }
+
 }

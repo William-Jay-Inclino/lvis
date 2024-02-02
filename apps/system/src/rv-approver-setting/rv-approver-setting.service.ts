@@ -16,16 +16,21 @@ export class RvApproverSettingService {
 
 		const data: Prisma.RVApproverSettingCreateInput = {
 			approver: { connect: { id: input.approver_id } },
-			approver_proxy: input.approver_proxy_id ? { connect: { id: input.approver_id } } : null,
+			approver_proxy: input.approver_proxy_id ? { connect: { id: input.approver_id } } : undefined,
 			label: input.label,
 			order: input.order
 		}
 
-		const created = await this.prisma.rVApproverSetting.create( { data } )
+		const created = await this.prisma.rVApproverSetting.create({
+			data,
+			include: {
+				approver: true
+			}
+		})
 
 		this.logger.log('Successfully created rVApproverSetting')
 
-		return await this.findOne(created.id)
+		return created
 	}
 
 	async findAll(): Promise<RVApproverSetting[]> {
@@ -82,12 +87,15 @@ export class RvApproverSettingService {
 			data,
 			where: {
 				id
+			},
+			include: {
+				approver: true
 			}
 		 })
 
 		this.logger.log('Successfully updated rVApproverSetting')
 
-		return await this.findOne(updated.id)
+		return updated
 	}
 
 	async remove(id: string): Promise<SystemRemoveResponse> {

@@ -50,7 +50,7 @@ export class UserResolver {
     return userFound
   }
   
-  @UseGuards(GqlAuthGuard)
+  // @UseGuards(GqlAuthGuard)
   @Query(() => User)
   async getUserByUserName(@Args('username') username: string) {
     const userFound = await this.userService.findByUserName(username);

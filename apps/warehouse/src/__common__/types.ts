@@ -33,3 +33,9 @@ export const enum REQUEST_TYPE {
     RV = 2,
     SPR = 3
 }
+
+export const enum VAT_TYPE {
+    NONE = 1,
+    INC = 2,
+    EXC = 3
+}

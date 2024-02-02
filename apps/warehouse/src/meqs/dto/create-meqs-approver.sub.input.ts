@@ -1,18 +1,18 @@
 import { InputType, Int, Field } from '@nestjs/graphql';
-import { IsInt, IsNotEmpty, IsString } from 'class-validator';
+import { IsInt, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 @InputType()
-export class CreateMeqsApproverInput {
+export class CreateMeqsApproverSubInput {
 
     @Field(() => String)
     @IsNotEmpty()
     @IsString()
     approver_id: string;
 
-    @Field(() => Int)
-    @IsInt()
-    @IsNotEmpty()
-    status: number;
+    @Field(() => String, { nullable: true })
+    @IsOptional()
+    @IsString()
+    approver_proxy_id: string;
 
     @Field(() => String)
     @IsString()

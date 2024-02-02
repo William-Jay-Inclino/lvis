@@ -1,0 +1,31 @@
+mutation{
+  createRv(input: {
+    canvass_id: "5b571755-4fbe-41b1-b659-4d38e01beb73",
+    supervisor_id: "4d0d5041-60d1-49d8-8751-1fbec3c82ba9",
+    date_requested: "2024-02-01",
+    approvers: [
+      {
+        approver_id: "4d0d5041-60d1-49d8-8751-1fbec3c82ba9",
+        label: "Imd. Sup.",
+        order: 1
+      },
+      {
+        approver_id: "42f90188-394b-49be-af1f-f2915168b0b8",
+        label: "Budget Officer",
+        order: 2
+      },
+      {
+        approver_id: "ab657e11-8b9c-4b49-9421-e5de9898cec8",
+        label: "Audit",
+        order: 3
+      },
+      {
+        approver_id: "d4be4ece-eda9-4c82-b199-bce1efabb043",
+        label: "GM / OIC",
+        order: 4
+      }
+    ]
+  }){
+    rv_number
+  }
+}

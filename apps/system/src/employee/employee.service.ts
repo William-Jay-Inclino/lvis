@@ -24,7 +24,8 @@ export class EmployeeService {
 
 		this.logger.log('Successfully created Employee')
 
-		return await this.findOne(created.id)
+		return created 
+
 	}
 
 	async findAll(): Promise<Employee[]> {
@@ -37,9 +38,14 @@ export class EmployeeService {
 	}
 
 	async findOne(id: string): Promise<Employee | null> {
+
+		this.logger.log('findOne', id)
+
 		const item = await this.prisma.employee.findUnique({
 			where: { id }
 		})
+
+		console.log('item', item, id)
 
 		if(!item){
             throw new NotFoundException('Employee not found')
@@ -58,16 +64,18 @@ export class EmployeeService {
 			lastname: input.lastname ?? existingItem.lastname
 		}
 
+		
 		const updated = await this.prisma.employee.update({ 
 			data,
 			where: {
 				id
 			}
-		 })
-
+		})
+		
 		this.logger.log('Successfully updated Employee')
 
-		return await this.findOne(updated.id)
+		return updated
+
 	}
 
 	async remove(id: string): Promise<SystemRemoveResponse> {
@@ -83,6 +91,34 @@ export class EmployeeService {
 			success: true,
 			msg: "Employee successfully deleted"
 		}
+
+	}
+
+	async validateEmployeeIds(ids: string[]): Promise<boolean> {
+
+		const exisitingIds = await this.prisma.employee.findMany({
+			where: {
+				id: { in: ids }
+			},
+			select: { id: true }
+		})
+
+		console.log('exisitingIds', exisitingIds)
+		console.log('ids', ids)
+
+		return exisitingIds.length === ids.length
+
+	}
+
+	async findByIds(ids: string[]): Promise<Employee[]> {
+
+		this.logger.log('findByIds', ids)
+
+		return await this.prisma.employee.findMany({
+			where: {
+				id: { in: ids }
+			}
+		})
 
 	}
 

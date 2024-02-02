@@ -13,6 +13,14 @@ export class CanvassService {
 
     private readonly logger = new Logger(CanvassService.name);
     private authUser: AuthUser
+    private includedFields = {
+        canvass_items: {
+            include: {
+                unit: true, 
+                brand: true
+            }
+        }, 
+    }
 
     constructor(
         private readonly prisma: PrismaService,
@@ -27,14 +35,12 @@ export class CanvassService {
 
         this.logger.log('create()', input)
 
-        // const isValidRequestedById = await this.isValidRequestedById(input.requested_by_id)
         const isValidRequestedById = await this.isEmployeeExist(input.requested_by_id, this.authUser)
 
         if(!isValidRequestedById){
             throw new NotFoundException('Requested by ID not valid')
         }
 
-        console.log('valid')
         const rcNumber = await this.getLatestRcNumber()
 
         const data: Prisma.CanvassCreateInput = {
@@ -55,11 +61,14 @@ export class CanvassService {
             }
         }
 
-        const created = await this.prisma.canvass.create( { data } )
+        const created = await this.prisma.canvass.create({
+            data,
+            include: this.includedFields
+        })
 
         this.logger.log('Successfully created canvass')
 
-        return await this.findOne(created.id)
+        return created
 
     }
 
@@ -69,7 +78,6 @@ export class CanvassService {
         const existingItem = await this.findOne(id)
 
         if(input.requested_by_id){
-            // const isValidRequestedById = await this.isValidRequestedById(input.requested_by_id)
             const isValidRequestedById = await this.isEmployeeExist(input.requested_by_id, this.authUser)
 
             if(!isValidRequestedById){
@@ -81,30 +89,25 @@ export class CanvassService {
             date_requested: input.date_requested ? new Date(input.date_requested) : existingItem.date_requested,
             purpose: input.purpose ?? existingItem.purpose,
             notes: input.notes ?? existingItem.notes,
-            requested_by_id: input.requested_by_id ?? existingItem.requested_by_id
+            requested_by_id: input.requested_by_id ?? existingItem.requested_by_id,
+            is_referenced: input.is_referenced ?? existingItem.is_referenced,
         }
 
         const updated = await this.prisma.canvass.update({
             data,
-            where: { id }
+            where: { id },
+            include: this.includedFields
         })
 
         this.logger.log('Successfully updated canvass')
 
-        return await this.findOne(updated.id)
+        return updated
 
     }
 
     async findAll(): Promise<Canvass[]> {
         return this.prisma.canvass.findMany({
-            include: {
-                canvass_items: {
-                    include: {
-                        unit: true, 
-                        brand: true
-                    }
-                }, 
-            },
+            include: this.includedFields,
             where: {
                 is_deleted: false
             },
@@ -119,15 +122,25 @@ export class CanvassService {
         this.logger.log('findOne()', id)
 
         const item = await this.prisma.canvass.findUnique({
-          include: {
-            canvass_items: {
-                include: {
-                    unit: true, 
-                    brand: true
-                }
-            }, 
-          },
+          include: this.includedFields,
           where: { id }
+        })
+
+        if(!item){
+            throw new NotFoundException('Canvass not found')
+        }
+
+        return item
+        
+    }
+
+    async findByRcNumber(rc_number: string): Promise<Canvass> {
+        
+        this.logger.log('findByRcNumber()', rc_number)
+
+        const item = await this.prisma.canvass.findUnique({
+          include: this.includedFields,
+          where: { rc_number }
         })
 
         if(!item){

@@ -1,0 +1,99 @@
+mutation{
+  createMeqs(input: {
+    rv_id: "d0f34830-94bb-4eff-97e5-7c2d1839826e",
+    request_type: 2,
+    meqs_date: "2024-02-03",
+    approvers: [
+      {
+        approver_id: "d81d6f78-27de-4efc-baf6-75a4775bfd65",
+        label: "1st CPC Member",
+        order: 1
+      },
+      {
+        approver_id: "fa70c513-142c-4224-8558-703073164997",
+        label: "2nd CPC Member",
+        order: 2
+      },
+      {
+        approver_id: "e5839237-0ac8-406b-951c-d2b608e6ef72",
+        label: "Witness",
+        order: 3
+      },
+      {
+        approver_id: "79ffa7e5-0f19-42b3-a17f-4305a92460c5",
+        label: "CPC Chairman",
+        order: 4
+      },
+      {
+        approver_id: "d4be4ece-eda9-4c82-b199-bce1efabb043",
+        label: "GM / OIC",
+        order: 5
+      }
+    ],
+    meqs_suppliers: [
+      {
+        supplier_id: "c7ad4110-b769-4f30-8ae8-960b4908ded0",
+        payment_terms: "COD",
+        meqs_supplier_items: [
+          {
+            canvass_item_id: "2926dd4c-2476-442c-a325-f72584a42003",
+            price:150,
+            is_awarded: false,
+            vat_type: 1
+          }
+        ],
+        attachments: [
+          {
+            src: "uploads/warehouse/meqs/1706914914549_phase1.jpg"
+          },
+          {
+            src: "uploads/warehouse/meqs/1706914914550_wallpaperflare.com_wallpaper.jpg"
+          }
+        ]
+      },
+      {
+        supplier_id: "e5dc3011-59b7-4cfd-8855-fe20cf47ca27",
+        payment_terms: "COD",
+        meqs_supplier_items: [
+          {
+            canvass_item_id: "2926dd4c-2476-442c-a325-f72584a42003",
+            price:100,
+            is_awarded: true,
+            vat_type: 1
+          }
+        ],
+        attachments: [
+          {
+            src: "uploads/warehouse/meqs/1706916921798_Phase 2.jpg"
+          }
+        ]
+      },
+            {
+        supplier_id: "87c963f4-6a7f-43f1-b8c6-aa07ba9a9afe",
+        payment_terms: "COD",
+        meqs_supplier_items: [
+          {
+            canvass_item_id: "2926dd4c-2476-442c-a325-f72584a42003",
+            price:200,
+            is_awarded: false,
+            vat_type: 1
+          }
+        ],
+        attachments: [
+          {
+            src: "uploads/warehouse/meqs/1706916921799_Phase 3.jpg"
+          }
+        ]
+      }
+    ]
+  }){
+    rv_id
+    rv{
+      rv_number
+      canvass{
+        rc_number
+      }
+    }
+    meqs_number
+  }
+}

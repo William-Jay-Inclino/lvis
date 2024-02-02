@@ -9,20 +9,25 @@ import { CurrentAuthUser } from '../auth/current-auth-user.decorator';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { GqlAuthGuard } from '../auth/guards/gql-auth.guard';
 import { UseGuards } from '@nestjs/common';
+import { RVApprover } from '../rv-approver/entities/rv-approver.entity';
+import { RvApproverService } from '../rv-approver/rv-approver.service';
 
 @UseGuards(GqlAuthGuard)
 @Resolver( () => RV)
 export class RvResolver {
 
-    constructor(private readonly rvService: RvService) {}
+    constructor(
+        private readonly rvService: RvService,
+        private readonly rvApproverService: RvApproverService
+    ) {}
 
     @Mutation(() => RV)
-    createRv(
+    async createRv(
         @Args('input') createRvInput: CreateRvInput,
         @CurrentAuthUser() authUser: AuthUser
     ) {
         this.rvService.setAuthUser(authUser)
-        return this.rvService.create(createRvInput);
+        return await this.rvService.create(createRvInput);
     }
 
     @Query(() => [RV])
@@ -31,16 +36,26 @@ export class RvResolver {
     }
 
     @Query(() => RV)
-    rv(@Args('id') id: string) {
-        return this.rvService.findOne(id);
+    rv(
+        @Args('id') id: string,
+        @Args('rv_number') rv_number: string
+    ) {
+        if(id){
+            return this.rvService.findOne(id);
+        }
+        if(rv_number){
+            return this.rvService.findByRvNumber(rv_number)
+        }
     }
 
     @Mutation(() => RV)
-    updateRv(
+    async updateRv(
       @Args('id') id: string,
-      @Args('input') updateRvInput: UpdateRvInput
+      @Args('input') updateRvInput: UpdateRvInput,
+      @CurrentAuthUser() authUser: AuthUser
     ) {
-      return this.rvService.update(id, updateRvInput);
+        this.rvService.setAuthUser(authUser)
+        return await this.rvService.update(id, updateRvInput);
     }
 
     @ResolveField( () => Employee)
@@ -62,6 +77,11 @@ export class RvResolver {
             return null
         }
         return { __typename: 'Classification', id: rv.classification_id }
+    }
+
+    @ResolveField( () => [RVApprover])
+    rv_approvers(@Parent() rv: RV): any {
+        return this.rvApproverService.findByRvId(rv.id)
     }
 
 }

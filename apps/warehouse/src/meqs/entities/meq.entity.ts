@@ -1,17 +1,15 @@
-import { ObjectType, Field, Int } from '@nestjs/graphql';
-import { MEQSApprover } from './meqs-approver.entity';
-import { MEQSItem } from './meqs-item.entity';
+import { ObjectType, Field, Int, ID } from '@nestjs/graphql';
 import { JO } from '../../jo/entities/jo.entity';
 import { RV } from '../../rv/entities/rv.entity';
 import { SPR } from '../../spr/entities/spr.entity';
 import { APPROVAL_STATUS, REQUEST_TYPE } from '../../__common__/types';
-import { Employee } from 'apps/system/src/employee/entities/employee.entity';
-import { PO } from '../../po/entities/po.entity';
+import { MEQSApprover } from '../../meqs-approver/entities/meqs-approver.entity';
+import { MeqsSupplier } from '../../meqs-supplier/entities/meqs-supplier.entity';
 
 @ObjectType()
 export class MEQS {
 
-  @Field(() => String)
+  @Field(() => ID)
   id: string;
 
   @Field(() => String, {nullable: true})
@@ -47,20 +45,14 @@ export class MEQS {
   @Field(() => String, {nullable: true})
   canceller_id: string;
 
-  @Field(() => Employee, {nullable: true})
-  canceller: Employee;
-
   @Field(() => [MEQSApprover])
   meqs_approvers: MEQSApprover[];
 
-  @Field(() => [MEQSItem])
-  meqs_items: MEQSItem[];
+  @Field(() => [MeqsSupplier])
+  meqs_suppliers: MeqsSupplier[];
 
-  @Field(() => [PO], {nullable: true})
-  pos: PO[];
-
-  @Field(() => Boolean)
-  is_referenced: boolean;
+  // @Field(() => [PO])
+  // pos: PO[];
 
   @Field(() => Date)
   created_at: Date;

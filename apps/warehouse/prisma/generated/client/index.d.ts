@@ -478,7 +478,7 @@ export namespace Prisma {
 
   /**
    * Prisma Client JS version: 5.8.1
-   * Query Engine version: 78caf6feeaed953168c64e15a249c3e9a033ebe2
+   * Query Engine version: 23fdc5965b1e05fc54e5f26ed3de66776b93de64
    */
   export type PrismaVersion = {
     client: string
@@ -2333,12 +2333,10 @@ export namespace Prisma {
 
   export type SupplierCountOutputType = {
     MEQSSupplier: number
-    meqs_supplier_items: number
   }
 
   export type SupplierCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     MEQSSupplier?: boolean | SupplierCountOutputTypeCountMEQSSupplierArgs
-    meqs_supplier_items?: boolean | SupplierCountOutputTypeCountMeqs_supplier_itemsArgs
   }
 
   // Custom InputTypes
@@ -2359,14 +2357,6 @@ export namespace Prisma {
    */
   export type SupplierCountOutputTypeCountMEQSSupplierArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: MEQSSupplierWhereInput
-  }
-
-
-  /**
-   * SupplierCountOutputType without action
-   */
-  export type SupplierCountOutputTypeCountMeqs_supplier_itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: MEQSSupplierItemWhereInput
   }
 
 
@@ -2693,10 +2683,12 @@ export namespace Prisma {
 
   export type MEQSSupplierCountOutputType = {
     attachments: number
+    meqs_supplier_items: number
   }
 
   export type MEQSSupplierCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     attachments?: boolean | MEQSSupplierCountOutputTypeCountAttachmentsArgs
+    meqs_supplier_items?: boolean | MEQSSupplierCountOutputTypeCountMeqs_supplier_itemsArgs
   }
 
   // Custom InputTypes
@@ -2717,6 +2709,14 @@ export namespace Prisma {
    */
   export type MEQSSupplierCountOutputTypeCountAttachmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: MEQSSupplierAttachmentWhereInput
+  }
+
+
+  /**
+   * MEQSSupplierCountOutputType without action
+   */
+  export type MEQSSupplierCountOutputTypeCountMeqs_supplier_itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MEQSSupplierItemWhereInput
   }
 
 
@@ -2932,7 +2932,6 @@ export namespace Prisma {
     updated_at?: boolean
     is_deleted?: boolean
     MEQSSupplier?: boolean | Supplier$MEQSSupplierArgs<ExtArgs>
-    meqs_supplier_items?: boolean | Supplier$meqs_supplier_itemsArgs<ExtArgs>
     _count?: boolean | SupplierCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["supplier"]>
 
@@ -2947,7 +2946,6 @@ export namespace Prisma {
 
   export type SupplierInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     MEQSSupplier?: boolean | Supplier$MEQSSupplierArgs<ExtArgs>
-    meqs_supplier_items?: boolean | Supplier$meqs_supplier_itemsArgs<ExtArgs>
     _count?: boolean | SupplierCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -2956,7 +2954,6 @@ export namespace Prisma {
     name: "Supplier"
     objects: {
       MEQSSupplier: Prisma.$MEQSSupplierPayload<ExtArgs>[]
-      meqs_supplier_items: Prisma.$MEQSSupplierItemPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3332,8 +3329,6 @@ export namespace Prisma {
 
     MEQSSupplier<T extends Supplier$MEQSSupplierArgs<ExtArgs> = {}>(args?: Subset<T, Supplier$MEQSSupplierArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MEQSSupplierPayload<ExtArgs>, T, 'findMany'> | Null>;
 
-    meqs_supplier_items<T extends Supplier$meqs_supplier_itemsArgs<ExtArgs> = {}>(args?: Subset<T, Supplier$meqs_supplier_itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MEQSSupplierItemPayload<ExtArgs>, T, 'findMany'> | Null>;
-
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3697,27 +3692,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: MEQSSupplierScalarFieldEnum | MEQSSupplierScalarFieldEnum[]
-  }
-
-
-  /**
-   * Supplier.meqs_supplier_items
-   */
-  export type Supplier$meqs_supplier_itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MEQSSupplierItem
-     */
-    select?: MEQSSupplierItemSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: MEQSSupplierItemInclude<ExtArgs> | null
-    where?: MEQSSupplierItemWhereInput
-    orderBy?: MEQSSupplierItemOrderByWithRelationInput | MEQSSupplierItemOrderByWithRelationInput[]
-    cursor?: MEQSSupplierItemWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: MEQSSupplierItemScalarFieldEnum | MEQSSupplierItemScalarFieldEnum[]
   }
 
 
@@ -16398,6 +16372,7 @@ export namespace Prisma {
     meqs?: boolean | MEQSDefaultArgs<ExtArgs>
     supplier?: boolean | SupplierDefaultArgs<ExtArgs>
     attachments?: boolean | MEQSSupplier$attachmentsArgs<ExtArgs>
+    meqs_supplier_items?: boolean | MEQSSupplier$meqs_supplier_itemsArgs<ExtArgs>
     po?: boolean | MEQSSupplier$poArgs<ExtArgs>
     _count?: boolean | MEQSSupplierCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["mEQSSupplier"]>
@@ -16417,6 +16392,7 @@ export namespace Prisma {
     meqs?: boolean | MEQSDefaultArgs<ExtArgs>
     supplier?: boolean | SupplierDefaultArgs<ExtArgs>
     attachments?: boolean | MEQSSupplier$attachmentsArgs<ExtArgs>
+    meqs_supplier_items?: boolean | MEQSSupplier$meqs_supplier_itemsArgs<ExtArgs>
     po?: boolean | MEQSSupplier$poArgs<ExtArgs>
     _count?: boolean | MEQSSupplierCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -16428,6 +16404,7 @@ export namespace Prisma {
       meqs: Prisma.$MEQSPayload<ExtArgs>
       supplier: Prisma.$SupplierPayload<ExtArgs>
       attachments: Prisma.$MEQSSupplierAttachmentPayload<ExtArgs>[]
+      meqs_supplier_items: Prisma.$MEQSSupplierItemPayload<ExtArgs>[]
       po: Prisma.$POPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -16810,6 +16787,8 @@ export namespace Prisma {
 
     attachments<T extends MEQSSupplier$attachmentsArgs<ExtArgs> = {}>(args?: Subset<T, MEQSSupplier$attachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MEQSSupplierAttachmentPayload<ExtArgs>, T, 'findMany'> | Null>;
 
+    meqs_supplier_items<T extends MEQSSupplier$meqs_supplier_itemsArgs<ExtArgs> = {}>(args?: Subset<T, MEQSSupplier$meqs_supplier_itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MEQSSupplierItemPayload<ExtArgs>, T, 'findMany'> | Null>;
+
     po<T extends MEQSSupplier$poArgs<ExtArgs> = {}>(args?: Subset<T, MEQSSupplier$poArgs<ExtArgs>>): Prisma__POClient<$Result.GetResult<Prisma.$POPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
 
     /**
@@ -17181,6 +17160,27 @@ export namespace Prisma {
 
 
   /**
+   * MEQSSupplier.meqs_supplier_items
+   */
+  export type MEQSSupplier$meqs_supplier_itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MEQSSupplierItem
+     */
+    select?: MEQSSupplierItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: MEQSSupplierItemInclude<ExtArgs> | null
+    where?: MEQSSupplierItemWhereInput
+    orderBy?: MEQSSupplierItemOrderByWithRelationInput | MEQSSupplierItemOrderByWithRelationInput[]
+    cursor?: MEQSSupplierItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MEQSSupplierItemScalarFieldEnum | MEQSSupplierItemScalarFieldEnum[]
+  }
+
+
+  /**
    * MEQSSupplier.po
    */
   export type MEQSSupplier$poArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -17226,10 +17226,12 @@ export namespace Prisma {
 
   export type MEQSSupplierItemAvgAggregateOutputType = {
     price: number | null
+    vat_type: number | null
   }
 
   export type MEQSSupplierItemSumAggregateOutputType = {
     price: number | null
+    vat_type: number | null
   }
 
   export type MEQSSupplierItemMinAggregateOutputType = {
@@ -17239,6 +17241,7 @@ export namespace Prisma {
     price: number | null
     is_awarded: boolean | null
     notes: string | null
+    vat_type: number | null
     created_at: Date | null
     updated_at: Date | null
     is_deleted: boolean | null
@@ -17251,6 +17254,7 @@ export namespace Prisma {
     price: number | null
     is_awarded: boolean | null
     notes: string | null
+    vat_type: number | null
     created_at: Date | null
     updated_at: Date | null
     is_deleted: boolean | null
@@ -17263,6 +17267,7 @@ export namespace Prisma {
     price: number
     is_awarded: number
     notes: number
+    vat_type: number
     created_at: number
     updated_at: number
     is_deleted: number
@@ -17272,10 +17277,12 @@ export namespace Prisma {
 
   export type MEQSSupplierItemAvgAggregateInputType = {
     price?: true
+    vat_type?: true
   }
 
   export type MEQSSupplierItemSumAggregateInputType = {
     price?: true
+    vat_type?: true
   }
 
   export type MEQSSupplierItemMinAggregateInputType = {
@@ -17285,6 +17292,7 @@ export namespace Prisma {
     price?: true
     is_awarded?: true
     notes?: true
+    vat_type?: true
     created_at?: true
     updated_at?: true
     is_deleted?: true
@@ -17297,6 +17305,7 @@ export namespace Prisma {
     price?: true
     is_awarded?: true
     notes?: true
+    vat_type?: true
     created_at?: true
     updated_at?: true
     is_deleted?: true
@@ -17309,6 +17318,7 @@ export namespace Prisma {
     price?: true
     is_awarded?: true
     notes?: true
+    vat_type?: true
     created_at?: true
     updated_at?: true
     is_deleted?: true
@@ -17408,6 +17418,7 @@ export namespace Prisma {
     price: number
     is_awarded: boolean
     notes: string | null
+    vat_type: number
     created_at: Date
     updated_at: Date
     is_deleted: boolean
@@ -17439,11 +17450,12 @@ export namespace Prisma {
     price?: boolean
     is_awarded?: boolean
     notes?: boolean
+    vat_type?: boolean
     created_at?: boolean
     updated_at?: boolean
     is_deleted?: boolean
     canvass_item?: boolean | CanvassItemDefaultArgs<ExtArgs>
-    meqs_supplier?: boolean | SupplierDefaultArgs<ExtArgs>
+    meqs_supplier?: boolean | MEQSSupplierDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["mEQSSupplierItem"]>
 
   export type MEQSSupplierItemSelectScalar = {
@@ -17453,6 +17465,7 @@ export namespace Prisma {
     price?: boolean
     is_awarded?: boolean
     notes?: boolean
+    vat_type?: boolean
     created_at?: boolean
     updated_at?: boolean
     is_deleted?: boolean
@@ -17460,7 +17473,7 @@ export namespace Prisma {
 
   export type MEQSSupplierItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     canvass_item?: boolean | CanvassItemDefaultArgs<ExtArgs>
-    meqs_supplier?: boolean | SupplierDefaultArgs<ExtArgs>
+    meqs_supplier?: boolean | MEQSSupplierDefaultArgs<ExtArgs>
   }
 
 
@@ -17468,7 +17481,7 @@ export namespace Prisma {
     name: "MEQSSupplierItem"
     objects: {
       canvass_item: Prisma.$CanvassItemPayload<ExtArgs>
-      meqs_supplier: Prisma.$SupplierPayload<ExtArgs>
+      meqs_supplier: Prisma.$MEQSSupplierPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -17477,6 +17490,7 @@ export namespace Prisma {
       price: number
       is_awarded: boolean
       notes: string | null
+      vat_type: number
       created_at: Date
       updated_at: Date
       is_deleted: boolean
@@ -17847,7 +17861,7 @@ export namespace Prisma {
 
     canvass_item<T extends CanvassItemDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CanvassItemDefaultArgs<ExtArgs>>): Prisma__CanvassItemClient<$Result.GetResult<Prisma.$CanvassItemPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
-    meqs_supplier<T extends SupplierDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SupplierDefaultArgs<ExtArgs>>): Prisma__SupplierClient<$Result.GetResult<Prisma.$SupplierPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+    meqs_supplier<T extends MEQSSupplierDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MEQSSupplierDefaultArgs<ExtArgs>>): Prisma__MEQSSupplierClient<$Result.GetResult<Prisma.$MEQSSupplierPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -17883,6 +17897,7 @@ export namespace Prisma {
     readonly price: FieldRef<"MEQSSupplierItem", 'Float'>
     readonly is_awarded: FieldRef<"MEQSSupplierItem", 'Boolean'>
     readonly notes: FieldRef<"MEQSSupplierItem", 'String'>
+    readonly vat_type: FieldRef<"MEQSSupplierItem", 'Int'>
     readonly created_at: FieldRef<"MEQSSupplierItem", 'DateTime'>
     readonly updated_at: FieldRef<"MEQSSupplierItem", 'DateTime'>
     readonly is_deleted: FieldRef<"MEQSSupplierItem", 'Boolean'>
@@ -22474,6 +22489,7 @@ export namespace Prisma {
     price: 'price',
     is_awarded: 'is_awarded',
     notes: 'notes',
+    vat_type: 'vat_type',
     created_at: 'created_at',
     updated_at: 'updated_at',
     is_deleted: 'is_deleted'
@@ -22651,7 +22667,6 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"Supplier"> | Date | string
     is_deleted?: BoolFilter<"Supplier"> | boolean
     MEQSSupplier?: MEQSSupplierListRelationFilter
-    meqs_supplier_items?: MEQSSupplierItemListRelationFilter
   }
 
   export type SupplierOrderByWithRelationInput = {
@@ -22662,7 +22677,6 @@ export namespace Prisma {
     updated_at?: SortOrder
     is_deleted?: SortOrder
     MEQSSupplier?: MEQSSupplierOrderByRelationAggregateInput
-    meqs_supplier_items?: MEQSSupplierItemOrderByRelationAggregateInput
   }
 
   export type SupplierWhereUniqueInput = Prisma.AtLeast<{
@@ -22676,7 +22690,6 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"Supplier"> | Date | string
     is_deleted?: BoolFilter<"Supplier"> | boolean
     MEQSSupplier?: MEQSSupplierListRelationFilter
-    meqs_supplier_items?: MEQSSupplierItemListRelationFilter
   }, "id">
 
   export type SupplierOrderByWithAggregationInput = {
@@ -23760,6 +23773,7 @@ export namespace Prisma {
     meqs?: XOR<MEQSRelationFilter, MEQSWhereInput>
     supplier?: XOR<SupplierRelationFilter, SupplierWhereInput>
     attachments?: MEQSSupplierAttachmentListRelationFilter
+    meqs_supplier_items?: MEQSSupplierItemListRelationFilter
     po?: XOR<PONullableRelationFilter, POWhereInput> | null
   }
 
@@ -23775,6 +23789,7 @@ export namespace Prisma {
     meqs?: MEQSOrderByWithRelationInput
     supplier?: SupplierOrderByWithRelationInput
     attachments?: MEQSSupplierAttachmentOrderByRelationAggregateInput
+    meqs_supplier_items?: MEQSSupplierItemOrderByRelationAggregateInput
     po?: POOrderByWithRelationInput
   }
 
@@ -23793,6 +23808,7 @@ export namespace Prisma {
     meqs?: XOR<MEQSRelationFilter, MEQSWhereInput>
     supplier?: XOR<SupplierRelationFilter, SupplierWhereInput>
     attachments?: MEQSSupplierAttachmentListRelationFilter
+    meqs_supplier_items?: MEQSSupplierItemListRelationFilter
     po?: XOR<PONullableRelationFilter, POWhereInput> | null
   }, "id">
 
@@ -23834,11 +23850,12 @@ export namespace Prisma {
     price?: FloatFilter<"MEQSSupplierItem"> | number
     is_awarded?: BoolFilter<"MEQSSupplierItem"> | boolean
     notes?: StringNullableFilter<"MEQSSupplierItem"> | string | null
+    vat_type?: IntFilter<"MEQSSupplierItem"> | number
     created_at?: DateTimeFilter<"MEQSSupplierItem"> | Date | string
     updated_at?: DateTimeFilter<"MEQSSupplierItem"> | Date | string
     is_deleted?: BoolFilter<"MEQSSupplierItem"> | boolean
     canvass_item?: XOR<CanvassItemRelationFilter, CanvassItemWhereInput>
-    meqs_supplier?: XOR<SupplierRelationFilter, SupplierWhereInput>
+    meqs_supplier?: XOR<MEQSSupplierRelationFilter, MEQSSupplierWhereInput>
   }
 
   export type MEQSSupplierItemOrderByWithRelationInput = {
@@ -23848,11 +23865,12 @@ export namespace Prisma {
     price?: SortOrder
     is_awarded?: SortOrder
     notes?: SortOrderInput | SortOrder
+    vat_type?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
     canvass_item?: CanvassItemOrderByWithRelationInput
-    meqs_supplier?: SupplierOrderByWithRelationInput
+    meqs_supplier?: MEQSSupplierOrderByWithRelationInput
   }
 
   export type MEQSSupplierItemWhereUniqueInput = Prisma.AtLeast<{
@@ -23865,11 +23883,12 @@ export namespace Prisma {
     price?: FloatFilter<"MEQSSupplierItem"> | number
     is_awarded?: BoolFilter<"MEQSSupplierItem"> | boolean
     notes?: StringNullableFilter<"MEQSSupplierItem"> | string | null
+    vat_type?: IntFilter<"MEQSSupplierItem"> | number
     created_at?: DateTimeFilter<"MEQSSupplierItem"> | Date | string
     updated_at?: DateTimeFilter<"MEQSSupplierItem"> | Date | string
     is_deleted?: BoolFilter<"MEQSSupplierItem"> | boolean
     canvass_item?: XOR<CanvassItemRelationFilter, CanvassItemWhereInput>
-    meqs_supplier?: XOR<SupplierRelationFilter, SupplierWhereInput>
+    meqs_supplier?: XOR<MEQSSupplierRelationFilter, MEQSSupplierWhereInput>
   }, "id">
 
   export type MEQSSupplierItemOrderByWithAggregationInput = {
@@ -23879,6 +23898,7 @@ export namespace Prisma {
     price?: SortOrder
     is_awarded?: SortOrder
     notes?: SortOrderInput | SortOrder
+    vat_type?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -23899,6 +23919,7 @@ export namespace Prisma {
     price?: FloatWithAggregatesFilter<"MEQSSupplierItem"> | number
     is_awarded?: BoolWithAggregatesFilter<"MEQSSupplierItem"> | boolean
     notes?: StringNullableWithAggregatesFilter<"MEQSSupplierItem"> | string | null
+    vat_type?: IntWithAggregatesFilter<"MEQSSupplierItem"> | number
     created_at?: DateTimeWithAggregatesFilter<"MEQSSupplierItem"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"MEQSSupplierItem"> | Date | string
     is_deleted?: BoolWithAggregatesFilter<"MEQSSupplierItem"> | boolean
@@ -24236,7 +24257,6 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     MEQSSupplier?: MEQSSupplierCreateNestedManyWithoutSupplierInput
-    meqs_supplier_items?: MEQSSupplierItemCreateNestedManyWithoutMeqs_supplierInput
   }
 
   export type SupplierUncheckedCreateInput = {
@@ -24247,7 +24267,6 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     MEQSSupplier?: MEQSSupplierUncheckedCreateNestedManyWithoutSupplierInput
-    meqs_supplier_items?: MEQSSupplierItemUncheckedCreateNestedManyWithoutMeqs_supplierInput
   }
 
   export type SupplierUpdateInput = {
@@ -24258,7 +24277,6 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     MEQSSupplier?: MEQSSupplierUpdateManyWithoutSupplierNestedInput
-    meqs_supplier_items?: MEQSSupplierItemUpdateManyWithoutMeqs_supplierNestedInput
   }
 
   export type SupplierUncheckedUpdateInput = {
@@ -24269,7 +24287,6 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     MEQSSupplier?: MEQSSupplierUncheckedUpdateManyWithoutSupplierNestedInput
-    meqs_supplier_items?: MEQSSupplierItemUncheckedUpdateManyWithoutMeqs_supplierNestedInput
   }
 
   export type SupplierCreateManyInput = {
@@ -25473,6 +25490,7 @@ export namespace Prisma {
     meqs: MEQSCreateNestedOneWithoutMeqs_suppliersInput
     supplier: SupplierCreateNestedOneWithoutMEQSSupplierInput
     attachments?: MEQSSupplierAttachmentCreateNestedManyWithoutMeqs_supplierInput
+    meqs_supplier_items?: MEQSSupplierItemCreateNestedManyWithoutMeqs_supplierInput
     po?: POCreateNestedOneWithoutMeqs_supplierInput
   }
 
@@ -25486,6 +25504,7 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     attachments?: MEQSSupplierAttachmentUncheckedCreateNestedManyWithoutMeqs_supplierInput
+    meqs_supplier_items?: MEQSSupplierItemUncheckedCreateNestedManyWithoutMeqs_supplierInput
     po?: POUncheckedCreateNestedOneWithoutMeqs_supplierInput
   }
 
@@ -25499,6 +25518,7 @@ export namespace Prisma {
     meqs?: MEQSUpdateOneRequiredWithoutMeqs_suppliersNestedInput
     supplier?: SupplierUpdateOneRequiredWithoutMEQSSupplierNestedInput
     attachments?: MEQSSupplierAttachmentUpdateManyWithoutMeqs_supplierNestedInput
+    meqs_supplier_items?: MEQSSupplierItemUpdateManyWithoutMeqs_supplierNestedInput
     po?: POUpdateOneWithoutMeqs_supplierNestedInput
   }
 
@@ -25512,6 +25532,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     attachments?: MEQSSupplierAttachmentUncheckedUpdateManyWithoutMeqs_supplierNestedInput
+    meqs_supplier_items?: MEQSSupplierItemUncheckedUpdateManyWithoutMeqs_supplierNestedInput
     po?: POUncheckedUpdateOneWithoutMeqs_supplierNestedInput
   }
 
@@ -25551,11 +25572,12 @@ export namespace Prisma {
     price: number
     is_awarded?: boolean
     notes?: string | null
+    vat_type?: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
     canvass_item: CanvassItemCreateNestedOneWithoutMeqs_supplier_itemsInput
-    meqs_supplier: SupplierCreateNestedOneWithoutMeqs_supplier_itemsInput
+    meqs_supplier: MEQSSupplierCreateNestedOneWithoutMeqs_supplier_itemsInput
   }
 
   export type MEQSSupplierItemUncheckedCreateInput = {
@@ -25565,6 +25587,7 @@ export namespace Prisma {
     price: number
     is_awarded?: boolean
     notes?: string | null
+    vat_type?: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -25575,11 +25598,12 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     is_awarded?: BoolFieldUpdateOperationsInput | boolean
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    vat_type?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     canvass_item?: CanvassItemUpdateOneRequiredWithoutMeqs_supplier_itemsNestedInput
-    meqs_supplier?: SupplierUpdateOneRequiredWithoutMeqs_supplier_itemsNestedInput
+    meqs_supplier?: MEQSSupplierUpdateOneRequiredWithoutMeqs_supplier_itemsNestedInput
   }
 
   export type MEQSSupplierItemUncheckedUpdateInput = {
@@ -25589,6 +25613,7 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     is_awarded?: BoolFieldUpdateOperationsInput | boolean
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    vat_type?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -25601,6 +25626,7 @@ export namespace Prisma {
     price: number
     is_awarded?: boolean
     notes?: string | null
+    vat_type?: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -25611,6 +25637,7 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     is_awarded?: BoolFieldUpdateOperationsInput | boolean
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    vat_type?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -25623,6 +25650,7 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     is_awarded?: BoolFieldUpdateOperationsInput | boolean
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    vat_type?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -26022,17 +26050,7 @@ export namespace Prisma {
     none?: MEQSSupplierWhereInput
   }
 
-  export type MEQSSupplierItemListRelationFilter = {
-    every?: MEQSSupplierItemWhereInput
-    some?: MEQSSupplierItemWhereInput
-    none?: MEQSSupplierItemWhereInput
-  }
-
   export type MEQSSupplierOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type MEQSSupplierItemOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -26239,9 +26257,19 @@ export namespace Prisma {
     isNot?: UnitWhereInput
   }
 
+  export type MEQSSupplierItemListRelationFilter = {
+    every?: MEQSSupplierItemWhereInput
+    some?: MEQSSupplierItemWhereInput
+    none?: MEQSSupplierItemWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
+  }
+
+  export type MEQSSupplierItemOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type CanvassItemCountOrderByAggregateInput = {
@@ -26931,6 +26959,11 @@ export namespace Prisma {
     isNot?: CanvassItemWhereInput
   }
 
+  export type MEQSSupplierRelationFilter = {
+    is?: MEQSSupplierWhereInput
+    isNot?: MEQSSupplierWhereInput
+  }
+
   export type MEQSSupplierItemCountOrderByAggregateInput = {
     id?: SortOrder
     canvass_item_id?: SortOrder
@@ -26938,6 +26971,7 @@ export namespace Prisma {
     price?: SortOrder
     is_awarded?: SortOrder
     notes?: SortOrder
+    vat_type?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -26945,6 +26979,7 @@ export namespace Prisma {
 
   export type MEQSSupplierItemAvgOrderByAggregateInput = {
     price?: SortOrder
+    vat_type?: SortOrder
   }
 
   export type MEQSSupplierItemMaxOrderByAggregateInput = {
@@ -26954,6 +26989,7 @@ export namespace Prisma {
     price?: SortOrder
     is_awarded?: SortOrder
     notes?: SortOrder
+    vat_type?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -26966,6 +27002,7 @@ export namespace Prisma {
     price?: SortOrder
     is_awarded?: SortOrder
     notes?: SortOrder
+    vat_type?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -26973,6 +27010,7 @@ export namespace Prisma {
 
   export type MEQSSupplierItemSumOrderByAggregateInput = {
     price?: SortOrder
+    vat_type?: SortOrder
   }
 
   export type FloatWithAggregatesFilter<$PrismaModel = never> = {
@@ -26989,11 +27027,6 @@ export namespace Prisma {
     _sum?: NestedFloatFilter<$PrismaModel>
     _min?: NestedFloatFilter<$PrismaModel>
     _max?: NestedFloatFilter<$PrismaModel>
-  }
-
-  export type MEQSSupplierRelationFilter = {
-    is?: MEQSSupplierWhereInput
-    isNot?: MEQSSupplierWhereInput
   }
 
   export type MEQSSupplierAttachmentCountOrderByAggregateInput = {
@@ -27199,25 +27232,11 @@ export namespace Prisma {
     connect?: MEQSSupplierWhereUniqueInput | MEQSSupplierWhereUniqueInput[]
   }
 
-  export type MEQSSupplierItemCreateNestedManyWithoutMeqs_supplierInput = {
-    create?: XOR<MEQSSupplierItemCreateWithoutMeqs_supplierInput, MEQSSupplierItemUncheckedCreateWithoutMeqs_supplierInput> | MEQSSupplierItemCreateWithoutMeqs_supplierInput[] | MEQSSupplierItemUncheckedCreateWithoutMeqs_supplierInput[]
-    connectOrCreate?: MEQSSupplierItemCreateOrConnectWithoutMeqs_supplierInput | MEQSSupplierItemCreateOrConnectWithoutMeqs_supplierInput[]
-    createMany?: MEQSSupplierItemCreateManyMeqs_supplierInputEnvelope
-    connect?: MEQSSupplierItemWhereUniqueInput | MEQSSupplierItemWhereUniqueInput[]
-  }
-
   export type MEQSSupplierUncheckedCreateNestedManyWithoutSupplierInput = {
     create?: XOR<MEQSSupplierCreateWithoutSupplierInput, MEQSSupplierUncheckedCreateWithoutSupplierInput> | MEQSSupplierCreateWithoutSupplierInput[] | MEQSSupplierUncheckedCreateWithoutSupplierInput[]
     connectOrCreate?: MEQSSupplierCreateOrConnectWithoutSupplierInput | MEQSSupplierCreateOrConnectWithoutSupplierInput[]
     createMany?: MEQSSupplierCreateManySupplierInputEnvelope
     connect?: MEQSSupplierWhereUniqueInput | MEQSSupplierWhereUniqueInput[]
-  }
-
-  export type MEQSSupplierItemUncheckedCreateNestedManyWithoutMeqs_supplierInput = {
-    create?: XOR<MEQSSupplierItemCreateWithoutMeqs_supplierInput, MEQSSupplierItemUncheckedCreateWithoutMeqs_supplierInput> | MEQSSupplierItemCreateWithoutMeqs_supplierInput[] | MEQSSupplierItemUncheckedCreateWithoutMeqs_supplierInput[]
-    connectOrCreate?: MEQSSupplierItemCreateOrConnectWithoutMeqs_supplierInput | MEQSSupplierItemCreateOrConnectWithoutMeqs_supplierInput[]
-    createMany?: MEQSSupplierItemCreateManyMeqs_supplierInputEnvelope
-    connect?: MEQSSupplierItemWhereUniqueInput | MEQSSupplierItemWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -27246,20 +27265,6 @@ export namespace Prisma {
     deleteMany?: MEQSSupplierScalarWhereInput | MEQSSupplierScalarWhereInput[]
   }
 
-  export type MEQSSupplierItemUpdateManyWithoutMeqs_supplierNestedInput = {
-    create?: XOR<MEQSSupplierItemCreateWithoutMeqs_supplierInput, MEQSSupplierItemUncheckedCreateWithoutMeqs_supplierInput> | MEQSSupplierItemCreateWithoutMeqs_supplierInput[] | MEQSSupplierItemUncheckedCreateWithoutMeqs_supplierInput[]
-    connectOrCreate?: MEQSSupplierItemCreateOrConnectWithoutMeqs_supplierInput | MEQSSupplierItemCreateOrConnectWithoutMeqs_supplierInput[]
-    upsert?: MEQSSupplierItemUpsertWithWhereUniqueWithoutMeqs_supplierInput | MEQSSupplierItemUpsertWithWhereUniqueWithoutMeqs_supplierInput[]
-    createMany?: MEQSSupplierItemCreateManyMeqs_supplierInputEnvelope
-    set?: MEQSSupplierItemWhereUniqueInput | MEQSSupplierItemWhereUniqueInput[]
-    disconnect?: MEQSSupplierItemWhereUniqueInput | MEQSSupplierItemWhereUniqueInput[]
-    delete?: MEQSSupplierItemWhereUniqueInput | MEQSSupplierItemWhereUniqueInput[]
-    connect?: MEQSSupplierItemWhereUniqueInput | MEQSSupplierItemWhereUniqueInput[]
-    update?: MEQSSupplierItemUpdateWithWhereUniqueWithoutMeqs_supplierInput | MEQSSupplierItemUpdateWithWhereUniqueWithoutMeqs_supplierInput[]
-    updateMany?: MEQSSupplierItemUpdateManyWithWhereWithoutMeqs_supplierInput | MEQSSupplierItemUpdateManyWithWhereWithoutMeqs_supplierInput[]
-    deleteMany?: MEQSSupplierItemScalarWhereInput | MEQSSupplierItemScalarWhereInput[]
-  }
-
   export type MEQSSupplierUncheckedUpdateManyWithoutSupplierNestedInput = {
     create?: XOR<MEQSSupplierCreateWithoutSupplierInput, MEQSSupplierUncheckedCreateWithoutSupplierInput> | MEQSSupplierCreateWithoutSupplierInput[] | MEQSSupplierUncheckedCreateWithoutSupplierInput[]
     connectOrCreate?: MEQSSupplierCreateOrConnectWithoutSupplierInput | MEQSSupplierCreateOrConnectWithoutSupplierInput[]
@@ -27272,20 +27277,6 @@ export namespace Prisma {
     update?: MEQSSupplierUpdateWithWhereUniqueWithoutSupplierInput | MEQSSupplierUpdateWithWhereUniqueWithoutSupplierInput[]
     updateMany?: MEQSSupplierUpdateManyWithWhereWithoutSupplierInput | MEQSSupplierUpdateManyWithWhereWithoutSupplierInput[]
     deleteMany?: MEQSSupplierScalarWhereInput | MEQSSupplierScalarWhereInput[]
-  }
-
-  export type MEQSSupplierItemUncheckedUpdateManyWithoutMeqs_supplierNestedInput = {
-    create?: XOR<MEQSSupplierItemCreateWithoutMeqs_supplierInput, MEQSSupplierItemUncheckedCreateWithoutMeqs_supplierInput> | MEQSSupplierItemCreateWithoutMeqs_supplierInput[] | MEQSSupplierItemUncheckedCreateWithoutMeqs_supplierInput[]
-    connectOrCreate?: MEQSSupplierItemCreateOrConnectWithoutMeqs_supplierInput | MEQSSupplierItemCreateOrConnectWithoutMeqs_supplierInput[]
-    upsert?: MEQSSupplierItemUpsertWithWhereUniqueWithoutMeqs_supplierInput | MEQSSupplierItemUpsertWithWhereUniqueWithoutMeqs_supplierInput[]
-    createMany?: MEQSSupplierItemCreateManyMeqs_supplierInputEnvelope
-    set?: MEQSSupplierItemWhereUniqueInput | MEQSSupplierItemWhereUniqueInput[]
-    disconnect?: MEQSSupplierItemWhereUniqueInput | MEQSSupplierItemWhereUniqueInput[]
-    delete?: MEQSSupplierItemWhereUniqueInput | MEQSSupplierItemWhereUniqueInput[]
-    connect?: MEQSSupplierItemWhereUniqueInput | MEQSSupplierItemWhereUniqueInput[]
-    update?: MEQSSupplierItemUpdateWithWhereUniqueWithoutMeqs_supplierInput | MEQSSupplierItemUpdateWithWhereUniqueWithoutMeqs_supplierInput[]
-    updateMany?: MEQSSupplierItemUpdateManyWithWhereWithoutMeqs_supplierInput | MEQSSupplierItemUpdateManyWithWhereWithoutMeqs_supplierInput[]
-    deleteMany?: MEQSSupplierItemScalarWhereInput | MEQSSupplierItemScalarWhereInput[]
   }
 
   export type CanvassItemCreateNestedManyWithoutUnitInput = {
@@ -28125,6 +28116,13 @@ export namespace Prisma {
     connect?: MEQSSupplierAttachmentWhereUniqueInput | MEQSSupplierAttachmentWhereUniqueInput[]
   }
 
+  export type MEQSSupplierItemCreateNestedManyWithoutMeqs_supplierInput = {
+    create?: XOR<MEQSSupplierItemCreateWithoutMeqs_supplierInput, MEQSSupplierItemUncheckedCreateWithoutMeqs_supplierInput> | MEQSSupplierItemCreateWithoutMeqs_supplierInput[] | MEQSSupplierItemUncheckedCreateWithoutMeqs_supplierInput[]
+    connectOrCreate?: MEQSSupplierItemCreateOrConnectWithoutMeqs_supplierInput | MEQSSupplierItemCreateOrConnectWithoutMeqs_supplierInput[]
+    createMany?: MEQSSupplierItemCreateManyMeqs_supplierInputEnvelope
+    connect?: MEQSSupplierItemWhereUniqueInput | MEQSSupplierItemWhereUniqueInput[]
+  }
+
   export type POCreateNestedOneWithoutMeqs_supplierInput = {
     create?: XOR<POCreateWithoutMeqs_supplierInput, POUncheckedCreateWithoutMeqs_supplierInput>
     connectOrCreate?: POCreateOrConnectWithoutMeqs_supplierInput
@@ -28136,6 +28134,13 @@ export namespace Prisma {
     connectOrCreate?: MEQSSupplierAttachmentCreateOrConnectWithoutMeqs_supplierInput | MEQSSupplierAttachmentCreateOrConnectWithoutMeqs_supplierInput[]
     createMany?: MEQSSupplierAttachmentCreateManyMeqs_supplierInputEnvelope
     connect?: MEQSSupplierAttachmentWhereUniqueInput | MEQSSupplierAttachmentWhereUniqueInput[]
+  }
+
+  export type MEQSSupplierItemUncheckedCreateNestedManyWithoutMeqs_supplierInput = {
+    create?: XOR<MEQSSupplierItemCreateWithoutMeqs_supplierInput, MEQSSupplierItemUncheckedCreateWithoutMeqs_supplierInput> | MEQSSupplierItemCreateWithoutMeqs_supplierInput[] | MEQSSupplierItemUncheckedCreateWithoutMeqs_supplierInput[]
+    connectOrCreate?: MEQSSupplierItemCreateOrConnectWithoutMeqs_supplierInput | MEQSSupplierItemCreateOrConnectWithoutMeqs_supplierInput[]
+    createMany?: MEQSSupplierItemCreateManyMeqs_supplierInputEnvelope
+    connect?: MEQSSupplierItemWhereUniqueInput | MEQSSupplierItemWhereUniqueInput[]
   }
 
   export type POUncheckedCreateNestedOneWithoutMeqs_supplierInput = {
@@ -28174,6 +28179,20 @@ export namespace Prisma {
     deleteMany?: MEQSSupplierAttachmentScalarWhereInput | MEQSSupplierAttachmentScalarWhereInput[]
   }
 
+  export type MEQSSupplierItemUpdateManyWithoutMeqs_supplierNestedInput = {
+    create?: XOR<MEQSSupplierItemCreateWithoutMeqs_supplierInput, MEQSSupplierItemUncheckedCreateWithoutMeqs_supplierInput> | MEQSSupplierItemCreateWithoutMeqs_supplierInput[] | MEQSSupplierItemUncheckedCreateWithoutMeqs_supplierInput[]
+    connectOrCreate?: MEQSSupplierItemCreateOrConnectWithoutMeqs_supplierInput | MEQSSupplierItemCreateOrConnectWithoutMeqs_supplierInput[]
+    upsert?: MEQSSupplierItemUpsertWithWhereUniqueWithoutMeqs_supplierInput | MEQSSupplierItemUpsertWithWhereUniqueWithoutMeqs_supplierInput[]
+    createMany?: MEQSSupplierItemCreateManyMeqs_supplierInputEnvelope
+    set?: MEQSSupplierItemWhereUniqueInput | MEQSSupplierItemWhereUniqueInput[]
+    disconnect?: MEQSSupplierItemWhereUniqueInput | MEQSSupplierItemWhereUniqueInput[]
+    delete?: MEQSSupplierItemWhereUniqueInput | MEQSSupplierItemWhereUniqueInput[]
+    connect?: MEQSSupplierItemWhereUniqueInput | MEQSSupplierItemWhereUniqueInput[]
+    update?: MEQSSupplierItemUpdateWithWhereUniqueWithoutMeqs_supplierInput | MEQSSupplierItemUpdateWithWhereUniqueWithoutMeqs_supplierInput[]
+    updateMany?: MEQSSupplierItemUpdateManyWithWhereWithoutMeqs_supplierInput | MEQSSupplierItemUpdateManyWithWhereWithoutMeqs_supplierInput[]
+    deleteMany?: MEQSSupplierItemScalarWhereInput | MEQSSupplierItemScalarWhereInput[]
+  }
+
   export type POUpdateOneWithoutMeqs_supplierNestedInput = {
     create?: XOR<POCreateWithoutMeqs_supplierInput, POUncheckedCreateWithoutMeqs_supplierInput>
     connectOrCreate?: POCreateOrConnectWithoutMeqs_supplierInput
@@ -28198,6 +28217,20 @@ export namespace Prisma {
     deleteMany?: MEQSSupplierAttachmentScalarWhereInput | MEQSSupplierAttachmentScalarWhereInput[]
   }
 
+  export type MEQSSupplierItemUncheckedUpdateManyWithoutMeqs_supplierNestedInput = {
+    create?: XOR<MEQSSupplierItemCreateWithoutMeqs_supplierInput, MEQSSupplierItemUncheckedCreateWithoutMeqs_supplierInput> | MEQSSupplierItemCreateWithoutMeqs_supplierInput[] | MEQSSupplierItemUncheckedCreateWithoutMeqs_supplierInput[]
+    connectOrCreate?: MEQSSupplierItemCreateOrConnectWithoutMeqs_supplierInput | MEQSSupplierItemCreateOrConnectWithoutMeqs_supplierInput[]
+    upsert?: MEQSSupplierItemUpsertWithWhereUniqueWithoutMeqs_supplierInput | MEQSSupplierItemUpsertWithWhereUniqueWithoutMeqs_supplierInput[]
+    createMany?: MEQSSupplierItemCreateManyMeqs_supplierInputEnvelope
+    set?: MEQSSupplierItemWhereUniqueInput | MEQSSupplierItemWhereUniqueInput[]
+    disconnect?: MEQSSupplierItemWhereUniqueInput | MEQSSupplierItemWhereUniqueInput[]
+    delete?: MEQSSupplierItemWhereUniqueInput | MEQSSupplierItemWhereUniqueInput[]
+    connect?: MEQSSupplierItemWhereUniqueInput | MEQSSupplierItemWhereUniqueInput[]
+    update?: MEQSSupplierItemUpdateWithWhereUniqueWithoutMeqs_supplierInput | MEQSSupplierItemUpdateWithWhereUniqueWithoutMeqs_supplierInput[]
+    updateMany?: MEQSSupplierItemUpdateManyWithWhereWithoutMeqs_supplierInput | MEQSSupplierItemUpdateManyWithWhereWithoutMeqs_supplierInput[]
+    deleteMany?: MEQSSupplierItemScalarWhereInput | MEQSSupplierItemScalarWhereInput[]
+  }
+
   export type POUncheckedUpdateOneWithoutMeqs_supplierNestedInput = {
     create?: XOR<POCreateWithoutMeqs_supplierInput, POUncheckedCreateWithoutMeqs_supplierInput>
     connectOrCreate?: POCreateOrConnectWithoutMeqs_supplierInput
@@ -28214,10 +28247,10 @@ export namespace Prisma {
     connect?: CanvassItemWhereUniqueInput
   }
 
-  export type SupplierCreateNestedOneWithoutMeqs_supplier_itemsInput = {
-    create?: XOR<SupplierCreateWithoutMeqs_supplier_itemsInput, SupplierUncheckedCreateWithoutMeqs_supplier_itemsInput>
-    connectOrCreate?: SupplierCreateOrConnectWithoutMeqs_supplier_itemsInput
-    connect?: SupplierWhereUniqueInput
+  export type MEQSSupplierCreateNestedOneWithoutMeqs_supplier_itemsInput = {
+    create?: XOR<MEQSSupplierCreateWithoutMeqs_supplier_itemsInput, MEQSSupplierUncheckedCreateWithoutMeqs_supplier_itemsInput>
+    connectOrCreate?: MEQSSupplierCreateOrConnectWithoutMeqs_supplier_itemsInput
+    connect?: MEQSSupplierWhereUniqueInput
   }
 
   export type FloatFieldUpdateOperationsInput = {
@@ -28236,12 +28269,12 @@ export namespace Prisma {
     update?: XOR<XOR<CanvassItemUpdateToOneWithWhereWithoutMeqs_supplier_itemsInput, CanvassItemUpdateWithoutMeqs_supplier_itemsInput>, CanvassItemUncheckedUpdateWithoutMeqs_supplier_itemsInput>
   }
 
-  export type SupplierUpdateOneRequiredWithoutMeqs_supplier_itemsNestedInput = {
-    create?: XOR<SupplierCreateWithoutMeqs_supplier_itemsInput, SupplierUncheckedCreateWithoutMeqs_supplier_itemsInput>
-    connectOrCreate?: SupplierCreateOrConnectWithoutMeqs_supplier_itemsInput
-    upsert?: SupplierUpsertWithoutMeqs_supplier_itemsInput
-    connect?: SupplierWhereUniqueInput
-    update?: XOR<XOR<SupplierUpdateToOneWithWhereWithoutMeqs_supplier_itemsInput, SupplierUpdateWithoutMeqs_supplier_itemsInput>, SupplierUncheckedUpdateWithoutMeqs_supplier_itemsInput>
+  export type MEQSSupplierUpdateOneRequiredWithoutMeqs_supplier_itemsNestedInput = {
+    create?: XOR<MEQSSupplierCreateWithoutMeqs_supplier_itemsInput, MEQSSupplierUncheckedCreateWithoutMeqs_supplier_itemsInput>
+    connectOrCreate?: MEQSSupplierCreateOrConnectWithoutMeqs_supplier_itemsInput
+    upsert?: MEQSSupplierUpsertWithoutMeqs_supplier_itemsInput
+    connect?: MEQSSupplierWhereUniqueInput
+    update?: XOR<XOR<MEQSSupplierUpdateToOneWithWhereWithoutMeqs_supplier_itemsInput, MEQSSupplierUpdateWithoutMeqs_supplier_itemsInput>, MEQSSupplierUncheckedUpdateWithoutMeqs_supplier_itemsInput>
   }
 
   export type MEQSSupplierCreateNestedOneWithoutAttachmentsInput = {
@@ -28541,6 +28574,7 @@ export namespace Prisma {
     is_deleted?: boolean
     meqs: MEQSCreateNestedOneWithoutMeqs_suppliersInput
     attachments?: MEQSSupplierAttachmentCreateNestedManyWithoutMeqs_supplierInput
+    meqs_supplier_items?: MEQSSupplierItemCreateNestedManyWithoutMeqs_supplierInput
     po?: POCreateNestedOneWithoutMeqs_supplierInput
   }
 
@@ -28553,6 +28587,7 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     attachments?: MEQSSupplierAttachmentUncheckedCreateNestedManyWithoutMeqs_supplierInput
+    meqs_supplier_items?: MEQSSupplierItemUncheckedCreateNestedManyWithoutMeqs_supplierInput
     po?: POUncheckedCreateNestedOneWithoutMeqs_supplierInput
   }
 
@@ -28563,38 +28598,6 @@ export namespace Prisma {
 
   export type MEQSSupplierCreateManySupplierInputEnvelope = {
     data: MEQSSupplierCreateManySupplierInput | MEQSSupplierCreateManySupplierInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type MEQSSupplierItemCreateWithoutMeqs_supplierInput = {
-    id?: string
-    price: number
-    is_awarded?: boolean
-    notes?: string | null
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-    canvass_item: CanvassItemCreateNestedOneWithoutMeqs_supplier_itemsInput
-  }
-
-  export type MEQSSupplierItemUncheckedCreateWithoutMeqs_supplierInput = {
-    id?: string
-    canvass_item_id: string
-    price: number
-    is_awarded?: boolean
-    notes?: string | null
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-  }
-
-  export type MEQSSupplierItemCreateOrConnectWithoutMeqs_supplierInput = {
-    where: MEQSSupplierItemWhereUniqueInput
-    create: XOR<MEQSSupplierItemCreateWithoutMeqs_supplierInput, MEQSSupplierItemUncheckedCreateWithoutMeqs_supplierInput>
-  }
-
-  export type MEQSSupplierItemCreateManyMeqs_supplierInputEnvelope = {
-    data: MEQSSupplierItemCreateManyMeqs_supplierInput | MEQSSupplierItemCreateManyMeqs_supplierInput[]
     skipDuplicates?: boolean
   }
 
@@ -28626,37 +28629,6 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"MEQSSupplier"> | Date | string
     updated_at?: DateTimeFilter<"MEQSSupplier"> | Date | string
     is_deleted?: BoolFilter<"MEQSSupplier"> | boolean
-  }
-
-  export type MEQSSupplierItemUpsertWithWhereUniqueWithoutMeqs_supplierInput = {
-    where: MEQSSupplierItemWhereUniqueInput
-    update: XOR<MEQSSupplierItemUpdateWithoutMeqs_supplierInput, MEQSSupplierItemUncheckedUpdateWithoutMeqs_supplierInput>
-    create: XOR<MEQSSupplierItemCreateWithoutMeqs_supplierInput, MEQSSupplierItemUncheckedCreateWithoutMeqs_supplierInput>
-  }
-
-  export type MEQSSupplierItemUpdateWithWhereUniqueWithoutMeqs_supplierInput = {
-    where: MEQSSupplierItemWhereUniqueInput
-    data: XOR<MEQSSupplierItemUpdateWithoutMeqs_supplierInput, MEQSSupplierItemUncheckedUpdateWithoutMeqs_supplierInput>
-  }
-
-  export type MEQSSupplierItemUpdateManyWithWhereWithoutMeqs_supplierInput = {
-    where: MEQSSupplierItemScalarWhereInput
-    data: XOR<MEQSSupplierItemUpdateManyMutationInput, MEQSSupplierItemUncheckedUpdateManyWithoutMeqs_supplierInput>
-  }
-
-  export type MEQSSupplierItemScalarWhereInput = {
-    AND?: MEQSSupplierItemScalarWhereInput | MEQSSupplierItemScalarWhereInput[]
-    OR?: MEQSSupplierItemScalarWhereInput[]
-    NOT?: MEQSSupplierItemScalarWhereInput | MEQSSupplierItemScalarWhereInput[]
-    id?: StringFilter<"MEQSSupplierItem"> | string
-    canvass_item_id?: StringFilter<"MEQSSupplierItem"> | string
-    meqs_supplier_id?: StringFilter<"MEQSSupplierItem"> | string
-    price?: FloatFilter<"MEQSSupplierItem"> | number
-    is_awarded?: BoolFilter<"MEQSSupplierItem"> | boolean
-    notes?: StringNullableFilter<"MEQSSupplierItem"> | string | null
-    created_at?: DateTimeFilter<"MEQSSupplierItem"> | Date | string
-    updated_at?: DateTimeFilter<"MEQSSupplierItem"> | Date | string
-    is_deleted?: BoolFilter<"MEQSSupplierItem"> | boolean
   }
 
   export type CanvassItemCreateWithoutUnitInput = {
@@ -28937,10 +28909,11 @@ export namespace Prisma {
     price: number
     is_awarded?: boolean
     notes?: string | null
+    vat_type?: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    meqs_supplier: SupplierCreateNestedOneWithoutMeqs_supplier_itemsInput
+    meqs_supplier: MEQSSupplierCreateNestedOneWithoutMeqs_supplier_itemsInput
   }
 
   export type MEQSSupplierItemUncheckedCreateWithoutCanvass_itemInput = {
@@ -28949,6 +28922,7 @@ export namespace Prisma {
     price: number
     is_awarded?: boolean
     notes?: string | null
+    vat_type?: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -29075,6 +29049,22 @@ export namespace Prisma {
   export type MEQSSupplierItemUpdateManyWithWhereWithoutCanvass_itemInput = {
     where: MEQSSupplierItemScalarWhereInput
     data: XOR<MEQSSupplierItemUpdateManyMutationInput, MEQSSupplierItemUncheckedUpdateManyWithoutCanvass_itemInput>
+  }
+
+  export type MEQSSupplierItemScalarWhereInput = {
+    AND?: MEQSSupplierItemScalarWhereInput | MEQSSupplierItemScalarWhereInput[]
+    OR?: MEQSSupplierItemScalarWhereInput[]
+    NOT?: MEQSSupplierItemScalarWhereInput | MEQSSupplierItemScalarWhereInput[]
+    id?: StringFilter<"MEQSSupplierItem"> | string
+    canvass_item_id?: StringFilter<"MEQSSupplierItem"> | string
+    meqs_supplier_id?: StringFilter<"MEQSSupplierItem"> | string
+    price?: FloatFilter<"MEQSSupplierItem"> | number
+    is_awarded?: BoolFilter<"MEQSSupplierItem"> | boolean
+    notes?: StringNullableFilter<"MEQSSupplierItem"> | string | null
+    vat_type?: IntFilter<"MEQSSupplierItem"> | number
+    created_at?: DateTimeFilter<"MEQSSupplierItem"> | Date | string
+    updated_at?: DateTimeFilter<"MEQSSupplierItem"> | Date | string
+    is_deleted?: BoolFilter<"MEQSSupplierItem"> | boolean
   }
 
   export type CanvassItemCreateWithoutCanvassInput = {
@@ -30560,6 +30550,7 @@ export namespace Prisma {
     is_deleted?: boolean
     supplier: SupplierCreateNestedOneWithoutMEQSSupplierInput
     attachments?: MEQSSupplierAttachmentCreateNestedManyWithoutMeqs_supplierInput
+    meqs_supplier_items?: MEQSSupplierItemCreateNestedManyWithoutMeqs_supplierInput
     po?: POCreateNestedOneWithoutMeqs_supplierInput
   }
 
@@ -30572,6 +30563,7 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     attachments?: MEQSSupplierAttachmentUncheckedCreateNestedManyWithoutMeqs_supplierInput
+    meqs_supplier_items?: MEQSSupplierItemUncheckedCreateNestedManyWithoutMeqs_supplierInput
     po?: POUncheckedCreateNestedOneWithoutMeqs_supplierInput
   }
 
@@ -30818,7 +30810,6 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    meqs_supplier_items?: MEQSSupplierItemCreateNestedManyWithoutMeqs_supplierInput
   }
 
   export type SupplierUncheckedCreateWithoutMEQSSupplierInput = {
@@ -30828,7 +30819,6 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    meqs_supplier_items?: MEQSSupplierItemUncheckedCreateNestedManyWithoutMeqs_supplierInput
   }
 
   export type SupplierCreateOrConnectWithoutMEQSSupplierInput = {
@@ -30859,6 +30849,40 @@ export namespace Prisma {
 
   export type MEQSSupplierAttachmentCreateManyMeqs_supplierInputEnvelope = {
     data: MEQSSupplierAttachmentCreateManyMeqs_supplierInput | MEQSSupplierAttachmentCreateManyMeqs_supplierInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MEQSSupplierItemCreateWithoutMeqs_supplierInput = {
+    id?: string
+    price: number
+    is_awarded?: boolean
+    notes?: string | null
+    vat_type?: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    canvass_item: CanvassItemCreateNestedOneWithoutMeqs_supplier_itemsInput
+  }
+
+  export type MEQSSupplierItemUncheckedCreateWithoutMeqs_supplierInput = {
+    id?: string
+    canvass_item_id: string
+    price: number
+    is_awarded?: boolean
+    notes?: string | null
+    vat_type?: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
+  export type MEQSSupplierItemCreateOrConnectWithoutMeqs_supplierInput = {
+    where: MEQSSupplierItemWhereUniqueInput
+    create: XOR<MEQSSupplierItemCreateWithoutMeqs_supplierInput, MEQSSupplierItemUncheckedCreateWithoutMeqs_supplierInput>
+  }
+
+  export type MEQSSupplierItemCreateManyMeqs_supplierInputEnvelope = {
+    data: MEQSSupplierItemCreateManyMeqs_supplierInput | MEQSSupplierItemCreateManyMeqs_supplierInput[]
     skipDuplicates?: boolean
   }
 
@@ -30952,7 +30976,6 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    meqs_supplier_items?: MEQSSupplierItemUpdateManyWithoutMeqs_supplierNestedInput
   }
 
   export type SupplierUncheckedUpdateWithoutMEQSSupplierInput = {
@@ -30962,7 +30985,6 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    meqs_supplier_items?: MEQSSupplierItemUncheckedUpdateManyWithoutMeqs_supplierNestedInput
   }
 
   export type MEQSSupplierAttachmentUpsertWithWhereUniqueWithoutMeqs_supplierInput = {
@@ -30991,6 +31013,22 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"MEQSSupplierAttachment"> | Date | string
     updated_at?: DateTimeFilter<"MEQSSupplierAttachment"> | Date | string
     is_deleted?: BoolFilter<"MEQSSupplierAttachment"> | boolean
+  }
+
+  export type MEQSSupplierItemUpsertWithWhereUniqueWithoutMeqs_supplierInput = {
+    where: MEQSSupplierItemWhereUniqueInput
+    update: XOR<MEQSSupplierItemUpdateWithoutMeqs_supplierInput, MEQSSupplierItemUncheckedUpdateWithoutMeqs_supplierInput>
+    create: XOR<MEQSSupplierItemCreateWithoutMeqs_supplierInput, MEQSSupplierItemUncheckedCreateWithoutMeqs_supplierInput>
+  }
+
+  export type MEQSSupplierItemUpdateWithWhereUniqueWithoutMeqs_supplierInput = {
+    where: MEQSSupplierItemWhereUniqueInput
+    data: XOR<MEQSSupplierItemUpdateWithoutMeqs_supplierInput, MEQSSupplierItemUncheckedUpdateWithoutMeqs_supplierInput>
+  }
+
+  export type MEQSSupplierItemUpdateManyWithWhereWithoutMeqs_supplierInput = {
+    where: MEQSSupplierItemScalarWhereInput
+    data: XOR<MEQSSupplierItemUpdateManyMutationInput, MEQSSupplierItemUncheckedUpdateManyWithoutMeqs_supplierInput>
   }
 
   export type POUpsertWithoutMeqs_supplierInput = {
@@ -31057,29 +31095,35 @@ export namespace Prisma {
     create: XOR<CanvassItemCreateWithoutMeqs_supplier_itemsInput, CanvassItemUncheckedCreateWithoutMeqs_supplier_itemsInput>
   }
 
-  export type SupplierCreateWithoutMeqs_supplier_itemsInput = {
+  export type MEQSSupplierCreateWithoutMeqs_supplier_itemsInput = {
     id?: string
-    name: string
-    contact: string
+    payment_terms: string
+    is_referenced?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    MEQSSupplier?: MEQSSupplierCreateNestedManyWithoutSupplierInput
+    meqs: MEQSCreateNestedOneWithoutMeqs_suppliersInput
+    supplier: SupplierCreateNestedOneWithoutMEQSSupplierInput
+    attachments?: MEQSSupplierAttachmentCreateNestedManyWithoutMeqs_supplierInput
+    po?: POCreateNestedOneWithoutMeqs_supplierInput
   }
 
-  export type SupplierUncheckedCreateWithoutMeqs_supplier_itemsInput = {
+  export type MEQSSupplierUncheckedCreateWithoutMeqs_supplier_itemsInput = {
     id?: string
-    name: string
-    contact: string
+    meqs_id: string
+    supplier_id: string
+    payment_terms: string
+    is_referenced?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    MEQSSupplier?: MEQSSupplierUncheckedCreateNestedManyWithoutSupplierInput
+    attachments?: MEQSSupplierAttachmentUncheckedCreateNestedManyWithoutMeqs_supplierInput
+    po?: POUncheckedCreateNestedOneWithoutMeqs_supplierInput
   }
 
-  export type SupplierCreateOrConnectWithoutMeqs_supplier_itemsInput = {
-    where: SupplierWhereUniqueInput
-    create: XOR<SupplierCreateWithoutMeqs_supplier_itemsInput, SupplierUncheckedCreateWithoutMeqs_supplier_itemsInput>
+  export type MEQSSupplierCreateOrConnectWithoutMeqs_supplier_itemsInput = {
+    where: MEQSSupplierWhereUniqueInput
+    create: XOR<MEQSSupplierCreateWithoutMeqs_supplier_itemsInput, MEQSSupplierUncheckedCreateWithoutMeqs_supplier_itemsInput>
   }
 
   export type CanvassItemUpsertWithoutMeqs_supplier_itemsInput = {
@@ -31117,35 +31161,41 @@ export namespace Prisma {
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
-  export type SupplierUpsertWithoutMeqs_supplier_itemsInput = {
-    update: XOR<SupplierUpdateWithoutMeqs_supplier_itemsInput, SupplierUncheckedUpdateWithoutMeqs_supplier_itemsInput>
-    create: XOR<SupplierCreateWithoutMeqs_supplier_itemsInput, SupplierUncheckedCreateWithoutMeqs_supplier_itemsInput>
-    where?: SupplierWhereInput
+  export type MEQSSupplierUpsertWithoutMeqs_supplier_itemsInput = {
+    update: XOR<MEQSSupplierUpdateWithoutMeqs_supplier_itemsInput, MEQSSupplierUncheckedUpdateWithoutMeqs_supplier_itemsInput>
+    create: XOR<MEQSSupplierCreateWithoutMeqs_supplier_itemsInput, MEQSSupplierUncheckedCreateWithoutMeqs_supplier_itemsInput>
+    where?: MEQSSupplierWhereInput
   }
 
-  export type SupplierUpdateToOneWithWhereWithoutMeqs_supplier_itemsInput = {
-    where?: SupplierWhereInput
-    data: XOR<SupplierUpdateWithoutMeqs_supplier_itemsInput, SupplierUncheckedUpdateWithoutMeqs_supplier_itemsInput>
+  export type MEQSSupplierUpdateToOneWithWhereWithoutMeqs_supplier_itemsInput = {
+    where?: MEQSSupplierWhereInput
+    data: XOR<MEQSSupplierUpdateWithoutMeqs_supplier_itemsInput, MEQSSupplierUncheckedUpdateWithoutMeqs_supplier_itemsInput>
   }
 
-  export type SupplierUpdateWithoutMeqs_supplier_itemsInput = {
+  export type MEQSSupplierUpdateWithoutMeqs_supplier_itemsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    contact?: StringFieldUpdateOperationsInput | string
+    payment_terms?: StringFieldUpdateOperationsInput | string
+    is_referenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    MEQSSupplier?: MEQSSupplierUpdateManyWithoutSupplierNestedInput
+    meqs?: MEQSUpdateOneRequiredWithoutMeqs_suppliersNestedInput
+    supplier?: SupplierUpdateOneRequiredWithoutMEQSSupplierNestedInput
+    attachments?: MEQSSupplierAttachmentUpdateManyWithoutMeqs_supplierNestedInput
+    po?: POUpdateOneWithoutMeqs_supplierNestedInput
   }
 
-  export type SupplierUncheckedUpdateWithoutMeqs_supplier_itemsInput = {
+  export type MEQSSupplierUncheckedUpdateWithoutMeqs_supplier_itemsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    contact?: StringFieldUpdateOperationsInput | string
+    meqs_id?: StringFieldUpdateOperationsInput | string
+    supplier_id?: StringFieldUpdateOperationsInput | string
+    payment_terms?: StringFieldUpdateOperationsInput | string
+    is_referenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    MEQSSupplier?: MEQSSupplierUncheckedUpdateManyWithoutSupplierNestedInput
+    attachments?: MEQSSupplierAttachmentUncheckedUpdateManyWithoutMeqs_supplierNestedInput
+    po?: POUncheckedUpdateOneWithoutMeqs_supplierNestedInput
   }
 
   export type MEQSSupplierCreateWithoutAttachmentsInput = {
@@ -31157,6 +31207,7 @@ export namespace Prisma {
     is_deleted?: boolean
     meqs: MEQSCreateNestedOneWithoutMeqs_suppliersInput
     supplier: SupplierCreateNestedOneWithoutMEQSSupplierInput
+    meqs_supplier_items?: MEQSSupplierItemCreateNestedManyWithoutMeqs_supplierInput
     po?: POCreateNestedOneWithoutMeqs_supplierInput
   }
 
@@ -31169,6 +31220,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    meqs_supplier_items?: MEQSSupplierItemUncheckedCreateNestedManyWithoutMeqs_supplierInput
     po?: POUncheckedCreateNestedOneWithoutMeqs_supplierInput
   }
 
@@ -31197,6 +31249,7 @@ export namespace Prisma {
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     meqs?: MEQSUpdateOneRequiredWithoutMeqs_suppliersNestedInput
     supplier?: SupplierUpdateOneRequiredWithoutMEQSSupplierNestedInput
+    meqs_supplier_items?: MEQSSupplierItemUpdateManyWithoutMeqs_supplierNestedInput
     po?: POUpdateOneWithoutMeqs_supplierNestedInput
   }
 
@@ -31209,6 +31262,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    meqs_supplier_items?: MEQSSupplierItemUncheckedUpdateManyWithoutMeqs_supplierNestedInput
     po?: POUncheckedUpdateOneWithoutMeqs_supplierNestedInput
   }
 
@@ -31340,6 +31394,7 @@ export namespace Prisma {
     meqs: MEQSCreateNestedOneWithoutMeqs_suppliersInput
     supplier: SupplierCreateNestedOneWithoutMEQSSupplierInput
     attachments?: MEQSSupplierAttachmentCreateNestedManyWithoutMeqs_supplierInput
+    meqs_supplier_items?: MEQSSupplierItemCreateNestedManyWithoutMeqs_supplierInput
   }
 
   export type MEQSSupplierUncheckedCreateWithoutPoInput = {
@@ -31352,6 +31407,7 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     attachments?: MEQSSupplierAttachmentUncheckedCreateNestedManyWithoutMeqs_supplierInput
+    meqs_supplier_items?: MEQSSupplierItemUncheckedCreateNestedManyWithoutMeqs_supplierInput
   }
 
   export type MEQSSupplierCreateOrConnectWithoutPoInput = {
@@ -31414,6 +31470,7 @@ export namespace Prisma {
     meqs?: MEQSUpdateOneRequiredWithoutMeqs_suppliersNestedInput
     supplier?: SupplierUpdateOneRequiredWithoutMEQSSupplierNestedInput
     attachments?: MEQSSupplierAttachmentUpdateManyWithoutMeqs_supplierNestedInput
+    meqs_supplier_items?: MEQSSupplierItemUpdateManyWithoutMeqs_supplierNestedInput
   }
 
   export type MEQSSupplierUncheckedUpdateWithoutPoInput = {
@@ -31426,6 +31483,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     attachments?: MEQSSupplierAttachmentUncheckedUpdateManyWithoutMeqs_supplierNestedInput
+    meqs_supplier_items?: MEQSSupplierItemUncheckedUpdateManyWithoutMeqs_supplierNestedInput
   }
 
   export type POCreateWithoutPo_approversInput = {
@@ -31502,17 +31560,6 @@ export namespace Prisma {
     is_deleted?: boolean
   }
 
-  export type MEQSSupplierItemCreateManyMeqs_supplierInput = {
-    id?: string
-    canvass_item_id: string
-    price: number
-    is_awarded?: boolean
-    notes?: string | null
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-  }
-
   export type MEQSSupplierUpdateWithoutSupplierInput = {
     id?: StringFieldUpdateOperationsInput | string
     payment_terms?: StringFieldUpdateOperationsInput | string
@@ -31522,6 +31569,7 @@ export namespace Prisma {
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     meqs?: MEQSUpdateOneRequiredWithoutMeqs_suppliersNestedInput
     attachments?: MEQSSupplierAttachmentUpdateManyWithoutMeqs_supplierNestedInput
+    meqs_supplier_items?: MEQSSupplierItemUpdateManyWithoutMeqs_supplierNestedInput
     po?: POUpdateOneWithoutMeqs_supplierNestedInput
   }
 
@@ -31534,6 +31582,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     attachments?: MEQSSupplierAttachmentUncheckedUpdateManyWithoutMeqs_supplierNestedInput
+    meqs_supplier_items?: MEQSSupplierItemUncheckedUpdateManyWithoutMeqs_supplierNestedInput
     po?: POUncheckedUpdateOneWithoutMeqs_supplierNestedInput
   }
 
@@ -31542,39 +31591,6 @@ export namespace Prisma {
     meqs_id?: StringFieldUpdateOperationsInput | string
     payment_terms?: StringFieldUpdateOperationsInput | string
     is_referenced?: BoolFieldUpdateOperationsInput | boolean
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type MEQSSupplierItemUpdateWithoutMeqs_supplierInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
-    is_awarded?: BoolFieldUpdateOperationsInput | boolean
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    canvass_item?: CanvassItemUpdateOneRequiredWithoutMeqs_supplier_itemsNestedInput
-  }
-
-  export type MEQSSupplierItemUncheckedUpdateWithoutMeqs_supplierInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    canvass_item_id?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
-    is_awarded?: BoolFieldUpdateOperationsInput | boolean
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type MEQSSupplierItemUncheckedUpdateManyWithoutMeqs_supplierInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    canvass_item_id?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
-    is_awarded?: BoolFieldUpdateOperationsInput | boolean
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -31742,6 +31758,7 @@ export namespace Prisma {
     price: number
     is_awarded?: boolean
     notes?: string | null
+    vat_type?: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -31752,10 +31769,11 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     is_awarded?: BoolFieldUpdateOperationsInput | boolean
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    vat_type?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    meqs_supplier?: SupplierUpdateOneRequiredWithoutMeqs_supplier_itemsNestedInput
+    meqs_supplier?: MEQSSupplierUpdateOneRequiredWithoutMeqs_supplier_itemsNestedInput
   }
 
   export type MEQSSupplierItemUncheckedUpdateWithoutCanvass_itemInput = {
@@ -31764,6 +31782,7 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     is_awarded?: BoolFieldUpdateOperationsInput | boolean
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    vat_type?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -31775,6 +31794,7 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     is_awarded?: BoolFieldUpdateOperationsInput | boolean
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    vat_type?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -32065,6 +32085,7 @@ export namespace Prisma {
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     supplier?: SupplierUpdateOneRequiredWithoutMEQSSupplierNestedInput
     attachments?: MEQSSupplierAttachmentUpdateManyWithoutMeqs_supplierNestedInput
+    meqs_supplier_items?: MEQSSupplierItemUpdateManyWithoutMeqs_supplierNestedInput
     po?: POUpdateOneWithoutMeqs_supplierNestedInput
   }
 
@@ -32077,6 +32098,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     attachments?: MEQSSupplierAttachmentUncheckedUpdateManyWithoutMeqs_supplierNestedInput
+    meqs_supplier_items?: MEQSSupplierItemUncheckedUpdateManyWithoutMeqs_supplierNestedInput
     po?: POUncheckedUpdateOneWithoutMeqs_supplierNestedInput
   }
 
@@ -32093,6 +32115,18 @@ export namespace Prisma {
   export type MEQSSupplierAttachmentCreateManyMeqs_supplierInput = {
     id?: string
     src: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
+  export type MEQSSupplierItemCreateManyMeqs_supplierInput = {
+    id?: string
+    canvass_item_id: string
+    price: number
+    is_awarded?: boolean
+    notes?: string | null
+    vat_type?: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -32117,6 +32151,42 @@ export namespace Prisma {
   export type MEQSSupplierAttachmentUncheckedUpdateManyWithoutMeqs_supplierInput = {
     id?: StringFieldUpdateOperationsInput | string
     src?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type MEQSSupplierItemUpdateWithoutMeqs_supplierInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    price?: FloatFieldUpdateOperationsInput | number
+    is_awarded?: BoolFieldUpdateOperationsInput | boolean
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    vat_type?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    canvass_item?: CanvassItemUpdateOneRequiredWithoutMeqs_supplier_itemsNestedInput
+  }
+
+  export type MEQSSupplierItemUncheckedUpdateWithoutMeqs_supplierInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    canvass_item_id?: StringFieldUpdateOperationsInput | string
+    price?: FloatFieldUpdateOperationsInput | number
+    is_awarded?: BoolFieldUpdateOperationsInput | boolean
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    vat_type?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type MEQSSupplierItemUncheckedUpdateManyWithoutMeqs_supplierInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    canvass_item_id?: StringFieldUpdateOperationsInput | string
+    price?: FloatFieldUpdateOperationsInput | number
+    is_awarded?: BoolFieldUpdateOperationsInput | boolean
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    vat_type?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean

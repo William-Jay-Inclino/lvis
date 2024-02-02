@@ -1,4 +1,4 @@
-import { Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { CanvassService } from '../canvass/canvass.service';
 import { PrismaService } from '../__prisma__/prisma.service';
 import { Prisma, RV } from 'apps/warehouse/prisma/generated/client';
@@ -16,6 +16,20 @@ export class RvService {
     private readonly logger = new Logger(CanvassService.name);
     private authUser: AuthUser
 
+    // fields that are included when returning a data from db
+    private includedFields = {
+        canvass: {
+            include: {
+                canvass_items: {
+                    include: {
+                        unit: true,
+                        brand: true
+                    }
+                }
+            }
+        },
+    }
+
     constructor(
         private readonly prisma: PrismaService,
         private readonly httpService: HttpService,
@@ -27,14 +41,30 @@ export class RvService {
     
     async create(input: CreateRvInput): Promise<RV> {
 
-        const isValidSupervisorId = await this.isEmployeeExist(input.supervisor_id, this.authUser)
+        this.logger.log('create()')
 
-        if(!isValidSupervisorId){
-            throw new NotFoundException('Supervisor ID not valid')
+        // ================================= VALIDATIONS =================================
+
+        // 1. Validate approver ids, and approver proxy ids exist in employees table in system service.
+
+        const employeeIds: string[] = input.approvers.map(({ approver_id, approver_proxy_id }) => {
+            const ids = [approver_id, approver_proxy_id].filter(id => id !== null && id !== undefined);
+            return ids.join(',');
+        });
+
+        this.logger.log('employeeIds', employeeIds)
+
+        const isValidEmployeeIds = await this.areEmployeesExist(employeeIds, this.authUser)
+
+        if(!isValidEmployeeIds){
+            throw new BadRequestException("One or more employee id is invalid")
         }
 
-        const rvNumber = await this.getLatestRcNumber()
+        // ================================= END VALIDATIONS =================================
 
+        const rvNumber = await this.getLatestRvNumber()
+
+        // data to be inserted in database
         const data: Prisma.RVCreateInput = {
             rv_number: rvNumber,
             date_requested: new Date(input.date_requested),
@@ -46,6 +76,7 @@ export class RvService {
                 create: input.approvers.map(i => {
                     return {
                         approver_id: i.approver_id,
+                        approver_proxy_id: i.approver_proxy_id ?? undefined,
                         label: i.label,
                         order: i.order,
                         status: APPROVAL_STATUS.PENDING
@@ -54,11 +85,29 @@ export class RvService {
             }
         }
 
-        const created = await this.prisma.rV.create( { data } )
+        // execute db transaction 
+        // 1. Create RV
+        // 2. Update is_reference field in canvass table
+        const [createdRv, updatedCanvass] = await this.prisma.$transaction([
+            this.prisma.rV.create({ 
+                data,
+                include: this.includedFields
+            }),
+            this.prisma.canvass.update({
+                data: {
+                    is_referenced: true
+                },
+                where: {
+                    id: input.canvass_id
+                }
+            })
+        ])
 
         this.logger.log('Successfully created RV')
+        this.logger.log(createdRv)
+        this.logger.log(updatedCanvass)
 
-		return await this.findOne(created.id)
+		return createdRv
 
     }
 
@@ -90,43 +139,39 @@ export class RvService {
             date_requested: input.date_requested ? new Date(input.date_requested) : existingItem.date_requested,
             work_order_no: input.work_order_no ?? existingItem.work_order_no,
             work_order_date: input.work_order_date ? new Date(input.work_order_date) : existingItem.work_order_date,
-            status: input.status ?? existingItem.status
+            status: input.status ?? existingItem.status,
+            is_referenced: input.is_referenced ?? existingItem.is_referenced
         }
 
         const updated = await this.prisma.rV.update({
             data,
-            where: { id }
+            where: { id },
+            include: this.includedFields
         })
 
         this.logger.log('Successfully updated RV')
 
-        return await this.findOne(updated.id)
+        return updated
 
     }
 
     async findOne(id: string): Promise<RV | null> {
 		const item = await this.prisma.rV.findUnique({
-            include: {
-                canvass: {
-                    include: {
-                        canvass_items: {
-                            include: {
-                                unit: true,
-                                brand: true
-                            }
-                        }
-                    }
-                },
-                rv_approvers: {
-                    orderBy: {
-                        order: 'asc'
-                    },
-                    where: {
-                        is_deleted: false
-                    }
-                }
-            },
+            include: this.includedFields,
 			where: { id }
+		})
+
+		if(!item){
+            throw new NotFoundException('RV not found')
+        }
+
+        return item
+	}
+
+    async findByRvNumber(rv_number: string): Promise<RV | null> {
+		const item = await this.prisma.rV.findUnique({
+            include: this.includedFields,
+			where: { rv_number }
 		})
 
 		if(!item){
@@ -138,26 +183,7 @@ export class RvService {
 
     async findAll(): Promise<RV[]> {
 		return await this.prisma.rV.findMany( {
-            include: {
-                rv_approvers: {
-                    orderBy: {
-                        order: 'asc'
-                    },
-                    where: {
-                        is_deleted: false
-                    }
-                },
-                canvass: {
-                    include: {
-                        canvass_items: {
-                            include: {
-                                unit: true,
-                                brand: true
-                            }
-                        }
-                    }
-                }
-            },
+            include: this.includedFields,
 			where: {
 				is_deleted: false 
 			},
@@ -183,7 +209,7 @@ export class RvService {
 
 	}
 
-    private async getLatestRcNumber(): Promise<string> {
+    private async getLatestRvNumber(): Promise<string> {
         const currentYear = new Date().getFullYear().toString().slice(-2);
     
         const latestItem = await this.prisma.rV.findFirst({
@@ -311,6 +337,52 @@ export class RvService {
         console.log('employee', employee)
         return true 
 
+    }
+
+    private async areEmployeesExist(employeeIds: string[], authUser: AuthUser): Promise<boolean> {
+
+        this.logger.log('areEmployeesExist', employeeIds);
+    
+        const query = `
+            query {
+                validateEmployeeIds(ids: ${JSON.stringify(employeeIds)})
+            }
+        `;
+
+        console.log('query', query)
+    
+        try {
+            const { data } = await firstValueFrom(
+                this.httpService.post(
+                    process.env.API_GATEWAY_URL,
+                    { query },
+                    {
+                        headers: {
+                            Authorization: authUser.authorization,
+                            'Content-Type': 'application/json',
+                        },
+                    }
+                ).pipe(
+                    catchError((error) => {
+                        throw error;
+                    }),
+                ),
+            );
+    
+            console.log('data', data);
+            console.log('data.data.validateEmployeeIds', data.data.validateEmployeeIds)
+    
+            if (!data || !data.data) {
+                console.log('No data returned');
+                return false;
+            }
+    
+            return data.data.validateEmployeeIds;
+    
+        } catch (error) {
+            console.error('Error querying employees:', error.message);
+            return false;
+        }
     }
 
 }

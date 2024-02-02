@@ -1,0 +1,16 @@
+query{
+  rvs{
+    id
+    rv_number
+    canvass{
+      rc_number
+      is_referenced
+    }
+    rv_approvers{
+      approver_id
+      approver{
+        firstname
+      }
+    }
+  }
+}

@@ -13,6 +13,7 @@ import { PrismaModule } from './__prisma__/prisma.module';
 import { SeederModule } from './__seeder__/seeder.module';
 import { RvApproverSettingModule } from './rv-approver-setting/rv-approver-setting.module';
 import { ClassificationModule } from './classification/classification.module';
+import { MeqsApproverSettingModule } from './meqs-approver-setting/meqs-approver-setting.module';
 
 
 @Module({
@@ -33,7 +34,8 @@ import { ClassificationModule } from './classification/classification.module';
     PrismaModule,
     SeederModule,
     RvApproverSettingModule,
-    ClassificationModule
+    ClassificationModule,
+    MeqsApproverSettingModule
   ],
   controllers: [],
   providers: [],

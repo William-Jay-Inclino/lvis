@@ -4,6 +4,8 @@ import { Module, UnauthorizedException } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { IntrospectAndCompose, RemoteGraphQLDataSource } from '@apollo/gateway';
 import { verify } from 'jsonwebtoken'
+import { AuthModule } from './auth/auth.module';
+import { FileUploadModule } from './file-upload/file-upload.module';
 
 const getToken = (authToken: string) => {
 
@@ -89,6 +91,10 @@ function handleAuth({ req }) {
         },
       },
     }),
+
+    AuthModule,
+
+    FileUploadModule,
   ],
   controllers: [],
   providers: [],

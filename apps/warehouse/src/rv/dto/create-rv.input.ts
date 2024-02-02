@@ -1,7 +1,7 @@
 import { InputType, Field } from '@nestjs/graphql';
 import { Transform, Type } from 'class-transformer';
 import { IsArray, IsDate, IsNotEmpty, IsOptional, IsString, ValidateNested } from 'class-validator';
-import { CreateRvApproverInput } from '../../rv-approver/dto/create-rv-approver.input';
+import { CreateRvApproverSubInput } from './create-rv-approver.sub.input';
 
 @InputType()
 export class CreateRvInput {
@@ -33,11 +33,11 @@ export class CreateRvInput {
   @IsDate()
   work_order_date?: string | null;
 
-  @Field(() => [CreateRvApproverInput])
+  @Field(() => [CreateRvApproverSubInput])
   @IsNotEmpty({each: true})
   @IsArray()
   @ValidateNested({ each: true })
-  @Type(() => CreateRvApproverInput)
-  approvers: CreateRvApproverInput[];
+  @Type(() => CreateRvApproverSubInput)
+  approvers: CreateRvApproverSubInput[];
 
 }
