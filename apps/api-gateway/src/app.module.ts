@@ -4,6 +4,7 @@ import { Module, UnauthorizedException } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { IntrospectAndCompose, RemoteGraphQLDataSource } from '@apollo/gateway';
 import { verify } from 'jsonwebtoken'
+import { AuthModule } from './auth/auth.module';
 
 const getToken = (authToken: string) => {
 
@@ -89,6 +90,8 @@ function handleAuth({ req }) {
         },
       },
     }),
+
+    AuthModule,
   ],
   controllers: [],
   providers: [],
