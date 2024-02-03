@@ -104,6 +104,11 @@ export type MEQSApprover = $Result.DefaultSelection<Prisma.$MEQSApproverPayload>
  */
 export type PO = $Result.DefaultSelection<Prisma.$POPayload>
 /**
+ * Model POItem
+ * 
+ */
+export type POItem = $Result.DefaultSelection<Prisma.$POItemPayload>
+/**
  * Model POApprover
  * 
  */
@@ -410,6 +415,16 @@ export class PrismaClient<
     * ```
     */
   get pO(): Prisma.PODelegate<ExtArgs>;
+
+  /**
+   * `prisma.pOItem`: Exposes CRUD operations for the **POItem** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more POItems
+    * const pOItems = await prisma.pOItem.findMany()
+    * ```
+    */
+  get pOItem(): Prisma.POItemDelegate<ExtArgs>;
 
   /**
    * `prisma.pOApprover`: Exposes CRUD operations for the **POApprover** model.
@@ -908,6 +923,7 @@ export namespace Prisma {
     MEQSSupplierAttachment: 'MEQSSupplierAttachment',
     MEQSApprover: 'MEQSApprover',
     PO: 'PO',
+    POItem: 'POItem',
     POApprover: 'POApprover'
   };
 
@@ -925,7 +941,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'supplier' | 'unit' | 'brand' | 'vehicle' | 'canvassItem' | 'canvass' | 'jO' | 'jOApprover' | 'rV' | 'rVApprover' | 'sPR' | 'sPRApprover' | 'mEQS' | 'mEQSSupplier' | 'mEQSSupplierItem' | 'mEQSSupplierAttachment' | 'mEQSApprover' | 'pO' | 'pOApprover'
+      modelProps: 'supplier' | 'unit' | 'brand' | 'vehicle' | 'canvassItem' | 'canvass' | 'jO' | 'jOApprover' | 'rV' | 'rVApprover' | 'sPR' | 'sPRApprover' | 'mEQS' | 'mEQSSupplier' | 'mEQSSupplierItem' | 'mEQSSupplierAttachment' | 'mEQSApprover' | 'pO' | 'pOItem' | 'pOApprover'
       txIsolationLevel: Prisma.TransactionIsolationLevel
     },
     model: {
@@ -2117,6 +2133,72 @@ export namespace Prisma {
           }
         }
       }
+      POItem: {
+        payload: Prisma.$POItemPayload<ExtArgs>
+        fields: Prisma.POItemFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.POItemFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$POItemPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.POItemFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$POItemPayload>
+          }
+          findFirst: {
+            args: Prisma.POItemFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$POItemPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.POItemFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$POItemPayload>
+          }
+          findMany: {
+            args: Prisma.POItemFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$POItemPayload>[]
+          }
+          create: {
+            args: Prisma.POItemCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$POItemPayload>
+          }
+          createMany: {
+            args: Prisma.POItemCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.POItemDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$POItemPayload>
+          }
+          update: {
+            args: Prisma.POItemUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$POItemPayload>
+          }
+          deleteMany: {
+            args: Prisma.POItemDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.POItemUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.POItemUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$POItemPayload>
+          }
+          aggregate: {
+            args: Prisma.POItemAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregatePOItem>
+          }
+          groupBy: {
+            args: Prisma.POItemGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<POItemGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.POItemCountArgs<ExtArgs>,
+            result: $Utils.Optional<POItemCountAggregateOutputType> | number
+          }
+        }
+      }
       POApprover: {
         payload: Prisma.$POApproverPayload<ExtArgs>
         fields: Prisma.POApproverFieldRefs
@@ -2727,10 +2809,12 @@ export namespace Prisma {
 
   export type POCountOutputType = {
     po_approvers: number
+    POItem: number
   }
 
   export type POCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     po_approvers?: boolean | POCountOutputTypeCountPo_approversArgs
+    POItem?: boolean | POCountOutputTypeCountPOItemArgs
   }
 
   // Custom InputTypes
@@ -2751,6 +2835,14 @@ export namespace Prisma {
    */
   export type POCountOutputTypeCountPo_approversArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: POApproverWhereInput
+  }
+
+
+  /**
+   * POCountOutputType without action
+   */
+  export type POCountOutputTypeCountPOItemArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: POItemWhereInput
   }
 
 
@@ -15067,6 +15159,7 @@ export namespace Prisma {
     request_type: number | null
     meqs_date: Date | null
     status: number | null
+    notes: string | null
     canceller_id: string | null
     created_at: Date | null
     updated_at: Date | null
@@ -15082,6 +15175,7 @@ export namespace Prisma {
     request_type: number | null
     meqs_date: Date | null
     status: number | null
+    notes: string | null
     canceller_id: string | null
     created_at: Date | null
     updated_at: Date | null
@@ -15097,6 +15191,7 @@ export namespace Prisma {
     request_type: number
     meqs_date: number
     status: number
+    notes: number
     canceller_id: number
     created_at: number
     updated_at: number
@@ -15124,6 +15219,7 @@ export namespace Prisma {
     request_type?: true
     meqs_date?: true
     status?: true
+    notes?: true
     canceller_id?: true
     created_at?: true
     updated_at?: true
@@ -15139,6 +15235,7 @@ export namespace Prisma {
     request_type?: true
     meqs_date?: true
     status?: true
+    notes?: true
     canceller_id?: true
     created_at?: true
     updated_at?: true
@@ -15154,6 +15251,7 @@ export namespace Prisma {
     request_type?: true
     meqs_date?: true
     status?: true
+    notes?: true
     canceller_id?: true
     created_at?: true
     updated_at?: true
@@ -15256,6 +15354,7 @@ export namespace Prisma {
     request_type: number
     meqs_date: Date
     status: number
+    notes: string | null
     canceller_id: string | null
     created_at: Date
     updated_at: Date
@@ -15290,6 +15389,7 @@ export namespace Prisma {
     request_type?: boolean
     meqs_date?: boolean
     status?: boolean
+    notes?: boolean
     canceller_id?: boolean
     created_at?: boolean
     updated_at?: boolean
@@ -15311,6 +15411,7 @@ export namespace Prisma {
     request_type?: boolean
     meqs_date?: boolean
     status?: boolean
+    notes?: boolean
     canceller_id?: boolean
     created_at?: boolean
     updated_at?: boolean
@@ -15345,6 +15446,7 @@ export namespace Prisma {
       request_type: number
       meqs_date: Date
       status: number
+      notes: string | null
       canceller_id: string | null
       created_at: Date
       updated_at: Date
@@ -15760,6 +15862,7 @@ export namespace Prisma {
     readonly request_type: FieldRef<"MEQS", 'Int'>
     readonly meqs_date: FieldRef<"MEQS", 'DateTime'>
     readonly status: FieldRef<"MEQS", 'Int'>
+    readonly notes: FieldRef<"MEQS", 'String'>
     readonly canceller_id: FieldRef<"MEQS", 'String'>
     readonly created_at: FieldRef<"MEQS", 'DateTime'>
     readonly updated_at: FieldRef<"MEQS", 'DateTime'>
@@ -17456,6 +17559,7 @@ export namespace Prisma {
     is_deleted?: boolean
     canvass_item?: boolean | CanvassItemDefaultArgs<ExtArgs>
     meqs_supplier?: boolean | MEQSSupplierDefaultArgs<ExtArgs>
+    po_item?: boolean | MEQSSupplierItem$po_itemArgs<ExtArgs>
   }, ExtArgs["result"]["mEQSSupplierItem"]>
 
   export type MEQSSupplierItemSelectScalar = {
@@ -17474,6 +17578,7 @@ export namespace Prisma {
   export type MEQSSupplierItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     canvass_item?: boolean | CanvassItemDefaultArgs<ExtArgs>
     meqs_supplier?: boolean | MEQSSupplierDefaultArgs<ExtArgs>
+    po_item?: boolean | MEQSSupplierItem$po_itemArgs<ExtArgs>
   }
 
 
@@ -17482,6 +17587,7 @@ export namespace Prisma {
     objects: {
       canvass_item: Prisma.$CanvassItemPayload<ExtArgs>
       meqs_supplier: Prisma.$MEQSSupplierPayload<ExtArgs>
+      po_item: Prisma.$POItemPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -17863,6 +17969,8 @@ export namespace Prisma {
 
     meqs_supplier<T extends MEQSSupplierDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MEQSSupplierDefaultArgs<ExtArgs>>): Prisma__MEQSSupplierClient<$Result.GetResult<Prisma.$MEQSSupplierPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
+    po_item<T extends MEQSSupplierItem$po_itemArgs<ExtArgs> = {}>(args?: Subset<T, MEQSSupplierItem$po_itemArgs<ExtArgs>>): Prisma__POItemClient<$Result.GetResult<Prisma.$POItemPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -18209,6 +18317,22 @@ export namespace Prisma {
      * Filter which MEQSSupplierItems to delete
      */
     where?: MEQSSupplierItemWhereInput
+  }
+
+
+  /**
+   * MEQSSupplierItem.po_item
+   */
+  export type MEQSSupplierItem$po_itemArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the POItem
+     */
+    select?: POItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: POItemInclude<ExtArgs> | null
+    where?: POItemWhereInput
   }
 
 
@@ -20422,6 +20546,7 @@ export namespace Prisma {
     is_deleted?: boolean
     po_approvers?: boolean | PO$po_approversArgs<ExtArgs>
     meqs_supplier?: boolean | MEQSSupplierDefaultArgs<ExtArgs>
+    POItem?: boolean | PO$POItemArgs<ExtArgs>
     _count?: boolean | POCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["pO"]>
 
@@ -20440,6 +20565,7 @@ export namespace Prisma {
   export type POInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     po_approvers?: boolean | PO$po_approversArgs<ExtArgs>
     meqs_supplier?: boolean | MEQSSupplierDefaultArgs<ExtArgs>
+    POItem?: boolean | PO$POItemArgs<ExtArgs>
     _count?: boolean | POCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -20449,6 +20575,7 @@ export namespace Prisma {
     objects: {
       po_approvers: Prisma.$POApproverPayload<ExtArgs>[]
       meqs_supplier: Prisma.$MEQSSupplierPayload<ExtArgs>
+      POItem: Prisma.$POItemPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -20829,6 +20956,8 @@ export namespace Prisma {
 
     meqs_supplier<T extends MEQSSupplierDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MEQSSupplierDefaultArgs<ExtArgs>>): Prisma__MEQSSupplierClient<$Result.GetResult<Prisma.$MEQSSupplierPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
+    POItem<T extends PO$POItemArgs<ExtArgs> = {}>(args?: Subset<T, PO$POItemArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$POItemPayload<ExtArgs>, T, 'findMany'> | Null>;
+
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -21199,6 +21328,27 @@ export namespace Prisma {
 
 
   /**
+   * PO.POItem
+   */
+  export type PO$POItemArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the POItem
+     */
+    select?: POItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: POItemInclude<ExtArgs> | null
+    where?: POItemWhereInput
+    orderBy?: POItemOrderByWithRelationInput | POItemOrderByWithRelationInput[]
+    cursor?: POItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: POItemScalarFieldEnum | POItemScalarFieldEnum[]
+  }
+
+
+  /**
    * PO without action
    */
   export type PODefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -21210,6 +21360,940 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well.
      */
     include?: POInclude<ExtArgs> | null
+  }
+
+
+
+  /**
+   * Model POItem
+   */
+
+  export type AggregatePOItem = {
+    _count: POItemCountAggregateOutputType | null
+    _min: POItemMinAggregateOutputType | null
+    _max: POItemMaxAggregateOutputType | null
+  }
+
+  export type POItemMinAggregateOutputType = {
+    id: string | null
+    po_id: string | null
+    meqs_supplier_item_id: string | null
+    created_at: Date | null
+    updated_at: Date | null
+    is_deleted: boolean | null
+  }
+
+  export type POItemMaxAggregateOutputType = {
+    id: string | null
+    po_id: string | null
+    meqs_supplier_item_id: string | null
+    created_at: Date | null
+    updated_at: Date | null
+    is_deleted: boolean | null
+  }
+
+  export type POItemCountAggregateOutputType = {
+    id: number
+    po_id: number
+    meqs_supplier_item_id: number
+    created_at: number
+    updated_at: number
+    is_deleted: number
+    _all: number
+  }
+
+
+  export type POItemMinAggregateInputType = {
+    id?: true
+    po_id?: true
+    meqs_supplier_item_id?: true
+    created_at?: true
+    updated_at?: true
+    is_deleted?: true
+  }
+
+  export type POItemMaxAggregateInputType = {
+    id?: true
+    po_id?: true
+    meqs_supplier_item_id?: true
+    created_at?: true
+    updated_at?: true
+    is_deleted?: true
+  }
+
+  export type POItemCountAggregateInputType = {
+    id?: true
+    po_id?: true
+    meqs_supplier_item_id?: true
+    created_at?: true
+    updated_at?: true
+    is_deleted?: true
+    _all?: true
+  }
+
+  export type POItemAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which POItem to aggregate.
+     */
+    where?: POItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of POItems to fetch.
+     */
+    orderBy?: POItemOrderByWithRelationInput | POItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: POItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` POItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` POItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned POItems
+    **/
+    _count?: true | POItemCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: POItemMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: POItemMaxAggregateInputType
+  }
+
+  export type GetPOItemAggregateType<T extends POItemAggregateArgs> = {
+        [P in keyof T & keyof AggregatePOItem]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePOItem[P]>
+      : GetScalarType<T[P], AggregatePOItem[P]>
+  }
+
+
+
+
+  export type POItemGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: POItemWhereInput
+    orderBy?: POItemOrderByWithAggregationInput | POItemOrderByWithAggregationInput[]
+    by: POItemScalarFieldEnum[] | POItemScalarFieldEnum
+    having?: POItemScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: POItemCountAggregateInputType | true
+    _min?: POItemMinAggregateInputType
+    _max?: POItemMaxAggregateInputType
+  }
+
+  export type POItemGroupByOutputType = {
+    id: string
+    po_id: string
+    meqs_supplier_item_id: string
+    created_at: Date
+    updated_at: Date
+    is_deleted: boolean
+    _count: POItemCountAggregateOutputType | null
+    _min: POItemMinAggregateOutputType | null
+    _max: POItemMaxAggregateOutputType | null
+  }
+
+  type GetPOItemGroupByPayload<T extends POItemGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<POItemGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof POItemGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], POItemGroupByOutputType[P]>
+            : GetScalarType<T[P], POItemGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type POItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    po_id?: boolean
+    meqs_supplier_item_id?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    is_deleted?: boolean
+    po?: boolean | PODefaultArgs<ExtArgs>
+    meqs_supplier_item?: boolean | MEQSSupplierItemDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["pOItem"]>
+
+  export type POItemSelectScalar = {
+    id?: boolean
+    po_id?: boolean
+    meqs_supplier_item_id?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    is_deleted?: boolean
+  }
+
+  export type POItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    po?: boolean | PODefaultArgs<ExtArgs>
+    meqs_supplier_item?: boolean | MEQSSupplierItemDefaultArgs<ExtArgs>
+  }
+
+
+  export type $POItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "POItem"
+    objects: {
+      po: Prisma.$POPayload<ExtArgs>
+      meqs_supplier_item: Prisma.$MEQSSupplierItemPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      po_id: string
+      meqs_supplier_item_id: string
+      created_at: Date
+      updated_at: Date
+      is_deleted: boolean
+    }, ExtArgs["result"]["pOItem"]>
+    composites: {}
+  }
+
+
+  type POItemGetPayload<S extends boolean | null | undefined | POItemDefaultArgs> = $Result.GetResult<Prisma.$POItemPayload, S>
+
+  type POItemCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<POItemFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: POItemCountAggregateInputType | true
+    }
+
+  export interface POItemDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['POItem'], meta: { name: 'POItem' } }
+    /**
+     * Find zero or one POItem that matches the filter.
+     * @param {POItemFindUniqueArgs} args - Arguments to find a POItem
+     * @example
+     * // Get one POItem
+     * const pOItem = await prisma.pOItem.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends POItemFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, POItemFindUniqueArgs<ExtArgs>>
+    ): Prisma__POItemClient<$Result.GetResult<Prisma.$POItemPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one POItem that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {POItemFindUniqueOrThrowArgs} args - Arguments to find a POItem
+     * @example
+     * // Get one POItem
+     * const pOItem = await prisma.pOItem.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends POItemFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, POItemFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__POItemClient<$Result.GetResult<Prisma.$POItemPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first POItem that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {POItemFindFirstArgs} args - Arguments to find a POItem
+     * @example
+     * // Get one POItem
+     * const pOItem = await prisma.pOItem.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends POItemFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, POItemFindFirstArgs<ExtArgs>>
+    ): Prisma__POItemClient<$Result.GetResult<Prisma.$POItemPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first POItem that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {POItemFindFirstOrThrowArgs} args - Arguments to find a POItem
+     * @example
+     * // Get one POItem
+     * const pOItem = await prisma.pOItem.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends POItemFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, POItemFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__POItemClient<$Result.GetResult<Prisma.$POItemPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more POItems that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {POItemFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all POItems
+     * const pOItems = await prisma.pOItem.findMany()
+     * 
+     * // Get first 10 POItems
+     * const pOItems = await prisma.pOItem.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const pOItemWithIdOnly = await prisma.pOItem.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends POItemFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, POItemFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$POItemPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a POItem.
+     * @param {POItemCreateArgs} args - Arguments to create a POItem.
+     * @example
+     * // Create one POItem
+     * const POItem = await prisma.pOItem.create({
+     *   data: {
+     *     // ... data to create a POItem
+     *   }
+     * })
+     * 
+    **/
+    create<T extends POItemCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, POItemCreateArgs<ExtArgs>>
+    ): Prisma__POItemClient<$Result.GetResult<Prisma.$POItemPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many POItems.
+     *     @param {POItemCreateManyArgs} args - Arguments to create many POItems.
+     *     @example
+     *     // Create many POItems
+     *     const pOItem = await prisma.pOItem.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends POItemCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, POItemCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a POItem.
+     * @param {POItemDeleteArgs} args - Arguments to delete one POItem.
+     * @example
+     * // Delete one POItem
+     * const POItem = await prisma.pOItem.delete({
+     *   where: {
+     *     // ... filter to delete one POItem
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends POItemDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, POItemDeleteArgs<ExtArgs>>
+    ): Prisma__POItemClient<$Result.GetResult<Prisma.$POItemPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one POItem.
+     * @param {POItemUpdateArgs} args - Arguments to update one POItem.
+     * @example
+     * // Update one POItem
+     * const pOItem = await prisma.pOItem.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends POItemUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, POItemUpdateArgs<ExtArgs>>
+    ): Prisma__POItemClient<$Result.GetResult<Prisma.$POItemPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more POItems.
+     * @param {POItemDeleteManyArgs} args - Arguments to filter POItems to delete.
+     * @example
+     * // Delete a few POItems
+     * const { count } = await prisma.pOItem.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends POItemDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, POItemDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more POItems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {POItemUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many POItems
+     * const pOItem = await prisma.pOItem.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends POItemUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, POItemUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one POItem.
+     * @param {POItemUpsertArgs} args - Arguments to update or create a POItem.
+     * @example
+     * // Update or create a POItem
+     * const pOItem = await prisma.pOItem.upsert({
+     *   create: {
+     *     // ... data to create a POItem
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the POItem we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends POItemUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, POItemUpsertArgs<ExtArgs>>
+    ): Prisma__POItemClient<$Result.GetResult<Prisma.$POItemPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of POItems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {POItemCountArgs} args - Arguments to filter POItems to count.
+     * @example
+     * // Count the number of POItems
+     * const count = await prisma.pOItem.count({
+     *   where: {
+     *     // ... the filter for the POItems we want to count
+     *   }
+     * })
+    **/
+    count<T extends POItemCountArgs>(
+      args?: Subset<T, POItemCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], POItemCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a POItem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {POItemAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends POItemAggregateArgs>(args: Subset<T, POItemAggregateArgs>): Prisma.PrismaPromise<GetPOItemAggregateType<T>>
+
+    /**
+     * Group by POItem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {POItemGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends POItemGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: POItemGroupByArgs['orderBy'] }
+        : { orderBy?: POItemGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, POItemGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPOItemGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the POItem model
+   */
+  readonly fields: POItemFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for POItem.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__POItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+    po<T extends PODefaultArgs<ExtArgs> = {}>(args?: Subset<T, PODefaultArgs<ExtArgs>>): Prisma__POClient<$Result.GetResult<Prisma.$POPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    meqs_supplier_item<T extends MEQSSupplierItemDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MEQSSupplierItemDefaultArgs<ExtArgs>>): Prisma__MEQSSupplierItemClient<$Result.GetResult<Prisma.$MEQSSupplierItemPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the POItem model
+   */ 
+  interface POItemFieldRefs {
+    readonly id: FieldRef<"POItem", 'String'>
+    readonly po_id: FieldRef<"POItem", 'String'>
+    readonly meqs_supplier_item_id: FieldRef<"POItem", 'String'>
+    readonly created_at: FieldRef<"POItem", 'DateTime'>
+    readonly updated_at: FieldRef<"POItem", 'DateTime'>
+    readonly is_deleted: FieldRef<"POItem", 'Boolean'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * POItem findUnique
+   */
+  export type POItemFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the POItem
+     */
+    select?: POItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: POItemInclude<ExtArgs> | null
+    /**
+     * Filter, which POItem to fetch.
+     */
+    where: POItemWhereUniqueInput
+  }
+
+
+  /**
+   * POItem findUniqueOrThrow
+   */
+  export type POItemFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the POItem
+     */
+    select?: POItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: POItemInclude<ExtArgs> | null
+    /**
+     * Filter, which POItem to fetch.
+     */
+    where: POItemWhereUniqueInput
+  }
+
+
+  /**
+   * POItem findFirst
+   */
+  export type POItemFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the POItem
+     */
+    select?: POItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: POItemInclude<ExtArgs> | null
+    /**
+     * Filter, which POItem to fetch.
+     */
+    where?: POItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of POItems to fetch.
+     */
+    orderBy?: POItemOrderByWithRelationInput | POItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for POItems.
+     */
+    cursor?: POItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` POItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` POItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of POItems.
+     */
+    distinct?: POItemScalarFieldEnum | POItemScalarFieldEnum[]
+  }
+
+
+  /**
+   * POItem findFirstOrThrow
+   */
+  export type POItemFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the POItem
+     */
+    select?: POItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: POItemInclude<ExtArgs> | null
+    /**
+     * Filter, which POItem to fetch.
+     */
+    where?: POItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of POItems to fetch.
+     */
+    orderBy?: POItemOrderByWithRelationInput | POItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for POItems.
+     */
+    cursor?: POItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` POItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` POItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of POItems.
+     */
+    distinct?: POItemScalarFieldEnum | POItemScalarFieldEnum[]
+  }
+
+
+  /**
+   * POItem findMany
+   */
+  export type POItemFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the POItem
+     */
+    select?: POItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: POItemInclude<ExtArgs> | null
+    /**
+     * Filter, which POItems to fetch.
+     */
+    where?: POItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of POItems to fetch.
+     */
+    orderBy?: POItemOrderByWithRelationInput | POItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing POItems.
+     */
+    cursor?: POItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` POItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` POItems.
+     */
+    skip?: number
+    distinct?: POItemScalarFieldEnum | POItemScalarFieldEnum[]
+  }
+
+
+  /**
+   * POItem create
+   */
+  export type POItemCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the POItem
+     */
+    select?: POItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: POItemInclude<ExtArgs> | null
+    /**
+     * The data needed to create a POItem.
+     */
+    data: XOR<POItemCreateInput, POItemUncheckedCreateInput>
+  }
+
+
+  /**
+   * POItem createMany
+   */
+  export type POItemCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many POItems.
+     */
+    data: POItemCreateManyInput | POItemCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * POItem update
+   */
+  export type POItemUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the POItem
+     */
+    select?: POItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: POItemInclude<ExtArgs> | null
+    /**
+     * The data needed to update a POItem.
+     */
+    data: XOR<POItemUpdateInput, POItemUncheckedUpdateInput>
+    /**
+     * Choose, which POItem to update.
+     */
+    where: POItemWhereUniqueInput
+  }
+
+
+  /**
+   * POItem updateMany
+   */
+  export type POItemUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update POItems.
+     */
+    data: XOR<POItemUpdateManyMutationInput, POItemUncheckedUpdateManyInput>
+    /**
+     * Filter which POItems to update
+     */
+    where?: POItemWhereInput
+  }
+
+
+  /**
+   * POItem upsert
+   */
+  export type POItemUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the POItem
+     */
+    select?: POItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: POItemInclude<ExtArgs> | null
+    /**
+     * The filter to search for the POItem to update in case it exists.
+     */
+    where: POItemWhereUniqueInput
+    /**
+     * In case the POItem found by the `where` argument doesn't exist, create a new POItem with this data.
+     */
+    create: XOR<POItemCreateInput, POItemUncheckedCreateInput>
+    /**
+     * In case the POItem was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<POItemUpdateInput, POItemUncheckedUpdateInput>
+  }
+
+
+  /**
+   * POItem delete
+   */
+  export type POItemDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the POItem
+     */
+    select?: POItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: POItemInclude<ExtArgs> | null
+    /**
+     * Filter which POItem to delete.
+     */
+    where: POItemWhereUniqueInput
+  }
+
+
+  /**
+   * POItem deleteMany
+   */
+  export type POItemDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which POItems to delete
+     */
+    where?: POItemWhereInput
+  }
+
+
+  /**
+   * POItem without action
+   */
+  export type POItemDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the POItem
+     */
+    select?: POItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: POItemInclude<ExtArgs> | null
   }
 
 
@@ -22459,6 +23543,7 @@ export namespace Prisma {
     request_type: 'request_type',
     meqs_date: 'meqs_date',
     status: 'status',
+    notes: 'notes',
     canceller_id: 'canceller_id',
     created_at: 'created_at',
     updated_at: 'updated_at',
@@ -22541,6 +23626,18 @@ export namespace Prisma {
   };
 
   export type POScalarFieldEnum = (typeof POScalarFieldEnum)[keyof typeof POScalarFieldEnum]
+
+
+  export const POItemScalarFieldEnum: {
+    id: 'id',
+    po_id: 'po_id',
+    meqs_supplier_item_id: 'meqs_supplier_item_id',
+    created_at: 'created_at',
+    updated_at: 'updated_at',
+    is_deleted: 'is_deleted'
+  };
+
+  export type POItemScalarFieldEnum = (typeof POItemScalarFieldEnum)[keyof typeof POItemScalarFieldEnum]
 
 
   export const POApproverScalarFieldEnum: {
@@ -23666,6 +24763,7 @@ export namespace Prisma {
     request_type?: IntFilter<"MEQS"> | number
     meqs_date?: DateTimeFilter<"MEQS"> | Date | string
     status?: IntFilter<"MEQS"> | number
+    notes?: StringNullableFilter<"MEQS"> | string | null
     canceller_id?: StringNullableFilter<"MEQS"> | string | null
     created_at?: DateTimeFilter<"MEQS"> | Date | string
     updated_at?: DateTimeFilter<"MEQS"> | Date | string
@@ -23686,6 +24784,7 @@ export namespace Prisma {
     request_type?: SortOrder
     meqs_date?: SortOrder
     status?: SortOrder
+    notes?: SortOrderInput | SortOrder
     canceller_id?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -23709,6 +24808,7 @@ export namespace Prisma {
     request_type?: IntFilter<"MEQS"> | number
     meqs_date?: DateTimeFilter<"MEQS"> | Date | string
     status?: IntFilter<"MEQS"> | number
+    notes?: StringNullableFilter<"MEQS"> | string | null
     canceller_id?: StringNullableFilter<"MEQS"> | string | null
     created_at?: DateTimeFilter<"MEQS"> | Date | string
     updated_at?: DateTimeFilter<"MEQS"> | Date | string
@@ -23729,6 +24829,7 @@ export namespace Prisma {
     request_type?: SortOrder
     meqs_date?: SortOrder
     status?: SortOrder
+    notes?: SortOrderInput | SortOrder
     canceller_id?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -23752,6 +24853,7 @@ export namespace Prisma {
     request_type?: IntWithAggregatesFilter<"MEQS"> | number
     meqs_date?: DateTimeWithAggregatesFilter<"MEQS"> | Date | string
     status?: IntWithAggregatesFilter<"MEQS"> | number
+    notes?: StringNullableWithAggregatesFilter<"MEQS"> | string | null
     canceller_id?: StringNullableWithAggregatesFilter<"MEQS"> | string | null
     created_at?: DateTimeWithAggregatesFilter<"MEQS"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"MEQS"> | Date | string
@@ -23856,6 +24958,7 @@ export namespace Prisma {
     is_deleted?: BoolFilter<"MEQSSupplierItem"> | boolean
     canvass_item?: XOR<CanvassItemRelationFilter, CanvassItemWhereInput>
     meqs_supplier?: XOR<MEQSSupplierRelationFilter, MEQSSupplierWhereInput>
+    po_item?: XOR<POItemNullableRelationFilter, POItemWhereInput> | null
   }
 
   export type MEQSSupplierItemOrderByWithRelationInput = {
@@ -23871,6 +24974,7 @@ export namespace Prisma {
     is_deleted?: SortOrder
     canvass_item?: CanvassItemOrderByWithRelationInput
     meqs_supplier?: MEQSSupplierOrderByWithRelationInput
+    po_item?: POItemOrderByWithRelationInput
   }
 
   export type MEQSSupplierItemWhereUniqueInput = Prisma.AtLeast<{
@@ -23889,6 +24993,7 @@ export namespace Prisma {
     is_deleted?: BoolFilter<"MEQSSupplierItem"> | boolean
     canvass_item?: XOR<CanvassItemRelationFilter, CanvassItemWhereInput>
     meqs_supplier?: XOR<MEQSSupplierRelationFilter, MEQSSupplierWhereInput>
+    po_item?: XOR<POItemNullableRelationFilter, POItemWhereInput> | null
   }, "id">
 
   export type MEQSSupplierItemOrderByWithAggregationInput = {
@@ -24092,6 +25197,7 @@ export namespace Prisma {
     is_deleted?: BoolFilter<"PO"> | boolean
     po_approvers?: POApproverListRelationFilter
     meqs_supplier?: XOR<MEQSSupplierRelationFilter, MEQSSupplierWhereInput>
+    POItem?: POItemListRelationFilter
   }
 
   export type POOrderByWithRelationInput = {
@@ -24106,6 +25212,7 @@ export namespace Prisma {
     is_deleted?: SortOrder
     po_approvers?: POApproverOrderByRelationAggregateInput
     meqs_supplier?: MEQSSupplierOrderByWithRelationInput
+    POItem?: POItemOrderByRelationAggregateInput
   }
 
   export type POWhereUniqueInput = Prisma.AtLeast<{
@@ -24123,6 +25230,7 @@ export namespace Prisma {
     is_deleted?: BoolFilter<"PO"> | boolean
     po_approvers?: POApproverListRelationFilter
     meqs_supplier?: XOR<MEQSSupplierRelationFilter, MEQSSupplierWhereInput>
+    POItem?: POItemListRelationFilter
   }, "id" | "meqs_supplier_id" | "po_number">
 
   export type POOrderByWithAggregationInput = {
@@ -24155,6 +25263,69 @@ export namespace Prisma {
     created_at?: DateTimeWithAggregatesFilter<"PO"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"PO"> | Date | string
     is_deleted?: BoolWithAggregatesFilter<"PO"> | boolean
+  }
+
+  export type POItemWhereInput = {
+    AND?: POItemWhereInput | POItemWhereInput[]
+    OR?: POItemWhereInput[]
+    NOT?: POItemWhereInput | POItemWhereInput[]
+    id?: StringFilter<"POItem"> | string
+    po_id?: StringFilter<"POItem"> | string
+    meqs_supplier_item_id?: StringFilter<"POItem"> | string
+    created_at?: DateTimeFilter<"POItem"> | Date | string
+    updated_at?: DateTimeFilter<"POItem"> | Date | string
+    is_deleted?: BoolFilter<"POItem"> | boolean
+    po?: XOR<PORelationFilter, POWhereInput>
+    meqs_supplier_item?: XOR<MEQSSupplierItemRelationFilter, MEQSSupplierItemWhereInput>
+  }
+
+  export type POItemOrderByWithRelationInput = {
+    id?: SortOrder
+    po_id?: SortOrder
+    meqs_supplier_item_id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+    po?: POOrderByWithRelationInput
+    meqs_supplier_item?: MEQSSupplierItemOrderByWithRelationInput
+  }
+
+  export type POItemWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    meqs_supplier_item_id?: string
+    AND?: POItemWhereInput | POItemWhereInput[]
+    OR?: POItemWhereInput[]
+    NOT?: POItemWhereInput | POItemWhereInput[]
+    po_id?: StringFilter<"POItem"> | string
+    created_at?: DateTimeFilter<"POItem"> | Date | string
+    updated_at?: DateTimeFilter<"POItem"> | Date | string
+    is_deleted?: BoolFilter<"POItem"> | boolean
+    po?: XOR<PORelationFilter, POWhereInput>
+    meqs_supplier_item?: XOR<MEQSSupplierItemRelationFilter, MEQSSupplierItemWhereInput>
+  }, "id" | "meqs_supplier_item_id">
+
+  export type POItemOrderByWithAggregationInput = {
+    id?: SortOrder
+    po_id?: SortOrder
+    meqs_supplier_item_id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+    _count?: POItemCountOrderByAggregateInput
+    _max?: POItemMaxOrderByAggregateInput
+    _min?: POItemMinOrderByAggregateInput
+  }
+
+  export type POItemScalarWhereWithAggregatesInput = {
+    AND?: POItemScalarWhereWithAggregatesInput | POItemScalarWhereWithAggregatesInput[]
+    OR?: POItemScalarWhereWithAggregatesInput[]
+    NOT?: POItemScalarWhereWithAggregatesInput | POItemScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"POItem"> | string
+    po_id?: StringWithAggregatesFilter<"POItem"> | string
+    meqs_supplier_item_id?: StringWithAggregatesFilter<"POItem"> | string
+    created_at?: DateTimeWithAggregatesFilter<"POItem"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"POItem"> | Date | string
+    is_deleted?: BoolWithAggregatesFilter<"POItem"> | boolean
   }
 
   export type POApproverWhereInput = {
@@ -25376,6 +26547,7 @@ export namespace Prisma {
     request_type?: number
     meqs_date: Date | string
     status?: number
+    notes?: string | null
     canceller_id?: string | null
     created_at?: Date | string
     updated_at?: Date | string
@@ -25396,6 +26568,7 @@ export namespace Prisma {
     request_type?: number
     meqs_date: Date | string
     status?: number
+    notes?: string | null
     canceller_id?: string | null
     created_at?: Date | string
     updated_at?: Date | string
@@ -25410,6 +26583,7 @@ export namespace Prisma {
     request_type?: IntFieldUpdateOperationsInput | number
     meqs_date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: IntFieldUpdateOperationsInput | number
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -25430,6 +26604,7 @@ export namespace Prisma {
     request_type?: IntFieldUpdateOperationsInput | number
     meqs_date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: IntFieldUpdateOperationsInput | number
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -25447,6 +26622,7 @@ export namespace Prisma {
     request_type?: number
     meqs_date: Date | string
     status?: number
+    notes?: string | null
     canceller_id?: string | null
     created_at?: Date | string
     updated_at?: Date | string
@@ -25459,6 +26635,7 @@ export namespace Prisma {
     request_type?: IntFieldUpdateOperationsInput | number
     meqs_date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: IntFieldUpdateOperationsInput | number
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -25474,6 +26651,7 @@ export namespace Prisma {
     request_type?: IntFieldUpdateOperationsInput | number
     meqs_date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: IntFieldUpdateOperationsInput | number
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -25578,6 +26756,7 @@ export namespace Prisma {
     is_deleted?: boolean
     canvass_item: CanvassItemCreateNestedOneWithoutMeqs_supplier_itemsInput
     meqs_supplier: MEQSSupplierCreateNestedOneWithoutMeqs_supplier_itemsInput
+    po_item?: POItemCreateNestedOneWithoutMeqs_supplier_itemInput
   }
 
   export type MEQSSupplierItemUncheckedCreateInput = {
@@ -25591,6 +26770,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    po_item?: POItemUncheckedCreateNestedOneWithoutMeqs_supplier_itemInput
   }
 
   export type MEQSSupplierItemUpdateInput = {
@@ -25604,6 +26784,7 @@ export namespace Prisma {
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     canvass_item?: CanvassItemUpdateOneRequiredWithoutMeqs_supplier_itemsNestedInput
     meqs_supplier?: MEQSSupplierUpdateOneRequiredWithoutMeqs_supplier_itemsNestedInput
+    po_item?: POItemUpdateOneWithoutMeqs_supplier_itemNestedInput
   }
 
   export type MEQSSupplierItemUncheckedUpdateInput = {
@@ -25617,6 +26798,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    po_item?: POItemUncheckedUpdateOneWithoutMeqs_supplier_itemNestedInput
   }
 
   export type MEQSSupplierItemCreateManyInput = {
@@ -25833,6 +27015,7 @@ export namespace Prisma {
     is_deleted?: boolean
     po_approvers?: POApproverCreateNestedManyWithoutPoInput
     meqs_supplier: MEQSSupplierCreateNestedOneWithoutPoInput
+    POItem?: POItemCreateNestedManyWithoutPoInput
   }
 
   export type POUncheckedCreateInput = {
@@ -25846,6 +27029,7 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     po_approvers?: POApproverUncheckedCreateNestedManyWithoutPoInput
+    POItem?: POItemUncheckedCreateNestedManyWithoutPoInput
   }
 
   export type POUpdateInput = {
@@ -25859,6 +27043,7 @@ export namespace Prisma {
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     po_approvers?: POApproverUpdateManyWithoutPoNestedInput
     meqs_supplier?: MEQSSupplierUpdateOneRequiredWithoutPoNestedInput
+    POItem?: POItemUpdateManyWithoutPoNestedInput
   }
 
   export type POUncheckedUpdateInput = {
@@ -25872,6 +27057,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     po_approvers?: POApproverUncheckedUpdateManyWithoutPoNestedInput
+    POItem?: POItemUncheckedUpdateManyWithoutPoNestedInput
   }
 
   export type POCreateManyInput = {
@@ -25904,6 +27090,67 @@ export namespace Prisma {
     po_date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: IntFieldUpdateOperationsInput | number
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type POItemCreateInput = {
+    id?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    po: POCreateNestedOneWithoutPOItemInput
+    meqs_supplier_item: MEQSSupplierItemCreateNestedOneWithoutPo_itemInput
+  }
+
+  export type POItemUncheckedCreateInput = {
+    id?: string
+    po_id: string
+    meqs_supplier_item_id: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
+  export type POItemUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    po?: POUpdateOneRequiredWithoutPOItemNestedInput
+    meqs_supplier_item?: MEQSSupplierItemUpdateOneRequiredWithoutPo_itemNestedInput
+  }
+
+  export type POItemUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    po_id?: StringFieldUpdateOperationsInput | string
+    meqs_supplier_item_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type POItemCreateManyInput = {
+    id?: string
+    po_id: string
+    meqs_supplier_item_id: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
+  export type POItemUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type POItemUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    po_id?: StringFieldUpdateOperationsInput | string
+    meqs_supplier_item_id?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -26839,6 +28086,7 @@ export namespace Prisma {
     request_type?: SortOrder
     meqs_date?: SortOrder
     status?: SortOrder
+    notes?: SortOrder
     canceller_id?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -26859,6 +28107,7 @@ export namespace Prisma {
     request_type?: SortOrder
     meqs_date?: SortOrder
     status?: SortOrder
+    notes?: SortOrder
     canceller_id?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -26874,6 +28123,7 @@ export namespace Prisma {
     request_type?: SortOrder
     meqs_date?: SortOrder
     status?: SortOrder
+    notes?: SortOrder
     canceller_id?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -26962,6 +28212,11 @@ export namespace Prisma {
   export type MEQSSupplierRelationFilter = {
     is?: MEQSSupplierWhereInput
     isNot?: MEQSSupplierWhereInput
+  }
+
+  export type POItemNullableRelationFilter = {
+    is?: POItemWhereInput | null
+    isNot?: POItemWhereInput | null
   }
 
   export type MEQSSupplierItemCountOrderByAggregateInput = {
@@ -27117,7 +28372,17 @@ export namespace Prisma {
     none?: POApproverWhereInput
   }
 
+  export type POItemListRelationFilter = {
+    every?: POItemWhereInput
+    some?: POItemWhereInput
+    none?: POItemWhereInput
+  }
+
   export type POApproverOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type POItemOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -27168,6 +28433,38 @@ export namespace Prisma {
   export type PORelationFilter = {
     is?: POWhereInput
     isNot?: POWhereInput
+  }
+
+  export type MEQSSupplierItemRelationFilter = {
+    is?: MEQSSupplierItemWhereInput
+    isNot?: MEQSSupplierItemWhereInput
+  }
+
+  export type POItemCountOrderByAggregateInput = {
+    id?: SortOrder
+    po_id?: SortOrder
+    meqs_supplier_item_id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+  }
+
+  export type POItemMaxOrderByAggregateInput = {
+    id?: SortOrder
+    po_id?: SortOrder
+    meqs_supplier_item_id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+  }
+
+  export type POItemMinOrderByAggregateInput = {
+    id?: SortOrder
+    po_id?: SortOrder
+    meqs_supplier_item_id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
   }
 
   export type POApproverCountOrderByAggregateInput = {
@@ -28253,6 +29550,18 @@ export namespace Prisma {
     connect?: MEQSSupplierWhereUniqueInput
   }
 
+  export type POItemCreateNestedOneWithoutMeqs_supplier_itemInput = {
+    create?: XOR<POItemCreateWithoutMeqs_supplier_itemInput, POItemUncheckedCreateWithoutMeqs_supplier_itemInput>
+    connectOrCreate?: POItemCreateOrConnectWithoutMeqs_supplier_itemInput
+    connect?: POItemWhereUniqueInput
+  }
+
+  export type POItemUncheckedCreateNestedOneWithoutMeqs_supplier_itemInput = {
+    create?: XOR<POItemCreateWithoutMeqs_supplier_itemInput, POItemUncheckedCreateWithoutMeqs_supplier_itemInput>
+    connectOrCreate?: POItemCreateOrConnectWithoutMeqs_supplier_itemInput
+    connect?: POItemWhereUniqueInput
+  }
+
   export type FloatFieldUpdateOperationsInput = {
     set?: number
     increment?: number
@@ -28275,6 +29584,26 @@ export namespace Prisma {
     upsert?: MEQSSupplierUpsertWithoutMeqs_supplier_itemsInput
     connect?: MEQSSupplierWhereUniqueInput
     update?: XOR<XOR<MEQSSupplierUpdateToOneWithWhereWithoutMeqs_supplier_itemsInput, MEQSSupplierUpdateWithoutMeqs_supplier_itemsInput>, MEQSSupplierUncheckedUpdateWithoutMeqs_supplier_itemsInput>
+  }
+
+  export type POItemUpdateOneWithoutMeqs_supplier_itemNestedInput = {
+    create?: XOR<POItemCreateWithoutMeqs_supplier_itemInput, POItemUncheckedCreateWithoutMeqs_supplier_itemInput>
+    connectOrCreate?: POItemCreateOrConnectWithoutMeqs_supplier_itemInput
+    upsert?: POItemUpsertWithoutMeqs_supplier_itemInput
+    disconnect?: POItemWhereInput | boolean
+    delete?: POItemWhereInput | boolean
+    connect?: POItemWhereUniqueInput
+    update?: XOR<XOR<POItemUpdateToOneWithWhereWithoutMeqs_supplier_itemInput, POItemUpdateWithoutMeqs_supplier_itemInput>, POItemUncheckedUpdateWithoutMeqs_supplier_itemInput>
+  }
+
+  export type POItemUncheckedUpdateOneWithoutMeqs_supplier_itemNestedInput = {
+    create?: XOR<POItemCreateWithoutMeqs_supplier_itemInput, POItemUncheckedCreateWithoutMeqs_supplier_itemInput>
+    connectOrCreate?: POItemCreateOrConnectWithoutMeqs_supplier_itemInput
+    upsert?: POItemUpsertWithoutMeqs_supplier_itemInput
+    disconnect?: POItemWhereInput | boolean
+    delete?: POItemWhereInput | boolean
+    connect?: POItemWhereUniqueInput
+    update?: XOR<XOR<POItemUpdateToOneWithWhereWithoutMeqs_supplier_itemInput, POItemUpdateWithoutMeqs_supplier_itemInput>, POItemUncheckedUpdateWithoutMeqs_supplier_itemInput>
   }
 
   export type MEQSSupplierCreateNestedOneWithoutAttachmentsInput = {
@@ -28318,11 +29647,25 @@ export namespace Prisma {
     connect?: MEQSSupplierWhereUniqueInput
   }
 
+  export type POItemCreateNestedManyWithoutPoInput = {
+    create?: XOR<POItemCreateWithoutPoInput, POItemUncheckedCreateWithoutPoInput> | POItemCreateWithoutPoInput[] | POItemUncheckedCreateWithoutPoInput[]
+    connectOrCreate?: POItemCreateOrConnectWithoutPoInput | POItemCreateOrConnectWithoutPoInput[]
+    createMany?: POItemCreateManyPoInputEnvelope
+    connect?: POItemWhereUniqueInput | POItemWhereUniqueInput[]
+  }
+
   export type POApproverUncheckedCreateNestedManyWithoutPoInput = {
     create?: XOR<POApproverCreateWithoutPoInput, POApproverUncheckedCreateWithoutPoInput> | POApproverCreateWithoutPoInput[] | POApproverUncheckedCreateWithoutPoInput[]
     connectOrCreate?: POApproverCreateOrConnectWithoutPoInput | POApproverCreateOrConnectWithoutPoInput[]
     createMany?: POApproverCreateManyPoInputEnvelope
     connect?: POApproverWhereUniqueInput | POApproverWhereUniqueInput[]
+  }
+
+  export type POItemUncheckedCreateNestedManyWithoutPoInput = {
+    create?: XOR<POItemCreateWithoutPoInput, POItemUncheckedCreateWithoutPoInput> | POItemCreateWithoutPoInput[] | POItemUncheckedCreateWithoutPoInput[]
+    connectOrCreate?: POItemCreateOrConnectWithoutPoInput | POItemCreateOrConnectWithoutPoInput[]
+    createMany?: POItemCreateManyPoInputEnvelope
+    connect?: POItemWhereUniqueInput | POItemWhereUniqueInput[]
   }
 
   export type POApproverUpdateManyWithoutPoNestedInput = {
@@ -28347,6 +29690,20 @@ export namespace Prisma {
     update?: XOR<XOR<MEQSSupplierUpdateToOneWithWhereWithoutPoInput, MEQSSupplierUpdateWithoutPoInput>, MEQSSupplierUncheckedUpdateWithoutPoInput>
   }
 
+  export type POItemUpdateManyWithoutPoNestedInput = {
+    create?: XOR<POItemCreateWithoutPoInput, POItemUncheckedCreateWithoutPoInput> | POItemCreateWithoutPoInput[] | POItemUncheckedCreateWithoutPoInput[]
+    connectOrCreate?: POItemCreateOrConnectWithoutPoInput | POItemCreateOrConnectWithoutPoInput[]
+    upsert?: POItemUpsertWithWhereUniqueWithoutPoInput | POItemUpsertWithWhereUniqueWithoutPoInput[]
+    createMany?: POItemCreateManyPoInputEnvelope
+    set?: POItemWhereUniqueInput | POItemWhereUniqueInput[]
+    disconnect?: POItemWhereUniqueInput | POItemWhereUniqueInput[]
+    delete?: POItemWhereUniqueInput | POItemWhereUniqueInput[]
+    connect?: POItemWhereUniqueInput | POItemWhereUniqueInput[]
+    update?: POItemUpdateWithWhereUniqueWithoutPoInput | POItemUpdateWithWhereUniqueWithoutPoInput[]
+    updateMany?: POItemUpdateManyWithWhereWithoutPoInput | POItemUpdateManyWithWhereWithoutPoInput[]
+    deleteMany?: POItemScalarWhereInput | POItemScalarWhereInput[]
+  }
+
   export type POApproverUncheckedUpdateManyWithoutPoNestedInput = {
     create?: XOR<POApproverCreateWithoutPoInput, POApproverUncheckedCreateWithoutPoInput> | POApproverCreateWithoutPoInput[] | POApproverUncheckedCreateWithoutPoInput[]
     connectOrCreate?: POApproverCreateOrConnectWithoutPoInput | POApproverCreateOrConnectWithoutPoInput[]
@@ -28359,6 +29716,48 @@ export namespace Prisma {
     update?: POApproverUpdateWithWhereUniqueWithoutPoInput | POApproverUpdateWithWhereUniqueWithoutPoInput[]
     updateMany?: POApproverUpdateManyWithWhereWithoutPoInput | POApproverUpdateManyWithWhereWithoutPoInput[]
     deleteMany?: POApproverScalarWhereInput | POApproverScalarWhereInput[]
+  }
+
+  export type POItemUncheckedUpdateManyWithoutPoNestedInput = {
+    create?: XOR<POItemCreateWithoutPoInput, POItemUncheckedCreateWithoutPoInput> | POItemCreateWithoutPoInput[] | POItemUncheckedCreateWithoutPoInput[]
+    connectOrCreate?: POItemCreateOrConnectWithoutPoInput | POItemCreateOrConnectWithoutPoInput[]
+    upsert?: POItemUpsertWithWhereUniqueWithoutPoInput | POItemUpsertWithWhereUniqueWithoutPoInput[]
+    createMany?: POItemCreateManyPoInputEnvelope
+    set?: POItemWhereUniqueInput | POItemWhereUniqueInput[]
+    disconnect?: POItemWhereUniqueInput | POItemWhereUniqueInput[]
+    delete?: POItemWhereUniqueInput | POItemWhereUniqueInput[]
+    connect?: POItemWhereUniqueInput | POItemWhereUniqueInput[]
+    update?: POItemUpdateWithWhereUniqueWithoutPoInput | POItemUpdateWithWhereUniqueWithoutPoInput[]
+    updateMany?: POItemUpdateManyWithWhereWithoutPoInput | POItemUpdateManyWithWhereWithoutPoInput[]
+    deleteMany?: POItemScalarWhereInput | POItemScalarWhereInput[]
+  }
+
+  export type POCreateNestedOneWithoutPOItemInput = {
+    create?: XOR<POCreateWithoutPOItemInput, POUncheckedCreateWithoutPOItemInput>
+    connectOrCreate?: POCreateOrConnectWithoutPOItemInput
+    connect?: POWhereUniqueInput
+  }
+
+  export type MEQSSupplierItemCreateNestedOneWithoutPo_itemInput = {
+    create?: XOR<MEQSSupplierItemCreateWithoutPo_itemInput, MEQSSupplierItemUncheckedCreateWithoutPo_itemInput>
+    connectOrCreate?: MEQSSupplierItemCreateOrConnectWithoutPo_itemInput
+    connect?: MEQSSupplierItemWhereUniqueInput
+  }
+
+  export type POUpdateOneRequiredWithoutPOItemNestedInput = {
+    create?: XOR<POCreateWithoutPOItemInput, POUncheckedCreateWithoutPOItemInput>
+    connectOrCreate?: POCreateOrConnectWithoutPOItemInput
+    upsert?: POUpsertWithoutPOItemInput
+    connect?: POWhereUniqueInput
+    update?: XOR<XOR<POUpdateToOneWithWhereWithoutPOItemInput, POUpdateWithoutPOItemInput>, POUncheckedUpdateWithoutPOItemInput>
+  }
+
+  export type MEQSSupplierItemUpdateOneRequiredWithoutPo_itemNestedInput = {
+    create?: XOR<MEQSSupplierItemCreateWithoutPo_itemInput, MEQSSupplierItemUncheckedCreateWithoutPo_itemInput>
+    connectOrCreate?: MEQSSupplierItemCreateOrConnectWithoutPo_itemInput
+    upsert?: MEQSSupplierItemUpsertWithoutPo_itemInput
+    connect?: MEQSSupplierItemWhereUniqueInput
+    update?: XOR<XOR<MEQSSupplierItemUpdateToOneWithWhereWithoutPo_itemInput, MEQSSupplierItemUpdateWithoutPo_itemInput>, MEQSSupplierItemUncheckedUpdateWithoutPo_itemInput>
   }
 
   export type POCreateNestedOneWithoutPo_approversInput = {
@@ -28914,6 +30313,7 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     meqs_supplier: MEQSSupplierCreateNestedOneWithoutMeqs_supplier_itemsInput
+    po_item?: POItemCreateNestedOneWithoutMeqs_supplier_itemInput
   }
 
   export type MEQSSupplierItemUncheckedCreateWithoutCanvass_itemInput = {
@@ -28926,6 +30326,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    po_item?: POItemUncheckedCreateNestedOneWithoutMeqs_supplier_itemInput
   }
 
   export type MEQSSupplierItemCreateOrConnectWithoutCanvass_itemInput = {
@@ -29456,6 +30857,7 @@ export namespace Prisma {
     request_type?: number
     meqs_date: Date | string
     status?: number
+    notes?: string | null
     canceller_id?: string | null
     created_at?: Date | string
     updated_at?: Date | string
@@ -29474,6 +30876,7 @@ export namespace Prisma {
     request_type?: number
     meqs_date: Date | string
     status?: number
+    notes?: string | null
     canceller_id?: string | null
     created_at?: Date | string
     updated_at?: Date | string
@@ -29580,6 +30983,7 @@ export namespace Prisma {
     request_type?: IntFieldUpdateOperationsInput | number
     meqs_date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: IntFieldUpdateOperationsInput | number
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -29598,6 +31002,7 @@ export namespace Prisma {
     request_type?: IntFieldUpdateOperationsInput | number
     meqs_date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: IntFieldUpdateOperationsInput | number
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -29737,6 +31142,7 @@ export namespace Prisma {
     request_type?: number
     meqs_date: Date | string
     status?: number
+    notes?: string | null
     canceller_id?: string | null
     created_at?: Date | string
     updated_at?: Date | string
@@ -29755,6 +31161,7 @@ export namespace Prisma {
     request_type?: number
     meqs_date: Date | string
     status?: number
+    notes?: string | null
     canceller_id?: string | null
     created_at?: Date | string
     updated_at?: Date | string
@@ -29866,6 +31273,7 @@ export namespace Prisma {
     request_type?: IntFieldUpdateOperationsInput | number
     meqs_date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: IntFieldUpdateOperationsInput | number
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -29884,6 +31292,7 @@ export namespace Prisma {
     request_type?: IntFieldUpdateOperationsInput | number
     meqs_date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: IntFieldUpdateOperationsInput | number
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -30020,6 +31429,7 @@ export namespace Prisma {
     request_type?: number
     meqs_date: Date | string
     status?: number
+    notes?: string | null
     canceller_id?: string | null
     created_at?: Date | string
     updated_at?: Date | string
@@ -30038,6 +31448,7 @@ export namespace Prisma {
     request_type?: number
     meqs_date: Date | string
     status?: number
+    notes?: string | null
     canceller_id?: string | null
     created_at?: Date | string
     updated_at?: Date | string
@@ -30166,6 +31577,7 @@ export namespace Prisma {
     request_type?: IntFieldUpdateOperationsInput | number
     meqs_date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: IntFieldUpdateOperationsInput | number
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -30184,6 +31596,7 @@ export namespace Prisma {
     request_type?: IntFieldUpdateOperationsInput | number
     meqs_date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: IntFieldUpdateOperationsInput | number
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -30772,6 +32185,7 @@ export namespace Prisma {
     request_type?: number
     meqs_date: Date | string
     status?: number
+    notes?: string | null
     canceller_id?: string | null
     created_at?: Date | string
     updated_at?: Date | string
@@ -30791,6 +32205,7 @@ export namespace Prisma {
     request_type?: number
     meqs_date: Date | string
     status?: number
+    notes?: string | null
     canceller_id?: string | null
     created_at?: Date | string
     updated_at?: Date | string
@@ -30862,6 +32277,7 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     canvass_item: CanvassItemCreateNestedOneWithoutMeqs_supplier_itemsInput
+    po_item?: POItemCreateNestedOneWithoutMeqs_supplier_itemInput
   }
 
   export type MEQSSupplierItemUncheckedCreateWithoutMeqs_supplierInput = {
@@ -30874,6 +32290,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    po_item?: POItemUncheckedCreateNestedOneWithoutMeqs_supplier_itemInput
   }
 
   export type MEQSSupplierItemCreateOrConnectWithoutMeqs_supplierInput = {
@@ -30896,6 +32313,7 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     po_approvers?: POApproverCreateNestedManyWithoutPoInput
+    POItem?: POItemCreateNestedManyWithoutPoInput
   }
 
   export type POUncheckedCreateWithoutMeqs_supplierInput = {
@@ -30908,6 +32326,7 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     po_approvers?: POApproverUncheckedCreateNestedManyWithoutPoInput
+    POItem?: POItemUncheckedCreateNestedManyWithoutPoInput
   }
 
   export type POCreateOrConnectWithoutMeqs_supplierInput = {
@@ -30932,6 +32351,7 @@ export namespace Prisma {
     request_type?: IntFieldUpdateOperationsInput | number
     meqs_date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: IntFieldUpdateOperationsInput | number
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -30951,6 +32371,7 @@ export namespace Prisma {
     request_type?: IntFieldUpdateOperationsInput | number
     meqs_date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: IntFieldUpdateOperationsInput | number
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -31052,6 +32473,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     po_approvers?: POApproverUpdateManyWithoutPoNestedInput
+    POItem?: POItemUpdateManyWithoutPoNestedInput
   }
 
   export type POUncheckedUpdateWithoutMeqs_supplierInput = {
@@ -31064,6 +32486,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     po_approvers?: POApproverUncheckedUpdateManyWithoutPoNestedInput
+    POItem?: POItemUncheckedUpdateManyWithoutPoNestedInput
   }
 
   export type CanvassItemCreateWithoutMeqs_supplier_itemsInput = {
@@ -31124,6 +32547,27 @@ export namespace Prisma {
   export type MEQSSupplierCreateOrConnectWithoutMeqs_supplier_itemsInput = {
     where: MEQSSupplierWhereUniqueInput
     create: XOR<MEQSSupplierCreateWithoutMeqs_supplier_itemsInput, MEQSSupplierUncheckedCreateWithoutMeqs_supplier_itemsInput>
+  }
+
+  export type POItemCreateWithoutMeqs_supplier_itemInput = {
+    id?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    po: POCreateNestedOneWithoutPOItemInput
+  }
+
+  export type POItemUncheckedCreateWithoutMeqs_supplier_itemInput = {
+    id?: string
+    po_id: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
+  export type POItemCreateOrConnectWithoutMeqs_supplier_itemInput = {
+    where: POItemWhereUniqueInput
+    create: XOR<POItemCreateWithoutMeqs_supplier_itemInput, POItemUncheckedCreateWithoutMeqs_supplier_itemInput>
   }
 
   export type CanvassItemUpsertWithoutMeqs_supplier_itemsInput = {
@@ -31196,6 +32640,33 @@ export namespace Prisma {
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     attachments?: MEQSSupplierAttachmentUncheckedUpdateManyWithoutMeqs_supplierNestedInput
     po?: POUncheckedUpdateOneWithoutMeqs_supplierNestedInput
+  }
+
+  export type POItemUpsertWithoutMeqs_supplier_itemInput = {
+    update: XOR<POItemUpdateWithoutMeqs_supplier_itemInput, POItemUncheckedUpdateWithoutMeqs_supplier_itemInput>
+    create: XOR<POItemCreateWithoutMeqs_supplier_itemInput, POItemUncheckedCreateWithoutMeqs_supplier_itemInput>
+    where?: POItemWhereInput
+  }
+
+  export type POItemUpdateToOneWithWhereWithoutMeqs_supplier_itemInput = {
+    where?: POItemWhereInput
+    data: XOR<POItemUpdateWithoutMeqs_supplier_itemInput, POItemUncheckedUpdateWithoutMeqs_supplier_itemInput>
+  }
+
+  export type POItemUpdateWithoutMeqs_supplier_itemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    po?: POUpdateOneRequiredWithoutPOItemNestedInput
+  }
+
+  export type POItemUncheckedUpdateWithoutMeqs_supplier_itemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    po_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type MEQSSupplierCreateWithoutAttachmentsInput = {
@@ -31272,6 +32743,7 @@ export namespace Prisma {
     request_type?: number
     meqs_date: Date | string
     status?: number
+    notes?: string | null
     canceller_id?: string | null
     created_at?: Date | string
     updated_at?: Date | string
@@ -31291,6 +32763,7 @@ export namespace Prisma {
     request_type?: number
     meqs_date: Date | string
     status?: number
+    notes?: string | null
     canceller_id?: string | null
     created_at?: Date | string
     updated_at?: Date | string
@@ -31320,6 +32793,7 @@ export namespace Prisma {
     request_type?: IntFieldUpdateOperationsInput | number
     meqs_date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: IntFieldUpdateOperationsInput | number
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -31339,6 +32813,7 @@ export namespace Prisma {
     request_type?: IntFieldUpdateOperationsInput | number
     meqs_date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: IntFieldUpdateOperationsInput | number
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -31415,6 +32890,32 @@ export namespace Prisma {
     create: XOR<MEQSSupplierCreateWithoutPoInput, MEQSSupplierUncheckedCreateWithoutPoInput>
   }
 
+  export type POItemCreateWithoutPoInput = {
+    id?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    meqs_supplier_item: MEQSSupplierItemCreateNestedOneWithoutPo_itemInput
+  }
+
+  export type POItemUncheckedCreateWithoutPoInput = {
+    id?: string
+    meqs_supplier_item_id: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
+  export type POItemCreateOrConnectWithoutPoInput = {
+    where: POItemWhereUniqueInput
+    create: XOR<POItemCreateWithoutPoInput, POItemUncheckedCreateWithoutPoInput>
+  }
+
+  export type POItemCreateManyPoInputEnvelope = {
+    data: POItemCreateManyPoInput | POItemCreateManyPoInput[]
+    skipDuplicates?: boolean
+  }
+
   export type POApproverUpsertWithWhereUniqueWithoutPoInput = {
     where: POApproverWhereUniqueInput
     update: XOR<POApproverUpdateWithoutPoInput, POApproverUncheckedUpdateWithoutPoInput>
@@ -31486,6 +32987,170 @@ export namespace Prisma {
     meqs_supplier_items?: MEQSSupplierItemUncheckedUpdateManyWithoutMeqs_supplierNestedInput
   }
 
+  export type POItemUpsertWithWhereUniqueWithoutPoInput = {
+    where: POItemWhereUniqueInput
+    update: XOR<POItemUpdateWithoutPoInput, POItemUncheckedUpdateWithoutPoInput>
+    create: XOR<POItemCreateWithoutPoInput, POItemUncheckedCreateWithoutPoInput>
+  }
+
+  export type POItemUpdateWithWhereUniqueWithoutPoInput = {
+    where: POItemWhereUniqueInput
+    data: XOR<POItemUpdateWithoutPoInput, POItemUncheckedUpdateWithoutPoInput>
+  }
+
+  export type POItemUpdateManyWithWhereWithoutPoInput = {
+    where: POItemScalarWhereInput
+    data: XOR<POItemUpdateManyMutationInput, POItemUncheckedUpdateManyWithoutPoInput>
+  }
+
+  export type POItemScalarWhereInput = {
+    AND?: POItemScalarWhereInput | POItemScalarWhereInput[]
+    OR?: POItemScalarWhereInput[]
+    NOT?: POItemScalarWhereInput | POItemScalarWhereInput[]
+    id?: StringFilter<"POItem"> | string
+    po_id?: StringFilter<"POItem"> | string
+    meqs_supplier_item_id?: StringFilter<"POItem"> | string
+    created_at?: DateTimeFilter<"POItem"> | Date | string
+    updated_at?: DateTimeFilter<"POItem"> | Date | string
+    is_deleted?: BoolFilter<"POItem"> | boolean
+  }
+
+  export type POCreateWithoutPOItemInput = {
+    id?: string
+    po_number: string
+    po_date: Date | string
+    status?: number
+    canceller_id?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    po_approvers?: POApproverCreateNestedManyWithoutPoInput
+    meqs_supplier: MEQSSupplierCreateNestedOneWithoutPoInput
+  }
+
+  export type POUncheckedCreateWithoutPOItemInput = {
+    id?: string
+    meqs_supplier_id: string
+    po_number: string
+    po_date: Date | string
+    status?: number
+    canceller_id?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    po_approvers?: POApproverUncheckedCreateNestedManyWithoutPoInput
+  }
+
+  export type POCreateOrConnectWithoutPOItemInput = {
+    where: POWhereUniqueInput
+    create: XOR<POCreateWithoutPOItemInput, POUncheckedCreateWithoutPOItemInput>
+  }
+
+  export type MEQSSupplierItemCreateWithoutPo_itemInput = {
+    id?: string
+    price: number
+    is_awarded?: boolean
+    notes?: string | null
+    vat_type?: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    canvass_item: CanvassItemCreateNestedOneWithoutMeqs_supplier_itemsInput
+    meqs_supplier: MEQSSupplierCreateNestedOneWithoutMeqs_supplier_itemsInput
+  }
+
+  export type MEQSSupplierItemUncheckedCreateWithoutPo_itemInput = {
+    id?: string
+    canvass_item_id: string
+    meqs_supplier_id: string
+    price: number
+    is_awarded?: boolean
+    notes?: string | null
+    vat_type?: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
+  export type MEQSSupplierItemCreateOrConnectWithoutPo_itemInput = {
+    where: MEQSSupplierItemWhereUniqueInput
+    create: XOR<MEQSSupplierItemCreateWithoutPo_itemInput, MEQSSupplierItemUncheckedCreateWithoutPo_itemInput>
+  }
+
+  export type POUpsertWithoutPOItemInput = {
+    update: XOR<POUpdateWithoutPOItemInput, POUncheckedUpdateWithoutPOItemInput>
+    create: XOR<POCreateWithoutPOItemInput, POUncheckedCreateWithoutPOItemInput>
+    where?: POWhereInput
+  }
+
+  export type POUpdateToOneWithWhereWithoutPOItemInput = {
+    where?: POWhereInput
+    data: XOR<POUpdateWithoutPOItemInput, POUncheckedUpdateWithoutPOItemInput>
+  }
+
+  export type POUpdateWithoutPOItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    po_number?: StringFieldUpdateOperationsInput | string
+    po_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: IntFieldUpdateOperationsInput | number
+    canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    po_approvers?: POApproverUpdateManyWithoutPoNestedInput
+    meqs_supplier?: MEQSSupplierUpdateOneRequiredWithoutPoNestedInput
+  }
+
+  export type POUncheckedUpdateWithoutPOItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    meqs_supplier_id?: StringFieldUpdateOperationsInput | string
+    po_number?: StringFieldUpdateOperationsInput | string
+    po_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: IntFieldUpdateOperationsInput | number
+    canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    po_approvers?: POApproverUncheckedUpdateManyWithoutPoNestedInput
+  }
+
+  export type MEQSSupplierItemUpsertWithoutPo_itemInput = {
+    update: XOR<MEQSSupplierItemUpdateWithoutPo_itemInput, MEQSSupplierItemUncheckedUpdateWithoutPo_itemInput>
+    create: XOR<MEQSSupplierItemCreateWithoutPo_itemInput, MEQSSupplierItemUncheckedCreateWithoutPo_itemInput>
+    where?: MEQSSupplierItemWhereInput
+  }
+
+  export type MEQSSupplierItemUpdateToOneWithWhereWithoutPo_itemInput = {
+    where?: MEQSSupplierItemWhereInput
+    data: XOR<MEQSSupplierItemUpdateWithoutPo_itemInput, MEQSSupplierItemUncheckedUpdateWithoutPo_itemInput>
+  }
+
+  export type MEQSSupplierItemUpdateWithoutPo_itemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    price?: FloatFieldUpdateOperationsInput | number
+    is_awarded?: BoolFieldUpdateOperationsInput | boolean
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    vat_type?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    canvass_item?: CanvassItemUpdateOneRequiredWithoutMeqs_supplier_itemsNestedInput
+    meqs_supplier?: MEQSSupplierUpdateOneRequiredWithoutMeqs_supplier_itemsNestedInput
+  }
+
+  export type MEQSSupplierItemUncheckedUpdateWithoutPo_itemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    canvass_item_id?: StringFieldUpdateOperationsInput | string
+    meqs_supplier_id?: StringFieldUpdateOperationsInput | string
+    price?: FloatFieldUpdateOperationsInput | number
+    is_awarded?: BoolFieldUpdateOperationsInput | boolean
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    vat_type?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
   export type POCreateWithoutPo_approversInput = {
     id?: string
     po_number: string
@@ -31496,6 +33161,7 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     meqs_supplier: MEQSSupplierCreateNestedOneWithoutPoInput
+    POItem?: POItemCreateNestedManyWithoutPoInput
   }
 
   export type POUncheckedCreateWithoutPo_approversInput = {
@@ -31508,6 +33174,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    POItem?: POItemUncheckedCreateNestedManyWithoutPoInput
   }
 
   export type POCreateOrConnectWithoutPo_approversInput = {
@@ -31536,6 +33203,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     meqs_supplier?: MEQSSupplierUpdateOneRequiredWithoutPoNestedInput
+    POItem?: POItemUpdateManyWithoutPoNestedInput
   }
 
   export type POUncheckedUpdateWithoutPo_approversInput = {
@@ -31548,6 +33216,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    POItem?: POItemUncheckedUpdateManyWithoutPoNestedInput
   }
 
   export type MEQSSupplierCreateManySupplierInput = {
@@ -31774,6 +33443,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     meqs_supplier?: MEQSSupplierUpdateOneRequiredWithoutMeqs_supplier_itemsNestedInput
+    po_item?: POItemUpdateOneWithoutMeqs_supplier_itemNestedInput
   }
 
   export type MEQSSupplierItemUncheckedUpdateWithoutCanvass_itemInput = {
@@ -31786,6 +33456,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    po_item?: POItemUncheckedUpdateOneWithoutMeqs_supplier_itemNestedInput
   }
 
   export type MEQSSupplierItemUncheckedUpdateManyWithoutCanvass_itemInput = {
@@ -32166,6 +33837,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     canvass_item?: CanvassItemUpdateOneRequiredWithoutMeqs_supplier_itemsNestedInput
+    po_item?: POItemUpdateOneWithoutMeqs_supplier_itemNestedInput
   }
 
   export type MEQSSupplierItemUncheckedUpdateWithoutMeqs_supplierInput = {
@@ -32178,6 +33850,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    po_item?: POItemUncheckedUpdateOneWithoutMeqs_supplier_itemNestedInput
   }
 
   export type MEQSSupplierItemUncheckedUpdateManyWithoutMeqs_supplierInput = {
@@ -32201,6 +33874,14 @@ export namespace Prisma {
     status: number
     label: string
     order: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
+  export type POItemCreateManyPoInput = {
+    id?: string
+    meqs_supplier_item_id: string
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -32243,6 +33924,30 @@ export namespace Prisma {
     status?: IntFieldUpdateOperationsInput | number
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type POItemUpdateWithoutPoInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    meqs_supplier_item?: MEQSSupplierItemUpdateOneRequiredWithoutPo_itemNestedInput
+  }
+
+  export type POItemUncheckedUpdateWithoutPoInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    meqs_supplier_item_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type POItemUncheckedUpdateManyWithoutPoInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    meqs_supplier_item_id?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -32373,6 +34078,10 @@ export namespace Prisma {
      * @deprecated Use PODefaultArgs instead
      */
     export type POArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = PODefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use POItemDefaultArgs instead
+     */
+    export type POItemArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = POItemDefaultArgs<ExtArgs>
     /**
      * @deprecated Use POApproverDefaultArgs instead
      */

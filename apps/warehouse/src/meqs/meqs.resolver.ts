@@ -7,7 +7,7 @@ import { CurrentAuthUser } from '../auth/current-auth-user.decorator';
 import { CreateMeqsInput } from './dto/create-meqs.input';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { UpdateMeqsInput } from './dto/update-meqs.input';
-import { Employee } from '../employee/entities/employee.entity';
+import { Employee } from '../__employee__/entities/employee.entity';
 
 @UseGuards(GqlAuthGuard)
 @Resolver( () => MEQS)

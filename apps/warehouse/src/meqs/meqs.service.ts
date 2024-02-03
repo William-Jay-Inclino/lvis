@@ -133,6 +133,7 @@ export class MeqsService {
             jo: input.jo_id ? { connect: { id: input.jo_id } } : undefined,
             rv: input.rv_id ? { connect: { id: input.rv_id } } : undefined,
             spr: input.spr_id ? { connect: { id: input.spr_id } } : undefined,
+            notes: input.notes,
             meqs_number: meqsNumber,
             request_type: input.request_type,
             meqs_date: new Date(input.meqs_date),
@@ -167,6 +168,7 @@ export class MeqsService {
 
 
         const data: Prisma.MEQSUpdateInput = {
+            notes: input.notes ?? existingItem.notes,
             meqs_date: input.meqs_date ? new Date(input.meqs_date) : existingItem.meqs_date,
             status: input.status ?? existingItem.status,
             canceller_id: input.canceller_id ?? existingItem.canceller_id

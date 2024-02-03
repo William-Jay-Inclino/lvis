@@ -5,6 +5,11 @@ import { InputType, Field, Int } from '@nestjs/graphql';
 @InputType()
 export class UpdateMeqsInput {
 
+  @Field(() => String, { nullable: true })
+  @IsOptional()
+  @IsString()
+  notes?: string;
+
   @Field(() => String, {nullable: true})
   @IsOptional()
   @Transform(({ value }) => new Date(value))

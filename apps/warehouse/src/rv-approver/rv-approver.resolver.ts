@@ -8,7 +8,7 @@ import { GqlAuthGuard } from '../auth/guards/gql-auth.guard';
 import { UseGuards } from '@nestjs/common';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { CurrentAuthUser } from '../auth/current-auth-user.decorator';
-import { Employee } from '../employee/entities/employee.entity';
+import { Employee } from '../__employee__/entities/employee.entity';
 import { RV } from '../rv/entities/rv.entity';
 
 @UseGuards(GqlAuthGuard)

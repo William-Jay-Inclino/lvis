@@ -2,7 +2,7 @@ import { Args, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/g
 import { Canvass } from './entities/canvass.entity';
 import { CanvassService } from './canvass.service';
 import { CreateCanvassInput } from './dto/create-canvass.input';
-import { Employee } from '../employee/entities/employee.entity';
+import { Employee } from '../__employee__/entities/employee.entity';
 import { CurrentAuthUser } from '../auth/current-auth-user.decorator';
 import { GqlAuthGuard } from '../auth/guards/gql-auth.guard';
 import { Logger, UseGuards } from '@nestjs/common';

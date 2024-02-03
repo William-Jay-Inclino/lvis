@@ -269,6 +269,7 @@ exports.Prisma.MEQSScalarFieldEnum = {
   request_type: 'request_type',
   meqs_date: 'meqs_date',
   status: 'status',
+  notes: 'notes',
   canceller_id: 'canceller_id',
   created_at: 'created_at',
   updated_at: 'updated_at',
@@ -335,6 +336,15 @@ exports.Prisma.POScalarFieldEnum = {
   is_deleted: 'is_deleted'
 };
 
+exports.Prisma.POItemScalarFieldEnum = {
+  id: 'id',
+  po_id: 'po_id',
+  meqs_supplier_item_id: 'meqs_supplier_item_id',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  is_deleted: 'is_deleted'
+};
+
 exports.Prisma.POApproverScalarFieldEnum = {
   id: 'id',
   po_id: 'po_id',
@@ -385,6 +395,7 @@ exports.Prisma.ModelName = {
   MEQSSupplierAttachment: 'MEQSSupplierAttachment',
   MEQSApprover: 'MEQSApprover',
   PO: 'PO',
+  POItem: 'POItem',
   POApprover: 'POApprover'
 };
 
