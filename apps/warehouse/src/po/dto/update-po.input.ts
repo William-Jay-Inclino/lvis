@@ -1,6 +1,7 @@
-import { Transform, Type } from 'class-transformer';
-import { IsNotEmpty, IsString, IsDate, IsOptional, IsArray, ValidateNested, IsInt } from 'class-validator';
+import { Transform } from 'class-transformer';
+import { IsString, IsDate, IsOptional, IsInt, IsBoolean } from 'class-validator';
 import { InputType, Field, Int } from '@nestjs/graphql';
+import { APPROVAL_STATUS } from '../../__common__/types';
 
 @InputType()
 export class UpdatePoInput {
@@ -11,31 +12,14 @@ export class UpdatePoInput {
   @IsDate()
   po_date?: string;
 
-  @Field(() => String, {nullable: true})
-  @IsOptional()
-  @IsString()
-  payment_terms?: string;
-
-  @Field(() => String, {nullable: true})
-  @IsOptional()
-  @IsString()
-  purpose?: string;
-
-  @Field(() => String, {nullable: true})
-  @IsString()
-  @IsOptional()
-  notes?: string;
-
   @Field(() => Int, {nullable: true})
   @IsInt()
   @IsOptional()
-  status?: number;
+  status?: APPROVAL_STATUS;
 
-  // @Field(() => [CreateItemWithSupplierInput], {nullable: true})
-  // @IsOptional()
-  // @IsArray()
-  // @ValidateNested({ each: true })
-  // @Type(() => CreateItemWithSupplierInput)
-  // items?: CreateItemWithSupplierInput[];
+  @Field(() => String, {nullable: true})
+  @IsString()
+  @IsOptional()
+  canceller_id?: string;
 
 }

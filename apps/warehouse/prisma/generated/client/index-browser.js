@@ -269,6 +269,7 @@ exports.Prisma.MEQSScalarFieldEnum = {
   request_type: 'request_type',
   meqs_date: 'meqs_date',
   status: 'status',
+  notes: 'notes',
   canceller_id: 'canceller_id',
   created_at: 'created_at',
   updated_at: 'updated_at',

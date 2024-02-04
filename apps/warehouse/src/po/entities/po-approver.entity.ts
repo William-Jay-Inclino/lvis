@@ -11,8 +11,8 @@ export class POApprover {
     @Field(() => String)
     approver_id: string
 
-    @Field(() => Employee)
-    approver: Employee
+    @Field(() => String, { nullable: true })
+    approver_proxy_id: string | null
 
     @Field(() => String)
     po_id: string

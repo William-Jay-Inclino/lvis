@@ -4,7 +4,7 @@ import { CanvassItem } from './entities/canvass-item.entity';
 import { CreateCanvassItemInput } from './dto/create-canvass-item.input';
 import { UpdateCanvassItemInput } from './dto/update-canvass-item.input';
 import { UseGuards } from '@nestjs/common';
-import { GqlAuthGuard } from '../auth/guards/gql-auth.guard';
+import { GqlAuthGuard } from '../__auth__/guards/gql-auth.guard';
 import { WarehouseRemoveResponse } from '../__common__/classes';
 
 @UseGuards(GqlAuthGuard)

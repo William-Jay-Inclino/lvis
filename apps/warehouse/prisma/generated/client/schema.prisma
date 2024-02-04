@@ -109,7 +109,7 @@ model JO {
   updated_at        DateTime     @updatedAt
   is_deleted        Boolean      @default(false)
   jo_approvers      JOApprover[]
-  canvass           Canvass      @relation(fields: [canvass_id], references: [id])
+  canvass           Canvass      @relation(fields: [canvass_id], references: [id], onDelete: Restrict)
   meqs              MEQS?
 
   @@map("job_order")
@@ -127,7 +127,7 @@ model JOApprover {
   created_at        DateTime  @default(now())
   updated_at        DateTime  @updatedAt
   is_deleted        Boolean   @default(false)
-  jo                JO        @relation(fields: [jo_id], references: [id])
+  jo                JO        @relation(fields: [jo_id], references: [id], onDelete: Cascade)
 
   @@map("jo_approver")
 }
@@ -135,7 +135,7 @@ model JOApprover {
 model RV {
   id                String    @id @default(uuid())
   canvass_id        String    @unique
-  canvass           Canvass   @relation(fields: [canvass_id], references: [id])
+  canvass           Canvass   @relation(fields: [canvass_id], references: [id], onDelete: Restrict)
   classification_id String?
   supervisor_id     String
   canceller_id      String?
@@ -189,8 +189,8 @@ model SPR {
   updated_at        DateTime      @updatedAt
   is_deleted        Boolean       @default(false)
   meqs              MEQS?
-  canvass           Canvass       @relation(fields: [canvass_id], references: [id])
-  vehicle           Vehicle       @relation(fields: [vehicle_id], references: [id])
+  canvass           Canvass       @relation(fields: [canvass_id], references: [id], onDelete: Restrict)
+  vehicle           Vehicle       @relation(fields: [vehicle_id], references: [id], onDelete: Restrict)
   spr_approvers     SPRApprover[]
 
   @@map("spare_parts_request")
@@ -209,7 +209,7 @@ model SPRApprover {
   created_at        DateTime  @default(now())
   updated_at        DateTime  @updatedAt
   is_deleted        Boolean   @default(false)
-  spr               SPR       @relation(fields: [spr_id], references: [id])
+  spr               SPR       @relation(fields: [spr_id], references: [id], onDelete: Cascade)
 
   @@map("spr_approver")
 }
@@ -223,6 +223,7 @@ model MEQS {
   request_type   Int            @default(1)
   meqs_date      DateTime
   status         Int            @default(1)
+  notes          String?
   canceller_id   String?
   created_at     DateTime       @default(now())
   updated_at     DateTime       @updatedAt
@@ -245,8 +246,8 @@ model MEQSSupplier {
   created_at          DateTime                 @default(now())
   updated_at          DateTime                 @updatedAt
   is_deleted          Boolean                  @default(false)
-  meqs                MEQS                     @relation(fields: [meqs_id], references: [id])
-  supplier            Supplier                 @relation(fields: [supplier_id], references: [id])
+  meqs                MEQS                     @relation(fields: [meqs_id], references: [id], onDelete: Cascade)
+  supplier            Supplier                 @relation(fields: [supplier_id], references: [id], onDelete: Restrict)
   attachments         MEQSSupplierAttachment[]
   meqs_supplier_items MEQSSupplierItem[]
   po                  PO?
@@ -298,7 +299,7 @@ model MEQSApprover {
   created_at        DateTime  @default(now())
   updated_at        DateTime  @updatedAt
   is_deleted        Boolean   @default(false)
-  meqs              MEQS      @relation(fields: [meqs_id], references: [id])
+  meqs              MEQS      @relation(fields: [meqs_id], references: [id], onDelete: Cascade)
 
   @@map("meqs_approver")
 }
@@ -314,7 +315,7 @@ model PO {
   updated_at       DateTime     @updatedAt
   is_deleted       Boolean      @default(false)
   po_approvers     POApprover[]
-  meqs_supplier    MEQSSupplier @relation(fields: [meqs_supplier_id], references: [id])
+  meqs_supplier    MEQSSupplier @relation(fields: [meqs_supplier_id], references: [id], onDelete: Restrict)
 
   @@map("purchase_order")
 }
@@ -332,7 +333,7 @@ model POApprover {
   created_at        DateTime  @default(now())
   updated_at        DateTime  @updatedAt
   is_deleted        Boolean   @default(false)
-  po                PO        @relation(fields: [po_id], references: [id])
+  po                PO        @relation(fields: [po_id], references: [id], onDelete: Cascade)
 
   @@map("po_approver")
 }

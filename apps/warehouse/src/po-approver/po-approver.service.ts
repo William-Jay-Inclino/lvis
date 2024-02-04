@@ -1,8 +1,8 @@
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
-import { CreateRvApproverInput } from './dto/create-rv-approver.input';
-import { UpdateRvApproverInput } from './dto/update-rv-approver.input';
+import { CreatePoApproverInput } from './dto/create-po-approver.input';
+import { UpdatePoApproverInput } from './dto/update-po-approver.input';
 import { PrismaService } from '../__prisma__/prisma.service';
-import { Prisma, RVApprover } from 'apps/warehouse/prisma/generated/client';
+import { Prisma, POApprover } from 'apps/warehouse/prisma/generated/client';
 import { APPROVAL_STATUS } from '../__common__/types';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { HttpService } from '@nestjs/axios';
@@ -10,25 +10,50 @@ import { catchError, firstValueFrom } from 'rxjs';
 import { WarehouseRemoveResponse } from '../__common__/classes';
 
 @Injectable()
-export class RvApproverService {
+export class PoApproverService {
 
-    private readonly logger = new Logger(RvApproverService.name);
+    private readonly logger = new Logger(PoApproverService.name);
     private authUser: AuthUser
     private includedFields = {
-        rv: {
-        include: {
-            canvass: {
-            include: {
-                canvass_items: {
-                include: {
-                    unit: true,
-                    brand: true
-                }
-                }
-            }
-            }
-        }
-        }
+      po: {
+			include: {
+				meqs_supplier: {
+					include: {
+						meqs: {
+							include: {
+							rv: {
+								include: {
+								canvass: true
+								}
+							},
+							jo: {
+								include: {
+								canvass: true
+								}
+							},
+							spr: {
+								include: {
+								canvass: true
+								}
+							}
+							}
+						},
+						supplier: true,
+						meqs_supplier_items: {
+							include: {
+							canvass_item: {
+								include: {
+								unit: true,
+								brand: true
+								}
+							}
+							}
+						},
+						attachments: true
+					}
+				}
+			}
+      }
     }
 
 	constructor(
@@ -40,7 +65,7 @@ export class RvApproverService {
         this.authUser = authUser
     }
 
-    async create(input: CreateRvApproverInput): Promise<RVApprover> {
+    async create(input: CreatePoApproverInput): Promise<POApprover> {
 
         const isValidApproverId = await this.areEmployeesExist([input.approver_id], this.authUser)
 
@@ -56,8 +81,8 @@ export class RvApproverService {
             }
         }
 
-        const data: Prisma.RVApproverCreateInput = {
-        rv: { connect: { id: input.rv_id } },
+        const data: Prisma.POApproverCreateInput = {
+        po: { connect: { id: input.po_id } },
             approver_id: input.approver_id,
         approver_proxy_id: input.approver_proxy_id ?? null,
         label: input.label,
@@ -65,18 +90,18 @@ export class RvApproverService {
         status: APPROVAL_STATUS.PENDING
         }
 
-        const created = await this.prisma.rVApprover.create({
+        const created = await this.prisma.pOApprover.create({
             data,
             include: this.includedFields
         })
 
-        this.logger.log('Successfully created rVApprover')
+        this.logger.log('Successfully created pOApprover')
 
         return created
     }
 
-    async findAll(): Promise<RVApprover[]> {
-        return await this.prisma.rVApprover.findMany({
+    async findAll(): Promise<POApprover[]> {
+        return await this.prisma.pOApprover.findMany({
             include: this.includedFields,
             where: { is_deleted: false },
             orderBy: {
@@ -85,30 +110,30 @@ export class RvApproverService {
         })
     }
 
-    findOne(id: string): Promise<RVApprover | null> {
+    async findOne(id: string): Promise<POApprover | null> {
         
-        const item = this.prisma.rVApprover.findUnique({
+        const item = await this.prisma.pOApprover.findUnique({
             where: { id },
             include: this.includedFields
         })
 
         if(!item){
-            throw new NotFoundException('RV Approver not found')
+            throw new NotFoundException('PO Approver not found')
         }
 
         return item
 
     }
 
-    async findByRvId(rvId: string): Promise<RVApprover[]> {
+    async findByPoId(poId: string): Promise<POApprover[]> {
 
-        this.logger.log('findByRvId()', rvId)
+        this.logger.log('findByPoId()', poId)
 
-        return await this.prisma.rVApprover.findMany({
+        return await this.prisma.pOApprover.findMany({
             include: this.includedFields,
             where: {
                 is_deleted: false,
-                rv_id: rvId
+                po_id: poId
             },
             orderBy: {
                 label: 'asc'
@@ -116,13 +141,13 @@ export class RvApproverService {
         })
     }
 
-    async findByRvNumber(rvNumber: string): Promise<RVApprover[]> {
-        return await this.prisma.rVApprover.findMany({
+    async findByPoNumber(poNumber: string): Promise<POApprover[]> {
+        return await this.prisma.pOApprover.findMany({
             include: this.includedFields,
             where: {
                 is_deleted: false,
-                rv: {
-                    rv_number: rvNumber
+                po: {
+                    po_number: poNumber
                 }
             },
             orderBy: {
@@ -131,7 +156,7 @@ export class RvApproverService {
         })
     }
 
-    async update(id: string, input: UpdateRvApproverInput): Promise<RVApprover> {
+    async update(id: string, input: UpdatePoApproverInput): Promise<POApprover> {
         this.logger.log('update()')
 
         const existingItem = await this.findOne(id)
@@ -156,7 +181,7 @@ export class RvApproverService {
 
         }
 
-        const data: Prisma.RVApproverUpdateInput = {
+        const data: Prisma.POApproverUpdateInput = {
             approver_id: input.approver_id ?? existingItem.approver_id,
             approver_proxy_id: input.approver_proxy_id ?? existingItem.approver_proxy_id,
             date_approval: input.date_approval ? new Date(input.date_approval) : existingItem.date_approval,
@@ -166,13 +191,13 @@ export class RvApproverService {
             order: input.order ?? existingItem.order,
         }
 
-        const updated = await this.prisma.rVApprover.update({
+        const updated = await this.prisma.pOApprover.update({
             data,
             where: { id },
             include: this.includedFields
         })
 
-        this.logger.log('Successfully updated RV Approver')
+        this.logger.log('Successfully updated PO Approver')
 
         return updated
 
@@ -182,20 +207,20 @@ export class RvApproverService {
 
 		const existingItem = await this.findOne(id)
 
-		await this.prisma.rVApprover.update( {
+		await this.prisma.pOApprover.update( {
 			where: { id },
 			data: { is_deleted: true }
 		} )
 
 		return {
 			success: true,
-			msg: "RV Approver successfully deleted"
+			msg: "PO Approver successfully deleted"
 		}
 
 	}
 
-    async forEmployee(employeeId: string): Promise<RVApprover[]> {
-        return await this.prisma.rVApprover.findMany({
+    async forEmployee(employeeId: string): Promise<POApprover[]> {
+        return await this.prisma.pOApprover.findMany({
             where: {
                 approver_id: employeeId,
                 is_deleted: false
@@ -204,7 +229,7 @@ export class RvApproverService {
         })
     }
 
-    private async areEmployeesExist(employeeIds: string[], authUser: AuthUser): Promise<boolean> {
+	private async areEmployeesExist(employeeIds: string[], authUser: AuthUser): Promise<boolean> {
 
         this.logger.log('areEmployeesExist', employeeIds);
     

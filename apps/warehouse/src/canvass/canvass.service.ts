@@ -35,7 +35,7 @@ export class CanvassService {
 
         this.logger.log('create()', input)
 
-        const isValidRequestedById = await this.isEmployeeExist(input.requested_by_id, this.authUser)
+        const isValidRequestedById = await this.areEmployeesExist([input.requested_by_id], this.authUser)
 
         if(!isValidRequestedById){
             throw new NotFoundException('Requested by ID not valid')
@@ -78,7 +78,7 @@ export class CanvassService {
         const existingItem = await this.findOne(id)
 
         if(input.requested_by_id){
-            const isValidRequestedById = await this.isEmployeeExist(input.requested_by_id, this.authUser)
+            const isValidRequestedById = await this.areEmployeesExist([input.requested_by_id], this.authUser)
 
             if(!isValidRequestedById){
                 throw new NotFoundException('Requested by ID not found')
@@ -202,46 +202,92 @@ export class CanvassService {
 
 	}
 
-    private async isEmployeeExist(employee_id: string, authUser: AuthUser): Promise<boolean> {
+    // private async isEmployeeExist(employee_id: string, authUser: AuthUser): Promise<boolean> {
     
-        this.logger.log('isEmployeeExist', employee_id)
+    //     this.logger.log('isEmployeeExist', employee_id)
 
-        // console.log('this.authUser', this.authUser)
+    //     // console.log('this.authUser', this.authUser)
 
+    //     const query = `
+    //         query{
+    //             employee(id: "${employee_id}") {
+    //                 id
+    //             }
+    //         }
+    //     `;
+
+    //     const { data } = await firstValueFrom(
+    //         this.httpService.post(process.env.API_GATEWAY_URL, 
+    //         { query },
+    //         {
+    //             headers: {
+    //                 Authorization: authUser.authorization,
+    //                 'Content-Type': 'application/json'
+    //             }
+    //         }  
+    //         ).pipe(
+    //             catchError((error) => {
+    //                 throw error
+    //             }),
+    //         ),
+    //     );
+
+    //     console.log('data', data)
+
+    //     if(!data || !data.data || !data.data.employee){
+    //         console.log('employee not found')
+    //         return false 
+    //     }
+    //     const employee = data.data.employee 
+    //     console.log('employee', employee)
+    //     return true 
+
+    // }
+
+    private async areEmployeesExist(employeeIds: string[], authUser: AuthUser): Promise<boolean> {
+
+        this.logger.log('areEmployeesExist', employeeIds);
+    
         const query = `
-            query{
-                employee(id: "${employee_id}") {
-                    id
-                }
+            query {
+                validateEmployeeIds(ids: ${JSON.stringify(employeeIds)})
             }
         `;
 
-        const { data } = await firstValueFrom(
-            this.httpService.post(process.env.API_GATEWAY_URL, 
-            { query },
-            {
-                headers: {
-                    Authorization: authUser.authorization,
-                    'Content-Type': 'application/json'
-                }
-            }  
-            ).pipe(
-                catchError((error) => {
-                    throw error
-                }),
-            ),
-        );
-
-        console.log('data', data)
-
-        if(!data || !data.data || !data.data.employee){
-            console.log('employee not found')
-            return false 
+        console.log('query', query)
+    
+        try {
+            const { data } = await firstValueFrom(
+                this.httpService.post(
+                    process.env.API_GATEWAY_URL,
+                    { query },
+                    {
+                        headers: {
+                            Authorization: authUser.authorization,
+                            'Content-Type': 'application/json',
+                        },
+                    }
+                ).pipe(
+                    catchError((error) => {
+                        throw error;
+                    }),
+                ),
+            );
+    
+            console.log('data', data);
+            console.log('data.data.validateEmployeeIds', data.data.validateEmployeeIds)
+    
+            if (!data || !data.data) {
+                console.log('No data returned');
+                return false;
+            }
+    
+            return data.data.validateEmployeeIds;
+    
+        } catch (error) {
+            console.error('Error querying employees:', error.message);
+            return false;
         }
-        const employee = data.data.employee 
-        console.log('employee', employee)
-        return true 
-
     }
 
 }

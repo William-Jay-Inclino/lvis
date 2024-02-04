@@ -2,12 +2,12 @@ import { Args, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/g
 import { RV } from './entities/rv.entity';
 import { CreateRvInput } from './dto/create-rv.input';
 import { RvService } from './rv.service';
-import { Employee } from '../employee/entities/employee.entity';
-import { Classification } from '../classification/entities/classification.entity';
+import { Employee } from '../__employee__/entities/employee.entity';
+import { Classification } from '../__classification__/entities/classification.entity';
 import { UpdateRvInput } from './dto/update-rv.input';
-import { CurrentAuthUser } from '../auth/current-auth-user.decorator';
+import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
 import { AuthUser } from '../__common__/auth-user.entity';
-import { GqlAuthGuard } from '../auth/guards/gql-auth.guard';
+import { GqlAuthGuard } from '../__auth__/guards/gql-auth.guard';
 import { UseGuards } from '@nestjs/common';
 import { RVApprover } from '../rv-approver/entities/rv-approver.entity';
 import { RvApproverService } from '../rv-approver/rv-approver.service';

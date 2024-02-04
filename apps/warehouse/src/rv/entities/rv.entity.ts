@@ -1,9 +1,5 @@
 import { ObjectType, Field, Int, ID } from '@nestjs/graphql';
 import { Canvass } from '../../canvass/entities/canvass.entity';
-import { RVApprover } from '../../rv-approver/entities/rv-approver.entity';
-// import { Employee } from 'apps/system/src/employee/entities/employee.entity';
-// import { Classification } from 'apps/system/src/classification/entities/classification.entity';
-
 @ObjectType()
 export class RV {
   
@@ -42,9 +38,6 @@ export class RV {
 
   @Field(() => Boolean)
   is_referenced: boolean;
-
-  @Field(() => [RVApprover])
-  rv_approvers: RVApprover[];
 
   @Field(() => Date)
   created_at: Date;

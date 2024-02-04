@@ -1,9 +1,9 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
-import { MEQS } from '../../meqs/entities/meq.entity';
+import { PO } from '../../po/entities/po.entity';
 
 @ObjectType()
-export class MEQSApprover {
-
+export class PoApprover {
+  
   @Field(() => String)
   id: string;
 
@@ -29,10 +29,10 @@ export class MEQSApprover {
   order: number
 
   @Field(() => String)
-  meqs_id: string
+  po_id: string
 
-  @Field(() => MEQS)
-  meqs: MEQS
+  @Field(() => PO)
+  po: PO
 
   @Field(() => Date)
   created_at: Date;

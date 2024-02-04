@@ -2,6 +2,7 @@ import { ObjectType, Field, ID } from '@nestjs/graphql';
 import { Supplier } from '../../supplier/entities/supplier.entity';
 import { MeqsSupplierItem } from '../../meqs-supplier-item/entities/meqs-supplier-item.entity';
 import { MeqsSupplierAttachment } from '../../meqs-supplier-attachment/entities/meqs-supplier-attachment.entity';
+import { MEQS } from '../../meqs/entities/meq.entity';
 
 @ObjectType()
 export class MeqsSupplier {
@@ -12,8 +13,8 @@ export class MeqsSupplier {
   @Field(() => String)
   meqs_id: string;
 
-  // @Field(() => MEQS)
-  // meqs: MEQS;
+  @Field(() => MEQS)
+  meqs: MEQS;
 
   @Field(() => String)
   supplier_id: string;

@@ -6,5 +6,6 @@ import { HttpModule } from '@nestjs/axios';
 @Module({
   imports: [HttpModule],
   providers: [MeqsApproverResolver, MeqsApproverService],
+  exports: [MeqsApproverService]
 })
 export class MeqsApproverModule {}

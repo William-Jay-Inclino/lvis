@@ -4,7 +4,7 @@ import { Employee } from './entities/employee.entity';
 import { CreateEmployeeInput } from './dto/create-employee.input';
 import { UpdateEmployeeInput } from './dto/update-employee.input';
 import { UseGuards } from '@nestjs/common';
-import { GqlAuthGuard } from '../auth/guards/gql-auth.guard';
+import { GqlAuthGuard } from '../__auth__/guards/gql-auth.guard';
 import { SystemRemoveResponse } from '../__common__/classes';
 // import { UpdateEmployeeInput } from './dto/update-employee.input';
 

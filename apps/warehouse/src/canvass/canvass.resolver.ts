@@ -2,9 +2,9 @@ import { Args, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/g
 import { Canvass } from './entities/canvass.entity';
 import { CanvassService } from './canvass.service';
 import { CreateCanvassInput } from './dto/create-canvass.input';
-import { Employee } from '../employee/entities/employee.entity';
-import { CurrentAuthUser } from '../auth/current-auth-user.decorator';
-import { GqlAuthGuard } from '../auth/guards/gql-auth.guard';
+import { Employee } from '../__employee__/entities/employee.entity';
+import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
+import { GqlAuthGuard } from '../__auth__/guards/gql-auth.guard';
 import { Logger, UseGuards } from '@nestjs/common';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { UpdateCanvassInput } from './dto/update-canvass.input';

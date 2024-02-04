@@ -3,7 +3,7 @@ import { UnitService } from './unit.service';
 import { Unit } from './entities/unit.entity';
 import { CreateUnitInput } from './dto/create-unit.input';
 import { UseGuards } from '@nestjs/common';
-import { GqlAuthGuard } from '../auth/guards/gql-auth.guard';
+import { GqlAuthGuard } from '../__auth__/guards/gql-auth.guard';
 import { UpdateUnitInput } from './dto/update-unit.input';
 import { WarehouseRemoveResponse } from '../__common__/classes';
 

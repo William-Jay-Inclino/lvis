@@ -133,6 +133,7 @@ export class MeqsService {
             jo: input.jo_id ? { connect: { id: input.jo_id } } : undefined,
             rv: input.rv_id ? { connect: { id: input.rv_id } } : undefined,
             spr: input.spr_id ? { connect: { id: input.spr_id } } : undefined,
+            notes: input.notes,
             meqs_number: meqsNumber,
             request_type: input.request_type,
             meqs_date: new Date(input.meqs_date),
@@ -140,15 +141,47 @@ export class MeqsService {
             meqs_suppliers
         }
 
-        const created = await this.prisma.mEQS.create({
+
+        if(input.jo_id){
+            return await this.createMeqsAndUpdateReference('jO', 'jo_id', data)
+        }
+
+        if(input.rv_id){
+            return await this.createMeqsAndUpdateReference('rV', 'rv_id', data)
+        }
+
+        if(input.spr_id){
+            return await this.createMeqsAndUpdateReference('sPR', 'spr_id', data)
+        }
+
+    }
+
+    async createMeqsAndUpdateReference(model: string, refId: string, data: Prisma.MEQSCreateInput): Promise<MEQS> {
+
+        // model can be jO, rV, or sPR
+        // refId can be jo_id, rv_id, spr_id
+
+        const createMeqsQuery = this.prisma.mEQS.create({
             data,
             include: this.includedFields
         })
+        
+        const updateReferenceQuery = this.prisma[model].update({
+            data: {
+                is_referenced: true
+            },
+            where: {
+                id: refId
+            }
+        })
 
-        this.logger.log('Successfully created MEQS')
+        const [createdMeqs, updatedRef] = await this.prisma.$transaction([
+            createMeqsQuery,
+            updateReferenceQuery
+        ])
 
-        return created
-
+        this.logger.log(`Successfully created MEQS and updated model: ${model} is_reference to true`)
+        return createdMeqs
     }
 
     async update(id: string, input: UpdateMeqsInput): Promise<MEQS> {
@@ -167,6 +200,7 @@ export class MeqsService {
 
 
         const data: Prisma.MEQSUpdateInput = {
+            notes: input.notes ?? existingItem.notes,
             meqs_date: input.meqs_date ? new Date(input.meqs_date) : existingItem.meqs_date,
             status: input.status ?? existingItem.status,
             canceller_id: input.canceller_id ?? existingItem.canceller_id
@@ -291,13 +325,14 @@ export class MeqsService {
             return false;
         }
     }
-    
-    async forEmployee(employeeId: string): Promise<MEQS[]> {
+
+    async forEmployeeCanceller(employeeId: string): Promise<MEQS[]> {
         return await this.prisma.mEQS.findMany({
             where: {
                 canceller_id: employeeId,
                 is_deleted: false
-            }
+            },
+            include: this.includedFields
         })
     }
 
