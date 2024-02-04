@@ -241,7 +241,8 @@ export class RvService {
             where: {
                 supervisor_id: employeeId,
                 is_deleted: false
-            }
+            },
+            include: this.includedFields
         })
     }
 
@@ -250,7 +251,8 @@ export class RvService {
             where: {
                 canceller_id: employeeId,
                 is_deleted: false
-            }
+            },
+            include: this.includedFields
         })
     }
 
@@ -259,7 +261,8 @@ export class RvService {
             where: {
                 classification_id: classificationId,
                 is_deleted: false
-            }
+            },
+            include: this.includedFields
         })
     }
 

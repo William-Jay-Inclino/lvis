@@ -273,7 +273,8 @@ export class MeqsApproverService {
             where: {
                 approver_id: employeeId,
                 is_deleted: false
-            }
+            },
+            include: this.includedFields
         })
     }
 

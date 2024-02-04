@@ -3,19 +3,21 @@ import { PO } from './entities/po.entity';
 import { CreatePoInput } from './dto/create-po.input';
 import { PoService } from './po.service';
 import { Employee } from '../__employee__/entities/employee.entity';
-import { Classification } from '../__classification__/entities/classification.entity';
 import { UpdatePoInput } from './dto/update-po.input';
 import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { GqlAuthGuard } from '../__auth__/guards/gql-auth.guard';
 import { UseGuards } from '@nestjs/common';
+import { POApprover } from './entities/po-approver.entity';
+import { PoApproverService } from '../po-approver/po-approver.service';
 
 @UseGuards(GqlAuthGuard)
 @Resolver( () => PO)
 export class PoResolver {
 
     constructor(
-        private readonly poService: PoService
+        private readonly poService: PoService,
+        private readonly poApproverService: PoApproverService
     ) {}
 
     @Mutation(() => PO)
@@ -53,6 +55,19 @@ export class PoResolver {
     ) {
         this.poService.setAuthUser(authUser)
         return await this.poService.update(id, updatePoInput);
+    }
+
+    @ResolveField( () => Employee, { nullable: true })
+    canceller(@Parent() po: PO): any {
+        if(!po.canceller_id){
+            return null
+        }
+        return { __typename: 'Employee', id: po.canceller_id }
+    }
+
+    @ResolveField( () => [POApprover])
+    po_approvers(@Parent() po: PO): any {
+        return this.poApproverService.findByPoId(po.id)
     }
 
 

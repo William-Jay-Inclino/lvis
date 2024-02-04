@@ -325,13 +325,14 @@ export class MeqsService {
             return false;
         }
     }
-    
-    async forEmployee(employeeId: string): Promise<MEQS[]> {
+
+    async forEmployeeCanceller(employeeId: string): Promise<MEQS[]> {
         return await this.prisma.mEQS.findMany({
             where: {
                 canceller_id: employeeId,
                 is_deleted: false
-            }
+            },
+            include: this.includedFields
         })
     }
 

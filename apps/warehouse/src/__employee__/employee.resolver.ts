@@ -8,6 +8,8 @@ import { RvApproverService } from '../rv-approver/rv-approver.service';
 import { RVApprover } from '../rv-approver/entities/rv-approver.entity';
 import { MEQS } from '../meqs/entities/meq.entity';
 import { MeqsService } from '../meqs/meqs.service';
+import { MEQSApprover } from '../meqs-approver/entities/meqs-approver.entity';
+import { MeqsApproverService } from '../meqs-approver/meqs-approver.service';
 
 @Resolver(() => Employee)
 export class EmployeeResolver {
@@ -16,6 +18,7 @@ export class EmployeeResolver {
         private readonly rvService: RvService,
         private readonly rvApproverService: RvApproverService,
         private readonly meqsService: MeqsService,
+        private readonly meqsApproverService: MeqsApproverService,
     ) {}
 
     @ResolveField( () => [Canvass])
@@ -39,8 +42,13 @@ export class EmployeeResolver {
     }
 
     @ResolveField( () => [MEQS])
-    meqs(@Parent() employee: Employee) {
-        return this.meqsService.forEmployee(employee.id)
+    meqs_cancelled(@Parent() employee: Employee) {
+        return this.meqsService.forEmployeeCanceller(employee.id)
+    }
+
+    @ResolveField( () => [MEQSApprover])
+    meqs_approvals(@Parent() employee: Employee) {
+        return this.meqsApproverService.forEmployee(employee.id)
     }
 
 }

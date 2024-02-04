@@ -28,6 +28,9 @@ import { SupplierModule } from './supplier/supplier.module';
 import { PoService } from './po/po.service';
 import { PoResolver } from './po/po.resolver';
 import { PoModule } from './po/po.module';
+import { PoApproverModule } from './po-approver/po-approver.module';
+import { PoApproverResolver } from './po-approver/po-approver.resolver';
+import { PoApproverModule } from './po-approver/po-approver.module';
 
 
 @Module({
@@ -56,9 +59,10 @@ import { PoModule } from './po/po.module';
     MeqsModule,
     UnitModule,
     SupplierModule,
-    PoModule
+    PoModule,
+    PoApproverModule
   ],
   controllers: [],
-  providers: [RvService, MeqsService, MeqsResolver, PoService, PoResolver],
+  providers: [RvService, MeqsService, MeqsResolver, PoService, PoResolver, PoApproverResolver],
 })
 export class WarehouseModule {}
