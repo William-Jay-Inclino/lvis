@@ -29,6 +29,7 @@ import { PoService } from './po/po.service';
 import { PoResolver } from './po/po.resolver';
 import { PoModule } from './po/po.module';
 import { PoApproverModule } from './po-approver/po-approver.module';
+import { VehicleModule } from './vehicle/vehicle.module';
 import { PoApproverResolver } from './po-approver/po-approver.resolver';
 import { PoApproverModule } from './po-approver/po-approver.module';
 
@@ -60,7 +61,8 @@ import { PoApproverModule } from './po-approver/po-approver.module';
     UnitModule,
     SupplierModule,
     PoModule,
-    PoApproverModule
+    PoApproverModule,
+    VehicleModule
   ],
   controllers: [],
   providers: [RvService, MeqsService, MeqsResolver, PoService, PoResolver, PoApproverResolver],
