@@ -118,7 +118,7 @@ export class RvService {
         const existingItem = await this.findOne(id)
 
         if(input.supervisor_id){
-            const isValidSupervisorId = await this.isEmployeeExist(input.supervisor_id, this.authUser)
+            const isValidSupervisorId = await this.areEmployeesExist([input.supervisor_id], this.authUser)
 
             if(!isValidSupervisorId){
                 throw new NotFoundException('Supervisor ID not valid')
@@ -133,6 +133,14 @@ export class RvService {
             }
         }
 
+        if(input.canceller_id) {
+            const isValidCancellerId = await this.areEmployeesExist([input.canceller_id], this.authUser)
+
+            if(!isValidCancellerId){
+                throw new NotFoundException('Canceller ID not valid')
+            }
+        }
+
         const data: Prisma.RVUpdateInput = {
             supervisor_id: input.supervisor_id ?? existingItem.supervisor_id,
             classification_id: input.classification_id ?? existingItem.classification_id,
@@ -140,7 +148,7 @@ export class RvService {
             work_order_no: input.work_order_no ?? existingItem.work_order_no,
             work_order_date: input.work_order_date ? new Date(input.work_order_date) : existingItem.work_order_date,
             status: input.status ?? existingItem.status,
-            is_referenced: input.is_referenced ?? existingItem.is_referenced
+            canceller_id: input.canceller_id ?? existingItem.canceller_id
         }
 
         const updated = await this.prisma.rV.update({
@@ -293,48 +301,6 @@ export class RvService {
         }
         const classification = data.data.classification 
         console.log('classification', classification)
-        return true 
-
-    }
-
-    private async isEmployeeExist(employee_id: string, authUser: AuthUser): Promise<boolean> {
-    
-        this.logger.log('isEmployeeExist', employee_id)
-
-        // console.log('this.authUser', this.authUser)
-
-        const query = `
-            query{
-                employee(id: "${employee_id}") {
-                    id
-                }
-            }
-        `;
-
-        const { data } = await firstValueFrom(
-            this.httpService.post(process.env.API_GATEWAY_URL, 
-            { query },
-            {
-                headers: {
-                    Authorization: authUser.authorization,
-                    'Content-Type': 'application/json'
-                }
-            }  
-            ).pipe(
-                catchError((error) => {
-                    throw error
-                }),
-            ),
-        );
-
-        console.log('data', data)
-
-        if(!data || !data.data || !data.data.employee){
-            console.log('employee not found')
-            return false 
-        }
-        const employee = data.data.employee 
-        console.log('employee', employee)
         return true 
 
     }

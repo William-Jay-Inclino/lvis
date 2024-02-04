@@ -141,15 +141,47 @@ export class MeqsService {
             meqs_suppliers
         }
 
-        const created = await this.prisma.mEQS.create({
+
+        if(input.jo_id){
+            return await this.createMeqsAndUpdateReference('jO', 'jo_id', data)
+        }
+
+        if(input.rv_id){
+            return await this.createMeqsAndUpdateReference('rV', 'rv_id', data)
+        }
+
+        if(input.spr_id){
+            return await this.createMeqsAndUpdateReference('sPR', 'spr_id', data)
+        }
+
+    }
+
+    async createMeqsAndUpdateReference(model: string, refId: string, data: Prisma.MEQSCreateInput): Promise<MEQS> {
+
+        // model can be jO, rV, or sPR
+        // refId can be jo_id, rv_id, spr_id
+
+        const createMeqsQuery = this.prisma.mEQS.create({
             data,
             include: this.includedFields
         })
+        
+        const updateReferenceQuery = this.prisma[model].update({
+            data: {
+                is_referenced: true
+            },
+            where: {
+                id: refId
+            }
+        })
 
-        this.logger.log('Successfully created MEQS')
+        const [createdMeqs, updatedRef] = await this.prisma.$transaction([
+            createMeqsQuery,
+            updateReferenceQuery
+        ])
 
-        return created
-
+        this.logger.log(`Successfully created MEQS and updated model: ${model} is_reference to true`)
+        return createdMeqs
     }
 
     async update(id: string, input: UpdateMeqsInput): Promise<MEQS> {

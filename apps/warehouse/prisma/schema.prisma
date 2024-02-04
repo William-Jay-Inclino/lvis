@@ -270,7 +270,6 @@ model MEQSSupplierItem {
 
   canvass_item  CanvassItem  @relation(fields: [canvass_item_id], references: [id], onDelete: Cascade)
   meqs_supplier MEQSSupplier @relation(fields: [meqs_supplier_id], references: [id], onDelete: Cascade)
-  po_item       POItem?
 
   @@map("meqs_supplier_item")
 }
@@ -317,22 +316,8 @@ model PO {
   is_deleted       Boolean      @default(false)
   po_approvers     POApprover[]
   meqs_supplier    MEQSSupplier @relation(fields: [meqs_supplier_id], references: [id], onDelete: Restrict)
-  POItem           POItem[]
 
   @@map("purchase_order")
-}
-
-model POItem {
-  id                    String @id @default(uuid())
-  po_id                 String
-  meqs_supplier_item_id String @unique
-
-  po                 PO               @relation(fields: [po_id], references: [id], onDelete: Cascade)
-  meqs_supplier_item MEQSSupplierItem @relation(fields: [meqs_supplier_item_id], references: [id], onDelete: Restrict)
-
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-  is_deleted Boolean  @default(false)
 }
 
 model POApprover {

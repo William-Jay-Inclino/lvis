@@ -4,10 +4,10 @@ import { MEQSApprover } from './entities/meqs-approver.entity';
 import { CreateMeqsApproverInput } from './dto/create-meqs-approver.input';
 import { UpdateMeqsApproverInput } from './dto/update-meqs-approver.input';
 import { WarehouseRemoveResponse } from '../__common__/classes';
-import { GqlAuthGuard } from '../auth/guards/gql-auth.guard';
+import { GqlAuthGuard } from '../__auth__/guards/gql-auth.guard';
 import { UseGuards } from '@nestjs/common';
 import { AuthUser } from '../__common__/auth-user.entity';
-import { CurrentAuthUser } from '../auth/current-auth-user.decorator';
+import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
 import { Employee } from '../__employee__/entities/employee.entity';
 
 @UseGuards(GqlAuthGuard)
@@ -25,8 +25,16 @@ export class MeqsApproverResolver {
   }
 
   @Query(() => [MEQSApprover])
-  meqsApprovers() {
-    return this.meqsApproverService.findAll();
+  rv_approvers(
+    @Args('meqs_id', {nullable: true}) meqs_id?: string,
+    @Args('meqs_number', {nullable: true}) meqs_number?: string,
+  ) {
+    if(meqs_id){
+      return this.meqsApproverService.findByMeqsId(meqs_id)
+    }
+    if(meqs_number){
+      return this.meqsApproverService.findByMeqsNumber(meqs_number)
+    }
   }
 
   @Query(() => MEQSApprover)

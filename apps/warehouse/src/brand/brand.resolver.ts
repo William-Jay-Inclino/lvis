@@ -3,7 +3,7 @@ import { BrandService } from './brand.service';
 import { Brand } from './entities/brand.entity';
 import { CreateBrandInput } from './dto/create-brand.input';
 import { UseGuards } from '@nestjs/common';
-import { GqlAuthGuard } from '../auth/guards/gql-auth.guard';
+import { GqlAuthGuard } from '../__auth__/guards/gql-auth.guard';
 import { UpdateBrandInput } from './dto/update-brand.input';
 import { WarehouseRemoveResponse } from '../__common__/classes';
 

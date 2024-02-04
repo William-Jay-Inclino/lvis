@@ -5,7 +5,7 @@ import {
   ApolloFederationDriver,
   ApolloFederationDriverConfig,
 } from '@nestjs/apollo';
-import { AuthModule } from './auth/auth.module';
+import { AuthModule } from './__auth__/auth.module';
 import { SeederModule } from './__seeder__/seeder.module';
 import { PrismaModule } from './__prisma__/prisma.module';
 import { CanvassModule } from './canvass/canvass.module';
@@ -25,6 +25,9 @@ import { MeqsResolver } from './meqs/meqs.resolver';
 import { MeqsModule } from './meqs/meqs.module';
 import { UnitModule } from './unit/unit.module';
 import { SupplierModule } from './supplier/supplier.module';
+import { PoService } from './po/po.service';
+import { PoResolver } from './po/po.resolver';
+import { PoModule } from './po/po.module';
 
 
 @Module({
@@ -52,9 +55,10 @@ import { SupplierModule } from './supplier/supplier.module';
     MeqsSupplierAttachmentModule,
     MeqsModule,
     UnitModule,
-    SupplierModule
+    SupplierModule,
+    PoModule
   ],
   controllers: [],
-  providers: [RvService, MeqsService, MeqsResolver],
+  providers: [RvService, MeqsService, MeqsResolver, PoService, PoResolver],
 })
 export class WarehouseModule {}

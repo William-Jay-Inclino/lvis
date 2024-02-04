@@ -132,6 +132,37 @@ export class MeqsApproverService {
 
     }
 
+    async findByMeqsId(meqsId: string): Promise<MEQSApprover[]> {
+
+        this.logger.log('findByMeqsId()', meqsId)
+
+        return await this.prisma.mEQSApprover.findMany({
+            include: this.includedFields,
+            where: {
+                is_deleted: false,
+                meqs_id: meqsId
+            },
+            orderBy: {
+                label: 'asc'
+            }
+        })
+    }
+
+    async findByMeqsNumber(meqsNumber: string): Promise<MEQSApprover[]> {
+        return await this.prisma.mEQSApprover.findMany({
+            include: this.includedFields,
+            where: {
+                is_deleted: false,
+                meqs: {
+                    meqs_number: meqsNumber
+                }
+            },
+            orderBy: {
+                label: 'asc'
+            }
+        })
+    }
+
     async update(id: string, input: UpdateMeqsApproverInput): Promise<MEQSApprover> {
         this.logger.log('update()')
 

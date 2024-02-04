@@ -38,9 +38,9 @@ export class UpdateRvInput {
   @IsOptional()
   status?: APPROVAL_STATUS;
 
-  @Field(() => Boolean, {nullable: true})
-  @IsBoolean()
+  @Field(() => String, {nullable: true})
+  @IsString()
   @IsOptional()
-  is_referenced?: boolean;
+  canceller_id?: string;
 
 }

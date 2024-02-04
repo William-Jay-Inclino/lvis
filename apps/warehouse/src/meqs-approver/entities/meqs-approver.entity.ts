@@ -28,11 +28,11 @@ export class MEQSApprover {
   @Field(() => Int)
   order: number
 
-  // @Field(() => String)
-  // meqs_id: string
+  @Field(() => String)
+  meqs_id: string
 
-  // @Field(() => MEQS)
-  // meqs: MEQS
+  @Field(() => MEQS)
+  meqs: MEQS
 
   @Field(() => Date)
   created_at: Date;

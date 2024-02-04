@@ -14,6 +14,22 @@ export class RvApproverService {
 
     private readonly logger = new Logger(RvApproverService.name);
     private authUser: AuthUser
+    private includedFields = {
+        rv: {
+        include: {
+            canvass: {
+            include: {
+                canvass_items: {
+                include: {
+                    unit: true,
+                    brand: true
+                }
+                }
+            }
+            }
+        }
+        }
+    }
 
 	constructor(
         private readonly prisma: PrismaService,
@@ -49,31 +65,19 @@ export class RvApproverService {
         status: APPROVAL_STATUS.PENDING
         }
 
-        const created = await this.prisma.rVApprover.create( { data } )
+        const created = await this.prisma.rVApprover.create({
+            data,
+            include: this.includedFields
+        })
 
         this.logger.log('Successfully created rVApprover')
 
-        return await this.findOne(created.id)
-        }
+        return created
+    }
 
     async findAll(): Promise<RVApprover[]> {
         return await this.prisma.rVApprover.findMany({
-            include: {
-                rv: {
-                include: {
-                    canvass: {
-                    include: {
-                        canvass_items: {
-                        include: {
-                            unit: true,
-                            brand: true
-                        }
-                        }
-                    }
-                    }
-                }
-                }
-            },
+            include: this.includedFields,
             where: { is_deleted: false },
             orderBy: {
                 label: 'asc'
@@ -84,30 +88,15 @@ export class RvApproverService {
     findOne(id: string): Promise<RVApprover | null> {
         
         const item = this.prisma.rVApprover.findUnique({
-        where: { id },
-        include: {
-            rv: {
-            include: {
-                canvass: {
-                include: {
-                    canvass_items: {
-                    include: {
-                        unit: true,
-                        brand: true
-                    }
-                    }
-                }
-                }
-            }
-            }
-        }
+            where: { id },
+            include: this.includedFields
         })
 
         if(!item){
-        throw new NotFoundException('RV Approver not found')
-    }
+            throw new NotFoundException('RV Approver not found')
+        }
 
-    return item
+        return item
 
     }
 
@@ -116,22 +105,7 @@ export class RvApproverService {
         this.logger.log('findByRvId()', rvId)
 
         return await this.prisma.rVApprover.findMany({
-            include: {
-                rv: {
-                include: {
-                    canvass: {
-                    include: {
-                        canvass_items: {
-                        include: {
-                            unit: true,
-                            brand: true
-                        }
-                        }
-                    }
-                    }
-                }
-                }
-            },
+            include: this.includedFields,
             where: {
                 is_deleted: false,
                 rv_id: rvId
@@ -144,22 +118,7 @@ export class RvApproverService {
 
     async findByRvNumber(rvNumber: string): Promise<RVApprover[]> {
         return await this.prisma.rVApprover.findMany({
-            include: {
-                rv: {
-                include: {
-                    canvass: {
-                    include: {
-                        canvass_items: {
-                        include: {
-                            unit: true,
-                            brand: true
-                        }
-                        }
-                    }
-                    }
-                }
-                }
-            },
+            include: this.includedFields,
             where: {
                 is_deleted: false,
                 rv: {
@@ -209,12 +168,13 @@ export class RvApproverService {
 
         const updated = await this.prisma.rVApprover.update({
             data,
-            where: { id }
+            where: { id },
+            include: this.includedFields
         })
 
         this.logger.log('Successfully updated RV Approver')
 
-        return await this.findOne(updated.id)
+        return updated
 
     }
 

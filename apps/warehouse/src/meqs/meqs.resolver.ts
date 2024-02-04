@@ -1,19 +1,24 @@
 import { Args, Mutation, Resolver, Query, ResolveField, Parent } from '@nestjs/graphql';
-import { GqlAuthGuard } from '../auth/guards/gql-auth.guard';
+import { GqlAuthGuard } from '../__auth__/guards/gql-auth.guard';
 import { UseGuards } from '@nestjs/common';
 import { MeqsService } from './meqs.service';
 import { MEQS } from './entities/meq.entity';
-import { CurrentAuthUser } from '../auth/current-auth-user.decorator';
+import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
 import { CreateMeqsInput } from './dto/create-meqs.input';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { UpdateMeqsInput } from './dto/update-meqs.input';
 import { Employee } from '../__employee__/entities/employee.entity';
+import { MEQSApprover } from '../meqs-approver/entities/meqs-approver.entity';
+import { MeqsApproverService } from '../meqs-approver/meqs-approver.service';
 
 @UseGuards(GqlAuthGuard)
 @Resolver( () => MEQS)
 export class MeqsResolver {
 
-    constructor(private readonly meqsService: MeqsService) {}
+    constructor(
+        private readonly meqsService: MeqsService,
+        private readonly meqsApproverService: MeqsApproverService
+    ) {}
 
     @Mutation(() => MEQS)
     async createMeqs(
@@ -58,6 +63,11 @@ export class MeqsResolver {
             return null
         }
         return { __typename: 'Employee', id: meqs.canceller_id }
+    }
+
+    @ResolveField( () => [MEQSApprover])
+    meqs_approvers(@Parent() meqs: MEQS): any {
+        return this.meqsApproverService.findByMeqsId(meqs.id)
     }
 
 }

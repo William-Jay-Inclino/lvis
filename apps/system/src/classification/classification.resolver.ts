@@ -3,7 +3,7 @@ import { ClassificationService } from './classification.service';
 import { Classification } from './entities/classification.entity';
 import { CreateClassificationInput } from './dto/create-classification.input';
 import { UpdateClassificationInput } from './dto/update-classification.input';
-import { GqlAuthGuard } from '../auth/guards/gql-auth.guard';
+import { GqlAuthGuard } from '../__auth__/guards/gql-auth.guard';
 import { UseGuards } from '@nestjs/common';
 @UseGuards(GqlAuthGuard)
 @Resolver(() => Classification)

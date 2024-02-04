@@ -2,10 +2,10 @@ import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { UserService } from './user.service';
 import { User } from './entities/user.entity';
 import { CreateUserInput } from './dto/create-user.input';
-import { CurrentUser } from '../auth/current-user.decorator';
+import { CurrentUser } from '../__auth__/current-user.decorator';
 import { UpdateUserInput } from './dto/update-user.input';
 import { Logger, NotFoundException, UseGuards } from '@nestjs/common';
-import { GqlAuthGuard } from '../auth/guards/gql-auth.guard';
+import { GqlAuthGuard } from '../__auth__/guards/gql-auth.guard';
 
 
 @Resolver(() => User)
