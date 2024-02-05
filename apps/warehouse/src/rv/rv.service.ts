@@ -9,6 +9,7 @@ import { UpdateRvInput } from './dto/update-rv.input';
 import { catchError, firstValueFrom } from 'rxjs';
 import { HttpService } from '@nestjs/axios';
 import { WarehouseRemoveResponse } from '../__common__/classes';
+import { isValidApprovalStatus } from '../__common__/helpers';
 
 @Injectable()
 export class RvService {
@@ -116,6 +117,18 @@ export class RvService {
         this.logger.log('update()')
 
         const existingItem = await this.findOne(id)
+
+        if(input.status){
+
+            if(!isValidApprovalStatus(input.status)){
+                throw new BadRequestException("Invalid status value")
+            }
+
+            if(input.status !== APPROVAL_STATUS.CANCELLED){
+                throw new BadRequestException("Unable to update status. Only accepts status = cancelled")
+            }
+
+        }
 
         if(input.supervisor_id){
             const isValidSupervisorId = await this.areEmployeesExist([input.supervisor_id], this.authUser)

@@ -8,6 +8,7 @@ import { AuthUser } from '../__common__/auth-user.entity';
 import { HttpService } from '@nestjs/axios';
 import { catchError, firstValueFrom } from 'rxjs';
 import { UpdatePoInput } from './dto/update-po.input';
+import { isValidApprovalStatus } from '../__common__/helpers';
 
 @Injectable()
 export class PoService {
@@ -142,6 +143,18 @@ export class PoService {
         this.logger.log('update(')
 
         const existingItem = await this.findOne(id)
+
+        if(input.status){
+
+            if(!isValidApprovalStatus(input.status)){
+                throw new BadRequestException("Invalid status value")
+            }
+
+            if(input.status !== APPROVAL_STATUS.CANCELLED){
+                throw new BadRequestException("Unable to update status. Only accepts status = cancelled")
+            }
+
+        }
 
         if(input.canceller_id){
             const isValidCancellerId = await this.areEmployeesExist([input.canceller_id], this.authUser)
