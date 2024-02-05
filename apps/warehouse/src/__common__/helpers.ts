@@ -1,4 +1,4 @@
-import { RVApprover } from "apps/warehouse/prisma/generated/client"
+import { MEQSApprover, POApprover, RVApprover } from "apps/warehouse/prisma/generated/client"
 import { APPROVAL_STATUS } from "./types"
 
 
@@ -20,7 +20,7 @@ export const isValidApprovalStatus = (status: number): boolean => {
 }
 
 
-export const getLastApprover = (approvers: RVApprover[]): RVApprover => {
+export const getLastApprover = (approvers: RVApprover[] | MEQSApprover[] | POApprover[]): RVApprover | MEQSApprover | POApprover => {
 
     return approvers.reduce((max, current) => (current.order > max.order ? current : max), approvers[0]);
 
