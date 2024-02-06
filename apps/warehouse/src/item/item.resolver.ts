@@ -1,4 +1,4 @@
-import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { ItemService } from './item.service';
 import { Item } from './entities/item.entity';
 import { CreateItemInput } from './dto/create-item.input';
@@ -9,27 +9,30 @@ export class ItemResolver {
   constructor(private readonly itemService: ItemService) {}
 
   @Mutation(() => Item)
-  createItem(@Args('createItemInput') createItemInput: CreateItemInput) {
+  createItem(@Args('input') createItemInput: CreateItemInput) {
     return this.itemService.create(createItemInput);
   }
 
-  @Query(() => [Item], { name: 'item' })
-  findAll() {
+  @Query(() => [Item])
+  items() {
     return this.itemService.findAll();
   }
 
-  @Query(() => Item, { name: 'item' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
+  @Query(() => Item)
+  item(@Args('id') id: string) {
     return this.itemService.findOne(id);
   }
 
   @Mutation(() => Item)
-  updateItem(@Args('updateItemInput') updateItemInput: UpdateItemInput) {
-    return this.itemService.update(updateItemInput.id, updateItemInput);
+  updateItem(
+    @Args('id') id: string,
+    @Args('input') updateItemInput: UpdateItemInput
+  ) {
+    return this.itemService.update(id, updateItemInput);
   }
 
   @Mutation(() => Item)
-  removeItem(@Args('id', { type: () => Int }) id: number) {
+  removeItem(@Args('id') id: string) {
     return this.itemService.remove(id);
   }
 }

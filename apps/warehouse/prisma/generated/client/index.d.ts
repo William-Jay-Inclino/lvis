@@ -26379,6 +26379,7 @@ export namespace Prisma {
     initial_quantity: number | null
     average_price: number | null
     initial_average_price: number | null
+    is_initial: boolean | null
     created_at: Date | null
     updated_at: Date | null
     is_deleted: boolean | null
@@ -26394,6 +26395,7 @@ export namespace Prisma {
     initial_quantity: number | null
     average_price: number | null
     initial_average_price: number | null
+    is_initial: boolean | null
     created_at: Date | null
     updated_at: Date | null
     is_deleted: boolean | null
@@ -26409,6 +26411,7 @@ export namespace Prisma {
     initial_quantity: number
     average_price: number
     initial_average_price: number
+    is_initial: number
     created_at: number
     updated_at: number
     is_deleted: number
@@ -26440,6 +26443,7 @@ export namespace Prisma {
     initial_quantity?: true
     average_price?: true
     initial_average_price?: true
+    is_initial?: true
     created_at?: true
     updated_at?: true
     is_deleted?: true
@@ -26455,6 +26459,7 @@ export namespace Prisma {
     initial_quantity?: true
     average_price?: true
     initial_average_price?: true
+    is_initial?: true
     created_at?: true
     updated_at?: true
     is_deleted?: true
@@ -26470,6 +26475,7 @@ export namespace Prisma {
     initial_quantity?: true
     average_price?: true
     initial_average_price?: true
+    is_initial?: true
     created_at?: true
     updated_at?: true
     is_deleted?: true
@@ -26572,6 +26578,7 @@ export namespace Prisma {
     initial_quantity: number
     average_price: number
     initial_average_price: number
+    is_initial: boolean
     created_at: Date
     updated_at: Date
     is_deleted: boolean
@@ -26606,6 +26613,7 @@ export namespace Prisma {
     initial_quantity?: boolean
     average_price?: boolean
     initial_average_price?: boolean
+    is_initial?: boolean
     created_at?: boolean
     updated_at?: boolean
     is_deleted?: boolean
@@ -26626,6 +26634,7 @@ export namespace Prisma {
     initial_quantity?: boolean
     average_price?: boolean
     initial_average_price?: boolean
+    is_initial?: boolean
     created_at?: boolean
     updated_at?: boolean
     is_deleted?: boolean
@@ -26658,6 +26667,7 @@ export namespace Prisma {
       initial_quantity: number
       average_price: number
       initial_average_price: number
+      is_initial: boolean
       created_at: Date
       updated_at: Date
       is_deleted: boolean
@@ -27071,6 +27081,7 @@ export namespace Prisma {
     readonly initial_quantity: FieldRef<"Item", 'Int'>
     readonly average_price: FieldRef<"Item", 'Float'>
     readonly initial_average_price: FieldRef<"Item", 'Float'>
+    readonly is_initial: FieldRef<"Item", 'Boolean'>
     readonly created_at: FieldRef<"Item", 'DateTime'>
     readonly updated_at: FieldRef<"Item", 'DateTime'>
     readonly is_deleted: FieldRef<"Item", 'Boolean'>
@@ -29810,6 +29821,7 @@ export namespace Prisma {
     initial_quantity: 'initial_quantity',
     average_price: 'average_price',
     initial_average_price: 'initial_average_price',
+    is_initial: 'is_initial',
     created_at: 'created_at',
     updated_at: 'updated_at',
     is_deleted: 'is_deleted'
@@ -31912,6 +31924,7 @@ export namespace Prisma {
     initial_quantity?: IntFilter<"Item"> | number
     average_price?: FloatFilter<"Item"> | number
     initial_average_price?: FloatFilter<"Item"> | number
+    is_initial?: BoolFilter<"Item"> | boolean
     created_at?: DateTimeFilter<"Item"> | Date | string
     updated_at?: DateTimeFilter<"Item"> | Date | string
     is_deleted?: BoolFilter<"Item"> | boolean
@@ -31931,6 +31944,7 @@ export namespace Prisma {
     initial_quantity?: SortOrder
     average_price?: SortOrder
     initial_average_price?: SortOrder
+    is_initial?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -31953,6 +31967,7 @@ export namespace Prisma {
     initial_quantity?: IntFilter<"Item"> | number
     average_price?: FloatFilter<"Item"> | number
     initial_average_price?: FloatFilter<"Item"> | number
+    is_initial?: BoolFilter<"Item"> | boolean
     created_at?: DateTimeFilter<"Item"> | Date | string
     updated_at?: DateTimeFilter<"Item"> | Date | string
     is_deleted?: BoolFilter<"Item"> | boolean
@@ -31972,6 +31987,7 @@ export namespace Prisma {
     initial_quantity?: SortOrder
     average_price?: SortOrder
     initial_average_price?: SortOrder
+    is_initial?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -31995,6 +32011,7 @@ export namespace Prisma {
     initial_quantity?: IntWithAggregatesFilter<"Item"> | number
     average_price?: FloatWithAggregatesFilter<"Item"> | number
     initial_average_price?: FloatWithAggregatesFilter<"Item"> | number
+    is_initial?: BoolWithAggregatesFilter<"Item"> | boolean
     created_at?: DateTimeWithAggregatesFilter<"Item"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"Item"> | Date | string
     is_deleted?: BoolWithAggregatesFilter<"Item"> | boolean
@@ -34333,6 +34350,7 @@ export namespace Prisma {
     initial_quantity: number
     average_price: number
     initial_average_price: number
+    is_initial?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -34352,6 +34370,7 @@ export namespace Prisma {
     initial_quantity: number
     average_price: number
     initial_average_price: number
+    is_initial?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -34367,6 +34386,7 @@ export namespace Prisma {
     initial_quantity?: IntFieldUpdateOperationsInput | number
     average_price?: FloatFieldUpdateOperationsInput | number
     initial_average_price?: FloatFieldUpdateOperationsInput | number
+    is_initial?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -34386,6 +34406,7 @@ export namespace Prisma {
     initial_quantity?: IntFieldUpdateOperationsInput | number
     average_price?: FloatFieldUpdateOperationsInput | number
     initial_average_price?: FloatFieldUpdateOperationsInput | number
+    is_initial?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -34403,6 +34424,7 @@ export namespace Prisma {
     initial_quantity: number
     average_price: number
     initial_average_price: number
+    is_initial?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -34416,6 +34438,7 @@ export namespace Prisma {
     initial_quantity?: IntFieldUpdateOperationsInput | number
     average_price?: FloatFieldUpdateOperationsInput | number
     initial_average_price?: FloatFieldUpdateOperationsInput | number
+    is_initial?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -34431,6 +34454,7 @@ export namespace Prisma {
     initial_quantity?: IntFieldUpdateOperationsInput | number
     average_price?: FloatFieldUpdateOperationsInput | number
     initial_average_price?: FloatFieldUpdateOperationsInput | number
+    is_initial?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -36086,6 +36110,7 @@ export namespace Prisma {
     initial_quantity?: SortOrder
     average_price?: SortOrder
     initial_average_price?: SortOrder
+    is_initial?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -36108,6 +36133,7 @@ export namespace Prisma {
     initial_quantity?: SortOrder
     average_price?: SortOrder
     initial_average_price?: SortOrder
+    is_initial?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -36123,6 +36149,7 @@ export namespace Prisma {
     initial_quantity?: SortOrder
     average_price?: SortOrder
     initial_average_price?: SortOrder
+    is_initial?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -38260,6 +38287,7 @@ export namespace Prisma {
     initial_quantity: number
     average_price: number
     initial_average_price: number
+    is_initial?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -38277,6 +38305,7 @@ export namespace Prisma {
     initial_quantity: number
     average_price: number
     initial_average_price: number
+    is_initial?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -38392,6 +38421,7 @@ export namespace Prisma {
     initial_quantity?: IntFilter<"Item"> | number
     average_price?: FloatFilter<"Item"> | number
     initial_average_price?: FloatFilter<"Item"> | number
+    is_initial?: BoolFilter<"Item"> | boolean
     created_at?: DateTimeFilter<"Item"> | Date | string
     updated_at?: DateTimeFilter<"Item"> | Date | string
     is_deleted?: BoolFilter<"Item"> | boolean
@@ -41855,6 +41885,7 @@ export namespace Prisma {
     initial_quantity: number
     average_price: number
     initial_average_price: number
+    is_initial?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -41873,6 +41904,7 @@ export namespace Prisma {
     initial_quantity: number
     average_price: number
     initial_average_price: number
+    is_initial?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -42027,6 +42059,7 @@ export namespace Prisma {
     initial_quantity?: IntFieldUpdateOperationsInput | number
     average_price?: FloatFieldUpdateOperationsInput | number
     initial_average_price?: FloatFieldUpdateOperationsInput | number
+    is_initial?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -42045,6 +42078,7 @@ export namespace Prisma {
     initial_quantity?: IntFieldUpdateOperationsInput | number
     average_price?: FloatFieldUpdateOperationsInput | number
     initial_average_price?: FloatFieldUpdateOperationsInput | number
+    is_initial?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -42388,6 +42422,7 @@ export namespace Prisma {
     initial_quantity: number
     average_price: number
     initial_average_price: number
+    is_initial?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -42405,6 +42440,7 @@ export namespace Prisma {
     initial_quantity: number
     average_price: number
     initial_average_price: number
+    is_initial?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -42446,6 +42482,7 @@ export namespace Prisma {
     initial_quantity: number
     average_price: number
     initial_average_price: number
+    is_initial?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -42464,6 +42501,7 @@ export namespace Prisma {
     initial_quantity: number
     average_price: number
     initial_average_price: number
+    is_initial?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -42537,6 +42575,7 @@ export namespace Prisma {
     initial_quantity?: IntFieldUpdateOperationsInput | number
     average_price?: FloatFieldUpdateOperationsInput | number
     initial_average_price?: FloatFieldUpdateOperationsInput | number
+    is_initial?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -42555,6 +42594,7 @@ export namespace Prisma {
     initial_quantity?: IntFieldUpdateOperationsInput | number
     average_price?: FloatFieldUpdateOperationsInput | number
     initial_average_price?: FloatFieldUpdateOperationsInput | number
+    is_initial?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -42694,6 +42734,7 @@ export namespace Prisma {
     initial_quantity: number
     average_price: number
     initial_average_price: number
+    is_initial?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -42798,6 +42839,7 @@ export namespace Prisma {
     initial_quantity?: IntFieldUpdateOperationsInput | number
     average_price?: FloatFieldUpdateOperationsInput | number
     initial_average_price?: FloatFieldUpdateOperationsInput | number
+    is_initial?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -42815,6 +42857,7 @@ export namespace Prisma {
     initial_quantity?: IntFieldUpdateOperationsInput | number
     average_price?: FloatFieldUpdateOperationsInput | number
     initial_average_price?: FloatFieldUpdateOperationsInput | number
+    is_initial?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -42831,6 +42874,7 @@ export namespace Prisma {
     initial_quantity?: IntFieldUpdateOperationsInput | number
     average_price?: FloatFieldUpdateOperationsInput | number
     initial_average_price?: FloatFieldUpdateOperationsInput | number
+    is_initial?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -43781,6 +43825,7 @@ export namespace Prisma {
     initial_quantity: number
     average_price: number
     initial_average_price: number
+    is_initial?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -43794,6 +43839,7 @@ export namespace Prisma {
     initial_quantity?: IntFieldUpdateOperationsInput | number
     average_price?: FloatFieldUpdateOperationsInput | number
     initial_average_price?: FloatFieldUpdateOperationsInput | number
+    is_initial?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -43811,6 +43857,7 @@ export namespace Prisma {
     initial_quantity?: IntFieldUpdateOperationsInput | number
     average_price?: FloatFieldUpdateOperationsInput | number
     initial_average_price?: FloatFieldUpdateOperationsInput | number
+    is_initial?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -43827,6 +43874,7 @@ export namespace Prisma {
     initial_quantity?: IntFieldUpdateOperationsInput | number
     average_price?: FloatFieldUpdateOperationsInput | number
     initial_average_price?: FloatFieldUpdateOperationsInput | number
+    is_initial?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean

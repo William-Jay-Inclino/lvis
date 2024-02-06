@@ -24,22 +24,22 @@ export class CreateItemInput {
   @IsString()
   description: string
 
-  @Field(() => Int)
-  @IsNotEmpty()
-  @IsInt()
-  @Min(1, { message: 'Quantity must be a positive integer' })
-  quantity: number
+  // @Field(() => Int)
+  // @IsNotEmpty()
+  // @IsInt()
+  // @Min(1, { message: 'Quantity must be a positive integer' })
+  // quantity: number
 
   @Field(() => Int)
   @IsNotEmpty()
   @IsInt()
   initial_quantity: number
 
-  @Field(() => Float)
-  @IsNotEmpty()
-  @IsNumber()
-  @Min(0.01, { message: 'Average Price must be greater than 0' })
-  average_price: number
+  // @Field(() => Float)
+  // @IsNotEmpty()
+  // @IsNumber()
+  // @Min(0.01, { message: 'Average Price must be greater than 0' })
+  // average_price: number
 
   @Field(() => Float)
   @IsNotEmpty()

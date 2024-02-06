@@ -418,15 +418,16 @@ model RRItem {
 }
 
 model Item {
-  id                    String @id @default(uuid())
+  id                    String  @id @default(uuid())
   item_type_id          String
   unit_id               String
-  code                  String @unique
+  code                  String  @unique
   description           String
   quantity              Int
   initial_quantity      Int
   average_price         Float
   initial_average_price Float
+  is_initial            Boolean @default(false)
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
