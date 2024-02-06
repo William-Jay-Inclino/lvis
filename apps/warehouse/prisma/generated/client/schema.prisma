@@ -104,6 +104,7 @@ model JO {
   supervisor_id     String
   status            Int          @default(1)
   canceller_id      String?
+  date_cancelled    DateTime?
   is_referenced     Boolean      @default(false)
   created_at        DateTime     @default(now())
   updated_at        DateTime     @updatedAt
@@ -139,6 +140,7 @@ model RV {
   classification_id String?
   supervisor_id     String
   canceller_id      String?
+  date_cancelled    DateTime?
   rv_number         String    @unique
   date_requested    DateTime
   work_order_no     String?
@@ -184,6 +186,7 @@ model SPR {
   supervisor_id     String
   status            Int           @default(1)
   canceller_id      String?
+  date_cancelled    DateTime?
   is_referenced     Boolean       @default(false)
   created_at        DateTime      @default(now())
   updated_at        DateTime      @updatedAt
@@ -225,6 +228,7 @@ model MEQS {
   status         Int            @default(1)
   notes          String?
   canceller_id   String?
+  date_cancelled DateTime?
   created_at     DateTime       @default(now())
   updated_at     DateTime       @updatedAt
   is_deleted     Boolean        @default(false)
@@ -311,6 +315,7 @@ model PO {
   po_date          DateTime
   status           Int          @default(1)
   canceller_id     String?
+  date_cancelled   DateTime?
   created_at       DateTime     @default(now())
   updated_at       DateTime     @updatedAt
   is_deleted       Boolean      @default(false)
