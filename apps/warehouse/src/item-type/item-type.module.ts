@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { ItemTypeService } from './item_type.service';
-import { ItemTypeResolver } from './item_type.resolver';
+import { ItemTypeService } from './item-type.service';
+import { ItemTypeResolver } from './item-type.resolver';
 
 @Module({
   providers: [ItemTypeResolver, ItemTypeService],
