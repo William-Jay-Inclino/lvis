@@ -1,8 +1,7 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
 
 @ObjectType()
-export class Brand {
-  
+export class ItemType {
   @Field(() => String)
   id: string;
 
@@ -14,5 +13,4 @@ export class Brand {
 
   @Field(() => Date)
   updated_at: Date;
-
 }
