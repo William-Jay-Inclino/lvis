@@ -17,11 +17,11 @@ exports.$Enums = {}
 
 /**
  * Prisma Client JS version: 5.8.1
- * Query Engine version: 78caf6feeaed953168c64e15a249c3e9a033ebe2
+ * Query Engine version: 23fdc5965b1e05fc54e5f26ed3de66776b93de64
  */
 Prisma.prismaVersion = {
   client: "5.8.1",
-  engine: "78caf6feeaed953168c64e15a249c3e9a033ebe2"
+  engine: "23fdc5965b1e05fc54e5f26ed3de66776b93de64"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -220,8 +220,7 @@ exports.Prisma.RVApproverSettingScalarFieldEnum = {
   order: 'order',
   created_at: 'created_at',
   updated_at: 'updated_at',
-  is_deleted: 'is_deleted',
-  employeeId: 'employeeId'
+  is_deleted: 'is_deleted'
 };
 
 exports.Prisma.SPRApproverSettingScalarFieldEnum = {
@@ -247,6 +246,17 @@ exports.Prisma.MEQSApproverSettingScalarFieldEnum = {
 };
 
 exports.Prisma.POApproverSettingScalarFieldEnum = {
+  id: 'id',
+  approver_id: 'approver_id',
+  approver_proxy_id: 'approver_proxy_id',
+  label: 'label',
+  order: 'order',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  is_deleted: 'is_deleted'
+};
+
+exports.Prisma.RRApproverSettingScalarFieldEnum = {
   id: 'id',
   approver_id: 'approver_id',
   approver_proxy_id: 'approver_proxy_id',
@@ -291,7 +301,8 @@ exports.Prisma.ModelName = {
   RVApproverSetting: 'RVApproverSetting',
   SPRApproverSetting: 'SPRApproverSetting',
   MEQSApproverSetting: 'MEQSApproverSetting',
-  POApproverSetting: 'POApproverSetting'
+  POApproverSetting: 'POApproverSetting',
+  RRApproverSetting: 'RRApproverSetting'
 };
 
 /**

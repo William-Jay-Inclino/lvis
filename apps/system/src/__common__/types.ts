@@ -82,3 +82,11 @@ export interface POApproverSetting {
     label: string
     order: number
 }
+
+
+export interface RRApproverSetting { 
+    id: string 
+    approver_id: string 
+    label: string
+    order: number
+}
