@@ -1,8 +1,8 @@
 import { BadRequestException, Injectable, Logger, NotFoundException } from '@nestjs/common';
-import { CreatePoApproverInput } from './dto/create-po-approver.input';
-import { UpdatePoApproverInput } from './dto/update-po-approver.input';
+import { CreateRrApproverInput } from './dto/create-rr-approver.input';
+import { UpdateRrApproverInput } from './dto/update-rr-approver.input';
 import { PrismaService } from '../__prisma__/prisma.service';
-import { Prisma, POApprover } from 'apps/warehouse/prisma/generated/client';
+import { Prisma, RRApprover } from 'apps/warehouse/prisma/generated/client';
 import { APPROVAL_STATUS } from '../__common__/types';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { HttpService } from '@nestjs/axios';
@@ -11,51 +11,51 @@ import { WarehouseRemoveResponse } from '../__common__/classes';
 import { getLastApprover, isValidApprovalStatus } from '../__common__/helpers';
 
 @Injectable()
-export class PoApproverService {
+export class RrApproverService {
 
-    private readonly logger = new Logger(PoApproverService.name);
+    private readonly logger = new Logger(RrApproverService.name);
     private authUser: AuthUser
-    private includedFields = {
-      po: {
-			include: {
-				meqs_supplier: {
-					include: {
-						meqs: {
-							include: {
-							rv: {
-								include: {
-								canvass: true
-								}
-							},
-							jo: {
-								include: {
-								canvass: true
-								}
-							},
-							spr: {
-								include: {
-								canvass: true
-								}
-							}
-							}
-						},
-						supplier: true,
-						meqs_supplier_items: {
-							include: {
-							canvass_item: {
-								include: {
-								unit: true,
-								brand: true
-								}
-							}
-							}
-						},
-						attachments: true
-					}
-				}
-			}
-      }
-    }
+    // private includedFields = {
+    //   po: {
+		// 	include: {
+		// 		meqs_supplier: {
+		// 			include: {
+		// 				meqs: {
+		// 					include: {
+		// 					rv: {
+		// 						include: {
+		// 						canvass: true
+		// 						}
+		// 					},
+		// 					jo: {
+		// 						include: {
+		// 						canvass: true
+		// 						}
+		// 					},
+		// 					spr: {
+		// 						include: {
+		// 						canvass: true
+		// 						}
+		// 					}
+		// 					}
+		// 				},
+		// 				supplier: true,
+		// 				meqs_supplier_items: {
+		// 					include: {
+		// 					canvass_item: {
+		// 						include: {
+		// 						unit: true,
+		// 						brand: true
+		// 						}
+		// 					}
+		// 					}
+		// 				},
+		// 				attachments: true
+		// 			}
+		// 		}
+		// 	}
+    //   }
+    // }
 
 	constructor(
         private readonly prisma: PrismaService,
@@ -66,7 +66,7 @@ export class PoApproverService {
         this.authUser = authUser
     }
 
-    async create(input: CreatePoApproverInput): Promise<POApprover> {
+    async create(input: CreateRrApproverInput): Promise<RRApprover> {
 
         const employeeIds = []
 
@@ -276,31 +276,21 @@ export class PoApproverService {
             throw new BadRequestException('Cancelled status not allowed');
         }
     
-        const employeeIds = []
-
-        if(input.approver_id){
-            employeeIds.push(input.approver_id)
+        if (input.approver_id) {
+            await this.validateEmployeeExistence(input.approver_id, 'Approver ID');
         }
-
-        if(input.approver_proxy_id) {
-            employeeIds.push(input.approver_proxy_id)
-        }
-
-        if(employeeIds.length > 0){
-            const isValidEmployeeIds = await this.areEmployeesExist(employeeIds, this.authUser)
     
-            if(!isValidEmployeeIds){
-                throw new BadRequestException("One or more employee id is invalid")
-            }
+        if (input.approver_proxy_id) {
+            await this.validateEmployeeExistence(input.approver_proxy_id, 'Approver Proxy ID');
         }
     }
 
-    // private async validateEmployeeExistence(employeeId: string, errorMessage: string): Promise<void> {
-    //     const isValidEmployeeId = await this.areEmployeesExist([employeeId], this.authUser);
-    //     if (!isValidEmployeeId) {
-    //         throw new NotFoundException(`${errorMessage} not valid`);
-    //     }
-    // }
+    private async validateEmployeeExistence(employeeId: string, errorMessage: string): Promise<void> {
+        const isValidEmployeeId = await this.areEmployeesExist([employeeId], this.authUser);
+        if (!isValidEmployeeId) {
+            throw new NotFoundException(`${errorMessage} not valid`);
+        }
+    }
 
     private async updatePOApprover(id: string, data: Prisma.POApproverUpdateInput): Promise<POApprover> {
         const updated = await this.prisma.pOApprover.update({

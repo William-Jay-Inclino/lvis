@@ -23070,10 +23070,12 @@ export namespace Prisma {
 
   export type RRAvgAggregateOutputType = {
     delivery_charge: number | null
+    status: number | null
   }
 
   export type RRSumAggregateOutputType = {
     delivery_charge: number | null
+    status: number | null
   }
 
   export type RRMinAggregateOutputType = {
@@ -23088,6 +23090,7 @@ export namespace Prisma {
     delivery_number: string | null
     notes: string | null
     delivery_charge: number | null
+    status: number | null
     created_at: Date | null
     updated_at: Date | null
     is_deleted: boolean | null
@@ -23105,6 +23108,7 @@ export namespace Prisma {
     delivery_number: string | null
     notes: string | null
     delivery_charge: number | null
+    status: number | null
     created_at: Date | null
     updated_at: Date | null
     is_deleted: boolean | null
@@ -23122,6 +23126,7 @@ export namespace Prisma {
     delivery_number: number
     notes: number
     delivery_charge: number
+    status: number
     created_at: number
     updated_at: number
     is_deleted: number
@@ -23131,10 +23136,12 @@ export namespace Prisma {
 
   export type RRAvgAggregateInputType = {
     delivery_charge?: true
+    status?: true
   }
 
   export type RRSumAggregateInputType = {
     delivery_charge?: true
+    status?: true
   }
 
   export type RRMinAggregateInputType = {
@@ -23149,6 +23156,7 @@ export namespace Prisma {
     delivery_number?: true
     notes?: true
     delivery_charge?: true
+    status?: true
     created_at?: true
     updated_at?: true
     is_deleted?: true
@@ -23166,6 +23174,7 @@ export namespace Prisma {
     delivery_number?: true
     notes?: true
     delivery_charge?: true
+    status?: true
     created_at?: true
     updated_at?: true
     is_deleted?: true
@@ -23183,6 +23192,7 @@ export namespace Prisma {
     delivery_number?: true
     notes?: true
     delivery_charge?: true
+    status?: true
     created_at?: true
     updated_at?: true
     is_deleted?: true
@@ -23287,6 +23297,7 @@ export namespace Prisma {
     delivery_number: string | null
     notes: string | null
     delivery_charge: number
+    status: number
     created_at: Date
     updated_at: Date
     is_deleted: boolean
@@ -23323,6 +23334,7 @@ export namespace Prisma {
     delivery_number?: boolean
     notes?: boolean
     delivery_charge?: boolean
+    status?: boolean
     created_at?: boolean
     updated_at?: boolean
     is_deleted?: boolean
@@ -23344,6 +23356,7 @@ export namespace Prisma {
     delivery_number?: boolean
     notes?: boolean
     delivery_charge?: boolean
+    status?: boolean
     created_at?: boolean
     updated_at?: boolean
     is_deleted?: boolean
@@ -23376,6 +23389,7 @@ export namespace Prisma {
       delivery_number: string | null
       notes: string | null
       delivery_charge: number
+      status: number
       created_at: Date
       updated_at: Date
       is_deleted: boolean
@@ -23789,6 +23803,7 @@ export namespace Prisma {
     readonly delivery_number: FieldRef<"RR", 'String'>
     readonly notes: FieldRef<"RR", 'String'>
     readonly delivery_charge: FieldRef<"RR", 'Float'>
+    readonly status: FieldRef<"RR", 'Int'>
     readonly created_at: FieldRef<"RR", 'DateTime'>
     readonly updated_at: FieldRef<"RR", 'DateTime'>
     readonly is_deleted: FieldRef<"RR", 'Boolean'>
@@ -29763,6 +29778,7 @@ export namespace Prisma {
     delivery_number: 'delivery_number',
     notes: 'notes',
     delivery_charge: 'delivery_charge',
+    status: 'status',
     created_at: 'created_at',
     updated_at: 'updated_at',
     is_deleted: 'is_deleted'
@@ -31602,6 +31618,7 @@ export namespace Prisma {
     delivery_number?: StringNullableFilter<"RR"> | string | null
     notes?: StringNullableFilter<"RR"> | string | null
     delivery_charge?: FloatFilter<"RR"> | number
+    status?: IntFilter<"RR"> | number
     created_at?: DateTimeFilter<"RR"> | Date | string
     updated_at?: DateTimeFilter<"RR"> | Date | string
     is_deleted?: BoolFilter<"RR"> | boolean
@@ -31622,6 +31639,7 @@ export namespace Prisma {
     delivery_number?: SortOrderInput | SortOrder
     notes?: SortOrderInput | SortOrder
     delivery_charge?: SortOrder
+    status?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -31645,6 +31663,7 @@ export namespace Prisma {
     delivery_number?: StringNullableFilter<"RR"> | string | null
     notes?: StringNullableFilter<"RR"> | string | null
     delivery_charge?: FloatFilter<"RR"> | number
+    status?: IntFilter<"RR"> | number
     created_at?: DateTimeFilter<"RR"> | Date | string
     updated_at?: DateTimeFilter<"RR"> | Date | string
     is_deleted?: BoolFilter<"RR"> | boolean
@@ -31665,6 +31684,7 @@ export namespace Prisma {
     delivery_number?: SortOrderInput | SortOrder
     notes?: SortOrderInput | SortOrder
     delivery_charge?: SortOrder
+    status?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -31690,6 +31710,7 @@ export namespace Prisma {
     delivery_number?: StringNullableWithAggregatesFilter<"RR"> | string | null
     notes?: StringNullableWithAggregatesFilter<"RR"> | string | null
     delivery_charge?: FloatWithAggregatesFilter<"RR"> | number
+    status?: IntWithAggregatesFilter<"RR"> | number
     created_at?: DateTimeWithAggregatesFilter<"RR"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"RR"> | Date | string
     is_deleted?: BoolWithAggregatesFilter<"RR"> | boolean
@@ -33990,6 +34011,7 @@ export namespace Prisma {
     delivery_number?: string | null
     notes?: string | null
     delivery_charge: number
+    status?: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -34010,6 +34032,7 @@ export namespace Prisma {
     delivery_number?: string | null
     notes?: string | null
     delivery_charge: number
+    status?: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -34028,6 +34051,7 @@ export namespace Prisma {
     delivery_number?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     delivery_charge?: FloatFieldUpdateOperationsInput | number
+    status?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -34048,6 +34072,7 @@ export namespace Prisma {
     delivery_number?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     delivery_charge?: FloatFieldUpdateOperationsInput | number
+    status?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -34067,6 +34092,7 @@ export namespace Prisma {
     delivery_number?: string | null
     notes?: string | null
     delivery_charge: number
+    status?: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -34083,6 +34109,7 @@ export namespace Prisma {
     delivery_number?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     delivery_charge?: FloatFieldUpdateOperationsInput | number
+    status?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -34100,6 +34127,7 @@ export namespace Prisma {
     delivery_number?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     delivery_charge?: FloatFieldUpdateOperationsInput | number
+    status?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -35886,6 +35914,7 @@ export namespace Prisma {
     delivery_number?: SortOrder
     notes?: SortOrder
     delivery_charge?: SortOrder
+    status?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -35893,6 +35922,7 @@ export namespace Prisma {
 
   export type RRAvgOrderByAggregateInput = {
     delivery_charge?: SortOrder
+    status?: SortOrder
   }
 
   export type RRMaxOrderByAggregateInput = {
@@ -35907,6 +35937,7 @@ export namespace Prisma {
     delivery_number?: SortOrder
     notes?: SortOrder
     delivery_charge?: SortOrder
+    status?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -35924,6 +35955,7 @@ export namespace Prisma {
     delivery_number?: SortOrder
     notes?: SortOrder
     delivery_charge?: SortOrder
+    status?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -35931,6 +35963,7 @@ export namespace Prisma {
 
   export type RRSumOrderByAggregateInput = {
     delivery_charge?: SortOrder
+    status?: SortOrder
   }
 
   export type RRRelationFilter = {
@@ -41320,6 +41353,7 @@ export namespace Prisma {
     delivery_number?: string | null
     notes?: string | null
     delivery_charge: number
+    status?: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -41338,6 +41372,7 @@ export namespace Prisma {
     delivery_number?: string | null
     notes?: string | null
     delivery_charge: number
+    status?: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -41443,6 +41478,7 @@ export namespace Prisma {
     delivery_number?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     delivery_charge?: FloatFieldUpdateOperationsInput | number
+    status?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -41461,6 +41497,7 @@ export namespace Prisma {
     delivery_number?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     delivery_charge?: FloatFieldUpdateOperationsInput | number
+    status?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -41759,6 +41796,7 @@ export namespace Prisma {
     delivery_number?: string | null
     notes?: string | null
     delivery_charge: number
+    status?: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -41778,6 +41816,7 @@ export namespace Prisma {
     delivery_number?: string | null
     notes?: string | null
     delivery_charge: number
+    status?: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -41811,6 +41850,7 @@ export namespace Prisma {
     delivery_number?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     delivery_charge?: FloatFieldUpdateOperationsInput | number
+    status?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -41830,6 +41870,7 @@ export namespace Prisma {
     delivery_number?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     delivery_charge?: FloatFieldUpdateOperationsInput | number
+    status?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -41847,6 +41888,7 @@ export namespace Prisma {
     delivery_number?: string | null
     notes?: string | null
     delivery_charge: number
+    status?: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -41866,6 +41908,7 @@ export namespace Prisma {
     delivery_number?: string | null
     notes?: string | null
     delivery_charge: number
+    status?: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -42015,6 +42058,7 @@ export namespace Prisma {
     delivery_number?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     delivery_charge?: FloatFieldUpdateOperationsInput | number
+    status?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -42034,6 +42078,7 @@ export namespace Prisma {
     delivery_number?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     delivery_charge?: FloatFieldUpdateOperationsInput | number
+    status?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean

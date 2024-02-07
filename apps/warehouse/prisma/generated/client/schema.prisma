@@ -359,6 +359,7 @@ model RR {
   delivery_number String?
   notes           String?
   delivery_charge Float
+  status          Int       @default(1)
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt

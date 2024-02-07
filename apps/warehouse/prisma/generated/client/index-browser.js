@@ -368,6 +368,7 @@ exports.Prisma.RRScalarFieldEnum = {
   delivery_number: 'delivery_number',
   notes: 'notes',
   delivery_charge: 'delivery_charge',
+  status: 'status',
   created_at: 'created_at',
   updated_at: 'updated_at',
   is_deleted: 'is_deleted'
