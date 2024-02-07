@@ -51,18 +51,19 @@ model Employee {
   po_approver_setting   POApproverSetting?   @relation("POApproverSetting")
   rv_approver_setting   RVApproverSetting?   @relation("RVApproverSetting")
   spr_approver_setting  SPRApproverSetting?  @relation("SPRApproverSetting")
+  rr_approver_setting   RRApproverSetting?   @relation("RRApproverSetting")
 
   jo_approver_proxy_setting   JOApproverSetting?   @relation("JOApproverProxySetting")
   meqs_approver_proxy_setting MEQSApproverSetting? @relation("MEQSApproverProxySetting")
   po_approver_proxy_setting   POApproverSetting?   @relation("POApproverProxySetting")
   rv_approver_proxy_setting   RVApproverSetting?   @relation("RVApproverProxySetting")
   spr_approver_proxy_setting  SPRApproverSetting?  @relation("SPRApproverProxySetting")
+  rr_approver_proxy_setting   RRApproverSetting?   @relation("RRApproverProxySetting")
 
-  created_at        DateTime            @default(now())
-  updated_at        DateTime            @updatedAt
-  is_deleted        Boolean             @default(false)
-  user_employee     UserEmployee?
-  RVApproverSetting RVApproverSetting[]
+  created_at    DateTime      @default(now())
+  updated_at    DateTime      @updatedAt
+  is_deleted    Boolean       @default(false)
+  user_employee UserEmployee?
 
   @@map("employee")
 }
@@ -197,8 +198,6 @@ model RVApproverSetting {
   is_deleted        Boolean   @default(false)
   approver          Employee  @relation("RVApproverSetting", fields: [approver_id], references: [id], onDelete: Restrict)
   approver_proxy    Employee? @relation("RVApproverProxySetting", fields: [approver_proxy_id], references: [id], onDelete: Restrict)
-  Employee          Employee? @relation(fields: [employeeId], references: [id])
-  employeeId        String?
 
   @@map("rv_approver_setting")
 }
@@ -246,4 +245,19 @@ model POApproverSetting {
   approver_proxy    Employee? @relation("POApproverProxySetting", fields: [approver_proxy_id], references: [id], onDelete: Restrict)
 
   @@map("po_approver_setting")
+}
+
+model RRApproverSetting {
+  id                String    @id @default(uuid())
+  approver_id       String    @unique
+  approver_proxy_id String?   @unique
+  label             String
+  order             Int       @unique
+  created_at        DateTime  @default(now())
+  updated_at        DateTime  @updatedAt
+  is_deleted        Boolean   @default(false)
+  approver          Employee  @relation("RRApproverSetting", fields: [approver_id], references: [id], onDelete: Restrict)
+  approver_proxy    Employee? @relation("RRApproverProxySetting", fields: [approver_proxy_id], references: [id], onDelete: Restrict)
+
+  @@map("rr_approver_setting")
 }

@@ -1,7 +1,8 @@
-import { IsDate, IsInt, IsOptional, IsString } from 'class-validator';
+import { IsDate, IsEnum, IsInt, IsOptional, IsString } from 'class-validator';
 import { CreateMeqsApproverInput } from './create-meqs-approver.input';
 import { InputType, Field, Int, PartialType } from '@nestjs/graphql';
 import { Transform } from 'class-transformer';
+import { APPROVAL_STATUS } from '../../__common__/types';
 
 @InputType()
 export class UpdateMeqsApproverInput extends PartialType(CreateMeqsApproverInput) {
@@ -29,8 +30,8 @@ export class UpdateMeqsApproverInput extends PartialType(CreateMeqsApproverInput
 
   @Field( () => Int, { nullable: true })
   @IsOptional()
-  @IsInt()
-  status?: number;
+  @IsEnum(APPROVAL_STATUS)
+  status?: APPROVAL_STATUS;
 
   @Field(() => String, { nullable: true })
   @IsOptional()

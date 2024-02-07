@@ -27,6 +27,8 @@ model Unit {
   updated_at    DateTime      @updatedAt
   is_deleted    Boolean       @default(false)
   canvass_items CanvassItem[]
+  rr_items      RRItem[]
+  items         Item[]
 
   @@map("unit")
 }
@@ -38,6 +40,7 @@ model Brand {
   updated_at    DateTime      @updatedAt
   is_deleted    Boolean       @default(false)
   canvass_items CanvassItem[]
+  rr_items      RRItem[]
 
   @@map("brand")
 }
@@ -104,6 +107,7 @@ model JO {
   supervisor_id     String
   status            Int          @default(1)
   canceller_id      String?
+  date_cancelled    DateTime?
   is_referenced     Boolean      @default(false)
   created_at        DateTime     @default(now())
   updated_at        DateTime     @updatedAt
@@ -139,6 +143,7 @@ model RV {
   classification_id String?
   supervisor_id     String
   canceller_id      String?
+  date_cancelled    DateTime?
   rv_number         String    @unique
   date_requested    DateTime
   work_order_no     String?
@@ -184,6 +189,7 @@ model SPR {
   supervisor_id     String
   status            Int           @default(1)
   canceller_id      String?
+  date_cancelled    DateTime?
   is_referenced     Boolean       @default(false)
   created_at        DateTime      @default(now())
   updated_at        DateTime      @updatedAt
@@ -225,6 +231,7 @@ model MEQS {
   status         Int            @default(1)
   notes          String?
   canceller_id   String?
+  date_cancelled DateTime?
   created_at     DateTime       @default(now())
   updated_at     DateTime       @updatedAt
   is_deleted     Boolean        @default(false)
@@ -311,11 +318,13 @@ model PO {
   po_date          DateTime
   status           Int          @default(1)
   canceller_id     String?
+  date_cancelled   DateTime?
   created_at       DateTime     @default(now())
   updated_at       DateTime     @updatedAt
   is_deleted       Boolean      @default(false)
   po_approvers     POApprover[]
   meqs_supplier    MEQSSupplier @relation(fields: [meqs_supplier_id], references: [id], onDelete: Restrict)
+  rr               RR?
 
   @@map("purchase_order")
 }
@@ -336,4 +345,130 @@ model POApprover {
   po                PO        @relation(fields: [po_id], references: [id], onDelete: Cascade)
 
   @@map("po_approver")
+}
+
+model RR {
+  id              String    @id @default(uuid())
+  po_id           String    @unique
+  rr_number       String    @unique
+  rr_date         DateTime
+  received_by_id  String
+  canceller_id    String?
+  date_cancelled  DateTime?
+  invoice_number  String
+  delivery_number String?
+  notes           String?
+  delivery_charge Float
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  is_deleted Boolean  @default(false)
+
+  po           PO           @relation(fields: [po_id], references: [id], onDelete: Restrict)
+  rr_approvers RRApprover[]
+  rr_items     RRItem[]
+
+  @@map("receiving_report")
+}
+
+model RRApprover {
+  id                String    @id @default(uuid())
+  rr_id             String
+  approver_id       String
+  approver_proxy_id String?
+  date_approval     DateTime?
+  notes             String?
+  status            Int
+  label             String
+  order             Int
+  created_at        DateTime  @default(now())
+  updated_at        DateTime  @updatedAt
+  is_deleted        Boolean   @default(false)
+  rr                RR        @relation(fields: [rr_id], references: [id], onDelete: Cascade)
+
+  @@map("rr_approver")
+}
+
+model RRItem {
+  id                 String  @id @default(uuid())
+  rr_id              String
+  item_id            String?
+  item_brand_id      String
+  unit_id            String
+  item_class         Int
+  quantity_delivered Int
+  quantity_accepted  Int
+  description        String
+  vat_type           Int
+  gross_price        Float
+  net_price          Float
+  freight_cost       Float
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  is_deleted Boolean  @default(false)
+
+  rr              RR               @relation(fields: [rr_id], references: [id], onDelete: Cascade)
+  item            Item?            @relation(fields: [item_id], references: [id], onDelete: Restrict)
+  item_brand      Brand            @relation(fields: [item_brand_id], references: [id], onDelete: Restrict)
+  unit            Unit             @relation(fields: [unit_id], references: [id], onDelete: Restrict)
+  ItemTransaction ItemTransaction?
+
+  @@map("rr_item")
+}
+
+model Item {
+  id                    String  @id @default(uuid())
+  item_type_id          String
+  unit_id               String
+  code                  String  @unique
+  description           String
+  quantity              Int
+  initial_quantity      Int
+  average_price         Float
+  initial_average_price Float
+  is_initial            Boolean @default(false)
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  is_deleted Boolean  @default(false)
+
+  item_type         ItemType          @relation(fields: [item_type_id], references: [id], onDelete: Restrict)
+  item_transactions ItemTransaction[]
+  rr_items          RRItem[]
+  unit              Unit              @relation(fields: [unit_id], references: [id], onDelete: Restrict)
+
+  @@map("item")
+}
+
+model ItemType {
+  id   String @id @default(uuid())
+  name String
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  is_deleted Boolean  @default(false)
+
+  items Item[]
+
+  @@map("item_type")
+}
+
+model ItemTransaction {
+  id         String  @id @default(uuid())
+  item_id    String
+  rr_item_id String? @unique
+  type       Int
+  quantity   Float
+  price      Float
+  remarks    String?
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  is_deleted Boolean  @default(false)
+
+  item    Item    @relation(fields: [item_id], references: [id], onDelete: Cascade)
+  rr_item RRItem? @relation(fields: [rr_item_id], references: [id], onDelete: Cascade)
+
+  @@map("item_transaction")
 }

@@ -1,4 +1,4 @@
-import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args} from '@nestjs/graphql';
 import { RvApproverSettingService } from './rv-approver-setting.service';
 import { RvApproverSetting } from './entities/rv-approver-setting.entity';
 import { CreateRvApproverSettingInput } from './dto/create-rv-approver-setting.input';

@@ -120,9 +120,9 @@ export class RvService {
 
         if(input.status){
 
-            if(!isValidApprovalStatus(input.status)){
-                throw new BadRequestException("Invalid status value")
-            }
+            // if(!isValidApprovalStatus(input.status)){
+            //     throw new BadRequestException("Invalid status value")
+            // }
 
             if(input.status !== APPROVAL_STATUS.CANCELLED){
                 throw new BadRequestException("Unable to update status. Only accepts status = cancelled")
@@ -161,7 +161,8 @@ export class RvService {
             work_order_no: input.work_order_no ?? existingItem.work_order_no,
             work_order_date: input.work_order_date ? new Date(input.work_order_date) : existingItem.work_order_date,
             status: input.status ?? existingItem.status,
-            canceller_id: input.canceller_id ?? existingItem.canceller_id
+            canceller_id: input.canceller_id ?? existingItem.canceller_id,
+            date_cancelled: input.canceller_id ? new Date() : existingItem.date_cancelled
         }
 
         const updated = await this.prisma.rV.update({

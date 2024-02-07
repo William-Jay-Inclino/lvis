@@ -1,6 +1,6 @@
 import { faker } from "@faker-js/faker";
 import { Department } from "../department/entities/department.entity";
-import { Classification, DepartmentStatus, Feature, JOApproverSetting, MEQSApproverSetting, Module, POApproverSetting, RVApproverSetting, SPRApproverSetting, Service, UserEmployee, UserStatus } from "../__common__/types";
+import { Classification, DepartmentStatus, Feature, JOApproverSetting, MEQSApproverSetting, Module, POApproverSetting, RRApproverSetting, RVApproverSetting, SPRApproverSetting, Service, UserEmployee, UserStatus } from "../__common__/types";
 import { Employee } from "../employee/entities/employee.entity";
 import { User } from "../user/entities/user.entity";
 
@@ -643,5 +643,20 @@ export const po_default_approvers: POApproverSetting[] = [
         approver_id: employees[3].id,
         label: 'GM / OIC',
         order: 4,
+    },
+]
+
+export const rr_default_approvers: RRApproverSetting[] = [
+    {
+        id: faker.string.uuid(),
+        approver_id: employees[2].id,
+        label: 'Audited By',
+        order: 2,
+    },
+    {
+        id: faker.string.uuid(),
+        approver_id: employees[3].id,
+        label: 'Approved By',
+        order: 3,
     },
 ]

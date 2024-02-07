@@ -1,4 +1,4 @@
-import { IsBoolean, IsInt, IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsBoolean, IsInt, IsNumber, IsOptional, IsString, Min } from 'class-validator';
 import { CreateMeqsSupplierItemInput } from './create-meqs-supplier-item.input';
 import { InputType, Field, Int, PartialType, Float } from '@nestjs/graphql';
 import { VAT_TYPE } from '../../__common__/types';
@@ -9,6 +9,7 @@ export class UpdateMeqsSupplierItemInput extends PartialType(CreateMeqsSupplierI
   @Field(() => Float, { nullable: true })
   @IsOptional()
   @IsNumber()
+  @Min(0.01, { message: 'Price must be greater than 0' })
   price?: number | null;
 
   @Field(() => String, { nullable: true })

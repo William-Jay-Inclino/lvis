@@ -177,6 +177,7 @@ exports.Prisma.JOScalarFieldEnum = {
   supervisor_id: 'supervisor_id',
   status: 'status',
   canceller_id: 'canceller_id',
+  date_cancelled: 'date_cancelled',
   is_referenced: 'is_referenced',
   created_at: 'created_at',
   updated_at: 'updated_at',
@@ -203,6 +204,7 @@ exports.Prisma.RVScalarFieldEnum = {
   classification_id: 'classification_id',
   supervisor_id: 'supervisor_id',
   canceller_id: 'canceller_id',
+  date_cancelled: 'date_cancelled',
   rv_number: 'rv_number',
   date_requested: 'date_requested',
   work_order_no: 'work_order_no',
@@ -239,6 +241,7 @@ exports.Prisma.SPRScalarFieldEnum = {
   supervisor_id: 'supervisor_id',
   status: 'status',
   canceller_id: 'canceller_id',
+  date_cancelled: 'date_cancelled',
   is_referenced: 'is_referenced',
   created_at: 'created_at',
   updated_at: 'updated_at',
@@ -271,6 +274,7 @@ exports.Prisma.MEQSScalarFieldEnum = {
   status: 'status',
   notes: 'notes',
   canceller_id: 'canceller_id',
+  date_cancelled: 'date_cancelled',
   created_at: 'created_at',
   updated_at: 'updated_at',
   is_deleted: 'is_deleted'
@@ -331,6 +335,7 @@ exports.Prisma.POScalarFieldEnum = {
   po_date: 'po_date',
   status: 'status',
   canceller_id: 'canceller_id',
+  date_cancelled: 'date_cancelled',
   created_at: 'created_at',
   updated_at: 'updated_at',
   is_deleted: 'is_deleted'
@@ -346,6 +351,94 @@ exports.Prisma.POApproverScalarFieldEnum = {
   status: 'status',
   label: 'label',
   order: 'order',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  is_deleted: 'is_deleted'
+};
+
+exports.Prisma.RRScalarFieldEnum = {
+  id: 'id',
+  po_id: 'po_id',
+  rr_number: 'rr_number',
+  rr_date: 'rr_date',
+  received_by_id: 'received_by_id',
+  canceller_id: 'canceller_id',
+  date_cancelled: 'date_cancelled',
+  invoice_number: 'invoice_number',
+  delivery_number: 'delivery_number',
+  notes: 'notes',
+  delivery_charge: 'delivery_charge',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  is_deleted: 'is_deleted'
+};
+
+exports.Prisma.RRApproverScalarFieldEnum = {
+  id: 'id',
+  rr_id: 'rr_id',
+  approver_id: 'approver_id',
+  approver_proxy_id: 'approver_proxy_id',
+  date_approval: 'date_approval',
+  notes: 'notes',
+  status: 'status',
+  label: 'label',
+  order: 'order',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  is_deleted: 'is_deleted'
+};
+
+exports.Prisma.RRItemScalarFieldEnum = {
+  id: 'id',
+  rr_id: 'rr_id',
+  item_id: 'item_id',
+  item_brand_id: 'item_brand_id',
+  unit_id: 'unit_id',
+  item_class: 'item_class',
+  quantity_delivered: 'quantity_delivered',
+  quantity_accepted: 'quantity_accepted',
+  description: 'description',
+  vat_type: 'vat_type',
+  gross_price: 'gross_price',
+  net_price: 'net_price',
+  freight_cost: 'freight_cost',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  is_deleted: 'is_deleted'
+};
+
+exports.Prisma.ItemScalarFieldEnum = {
+  id: 'id',
+  item_type_id: 'item_type_id',
+  unit_id: 'unit_id',
+  code: 'code',
+  description: 'description',
+  quantity: 'quantity',
+  initial_quantity: 'initial_quantity',
+  average_price: 'average_price',
+  initial_average_price: 'initial_average_price',
+  is_initial: 'is_initial',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  is_deleted: 'is_deleted'
+};
+
+exports.Prisma.ItemTypeScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  is_deleted: 'is_deleted'
+};
+
+exports.Prisma.ItemTransactionScalarFieldEnum = {
+  id: 'id',
+  item_id: 'item_id',
+  rr_item_id: 'rr_item_id',
+  type: 'type',
+  quantity: 'quantity',
+  price: 'price',
+  remarks: 'remarks',
   created_at: 'created_at',
   updated_at: 'updated_at',
   is_deleted: 'is_deleted'
@@ -386,7 +479,13 @@ exports.Prisma.ModelName = {
   MEQSSupplierAttachment: 'MEQSSupplierAttachment',
   MEQSApprover: 'MEQSApprover',
   PO: 'PO',
-  POApprover: 'POApprover'
+  POApprover: 'POApprover',
+  RR: 'RR',
+  RRApprover: 'RRApprover',
+  RRItem: 'RRItem',
+  Item: 'Item',
+  ItemType: 'ItemType',
+  ItemTransaction: 'ItemTransaction'
 };
 
 /**

@@ -14,6 +14,8 @@ import { SeederModule } from './__seeder__/seeder.module';
 import { RvApproverSettingModule } from './rv-approver-setting/rv-approver-setting.module';
 import { ClassificationModule } from './classification/classification.module';
 import { MeqsApproverSettingModule } from './meqs-approver-setting/meqs-approver-setting.module';
+import { PoApproverSettingModule } from './po-approver-setting/po-approver-setting.module';
+import { RrApproverSettingModule } from './rr-approver-setting/rr-approver-setting.module';
 
 
 @Module({
@@ -35,7 +37,9 @@ import { MeqsApproverSettingModule } from './meqs-approver-setting/meqs-approver
     SeederModule,
     RvApproverSettingModule,
     ClassificationModule,
-    MeqsApproverSettingModule
+    MeqsApproverSettingModule,
+    PoApproverSettingModule,
+    RrApproverSettingModule
   ],
   controllers: [],
   providers: [],

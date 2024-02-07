@@ -28,14 +28,24 @@ export enum APPROVAL_STATUS {
     CANCELLED = 4,
 }
 
-export const enum REQUEST_TYPE {
+export enum REQUEST_TYPE {
     JO = 1,
     RV = 2,
     SPR = 3
 }
 
-export const enum VAT_TYPE {
+export enum VAT_TYPE {
     NONE = 1,
     INC = 2,
     EXC = 3
+}
+
+export enum ITEM_TRANSACTION_TYPE {
+    STOCK_IN = 1,
+    STOCK_OUT = 2
+}
+
+export enum ITEM_CLASS {
+    STOCK = 1,
+    NON_STOCK = 2
 }

@@ -108,6 +108,36 @@ export type PO = $Result.DefaultSelection<Prisma.$POPayload>
  * 
  */
 export type POApprover = $Result.DefaultSelection<Prisma.$POApproverPayload>
+/**
+ * Model RR
+ * 
+ */
+export type RR = $Result.DefaultSelection<Prisma.$RRPayload>
+/**
+ * Model RRApprover
+ * 
+ */
+export type RRApprover = $Result.DefaultSelection<Prisma.$RRApproverPayload>
+/**
+ * Model RRItem
+ * 
+ */
+export type RRItem = $Result.DefaultSelection<Prisma.$RRItemPayload>
+/**
+ * Model Item
+ * 
+ */
+export type Item = $Result.DefaultSelection<Prisma.$ItemPayload>
+/**
+ * Model ItemType
+ * 
+ */
+export type ItemType = $Result.DefaultSelection<Prisma.$ItemTypePayload>
+/**
+ * Model ItemTransaction
+ * 
+ */
+export type ItemTransaction = $Result.DefaultSelection<Prisma.$ItemTransactionPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -420,6 +450,66 @@ export class PrismaClient<
     * ```
     */
   get pOApprover(): Prisma.POApproverDelegate<ExtArgs>;
+
+  /**
+   * `prisma.rR`: Exposes CRUD operations for the **RR** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more RRS
+    * const rRS = await prisma.rR.findMany()
+    * ```
+    */
+  get rR(): Prisma.RRDelegate<ExtArgs>;
+
+  /**
+   * `prisma.rRApprover`: Exposes CRUD operations for the **RRApprover** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more RRApprovers
+    * const rRApprovers = await prisma.rRApprover.findMany()
+    * ```
+    */
+  get rRApprover(): Prisma.RRApproverDelegate<ExtArgs>;
+
+  /**
+   * `prisma.rRItem`: Exposes CRUD operations for the **RRItem** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more RRItems
+    * const rRItems = await prisma.rRItem.findMany()
+    * ```
+    */
+  get rRItem(): Prisma.RRItemDelegate<ExtArgs>;
+
+  /**
+   * `prisma.item`: Exposes CRUD operations for the **Item** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Items
+    * const items = await prisma.item.findMany()
+    * ```
+    */
+  get item(): Prisma.ItemDelegate<ExtArgs>;
+
+  /**
+   * `prisma.itemType`: Exposes CRUD operations for the **ItemType** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ItemTypes
+    * const itemTypes = await prisma.itemType.findMany()
+    * ```
+    */
+  get itemType(): Prisma.ItemTypeDelegate<ExtArgs>;
+
+  /**
+   * `prisma.itemTransaction`: Exposes CRUD operations for the **ItemTransaction** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ItemTransactions
+    * const itemTransactions = await prisma.itemTransaction.findMany()
+    * ```
+    */
+  get itemTransaction(): Prisma.ItemTransactionDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -908,7 +998,13 @@ export namespace Prisma {
     MEQSSupplierAttachment: 'MEQSSupplierAttachment',
     MEQSApprover: 'MEQSApprover',
     PO: 'PO',
-    POApprover: 'POApprover'
+    POApprover: 'POApprover',
+    RR: 'RR',
+    RRApprover: 'RRApprover',
+    RRItem: 'RRItem',
+    Item: 'Item',
+    ItemType: 'ItemType',
+    ItemTransaction: 'ItemTransaction'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -925,7 +1021,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'supplier' | 'unit' | 'brand' | 'vehicle' | 'canvassItem' | 'canvass' | 'jO' | 'jOApprover' | 'rV' | 'rVApprover' | 'sPR' | 'sPRApprover' | 'mEQS' | 'mEQSSupplier' | 'mEQSSupplierItem' | 'mEQSSupplierAttachment' | 'mEQSApprover' | 'pO' | 'pOApprover'
+      modelProps: 'supplier' | 'unit' | 'brand' | 'vehicle' | 'canvassItem' | 'canvass' | 'jO' | 'jOApprover' | 'rV' | 'rVApprover' | 'sPR' | 'sPRApprover' | 'mEQS' | 'mEQSSupplier' | 'mEQSSupplierItem' | 'mEQSSupplierAttachment' | 'mEQSApprover' | 'pO' | 'pOApprover' | 'rR' | 'rRApprover' | 'rRItem' | 'item' | 'itemType' | 'itemTransaction'
       txIsolationLevel: Prisma.TransactionIsolationLevel
     },
     model: {
@@ -2183,6 +2279,402 @@ export namespace Prisma {
           }
         }
       }
+      RR: {
+        payload: Prisma.$RRPayload<ExtArgs>
+        fields: Prisma.RRFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.RRFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$RRPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.RRFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$RRPayload>
+          }
+          findFirst: {
+            args: Prisma.RRFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$RRPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.RRFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$RRPayload>
+          }
+          findMany: {
+            args: Prisma.RRFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$RRPayload>[]
+          }
+          create: {
+            args: Prisma.RRCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$RRPayload>
+          }
+          createMany: {
+            args: Prisma.RRCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.RRDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$RRPayload>
+          }
+          update: {
+            args: Prisma.RRUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$RRPayload>
+          }
+          deleteMany: {
+            args: Prisma.RRDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.RRUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.RRUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$RRPayload>
+          }
+          aggregate: {
+            args: Prisma.RRAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateRR>
+          }
+          groupBy: {
+            args: Prisma.RRGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<RRGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.RRCountArgs<ExtArgs>,
+            result: $Utils.Optional<RRCountAggregateOutputType> | number
+          }
+        }
+      }
+      RRApprover: {
+        payload: Prisma.$RRApproverPayload<ExtArgs>
+        fields: Prisma.RRApproverFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.RRApproverFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$RRApproverPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.RRApproverFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$RRApproverPayload>
+          }
+          findFirst: {
+            args: Prisma.RRApproverFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$RRApproverPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.RRApproverFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$RRApproverPayload>
+          }
+          findMany: {
+            args: Prisma.RRApproverFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$RRApproverPayload>[]
+          }
+          create: {
+            args: Prisma.RRApproverCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$RRApproverPayload>
+          }
+          createMany: {
+            args: Prisma.RRApproverCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.RRApproverDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$RRApproverPayload>
+          }
+          update: {
+            args: Prisma.RRApproverUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$RRApproverPayload>
+          }
+          deleteMany: {
+            args: Prisma.RRApproverDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.RRApproverUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.RRApproverUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$RRApproverPayload>
+          }
+          aggregate: {
+            args: Prisma.RRApproverAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateRRApprover>
+          }
+          groupBy: {
+            args: Prisma.RRApproverGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<RRApproverGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.RRApproverCountArgs<ExtArgs>,
+            result: $Utils.Optional<RRApproverCountAggregateOutputType> | number
+          }
+        }
+      }
+      RRItem: {
+        payload: Prisma.$RRItemPayload<ExtArgs>
+        fields: Prisma.RRItemFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.RRItemFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$RRItemPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.RRItemFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$RRItemPayload>
+          }
+          findFirst: {
+            args: Prisma.RRItemFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$RRItemPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.RRItemFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$RRItemPayload>
+          }
+          findMany: {
+            args: Prisma.RRItemFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$RRItemPayload>[]
+          }
+          create: {
+            args: Prisma.RRItemCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$RRItemPayload>
+          }
+          createMany: {
+            args: Prisma.RRItemCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.RRItemDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$RRItemPayload>
+          }
+          update: {
+            args: Prisma.RRItemUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$RRItemPayload>
+          }
+          deleteMany: {
+            args: Prisma.RRItemDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.RRItemUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.RRItemUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$RRItemPayload>
+          }
+          aggregate: {
+            args: Prisma.RRItemAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateRRItem>
+          }
+          groupBy: {
+            args: Prisma.RRItemGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<RRItemGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.RRItemCountArgs<ExtArgs>,
+            result: $Utils.Optional<RRItemCountAggregateOutputType> | number
+          }
+        }
+      }
+      Item: {
+        payload: Prisma.$ItemPayload<ExtArgs>
+        fields: Prisma.ItemFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ItemFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ItemPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ItemFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ItemPayload>
+          }
+          findFirst: {
+            args: Prisma.ItemFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ItemPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ItemFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ItemPayload>
+          }
+          findMany: {
+            args: Prisma.ItemFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ItemPayload>[]
+          }
+          create: {
+            args: Prisma.ItemCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ItemPayload>
+          }
+          createMany: {
+            args: Prisma.ItemCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.ItemDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ItemPayload>
+          }
+          update: {
+            args: Prisma.ItemUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ItemPayload>
+          }
+          deleteMany: {
+            args: Prisma.ItemDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ItemUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.ItemUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ItemPayload>
+          }
+          aggregate: {
+            args: Prisma.ItemAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateItem>
+          }
+          groupBy: {
+            args: Prisma.ItemGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<ItemGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ItemCountArgs<ExtArgs>,
+            result: $Utils.Optional<ItemCountAggregateOutputType> | number
+          }
+        }
+      }
+      ItemType: {
+        payload: Prisma.$ItemTypePayload<ExtArgs>
+        fields: Prisma.ItemTypeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ItemTypeFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ItemTypePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ItemTypeFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ItemTypePayload>
+          }
+          findFirst: {
+            args: Prisma.ItemTypeFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ItemTypePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ItemTypeFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ItemTypePayload>
+          }
+          findMany: {
+            args: Prisma.ItemTypeFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ItemTypePayload>[]
+          }
+          create: {
+            args: Prisma.ItemTypeCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ItemTypePayload>
+          }
+          createMany: {
+            args: Prisma.ItemTypeCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.ItemTypeDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ItemTypePayload>
+          }
+          update: {
+            args: Prisma.ItemTypeUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ItemTypePayload>
+          }
+          deleteMany: {
+            args: Prisma.ItemTypeDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ItemTypeUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.ItemTypeUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ItemTypePayload>
+          }
+          aggregate: {
+            args: Prisma.ItemTypeAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateItemType>
+          }
+          groupBy: {
+            args: Prisma.ItemTypeGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<ItemTypeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ItemTypeCountArgs<ExtArgs>,
+            result: $Utils.Optional<ItemTypeCountAggregateOutputType> | number
+          }
+        }
+      }
+      ItemTransaction: {
+        payload: Prisma.$ItemTransactionPayload<ExtArgs>
+        fields: Prisma.ItemTransactionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ItemTransactionFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ItemTransactionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ItemTransactionFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ItemTransactionPayload>
+          }
+          findFirst: {
+            args: Prisma.ItemTransactionFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ItemTransactionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ItemTransactionFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ItemTransactionPayload>
+          }
+          findMany: {
+            args: Prisma.ItemTransactionFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ItemTransactionPayload>[]
+          }
+          create: {
+            args: Prisma.ItemTransactionCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ItemTransactionPayload>
+          }
+          createMany: {
+            args: Prisma.ItemTransactionCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.ItemTransactionDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ItemTransactionPayload>
+          }
+          update: {
+            args: Prisma.ItemTransactionUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ItemTransactionPayload>
+          }
+          deleteMany: {
+            args: Prisma.ItemTransactionDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ItemTransactionUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.ItemTransactionUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ItemTransactionPayload>
+          }
+          aggregate: {
+            args: Prisma.ItemTransactionAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateItemTransaction>
+          }
+          groupBy: {
+            args: Prisma.ItemTransactionGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<ItemTransactionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ItemTransactionCountArgs<ExtArgs>,
+            result: $Utils.Optional<ItemTransactionCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2367,10 +2859,14 @@ export namespace Prisma {
 
   export type UnitCountOutputType = {
     canvass_items: number
+    rr_items: number
+    items: number
   }
 
   export type UnitCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     canvass_items?: boolean | UnitCountOutputTypeCountCanvass_itemsArgs
+    rr_items?: boolean | UnitCountOutputTypeCountRr_itemsArgs
+    items?: boolean | UnitCountOutputTypeCountItemsArgs
   }
 
   // Custom InputTypes
@@ -2394,6 +2890,22 @@ export namespace Prisma {
   }
 
 
+  /**
+   * UnitCountOutputType without action
+   */
+  export type UnitCountOutputTypeCountRr_itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RRItemWhereInput
+  }
+
+
+  /**
+   * UnitCountOutputType without action
+   */
+  export type UnitCountOutputTypeCountItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ItemWhereInput
+  }
+
+
 
   /**
    * Count Type BrandCountOutputType
@@ -2401,10 +2913,12 @@ export namespace Prisma {
 
   export type BrandCountOutputType = {
     canvass_items: number
+    rr_items: number
   }
 
   export type BrandCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     canvass_items?: boolean | BrandCountOutputTypeCountCanvass_itemsArgs
+    rr_items?: boolean | BrandCountOutputTypeCountRr_itemsArgs
   }
 
   // Custom InputTypes
@@ -2425,6 +2939,14 @@ export namespace Prisma {
    */
   export type BrandCountOutputTypeCountCanvass_itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: CanvassItemWhereInput
+  }
+
+
+  /**
+   * BrandCountOutputType without action
+   */
+  export type BrandCountOutputTypeCountRr_itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RRItemWhereInput
   }
 
 
@@ -2751,6 +3273,128 @@ export namespace Prisma {
    */
   export type POCountOutputTypeCountPo_approversArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: POApproverWhereInput
+  }
+
+
+
+  /**
+   * Count Type RRCountOutputType
+   */
+
+  export type RRCountOutputType = {
+    rr_approvers: number
+    rr_items: number
+  }
+
+  export type RRCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    rr_approvers?: boolean | RRCountOutputTypeCountRr_approversArgs
+    rr_items?: boolean | RRCountOutputTypeCountRr_itemsArgs
+  }
+
+  // Custom InputTypes
+
+  /**
+   * RRCountOutputType without action
+   */
+  export type RRCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RRCountOutputType
+     */
+    select?: RRCountOutputTypeSelect<ExtArgs> | null
+  }
+
+
+  /**
+   * RRCountOutputType without action
+   */
+  export type RRCountOutputTypeCountRr_approversArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RRApproverWhereInput
+  }
+
+
+  /**
+   * RRCountOutputType without action
+   */
+  export type RRCountOutputTypeCountRr_itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RRItemWhereInput
+  }
+
+
+
+  /**
+   * Count Type ItemCountOutputType
+   */
+
+  export type ItemCountOutputType = {
+    item_transactions: number
+    rr_items: number
+  }
+
+  export type ItemCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    item_transactions?: boolean | ItemCountOutputTypeCountItem_transactionsArgs
+    rr_items?: boolean | ItemCountOutputTypeCountRr_itemsArgs
+  }
+
+  // Custom InputTypes
+
+  /**
+   * ItemCountOutputType without action
+   */
+  export type ItemCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ItemCountOutputType
+     */
+    select?: ItemCountOutputTypeSelect<ExtArgs> | null
+  }
+
+
+  /**
+   * ItemCountOutputType without action
+   */
+  export type ItemCountOutputTypeCountItem_transactionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ItemTransactionWhereInput
+  }
+
+
+  /**
+   * ItemCountOutputType without action
+   */
+  export type ItemCountOutputTypeCountRr_itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RRItemWhereInput
+  }
+
+
+
+  /**
+   * Count Type ItemTypeCountOutputType
+   */
+
+  export type ItemTypeCountOutputType = {
+    items: number
+  }
+
+  export type ItemTypeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    items?: boolean | ItemTypeCountOutputTypeCountItemsArgs
+  }
+
+  // Custom InputTypes
+
+  /**
+   * ItemTypeCountOutputType without action
+   */
+  export type ItemTypeCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ItemTypeCountOutputType
+     */
+    select?: ItemTypeCountOutputTypeSelect<ExtArgs> | null
+  }
+
+
+  /**
+   * ItemTypeCountOutputType without action
+   */
+  export type ItemTypeCountOutputTypeCountItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ItemWhereInput
   }
 
 
@@ -3876,6 +4520,8 @@ export namespace Prisma {
     updated_at?: boolean
     is_deleted?: boolean
     canvass_items?: boolean | Unit$canvass_itemsArgs<ExtArgs>
+    rr_items?: boolean | Unit$rr_itemsArgs<ExtArgs>
+    items?: boolean | Unit$itemsArgs<ExtArgs>
     _count?: boolean | UnitCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["unit"]>
 
@@ -3889,6 +4535,8 @@ export namespace Prisma {
 
   export type UnitInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     canvass_items?: boolean | Unit$canvass_itemsArgs<ExtArgs>
+    rr_items?: boolean | Unit$rr_itemsArgs<ExtArgs>
+    items?: boolean | Unit$itemsArgs<ExtArgs>
     _count?: boolean | UnitCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -3897,6 +4545,8 @@ export namespace Prisma {
     name: "Unit"
     objects: {
       canvass_items: Prisma.$CanvassItemPayload<ExtArgs>[]
+      rr_items: Prisma.$RRItemPayload<ExtArgs>[]
+      items: Prisma.$ItemPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4271,6 +4921,10 @@ export namespace Prisma {
 
     canvass_items<T extends Unit$canvass_itemsArgs<ExtArgs> = {}>(args?: Subset<T, Unit$canvass_itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CanvassItemPayload<ExtArgs>, T, 'findMany'> | Null>;
 
+    rr_items<T extends Unit$rr_itemsArgs<ExtArgs> = {}>(args?: Subset<T, Unit$rr_itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RRItemPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    items<T extends Unit$itemsArgs<ExtArgs> = {}>(args?: Subset<T, Unit$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, 'findMany'> | Null>;
+
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4637,6 +5291,48 @@ export namespace Prisma {
 
 
   /**
+   * Unit.rr_items
+   */
+  export type Unit$rr_itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RRItem
+     */
+    select?: RRItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: RRItemInclude<ExtArgs> | null
+    where?: RRItemWhereInput
+    orderBy?: RRItemOrderByWithRelationInput | RRItemOrderByWithRelationInput[]
+    cursor?: RRItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RRItemScalarFieldEnum | RRItemScalarFieldEnum[]
+  }
+
+
+  /**
+   * Unit.items
+   */
+  export type Unit$itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Item
+     */
+    select?: ItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemInclude<ExtArgs> | null
+    where?: ItemWhereInput
+    orderBy?: ItemOrderByWithRelationInput | ItemOrderByWithRelationInput[]
+    cursor?: ItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ItemScalarFieldEnum | ItemScalarFieldEnum[]
+  }
+
+
+  /**
    * Unit without action
    */
   export type UnitDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4817,6 +5513,7 @@ export namespace Prisma {
     updated_at?: boolean
     is_deleted?: boolean
     canvass_items?: boolean | Brand$canvass_itemsArgs<ExtArgs>
+    rr_items?: boolean | Brand$rr_itemsArgs<ExtArgs>
     _count?: boolean | BrandCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["brand"]>
 
@@ -4830,6 +5527,7 @@ export namespace Prisma {
 
   export type BrandInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     canvass_items?: boolean | Brand$canvass_itemsArgs<ExtArgs>
+    rr_items?: boolean | Brand$rr_itemsArgs<ExtArgs>
     _count?: boolean | BrandCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -4838,6 +5536,7 @@ export namespace Prisma {
     name: "Brand"
     objects: {
       canvass_items: Prisma.$CanvassItemPayload<ExtArgs>[]
+      rr_items: Prisma.$RRItemPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -5212,6 +5911,8 @@ export namespace Prisma {
 
     canvass_items<T extends Brand$canvass_itemsArgs<ExtArgs> = {}>(args?: Subset<T, Brand$canvass_itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CanvassItemPayload<ExtArgs>, T, 'findMany'> | Null>;
 
+    rr_items<T extends Brand$rr_itemsArgs<ExtArgs> = {}>(args?: Subset<T, Brand$rr_itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RRItemPayload<ExtArgs>, T, 'findMany'> | Null>;
+
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5574,6 +6275,27 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: CanvassItemScalarFieldEnum | CanvassItemScalarFieldEnum[]
+  }
+
+
+  /**
+   * Brand.rr_items
+   */
+  export type Brand$rr_itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RRItem
+     */
+    select?: RRItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: RRItemInclude<ExtArgs> | null
+    where?: RRItemWhereInput
+    orderBy?: RRItemOrderByWithRelationInput | RRItemOrderByWithRelationInput[]
+    cursor?: RRItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RRItemScalarFieldEnum | RRItemScalarFieldEnum[]
   }
 
 
@@ -8685,6 +9407,7 @@ export namespace Prisma {
     supervisor_id: string | null
     status: number | null
     canceller_id: string | null
+    date_cancelled: Date | null
     is_referenced: boolean | null
     created_at: Date | null
     updated_at: Date | null
@@ -8702,6 +9425,7 @@ export namespace Prisma {
     supervisor_id: string | null
     status: number | null
     canceller_id: string | null
+    date_cancelled: Date | null
     is_referenced: boolean | null
     created_at: Date | null
     updated_at: Date | null
@@ -8719,6 +9443,7 @@ export namespace Prisma {
     supervisor_id: number
     status: number
     canceller_id: number
+    date_cancelled: number
     is_referenced: number
     created_at: number
     updated_at: number
@@ -8746,6 +9471,7 @@ export namespace Prisma {
     supervisor_id?: true
     status?: true
     canceller_id?: true
+    date_cancelled?: true
     is_referenced?: true
     created_at?: true
     updated_at?: true
@@ -8763,6 +9489,7 @@ export namespace Prisma {
     supervisor_id?: true
     status?: true
     canceller_id?: true
+    date_cancelled?: true
     is_referenced?: true
     created_at?: true
     updated_at?: true
@@ -8780,6 +9507,7 @@ export namespace Prisma {
     supervisor_id?: true
     status?: true
     canceller_id?: true
+    date_cancelled?: true
     is_referenced?: true
     created_at?: true
     updated_at?: true
@@ -8884,6 +9612,7 @@ export namespace Prisma {
     supervisor_id: string
     status: number
     canceller_id: string | null
+    date_cancelled: Date | null
     is_referenced: boolean
     created_at: Date
     updated_at: Date
@@ -8920,6 +9649,7 @@ export namespace Prisma {
     supervisor_id?: boolean
     status?: boolean
     canceller_id?: boolean
+    date_cancelled?: boolean
     is_referenced?: boolean
     created_at?: boolean
     updated_at?: boolean
@@ -8941,6 +9671,7 @@ export namespace Prisma {
     supervisor_id?: boolean
     status?: boolean
     canceller_id?: boolean
+    date_cancelled?: boolean
     is_referenced?: boolean
     created_at?: boolean
     updated_at?: boolean
@@ -8973,6 +9704,7 @@ export namespace Prisma {
       supervisor_id: string
       status: number
       canceller_id: string | null
+      date_cancelled: Date | null
       is_referenced: boolean
       created_at: Date
       updated_at: Date
@@ -9386,6 +10118,7 @@ export namespace Prisma {
     readonly supervisor_id: FieldRef<"JO", 'String'>
     readonly status: FieldRef<"JO", 'Int'>
     readonly canceller_id: FieldRef<"JO", 'String'>
+    readonly date_cancelled: FieldRef<"JO", 'DateTime'>
     readonly is_referenced: FieldRef<"JO", 'Boolean'>
     readonly created_at: FieldRef<"JO", 'DateTime'>
     readonly updated_at: FieldRef<"JO", 'DateTime'>
@@ -10802,6 +11535,7 @@ export namespace Prisma {
     classification_id: string | null
     supervisor_id: string | null
     canceller_id: string | null
+    date_cancelled: Date | null
     rv_number: string | null
     date_requested: Date | null
     work_order_no: string | null
@@ -10819,6 +11553,7 @@ export namespace Prisma {
     classification_id: string | null
     supervisor_id: string | null
     canceller_id: string | null
+    date_cancelled: Date | null
     rv_number: string | null
     date_requested: Date | null
     work_order_no: string | null
@@ -10836,6 +11571,7 @@ export namespace Prisma {
     classification_id: number
     supervisor_id: number
     canceller_id: number
+    date_cancelled: number
     rv_number: number
     date_requested: number
     work_order_no: number
@@ -10863,6 +11599,7 @@ export namespace Prisma {
     classification_id?: true
     supervisor_id?: true
     canceller_id?: true
+    date_cancelled?: true
     rv_number?: true
     date_requested?: true
     work_order_no?: true
@@ -10880,6 +11617,7 @@ export namespace Prisma {
     classification_id?: true
     supervisor_id?: true
     canceller_id?: true
+    date_cancelled?: true
     rv_number?: true
     date_requested?: true
     work_order_no?: true
@@ -10897,6 +11635,7 @@ export namespace Prisma {
     classification_id?: true
     supervisor_id?: true
     canceller_id?: true
+    date_cancelled?: true
     rv_number?: true
     date_requested?: true
     work_order_no?: true
@@ -11001,6 +11740,7 @@ export namespace Prisma {
     classification_id: string | null
     supervisor_id: string
     canceller_id: string | null
+    date_cancelled: Date | null
     rv_number: string
     date_requested: Date
     work_order_no: string | null
@@ -11037,6 +11777,7 @@ export namespace Prisma {
     classification_id?: boolean
     supervisor_id?: boolean
     canceller_id?: boolean
+    date_cancelled?: boolean
     rv_number?: boolean
     date_requested?: boolean
     work_order_no?: boolean
@@ -11058,6 +11799,7 @@ export namespace Prisma {
     classification_id?: boolean
     supervisor_id?: boolean
     canceller_id?: boolean
+    date_cancelled?: boolean
     rv_number?: boolean
     date_requested?: boolean
     work_order_no?: boolean
@@ -11090,6 +11832,7 @@ export namespace Prisma {
       classification_id: string | null
       supervisor_id: string
       canceller_id: string | null
+      date_cancelled: Date | null
       rv_number: string
       date_requested: Date
       work_order_no: string | null
@@ -11503,6 +12246,7 @@ export namespace Prisma {
     readonly classification_id: FieldRef<"RV", 'String'>
     readonly supervisor_id: FieldRef<"RV", 'String'>
     readonly canceller_id: FieldRef<"RV", 'String'>
+    readonly date_cancelled: FieldRef<"RV", 'DateTime'>
     readonly rv_number: FieldRef<"RV", 'String'>
     readonly date_requested: FieldRef<"RV", 'DateTime'>
     readonly work_order_no: FieldRef<"RV", 'String'>
@@ -12939,6 +13683,7 @@ export namespace Prisma {
     supervisor_id: string | null
     status: number | null
     canceller_id: string | null
+    date_cancelled: Date | null
     is_referenced: boolean | null
     created_at: Date | null
     updated_at: Date | null
@@ -12955,6 +13700,7 @@ export namespace Prisma {
     supervisor_id: string | null
     status: number | null
     canceller_id: string | null
+    date_cancelled: Date | null
     is_referenced: boolean | null
     created_at: Date | null
     updated_at: Date | null
@@ -12971,6 +13717,7 @@ export namespace Prisma {
     supervisor_id: number
     status: number
     canceller_id: number
+    date_cancelled: number
     is_referenced: number
     created_at: number
     updated_at: number
@@ -12997,6 +13744,7 @@ export namespace Prisma {
     supervisor_id?: true
     status?: true
     canceller_id?: true
+    date_cancelled?: true
     is_referenced?: true
     created_at?: true
     updated_at?: true
@@ -13013,6 +13761,7 @@ export namespace Prisma {
     supervisor_id?: true
     status?: true
     canceller_id?: true
+    date_cancelled?: true
     is_referenced?: true
     created_at?: true
     updated_at?: true
@@ -13029,6 +13778,7 @@ export namespace Prisma {
     supervisor_id?: true
     status?: true
     canceller_id?: true
+    date_cancelled?: true
     is_referenced?: true
     created_at?: true
     updated_at?: true
@@ -13132,6 +13882,7 @@ export namespace Prisma {
     supervisor_id: string
     status: number
     canceller_id: string | null
+    date_cancelled: Date | null
     is_referenced: boolean
     created_at: Date
     updated_at: Date
@@ -13167,6 +13918,7 @@ export namespace Prisma {
     supervisor_id?: boolean
     status?: boolean
     canceller_id?: boolean
+    date_cancelled?: boolean
     is_referenced?: boolean
     created_at?: boolean
     updated_at?: boolean
@@ -13188,6 +13940,7 @@ export namespace Prisma {
     supervisor_id?: boolean
     status?: boolean
     canceller_id?: boolean
+    date_cancelled?: boolean
     is_referenced?: boolean
     created_at?: boolean
     updated_at?: boolean
@@ -13221,6 +13974,7 @@ export namespace Prisma {
       supervisor_id: string
       status: number
       canceller_id: string | null
+      date_cancelled: Date | null
       is_referenced: boolean
       created_at: Date
       updated_at: Date
@@ -13635,6 +14389,7 @@ export namespace Prisma {
     readonly supervisor_id: FieldRef<"SPR", 'String'>
     readonly status: FieldRef<"SPR", 'Int'>
     readonly canceller_id: FieldRef<"SPR", 'String'>
+    readonly date_cancelled: FieldRef<"SPR", 'DateTime'>
     readonly is_referenced: FieldRef<"SPR", 'Boolean'>
     readonly created_at: FieldRef<"SPR", 'DateTime'>
     readonly updated_at: FieldRef<"SPR", 'DateTime'>
@@ -15069,6 +15824,7 @@ export namespace Prisma {
     status: number | null
     notes: string | null
     canceller_id: string | null
+    date_cancelled: Date | null
     created_at: Date | null
     updated_at: Date | null
     is_deleted: boolean | null
@@ -15085,6 +15841,7 @@ export namespace Prisma {
     status: number | null
     notes: string | null
     canceller_id: string | null
+    date_cancelled: Date | null
     created_at: Date | null
     updated_at: Date | null
     is_deleted: boolean | null
@@ -15101,6 +15858,7 @@ export namespace Prisma {
     status: number
     notes: number
     canceller_id: number
+    date_cancelled: number
     created_at: number
     updated_at: number
     is_deleted: number
@@ -15129,6 +15887,7 @@ export namespace Prisma {
     status?: true
     notes?: true
     canceller_id?: true
+    date_cancelled?: true
     created_at?: true
     updated_at?: true
     is_deleted?: true
@@ -15145,6 +15904,7 @@ export namespace Prisma {
     status?: true
     notes?: true
     canceller_id?: true
+    date_cancelled?: true
     created_at?: true
     updated_at?: true
     is_deleted?: true
@@ -15161,6 +15921,7 @@ export namespace Prisma {
     status?: true
     notes?: true
     canceller_id?: true
+    date_cancelled?: true
     created_at?: true
     updated_at?: true
     is_deleted?: true
@@ -15264,6 +16025,7 @@ export namespace Prisma {
     status: number
     notes: string | null
     canceller_id: string | null
+    date_cancelled: Date | null
     created_at: Date
     updated_at: Date
     is_deleted: boolean
@@ -15299,6 +16061,7 @@ export namespace Prisma {
     status?: boolean
     notes?: boolean
     canceller_id?: boolean
+    date_cancelled?: boolean
     created_at?: boolean
     updated_at?: boolean
     is_deleted?: boolean
@@ -15321,6 +16084,7 @@ export namespace Prisma {
     status?: boolean
     notes?: boolean
     canceller_id?: boolean
+    date_cancelled?: boolean
     created_at?: boolean
     updated_at?: boolean
     is_deleted?: boolean
@@ -15356,6 +16120,7 @@ export namespace Prisma {
       status: number
       notes: string | null
       canceller_id: string | null
+      date_cancelled: Date | null
       created_at: Date
       updated_at: Date
       is_deleted: boolean
@@ -15772,6 +16537,7 @@ export namespace Prisma {
     readonly status: FieldRef<"MEQS", 'Int'>
     readonly notes: FieldRef<"MEQS", 'String'>
     readonly canceller_id: FieldRef<"MEQS", 'String'>
+    readonly date_cancelled: FieldRef<"MEQS", 'DateTime'>
     readonly created_at: FieldRef<"MEQS", 'DateTime'>
     readonly updated_at: FieldRef<"MEQS", 'DateTime'>
     readonly is_deleted: FieldRef<"MEQS", 'Boolean'>
@@ -20228,6 +20994,7 @@ export namespace Prisma {
     po_date: Date | null
     status: number | null
     canceller_id: string | null
+    date_cancelled: Date | null
     created_at: Date | null
     updated_at: Date | null
     is_deleted: boolean | null
@@ -20240,6 +21007,7 @@ export namespace Prisma {
     po_date: Date | null
     status: number | null
     canceller_id: string | null
+    date_cancelled: Date | null
     created_at: Date | null
     updated_at: Date | null
     is_deleted: boolean | null
@@ -20252,6 +21020,7 @@ export namespace Prisma {
     po_date: number
     status: number
     canceller_id: number
+    date_cancelled: number
     created_at: number
     updated_at: number
     is_deleted: number
@@ -20274,6 +21043,7 @@ export namespace Prisma {
     po_date?: true
     status?: true
     canceller_id?: true
+    date_cancelled?: true
     created_at?: true
     updated_at?: true
     is_deleted?: true
@@ -20286,6 +21056,7 @@ export namespace Prisma {
     po_date?: true
     status?: true
     canceller_id?: true
+    date_cancelled?: true
     created_at?: true
     updated_at?: true
     is_deleted?: true
@@ -20298,6 +21069,7 @@ export namespace Prisma {
     po_date?: true
     status?: true
     canceller_id?: true
+    date_cancelled?: true
     created_at?: true
     updated_at?: true
     is_deleted?: true
@@ -20397,6 +21169,7 @@ export namespace Prisma {
     po_date: Date
     status: number
     canceller_id: string | null
+    date_cancelled: Date | null
     created_at: Date
     updated_at: Date
     is_deleted: boolean
@@ -20428,11 +21201,13 @@ export namespace Prisma {
     po_date?: boolean
     status?: boolean
     canceller_id?: boolean
+    date_cancelled?: boolean
     created_at?: boolean
     updated_at?: boolean
     is_deleted?: boolean
     po_approvers?: boolean | PO$po_approversArgs<ExtArgs>
     meqs_supplier?: boolean | MEQSSupplierDefaultArgs<ExtArgs>
+    rr?: boolean | PO$rrArgs<ExtArgs>
     _count?: boolean | POCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["pO"]>
 
@@ -20443,6 +21218,7 @@ export namespace Prisma {
     po_date?: boolean
     status?: boolean
     canceller_id?: boolean
+    date_cancelled?: boolean
     created_at?: boolean
     updated_at?: boolean
     is_deleted?: boolean
@@ -20451,6 +21227,7 @@ export namespace Prisma {
   export type POInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     po_approvers?: boolean | PO$po_approversArgs<ExtArgs>
     meqs_supplier?: boolean | MEQSSupplierDefaultArgs<ExtArgs>
+    rr?: boolean | PO$rrArgs<ExtArgs>
     _count?: boolean | POCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -20460,6 +21237,7 @@ export namespace Prisma {
     objects: {
       po_approvers: Prisma.$POApproverPayload<ExtArgs>[]
       meqs_supplier: Prisma.$MEQSSupplierPayload<ExtArgs>
+      rr: Prisma.$RRPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -20468,6 +21246,7 @@ export namespace Prisma {
       po_date: Date
       status: number
       canceller_id: string | null
+      date_cancelled: Date | null
       created_at: Date
       updated_at: Date
       is_deleted: boolean
@@ -20840,6 +21619,8 @@ export namespace Prisma {
 
     meqs_supplier<T extends MEQSSupplierDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MEQSSupplierDefaultArgs<ExtArgs>>): Prisma__MEQSSupplierClient<$Result.GetResult<Prisma.$MEQSSupplierPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
+    rr<T extends PO$rrArgs<ExtArgs> = {}>(args?: Subset<T, PO$rrArgs<ExtArgs>>): Prisma__RRClient<$Result.GetResult<Prisma.$RRPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -20874,6 +21655,7 @@ export namespace Prisma {
     readonly po_date: FieldRef<"PO", 'DateTime'>
     readonly status: FieldRef<"PO", 'Int'>
     readonly canceller_id: FieldRef<"PO", 'String'>
+    readonly date_cancelled: FieldRef<"PO", 'DateTime'>
     readonly created_at: FieldRef<"PO", 'DateTime'>
     readonly updated_at: FieldRef<"PO", 'DateTime'>
     readonly is_deleted: FieldRef<"PO", 'Boolean'>
@@ -21206,6 +21988,22 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: POApproverScalarFieldEnum | POApproverScalarFieldEnum[]
+  }
+
+
+  /**
+   * PO.rr
+   */
+  export type PO$rrArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RR
+     */
+    select?: RRSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: RRInclude<ExtArgs> | null
+    where?: RRWhereInput
   }
 
 
@@ -22259,6 +23057,6381 @@ export namespace Prisma {
 
 
   /**
+   * Model RR
+   */
+
+  export type AggregateRR = {
+    _count: RRCountAggregateOutputType | null
+    _avg: RRAvgAggregateOutputType | null
+    _sum: RRSumAggregateOutputType | null
+    _min: RRMinAggregateOutputType | null
+    _max: RRMaxAggregateOutputType | null
+  }
+
+  export type RRAvgAggregateOutputType = {
+    delivery_charge: number | null
+  }
+
+  export type RRSumAggregateOutputType = {
+    delivery_charge: number | null
+  }
+
+  export type RRMinAggregateOutputType = {
+    id: string | null
+    po_id: string | null
+    rr_number: string | null
+    rr_date: Date | null
+    received_by_id: string | null
+    canceller_id: string | null
+    date_cancelled: Date | null
+    invoice_number: string | null
+    delivery_number: string | null
+    notes: string | null
+    delivery_charge: number | null
+    created_at: Date | null
+    updated_at: Date | null
+    is_deleted: boolean | null
+  }
+
+  export type RRMaxAggregateOutputType = {
+    id: string | null
+    po_id: string | null
+    rr_number: string | null
+    rr_date: Date | null
+    received_by_id: string | null
+    canceller_id: string | null
+    date_cancelled: Date | null
+    invoice_number: string | null
+    delivery_number: string | null
+    notes: string | null
+    delivery_charge: number | null
+    created_at: Date | null
+    updated_at: Date | null
+    is_deleted: boolean | null
+  }
+
+  export type RRCountAggregateOutputType = {
+    id: number
+    po_id: number
+    rr_number: number
+    rr_date: number
+    received_by_id: number
+    canceller_id: number
+    date_cancelled: number
+    invoice_number: number
+    delivery_number: number
+    notes: number
+    delivery_charge: number
+    created_at: number
+    updated_at: number
+    is_deleted: number
+    _all: number
+  }
+
+
+  export type RRAvgAggregateInputType = {
+    delivery_charge?: true
+  }
+
+  export type RRSumAggregateInputType = {
+    delivery_charge?: true
+  }
+
+  export type RRMinAggregateInputType = {
+    id?: true
+    po_id?: true
+    rr_number?: true
+    rr_date?: true
+    received_by_id?: true
+    canceller_id?: true
+    date_cancelled?: true
+    invoice_number?: true
+    delivery_number?: true
+    notes?: true
+    delivery_charge?: true
+    created_at?: true
+    updated_at?: true
+    is_deleted?: true
+  }
+
+  export type RRMaxAggregateInputType = {
+    id?: true
+    po_id?: true
+    rr_number?: true
+    rr_date?: true
+    received_by_id?: true
+    canceller_id?: true
+    date_cancelled?: true
+    invoice_number?: true
+    delivery_number?: true
+    notes?: true
+    delivery_charge?: true
+    created_at?: true
+    updated_at?: true
+    is_deleted?: true
+  }
+
+  export type RRCountAggregateInputType = {
+    id?: true
+    po_id?: true
+    rr_number?: true
+    rr_date?: true
+    received_by_id?: true
+    canceller_id?: true
+    date_cancelled?: true
+    invoice_number?: true
+    delivery_number?: true
+    notes?: true
+    delivery_charge?: true
+    created_at?: true
+    updated_at?: true
+    is_deleted?: true
+    _all?: true
+  }
+
+  export type RRAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RR to aggregate.
+     */
+    where?: RRWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RRS to fetch.
+     */
+    orderBy?: RROrderByWithRelationInput | RROrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: RRWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RRS from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RRS.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned RRS
+    **/
+    _count?: true | RRCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: RRAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: RRSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: RRMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: RRMaxAggregateInputType
+  }
+
+  export type GetRRAggregateType<T extends RRAggregateArgs> = {
+        [P in keyof T & keyof AggregateRR]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateRR[P]>
+      : GetScalarType<T[P], AggregateRR[P]>
+  }
+
+
+
+
+  export type RRGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RRWhereInput
+    orderBy?: RROrderByWithAggregationInput | RROrderByWithAggregationInput[]
+    by: RRScalarFieldEnum[] | RRScalarFieldEnum
+    having?: RRScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: RRCountAggregateInputType | true
+    _avg?: RRAvgAggregateInputType
+    _sum?: RRSumAggregateInputType
+    _min?: RRMinAggregateInputType
+    _max?: RRMaxAggregateInputType
+  }
+
+  export type RRGroupByOutputType = {
+    id: string
+    po_id: string
+    rr_number: string
+    rr_date: Date
+    received_by_id: string
+    canceller_id: string | null
+    date_cancelled: Date | null
+    invoice_number: string
+    delivery_number: string | null
+    notes: string | null
+    delivery_charge: number
+    created_at: Date
+    updated_at: Date
+    is_deleted: boolean
+    _count: RRCountAggregateOutputType | null
+    _avg: RRAvgAggregateOutputType | null
+    _sum: RRSumAggregateOutputType | null
+    _min: RRMinAggregateOutputType | null
+    _max: RRMaxAggregateOutputType | null
+  }
+
+  type GetRRGroupByPayload<T extends RRGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<RRGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof RRGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], RRGroupByOutputType[P]>
+            : GetScalarType<T[P], RRGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type RRSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    po_id?: boolean
+    rr_number?: boolean
+    rr_date?: boolean
+    received_by_id?: boolean
+    canceller_id?: boolean
+    date_cancelled?: boolean
+    invoice_number?: boolean
+    delivery_number?: boolean
+    notes?: boolean
+    delivery_charge?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    is_deleted?: boolean
+    po?: boolean | PODefaultArgs<ExtArgs>
+    rr_approvers?: boolean | RR$rr_approversArgs<ExtArgs>
+    rr_items?: boolean | RR$rr_itemsArgs<ExtArgs>
+    _count?: boolean | RRCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["rR"]>
+
+  export type RRSelectScalar = {
+    id?: boolean
+    po_id?: boolean
+    rr_number?: boolean
+    rr_date?: boolean
+    received_by_id?: boolean
+    canceller_id?: boolean
+    date_cancelled?: boolean
+    invoice_number?: boolean
+    delivery_number?: boolean
+    notes?: boolean
+    delivery_charge?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    is_deleted?: boolean
+  }
+
+  export type RRInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    po?: boolean | PODefaultArgs<ExtArgs>
+    rr_approvers?: boolean | RR$rr_approversArgs<ExtArgs>
+    rr_items?: boolean | RR$rr_itemsArgs<ExtArgs>
+    _count?: boolean | RRCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+
+  export type $RRPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "RR"
+    objects: {
+      po: Prisma.$POPayload<ExtArgs>
+      rr_approvers: Prisma.$RRApproverPayload<ExtArgs>[]
+      rr_items: Prisma.$RRItemPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      po_id: string
+      rr_number: string
+      rr_date: Date
+      received_by_id: string
+      canceller_id: string | null
+      date_cancelled: Date | null
+      invoice_number: string
+      delivery_number: string | null
+      notes: string | null
+      delivery_charge: number
+      created_at: Date
+      updated_at: Date
+      is_deleted: boolean
+    }, ExtArgs["result"]["rR"]>
+    composites: {}
+  }
+
+
+  type RRGetPayload<S extends boolean | null | undefined | RRDefaultArgs> = $Result.GetResult<Prisma.$RRPayload, S>
+
+  type RRCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<RRFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: RRCountAggregateInputType | true
+    }
+
+  export interface RRDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['RR'], meta: { name: 'RR' } }
+    /**
+     * Find zero or one RR that matches the filter.
+     * @param {RRFindUniqueArgs} args - Arguments to find a RR
+     * @example
+     * // Get one RR
+     * const rR = await prisma.rR.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends RRFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, RRFindUniqueArgs<ExtArgs>>
+    ): Prisma__RRClient<$Result.GetResult<Prisma.$RRPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one RR that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {RRFindUniqueOrThrowArgs} args - Arguments to find a RR
+     * @example
+     * // Get one RR
+     * const rR = await prisma.rR.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends RRFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, RRFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__RRClient<$Result.GetResult<Prisma.$RRPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first RR that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RRFindFirstArgs} args - Arguments to find a RR
+     * @example
+     * // Get one RR
+     * const rR = await prisma.rR.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends RRFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, RRFindFirstArgs<ExtArgs>>
+    ): Prisma__RRClient<$Result.GetResult<Prisma.$RRPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first RR that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RRFindFirstOrThrowArgs} args - Arguments to find a RR
+     * @example
+     * // Get one RR
+     * const rR = await prisma.rR.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends RRFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, RRFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__RRClient<$Result.GetResult<Prisma.$RRPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more RRS that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RRFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all RRS
+     * const rRS = await prisma.rR.findMany()
+     * 
+     * // Get first 10 RRS
+     * const rRS = await prisma.rR.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const rRWithIdOnly = await prisma.rR.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends RRFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, RRFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RRPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a RR.
+     * @param {RRCreateArgs} args - Arguments to create a RR.
+     * @example
+     * // Create one RR
+     * const RR = await prisma.rR.create({
+     *   data: {
+     *     // ... data to create a RR
+     *   }
+     * })
+     * 
+    **/
+    create<T extends RRCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, RRCreateArgs<ExtArgs>>
+    ): Prisma__RRClient<$Result.GetResult<Prisma.$RRPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many RRS.
+     *     @param {RRCreateManyArgs} args - Arguments to create many RRS.
+     *     @example
+     *     // Create many RRS
+     *     const rR = await prisma.rR.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends RRCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, RRCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a RR.
+     * @param {RRDeleteArgs} args - Arguments to delete one RR.
+     * @example
+     * // Delete one RR
+     * const RR = await prisma.rR.delete({
+     *   where: {
+     *     // ... filter to delete one RR
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends RRDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, RRDeleteArgs<ExtArgs>>
+    ): Prisma__RRClient<$Result.GetResult<Prisma.$RRPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one RR.
+     * @param {RRUpdateArgs} args - Arguments to update one RR.
+     * @example
+     * // Update one RR
+     * const rR = await prisma.rR.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends RRUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, RRUpdateArgs<ExtArgs>>
+    ): Prisma__RRClient<$Result.GetResult<Prisma.$RRPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more RRS.
+     * @param {RRDeleteManyArgs} args - Arguments to filter RRS to delete.
+     * @example
+     * // Delete a few RRS
+     * const { count } = await prisma.rR.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends RRDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, RRDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more RRS.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RRUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many RRS
+     * const rR = await prisma.rR.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends RRUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, RRUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one RR.
+     * @param {RRUpsertArgs} args - Arguments to update or create a RR.
+     * @example
+     * // Update or create a RR
+     * const rR = await prisma.rR.upsert({
+     *   create: {
+     *     // ... data to create a RR
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the RR we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends RRUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, RRUpsertArgs<ExtArgs>>
+    ): Prisma__RRClient<$Result.GetResult<Prisma.$RRPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of RRS.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RRCountArgs} args - Arguments to filter RRS to count.
+     * @example
+     * // Count the number of RRS
+     * const count = await prisma.rR.count({
+     *   where: {
+     *     // ... the filter for the RRS we want to count
+     *   }
+     * })
+    **/
+    count<T extends RRCountArgs>(
+      args?: Subset<T, RRCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], RRCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a RR.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RRAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends RRAggregateArgs>(args: Subset<T, RRAggregateArgs>): Prisma.PrismaPromise<GetRRAggregateType<T>>
+
+    /**
+     * Group by RR.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RRGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends RRGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: RRGroupByArgs['orderBy'] }
+        : { orderBy?: RRGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, RRGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRRGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the RR model
+   */
+  readonly fields: RRFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for RR.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__RRClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+    po<T extends PODefaultArgs<ExtArgs> = {}>(args?: Subset<T, PODefaultArgs<ExtArgs>>): Prisma__POClient<$Result.GetResult<Prisma.$POPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    rr_approvers<T extends RR$rr_approversArgs<ExtArgs> = {}>(args?: Subset<T, RR$rr_approversArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RRApproverPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    rr_items<T extends RR$rr_itemsArgs<ExtArgs> = {}>(args?: Subset<T, RR$rr_itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RRItemPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the RR model
+   */ 
+  interface RRFieldRefs {
+    readonly id: FieldRef<"RR", 'String'>
+    readonly po_id: FieldRef<"RR", 'String'>
+    readonly rr_number: FieldRef<"RR", 'String'>
+    readonly rr_date: FieldRef<"RR", 'DateTime'>
+    readonly received_by_id: FieldRef<"RR", 'String'>
+    readonly canceller_id: FieldRef<"RR", 'String'>
+    readonly date_cancelled: FieldRef<"RR", 'DateTime'>
+    readonly invoice_number: FieldRef<"RR", 'String'>
+    readonly delivery_number: FieldRef<"RR", 'String'>
+    readonly notes: FieldRef<"RR", 'String'>
+    readonly delivery_charge: FieldRef<"RR", 'Float'>
+    readonly created_at: FieldRef<"RR", 'DateTime'>
+    readonly updated_at: FieldRef<"RR", 'DateTime'>
+    readonly is_deleted: FieldRef<"RR", 'Boolean'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * RR findUnique
+   */
+  export type RRFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RR
+     */
+    select?: RRSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: RRInclude<ExtArgs> | null
+    /**
+     * Filter, which RR to fetch.
+     */
+    where: RRWhereUniqueInput
+  }
+
+
+  /**
+   * RR findUniqueOrThrow
+   */
+  export type RRFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RR
+     */
+    select?: RRSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: RRInclude<ExtArgs> | null
+    /**
+     * Filter, which RR to fetch.
+     */
+    where: RRWhereUniqueInput
+  }
+
+
+  /**
+   * RR findFirst
+   */
+  export type RRFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RR
+     */
+    select?: RRSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: RRInclude<ExtArgs> | null
+    /**
+     * Filter, which RR to fetch.
+     */
+    where?: RRWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RRS to fetch.
+     */
+    orderBy?: RROrderByWithRelationInput | RROrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RRS.
+     */
+    cursor?: RRWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RRS from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RRS.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RRS.
+     */
+    distinct?: RRScalarFieldEnum | RRScalarFieldEnum[]
+  }
+
+
+  /**
+   * RR findFirstOrThrow
+   */
+  export type RRFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RR
+     */
+    select?: RRSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: RRInclude<ExtArgs> | null
+    /**
+     * Filter, which RR to fetch.
+     */
+    where?: RRWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RRS to fetch.
+     */
+    orderBy?: RROrderByWithRelationInput | RROrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RRS.
+     */
+    cursor?: RRWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RRS from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RRS.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RRS.
+     */
+    distinct?: RRScalarFieldEnum | RRScalarFieldEnum[]
+  }
+
+
+  /**
+   * RR findMany
+   */
+  export type RRFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RR
+     */
+    select?: RRSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: RRInclude<ExtArgs> | null
+    /**
+     * Filter, which RRS to fetch.
+     */
+    where?: RRWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RRS to fetch.
+     */
+    orderBy?: RROrderByWithRelationInput | RROrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing RRS.
+     */
+    cursor?: RRWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RRS from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RRS.
+     */
+    skip?: number
+    distinct?: RRScalarFieldEnum | RRScalarFieldEnum[]
+  }
+
+
+  /**
+   * RR create
+   */
+  export type RRCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RR
+     */
+    select?: RRSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: RRInclude<ExtArgs> | null
+    /**
+     * The data needed to create a RR.
+     */
+    data: XOR<RRCreateInput, RRUncheckedCreateInput>
+  }
+
+
+  /**
+   * RR createMany
+   */
+  export type RRCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many RRS.
+     */
+    data: RRCreateManyInput | RRCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * RR update
+   */
+  export type RRUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RR
+     */
+    select?: RRSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: RRInclude<ExtArgs> | null
+    /**
+     * The data needed to update a RR.
+     */
+    data: XOR<RRUpdateInput, RRUncheckedUpdateInput>
+    /**
+     * Choose, which RR to update.
+     */
+    where: RRWhereUniqueInput
+  }
+
+
+  /**
+   * RR updateMany
+   */
+  export type RRUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update RRS.
+     */
+    data: XOR<RRUpdateManyMutationInput, RRUncheckedUpdateManyInput>
+    /**
+     * Filter which RRS to update
+     */
+    where?: RRWhereInput
+  }
+
+
+  /**
+   * RR upsert
+   */
+  export type RRUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RR
+     */
+    select?: RRSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: RRInclude<ExtArgs> | null
+    /**
+     * The filter to search for the RR to update in case it exists.
+     */
+    where: RRWhereUniqueInput
+    /**
+     * In case the RR found by the `where` argument doesn't exist, create a new RR with this data.
+     */
+    create: XOR<RRCreateInput, RRUncheckedCreateInput>
+    /**
+     * In case the RR was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<RRUpdateInput, RRUncheckedUpdateInput>
+  }
+
+
+  /**
+   * RR delete
+   */
+  export type RRDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RR
+     */
+    select?: RRSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: RRInclude<ExtArgs> | null
+    /**
+     * Filter which RR to delete.
+     */
+    where: RRWhereUniqueInput
+  }
+
+
+  /**
+   * RR deleteMany
+   */
+  export type RRDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RRS to delete
+     */
+    where?: RRWhereInput
+  }
+
+
+  /**
+   * RR.rr_approvers
+   */
+  export type RR$rr_approversArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RRApprover
+     */
+    select?: RRApproverSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: RRApproverInclude<ExtArgs> | null
+    where?: RRApproverWhereInput
+    orderBy?: RRApproverOrderByWithRelationInput | RRApproverOrderByWithRelationInput[]
+    cursor?: RRApproverWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RRApproverScalarFieldEnum | RRApproverScalarFieldEnum[]
+  }
+
+
+  /**
+   * RR.rr_items
+   */
+  export type RR$rr_itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RRItem
+     */
+    select?: RRItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: RRItemInclude<ExtArgs> | null
+    where?: RRItemWhereInput
+    orderBy?: RRItemOrderByWithRelationInput | RRItemOrderByWithRelationInput[]
+    cursor?: RRItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RRItemScalarFieldEnum | RRItemScalarFieldEnum[]
+  }
+
+
+  /**
+   * RR without action
+   */
+  export type RRDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RR
+     */
+    select?: RRSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: RRInclude<ExtArgs> | null
+  }
+
+
+
+  /**
+   * Model RRApprover
+   */
+
+  export type AggregateRRApprover = {
+    _count: RRApproverCountAggregateOutputType | null
+    _avg: RRApproverAvgAggregateOutputType | null
+    _sum: RRApproverSumAggregateOutputType | null
+    _min: RRApproverMinAggregateOutputType | null
+    _max: RRApproverMaxAggregateOutputType | null
+  }
+
+  export type RRApproverAvgAggregateOutputType = {
+    status: number | null
+    order: number | null
+  }
+
+  export type RRApproverSumAggregateOutputType = {
+    status: number | null
+    order: number | null
+  }
+
+  export type RRApproverMinAggregateOutputType = {
+    id: string | null
+    rr_id: string | null
+    approver_id: string | null
+    approver_proxy_id: string | null
+    date_approval: Date | null
+    notes: string | null
+    status: number | null
+    label: string | null
+    order: number | null
+    created_at: Date | null
+    updated_at: Date | null
+    is_deleted: boolean | null
+  }
+
+  export type RRApproverMaxAggregateOutputType = {
+    id: string | null
+    rr_id: string | null
+    approver_id: string | null
+    approver_proxy_id: string | null
+    date_approval: Date | null
+    notes: string | null
+    status: number | null
+    label: string | null
+    order: number | null
+    created_at: Date | null
+    updated_at: Date | null
+    is_deleted: boolean | null
+  }
+
+  export type RRApproverCountAggregateOutputType = {
+    id: number
+    rr_id: number
+    approver_id: number
+    approver_proxy_id: number
+    date_approval: number
+    notes: number
+    status: number
+    label: number
+    order: number
+    created_at: number
+    updated_at: number
+    is_deleted: number
+    _all: number
+  }
+
+
+  export type RRApproverAvgAggregateInputType = {
+    status?: true
+    order?: true
+  }
+
+  export type RRApproverSumAggregateInputType = {
+    status?: true
+    order?: true
+  }
+
+  export type RRApproverMinAggregateInputType = {
+    id?: true
+    rr_id?: true
+    approver_id?: true
+    approver_proxy_id?: true
+    date_approval?: true
+    notes?: true
+    status?: true
+    label?: true
+    order?: true
+    created_at?: true
+    updated_at?: true
+    is_deleted?: true
+  }
+
+  export type RRApproverMaxAggregateInputType = {
+    id?: true
+    rr_id?: true
+    approver_id?: true
+    approver_proxy_id?: true
+    date_approval?: true
+    notes?: true
+    status?: true
+    label?: true
+    order?: true
+    created_at?: true
+    updated_at?: true
+    is_deleted?: true
+  }
+
+  export type RRApproverCountAggregateInputType = {
+    id?: true
+    rr_id?: true
+    approver_id?: true
+    approver_proxy_id?: true
+    date_approval?: true
+    notes?: true
+    status?: true
+    label?: true
+    order?: true
+    created_at?: true
+    updated_at?: true
+    is_deleted?: true
+    _all?: true
+  }
+
+  export type RRApproverAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RRApprover to aggregate.
+     */
+    where?: RRApproverWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RRApprovers to fetch.
+     */
+    orderBy?: RRApproverOrderByWithRelationInput | RRApproverOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: RRApproverWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RRApprovers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RRApprovers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned RRApprovers
+    **/
+    _count?: true | RRApproverCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: RRApproverAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: RRApproverSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: RRApproverMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: RRApproverMaxAggregateInputType
+  }
+
+  export type GetRRApproverAggregateType<T extends RRApproverAggregateArgs> = {
+        [P in keyof T & keyof AggregateRRApprover]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateRRApprover[P]>
+      : GetScalarType<T[P], AggregateRRApprover[P]>
+  }
+
+
+
+
+  export type RRApproverGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RRApproverWhereInput
+    orderBy?: RRApproverOrderByWithAggregationInput | RRApproverOrderByWithAggregationInput[]
+    by: RRApproverScalarFieldEnum[] | RRApproverScalarFieldEnum
+    having?: RRApproverScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: RRApproverCountAggregateInputType | true
+    _avg?: RRApproverAvgAggregateInputType
+    _sum?: RRApproverSumAggregateInputType
+    _min?: RRApproverMinAggregateInputType
+    _max?: RRApproverMaxAggregateInputType
+  }
+
+  export type RRApproverGroupByOutputType = {
+    id: string
+    rr_id: string
+    approver_id: string
+    approver_proxy_id: string | null
+    date_approval: Date | null
+    notes: string | null
+    status: number
+    label: string
+    order: number
+    created_at: Date
+    updated_at: Date
+    is_deleted: boolean
+    _count: RRApproverCountAggregateOutputType | null
+    _avg: RRApproverAvgAggregateOutputType | null
+    _sum: RRApproverSumAggregateOutputType | null
+    _min: RRApproverMinAggregateOutputType | null
+    _max: RRApproverMaxAggregateOutputType | null
+  }
+
+  type GetRRApproverGroupByPayload<T extends RRApproverGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<RRApproverGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof RRApproverGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], RRApproverGroupByOutputType[P]>
+            : GetScalarType<T[P], RRApproverGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type RRApproverSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    rr_id?: boolean
+    approver_id?: boolean
+    approver_proxy_id?: boolean
+    date_approval?: boolean
+    notes?: boolean
+    status?: boolean
+    label?: boolean
+    order?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    is_deleted?: boolean
+    rr?: boolean | RRDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["rRApprover"]>
+
+  export type RRApproverSelectScalar = {
+    id?: boolean
+    rr_id?: boolean
+    approver_id?: boolean
+    approver_proxy_id?: boolean
+    date_approval?: boolean
+    notes?: boolean
+    status?: boolean
+    label?: boolean
+    order?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    is_deleted?: boolean
+  }
+
+  export type RRApproverInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    rr?: boolean | RRDefaultArgs<ExtArgs>
+  }
+
+
+  export type $RRApproverPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "RRApprover"
+    objects: {
+      rr: Prisma.$RRPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      rr_id: string
+      approver_id: string
+      approver_proxy_id: string | null
+      date_approval: Date | null
+      notes: string | null
+      status: number
+      label: string
+      order: number
+      created_at: Date
+      updated_at: Date
+      is_deleted: boolean
+    }, ExtArgs["result"]["rRApprover"]>
+    composites: {}
+  }
+
+
+  type RRApproverGetPayload<S extends boolean | null | undefined | RRApproverDefaultArgs> = $Result.GetResult<Prisma.$RRApproverPayload, S>
+
+  type RRApproverCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<RRApproverFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: RRApproverCountAggregateInputType | true
+    }
+
+  export interface RRApproverDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['RRApprover'], meta: { name: 'RRApprover' } }
+    /**
+     * Find zero or one RRApprover that matches the filter.
+     * @param {RRApproverFindUniqueArgs} args - Arguments to find a RRApprover
+     * @example
+     * // Get one RRApprover
+     * const rRApprover = await prisma.rRApprover.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends RRApproverFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, RRApproverFindUniqueArgs<ExtArgs>>
+    ): Prisma__RRApproverClient<$Result.GetResult<Prisma.$RRApproverPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one RRApprover that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {RRApproverFindUniqueOrThrowArgs} args - Arguments to find a RRApprover
+     * @example
+     * // Get one RRApprover
+     * const rRApprover = await prisma.rRApprover.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends RRApproverFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, RRApproverFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__RRApproverClient<$Result.GetResult<Prisma.$RRApproverPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first RRApprover that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RRApproverFindFirstArgs} args - Arguments to find a RRApprover
+     * @example
+     * // Get one RRApprover
+     * const rRApprover = await prisma.rRApprover.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends RRApproverFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, RRApproverFindFirstArgs<ExtArgs>>
+    ): Prisma__RRApproverClient<$Result.GetResult<Prisma.$RRApproverPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first RRApprover that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RRApproverFindFirstOrThrowArgs} args - Arguments to find a RRApprover
+     * @example
+     * // Get one RRApprover
+     * const rRApprover = await prisma.rRApprover.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends RRApproverFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, RRApproverFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__RRApproverClient<$Result.GetResult<Prisma.$RRApproverPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more RRApprovers that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RRApproverFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all RRApprovers
+     * const rRApprovers = await prisma.rRApprover.findMany()
+     * 
+     * // Get first 10 RRApprovers
+     * const rRApprovers = await prisma.rRApprover.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const rRApproverWithIdOnly = await prisma.rRApprover.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends RRApproverFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, RRApproverFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RRApproverPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a RRApprover.
+     * @param {RRApproverCreateArgs} args - Arguments to create a RRApprover.
+     * @example
+     * // Create one RRApprover
+     * const RRApprover = await prisma.rRApprover.create({
+     *   data: {
+     *     // ... data to create a RRApprover
+     *   }
+     * })
+     * 
+    **/
+    create<T extends RRApproverCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, RRApproverCreateArgs<ExtArgs>>
+    ): Prisma__RRApproverClient<$Result.GetResult<Prisma.$RRApproverPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many RRApprovers.
+     *     @param {RRApproverCreateManyArgs} args - Arguments to create many RRApprovers.
+     *     @example
+     *     // Create many RRApprovers
+     *     const rRApprover = await prisma.rRApprover.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends RRApproverCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, RRApproverCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a RRApprover.
+     * @param {RRApproverDeleteArgs} args - Arguments to delete one RRApprover.
+     * @example
+     * // Delete one RRApprover
+     * const RRApprover = await prisma.rRApprover.delete({
+     *   where: {
+     *     // ... filter to delete one RRApprover
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends RRApproverDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, RRApproverDeleteArgs<ExtArgs>>
+    ): Prisma__RRApproverClient<$Result.GetResult<Prisma.$RRApproverPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one RRApprover.
+     * @param {RRApproverUpdateArgs} args - Arguments to update one RRApprover.
+     * @example
+     * // Update one RRApprover
+     * const rRApprover = await prisma.rRApprover.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends RRApproverUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, RRApproverUpdateArgs<ExtArgs>>
+    ): Prisma__RRApproverClient<$Result.GetResult<Prisma.$RRApproverPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more RRApprovers.
+     * @param {RRApproverDeleteManyArgs} args - Arguments to filter RRApprovers to delete.
+     * @example
+     * // Delete a few RRApprovers
+     * const { count } = await prisma.rRApprover.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends RRApproverDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, RRApproverDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more RRApprovers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RRApproverUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many RRApprovers
+     * const rRApprover = await prisma.rRApprover.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends RRApproverUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, RRApproverUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one RRApprover.
+     * @param {RRApproverUpsertArgs} args - Arguments to update or create a RRApprover.
+     * @example
+     * // Update or create a RRApprover
+     * const rRApprover = await prisma.rRApprover.upsert({
+     *   create: {
+     *     // ... data to create a RRApprover
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the RRApprover we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends RRApproverUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, RRApproverUpsertArgs<ExtArgs>>
+    ): Prisma__RRApproverClient<$Result.GetResult<Prisma.$RRApproverPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of RRApprovers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RRApproverCountArgs} args - Arguments to filter RRApprovers to count.
+     * @example
+     * // Count the number of RRApprovers
+     * const count = await prisma.rRApprover.count({
+     *   where: {
+     *     // ... the filter for the RRApprovers we want to count
+     *   }
+     * })
+    **/
+    count<T extends RRApproverCountArgs>(
+      args?: Subset<T, RRApproverCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], RRApproverCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a RRApprover.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RRApproverAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends RRApproverAggregateArgs>(args: Subset<T, RRApproverAggregateArgs>): Prisma.PrismaPromise<GetRRApproverAggregateType<T>>
+
+    /**
+     * Group by RRApprover.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RRApproverGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends RRApproverGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: RRApproverGroupByArgs['orderBy'] }
+        : { orderBy?: RRApproverGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, RRApproverGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRRApproverGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the RRApprover model
+   */
+  readonly fields: RRApproverFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for RRApprover.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__RRApproverClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+    rr<T extends RRDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RRDefaultArgs<ExtArgs>>): Prisma__RRClient<$Result.GetResult<Prisma.$RRPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the RRApprover model
+   */ 
+  interface RRApproverFieldRefs {
+    readonly id: FieldRef<"RRApprover", 'String'>
+    readonly rr_id: FieldRef<"RRApprover", 'String'>
+    readonly approver_id: FieldRef<"RRApprover", 'String'>
+    readonly approver_proxy_id: FieldRef<"RRApprover", 'String'>
+    readonly date_approval: FieldRef<"RRApprover", 'DateTime'>
+    readonly notes: FieldRef<"RRApprover", 'String'>
+    readonly status: FieldRef<"RRApprover", 'Int'>
+    readonly label: FieldRef<"RRApprover", 'String'>
+    readonly order: FieldRef<"RRApprover", 'Int'>
+    readonly created_at: FieldRef<"RRApprover", 'DateTime'>
+    readonly updated_at: FieldRef<"RRApprover", 'DateTime'>
+    readonly is_deleted: FieldRef<"RRApprover", 'Boolean'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * RRApprover findUnique
+   */
+  export type RRApproverFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RRApprover
+     */
+    select?: RRApproverSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: RRApproverInclude<ExtArgs> | null
+    /**
+     * Filter, which RRApprover to fetch.
+     */
+    where: RRApproverWhereUniqueInput
+  }
+
+
+  /**
+   * RRApprover findUniqueOrThrow
+   */
+  export type RRApproverFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RRApprover
+     */
+    select?: RRApproverSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: RRApproverInclude<ExtArgs> | null
+    /**
+     * Filter, which RRApprover to fetch.
+     */
+    where: RRApproverWhereUniqueInput
+  }
+
+
+  /**
+   * RRApprover findFirst
+   */
+  export type RRApproverFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RRApprover
+     */
+    select?: RRApproverSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: RRApproverInclude<ExtArgs> | null
+    /**
+     * Filter, which RRApprover to fetch.
+     */
+    where?: RRApproverWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RRApprovers to fetch.
+     */
+    orderBy?: RRApproverOrderByWithRelationInput | RRApproverOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RRApprovers.
+     */
+    cursor?: RRApproverWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RRApprovers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RRApprovers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RRApprovers.
+     */
+    distinct?: RRApproverScalarFieldEnum | RRApproverScalarFieldEnum[]
+  }
+
+
+  /**
+   * RRApprover findFirstOrThrow
+   */
+  export type RRApproverFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RRApprover
+     */
+    select?: RRApproverSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: RRApproverInclude<ExtArgs> | null
+    /**
+     * Filter, which RRApprover to fetch.
+     */
+    where?: RRApproverWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RRApprovers to fetch.
+     */
+    orderBy?: RRApproverOrderByWithRelationInput | RRApproverOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RRApprovers.
+     */
+    cursor?: RRApproverWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RRApprovers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RRApprovers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RRApprovers.
+     */
+    distinct?: RRApproverScalarFieldEnum | RRApproverScalarFieldEnum[]
+  }
+
+
+  /**
+   * RRApprover findMany
+   */
+  export type RRApproverFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RRApprover
+     */
+    select?: RRApproverSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: RRApproverInclude<ExtArgs> | null
+    /**
+     * Filter, which RRApprovers to fetch.
+     */
+    where?: RRApproverWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RRApprovers to fetch.
+     */
+    orderBy?: RRApproverOrderByWithRelationInput | RRApproverOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing RRApprovers.
+     */
+    cursor?: RRApproverWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RRApprovers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RRApprovers.
+     */
+    skip?: number
+    distinct?: RRApproverScalarFieldEnum | RRApproverScalarFieldEnum[]
+  }
+
+
+  /**
+   * RRApprover create
+   */
+  export type RRApproverCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RRApprover
+     */
+    select?: RRApproverSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: RRApproverInclude<ExtArgs> | null
+    /**
+     * The data needed to create a RRApprover.
+     */
+    data: XOR<RRApproverCreateInput, RRApproverUncheckedCreateInput>
+  }
+
+
+  /**
+   * RRApprover createMany
+   */
+  export type RRApproverCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many RRApprovers.
+     */
+    data: RRApproverCreateManyInput | RRApproverCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * RRApprover update
+   */
+  export type RRApproverUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RRApprover
+     */
+    select?: RRApproverSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: RRApproverInclude<ExtArgs> | null
+    /**
+     * The data needed to update a RRApprover.
+     */
+    data: XOR<RRApproverUpdateInput, RRApproverUncheckedUpdateInput>
+    /**
+     * Choose, which RRApprover to update.
+     */
+    where: RRApproverWhereUniqueInput
+  }
+
+
+  /**
+   * RRApprover updateMany
+   */
+  export type RRApproverUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update RRApprovers.
+     */
+    data: XOR<RRApproverUpdateManyMutationInput, RRApproverUncheckedUpdateManyInput>
+    /**
+     * Filter which RRApprovers to update
+     */
+    where?: RRApproverWhereInput
+  }
+
+
+  /**
+   * RRApprover upsert
+   */
+  export type RRApproverUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RRApprover
+     */
+    select?: RRApproverSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: RRApproverInclude<ExtArgs> | null
+    /**
+     * The filter to search for the RRApprover to update in case it exists.
+     */
+    where: RRApproverWhereUniqueInput
+    /**
+     * In case the RRApprover found by the `where` argument doesn't exist, create a new RRApprover with this data.
+     */
+    create: XOR<RRApproverCreateInput, RRApproverUncheckedCreateInput>
+    /**
+     * In case the RRApprover was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<RRApproverUpdateInput, RRApproverUncheckedUpdateInput>
+  }
+
+
+  /**
+   * RRApprover delete
+   */
+  export type RRApproverDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RRApprover
+     */
+    select?: RRApproverSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: RRApproverInclude<ExtArgs> | null
+    /**
+     * Filter which RRApprover to delete.
+     */
+    where: RRApproverWhereUniqueInput
+  }
+
+
+  /**
+   * RRApprover deleteMany
+   */
+  export type RRApproverDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RRApprovers to delete
+     */
+    where?: RRApproverWhereInput
+  }
+
+
+  /**
+   * RRApprover without action
+   */
+  export type RRApproverDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RRApprover
+     */
+    select?: RRApproverSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: RRApproverInclude<ExtArgs> | null
+  }
+
+
+
+  /**
+   * Model RRItem
+   */
+
+  export type AggregateRRItem = {
+    _count: RRItemCountAggregateOutputType | null
+    _avg: RRItemAvgAggregateOutputType | null
+    _sum: RRItemSumAggregateOutputType | null
+    _min: RRItemMinAggregateOutputType | null
+    _max: RRItemMaxAggregateOutputType | null
+  }
+
+  export type RRItemAvgAggregateOutputType = {
+    item_class: number | null
+    quantity_delivered: number | null
+    quantity_accepted: number | null
+    vat_type: number | null
+    gross_price: number | null
+    net_price: number | null
+    freight_cost: number | null
+  }
+
+  export type RRItemSumAggregateOutputType = {
+    item_class: number | null
+    quantity_delivered: number | null
+    quantity_accepted: number | null
+    vat_type: number | null
+    gross_price: number | null
+    net_price: number | null
+    freight_cost: number | null
+  }
+
+  export type RRItemMinAggregateOutputType = {
+    id: string | null
+    rr_id: string | null
+    item_id: string | null
+    item_brand_id: string | null
+    unit_id: string | null
+    item_class: number | null
+    quantity_delivered: number | null
+    quantity_accepted: number | null
+    description: string | null
+    vat_type: number | null
+    gross_price: number | null
+    net_price: number | null
+    freight_cost: number | null
+    created_at: Date | null
+    updated_at: Date | null
+    is_deleted: boolean | null
+  }
+
+  export type RRItemMaxAggregateOutputType = {
+    id: string | null
+    rr_id: string | null
+    item_id: string | null
+    item_brand_id: string | null
+    unit_id: string | null
+    item_class: number | null
+    quantity_delivered: number | null
+    quantity_accepted: number | null
+    description: string | null
+    vat_type: number | null
+    gross_price: number | null
+    net_price: number | null
+    freight_cost: number | null
+    created_at: Date | null
+    updated_at: Date | null
+    is_deleted: boolean | null
+  }
+
+  export type RRItemCountAggregateOutputType = {
+    id: number
+    rr_id: number
+    item_id: number
+    item_brand_id: number
+    unit_id: number
+    item_class: number
+    quantity_delivered: number
+    quantity_accepted: number
+    description: number
+    vat_type: number
+    gross_price: number
+    net_price: number
+    freight_cost: number
+    created_at: number
+    updated_at: number
+    is_deleted: number
+    _all: number
+  }
+
+
+  export type RRItemAvgAggregateInputType = {
+    item_class?: true
+    quantity_delivered?: true
+    quantity_accepted?: true
+    vat_type?: true
+    gross_price?: true
+    net_price?: true
+    freight_cost?: true
+  }
+
+  export type RRItemSumAggregateInputType = {
+    item_class?: true
+    quantity_delivered?: true
+    quantity_accepted?: true
+    vat_type?: true
+    gross_price?: true
+    net_price?: true
+    freight_cost?: true
+  }
+
+  export type RRItemMinAggregateInputType = {
+    id?: true
+    rr_id?: true
+    item_id?: true
+    item_brand_id?: true
+    unit_id?: true
+    item_class?: true
+    quantity_delivered?: true
+    quantity_accepted?: true
+    description?: true
+    vat_type?: true
+    gross_price?: true
+    net_price?: true
+    freight_cost?: true
+    created_at?: true
+    updated_at?: true
+    is_deleted?: true
+  }
+
+  export type RRItemMaxAggregateInputType = {
+    id?: true
+    rr_id?: true
+    item_id?: true
+    item_brand_id?: true
+    unit_id?: true
+    item_class?: true
+    quantity_delivered?: true
+    quantity_accepted?: true
+    description?: true
+    vat_type?: true
+    gross_price?: true
+    net_price?: true
+    freight_cost?: true
+    created_at?: true
+    updated_at?: true
+    is_deleted?: true
+  }
+
+  export type RRItemCountAggregateInputType = {
+    id?: true
+    rr_id?: true
+    item_id?: true
+    item_brand_id?: true
+    unit_id?: true
+    item_class?: true
+    quantity_delivered?: true
+    quantity_accepted?: true
+    description?: true
+    vat_type?: true
+    gross_price?: true
+    net_price?: true
+    freight_cost?: true
+    created_at?: true
+    updated_at?: true
+    is_deleted?: true
+    _all?: true
+  }
+
+  export type RRItemAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RRItem to aggregate.
+     */
+    where?: RRItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RRItems to fetch.
+     */
+    orderBy?: RRItemOrderByWithRelationInput | RRItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: RRItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RRItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RRItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned RRItems
+    **/
+    _count?: true | RRItemCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: RRItemAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: RRItemSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: RRItemMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: RRItemMaxAggregateInputType
+  }
+
+  export type GetRRItemAggregateType<T extends RRItemAggregateArgs> = {
+        [P in keyof T & keyof AggregateRRItem]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateRRItem[P]>
+      : GetScalarType<T[P], AggregateRRItem[P]>
+  }
+
+
+
+
+  export type RRItemGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RRItemWhereInput
+    orderBy?: RRItemOrderByWithAggregationInput | RRItemOrderByWithAggregationInput[]
+    by: RRItemScalarFieldEnum[] | RRItemScalarFieldEnum
+    having?: RRItemScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: RRItemCountAggregateInputType | true
+    _avg?: RRItemAvgAggregateInputType
+    _sum?: RRItemSumAggregateInputType
+    _min?: RRItemMinAggregateInputType
+    _max?: RRItemMaxAggregateInputType
+  }
+
+  export type RRItemGroupByOutputType = {
+    id: string
+    rr_id: string
+    item_id: string | null
+    item_brand_id: string
+    unit_id: string
+    item_class: number
+    quantity_delivered: number
+    quantity_accepted: number
+    description: string
+    vat_type: number
+    gross_price: number
+    net_price: number
+    freight_cost: number
+    created_at: Date
+    updated_at: Date
+    is_deleted: boolean
+    _count: RRItemCountAggregateOutputType | null
+    _avg: RRItemAvgAggregateOutputType | null
+    _sum: RRItemSumAggregateOutputType | null
+    _min: RRItemMinAggregateOutputType | null
+    _max: RRItemMaxAggregateOutputType | null
+  }
+
+  type GetRRItemGroupByPayload<T extends RRItemGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<RRItemGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof RRItemGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], RRItemGroupByOutputType[P]>
+            : GetScalarType<T[P], RRItemGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type RRItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    rr_id?: boolean
+    item_id?: boolean
+    item_brand_id?: boolean
+    unit_id?: boolean
+    item_class?: boolean
+    quantity_delivered?: boolean
+    quantity_accepted?: boolean
+    description?: boolean
+    vat_type?: boolean
+    gross_price?: boolean
+    net_price?: boolean
+    freight_cost?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    is_deleted?: boolean
+    rr?: boolean | RRDefaultArgs<ExtArgs>
+    item?: boolean | RRItem$itemArgs<ExtArgs>
+    item_brand?: boolean | BrandDefaultArgs<ExtArgs>
+    unit?: boolean | UnitDefaultArgs<ExtArgs>
+    ItemTransaction?: boolean | RRItem$ItemTransactionArgs<ExtArgs>
+  }, ExtArgs["result"]["rRItem"]>
+
+  export type RRItemSelectScalar = {
+    id?: boolean
+    rr_id?: boolean
+    item_id?: boolean
+    item_brand_id?: boolean
+    unit_id?: boolean
+    item_class?: boolean
+    quantity_delivered?: boolean
+    quantity_accepted?: boolean
+    description?: boolean
+    vat_type?: boolean
+    gross_price?: boolean
+    net_price?: boolean
+    freight_cost?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    is_deleted?: boolean
+  }
+
+  export type RRItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    rr?: boolean | RRDefaultArgs<ExtArgs>
+    item?: boolean | RRItem$itemArgs<ExtArgs>
+    item_brand?: boolean | BrandDefaultArgs<ExtArgs>
+    unit?: boolean | UnitDefaultArgs<ExtArgs>
+    ItemTransaction?: boolean | RRItem$ItemTransactionArgs<ExtArgs>
+  }
+
+
+  export type $RRItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "RRItem"
+    objects: {
+      rr: Prisma.$RRPayload<ExtArgs>
+      item: Prisma.$ItemPayload<ExtArgs> | null
+      item_brand: Prisma.$BrandPayload<ExtArgs>
+      unit: Prisma.$UnitPayload<ExtArgs>
+      ItemTransaction: Prisma.$ItemTransactionPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      rr_id: string
+      item_id: string | null
+      item_brand_id: string
+      unit_id: string
+      item_class: number
+      quantity_delivered: number
+      quantity_accepted: number
+      description: string
+      vat_type: number
+      gross_price: number
+      net_price: number
+      freight_cost: number
+      created_at: Date
+      updated_at: Date
+      is_deleted: boolean
+    }, ExtArgs["result"]["rRItem"]>
+    composites: {}
+  }
+
+
+  type RRItemGetPayload<S extends boolean | null | undefined | RRItemDefaultArgs> = $Result.GetResult<Prisma.$RRItemPayload, S>
+
+  type RRItemCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<RRItemFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: RRItemCountAggregateInputType | true
+    }
+
+  export interface RRItemDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['RRItem'], meta: { name: 'RRItem' } }
+    /**
+     * Find zero or one RRItem that matches the filter.
+     * @param {RRItemFindUniqueArgs} args - Arguments to find a RRItem
+     * @example
+     * // Get one RRItem
+     * const rRItem = await prisma.rRItem.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends RRItemFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, RRItemFindUniqueArgs<ExtArgs>>
+    ): Prisma__RRItemClient<$Result.GetResult<Prisma.$RRItemPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one RRItem that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {RRItemFindUniqueOrThrowArgs} args - Arguments to find a RRItem
+     * @example
+     * // Get one RRItem
+     * const rRItem = await prisma.rRItem.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends RRItemFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, RRItemFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__RRItemClient<$Result.GetResult<Prisma.$RRItemPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first RRItem that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RRItemFindFirstArgs} args - Arguments to find a RRItem
+     * @example
+     * // Get one RRItem
+     * const rRItem = await prisma.rRItem.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends RRItemFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, RRItemFindFirstArgs<ExtArgs>>
+    ): Prisma__RRItemClient<$Result.GetResult<Prisma.$RRItemPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first RRItem that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RRItemFindFirstOrThrowArgs} args - Arguments to find a RRItem
+     * @example
+     * // Get one RRItem
+     * const rRItem = await prisma.rRItem.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends RRItemFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, RRItemFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__RRItemClient<$Result.GetResult<Prisma.$RRItemPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more RRItems that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RRItemFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all RRItems
+     * const rRItems = await prisma.rRItem.findMany()
+     * 
+     * // Get first 10 RRItems
+     * const rRItems = await prisma.rRItem.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const rRItemWithIdOnly = await prisma.rRItem.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends RRItemFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, RRItemFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RRItemPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a RRItem.
+     * @param {RRItemCreateArgs} args - Arguments to create a RRItem.
+     * @example
+     * // Create one RRItem
+     * const RRItem = await prisma.rRItem.create({
+     *   data: {
+     *     // ... data to create a RRItem
+     *   }
+     * })
+     * 
+    **/
+    create<T extends RRItemCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, RRItemCreateArgs<ExtArgs>>
+    ): Prisma__RRItemClient<$Result.GetResult<Prisma.$RRItemPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many RRItems.
+     *     @param {RRItemCreateManyArgs} args - Arguments to create many RRItems.
+     *     @example
+     *     // Create many RRItems
+     *     const rRItem = await prisma.rRItem.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends RRItemCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, RRItemCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a RRItem.
+     * @param {RRItemDeleteArgs} args - Arguments to delete one RRItem.
+     * @example
+     * // Delete one RRItem
+     * const RRItem = await prisma.rRItem.delete({
+     *   where: {
+     *     // ... filter to delete one RRItem
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends RRItemDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, RRItemDeleteArgs<ExtArgs>>
+    ): Prisma__RRItemClient<$Result.GetResult<Prisma.$RRItemPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one RRItem.
+     * @param {RRItemUpdateArgs} args - Arguments to update one RRItem.
+     * @example
+     * // Update one RRItem
+     * const rRItem = await prisma.rRItem.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends RRItemUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, RRItemUpdateArgs<ExtArgs>>
+    ): Prisma__RRItemClient<$Result.GetResult<Prisma.$RRItemPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more RRItems.
+     * @param {RRItemDeleteManyArgs} args - Arguments to filter RRItems to delete.
+     * @example
+     * // Delete a few RRItems
+     * const { count } = await prisma.rRItem.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends RRItemDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, RRItemDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more RRItems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RRItemUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many RRItems
+     * const rRItem = await prisma.rRItem.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends RRItemUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, RRItemUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one RRItem.
+     * @param {RRItemUpsertArgs} args - Arguments to update or create a RRItem.
+     * @example
+     * // Update or create a RRItem
+     * const rRItem = await prisma.rRItem.upsert({
+     *   create: {
+     *     // ... data to create a RRItem
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the RRItem we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends RRItemUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, RRItemUpsertArgs<ExtArgs>>
+    ): Prisma__RRItemClient<$Result.GetResult<Prisma.$RRItemPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of RRItems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RRItemCountArgs} args - Arguments to filter RRItems to count.
+     * @example
+     * // Count the number of RRItems
+     * const count = await prisma.rRItem.count({
+     *   where: {
+     *     // ... the filter for the RRItems we want to count
+     *   }
+     * })
+    **/
+    count<T extends RRItemCountArgs>(
+      args?: Subset<T, RRItemCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], RRItemCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a RRItem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RRItemAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends RRItemAggregateArgs>(args: Subset<T, RRItemAggregateArgs>): Prisma.PrismaPromise<GetRRItemAggregateType<T>>
+
+    /**
+     * Group by RRItem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RRItemGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends RRItemGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: RRItemGroupByArgs['orderBy'] }
+        : { orderBy?: RRItemGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, RRItemGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRRItemGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the RRItem model
+   */
+  readonly fields: RRItemFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for RRItem.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__RRItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+    rr<T extends RRDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RRDefaultArgs<ExtArgs>>): Prisma__RRClient<$Result.GetResult<Prisma.$RRPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    item<T extends RRItem$itemArgs<ExtArgs> = {}>(args?: Subset<T, RRItem$itemArgs<ExtArgs>>): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+
+    item_brand<T extends BrandDefaultArgs<ExtArgs> = {}>(args?: Subset<T, BrandDefaultArgs<ExtArgs>>): Prisma__BrandClient<$Result.GetResult<Prisma.$BrandPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    unit<T extends UnitDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UnitDefaultArgs<ExtArgs>>): Prisma__UnitClient<$Result.GetResult<Prisma.$UnitPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    ItemTransaction<T extends RRItem$ItemTransactionArgs<ExtArgs> = {}>(args?: Subset<T, RRItem$ItemTransactionArgs<ExtArgs>>): Prisma__ItemTransactionClient<$Result.GetResult<Prisma.$ItemTransactionPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the RRItem model
+   */ 
+  interface RRItemFieldRefs {
+    readonly id: FieldRef<"RRItem", 'String'>
+    readonly rr_id: FieldRef<"RRItem", 'String'>
+    readonly item_id: FieldRef<"RRItem", 'String'>
+    readonly item_brand_id: FieldRef<"RRItem", 'String'>
+    readonly unit_id: FieldRef<"RRItem", 'String'>
+    readonly item_class: FieldRef<"RRItem", 'Int'>
+    readonly quantity_delivered: FieldRef<"RRItem", 'Int'>
+    readonly quantity_accepted: FieldRef<"RRItem", 'Int'>
+    readonly description: FieldRef<"RRItem", 'String'>
+    readonly vat_type: FieldRef<"RRItem", 'Int'>
+    readonly gross_price: FieldRef<"RRItem", 'Float'>
+    readonly net_price: FieldRef<"RRItem", 'Float'>
+    readonly freight_cost: FieldRef<"RRItem", 'Float'>
+    readonly created_at: FieldRef<"RRItem", 'DateTime'>
+    readonly updated_at: FieldRef<"RRItem", 'DateTime'>
+    readonly is_deleted: FieldRef<"RRItem", 'Boolean'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * RRItem findUnique
+   */
+  export type RRItemFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RRItem
+     */
+    select?: RRItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: RRItemInclude<ExtArgs> | null
+    /**
+     * Filter, which RRItem to fetch.
+     */
+    where: RRItemWhereUniqueInput
+  }
+
+
+  /**
+   * RRItem findUniqueOrThrow
+   */
+  export type RRItemFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RRItem
+     */
+    select?: RRItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: RRItemInclude<ExtArgs> | null
+    /**
+     * Filter, which RRItem to fetch.
+     */
+    where: RRItemWhereUniqueInput
+  }
+
+
+  /**
+   * RRItem findFirst
+   */
+  export type RRItemFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RRItem
+     */
+    select?: RRItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: RRItemInclude<ExtArgs> | null
+    /**
+     * Filter, which RRItem to fetch.
+     */
+    where?: RRItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RRItems to fetch.
+     */
+    orderBy?: RRItemOrderByWithRelationInput | RRItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RRItems.
+     */
+    cursor?: RRItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RRItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RRItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RRItems.
+     */
+    distinct?: RRItemScalarFieldEnum | RRItemScalarFieldEnum[]
+  }
+
+
+  /**
+   * RRItem findFirstOrThrow
+   */
+  export type RRItemFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RRItem
+     */
+    select?: RRItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: RRItemInclude<ExtArgs> | null
+    /**
+     * Filter, which RRItem to fetch.
+     */
+    where?: RRItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RRItems to fetch.
+     */
+    orderBy?: RRItemOrderByWithRelationInput | RRItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RRItems.
+     */
+    cursor?: RRItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RRItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RRItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RRItems.
+     */
+    distinct?: RRItemScalarFieldEnum | RRItemScalarFieldEnum[]
+  }
+
+
+  /**
+   * RRItem findMany
+   */
+  export type RRItemFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RRItem
+     */
+    select?: RRItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: RRItemInclude<ExtArgs> | null
+    /**
+     * Filter, which RRItems to fetch.
+     */
+    where?: RRItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RRItems to fetch.
+     */
+    orderBy?: RRItemOrderByWithRelationInput | RRItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing RRItems.
+     */
+    cursor?: RRItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RRItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RRItems.
+     */
+    skip?: number
+    distinct?: RRItemScalarFieldEnum | RRItemScalarFieldEnum[]
+  }
+
+
+  /**
+   * RRItem create
+   */
+  export type RRItemCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RRItem
+     */
+    select?: RRItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: RRItemInclude<ExtArgs> | null
+    /**
+     * The data needed to create a RRItem.
+     */
+    data: XOR<RRItemCreateInput, RRItemUncheckedCreateInput>
+  }
+
+
+  /**
+   * RRItem createMany
+   */
+  export type RRItemCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many RRItems.
+     */
+    data: RRItemCreateManyInput | RRItemCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * RRItem update
+   */
+  export type RRItemUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RRItem
+     */
+    select?: RRItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: RRItemInclude<ExtArgs> | null
+    /**
+     * The data needed to update a RRItem.
+     */
+    data: XOR<RRItemUpdateInput, RRItemUncheckedUpdateInput>
+    /**
+     * Choose, which RRItem to update.
+     */
+    where: RRItemWhereUniqueInput
+  }
+
+
+  /**
+   * RRItem updateMany
+   */
+  export type RRItemUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update RRItems.
+     */
+    data: XOR<RRItemUpdateManyMutationInput, RRItemUncheckedUpdateManyInput>
+    /**
+     * Filter which RRItems to update
+     */
+    where?: RRItemWhereInput
+  }
+
+
+  /**
+   * RRItem upsert
+   */
+  export type RRItemUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RRItem
+     */
+    select?: RRItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: RRItemInclude<ExtArgs> | null
+    /**
+     * The filter to search for the RRItem to update in case it exists.
+     */
+    where: RRItemWhereUniqueInput
+    /**
+     * In case the RRItem found by the `where` argument doesn't exist, create a new RRItem with this data.
+     */
+    create: XOR<RRItemCreateInput, RRItemUncheckedCreateInput>
+    /**
+     * In case the RRItem was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<RRItemUpdateInput, RRItemUncheckedUpdateInput>
+  }
+
+
+  /**
+   * RRItem delete
+   */
+  export type RRItemDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RRItem
+     */
+    select?: RRItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: RRItemInclude<ExtArgs> | null
+    /**
+     * Filter which RRItem to delete.
+     */
+    where: RRItemWhereUniqueInput
+  }
+
+
+  /**
+   * RRItem deleteMany
+   */
+  export type RRItemDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RRItems to delete
+     */
+    where?: RRItemWhereInput
+  }
+
+
+  /**
+   * RRItem.item
+   */
+  export type RRItem$itemArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Item
+     */
+    select?: ItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemInclude<ExtArgs> | null
+    where?: ItemWhereInput
+  }
+
+
+  /**
+   * RRItem.ItemTransaction
+   */
+  export type RRItem$ItemTransactionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ItemTransaction
+     */
+    select?: ItemTransactionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemTransactionInclude<ExtArgs> | null
+    where?: ItemTransactionWhereInput
+  }
+
+
+  /**
+   * RRItem without action
+   */
+  export type RRItemDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RRItem
+     */
+    select?: RRItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: RRItemInclude<ExtArgs> | null
+  }
+
+
+
+  /**
+   * Model Item
+   */
+
+  export type AggregateItem = {
+    _count: ItemCountAggregateOutputType | null
+    _avg: ItemAvgAggregateOutputType | null
+    _sum: ItemSumAggregateOutputType | null
+    _min: ItemMinAggregateOutputType | null
+    _max: ItemMaxAggregateOutputType | null
+  }
+
+  export type ItemAvgAggregateOutputType = {
+    quantity: number | null
+    initial_quantity: number | null
+    average_price: number | null
+    initial_average_price: number | null
+  }
+
+  export type ItemSumAggregateOutputType = {
+    quantity: number | null
+    initial_quantity: number | null
+    average_price: number | null
+    initial_average_price: number | null
+  }
+
+  export type ItemMinAggregateOutputType = {
+    id: string | null
+    item_type_id: string | null
+    unit_id: string | null
+    code: string | null
+    description: string | null
+    quantity: number | null
+    initial_quantity: number | null
+    average_price: number | null
+    initial_average_price: number | null
+    is_initial: boolean | null
+    created_at: Date | null
+    updated_at: Date | null
+    is_deleted: boolean | null
+  }
+
+  export type ItemMaxAggregateOutputType = {
+    id: string | null
+    item_type_id: string | null
+    unit_id: string | null
+    code: string | null
+    description: string | null
+    quantity: number | null
+    initial_quantity: number | null
+    average_price: number | null
+    initial_average_price: number | null
+    is_initial: boolean | null
+    created_at: Date | null
+    updated_at: Date | null
+    is_deleted: boolean | null
+  }
+
+  export type ItemCountAggregateOutputType = {
+    id: number
+    item_type_id: number
+    unit_id: number
+    code: number
+    description: number
+    quantity: number
+    initial_quantity: number
+    average_price: number
+    initial_average_price: number
+    is_initial: number
+    created_at: number
+    updated_at: number
+    is_deleted: number
+    _all: number
+  }
+
+
+  export type ItemAvgAggregateInputType = {
+    quantity?: true
+    initial_quantity?: true
+    average_price?: true
+    initial_average_price?: true
+  }
+
+  export type ItemSumAggregateInputType = {
+    quantity?: true
+    initial_quantity?: true
+    average_price?: true
+    initial_average_price?: true
+  }
+
+  export type ItemMinAggregateInputType = {
+    id?: true
+    item_type_id?: true
+    unit_id?: true
+    code?: true
+    description?: true
+    quantity?: true
+    initial_quantity?: true
+    average_price?: true
+    initial_average_price?: true
+    is_initial?: true
+    created_at?: true
+    updated_at?: true
+    is_deleted?: true
+  }
+
+  export type ItemMaxAggregateInputType = {
+    id?: true
+    item_type_id?: true
+    unit_id?: true
+    code?: true
+    description?: true
+    quantity?: true
+    initial_quantity?: true
+    average_price?: true
+    initial_average_price?: true
+    is_initial?: true
+    created_at?: true
+    updated_at?: true
+    is_deleted?: true
+  }
+
+  export type ItemCountAggregateInputType = {
+    id?: true
+    item_type_id?: true
+    unit_id?: true
+    code?: true
+    description?: true
+    quantity?: true
+    initial_quantity?: true
+    average_price?: true
+    initial_average_price?: true
+    is_initial?: true
+    created_at?: true
+    updated_at?: true
+    is_deleted?: true
+    _all?: true
+  }
+
+  export type ItemAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Item to aggregate.
+     */
+    where?: ItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Items to fetch.
+     */
+    orderBy?: ItemOrderByWithRelationInput | ItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Items from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Items.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Items
+    **/
+    _count?: true | ItemCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ItemAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ItemSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ItemMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ItemMaxAggregateInputType
+  }
+
+  export type GetItemAggregateType<T extends ItemAggregateArgs> = {
+        [P in keyof T & keyof AggregateItem]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateItem[P]>
+      : GetScalarType<T[P], AggregateItem[P]>
+  }
+
+
+
+
+  export type ItemGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ItemWhereInput
+    orderBy?: ItemOrderByWithAggregationInput | ItemOrderByWithAggregationInput[]
+    by: ItemScalarFieldEnum[] | ItemScalarFieldEnum
+    having?: ItemScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ItemCountAggregateInputType | true
+    _avg?: ItemAvgAggregateInputType
+    _sum?: ItemSumAggregateInputType
+    _min?: ItemMinAggregateInputType
+    _max?: ItemMaxAggregateInputType
+  }
+
+  export type ItemGroupByOutputType = {
+    id: string
+    item_type_id: string
+    unit_id: string
+    code: string
+    description: string
+    quantity: number
+    initial_quantity: number
+    average_price: number
+    initial_average_price: number
+    is_initial: boolean
+    created_at: Date
+    updated_at: Date
+    is_deleted: boolean
+    _count: ItemCountAggregateOutputType | null
+    _avg: ItemAvgAggregateOutputType | null
+    _sum: ItemSumAggregateOutputType | null
+    _min: ItemMinAggregateOutputType | null
+    _max: ItemMaxAggregateOutputType | null
+  }
+
+  type GetItemGroupByPayload<T extends ItemGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ItemGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ItemGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ItemGroupByOutputType[P]>
+            : GetScalarType<T[P], ItemGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    item_type_id?: boolean
+    unit_id?: boolean
+    code?: boolean
+    description?: boolean
+    quantity?: boolean
+    initial_quantity?: boolean
+    average_price?: boolean
+    initial_average_price?: boolean
+    is_initial?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    is_deleted?: boolean
+    item_type?: boolean | ItemTypeDefaultArgs<ExtArgs>
+    item_transactions?: boolean | Item$item_transactionsArgs<ExtArgs>
+    rr_items?: boolean | Item$rr_itemsArgs<ExtArgs>
+    unit?: boolean | UnitDefaultArgs<ExtArgs>
+    _count?: boolean | ItemCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["item"]>
+
+  export type ItemSelectScalar = {
+    id?: boolean
+    item_type_id?: boolean
+    unit_id?: boolean
+    code?: boolean
+    description?: boolean
+    quantity?: boolean
+    initial_quantity?: boolean
+    average_price?: boolean
+    initial_average_price?: boolean
+    is_initial?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    is_deleted?: boolean
+  }
+
+  export type ItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    item_type?: boolean | ItemTypeDefaultArgs<ExtArgs>
+    item_transactions?: boolean | Item$item_transactionsArgs<ExtArgs>
+    rr_items?: boolean | Item$rr_itemsArgs<ExtArgs>
+    unit?: boolean | UnitDefaultArgs<ExtArgs>
+    _count?: boolean | ItemCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+
+  export type $ItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Item"
+    objects: {
+      item_type: Prisma.$ItemTypePayload<ExtArgs>
+      item_transactions: Prisma.$ItemTransactionPayload<ExtArgs>[]
+      rr_items: Prisma.$RRItemPayload<ExtArgs>[]
+      unit: Prisma.$UnitPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      item_type_id: string
+      unit_id: string
+      code: string
+      description: string
+      quantity: number
+      initial_quantity: number
+      average_price: number
+      initial_average_price: number
+      is_initial: boolean
+      created_at: Date
+      updated_at: Date
+      is_deleted: boolean
+    }, ExtArgs["result"]["item"]>
+    composites: {}
+  }
+
+
+  type ItemGetPayload<S extends boolean | null | undefined | ItemDefaultArgs> = $Result.GetResult<Prisma.$ItemPayload, S>
+
+  type ItemCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<ItemFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: ItemCountAggregateInputType | true
+    }
+
+  export interface ItemDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Item'], meta: { name: 'Item' } }
+    /**
+     * Find zero or one Item that matches the filter.
+     * @param {ItemFindUniqueArgs} args - Arguments to find a Item
+     * @example
+     * // Get one Item
+     * const item = await prisma.item.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends ItemFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, ItemFindUniqueArgs<ExtArgs>>
+    ): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one Item that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {ItemFindUniqueOrThrowArgs} args - Arguments to find a Item
+     * @example
+     * // Get one Item
+     * const item = await prisma.item.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends ItemFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, ItemFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first Item that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ItemFindFirstArgs} args - Arguments to find a Item
+     * @example
+     * // Get one Item
+     * const item = await prisma.item.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends ItemFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, ItemFindFirstArgs<ExtArgs>>
+    ): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first Item that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ItemFindFirstOrThrowArgs} args - Arguments to find a Item
+     * @example
+     * // Get one Item
+     * const item = await prisma.item.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends ItemFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, ItemFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more Items that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ItemFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Items
+     * const items = await prisma.item.findMany()
+     * 
+     * // Get first 10 Items
+     * const items = await prisma.item.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const itemWithIdOnly = await prisma.item.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends ItemFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, ItemFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a Item.
+     * @param {ItemCreateArgs} args - Arguments to create a Item.
+     * @example
+     * // Create one Item
+     * const Item = await prisma.item.create({
+     *   data: {
+     *     // ... data to create a Item
+     *   }
+     * })
+     * 
+    **/
+    create<T extends ItemCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, ItemCreateArgs<ExtArgs>>
+    ): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many Items.
+     *     @param {ItemCreateManyArgs} args - Arguments to create many Items.
+     *     @example
+     *     // Create many Items
+     *     const item = await prisma.item.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends ItemCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, ItemCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Item.
+     * @param {ItemDeleteArgs} args - Arguments to delete one Item.
+     * @example
+     * // Delete one Item
+     * const Item = await prisma.item.delete({
+     *   where: {
+     *     // ... filter to delete one Item
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends ItemDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, ItemDeleteArgs<ExtArgs>>
+    ): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one Item.
+     * @param {ItemUpdateArgs} args - Arguments to update one Item.
+     * @example
+     * // Update one Item
+     * const item = await prisma.item.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends ItemUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, ItemUpdateArgs<ExtArgs>>
+    ): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more Items.
+     * @param {ItemDeleteManyArgs} args - Arguments to filter Items to delete.
+     * @example
+     * // Delete a few Items
+     * const { count } = await prisma.item.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends ItemDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, ItemDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Items.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ItemUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Items
+     * const item = await prisma.item.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends ItemUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, ItemUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Item.
+     * @param {ItemUpsertArgs} args - Arguments to update or create a Item.
+     * @example
+     * // Update or create a Item
+     * const item = await prisma.item.upsert({
+     *   create: {
+     *     // ... data to create a Item
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Item we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends ItemUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, ItemUpsertArgs<ExtArgs>>
+    ): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of Items.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ItemCountArgs} args - Arguments to filter Items to count.
+     * @example
+     * // Count the number of Items
+     * const count = await prisma.item.count({
+     *   where: {
+     *     // ... the filter for the Items we want to count
+     *   }
+     * })
+    **/
+    count<T extends ItemCountArgs>(
+      args?: Subset<T, ItemCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ItemCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Item.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ItemAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ItemAggregateArgs>(args: Subset<T, ItemAggregateArgs>): Prisma.PrismaPromise<GetItemAggregateType<T>>
+
+    /**
+     * Group by Item.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ItemGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ItemGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ItemGroupByArgs['orderBy'] }
+        : { orderBy?: ItemGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ItemGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetItemGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Item model
+   */
+  readonly fields: ItemFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Item.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+    item_type<T extends ItemTypeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ItemTypeDefaultArgs<ExtArgs>>): Prisma__ItemTypeClient<$Result.GetResult<Prisma.$ItemTypePayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    item_transactions<T extends Item$item_transactionsArgs<ExtArgs> = {}>(args?: Subset<T, Item$item_transactionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ItemTransactionPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    rr_items<T extends Item$rr_itemsArgs<ExtArgs> = {}>(args?: Subset<T, Item$rr_itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RRItemPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    unit<T extends UnitDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UnitDefaultArgs<ExtArgs>>): Prisma__UnitClient<$Result.GetResult<Prisma.$UnitPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the Item model
+   */ 
+  interface ItemFieldRefs {
+    readonly id: FieldRef<"Item", 'String'>
+    readonly item_type_id: FieldRef<"Item", 'String'>
+    readonly unit_id: FieldRef<"Item", 'String'>
+    readonly code: FieldRef<"Item", 'String'>
+    readonly description: FieldRef<"Item", 'String'>
+    readonly quantity: FieldRef<"Item", 'Int'>
+    readonly initial_quantity: FieldRef<"Item", 'Int'>
+    readonly average_price: FieldRef<"Item", 'Float'>
+    readonly initial_average_price: FieldRef<"Item", 'Float'>
+    readonly is_initial: FieldRef<"Item", 'Boolean'>
+    readonly created_at: FieldRef<"Item", 'DateTime'>
+    readonly updated_at: FieldRef<"Item", 'DateTime'>
+    readonly is_deleted: FieldRef<"Item", 'Boolean'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * Item findUnique
+   */
+  export type ItemFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Item
+     */
+    select?: ItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemInclude<ExtArgs> | null
+    /**
+     * Filter, which Item to fetch.
+     */
+    where: ItemWhereUniqueInput
+  }
+
+
+  /**
+   * Item findUniqueOrThrow
+   */
+  export type ItemFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Item
+     */
+    select?: ItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemInclude<ExtArgs> | null
+    /**
+     * Filter, which Item to fetch.
+     */
+    where: ItemWhereUniqueInput
+  }
+
+
+  /**
+   * Item findFirst
+   */
+  export type ItemFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Item
+     */
+    select?: ItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemInclude<ExtArgs> | null
+    /**
+     * Filter, which Item to fetch.
+     */
+    where?: ItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Items to fetch.
+     */
+    orderBy?: ItemOrderByWithRelationInput | ItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Items.
+     */
+    cursor?: ItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Items from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Items.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Items.
+     */
+    distinct?: ItemScalarFieldEnum | ItemScalarFieldEnum[]
+  }
+
+
+  /**
+   * Item findFirstOrThrow
+   */
+  export type ItemFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Item
+     */
+    select?: ItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemInclude<ExtArgs> | null
+    /**
+     * Filter, which Item to fetch.
+     */
+    where?: ItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Items to fetch.
+     */
+    orderBy?: ItemOrderByWithRelationInput | ItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Items.
+     */
+    cursor?: ItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Items from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Items.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Items.
+     */
+    distinct?: ItemScalarFieldEnum | ItemScalarFieldEnum[]
+  }
+
+
+  /**
+   * Item findMany
+   */
+  export type ItemFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Item
+     */
+    select?: ItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemInclude<ExtArgs> | null
+    /**
+     * Filter, which Items to fetch.
+     */
+    where?: ItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Items to fetch.
+     */
+    orderBy?: ItemOrderByWithRelationInput | ItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Items.
+     */
+    cursor?: ItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Items from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Items.
+     */
+    skip?: number
+    distinct?: ItemScalarFieldEnum | ItemScalarFieldEnum[]
+  }
+
+
+  /**
+   * Item create
+   */
+  export type ItemCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Item
+     */
+    select?: ItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Item.
+     */
+    data: XOR<ItemCreateInput, ItemUncheckedCreateInput>
+  }
+
+
+  /**
+   * Item createMany
+   */
+  export type ItemCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Items.
+     */
+    data: ItemCreateManyInput | ItemCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * Item update
+   */
+  export type ItemUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Item
+     */
+    select?: ItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Item.
+     */
+    data: XOR<ItemUpdateInput, ItemUncheckedUpdateInput>
+    /**
+     * Choose, which Item to update.
+     */
+    where: ItemWhereUniqueInput
+  }
+
+
+  /**
+   * Item updateMany
+   */
+  export type ItemUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Items.
+     */
+    data: XOR<ItemUpdateManyMutationInput, ItemUncheckedUpdateManyInput>
+    /**
+     * Filter which Items to update
+     */
+    where?: ItemWhereInput
+  }
+
+
+  /**
+   * Item upsert
+   */
+  export type ItemUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Item
+     */
+    select?: ItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Item to update in case it exists.
+     */
+    where: ItemWhereUniqueInput
+    /**
+     * In case the Item found by the `where` argument doesn't exist, create a new Item with this data.
+     */
+    create: XOR<ItemCreateInput, ItemUncheckedCreateInput>
+    /**
+     * In case the Item was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ItemUpdateInput, ItemUncheckedUpdateInput>
+  }
+
+
+  /**
+   * Item delete
+   */
+  export type ItemDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Item
+     */
+    select?: ItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemInclude<ExtArgs> | null
+    /**
+     * Filter which Item to delete.
+     */
+    where: ItemWhereUniqueInput
+  }
+
+
+  /**
+   * Item deleteMany
+   */
+  export type ItemDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Items to delete
+     */
+    where?: ItemWhereInput
+  }
+
+
+  /**
+   * Item.item_transactions
+   */
+  export type Item$item_transactionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ItemTransaction
+     */
+    select?: ItemTransactionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemTransactionInclude<ExtArgs> | null
+    where?: ItemTransactionWhereInput
+    orderBy?: ItemTransactionOrderByWithRelationInput | ItemTransactionOrderByWithRelationInput[]
+    cursor?: ItemTransactionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ItemTransactionScalarFieldEnum | ItemTransactionScalarFieldEnum[]
+  }
+
+
+  /**
+   * Item.rr_items
+   */
+  export type Item$rr_itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RRItem
+     */
+    select?: RRItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: RRItemInclude<ExtArgs> | null
+    where?: RRItemWhereInput
+    orderBy?: RRItemOrderByWithRelationInput | RRItemOrderByWithRelationInput[]
+    cursor?: RRItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RRItemScalarFieldEnum | RRItemScalarFieldEnum[]
+  }
+
+
+  /**
+   * Item without action
+   */
+  export type ItemDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Item
+     */
+    select?: ItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemInclude<ExtArgs> | null
+  }
+
+
+
+  /**
+   * Model ItemType
+   */
+
+  export type AggregateItemType = {
+    _count: ItemTypeCountAggregateOutputType | null
+    _min: ItemTypeMinAggregateOutputType | null
+    _max: ItemTypeMaxAggregateOutputType | null
+  }
+
+  export type ItemTypeMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    created_at: Date | null
+    updated_at: Date | null
+    is_deleted: boolean | null
+  }
+
+  export type ItemTypeMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    created_at: Date | null
+    updated_at: Date | null
+    is_deleted: boolean | null
+  }
+
+  export type ItemTypeCountAggregateOutputType = {
+    id: number
+    name: number
+    created_at: number
+    updated_at: number
+    is_deleted: number
+    _all: number
+  }
+
+
+  export type ItemTypeMinAggregateInputType = {
+    id?: true
+    name?: true
+    created_at?: true
+    updated_at?: true
+    is_deleted?: true
+  }
+
+  export type ItemTypeMaxAggregateInputType = {
+    id?: true
+    name?: true
+    created_at?: true
+    updated_at?: true
+    is_deleted?: true
+  }
+
+  export type ItemTypeCountAggregateInputType = {
+    id?: true
+    name?: true
+    created_at?: true
+    updated_at?: true
+    is_deleted?: true
+    _all?: true
+  }
+
+  export type ItemTypeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ItemType to aggregate.
+     */
+    where?: ItemTypeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ItemTypes to fetch.
+     */
+    orderBy?: ItemTypeOrderByWithRelationInput | ItemTypeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ItemTypeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ItemTypes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ItemTypes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ItemTypes
+    **/
+    _count?: true | ItemTypeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ItemTypeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ItemTypeMaxAggregateInputType
+  }
+
+  export type GetItemTypeAggregateType<T extends ItemTypeAggregateArgs> = {
+        [P in keyof T & keyof AggregateItemType]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateItemType[P]>
+      : GetScalarType<T[P], AggregateItemType[P]>
+  }
+
+
+
+
+  export type ItemTypeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ItemTypeWhereInput
+    orderBy?: ItemTypeOrderByWithAggregationInput | ItemTypeOrderByWithAggregationInput[]
+    by: ItemTypeScalarFieldEnum[] | ItemTypeScalarFieldEnum
+    having?: ItemTypeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ItemTypeCountAggregateInputType | true
+    _min?: ItemTypeMinAggregateInputType
+    _max?: ItemTypeMaxAggregateInputType
+  }
+
+  export type ItemTypeGroupByOutputType = {
+    id: string
+    name: string
+    created_at: Date
+    updated_at: Date
+    is_deleted: boolean
+    _count: ItemTypeCountAggregateOutputType | null
+    _min: ItemTypeMinAggregateOutputType | null
+    _max: ItemTypeMaxAggregateOutputType | null
+  }
+
+  type GetItemTypeGroupByPayload<T extends ItemTypeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ItemTypeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ItemTypeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ItemTypeGroupByOutputType[P]>
+            : GetScalarType<T[P], ItemTypeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ItemTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    is_deleted?: boolean
+    items?: boolean | ItemType$itemsArgs<ExtArgs>
+    _count?: boolean | ItemTypeCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["itemType"]>
+
+  export type ItemTypeSelectScalar = {
+    id?: boolean
+    name?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    is_deleted?: boolean
+  }
+
+  export type ItemTypeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    items?: boolean | ItemType$itemsArgs<ExtArgs>
+    _count?: boolean | ItemTypeCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+
+  export type $ItemTypePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ItemType"
+    objects: {
+      items: Prisma.$ItemPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      created_at: Date
+      updated_at: Date
+      is_deleted: boolean
+    }, ExtArgs["result"]["itemType"]>
+    composites: {}
+  }
+
+
+  type ItemTypeGetPayload<S extends boolean | null | undefined | ItemTypeDefaultArgs> = $Result.GetResult<Prisma.$ItemTypePayload, S>
+
+  type ItemTypeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<ItemTypeFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: ItemTypeCountAggregateInputType | true
+    }
+
+  export interface ItemTypeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ItemType'], meta: { name: 'ItemType' } }
+    /**
+     * Find zero or one ItemType that matches the filter.
+     * @param {ItemTypeFindUniqueArgs} args - Arguments to find a ItemType
+     * @example
+     * // Get one ItemType
+     * const itemType = await prisma.itemType.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends ItemTypeFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, ItemTypeFindUniqueArgs<ExtArgs>>
+    ): Prisma__ItemTypeClient<$Result.GetResult<Prisma.$ItemTypePayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one ItemType that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {ItemTypeFindUniqueOrThrowArgs} args - Arguments to find a ItemType
+     * @example
+     * // Get one ItemType
+     * const itemType = await prisma.itemType.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends ItemTypeFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, ItemTypeFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__ItemTypeClient<$Result.GetResult<Prisma.$ItemTypePayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first ItemType that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ItemTypeFindFirstArgs} args - Arguments to find a ItemType
+     * @example
+     * // Get one ItemType
+     * const itemType = await prisma.itemType.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends ItemTypeFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, ItemTypeFindFirstArgs<ExtArgs>>
+    ): Prisma__ItemTypeClient<$Result.GetResult<Prisma.$ItemTypePayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first ItemType that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ItemTypeFindFirstOrThrowArgs} args - Arguments to find a ItemType
+     * @example
+     * // Get one ItemType
+     * const itemType = await prisma.itemType.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends ItemTypeFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, ItemTypeFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__ItemTypeClient<$Result.GetResult<Prisma.$ItemTypePayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more ItemTypes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ItemTypeFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ItemTypes
+     * const itemTypes = await prisma.itemType.findMany()
+     * 
+     * // Get first 10 ItemTypes
+     * const itemTypes = await prisma.itemType.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const itemTypeWithIdOnly = await prisma.itemType.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends ItemTypeFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, ItemTypeFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ItemTypePayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a ItemType.
+     * @param {ItemTypeCreateArgs} args - Arguments to create a ItemType.
+     * @example
+     * // Create one ItemType
+     * const ItemType = await prisma.itemType.create({
+     *   data: {
+     *     // ... data to create a ItemType
+     *   }
+     * })
+     * 
+    **/
+    create<T extends ItemTypeCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, ItemTypeCreateArgs<ExtArgs>>
+    ): Prisma__ItemTypeClient<$Result.GetResult<Prisma.$ItemTypePayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many ItemTypes.
+     *     @param {ItemTypeCreateManyArgs} args - Arguments to create many ItemTypes.
+     *     @example
+     *     // Create many ItemTypes
+     *     const itemType = await prisma.itemType.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends ItemTypeCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, ItemTypeCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a ItemType.
+     * @param {ItemTypeDeleteArgs} args - Arguments to delete one ItemType.
+     * @example
+     * // Delete one ItemType
+     * const ItemType = await prisma.itemType.delete({
+     *   where: {
+     *     // ... filter to delete one ItemType
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends ItemTypeDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, ItemTypeDeleteArgs<ExtArgs>>
+    ): Prisma__ItemTypeClient<$Result.GetResult<Prisma.$ItemTypePayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one ItemType.
+     * @param {ItemTypeUpdateArgs} args - Arguments to update one ItemType.
+     * @example
+     * // Update one ItemType
+     * const itemType = await prisma.itemType.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends ItemTypeUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, ItemTypeUpdateArgs<ExtArgs>>
+    ): Prisma__ItemTypeClient<$Result.GetResult<Prisma.$ItemTypePayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more ItemTypes.
+     * @param {ItemTypeDeleteManyArgs} args - Arguments to filter ItemTypes to delete.
+     * @example
+     * // Delete a few ItemTypes
+     * const { count } = await prisma.itemType.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends ItemTypeDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, ItemTypeDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ItemTypes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ItemTypeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ItemTypes
+     * const itemType = await prisma.itemType.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends ItemTypeUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, ItemTypeUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one ItemType.
+     * @param {ItemTypeUpsertArgs} args - Arguments to update or create a ItemType.
+     * @example
+     * // Update or create a ItemType
+     * const itemType = await prisma.itemType.upsert({
+     *   create: {
+     *     // ... data to create a ItemType
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ItemType we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends ItemTypeUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, ItemTypeUpsertArgs<ExtArgs>>
+    ): Prisma__ItemTypeClient<$Result.GetResult<Prisma.$ItemTypePayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of ItemTypes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ItemTypeCountArgs} args - Arguments to filter ItemTypes to count.
+     * @example
+     * // Count the number of ItemTypes
+     * const count = await prisma.itemType.count({
+     *   where: {
+     *     // ... the filter for the ItemTypes we want to count
+     *   }
+     * })
+    **/
+    count<T extends ItemTypeCountArgs>(
+      args?: Subset<T, ItemTypeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ItemTypeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ItemType.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ItemTypeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ItemTypeAggregateArgs>(args: Subset<T, ItemTypeAggregateArgs>): Prisma.PrismaPromise<GetItemTypeAggregateType<T>>
+
+    /**
+     * Group by ItemType.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ItemTypeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ItemTypeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ItemTypeGroupByArgs['orderBy'] }
+        : { orderBy?: ItemTypeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ItemTypeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetItemTypeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ItemType model
+   */
+  readonly fields: ItemTypeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ItemType.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ItemTypeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+    items<T extends ItemType$itemsArgs<ExtArgs> = {}>(args?: Subset<T, ItemType$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the ItemType model
+   */ 
+  interface ItemTypeFieldRefs {
+    readonly id: FieldRef<"ItemType", 'String'>
+    readonly name: FieldRef<"ItemType", 'String'>
+    readonly created_at: FieldRef<"ItemType", 'DateTime'>
+    readonly updated_at: FieldRef<"ItemType", 'DateTime'>
+    readonly is_deleted: FieldRef<"ItemType", 'Boolean'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * ItemType findUnique
+   */
+  export type ItemTypeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ItemType
+     */
+    select?: ItemTypeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemTypeInclude<ExtArgs> | null
+    /**
+     * Filter, which ItemType to fetch.
+     */
+    where: ItemTypeWhereUniqueInput
+  }
+
+
+  /**
+   * ItemType findUniqueOrThrow
+   */
+  export type ItemTypeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ItemType
+     */
+    select?: ItemTypeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemTypeInclude<ExtArgs> | null
+    /**
+     * Filter, which ItemType to fetch.
+     */
+    where: ItemTypeWhereUniqueInput
+  }
+
+
+  /**
+   * ItemType findFirst
+   */
+  export type ItemTypeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ItemType
+     */
+    select?: ItemTypeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemTypeInclude<ExtArgs> | null
+    /**
+     * Filter, which ItemType to fetch.
+     */
+    where?: ItemTypeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ItemTypes to fetch.
+     */
+    orderBy?: ItemTypeOrderByWithRelationInput | ItemTypeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ItemTypes.
+     */
+    cursor?: ItemTypeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ItemTypes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ItemTypes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ItemTypes.
+     */
+    distinct?: ItemTypeScalarFieldEnum | ItemTypeScalarFieldEnum[]
+  }
+
+
+  /**
+   * ItemType findFirstOrThrow
+   */
+  export type ItemTypeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ItemType
+     */
+    select?: ItemTypeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemTypeInclude<ExtArgs> | null
+    /**
+     * Filter, which ItemType to fetch.
+     */
+    where?: ItemTypeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ItemTypes to fetch.
+     */
+    orderBy?: ItemTypeOrderByWithRelationInput | ItemTypeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ItemTypes.
+     */
+    cursor?: ItemTypeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ItemTypes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ItemTypes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ItemTypes.
+     */
+    distinct?: ItemTypeScalarFieldEnum | ItemTypeScalarFieldEnum[]
+  }
+
+
+  /**
+   * ItemType findMany
+   */
+  export type ItemTypeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ItemType
+     */
+    select?: ItemTypeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemTypeInclude<ExtArgs> | null
+    /**
+     * Filter, which ItemTypes to fetch.
+     */
+    where?: ItemTypeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ItemTypes to fetch.
+     */
+    orderBy?: ItemTypeOrderByWithRelationInput | ItemTypeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ItemTypes.
+     */
+    cursor?: ItemTypeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ItemTypes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ItemTypes.
+     */
+    skip?: number
+    distinct?: ItemTypeScalarFieldEnum | ItemTypeScalarFieldEnum[]
+  }
+
+
+  /**
+   * ItemType create
+   */
+  export type ItemTypeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ItemType
+     */
+    select?: ItemTypeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemTypeInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ItemType.
+     */
+    data: XOR<ItemTypeCreateInput, ItemTypeUncheckedCreateInput>
+  }
+
+
+  /**
+   * ItemType createMany
+   */
+  export type ItemTypeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ItemTypes.
+     */
+    data: ItemTypeCreateManyInput | ItemTypeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * ItemType update
+   */
+  export type ItemTypeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ItemType
+     */
+    select?: ItemTypeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemTypeInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ItemType.
+     */
+    data: XOR<ItemTypeUpdateInput, ItemTypeUncheckedUpdateInput>
+    /**
+     * Choose, which ItemType to update.
+     */
+    where: ItemTypeWhereUniqueInput
+  }
+
+
+  /**
+   * ItemType updateMany
+   */
+  export type ItemTypeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ItemTypes.
+     */
+    data: XOR<ItemTypeUpdateManyMutationInput, ItemTypeUncheckedUpdateManyInput>
+    /**
+     * Filter which ItemTypes to update
+     */
+    where?: ItemTypeWhereInput
+  }
+
+
+  /**
+   * ItemType upsert
+   */
+  export type ItemTypeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ItemType
+     */
+    select?: ItemTypeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemTypeInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ItemType to update in case it exists.
+     */
+    where: ItemTypeWhereUniqueInput
+    /**
+     * In case the ItemType found by the `where` argument doesn't exist, create a new ItemType with this data.
+     */
+    create: XOR<ItemTypeCreateInput, ItemTypeUncheckedCreateInput>
+    /**
+     * In case the ItemType was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ItemTypeUpdateInput, ItemTypeUncheckedUpdateInput>
+  }
+
+
+  /**
+   * ItemType delete
+   */
+  export type ItemTypeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ItemType
+     */
+    select?: ItemTypeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemTypeInclude<ExtArgs> | null
+    /**
+     * Filter which ItemType to delete.
+     */
+    where: ItemTypeWhereUniqueInput
+  }
+
+
+  /**
+   * ItemType deleteMany
+   */
+  export type ItemTypeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ItemTypes to delete
+     */
+    where?: ItemTypeWhereInput
+  }
+
+
+  /**
+   * ItemType.items
+   */
+  export type ItemType$itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Item
+     */
+    select?: ItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemInclude<ExtArgs> | null
+    where?: ItemWhereInput
+    orderBy?: ItemOrderByWithRelationInput | ItemOrderByWithRelationInput[]
+    cursor?: ItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ItemScalarFieldEnum | ItemScalarFieldEnum[]
+  }
+
+
+  /**
+   * ItemType without action
+   */
+  export type ItemTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ItemType
+     */
+    select?: ItemTypeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemTypeInclude<ExtArgs> | null
+  }
+
+
+
+  /**
+   * Model ItemTransaction
+   */
+
+  export type AggregateItemTransaction = {
+    _count: ItemTransactionCountAggregateOutputType | null
+    _avg: ItemTransactionAvgAggregateOutputType | null
+    _sum: ItemTransactionSumAggregateOutputType | null
+    _min: ItemTransactionMinAggregateOutputType | null
+    _max: ItemTransactionMaxAggregateOutputType | null
+  }
+
+  export type ItemTransactionAvgAggregateOutputType = {
+    type: number | null
+    quantity: number | null
+    price: number | null
+  }
+
+  export type ItemTransactionSumAggregateOutputType = {
+    type: number | null
+    quantity: number | null
+    price: number | null
+  }
+
+  export type ItemTransactionMinAggregateOutputType = {
+    id: string | null
+    item_id: string | null
+    rr_item_id: string | null
+    type: number | null
+    quantity: number | null
+    price: number | null
+    remarks: string | null
+    created_at: Date | null
+    updated_at: Date | null
+    is_deleted: boolean | null
+  }
+
+  export type ItemTransactionMaxAggregateOutputType = {
+    id: string | null
+    item_id: string | null
+    rr_item_id: string | null
+    type: number | null
+    quantity: number | null
+    price: number | null
+    remarks: string | null
+    created_at: Date | null
+    updated_at: Date | null
+    is_deleted: boolean | null
+  }
+
+  export type ItemTransactionCountAggregateOutputType = {
+    id: number
+    item_id: number
+    rr_item_id: number
+    type: number
+    quantity: number
+    price: number
+    remarks: number
+    created_at: number
+    updated_at: number
+    is_deleted: number
+    _all: number
+  }
+
+
+  export type ItemTransactionAvgAggregateInputType = {
+    type?: true
+    quantity?: true
+    price?: true
+  }
+
+  export type ItemTransactionSumAggregateInputType = {
+    type?: true
+    quantity?: true
+    price?: true
+  }
+
+  export type ItemTransactionMinAggregateInputType = {
+    id?: true
+    item_id?: true
+    rr_item_id?: true
+    type?: true
+    quantity?: true
+    price?: true
+    remarks?: true
+    created_at?: true
+    updated_at?: true
+    is_deleted?: true
+  }
+
+  export type ItemTransactionMaxAggregateInputType = {
+    id?: true
+    item_id?: true
+    rr_item_id?: true
+    type?: true
+    quantity?: true
+    price?: true
+    remarks?: true
+    created_at?: true
+    updated_at?: true
+    is_deleted?: true
+  }
+
+  export type ItemTransactionCountAggregateInputType = {
+    id?: true
+    item_id?: true
+    rr_item_id?: true
+    type?: true
+    quantity?: true
+    price?: true
+    remarks?: true
+    created_at?: true
+    updated_at?: true
+    is_deleted?: true
+    _all?: true
+  }
+
+  export type ItemTransactionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ItemTransaction to aggregate.
+     */
+    where?: ItemTransactionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ItemTransactions to fetch.
+     */
+    orderBy?: ItemTransactionOrderByWithRelationInput | ItemTransactionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ItemTransactionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ItemTransactions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ItemTransactions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ItemTransactions
+    **/
+    _count?: true | ItemTransactionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ItemTransactionAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ItemTransactionSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ItemTransactionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ItemTransactionMaxAggregateInputType
+  }
+
+  export type GetItemTransactionAggregateType<T extends ItemTransactionAggregateArgs> = {
+        [P in keyof T & keyof AggregateItemTransaction]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateItemTransaction[P]>
+      : GetScalarType<T[P], AggregateItemTransaction[P]>
+  }
+
+
+
+
+  export type ItemTransactionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ItemTransactionWhereInput
+    orderBy?: ItemTransactionOrderByWithAggregationInput | ItemTransactionOrderByWithAggregationInput[]
+    by: ItemTransactionScalarFieldEnum[] | ItemTransactionScalarFieldEnum
+    having?: ItemTransactionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ItemTransactionCountAggregateInputType | true
+    _avg?: ItemTransactionAvgAggregateInputType
+    _sum?: ItemTransactionSumAggregateInputType
+    _min?: ItemTransactionMinAggregateInputType
+    _max?: ItemTransactionMaxAggregateInputType
+  }
+
+  export type ItemTransactionGroupByOutputType = {
+    id: string
+    item_id: string
+    rr_item_id: string | null
+    type: number
+    quantity: number
+    price: number
+    remarks: string | null
+    created_at: Date
+    updated_at: Date
+    is_deleted: boolean
+    _count: ItemTransactionCountAggregateOutputType | null
+    _avg: ItemTransactionAvgAggregateOutputType | null
+    _sum: ItemTransactionSumAggregateOutputType | null
+    _min: ItemTransactionMinAggregateOutputType | null
+    _max: ItemTransactionMaxAggregateOutputType | null
+  }
+
+  type GetItemTransactionGroupByPayload<T extends ItemTransactionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ItemTransactionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ItemTransactionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ItemTransactionGroupByOutputType[P]>
+            : GetScalarType<T[P], ItemTransactionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ItemTransactionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    item_id?: boolean
+    rr_item_id?: boolean
+    type?: boolean
+    quantity?: boolean
+    price?: boolean
+    remarks?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    is_deleted?: boolean
+    item?: boolean | ItemDefaultArgs<ExtArgs>
+    rr_item?: boolean | ItemTransaction$rr_itemArgs<ExtArgs>
+  }, ExtArgs["result"]["itemTransaction"]>
+
+  export type ItemTransactionSelectScalar = {
+    id?: boolean
+    item_id?: boolean
+    rr_item_id?: boolean
+    type?: boolean
+    quantity?: boolean
+    price?: boolean
+    remarks?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    is_deleted?: boolean
+  }
+
+  export type ItemTransactionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    item?: boolean | ItemDefaultArgs<ExtArgs>
+    rr_item?: boolean | ItemTransaction$rr_itemArgs<ExtArgs>
+  }
+
+
+  export type $ItemTransactionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ItemTransaction"
+    objects: {
+      item: Prisma.$ItemPayload<ExtArgs>
+      rr_item: Prisma.$RRItemPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      item_id: string
+      rr_item_id: string | null
+      type: number
+      quantity: number
+      price: number
+      remarks: string | null
+      created_at: Date
+      updated_at: Date
+      is_deleted: boolean
+    }, ExtArgs["result"]["itemTransaction"]>
+    composites: {}
+  }
+
+
+  type ItemTransactionGetPayload<S extends boolean | null | undefined | ItemTransactionDefaultArgs> = $Result.GetResult<Prisma.$ItemTransactionPayload, S>
+
+  type ItemTransactionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<ItemTransactionFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: ItemTransactionCountAggregateInputType | true
+    }
+
+  export interface ItemTransactionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ItemTransaction'], meta: { name: 'ItemTransaction' } }
+    /**
+     * Find zero or one ItemTransaction that matches the filter.
+     * @param {ItemTransactionFindUniqueArgs} args - Arguments to find a ItemTransaction
+     * @example
+     * // Get one ItemTransaction
+     * const itemTransaction = await prisma.itemTransaction.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends ItemTransactionFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, ItemTransactionFindUniqueArgs<ExtArgs>>
+    ): Prisma__ItemTransactionClient<$Result.GetResult<Prisma.$ItemTransactionPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one ItemTransaction that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {ItemTransactionFindUniqueOrThrowArgs} args - Arguments to find a ItemTransaction
+     * @example
+     * // Get one ItemTransaction
+     * const itemTransaction = await prisma.itemTransaction.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends ItemTransactionFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, ItemTransactionFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__ItemTransactionClient<$Result.GetResult<Prisma.$ItemTransactionPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first ItemTransaction that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ItemTransactionFindFirstArgs} args - Arguments to find a ItemTransaction
+     * @example
+     * // Get one ItemTransaction
+     * const itemTransaction = await prisma.itemTransaction.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends ItemTransactionFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, ItemTransactionFindFirstArgs<ExtArgs>>
+    ): Prisma__ItemTransactionClient<$Result.GetResult<Prisma.$ItemTransactionPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first ItemTransaction that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ItemTransactionFindFirstOrThrowArgs} args - Arguments to find a ItemTransaction
+     * @example
+     * // Get one ItemTransaction
+     * const itemTransaction = await prisma.itemTransaction.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends ItemTransactionFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, ItemTransactionFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__ItemTransactionClient<$Result.GetResult<Prisma.$ItemTransactionPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more ItemTransactions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ItemTransactionFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ItemTransactions
+     * const itemTransactions = await prisma.itemTransaction.findMany()
+     * 
+     * // Get first 10 ItemTransactions
+     * const itemTransactions = await prisma.itemTransaction.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const itemTransactionWithIdOnly = await prisma.itemTransaction.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends ItemTransactionFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, ItemTransactionFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ItemTransactionPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a ItemTransaction.
+     * @param {ItemTransactionCreateArgs} args - Arguments to create a ItemTransaction.
+     * @example
+     * // Create one ItemTransaction
+     * const ItemTransaction = await prisma.itemTransaction.create({
+     *   data: {
+     *     // ... data to create a ItemTransaction
+     *   }
+     * })
+     * 
+    **/
+    create<T extends ItemTransactionCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, ItemTransactionCreateArgs<ExtArgs>>
+    ): Prisma__ItemTransactionClient<$Result.GetResult<Prisma.$ItemTransactionPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many ItemTransactions.
+     *     @param {ItemTransactionCreateManyArgs} args - Arguments to create many ItemTransactions.
+     *     @example
+     *     // Create many ItemTransactions
+     *     const itemTransaction = await prisma.itemTransaction.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends ItemTransactionCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, ItemTransactionCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a ItemTransaction.
+     * @param {ItemTransactionDeleteArgs} args - Arguments to delete one ItemTransaction.
+     * @example
+     * // Delete one ItemTransaction
+     * const ItemTransaction = await prisma.itemTransaction.delete({
+     *   where: {
+     *     // ... filter to delete one ItemTransaction
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends ItemTransactionDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, ItemTransactionDeleteArgs<ExtArgs>>
+    ): Prisma__ItemTransactionClient<$Result.GetResult<Prisma.$ItemTransactionPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one ItemTransaction.
+     * @param {ItemTransactionUpdateArgs} args - Arguments to update one ItemTransaction.
+     * @example
+     * // Update one ItemTransaction
+     * const itemTransaction = await prisma.itemTransaction.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends ItemTransactionUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, ItemTransactionUpdateArgs<ExtArgs>>
+    ): Prisma__ItemTransactionClient<$Result.GetResult<Prisma.$ItemTransactionPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more ItemTransactions.
+     * @param {ItemTransactionDeleteManyArgs} args - Arguments to filter ItemTransactions to delete.
+     * @example
+     * // Delete a few ItemTransactions
+     * const { count } = await prisma.itemTransaction.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends ItemTransactionDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, ItemTransactionDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ItemTransactions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ItemTransactionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ItemTransactions
+     * const itemTransaction = await prisma.itemTransaction.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends ItemTransactionUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, ItemTransactionUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one ItemTransaction.
+     * @param {ItemTransactionUpsertArgs} args - Arguments to update or create a ItemTransaction.
+     * @example
+     * // Update or create a ItemTransaction
+     * const itemTransaction = await prisma.itemTransaction.upsert({
+     *   create: {
+     *     // ... data to create a ItemTransaction
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ItemTransaction we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends ItemTransactionUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, ItemTransactionUpsertArgs<ExtArgs>>
+    ): Prisma__ItemTransactionClient<$Result.GetResult<Prisma.$ItemTransactionPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of ItemTransactions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ItemTransactionCountArgs} args - Arguments to filter ItemTransactions to count.
+     * @example
+     * // Count the number of ItemTransactions
+     * const count = await prisma.itemTransaction.count({
+     *   where: {
+     *     // ... the filter for the ItemTransactions we want to count
+     *   }
+     * })
+    **/
+    count<T extends ItemTransactionCountArgs>(
+      args?: Subset<T, ItemTransactionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ItemTransactionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ItemTransaction.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ItemTransactionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ItemTransactionAggregateArgs>(args: Subset<T, ItemTransactionAggregateArgs>): Prisma.PrismaPromise<GetItemTransactionAggregateType<T>>
+
+    /**
+     * Group by ItemTransaction.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ItemTransactionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ItemTransactionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ItemTransactionGroupByArgs['orderBy'] }
+        : { orderBy?: ItemTransactionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ItemTransactionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetItemTransactionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ItemTransaction model
+   */
+  readonly fields: ItemTransactionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ItemTransaction.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ItemTransactionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+    item<T extends ItemDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ItemDefaultArgs<ExtArgs>>): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    rr_item<T extends ItemTransaction$rr_itemArgs<ExtArgs> = {}>(args?: Subset<T, ItemTransaction$rr_itemArgs<ExtArgs>>): Prisma__RRItemClient<$Result.GetResult<Prisma.$RRItemPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the ItemTransaction model
+   */ 
+  interface ItemTransactionFieldRefs {
+    readonly id: FieldRef<"ItemTransaction", 'String'>
+    readonly item_id: FieldRef<"ItemTransaction", 'String'>
+    readonly rr_item_id: FieldRef<"ItemTransaction", 'String'>
+    readonly type: FieldRef<"ItemTransaction", 'Int'>
+    readonly quantity: FieldRef<"ItemTransaction", 'Float'>
+    readonly price: FieldRef<"ItemTransaction", 'Float'>
+    readonly remarks: FieldRef<"ItemTransaction", 'String'>
+    readonly created_at: FieldRef<"ItemTransaction", 'DateTime'>
+    readonly updated_at: FieldRef<"ItemTransaction", 'DateTime'>
+    readonly is_deleted: FieldRef<"ItemTransaction", 'Boolean'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * ItemTransaction findUnique
+   */
+  export type ItemTransactionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ItemTransaction
+     */
+    select?: ItemTransactionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemTransactionInclude<ExtArgs> | null
+    /**
+     * Filter, which ItemTransaction to fetch.
+     */
+    where: ItemTransactionWhereUniqueInput
+  }
+
+
+  /**
+   * ItemTransaction findUniqueOrThrow
+   */
+  export type ItemTransactionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ItemTransaction
+     */
+    select?: ItemTransactionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemTransactionInclude<ExtArgs> | null
+    /**
+     * Filter, which ItemTransaction to fetch.
+     */
+    where: ItemTransactionWhereUniqueInput
+  }
+
+
+  /**
+   * ItemTransaction findFirst
+   */
+  export type ItemTransactionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ItemTransaction
+     */
+    select?: ItemTransactionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemTransactionInclude<ExtArgs> | null
+    /**
+     * Filter, which ItemTransaction to fetch.
+     */
+    where?: ItemTransactionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ItemTransactions to fetch.
+     */
+    orderBy?: ItemTransactionOrderByWithRelationInput | ItemTransactionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ItemTransactions.
+     */
+    cursor?: ItemTransactionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ItemTransactions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ItemTransactions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ItemTransactions.
+     */
+    distinct?: ItemTransactionScalarFieldEnum | ItemTransactionScalarFieldEnum[]
+  }
+
+
+  /**
+   * ItemTransaction findFirstOrThrow
+   */
+  export type ItemTransactionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ItemTransaction
+     */
+    select?: ItemTransactionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemTransactionInclude<ExtArgs> | null
+    /**
+     * Filter, which ItemTransaction to fetch.
+     */
+    where?: ItemTransactionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ItemTransactions to fetch.
+     */
+    orderBy?: ItemTransactionOrderByWithRelationInput | ItemTransactionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ItemTransactions.
+     */
+    cursor?: ItemTransactionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ItemTransactions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ItemTransactions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ItemTransactions.
+     */
+    distinct?: ItemTransactionScalarFieldEnum | ItemTransactionScalarFieldEnum[]
+  }
+
+
+  /**
+   * ItemTransaction findMany
+   */
+  export type ItemTransactionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ItemTransaction
+     */
+    select?: ItemTransactionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemTransactionInclude<ExtArgs> | null
+    /**
+     * Filter, which ItemTransactions to fetch.
+     */
+    where?: ItemTransactionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ItemTransactions to fetch.
+     */
+    orderBy?: ItemTransactionOrderByWithRelationInput | ItemTransactionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ItemTransactions.
+     */
+    cursor?: ItemTransactionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ItemTransactions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ItemTransactions.
+     */
+    skip?: number
+    distinct?: ItemTransactionScalarFieldEnum | ItemTransactionScalarFieldEnum[]
+  }
+
+
+  /**
+   * ItemTransaction create
+   */
+  export type ItemTransactionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ItemTransaction
+     */
+    select?: ItemTransactionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemTransactionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ItemTransaction.
+     */
+    data: XOR<ItemTransactionCreateInput, ItemTransactionUncheckedCreateInput>
+  }
+
+
+  /**
+   * ItemTransaction createMany
+   */
+  export type ItemTransactionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ItemTransactions.
+     */
+    data: ItemTransactionCreateManyInput | ItemTransactionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * ItemTransaction update
+   */
+  export type ItemTransactionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ItemTransaction
+     */
+    select?: ItemTransactionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemTransactionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ItemTransaction.
+     */
+    data: XOR<ItemTransactionUpdateInput, ItemTransactionUncheckedUpdateInput>
+    /**
+     * Choose, which ItemTransaction to update.
+     */
+    where: ItemTransactionWhereUniqueInput
+  }
+
+
+  /**
+   * ItemTransaction updateMany
+   */
+  export type ItemTransactionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ItemTransactions.
+     */
+    data: XOR<ItemTransactionUpdateManyMutationInput, ItemTransactionUncheckedUpdateManyInput>
+    /**
+     * Filter which ItemTransactions to update
+     */
+    where?: ItemTransactionWhereInput
+  }
+
+
+  /**
+   * ItemTransaction upsert
+   */
+  export type ItemTransactionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ItemTransaction
+     */
+    select?: ItemTransactionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemTransactionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ItemTransaction to update in case it exists.
+     */
+    where: ItemTransactionWhereUniqueInput
+    /**
+     * In case the ItemTransaction found by the `where` argument doesn't exist, create a new ItemTransaction with this data.
+     */
+    create: XOR<ItemTransactionCreateInput, ItemTransactionUncheckedCreateInput>
+    /**
+     * In case the ItemTransaction was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ItemTransactionUpdateInput, ItemTransactionUncheckedUpdateInput>
+  }
+
+
+  /**
+   * ItemTransaction delete
+   */
+  export type ItemTransactionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ItemTransaction
+     */
+    select?: ItemTransactionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemTransactionInclude<ExtArgs> | null
+    /**
+     * Filter which ItemTransaction to delete.
+     */
+    where: ItemTransactionWhereUniqueInput
+  }
+
+
+  /**
+   * ItemTransaction deleteMany
+   */
+  export type ItemTransactionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ItemTransactions to delete
+     */
+    where?: ItemTransactionWhereInput
+  }
+
+
+  /**
+   * ItemTransaction.rr_item
+   */
+  export type ItemTransaction$rr_itemArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RRItem
+     */
+    select?: RRItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: RRItemInclude<ExtArgs> | null
+    where?: RRItemWhereInput
+  }
+
+
+  /**
+   * ItemTransaction without action
+   */
+  export type ItemTransactionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ItemTransaction
+     */
+    select?: ItemTransactionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemTransactionInclude<ExtArgs> | null
+  }
+
+
+
+  /**
    * Enums
    */
 
@@ -22360,6 +29533,7 @@ export namespace Prisma {
     supervisor_id: 'supervisor_id',
     status: 'status',
     canceller_id: 'canceller_id',
+    date_cancelled: 'date_cancelled',
     is_referenced: 'is_referenced',
     created_at: 'created_at',
     updated_at: 'updated_at',
@@ -22392,6 +29566,7 @@ export namespace Prisma {
     classification_id: 'classification_id',
     supervisor_id: 'supervisor_id',
     canceller_id: 'canceller_id',
+    date_cancelled: 'date_cancelled',
     rv_number: 'rv_number',
     date_requested: 'date_requested',
     work_order_no: 'work_order_no',
@@ -22434,6 +29609,7 @@ export namespace Prisma {
     supervisor_id: 'supervisor_id',
     status: 'status',
     canceller_id: 'canceller_id',
+    date_cancelled: 'date_cancelled',
     is_referenced: 'is_referenced',
     created_at: 'created_at',
     updated_at: 'updated_at',
@@ -22472,6 +29648,7 @@ export namespace Prisma {
     status: 'status',
     notes: 'notes',
     canceller_id: 'canceller_id',
+    date_cancelled: 'date_cancelled',
     created_at: 'created_at',
     updated_at: 'updated_at',
     is_deleted: 'is_deleted'
@@ -22547,6 +29724,7 @@ export namespace Prisma {
     po_date: 'po_date',
     status: 'status',
     canceller_id: 'canceller_id',
+    date_cancelled: 'date_cancelled',
     created_at: 'created_at',
     updated_at: 'updated_at',
     is_deleted: 'is_deleted'
@@ -22571,6 +29749,112 @@ export namespace Prisma {
   };
 
   export type POApproverScalarFieldEnum = (typeof POApproverScalarFieldEnum)[keyof typeof POApproverScalarFieldEnum]
+
+
+  export const RRScalarFieldEnum: {
+    id: 'id',
+    po_id: 'po_id',
+    rr_number: 'rr_number',
+    rr_date: 'rr_date',
+    received_by_id: 'received_by_id',
+    canceller_id: 'canceller_id',
+    date_cancelled: 'date_cancelled',
+    invoice_number: 'invoice_number',
+    delivery_number: 'delivery_number',
+    notes: 'notes',
+    delivery_charge: 'delivery_charge',
+    created_at: 'created_at',
+    updated_at: 'updated_at',
+    is_deleted: 'is_deleted'
+  };
+
+  export type RRScalarFieldEnum = (typeof RRScalarFieldEnum)[keyof typeof RRScalarFieldEnum]
+
+
+  export const RRApproverScalarFieldEnum: {
+    id: 'id',
+    rr_id: 'rr_id',
+    approver_id: 'approver_id',
+    approver_proxy_id: 'approver_proxy_id',
+    date_approval: 'date_approval',
+    notes: 'notes',
+    status: 'status',
+    label: 'label',
+    order: 'order',
+    created_at: 'created_at',
+    updated_at: 'updated_at',
+    is_deleted: 'is_deleted'
+  };
+
+  export type RRApproverScalarFieldEnum = (typeof RRApproverScalarFieldEnum)[keyof typeof RRApproverScalarFieldEnum]
+
+
+  export const RRItemScalarFieldEnum: {
+    id: 'id',
+    rr_id: 'rr_id',
+    item_id: 'item_id',
+    item_brand_id: 'item_brand_id',
+    unit_id: 'unit_id',
+    item_class: 'item_class',
+    quantity_delivered: 'quantity_delivered',
+    quantity_accepted: 'quantity_accepted',
+    description: 'description',
+    vat_type: 'vat_type',
+    gross_price: 'gross_price',
+    net_price: 'net_price',
+    freight_cost: 'freight_cost',
+    created_at: 'created_at',
+    updated_at: 'updated_at',
+    is_deleted: 'is_deleted'
+  };
+
+  export type RRItemScalarFieldEnum = (typeof RRItemScalarFieldEnum)[keyof typeof RRItemScalarFieldEnum]
+
+
+  export const ItemScalarFieldEnum: {
+    id: 'id',
+    item_type_id: 'item_type_id',
+    unit_id: 'unit_id',
+    code: 'code',
+    description: 'description',
+    quantity: 'quantity',
+    initial_quantity: 'initial_quantity',
+    average_price: 'average_price',
+    initial_average_price: 'initial_average_price',
+    is_initial: 'is_initial',
+    created_at: 'created_at',
+    updated_at: 'updated_at',
+    is_deleted: 'is_deleted'
+  };
+
+  export type ItemScalarFieldEnum = (typeof ItemScalarFieldEnum)[keyof typeof ItemScalarFieldEnum]
+
+
+  export const ItemTypeScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    created_at: 'created_at',
+    updated_at: 'updated_at',
+    is_deleted: 'is_deleted'
+  };
+
+  export type ItemTypeScalarFieldEnum = (typeof ItemTypeScalarFieldEnum)[keyof typeof ItemTypeScalarFieldEnum]
+
+
+  export const ItemTransactionScalarFieldEnum: {
+    id: 'id',
+    item_id: 'item_id',
+    rr_item_id: 'rr_item_id',
+    type: 'type',
+    quantity: 'quantity',
+    price: 'price',
+    remarks: 'remarks',
+    created_at: 'created_at',
+    updated_at: 'updated_at',
+    is_deleted: 'is_deleted'
+  };
+
+  export type ItemTransactionScalarFieldEnum = (typeof ItemTransactionScalarFieldEnum)[keyof typeof ItemTransactionScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -22738,6 +30022,8 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"Unit"> | Date | string
     is_deleted?: BoolFilter<"Unit"> | boolean
     canvass_items?: CanvassItemListRelationFilter
+    rr_items?: RRItemListRelationFilter
+    items?: ItemListRelationFilter
   }
 
   export type UnitOrderByWithRelationInput = {
@@ -22747,6 +30033,8 @@ export namespace Prisma {
     updated_at?: SortOrder
     is_deleted?: SortOrder
     canvass_items?: CanvassItemOrderByRelationAggregateInput
+    rr_items?: RRItemOrderByRelationAggregateInput
+    items?: ItemOrderByRelationAggregateInput
   }
 
   export type UnitWhereUniqueInput = Prisma.AtLeast<{
@@ -22759,6 +30047,8 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"Unit"> | Date | string
     is_deleted?: BoolFilter<"Unit"> | boolean
     canvass_items?: CanvassItemListRelationFilter
+    rr_items?: RRItemListRelationFilter
+    items?: ItemListRelationFilter
   }, "id">
 
   export type UnitOrderByWithAggregationInput = {
@@ -22793,6 +30083,7 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"Brand"> | Date | string
     is_deleted?: BoolFilter<"Brand"> | boolean
     canvass_items?: CanvassItemListRelationFilter
+    rr_items?: RRItemListRelationFilter
   }
 
   export type BrandOrderByWithRelationInput = {
@@ -22802,6 +30093,7 @@ export namespace Prisma {
     updated_at?: SortOrder
     is_deleted?: SortOrder
     canvass_items?: CanvassItemOrderByRelationAggregateInput
+    rr_items?: RRItemOrderByRelationAggregateInput
   }
 
   export type BrandWhereUniqueInput = Prisma.AtLeast<{
@@ -22814,6 +30106,7 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"Brand"> | Date | string
     is_deleted?: BoolFilter<"Brand"> | boolean
     canvass_items?: CanvassItemListRelationFilter
+    rr_items?: RRItemListRelationFilter
   }, "id">
 
   export type BrandOrderByWithAggregationInput = {
@@ -23087,6 +30380,7 @@ export namespace Prisma {
     supervisor_id?: StringFilter<"JO"> | string
     status?: IntFilter<"JO"> | number
     canceller_id?: StringNullableFilter<"JO"> | string | null
+    date_cancelled?: DateTimeNullableFilter<"JO"> | Date | string | null
     is_referenced?: BoolFilter<"JO"> | boolean
     created_at?: DateTimeFilter<"JO"> | Date | string
     updated_at?: DateTimeFilter<"JO"> | Date | string
@@ -23107,6 +30401,7 @@ export namespace Prisma {
     supervisor_id?: SortOrder
     status?: SortOrder
     canceller_id?: SortOrderInput | SortOrder
+    date_cancelled?: SortOrderInput | SortOrder
     is_referenced?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -23130,6 +30425,7 @@ export namespace Prisma {
     supervisor_id?: StringFilter<"JO"> | string
     status?: IntFilter<"JO"> | number
     canceller_id?: StringNullableFilter<"JO"> | string | null
+    date_cancelled?: DateTimeNullableFilter<"JO"> | Date | string | null
     is_referenced?: BoolFilter<"JO"> | boolean
     created_at?: DateTimeFilter<"JO"> | Date | string
     updated_at?: DateTimeFilter<"JO"> | Date | string
@@ -23150,6 +30446,7 @@ export namespace Prisma {
     supervisor_id?: SortOrder
     status?: SortOrder
     canceller_id?: SortOrderInput | SortOrder
+    date_cancelled?: SortOrderInput | SortOrder
     is_referenced?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -23175,6 +30472,7 @@ export namespace Prisma {
     supervisor_id?: StringWithAggregatesFilter<"JO"> | string
     status?: IntWithAggregatesFilter<"JO"> | number
     canceller_id?: StringNullableWithAggregatesFilter<"JO"> | string | null
+    date_cancelled?: DateTimeNullableWithAggregatesFilter<"JO"> | Date | string | null
     is_referenced?: BoolWithAggregatesFilter<"JO"> | boolean
     created_at?: DateTimeWithAggregatesFilter<"JO"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"JO"> | Date | string
@@ -23277,6 +30575,7 @@ export namespace Prisma {
     classification_id?: StringNullableFilter<"RV"> | string | null
     supervisor_id?: StringFilter<"RV"> | string
     canceller_id?: StringNullableFilter<"RV"> | string | null
+    date_cancelled?: DateTimeNullableFilter<"RV"> | Date | string | null
     rv_number?: StringFilter<"RV"> | string
     date_requested?: DateTimeFilter<"RV"> | Date | string
     work_order_no?: StringNullableFilter<"RV"> | string | null
@@ -23297,6 +30596,7 @@ export namespace Prisma {
     classification_id?: SortOrderInput | SortOrder
     supervisor_id?: SortOrder
     canceller_id?: SortOrderInput | SortOrder
+    date_cancelled?: SortOrderInput | SortOrder
     rv_number?: SortOrder
     date_requested?: SortOrder
     work_order_no?: SortOrderInput | SortOrder
@@ -23321,6 +30621,7 @@ export namespace Prisma {
     classification_id?: StringNullableFilter<"RV"> | string | null
     supervisor_id?: StringFilter<"RV"> | string
     canceller_id?: StringNullableFilter<"RV"> | string | null
+    date_cancelled?: DateTimeNullableFilter<"RV"> | Date | string | null
     date_requested?: DateTimeFilter<"RV"> | Date | string
     work_order_no?: StringNullableFilter<"RV"> | string | null
     work_order_date?: DateTimeNullableFilter<"RV"> | Date | string | null
@@ -23340,6 +30641,7 @@ export namespace Prisma {
     classification_id?: SortOrderInput | SortOrder
     supervisor_id?: SortOrder
     canceller_id?: SortOrderInput | SortOrder
+    date_cancelled?: SortOrderInput | SortOrder
     rv_number?: SortOrder
     date_requested?: SortOrder
     work_order_no?: SortOrderInput | SortOrder
@@ -23365,6 +30667,7 @@ export namespace Prisma {
     classification_id?: StringNullableWithAggregatesFilter<"RV"> | string | null
     supervisor_id?: StringWithAggregatesFilter<"RV"> | string
     canceller_id?: StringNullableWithAggregatesFilter<"RV"> | string | null
+    date_cancelled?: DateTimeNullableWithAggregatesFilter<"RV"> | Date | string | null
     rv_number?: StringWithAggregatesFilter<"RV"> | string
     date_requested?: DateTimeWithAggregatesFilter<"RV"> | Date | string
     work_order_no?: StringNullableWithAggregatesFilter<"RV"> | string | null
@@ -23481,6 +30784,7 @@ export namespace Prisma {
     supervisor_id?: StringFilter<"SPR"> | string
     status?: IntFilter<"SPR"> | number
     canceller_id?: StringNullableFilter<"SPR"> | string | null
+    date_cancelled?: DateTimeNullableFilter<"SPR"> | Date | string | null
     is_referenced?: BoolFilter<"SPR"> | boolean
     created_at?: DateTimeFilter<"SPR"> | Date | string
     updated_at?: DateTimeFilter<"SPR"> | Date | string
@@ -23501,6 +30805,7 @@ export namespace Prisma {
     supervisor_id?: SortOrder
     status?: SortOrder
     canceller_id?: SortOrderInput | SortOrder
+    date_cancelled?: SortOrderInput | SortOrder
     is_referenced?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -23524,6 +30829,7 @@ export namespace Prisma {
     supervisor_id?: StringFilter<"SPR"> | string
     status?: IntFilter<"SPR"> | number
     canceller_id?: StringNullableFilter<"SPR"> | string | null
+    date_cancelled?: DateTimeNullableFilter<"SPR"> | Date | string | null
     is_referenced?: BoolFilter<"SPR"> | boolean
     created_at?: DateTimeFilter<"SPR"> | Date | string
     updated_at?: DateTimeFilter<"SPR"> | Date | string
@@ -23544,6 +30850,7 @@ export namespace Prisma {
     supervisor_id?: SortOrder
     status?: SortOrder
     canceller_id?: SortOrderInput | SortOrder
+    date_cancelled?: SortOrderInput | SortOrder
     is_referenced?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -23568,6 +30875,7 @@ export namespace Prisma {
     supervisor_id?: StringWithAggregatesFilter<"SPR"> | string
     status?: IntWithAggregatesFilter<"SPR"> | number
     canceller_id?: StringNullableWithAggregatesFilter<"SPR"> | string | null
+    date_cancelled?: DateTimeNullableWithAggregatesFilter<"SPR"> | Date | string | null
     is_referenced?: BoolWithAggregatesFilter<"SPR"> | boolean
     created_at?: DateTimeWithAggregatesFilter<"SPR"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"SPR"> | Date | string
@@ -23680,6 +30988,7 @@ export namespace Prisma {
     status?: IntFilter<"MEQS"> | number
     notes?: StringNullableFilter<"MEQS"> | string | null
     canceller_id?: StringNullableFilter<"MEQS"> | string | null
+    date_cancelled?: DateTimeNullableFilter<"MEQS"> | Date | string | null
     created_at?: DateTimeFilter<"MEQS"> | Date | string
     updated_at?: DateTimeFilter<"MEQS"> | Date | string
     is_deleted?: BoolFilter<"MEQS"> | boolean
@@ -23701,6 +31010,7 @@ export namespace Prisma {
     status?: SortOrder
     notes?: SortOrderInput | SortOrder
     canceller_id?: SortOrderInput | SortOrder
+    date_cancelled?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -23725,6 +31035,7 @@ export namespace Prisma {
     status?: IntFilter<"MEQS"> | number
     notes?: StringNullableFilter<"MEQS"> | string | null
     canceller_id?: StringNullableFilter<"MEQS"> | string | null
+    date_cancelled?: DateTimeNullableFilter<"MEQS"> | Date | string | null
     created_at?: DateTimeFilter<"MEQS"> | Date | string
     updated_at?: DateTimeFilter<"MEQS"> | Date | string
     is_deleted?: BoolFilter<"MEQS"> | boolean
@@ -23746,6 +31057,7 @@ export namespace Prisma {
     status?: SortOrder
     notes?: SortOrderInput | SortOrder
     canceller_id?: SortOrderInput | SortOrder
+    date_cancelled?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -23770,6 +31082,7 @@ export namespace Prisma {
     status?: IntWithAggregatesFilter<"MEQS"> | number
     notes?: StringNullableWithAggregatesFilter<"MEQS"> | string | null
     canceller_id?: StringNullableWithAggregatesFilter<"MEQS"> | string | null
+    date_cancelled?: DateTimeNullableWithAggregatesFilter<"MEQS"> | Date | string | null
     created_at?: DateTimeWithAggregatesFilter<"MEQS"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"MEQS"> | Date | string
     is_deleted?: BoolWithAggregatesFilter<"MEQS"> | boolean
@@ -24104,11 +31417,13 @@ export namespace Prisma {
     po_date?: DateTimeFilter<"PO"> | Date | string
     status?: IntFilter<"PO"> | number
     canceller_id?: StringNullableFilter<"PO"> | string | null
+    date_cancelled?: DateTimeNullableFilter<"PO"> | Date | string | null
     created_at?: DateTimeFilter<"PO"> | Date | string
     updated_at?: DateTimeFilter<"PO"> | Date | string
     is_deleted?: BoolFilter<"PO"> | boolean
     po_approvers?: POApproverListRelationFilter
     meqs_supplier?: XOR<MEQSSupplierRelationFilter, MEQSSupplierWhereInput>
+    rr?: XOR<RRNullableRelationFilter, RRWhereInput> | null
   }
 
   export type POOrderByWithRelationInput = {
@@ -24118,11 +31433,13 @@ export namespace Prisma {
     po_date?: SortOrder
     status?: SortOrder
     canceller_id?: SortOrderInput | SortOrder
+    date_cancelled?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
     po_approvers?: POApproverOrderByRelationAggregateInput
     meqs_supplier?: MEQSSupplierOrderByWithRelationInput
+    rr?: RROrderByWithRelationInput
   }
 
   export type POWhereUniqueInput = Prisma.AtLeast<{
@@ -24135,11 +31452,13 @@ export namespace Prisma {
     po_date?: DateTimeFilter<"PO"> | Date | string
     status?: IntFilter<"PO"> | number
     canceller_id?: StringNullableFilter<"PO"> | string | null
+    date_cancelled?: DateTimeNullableFilter<"PO"> | Date | string | null
     created_at?: DateTimeFilter<"PO"> | Date | string
     updated_at?: DateTimeFilter<"PO"> | Date | string
     is_deleted?: BoolFilter<"PO"> | boolean
     po_approvers?: POApproverListRelationFilter
     meqs_supplier?: XOR<MEQSSupplierRelationFilter, MEQSSupplierWhereInput>
+    rr?: XOR<RRNullableRelationFilter, RRWhereInput> | null
   }, "id" | "meqs_supplier_id" | "po_number">
 
   export type POOrderByWithAggregationInput = {
@@ -24149,6 +31468,7 @@ export namespace Prisma {
     po_date?: SortOrder
     status?: SortOrder
     canceller_id?: SortOrderInput | SortOrder
+    date_cancelled?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -24169,6 +31489,7 @@ export namespace Prisma {
     po_date?: DateTimeWithAggregatesFilter<"PO"> | Date | string
     status?: IntWithAggregatesFilter<"PO"> | number
     canceller_id?: StringNullableWithAggregatesFilter<"PO"> | string | null
+    date_cancelled?: DateTimeNullableWithAggregatesFilter<"PO"> | Date | string | null
     created_at?: DateTimeWithAggregatesFilter<"PO"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"PO"> | Date | string
     is_deleted?: BoolWithAggregatesFilter<"PO"> | boolean
@@ -24266,6 +31587,576 @@ export namespace Prisma {
     is_deleted?: BoolWithAggregatesFilter<"POApprover"> | boolean
   }
 
+  export type RRWhereInput = {
+    AND?: RRWhereInput | RRWhereInput[]
+    OR?: RRWhereInput[]
+    NOT?: RRWhereInput | RRWhereInput[]
+    id?: StringFilter<"RR"> | string
+    po_id?: StringFilter<"RR"> | string
+    rr_number?: StringFilter<"RR"> | string
+    rr_date?: DateTimeFilter<"RR"> | Date | string
+    received_by_id?: StringFilter<"RR"> | string
+    canceller_id?: StringNullableFilter<"RR"> | string | null
+    date_cancelled?: DateTimeNullableFilter<"RR"> | Date | string | null
+    invoice_number?: StringFilter<"RR"> | string
+    delivery_number?: StringNullableFilter<"RR"> | string | null
+    notes?: StringNullableFilter<"RR"> | string | null
+    delivery_charge?: FloatFilter<"RR"> | number
+    created_at?: DateTimeFilter<"RR"> | Date | string
+    updated_at?: DateTimeFilter<"RR"> | Date | string
+    is_deleted?: BoolFilter<"RR"> | boolean
+    po?: XOR<PORelationFilter, POWhereInput>
+    rr_approvers?: RRApproverListRelationFilter
+    rr_items?: RRItemListRelationFilter
+  }
+
+  export type RROrderByWithRelationInput = {
+    id?: SortOrder
+    po_id?: SortOrder
+    rr_number?: SortOrder
+    rr_date?: SortOrder
+    received_by_id?: SortOrder
+    canceller_id?: SortOrderInput | SortOrder
+    date_cancelled?: SortOrderInput | SortOrder
+    invoice_number?: SortOrder
+    delivery_number?: SortOrderInput | SortOrder
+    notes?: SortOrderInput | SortOrder
+    delivery_charge?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+    po?: POOrderByWithRelationInput
+    rr_approvers?: RRApproverOrderByRelationAggregateInput
+    rr_items?: RRItemOrderByRelationAggregateInput
+  }
+
+  export type RRWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    po_id?: string
+    rr_number?: string
+    AND?: RRWhereInput | RRWhereInput[]
+    OR?: RRWhereInput[]
+    NOT?: RRWhereInput | RRWhereInput[]
+    rr_date?: DateTimeFilter<"RR"> | Date | string
+    received_by_id?: StringFilter<"RR"> | string
+    canceller_id?: StringNullableFilter<"RR"> | string | null
+    date_cancelled?: DateTimeNullableFilter<"RR"> | Date | string | null
+    invoice_number?: StringFilter<"RR"> | string
+    delivery_number?: StringNullableFilter<"RR"> | string | null
+    notes?: StringNullableFilter<"RR"> | string | null
+    delivery_charge?: FloatFilter<"RR"> | number
+    created_at?: DateTimeFilter<"RR"> | Date | string
+    updated_at?: DateTimeFilter<"RR"> | Date | string
+    is_deleted?: BoolFilter<"RR"> | boolean
+    po?: XOR<PORelationFilter, POWhereInput>
+    rr_approvers?: RRApproverListRelationFilter
+    rr_items?: RRItemListRelationFilter
+  }, "id" | "po_id" | "rr_number">
+
+  export type RROrderByWithAggregationInput = {
+    id?: SortOrder
+    po_id?: SortOrder
+    rr_number?: SortOrder
+    rr_date?: SortOrder
+    received_by_id?: SortOrder
+    canceller_id?: SortOrderInput | SortOrder
+    date_cancelled?: SortOrderInput | SortOrder
+    invoice_number?: SortOrder
+    delivery_number?: SortOrderInput | SortOrder
+    notes?: SortOrderInput | SortOrder
+    delivery_charge?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+    _count?: RRCountOrderByAggregateInput
+    _avg?: RRAvgOrderByAggregateInput
+    _max?: RRMaxOrderByAggregateInput
+    _min?: RRMinOrderByAggregateInput
+    _sum?: RRSumOrderByAggregateInput
+  }
+
+  export type RRScalarWhereWithAggregatesInput = {
+    AND?: RRScalarWhereWithAggregatesInput | RRScalarWhereWithAggregatesInput[]
+    OR?: RRScalarWhereWithAggregatesInput[]
+    NOT?: RRScalarWhereWithAggregatesInput | RRScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"RR"> | string
+    po_id?: StringWithAggregatesFilter<"RR"> | string
+    rr_number?: StringWithAggregatesFilter<"RR"> | string
+    rr_date?: DateTimeWithAggregatesFilter<"RR"> | Date | string
+    received_by_id?: StringWithAggregatesFilter<"RR"> | string
+    canceller_id?: StringNullableWithAggregatesFilter<"RR"> | string | null
+    date_cancelled?: DateTimeNullableWithAggregatesFilter<"RR"> | Date | string | null
+    invoice_number?: StringWithAggregatesFilter<"RR"> | string
+    delivery_number?: StringNullableWithAggregatesFilter<"RR"> | string | null
+    notes?: StringNullableWithAggregatesFilter<"RR"> | string | null
+    delivery_charge?: FloatWithAggregatesFilter<"RR"> | number
+    created_at?: DateTimeWithAggregatesFilter<"RR"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"RR"> | Date | string
+    is_deleted?: BoolWithAggregatesFilter<"RR"> | boolean
+  }
+
+  export type RRApproverWhereInput = {
+    AND?: RRApproverWhereInput | RRApproverWhereInput[]
+    OR?: RRApproverWhereInput[]
+    NOT?: RRApproverWhereInput | RRApproverWhereInput[]
+    id?: StringFilter<"RRApprover"> | string
+    rr_id?: StringFilter<"RRApprover"> | string
+    approver_id?: StringFilter<"RRApprover"> | string
+    approver_proxy_id?: StringNullableFilter<"RRApprover"> | string | null
+    date_approval?: DateTimeNullableFilter<"RRApprover"> | Date | string | null
+    notes?: StringNullableFilter<"RRApprover"> | string | null
+    status?: IntFilter<"RRApprover"> | number
+    label?: StringFilter<"RRApprover"> | string
+    order?: IntFilter<"RRApprover"> | number
+    created_at?: DateTimeFilter<"RRApprover"> | Date | string
+    updated_at?: DateTimeFilter<"RRApprover"> | Date | string
+    is_deleted?: BoolFilter<"RRApprover"> | boolean
+    rr?: XOR<RRRelationFilter, RRWhereInput>
+  }
+
+  export type RRApproverOrderByWithRelationInput = {
+    id?: SortOrder
+    rr_id?: SortOrder
+    approver_id?: SortOrder
+    approver_proxy_id?: SortOrderInput | SortOrder
+    date_approval?: SortOrderInput | SortOrder
+    notes?: SortOrderInput | SortOrder
+    status?: SortOrder
+    label?: SortOrder
+    order?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+    rr?: RROrderByWithRelationInput
+  }
+
+  export type RRApproverWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: RRApproverWhereInput | RRApproverWhereInput[]
+    OR?: RRApproverWhereInput[]
+    NOT?: RRApproverWhereInput | RRApproverWhereInput[]
+    rr_id?: StringFilter<"RRApprover"> | string
+    approver_id?: StringFilter<"RRApprover"> | string
+    approver_proxy_id?: StringNullableFilter<"RRApprover"> | string | null
+    date_approval?: DateTimeNullableFilter<"RRApprover"> | Date | string | null
+    notes?: StringNullableFilter<"RRApprover"> | string | null
+    status?: IntFilter<"RRApprover"> | number
+    label?: StringFilter<"RRApprover"> | string
+    order?: IntFilter<"RRApprover"> | number
+    created_at?: DateTimeFilter<"RRApprover"> | Date | string
+    updated_at?: DateTimeFilter<"RRApprover"> | Date | string
+    is_deleted?: BoolFilter<"RRApprover"> | boolean
+    rr?: XOR<RRRelationFilter, RRWhereInput>
+  }, "id">
+
+  export type RRApproverOrderByWithAggregationInput = {
+    id?: SortOrder
+    rr_id?: SortOrder
+    approver_id?: SortOrder
+    approver_proxy_id?: SortOrderInput | SortOrder
+    date_approval?: SortOrderInput | SortOrder
+    notes?: SortOrderInput | SortOrder
+    status?: SortOrder
+    label?: SortOrder
+    order?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+    _count?: RRApproverCountOrderByAggregateInput
+    _avg?: RRApproverAvgOrderByAggregateInput
+    _max?: RRApproverMaxOrderByAggregateInput
+    _min?: RRApproverMinOrderByAggregateInput
+    _sum?: RRApproverSumOrderByAggregateInput
+  }
+
+  export type RRApproverScalarWhereWithAggregatesInput = {
+    AND?: RRApproverScalarWhereWithAggregatesInput | RRApproverScalarWhereWithAggregatesInput[]
+    OR?: RRApproverScalarWhereWithAggregatesInput[]
+    NOT?: RRApproverScalarWhereWithAggregatesInput | RRApproverScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"RRApprover"> | string
+    rr_id?: StringWithAggregatesFilter<"RRApprover"> | string
+    approver_id?: StringWithAggregatesFilter<"RRApprover"> | string
+    approver_proxy_id?: StringNullableWithAggregatesFilter<"RRApprover"> | string | null
+    date_approval?: DateTimeNullableWithAggregatesFilter<"RRApprover"> | Date | string | null
+    notes?: StringNullableWithAggregatesFilter<"RRApprover"> | string | null
+    status?: IntWithAggregatesFilter<"RRApprover"> | number
+    label?: StringWithAggregatesFilter<"RRApprover"> | string
+    order?: IntWithAggregatesFilter<"RRApprover"> | number
+    created_at?: DateTimeWithAggregatesFilter<"RRApprover"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"RRApprover"> | Date | string
+    is_deleted?: BoolWithAggregatesFilter<"RRApprover"> | boolean
+  }
+
+  export type RRItemWhereInput = {
+    AND?: RRItemWhereInput | RRItemWhereInput[]
+    OR?: RRItemWhereInput[]
+    NOT?: RRItemWhereInput | RRItemWhereInput[]
+    id?: StringFilter<"RRItem"> | string
+    rr_id?: StringFilter<"RRItem"> | string
+    item_id?: StringNullableFilter<"RRItem"> | string | null
+    item_brand_id?: StringFilter<"RRItem"> | string
+    unit_id?: StringFilter<"RRItem"> | string
+    item_class?: IntFilter<"RRItem"> | number
+    quantity_delivered?: IntFilter<"RRItem"> | number
+    quantity_accepted?: IntFilter<"RRItem"> | number
+    description?: StringFilter<"RRItem"> | string
+    vat_type?: IntFilter<"RRItem"> | number
+    gross_price?: FloatFilter<"RRItem"> | number
+    net_price?: FloatFilter<"RRItem"> | number
+    freight_cost?: FloatFilter<"RRItem"> | number
+    created_at?: DateTimeFilter<"RRItem"> | Date | string
+    updated_at?: DateTimeFilter<"RRItem"> | Date | string
+    is_deleted?: BoolFilter<"RRItem"> | boolean
+    rr?: XOR<RRRelationFilter, RRWhereInput>
+    item?: XOR<ItemNullableRelationFilter, ItemWhereInput> | null
+    item_brand?: XOR<BrandRelationFilter, BrandWhereInput>
+    unit?: XOR<UnitRelationFilter, UnitWhereInput>
+    ItemTransaction?: XOR<ItemTransactionNullableRelationFilter, ItemTransactionWhereInput> | null
+  }
+
+  export type RRItemOrderByWithRelationInput = {
+    id?: SortOrder
+    rr_id?: SortOrder
+    item_id?: SortOrderInput | SortOrder
+    item_brand_id?: SortOrder
+    unit_id?: SortOrder
+    item_class?: SortOrder
+    quantity_delivered?: SortOrder
+    quantity_accepted?: SortOrder
+    description?: SortOrder
+    vat_type?: SortOrder
+    gross_price?: SortOrder
+    net_price?: SortOrder
+    freight_cost?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+    rr?: RROrderByWithRelationInput
+    item?: ItemOrderByWithRelationInput
+    item_brand?: BrandOrderByWithRelationInput
+    unit?: UnitOrderByWithRelationInput
+    ItemTransaction?: ItemTransactionOrderByWithRelationInput
+  }
+
+  export type RRItemWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: RRItemWhereInput | RRItemWhereInput[]
+    OR?: RRItemWhereInput[]
+    NOT?: RRItemWhereInput | RRItemWhereInput[]
+    rr_id?: StringFilter<"RRItem"> | string
+    item_id?: StringNullableFilter<"RRItem"> | string | null
+    item_brand_id?: StringFilter<"RRItem"> | string
+    unit_id?: StringFilter<"RRItem"> | string
+    item_class?: IntFilter<"RRItem"> | number
+    quantity_delivered?: IntFilter<"RRItem"> | number
+    quantity_accepted?: IntFilter<"RRItem"> | number
+    description?: StringFilter<"RRItem"> | string
+    vat_type?: IntFilter<"RRItem"> | number
+    gross_price?: FloatFilter<"RRItem"> | number
+    net_price?: FloatFilter<"RRItem"> | number
+    freight_cost?: FloatFilter<"RRItem"> | number
+    created_at?: DateTimeFilter<"RRItem"> | Date | string
+    updated_at?: DateTimeFilter<"RRItem"> | Date | string
+    is_deleted?: BoolFilter<"RRItem"> | boolean
+    rr?: XOR<RRRelationFilter, RRWhereInput>
+    item?: XOR<ItemNullableRelationFilter, ItemWhereInput> | null
+    item_brand?: XOR<BrandRelationFilter, BrandWhereInput>
+    unit?: XOR<UnitRelationFilter, UnitWhereInput>
+    ItemTransaction?: XOR<ItemTransactionNullableRelationFilter, ItemTransactionWhereInput> | null
+  }, "id">
+
+  export type RRItemOrderByWithAggregationInput = {
+    id?: SortOrder
+    rr_id?: SortOrder
+    item_id?: SortOrderInput | SortOrder
+    item_brand_id?: SortOrder
+    unit_id?: SortOrder
+    item_class?: SortOrder
+    quantity_delivered?: SortOrder
+    quantity_accepted?: SortOrder
+    description?: SortOrder
+    vat_type?: SortOrder
+    gross_price?: SortOrder
+    net_price?: SortOrder
+    freight_cost?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+    _count?: RRItemCountOrderByAggregateInput
+    _avg?: RRItemAvgOrderByAggregateInput
+    _max?: RRItemMaxOrderByAggregateInput
+    _min?: RRItemMinOrderByAggregateInput
+    _sum?: RRItemSumOrderByAggregateInput
+  }
+
+  export type RRItemScalarWhereWithAggregatesInput = {
+    AND?: RRItemScalarWhereWithAggregatesInput | RRItemScalarWhereWithAggregatesInput[]
+    OR?: RRItemScalarWhereWithAggregatesInput[]
+    NOT?: RRItemScalarWhereWithAggregatesInput | RRItemScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"RRItem"> | string
+    rr_id?: StringWithAggregatesFilter<"RRItem"> | string
+    item_id?: StringNullableWithAggregatesFilter<"RRItem"> | string | null
+    item_brand_id?: StringWithAggregatesFilter<"RRItem"> | string
+    unit_id?: StringWithAggregatesFilter<"RRItem"> | string
+    item_class?: IntWithAggregatesFilter<"RRItem"> | number
+    quantity_delivered?: IntWithAggregatesFilter<"RRItem"> | number
+    quantity_accepted?: IntWithAggregatesFilter<"RRItem"> | number
+    description?: StringWithAggregatesFilter<"RRItem"> | string
+    vat_type?: IntWithAggregatesFilter<"RRItem"> | number
+    gross_price?: FloatWithAggregatesFilter<"RRItem"> | number
+    net_price?: FloatWithAggregatesFilter<"RRItem"> | number
+    freight_cost?: FloatWithAggregatesFilter<"RRItem"> | number
+    created_at?: DateTimeWithAggregatesFilter<"RRItem"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"RRItem"> | Date | string
+    is_deleted?: BoolWithAggregatesFilter<"RRItem"> | boolean
+  }
+
+  export type ItemWhereInput = {
+    AND?: ItemWhereInput | ItemWhereInput[]
+    OR?: ItemWhereInput[]
+    NOT?: ItemWhereInput | ItemWhereInput[]
+    id?: StringFilter<"Item"> | string
+    item_type_id?: StringFilter<"Item"> | string
+    unit_id?: StringFilter<"Item"> | string
+    code?: StringFilter<"Item"> | string
+    description?: StringFilter<"Item"> | string
+    quantity?: IntFilter<"Item"> | number
+    initial_quantity?: IntFilter<"Item"> | number
+    average_price?: FloatFilter<"Item"> | number
+    initial_average_price?: FloatFilter<"Item"> | number
+    is_initial?: BoolFilter<"Item"> | boolean
+    created_at?: DateTimeFilter<"Item"> | Date | string
+    updated_at?: DateTimeFilter<"Item"> | Date | string
+    is_deleted?: BoolFilter<"Item"> | boolean
+    item_type?: XOR<ItemTypeRelationFilter, ItemTypeWhereInput>
+    item_transactions?: ItemTransactionListRelationFilter
+    rr_items?: RRItemListRelationFilter
+    unit?: XOR<UnitRelationFilter, UnitWhereInput>
+  }
+
+  export type ItemOrderByWithRelationInput = {
+    id?: SortOrder
+    item_type_id?: SortOrder
+    unit_id?: SortOrder
+    code?: SortOrder
+    description?: SortOrder
+    quantity?: SortOrder
+    initial_quantity?: SortOrder
+    average_price?: SortOrder
+    initial_average_price?: SortOrder
+    is_initial?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+    item_type?: ItemTypeOrderByWithRelationInput
+    item_transactions?: ItemTransactionOrderByRelationAggregateInput
+    rr_items?: RRItemOrderByRelationAggregateInput
+    unit?: UnitOrderByWithRelationInput
+  }
+
+  export type ItemWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    code?: string
+    AND?: ItemWhereInput | ItemWhereInput[]
+    OR?: ItemWhereInput[]
+    NOT?: ItemWhereInput | ItemWhereInput[]
+    item_type_id?: StringFilter<"Item"> | string
+    unit_id?: StringFilter<"Item"> | string
+    description?: StringFilter<"Item"> | string
+    quantity?: IntFilter<"Item"> | number
+    initial_quantity?: IntFilter<"Item"> | number
+    average_price?: FloatFilter<"Item"> | number
+    initial_average_price?: FloatFilter<"Item"> | number
+    is_initial?: BoolFilter<"Item"> | boolean
+    created_at?: DateTimeFilter<"Item"> | Date | string
+    updated_at?: DateTimeFilter<"Item"> | Date | string
+    is_deleted?: BoolFilter<"Item"> | boolean
+    item_type?: XOR<ItemTypeRelationFilter, ItemTypeWhereInput>
+    item_transactions?: ItemTransactionListRelationFilter
+    rr_items?: RRItemListRelationFilter
+    unit?: XOR<UnitRelationFilter, UnitWhereInput>
+  }, "id" | "code">
+
+  export type ItemOrderByWithAggregationInput = {
+    id?: SortOrder
+    item_type_id?: SortOrder
+    unit_id?: SortOrder
+    code?: SortOrder
+    description?: SortOrder
+    quantity?: SortOrder
+    initial_quantity?: SortOrder
+    average_price?: SortOrder
+    initial_average_price?: SortOrder
+    is_initial?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+    _count?: ItemCountOrderByAggregateInput
+    _avg?: ItemAvgOrderByAggregateInput
+    _max?: ItemMaxOrderByAggregateInput
+    _min?: ItemMinOrderByAggregateInput
+    _sum?: ItemSumOrderByAggregateInput
+  }
+
+  export type ItemScalarWhereWithAggregatesInput = {
+    AND?: ItemScalarWhereWithAggregatesInput | ItemScalarWhereWithAggregatesInput[]
+    OR?: ItemScalarWhereWithAggregatesInput[]
+    NOT?: ItemScalarWhereWithAggregatesInput | ItemScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Item"> | string
+    item_type_id?: StringWithAggregatesFilter<"Item"> | string
+    unit_id?: StringWithAggregatesFilter<"Item"> | string
+    code?: StringWithAggregatesFilter<"Item"> | string
+    description?: StringWithAggregatesFilter<"Item"> | string
+    quantity?: IntWithAggregatesFilter<"Item"> | number
+    initial_quantity?: IntWithAggregatesFilter<"Item"> | number
+    average_price?: FloatWithAggregatesFilter<"Item"> | number
+    initial_average_price?: FloatWithAggregatesFilter<"Item"> | number
+    is_initial?: BoolWithAggregatesFilter<"Item"> | boolean
+    created_at?: DateTimeWithAggregatesFilter<"Item"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"Item"> | Date | string
+    is_deleted?: BoolWithAggregatesFilter<"Item"> | boolean
+  }
+
+  export type ItemTypeWhereInput = {
+    AND?: ItemTypeWhereInput | ItemTypeWhereInput[]
+    OR?: ItemTypeWhereInput[]
+    NOT?: ItemTypeWhereInput | ItemTypeWhereInput[]
+    id?: StringFilter<"ItemType"> | string
+    name?: StringFilter<"ItemType"> | string
+    created_at?: DateTimeFilter<"ItemType"> | Date | string
+    updated_at?: DateTimeFilter<"ItemType"> | Date | string
+    is_deleted?: BoolFilter<"ItemType"> | boolean
+    items?: ItemListRelationFilter
+  }
+
+  export type ItemTypeOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+    items?: ItemOrderByRelationAggregateInput
+  }
+
+  export type ItemTypeWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ItemTypeWhereInput | ItemTypeWhereInput[]
+    OR?: ItemTypeWhereInput[]
+    NOT?: ItemTypeWhereInput | ItemTypeWhereInput[]
+    name?: StringFilter<"ItemType"> | string
+    created_at?: DateTimeFilter<"ItemType"> | Date | string
+    updated_at?: DateTimeFilter<"ItemType"> | Date | string
+    is_deleted?: BoolFilter<"ItemType"> | boolean
+    items?: ItemListRelationFilter
+  }, "id">
+
+  export type ItemTypeOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+    _count?: ItemTypeCountOrderByAggregateInput
+    _max?: ItemTypeMaxOrderByAggregateInput
+    _min?: ItemTypeMinOrderByAggregateInput
+  }
+
+  export type ItemTypeScalarWhereWithAggregatesInput = {
+    AND?: ItemTypeScalarWhereWithAggregatesInput | ItemTypeScalarWhereWithAggregatesInput[]
+    OR?: ItemTypeScalarWhereWithAggregatesInput[]
+    NOT?: ItemTypeScalarWhereWithAggregatesInput | ItemTypeScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ItemType"> | string
+    name?: StringWithAggregatesFilter<"ItemType"> | string
+    created_at?: DateTimeWithAggregatesFilter<"ItemType"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"ItemType"> | Date | string
+    is_deleted?: BoolWithAggregatesFilter<"ItemType"> | boolean
+  }
+
+  export type ItemTransactionWhereInput = {
+    AND?: ItemTransactionWhereInput | ItemTransactionWhereInput[]
+    OR?: ItemTransactionWhereInput[]
+    NOT?: ItemTransactionWhereInput | ItemTransactionWhereInput[]
+    id?: StringFilter<"ItemTransaction"> | string
+    item_id?: StringFilter<"ItemTransaction"> | string
+    rr_item_id?: StringNullableFilter<"ItemTransaction"> | string | null
+    type?: IntFilter<"ItemTransaction"> | number
+    quantity?: FloatFilter<"ItemTransaction"> | number
+    price?: FloatFilter<"ItemTransaction"> | number
+    remarks?: StringNullableFilter<"ItemTransaction"> | string | null
+    created_at?: DateTimeFilter<"ItemTransaction"> | Date | string
+    updated_at?: DateTimeFilter<"ItemTransaction"> | Date | string
+    is_deleted?: BoolFilter<"ItemTransaction"> | boolean
+    item?: XOR<ItemRelationFilter, ItemWhereInput>
+    rr_item?: XOR<RRItemNullableRelationFilter, RRItemWhereInput> | null
+  }
+
+  export type ItemTransactionOrderByWithRelationInput = {
+    id?: SortOrder
+    item_id?: SortOrder
+    rr_item_id?: SortOrderInput | SortOrder
+    type?: SortOrder
+    quantity?: SortOrder
+    price?: SortOrder
+    remarks?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+    item?: ItemOrderByWithRelationInput
+    rr_item?: RRItemOrderByWithRelationInput
+  }
+
+  export type ItemTransactionWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    rr_item_id?: string
+    AND?: ItemTransactionWhereInput | ItemTransactionWhereInput[]
+    OR?: ItemTransactionWhereInput[]
+    NOT?: ItemTransactionWhereInput | ItemTransactionWhereInput[]
+    item_id?: StringFilter<"ItemTransaction"> | string
+    type?: IntFilter<"ItemTransaction"> | number
+    quantity?: FloatFilter<"ItemTransaction"> | number
+    price?: FloatFilter<"ItemTransaction"> | number
+    remarks?: StringNullableFilter<"ItemTransaction"> | string | null
+    created_at?: DateTimeFilter<"ItemTransaction"> | Date | string
+    updated_at?: DateTimeFilter<"ItemTransaction"> | Date | string
+    is_deleted?: BoolFilter<"ItemTransaction"> | boolean
+    item?: XOR<ItemRelationFilter, ItemWhereInput>
+    rr_item?: XOR<RRItemNullableRelationFilter, RRItemWhereInput> | null
+  }, "id" | "rr_item_id">
+
+  export type ItemTransactionOrderByWithAggregationInput = {
+    id?: SortOrder
+    item_id?: SortOrder
+    rr_item_id?: SortOrderInput | SortOrder
+    type?: SortOrder
+    quantity?: SortOrder
+    price?: SortOrder
+    remarks?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+    _count?: ItemTransactionCountOrderByAggregateInput
+    _avg?: ItemTransactionAvgOrderByAggregateInput
+    _max?: ItemTransactionMaxOrderByAggregateInput
+    _min?: ItemTransactionMinOrderByAggregateInput
+    _sum?: ItemTransactionSumOrderByAggregateInput
+  }
+
+  export type ItemTransactionScalarWhereWithAggregatesInput = {
+    AND?: ItemTransactionScalarWhereWithAggregatesInput | ItemTransactionScalarWhereWithAggregatesInput[]
+    OR?: ItemTransactionScalarWhereWithAggregatesInput[]
+    NOT?: ItemTransactionScalarWhereWithAggregatesInput | ItemTransactionScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ItemTransaction"> | string
+    item_id?: StringWithAggregatesFilter<"ItemTransaction"> | string
+    rr_item_id?: StringNullableWithAggregatesFilter<"ItemTransaction"> | string | null
+    type?: IntWithAggregatesFilter<"ItemTransaction"> | number
+    quantity?: FloatWithAggregatesFilter<"ItemTransaction"> | number
+    price?: FloatWithAggregatesFilter<"ItemTransaction"> | number
+    remarks?: StringNullableWithAggregatesFilter<"ItemTransaction"> | string | null
+    created_at?: DateTimeWithAggregatesFilter<"ItemTransaction"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"ItemTransaction"> | Date | string
+    is_deleted?: BoolWithAggregatesFilter<"ItemTransaction"> | boolean
+  }
+
   export type SupplierCreateInput = {
     id?: string
     name: string
@@ -24340,6 +32231,8 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     canvass_items?: CanvassItemCreateNestedManyWithoutUnitInput
+    rr_items?: RRItemCreateNestedManyWithoutUnitInput
+    items?: ItemCreateNestedManyWithoutUnitInput
   }
 
   export type UnitUncheckedCreateInput = {
@@ -24349,6 +32242,8 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     canvass_items?: CanvassItemUncheckedCreateNestedManyWithoutUnitInput
+    rr_items?: RRItemUncheckedCreateNestedManyWithoutUnitInput
+    items?: ItemUncheckedCreateNestedManyWithoutUnitInput
   }
 
   export type UnitUpdateInput = {
@@ -24358,6 +32253,8 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     canvass_items?: CanvassItemUpdateManyWithoutUnitNestedInput
+    rr_items?: RRItemUpdateManyWithoutUnitNestedInput
+    items?: ItemUpdateManyWithoutUnitNestedInput
   }
 
   export type UnitUncheckedUpdateInput = {
@@ -24367,6 +32264,8 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     canvass_items?: CanvassItemUncheckedUpdateManyWithoutUnitNestedInput
+    rr_items?: RRItemUncheckedUpdateManyWithoutUnitNestedInput
+    items?: ItemUncheckedUpdateManyWithoutUnitNestedInput
   }
 
   export type UnitCreateManyInput = {
@@ -24400,6 +32299,7 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     canvass_items?: CanvassItemCreateNestedManyWithoutBrandInput
+    rr_items?: RRItemCreateNestedManyWithoutItem_brandInput
   }
 
   export type BrandUncheckedCreateInput = {
@@ -24409,6 +32309,7 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     canvass_items?: CanvassItemUncheckedCreateNestedManyWithoutBrandInput
+    rr_items?: RRItemUncheckedCreateNestedManyWithoutItem_brandInput
   }
 
   export type BrandUpdateInput = {
@@ -24418,6 +32319,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     canvass_items?: CanvassItemUpdateManyWithoutBrandNestedInput
+    rr_items?: RRItemUpdateManyWithoutItem_brandNestedInput
   }
 
   export type BrandUncheckedUpdateInput = {
@@ -24427,6 +32329,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     canvass_items?: CanvassItemUncheckedUpdateManyWithoutBrandNestedInput
+    rr_items?: RRItemUncheckedUpdateManyWithoutItem_brandNestedInput
   }
 
   export type BrandCreateManyInput = {
@@ -24722,6 +32625,7 @@ export namespace Prisma {
     supervisor_id: string
     status?: number
     canceller_id?: string | null
+    date_cancelled?: Date | string | null
     is_referenced?: boolean
     created_at?: Date | string
     updated_at?: Date | string
@@ -24742,6 +32646,7 @@ export namespace Prisma {
     supervisor_id: string
     status?: number
     canceller_id?: string | null
+    date_cancelled?: Date | string | null
     is_referenced?: boolean
     created_at?: Date | string
     updated_at?: Date | string
@@ -24760,6 +32665,7 @@ export namespace Prisma {
     supervisor_id?: StringFieldUpdateOperationsInput | string
     status?: IntFieldUpdateOperationsInput | number
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_referenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24780,6 +32686,7 @@ export namespace Prisma {
     supervisor_id?: StringFieldUpdateOperationsInput | string
     status?: IntFieldUpdateOperationsInput | number
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_referenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24799,6 +32706,7 @@ export namespace Prisma {
     supervisor_id: string
     status?: number
     canceller_id?: string | null
+    date_cancelled?: Date | string | null
     is_referenced?: boolean
     created_at?: Date | string
     updated_at?: Date | string
@@ -24815,6 +32723,7 @@ export namespace Prisma {
     supervisor_id?: StringFieldUpdateOperationsInput | string
     status?: IntFieldUpdateOperationsInput | number
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_referenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24832,6 +32741,7 @@ export namespace Prisma {
     supervisor_id?: StringFieldUpdateOperationsInput | string
     status?: IntFieldUpdateOperationsInput | number
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_referenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24940,6 +32850,7 @@ export namespace Prisma {
     classification_id?: string | null
     supervisor_id: string
     canceller_id?: string | null
+    date_cancelled?: Date | string | null
     rv_number: string
     date_requested: Date | string
     work_order_no?: string | null
@@ -24960,6 +32871,7 @@ export namespace Prisma {
     classification_id?: string | null
     supervisor_id: string
     canceller_id?: string | null
+    date_cancelled?: Date | string | null
     rv_number: string
     date_requested: Date | string
     work_order_no?: string | null
@@ -24978,6 +32890,7 @@ export namespace Prisma {
     classification_id?: NullableStringFieldUpdateOperationsInput | string | null
     supervisor_id?: StringFieldUpdateOperationsInput | string
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     rv_number?: StringFieldUpdateOperationsInput | string
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
     work_order_no?: NullableStringFieldUpdateOperationsInput | string | null
@@ -24998,6 +32911,7 @@ export namespace Prisma {
     classification_id?: NullableStringFieldUpdateOperationsInput | string | null
     supervisor_id?: StringFieldUpdateOperationsInput | string
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     rv_number?: StringFieldUpdateOperationsInput | string
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
     work_order_no?: NullableStringFieldUpdateOperationsInput | string | null
@@ -25017,6 +32931,7 @@ export namespace Prisma {
     classification_id?: string | null
     supervisor_id: string
     canceller_id?: string | null
+    date_cancelled?: Date | string | null
     rv_number: string
     date_requested: Date | string
     work_order_no?: string | null
@@ -25033,6 +32948,7 @@ export namespace Prisma {
     classification_id?: NullableStringFieldUpdateOperationsInput | string | null
     supervisor_id?: StringFieldUpdateOperationsInput | string
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     rv_number?: StringFieldUpdateOperationsInput | string
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
     work_order_no?: NullableStringFieldUpdateOperationsInput | string | null
@@ -25050,6 +32966,7 @@ export namespace Prisma {
     classification_id?: NullableStringFieldUpdateOperationsInput | string | null
     supervisor_id?: StringFieldUpdateOperationsInput | string
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     rv_number?: StringFieldUpdateOperationsInput | string
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
     work_order_no?: NullableStringFieldUpdateOperationsInput | string | null
@@ -25173,6 +33090,7 @@ export namespace Prisma {
     supervisor_id: string
     status?: number
     canceller_id?: string | null
+    date_cancelled?: Date | string | null
     is_referenced?: boolean
     created_at?: Date | string
     updated_at?: Date | string
@@ -25193,6 +33111,7 @@ export namespace Prisma {
     supervisor_id: string
     status?: number
     canceller_id?: string | null
+    date_cancelled?: Date | string | null
     is_referenced?: boolean
     created_at?: Date | string
     updated_at?: Date | string
@@ -25209,6 +33128,7 @@ export namespace Prisma {
     supervisor_id?: StringFieldUpdateOperationsInput | string
     status?: IntFieldUpdateOperationsInput | number
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_referenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -25229,6 +33149,7 @@ export namespace Prisma {
     supervisor_id?: StringFieldUpdateOperationsInput | string
     status?: IntFieldUpdateOperationsInput | number
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_referenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -25247,6 +33168,7 @@ export namespace Prisma {
     supervisor_id: string
     status?: number
     canceller_id?: string | null
+    date_cancelled?: Date | string | null
     is_referenced?: boolean
     created_at?: Date | string
     updated_at?: Date | string
@@ -25261,6 +33183,7 @@ export namespace Prisma {
     supervisor_id?: StringFieldUpdateOperationsInput | string
     status?: IntFieldUpdateOperationsInput | number
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_referenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -25277,6 +33200,7 @@ export namespace Prisma {
     supervisor_id?: StringFieldUpdateOperationsInput | string
     status?: IntFieldUpdateOperationsInput | number
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_referenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -25395,6 +33319,7 @@ export namespace Prisma {
     status?: number
     notes?: string | null
     canceller_id?: string | null
+    date_cancelled?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -25416,6 +33341,7 @@ export namespace Prisma {
     status?: number
     notes?: string | null
     canceller_id?: string | null
+    date_cancelled?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -25431,6 +33357,7 @@ export namespace Prisma {
     status?: IntFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -25452,6 +33379,7 @@ export namespace Prisma {
     status?: IntFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -25470,6 +33398,7 @@ export namespace Prisma {
     status?: number
     notes?: string | null
     canceller_id?: string | null
+    date_cancelled?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -25483,6 +33412,7 @@ export namespace Prisma {
     status?: IntFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -25499,6 +33429,7 @@ export namespace Prisma {
     status?: IntFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -25852,11 +33783,13 @@ export namespace Prisma {
     po_date: Date | string
     status?: number
     canceller_id?: string | null
+    date_cancelled?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
     po_approvers?: POApproverCreateNestedManyWithoutPoInput
     meqs_supplier: MEQSSupplierCreateNestedOneWithoutPoInput
+    rr?: RRCreateNestedOneWithoutPoInput
   }
 
   export type POUncheckedCreateInput = {
@@ -25866,10 +33799,12 @@ export namespace Prisma {
     po_date: Date | string
     status?: number
     canceller_id?: string | null
+    date_cancelled?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
     po_approvers?: POApproverUncheckedCreateNestedManyWithoutPoInput
+    rr?: RRUncheckedCreateNestedOneWithoutPoInput
   }
 
   export type POUpdateInput = {
@@ -25878,11 +33813,13 @@ export namespace Prisma {
     po_date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: IntFieldUpdateOperationsInput | number
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     po_approvers?: POApproverUpdateManyWithoutPoNestedInput
     meqs_supplier?: MEQSSupplierUpdateOneRequiredWithoutPoNestedInput
+    rr?: RRUpdateOneWithoutPoNestedInput
   }
 
   export type POUncheckedUpdateInput = {
@@ -25892,10 +33829,12 @@ export namespace Prisma {
     po_date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: IntFieldUpdateOperationsInput | number
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     po_approvers?: POApproverUncheckedUpdateManyWithoutPoNestedInput
+    rr?: RRUncheckedUpdateOneWithoutPoNestedInput
   }
 
   export type POCreateManyInput = {
@@ -25905,6 +33844,7 @@ export namespace Prisma {
     po_date: Date | string
     status?: number
     canceller_id?: string | null
+    date_cancelled?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -25916,6 +33856,7 @@ export namespace Prisma {
     po_date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: IntFieldUpdateOperationsInput | number
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -25928,6 +33869,7 @@ export namespace Prisma {
     po_date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: IntFieldUpdateOperationsInput | number
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -26032,6 +33974,636 @@ export namespace Prisma {
     status?: IntFieldUpdateOperationsInput | number
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type RRCreateInput = {
+    id?: string
+    rr_number: string
+    rr_date: Date | string
+    received_by_id: string
+    canceller_id?: string | null
+    date_cancelled?: Date | string | null
+    invoice_number: string
+    delivery_number?: string | null
+    notes?: string | null
+    delivery_charge: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    po: POCreateNestedOneWithoutRrInput
+    rr_approvers?: RRApproverCreateNestedManyWithoutRrInput
+    rr_items?: RRItemCreateNestedManyWithoutRrInput
+  }
+
+  export type RRUncheckedCreateInput = {
+    id?: string
+    po_id: string
+    rr_number: string
+    rr_date: Date | string
+    received_by_id: string
+    canceller_id?: string | null
+    date_cancelled?: Date | string | null
+    invoice_number: string
+    delivery_number?: string | null
+    notes?: string | null
+    delivery_charge: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    rr_approvers?: RRApproverUncheckedCreateNestedManyWithoutRrInput
+    rr_items?: RRItemUncheckedCreateNestedManyWithoutRrInput
+  }
+
+  export type RRUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    rr_number?: StringFieldUpdateOperationsInput | string
+    rr_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    received_by_id?: StringFieldUpdateOperationsInput | string
+    canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    invoice_number?: StringFieldUpdateOperationsInput | string
+    delivery_number?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    delivery_charge?: FloatFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    po?: POUpdateOneRequiredWithoutRrNestedInput
+    rr_approvers?: RRApproverUpdateManyWithoutRrNestedInput
+    rr_items?: RRItemUpdateManyWithoutRrNestedInput
+  }
+
+  export type RRUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    po_id?: StringFieldUpdateOperationsInput | string
+    rr_number?: StringFieldUpdateOperationsInput | string
+    rr_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    received_by_id?: StringFieldUpdateOperationsInput | string
+    canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    invoice_number?: StringFieldUpdateOperationsInput | string
+    delivery_number?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    delivery_charge?: FloatFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    rr_approvers?: RRApproverUncheckedUpdateManyWithoutRrNestedInput
+    rr_items?: RRItemUncheckedUpdateManyWithoutRrNestedInput
+  }
+
+  export type RRCreateManyInput = {
+    id?: string
+    po_id: string
+    rr_number: string
+    rr_date: Date | string
+    received_by_id: string
+    canceller_id?: string | null
+    date_cancelled?: Date | string | null
+    invoice_number: string
+    delivery_number?: string | null
+    notes?: string | null
+    delivery_charge: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
+  export type RRUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    rr_number?: StringFieldUpdateOperationsInput | string
+    rr_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    received_by_id?: StringFieldUpdateOperationsInput | string
+    canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    invoice_number?: StringFieldUpdateOperationsInput | string
+    delivery_number?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    delivery_charge?: FloatFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type RRUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    po_id?: StringFieldUpdateOperationsInput | string
+    rr_number?: StringFieldUpdateOperationsInput | string
+    rr_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    received_by_id?: StringFieldUpdateOperationsInput | string
+    canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    invoice_number?: StringFieldUpdateOperationsInput | string
+    delivery_number?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    delivery_charge?: FloatFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type RRApproverCreateInput = {
+    id?: string
+    approver_id: string
+    approver_proxy_id?: string | null
+    date_approval?: Date | string | null
+    notes?: string | null
+    status: number
+    label: string
+    order: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    rr: RRCreateNestedOneWithoutRr_approversInput
+  }
+
+  export type RRApproverUncheckedCreateInput = {
+    id?: string
+    rr_id: string
+    approver_id: string
+    approver_proxy_id?: string | null
+    date_approval?: Date | string | null
+    notes?: string | null
+    status: number
+    label: string
+    order: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
+  export type RRApproverUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    approver_id?: StringFieldUpdateOperationsInput | string
+    approver_proxy_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_approval?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: IntFieldUpdateOperationsInput | number
+    label?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    rr?: RRUpdateOneRequiredWithoutRr_approversNestedInput
+  }
+
+  export type RRApproverUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    rr_id?: StringFieldUpdateOperationsInput | string
+    approver_id?: StringFieldUpdateOperationsInput | string
+    approver_proxy_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_approval?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: IntFieldUpdateOperationsInput | number
+    label?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type RRApproverCreateManyInput = {
+    id?: string
+    rr_id: string
+    approver_id: string
+    approver_proxy_id?: string | null
+    date_approval?: Date | string | null
+    notes?: string | null
+    status: number
+    label: string
+    order: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
+  export type RRApproverUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    approver_id?: StringFieldUpdateOperationsInput | string
+    approver_proxy_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_approval?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: IntFieldUpdateOperationsInput | number
+    label?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type RRApproverUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    rr_id?: StringFieldUpdateOperationsInput | string
+    approver_id?: StringFieldUpdateOperationsInput | string
+    approver_proxy_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_approval?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: IntFieldUpdateOperationsInput | number
+    label?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type RRItemCreateInput = {
+    id?: string
+    item_class: number
+    quantity_delivered: number
+    quantity_accepted: number
+    description: string
+    vat_type: number
+    gross_price: number
+    net_price: number
+    freight_cost: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    rr: RRCreateNestedOneWithoutRr_itemsInput
+    item?: ItemCreateNestedOneWithoutRr_itemsInput
+    item_brand: BrandCreateNestedOneWithoutRr_itemsInput
+    unit: UnitCreateNestedOneWithoutRr_itemsInput
+    ItemTransaction?: ItemTransactionCreateNestedOneWithoutRr_itemInput
+  }
+
+  export type RRItemUncheckedCreateInput = {
+    id?: string
+    rr_id: string
+    item_id?: string | null
+    item_brand_id: string
+    unit_id: string
+    item_class: number
+    quantity_delivered: number
+    quantity_accepted: number
+    description: string
+    vat_type: number
+    gross_price: number
+    net_price: number
+    freight_cost: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    ItemTransaction?: ItemTransactionUncheckedCreateNestedOneWithoutRr_itemInput
+  }
+
+  export type RRItemUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    item_class?: IntFieldUpdateOperationsInput | number
+    quantity_delivered?: IntFieldUpdateOperationsInput | number
+    quantity_accepted?: IntFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
+    vat_type?: IntFieldUpdateOperationsInput | number
+    gross_price?: FloatFieldUpdateOperationsInput | number
+    net_price?: FloatFieldUpdateOperationsInput | number
+    freight_cost?: FloatFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    rr?: RRUpdateOneRequiredWithoutRr_itemsNestedInput
+    item?: ItemUpdateOneWithoutRr_itemsNestedInput
+    item_brand?: BrandUpdateOneRequiredWithoutRr_itemsNestedInput
+    unit?: UnitUpdateOneRequiredWithoutRr_itemsNestedInput
+    ItemTransaction?: ItemTransactionUpdateOneWithoutRr_itemNestedInput
+  }
+
+  export type RRItemUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    rr_id?: StringFieldUpdateOperationsInput | string
+    item_id?: NullableStringFieldUpdateOperationsInput | string | null
+    item_brand_id?: StringFieldUpdateOperationsInput | string
+    unit_id?: StringFieldUpdateOperationsInput | string
+    item_class?: IntFieldUpdateOperationsInput | number
+    quantity_delivered?: IntFieldUpdateOperationsInput | number
+    quantity_accepted?: IntFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
+    vat_type?: IntFieldUpdateOperationsInput | number
+    gross_price?: FloatFieldUpdateOperationsInput | number
+    net_price?: FloatFieldUpdateOperationsInput | number
+    freight_cost?: FloatFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    ItemTransaction?: ItemTransactionUncheckedUpdateOneWithoutRr_itemNestedInput
+  }
+
+  export type RRItemCreateManyInput = {
+    id?: string
+    rr_id: string
+    item_id?: string | null
+    item_brand_id: string
+    unit_id: string
+    item_class: number
+    quantity_delivered: number
+    quantity_accepted: number
+    description: string
+    vat_type: number
+    gross_price: number
+    net_price: number
+    freight_cost: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
+  export type RRItemUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    item_class?: IntFieldUpdateOperationsInput | number
+    quantity_delivered?: IntFieldUpdateOperationsInput | number
+    quantity_accepted?: IntFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
+    vat_type?: IntFieldUpdateOperationsInput | number
+    gross_price?: FloatFieldUpdateOperationsInput | number
+    net_price?: FloatFieldUpdateOperationsInput | number
+    freight_cost?: FloatFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type RRItemUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    rr_id?: StringFieldUpdateOperationsInput | string
+    item_id?: NullableStringFieldUpdateOperationsInput | string | null
+    item_brand_id?: StringFieldUpdateOperationsInput | string
+    unit_id?: StringFieldUpdateOperationsInput | string
+    item_class?: IntFieldUpdateOperationsInput | number
+    quantity_delivered?: IntFieldUpdateOperationsInput | number
+    quantity_accepted?: IntFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
+    vat_type?: IntFieldUpdateOperationsInput | number
+    gross_price?: FloatFieldUpdateOperationsInput | number
+    net_price?: FloatFieldUpdateOperationsInput | number
+    freight_cost?: FloatFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type ItemCreateInput = {
+    id?: string
+    code: string
+    description: string
+    quantity: number
+    initial_quantity: number
+    average_price: number
+    initial_average_price: number
+    is_initial?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    item_type: ItemTypeCreateNestedOneWithoutItemsInput
+    item_transactions?: ItemTransactionCreateNestedManyWithoutItemInput
+    rr_items?: RRItemCreateNestedManyWithoutItemInput
+    unit: UnitCreateNestedOneWithoutItemsInput
+  }
+
+  export type ItemUncheckedCreateInput = {
+    id?: string
+    item_type_id: string
+    unit_id: string
+    code: string
+    description: string
+    quantity: number
+    initial_quantity: number
+    average_price: number
+    initial_average_price: number
+    is_initial?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    item_transactions?: ItemTransactionUncheckedCreateNestedManyWithoutItemInput
+    rr_items?: RRItemUncheckedCreateNestedManyWithoutItemInput
+  }
+
+  export type ItemUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    initial_quantity?: IntFieldUpdateOperationsInput | number
+    average_price?: FloatFieldUpdateOperationsInput | number
+    initial_average_price?: FloatFieldUpdateOperationsInput | number
+    is_initial?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    item_type?: ItemTypeUpdateOneRequiredWithoutItemsNestedInput
+    item_transactions?: ItemTransactionUpdateManyWithoutItemNestedInput
+    rr_items?: RRItemUpdateManyWithoutItemNestedInput
+    unit?: UnitUpdateOneRequiredWithoutItemsNestedInput
+  }
+
+  export type ItemUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    item_type_id?: StringFieldUpdateOperationsInput | string
+    unit_id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    initial_quantity?: IntFieldUpdateOperationsInput | number
+    average_price?: FloatFieldUpdateOperationsInput | number
+    initial_average_price?: FloatFieldUpdateOperationsInput | number
+    is_initial?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    item_transactions?: ItemTransactionUncheckedUpdateManyWithoutItemNestedInput
+    rr_items?: RRItemUncheckedUpdateManyWithoutItemNestedInput
+  }
+
+  export type ItemCreateManyInput = {
+    id?: string
+    item_type_id: string
+    unit_id: string
+    code: string
+    description: string
+    quantity: number
+    initial_quantity: number
+    average_price: number
+    initial_average_price: number
+    is_initial?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
+  export type ItemUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    initial_quantity?: IntFieldUpdateOperationsInput | number
+    average_price?: FloatFieldUpdateOperationsInput | number
+    initial_average_price?: FloatFieldUpdateOperationsInput | number
+    is_initial?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type ItemUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    item_type_id?: StringFieldUpdateOperationsInput | string
+    unit_id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    initial_quantity?: IntFieldUpdateOperationsInput | number
+    average_price?: FloatFieldUpdateOperationsInput | number
+    initial_average_price?: FloatFieldUpdateOperationsInput | number
+    is_initial?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type ItemTypeCreateInput = {
+    id?: string
+    name: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    items?: ItemCreateNestedManyWithoutItem_typeInput
+  }
+
+  export type ItemTypeUncheckedCreateInput = {
+    id?: string
+    name: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    items?: ItemUncheckedCreateNestedManyWithoutItem_typeInput
+  }
+
+  export type ItemTypeUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    items?: ItemUpdateManyWithoutItem_typeNestedInput
+  }
+
+  export type ItemTypeUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    items?: ItemUncheckedUpdateManyWithoutItem_typeNestedInput
+  }
+
+  export type ItemTypeCreateManyInput = {
+    id?: string
+    name: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
+  export type ItemTypeUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type ItemTypeUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type ItemTransactionCreateInput = {
+    id?: string
+    type: number
+    quantity: number
+    price: number
+    remarks?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    item: ItemCreateNestedOneWithoutItem_transactionsInput
+    rr_item?: RRItemCreateNestedOneWithoutItemTransactionInput
+  }
+
+  export type ItemTransactionUncheckedCreateInput = {
+    id?: string
+    item_id: string
+    rr_item_id?: string | null
+    type: number
+    quantity: number
+    price: number
+    remarks?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
+  export type ItemTransactionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: IntFieldUpdateOperationsInput | number
+    quantity?: FloatFieldUpdateOperationsInput | number
+    price?: FloatFieldUpdateOperationsInput | number
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    item?: ItemUpdateOneRequiredWithoutItem_transactionsNestedInput
+    rr_item?: RRItemUpdateOneWithoutItemTransactionNestedInput
+  }
+
+  export type ItemTransactionUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    item_id?: StringFieldUpdateOperationsInput | string
+    rr_item_id?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: IntFieldUpdateOperationsInput | number
+    quantity?: FloatFieldUpdateOperationsInput | number
+    price?: FloatFieldUpdateOperationsInput | number
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type ItemTransactionCreateManyInput = {
+    id?: string
+    item_id: string
+    rr_item_id?: string | null
+    type: number
+    quantity: number
+    price: number
+    remarks?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
+  export type ItemTransactionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: IntFieldUpdateOperationsInput | number
+    quantity?: FloatFieldUpdateOperationsInput | number
+    price?: FloatFieldUpdateOperationsInput | number
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type ItemTransactionUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    item_id?: StringFieldUpdateOperationsInput | string
+    rr_item_id?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: IntFieldUpdateOperationsInput | number
+    quantity?: FloatFieldUpdateOperationsInput | number
+    price?: FloatFieldUpdateOperationsInput | number
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -26151,7 +34723,27 @@ export namespace Prisma {
     none?: CanvassItemWhereInput
   }
 
+  export type RRItemListRelationFilter = {
+    every?: RRItemWhereInput
+    some?: RRItemWhereInput
+    none?: RRItemWhereInput
+  }
+
+  export type ItemListRelationFilter = {
+    every?: ItemWhereInput
+    some?: ItemWhereInput
+    none?: ItemWhereInput
+  }
+
   export type CanvassItemOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type RRItemOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ItemOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -26428,6 +35020,17 @@ export namespace Prisma {
     is_deleted?: SortOrder
   }
 
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type JOApproverListRelationFilter = {
     every?: JOApproverWhereInput
     some?: JOApproverWhereInput
@@ -26454,6 +35057,7 @@ export namespace Prisma {
     supervisor_id?: SortOrder
     status?: SortOrder
     canceller_id?: SortOrder
+    date_cancelled?: SortOrder
     is_referenced?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -26475,6 +35079,7 @@ export namespace Prisma {
     supervisor_id?: SortOrder
     status?: SortOrder
     canceller_id?: SortOrder
+    date_cancelled?: SortOrder
     is_referenced?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -26492,6 +35097,7 @@ export namespace Prisma {
     supervisor_id?: SortOrder
     status?: SortOrder
     canceller_id?: SortOrder
+    date_cancelled?: SortOrder
     is_referenced?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -26502,7 +35108,7 @@ export namespace Prisma {
     status?: SortOrder
   }
 
-  export type DateTimeNullableFilter<$PrismaModel = never> = {
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
     notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -26510,7 +35116,10 @@ export namespace Prisma {
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type JORelationFilter = {
@@ -26570,20 +35179,6 @@ export namespace Prisma {
     order?: SortOrder
   }
 
-  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
-  }
-
   export type RVApproverListRelationFilter = {
     every?: RVApproverWhereInput
     some?: RVApproverWhereInput
@@ -26600,6 +35195,7 @@ export namespace Prisma {
     classification_id?: SortOrder
     supervisor_id?: SortOrder
     canceller_id?: SortOrder
+    date_cancelled?: SortOrder
     rv_number?: SortOrder
     date_requested?: SortOrder
     work_order_no?: SortOrder
@@ -26621,6 +35217,7 @@ export namespace Prisma {
     classification_id?: SortOrder
     supervisor_id?: SortOrder
     canceller_id?: SortOrder
+    date_cancelled?: SortOrder
     rv_number?: SortOrder
     date_requested?: SortOrder
     work_order_no?: SortOrder
@@ -26638,6 +35235,7 @@ export namespace Prisma {
     classification_id?: SortOrder
     supervisor_id?: SortOrder
     canceller_id?: SortOrder
+    date_cancelled?: SortOrder
     rv_number?: SortOrder
     date_requested?: SortOrder
     work_order_no?: SortOrder
@@ -26738,6 +35336,7 @@ export namespace Prisma {
     supervisor_id?: SortOrder
     status?: SortOrder
     canceller_id?: SortOrder
+    date_cancelled?: SortOrder
     is_referenced?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -26758,6 +35357,7 @@ export namespace Prisma {
     supervisor_id?: SortOrder
     status?: SortOrder
     canceller_id?: SortOrder
+    date_cancelled?: SortOrder
     is_referenced?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -26774,6 +35374,7 @@ export namespace Prisma {
     supervisor_id?: SortOrder
     status?: SortOrder
     canceller_id?: SortOrder
+    date_cancelled?: SortOrder
     is_referenced?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -26865,6 +35466,7 @@ export namespace Prisma {
     status?: SortOrder
     notes?: SortOrder
     canceller_id?: SortOrder
+    date_cancelled?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -26886,6 +35488,7 @@ export namespace Prisma {
     status?: SortOrder
     notes?: SortOrder
     canceller_id?: SortOrder
+    date_cancelled?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -26902,6 +35505,7 @@ export namespace Prisma {
     status?: SortOrder
     notes?: SortOrder
     canceller_id?: SortOrder
+    date_cancelled?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -27144,6 +35748,11 @@ export namespace Prisma {
     none?: POApproverWhereInput
   }
 
+  export type RRNullableRelationFilter = {
+    is?: RRWhereInput | null
+    isNot?: RRWhereInput | null
+  }
+
   export type POApproverOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -27155,6 +35764,7 @@ export namespace Prisma {
     po_date?: SortOrder
     status?: SortOrder
     canceller_id?: SortOrder
+    date_cancelled?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -27171,6 +35781,7 @@ export namespace Prisma {
     po_date?: SortOrder
     status?: SortOrder
     canceller_id?: SortOrder
+    date_cancelled?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -27183,6 +35794,7 @@ export namespace Prisma {
     po_date?: SortOrder
     status?: SortOrder
     canceller_id?: SortOrder
+    date_cancelled?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -27252,6 +35864,389 @@ export namespace Prisma {
     order?: SortOrder
   }
 
+  export type RRApproverListRelationFilter = {
+    every?: RRApproverWhereInput
+    some?: RRApproverWhereInput
+    none?: RRApproverWhereInput
+  }
+
+  export type RRApproverOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type RRCountOrderByAggregateInput = {
+    id?: SortOrder
+    po_id?: SortOrder
+    rr_number?: SortOrder
+    rr_date?: SortOrder
+    received_by_id?: SortOrder
+    canceller_id?: SortOrder
+    date_cancelled?: SortOrder
+    invoice_number?: SortOrder
+    delivery_number?: SortOrder
+    notes?: SortOrder
+    delivery_charge?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+  }
+
+  export type RRAvgOrderByAggregateInput = {
+    delivery_charge?: SortOrder
+  }
+
+  export type RRMaxOrderByAggregateInput = {
+    id?: SortOrder
+    po_id?: SortOrder
+    rr_number?: SortOrder
+    rr_date?: SortOrder
+    received_by_id?: SortOrder
+    canceller_id?: SortOrder
+    date_cancelled?: SortOrder
+    invoice_number?: SortOrder
+    delivery_number?: SortOrder
+    notes?: SortOrder
+    delivery_charge?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+  }
+
+  export type RRMinOrderByAggregateInput = {
+    id?: SortOrder
+    po_id?: SortOrder
+    rr_number?: SortOrder
+    rr_date?: SortOrder
+    received_by_id?: SortOrder
+    canceller_id?: SortOrder
+    date_cancelled?: SortOrder
+    invoice_number?: SortOrder
+    delivery_number?: SortOrder
+    notes?: SortOrder
+    delivery_charge?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+  }
+
+  export type RRSumOrderByAggregateInput = {
+    delivery_charge?: SortOrder
+  }
+
+  export type RRRelationFilter = {
+    is?: RRWhereInput
+    isNot?: RRWhereInput
+  }
+
+  export type RRApproverCountOrderByAggregateInput = {
+    id?: SortOrder
+    rr_id?: SortOrder
+    approver_id?: SortOrder
+    approver_proxy_id?: SortOrder
+    date_approval?: SortOrder
+    notes?: SortOrder
+    status?: SortOrder
+    label?: SortOrder
+    order?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+  }
+
+  export type RRApproverAvgOrderByAggregateInput = {
+    status?: SortOrder
+    order?: SortOrder
+  }
+
+  export type RRApproverMaxOrderByAggregateInput = {
+    id?: SortOrder
+    rr_id?: SortOrder
+    approver_id?: SortOrder
+    approver_proxy_id?: SortOrder
+    date_approval?: SortOrder
+    notes?: SortOrder
+    status?: SortOrder
+    label?: SortOrder
+    order?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+  }
+
+  export type RRApproverMinOrderByAggregateInput = {
+    id?: SortOrder
+    rr_id?: SortOrder
+    approver_id?: SortOrder
+    approver_proxy_id?: SortOrder
+    date_approval?: SortOrder
+    notes?: SortOrder
+    status?: SortOrder
+    label?: SortOrder
+    order?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+  }
+
+  export type RRApproverSumOrderByAggregateInput = {
+    status?: SortOrder
+    order?: SortOrder
+  }
+
+  export type ItemNullableRelationFilter = {
+    is?: ItemWhereInput | null
+    isNot?: ItemWhereInput | null
+  }
+
+  export type BrandRelationFilter = {
+    is?: BrandWhereInput
+    isNot?: BrandWhereInput
+  }
+
+  export type ItemTransactionNullableRelationFilter = {
+    is?: ItemTransactionWhereInput | null
+    isNot?: ItemTransactionWhereInput | null
+  }
+
+  export type RRItemCountOrderByAggregateInput = {
+    id?: SortOrder
+    rr_id?: SortOrder
+    item_id?: SortOrder
+    item_brand_id?: SortOrder
+    unit_id?: SortOrder
+    item_class?: SortOrder
+    quantity_delivered?: SortOrder
+    quantity_accepted?: SortOrder
+    description?: SortOrder
+    vat_type?: SortOrder
+    gross_price?: SortOrder
+    net_price?: SortOrder
+    freight_cost?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+  }
+
+  export type RRItemAvgOrderByAggregateInput = {
+    item_class?: SortOrder
+    quantity_delivered?: SortOrder
+    quantity_accepted?: SortOrder
+    vat_type?: SortOrder
+    gross_price?: SortOrder
+    net_price?: SortOrder
+    freight_cost?: SortOrder
+  }
+
+  export type RRItemMaxOrderByAggregateInput = {
+    id?: SortOrder
+    rr_id?: SortOrder
+    item_id?: SortOrder
+    item_brand_id?: SortOrder
+    unit_id?: SortOrder
+    item_class?: SortOrder
+    quantity_delivered?: SortOrder
+    quantity_accepted?: SortOrder
+    description?: SortOrder
+    vat_type?: SortOrder
+    gross_price?: SortOrder
+    net_price?: SortOrder
+    freight_cost?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+  }
+
+  export type RRItemMinOrderByAggregateInput = {
+    id?: SortOrder
+    rr_id?: SortOrder
+    item_id?: SortOrder
+    item_brand_id?: SortOrder
+    unit_id?: SortOrder
+    item_class?: SortOrder
+    quantity_delivered?: SortOrder
+    quantity_accepted?: SortOrder
+    description?: SortOrder
+    vat_type?: SortOrder
+    gross_price?: SortOrder
+    net_price?: SortOrder
+    freight_cost?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+  }
+
+  export type RRItemSumOrderByAggregateInput = {
+    item_class?: SortOrder
+    quantity_delivered?: SortOrder
+    quantity_accepted?: SortOrder
+    vat_type?: SortOrder
+    gross_price?: SortOrder
+    net_price?: SortOrder
+    freight_cost?: SortOrder
+  }
+
+  export type ItemTypeRelationFilter = {
+    is?: ItemTypeWhereInput
+    isNot?: ItemTypeWhereInput
+  }
+
+  export type ItemTransactionListRelationFilter = {
+    every?: ItemTransactionWhereInput
+    some?: ItemTransactionWhereInput
+    none?: ItemTransactionWhereInput
+  }
+
+  export type ItemTransactionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ItemCountOrderByAggregateInput = {
+    id?: SortOrder
+    item_type_id?: SortOrder
+    unit_id?: SortOrder
+    code?: SortOrder
+    description?: SortOrder
+    quantity?: SortOrder
+    initial_quantity?: SortOrder
+    average_price?: SortOrder
+    initial_average_price?: SortOrder
+    is_initial?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+  }
+
+  export type ItemAvgOrderByAggregateInput = {
+    quantity?: SortOrder
+    initial_quantity?: SortOrder
+    average_price?: SortOrder
+    initial_average_price?: SortOrder
+  }
+
+  export type ItemMaxOrderByAggregateInput = {
+    id?: SortOrder
+    item_type_id?: SortOrder
+    unit_id?: SortOrder
+    code?: SortOrder
+    description?: SortOrder
+    quantity?: SortOrder
+    initial_quantity?: SortOrder
+    average_price?: SortOrder
+    initial_average_price?: SortOrder
+    is_initial?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+  }
+
+  export type ItemMinOrderByAggregateInput = {
+    id?: SortOrder
+    item_type_id?: SortOrder
+    unit_id?: SortOrder
+    code?: SortOrder
+    description?: SortOrder
+    quantity?: SortOrder
+    initial_quantity?: SortOrder
+    average_price?: SortOrder
+    initial_average_price?: SortOrder
+    is_initial?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+  }
+
+  export type ItemSumOrderByAggregateInput = {
+    quantity?: SortOrder
+    initial_quantity?: SortOrder
+    average_price?: SortOrder
+    initial_average_price?: SortOrder
+  }
+
+  export type ItemTypeCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+  }
+
+  export type ItemTypeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+  }
+
+  export type ItemTypeMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+  }
+
+  export type ItemRelationFilter = {
+    is?: ItemWhereInput
+    isNot?: ItemWhereInput
+  }
+
+  export type RRItemNullableRelationFilter = {
+    is?: RRItemWhereInput | null
+    isNot?: RRItemWhereInput | null
+  }
+
+  export type ItemTransactionCountOrderByAggregateInput = {
+    id?: SortOrder
+    item_id?: SortOrder
+    rr_item_id?: SortOrder
+    type?: SortOrder
+    quantity?: SortOrder
+    price?: SortOrder
+    remarks?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+  }
+
+  export type ItemTransactionAvgOrderByAggregateInput = {
+    type?: SortOrder
+    quantity?: SortOrder
+    price?: SortOrder
+  }
+
+  export type ItemTransactionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    item_id?: SortOrder
+    rr_item_id?: SortOrder
+    type?: SortOrder
+    quantity?: SortOrder
+    price?: SortOrder
+    remarks?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+  }
+
+  export type ItemTransactionMinOrderByAggregateInput = {
+    id?: SortOrder
+    item_id?: SortOrder
+    rr_item_id?: SortOrder
+    type?: SortOrder
+    quantity?: SortOrder
+    price?: SortOrder
+    remarks?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+  }
+
+  export type ItemTransactionSumOrderByAggregateInput = {
+    type?: SortOrder
+    quantity?: SortOrder
+    price?: SortOrder
+  }
+
   export type MEQSSupplierCreateNestedManyWithoutSupplierInput = {
     create?: XOR<MEQSSupplierCreateWithoutSupplierInput, MEQSSupplierUncheckedCreateWithoutSupplierInput> | MEQSSupplierCreateWithoutSupplierInput[] | MEQSSupplierUncheckedCreateWithoutSupplierInput[]
     connectOrCreate?: MEQSSupplierCreateOrConnectWithoutSupplierInput | MEQSSupplierCreateOrConnectWithoutSupplierInput[]
@@ -27313,11 +36308,39 @@ export namespace Prisma {
     connect?: CanvassItemWhereUniqueInput | CanvassItemWhereUniqueInput[]
   }
 
+  export type RRItemCreateNestedManyWithoutUnitInput = {
+    create?: XOR<RRItemCreateWithoutUnitInput, RRItemUncheckedCreateWithoutUnitInput> | RRItemCreateWithoutUnitInput[] | RRItemUncheckedCreateWithoutUnitInput[]
+    connectOrCreate?: RRItemCreateOrConnectWithoutUnitInput | RRItemCreateOrConnectWithoutUnitInput[]
+    createMany?: RRItemCreateManyUnitInputEnvelope
+    connect?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
+  }
+
+  export type ItemCreateNestedManyWithoutUnitInput = {
+    create?: XOR<ItemCreateWithoutUnitInput, ItemUncheckedCreateWithoutUnitInput> | ItemCreateWithoutUnitInput[] | ItemUncheckedCreateWithoutUnitInput[]
+    connectOrCreate?: ItemCreateOrConnectWithoutUnitInput | ItemCreateOrConnectWithoutUnitInput[]
+    createMany?: ItemCreateManyUnitInputEnvelope
+    connect?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+  }
+
   export type CanvassItemUncheckedCreateNestedManyWithoutUnitInput = {
     create?: XOR<CanvassItemCreateWithoutUnitInput, CanvassItemUncheckedCreateWithoutUnitInput> | CanvassItemCreateWithoutUnitInput[] | CanvassItemUncheckedCreateWithoutUnitInput[]
     connectOrCreate?: CanvassItemCreateOrConnectWithoutUnitInput | CanvassItemCreateOrConnectWithoutUnitInput[]
     createMany?: CanvassItemCreateManyUnitInputEnvelope
     connect?: CanvassItemWhereUniqueInput | CanvassItemWhereUniqueInput[]
+  }
+
+  export type RRItemUncheckedCreateNestedManyWithoutUnitInput = {
+    create?: XOR<RRItemCreateWithoutUnitInput, RRItemUncheckedCreateWithoutUnitInput> | RRItemCreateWithoutUnitInput[] | RRItemUncheckedCreateWithoutUnitInput[]
+    connectOrCreate?: RRItemCreateOrConnectWithoutUnitInput | RRItemCreateOrConnectWithoutUnitInput[]
+    createMany?: RRItemCreateManyUnitInputEnvelope
+    connect?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
+  }
+
+  export type ItemUncheckedCreateNestedManyWithoutUnitInput = {
+    create?: XOR<ItemCreateWithoutUnitInput, ItemUncheckedCreateWithoutUnitInput> | ItemCreateWithoutUnitInput[] | ItemUncheckedCreateWithoutUnitInput[]
+    connectOrCreate?: ItemCreateOrConnectWithoutUnitInput | ItemCreateOrConnectWithoutUnitInput[]
+    createMany?: ItemCreateManyUnitInputEnvelope
+    connect?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
   }
 
   export type CanvassItemUpdateManyWithoutUnitNestedInput = {
@@ -27334,6 +36357,34 @@ export namespace Prisma {
     deleteMany?: CanvassItemScalarWhereInput | CanvassItemScalarWhereInput[]
   }
 
+  export type RRItemUpdateManyWithoutUnitNestedInput = {
+    create?: XOR<RRItemCreateWithoutUnitInput, RRItemUncheckedCreateWithoutUnitInput> | RRItemCreateWithoutUnitInput[] | RRItemUncheckedCreateWithoutUnitInput[]
+    connectOrCreate?: RRItemCreateOrConnectWithoutUnitInput | RRItemCreateOrConnectWithoutUnitInput[]
+    upsert?: RRItemUpsertWithWhereUniqueWithoutUnitInput | RRItemUpsertWithWhereUniqueWithoutUnitInput[]
+    createMany?: RRItemCreateManyUnitInputEnvelope
+    set?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
+    disconnect?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
+    delete?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
+    connect?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
+    update?: RRItemUpdateWithWhereUniqueWithoutUnitInput | RRItemUpdateWithWhereUniqueWithoutUnitInput[]
+    updateMany?: RRItemUpdateManyWithWhereWithoutUnitInput | RRItemUpdateManyWithWhereWithoutUnitInput[]
+    deleteMany?: RRItemScalarWhereInput | RRItemScalarWhereInput[]
+  }
+
+  export type ItemUpdateManyWithoutUnitNestedInput = {
+    create?: XOR<ItemCreateWithoutUnitInput, ItemUncheckedCreateWithoutUnitInput> | ItemCreateWithoutUnitInput[] | ItemUncheckedCreateWithoutUnitInput[]
+    connectOrCreate?: ItemCreateOrConnectWithoutUnitInput | ItemCreateOrConnectWithoutUnitInput[]
+    upsert?: ItemUpsertWithWhereUniqueWithoutUnitInput | ItemUpsertWithWhereUniqueWithoutUnitInput[]
+    createMany?: ItemCreateManyUnitInputEnvelope
+    set?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+    disconnect?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+    delete?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+    connect?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+    update?: ItemUpdateWithWhereUniqueWithoutUnitInput | ItemUpdateWithWhereUniqueWithoutUnitInput[]
+    updateMany?: ItemUpdateManyWithWhereWithoutUnitInput | ItemUpdateManyWithWhereWithoutUnitInput[]
+    deleteMany?: ItemScalarWhereInput | ItemScalarWhereInput[]
+  }
+
   export type CanvassItemUncheckedUpdateManyWithoutUnitNestedInput = {
     create?: XOR<CanvassItemCreateWithoutUnitInput, CanvassItemUncheckedCreateWithoutUnitInput> | CanvassItemCreateWithoutUnitInput[] | CanvassItemUncheckedCreateWithoutUnitInput[]
     connectOrCreate?: CanvassItemCreateOrConnectWithoutUnitInput | CanvassItemCreateOrConnectWithoutUnitInput[]
@@ -27348,6 +36399,34 @@ export namespace Prisma {
     deleteMany?: CanvassItemScalarWhereInput | CanvassItemScalarWhereInput[]
   }
 
+  export type RRItemUncheckedUpdateManyWithoutUnitNestedInput = {
+    create?: XOR<RRItemCreateWithoutUnitInput, RRItemUncheckedCreateWithoutUnitInput> | RRItemCreateWithoutUnitInput[] | RRItemUncheckedCreateWithoutUnitInput[]
+    connectOrCreate?: RRItemCreateOrConnectWithoutUnitInput | RRItemCreateOrConnectWithoutUnitInput[]
+    upsert?: RRItemUpsertWithWhereUniqueWithoutUnitInput | RRItemUpsertWithWhereUniqueWithoutUnitInput[]
+    createMany?: RRItemCreateManyUnitInputEnvelope
+    set?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
+    disconnect?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
+    delete?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
+    connect?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
+    update?: RRItemUpdateWithWhereUniqueWithoutUnitInput | RRItemUpdateWithWhereUniqueWithoutUnitInput[]
+    updateMany?: RRItemUpdateManyWithWhereWithoutUnitInput | RRItemUpdateManyWithWhereWithoutUnitInput[]
+    deleteMany?: RRItemScalarWhereInput | RRItemScalarWhereInput[]
+  }
+
+  export type ItemUncheckedUpdateManyWithoutUnitNestedInput = {
+    create?: XOR<ItemCreateWithoutUnitInput, ItemUncheckedCreateWithoutUnitInput> | ItemCreateWithoutUnitInput[] | ItemUncheckedCreateWithoutUnitInput[]
+    connectOrCreate?: ItemCreateOrConnectWithoutUnitInput | ItemCreateOrConnectWithoutUnitInput[]
+    upsert?: ItemUpsertWithWhereUniqueWithoutUnitInput | ItemUpsertWithWhereUniqueWithoutUnitInput[]
+    createMany?: ItemCreateManyUnitInputEnvelope
+    set?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+    disconnect?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+    delete?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+    connect?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+    update?: ItemUpdateWithWhereUniqueWithoutUnitInput | ItemUpdateWithWhereUniqueWithoutUnitInput[]
+    updateMany?: ItemUpdateManyWithWhereWithoutUnitInput | ItemUpdateManyWithWhereWithoutUnitInput[]
+    deleteMany?: ItemScalarWhereInput | ItemScalarWhereInput[]
+  }
+
   export type CanvassItemCreateNestedManyWithoutBrandInput = {
     create?: XOR<CanvassItemCreateWithoutBrandInput, CanvassItemUncheckedCreateWithoutBrandInput> | CanvassItemCreateWithoutBrandInput[] | CanvassItemUncheckedCreateWithoutBrandInput[]
     connectOrCreate?: CanvassItemCreateOrConnectWithoutBrandInput | CanvassItemCreateOrConnectWithoutBrandInput[]
@@ -27355,11 +36434,25 @@ export namespace Prisma {
     connect?: CanvassItemWhereUniqueInput | CanvassItemWhereUniqueInput[]
   }
 
+  export type RRItemCreateNestedManyWithoutItem_brandInput = {
+    create?: XOR<RRItemCreateWithoutItem_brandInput, RRItemUncheckedCreateWithoutItem_brandInput> | RRItemCreateWithoutItem_brandInput[] | RRItemUncheckedCreateWithoutItem_brandInput[]
+    connectOrCreate?: RRItemCreateOrConnectWithoutItem_brandInput | RRItemCreateOrConnectWithoutItem_brandInput[]
+    createMany?: RRItemCreateManyItem_brandInputEnvelope
+    connect?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
+  }
+
   export type CanvassItemUncheckedCreateNestedManyWithoutBrandInput = {
     create?: XOR<CanvassItemCreateWithoutBrandInput, CanvassItemUncheckedCreateWithoutBrandInput> | CanvassItemCreateWithoutBrandInput[] | CanvassItemUncheckedCreateWithoutBrandInput[]
     connectOrCreate?: CanvassItemCreateOrConnectWithoutBrandInput | CanvassItemCreateOrConnectWithoutBrandInput[]
     createMany?: CanvassItemCreateManyBrandInputEnvelope
     connect?: CanvassItemWhereUniqueInput | CanvassItemWhereUniqueInput[]
+  }
+
+  export type RRItemUncheckedCreateNestedManyWithoutItem_brandInput = {
+    create?: XOR<RRItemCreateWithoutItem_brandInput, RRItemUncheckedCreateWithoutItem_brandInput> | RRItemCreateWithoutItem_brandInput[] | RRItemUncheckedCreateWithoutItem_brandInput[]
+    connectOrCreate?: RRItemCreateOrConnectWithoutItem_brandInput | RRItemCreateOrConnectWithoutItem_brandInput[]
+    createMany?: RRItemCreateManyItem_brandInputEnvelope
+    connect?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
   }
 
   export type CanvassItemUpdateManyWithoutBrandNestedInput = {
@@ -27376,6 +36469,20 @@ export namespace Prisma {
     deleteMany?: CanvassItemScalarWhereInput | CanvassItemScalarWhereInput[]
   }
 
+  export type RRItemUpdateManyWithoutItem_brandNestedInput = {
+    create?: XOR<RRItemCreateWithoutItem_brandInput, RRItemUncheckedCreateWithoutItem_brandInput> | RRItemCreateWithoutItem_brandInput[] | RRItemUncheckedCreateWithoutItem_brandInput[]
+    connectOrCreate?: RRItemCreateOrConnectWithoutItem_brandInput | RRItemCreateOrConnectWithoutItem_brandInput[]
+    upsert?: RRItemUpsertWithWhereUniqueWithoutItem_brandInput | RRItemUpsertWithWhereUniqueWithoutItem_brandInput[]
+    createMany?: RRItemCreateManyItem_brandInputEnvelope
+    set?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
+    disconnect?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
+    delete?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
+    connect?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
+    update?: RRItemUpdateWithWhereUniqueWithoutItem_brandInput | RRItemUpdateWithWhereUniqueWithoutItem_brandInput[]
+    updateMany?: RRItemUpdateManyWithWhereWithoutItem_brandInput | RRItemUpdateManyWithWhereWithoutItem_brandInput[]
+    deleteMany?: RRItemScalarWhereInput | RRItemScalarWhereInput[]
+  }
+
   export type CanvassItemUncheckedUpdateManyWithoutBrandNestedInput = {
     create?: XOR<CanvassItemCreateWithoutBrandInput, CanvassItemUncheckedCreateWithoutBrandInput> | CanvassItemCreateWithoutBrandInput[] | CanvassItemUncheckedCreateWithoutBrandInput[]
     connectOrCreate?: CanvassItemCreateOrConnectWithoutBrandInput | CanvassItemCreateOrConnectWithoutBrandInput[]
@@ -27388,6 +36495,20 @@ export namespace Prisma {
     update?: CanvassItemUpdateWithWhereUniqueWithoutBrandInput | CanvassItemUpdateWithWhereUniqueWithoutBrandInput[]
     updateMany?: CanvassItemUpdateManyWithWhereWithoutBrandInput | CanvassItemUpdateManyWithWhereWithoutBrandInput[]
     deleteMany?: CanvassItemScalarWhereInput | CanvassItemScalarWhereInput[]
+  }
+
+  export type RRItemUncheckedUpdateManyWithoutItem_brandNestedInput = {
+    create?: XOR<RRItemCreateWithoutItem_brandInput, RRItemUncheckedCreateWithoutItem_brandInput> | RRItemCreateWithoutItem_brandInput[] | RRItemUncheckedCreateWithoutItem_brandInput[]
+    connectOrCreate?: RRItemCreateOrConnectWithoutItem_brandInput | RRItemCreateOrConnectWithoutItem_brandInput[]
+    upsert?: RRItemUpsertWithWhereUniqueWithoutItem_brandInput | RRItemUpsertWithWhereUniqueWithoutItem_brandInput[]
+    createMany?: RRItemCreateManyItem_brandInputEnvelope
+    set?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
+    disconnect?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
+    delete?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
+    connect?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
+    update?: RRItemUpdateWithWhereUniqueWithoutItem_brandInput | RRItemUpdateWithWhereUniqueWithoutItem_brandInput[]
+    updateMany?: RRItemUpdateManyWithWhereWithoutItem_brandInput | RRItemUpdateManyWithWhereWithoutItem_brandInput[]
+    deleteMany?: RRItemScalarWhereInput | RRItemScalarWhereInput[]
   }
 
   export type SPRCreateNestedManyWithoutVehicleInput = {
@@ -27700,6 +36821,10 @@ export namespace Prisma {
     connect?: MEQSWhereUniqueInput
   }
 
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+  }
+
   export type JOApproverUpdateManyWithoutJoNestedInput = {
     create?: XOR<JOApproverCreateWithoutJoInput, JOApproverUncheckedCreateWithoutJoInput> | JOApproverCreateWithoutJoInput[] | JOApproverUncheckedCreateWithoutJoInput[]
     connectOrCreate?: JOApproverCreateOrConnectWithoutJoInput | JOApproverCreateOrConnectWithoutJoInput[]
@@ -27760,10 +36885,6 @@ export namespace Prisma {
     create?: XOR<JOCreateWithoutJo_approversInput, JOUncheckedCreateWithoutJo_approversInput>
     connectOrCreate?: JOCreateOrConnectWithoutJo_approversInput
     connect?: JOWhereUniqueInput
-  }
-
-  export type NullableDateTimeFieldUpdateOperationsInput = {
-    set?: Date | string | null
   }
 
   export type JOUpdateOneRequiredWithoutJo_approversNestedInput = {
@@ -28345,11 +37466,23 @@ export namespace Prisma {
     connect?: MEQSSupplierWhereUniqueInput
   }
 
+  export type RRCreateNestedOneWithoutPoInput = {
+    create?: XOR<RRCreateWithoutPoInput, RRUncheckedCreateWithoutPoInput>
+    connectOrCreate?: RRCreateOrConnectWithoutPoInput
+    connect?: RRWhereUniqueInput
+  }
+
   export type POApproverUncheckedCreateNestedManyWithoutPoInput = {
     create?: XOR<POApproverCreateWithoutPoInput, POApproverUncheckedCreateWithoutPoInput> | POApproverCreateWithoutPoInput[] | POApproverUncheckedCreateWithoutPoInput[]
     connectOrCreate?: POApproverCreateOrConnectWithoutPoInput | POApproverCreateOrConnectWithoutPoInput[]
     createMany?: POApproverCreateManyPoInputEnvelope
     connect?: POApproverWhereUniqueInput | POApproverWhereUniqueInput[]
+  }
+
+  export type RRUncheckedCreateNestedOneWithoutPoInput = {
+    create?: XOR<RRCreateWithoutPoInput, RRUncheckedCreateWithoutPoInput>
+    connectOrCreate?: RRCreateOrConnectWithoutPoInput
+    connect?: RRWhereUniqueInput
   }
 
   export type POApproverUpdateManyWithoutPoNestedInput = {
@@ -28374,6 +37507,16 @@ export namespace Prisma {
     update?: XOR<XOR<MEQSSupplierUpdateToOneWithWhereWithoutPoInput, MEQSSupplierUpdateWithoutPoInput>, MEQSSupplierUncheckedUpdateWithoutPoInput>
   }
 
+  export type RRUpdateOneWithoutPoNestedInput = {
+    create?: XOR<RRCreateWithoutPoInput, RRUncheckedCreateWithoutPoInput>
+    connectOrCreate?: RRCreateOrConnectWithoutPoInput
+    upsert?: RRUpsertWithoutPoInput
+    disconnect?: RRWhereInput | boolean
+    delete?: RRWhereInput | boolean
+    connect?: RRWhereUniqueInput
+    update?: XOR<XOR<RRUpdateToOneWithWhereWithoutPoInput, RRUpdateWithoutPoInput>, RRUncheckedUpdateWithoutPoInput>
+  }
+
   export type POApproverUncheckedUpdateManyWithoutPoNestedInput = {
     create?: XOR<POApproverCreateWithoutPoInput, POApproverUncheckedCreateWithoutPoInput> | POApproverCreateWithoutPoInput[] | POApproverUncheckedCreateWithoutPoInput[]
     connectOrCreate?: POApproverCreateOrConnectWithoutPoInput | POApproverCreateOrConnectWithoutPoInput[]
@@ -28388,6 +37531,16 @@ export namespace Prisma {
     deleteMany?: POApproverScalarWhereInput | POApproverScalarWhereInput[]
   }
 
+  export type RRUncheckedUpdateOneWithoutPoNestedInput = {
+    create?: XOR<RRCreateWithoutPoInput, RRUncheckedCreateWithoutPoInput>
+    connectOrCreate?: RRCreateOrConnectWithoutPoInput
+    upsert?: RRUpsertWithoutPoInput
+    disconnect?: RRWhereInput | boolean
+    delete?: RRWhereInput | boolean
+    connect?: RRWhereUniqueInput
+    update?: XOR<XOR<RRUpdateToOneWithWhereWithoutPoInput, RRUpdateWithoutPoInput>, RRUncheckedUpdateWithoutPoInput>
+  }
+
   export type POCreateNestedOneWithoutPo_approversInput = {
     create?: XOR<POCreateWithoutPo_approversInput, POUncheckedCreateWithoutPo_approversInput>
     connectOrCreate?: POCreateOrConnectWithoutPo_approversInput
@@ -28400,6 +37553,392 @@ export namespace Prisma {
     upsert?: POUpsertWithoutPo_approversInput
     connect?: POWhereUniqueInput
     update?: XOR<XOR<POUpdateToOneWithWhereWithoutPo_approversInput, POUpdateWithoutPo_approversInput>, POUncheckedUpdateWithoutPo_approversInput>
+  }
+
+  export type POCreateNestedOneWithoutRrInput = {
+    create?: XOR<POCreateWithoutRrInput, POUncheckedCreateWithoutRrInput>
+    connectOrCreate?: POCreateOrConnectWithoutRrInput
+    connect?: POWhereUniqueInput
+  }
+
+  export type RRApproverCreateNestedManyWithoutRrInput = {
+    create?: XOR<RRApproverCreateWithoutRrInput, RRApproverUncheckedCreateWithoutRrInput> | RRApproverCreateWithoutRrInput[] | RRApproverUncheckedCreateWithoutRrInput[]
+    connectOrCreate?: RRApproverCreateOrConnectWithoutRrInput | RRApproverCreateOrConnectWithoutRrInput[]
+    createMany?: RRApproverCreateManyRrInputEnvelope
+    connect?: RRApproverWhereUniqueInput | RRApproverWhereUniqueInput[]
+  }
+
+  export type RRItemCreateNestedManyWithoutRrInput = {
+    create?: XOR<RRItemCreateWithoutRrInput, RRItemUncheckedCreateWithoutRrInput> | RRItemCreateWithoutRrInput[] | RRItemUncheckedCreateWithoutRrInput[]
+    connectOrCreate?: RRItemCreateOrConnectWithoutRrInput | RRItemCreateOrConnectWithoutRrInput[]
+    createMany?: RRItemCreateManyRrInputEnvelope
+    connect?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
+  }
+
+  export type RRApproverUncheckedCreateNestedManyWithoutRrInput = {
+    create?: XOR<RRApproverCreateWithoutRrInput, RRApproverUncheckedCreateWithoutRrInput> | RRApproverCreateWithoutRrInput[] | RRApproverUncheckedCreateWithoutRrInput[]
+    connectOrCreate?: RRApproverCreateOrConnectWithoutRrInput | RRApproverCreateOrConnectWithoutRrInput[]
+    createMany?: RRApproverCreateManyRrInputEnvelope
+    connect?: RRApproverWhereUniqueInput | RRApproverWhereUniqueInput[]
+  }
+
+  export type RRItemUncheckedCreateNestedManyWithoutRrInput = {
+    create?: XOR<RRItemCreateWithoutRrInput, RRItemUncheckedCreateWithoutRrInput> | RRItemCreateWithoutRrInput[] | RRItemUncheckedCreateWithoutRrInput[]
+    connectOrCreate?: RRItemCreateOrConnectWithoutRrInput | RRItemCreateOrConnectWithoutRrInput[]
+    createMany?: RRItemCreateManyRrInputEnvelope
+    connect?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
+  }
+
+  export type POUpdateOneRequiredWithoutRrNestedInput = {
+    create?: XOR<POCreateWithoutRrInput, POUncheckedCreateWithoutRrInput>
+    connectOrCreate?: POCreateOrConnectWithoutRrInput
+    upsert?: POUpsertWithoutRrInput
+    connect?: POWhereUniqueInput
+    update?: XOR<XOR<POUpdateToOneWithWhereWithoutRrInput, POUpdateWithoutRrInput>, POUncheckedUpdateWithoutRrInput>
+  }
+
+  export type RRApproverUpdateManyWithoutRrNestedInput = {
+    create?: XOR<RRApproverCreateWithoutRrInput, RRApproverUncheckedCreateWithoutRrInput> | RRApproverCreateWithoutRrInput[] | RRApproverUncheckedCreateWithoutRrInput[]
+    connectOrCreate?: RRApproverCreateOrConnectWithoutRrInput | RRApproverCreateOrConnectWithoutRrInput[]
+    upsert?: RRApproverUpsertWithWhereUniqueWithoutRrInput | RRApproverUpsertWithWhereUniqueWithoutRrInput[]
+    createMany?: RRApproverCreateManyRrInputEnvelope
+    set?: RRApproverWhereUniqueInput | RRApproverWhereUniqueInput[]
+    disconnect?: RRApproverWhereUniqueInput | RRApproverWhereUniqueInput[]
+    delete?: RRApproverWhereUniqueInput | RRApproverWhereUniqueInput[]
+    connect?: RRApproverWhereUniqueInput | RRApproverWhereUniqueInput[]
+    update?: RRApproverUpdateWithWhereUniqueWithoutRrInput | RRApproverUpdateWithWhereUniqueWithoutRrInput[]
+    updateMany?: RRApproverUpdateManyWithWhereWithoutRrInput | RRApproverUpdateManyWithWhereWithoutRrInput[]
+    deleteMany?: RRApproverScalarWhereInput | RRApproverScalarWhereInput[]
+  }
+
+  export type RRItemUpdateManyWithoutRrNestedInput = {
+    create?: XOR<RRItemCreateWithoutRrInput, RRItemUncheckedCreateWithoutRrInput> | RRItemCreateWithoutRrInput[] | RRItemUncheckedCreateWithoutRrInput[]
+    connectOrCreate?: RRItemCreateOrConnectWithoutRrInput | RRItemCreateOrConnectWithoutRrInput[]
+    upsert?: RRItemUpsertWithWhereUniqueWithoutRrInput | RRItemUpsertWithWhereUniqueWithoutRrInput[]
+    createMany?: RRItemCreateManyRrInputEnvelope
+    set?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
+    disconnect?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
+    delete?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
+    connect?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
+    update?: RRItemUpdateWithWhereUniqueWithoutRrInput | RRItemUpdateWithWhereUniqueWithoutRrInput[]
+    updateMany?: RRItemUpdateManyWithWhereWithoutRrInput | RRItemUpdateManyWithWhereWithoutRrInput[]
+    deleteMany?: RRItemScalarWhereInput | RRItemScalarWhereInput[]
+  }
+
+  export type RRApproverUncheckedUpdateManyWithoutRrNestedInput = {
+    create?: XOR<RRApproverCreateWithoutRrInput, RRApproverUncheckedCreateWithoutRrInput> | RRApproverCreateWithoutRrInput[] | RRApproverUncheckedCreateWithoutRrInput[]
+    connectOrCreate?: RRApproverCreateOrConnectWithoutRrInput | RRApproverCreateOrConnectWithoutRrInput[]
+    upsert?: RRApproverUpsertWithWhereUniqueWithoutRrInput | RRApproverUpsertWithWhereUniqueWithoutRrInput[]
+    createMany?: RRApproverCreateManyRrInputEnvelope
+    set?: RRApproverWhereUniqueInput | RRApproverWhereUniqueInput[]
+    disconnect?: RRApproverWhereUniqueInput | RRApproverWhereUniqueInput[]
+    delete?: RRApproverWhereUniqueInput | RRApproverWhereUniqueInput[]
+    connect?: RRApproverWhereUniqueInput | RRApproverWhereUniqueInput[]
+    update?: RRApproverUpdateWithWhereUniqueWithoutRrInput | RRApproverUpdateWithWhereUniqueWithoutRrInput[]
+    updateMany?: RRApproverUpdateManyWithWhereWithoutRrInput | RRApproverUpdateManyWithWhereWithoutRrInput[]
+    deleteMany?: RRApproverScalarWhereInput | RRApproverScalarWhereInput[]
+  }
+
+  export type RRItemUncheckedUpdateManyWithoutRrNestedInput = {
+    create?: XOR<RRItemCreateWithoutRrInput, RRItemUncheckedCreateWithoutRrInput> | RRItemCreateWithoutRrInput[] | RRItemUncheckedCreateWithoutRrInput[]
+    connectOrCreate?: RRItemCreateOrConnectWithoutRrInput | RRItemCreateOrConnectWithoutRrInput[]
+    upsert?: RRItemUpsertWithWhereUniqueWithoutRrInput | RRItemUpsertWithWhereUniqueWithoutRrInput[]
+    createMany?: RRItemCreateManyRrInputEnvelope
+    set?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
+    disconnect?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
+    delete?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
+    connect?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
+    update?: RRItemUpdateWithWhereUniqueWithoutRrInput | RRItemUpdateWithWhereUniqueWithoutRrInput[]
+    updateMany?: RRItemUpdateManyWithWhereWithoutRrInput | RRItemUpdateManyWithWhereWithoutRrInput[]
+    deleteMany?: RRItemScalarWhereInput | RRItemScalarWhereInput[]
+  }
+
+  export type RRCreateNestedOneWithoutRr_approversInput = {
+    create?: XOR<RRCreateWithoutRr_approversInput, RRUncheckedCreateWithoutRr_approversInput>
+    connectOrCreate?: RRCreateOrConnectWithoutRr_approversInput
+    connect?: RRWhereUniqueInput
+  }
+
+  export type RRUpdateOneRequiredWithoutRr_approversNestedInput = {
+    create?: XOR<RRCreateWithoutRr_approversInput, RRUncheckedCreateWithoutRr_approversInput>
+    connectOrCreate?: RRCreateOrConnectWithoutRr_approversInput
+    upsert?: RRUpsertWithoutRr_approversInput
+    connect?: RRWhereUniqueInput
+    update?: XOR<XOR<RRUpdateToOneWithWhereWithoutRr_approversInput, RRUpdateWithoutRr_approversInput>, RRUncheckedUpdateWithoutRr_approversInput>
+  }
+
+  export type RRCreateNestedOneWithoutRr_itemsInput = {
+    create?: XOR<RRCreateWithoutRr_itemsInput, RRUncheckedCreateWithoutRr_itemsInput>
+    connectOrCreate?: RRCreateOrConnectWithoutRr_itemsInput
+    connect?: RRWhereUniqueInput
+  }
+
+  export type ItemCreateNestedOneWithoutRr_itemsInput = {
+    create?: XOR<ItemCreateWithoutRr_itemsInput, ItemUncheckedCreateWithoutRr_itemsInput>
+    connectOrCreate?: ItemCreateOrConnectWithoutRr_itemsInput
+    connect?: ItemWhereUniqueInput
+  }
+
+  export type BrandCreateNestedOneWithoutRr_itemsInput = {
+    create?: XOR<BrandCreateWithoutRr_itemsInput, BrandUncheckedCreateWithoutRr_itemsInput>
+    connectOrCreate?: BrandCreateOrConnectWithoutRr_itemsInput
+    connect?: BrandWhereUniqueInput
+  }
+
+  export type UnitCreateNestedOneWithoutRr_itemsInput = {
+    create?: XOR<UnitCreateWithoutRr_itemsInput, UnitUncheckedCreateWithoutRr_itemsInput>
+    connectOrCreate?: UnitCreateOrConnectWithoutRr_itemsInput
+    connect?: UnitWhereUniqueInput
+  }
+
+  export type ItemTransactionCreateNestedOneWithoutRr_itemInput = {
+    create?: XOR<ItemTransactionCreateWithoutRr_itemInput, ItemTransactionUncheckedCreateWithoutRr_itemInput>
+    connectOrCreate?: ItemTransactionCreateOrConnectWithoutRr_itemInput
+    connect?: ItemTransactionWhereUniqueInput
+  }
+
+  export type ItemTransactionUncheckedCreateNestedOneWithoutRr_itemInput = {
+    create?: XOR<ItemTransactionCreateWithoutRr_itemInput, ItemTransactionUncheckedCreateWithoutRr_itemInput>
+    connectOrCreate?: ItemTransactionCreateOrConnectWithoutRr_itemInput
+    connect?: ItemTransactionWhereUniqueInput
+  }
+
+  export type RRUpdateOneRequiredWithoutRr_itemsNestedInput = {
+    create?: XOR<RRCreateWithoutRr_itemsInput, RRUncheckedCreateWithoutRr_itemsInput>
+    connectOrCreate?: RRCreateOrConnectWithoutRr_itemsInput
+    upsert?: RRUpsertWithoutRr_itemsInput
+    connect?: RRWhereUniqueInput
+    update?: XOR<XOR<RRUpdateToOneWithWhereWithoutRr_itemsInput, RRUpdateWithoutRr_itemsInput>, RRUncheckedUpdateWithoutRr_itemsInput>
+  }
+
+  export type ItemUpdateOneWithoutRr_itemsNestedInput = {
+    create?: XOR<ItemCreateWithoutRr_itemsInput, ItemUncheckedCreateWithoutRr_itemsInput>
+    connectOrCreate?: ItemCreateOrConnectWithoutRr_itemsInput
+    upsert?: ItemUpsertWithoutRr_itemsInput
+    disconnect?: ItemWhereInput | boolean
+    delete?: ItemWhereInput | boolean
+    connect?: ItemWhereUniqueInput
+    update?: XOR<XOR<ItemUpdateToOneWithWhereWithoutRr_itemsInput, ItemUpdateWithoutRr_itemsInput>, ItemUncheckedUpdateWithoutRr_itemsInput>
+  }
+
+  export type BrandUpdateOneRequiredWithoutRr_itemsNestedInput = {
+    create?: XOR<BrandCreateWithoutRr_itemsInput, BrandUncheckedCreateWithoutRr_itemsInput>
+    connectOrCreate?: BrandCreateOrConnectWithoutRr_itemsInput
+    upsert?: BrandUpsertWithoutRr_itemsInput
+    connect?: BrandWhereUniqueInput
+    update?: XOR<XOR<BrandUpdateToOneWithWhereWithoutRr_itemsInput, BrandUpdateWithoutRr_itemsInput>, BrandUncheckedUpdateWithoutRr_itemsInput>
+  }
+
+  export type UnitUpdateOneRequiredWithoutRr_itemsNestedInput = {
+    create?: XOR<UnitCreateWithoutRr_itemsInput, UnitUncheckedCreateWithoutRr_itemsInput>
+    connectOrCreate?: UnitCreateOrConnectWithoutRr_itemsInput
+    upsert?: UnitUpsertWithoutRr_itemsInput
+    connect?: UnitWhereUniqueInput
+    update?: XOR<XOR<UnitUpdateToOneWithWhereWithoutRr_itemsInput, UnitUpdateWithoutRr_itemsInput>, UnitUncheckedUpdateWithoutRr_itemsInput>
+  }
+
+  export type ItemTransactionUpdateOneWithoutRr_itemNestedInput = {
+    create?: XOR<ItemTransactionCreateWithoutRr_itemInput, ItemTransactionUncheckedCreateWithoutRr_itemInput>
+    connectOrCreate?: ItemTransactionCreateOrConnectWithoutRr_itemInput
+    upsert?: ItemTransactionUpsertWithoutRr_itemInput
+    disconnect?: ItemTransactionWhereInput | boolean
+    delete?: ItemTransactionWhereInput | boolean
+    connect?: ItemTransactionWhereUniqueInput
+    update?: XOR<XOR<ItemTransactionUpdateToOneWithWhereWithoutRr_itemInput, ItemTransactionUpdateWithoutRr_itemInput>, ItemTransactionUncheckedUpdateWithoutRr_itemInput>
+  }
+
+  export type ItemTransactionUncheckedUpdateOneWithoutRr_itemNestedInput = {
+    create?: XOR<ItemTransactionCreateWithoutRr_itemInput, ItemTransactionUncheckedCreateWithoutRr_itemInput>
+    connectOrCreate?: ItemTransactionCreateOrConnectWithoutRr_itemInput
+    upsert?: ItemTransactionUpsertWithoutRr_itemInput
+    disconnect?: ItemTransactionWhereInput | boolean
+    delete?: ItemTransactionWhereInput | boolean
+    connect?: ItemTransactionWhereUniqueInput
+    update?: XOR<XOR<ItemTransactionUpdateToOneWithWhereWithoutRr_itemInput, ItemTransactionUpdateWithoutRr_itemInput>, ItemTransactionUncheckedUpdateWithoutRr_itemInput>
+  }
+
+  export type ItemTypeCreateNestedOneWithoutItemsInput = {
+    create?: XOR<ItemTypeCreateWithoutItemsInput, ItemTypeUncheckedCreateWithoutItemsInput>
+    connectOrCreate?: ItemTypeCreateOrConnectWithoutItemsInput
+    connect?: ItemTypeWhereUniqueInput
+  }
+
+  export type ItemTransactionCreateNestedManyWithoutItemInput = {
+    create?: XOR<ItemTransactionCreateWithoutItemInput, ItemTransactionUncheckedCreateWithoutItemInput> | ItemTransactionCreateWithoutItemInput[] | ItemTransactionUncheckedCreateWithoutItemInput[]
+    connectOrCreate?: ItemTransactionCreateOrConnectWithoutItemInput | ItemTransactionCreateOrConnectWithoutItemInput[]
+    createMany?: ItemTransactionCreateManyItemInputEnvelope
+    connect?: ItemTransactionWhereUniqueInput | ItemTransactionWhereUniqueInput[]
+  }
+
+  export type RRItemCreateNestedManyWithoutItemInput = {
+    create?: XOR<RRItemCreateWithoutItemInput, RRItemUncheckedCreateWithoutItemInput> | RRItemCreateWithoutItemInput[] | RRItemUncheckedCreateWithoutItemInput[]
+    connectOrCreate?: RRItemCreateOrConnectWithoutItemInput | RRItemCreateOrConnectWithoutItemInput[]
+    createMany?: RRItemCreateManyItemInputEnvelope
+    connect?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
+  }
+
+  export type UnitCreateNestedOneWithoutItemsInput = {
+    create?: XOR<UnitCreateWithoutItemsInput, UnitUncheckedCreateWithoutItemsInput>
+    connectOrCreate?: UnitCreateOrConnectWithoutItemsInput
+    connect?: UnitWhereUniqueInput
+  }
+
+  export type ItemTransactionUncheckedCreateNestedManyWithoutItemInput = {
+    create?: XOR<ItemTransactionCreateWithoutItemInput, ItemTransactionUncheckedCreateWithoutItemInput> | ItemTransactionCreateWithoutItemInput[] | ItemTransactionUncheckedCreateWithoutItemInput[]
+    connectOrCreate?: ItemTransactionCreateOrConnectWithoutItemInput | ItemTransactionCreateOrConnectWithoutItemInput[]
+    createMany?: ItemTransactionCreateManyItemInputEnvelope
+    connect?: ItemTransactionWhereUniqueInput | ItemTransactionWhereUniqueInput[]
+  }
+
+  export type RRItemUncheckedCreateNestedManyWithoutItemInput = {
+    create?: XOR<RRItemCreateWithoutItemInput, RRItemUncheckedCreateWithoutItemInput> | RRItemCreateWithoutItemInput[] | RRItemUncheckedCreateWithoutItemInput[]
+    connectOrCreate?: RRItemCreateOrConnectWithoutItemInput | RRItemCreateOrConnectWithoutItemInput[]
+    createMany?: RRItemCreateManyItemInputEnvelope
+    connect?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
+  }
+
+  export type ItemTypeUpdateOneRequiredWithoutItemsNestedInput = {
+    create?: XOR<ItemTypeCreateWithoutItemsInput, ItemTypeUncheckedCreateWithoutItemsInput>
+    connectOrCreate?: ItemTypeCreateOrConnectWithoutItemsInput
+    upsert?: ItemTypeUpsertWithoutItemsInput
+    connect?: ItemTypeWhereUniqueInput
+    update?: XOR<XOR<ItemTypeUpdateToOneWithWhereWithoutItemsInput, ItemTypeUpdateWithoutItemsInput>, ItemTypeUncheckedUpdateWithoutItemsInput>
+  }
+
+  export type ItemTransactionUpdateManyWithoutItemNestedInput = {
+    create?: XOR<ItemTransactionCreateWithoutItemInput, ItemTransactionUncheckedCreateWithoutItemInput> | ItemTransactionCreateWithoutItemInput[] | ItemTransactionUncheckedCreateWithoutItemInput[]
+    connectOrCreate?: ItemTransactionCreateOrConnectWithoutItemInput | ItemTransactionCreateOrConnectWithoutItemInput[]
+    upsert?: ItemTransactionUpsertWithWhereUniqueWithoutItemInput | ItemTransactionUpsertWithWhereUniqueWithoutItemInput[]
+    createMany?: ItemTransactionCreateManyItemInputEnvelope
+    set?: ItemTransactionWhereUniqueInput | ItemTransactionWhereUniqueInput[]
+    disconnect?: ItemTransactionWhereUniqueInput | ItemTransactionWhereUniqueInput[]
+    delete?: ItemTransactionWhereUniqueInput | ItemTransactionWhereUniqueInput[]
+    connect?: ItemTransactionWhereUniqueInput | ItemTransactionWhereUniqueInput[]
+    update?: ItemTransactionUpdateWithWhereUniqueWithoutItemInput | ItemTransactionUpdateWithWhereUniqueWithoutItemInput[]
+    updateMany?: ItemTransactionUpdateManyWithWhereWithoutItemInput | ItemTransactionUpdateManyWithWhereWithoutItemInput[]
+    deleteMany?: ItemTransactionScalarWhereInput | ItemTransactionScalarWhereInput[]
+  }
+
+  export type RRItemUpdateManyWithoutItemNestedInput = {
+    create?: XOR<RRItemCreateWithoutItemInput, RRItemUncheckedCreateWithoutItemInput> | RRItemCreateWithoutItemInput[] | RRItemUncheckedCreateWithoutItemInput[]
+    connectOrCreate?: RRItemCreateOrConnectWithoutItemInput | RRItemCreateOrConnectWithoutItemInput[]
+    upsert?: RRItemUpsertWithWhereUniqueWithoutItemInput | RRItemUpsertWithWhereUniqueWithoutItemInput[]
+    createMany?: RRItemCreateManyItemInputEnvelope
+    set?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
+    disconnect?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
+    delete?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
+    connect?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
+    update?: RRItemUpdateWithWhereUniqueWithoutItemInput | RRItemUpdateWithWhereUniqueWithoutItemInput[]
+    updateMany?: RRItemUpdateManyWithWhereWithoutItemInput | RRItemUpdateManyWithWhereWithoutItemInput[]
+    deleteMany?: RRItemScalarWhereInput | RRItemScalarWhereInput[]
+  }
+
+  export type UnitUpdateOneRequiredWithoutItemsNestedInput = {
+    create?: XOR<UnitCreateWithoutItemsInput, UnitUncheckedCreateWithoutItemsInput>
+    connectOrCreate?: UnitCreateOrConnectWithoutItemsInput
+    upsert?: UnitUpsertWithoutItemsInput
+    connect?: UnitWhereUniqueInput
+    update?: XOR<XOR<UnitUpdateToOneWithWhereWithoutItemsInput, UnitUpdateWithoutItemsInput>, UnitUncheckedUpdateWithoutItemsInput>
+  }
+
+  export type ItemTransactionUncheckedUpdateManyWithoutItemNestedInput = {
+    create?: XOR<ItemTransactionCreateWithoutItemInput, ItemTransactionUncheckedCreateWithoutItemInput> | ItemTransactionCreateWithoutItemInput[] | ItemTransactionUncheckedCreateWithoutItemInput[]
+    connectOrCreate?: ItemTransactionCreateOrConnectWithoutItemInput | ItemTransactionCreateOrConnectWithoutItemInput[]
+    upsert?: ItemTransactionUpsertWithWhereUniqueWithoutItemInput | ItemTransactionUpsertWithWhereUniqueWithoutItemInput[]
+    createMany?: ItemTransactionCreateManyItemInputEnvelope
+    set?: ItemTransactionWhereUniqueInput | ItemTransactionWhereUniqueInput[]
+    disconnect?: ItemTransactionWhereUniqueInput | ItemTransactionWhereUniqueInput[]
+    delete?: ItemTransactionWhereUniqueInput | ItemTransactionWhereUniqueInput[]
+    connect?: ItemTransactionWhereUniqueInput | ItemTransactionWhereUniqueInput[]
+    update?: ItemTransactionUpdateWithWhereUniqueWithoutItemInput | ItemTransactionUpdateWithWhereUniqueWithoutItemInput[]
+    updateMany?: ItemTransactionUpdateManyWithWhereWithoutItemInput | ItemTransactionUpdateManyWithWhereWithoutItemInput[]
+    deleteMany?: ItemTransactionScalarWhereInput | ItemTransactionScalarWhereInput[]
+  }
+
+  export type RRItemUncheckedUpdateManyWithoutItemNestedInput = {
+    create?: XOR<RRItemCreateWithoutItemInput, RRItemUncheckedCreateWithoutItemInput> | RRItemCreateWithoutItemInput[] | RRItemUncheckedCreateWithoutItemInput[]
+    connectOrCreate?: RRItemCreateOrConnectWithoutItemInput | RRItemCreateOrConnectWithoutItemInput[]
+    upsert?: RRItemUpsertWithWhereUniqueWithoutItemInput | RRItemUpsertWithWhereUniqueWithoutItemInput[]
+    createMany?: RRItemCreateManyItemInputEnvelope
+    set?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
+    disconnect?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
+    delete?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
+    connect?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
+    update?: RRItemUpdateWithWhereUniqueWithoutItemInput | RRItemUpdateWithWhereUniqueWithoutItemInput[]
+    updateMany?: RRItemUpdateManyWithWhereWithoutItemInput | RRItemUpdateManyWithWhereWithoutItemInput[]
+    deleteMany?: RRItemScalarWhereInput | RRItemScalarWhereInput[]
+  }
+
+  export type ItemCreateNestedManyWithoutItem_typeInput = {
+    create?: XOR<ItemCreateWithoutItem_typeInput, ItemUncheckedCreateWithoutItem_typeInput> | ItemCreateWithoutItem_typeInput[] | ItemUncheckedCreateWithoutItem_typeInput[]
+    connectOrCreate?: ItemCreateOrConnectWithoutItem_typeInput | ItemCreateOrConnectWithoutItem_typeInput[]
+    createMany?: ItemCreateManyItem_typeInputEnvelope
+    connect?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+  }
+
+  export type ItemUncheckedCreateNestedManyWithoutItem_typeInput = {
+    create?: XOR<ItemCreateWithoutItem_typeInput, ItemUncheckedCreateWithoutItem_typeInput> | ItemCreateWithoutItem_typeInput[] | ItemUncheckedCreateWithoutItem_typeInput[]
+    connectOrCreate?: ItemCreateOrConnectWithoutItem_typeInput | ItemCreateOrConnectWithoutItem_typeInput[]
+    createMany?: ItemCreateManyItem_typeInputEnvelope
+    connect?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+  }
+
+  export type ItemUpdateManyWithoutItem_typeNestedInput = {
+    create?: XOR<ItemCreateWithoutItem_typeInput, ItemUncheckedCreateWithoutItem_typeInput> | ItemCreateWithoutItem_typeInput[] | ItemUncheckedCreateWithoutItem_typeInput[]
+    connectOrCreate?: ItemCreateOrConnectWithoutItem_typeInput | ItemCreateOrConnectWithoutItem_typeInput[]
+    upsert?: ItemUpsertWithWhereUniqueWithoutItem_typeInput | ItemUpsertWithWhereUniqueWithoutItem_typeInput[]
+    createMany?: ItemCreateManyItem_typeInputEnvelope
+    set?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+    disconnect?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+    delete?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+    connect?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+    update?: ItemUpdateWithWhereUniqueWithoutItem_typeInput | ItemUpdateWithWhereUniqueWithoutItem_typeInput[]
+    updateMany?: ItemUpdateManyWithWhereWithoutItem_typeInput | ItemUpdateManyWithWhereWithoutItem_typeInput[]
+    deleteMany?: ItemScalarWhereInput | ItemScalarWhereInput[]
+  }
+
+  export type ItemUncheckedUpdateManyWithoutItem_typeNestedInput = {
+    create?: XOR<ItemCreateWithoutItem_typeInput, ItemUncheckedCreateWithoutItem_typeInput> | ItemCreateWithoutItem_typeInput[] | ItemUncheckedCreateWithoutItem_typeInput[]
+    connectOrCreate?: ItemCreateOrConnectWithoutItem_typeInput | ItemCreateOrConnectWithoutItem_typeInput[]
+    upsert?: ItemUpsertWithWhereUniqueWithoutItem_typeInput | ItemUpsertWithWhereUniqueWithoutItem_typeInput[]
+    createMany?: ItemCreateManyItem_typeInputEnvelope
+    set?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+    disconnect?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+    delete?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+    connect?: ItemWhereUniqueInput | ItemWhereUniqueInput[]
+    update?: ItemUpdateWithWhereUniqueWithoutItem_typeInput | ItemUpdateWithWhereUniqueWithoutItem_typeInput[]
+    updateMany?: ItemUpdateManyWithWhereWithoutItem_typeInput | ItemUpdateManyWithWhereWithoutItem_typeInput[]
+    deleteMany?: ItemScalarWhereInput | ItemScalarWhereInput[]
+  }
+
+  export type ItemCreateNestedOneWithoutItem_transactionsInput = {
+    create?: XOR<ItemCreateWithoutItem_transactionsInput, ItemUncheckedCreateWithoutItem_transactionsInput>
+    connectOrCreate?: ItemCreateOrConnectWithoutItem_transactionsInput
+    connect?: ItemWhereUniqueInput
+  }
+
+  export type RRItemCreateNestedOneWithoutItemTransactionInput = {
+    create?: XOR<RRItemCreateWithoutItemTransactionInput, RRItemUncheckedCreateWithoutItemTransactionInput>
+    connectOrCreate?: RRItemCreateOrConnectWithoutItemTransactionInput
+    connect?: RRItemWhereUniqueInput
+  }
+
+  export type ItemUpdateOneRequiredWithoutItem_transactionsNestedInput = {
+    create?: XOR<ItemCreateWithoutItem_transactionsInput, ItemUncheckedCreateWithoutItem_transactionsInput>
+    connectOrCreate?: ItemCreateOrConnectWithoutItem_transactionsInput
+    upsert?: ItemUpsertWithoutItem_transactionsInput
+    connect?: ItemWhereUniqueInput
+    update?: XOR<XOR<ItemUpdateToOneWithWhereWithoutItem_transactionsInput, ItemUpdateWithoutItem_transactionsInput>, ItemUncheckedUpdateWithoutItem_transactionsInput>
+  }
+
+  export type RRItemUpdateOneWithoutItemTransactionNestedInput = {
+    create?: XOR<RRItemCreateWithoutItemTransactionInput, RRItemUncheckedCreateWithoutItemTransactionInput>
+    connectOrCreate?: RRItemCreateOrConnectWithoutItemTransactionInput
+    upsert?: RRItemUpsertWithoutItemTransactionInput
+    disconnect?: RRItemWhereInput | boolean
+    delete?: RRItemWhereInput | boolean
+    connect?: RRItemWhereUniqueInput
+    update?: XOR<XOR<RRItemUpdateToOneWithWhereWithoutItemTransactionInput, RRItemUpdateWithoutItemTransactionInput>, RRItemUncheckedUpdateWithoutItemTransactionInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -28692,6 +38231,98 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type RRItemCreateWithoutUnitInput = {
+    id?: string
+    item_class: number
+    quantity_delivered: number
+    quantity_accepted: number
+    description: string
+    vat_type: number
+    gross_price: number
+    net_price: number
+    freight_cost: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    rr: RRCreateNestedOneWithoutRr_itemsInput
+    item?: ItemCreateNestedOneWithoutRr_itemsInput
+    item_brand: BrandCreateNestedOneWithoutRr_itemsInput
+    ItemTransaction?: ItemTransactionCreateNestedOneWithoutRr_itemInput
+  }
+
+  export type RRItemUncheckedCreateWithoutUnitInput = {
+    id?: string
+    rr_id: string
+    item_id?: string | null
+    item_brand_id: string
+    item_class: number
+    quantity_delivered: number
+    quantity_accepted: number
+    description: string
+    vat_type: number
+    gross_price: number
+    net_price: number
+    freight_cost: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    ItemTransaction?: ItemTransactionUncheckedCreateNestedOneWithoutRr_itemInput
+  }
+
+  export type RRItemCreateOrConnectWithoutUnitInput = {
+    where: RRItemWhereUniqueInput
+    create: XOR<RRItemCreateWithoutUnitInput, RRItemUncheckedCreateWithoutUnitInput>
+  }
+
+  export type RRItemCreateManyUnitInputEnvelope = {
+    data: RRItemCreateManyUnitInput | RRItemCreateManyUnitInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ItemCreateWithoutUnitInput = {
+    id?: string
+    code: string
+    description: string
+    quantity: number
+    initial_quantity: number
+    average_price: number
+    initial_average_price: number
+    is_initial?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    item_type: ItemTypeCreateNestedOneWithoutItemsInput
+    item_transactions?: ItemTransactionCreateNestedManyWithoutItemInput
+    rr_items?: RRItemCreateNestedManyWithoutItemInput
+  }
+
+  export type ItemUncheckedCreateWithoutUnitInput = {
+    id?: string
+    item_type_id: string
+    code: string
+    description: string
+    quantity: number
+    initial_quantity: number
+    average_price: number
+    initial_average_price: number
+    is_initial?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    item_transactions?: ItemTransactionUncheckedCreateNestedManyWithoutItemInput
+    rr_items?: RRItemUncheckedCreateNestedManyWithoutItemInput
+  }
+
+  export type ItemCreateOrConnectWithoutUnitInput = {
+    where: ItemWhereUniqueInput
+    create: XOR<ItemCreateWithoutUnitInput, ItemUncheckedCreateWithoutUnitInput>
+  }
+
+  export type ItemCreateManyUnitInputEnvelope = {
+    data: ItemCreateManyUnitInput | ItemCreateManyUnitInput[]
+    skipDuplicates?: boolean
+  }
+
   export type CanvassItemUpsertWithWhereUniqueWithoutUnitInput = {
     where: CanvassItemWhereUniqueInput
     update: XOR<CanvassItemUpdateWithoutUnitInput, CanvassItemUncheckedUpdateWithoutUnitInput>
@@ -28721,6 +38352,79 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"CanvassItem"> | Date | string
     updated_at?: DateTimeFilter<"CanvassItem"> | Date | string
     is_deleted?: BoolFilter<"CanvassItem"> | boolean
+  }
+
+  export type RRItemUpsertWithWhereUniqueWithoutUnitInput = {
+    where: RRItemWhereUniqueInput
+    update: XOR<RRItemUpdateWithoutUnitInput, RRItemUncheckedUpdateWithoutUnitInput>
+    create: XOR<RRItemCreateWithoutUnitInput, RRItemUncheckedCreateWithoutUnitInput>
+  }
+
+  export type RRItemUpdateWithWhereUniqueWithoutUnitInput = {
+    where: RRItemWhereUniqueInput
+    data: XOR<RRItemUpdateWithoutUnitInput, RRItemUncheckedUpdateWithoutUnitInput>
+  }
+
+  export type RRItemUpdateManyWithWhereWithoutUnitInput = {
+    where: RRItemScalarWhereInput
+    data: XOR<RRItemUpdateManyMutationInput, RRItemUncheckedUpdateManyWithoutUnitInput>
+  }
+
+  export type RRItemScalarWhereInput = {
+    AND?: RRItemScalarWhereInput | RRItemScalarWhereInput[]
+    OR?: RRItemScalarWhereInput[]
+    NOT?: RRItemScalarWhereInput | RRItemScalarWhereInput[]
+    id?: StringFilter<"RRItem"> | string
+    rr_id?: StringFilter<"RRItem"> | string
+    item_id?: StringNullableFilter<"RRItem"> | string | null
+    item_brand_id?: StringFilter<"RRItem"> | string
+    unit_id?: StringFilter<"RRItem"> | string
+    item_class?: IntFilter<"RRItem"> | number
+    quantity_delivered?: IntFilter<"RRItem"> | number
+    quantity_accepted?: IntFilter<"RRItem"> | number
+    description?: StringFilter<"RRItem"> | string
+    vat_type?: IntFilter<"RRItem"> | number
+    gross_price?: FloatFilter<"RRItem"> | number
+    net_price?: FloatFilter<"RRItem"> | number
+    freight_cost?: FloatFilter<"RRItem"> | number
+    created_at?: DateTimeFilter<"RRItem"> | Date | string
+    updated_at?: DateTimeFilter<"RRItem"> | Date | string
+    is_deleted?: BoolFilter<"RRItem"> | boolean
+  }
+
+  export type ItemUpsertWithWhereUniqueWithoutUnitInput = {
+    where: ItemWhereUniqueInput
+    update: XOR<ItemUpdateWithoutUnitInput, ItemUncheckedUpdateWithoutUnitInput>
+    create: XOR<ItemCreateWithoutUnitInput, ItemUncheckedCreateWithoutUnitInput>
+  }
+
+  export type ItemUpdateWithWhereUniqueWithoutUnitInput = {
+    where: ItemWhereUniqueInput
+    data: XOR<ItemUpdateWithoutUnitInput, ItemUncheckedUpdateWithoutUnitInput>
+  }
+
+  export type ItemUpdateManyWithWhereWithoutUnitInput = {
+    where: ItemScalarWhereInput
+    data: XOR<ItemUpdateManyMutationInput, ItemUncheckedUpdateManyWithoutUnitInput>
+  }
+
+  export type ItemScalarWhereInput = {
+    AND?: ItemScalarWhereInput | ItemScalarWhereInput[]
+    OR?: ItemScalarWhereInput[]
+    NOT?: ItemScalarWhereInput | ItemScalarWhereInput[]
+    id?: StringFilter<"Item"> | string
+    item_type_id?: StringFilter<"Item"> | string
+    unit_id?: StringFilter<"Item"> | string
+    code?: StringFilter<"Item"> | string
+    description?: StringFilter<"Item"> | string
+    quantity?: IntFilter<"Item"> | number
+    initial_quantity?: IntFilter<"Item"> | number
+    average_price?: FloatFilter<"Item"> | number
+    initial_average_price?: FloatFilter<"Item"> | number
+    is_initial?: BoolFilter<"Item"> | boolean
+    created_at?: DateTimeFilter<"Item"> | Date | string
+    updated_at?: DateTimeFilter<"Item"> | Date | string
+    is_deleted?: BoolFilter<"Item"> | boolean
   }
 
   export type CanvassItemCreateWithoutBrandInput = {
@@ -28757,6 +38461,54 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type RRItemCreateWithoutItem_brandInput = {
+    id?: string
+    item_class: number
+    quantity_delivered: number
+    quantity_accepted: number
+    description: string
+    vat_type: number
+    gross_price: number
+    net_price: number
+    freight_cost: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    rr: RRCreateNestedOneWithoutRr_itemsInput
+    item?: ItemCreateNestedOneWithoutRr_itemsInput
+    unit: UnitCreateNestedOneWithoutRr_itemsInput
+    ItemTransaction?: ItemTransactionCreateNestedOneWithoutRr_itemInput
+  }
+
+  export type RRItemUncheckedCreateWithoutItem_brandInput = {
+    id?: string
+    rr_id: string
+    item_id?: string | null
+    unit_id: string
+    item_class: number
+    quantity_delivered: number
+    quantity_accepted: number
+    description: string
+    vat_type: number
+    gross_price: number
+    net_price: number
+    freight_cost: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    ItemTransaction?: ItemTransactionUncheckedCreateNestedOneWithoutRr_itemInput
+  }
+
+  export type RRItemCreateOrConnectWithoutItem_brandInput = {
+    where: RRItemWhereUniqueInput
+    create: XOR<RRItemCreateWithoutItem_brandInput, RRItemUncheckedCreateWithoutItem_brandInput>
+  }
+
+  export type RRItemCreateManyItem_brandInputEnvelope = {
+    data: RRItemCreateManyItem_brandInput | RRItemCreateManyItem_brandInput[]
+    skipDuplicates?: boolean
+  }
+
   export type CanvassItemUpsertWithWhereUniqueWithoutBrandInput = {
     where: CanvassItemWhereUniqueInput
     update: XOR<CanvassItemUpdateWithoutBrandInput, CanvassItemUncheckedUpdateWithoutBrandInput>
@@ -28773,6 +38525,22 @@ export namespace Prisma {
     data: XOR<CanvassItemUpdateManyMutationInput, CanvassItemUncheckedUpdateManyWithoutBrandInput>
   }
 
+  export type RRItemUpsertWithWhereUniqueWithoutItem_brandInput = {
+    where: RRItemWhereUniqueInput
+    update: XOR<RRItemUpdateWithoutItem_brandInput, RRItemUncheckedUpdateWithoutItem_brandInput>
+    create: XOR<RRItemCreateWithoutItem_brandInput, RRItemUncheckedCreateWithoutItem_brandInput>
+  }
+
+  export type RRItemUpdateWithWhereUniqueWithoutItem_brandInput = {
+    where: RRItemWhereUniqueInput
+    data: XOR<RRItemUpdateWithoutItem_brandInput, RRItemUncheckedUpdateWithoutItem_brandInput>
+  }
+
+  export type RRItemUpdateManyWithWhereWithoutItem_brandInput = {
+    where: RRItemScalarWhereInput
+    data: XOR<RRItemUpdateManyMutationInput, RRItemUncheckedUpdateManyWithoutItem_brandInput>
+  }
+
   export type SPRCreateWithoutVehicleInput = {
     id?: string
     spr_number: string
@@ -28781,6 +38549,7 @@ export namespace Prisma {
     supervisor_id: string
     status?: number
     canceller_id?: string | null
+    date_cancelled?: Date | string | null
     is_referenced?: boolean
     created_at?: Date | string
     updated_at?: Date | string
@@ -28799,6 +38568,7 @@ export namespace Prisma {
     supervisor_id: string
     status?: number
     canceller_id?: string | null
+    date_cancelled?: Date | string | null
     is_referenced?: boolean
     created_at?: Date | string
     updated_at?: Date | string
@@ -28846,6 +38616,7 @@ export namespace Prisma {
     supervisor_id?: StringFilter<"SPR"> | string
     status?: IntFilter<"SPR"> | number
     canceller_id?: StringNullableFilter<"SPR"> | string | null
+    date_cancelled?: DateTimeNullableFilter<"SPR"> | Date | string | null
     is_referenced?: BoolFilter<"SPR"> | boolean
     created_at?: DateTimeFilter<"SPR"> | Date | string
     updated_at?: DateTimeFilter<"SPR"> | Date | string
@@ -28895,6 +38666,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    rr_items?: RRItemCreateNestedManyWithoutItem_brandInput
   }
 
   export type BrandUncheckedCreateWithoutCanvass_itemsInput = {
@@ -28903,6 +38675,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    rr_items?: RRItemUncheckedCreateNestedManyWithoutItem_brandInput
   }
 
   export type BrandCreateOrConnectWithoutCanvass_itemsInput = {
@@ -28916,6 +38689,8 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    rr_items?: RRItemCreateNestedManyWithoutUnitInput
+    items?: ItemCreateNestedManyWithoutUnitInput
   }
 
   export type UnitUncheckedCreateWithoutCanvass_itemsInput = {
@@ -28924,6 +38699,8 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    rr_items?: RRItemUncheckedCreateNestedManyWithoutUnitInput
+    items?: ItemUncheckedCreateNestedManyWithoutUnitInput
   }
 
   export type UnitCreateOrConnectWithoutCanvass_itemsInput = {
@@ -29025,6 +38802,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    rr_items?: RRItemUpdateManyWithoutItem_brandNestedInput
   }
 
   export type BrandUncheckedUpdateWithoutCanvass_itemsInput = {
@@ -29033,6 +38811,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    rr_items?: RRItemUncheckedUpdateManyWithoutItem_brandNestedInput
   }
 
   export type UnitUpsertWithoutCanvass_itemsInput = {
@@ -29052,6 +38831,8 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    rr_items?: RRItemUpdateManyWithoutUnitNestedInput
+    items?: ItemUpdateManyWithoutUnitNestedInput
   }
 
   export type UnitUncheckedUpdateWithoutCanvass_itemsInput = {
@@ -29060,6 +38841,8 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    rr_items?: RRItemUncheckedUpdateManyWithoutUnitNestedInput
+    items?: ItemUncheckedUpdateManyWithoutUnitNestedInput
   }
 
   export type MEQSSupplierItemUpsertWithWhereUniqueWithoutCanvass_itemInput = {
@@ -29138,6 +38921,7 @@ export namespace Prisma {
     supervisor_id: string
     status?: number
     canceller_id?: string | null
+    date_cancelled?: Date | string | null
     is_referenced?: boolean
     created_at?: Date | string
     updated_at?: Date | string
@@ -29156,6 +38940,7 @@ export namespace Prisma {
     supervisor_id: string
     status?: number
     canceller_id?: string | null
+    date_cancelled?: Date | string | null
     is_referenced?: boolean
     created_at?: Date | string
     updated_at?: Date | string
@@ -29174,6 +38959,7 @@ export namespace Prisma {
     classification_id?: string | null
     supervisor_id: string
     canceller_id?: string | null
+    date_cancelled?: Date | string | null
     rv_number: string
     date_requested: Date | string
     work_order_no?: string | null
@@ -29192,6 +38978,7 @@ export namespace Prisma {
     classification_id?: string | null
     supervisor_id: string
     canceller_id?: string | null
+    date_cancelled?: Date | string | null
     rv_number: string
     date_requested: Date | string
     work_order_no?: string | null
@@ -29218,6 +39005,7 @@ export namespace Prisma {
     supervisor_id: string
     status?: number
     canceller_id?: string | null
+    date_cancelled?: Date | string | null
     is_referenced?: boolean
     created_at?: Date | string
     updated_at?: Date | string
@@ -29236,6 +39024,7 @@ export namespace Prisma {
     supervisor_id: string
     status?: number
     canceller_id?: string | null
+    date_cancelled?: Date | string | null
     is_referenced?: boolean
     created_at?: Date | string
     updated_at?: Date | string
@@ -29286,6 +39075,7 @@ export namespace Prisma {
     supervisor_id?: StringFieldUpdateOperationsInput | string
     status?: IntFieldUpdateOperationsInput | number
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_referenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -29304,6 +39094,7 @@ export namespace Prisma {
     supervisor_id?: StringFieldUpdateOperationsInput | string
     status?: IntFieldUpdateOperationsInput | number
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_referenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -29328,6 +39119,7 @@ export namespace Prisma {
     classification_id?: NullableStringFieldUpdateOperationsInput | string | null
     supervisor_id?: StringFieldUpdateOperationsInput | string
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     rv_number?: StringFieldUpdateOperationsInput | string
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
     work_order_no?: NullableStringFieldUpdateOperationsInput | string | null
@@ -29346,6 +39138,7 @@ export namespace Prisma {
     classification_id?: NullableStringFieldUpdateOperationsInput | string | null
     supervisor_id?: StringFieldUpdateOperationsInput | string
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     rv_number?: StringFieldUpdateOperationsInput | string
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
     work_order_no?: NullableStringFieldUpdateOperationsInput | string | null
@@ -29378,6 +39171,7 @@ export namespace Prisma {
     supervisor_id?: StringFieldUpdateOperationsInput | string
     status?: IntFieldUpdateOperationsInput | number
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_referenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -29396,6 +39190,7 @@ export namespace Prisma {
     supervisor_id?: StringFieldUpdateOperationsInput | string
     status?: IntFieldUpdateOperationsInput | number
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_referenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -29485,6 +39280,7 @@ export namespace Prisma {
     status?: number
     notes?: string | null
     canceller_id?: string | null
+    date_cancelled?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -29504,6 +39300,7 @@ export namespace Prisma {
     status?: number
     notes?: string | null
     canceller_id?: string | null
+    date_cancelled?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -29611,6 +39408,7 @@ export namespace Prisma {
     status?: IntFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -29630,6 +39428,7 @@ export namespace Prisma {
     status?: IntFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -29647,6 +39446,7 @@ export namespace Prisma {
     supervisor_id: string
     status?: number
     canceller_id?: string | null
+    date_cancelled?: Date | string | null
     is_referenced?: boolean
     created_at?: Date | string
     updated_at?: Date | string
@@ -29666,6 +39466,7 @@ export namespace Prisma {
     supervisor_id: string
     status?: number
     canceller_id?: string | null
+    date_cancelled?: Date | string | null
     is_referenced?: boolean
     created_at?: Date | string
     updated_at?: Date | string
@@ -29699,6 +39500,7 @@ export namespace Prisma {
     supervisor_id?: StringFieldUpdateOperationsInput | string
     status?: IntFieldUpdateOperationsInput | number
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_referenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -29718,6 +39520,7 @@ export namespace Prisma {
     supervisor_id?: StringFieldUpdateOperationsInput | string
     status?: IntFieldUpdateOperationsInput | number
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_referenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -29770,6 +39573,7 @@ export namespace Prisma {
     status?: number
     notes?: string | null
     canceller_id?: string | null
+    date_cancelled?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -29789,6 +39593,7 @@ export namespace Prisma {
     status?: number
     notes?: string | null
     canceller_id?: string | null
+    date_cancelled?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -29901,6 +39706,7 @@ export namespace Prisma {
     status?: IntFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -29920,6 +39726,7 @@ export namespace Prisma {
     status?: IntFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -29966,6 +39773,7 @@ export namespace Prisma {
     classification_id?: string | null
     supervisor_id: string
     canceller_id?: string | null
+    date_cancelled?: Date | string | null
     rv_number: string
     date_requested: Date | string
     work_order_no?: string | null
@@ -29985,6 +39793,7 @@ export namespace Prisma {
     classification_id?: string | null
     supervisor_id: string
     canceller_id?: string | null
+    date_cancelled?: Date | string | null
     rv_number: string
     date_requested: Date | string
     work_order_no?: string | null
@@ -30018,6 +39827,7 @@ export namespace Prisma {
     classification_id?: NullableStringFieldUpdateOperationsInput | string | null
     supervisor_id?: StringFieldUpdateOperationsInput | string
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     rv_number?: StringFieldUpdateOperationsInput | string
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
     work_order_no?: NullableStringFieldUpdateOperationsInput | string | null
@@ -30037,6 +39847,7 @@ export namespace Prisma {
     classification_id?: NullableStringFieldUpdateOperationsInput | string | null
     supervisor_id?: StringFieldUpdateOperationsInput | string
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     rv_number?: StringFieldUpdateOperationsInput | string
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
     work_order_no?: NullableStringFieldUpdateOperationsInput | string | null
@@ -30057,6 +39868,7 @@ export namespace Prisma {
     status?: number
     notes?: string | null
     canceller_id?: string | null
+    date_cancelled?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -30076,6 +39888,7 @@ export namespace Prisma {
     status?: number
     notes?: string | null
     canceller_id?: string | null
+    date_cancelled?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -30205,6 +40018,7 @@ export namespace Prisma {
     status?: IntFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -30224,6 +40038,7 @@ export namespace Prisma {
     status?: IntFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -30345,6 +40160,7 @@ export namespace Prisma {
     supervisor_id: string
     status?: number
     canceller_id?: string | null
+    date_cancelled?: Date | string | null
     is_referenced?: boolean
     created_at?: Date | string
     updated_at?: Date | string
@@ -30364,6 +40180,7 @@ export namespace Prisma {
     supervisor_id: string
     status?: number
     canceller_id?: string | null
+    date_cancelled?: Date | string | null
     is_referenced?: boolean
     created_at?: Date | string
     updated_at?: Date | string
@@ -30395,6 +40212,7 @@ export namespace Prisma {
     supervisor_id?: StringFieldUpdateOperationsInput | string
     status?: IntFieldUpdateOperationsInput | number
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_referenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -30414,6 +40232,7 @@ export namespace Prisma {
     supervisor_id?: StringFieldUpdateOperationsInput | string
     status?: IntFieldUpdateOperationsInput | number
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_referenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -30431,6 +40250,7 @@ export namespace Prisma {
     supervisor_id: string
     status?: number
     canceller_id?: string | null
+    date_cancelled?: Date | string | null
     is_referenced?: boolean
     created_at?: Date | string
     updated_at?: Date | string
@@ -30450,6 +40270,7 @@ export namespace Prisma {
     supervisor_id: string
     status?: number
     canceller_id?: string | null
+    date_cancelled?: Date | string | null
     is_referenced?: boolean
     created_at?: Date | string
     updated_at?: Date | string
@@ -30467,6 +40288,7 @@ export namespace Prisma {
     classification_id?: string | null
     supervisor_id: string
     canceller_id?: string | null
+    date_cancelled?: Date | string | null
     rv_number: string
     date_requested: Date | string
     work_order_no?: string | null
@@ -30486,6 +40308,7 @@ export namespace Prisma {
     classification_id?: string | null
     supervisor_id: string
     canceller_id?: string | null
+    date_cancelled?: Date | string | null
     rv_number: string
     date_requested: Date | string
     work_order_no?: string | null
@@ -30511,6 +40334,7 @@ export namespace Prisma {
     supervisor_id: string
     status?: number
     canceller_id?: string | null
+    date_cancelled?: Date | string | null
     is_referenced?: boolean
     created_at?: Date | string
     updated_at?: Date | string
@@ -30530,6 +40354,7 @@ export namespace Prisma {
     supervisor_id: string
     status?: number
     canceller_id?: string | null
+    date_cancelled?: Date | string | null
     is_referenced?: boolean
     created_at?: Date | string
     updated_at?: Date | string
@@ -30637,6 +40462,7 @@ export namespace Prisma {
     supervisor_id?: StringFieldUpdateOperationsInput | string
     status?: IntFieldUpdateOperationsInput | number
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_referenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -30656,6 +40482,7 @@ export namespace Prisma {
     supervisor_id?: StringFieldUpdateOperationsInput | string
     status?: IntFieldUpdateOperationsInput | number
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_referenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -30679,6 +40506,7 @@ export namespace Prisma {
     classification_id?: NullableStringFieldUpdateOperationsInput | string | null
     supervisor_id?: StringFieldUpdateOperationsInput | string
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     rv_number?: StringFieldUpdateOperationsInput | string
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
     work_order_no?: NullableStringFieldUpdateOperationsInput | string | null
@@ -30698,6 +40526,7 @@ export namespace Prisma {
     classification_id?: NullableStringFieldUpdateOperationsInput | string | null
     supervisor_id?: StringFieldUpdateOperationsInput | string
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     rv_number?: StringFieldUpdateOperationsInput | string
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
     work_order_no?: NullableStringFieldUpdateOperationsInput | string | null
@@ -30729,6 +40558,7 @@ export namespace Prisma {
     supervisor_id?: StringFieldUpdateOperationsInput | string
     status?: IntFieldUpdateOperationsInput | number
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_referenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -30748,6 +40578,7 @@ export namespace Prisma {
     supervisor_id?: StringFieldUpdateOperationsInput | string
     status?: IntFieldUpdateOperationsInput | number
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_referenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -30813,6 +40644,7 @@ export namespace Prisma {
     status?: number
     notes?: string | null
     canceller_id?: string | null
+    date_cancelled?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -30833,6 +40665,7 @@ export namespace Prisma {
     status?: number
     notes?: string | null
     canceller_id?: string | null
+    date_cancelled?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -30933,10 +40766,12 @@ export namespace Prisma {
     po_date: Date | string
     status?: number
     canceller_id?: string | null
+    date_cancelled?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
     po_approvers?: POApproverCreateNestedManyWithoutPoInput
+    rr?: RRCreateNestedOneWithoutPoInput
   }
 
   export type POUncheckedCreateWithoutMeqs_supplierInput = {
@@ -30945,10 +40780,12 @@ export namespace Prisma {
     po_date: Date | string
     status?: number
     canceller_id?: string | null
+    date_cancelled?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
     po_approvers?: POApproverUncheckedCreateNestedManyWithoutPoInput
+    rr?: RRUncheckedCreateNestedOneWithoutPoInput
   }
 
   export type POCreateOrConnectWithoutMeqs_supplierInput = {
@@ -30975,6 +40812,7 @@ export namespace Prisma {
     status?: IntFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -30995,6 +40833,7 @@ export namespace Prisma {
     status?: IntFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -31091,10 +40930,12 @@ export namespace Prisma {
     po_date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: IntFieldUpdateOperationsInput | number
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     po_approvers?: POApproverUpdateManyWithoutPoNestedInput
+    rr?: RRUpdateOneWithoutPoNestedInput
   }
 
   export type POUncheckedUpdateWithoutMeqs_supplierInput = {
@@ -31103,10 +40944,12 @@ export namespace Prisma {
     po_date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: IntFieldUpdateOperationsInput | number
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     po_approvers?: POApproverUncheckedUpdateManyWithoutPoNestedInput
+    rr?: RRUncheckedUpdateOneWithoutPoNestedInput
   }
 
   export type CanvassItemCreateWithoutMeqs_supplier_itemsInput = {
@@ -31317,6 +41160,7 @@ export namespace Prisma {
     status?: number
     notes?: string | null
     canceller_id?: string | null
+    date_cancelled?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -31337,6 +41181,7 @@ export namespace Prisma {
     status?: number
     notes?: string | null
     canceller_id?: string | null
+    date_cancelled?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -31367,6 +41212,7 @@ export namespace Prisma {
     status?: IntFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -31387,6 +41233,7 @@ export namespace Prisma {
     status?: IntFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -31462,6 +41309,47 @@ export namespace Prisma {
     create: XOR<MEQSSupplierCreateWithoutPoInput, MEQSSupplierUncheckedCreateWithoutPoInput>
   }
 
+  export type RRCreateWithoutPoInput = {
+    id?: string
+    rr_number: string
+    rr_date: Date | string
+    received_by_id: string
+    canceller_id?: string | null
+    date_cancelled?: Date | string | null
+    invoice_number: string
+    delivery_number?: string | null
+    notes?: string | null
+    delivery_charge: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    rr_approvers?: RRApproverCreateNestedManyWithoutRrInput
+    rr_items?: RRItemCreateNestedManyWithoutRrInput
+  }
+
+  export type RRUncheckedCreateWithoutPoInput = {
+    id?: string
+    rr_number: string
+    rr_date: Date | string
+    received_by_id: string
+    canceller_id?: string | null
+    date_cancelled?: Date | string | null
+    invoice_number: string
+    delivery_number?: string | null
+    notes?: string | null
+    delivery_charge: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    rr_approvers?: RRApproverUncheckedCreateNestedManyWithoutRrInput
+    rr_items?: RRItemUncheckedCreateNestedManyWithoutRrInput
+  }
+
+  export type RRCreateOrConnectWithoutPoInput = {
+    where: RRWhereUniqueInput
+    create: XOR<RRCreateWithoutPoInput, RRUncheckedCreateWithoutPoInput>
+  }
+
   export type POApproverUpsertWithWhereUniqueWithoutPoInput = {
     where: POApproverWhereUniqueInput
     update: XOR<POApproverUpdateWithoutPoInput, POApproverUncheckedUpdateWithoutPoInput>
@@ -31533,16 +41421,65 @@ export namespace Prisma {
     meqs_supplier_items?: MEQSSupplierItemUncheckedUpdateManyWithoutMeqs_supplierNestedInput
   }
 
+  export type RRUpsertWithoutPoInput = {
+    update: XOR<RRUpdateWithoutPoInput, RRUncheckedUpdateWithoutPoInput>
+    create: XOR<RRCreateWithoutPoInput, RRUncheckedCreateWithoutPoInput>
+    where?: RRWhereInput
+  }
+
+  export type RRUpdateToOneWithWhereWithoutPoInput = {
+    where?: RRWhereInput
+    data: XOR<RRUpdateWithoutPoInput, RRUncheckedUpdateWithoutPoInput>
+  }
+
+  export type RRUpdateWithoutPoInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    rr_number?: StringFieldUpdateOperationsInput | string
+    rr_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    received_by_id?: StringFieldUpdateOperationsInput | string
+    canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    invoice_number?: StringFieldUpdateOperationsInput | string
+    delivery_number?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    delivery_charge?: FloatFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    rr_approvers?: RRApproverUpdateManyWithoutRrNestedInput
+    rr_items?: RRItemUpdateManyWithoutRrNestedInput
+  }
+
+  export type RRUncheckedUpdateWithoutPoInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    rr_number?: StringFieldUpdateOperationsInput | string
+    rr_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    received_by_id?: StringFieldUpdateOperationsInput | string
+    canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    invoice_number?: StringFieldUpdateOperationsInput | string
+    delivery_number?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    delivery_charge?: FloatFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    rr_approvers?: RRApproverUncheckedUpdateManyWithoutRrNestedInput
+    rr_items?: RRItemUncheckedUpdateManyWithoutRrNestedInput
+  }
+
   export type POCreateWithoutPo_approversInput = {
     id?: string
     po_number: string
     po_date: Date | string
     status?: number
     canceller_id?: string | null
+    date_cancelled?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
     meqs_supplier: MEQSSupplierCreateNestedOneWithoutPoInput
+    rr?: RRCreateNestedOneWithoutPoInput
   }
 
   export type POUncheckedCreateWithoutPo_approversInput = {
@@ -31552,9 +41489,11 @@ export namespace Prisma {
     po_date: Date | string
     status?: number
     canceller_id?: string | null
+    date_cancelled?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    rr?: RRUncheckedCreateNestedOneWithoutPoInput
   }
 
   export type POCreateOrConnectWithoutPo_approversInput = {
@@ -31579,10 +41518,12 @@ export namespace Prisma {
     po_date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: IntFieldUpdateOperationsInput | number
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     meqs_supplier?: MEQSSupplierUpdateOneRequiredWithoutPoNestedInput
+    rr?: RRUpdateOneWithoutPoNestedInput
   }
 
   export type POUncheckedUpdateWithoutPo_approversInput = {
@@ -31592,6 +41533,1118 @@ export namespace Prisma {
     po_date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: IntFieldUpdateOperationsInput | number
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    rr?: RRUncheckedUpdateOneWithoutPoNestedInput
+  }
+
+  export type POCreateWithoutRrInput = {
+    id?: string
+    po_number: string
+    po_date: Date | string
+    status?: number
+    canceller_id?: string | null
+    date_cancelled?: Date | string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    po_approvers?: POApproverCreateNestedManyWithoutPoInput
+    meqs_supplier: MEQSSupplierCreateNestedOneWithoutPoInput
+  }
+
+  export type POUncheckedCreateWithoutRrInput = {
+    id?: string
+    meqs_supplier_id: string
+    po_number: string
+    po_date: Date | string
+    status?: number
+    canceller_id?: string | null
+    date_cancelled?: Date | string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    po_approvers?: POApproverUncheckedCreateNestedManyWithoutPoInput
+  }
+
+  export type POCreateOrConnectWithoutRrInput = {
+    where: POWhereUniqueInput
+    create: XOR<POCreateWithoutRrInput, POUncheckedCreateWithoutRrInput>
+  }
+
+  export type RRApproverCreateWithoutRrInput = {
+    id?: string
+    approver_id: string
+    approver_proxy_id?: string | null
+    date_approval?: Date | string | null
+    notes?: string | null
+    status: number
+    label: string
+    order: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
+  export type RRApproverUncheckedCreateWithoutRrInput = {
+    id?: string
+    approver_id: string
+    approver_proxy_id?: string | null
+    date_approval?: Date | string | null
+    notes?: string | null
+    status: number
+    label: string
+    order: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
+  export type RRApproverCreateOrConnectWithoutRrInput = {
+    where: RRApproverWhereUniqueInput
+    create: XOR<RRApproverCreateWithoutRrInput, RRApproverUncheckedCreateWithoutRrInput>
+  }
+
+  export type RRApproverCreateManyRrInputEnvelope = {
+    data: RRApproverCreateManyRrInput | RRApproverCreateManyRrInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type RRItemCreateWithoutRrInput = {
+    id?: string
+    item_class: number
+    quantity_delivered: number
+    quantity_accepted: number
+    description: string
+    vat_type: number
+    gross_price: number
+    net_price: number
+    freight_cost: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    item?: ItemCreateNestedOneWithoutRr_itemsInput
+    item_brand: BrandCreateNestedOneWithoutRr_itemsInput
+    unit: UnitCreateNestedOneWithoutRr_itemsInput
+    ItemTransaction?: ItemTransactionCreateNestedOneWithoutRr_itemInput
+  }
+
+  export type RRItemUncheckedCreateWithoutRrInput = {
+    id?: string
+    item_id?: string | null
+    item_brand_id: string
+    unit_id: string
+    item_class: number
+    quantity_delivered: number
+    quantity_accepted: number
+    description: string
+    vat_type: number
+    gross_price: number
+    net_price: number
+    freight_cost: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    ItemTransaction?: ItemTransactionUncheckedCreateNestedOneWithoutRr_itemInput
+  }
+
+  export type RRItemCreateOrConnectWithoutRrInput = {
+    where: RRItemWhereUniqueInput
+    create: XOR<RRItemCreateWithoutRrInput, RRItemUncheckedCreateWithoutRrInput>
+  }
+
+  export type RRItemCreateManyRrInputEnvelope = {
+    data: RRItemCreateManyRrInput | RRItemCreateManyRrInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type POUpsertWithoutRrInput = {
+    update: XOR<POUpdateWithoutRrInput, POUncheckedUpdateWithoutRrInput>
+    create: XOR<POCreateWithoutRrInput, POUncheckedCreateWithoutRrInput>
+    where?: POWhereInput
+  }
+
+  export type POUpdateToOneWithWhereWithoutRrInput = {
+    where?: POWhereInput
+    data: XOR<POUpdateWithoutRrInput, POUncheckedUpdateWithoutRrInput>
+  }
+
+  export type POUpdateWithoutRrInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    po_number?: StringFieldUpdateOperationsInput | string
+    po_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: IntFieldUpdateOperationsInput | number
+    canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    po_approvers?: POApproverUpdateManyWithoutPoNestedInput
+    meqs_supplier?: MEQSSupplierUpdateOneRequiredWithoutPoNestedInput
+  }
+
+  export type POUncheckedUpdateWithoutRrInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    meqs_supplier_id?: StringFieldUpdateOperationsInput | string
+    po_number?: StringFieldUpdateOperationsInput | string
+    po_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: IntFieldUpdateOperationsInput | number
+    canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    po_approvers?: POApproverUncheckedUpdateManyWithoutPoNestedInput
+  }
+
+  export type RRApproverUpsertWithWhereUniqueWithoutRrInput = {
+    where: RRApproverWhereUniqueInput
+    update: XOR<RRApproverUpdateWithoutRrInput, RRApproverUncheckedUpdateWithoutRrInput>
+    create: XOR<RRApproverCreateWithoutRrInput, RRApproverUncheckedCreateWithoutRrInput>
+  }
+
+  export type RRApproverUpdateWithWhereUniqueWithoutRrInput = {
+    where: RRApproverWhereUniqueInput
+    data: XOR<RRApproverUpdateWithoutRrInput, RRApproverUncheckedUpdateWithoutRrInput>
+  }
+
+  export type RRApproverUpdateManyWithWhereWithoutRrInput = {
+    where: RRApproverScalarWhereInput
+    data: XOR<RRApproverUpdateManyMutationInput, RRApproverUncheckedUpdateManyWithoutRrInput>
+  }
+
+  export type RRApproverScalarWhereInput = {
+    AND?: RRApproverScalarWhereInput | RRApproverScalarWhereInput[]
+    OR?: RRApproverScalarWhereInput[]
+    NOT?: RRApproverScalarWhereInput | RRApproverScalarWhereInput[]
+    id?: StringFilter<"RRApprover"> | string
+    rr_id?: StringFilter<"RRApprover"> | string
+    approver_id?: StringFilter<"RRApprover"> | string
+    approver_proxy_id?: StringNullableFilter<"RRApprover"> | string | null
+    date_approval?: DateTimeNullableFilter<"RRApprover"> | Date | string | null
+    notes?: StringNullableFilter<"RRApprover"> | string | null
+    status?: IntFilter<"RRApprover"> | number
+    label?: StringFilter<"RRApprover"> | string
+    order?: IntFilter<"RRApprover"> | number
+    created_at?: DateTimeFilter<"RRApprover"> | Date | string
+    updated_at?: DateTimeFilter<"RRApprover"> | Date | string
+    is_deleted?: BoolFilter<"RRApprover"> | boolean
+  }
+
+  export type RRItemUpsertWithWhereUniqueWithoutRrInput = {
+    where: RRItemWhereUniqueInput
+    update: XOR<RRItemUpdateWithoutRrInput, RRItemUncheckedUpdateWithoutRrInput>
+    create: XOR<RRItemCreateWithoutRrInput, RRItemUncheckedCreateWithoutRrInput>
+  }
+
+  export type RRItemUpdateWithWhereUniqueWithoutRrInput = {
+    where: RRItemWhereUniqueInput
+    data: XOR<RRItemUpdateWithoutRrInput, RRItemUncheckedUpdateWithoutRrInput>
+  }
+
+  export type RRItemUpdateManyWithWhereWithoutRrInput = {
+    where: RRItemScalarWhereInput
+    data: XOR<RRItemUpdateManyMutationInput, RRItemUncheckedUpdateManyWithoutRrInput>
+  }
+
+  export type RRCreateWithoutRr_approversInput = {
+    id?: string
+    rr_number: string
+    rr_date: Date | string
+    received_by_id: string
+    canceller_id?: string | null
+    date_cancelled?: Date | string | null
+    invoice_number: string
+    delivery_number?: string | null
+    notes?: string | null
+    delivery_charge: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    po: POCreateNestedOneWithoutRrInput
+    rr_items?: RRItemCreateNestedManyWithoutRrInput
+  }
+
+  export type RRUncheckedCreateWithoutRr_approversInput = {
+    id?: string
+    po_id: string
+    rr_number: string
+    rr_date: Date | string
+    received_by_id: string
+    canceller_id?: string | null
+    date_cancelled?: Date | string | null
+    invoice_number: string
+    delivery_number?: string | null
+    notes?: string | null
+    delivery_charge: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    rr_items?: RRItemUncheckedCreateNestedManyWithoutRrInput
+  }
+
+  export type RRCreateOrConnectWithoutRr_approversInput = {
+    where: RRWhereUniqueInput
+    create: XOR<RRCreateWithoutRr_approversInput, RRUncheckedCreateWithoutRr_approversInput>
+  }
+
+  export type RRUpsertWithoutRr_approversInput = {
+    update: XOR<RRUpdateWithoutRr_approversInput, RRUncheckedUpdateWithoutRr_approversInput>
+    create: XOR<RRCreateWithoutRr_approversInput, RRUncheckedCreateWithoutRr_approversInput>
+    where?: RRWhereInput
+  }
+
+  export type RRUpdateToOneWithWhereWithoutRr_approversInput = {
+    where?: RRWhereInput
+    data: XOR<RRUpdateWithoutRr_approversInput, RRUncheckedUpdateWithoutRr_approversInput>
+  }
+
+  export type RRUpdateWithoutRr_approversInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    rr_number?: StringFieldUpdateOperationsInput | string
+    rr_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    received_by_id?: StringFieldUpdateOperationsInput | string
+    canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    invoice_number?: StringFieldUpdateOperationsInput | string
+    delivery_number?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    delivery_charge?: FloatFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    po?: POUpdateOneRequiredWithoutRrNestedInput
+    rr_items?: RRItemUpdateManyWithoutRrNestedInput
+  }
+
+  export type RRUncheckedUpdateWithoutRr_approversInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    po_id?: StringFieldUpdateOperationsInput | string
+    rr_number?: StringFieldUpdateOperationsInput | string
+    rr_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    received_by_id?: StringFieldUpdateOperationsInput | string
+    canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    invoice_number?: StringFieldUpdateOperationsInput | string
+    delivery_number?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    delivery_charge?: FloatFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    rr_items?: RRItemUncheckedUpdateManyWithoutRrNestedInput
+  }
+
+  export type RRCreateWithoutRr_itemsInput = {
+    id?: string
+    rr_number: string
+    rr_date: Date | string
+    received_by_id: string
+    canceller_id?: string | null
+    date_cancelled?: Date | string | null
+    invoice_number: string
+    delivery_number?: string | null
+    notes?: string | null
+    delivery_charge: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    po: POCreateNestedOneWithoutRrInput
+    rr_approvers?: RRApproverCreateNestedManyWithoutRrInput
+  }
+
+  export type RRUncheckedCreateWithoutRr_itemsInput = {
+    id?: string
+    po_id: string
+    rr_number: string
+    rr_date: Date | string
+    received_by_id: string
+    canceller_id?: string | null
+    date_cancelled?: Date | string | null
+    invoice_number: string
+    delivery_number?: string | null
+    notes?: string | null
+    delivery_charge: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    rr_approvers?: RRApproverUncheckedCreateNestedManyWithoutRrInput
+  }
+
+  export type RRCreateOrConnectWithoutRr_itemsInput = {
+    where: RRWhereUniqueInput
+    create: XOR<RRCreateWithoutRr_itemsInput, RRUncheckedCreateWithoutRr_itemsInput>
+  }
+
+  export type ItemCreateWithoutRr_itemsInput = {
+    id?: string
+    code: string
+    description: string
+    quantity: number
+    initial_quantity: number
+    average_price: number
+    initial_average_price: number
+    is_initial?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    item_type: ItemTypeCreateNestedOneWithoutItemsInput
+    item_transactions?: ItemTransactionCreateNestedManyWithoutItemInput
+    unit: UnitCreateNestedOneWithoutItemsInput
+  }
+
+  export type ItemUncheckedCreateWithoutRr_itemsInput = {
+    id?: string
+    item_type_id: string
+    unit_id: string
+    code: string
+    description: string
+    quantity: number
+    initial_quantity: number
+    average_price: number
+    initial_average_price: number
+    is_initial?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    item_transactions?: ItemTransactionUncheckedCreateNestedManyWithoutItemInput
+  }
+
+  export type ItemCreateOrConnectWithoutRr_itemsInput = {
+    where: ItemWhereUniqueInput
+    create: XOR<ItemCreateWithoutRr_itemsInput, ItemUncheckedCreateWithoutRr_itemsInput>
+  }
+
+  export type BrandCreateWithoutRr_itemsInput = {
+    id?: string
+    name: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    canvass_items?: CanvassItemCreateNestedManyWithoutBrandInput
+  }
+
+  export type BrandUncheckedCreateWithoutRr_itemsInput = {
+    id?: string
+    name: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    canvass_items?: CanvassItemUncheckedCreateNestedManyWithoutBrandInput
+  }
+
+  export type BrandCreateOrConnectWithoutRr_itemsInput = {
+    where: BrandWhereUniqueInput
+    create: XOR<BrandCreateWithoutRr_itemsInput, BrandUncheckedCreateWithoutRr_itemsInput>
+  }
+
+  export type UnitCreateWithoutRr_itemsInput = {
+    id?: string
+    name: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    canvass_items?: CanvassItemCreateNestedManyWithoutUnitInput
+    items?: ItemCreateNestedManyWithoutUnitInput
+  }
+
+  export type UnitUncheckedCreateWithoutRr_itemsInput = {
+    id?: string
+    name: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    canvass_items?: CanvassItemUncheckedCreateNestedManyWithoutUnitInput
+    items?: ItemUncheckedCreateNestedManyWithoutUnitInput
+  }
+
+  export type UnitCreateOrConnectWithoutRr_itemsInput = {
+    where: UnitWhereUniqueInput
+    create: XOR<UnitCreateWithoutRr_itemsInput, UnitUncheckedCreateWithoutRr_itemsInput>
+  }
+
+  export type ItemTransactionCreateWithoutRr_itemInput = {
+    id?: string
+    type: number
+    quantity: number
+    price: number
+    remarks?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    item: ItemCreateNestedOneWithoutItem_transactionsInput
+  }
+
+  export type ItemTransactionUncheckedCreateWithoutRr_itemInput = {
+    id?: string
+    item_id: string
+    type: number
+    quantity: number
+    price: number
+    remarks?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
+  export type ItemTransactionCreateOrConnectWithoutRr_itemInput = {
+    where: ItemTransactionWhereUniqueInput
+    create: XOR<ItemTransactionCreateWithoutRr_itemInput, ItemTransactionUncheckedCreateWithoutRr_itemInput>
+  }
+
+  export type RRUpsertWithoutRr_itemsInput = {
+    update: XOR<RRUpdateWithoutRr_itemsInput, RRUncheckedUpdateWithoutRr_itemsInput>
+    create: XOR<RRCreateWithoutRr_itemsInput, RRUncheckedCreateWithoutRr_itemsInput>
+    where?: RRWhereInput
+  }
+
+  export type RRUpdateToOneWithWhereWithoutRr_itemsInput = {
+    where?: RRWhereInput
+    data: XOR<RRUpdateWithoutRr_itemsInput, RRUncheckedUpdateWithoutRr_itemsInput>
+  }
+
+  export type RRUpdateWithoutRr_itemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    rr_number?: StringFieldUpdateOperationsInput | string
+    rr_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    received_by_id?: StringFieldUpdateOperationsInput | string
+    canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    invoice_number?: StringFieldUpdateOperationsInput | string
+    delivery_number?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    delivery_charge?: FloatFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    po?: POUpdateOneRequiredWithoutRrNestedInput
+    rr_approvers?: RRApproverUpdateManyWithoutRrNestedInput
+  }
+
+  export type RRUncheckedUpdateWithoutRr_itemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    po_id?: StringFieldUpdateOperationsInput | string
+    rr_number?: StringFieldUpdateOperationsInput | string
+    rr_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    received_by_id?: StringFieldUpdateOperationsInput | string
+    canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    invoice_number?: StringFieldUpdateOperationsInput | string
+    delivery_number?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    delivery_charge?: FloatFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    rr_approvers?: RRApproverUncheckedUpdateManyWithoutRrNestedInput
+  }
+
+  export type ItemUpsertWithoutRr_itemsInput = {
+    update: XOR<ItemUpdateWithoutRr_itemsInput, ItemUncheckedUpdateWithoutRr_itemsInput>
+    create: XOR<ItemCreateWithoutRr_itemsInput, ItemUncheckedCreateWithoutRr_itemsInput>
+    where?: ItemWhereInput
+  }
+
+  export type ItemUpdateToOneWithWhereWithoutRr_itemsInput = {
+    where?: ItemWhereInput
+    data: XOR<ItemUpdateWithoutRr_itemsInput, ItemUncheckedUpdateWithoutRr_itemsInput>
+  }
+
+  export type ItemUpdateWithoutRr_itemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    initial_quantity?: IntFieldUpdateOperationsInput | number
+    average_price?: FloatFieldUpdateOperationsInput | number
+    initial_average_price?: FloatFieldUpdateOperationsInput | number
+    is_initial?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    item_type?: ItemTypeUpdateOneRequiredWithoutItemsNestedInput
+    item_transactions?: ItemTransactionUpdateManyWithoutItemNestedInput
+    unit?: UnitUpdateOneRequiredWithoutItemsNestedInput
+  }
+
+  export type ItemUncheckedUpdateWithoutRr_itemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    item_type_id?: StringFieldUpdateOperationsInput | string
+    unit_id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    initial_quantity?: IntFieldUpdateOperationsInput | number
+    average_price?: FloatFieldUpdateOperationsInput | number
+    initial_average_price?: FloatFieldUpdateOperationsInput | number
+    is_initial?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    item_transactions?: ItemTransactionUncheckedUpdateManyWithoutItemNestedInput
+  }
+
+  export type BrandUpsertWithoutRr_itemsInput = {
+    update: XOR<BrandUpdateWithoutRr_itemsInput, BrandUncheckedUpdateWithoutRr_itemsInput>
+    create: XOR<BrandCreateWithoutRr_itemsInput, BrandUncheckedCreateWithoutRr_itemsInput>
+    where?: BrandWhereInput
+  }
+
+  export type BrandUpdateToOneWithWhereWithoutRr_itemsInput = {
+    where?: BrandWhereInput
+    data: XOR<BrandUpdateWithoutRr_itemsInput, BrandUncheckedUpdateWithoutRr_itemsInput>
+  }
+
+  export type BrandUpdateWithoutRr_itemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    canvass_items?: CanvassItemUpdateManyWithoutBrandNestedInput
+  }
+
+  export type BrandUncheckedUpdateWithoutRr_itemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    canvass_items?: CanvassItemUncheckedUpdateManyWithoutBrandNestedInput
+  }
+
+  export type UnitUpsertWithoutRr_itemsInput = {
+    update: XOR<UnitUpdateWithoutRr_itemsInput, UnitUncheckedUpdateWithoutRr_itemsInput>
+    create: XOR<UnitCreateWithoutRr_itemsInput, UnitUncheckedCreateWithoutRr_itemsInput>
+    where?: UnitWhereInput
+  }
+
+  export type UnitUpdateToOneWithWhereWithoutRr_itemsInput = {
+    where?: UnitWhereInput
+    data: XOR<UnitUpdateWithoutRr_itemsInput, UnitUncheckedUpdateWithoutRr_itemsInput>
+  }
+
+  export type UnitUpdateWithoutRr_itemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    canvass_items?: CanvassItemUpdateManyWithoutUnitNestedInput
+    items?: ItemUpdateManyWithoutUnitNestedInput
+  }
+
+  export type UnitUncheckedUpdateWithoutRr_itemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    canvass_items?: CanvassItemUncheckedUpdateManyWithoutUnitNestedInput
+    items?: ItemUncheckedUpdateManyWithoutUnitNestedInput
+  }
+
+  export type ItemTransactionUpsertWithoutRr_itemInput = {
+    update: XOR<ItemTransactionUpdateWithoutRr_itemInput, ItemTransactionUncheckedUpdateWithoutRr_itemInput>
+    create: XOR<ItemTransactionCreateWithoutRr_itemInput, ItemTransactionUncheckedCreateWithoutRr_itemInput>
+    where?: ItemTransactionWhereInput
+  }
+
+  export type ItemTransactionUpdateToOneWithWhereWithoutRr_itemInput = {
+    where?: ItemTransactionWhereInput
+    data: XOR<ItemTransactionUpdateWithoutRr_itemInput, ItemTransactionUncheckedUpdateWithoutRr_itemInput>
+  }
+
+  export type ItemTransactionUpdateWithoutRr_itemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: IntFieldUpdateOperationsInput | number
+    quantity?: FloatFieldUpdateOperationsInput | number
+    price?: FloatFieldUpdateOperationsInput | number
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    item?: ItemUpdateOneRequiredWithoutItem_transactionsNestedInput
+  }
+
+  export type ItemTransactionUncheckedUpdateWithoutRr_itemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    item_id?: StringFieldUpdateOperationsInput | string
+    type?: IntFieldUpdateOperationsInput | number
+    quantity?: FloatFieldUpdateOperationsInput | number
+    price?: FloatFieldUpdateOperationsInput | number
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type ItemTypeCreateWithoutItemsInput = {
+    id?: string
+    name: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
+  export type ItemTypeUncheckedCreateWithoutItemsInput = {
+    id?: string
+    name: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
+  export type ItemTypeCreateOrConnectWithoutItemsInput = {
+    where: ItemTypeWhereUniqueInput
+    create: XOR<ItemTypeCreateWithoutItemsInput, ItemTypeUncheckedCreateWithoutItemsInput>
+  }
+
+  export type ItemTransactionCreateWithoutItemInput = {
+    id?: string
+    type: number
+    quantity: number
+    price: number
+    remarks?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    rr_item?: RRItemCreateNestedOneWithoutItemTransactionInput
+  }
+
+  export type ItemTransactionUncheckedCreateWithoutItemInput = {
+    id?: string
+    rr_item_id?: string | null
+    type: number
+    quantity: number
+    price: number
+    remarks?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
+  export type ItemTransactionCreateOrConnectWithoutItemInput = {
+    where: ItemTransactionWhereUniqueInput
+    create: XOR<ItemTransactionCreateWithoutItemInput, ItemTransactionUncheckedCreateWithoutItemInput>
+  }
+
+  export type ItemTransactionCreateManyItemInputEnvelope = {
+    data: ItemTransactionCreateManyItemInput | ItemTransactionCreateManyItemInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type RRItemCreateWithoutItemInput = {
+    id?: string
+    item_class: number
+    quantity_delivered: number
+    quantity_accepted: number
+    description: string
+    vat_type: number
+    gross_price: number
+    net_price: number
+    freight_cost: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    rr: RRCreateNestedOneWithoutRr_itemsInput
+    item_brand: BrandCreateNestedOneWithoutRr_itemsInput
+    unit: UnitCreateNestedOneWithoutRr_itemsInput
+    ItemTransaction?: ItemTransactionCreateNestedOneWithoutRr_itemInput
+  }
+
+  export type RRItemUncheckedCreateWithoutItemInput = {
+    id?: string
+    rr_id: string
+    item_brand_id: string
+    unit_id: string
+    item_class: number
+    quantity_delivered: number
+    quantity_accepted: number
+    description: string
+    vat_type: number
+    gross_price: number
+    net_price: number
+    freight_cost: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    ItemTransaction?: ItemTransactionUncheckedCreateNestedOneWithoutRr_itemInput
+  }
+
+  export type RRItemCreateOrConnectWithoutItemInput = {
+    where: RRItemWhereUniqueInput
+    create: XOR<RRItemCreateWithoutItemInput, RRItemUncheckedCreateWithoutItemInput>
+  }
+
+  export type RRItemCreateManyItemInputEnvelope = {
+    data: RRItemCreateManyItemInput | RRItemCreateManyItemInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UnitCreateWithoutItemsInput = {
+    id?: string
+    name: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    canvass_items?: CanvassItemCreateNestedManyWithoutUnitInput
+    rr_items?: RRItemCreateNestedManyWithoutUnitInput
+  }
+
+  export type UnitUncheckedCreateWithoutItemsInput = {
+    id?: string
+    name: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    canvass_items?: CanvassItemUncheckedCreateNestedManyWithoutUnitInput
+    rr_items?: RRItemUncheckedCreateNestedManyWithoutUnitInput
+  }
+
+  export type UnitCreateOrConnectWithoutItemsInput = {
+    where: UnitWhereUniqueInput
+    create: XOR<UnitCreateWithoutItemsInput, UnitUncheckedCreateWithoutItemsInput>
+  }
+
+  export type ItemTypeUpsertWithoutItemsInput = {
+    update: XOR<ItemTypeUpdateWithoutItemsInput, ItemTypeUncheckedUpdateWithoutItemsInput>
+    create: XOR<ItemTypeCreateWithoutItemsInput, ItemTypeUncheckedCreateWithoutItemsInput>
+    where?: ItemTypeWhereInput
+  }
+
+  export type ItemTypeUpdateToOneWithWhereWithoutItemsInput = {
+    where?: ItemTypeWhereInput
+    data: XOR<ItemTypeUpdateWithoutItemsInput, ItemTypeUncheckedUpdateWithoutItemsInput>
+  }
+
+  export type ItemTypeUpdateWithoutItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type ItemTypeUncheckedUpdateWithoutItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type ItemTransactionUpsertWithWhereUniqueWithoutItemInput = {
+    where: ItemTransactionWhereUniqueInput
+    update: XOR<ItemTransactionUpdateWithoutItemInput, ItemTransactionUncheckedUpdateWithoutItemInput>
+    create: XOR<ItemTransactionCreateWithoutItemInput, ItemTransactionUncheckedCreateWithoutItemInput>
+  }
+
+  export type ItemTransactionUpdateWithWhereUniqueWithoutItemInput = {
+    where: ItemTransactionWhereUniqueInput
+    data: XOR<ItemTransactionUpdateWithoutItemInput, ItemTransactionUncheckedUpdateWithoutItemInput>
+  }
+
+  export type ItemTransactionUpdateManyWithWhereWithoutItemInput = {
+    where: ItemTransactionScalarWhereInput
+    data: XOR<ItemTransactionUpdateManyMutationInput, ItemTransactionUncheckedUpdateManyWithoutItemInput>
+  }
+
+  export type ItemTransactionScalarWhereInput = {
+    AND?: ItemTransactionScalarWhereInput | ItemTransactionScalarWhereInput[]
+    OR?: ItemTransactionScalarWhereInput[]
+    NOT?: ItemTransactionScalarWhereInput | ItemTransactionScalarWhereInput[]
+    id?: StringFilter<"ItemTransaction"> | string
+    item_id?: StringFilter<"ItemTransaction"> | string
+    rr_item_id?: StringNullableFilter<"ItemTransaction"> | string | null
+    type?: IntFilter<"ItemTransaction"> | number
+    quantity?: FloatFilter<"ItemTransaction"> | number
+    price?: FloatFilter<"ItemTransaction"> | number
+    remarks?: StringNullableFilter<"ItemTransaction"> | string | null
+    created_at?: DateTimeFilter<"ItemTransaction"> | Date | string
+    updated_at?: DateTimeFilter<"ItemTransaction"> | Date | string
+    is_deleted?: BoolFilter<"ItemTransaction"> | boolean
+  }
+
+  export type RRItemUpsertWithWhereUniqueWithoutItemInput = {
+    where: RRItemWhereUniqueInput
+    update: XOR<RRItemUpdateWithoutItemInput, RRItemUncheckedUpdateWithoutItemInput>
+    create: XOR<RRItemCreateWithoutItemInput, RRItemUncheckedCreateWithoutItemInput>
+  }
+
+  export type RRItemUpdateWithWhereUniqueWithoutItemInput = {
+    where: RRItemWhereUniqueInput
+    data: XOR<RRItemUpdateWithoutItemInput, RRItemUncheckedUpdateWithoutItemInput>
+  }
+
+  export type RRItemUpdateManyWithWhereWithoutItemInput = {
+    where: RRItemScalarWhereInput
+    data: XOR<RRItemUpdateManyMutationInput, RRItemUncheckedUpdateManyWithoutItemInput>
+  }
+
+  export type UnitUpsertWithoutItemsInput = {
+    update: XOR<UnitUpdateWithoutItemsInput, UnitUncheckedUpdateWithoutItemsInput>
+    create: XOR<UnitCreateWithoutItemsInput, UnitUncheckedCreateWithoutItemsInput>
+    where?: UnitWhereInput
+  }
+
+  export type UnitUpdateToOneWithWhereWithoutItemsInput = {
+    where?: UnitWhereInput
+    data: XOR<UnitUpdateWithoutItemsInput, UnitUncheckedUpdateWithoutItemsInput>
+  }
+
+  export type UnitUpdateWithoutItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    canvass_items?: CanvassItemUpdateManyWithoutUnitNestedInput
+    rr_items?: RRItemUpdateManyWithoutUnitNestedInput
+  }
+
+  export type UnitUncheckedUpdateWithoutItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    canvass_items?: CanvassItemUncheckedUpdateManyWithoutUnitNestedInput
+    rr_items?: RRItemUncheckedUpdateManyWithoutUnitNestedInput
+  }
+
+  export type ItemCreateWithoutItem_typeInput = {
+    id?: string
+    code: string
+    description: string
+    quantity: number
+    initial_quantity: number
+    average_price: number
+    initial_average_price: number
+    is_initial?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    item_transactions?: ItemTransactionCreateNestedManyWithoutItemInput
+    rr_items?: RRItemCreateNestedManyWithoutItemInput
+    unit: UnitCreateNestedOneWithoutItemsInput
+  }
+
+  export type ItemUncheckedCreateWithoutItem_typeInput = {
+    id?: string
+    unit_id: string
+    code: string
+    description: string
+    quantity: number
+    initial_quantity: number
+    average_price: number
+    initial_average_price: number
+    is_initial?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    item_transactions?: ItemTransactionUncheckedCreateNestedManyWithoutItemInput
+    rr_items?: RRItemUncheckedCreateNestedManyWithoutItemInput
+  }
+
+  export type ItemCreateOrConnectWithoutItem_typeInput = {
+    where: ItemWhereUniqueInput
+    create: XOR<ItemCreateWithoutItem_typeInput, ItemUncheckedCreateWithoutItem_typeInput>
+  }
+
+  export type ItemCreateManyItem_typeInputEnvelope = {
+    data: ItemCreateManyItem_typeInput | ItemCreateManyItem_typeInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ItemUpsertWithWhereUniqueWithoutItem_typeInput = {
+    where: ItemWhereUniqueInput
+    update: XOR<ItemUpdateWithoutItem_typeInput, ItemUncheckedUpdateWithoutItem_typeInput>
+    create: XOR<ItemCreateWithoutItem_typeInput, ItemUncheckedCreateWithoutItem_typeInput>
+  }
+
+  export type ItemUpdateWithWhereUniqueWithoutItem_typeInput = {
+    where: ItemWhereUniqueInput
+    data: XOR<ItemUpdateWithoutItem_typeInput, ItemUncheckedUpdateWithoutItem_typeInput>
+  }
+
+  export type ItemUpdateManyWithWhereWithoutItem_typeInput = {
+    where: ItemScalarWhereInput
+    data: XOR<ItemUpdateManyMutationInput, ItemUncheckedUpdateManyWithoutItem_typeInput>
+  }
+
+  export type ItemCreateWithoutItem_transactionsInput = {
+    id?: string
+    code: string
+    description: string
+    quantity: number
+    initial_quantity: number
+    average_price: number
+    initial_average_price: number
+    is_initial?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    item_type: ItemTypeCreateNestedOneWithoutItemsInput
+    rr_items?: RRItemCreateNestedManyWithoutItemInput
+    unit: UnitCreateNestedOneWithoutItemsInput
+  }
+
+  export type ItemUncheckedCreateWithoutItem_transactionsInput = {
+    id?: string
+    item_type_id: string
+    unit_id: string
+    code: string
+    description: string
+    quantity: number
+    initial_quantity: number
+    average_price: number
+    initial_average_price: number
+    is_initial?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    rr_items?: RRItemUncheckedCreateNestedManyWithoutItemInput
+  }
+
+  export type ItemCreateOrConnectWithoutItem_transactionsInput = {
+    where: ItemWhereUniqueInput
+    create: XOR<ItemCreateWithoutItem_transactionsInput, ItemUncheckedCreateWithoutItem_transactionsInput>
+  }
+
+  export type RRItemCreateWithoutItemTransactionInput = {
+    id?: string
+    item_class: number
+    quantity_delivered: number
+    quantity_accepted: number
+    description: string
+    vat_type: number
+    gross_price: number
+    net_price: number
+    freight_cost: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    rr: RRCreateNestedOneWithoutRr_itemsInput
+    item?: ItemCreateNestedOneWithoutRr_itemsInput
+    item_brand: BrandCreateNestedOneWithoutRr_itemsInput
+    unit: UnitCreateNestedOneWithoutRr_itemsInput
+  }
+
+  export type RRItemUncheckedCreateWithoutItemTransactionInput = {
+    id?: string
+    rr_id: string
+    item_id?: string | null
+    item_brand_id: string
+    unit_id: string
+    item_class: number
+    quantity_delivered: number
+    quantity_accepted: number
+    description: string
+    vat_type: number
+    gross_price: number
+    net_price: number
+    freight_cost: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
+  export type RRItemCreateOrConnectWithoutItemTransactionInput = {
+    where: RRItemWhereUniqueInput
+    create: XOR<RRItemCreateWithoutItemTransactionInput, RRItemUncheckedCreateWithoutItemTransactionInput>
+  }
+
+  export type ItemUpsertWithoutItem_transactionsInput = {
+    update: XOR<ItemUpdateWithoutItem_transactionsInput, ItemUncheckedUpdateWithoutItem_transactionsInput>
+    create: XOR<ItemCreateWithoutItem_transactionsInput, ItemUncheckedCreateWithoutItem_transactionsInput>
+    where?: ItemWhereInput
+  }
+
+  export type ItemUpdateToOneWithWhereWithoutItem_transactionsInput = {
+    where?: ItemWhereInput
+    data: XOR<ItemUpdateWithoutItem_transactionsInput, ItemUncheckedUpdateWithoutItem_transactionsInput>
+  }
+
+  export type ItemUpdateWithoutItem_transactionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    initial_quantity?: IntFieldUpdateOperationsInput | number
+    average_price?: FloatFieldUpdateOperationsInput | number
+    initial_average_price?: FloatFieldUpdateOperationsInput | number
+    is_initial?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    item_type?: ItemTypeUpdateOneRequiredWithoutItemsNestedInput
+    rr_items?: RRItemUpdateManyWithoutItemNestedInput
+    unit?: UnitUpdateOneRequiredWithoutItemsNestedInput
+  }
+
+  export type ItemUncheckedUpdateWithoutItem_transactionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    item_type_id?: StringFieldUpdateOperationsInput | string
+    unit_id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    initial_quantity?: IntFieldUpdateOperationsInput | number
+    average_price?: FloatFieldUpdateOperationsInput | number
+    initial_average_price?: FloatFieldUpdateOperationsInput | number
+    is_initial?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    rr_items?: RRItemUncheckedUpdateManyWithoutItemNestedInput
+  }
+
+  export type RRItemUpsertWithoutItemTransactionInput = {
+    update: XOR<RRItemUpdateWithoutItemTransactionInput, RRItemUncheckedUpdateWithoutItemTransactionInput>
+    create: XOR<RRItemCreateWithoutItemTransactionInput, RRItemUncheckedCreateWithoutItemTransactionInput>
+    where?: RRItemWhereInput
+  }
+
+  export type RRItemUpdateToOneWithWhereWithoutItemTransactionInput = {
+    where?: RRItemWhereInput
+    data: XOR<RRItemUpdateWithoutItemTransactionInput, RRItemUncheckedUpdateWithoutItemTransactionInput>
+  }
+
+  export type RRItemUpdateWithoutItemTransactionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    item_class?: IntFieldUpdateOperationsInput | number
+    quantity_delivered?: IntFieldUpdateOperationsInput | number
+    quantity_accepted?: IntFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
+    vat_type?: IntFieldUpdateOperationsInput | number
+    gross_price?: FloatFieldUpdateOperationsInput | number
+    net_price?: FloatFieldUpdateOperationsInput | number
+    freight_cost?: FloatFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    rr?: RRUpdateOneRequiredWithoutRr_itemsNestedInput
+    item?: ItemUpdateOneWithoutRr_itemsNestedInput
+    item_brand?: BrandUpdateOneRequiredWithoutRr_itemsNestedInput
+    unit?: UnitUpdateOneRequiredWithoutRr_itemsNestedInput
+  }
+
+  export type RRItemUncheckedUpdateWithoutItemTransactionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    rr_id?: StringFieldUpdateOperationsInput | string
+    item_id?: NullableStringFieldUpdateOperationsInput | string | null
+    item_brand_id?: StringFieldUpdateOperationsInput | string
+    unit_id?: StringFieldUpdateOperationsInput | string
+    item_class?: IntFieldUpdateOperationsInput | number
+    quantity_delivered?: IntFieldUpdateOperationsInput | number
+    quantity_accepted?: IntFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
+    vat_type?: IntFieldUpdateOperationsInput | number
+    gross_price?: FloatFieldUpdateOperationsInput | number
+    net_price?: FloatFieldUpdateOperationsInput | number
+    freight_cost?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -31654,6 +42707,39 @@ export namespace Prisma {
     is_deleted?: boolean
   }
 
+  export type RRItemCreateManyUnitInput = {
+    id?: string
+    rr_id: string
+    item_id?: string | null
+    item_brand_id: string
+    item_class: number
+    quantity_delivered: number
+    quantity_accepted: number
+    description: string
+    vat_type: number
+    gross_price: number
+    net_price: number
+    freight_cost: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
+  export type ItemCreateManyUnitInput = {
+    id?: string
+    item_type_id: string
+    code: string
+    description: string
+    quantity: number
+    initial_quantity: number
+    average_price: number
+    initial_average_price: number
+    is_initial?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
   export type CanvassItemUpdateWithoutUnitInput = {
     id?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
@@ -31689,12 +42775,135 @@ export namespace Prisma {
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
+  export type RRItemUpdateWithoutUnitInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    item_class?: IntFieldUpdateOperationsInput | number
+    quantity_delivered?: IntFieldUpdateOperationsInput | number
+    quantity_accepted?: IntFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
+    vat_type?: IntFieldUpdateOperationsInput | number
+    gross_price?: FloatFieldUpdateOperationsInput | number
+    net_price?: FloatFieldUpdateOperationsInput | number
+    freight_cost?: FloatFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    rr?: RRUpdateOneRequiredWithoutRr_itemsNestedInput
+    item?: ItemUpdateOneWithoutRr_itemsNestedInput
+    item_brand?: BrandUpdateOneRequiredWithoutRr_itemsNestedInput
+    ItemTransaction?: ItemTransactionUpdateOneWithoutRr_itemNestedInput
+  }
+
+  export type RRItemUncheckedUpdateWithoutUnitInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    rr_id?: StringFieldUpdateOperationsInput | string
+    item_id?: NullableStringFieldUpdateOperationsInput | string | null
+    item_brand_id?: StringFieldUpdateOperationsInput | string
+    item_class?: IntFieldUpdateOperationsInput | number
+    quantity_delivered?: IntFieldUpdateOperationsInput | number
+    quantity_accepted?: IntFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
+    vat_type?: IntFieldUpdateOperationsInput | number
+    gross_price?: FloatFieldUpdateOperationsInput | number
+    net_price?: FloatFieldUpdateOperationsInput | number
+    freight_cost?: FloatFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    ItemTransaction?: ItemTransactionUncheckedUpdateOneWithoutRr_itemNestedInput
+  }
+
+  export type RRItemUncheckedUpdateManyWithoutUnitInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    rr_id?: StringFieldUpdateOperationsInput | string
+    item_id?: NullableStringFieldUpdateOperationsInput | string | null
+    item_brand_id?: StringFieldUpdateOperationsInput | string
+    item_class?: IntFieldUpdateOperationsInput | number
+    quantity_delivered?: IntFieldUpdateOperationsInput | number
+    quantity_accepted?: IntFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
+    vat_type?: IntFieldUpdateOperationsInput | number
+    gross_price?: FloatFieldUpdateOperationsInput | number
+    net_price?: FloatFieldUpdateOperationsInput | number
+    freight_cost?: FloatFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type ItemUpdateWithoutUnitInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    initial_quantity?: IntFieldUpdateOperationsInput | number
+    average_price?: FloatFieldUpdateOperationsInput | number
+    initial_average_price?: FloatFieldUpdateOperationsInput | number
+    is_initial?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    item_type?: ItemTypeUpdateOneRequiredWithoutItemsNestedInput
+    item_transactions?: ItemTransactionUpdateManyWithoutItemNestedInput
+    rr_items?: RRItemUpdateManyWithoutItemNestedInput
+  }
+
+  export type ItemUncheckedUpdateWithoutUnitInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    item_type_id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    initial_quantity?: IntFieldUpdateOperationsInput | number
+    average_price?: FloatFieldUpdateOperationsInput | number
+    initial_average_price?: FloatFieldUpdateOperationsInput | number
+    is_initial?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    item_transactions?: ItemTransactionUncheckedUpdateManyWithoutItemNestedInput
+    rr_items?: RRItemUncheckedUpdateManyWithoutItemNestedInput
+  }
+
+  export type ItemUncheckedUpdateManyWithoutUnitInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    item_type_id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    initial_quantity?: IntFieldUpdateOperationsInput | number
+    average_price?: FloatFieldUpdateOperationsInput | number
+    initial_average_price?: FloatFieldUpdateOperationsInput | number
+    is_initial?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
   export type CanvassItemCreateManyBrandInput = {
     id?: string
     canvass_id: string
     description: string
     unit_id: string
     quantity: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
+  export type RRItemCreateManyItem_brandInput = {
+    id?: string
+    rr_id: string
+    item_id?: string | null
+    unit_id: string
+    item_class: number
+    quantity_delivered: number
+    quantity_accepted: number
+    description: string
+    vat_type: number
+    gross_price: number
+    net_price: number
+    freight_cost: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -31735,6 +42944,62 @@ export namespace Prisma {
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
+  export type RRItemUpdateWithoutItem_brandInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    item_class?: IntFieldUpdateOperationsInput | number
+    quantity_delivered?: IntFieldUpdateOperationsInput | number
+    quantity_accepted?: IntFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
+    vat_type?: IntFieldUpdateOperationsInput | number
+    gross_price?: FloatFieldUpdateOperationsInput | number
+    net_price?: FloatFieldUpdateOperationsInput | number
+    freight_cost?: FloatFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    rr?: RRUpdateOneRequiredWithoutRr_itemsNestedInput
+    item?: ItemUpdateOneWithoutRr_itemsNestedInput
+    unit?: UnitUpdateOneRequiredWithoutRr_itemsNestedInput
+    ItemTransaction?: ItemTransactionUpdateOneWithoutRr_itemNestedInput
+  }
+
+  export type RRItemUncheckedUpdateWithoutItem_brandInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    rr_id?: StringFieldUpdateOperationsInput | string
+    item_id?: NullableStringFieldUpdateOperationsInput | string | null
+    unit_id?: StringFieldUpdateOperationsInput | string
+    item_class?: IntFieldUpdateOperationsInput | number
+    quantity_delivered?: IntFieldUpdateOperationsInput | number
+    quantity_accepted?: IntFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
+    vat_type?: IntFieldUpdateOperationsInput | number
+    gross_price?: FloatFieldUpdateOperationsInput | number
+    net_price?: FloatFieldUpdateOperationsInput | number
+    freight_cost?: FloatFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    ItemTransaction?: ItemTransactionUncheckedUpdateOneWithoutRr_itemNestedInput
+  }
+
+  export type RRItemUncheckedUpdateManyWithoutItem_brandInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    rr_id?: StringFieldUpdateOperationsInput | string
+    item_id?: NullableStringFieldUpdateOperationsInput | string | null
+    unit_id?: StringFieldUpdateOperationsInput | string
+    item_class?: IntFieldUpdateOperationsInput | number
+    quantity_delivered?: IntFieldUpdateOperationsInput | number
+    quantity_accepted?: IntFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
+    vat_type?: IntFieldUpdateOperationsInput | number
+    gross_price?: FloatFieldUpdateOperationsInput | number
+    net_price?: FloatFieldUpdateOperationsInput | number
+    freight_cost?: FloatFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
   export type SPRCreateManyVehicleInput = {
     id?: string
     spr_number: string
@@ -31744,6 +43009,7 @@ export namespace Prisma {
     supervisor_id: string
     status?: number
     canceller_id?: string | null
+    date_cancelled?: Date | string | null
     is_referenced?: boolean
     created_at?: Date | string
     updated_at?: Date | string
@@ -31758,6 +43024,7 @@ export namespace Prisma {
     supervisor_id?: StringFieldUpdateOperationsInput | string
     status?: IntFieldUpdateOperationsInput | number
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_referenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -31776,6 +43043,7 @@ export namespace Prisma {
     supervisor_id?: StringFieldUpdateOperationsInput | string
     status?: IntFieldUpdateOperationsInput | number
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_referenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -31793,6 +43061,7 @@ export namespace Prisma {
     supervisor_id?: StringFieldUpdateOperationsInput | string
     status?: IntFieldUpdateOperationsInput | number
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_referenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -32295,6 +43564,322 @@ export namespace Prisma {
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
+  export type RRApproverCreateManyRrInput = {
+    id?: string
+    approver_id: string
+    approver_proxy_id?: string | null
+    date_approval?: Date | string | null
+    notes?: string | null
+    status: number
+    label: string
+    order: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
+  export type RRItemCreateManyRrInput = {
+    id?: string
+    item_id?: string | null
+    item_brand_id: string
+    unit_id: string
+    item_class: number
+    quantity_delivered: number
+    quantity_accepted: number
+    description: string
+    vat_type: number
+    gross_price: number
+    net_price: number
+    freight_cost: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
+  export type RRApproverUpdateWithoutRrInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    approver_id?: StringFieldUpdateOperationsInput | string
+    approver_proxy_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_approval?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: IntFieldUpdateOperationsInput | number
+    label?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type RRApproverUncheckedUpdateWithoutRrInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    approver_id?: StringFieldUpdateOperationsInput | string
+    approver_proxy_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_approval?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: IntFieldUpdateOperationsInput | number
+    label?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type RRApproverUncheckedUpdateManyWithoutRrInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    approver_id?: StringFieldUpdateOperationsInput | string
+    approver_proxy_id?: NullableStringFieldUpdateOperationsInput | string | null
+    date_approval?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: IntFieldUpdateOperationsInput | number
+    label?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type RRItemUpdateWithoutRrInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    item_class?: IntFieldUpdateOperationsInput | number
+    quantity_delivered?: IntFieldUpdateOperationsInput | number
+    quantity_accepted?: IntFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
+    vat_type?: IntFieldUpdateOperationsInput | number
+    gross_price?: FloatFieldUpdateOperationsInput | number
+    net_price?: FloatFieldUpdateOperationsInput | number
+    freight_cost?: FloatFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    item?: ItemUpdateOneWithoutRr_itemsNestedInput
+    item_brand?: BrandUpdateOneRequiredWithoutRr_itemsNestedInput
+    unit?: UnitUpdateOneRequiredWithoutRr_itemsNestedInput
+    ItemTransaction?: ItemTransactionUpdateOneWithoutRr_itemNestedInput
+  }
+
+  export type RRItemUncheckedUpdateWithoutRrInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    item_id?: NullableStringFieldUpdateOperationsInput | string | null
+    item_brand_id?: StringFieldUpdateOperationsInput | string
+    unit_id?: StringFieldUpdateOperationsInput | string
+    item_class?: IntFieldUpdateOperationsInput | number
+    quantity_delivered?: IntFieldUpdateOperationsInput | number
+    quantity_accepted?: IntFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
+    vat_type?: IntFieldUpdateOperationsInput | number
+    gross_price?: FloatFieldUpdateOperationsInput | number
+    net_price?: FloatFieldUpdateOperationsInput | number
+    freight_cost?: FloatFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    ItemTransaction?: ItemTransactionUncheckedUpdateOneWithoutRr_itemNestedInput
+  }
+
+  export type RRItemUncheckedUpdateManyWithoutRrInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    item_id?: NullableStringFieldUpdateOperationsInput | string | null
+    item_brand_id?: StringFieldUpdateOperationsInput | string
+    unit_id?: StringFieldUpdateOperationsInput | string
+    item_class?: IntFieldUpdateOperationsInput | number
+    quantity_delivered?: IntFieldUpdateOperationsInput | number
+    quantity_accepted?: IntFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
+    vat_type?: IntFieldUpdateOperationsInput | number
+    gross_price?: FloatFieldUpdateOperationsInput | number
+    net_price?: FloatFieldUpdateOperationsInput | number
+    freight_cost?: FloatFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type ItemTransactionCreateManyItemInput = {
+    id?: string
+    rr_item_id?: string | null
+    type: number
+    quantity: number
+    price: number
+    remarks?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
+  export type RRItemCreateManyItemInput = {
+    id?: string
+    rr_id: string
+    item_brand_id: string
+    unit_id: string
+    item_class: number
+    quantity_delivered: number
+    quantity_accepted: number
+    description: string
+    vat_type: number
+    gross_price: number
+    net_price: number
+    freight_cost: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
+  export type ItemTransactionUpdateWithoutItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: IntFieldUpdateOperationsInput | number
+    quantity?: FloatFieldUpdateOperationsInput | number
+    price?: FloatFieldUpdateOperationsInput | number
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    rr_item?: RRItemUpdateOneWithoutItemTransactionNestedInput
+  }
+
+  export type ItemTransactionUncheckedUpdateWithoutItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    rr_item_id?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: IntFieldUpdateOperationsInput | number
+    quantity?: FloatFieldUpdateOperationsInput | number
+    price?: FloatFieldUpdateOperationsInput | number
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type ItemTransactionUncheckedUpdateManyWithoutItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    rr_item_id?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: IntFieldUpdateOperationsInput | number
+    quantity?: FloatFieldUpdateOperationsInput | number
+    price?: FloatFieldUpdateOperationsInput | number
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type RRItemUpdateWithoutItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    item_class?: IntFieldUpdateOperationsInput | number
+    quantity_delivered?: IntFieldUpdateOperationsInput | number
+    quantity_accepted?: IntFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
+    vat_type?: IntFieldUpdateOperationsInput | number
+    gross_price?: FloatFieldUpdateOperationsInput | number
+    net_price?: FloatFieldUpdateOperationsInput | number
+    freight_cost?: FloatFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    rr?: RRUpdateOneRequiredWithoutRr_itemsNestedInput
+    item_brand?: BrandUpdateOneRequiredWithoutRr_itemsNestedInput
+    unit?: UnitUpdateOneRequiredWithoutRr_itemsNestedInput
+    ItemTransaction?: ItemTransactionUpdateOneWithoutRr_itemNestedInput
+  }
+
+  export type RRItemUncheckedUpdateWithoutItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    rr_id?: StringFieldUpdateOperationsInput | string
+    item_brand_id?: StringFieldUpdateOperationsInput | string
+    unit_id?: StringFieldUpdateOperationsInput | string
+    item_class?: IntFieldUpdateOperationsInput | number
+    quantity_delivered?: IntFieldUpdateOperationsInput | number
+    quantity_accepted?: IntFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
+    vat_type?: IntFieldUpdateOperationsInput | number
+    gross_price?: FloatFieldUpdateOperationsInput | number
+    net_price?: FloatFieldUpdateOperationsInput | number
+    freight_cost?: FloatFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    ItemTransaction?: ItemTransactionUncheckedUpdateOneWithoutRr_itemNestedInput
+  }
+
+  export type RRItemUncheckedUpdateManyWithoutItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    rr_id?: StringFieldUpdateOperationsInput | string
+    item_brand_id?: StringFieldUpdateOperationsInput | string
+    unit_id?: StringFieldUpdateOperationsInput | string
+    item_class?: IntFieldUpdateOperationsInput | number
+    quantity_delivered?: IntFieldUpdateOperationsInput | number
+    quantity_accepted?: IntFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
+    vat_type?: IntFieldUpdateOperationsInput | number
+    gross_price?: FloatFieldUpdateOperationsInput | number
+    net_price?: FloatFieldUpdateOperationsInput | number
+    freight_cost?: FloatFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type ItemCreateManyItem_typeInput = {
+    id?: string
+    unit_id: string
+    code: string
+    description: string
+    quantity: number
+    initial_quantity: number
+    average_price: number
+    initial_average_price: number
+    is_initial?: boolean
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
+  export type ItemUpdateWithoutItem_typeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    initial_quantity?: IntFieldUpdateOperationsInput | number
+    average_price?: FloatFieldUpdateOperationsInput | number
+    initial_average_price?: FloatFieldUpdateOperationsInput | number
+    is_initial?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    item_transactions?: ItemTransactionUpdateManyWithoutItemNestedInput
+    rr_items?: RRItemUpdateManyWithoutItemNestedInput
+    unit?: UnitUpdateOneRequiredWithoutItemsNestedInput
+  }
+
+  export type ItemUncheckedUpdateWithoutItem_typeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    unit_id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    initial_quantity?: IntFieldUpdateOperationsInput | number
+    average_price?: FloatFieldUpdateOperationsInput | number
+    initial_average_price?: FloatFieldUpdateOperationsInput | number
+    is_initial?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    item_transactions?: ItemTransactionUncheckedUpdateManyWithoutItemNestedInput
+    rr_items?: RRItemUncheckedUpdateManyWithoutItemNestedInput
+  }
+
+  export type ItemUncheckedUpdateManyWithoutItem_typeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    unit_id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    initial_quantity?: IntFieldUpdateOperationsInput | number
+    average_price?: FloatFieldUpdateOperationsInput | number
+    initial_average_price?: FloatFieldUpdateOperationsInput | number
+    is_initial?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
 
 
   /**
@@ -32348,6 +43933,18 @@ export namespace Prisma {
      * @deprecated Use POCountOutputTypeDefaultArgs instead
      */
     export type POCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = POCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use RRCountOutputTypeDefaultArgs instead
+     */
+    export type RRCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = RRCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use ItemCountOutputTypeDefaultArgs instead
+     */
+    export type ItemCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ItemCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use ItemTypeCountOutputTypeDefaultArgs instead
+     */
+    export type ItemTypeCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ItemTypeCountOutputTypeDefaultArgs<ExtArgs>
     /**
      * @deprecated Use SupplierDefaultArgs instead
      */
@@ -32424,6 +44021,30 @@ export namespace Prisma {
      * @deprecated Use POApproverDefaultArgs instead
      */
     export type POApproverArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = POApproverDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use RRDefaultArgs instead
+     */
+    export type RRArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = RRDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use RRApproverDefaultArgs instead
+     */
+    export type RRApproverArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = RRApproverDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use RRItemDefaultArgs instead
+     */
+    export type RRItemArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = RRItemDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use ItemDefaultArgs instead
+     */
+    export type ItemArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ItemDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use ItemTypeDefaultArgs instead
+     */
+    export type ItemTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ItemTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use ItemTransactionDefaultArgs instead
+     */
+    export type ItemTransactionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ItemTransactionDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany
