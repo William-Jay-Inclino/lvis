@@ -1,5 +1,7 @@
 import { ObjectType, Field, Int, ID, Float } from '@nestjs/graphql';
 import { Unit } from '../../unit/entities/unit.entity';
+import { ItemTransaction } from '../../item-transaction/entities/item-transaction.entity';
+import { ItemType } from '../../item-type/entities/item-type.entity';
 
 @ObjectType()
 export class Item {
@@ -37,11 +39,11 @@ export class Item {
   @Field(() => Date)
   updated_at: Date;
 
-  // @Field()
-  // item_type: string;
+  @Field(() => ItemType)
+  item_type: ItemType;
 
-  // @Field()
-  // item_transactions: string;
+  @Field(() => [ItemTransaction])
+  item_transactions: ItemTransaction[];
 
   // @Field()
   // rr_items: string;

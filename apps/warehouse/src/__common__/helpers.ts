@@ -1,5 +1,5 @@
 import { MEQSApprover, POApprover, RVApprover } from "apps/warehouse/prisma/generated/client"
-import { APPROVAL_STATUS } from "./types"
+import { APPROVAL_STATUS, ITEM_TRANSACTION_TYPE } from "./types"
 
 
 export const isValidApprovalStatus = (status: number): boolean => {
@@ -12,6 +12,21 @@ export const isValidApprovalStatus = (status: number): boolean => {
     ]
 
     if(approvalStatusArray.includes(status)){
+        return true 
+    }
+
+    return false
+
+}
+
+export const isValidItemTransactionType = (type: number): boolean => {
+
+    const transactionTypeArray = [
+        ITEM_TRANSACTION_TYPE.STOCK_IN,
+        ITEM_TRANSACTION_TYPE.STOCK_OUT,
+    ]
+
+    if(transactionTypeArray.includes(type)) {
         return true 
     }
 

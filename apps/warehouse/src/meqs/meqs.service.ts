@@ -193,9 +193,9 @@ export class MeqsService {
 
         if(input.status){
 
-            if(!isValidApprovalStatus(input.status)){
-                throw new BadRequestException("Invalid status value")
-            }
+            // if(!isValidApprovalStatus(input.status)){
+            //     throw new BadRequestException("Invalid status value")
+            // }
 
             if(input.status !== APPROVAL_STATUS.CANCELLED){
                 throw new BadRequestException("Unable to update status. Only accepts status = cancelled")

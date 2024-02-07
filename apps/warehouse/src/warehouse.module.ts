@@ -33,6 +33,7 @@ import { PoApproverResolver } from './po-approver/po-approver.resolver';
 import { PoApproverModule } from './po-approver/po-approver.module';
 import { ItemTypeModule } from './item-type/item-type.module';
 import { ItemModule } from './item/item.module';
+import { ItemTransactionModule } from './item-transaction/item-transaction.module';
 
 
 @Module({
@@ -65,7 +66,8 @@ import { ItemModule } from './item/item.module';
     PoApproverModule,
     VehicleModule,
     ItemTypeModule,
-    ItemModule
+    ItemModule,
+    ItemTransactionModule
   ],
   controllers: [],
   providers: [RvService, MeqsService, MeqsResolver, PoService, PoResolver, PoApproverResolver],

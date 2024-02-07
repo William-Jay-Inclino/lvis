@@ -109,37 +109,15 @@ export class ItemService {
 		
 		const existingItem = await this.findOne(id)
 
-		let item_type = {
-			connect: {
-				id: existingItem.item_type_id
-			}
-		}
-
-		if(input.item_type_id){
-			item_type = {
-				connect: {
-					id: input.item_type_id
-				}
-			}
-		}
-
-		let unit = {
-			connect: {
-				id: existingItem.unit_id
-			}
-		}
-
-		if(input.unit_id){
-			unit = {
-				connect: {
-					id: input.unit_id
-				}
-			}
-		}
-
 		const data: Prisma.ItemUpdateInput = {
-			item_type,
-			unit,
+			item_type: input.item_type_id ? 
+				{ connect: { id: input.item_type_id } } 
+				: 
+				{ connect: { id: existingItem.item_type_id } },
+			unit: input.unit_id ? 
+				{ connect: { id: input.unit_id } } 
+				: 
+				{ connect: { id: existingItem.unit_id } },
 			code: input.code ?? existingItem.code,
 			description: input.description ?? existingItem.description
 		}
