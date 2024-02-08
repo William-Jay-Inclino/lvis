@@ -18,6 +18,11 @@ pnpm run start:dev system
 
 5. pnpm run start:dev 
 
+6. cd in apps/system and run: pnpm run migrate:dev
+Note: make sure you have .env file in apps/system directory
+
+7. cd in apps/warehouse and run: pnpm run migrate:dev
+Note: make sure you have .env file in apps/warehouse directory
 
 Note: Make sure in doing step 5, step 2-4 is already up and running 
 
