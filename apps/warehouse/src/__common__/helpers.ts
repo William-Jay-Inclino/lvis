@@ -1,4 +1,4 @@
-import { MEQSApprover, POApprover, RVApprover } from "apps/warehouse/prisma/generated/client"
+import { MEQSApprover, POApprover, RRApprover, RVApprover } from "apps/warehouse/prisma/generated/client"
 import { APPROVAL_STATUS, ITEM_TRANSACTION_TYPE } from "./types"
 
 
@@ -35,8 +35,17 @@ export const isValidItemTransactionType = (type: number): boolean => {
 }
 
 
-export const getLastApprover = (approvers: RVApprover[] | MEQSApprover[] | POApprover[]): RVApprover | MEQSApprover | POApprover => {
-
+export const getLastApprover = (
+    approvers: 
+    RVApprover[] | 
+    MEQSApprover[] | 
+    POApprover[] |
+    RRApprover[] 
+): 
+    RVApprover | 
+    MEQSApprover | 
+    POApprover | 
+    RRApprover => {
     return approvers.reduce((max, current) => (current.order > max.order ? current : max), approvers[0]);
 
 }

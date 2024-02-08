@@ -1,4 +1,4 @@
-import { Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { CreateItemTransactionInput } from './dto/create-item-transaction.input';
 import { UpdateItemTransactionInput } from './dto/update-item-transaction.input';
 import { PrismaService } from '../__prisma__/prisma.service';
@@ -52,14 +52,11 @@ export class ItemTransactionService {
         }
 
         const totalQuantity = item.quantity + input.quantity;
-        const totalValue = item.average_price * item.quantity + input.quantity * input.price;
-        const newAveragePrice = totalQuantity !== 0 ? totalValue / totalQuantity : 0;
 
         const updateItem = this.prisma.item.update({
             where: { id: item.id },
             data: {
-                quantity: totalQuantity,
-                average_price: newAveragePrice
+                quantity: totalQuantity
             }
         })
 
@@ -104,11 +101,38 @@ export class ItemTransactionService {
         
         const existingItem = await this.findOne(id)
 
-        const data: Prisma.ItemTransactionUpdateInput = {
-            remarks: input.remarks ?? existingItem.remarks
+        if(existingItem.rr_item_id){
+
+            if(input.quantity || input.price){
+
+                throw new BadRequestException('Unable to update quantity or price. Update it in  rr item module instead')
+
+            }
+
         }
 
-        const updated = await this.prisma.itemTransaction.update({
+        const data: Prisma.ItemTransactionUpdateInput = {
+            remarks: input.remarks ?? existingItem.remarks,
+            price: input.price ?? existingItem.price,
+            quantity: input.price ?? existingItem.quantity,
+        }
+
+        if(!input.quantity){
+            const updated = await this.prisma.itemTransaction.update({
+                data,
+                include: this.includedFields,
+                where: {
+                    id
+                }
+            })
+    
+            this.logger.log('Successfully updated item')
+            return updated
+        }
+
+        // if there is quantity then use db transactions since we also need to update the quantity in item table 
+
+        const updateItemTransaction = this.prisma.itemTransaction.update({
             data,
             include: this.includedFields,
             where: {
@@ -116,9 +140,32 @@ export class ItemTransactionService {
             }
         })
 
-        this.logger.log('Successfully updated item')
+        const item = await this.prisma.item.findUnique({
+            where: { id: input.item_id }
+        })
 
-        return updated
+        if (!item) {
+            throw new Error(`Item with ID ${input.item_id} not found.`);
+        }
+
+        const newQuantity = (item.quantity - existingItem.quantity) + input.quantity
+
+        const updateItem = this.prisma.item.update({
+            where: { id: item.id },
+            data: {
+                quantity: newQuantity
+            }
+        })
+
+
+        const [updatedItemTransaction, updatedItem] = await this.prisma.$transaction([
+            updateItemTransaction,
+            updateItem
+        ])
+
+        this.logger.log('Successfully updated item transaction and quantity in item table')
+
+        return updatedItemTransaction
 
     }
 

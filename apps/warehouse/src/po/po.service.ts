@@ -8,7 +8,6 @@ import { AuthUser } from '../__common__/auth-user.entity';
 import { HttpService } from '@nestjs/axios';
 import { catchError, firstValueFrom } from 'rxjs';
 import { UpdatePoInput } from './dto/update-po.input';
-import { isValidApprovalStatus } from '../__common__/helpers';
 
 @Injectable()
 export class PoService {

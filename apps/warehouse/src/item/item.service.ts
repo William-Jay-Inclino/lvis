@@ -43,9 +43,6 @@ export class ItemService {
 			description: input.code,
 			initial_quantity: input.initial_quantity,
 			quantity: input.initial_quantity,
-			average_price: input.initial_average_price,
-			initial_average_price: input.initial_average_price,
-			is_initial: true,
 			item_transactions: {
 				create: item_transaction
 			}

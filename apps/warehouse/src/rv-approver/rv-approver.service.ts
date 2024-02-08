@@ -43,17 +43,19 @@ export class RvApproverService {
 
     async create(input: CreateRvApproverInput): Promise<RVApprover> {
 
-        const isValidApproverId = await this.areEmployeesExist([input.approver_id], this.authUser)
+        const employeeIds = []
 
-        if(!isValidApproverId){
-            throw new NotFoundException('Approver ID not valid')
+        employeeIds.push(input.approver_id)
+
+        if(input.approver_proxy_id) {
+            employeeIds.push(input.approver_proxy_id)
         }
 
-        if(input.approver_proxy_id){
-            const isValidApproverProxyId = await this.areEmployeesExist([input.approver_proxy_id], this.authUser)
-
-            if(!isValidApproverProxyId){
-                throw new NotFoundException('Approver Proxy ID not valid')
+        if(employeeIds.length > 0){
+            const isValidEmployeeIds = await this.areEmployeesExist(employeeIds, this.authUser)
+    
+            if(!isValidEmployeeIds){
+                throw new BadRequestException("One or more employee id is invalid")
             }
         }
 
@@ -249,12 +251,22 @@ export class RvApproverService {
             throw new BadRequestException('Cancelled status not allowed');
         }
     
-        if (input.approver_id) {
-            await this.validateEmployeeExistence(input.approver_id, 'Approver ID');
+        const employeeIds = []
+
+        if(input.approver_id){
+            employeeIds.push(input.approver_id)
         }
+
+        if(input.approver_proxy_id) {
+            employeeIds.push(input.approver_proxy_id)
+        }
+
+        if(employeeIds.length > 0){
+            const isValidEmployeeIds = await this.areEmployeesExist(employeeIds, this.authUser)
     
-        if (input.approver_proxy_id) {
-            await this.validateEmployeeExistence(input.approver_proxy_id, 'Approver Proxy ID');
+            if(!isValidEmployeeIds){
+                throw new BadRequestException("One or more employee id is invalid")
+            }
         }
     }
 

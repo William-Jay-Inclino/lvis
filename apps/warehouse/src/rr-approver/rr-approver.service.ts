@@ -1,8 +1,8 @@
 import { BadRequestException, Injectable, Logger, NotFoundException } from '@nestjs/common';
-import { CreatePoApproverInput } from './dto/create-po-approver.input';
-import { UpdatePoApproverInput } from './dto/update-po-approver.input';
+import { CreateRrApproverInput } from './dto/create-rr-approver.input';
+import { UpdateRrApproverInput } from './dto/update-rr-approver.input';
 import { PrismaService } from '../__prisma__/prisma.service';
-import { Prisma, POApprover } from 'apps/warehouse/prisma/generated/client';
+import { Prisma, RRApprover } from 'apps/warehouse/prisma/generated/client';
 import { APPROVAL_STATUS } from '../__common__/types';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { HttpService } from '@nestjs/axios';
@@ -11,50 +11,54 @@ import { WarehouseRemoveResponse } from '../__common__/classes';
 import { getLastApprover, isValidApprovalStatus } from '../__common__/helpers';
 
 @Injectable()
-export class PoApproverService {
+export class RrApproverService {
 
-    private readonly logger = new Logger(PoApproverService.name);
+    private readonly logger = new Logger(RrApproverService.name);
     private authUser: AuthUser
     private includedFields = {
-      po: {
-			include: {
-				meqs_supplier: {
-					include: {
-						meqs: {
-							include: {
-							rv: {
-								include: {
-								canvass: true
-								}
-							},
-							jo: {
-								include: {
-								canvass: true
-								}
-							},
-							spr: {
-								include: {
-								canvass: true
-								}
-							}
-							}
-						},
-						supplier: true,
-						meqs_supplier_items: {
-							include: {
-							canvass_item: {
-								include: {
-								unit: true,
-								brand: true
-								}
-							}
-							}
-						},
-						attachments: true
-					}
-				}
-			}
-      }
+        rr: {
+            include: {
+                po: {
+                    include: {
+                        meqs_supplier: {
+                            include: {
+                                meqs: {
+                                    include: {
+                                    rv: {
+                                        include: {
+                                        canvass: true
+                                        }
+                                    },
+                                    jo: {
+                                        include: {
+                                        canvass: true
+                                        }
+                                    },
+                                    spr: {
+                                        include: {
+                                        canvass: true
+                                        }
+                                    }
+                                    }
+                                },
+                                supplier: true,
+                                meqs_supplier_items: {
+                                    include: {
+                                    canvass_item: {
+                                        include: {
+                                        unit: true,
+                                        brand: true
+                                        }
+                                    }
+                                    }
+                                },
+                                attachments: true
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
 	constructor(
@@ -66,7 +70,7 @@ export class PoApproverService {
         this.authUser = authUser
     }
 
-    async create(input: CreatePoApproverInput): Promise<POApprover> {
+    async create(input: CreateRrApproverInput): Promise<RRApprover> {
 
         const employeeIds = []
 
@@ -84,8 +88,8 @@ export class PoApproverService {
             }
         }
 
-        const data: Prisma.POApproverCreateInput = {
-        po: { connect: { id: input.po_id } },
+        const data: Prisma.RRApproverCreateInput = {
+        rr: { connect: { id: input.rr_id } },
             approver_id: input.approver_id,
         approver_proxy_id: input.approver_proxy_id ?? null,
         label: input.label,
@@ -93,18 +97,18 @@ export class PoApproverService {
         status: APPROVAL_STATUS.PENDING
         }
 
-        const created = await this.prisma.pOApprover.create({
+        const created = await this.prisma.rRApprover.create({
             data,
             include: this.includedFields
         })
 
-        this.logger.log('Successfully created pOApprover')
+        this.logger.log('Successfully created rRApprover')
 
         return created
     }
 
-    async findAll(): Promise<POApprover[]> {
-        return await this.prisma.pOApprover.findMany({
+    async findAll(): Promise<RRApprover[]> {
+        return await this.prisma.rRApprover.findMany({
             include: this.includedFields,
             where: { is_deleted: false },
             orderBy: {
@@ -113,30 +117,30 @@ export class PoApproverService {
         })
     }
 
-    async findOne(id: string): Promise<POApprover | null> {
+    async findOne(id: string): Promise<RRApprover | null> {
         
-        const item = await this.prisma.pOApprover.findUnique({
+        const item = await this.prisma.rRApprover.findUnique({
             where: { id },
             include: this.includedFields
         })
 
         if(!item){
-            throw new NotFoundException('PO Approver not found')
+            throw new NotFoundException('RR Approver not found')
         }
 
         return item
 
     }
 
-    async findByPoId(poId: string): Promise<POApprover[]> {
+    async findByRrId(rrId: string): Promise<RRApprover[]> {
 
-        this.logger.log('findByPoId()', poId)
+        this.logger.log('findByRrId()', rrId)
 
-        return await this.prisma.pOApprover.findMany({
+        return await this.prisma.rRApprover.findMany({
             include: this.includedFields,
             where: {
                 is_deleted: false,
-                po_id: poId
+                rr_id: rrId
             },
             orderBy: {
                 label: 'asc'
@@ -144,13 +148,13 @@ export class PoApproverService {
         })
     }
 
-    async findByPoNumber(poNumber: string): Promise<POApprover[]> {
-        return await this.prisma.pOApprover.findMany({
+    async findByRrNumber(rrNumber: string): Promise<RRApprover[]> {
+        return await this.prisma.rRApprover.findMany({
             include: this.includedFields,
             where: {
                 is_deleted: false,
-                po: {
-                    po_number: poNumber
+                rr: {
+                    rr_number: rrNumber
                 }
             },
             orderBy: {
@@ -159,14 +163,14 @@ export class PoApproverService {
         })
     }
 
-    async update(id: string, input: UpdatePoApproverInput): Promise<POApprover> {
+    async update(id: string, input: UpdateRrApproverInput): Promise<RRApprover> {
         this.logger.log('update()')
 
         const existingItem = await this.findOne(id)
 
         await this.validateInput(input)
 
-        const data: Prisma.POApproverUpdateInput = {
+        const data: Prisma.RRApproverUpdateInput = {
             approver_id: input.approver_id ?? existingItem.approver_id,
             approver_proxy_id: input.approver_proxy_id ?? existingItem.approver_proxy_id,
             date_approval: input.date_approval ? new Date(input.date_approval) : existingItem.date_approval,
@@ -178,19 +182,19 @@ export class PoApproverService {
 
         // if no status then normal update
         if(!input.status){
-            return await this.updatePOApprover(id, data)
+            return await this.updateRRApprover(id, data)
         }
 
         if(input.status === APPROVAL_STATUS.APPROVED){
-            return await this.handleApprovedStatus(id, data, existingItem.po_id)
+            return await this.handleApprovedStatus(id, data, existingItem.rr_id)
         }
 
         if(input.status === APPROVAL_STATUS.DISAPPROVED){
-            return await this.handleDisapprovedStatus(id, data, existingItem.po_id)
+            return await this.handleDisapprovedStatus(id, data, existingItem.rr_id)
         }
 
         if(input.status === APPROVAL_STATUS.PENDING){
-            return await this.handlePendingStatus(id, data, existingItem.po_id)
+            return await this.handlePendingStatus(id, data, existingItem.rr_id)
         }
 
     }
@@ -199,20 +203,20 @@ export class PoApproverService {
 
 		const existingItem = await this.findOne(id)
 
-		await this.prisma.pOApprover.update( {
+		await this.prisma.rRApprover.update( {
 			where: { id },
 			data: { is_deleted: true }
 		} )
 
 		return {
 			success: true,
-			msg: "PO Approver successfully deleted"
+			msg: "RR Approver successfully deleted"
 		}
 
 	}
 
-    async forEmployee(employeeId: string): Promise<POApprover[]> {
-        return await this.prisma.pOApprover.findMany({
+    async forEmployee(employeeId: string): Promise<RRApprover[]> {
+        return await this.prisma.rRApprover.findMany({
             where: {
                 approver_id: employeeId,
                 is_deleted: false
@@ -267,7 +271,7 @@ export class PoApproverService {
         }
     }
 
-    private async validateInput(input: UpdatePoApproverInput): Promise<void> {
+    private async validateInput(input: UpdateRrApproverInput): Promise<void> {
         if (input.status && !isValidApprovalStatus(input.status)) {
             throw new BadRequestException('Invalid status value');
         }
@@ -276,111 +280,101 @@ export class PoApproverService {
             throw new BadRequestException('Cancelled status not allowed');
         }
     
-        const employeeIds = []
-
-        if(input.approver_id){
-            employeeIds.push(input.approver_id)
+        if (input.approver_id) {
+            await this.validateEmployeeExistence(input.approver_id, 'Approver ID');
         }
-
-        if(input.approver_proxy_id) {
-            employeeIds.push(input.approver_proxy_id)
-        }
-
-        if(employeeIds.length > 0){
-            const isValidEmployeeIds = await this.areEmployeesExist(employeeIds, this.authUser)
     
-            if(!isValidEmployeeIds){
-                throw new BadRequestException("One or more employee id is invalid")
-            }
+        if (input.approver_proxy_id) {
+            await this.validateEmployeeExistence(input.approver_proxy_id, 'Approver Proxy ID');
         }
     }
 
-    // private async validateEmployeeExistence(employeeId: string, errorMessage: string): Promise<void> {
-    //     const isValidEmployeeId = await this.areEmployeesExist([employeeId], this.authUser);
-    //     if (!isValidEmployeeId) {
-    //         throw new NotFoundException(`${errorMessage} not valid`);
-    //     }
-    // }
+    private async validateEmployeeExistence(employeeId: string, errorMessage: string): Promise<void> {
+        const isValidEmployeeId = await this.areEmployeesExist([employeeId], this.authUser);
+        if (!isValidEmployeeId) {
+            throw new NotFoundException(`${errorMessage} not valid`);
+        }
+    }
 
-    private async updatePOApprover(id: string, data: Prisma.POApproverUpdateInput): Promise<POApprover> {
-        const updated = await this.prisma.pOApprover.update({
+    private async updateRRApprover(id: string, data: Prisma.RRApproverUpdateInput): Promise<RRApprover> {
+        const updated = await this.prisma.rRApprover.update({
             data,
             where: { id },
             include: this.includedFields,
         });
-        this.logger.log('Successfully updated PO Approver');
+        this.logger.log('Successfully updated RR Approver');
         return updated;
     }
 
-    // if last approver approves then update po status to approve
-    private async handleApprovedStatus(id: string, data: Prisma.POApproverUpdateInput, poId: string): Promise<POApprover> {
-        const approvers = await this.findByPoId(poId);
+    // if last approver approves then update rr status to approve
+    private async handleApprovedStatus(id: string, data: Prisma.RRApproverUpdateInput, rrId: string): Promise<RRApprover> {
+        const approvers = await this.findByRrId(rrId);
         const lastApprover = getLastApprover(approvers);
     
         if (lastApprover.id !== id) {
-            return await this.updatePOApprover(id, data);
+            return await this.updateRRApprover(id, data);
         }
 
         // if last approver approves
 
-        const updatePoApprover = this.prisma.pOApprover.update({
+        const updateRrApprover = this.prisma.rRApprover.update({
             data,
             where: { id },
             include: this.includedFields,
         }); 
     
-        const [updatedPoApprover, updatedPoStatus] = await this.prisma.$transaction([
-            updatePoApprover,
-            this.prisma.pO.update({
+        const [updatedRrApprover, updatedRrStatus] = await this.prisma.$transaction([
+            updateRrApprover,
+            this.prisma.rR.update({
                 data: { status: APPROVAL_STATUS.APPROVED },
-                where: { id: poId },
+                where: { id: rrId },
             }),
         ]);
     
-        this.logger.log('Successfully updated PO Approver');
-        return updatedPoApprover;
+        this.logger.log('Successfully updated RR Approver');
+        return updatedRrApprover;
     }
 
-    // also update po status to disapproved
-    private async handleDisapprovedStatus(id: string, data: Prisma.POApproverUpdateInput, poId: string): Promise<POApprover> {
+    // also update rr status to disapproved
+    private async handleDisapprovedStatus(id: string, data: Prisma.RRApproverUpdateInput, rrId: string): Promise<RRApprover> {
 
-        const updatePoApprover = this.prisma.pOApprover.update({
+        const updateRrApprover = this.prisma.rRApprover.update({
             data,
             where: { id },
             include: this.includedFields,
         }); 
 
-        const [updatedPoApprover, updatedPoStatus] = await this.prisma.$transaction([
-            updatePoApprover,
-            this.prisma.pO.update({
+        const [updatedRrApprover, updatedPoStatus] = await this.prisma.$transaction([
+            updateRrApprover,
+            this.prisma.rR.update({
                 data: { status: APPROVAL_STATUS.DISAPPROVED },
-                where: { id: poId },
+                where: { id: rrId },
             }),
         ]);
     
-        this.logger.log('Successfully updated PO Approver');
-        return updatedPoApprover;
+        this.logger.log('Successfully updated RR Approver');
+        return updatedRrApprover;
     }
 
-    // also update po status to pending
-    private async handlePendingStatus(id: string, data: Prisma.POApproverUpdateInput, poId: string): Promise<POApprover> {
+    // also update rr status to pending
+    private async handlePendingStatus(id: string, data: Prisma.RRApproverUpdateInput, rrId: string): Promise<RRApprover> {
 
-        const updatePoApprover = this.prisma.pOApprover.update({
+        const updateRrApprover = this.prisma.rRApprover.update({
             data,
             where: { id },
             include: this.includedFields,
         }); 
 
-        const [updatedPoApprover, updatedPoStatus] = await this.prisma.$transaction([
-            updatePoApprover,
-            this.prisma.pO.update({
+        const [updatedRrApprover, updatedPoStatus] = await this.prisma.$transaction([
+            updateRrApprover,
+            this.prisma.rRApprover.update({
                 data: { status: APPROVAL_STATUS.PENDING },
-                where: { id: poId },
+                where: { id: rrId },
             }),
         ]);
     
-        this.logger.log('Successfully updated PO Approver');
-        return updatedPoApprover;
+        this.logger.log('Successfully updated RR Approver');
+        return updatedRrApprover;
     }
 
 }
