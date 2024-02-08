@@ -1,0 +1,49 @@
+build code for production:
+pnpm run build
+
+
+to run the services 
+note: must be in order
+
+1. system service:
+node dist/apps/system/main
+
+2. warehouse service:
+node dist/apps/warehouse/main
+
+3. api-gateway
+node dist/apps/api-gateway/main
+
+
+to run the services in the background use pm2
+
+install first pm2 globally 
+
+pnpm install -g pm2 
+
+
+Then make the file (main.js located in dist folder) executable ex: 
+
+chmod +x /home/jay/Documents/projects/leyeco/lvis/dist/apps/system/main.js
+
+
+to run the services (if you are in the root directory of the app)
+note: must be in order
+
+1. system service:
+pm2 start node dist/apps/system/main.js --env .env
+
+2. warehouse service:
+pm2 start node dist/apps/warehouse/main.js --env .env
+
+3. api-gateway
+pm2 start node dist/apps/api-gateway/main.js --env .env
+
+
+to stop individual process just use 
+pm2 stop node dist/apps/system/main.js
+
+
+to stop all process
+
+pm2 delete all
