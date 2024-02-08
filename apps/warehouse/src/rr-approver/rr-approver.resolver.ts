@@ -9,27 +9,30 @@ export class RrApproverResolver {
   constructor(private readonly rrApproverService: RrApproverService) {}
 
   @Mutation(() => RrApprover)
-  createRrApprover(@Args('createRrApproverInput') createRrApproverInput: CreateRrApproverInput) {
+  createRrApprover(@Args('input') createRrApproverInput: CreateRrApproverInput) {
     return this.rrApproverService.create(createRrApproverInput);
   }
 
-  @Query(() => [RrApprover], { name: 'rrApprover' })
-  findAll() {
+  @Query(() => [RrApprover])
+  rr_approvers() {
     return this.rrApproverService.findAll();
   }
 
-  @Query(() => RrApprover, { name: 'rrApprover' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
+  @Query(() => RrApprover)
+  rr_approver(@Args('id') id: string) {
     return this.rrApproverService.findOne(id);
   }
 
   @Mutation(() => RrApprover)
-  updateRrApprover(@Args('updateRrApproverInput') updateRrApproverInput: UpdateRrApproverInput) {
-    return this.rrApproverService.update(updateRrApproverInput.id, updateRrApproverInput);
+  updateRrApprover(
+    @Args('id') id: string,
+    @Args('input') updateRrApproverInput: UpdateRrApproverInput
+  ) {
+    return this.rrApproverService.update(id, updateRrApproverInput);
   }
 
   @Mutation(() => RrApprover)
-  removeRrApprover(@Args('id', { type: () => Int }) id: number) {
+  removeRrApprover(@Args('id') id: string) {
     return this.rrApproverService.remove(id);
   }
 }
