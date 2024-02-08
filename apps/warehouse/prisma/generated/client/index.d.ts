@@ -25468,8 +25468,8 @@ export namespace Prisma {
     id: string
     rr_id: string
     item_id: string | null
-    item_brand_id: string
-    unit_id: string
+    item_brand_id: string | null
+    unit_id: string | null
     item_class: number
     quantity_delivered: number
     quantity_accepted: number
@@ -25521,8 +25521,8 @@ export namespace Prisma {
     is_deleted?: boolean
     rr?: boolean | RRDefaultArgs<ExtArgs>
     item?: boolean | RRItem$itemArgs<ExtArgs>
-    item_brand?: boolean | BrandDefaultArgs<ExtArgs>
-    unit?: boolean | UnitDefaultArgs<ExtArgs>
+    item_brand?: boolean | RRItem$item_brandArgs<ExtArgs>
+    unit?: boolean | RRItem$unitArgs<ExtArgs>
     ItemTransaction?: boolean | RRItem$ItemTransactionArgs<ExtArgs>
   }, ExtArgs["result"]["rRItem"]>
 
@@ -25548,8 +25548,8 @@ export namespace Prisma {
   export type RRItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     rr?: boolean | RRDefaultArgs<ExtArgs>
     item?: boolean | RRItem$itemArgs<ExtArgs>
-    item_brand?: boolean | BrandDefaultArgs<ExtArgs>
-    unit?: boolean | UnitDefaultArgs<ExtArgs>
+    item_brand?: boolean | RRItem$item_brandArgs<ExtArgs>
+    unit?: boolean | RRItem$unitArgs<ExtArgs>
     ItemTransaction?: boolean | RRItem$ItemTransactionArgs<ExtArgs>
   }
 
@@ -25559,16 +25559,16 @@ export namespace Prisma {
     objects: {
       rr: Prisma.$RRPayload<ExtArgs>
       item: Prisma.$ItemPayload<ExtArgs> | null
-      item_brand: Prisma.$BrandPayload<ExtArgs>
-      unit: Prisma.$UnitPayload<ExtArgs>
+      item_brand: Prisma.$BrandPayload<ExtArgs> | null
+      unit: Prisma.$UnitPayload<ExtArgs> | null
       ItemTransaction: Prisma.$ItemTransactionPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       rr_id: string
       item_id: string | null
-      item_brand_id: string
-      unit_id: string
+      item_brand_id: string | null
+      unit_id: string | null
       item_class: number
       quantity_delivered: number
       quantity_accepted: number
@@ -25949,9 +25949,9 @@ export namespace Prisma {
 
     item<T extends RRItem$itemArgs<ExtArgs> = {}>(args?: Subset<T, RRItem$itemArgs<ExtArgs>>): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
 
-    item_brand<T extends BrandDefaultArgs<ExtArgs> = {}>(args?: Subset<T, BrandDefaultArgs<ExtArgs>>): Prisma__BrandClient<$Result.GetResult<Prisma.$BrandPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+    item_brand<T extends RRItem$item_brandArgs<ExtArgs> = {}>(args?: Subset<T, RRItem$item_brandArgs<ExtArgs>>): Prisma__BrandClient<$Result.GetResult<Prisma.$BrandPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
 
-    unit<T extends UnitDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UnitDefaultArgs<ExtArgs>>): Prisma__UnitClient<$Result.GetResult<Prisma.$UnitPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+    unit<T extends RRItem$unitArgs<ExtArgs> = {}>(args?: Subset<T, RRItem$unitArgs<ExtArgs>>): Prisma__UnitClient<$Result.GetResult<Prisma.$UnitPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
 
     ItemTransaction<T extends RRItem$ItemTransactionArgs<ExtArgs> = {}>(args?: Subset<T, RRItem$ItemTransactionArgs<ExtArgs>>): Prisma__ItemTransactionClient<$Result.GetResult<Prisma.$ItemTransactionPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
 
@@ -26327,6 +26327,38 @@ export namespace Prisma {
 
 
   /**
+   * RRItem.item_brand
+   */
+  export type RRItem$item_brandArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Brand
+     */
+    select?: BrandSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: BrandInclude<ExtArgs> | null
+    where?: BrandWhereInput
+  }
+
+
+  /**
+   * RRItem.unit
+   */
+  export type RRItem$unitArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Unit
+     */
+    select?: UnitSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: UnitInclude<ExtArgs> | null
+    where?: UnitWhereInput
+  }
+
+
+  /**
    * RRItem.ItemTransaction
    */
   export type RRItem$ItemTransactionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -26373,15 +26405,11 @@ export namespace Prisma {
   export type ItemAvgAggregateOutputType = {
     quantity: number | null
     initial_quantity: number | null
-    average_price: number | null
-    initial_average_price: number | null
   }
 
   export type ItemSumAggregateOutputType = {
     quantity: number | null
     initial_quantity: number | null
-    average_price: number | null
-    initial_average_price: number | null
   }
 
   export type ItemMinAggregateOutputType = {
@@ -26392,9 +26420,6 @@ export namespace Prisma {
     description: string | null
     quantity: number | null
     initial_quantity: number | null
-    average_price: number | null
-    initial_average_price: number | null
-    is_initial: boolean | null
     created_at: Date | null
     updated_at: Date | null
     is_deleted: boolean | null
@@ -26408,9 +26433,6 @@ export namespace Prisma {
     description: string | null
     quantity: number | null
     initial_quantity: number | null
-    average_price: number | null
-    initial_average_price: number | null
-    is_initial: boolean | null
     created_at: Date | null
     updated_at: Date | null
     is_deleted: boolean | null
@@ -26424,9 +26446,6 @@ export namespace Prisma {
     description: number
     quantity: number
     initial_quantity: number
-    average_price: number
-    initial_average_price: number
-    is_initial: number
     created_at: number
     updated_at: number
     is_deleted: number
@@ -26437,15 +26456,11 @@ export namespace Prisma {
   export type ItemAvgAggregateInputType = {
     quantity?: true
     initial_quantity?: true
-    average_price?: true
-    initial_average_price?: true
   }
 
   export type ItemSumAggregateInputType = {
     quantity?: true
     initial_quantity?: true
-    average_price?: true
-    initial_average_price?: true
   }
 
   export type ItemMinAggregateInputType = {
@@ -26456,9 +26471,6 @@ export namespace Prisma {
     description?: true
     quantity?: true
     initial_quantity?: true
-    average_price?: true
-    initial_average_price?: true
-    is_initial?: true
     created_at?: true
     updated_at?: true
     is_deleted?: true
@@ -26472,9 +26484,6 @@ export namespace Prisma {
     description?: true
     quantity?: true
     initial_quantity?: true
-    average_price?: true
-    initial_average_price?: true
-    is_initial?: true
     created_at?: true
     updated_at?: true
     is_deleted?: true
@@ -26488,9 +26497,6 @@ export namespace Prisma {
     description?: true
     quantity?: true
     initial_quantity?: true
-    average_price?: true
-    initial_average_price?: true
-    is_initial?: true
     created_at?: true
     updated_at?: true
     is_deleted?: true
@@ -26591,9 +26597,6 @@ export namespace Prisma {
     description: string
     quantity: number
     initial_quantity: number
-    average_price: number
-    initial_average_price: number
-    is_initial: boolean
     created_at: Date
     updated_at: Date
     is_deleted: boolean
@@ -26626,9 +26629,6 @@ export namespace Prisma {
     description?: boolean
     quantity?: boolean
     initial_quantity?: boolean
-    average_price?: boolean
-    initial_average_price?: boolean
-    is_initial?: boolean
     created_at?: boolean
     updated_at?: boolean
     is_deleted?: boolean
@@ -26647,9 +26647,6 @@ export namespace Prisma {
     description?: boolean
     quantity?: boolean
     initial_quantity?: boolean
-    average_price?: boolean
-    initial_average_price?: boolean
-    is_initial?: boolean
     created_at?: boolean
     updated_at?: boolean
     is_deleted?: boolean
@@ -26680,9 +26677,6 @@ export namespace Prisma {
       description: string
       quantity: number
       initial_quantity: number
-      average_price: number
-      initial_average_price: number
-      is_initial: boolean
       created_at: Date
       updated_at: Date
       is_deleted: boolean
@@ -27094,9 +27088,6 @@ export namespace Prisma {
     readonly description: FieldRef<"Item", 'String'>
     readonly quantity: FieldRef<"Item", 'Int'>
     readonly initial_quantity: FieldRef<"Item", 'Int'>
-    readonly average_price: FieldRef<"Item", 'Float'>
-    readonly initial_average_price: FieldRef<"Item", 'Float'>
-    readonly is_initial: FieldRef<"Item", 'Boolean'>
     readonly created_at: FieldRef<"Item", 'DateTime'>
     readonly updated_at: FieldRef<"Item", 'DateTime'>
     readonly is_deleted: FieldRef<"Item", 'Boolean'>
@@ -28442,6 +28433,7 @@ export namespace Prisma {
     quantity: number | null
     price: number | null
     remarks: string | null
+    is_initial: boolean | null
     created_at: Date | null
     updated_at: Date | null
     is_deleted: boolean | null
@@ -28455,6 +28447,7 @@ export namespace Prisma {
     quantity: number | null
     price: number | null
     remarks: string | null
+    is_initial: boolean | null
     created_at: Date | null
     updated_at: Date | null
     is_deleted: boolean | null
@@ -28468,6 +28461,7 @@ export namespace Prisma {
     quantity: number
     price: number
     remarks: number
+    is_initial: number
     created_at: number
     updated_at: number
     is_deleted: number
@@ -28495,6 +28489,7 @@ export namespace Prisma {
     quantity?: true
     price?: true
     remarks?: true
+    is_initial?: true
     created_at?: true
     updated_at?: true
     is_deleted?: true
@@ -28508,6 +28503,7 @@ export namespace Prisma {
     quantity?: true
     price?: true
     remarks?: true
+    is_initial?: true
     created_at?: true
     updated_at?: true
     is_deleted?: true
@@ -28521,6 +28517,7 @@ export namespace Prisma {
     quantity?: true
     price?: true
     remarks?: true
+    is_initial?: true
     created_at?: true
     updated_at?: true
     is_deleted?: true
@@ -28621,6 +28618,7 @@ export namespace Prisma {
     quantity: number
     price: number
     remarks: string | null
+    is_initial: boolean
     created_at: Date
     updated_at: Date
     is_deleted: boolean
@@ -28653,6 +28651,7 @@ export namespace Prisma {
     quantity?: boolean
     price?: boolean
     remarks?: boolean
+    is_initial?: boolean
     created_at?: boolean
     updated_at?: boolean
     is_deleted?: boolean
@@ -28668,6 +28667,7 @@ export namespace Prisma {
     quantity?: boolean
     price?: boolean
     remarks?: boolean
+    is_initial?: boolean
     created_at?: boolean
     updated_at?: boolean
     is_deleted?: boolean
@@ -28693,6 +28693,7 @@ export namespace Prisma {
       quantity: number
       price: number
       remarks: string | null
+      is_initial: boolean
       created_at: Date
       updated_at: Date
       is_deleted: boolean
@@ -29100,6 +29101,7 @@ export namespace Prisma {
     readonly quantity: FieldRef<"ItemTransaction", 'Float'>
     readonly price: FieldRef<"ItemTransaction", 'Float'>
     readonly remarks: FieldRef<"ItemTransaction", 'String'>
+    readonly is_initial: FieldRef<"ItemTransaction", 'Boolean'>
     readonly created_at: FieldRef<"ItemTransaction", 'DateTime'>
     readonly updated_at: FieldRef<"ItemTransaction", 'DateTime'>
     readonly is_deleted: FieldRef<"ItemTransaction", 'Boolean'>
@@ -29835,9 +29837,6 @@ export namespace Prisma {
     description: 'description',
     quantity: 'quantity',
     initial_quantity: 'initial_quantity',
-    average_price: 'average_price',
-    initial_average_price: 'initial_average_price',
-    is_initial: 'is_initial',
     created_at: 'created_at',
     updated_at: 'updated_at',
     is_deleted: 'is_deleted'
@@ -29865,6 +29864,7 @@ export namespace Prisma {
     quantity: 'quantity',
     price: 'price',
     remarks: 'remarks',
+    is_initial: 'is_initial',
     created_at: 'created_at',
     updated_at: 'updated_at',
     is_deleted: 'is_deleted'
@@ -31815,8 +31815,8 @@ export namespace Prisma {
     id?: StringFilter<"RRItem"> | string
     rr_id?: StringFilter<"RRItem"> | string
     item_id?: StringNullableFilter<"RRItem"> | string | null
-    item_brand_id?: StringFilter<"RRItem"> | string
-    unit_id?: StringFilter<"RRItem"> | string
+    item_brand_id?: StringNullableFilter<"RRItem"> | string | null
+    unit_id?: StringNullableFilter<"RRItem"> | string | null
     item_class?: IntFilter<"RRItem"> | number
     quantity_delivered?: IntFilter<"RRItem"> | number
     quantity_accepted?: IntFilter<"RRItem"> | number
@@ -31830,8 +31830,8 @@ export namespace Prisma {
     is_deleted?: BoolFilter<"RRItem"> | boolean
     rr?: XOR<RRRelationFilter, RRWhereInput>
     item?: XOR<ItemNullableRelationFilter, ItemWhereInput> | null
-    item_brand?: XOR<BrandRelationFilter, BrandWhereInput>
-    unit?: XOR<UnitRelationFilter, UnitWhereInput>
+    item_brand?: XOR<BrandNullableRelationFilter, BrandWhereInput> | null
+    unit?: XOR<UnitNullableRelationFilter, UnitWhereInput> | null
     ItemTransaction?: XOR<ItemTransactionNullableRelationFilter, ItemTransactionWhereInput> | null
   }
 
@@ -31839,8 +31839,8 @@ export namespace Prisma {
     id?: SortOrder
     rr_id?: SortOrder
     item_id?: SortOrderInput | SortOrder
-    item_brand_id?: SortOrder
-    unit_id?: SortOrder
+    item_brand_id?: SortOrderInput | SortOrder
+    unit_id?: SortOrderInput | SortOrder
     item_class?: SortOrder
     quantity_delivered?: SortOrder
     quantity_accepted?: SortOrder
@@ -31866,8 +31866,8 @@ export namespace Prisma {
     NOT?: RRItemWhereInput | RRItemWhereInput[]
     rr_id?: StringFilter<"RRItem"> | string
     item_id?: StringNullableFilter<"RRItem"> | string | null
-    item_brand_id?: StringFilter<"RRItem"> | string
-    unit_id?: StringFilter<"RRItem"> | string
+    item_brand_id?: StringNullableFilter<"RRItem"> | string | null
+    unit_id?: StringNullableFilter<"RRItem"> | string | null
     item_class?: IntFilter<"RRItem"> | number
     quantity_delivered?: IntFilter<"RRItem"> | number
     quantity_accepted?: IntFilter<"RRItem"> | number
@@ -31881,8 +31881,8 @@ export namespace Prisma {
     is_deleted?: BoolFilter<"RRItem"> | boolean
     rr?: XOR<RRRelationFilter, RRWhereInput>
     item?: XOR<ItemNullableRelationFilter, ItemWhereInput> | null
-    item_brand?: XOR<BrandRelationFilter, BrandWhereInput>
-    unit?: XOR<UnitRelationFilter, UnitWhereInput>
+    item_brand?: XOR<BrandNullableRelationFilter, BrandWhereInput> | null
+    unit?: XOR<UnitNullableRelationFilter, UnitWhereInput> | null
     ItemTransaction?: XOR<ItemTransactionNullableRelationFilter, ItemTransactionWhereInput> | null
   }, "id">
 
@@ -31890,8 +31890,8 @@ export namespace Prisma {
     id?: SortOrder
     rr_id?: SortOrder
     item_id?: SortOrderInput | SortOrder
-    item_brand_id?: SortOrder
-    unit_id?: SortOrder
+    item_brand_id?: SortOrderInput | SortOrder
+    unit_id?: SortOrderInput | SortOrder
     item_class?: SortOrder
     quantity_delivered?: SortOrder
     quantity_accepted?: SortOrder
@@ -31917,8 +31917,8 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"RRItem"> | string
     rr_id?: StringWithAggregatesFilter<"RRItem"> | string
     item_id?: StringNullableWithAggregatesFilter<"RRItem"> | string | null
-    item_brand_id?: StringWithAggregatesFilter<"RRItem"> | string
-    unit_id?: StringWithAggregatesFilter<"RRItem"> | string
+    item_brand_id?: StringNullableWithAggregatesFilter<"RRItem"> | string | null
+    unit_id?: StringNullableWithAggregatesFilter<"RRItem"> | string | null
     item_class?: IntWithAggregatesFilter<"RRItem"> | number
     quantity_delivered?: IntWithAggregatesFilter<"RRItem"> | number
     quantity_accepted?: IntWithAggregatesFilter<"RRItem"> | number
@@ -31943,9 +31943,6 @@ export namespace Prisma {
     description?: StringFilter<"Item"> | string
     quantity?: IntFilter<"Item"> | number
     initial_quantity?: IntFilter<"Item"> | number
-    average_price?: FloatFilter<"Item"> | number
-    initial_average_price?: FloatFilter<"Item"> | number
-    is_initial?: BoolFilter<"Item"> | boolean
     created_at?: DateTimeFilter<"Item"> | Date | string
     updated_at?: DateTimeFilter<"Item"> | Date | string
     is_deleted?: BoolFilter<"Item"> | boolean
@@ -31963,9 +31960,6 @@ export namespace Prisma {
     description?: SortOrder
     quantity?: SortOrder
     initial_quantity?: SortOrder
-    average_price?: SortOrder
-    initial_average_price?: SortOrder
-    is_initial?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -31986,9 +31980,6 @@ export namespace Prisma {
     description?: StringFilter<"Item"> | string
     quantity?: IntFilter<"Item"> | number
     initial_quantity?: IntFilter<"Item"> | number
-    average_price?: FloatFilter<"Item"> | number
-    initial_average_price?: FloatFilter<"Item"> | number
-    is_initial?: BoolFilter<"Item"> | boolean
     created_at?: DateTimeFilter<"Item"> | Date | string
     updated_at?: DateTimeFilter<"Item"> | Date | string
     is_deleted?: BoolFilter<"Item"> | boolean
@@ -32006,9 +31997,6 @@ export namespace Prisma {
     description?: SortOrder
     quantity?: SortOrder
     initial_quantity?: SortOrder
-    average_price?: SortOrder
-    initial_average_price?: SortOrder
-    is_initial?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -32030,9 +32018,6 @@ export namespace Prisma {
     description?: StringWithAggregatesFilter<"Item"> | string
     quantity?: IntWithAggregatesFilter<"Item"> | number
     initial_quantity?: IntWithAggregatesFilter<"Item"> | number
-    average_price?: FloatWithAggregatesFilter<"Item"> | number
-    initial_average_price?: FloatWithAggregatesFilter<"Item"> | number
-    is_initial?: BoolWithAggregatesFilter<"Item"> | boolean
     created_at?: DateTimeWithAggregatesFilter<"Item"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"Item"> | Date | string
     is_deleted?: BoolWithAggregatesFilter<"Item"> | boolean
@@ -32104,6 +32089,7 @@ export namespace Prisma {
     quantity?: FloatFilter<"ItemTransaction"> | number
     price?: FloatFilter<"ItemTransaction"> | number
     remarks?: StringNullableFilter<"ItemTransaction"> | string | null
+    is_initial?: BoolFilter<"ItemTransaction"> | boolean
     created_at?: DateTimeFilter<"ItemTransaction"> | Date | string
     updated_at?: DateTimeFilter<"ItemTransaction"> | Date | string
     is_deleted?: BoolFilter<"ItemTransaction"> | boolean
@@ -32119,6 +32105,7 @@ export namespace Prisma {
     quantity?: SortOrder
     price?: SortOrder
     remarks?: SortOrderInput | SortOrder
+    is_initial?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -32137,6 +32124,7 @@ export namespace Prisma {
     quantity?: FloatFilter<"ItemTransaction"> | number
     price?: FloatFilter<"ItemTransaction"> | number
     remarks?: StringNullableFilter<"ItemTransaction"> | string | null
+    is_initial?: BoolFilter<"ItemTransaction"> | boolean
     created_at?: DateTimeFilter<"ItemTransaction"> | Date | string
     updated_at?: DateTimeFilter<"ItemTransaction"> | Date | string
     is_deleted?: BoolFilter<"ItemTransaction"> | boolean
@@ -32152,6 +32140,7 @@ export namespace Prisma {
     quantity?: SortOrder
     price?: SortOrder
     remarks?: SortOrderInput | SortOrder
+    is_initial?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -32173,6 +32162,7 @@ export namespace Prisma {
     quantity?: FloatWithAggregatesFilter<"ItemTransaction"> | number
     price?: FloatWithAggregatesFilter<"ItemTransaction"> | number
     remarks?: StringNullableWithAggregatesFilter<"ItemTransaction"> | string | null
+    is_initial?: BoolWithAggregatesFilter<"ItemTransaction"> | boolean
     created_at?: DateTimeWithAggregatesFilter<"ItemTransaction"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"ItemTransaction"> | Date | string
     is_deleted?: BoolWithAggregatesFilter<"ItemTransaction"> | boolean
@@ -34252,8 +34242,8 @@ export namespace Prisma {
     is_deleted?: boolean
     rr: RRCreateNestedOneWithoutRr_itemsInput
     item?: ItemCreateNestedOneWithoutRr_itemsInput
-    item_brand: BrandCreateNestedOneWithoutRr_itemsInput
-    unit: UnitCreateNestedOneWithoutRr_itemsInput
+    item_brand?: BrandCreateNestedOneWithoutRr_itemsInput
+    unit?: UnitCreateNestedOneWithoutRr_itemsInput
     ItemTransaction?: ItemTransactionCreateNestedOneWithoutRr_itemInput
   }
 
@@ -34261,8 +34251,8 @@ export namespace Prisma {
     id?: string
     rr_id: string
     item_id?: string | null
-    item_brand_id: string
-    unit_id: string
+    item_brand_id?: string | null
+    unit_id?: string | null
     item_class: number
     quantity_delivered: number
     quantity_accepted: number
@@ -34292,8 +34282,8 @@ export namespace Prisma {
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     rr?: RRUpdateOneRequiredWithoutRr_itemsNestedInput
     item?: ItemUpdateOneWithoutRr_itemsNestedInput
-    item_brand?: BrandUpdateOneRequiredWithoutRr_itemsNestedInput
-    unit?: UnitUpdateOneRequiredWithoutRr_itemsNestedInput
+    item_brand?: BrandUpdateOneWithoutRr_itemsNestedInput
+    unit?: UnitUpdateOneWithoutRr_itemsNestedInput
     ItemTransaction?: ItemTransactionUpdateOneWithoutRr_itemNestedInput
   }
 
@@ -34301,8 +34291,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     rr_id?: StringFieldUpdateOperationsInput | string
     item_id?: NullableStringFieldUpdateOperationsInput | string | null
-    item_brand_id?: StringFieldUpdateOperationsInput | string
-    unit_id?: StringFieldUpdateOperationsInput | string
+    item_brand_id?: NullableStringFieldUpdateOperationsInput | string | null
+    unit_id?: NullableStringFieldUpdateOperationsInput | string | null
     item_class?: IntFieldUpdateOperationsInput | number
     quantity_delivered?: IntFieldUpdateOperationsInput | number
     quantity_accepted?: IntFieldUpdateOperationsInput | number
@@ -34321,8 +34311,8 @@ export namespace Prisma {
     id?: string
     rr_id: string
     item_id?: string | null
-    item_brand_id: string
-    unit_id: string
+    item_brand_id?: string | null
+    unit_id?: string | null
     item_class: number
     quantity_delivered: number
     quantity_accepted: number
@@ -34355,8 +34345,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     rr_id?: StringFieldUpdateOperationsInput | string
     item_id?: NullableStringFieldUpdateOperationsInput | string | null
-    item_brand_id?: StringFieldUpdateOperationsInput | string
-    unit_id?: StringFieldUpdateOperationsInput | string
+    item_brand_id?: NullableStringFieldUpdateOperationsInput | string | null
+    unit_id?: NullableStringFieldUpdateOperationsInput | string | null
     item_class?: IntFieldUpdateOperationsInput | number
     quantity_delivered?: IntFieldUpdateOperationsInput | number
     quantity_accepted?: IntFieldUpdateOperationsInput | number
@@ -34376,9 +34366,6 @@ export namespace Prisma {
     description: string
     quantity: number
     initial_quantity: number
-    average_price: number
-    initial_average_price: number
-    is_initial?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -34396,9 +34383,6 @@ export namespace Prisma {
     description: string
     quantity: number
     initial_quantity: number
-    average_price: number
-    initial_average_price: number
-    is_initial?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -34412,9 +34396,6 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
-    average_price?: FloatFieldUpdateOperationsInput | number
-    initial_average_price?: FloatFieldUpdateOperationsInput | number
-    is_initial?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -34432,9 +34413,6 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
-    average_price?: FloatFieldUpdateOperationsInput | number
-    initial_average_price?: FloatFieldUpdateOperationsInput | number
-    is_initial?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -34450,9 +34428,6 @@ export namespace Prisma {
     description: string
     quantity: number
     initial_quantity: number
-    average_price: number
-    initial_average_price: number
-    is_initial?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -34464,9 +34439,6 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
-    average_price?: FloatFieldUpdateOperationsInput | number
-    initial_average_price?: FloatFieldUpdateOperationsInput | number
-    is_initial?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -34480,9 +34452,6 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
-    average_price?: FloatFieldUpdateOperationsInput | number
-    initial_average_price?: FloatFieldUpdateOperationsInput | number
-    is_initial?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -34554,6 +34523,7 @@ export namespace Prisma {
     quantity: number
     price: number
     remarks?: string | null
+    is_initial?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -34569,6 +34539,7 @@ export namespace Prisma {
     quantity: number
     price: number
     remarks?: string | null
+    is_initial?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -34580,6 +34551,7 @@ export namespace Prisma {
     quantity?: FloatFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    is_initial?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -34595,6 +34567,7 @@ export namespace Prisma {
     quantity?: FloatFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    is_initial?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -34608,6 +34581,7 @@ export namespace Prisma {
     quantity: number
     price: number
     remarks?: string | null
+    is_initial?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -34619,6 +34593,7 @@ export namespace Prisma {
     quantity?: FloatFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    is_initial?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -34632,6 +34607,7 @@ export namespace Prisma {
     quantity?: FloatFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    is_initial?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -36031,9 +36007,9 @@ export namespace Prisma {
     isNot?: ItemWhereInput | null
   }
 
-  export type BrandRelationFilter = {
-    is?: BrandWhereInput
-    isNot?: BrandWhereInput
+  export type UnitNullableRelationFilter = {
+    is?: UnitWhereInput | null
+    isNot?: UnitWhereInput | null
   }
 
   export type ItemTransactionNullableRelationFilter = {
@@ -36141,9 +36117,6 @@ export namespace Prisma {
     description?: SortOrder
     quantity?: SortOrder
     initial_quantity?: SortOrder
-    average_price?: SortOrder
-    initial_average_price?: SortOrder
-    is_initial?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -36152,8 +36125,6 @@ export namespace Prisma {
   export type ItemAvgOrderByAggregateInput = {
     quantity?: SortOrder
     initial_quantity?: SortOrder
-    average_price?: SortOrder
-    initial_average_price?: SortOrder
   }
 
   export type ItemMaxOrderByAggregateInput = {
@@ -36164,9 +36135,6 @@ export namespace Prisma {
     description?: SortOrder
     quantity?: SortOrder
     initial_quantity?: SortOrder
-    average_price?: SortOrder
-    initial_average_price?: SortOrder
-    is_initial?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -36180,9 +36148,6 @@ export namespace Prisma {
     description?: SortOrder
     quantity?: SortOrder
     initial_quantity?: SortOrder
-    average_price?: SortOrder
-    initial_average_price?: SortOrder
-    is_initial?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -36191,8 +36156,6 @@ export namespace Prisma {
   export type ItemSumOrderByAggregateInput = {
     quantity?: SortOrder
     initial_quantity?: SortOrder
-    average_price?: SortOrder
-    initial_average_price?: SortOrder
   }
 
   export type ItemTypeCountOrderByAggregateInput = {
@@ -36237,6 +36200,7 @@ export namespace Prisma {
     quantity?: SortOrder
     price?: SortOrder
     remarks?: SortOrder
+    is_initial?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -36256,6 +36220,7 @@ export namespace Prisma {
     quantity?: SortOrder
     price?: SortOrder
     remarks?: SortOrder
+    is_initial?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -36269,6 +36234,7 @@ export namespace Prisma {
     quantity?: SortOrder
     price?: SortOrder
     remarks?: SortOrder
+    is_initial?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -37754,18 +37720,22 @@ export namespace Prisma {
     update?: XOR<XOR<ItemUpdateToOneWithWhereWithoutRr_itemsInput, ItemUpdateWithoutRr_itemsInput>, ItemUncheckedUpdateWithoutRr_itemsInput>
   }
 
-  export type BrandUpdateOneRequiredWithoutRr_itemsNestedInput = {
+  export type BrandUpdateOneWithoutRr_itemsNestedInput = {
     create?: XOR<BrandCreateWithoutRr_itemsInput, BrandUncheckedCreateWithoutRr_itemsInput>
     connectOrCreate?: BrandCreateOrConnectWithoutRr_itemsInput
     upsert?: BrandUpsertWithoutRr_itemsInput
+    disconnect?: BrandWhereInput | boolean
+    delete?: BrandWhereInput | boolean
     connect?: BrandWhereUniqueInput
     update?: XOR<XOR<BrandUpdateToOneWithWhereWithoutRr_itemsInput, BrandUpdateWithoutRr_itemsInput>, BrandUncheckedUpdateWithoutRr_itemsInput>
   }
 
-  export type UnitUpdateOneRequiredWithoutRr_itemsNestedInput = {
+  export type UnitUpdateOneWithoutRr_itemsNestedInput = {
     create?: XOR<UnitCreateWithoutRr_itemsInput, UnitUncheckedCreateWithoutRr_itemsInput>
     connectOrCreate?: UnitCreateOrConnectWithoutRr_itemsInput
     upsert?: UnitUpsertWithoutRr_itemsInput
+    disconnect?: UnitWhereInput | boolean
+    delete?: UnitWhereInput | boolean
     connect?: UnitWhereUniqueInput
     update?: XOR<XOR<UnitUpdateToOneWithWhereWithoutRr_itemsInput, UnitUpdateWithoutRr_itemsInput>, UnitUncheckedUpdateWithoutRr_itemsInput>
   }
@@ -38279,7 +38249,7 @@ export namespace Prisma {
     is_deleted?: boolean
     rr: RRCreateNestedOneWithoutRr_itemsInput
     item?: ItemCreateNestedOneWithoutRr_itemsInput
-    item_brand: BrandCreateNestedOneWithoutRr_itemsInput
+    item_brand?: BrandCreateNestedOneWithoutRr_itemsInput
     ItemTransaction?: ItemTransactionCreateNestedOneWithoutRr_itemInput
   }
 
@@ -38287,7 +38257,7 @@ export namespace Prisma {
     id?: string
     rr_id: string
     item_id?: string | null
-    item_brand_id: string
+    item_brand_id?: string | null
     item_class: number
     quantity_delivered: number
     quantity_accepted: number
@@ -38318,9 +38288,6 @@ export namespace Prisma {
     description: string
     quantity: number
     initial_quantity: number
-    average_price: number
-    initial_average_price: number
-    is_initial?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -38336,9 +38303,6 @@ export namespace Prisma {
     description: string
     quantity: number
     initial_quantity: number
-    average_price: number
-    initial_average_price: number
-    is_initial?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -38410,8 +38374,8 @@ export namespace Prisma {
     id?: StringFilter<"RRItem"> | string
     rr_id?: StringFilter<"RRItem"> | string
     item_id?: StringNullableFilter<"RRItem"> | string | null
-    item_brand_id?: StringFilter<"RRItem"> | string
-    unit_id?: StringFilter<"RRItem"> | string
+    item_brand_id?: StringNullableFilter<"RRItem"> | string | null
+    unit_id?: StringNullableFilter<"RRItem"> | string | null
     item_class?: IntFilter<"RRItem"> | number
     quantity_delivered?: IntFilter<"RRItem"> | number
     quantity_accepted?: IntFilter<"RRItem"> | number
@@ -38452,9 +38416,6 @@ export namespace Prisma {
     description?: StringFilter<"Item"> | string
     quantity?: IntFilter<"Item"> | number
     initial_quantity?: IntFilter<"Item"> | number
-    average_price?: FloatFilter<"Item"> | number
-    initial_average_price?: FloatFilter<"Item"> | number
-    is_initial?: BoolFilter<"Item"> | boolean
     created_at?: DateTimeFilter<"Item"> | Date | string
     updated_at?: DateTimeFilter<"Item"> | Date | string
     is_deleted?: BoolFilter<"Item"> | boolean
@@ -38509,7 +38470,7 @@ export namespace Prisma {
     is_deleted?: boolean
     rr: RRCreateNestedOneWithoutRr_itemsInput
     item?: ItemCreateNestedOneWithoutRr_itemsInput
-    unit: UnitCreateNestedOneWithoutRr_itemsInput
+    unit?: UnitCreateNestedOneWithoutRr_itemsInput
     ItemTransaction?: ItemTransactionCreateNestedOneWithoutRr_itemInput
   }
 
@@ -38517,7 +38478,7 @@ export namespace Prisma {
     id?: string
     rr_id: string
     item_id?: string | null
-    unit_id: string
+    unit_id?: string | null
     item_class: number
     quantity_delivered: number
     quantity_accepted: number
@@ -41662,16 +41623,16 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     item?: ItemCreateNestedOneWithoutRr_itemsInput
-    item_brand: BrandCreateNestedOneWithoutRr_itemsInput
-    unit: UnitCreateNestedOneWithoutRr_itemsInput
+    item_brand?: BrandCreateNestedOneWithoutRr_itemsInput
+    unit?: UnitCreateNestedOneWithoutRr_itemsInput
     ItemTransaction?: ItemTransactionCreateNestedOneWithoutRr_itemInput
   }
 
   export type RRItemUncheckedCreateWithoutRrInput = {
     id?: string
     item_id?: string | null
-    item_brand_id: string
-    unit_id: string
+    item_brand_id?: string | null
+    unit_id?: string | null
     item_class: number
     quantity_delivered: number
     quantity_accepted: number
@@ -41926,9 +41887,6 @@ export namespace Prisma {
     description: string
     quantity: number
     initial_quantity: number
-    average_price: number
-    initial_average_price: number
-    is_initial?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -41945,9 +41903,6 @@ export namespace Prisma {
     description: string
     quantity: number
     initial_quantity: number
-    average_price: number
-    initial_average_price: number
-    is_initial?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -42013,6 +41968,7 @@ export namespace Prisma {
     quantity: number
     price: number
     remarks?: string | null
+    is_initial?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -42026,6 +41982,7 @@ export namespace Prisma {
     quantity: number
     price: number
     remarks?: string | null
+    is_initial?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -42102,9 +42059,6 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
-    average_price?: FloatFieldUpdateOperationsInput | number
-    initial_average_price?: FloatFieldUpdateOperationsInput | number
-    is_initial?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -42121,9 +42075,6 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
-    average_price?: FloatFieldUpdateOperationsInput | number
-    initial_average_price?: FloatFieldUpdateOperationsInput | number
-    is_initial?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -42207,6 +42158,7 @@ export namespace Prisma {
     quantity?: FloatFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    is_initial?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -42220,6 +42172,7 @@ export namespace Prisma {
     quantity?: FloatFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    is_initial?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -42252,6 +42205,7 @@ export namespace Prisma {
     quantity: number
     price: number
     remarks?: string | null
+    is_initial?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -42265,6 +42219,7 @@ export namespace Prisma {
     quantity: number
     price: number
     remarks?: string | null
+    is_initial?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -42294,16 +42249,16 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     rr: RRCreateNestedOneWithoutRr_itemsInput
-    item_brand: BrandCreateNestedOneWithoutRr_itemsInput
-    unit: UnitCreateNestedOneWithoutRr_itemsInput
+    item_brand?: BrandCreateNestedOneWithoutRr_itemsInput
+    unit?: UnitCreateNestedOneWithoutRr_itemsInput
     ItemTransaction?: ItemTransactionCreateNestedOneWithoutRr_itemInput
   }
 
   export type RRItemUncheckedCreateWithoutItemInput = {
     id?: string
     rr_id: string
-    item_brand_id: string
-    unit_id: string
+    item_brand_id?: string | null
+    unit_id?: string | null
     item_class: number
     quantity_delivered: number
     quantity_accepted: number
@@ -42407,6 +42362,7 @@ export namespace Prisma {
     quantity?: FloatFilter<"ItemTransaction"> | number
     price?: FloatFilter<"ItemTransaction"> | number
     remarks?: StringNullableFilter<"ItemTransaction"> | string | null
+    is_initial?: BoolFilter<"ItemTransaction"> | boolean
     created_at?: DateTimeFilter<"ItemTransaction"> | Date | string
     updated_at?: DateTimeFilter<"ItemTransaction"> | Date | string
     is_deleted?: BoolFilter<"ItemTransaction"> | boolean
@@ -42465,9 +42421,6 @@ export namespace Prisma {
     description: string
     quantity: number
     initial_quantity: number
-    average_price: number
-    initial_average_price: number
-    is_initial?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -42483,9 +42436,6 @@ export namespace Prisma {
     description: string
     quantity: number
     initial_quantity: number
-    average_price: number
-    initial_average_price: number
-    is_initial?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -42525,9 +42475,6 @@ export namespace Prisma {
     description: string
     quantity: number
     initial_quantity: number
-    average_price: number
-    initial_average_price: number
-    is_initial?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -42544,9 +42491,6 @@ export namespace Prisma {
     description: string
     quantity: number
     initial_quantity: number
-    average_price: number
-    initial_average_price: number
-    is_initial?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -42573,16 +42517,16 @@ export namespace Prisma {
     is_deleted?: boolean
     rr: RRCreateNestedOneWithoutRr_itemsInput
     item?: ItemCreateNestedOneWithoutRr_itemsInput
-    item_brand: BrandCreateNestedOneWithoutRr_itemsInput
-    unit: UnitCreateNestedOneWithoutRr_itemsInput
+    item_brand?: BrandCreateNestedOneWithoutRr_itemsInput
+    unit?: UnitCreateNestedOneWithoutRr_itemsInput
   }
 
   export type RRItemUncheckedCreateWithoutItemTransactionInput = {
     id?: string
     rr_id: string
     item_id?: string | null
-    item_brand_id: string
-    unit_id: string
+    item_brand_id?: string | null
+    unit_id?: string | null
     item_class: number
     quantity_delivered: number
     quantity_accepted: number
@@ -42618,9 +42562,6 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
-    average_price?: FloatFieldUpdateOperationsInput | number
-    initial_average_price?: FloatFieldUpdateOperationsInput | number
-    is_initial?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -42637,9 +42578,6 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
-    average_price?: FloatFieldUpdateOperationsInput | number
-    initial_average_price?: FloatFieldUpdateOperationsInput | number
-    is_initial?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -42672,16 +42610,16 @@ export namespace Prisma {
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     rr?: RRUpdateOneRequiredWithoutRr_itemsNestedInput
     item?: ItemUpdateOneWithoutRr_itemsNestedInput
-    item_brand?: BrandUpdateOneRequiredWithoutRr_itemsNestedInput
-    unit?: UnitUpdateOneRequiredWithoutRr_itemsNestedInput
+    item_brand?: BrandUpdateOneWithoutRr_itemsNestedInput
+    unit?: UnitUpdateOneWithoutRr_itemsNestedInput
   }
 
   export type RRItemUncheckedUpdateWithoutItemTransactionInput = {
     id?: StringFieldUpdateOperationsInput | string
     rr_id?: StringFieldUpdateOperationsInput | string
     item_id?: NullableStringFieldUpdateOperationsInput | string | null
-    item_brand_id?: StringFieldUpdateOperationsInput | string
-    unit_id?: StringFieldUpdateOperationsInput | string
+    item_brand_id?: NullableStringFieldUpdateOperationsInput | string | null
+    unit_id?: NullableStringFieldUpdateOperationsInput | string | null
     item_class?: IntFieldUpdateOperationsInput | number
     quantity_delivered?: IntFieldUpdateOperationsInput | number
     quantity_accepted?: IntFieldUpdateOperationsInput | number
@@ -42756,7 +42694,7 @@ export namespace Prisma {
     id?: string
     rr_id: string
     item_id?: string | null
-    item_brand_id: string
+    item_brand_id?: string | null
     item_class: number
     quantity_delivered: number
     quantity_accepted: number
@@ -42777,9 +42715,6 @@ export namespace Prisma {
     description: string
     quantity: number
     initial_quantity: number
-    average_price: number
-    initial_average_price: number
-    is_initial?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -42835,7 +42770,7 @@ export namespace Prisma {
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     rr?: RRUpdateOneRequiredWithoutRr_itemsNestedInput
     item?: ItemUpdateOneWithoutRr_itemsNestedInput
-    item_brand?: BrandUpdateOneRequiredWithoutRr_itemsNestedInput
+    item_brand?: BrandUpdateOneWithoutRr_itemsNestedInput
     ItemTransaction?: ItemTransactionUpdateOneWithoutRr_itemNestedInput
   }
 
@@ -42843,7 +42778,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     rr_id?: StringFieldUpdateOperationsInput | string
     item_id?: NullableStringFieldUpdateOperationsInput | string | null
-    item_brand_id?: StringFieldUpdateOperationsInput | string
+    item_brand_id?: NullableStringFieldUpdateOperationsInput | string | null
     item_class?: IntFieldUpdateOperationsInput | number
     quantity_delivered?: IntFieldUpdateOperationsInput | number
     quantity_accepted?: IntFieldUpdateOperationsInput | number
@@ -42862,7 +42797,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     rr_id?: StringFieldUpdateOperationsInput | string
     item_id?: NullableStringFieldUpdateOperationsInput | string | null
-    item_brand_id?: StringFieldUpdateOperationsInput | string
+    item_brand_id?: NullableStringFieldUpdateOperationsInput | string | null
     item_class?: IntFieldUpdateOperationsInput | number
     quantity_delivered?: IntFieldUpdateOperationsInput | number
     quantity_accepted?: IntFieldUpdateOperationsInput | number
@@ -42882,9 +42817,6 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
-    average_price?: FloatFieldUpdateOperationsInput | number
-    initial_average_price?: FloatFieldUpdateOperationsInput | number
-    is_initial?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -42900,9 +42832,6 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
-    average_price?: FloatFieldUpdateOperationsInput | number
-    initial_average_price?: FloatFieldUpdateOperationsInput | number
-    is_initial?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -42917,9 +42846,6 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
-    average_price?: FloatFieldUpdateOperationsInput | number
-    initial_average_price?: FloatFieldUpdateOperationsInput | number
-    is_initial?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -42940,7 +42866,7 @@ export namespace Prisma {
     id?: string
     rr_id: string
     item_id?: string | null
-    unit_id: string
+    unit_id?: string | null
     item_class: number
     quantity_delivered: number
     quantity_accepted: number
@@ -43004,7 +42930,7 @@ export namespace Prisma {
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     rr?: RRUpdateOneRequiredWithoutRr_itemsNestedInput
     item?: ItemUpdateOneWithoutRr_itemsNestedInput
-    unit?: UnitUpdateOneRequiredWithoutRr_itemsNestedInput
+    unit?: UnitUpdateOneWithoutRr_itemsNestedInput
     ItemTransaction?: ItemTransactionUpdateOneWithoutRr_itemNestedInput
   }
 
@@ -43012,7 +42938,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     rr_id?: StringFieldUpdateOperationsInput | string
     item_id?: NullableStringFieldUpdateOperationsInput | string | null
-    unit_id?: StringFieldUpdateOperationsInput | string
+    unit_id?: NullableStringFieldUpdateOperationsInput | string | null
     item_class?: IntFieldUpdateOperationsInput | number
     quantity_delivered?: IntFieldUpdateOperationsInput | number
     quantity_accepted?: IntFieldUpdateOperationsInput | number
@@ -43031,7 +42957,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     rr_id?: StringFieldUpdateOperationsInput | string
     item_id?: NullableStringFieldUpdateOperationsInput | string | null
-    unit_id?: StringFieldUpdateOperationsInput | string
+    unit_id?: NullableStringFieldUpdateOperationsInput | string | null
     item_class?: IntFieldUpdateOperationsInput | number
     quantity_delivered?: IntFieldUpdateOperationsInput | number
     quantity_accepted?: IntFieldUpdateOperationsInput | number
@@ -43626,8 +43552,8 @@ export namespace Prisma {
   export type RRItemCreateManyRrInput = {
     id?: string
     item_id?: string | null
-    item_brand_id: string
-    unit_id: string
+    item_brand_id?: string | null
+    unit_id?: string | null
     item_class: number
     quantity_delivered: number
     quantity_accepted: number
@@ -43697,16 +43623,16 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     item?: ItemUpdateOneWithoutRr_itemsNestedInput
-    item_brand?: BrandUpdateOneRequiredWithoutRr_itemsNestedInput
-    unit?: UnitUpdateOneRequiredWithoutRr_itemsNestedInput
+    item_brand?: BrandUpdateOneWithoutRr_itemsNestedInput
+    unit?: UnitUpdateOneWithoutRr_itemsNestedInput
     ItemTransaction?: ItemTransactionUpdateOneWithoutRr_itemNestedInput
   }
 
   export type RRItemUncheckedUpdateWithoutRrInput = {
     id?: StringFieldUpdateOperationsInput | string
     item_id?: NullableStringFieldUpdateOperationsInput | string | null
-    item_brand_id?: StringFieldUpdateOperationsInput | string
-    unit_id?: StringFieldUpdateOperationsInput | string
+    item_brand_id?: NullableStringFieldUpdateOperationsInput | string | null
+    unit_id?: NullableStringFieldUpdateOperationsInput | string | null
     item_class?: IntFieldUpdateOperationsInput | number
     quantity_delivered?: IntFieldUpdateOperationsInput | number
     quantity_accepted?: IntFieldUpdateOperationsInput | number
@@ -43724,8 +43650,8 @@ export namespace Prisma {
   export type RRItemUncheckedUpdateManyWithoutRrInput = {
     id?: StringFieldUpdateOperationsInput | string
     item_id?: NullableStringFieldUpdateOperationsInput | string | null
-    item_brand_id?: StringFieldUpdateOperationsInput | string
-    unit_id?: StringFieldUpdateOperationsInput | string
+    item_brand_id?: NullableStringFieldUpdateOperationsInput | string | null
+    unit_id?: NullableStringFieldUpdateOperationsInput | string | null
     item_class?: IntFieldUpdateOperationsInput | number
     quantity_delivered?: IntFieldUpdateOperationsInput | number
     quantity_accepted?: IntFieldUpdateOperationsInput | number
@@ -43746,6 +43672,7 @@ export namespace Prisma {
     quantity: number
     price: number
     remarks?: string | null
+    is_initial?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -43754,8 +43681,8 @@ export namespace Prisma {
   export type RRItemCreateManyItemInput = {
     id?: string
     rr_id: string
-    item_brand_id: string
-    unit_id: string
+    item_brand_id?: string | null
+    unit_id?: string | null
     item_class: number
     quantity_delivered: number
     quantity_accepted: number
@@ -43775,6 +43702,7 @@ export namespace Prisma {
     quantity?: FloatFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    is_initial?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -43788,6 +43716,7 @@ export namespace Prisma {
     quantity?: FloatFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    is_initial?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -43800,6 +43729,7 @@ export namespace Prisma {
     quantity?: FloatFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    is_initial?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -43819,16 +43749,16 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     rr?: RRUpdateOneRequiredWithoutRr_itemsNestedInput
-    item_brand?: BrandUpdateOneRequiredWithoutRr_itemsNestedInput
-    unit?: UnitUpdateOneRequiredWithoutRr_itemsNestedInput
+    item_brand?: BrandUpdateOneWithoutRr_itemsNestedInput
+    unit?: UnitUpdateOneWithoutRr_itemsNestedInput
     ItemTransaction?: ItemTransactionUpdateOneWithoutRr_itemNestedInput
   }
 
   export type RRItemUncheckedUpdateWithoutItemInput = {
     id?: StringFieldUpdateOperationsInput | string
     rr_id?: StringFieldUpdateOperationsInput | string
-    item_brand_id?: StringFieldUpdateOperationsInput | string
-    unit_id?: StringFieldUpdateOperationsInput | string
+    item_brand_id?: NullableStringFieldUpdateOperationsInput | string | null
+    unit_id?: NullableStringFieldUpdateOperationsInput | string | null
     item_class?: IntFieldUpdateOperationsInput | number
     quantity_delivered?: IntFieldUpdateOperationsInput | number
     quantity_accepted?: IntFieldUpdateOperationsInput | number
@@ -43846,8 +43776,8 @@ export namespace Prisma {
   export type RRItemUncheckedUpdateManyWithoutItemInput = {
     id?: StringFieldUpdateOperationsInput | string
     rr_id?: StringFieldUpdateOperationsInput | string
-    item_brand_id?: StringFieldUpdateOperationsInput | string
-    unit_id?: StringFieldUpdateOperationsInput | string
+    item_brand_id?: NullableStringFieldUpdateOperationsInput | string | null
+    unit_id?: NullableStringFieldUpdateOperationsInput | string | null
     item_class?: IntFieldUpdateOperationsInput | number
     quantity_delivered?: IntFieldUpdateOperationsInput | number
     quantity_accepted?: IntFieldUpdateOperationsInput | number
@@ -43868,9 +43798,6 @@ export namespace Prisma {
     description: string
     quantity: number
     initial_quantity: number
-    average_price: number
-    initial_average_price: number
-    is_initial?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -43882,9 +43809,6 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
-    average_price?: FloatFieldUpdateOperationsInput | number
-    initial_average_price?: FloatFieldUpdateOperationsInput | number
-    is_initial?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -43900,9 +43824,6 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
-    average_price?: FloatFieldUpdateOperationsInput | number
-    initial_average_price?: FloatFieldUpdateOperationsInput | number
-    is_initial?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -43917,9 +43838,6 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
-    average_price?: FloatFieldUpdateOperationsInput | number
-    initial_average_price?: FloatFieldUpdateOperationsInput | number
-    is_initial?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean

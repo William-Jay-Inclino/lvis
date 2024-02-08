@@ -2,6 +2,7 @@ import { InputType, Int, Field, Float } from '@nestjs/graphql';
 import { Transform, Type } from 'class-transformer';
 import { IsArray, IsDate, IsNotEmpty, IsNumber, IsOptional, IsString, Min, ValidateNested } from 'class-validator';
 import { CreateRrApproverSubInput } from './create-rr-approver.sub.input';
+import { CreateRRItemSubInput } from './create-rr-item.sub.input';
 
 @InputType()
 export class CreateRrInput {
@@ -49,5 +50,12 @@ export class CreateRrInput {
   @ValidateNested({ each: true })
   @Type(() => CreateRrApproverSubInput)
   approvers: CreateRrApproverSubInput[];
+
+  @Field(() => [CreateRRItemSubInput])
+  @IsNotEmpty({each: true})
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => CreateRRItemSubInput)
+  rr_items: CreateRRItemSubInput[];
 
 }

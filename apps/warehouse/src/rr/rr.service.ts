@@ -112,6 +112,26 @@ export class RrService {
                     return approver
 
                 })
+            },
+            rr_items: {
+                create: input.rr_items.map(i => {
+                    
+                    const item: Prisma.RRItemCreateWithoutRrInput = {
+                        item: i.item_id ? { connect: { id: i.item_id } } : undefined,
+                        item_brand: i.item_brand_id ? { connect: { id: i.item_brand_id } } : undefined,
+                        unit: i.unit_id ? { connect: { id: i.unit_id } } : undefined,
+                        item_class: i.item_class,
+                        quantity_delivered: i.quantity_delivered,
+                        quantity_accepted: i.quantity_accepted,
+                        description: i.description,
+                        vat_type: i.vat_type,
+                        gross_price: i.gross_price,
+                        net_price: i.net_price,
+                        freight_cost: i.freight_cost,
+                    }
+                    
+                    return item
+                })
             }
         }
 

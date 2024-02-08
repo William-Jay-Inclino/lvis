@@ -416,9 +416,6 @@ exports.Prisma.ItemScalarFieldEnum = {
   description: 'description',
   quantity: 'quantity',
   initial_quantity: 'initial_quantity',
-  average_price: 'average_price',
-  initial_average_price: 'initial_average_price',
-  is_initial: 'is_initial',
   created_at: 'created_at',
   updated_at: 'updated_at',
   is_deleted: 'is_deleted'
@@ -440,6 +437,7 @@ exports.Prisma.ItemTransactionScalarFieldEnum = {
   quantity: 'quantity',
   price: 'price',
   remarks: 'remarks',
+  is_initial: 'is_initial',
   created_at: 'created_at',
   updated_at: 'updated_at',
   is_deleted: 'is_deleted'
