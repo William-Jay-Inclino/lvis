@@ -52,14 +52,11 @@ export class ItemTransactionService {
         }
 
         const totalQuantity = item.quantity + input.quantity;
-        const totalValue = item.average_price * item.quantity + input.quantity * input.price;
-        const newAveragePrice = totalQuantity !== 0 ? totalValue / totalQuantity : 0;
 
         const updateItem = this.prisma.item.update({
             where: { id: item.id },
             data: {
-                quantity: totalQuantity,
-                average_price: newAveragePrice
+                quantity: totalQuantity
             }
         })
 
