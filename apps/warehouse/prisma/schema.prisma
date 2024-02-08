@@ -409,11 +409,11 @@ model RRItem {
   updated_at DateTime @updatedAt
   is_deleted Boolean  @default(false)
 
-  rr              RR               @relation(fields: [rr_id], references: [id], onDelete: Cascade)
-  item            Item?            @relation(fields: [item_id], references: [id], onDelete: Restrict)
-  item_brand      Brand?           @relation(fields: [item_brand_id], references: [id], onDelete: Restrict)
-  unit            Unit?            @relation(fields: [unit_id], references: [id], onDelete: Restrict)
-  ItemTransaction ItemTransaction?
+  rr               RR               @relation(fields: [rr_id], references: [id], onDelete: Cascade)
+  item             Item?            @relation(fields: [item_id], references: [id], onDelete: Restrict)
+  item_brand       Brand?           @relation(fields: [item_brand_id], references: [id], onDelete: Restrict)
+  unit             Unit?            @relation(fields: [unit_id], references: [id], onDelete: Restrict)
+  item_transaction ItemTransaction?
 
   @@map("rr_item")
 }

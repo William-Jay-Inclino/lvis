@@ -25523,7 +25523,7 @@ export namespace Prisma {
     item?: boolean | RRItem$itemArgs<ExtArgs>
     item_brand?: boolean | RRItem$item_brandArgs<ExtArgs>
     unit?: boolean | RRItem$unitArgs<ExtArgs>
-    ItemTransaction?: boolean | RRItem$ItemTransactionArgs<ExtArgs>
+    item_transaction?: boolean | RRItem$item_transactionArgs<ExtArgs>
   }, ExtArgs["result"]["rRItem"]>
 
   export type RRItemSelectScalar = {
@@ -25550,7 +25550,7 @@ export namespace Prisma {
     item?: boolean | RRItem$itemArgs<ExtArgs>
     item_brand?: boolean | RRItem$item_brandArgs<ExtArgs>
     unit?: boolean | RRItem$unitArgs<ExtArgs>
-    ItemTransaction?: boolean | RRItem$ItemTransactionArgs<ExtArgs>
+    item_transaction?: boolean | RRItem$item_transactionArgs<ExtArgs>
   }
 
 
@@ -25561,7 +25561,7 @@ export namespace Prisma {
       item: Prisma.$ItemPayload<ExtArgs> | null
       item_brand: Prisma.$BrandPayload<ExtArgs> | null
       unit: Prisma.$UnitPayload<ExtArgs> | null
-      ItemTransaction: Prisma.$ItemTransactionPayload<ExtArgs> | null
+      item_transaction: Prisma.$ItemTransactionPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -25953,7 +25953,7 @@ export namespace Prisma {
 
     unit<T extends RRItem$unitArgs<ExtArgs> = {}>(args?: Subset<T, RRItem$unitArgs<ExtArgs>>): Prisma__UnitClient<$Result.GetResult<Prisma.$UnitPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
 
-    ItemTransaction<T extends RRItem$ItemTransactionArgs<ExtArgs> = {}>(args?: Subset<T, RRItem$ItemTransactionArgs<ExtArgs>>): Prisma__ItemTransactionClient<$Result.GetResult<Prisma.$ItemTransactionPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+    item_transaction<T extends RRItem$item_transactionArgs<ExtArgs> = {}>(args?: Subset<T, RRItem$item_transactionArgs<ExtArgs>>): Prisma__ItemTransactionClient<$Result.GetResult<Prisma.$ItemTransactionPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -26359,9 +26359,9 @@ export namespace Prisma {
 
 
   /**
-   * RRItem.ItemTransaction
+   * RRItem.item_transaction
    */
-  export type RRItem$ItemTransactionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type RRItem$item_transactionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the ItemTransaction
      */
@@ -31832,7 +31832,7 @@ export namespace Prisma {
     item?: XOR<ItemNullableRelationFilter, ItemWhereInput> | null
     item_brand?: XOR<BrandNullableRelationFilter, BrandWhereInput> | null
     unit?: XOR<UnitNullableRelationFilter, UnitWhereInput> | null
-    ItemTransaction?: XOR<ItemTransactionNullableRelationFilter, ItemTransactionWhereInput> | null
+    item_transaction?: XOR<ItemTransactionNullableRelationFilter, ItemTransactionWhereInput> | null
   }
 
   export type RRItemOrderByWithRelationInput = {
@@ -31856,7 +31856,7 @@ export namespace Prisma {
     item?: ItemOrderByWithRelationInput
     item_brand?: BrandOrderByWithRelationInput
     unit?: UnitOrderByWithRelationInput
-    ItemTransaction?: ItemTransactionOrderByWithRelationInput
+    item_transaction?: ItemTransactionOrderByWithRelationInput
   }
 
   export type RRItemWhereUniqueInput = Prisma.AtLeast<{
@@ -31883,7 +31883,7 @@ export namespace Prisma {
     item?: XOR<ItemNullableRelationFilter, ItemWhereInput> | null
     item_brand?: XOR<BrandNullableRelationFilter, BrandWhereInput> | null
     unit?: XOR<UnitNullableRelationFilter, UnitWhereInput> | null
-    ItemTransaction?: XOR<ItemTransactionNullableRelationFilter, ItemTransactionWhereInput> | null
+    item_transaction?: XOR<ItemTransactionNullableRelationFilter, ItemTransactionWhereInput> | null
   }, "id">
 
   export type RRItemOrderByWithAggregationInput = {
@@ -34244,7 +34244,7 @@ export namespace Prisma {
     item?: ItemCreateNestedOneWithoutRr_itemsInput
     item_brand?: BrandCreateNestedOneWithoutRr_itemsInput
     unit?: UnitCreateNestedOneWithoutRr_itemsInput
-    ItemTransaction?: ItemTransactionCreateNestedOneWithoutRr_itemInput
+    item_transaction?: ItemTransactionCreateNestedOneWithoutRr_itemInput
   }
 
   export type RRItemUncheckedCreateInput = {
@@ -34264,7 +34264,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    ItemTransaction?: ItemTransactionUncheckedCreateNestedOneWithoutRr_itemInput
+    item_transaction?: ItemTransactionUncheckedCreateNestedOneWithoutRr_itemInput
   }
 
   export type RRItemUpdateInput = {
@@ -34284,7 +34284,7 @@ export namespace Prisma {
     item?: ItemUpdateOneWithoutRr_itemsNestedInput
     item_brand?: BrandUpdateOneWithoutRr_itemsNestedInput
     unit?: UnitUpdateOneWithoutRr_itemsNestedInput
-    ItemTransaction?: ItemTransactionUpdateOneWithoutRr_itemNestedInput
+    item_transaction?: ItemTransactionUpdateOneWithoutRr_itemNestedInput
   }
 
   export type RRItemUncheckedUpdateInput = {
@@ -34304,7 +34304,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    ItemTransaction?: ItemTransactionUncheckedUpdateOneWithoutRr_itemNestedInput
+    item_transaction?: ItemTransactionUncheckedUpdateOneWithoutRr_itemNestedInput
   }
 
   export type RRItemCreateManyInput = {
@@ -34528,7 +34528,7 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     item: ItemCreateNestedOneWithoutItem_transactionsInput
-    rr_item?: RRItemCreateNestedOneWithoutItemTransactionInput
+    rr_item?: RRItemCreateNestedOneWithoutItem_transactionInput
   }
 
   export type ItemTransactionUncheckedCreateInput = {
@@ -34556,7 +34556,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     item?: ItemUpdateOneRequiredWithoutItem_transactionsNestedInput
-    rr_item?: RRItemUpdateOneWithoutItemTransactionNestedInput
+    rr_item?: RRItemUpdateOneWithoutItem_transactionNestedInput
   }
 
   export type ItemTransactionUncheckedUpdateInput = {
@@ -37920,9 +37920,9 @@ export namespace Prisma {
     connect?: ItemWhereUniqueInput
   }
 
-  export type RRItemCreateNestedOneWithoutItemTransactionInput = {
-    create?: XOR<RRItemCreateWithoutItemTransactionInput, RRItemUncheckedCreateWithoutItemTransactionInput>
-    connectOrCreate?: RRItemCreateOrConnectWithoutItemTransactionInput
+  export type RRItemCreateNestedOneWithoutItem_transactionInput = {
+    create?: XOR<RRItemCreateWithoutItem_transactionInput, RRItemUncheckedCreateWithoutItem_transactionInput>
+    connectOrCreate?: RRItemCreateOrConnectWithoutItem_transactionInput
     connect?: RRItemWhereUniqueInput
   }
 
@@ -37934,14 +37934,14 @@ export namespace Prisma {
     update?: XOR<XOR<ItemUpdateToOneWithWhereWithoutItem_transactionsInput, ItemUpdateWithoutItem_transactionsInput>, ItemUncheckedUpdateWithoutItem_transactionsInput>
   }
 
-  export type RRItemUpdateOneWithoutItemTransactionNestedInput = {
-    create?: XOR<RRItemCreateWithoutItemTransactionInput, RRItemUncheckedCreateWithoutItemTransactionInput>
-    connectOrCreate?: RRItemCreateOrConnectWithoutItemTransactionInput
-    upsert?: RRItemUpsertWithoutItemTransactionInput
+  export type RRItemUpdateOneWithoutItem_transactionNestedInput = {
+    create?: XOR<RRItemCreateWithoutItem_transactionInput, RRItemUncheckedCreateWithoutItem_transactionInput>
+    connectOrCreate?: RRItemCreateOrConnectWithoutItem_transactionInput
+    upsert?: RRItemUpsertWithoutItem_transactionInput
     disconnect?: RRItemWhereInput | boolean
     delete?: RRItemWhereInput | boolean
     connect?: RRItemWhereUniqueInput
-    update?: XOR<XOR<RRItemUpdateToOneWithWhereWithoutItemTransactionInput, RRItemUpdateWithoutItemTransactionInput>, RRItemUncheckedUpdateWithoutItemTransactionInput>
+    update?: XOR<XOR<RRItemUpdateToOneWithWhereWithoutItem_transactionInput, RRItemUpdateWithoutItem_transactionInput>, RRItemUncheckedUpdateWithoutItem_transactionInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -38250,7 +38250,7 @@ export namespace Prisma {
     rr: RRCreateNestedOneWithoutRr_itemsInput
     item?: ItemCreateNestedOneWithoutRr_itemsInput
     item_brand?: BrandCreateNestedOneWithoutRr_itemsInput
-    ItemTransaction?: ItemTransactionCreateNestedOneWithoutRr_itemInput
+    item_transaction?: ItemTransactionCreateNestedOneWithoutRr_itemInput
   }
 
   export type RRItemUncheckedCreateWithoutUnitInput = {
@@ -38269,7 +38269,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    ItemTransaction?: ItemTransactionUncheckedCreateNestedOneWithoutRr_itemInput
+    item_transaction?: ItemTransactionUncheckedCreateNestedOneWithoutRr_itemInput
   }
 
   export type RRItemCreateOrConnectWithoutUnitInput = {
@@ -38471,7 +38471,7 @@ export namespace Prisma {
     rr: RRCreateNestedOneWithoutRr_itemsInput
     item?: ItemCreateNestedOneWithoutRr_itemsInput
     unit?: UnitCreateNestedOneWithoutRr_itemsInput
-    ItemTransaction?: ItemTransactionCreateNestedOneWithoutRr_itemInput
+    item_transaction?: ItemTransactionCreateNestedOneWithoutRr_itemInput
   }
 
   export type RRItemUncheckedCreateWithoutItem_brandInput = {
@@ -38490,7 +38490,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    ItemTransaction?: ItemTransactionUncheckedCreateNestedOneWithoutRr_itemInput
+    item_transaction?: ItemTransactionUncheckedCreateNestedOneWithoutRr_itemInput
   }
 
   export type RRItemCreateOrConnectWithoutItem_brandInput = {
@@ -41625,7 +41625,7 @@ export namespace Prisma {
     item?: ItemCreateNestedOneWithoutRr_itemsInput
     item_brand?: BrandCreateNestedOneWithoutRr_itemsInput
     unit?: UnitCreateNestedOneWithoutRr_itemsInput
-    ItemTransaction?: ItemTransactionCreateNestedOneWithoutRr_itemInput
+    item_transaction?: ItemTransactionCreateNestedOneWithoutRr_itemInput
   }
 
   export type RRItemUncheckedCreateWithoutRrInput = {
@@ -41644,7 +41644,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    ItemTransaction?: ItemTransactionUncheckedCreateNestedOneWithoutRr_itemInput
+    item_transaction?: ItemTransactionUncheckedCreateNestedOneWithoutRr_itemInput
   }
 
   export type RRItemCreateOrConnectWithoutRrInput = {
@@ -42209,7 +42209,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    rr_item?: RRItemCreateNestedOneWithoutItemTransactionInput
+    rr_item?: RRItemCreateNestedOneWithoutItem_transactionInput
   }
 
   export type ItemTransactionUncheckedCreateWithoutItemInput = {
@@ -42251,7 +42251,7 @@ export namespace Prisma {
     rr: RRCreateNestedOneWithoutRr_itemsInput
     item_brand?: BrandCreateNestedOneWithoutRr_itemsInput
     unit?: UnitCreateNestedOneWithoutRr_itemsInput
-    ItemTransaction?: ItemTransactionCreateNestedOneWithoutRr_itemInput
+    item_transaction?: ItemTransactionCreateNestedOneWithoutRr_itemInput
   }
 
   export type RRItemUncheckedCreateWithoutItemInput = {
@@ -42270,7 +42270,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    ItemTransaction?: ItemTransactionUncheckedCreateNestedOneWithoutRr_itemInput
+    item_transaction?: ItemTransactionUncheckedCreateNestedOneWithoutRr_itemInput
   }
 
   export type RRItemCreateOrConnectWithoutItemInput = {
@@ -42502,7 +42502,7 @@ export namespace Prisma {
     create: XOR<ItemCreateWithoutItem_transactionsInput, ItemUncheckedCreateWithoutItem_transactionsInput>
   }
 
-  export type RRItemCreateWithoutItemTransactionInput = {
+  export type RRItemCreateWithoutItem_transactionInput = {
     id?: string
     item_class: number
     quantity_delivered: number
@@ -42521,7 +42521,7 @@ export namespace Prisma {
     unit?: UnitCreateNestedOneWithoutRr_itemsInput
   }
 
-  export type RRItemUncheckedCreateWithoutItemTransactionInput = {
+  export type RRItemUncheckedCreateWithoutItem_transactionInput = {
     id?: string
     rr_id: string
     item_id?: string | null
@@ -42540,9 +42540,9 @@ export namespace Prisma {
     is_deleted?: boolean
   }
 
-  export type RRItemCreateOrConnectWithoutItemTransactionInput = {
+  export type RRItemCreateOrConnectWithoutItem_transactionInput = {
     where: RRItemWhereUniqueInput
-    create: XOR<RRItemCreateWithoutItemTransactionInput, RRItemUncheckedCreateWithoutItemTransactionInput>
+    create: XOR<RRItemCreateWithoutItem_transactionInput, RRItemUncheckedCreateWithoutItem_transactionInput>
   }
 
   export type ItemUpsertWithoutItem_transactionsInput = {
@@ -42584,18 +42584,18 @@ export namespace Prisma {
     rr_items?: RRItemUncheckedUpdateManyWithoutItemNestedInput
   }
 
-  export type RRItemUpsertWithoutItemTransactionInput = {
-    update: XOR<RRItemUpdateWithoutItemTransactionInput, RRItemUncheckedUpdateWithoutItemTransactionInput>
-    create: XOR<RRItemCreateWithoutItemTransactionInput, RRItemUncheckedCreateWithoutItemTransactionInput>
+  export type RRItemUpsertWithoutItem_transactionInput = {
+    update: XOR<RRItemUpdateWithoutItem_transactionInput, RRItemUncheckedUpdateWithoutItem_transactionInput>
+    create: XOR<RRItemCreateWithoutItem_transactionInput, RRItemUncheckedCreateWithoutItem_transactionInput>
     where?: RRItemWhereInput
   }
 
-  export type RRItemUpdateToOneWithWhereWithoutItemTransactionInput = {
+  export type RRItemUpdateToOneWithWhereWithoutItem_transactionInput = {
     where?: RRItemWhereInput
-    data: XOR<RRItemUpdateWithoutItemTransactionInput, RRItemUncheckedUpdateWithoutItemTransactionInput>
+    data: XOR<RRItemUpdateWithoutItem_transactionInput, RRItemUncheckedUpdateWithoutItem_transactionInput>
   }
 
-  export type RRItemUpdateWithoutItemTransactionInput = {
+  export type RRItemUpdateWithoutItem_transactionInput = {
     id?: StringFieldUpdateOperationsInput | string
     item_class?: IntFieldUpdateOperationsInput | number
     quantity_delivered?: IntFieldUpdateOperationsInput | number
@@ -42614,7 +42614,7 @@ export namespace Prisma {
     unit?: UnitUpdateOneWithoutRr_itemsNestedInput
   }
 
-  export type RRItemUncheckedUpdateWithoutItemTransactionInput = {
+  export type RRItemUncheckedUpdateWithoutItem_transactionInput = {
     id?: StringFieldUpdateOperationsInput | string
     rr_id?: StringFieldUpdateOperationsInput | string
     item_id?: NullableStringFieldUpdateOperationsInput | string | null
@@ -42771,7 +42771,7 @@ export namespace Prisma {
     rr?: RRUpdateOneRequiredWithoutRr_itemsNestedInput
     item?: ItemUpdateOneWithoutRr_itemsNestedInput
     item_brand?: BrandUpdateOneWithoutRr_itemsNestedInput
-    ItemTransaction?: ItemTransactionUpdateOneWithoutRr_itemNestedInput
+    item_transaction?: ItemTransactionUpdateOneWithoutRr_itemNestedInput
   }
 
   export type RRItemUncheckedUpdateWithoutUnitInput = {
@@ -42790,7 +42790,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    ItemTransaction?: ItemTransactionUncheckedUpdateOneWithoutRr_itemNestedInput
+    item_transaction?: ItemTransactionUncheckedUpdateOneWithoutRr_itemNestedInput
   }
 
   export type RRItemUncheckedUpdateManyWithoutUnitInput = {
@@ -42931,7 +42931,7 @@ export namespace Prisma {
     rr?: RRUpdateOneRequiredWithoutRr_itemsNestedInput
     item?: ItemUpdateOneWithoutRr_itemsNestedInput
     unit?: UnitUpdateOneWithoutRr_itemsNestedInput
-    ItemTransaction?: ItemTransactionUpdateOneWithoutRr_itemNestedInput
+    item_transaction?: ItemTransactionUpdateOneWithoutRr_itemNestedInput
   }
 
   export type RRItemUncheckedUpdateWithoutItem_brandInput = {
@@ -42950,7 +42950,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    ItemTransaction?: ItemTransactionUncheckedUpdateOneWithoutRr_itemNestedInput
+    item_transaction?: ItemTransactionUncheckedUpdateOneWithoutRr_itemNestedInput
   }
 
   export type RRItemUncheckedUpdateManyWithoutItem_brandInput = {
@@ -43625,7 +43625,7 @@ export namespace Prisma {
     item?: ItemUpdateOneWithoutRr_itemsNestedInput
     item_brand?: BrandUpdateOneWithoutRr_itemsNestedInput
     unit?: UnitUpdateOneWithoutRr_itemsNestedInput
-    ItemTransaction?: ItemTransactionUpdateOneWithoutRr_itemNestedInput
+    item_transaction?: ItemTransactionUpdateOneWithoutRr_itemNestedInput
   }
 
   export type RRItemUncheckedUpdateWithoutRrInput = {
@@ -43644,7 +43644,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    ItemTransaction?: ItemTransactionUncheckedUpdateOneWithoutRr_itemNestedInput
+    item_transaction?: ItemTransactionUncheckedUpdateOneWithoutRr_itemNestedInput
   }
 
   export type RRItemUncheckedUpdateManyWithoutRrInput = {
@@ -43706,7 +43706,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    rr_item?: RRItemUpdateOneWithoutItemTransactionNestedInput
+    rr_item?: RRItemUpdateOneWithoutItem_transactionNestedInput
   }
 
   export type ItemTransactionUncheckedUpdateWithoutItemInput = {
@@ -43751,7 +43751,7 @@ export namespace Prisma {
     rr?: RRUpdateOneRequiredWithoutRr_itemsNestedInput
     item_brand?: BrandUpdateOneWithoutRr_itemsNestedInput
     unit?: UnitUpdateOneWithoutRr_itemsNestedInput
-    ItemTransaction?: ItemTransactionUpdateOneWithoutRr_itemNestedInput
+    item_transaction?: ItemTransactionUpdateOneWithoutRr_itemNestedInput
   }
 
   export type RRItemUncheckedUpdateWithoutItemInput = {
@@ -43770,7 +43770,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    ItemTransaction?: ItemTransactionUncheckedUpdateOneWithoutRr_itemNestedInput
+    item_transaction?: ItemTransactionUncheckedUpdateOneWithoutRr_itemNestedInput
   }
 
   export type RRItemUncheckedUpdateManyWithoutItemInput = {
