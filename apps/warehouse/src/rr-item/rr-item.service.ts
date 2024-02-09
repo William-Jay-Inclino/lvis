@@ -141,6 +141,8 @@ export class RrItemService {
 
         const existingItem = await this.findOne(id)
 
+
+		// prepare rr item data to be updated
 		const data: Prisma.RRItemUpdateInput = {
 			item: input.item_id ? 
 				{
@@ -177,7 +179,7 @@ export class RrItemService {
 		}
 
 
-		// if no quantity_accepted or net price to update
+		// if no quantity_accepted or net price to update then only update rr item 
 		if(!input.quantity_accepted || !input.net_price) {
 			const updated = await this.prisma.rRItem.update({
 				data,
@@ -191,15 +193,14 @@ export class RrItemService {
 		}
 
 
-		// initialize update rr item query
+		// set update rr item query
 		const updateRRItemQuery = this.prisma.rRItem.update({
 			data,
 			where: { id },
 			include: this.includedFields
 		})
-
-
-		// initialize update item transaction query to update it's new quantity and price base on rr item
+		
+		// get item transaction
         const itemTransaction = await this.prisma.itemTransaction.findUnique({
             where: { rr_item_id: id }
         })
@@ -208,13 +209,12 @@ export class RrItemService {
             throw new NotFoundException('Item transaction not found')
         }
 
-		const dataItemTransaction: Prisma.ItemTransactionUpdateInput = {
-			quantity: input.quantity_accepted ?? itemTransaction.quantity,
-			price: input.net_price ?? itemTransaction.price
-		}
-
+		// set update item transaction query
 		const updateItemTransactionQuery = this.prisma.itemTransaction.update({
-			data: dataItemTransaction,
+			data: {
+				quantity: input.quantity_accepted ?? itemTransaction.quantity,
+				price: input.net_price ?? itemTransaction.price
+			},
 			where: {
 				id: itemTransaction.id
 			}
@@ -234,7 +234,7 @@ export class RrItemService {
 
 		}
 
-		// initialize update item query to update it's new quantity
+		// set update item query to update it's new quantity
         const item = await this.prisma.item.findUnique({
             where: { id: itemTransaction.item_id }
         })
@@ -245,15 +245,13 @@ export class RrItemService {
 
 		const newQuantity = (item.quantity - itemTransaction.quantity) + input.quantity_accepted
 
-		const dataItem: Prisma.ItemUpdateInput = {
-			quantity: newQuantity
-		}
-
 		const updateItemQuery = this.prisma.item.update({
 			where: {
 				id: item.id
 			},
-			data: dataItem
+			data: {
+				quantity: newQuantity
+			}
 		})
 
 		// update rr item, item transaction's quantity and price, item's quantity using database transaction
