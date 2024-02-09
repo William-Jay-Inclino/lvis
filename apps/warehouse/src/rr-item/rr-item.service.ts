@@ -144,30 +144,9 @@ export class RrItemService {
 
 		// prepare rr item data to be updated
 		const data: Prisma.RRItemUpdateInput = {
-			item: input.item_id ? 
-				{
-					connect: { id: input.item_id }
-				}
-				:
-				{
-					connect: { id: existingItem.item_id }
-				},
-			item_brand: input.item_brand_id ? 
-				{
-					connect: { id: input.item_brand_id }
-				}
-				:
-				{
-					connect: { id: existingItem.item_brand_id }
-				},
-			unit: input.unit_id ? 
-				{
-					connect: { id: input.unit_id }
-				}
-				:
-				{
-					connect: { id: existingItem.unit_id }
-				},
+			item: { connect: { id: input.item_id || existingItem.item_id } },
+			item_brand: { connect: { id: input.item_brand_id || existingItem.item_brand_id } },
+			unit: { connect: { id: input.unit_id || existingItem.unit_id } },
 			item_class: input.item_class ?? existingItem.item_class,
 			quantity_delivered: input.quantity_delivered ?? existingItem.quantity_delivered,
 			quantity_accepted: input.quantity_accepted ?? existingItem.quantity_accepted,
@@ -176,7 +155,7 @@ export class RrItemService {
 			gross_price: input.gross_price ?? existingItem.gross_price,
 			net_price: input.net_price ?? existingItem.net_price,
 			freight_cost: input.freight_cost ?? existingItem.freight_cost,
-		}
+		};
 
 
 		// if no quantity_accepted or net price to update then only update rr item 
