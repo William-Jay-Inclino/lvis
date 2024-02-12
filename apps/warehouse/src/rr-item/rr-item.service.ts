@@ -130,8 +130,6 @@ export class RrItemService {
 
         const existingItem = await this.findOne(id)
 
-
-		// prepare rr item data to be updated
 		const data: Prisma.RRItemUpdateInput = {
 			item: { connect: { id: input.item_id || existingItem.item_id } },
 			item_brand: { connect: { id: input.item_brand_id || existingItem.item_brand_id } },
@@ -147,140 +145,15 @@ export class RrItemService {
 		};
 
 
-		// if no quantity_accepted or net price to update then only update rr item 
-		if(!input.quantity_accepted || !input.net_price) {
-			const updated = await this.prisma.rRItem.update({
-				data,
-				where: { id },
-				include: this.includedFields
-			})
-
-			this.logger.log('Successfully updated RR Item')
-
-			return updated
-		}
-
-
-		// set update rr item query
-		const updateRRItemQuery = this.prisma.rRItem.update({
+		const updated = await this.prisma.rRItem.update({
 			data,
 			where: { id },
 			include: this.includedFields
 		})
-		
-		// get item transaction
-        const itemTransaction = await this.prisma.itemTransaction.findUnique({
-            where: { rr_item_id: id }
-        })
 
-		if(!itemTransaction) {
-            throw new NotFoundException('Item transaction not found')
-        }
+		this.logger.log('Successfully updated RR Item')
 
-		// set update item transaction query
-		const updateItemTransactionQuery = this.prisma.itemTransaction.update({
-			data: {
-				item: { connect: { id: input.item_id || itemTransaction.item_id } },
-				quantity: input.quantity_accepted ?? itemTransaction.quantity,
-				price: input.net_price ?? itemTransaction.price
-			},
-			where: {
-				id: itemTransaction.id
-			}
-		})
-
-		// if no quantity_accepted and not new item then update only rr item and item transaction. No need to update quantity in item table
-		if(!input.quantity_accepted && !input.item_id){
-
-			const [updatedRRItem, updatedItemTransaction] = await this.prisma.$transaction([
-				updateRRItemQuery,
-				updateItemTransactionQuery
-			])
-
-			this.logger.log('Successfully updated RR Item and Item transaction price')
-
-			return updatedRRItem
-
-		}
-
-		// get item
-        const item = await this.prisma.item.findUnique({
-            where: { id: itemTransaction.item_id }
-        })
-
-        if(!item) {
-            throw new NotFoundException('Item not found')
-        }
-
-
-		// if same item (previous item equal to new input item)
-		if(itemTransaction.item_id === input.item_id) {
-
-			const newQuantity = (item.quantity - itemTransaction.quantity) + input.quantity_accepted
-			const updateItemQuery = this.prisma.item.update({
-				where: {
-					id: item.id
-				},
-				data: {
-					quantity: newQuantity
-				}
-			})
-
-			// update rr item, item transaction's quantity and price, item's quantity using database transaction
-	
-			const [updatedRRItem, updatedItemTransaction, updatedItem] = await this.prisma.$transaction([
-				updateRRItemQuery,
-				updateItemTransactionQuery,
-				updateItemQuery
-			])
-
-			this.logger.log('Successfully updated RR Item, Item transaction (quantity and/or price), and Item (quantity)')
-	
-			return updatedRRItem
-
-		}
-
-		// if different item then subtract the qty from the prev item and add qty in the new item
-		const deductedQuantity = item.quantity - itemTransaction.quantity
-
-		const prevItemQtyDiffQuery = this.prisma.item.update({
-			where: {
-				id: item.id
-			},
-			data: {
-				quantity: deductedQuantity
-			}
-		})
-
-		const newItem = await this.prisma.item.findUnique({
-			where: { id: input.item_id }
-		})
-
-		if(!newItem) {
-			throw new NotFoundException('Item not found')
-		}
-
-		const newTotalQuantity = newItem.quantity + input.quantity_accepted
-
-		const newItemQtyTotalQuery = this.prisma.item.update({
-			where: {
-				id: item.id
-			},
-			data: {
-				quantity: newTotalQuantity
-			}
-		})
-
-		const [updatedRRItem, updatedItemTransaction, updatedPrevItem, updatedNewItem] = await this.prisma.$transaction([
-			updateRRItemQuery,
-			updateItemTransactionQuery,
-			prevItemQtyDiffQuery,
-			newItemQtyTotalQuery
-		])
-
-		this.logger.log('Successfully updated RR Item, Item transaction (quantity and/or price), Previous Item Qty, and New Item Qty')
-
-		return updatedRRItem
+		return updated
 
 	}
 

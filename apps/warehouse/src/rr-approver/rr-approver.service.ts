@@ -319,10 +319,6 @@ export class RrApproverService {
         return updated;
     }
 
-    // update rr_approver (rr_approver table)
-    // if last approver approves then update rr status to approve (rr_table)
-    // also create item transaction per item (item_transaction table)
-    // update item quantity per item transaction (item table)
     private async handleApprovedStatus(id: string, data: Prisma.RRApproverUpdateInput, rrId: string): Promise<RRApprover> {
         const approvers = await this.findByRrId(rrId);
         const lastApprover = getLastApprover(approvers);

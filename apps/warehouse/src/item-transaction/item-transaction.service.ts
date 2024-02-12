@@ -117,7 +117,9 @@ export class ItemTransactionService {
             quantity: input.price ?? existingItem.quantity,
         }
 
-        if(!input.quantity){
+        const sameQtyValue = input.quantity && (input.quantity === existingItem.quantity)
+
+        if(!input.quantity || sameQtyValue){
             const updated = await this.prisma.itemTransaction.update({
                 data,
                 include: this.includedFields,
