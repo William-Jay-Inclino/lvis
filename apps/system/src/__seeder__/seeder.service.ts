@@ -11,22 +11,24 @@ export class SeederService {
         console.log('Seeding data...');
     
         try {
-            await this.prisma.$transaction(async () => {
-              await this.seedService();
-              await this.seedFeature();
-              await this.seedModule();
-              await this.seedSubModule();
-              await this.seedDepartment();
-              await this.seedClassification();
-              await this.seedEmployee();
-              await this.seedJOApproverSetting();
-              await this.seedRVApproverSetting();
-              await this.seedSPRApproverSetting();
-              await this.seedMEQSApproverSetting();
-              await this.seedPOApproverSetting();
-              await this.seedUserTable();
-              await this.seedUserEmployeeTable();
-            });
+            await this.prisma.$transaction([
+                this.seedService(),
+                this.seedFeature(),
+                this.seedModule(),
+                this.seedSubModule(),
+                this.seedDepartment(),
+                this.seedClassification(),
+                this.seedEmployee(),
+                this.seedJOApproverSetting(),
+                this.seedRVApproverSetting(),
+                this.seedSPRApproverSetting(),
+                this.seedMEQSApproverSetting(),
+                this.seedPOApproverSetting(),
+                this.seedRRApproverSetting(),
+                this.seedUserTable(),
+                this.seedUserEmployeeTable(),
+            ]
+            );
             
             console.log('Seeding done')
           } catch (error) {
@@ -34,47 +36,47 @@ export class SeederService {
           }
     }
 
-    async seedService() {
+    seedService(): any {
         console.log('seeding service table...')
         try {
-            await this.prisma.service.createMany({ data: data.services })
+            return this.prisma.service.createMany({ data: data.services })
         } catch (error) {
             console.error(error)            
         }
     }
     
-    async seedFeature() {
+    seedFeature() {
         console.log('seeding feature table...')
         try {
-            await this.prisma.feature.createMany({ data: data.features })
+            return this.prisma.feature.createMany({ data: data.features })
         } catch (error) {
             console.error(error)            
         }
     }
 
-    async seedModule() {
+    seedModule() {
         console.log('seeding module table...')
         try {
-            await this.prisma.module.createMany({ data: data.modules })
+            return this.prisma.module.createMany({ data: data.modules })
         } catch (error) {
             console.error(error)           
         }
     }
 
-    async seedSubModule() {
+    seedSubModule() {
         console.log('seeding submodule table...')
         try {
-            await this.prisma.subModule.createMany({ data: data.subModules })
+            return this.prisma.subModule.createMany({ data: data.subModules })
         } catch (error) {
             console.error(error)           
         }
     }
 
-    async seedDepartment() {
+    seedDepartment() {
         console.log('seeding department table...')
 
         try {
-            await this.prisma.department.createMany({
+            return this.prisma.department.createMany({
                 data: data.departments
             })
         } catch (error) {
@@ -83,11 +85,11 @@ export class SeederService {
 
     }
 
-    async seedClassification() {
+    seedClassification() {
         console.log('seeding classification table...')
 
         try {
-            await this.prisma.classification.createMany({
+            return this.prisma.classification.createMany({
                 data: data.classifications
             })
         } catch (error) {
@@ -97,11 +99,11 @@ export class SeederService {
 
     }
 
-    async seedEmployee() {
+    seedEmployee() {
         console.log('seeding employee table...')
 
         try {
-            await this.prisma.employee.createMany({
+            return this.prisma.employee.createMany({
                 data: data.employees
             })
         } catch (error) {
@@ -111,11 +113,11 @@ export class SeederService {
 
     }
 
-    async seedJOApproverSetting() {
+    seedJOApproverSetting() {
         console.log('seeding jo_approver_setting table...')
 
         try {
-            await this.prisma.jOApproverSetting.createMany({
+            return this.prisma.jOApproverSetting.createMany({
                 data: data.jo_default_approvers,
             })
         } catch (error) {
@@ -125,11 +127,11 @@ export class SeederService {
 
     }
 
-    async seedRVApproverSetting() {
+    seedRVApproverSetting() {
         console.log('seeding rv_approver_setting table...')
 
         try {
-            await this.prisma.rVApproverSetting.createMany({
+            return this.prisma.rVApproverSetting.createMany({
                 data: data.rv_default_approvers,
             })
         } catch (error) {
@@ -139,11 +141,11 @@ export class SeederService {
 
     }
 
-    async seedSPRApproverSetting() {
+    seedSPRApproverSetting() {
         console.log('seeding spr_approver_setting table...')
 
         try {
-            await this.prisma.sPRApproverSetting.createMany({
+            return this.prisma.sPRApproverSetting.createMany({
                 data: data.spr_default_approvers,
             })
         } catch (error) {
@@ -153,11 +155,11 @@ export class SeederService {
 
     }
 
-    async seedMEQSApproverSetting() {
+    seedMEQSApproverSetting() {
         console.log('seeding meqs_approver_setting table...')
 
         try {
-            await this.prisma.mEQSApproverSetting.createMany({
+            return this.prisma.mEQSApproverSetting.createMany({
                 data: data.meqs_default_approvers,
             })
         } catch (error) {
@@ -167,25 +169,37 @@ export class SeederService {
 
     }
 
-    async seedPOApproverSetting() {
+    seedPOApproverSetting() {
         console.log('seeding po_approver_setting table...')
 
         try {
-            await this.prisma.pOApproverSetting.createMany({
+            return this.prisma.pOApproverSetting.createMany({
                 data: data.po_default_approvers,
             })
         } catch (error) {
             console.error(error)  
         }
 
+    }
+
+    seedRRApproverSetting() {
+        console.log('seeding rr_approver_setting table...')
+
+        try {
+            return this.prisma.rRApproverSetting.createMany({
+                data: data.rr_default_approvers,
+            })
+        } catch (error) {
+            console.error(error)  
+        }
 
     }
 
-    async seedUserTable() {
+    seedUserTable() {
         console.log('seeding user table...')
 
         try {
-            await this.prisma.user.createMany({
+            return this.prisma.user.createMany({
                 data: data.users,
             })
         } catch (error) {
@@ -194,11 +208,11 @@ export class SeederService {
 
     }
 
-    async seedUserEmployeeTable() {
-        console.log('seeding user_employee table...')
+    seedUserEmployeeTable() {
+        console.log('seeding user_employee table....')
 
         try {
-            await this.prisma.userEmployee.createMany({
+            return this.prisma.userEmployee.createMany({
                 data: data.userEmployees,
             })
         } catch (error) {

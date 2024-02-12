@@ -12,7 +12,7 @@ export class SeederController {
     @HttpCode(HttpStatus.OK)
     async seedData() {
       try {
-        await this.seederService.seedData();
+        return await this.seederService.seedData();
       } catch (error) {
         return 'Data seeding failed.';
       }

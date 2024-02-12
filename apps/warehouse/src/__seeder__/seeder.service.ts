@@ -11,49 +11,51 @@ export class SeederService {
         console.log('Seeding data...');
     
         try {
-            await this.prisma.$transaction(async () => {
-              await this.seedSupplier();
-              await this.seedUnit();
-              await this.seedBrand();
-              await this.seedVehicle();
-            });
+            await this.prisma.$transaction([
+                this.seedSupplier(),
+                this.seedUnit(),
+                this.seedBrand(),
+                this.seedVehicle()
+            ]
+                
+            );
             console.log('Seeding done')
           } catch (error) {
             console.error('Transaction failed. Rolling back...', error);
           }
     }
 
-    async seedSupplier() {
+    seedSupplier() {
         console.log('seeding supplier table...')
         try {
-            await this.prisma.supplier.createMany({ data: data.suppliers })
+            return this.prisma.supplier.createMany({ data: data.suppliers })
         } catch (error) {
             console.error(error)            
         }
     }
 
-    async seedUnit() {
+    seedUnit() {
         console.log('seeding unit table...')
         try {
-            await this.prisma.unit.createMany({ data: data.units })
+            return this.prisma.unit.createMany({ data: data.units })
         } catch (error) {
             console.error(error)            
         }
     }
 
-    async seedBrand() {
+    seedBrand() {
         console.log('seeding brand table...')
         try {
-            await this.prisma.brand.createMany({ data: data.brands })
+            return this.prisma.brand.createMany({ data: data.brands })
         } catch (error) {
             console.error(error)            
         }
     }
 
-    async seedVehicle() {
+    seedVehicle() {
         console.log('seeding vehicle table...')
         try {
-            await this.prisma.vehicle.createMany({ data: data.vehicles })
+            return this.prisma.vehicle.createMany({ data: data.vehicles })
         } catch (error) {
             console.error(error)            
         }
