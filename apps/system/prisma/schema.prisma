@@ -11,6 +11,7 @@ datasource db {
 enum Role {
   USER
   ADMIN
+  IT
 }
 
 model Division {
@@ -121,8 +122,8 @@ model UserPermission {
   user    User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
   user_id String
 
-  module    Module @relation(fields: [module_id], references: [id], onDelete: Restrict)
-  module_id String
+  submodule    SubModule @relation(fields: [submodule_id], references: [id], onDelete: Restrict)
+  submodule_id String
 
   @@map("user_permission")
 }
@@ -149,8 +150,8 @@ model Feature {
   is_deleted Boolean  @default(false)
 
   service    Service  @relation("ServiceToFeature", fields: [service_id], references: [id], onDelete: Cascade)
-  modules    Module[] @relation("FeatureToModule")
   service_id String
+  modules    Module[] @relation("FeatureToModule")
 
   @@map("feature")
 }
@@ -166,9 +167,25 @@ model Module {
   feature    Feature @relation("FeatureToModule", fields: [feature_id], references: [id], onDelete: Cascade)
   feature_id String
 
-  user_permissions UserPermission[]
+  submodules SubModule[] @relation("ModuleToSubmodule")
 
   @@map("module")
+}
+
+model SubModule {
+  id   String @id @default(uuid())
+  name String
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  is_deleted Boolean  @default(false)
+
+  module    Module @relation("ModuleToSubmodule", fields: [module_id], references: [id], onDelete: Cascade)
+  module_id String
+
+  user_permissions UserPermission[]
+
+  @@map("submodule")
 }
 
 model JOApproverSetting {

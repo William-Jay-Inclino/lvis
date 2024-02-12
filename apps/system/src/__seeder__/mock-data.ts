@@ -1,6 +1,6 @@
 import { faker } from "@faker-js/faker";
 import { Department } from "../department/entities/department.entity";
-import { Classification, DepartmentStatus, Feature, JOApproverSetting, MEQSApproverSetting, Module, POApproverSetting, RRApproverSetting, RVApproverSetting, SPRApproverSetting, Service, UserEmployee, UserStatus } from "../__common__/types";
+import { Classification, DepartmentStatus, Feature, JOApproverSetting, MEQSApproverSetting, Module, POApproverSetting, RRApproverSetting, RVApproverSetting, SPRApproverSetting, Service, SubModule, UserEmployee, UserStatus } from "../__common__/types";
 import { Employee } from "../employee/entities/employee.entity";
 import { User } from "../user/entities/user.entity";
 
@@ -214,6 +214,31 @@ export const modules: Module[] = [
         feature_id: features[8].id
     }
 ]
+
+const subModules: SubModule[] = []
+
+const crud = ['create', 'read', 'update', 'delete']
+
+for(let module of modules) {
+
+    for(let i of crud) {
+
+        const x: SubModule = {
+            id: faker.string.uuid(),
+            name: i,
+            module_id: module.id
+        }
+
+        subModules.push(x)
+
+    }
+
+}
+
+export {
+    subModules
+}
+
 
 export const employees: Employee[] = [
     // Imd. Sup. = 0

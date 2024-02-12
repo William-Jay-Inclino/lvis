@@ -64,6 +64,11 @@ export type Feature = $Result.DefaultSelection<Prisma.$FeaturePayload>
  */
 export type Module = $Result.DefaultSelection<Prisma.$ModulePayload>
 /**
+ * Model SubModule
+ * 
+ */
+export type SubModule = $Result.DefaultSelection<Prisma.$SubModulePayload>
+/**
  * Model JOApproverSetting
  * 
  */
@@ -100,7 +105,8 @@ export type RRApproverSetting = $Result.DefaultSelection<Prisma.$RRApproverSetti
 export namespace $Enums {
   export const Role: {
   USER: 'USER',
-  ADMIN: 'ADMIN'
+  ADMIN: 'ADMIN',
+  IT: 'IT'
 };
 
 export type Role = (typeof Role)[keyof typeof Role]
@@ -332,6 +338,16 @@ export class PrismaClient<
     * ```
     */
   get module(): Prisma.ModuleDelegate<ExtArgs>;
+
+  /**
+   * `prisma.subModule`: Exposes CRUD operations for the **SubModule** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SubModules
+    * const subModules = await prisma.subModule.findMany()
+    * ```
+    */
+  get subModule(): Prisma.SubModuleDelegate<ExtArgs>;
 
   /**
    * `prisma.jOApproverSetting`: Exposes CRUD operations for the **JOApproverSetting** model.
@@ -872,6 +888,7 @@ export namespace Prisma {
     Service: 'Service',
     Feature: 'Feature',
     Module: 'Module',
+    SubModule: 'SubModule',
     JOApproverSetting: 'JOApproverSetting',
     RVApproverSetting: 'RVApproverSetting',
     SPRApproverSetting: 'SPRApproverSetting',
@@ -894,7 +911,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'division' | 'department' | 'employee' | 'classification' | 'user' | 'userEmployee' | 'userPermission' | 'service' | 'feature' | 'module' | 'jOApproverSetting' | 'rVApproverSetting' | 'sPRApproverSetting' | 'mEQSApproverSetting' | 'pOApproverSetting' | 'rRApproverSetting'
+      modelProps: 'division' | 'department' | 'employee' | 'classification' | 'user' | 'userEmployee' | 'userPermission' | 'service' | 'feature' | 'module' | 'subModule' | 'jOApproverSetting' | 'rVApproverSetting' | 'sPRApproverSetting' | 'mEQSApproverSetting' | 'pOApproverSetting' | 'rRApproverSetting'
       txIsolationLevel: Prisma.TransactionIsolationLevel
     },
     model: {
@@ -1555,6 +1572,72 @@ export namespace Prisma {
           count: {
             args: Prisma.ModuleCountArgs<ExtArgs>,
             result: $Utils.Optional<ModuleCountAggregateOutputType> | number
+          }
+        }
+      }
+      SubModule: {
+        payload: Prisma.$SubModulePayload<ExtArgs>
+        fields: Prisma.SubModuleFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SubModuleFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$SubModulePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SubModuleFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$SubModulePayload>
+          }
+          findFirst: {
+            args: Prisma.SubModuleFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$SubModulePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SubModuleFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$SubModulePayload>
+          }
+          findMany: {
+            args: Prisma.SubModuleFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$SubModulePayload>[]
+          }
+          create: {
+            args: Prisma.SubModuleCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$SubModulePayload>
+          }
+          createMany: {
+            args: Prisma.SubModuleCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.SubModuleDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$SubModulePayload>
+          }
+          update: {
+            args: Prisma.SubModuleUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$SubModulePayload>
+          }
+          deleteMany: {
+            args: Prisma.SubModuleDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SubModuleUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.SubModuleUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$SubModulePayload>
+          }
+          aggregate: {
+            args: Prisma.SubModuleAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateSubModule>
+          }
+          groupBy: {
+            args: Prisma.SubModuleGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<SubModuleGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SubModuleCountArgs<ExtArgs>,
+            result: $Utils.Optional<SubModuleCountAggregateOutputType> | number
           }
         }
       }
@@ -2239,11 +2322,11 @@ export namespace Prisma {
    */
 
   export type ModuleCountOutputType = {
-    user_permissions: number
+    submodules: number
   }
 
   export type ModuleCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user_permissions?: boolean | ModuleCountOutputTypeCountUser_permissionsArgs
+    submodules?: boolean | ModuleCountOutputTypeCountSubmodulesArgs
   }
 
   // Custom InputTypes
@@ -2262,7 +2345,41 @@ export namespace Prisma {
   /**
    * ModuleCountOutputType without action
    */
-  export type ModuleCountOutputTypeCountUser_permissionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ModuleCountOutputTypeCountSubmodulesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SubModuleWhereInput
+  }
+
+
+
+  /**
+   * Count Type SubModuleCountOutputType
+   */
+
+  export type SubModuleCountOutputType = {
+    user_permissions: number
+  }
+
+  export type SubModuleCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user_permissions?: boolean | SubModuleCountOutputTypeCountUser_permissionsArgs
+  }
+
+  // Custom InputTypes
+
+  /**
+   * SubModuleCountOutputType without action
+   */
+  export type SubModuleCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SubModuleCountOutputType
+     */
+    select?: SubModuleCountOutputTypeSelect<ExtArgs> | null
+  }
+
+
+  /**
+   * SubModuleCountOutputType without action
+   */
+  export type SubModuleCountOutputTypeCountUser_permissionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: UserPermissionWhereInput
   }
 
@@ -8311,7 +8428,7 @@ export namespace Prisma {
     updated_at: Date | null
     is_deleted: boolean | null
     user_id: string | null
-    module_id: string | null
+    submodule_id: string | null
   }
 
   export type UserPermissionMaxAggregateOutputType = {
@@ -8320,7 +8437,7 @@ export namespace Prisma {
     updated_at: Date | null
     is_deleted: boolean | null
     user_id: string | null
-    module_id: string | null
+    submodule_id: string | null
   }
 
   export type UserPermissionCountAggregateOutputType = {
@@ -8329,7 +8446,7 @@ export namespace Prisma {
     updated_at: number
     is_deleted: number
     user_id: number
-    module_id: number
+    submodule_id: number
     _all: number
   }
 
@@ -8340,7 +8457,7 @@ export namespace Prisma {
     updated_at?: true
     is_deleted?: true
     user_id?: true
-    module_id?: true
+    submodule_id?: true
   }
 
   export type UserPermissionMaxAggregateInputType = {
@@ -8349,7 +8466,7 @@ export namespace Prisma {
     updated_at?: true
     is_deleted?: true
     user_id?: true
-    module_id?: true
+    submodule_id?: true
   }
 
   export type UserPermissionCountAggregateInputType = {
@@ -8358,7 +8475,7 @@ export namespace Prisma {
     updated_at?: true
     is_deleted?: true
     user_id?: true
-    module_id?: true
+    submodule_id?: true
     _all?: true
   }
 
@@ -8440,7 +8557,7 @@ export namespace Prisma {
     updated_at: Date
     is_deleted: boolean
     user_id: string
-    module_id: string
+    submodule_id: string
     _count: UserPermissionCountAggregateOutputType | null
     _min: UserPermissionMinAggregateOutputType | null
     _max: UserPermissionMaxAggregateOutputType | null
@@ -8466,9 +8583,9 @@ export namespace Prisma {
     updated_at?: boolean
     is_deleted?: boolean
     user_id?: boolean
-    module_id?: boolean
+    submodule_id?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
-    module?: boolean | ModuleDefaultArgs<ExtArgs>
+    submodule?: boolean | SubModuleDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["userPermission"]>
 
   export type UserPermissionSelectScalar = {
@@ -8477,12 +8594,12 @@ export namespace Prisma {
     updated_at?: boolean
     is_deleted?: boolean
     user_id?: boolean
-    module_id?: boolean
+    submodule_id?: boolean
   }
 
   export type UserPermissionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
-    module?: boolean | ModuleDefaultArgs<ExtArgs>
+    submodule?: boolean | SubModuleDefaultArgs<ExtArgs>
   }
 
 
@@ -8490,7 +8607,7 @@ export namespace Prisma {
     name: "UserPermission"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
-      module: Prisma.$ModulePayload<ExtArgs>
+      submodule: Prisma.$SubModulePayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -8498,7 +8615,7 @@ export namespace Prisma {
       updated_at: Date
       is_deleted: boolean
       user_id: string
-      module_id: string
+      submodule_id: string
     }, ExtArgs["result"]["userPermission"]>
     composites: {}
   }
@@ -8866,7 +8983,7 @@ export namespace Prisma {
 
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
-    module<T extends ModuleDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ModuleDefaultArgs<ExtArgs>>): Prisma__ModuleClient<$Result.GetResult<Prisma.$ModulePayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+    submodule<T extends SubModuleDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SubModuleDefaultArgs<ExtArgs>>): Prisma__SubModuleClient<$Result.GetResult<Prisma.$SubModulePayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -8901,7 +9018,7 @@ export namespace Prisma {
     readonly updated_at: FieldRef<"UserPermission", 'DateTime'>
     readonly is_deleted: FieldRef<"UserPermission", 'Boolean'>
     readonly user_id: FieldRef<"UserPermission", 'String'>
-    readonly module_id: FieldRef<"UserPermission", 'String'>
+    readonly submodule_id: FieldRef<"UserPermission", 'String'>
   }
     
 
@@ -11300,7 +11417,7 @@ export namespace Prisma {
     is_deleted?: boolean
     feature_id?: boolean
     feature?: boolean | FeatureDefaultArgs<ExtArgs>
-    user_permissions?: boolean | Module$user_permissionsArgs<ExtArgs>
+    submodules?: boolean | Module$submodulesArgs<ExtArgs>
     _count?: boolean | ModuleCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["module"]>
 
@@ -11315,7 +11432,7 @@ export namespace Prisma {
 
   export type ModuleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     feature?: boolean | FeatureDefaultArgs<ExtArgs>
-    user_permissions?: boolean | Module$user_permissionsArgs<ExtArgs>
+    submodules?: boolean | Module$submodulesArgs<ExtArgs>
     _count?: boolean | ModuleCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -11324,7 +11441,7 @@ export namespace Prisma {
     name: "Module"
     objects: {
       feature: Prisma.$FeaturePayload<ExtArgs>
-      user_permissions: Prisma.$UserPermissionPayload<ExtArgs>[]
+      submodules: Prisma.$SubModulePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -11700,7 +11817,7 @@ export namespace Prisma {
 
     feature<T extends FeatureDefaultArgs<ExtArgs> = {}>(args?: Subset<T, FeatureDefaultArgs<ExtArgs>>): Prisma__FeatureClient<$Result.GetResult<Prisma.$FeaturePayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
-    user_permissions<T extends Module$user_permissionsArgs<ExtArgs> = {}>(args?: Subset<T, Module$user_permissionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPermissionPayload<ExtArgs>, T, 'findMany'> | Null>;
+    submodules<T extends Module$submodulesArgs<ExtArgs> = {}>(args?: Subset<T, Module$submodulesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubModulePayload<ExtArgs>, T, 'findMany'> | Null>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -12048,9 +12165,966 @@ export namespace Prisma {
 
 
   /**
-   * Module.user_permissions
+   * Module.submodules
    */
-  export type Module$user_permissionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Module$submodulesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SubModule
+     */
+    select?: SubModuleSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SubModuleInclude<ExtArgs> | null
+    where?: SubModuleWhereInput
+    orderBy?: SubModuleOrderByWithRelationInput | SubModuleOrderByWithRelationInput[]
+    cursor?: SubModuleWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SubModuleScalarFieldEnum | SubModuleScalarFieldEnum[]
+  }
+
+
+  /**
+   * Module without action
+   */
+  export type ModuleDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Module
+     */
+    select?: ModuleSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ModuleInclude<ExtArgs> | null
+  }
+
+
+
+  /**
+   * Model SubModule
+   */
+
+  export type AggregateSubModule = {
+    _count: SubModuleCountAggregateOutputType | null
+    _min: SubModuleMinAggregateOutputType | null
+    _max: SubModuleMaxAggregateOutputType | null
+  }
+
+  export type SubModuleMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    created_at: Date | null
+    updated_at: Date | null
+    is_deleted: boolean | null
+    module_id: string | null
+  }
+
+  export type SubModuleMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    created_at: Date | null
+    updated_at: Date | null
+    is_deleted: boolean | null
+    module_id: string | null
+  }
+
+  export type SubModuleCountAggregateOutputType = {
+    id: number
+    name: number
+    created_at: number
+    updated_at: number
+    is_deleted: number
+    module_id: number
+    _all: number
+  }
+
+
+  export type SubModuleMinAggregateInputType = {
+    id?: true
+    name?: true
+    created_at?: true
+    updated_at?: true
+    is_deleted?: true
+    module_id?: true
+  }
+
+  export type SubModuleMaxAggregateInputType = {
+    id?: true
+    name?: true
+    created_at?: true
+    updated_at?: true
+    is_deleted?: true
+    module_id?: true
+  }
+
+  export type SubModuleCountAggregateInputType = {
+    id?: true
+    name?: true
+    created_at?: true
+    updated_at?: true
+    is_deleted?: true
+    module_id?: true
+    _all?: true
+  }
+
+  export type SubModuleAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SubModule to aggregate.
+     */
+    where?: SubModuleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SubModules to fetch.
+     */
+    orderBy?: SubModuleOrderByWithRelationInput | SubModuleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SubModuleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SubModules from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SubModules.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SubModules
+    **/
+    _count?: true | SubModuleCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SubModuleMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SubModuleMaxAggregateInputType
+  }
+
+  export type GetSubModuleAggregateType<T extends SubModuleAggregateArgs> = {
+        [P in keyof T & keyof AggregateSubModule]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSubModule[P]>
+      : GetScalarType<T[P], AggregateSubModule[P]>
+  }
+
+
+
+
+  export type SubModuleGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SubModuleWhereInput
+    orderBy?: SubModuleOrderByWithAggregationInput | SubModuleOrderByWithAggregationInput[]
+    by: SubModuleScalarFieldEnum[] | SubModuleScalarFieldEnum
+    having?: SubModuleScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SubModuleCountAggregateInputType | true
+    _min?: SubModuleMinAggregateInputType
+    _max?: SubModuleMaxAggregateInputType
+  }
+
+  export type SubModuleGroupByOutputType = {
+    id: string
+    name: string
+    created_at: Date
+    updated_at: Date
+    is_deleted: boolean
+    module_id: string
+    _count: SubModuleCountAggregateOutputType | null
+    _min: SubModuleMinAggregateOutputType | null
+    _max: SubModuleMaxAggregateOutputType | null
+  }
+
+  type GetSubModuleGroupByPayload<T extends SubModuleGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SubModuleGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SubModuleGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SubModuleGroupByOutputType[P]>
+            : GetScalarType<T[P], SubModuleGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SubModuleSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    is_deleted?: boolean
+    module_id?: boolean
+    module?: boolean | ModuleDefaultArgs<ExtArgs>
+    user_permissions?: boolean | SubModule$user_permissionsArgs<ExtArgs>
+    _count?: boolean | SubModuleCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["subModule"]>
+
+  export type SubModuleSelectScalar = {
+    id?: boolean
+    name?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    is_deleted?: boolean
+    module_id?: boolean
+  }
+
+  export type SubModuleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    module?: boolean | ModuleDefaultArgs<ExtArgs>
+    user_permissions?: boolean | SubModule$user_permissionsArgs<ExtArgs>
+    _count?: boolean | SubModuleCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+
+  export type $SubModulePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SubModule"
+    objects: {
+      module: Prisma.$ModulePayload<ExtArgs>
+      user_permissions: Prisma.$UserPermissionPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      created_at: Date
+      updated_at: Date
+      is_deleted: boolean
+      module_id: string
+    }, ExtArgs["result"]["subModule"]>
+    composites: {}
+  }
+
+
+  type SubModuleGetPayload<S extends boolean | null | undefined | SubModuleDefaultArgs> = $Result.GetResult<Prisma.$SubModulePayload, S>
+
+  type SubModuleCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<SubModuleFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: SubModuleCountAggregateInputType | true
+    }
+
+  export interface SubModuleDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SubModule'], meta: { name: 'SubModule' } }
+    /**
+     * Find zero or one SubModule that matches the filter.
+     * @param {SubModuleFindUniqueArgs} args - Arguments to find a SubModule
+     * @example
+     * // Get one SubModule
+     * const subModule = await prisma.subModule.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends SubModuleFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, SubModuleFindUniqueArgs<ExtArgs>>
+    ): Prisma__SubModuleClient<$Result.GetResult<Prisma.$SubModulePayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one SubModule that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {SubModuleFindUniqueOrThrowArgs} args - Arguments to find a SubModule
+     * @example
+     * // Get one SubModule
+     * const subModule = await prisma.subModule.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends SubModuleFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, SubModuleFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__SubModuleClient<$Result.GetResult<Prisma.$SubModulePayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first SubModule that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubModuleFindFirstArgs} args - Arguments to find a SubModule
+     * @example
+     * // Get one SubModule
+     * const subModule = await prisma.subModule.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends SubModuleFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, SubModuleFindFirstArgs<ExtArgs>>
+    ): Prisma__SubModuleClient<$Result.GetResult<Prisma.$SubModulePayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first SubModule that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubModuleFindFirstOrThrowArgs} args - Arguments to find a SubModule
+     * @example
+     * // Get one SubModule
+     * const subModule = await prisma.subModule.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends SubModuleFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, SubModuleFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__SubModuleClient<$Result.GetResult<Prisma.$SubModulePayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more SubModules that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubModuleFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SubModules
+     * const subModules = await prisma.subModule.findMany()
+     * 
+     * // Get first 10 SubModules
+     * const subModules = await prisma.subModule.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const subModuleWithIdOnly = await prisma.subModule.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends SubModuleFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, SubModuleFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubModulePayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a SubModule.
+     * @param {SubModuleCreateArgs} args - Arguments to create a SubModule.
+     * @example
+     * // Create one SubModule
+     * const SubModule = await prisma.subModule.create({
+     *   data: {
+     *     // ... data to create a SubModule
+     *   }
+     * })
+     * 
+    **/
+    create<T extends SubModuleCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, SubModuleCreateArgs<ExtArgs>>
+    ): Prisma__SubModuleClient<$Result.GetResult<Prisma.$SubModulePayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many SubModules.
+     *     @param {SubModuleCreateManyArgs} args - Arguments to create many SubModules.
+     *     @example
+     *     // Create many SubModules
+     *     const subModule = await prisma.subModule.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends SubModuleCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, SubModuleCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a SubModule.
+     * @param {SubModuleDeleteArgs} args - Arguments to delete one SubModule.
+     * @example
+     * // Delete one SubModule
+     * const SubModule = await prisma.subModule.delete({
+     *   where: {
+     *     // ... filter to delete one SubModule
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends SubModuleDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, SubModuleDeleteArgs<ExtArgs>>
+    ): Prisma__SubModuleClient<$Result.GetResult<Prisma.$SubModulePayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one SubModule.
+     * @param {SubModuleUpdateArgs} args - Arguments to update one SubModule.
+     * @example
+     * // Update one SubModule
+     * const subModule = await prisma.subModule.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends SubModuleUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, SubModuleUpdateArgs<ExtArgs>>
+    ): Prisma__SubModuleClient<$Result.GetResult<Prisma.$SubModulePayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more SubModules.
+     * @param {SubModuleDeleteManyArgs} args - Arguments to filter SubModules to delete.
+     * @example
+     * // Delete a few SubModules
+     * const { count } = await prisma.subModule.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends SubModuleDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, SubModuleDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SubModules.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubModuleUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SubModules
+     * const subModule = await prisma.subModule.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends SubModuleUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, SubModuleUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one SubModule.
+     * @param {SubModuleUpsertArgs} args - Arguments to update or create a SubModule.
+     * @example
+     * // Update or create a SubModule
+     * const subModule = await prisma.subModule.upsert({
+     *   create: {
+     *     // ... data to create a SubModule
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SubModule we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends SubModuleUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, SubModuleUpsertArgs<ExtArgs>>
+    ): Prisma__SubModuleClient<$Result.GetResult<Prisma.$SubModulePayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of SubModules.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubModuleCountArgs} args - Arguments to filter SubModules to count.
+     * @example
+     * // Count the number of SubModules
+     * const count = await prisma.subModule.count({
+     *   where: {
+     *     // ... the filter for the SubModules we want to count
+     *   }
+     * })
+    **/
+    count<T extends SubModuleCountArgs>(
+      args?: Subset<T, SubModuleCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SubModuleCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SubModule.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubModuleAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SubModuleAggregateArgs>(args: Subset<T, SubModuleAggregateArgs>): Prisma.PrismaPromise<GetSubModuleAggregateType<T>>
+
+    /**
+     * Group by SubModule.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubModuleGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SubModuleGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SubModuleGroupByArgs['orderBy'] }
+        : { orderBy?: SubModuleGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SubModuleGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSubModuleGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SubModule model
+   */
+  readonly fields: SubModuleFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SubModule.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SubModuleClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+    module<T extends ModuleDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ModuleDefaultArgs<ExtArgs>>): Prisma__ModuleClient<$Result.GetResult<Prisma.$ModulePayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    user_permissions<T extends SubModule$user_permissionsArgs<ExtArgs> = {}>(args?: Subset<T, SubModule$user_permissionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPermissionPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the SubModule model
+   */ 
+  interface SubModuleFieldRefs {
+    readonly id: FieldRef<"SubModule", 'String'>
+    readonly name: FieldRef<"SubModule", 'String'>
+    readonly created_at: FieldRef<"SubModule", 'DateTime'>
+    readonly updated_at: FieldRef<"SubModule", 'DateTime'>
+    readonly is_deleted: FieldRef<"SubModule", 'Boolean'>
+    readonly module_id: FieldRef<"SubModule", 'String'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * SubModule findUnique
+   */
+  export type SubModuleFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SubModule
+     */
+    select?: SubModuleSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SubModuleInclude<ExtArgs> | null
+    /**
+     * Filter, which SubModule to fetch.
+     */
+    where: SubModuleWhereUniqueInput
+  }
+
+
+  /**
+   * SubModule findUniqueOrThrow
+   */
+  export type SubModuleFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SubModule
+     */
+    select?: SubModuleSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SubModuleInclude<ExtArgs> | null
+    /**
+     * Filter, which SubModule to fetch.
+     */
+    where: SubModuleWhereUniqueInput
+  }
+
+
+  /**
+   * SubModule findFirst
+   */
+  export type SubModuleFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SubModule
+     */
+    select?: SubModuleSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SubModuleInclude<ExtArgs> | null
+    /**
+     * Filter, which SubModule to fetch.
+     */
+    where?: SubModuleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SubModules to fetch.
+     */
+    orderBy?: SubModuleOrderByWithRelationInput | SubModuleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SubModules.
+     */
+    cursor?: SubModuleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SubModules from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SubModules.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SubModules.
+     */
+    distinct?: SubModuleScalarFieldEnum | SubModuleScalarFieldEnum[]
+  }
+
+
+  /**
+   * SubModule findFirstOrThrow
+   */
+  export type SubModuleFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SubModule
+     */
+    select?: SubModuleSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SubModuleInclude<ExtArgs> | null
+    /**
+     * Filter, which SubModule to fetch.
+     */
+    where?: SubModuleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SubModules to fetch.
+     */
+    orderBy?: SubModuleOrderByWithRelationInput | SubModuleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SubModules.
+     */
+    cursor?: SubModuleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SubModules from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SubModules.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SubModules.
+     */
+    distinct?: SubModuleScalarFieldEnum | SubModuleScalarFieldEnum[]
+  }
+
+
+  /**
+   * SubModule findMany
+   */
+  export type SubModuleFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SubModule
+     */
+    select?: SubModuleSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SubModuleInclude<ExtArgs> | null
+    /**
+     * Filter, which SubModules to fetch.
+     */
+    where?: SubModuleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SubModules to fetch.
+     */
+    orderBy?: SubModuleOrderByWithRelationInput | SubModuleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SubModules.
+     */
+    cursor?: SubModuleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SubModules from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SubModules.
+     */
+    skip?: number
+    distinct?: SubModuleScalarFieldEnum | SubModuleScalarFieldEnum[]
+  }
+
+
+  /**
+   * SubModule create
+   */
+  export type SubModuleCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SubModule
+     */
+    select?: SubModuleSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SubModuleInclude<ExtArgs> | null
+    /**
+     * The data needed to create a SubModule.
+     */
+    data: XOR<SubModuleCreateInput, SubModuleUncheckedCreateInput>
+  }
+
+
+  /**
+   * SubModule createMany
+   */
+  export type SubModuleCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SubModules.
+     */
+    data: SubModuleCreateManyInput | SubModuleCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * SubModule update
+   */
+  export type SubModuleUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SubModule
+     */
+    select?: SubModuleSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SubModuleInclude<ExtArgs> | null
+    /**
+     * The data needed to update a SubModule.
+     */
+    data: XOR<SubModuleUpdateInput, SubModuleUncheckedUpdateInput>
+    /**
+     * Choose, which SubModule to update.
+     */
+    where: SubModuleWhereUniqueInput
+  }
+
+
+  /**
+   * SubModule updateMany
+   */
+  export type SubModuleUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SubModules.
+     */
+    data: XOR<SubModuleUpdateManyMutationInput, SubModuleUncheckedUpdateManyInput>
+    /**
+     * Filter which SubModules to update
+     */
+    where?: SubModuleWhereInput
+  }
+
+
+  /**
+   * SubModule upsert
+   */
+  export type SubModuleUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SubModule
+     */
+    select?: SubModuleSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SubModuleInclude<ExtArgs> | null
+    /**
+     * The filter to search for the SubModule to update in case it exists.
+     */
+    where: SubModuleWhereUniqueInput
+    /**
+     * In case the SubModule found by the `where` argument doesn't exist, create a new SubModule with this data.
+     */
+    create: XOR<SubModuleCreateInput, SubModuleUncheckedCreateInput>
+    /**
+     * In case the SubModule was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SubModuleUpdateInput, SubModuleUncheckedUpdateInput>
+  }
+
+
+  /**
+   * SubModule delete
+   */
+  export type SubModuleDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SubModule
+     */
+    select?: SubModuleSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SubModuleInclude<ExtArgs> | null
+    /**
+     * Filter which SubModule to delete.
+     */
+    where: SubModuleWhereUniqueInput
+  }
+
+
+  /**
+   * SubModule deleteMany
+   */
+  export type SubModuleDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SubModules to delete
+     */
+    where?: SubModuleWhereInput
+  }
+
+
+  /**
+   * SubModule.user_permissions
+   */
+  export type SubModule$user_permissionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the UserPermission
      */
@@ -12069,17 +13143,17 @@ export namespace Prisma {
 
 
   /**
-   * Module without action
+   * SubModule without action
    */
-  export type ModuleDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SubModuleDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Module
+     * Select specific fields to fetch from the SubModule
      */
-    select?: ModuleSelect<ExtArgs> | null
+    select?: SubModuleSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: ModuleInclude<ExtArgs> | null
+    include?: SubModuleInclude<ExtArgs> | null
   }
 
 
@@ -18217,7 +19291,7 @@ export namespace Prisma {
     updated_at: 'updated_at',
     is_deleted: 'is_deleted',
     user_id: 'user_id',
-    module_id: 'module_id'
+    submodule_id: 'submodule_id'
   };
 
   export type UserPermissionScalarFieldEnum = (typeof UserPermissionScalarFieldEnum)[keyof typeof UserPermissionScalarFieldEnum]
@@ -18256,6 +19330,18 @@ export namespace Prisma {
   };
 
   export type ModuleScalarFieldEnum = (typeof ModuleScalarFieldEnum)[keyof typeof ModuleScalarFieldEnum]
+
+
+  export const SubModuleScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    created_at: 'created_at',
+    updated_at: 'updated_at',
+    is_deleted: 'is_deleted',
+    module_id: 'module_id'
+  };
+
+  export type SubModuleScalarFieldEnum = (typeof SubModuleScalarFieldEnum)[keyof typeof SubModuleScalarFieldEnum]
 
 
   export const JOApproverSettingScalarFieldEnum: {
@@ -18890,9 +19976,9 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"UserPermission"> | Date | string
     is_deleted?: BoolFilter<"UserPermission"> | boolean
     user_id?: StringFilter<"UserPermission"> | string
-    module_id?: StringFilter<"UserPermission"> | string
+    submodule_id?: StringFilter<"UserPermission"> | string
     user?: XOR<UserRelationFilter, UserWhereInput>
-    module?: XOR<ModuleRelationFilter, ModuleWhereInput>
+    submodule?: XOR<SubModuleRelationFilter, SubModuleWhereInput>
   }
 
   export type UserPermissionOrderByWithRelationInput = {
@@ -18901,9 +19987,9 @@ export namespace Prisma {
     updated_at?: SortOrder
     is_deleted?: SortOrder
     user_id?: SortOrder
-    module_id?: SortOrder
+    submodule_id?: SortOrder
     user?: UserOrderByWithRelationInput
-    module?: ModuleOrderByWithRelationInput
+    submodule?: SubModuleOrderByWithRelationInput
   }
 
   export type UserPermissionWhereUniqueInput = Prisma.AtLeast<{
@@ -18915,9 +20001,9 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"UserPermission"> | Date | string
     is_deleted?: BoolFilter<"UserPermission"> | boolean
     user_id?: StringFilter<"UserPermission"> | string
-    module_id?: StringFilter<"UserPermission"> | string
+    submodule_id?: StringFilter<"UserPermission"> | string
     user?: XOR<UserRelationFilter, UserWhereInput>
-    module?: XOR<ModuleRelationFilter, ModuleWhereInput>
+    submodule?: XOR<SubModuleRelationFilter, SubModuleWhereInput>
   }, "id">
 
   export type UserPermissionOrderByWithAggregationInput = {
@@ -18926,7 +20012,7 @@ export namespace Prisma {
     updated_at?: SortOrder
     is_deleted?: SortOrder
     user_id?: SortOrder
-    module_id?: SortOrder
+    submodule_id?: SortOrder
     _count?: UserPermissionCountOrderByAggregateInput
     _max?: UserPermissionMaxOrderByAggregateInput
     _min?: UserPermissionMinOrderByAggregateInput
@@ -18941,7 +20027,7 @@ export namespace Prisma {
     updated_at?: DateTimeWithAggregatesFilter<"UserPermission"> | Date | string
     is_deleted?: BoolWithAggregatesFilter<"UserPermission"> | boolean
     user_id?: StringWithAggregatesFilter<"UserPermission"> | string
-    module_id?: StringWithAggregatesFilter<"UserPermission"> | string
+    submodule_id?: StringWithAggregatesFilter<"UserPermission"> | string
   }
 
   export type ServiceWhereInput = {
@@ -19073,7 +20159,7 @@ export namespace Prisma {
     is_deleted?: BoolFilter<"Module"> | boolean
     feature_id?: StringFilter<"Module"> | string
     feature?: XOR<FeatureRelationFilter, FeatureWhereInput>
-    user_permissions?: UserPermissionListRelationFilter
+    submodules?: SubModuleListRelationFilter
   }
 
   export type ModuleOrderByWithRelationInput = {
@@ -19084,7 +20170,7 @@ export namespace Prisma {
     is_deleted?: SortOrder
     feature_id?: SortOrder
     feature?: FeatureOrderByWithRelationInput
-    user_permissions?: UserPermissionOrderByRelationAggregateInput
+    submodules?: SubModuleOrderByRelationAggregateInput
   }
 
   export type ModuleWhereUniqueInput = Prisma.AtLeast<{
@@ -19098,7 +20184,7 @@ export namespace Prisma {
     is_deleted?: BoolFilter<"Module"> | boolean
     feature_id?: StringFilter<"Module"> | string
     feature?: XOR<FeatureRelationFilter, FeatureWhereInput>
-    user_permissions?: UserPermissionListRelationFilter
+    submodules?: SubModuleListRelationFilter
   }, "id">
 
   export type ModuleOrderByWithAggregationInput = {
@@ -19123,6 +20209,69 @@ export namespace Prisma {
     updated_at?: DateTimeWithAggregatesFilter<"Module"> | Date | string
     is_deleted?: BoolWithAggregatesFilter<"Module"> | boolean
     feature_id?: StringWithAggregatesFilter<"Module"> | string
+  }
+
+  export type SubModuleWhereInput = {
+    AND?: SubModuleWhereInput | SubModuleWhereInput[]
+    OR?: SubModuleWhereInput[]
+    NOT?: SubModuleWhereInput | SubModuleWhereInput[]
+    id?: StringFilter<"SubModule"> | string
+    name?: StringFilter<"SubModule"> | string
+    created_at?: DateTimeFilter<"SubModule"> | Date | string
+    updated_at?: DateTimeFilter<"SubModule"> | Date | string
+    is_deleted?: BoolFilter<"SubModule"> | boolean
+    module_id?: StringFilter<"SubModule"> | string
+    module?: XOR<ModuleRelationFilter, ModuleWhereInput>
+    user_permissions?: UserPermissionListRelationFilter
+  }
+
+  export type SubModuleOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+    module_id?: SortOrder
+    module?: ModuleOrderByWithRelationInput
+    user_permissions?: UserPermissionOrderByRelationAggregateInput
+  }
+
+  export type SubModuleWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: SubModuleWhereInput | SubModuleWhereInput[]
+    OR?: SubModuleWhereInput[]
+    NOT?: SubModuleWhereInput | SubModuleWhereInput[]
+    name?: StringFilter<"SubModule"> | string
+    created_at?: DateTimeFilter<"SubModule"> | Date | string
+    updated_at?: DateTimeFilter<"SubModule"> | Date | string
+    is_deleted?: BoolFilter<"SubModule"> | boolean
+    module_id?: StringFilter<"SubModule"> | string
+    module?: XOR<ModuleRelationFilter, ModuleWhereInput>
+    user_permissions?: UserPermissionListRelationFilter
+  }, "id">
+
+  export type SubModuleOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+    module_id?: SortOrder
+    _count?: SubModuleCountOrderByAggregateInput
+    _max?: SubModuleMaxOrderByAggregateInput
+    _min?: SubModuleMinOrderByAggregateInput
+  }
+
+  export type SubModuleScalarWhereWithAggregatesInput = {
+    AND?: SubModuleScalarWhereWithAggregatesInput | SubModuleScalarWhereWithAggregatesInput[]
+    OR?: SubModuleScalarWhereWithAggregatesInput[]
+    NOT?: SubModuleScalarWhereWithAggregatesInput | SubModuleScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"SubModule"> | string
+    name?: StringWithAggregatesFilter<"SubModule"> | string
+    created_at?: DateTimeWithAggregatesFilter<"SubModule"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"SubModule"> | Date | string
+    is_deleted?: BoolWithAggregatesFilter<"SubModule"> | boolean
+    module_id?: StringWithAggregatesFilter<"SubModule"> | string
   }
 
   export type JOApproverSettingWhereInput = {
@@ -20055,7 +21204,7 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     user: UserCreateNestedOneWithoutUser_permissionsInput
-    module: ModuleCreateNestedOneWithoutUser_permissionsInput
+    submodule: SubModuleCreateNestedOneWithoutUser_permissionsInput
   }
 
   export type UserPermissionUncheckedCreateInput = {
@@ -20064,7 +21213,7 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     user_id: string
-    module_id: string
+    submodule_id: string
   }
 
   export type UserPermissionUpdateInput = {
@@ -20073,7 +21222,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     user?: UserUpdateOneRequiredWithoutUser_permissionsNestedInput
-    module?: ModuleUpdateOneRequiredWithoutUser_permissionsNestedInput
+    submodule?: SubModuleUpdateOneRequiredWithoutUser_permissionsNestedInput
   }
 
   export type UserPermissionUncheckedUpdateInput = {
@@ -20082,7 +21231,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     user_id?: StringFieldUpdateOperationsInput | string
-    module_id?: StringFieldUpdateOperationsInput | string
+    submodule_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type UserPermissionCreateManyInput = {
@@ -20091,7 +21240,7 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     user_id: string
-    module_id: string
+    submodule_id: string
   }
 
   export type UserPermissionUpdateManyMutationInput = {
@@ -20107,7 +21256,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     user_id?: StringFieldUpdateOperationsInput | string
-    module_id?: StringFieldUpdateOperationsInput | string
+    submodule_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type ServiceCreateInput = {
@@ -20243,7 +21392,7 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     feature: FeatureCreateNestedOneWithoutModulesInput
-    user_permissions?: UserPermissionCreateNestedManyWithoutModuleInput
+    submodules?: SubModuleCreateNestedManyWithoutModuleInput
   }
 
   export type ModuleUncheckedCreateInput = {
@@ -20253,7 +21402,7 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     feature_id: string
-    user_permissions?: UserPermissionUncheckedCreateNestedManyWithoutModuleInput
+    submodules?: SubModuleUncheckedCreateNestedManyWithoutModuleInput
   }
 
   export type ModuleUpdateInput = {
@@ -20263,7 +21412,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     feature?: FeatureUpdateOneRequiredWithoutModulesNestedInput
-    user_permissions?: UserPermissionUpdateManyWithoutModuleNestedInput
+    submodules?: SubModuleUpdateManyWithoutModuleNestedInput
   }
 
   export type ModuleUncheckedUpdateInput = {
@@ -20273,7 +21422,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     feature_id?: StringFieldUpdateOperationsInput | string
-    user_permissions?: UserPermissionUncheckedUpdateManyWithoutModuleNestedInput
+    submodules?: SubModuleUncheckedUpdateManyWithoutModuleNestedInput
   }
 
   export type ModuleCreateManyInput = {
@@ -20300,6 +21449,72 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     feature_id?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type SubModuleCreateInput = {
+    id?: string
+    name: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    module: ModuleCreateNestedOneWithoutSubmodulesInput
+    user_permissions?: UserPermissionCreateNestedManyWithoutSubmoduleInput
+  }
+
+  export type SubModuleUncheckedCreateInput = {
+    id?: string
+    name: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    module_id: string
+    user_permissions?: UserPermissionUncheckedCreateNestedManyWithoutSubmoduleInput
+  }
+
+  export type SubModuleUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    module?: ModuleUpdateOneRequiredWithoutSubmodulesNestedInput
+    user_permissions?: UserPermissionUpdateManyWithoutSubmoduleNestedInput
+  }
+
+  export type SubModuleUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    module_id?: StringFieldUpdateOperationsInput | string
+    user_permissions?: UserPermissionUncheckedUpdateManyWithoutSubmoduleNestedInput
+  }
+
+  export type SubModuleCreateManyInput = {
+    id?: string
+    name: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    module_id: string
+  }
+
+  export type SubModuleUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type SubModuleUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    module_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type JOApproverSettingCreateInput = {
@@ -21176,9 +22391,9 @@ export namespace Prisma {
     is_deleted?: SortOrder
   }
 
-  export type ModuleRelationFilter = {
-    is?: ModuleWhereInput
-    isNot?: ModuleWhereInput
+  export type SubModuleRelationFilter = {
+    is?: SubModuleWhereInput
+    isNot?: SubModuleWhereInput
   }
 
   export type UserPermissionCountOrderByAggregateInput = {
@@ -21187,7 +22402,7 @@ export namespace Prisma {
     updated_at?: SortOrder
     is_deleted?: SortOrder
     user_id?: SortOrder
-    module_id?: SortOrder
+    submodule_id?: SortOrder
   }
 
   export type UserPermissionMaxOrderByAggregateInput = {
@@ -21196,7 +22411,7 @@ export namespace Prisma {
     updated_at?: SortOrder
     is_deleted?: SortOrder
     user_id?: SortOrder
-    module_id?: SortOrder
+    submodule_id?: SortOrder
   }
 
   export type UserPermissionMinOrderByAggregateInput = {
@@ -21205,7 +22420,7 @@ export namespace Prisma {
     updated_at?: SortOrder
     is_deleted?: SortOrder
     user_id?: SortOrder
-    module_id?: SortOrder
+    submodule_id?: SortOrder
   }
 
   export type FeatureListRelationFilter = {
@@ -21289,6 +22504,16 @@ export namespace Prisma {
     isNot?: FeatureWhereInput
   }
 
+  export type SubModuleListRelationFilter = {
+    every?: SubModuleWhereInput
+    some?: SubModuleWhereInput
+    none?: SubModuleWhereInput
+  }
+
+  export type SubModuleOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type ModuleCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
@@ -21314,6 +22539,38 @@ export namespace Prisma {
     updated_at?: SortOrder
     is_deleted?: SortOrder
     feature_id?: SortOrder
+  }
+
+  export type ModuleRelationFilter = {
+    is?: ModuleWhereInput
+    isNot?: ModuleWhereInput
+  }
+
+  export type SubModuleCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+    module_id?: SortOrder
+  }
+
+  export type SubModuleMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+    module_id?: SortOrder
+  }
+
+  export type SubModuleMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+    module_id?: SortOrder
   }
 
   export type EmployeeNullableRelationFilter = {
@@ -22175,10 +23432,10 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
-  export type ModuleCreateNestedOneWithoutUser_permissionsInput = {
-    create?: XOR<ModuleCreateWithoutUser_permissionsInput, ModuleUncheckedCreateWithoutUser_permissionsInput>
-    connectOrCreate?: ModuleCreateOrConnectWithoutUser_permissionsInput
-    connect?: ModuleWhereUniqueInput
+  export type SubModuleCreateNestedOneWithoutUser_permissionsInput = {
+    create?: XOR<SubModuleCreateWithoutUser_permissionsInput, SubModuleUncheckedCreateWithoutUser_permissionsInput>
+    connectOrCreate?: SubModuleCreateOrConnectWithoutUser_permissionsInput
+    connect?: SubModuleWhereUniqueInput
   }
 
   export type UserUpdateOneRequiredWithoutUser_permissionsNestedInput = {
@@ -22189,12 +23446,12 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutUser_permissionsInput, UserUpdateWithoutUser_permissionsInput>, UserUncheckedUpdateWithoutUser_permissionsInput>
   }
 
-  export type ModuleUpdateOneRequiredWithoutUser_permissionsNestedInput = {
-    create?: XOR<ModuleCreateWithoutUser_permissionsInput, ModuleUncheckedCreateWithoutUser_permissionsInput>
-    connectOrCreate?: ModuleCreateOrConnectWithoutUser_permissionsInput
-    upsert?: ModuleUpsertWithoutUser_permissionsInput
-    connect?: ModuleWhereUniqueInput
-    update?: XOR<XOR<ModuleUpdateToOneWithWhereWithoutUser_permissionsInput, ModuleUpdateWithoutUser_permissionsInput>, ModuleUncheckedUpdateWithoutUser_permissionsInput>
+  export type SubModuleUpdateOneRequiredWithoutUser_permissionsNestedInput = {
+    create?: XOR<SubModuleCreateWithoutUser_permissionsInput, SubModuleUncheckedCreateWithoutUser_permissionsInput>
+    connectOrCreate?: SubModuleCreateOrConnectWithoutUser_permissionsInput
+    upsert?: SubModuleUpsertWithoutUser_permissionsInput
+    connect?: SubModuleWhereUniqueInput
+    update?: XOR<XOR<SubModuleUpdateToOneWithWhereWithoutUser_permissionsInput, SubModuleUpdateWithoutUser_permissionsInput>, SubModuleUncheckedUpdateWithoutUser_permissionsInput>
   }
 
   export type FeatureCreateNestedManyWithoutServiceInput = {
@@ -22301,18 +23558,18 @@ export namespace Prisma {
     connect?: FeatureWhereUniqueInput
   }
 
-  export type UserPermissionCreateNestedManyWithoutModuleInput = {
-    create?: XOR<UserPermissionCreateWithoutModuleInput, UserPermissionUncheckedCreateWithoutModuleInput> | UserPermissionCreateWithoutModuleInput[] | UserPermissionUncheckedCreateWithoutModuleInput[]
-    connectOrCreate?: UserPermissionCreateOrConnectWithoutModuleInput | UserPermissionCreateOrConnectWithoutModuleInput[]
-    createMany?: UserPermissionCreateManyModuleInputEnvelope
-    connect?: UserPermissionWhereUniqueInput | UserPermissionWhereUniqueInput[]
+  export type SubModuleCreateNestedManyWithoutModuleInput = {
+    create?: XOR<SubModuleCreateWithoutModuleInput, SubModuleUncheckedCreateWithoutModuleInput> | SubModuleCreateWithoutModuleInput[] | SubModuleUncheckedCreateWithoutModuleInput[]
+    connectOrCreate?: SubModuleCreateOrConnectWithoutModuleInput | SubModuleCreateOrConnectWithoutModuleInput[]
+    createMany?: SubModuleCreateManyModuleInputEnvelope
+    connect?: SubModuleWhereUniqueInput | SubModuleWhereUniqueInput[]
   }
 
-  export type UserPermissionUncheckedCreateNestedManyWithoutModuleInput = {
-    create?: XOR<UserPermissionCreateWithoutModuleInput, UserPermissionUncheckedCreateWithoutModuleInput> | UserPermissionCreateWithoutModuleInput[] | UserPermissionUncheckedCreateWithoutModuleInput[]
-    connectOrCreate?: UserPermissionCreateOrConnectWithoutModuleInput | UserPermissionCreateOrConnectWithoutModuleInput[]
-    createMany?: UserPermissionCreateManyModuleInputEnvelope
-    connect?: UserPermissionWhereUniqueInput | UserPermissionWhereUniqueInput[]
+  export type SubModuleUncheckedCreateNestedManyWithoutModuleInput = {
+    create?: XOR<SubModuleCreateWithoutModuleInput, SubModuleUncheckedCreateWithoutModuleInput> | SubModuleCreateWithoutModuleInput[] | SubModuleUncheckedCreateWithoutModuleInput[]
+    connectOrCreate?: SubModuleCreateOrConnectWithoutModuleInput | SubModuleCreateOrConnectWithoutModuleInput[]
+    createMany?: SubModuleCreateManyModuleInputEnvelope
+    connect?: SubModuleWhereUniqueInput | SubModuleWhereUniqueInput[]
   }
 
   export type FeatureUpdateOneRequiredWithoutModulesNestedInput = {
@@ -22323,31 +23580,87 @@ export namespace Prisma {
     update?: XOR<XOR<FeatureUpdateToOneWithWhereWithoutModulesInput, FeatureUpdateWithoutModulesInput>, FeatureUncheckedUpdateWithoutModulesInput>
   }
 
-  export type UserPermissionUpdateManyWithoutModuleNestedInput = {
-    create?: XOR<UserPermissionCreateWithoutModuleInput, UserPermissionUncheckedCreateWithoutModuleInput> | UserPermissionCreateWithoutModuleInput[] | UserPermissionUncheckedCreateWithoutModuleInput[]
-    connectOrCreate?: UserPermissionCreateOrConnectWithoutModuleInput | UserPermissionCreateOrConnectWithoutModuleInput[]
-    upsert?: UserPermissionUpsertWithWhereUniqueWithoutModuleInput | UserPermissionUpsertWithWhereUniqueWithoutModuleInput[]
-    createMany?: UserPermissionCreateManyModuleInputEnvelope
+  export type SubModuleUpdateManyWithoutModuleNestedInput = {
+    create?: XOR<SubModuleCreateWithoutModuleInput, SubModuleUncheckedCreateWithoutModuleInput> | SubModuleCreateWithoutModuleInput[] | SubModuleUncheckedCreateWithoutModuleInput[]
+    connectOrCreate?: SubModuleCreateOrConnectWithoutModuleInput | SubModuleCreateOrConnectWithoutModuleInput[]
+    upsert?: SubModuleUpsertWithWhereUniqueWithoutModuleInput | SubModuleUpsertWithWhereUniqueWithoutModuleInput[]
+    createMany?: SubModuleCreateManyModuleInputEnvelope
+    set?: SubModuleWhereUniqueInput | SubModuleWhereUniqueInput[]
+    disconnect?: SubModuleWhereUniqueInput | SubModuleWhereUniqueInput[]
+    delete?: SubModuleWhereUniqueInput | SubModuleWhereUniqueInput[]
+    connect?: SubModuleWhereUniqueInput | SubModuleWhereUniqueInput[]
+    update?: SubModuleUpdateWithWhereUniqueWithoutModuleInput | SubModuleUpdateWithWhereUniqueWithoutModuleInput[]
+    updateMany?: SubModuleUpdateManyWithWhereWithoutModuleInput | SubModuleUpdateManyWithWhereWithoutModuleInput[]
+    deleteMany?: SubModuleScalarWhereInput | SubModuleScalarWhereInput[]
+  }
+
+  export type SubModuleUncheckedUpdateManyWithoutModuleNestedInput = {
+    create?: XOR<SubModuleCreateWithoutModuleInput, SubModuleUncheckedCreateWithoutModuleInput> | SubModuleCreateWithoutModuleInput[] | SubModuleUncheckedCreateWithoutModuleInput[]
+    connectOrCreate?: SubModuleCreateOrConnectWithoutModuleInput | SubModuleCreateOrConnectWithoutModuleInput[]
+    upsert?: SubModuleUpsertWithWhereUniqueWithoutModuleInput | SubModuleUpsertWithWhereUniqueWithoutModuleInput[]
+    createMany?: SubModuleCreateManyModuleInputEnvelope
+    set?: SubModuleWhereUniqueInput | SubModuleWhereUniqueInput[]
+    disconnect?: SubModuleWhereUniqueInput | SubModuleWhereUniqueInput[]
+    delete?: SubModuleWhereUniqueInput | SubModuleWhereUniqueInput[]
+    connect?: SubModuleWhereUniqueInput | SubModuleWhereUniqueInput[]
+    update?: SubModuleUpdateWithWhereUniqueWithoutModuleInput | SubModuleUpdateWithWhereUniqueWithoutModuleInput[]
+    updateMany?: SubModuleUpdateManyWithWhereWithoutModuleInput | SubModuleUpdateManyWithWhereWithoutModuleInput[]
+    deleteMany?: SubModuleScalarWhereInput | SubModuleScalarWhereInput[]
+  }
+
+  export type ModuleCreateNestedOneWithoutSubmodulesInput = {
+    create?: XOR<ModuleCreateWithoutSubmodulesInput, ModuleUncheckedCreateWithoutSubmodulesInput>
+    connectOrCreate?: ModuleCreateOrConnectWithoutSubmodulesInput
+    connect?: ModuleWhereUniqueInput
+  }
+
+  export type UserPermissionCreateNestedManyWithoutSubmoduleInput = {
+    create?: XOR<UserPermissionCreateWithoutSubmoduleInput, UserPermissionUncheckedCreateWithoutSubmoduleInput> | UserPermissionCreateWithoutSubmoduleInput[] | UserPermissionUncheckedCreateWithoutSubmoduleInput[]
+    connectOrCreate?: UserPermissionCreateOrConnectWithoutSubmoduleInput | UserPermissionCreateOrConnectWithoutSubmoduleInput[]
+    createMany?: UserPermissionCreateManySubmoduleInputEnvelope
+    connect?: UserPermissionWhereUniqueInput | UserPermissionWhereUniqueInput[]
+  }
+
+  export type UserPermissionUncheckedCreateNestedManyWithoutSubmoduleInput = {
+    create?: XOR<UserPermissionCreateWithoutSubmoduleInput, UserPermissionUncheckedCreateWithoutSubmoduleInput> | UserPermissionCreateWithoutSubmoduleInput[] | UserPermissionUncheckedCreateWithoutSubmoduleInput[]
+    connectOrCreate?: UserPermissionCreateOrConnectWithoutSubmoduleInput | UserPermissionCreateOrConnectWithoutSubmoduleInput[]
+    createMany?: UserPermissionCreateManySubmoduleInputEnvelope
+    connect?: UserPermissionWhereUniqueInput | UserPermissionWhereUniqueInput[]
+  }
+
+  export type ModuleUpdateOneRequiredWithoutSubmodulesNestedInput = {
+    create?: XOR<ModuleCreateWithoutSubmodulesInput, ModuleUncheckedCreateWithoutSubmodulesInput>
+    connectOrCreate?: ModuleCreateOrConnectWithoutSubmodulesInput
+    upsert?: ModuleUpsertWithoutSubmodulesInput
+    connect?: ModuleWhereUniqueInput
+    update?: XOR<XOR<ModuleUpdateToOneWithWhereWithoutSubmodulesInput, ModuleUpdateWithoutSubmodulesInput>, ModuleUncheckedUpdateWithoutSubmodulesInput>
+  }
+
+  export type UserPermissionUpdateManyWithoutSubmoduleNestedInput = {
+    create?: XOR<UserPermissionCreateWithoutSubmoduleInput, UserPermissionUncheckedCreateWithoutSubmoduleInput> | UserPermissionCreateWithoutSubmoduleInput[] | UserPermissionUncheckedCreateWithoutSubmoduleInput[]
+    connectOrCreate?: UserPermissionCreateOrConnectWithoutSubmoduleInput | UserPermissionCreateOrConnectWithoutSubmoduleInput[]
+    upsert?: UserPermissionUpsertWithWhereUniqueWithoutSubmoduleInput | UserPermissionUpsertWithWhereUniqueWithoutSubmoduleInput[]
+    createMany?: UserPermissionCreateManySubmoduleInputEnvelope
     set?: UserPermissionWhereUniqueInput | UserPermissionWhereUniqueInput[]
     disconnect?: UserPermissionWhereUniqueInput | UserPermissionWhereUniqueInput[]
     delete?: UserPermissionWhereUniqueInput | UserPermissionWhereUniqueInput[]
     connect?: UserPermissionWhereUniqueInput | UserPermissionWhereUniqueInput[]
-    update?: UserPermissionUpdateWithWhereUniqueWithoutModuleInput | UserPermissionUpdateWithWhereUniqueWithoutModuleInput[]
-    updateMany?: UserPermissionUpdateManyWithWhereWithoutModuleInput | UserPermissionUpdateManyWithWhereWithoutModuleInput[]
+    update?: UserPermissionUpdateWithWhereUniqueWithoutSubmoduleInput | UserPermissionUpdateWithWhereUniqueWithoutSubmoduleInput[]
+    updateMany?: UserPermissionUpdateManyWithWhereWithoutSubmoduleInput | UserPermissionUpdateManyWithWhereWithoutSubmoduleInput[]
     deleteMany?: UserPermissionScalarWhereInput | UserPermissionScalarWhereInput[]
   }
 
-  export type UserPermissionUncheckedUpdateManyWithoutModuleNestedInput = {
-    create?: XOR<UserPermissionCreateWithoutModuleInput, UserPermissionUncheckedCreateWithoutModuleInput> | UserPermissionCreateWithoutModuleInput[] | UserPermissionUncheckedCreateWithoutModuleInput[]
-    connectOrCreate?: UserPermissionCreateOrConnectWithoutModuleInput | UserPermissionCreateOrConnectWithoutModuleInput[]
-    upsert?: UserPermissionUpsertWithWhereUniqueWithoutModuleInput | UserPermissionUpsertWithWhereUniqueWithoutModuleInput[]
-    createMany?: UserPermissionCreateManyModuleInputEnvelope
+  export type UserPermissionUncheckedUpdateManyWithoutSubmoduleNestedInput = {
+    create?: XOR<UserPermissionCreateWithoutSubmoduleInput, UserPermissionUncheckedCreateWithoutSubmoduleInput> | UserPermissionCreateWithoutSubmoduleInput[] | UserPermissionUncheckedCreateWithoutSubmoduleInput[]
+    connectOrCreate?: UserPermissionCreateOrConnectWithoutSubmoduleInput | UserPermissionCreateOrConnectWithoutSubmoduleInput[]
+    upsert?: UserPermissionUpsertWithWhereUniqueWithoutSubmoduleInput | UserPermissionUpsertWithWhereUniqueWithoutSubmoduleInput[]
+    createMany?: UserPermissionCreateManySubmoduleInputEnvelope
     set?: UserPermissionWhereUniqueInput | UserPermissionWhereUniqueInput[]
     disconnect?: UserPermissionWhereUniqueInput | UserPermissionWhereUniqueInput[]
     delete?: UserPermissionWhereUniqueInput | UserPermissionWhereUniqueInput[]
     connect?: UserPermissionWhereUniqueInput | UserPermissionWhereUniqueInput[]
-    update?: UserPermissionUpdateWithWhereUniqueWithoutModuleInput | UserPermissionUpdateWithWhereUniqueWithoutModuleInput[]
-    updateMany?: UserPermissionUpdateManyWithWhereWithoutModuleInput | UserPermissionUpdateManyWithWhereWithoutModuleInput[]
+    update?: UserPermissionUpdateWithWhereUniqueWithoutSubmoduleInput | UserPermissionUpdateWithWhereUniqueWithoutSubmoduleInput[]
+    updateMany?: UserPermissionUpdateManyWithWhereWithoutSubmoduleInput | UserPermissionUpdateManyWithWhereWithoutSubmoduleInput[]
     deleteMany?: UserPermissionScalarWhereInput | UserPermissionScalarWhereInput[]
   }
 
@@ -23538,7 +24851,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    module: ModuleCreateNestedOneWithoutUser_permissionsInput
+    submodule: SubModuleCreateNestedOneWithoutUser_permissionsInput
   }
 
   export type UserPermissionUncheckedCreateWithoutUserInput = {
@@ -23546,7 +24859,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    module_id: string
+    submodule_id: string
   }
 
   export type UserPermissionCreateOrConnectWithoutUserInput = {
@@ -23605,7 +24918,7 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"UserPermission"> | Date | string
     is_deleted?: BoolFilter<"UserPermission"> | boolean
     user_id?: StringFilter<"UserPermission"> | string
-    module_id?: StringFilter<"UserPermission"> | string
+    submodule_id?: StringFilter<"UserPermission"> | string
   }
 
   export type UserEmployeeUpsertWithoutUserInput = {
@@ -23832,27 +25145,27 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutUser_permissionsInput, UserUncheckedCreateWithoutUser_permissionsInput>
   }
 
-  export type ModuleCreateWithoutUser_permissionsInput = {
+  export type SubModuleCreateWithoutUser_permissionsInput = {
     id?: string
     name: string
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    feature: FeatureCreateNestedOneWithoutModulesInput
+    module: ModuleCreateNestedOneWithoutSubmodulesInput
   }
 
-  export type ModuleUncheckedCreateWithoutUser_permissionsInput = {
+  export type SubModuleUncheckedCreateWithoutUser_permissionsInput = {
     id?: string
     name: string
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    feature_id: string
+    module_id: string
   }
 
-  export type ModuleCreateOrConnectWithoutUser_permissionsInput = {
-    where: ModuleWhereUniqueInput
-    create: XOR<ModuleCreateWithoutUser_permissionsInput, ModuleUncheckedCreateWithoutUser_permissionsInput>
+  export type SubModuleCreateOrConnectWithoutUser_permissionsInput = {
+    where: SubModuleWhereUniqueInput
+    create: XOR<SubModuleCreateWithoutUser_permissionsInput, SubModuleUncheckedCreateWithoutUser_permissionsInput>
   }
 
   export type UserUpsertWithoutUser_permissionsInput = {
@@ -23890,33 +25203,33 @@ export namespace Prisma {
     user_employee?: UserEmployeeUncheckedUpdateOneWithoutUserNestedInput
   }
 
-  export type ModuleUpsertWithoutUser_permissionsInput = {
-    update: XOR<ModuleUpdateWithoutUser_permissionsInput, ModuleUncheckedUpdateWithoutUser_permissionsInput>
-    create: XOR<ModuleCreateWithoutUser_permissionsInput, ModuleUncheckedCreateWithoutUser_permissionsInput>
-    where?: ModuleWhereInput
+  export type SubModuleUpsertWithoutUser_permissionsInput = {
+    update: XOR<SubModuleUpdateWithoutUser_permissionsInput, SubModuleUncheckedUpdateWithoutUser_permissionsInput>
+    create: XOR<SubModuleCreateWithoutUser_permissionsInput, SubModuleUncheckedCreateWithoutUser_permissionsInput>
+    where?: SubModuleWhereInput
   }
 
-  export type ModuleUpdateToOneWithWhereWithoutUser_permissionsInput = {
-    where?: ModuleWhereInput
-    data: XOR<ModuleUpdateWithoutUser_permissionsInput, ModuleUncheckedUpdateWithoutUser_permissionsInput>
+  export type SubModuleUpdateToOneWithWhereWithoutUser_permissionsInput = {
+    where?: SubModuleWhereInput
+    data: XOR<SubModuleUpdateWithoutUser_permissionsInput, SubModuleUncheckedUpdateWithoutUser_permissionsInput>
   }
 
-  export type ModuleUpdateWithoutUser_permissionsInput = {
+  export type SubModuleUpdateWithoutUser_permissionsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    feature?: FeatureUpdateOneRequiredWithoutModulesNestedInput
+    module?: ModuleUpdateOneRequiredWithoutSubmodulesNestedInput
   }
 
-  export type ModuleUncheckedUpdateWithoutUser_permissionsInput = {
+  export type SubModuleUncheckedUpdateWithoutUser_permissionsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    feature_id?: StringFieldUpdateOperationsInput | string
+    module_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type FeatureCreateWithoutServiceInput = {
@@ -24002,7 +25315,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    user_permissions?: UserPermissionCreateNestedManyWithoutModuleInput
+    submodules?: SubModuleCreateNestedManyWithoutModuleInput
   }
 
   export type ModuleUncheckedCreateWithoutFeatureInput = {
@@ -24011,7 +25324,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    user_permissions?: UserPermissionUncheckedCreateNestedManyWithoutModuleInput
+    submodules?: SubModuleUncheckedCreateNestedManyWithoutModuleInput
   }
 
   export type ModuleCreateOrConnectWithoutFeatureInput = {
@@ -24102,29 +25415,31 @@ export namespace Prisma {
     create: XOR<FeatureCreateWithoutModulesInput, FeatureUncheckedCreateWithoutModulesInput>
   }
 
-  export type UserPermissionCreateWithoutModuleInput = {
+  export type SubModuleCreateWithoutModuleInput = {
     id?: string
+    name: string
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    user: UserCreateNestedOneWithoutUser_permissionsInput
+    user_permissions?: UserPermissionCreateNestedManyWithoutSubmoduleInput
   }
 
-  export type UserPermissionUncheckedCreateWithoutModuleInput = {
+  export type SubModuleUncheckedCreateWithoutModuleInput = {
     id?: string
+    name: string
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    user_id: string
+    user_permissions?: UserPermissionUncheckedCreateNestedManyWithoutSubmoduleInput
   }
 
-  export type UserPermissionCreateOrConnectWithoutModuleInput = {
-    where: UserPermissionWhereUniqueInput
-    create: XOR<UserPermissionCreateWithoutModuleInput, UserPermissionUncheckedCreateWithoutModuleInput>
+  export type SubModuleCreateOrConnectWithoutModuleInput = {
+    where: SubModuleWhereUniqueInput
+    create: XOR<SubModuleCreateWithoutModuleInput, SubModuleUncheckedCreateWithoutModuleInput>
   }
 
-  export type UserPermissionCreateManyModuleInputEnvelope = {
-    data: UserPermissionCreateManyModuleInput | UserPermissionCreateManyModuleInput[]
+  export type SubModuleCreateManyModuleInputEnvelope = {
+    data: SubModuleCreateManyModuleInput | SubModuleCreateManyModuleInput[]
     skipDuplicates?: boolean
   }
 
@@ -24157,20 +25472,126 @@ export namespace Prisma {
     service_id?: StringFieldUpdateOperationsInput | string
   }
 
-  export type UserPermissionUpsertWithWhereUniqueWithoutModuleInput = {
-    where: UserPermissionWhereUniqueInput
-    update: XOR<UserPermissionUpdateWithoutModuleInput, UserPermissionUncheckedUpdateWithoutModuleInput>
-    create: XOR<UserPermissionCreateWithoutModuleInput, UserPermissionUncheckedCreateWithoutModuleInput>
+  export type SubModuleUpsertWithWhereUniqueWithoutModuleInput = {
+    where: SubModuleWhereUniqueInput
+    update: XOR<SubModuleUpdateWithoutModuleInput, SubModuleUncheckedUpdateWithoutModuleInput>
+    create: XOR<SubModuleCreateWithoutModuleInput, SubModuleUncheckedCreateWithoutModuleInput>
   }
 
-  export type UserPermissionUpdateWithWhereUniqueWithoutModuleInput = {
-    where: UserPermissionWhereUniqueInput
-    data: XOR<UserPermissionUpdateWithoutModuleInput, UserPermissionUncheckedUpdateWithoutModuleInput>
+  export type SubModuleUpdateWithWhereUniqueWithoutModuleInput = {
+    where: SubModuleWhereUniqueInput
+    data: XOR<SubModuleUpdateWithoutModuleInput, SubModuleUncheckedUpdateWithoutModuleInput>
   }
 
-  export type UserPermissionUpdateManyWithWhereWithoutModuleInput = {
+  export type SubModuleUpdateManyWithWhereWithoutModuleInput = {
+    where: SubModuleScalarWhereInput
+    data: XOR<SubModuleUpdateManyMutationInput, SubModuleUncheckedUpdateManyWithoutModuleInput>
+  }
+
+  export type SubModuleScalarWhereInput = {
+    AND?: SubModuleScalarWhereInput | SubModuleScalarWhereInput[]
+    OR?: SubModuleScalarWhereInput[]
+    NOT?: SubModuleScalarWhereInput | SubModuleScalarWhereInput[]
+    id?: StringFilter<"SubModule"> | string
+    name?: StringFilter<"SubModule"> | string
+    created_at?: DateTimeFilter<"SubModule"> | Date | string
+    updated_at?: DateTimeFilter<"SubModule"> | Date | string
+    is_deleted?: BoolFilter<"SubModule"> | boolean
+    module_id?: StringFilter<"SubModule"> | string
+  }
+
+  export type ModuleCreateWithoutSubmodulesInput = {
+    id?: string
+    name: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    feature: FeatureCreateNestedOneWithoutModulesInput
+  }
+
+  export type ModuleUncheckedCreateWithoutSubmodulesInput = {
+    id?: string
+    name: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    feature_id: string
+  }
+
+  export type ModuleCreateOrConnectWithoutSubmodulesInput = {
+    where: ModuleWhereUniqueInput
+    create: XOR<ModuleCreateWithoutSubmodulesInput, ModuleUncheckedCreateWithoutSubmodulesInput>
+  }
+
+  export type UserPermissionCreateWithoutSubmoduleInput = {
+    id?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    user: UserCreateNestedOneWithoutUser_permissionsInput
+  }
+
+  export type UserPermissionUncheckedCreateWithoutSubmoduleInput = {
+    id?: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    user_id: string
+  }
+
+  export type UserPermissionCreateOrConnectWithoutSubmoduleInput = {
+    where: UserPermissionWhereUniqueInput
+    create: XOR<UserPermissionCreateWithoutSubmoduleInput, UserPermissionUncheckedCreateWithoutSubmoduleInput>
+  }
+
+  export type UserPermissionCreateManySubmoduleInputEnvelope = {
+    data: UserPermissionCreateManySubmoduleInput | UserPermissionCreateManySubmoduleInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ModuleUpsertWithoutSubmodulesInput = {
+    update: XOR<ModuleUpdateWithoutSubmodulesInput, ModuleUncheckedUpdateWithoutSubmodulesInput>
+    create: XOR<ModuleCreateWithoutSubmodulesInput, ModuleUncheckedCreateWithoutSubmodulesInput>
+    where?: ModuleWhereInput
+  }
+
+  export type ModuleUpdateToOneWithWhereWithoutSubmodulesInput = {
+    where?: ModuleWhereInput
+    data: XOR<ModuleUpdateWithoutSubmodulesInput, ModuleUncheckedUpdateWithoutSubmodulesInput>
+  }
+
+  export type ModuleUpdateWithoutSubmodulesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    feature?: FeatureUpdateOneRequiredWithoutModulesNestedInput
+  }
+
+  export type ModuleUncheckedUpdateWithoutSubmodulesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    feature_id?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type UserPermissionUpsertWithWhereUniqueWithoutSubmoduleInput = {
+    where: UserPermissionWhereUniqueInput
+    update: XOR<UserPermissionUpdateWithoutSubmoduleInput, UserPermissionUncheckedUpdateWithoutSubmoduleInput>
+    create: XOR<UserPermissionCreateWithoutSubmoduleInput, UserPermissionUncheckedCreateWithoutSubmoduleInput>
+  }
+
+  export type UserPermissionUpdateWithWhereUniqueWithoutSubmoduleInput = {
+    where: UserPermissionWhereUniqueInput
+    data: XOR<UserPermissionUpdateWithoutSubmoduleInput, UserPermissionUncheckedUpdateWithoutSubmoduleInput>
+  }
+
+  export type UserPermissionUpdateManyWithWhereWithoutSubmoduleInput = {
     where: UserPermissionScalarWhereInput
-    data: XOR<UserPermissionUpdateManyMutationInput, UserPermissionUncheckedUpdateManyWithoutModuleInput>
+    data: XOR<UserPermissionUpdateManyMutationInput, UserPermissionUncheckedUpdateManyWithoutSubmoduleInput>
   }
 
   export type EmployeeCreateWithoutJo_approver_settingInput = {
@@ -25466,7 +26887,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    module_id: string
+    submodule_id: string
   }
 
   export type UserPermissionUpdateWithoutUserInput = {
@@ -25474,7 +26895,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    module?: ModuleUpdateOneRequiredWithoutUser_permissionsNestedInput
+    submodule?: SubModuleUpdateOneRequiredWithoutUser_permissionsNestedInput
   }
 
   export type UserPermissionUncheckedUpdateWithoutUserInput = {
@@ -25482,7 +26903,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    module_id?: StringFieldUpdateOperationsInput | string
+    submodule_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type UserPermissionUncheckedUpdateManyWithoutUserInput = {
@@ -25490,7 +26911,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    module_id?: StringFieldUpdateOperationsInput | string
+    submodule_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type FeatureCreateManyServiceInput = {
@@ -25541,7 +26962,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    user_permissions?: UserPermissionUpdateManyWithoutModuleNestedInput
+    submodules?: SubModuleUpdateManyWithoutModuleNestedInput
   }
 
   export type ModuleUncheckedUpdateWithoutFeatureInput = {
@@ -25550,7 +26971,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    user_permissions?: UserPermissionUncheckedUpdateManyWithoutModuleNestedInput
+    submodules?: SubModuleUncheckedUpdateManyWithoutModuleNestedInput
   }
 
   export type ModuleUncheckedUpdateManyWithoutFeatureInput = {
@@ -25561,7 +26982,41 @@ export namespace Prisma {
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
-  export type UserPermissionCreateManyModuleInput = {
+  export type SubModuleCreateManyModuleInput = {
+    id?: string
+    name: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
+  export type SubModuleUpdateWithoutModuleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    user_permissions?: UserPermissionUpdateManyWithoutSubmoduleNestedInput
+  }
+
+  export type SubModuleUncheckedUpdateWithoutModuleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    user_permissions?: UserPermissionUncheckedUpdateManyWithoutSubmoduleNestedInput
+  }
+
+  export type SubModuleUncheckedUpdateManyWithoutModuleInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type UserPermissionCreateManySubmoduleInput = {
     id?: string
     created_at?: Date | string
     updated_at?: Date | string
@@ -25569,7 +27024,7 @@ export namespace Prisma {
     user_id: string
   }
 
-  export type UserPermissionUpdateWithoutModuleInput = {
+  export type UserPermissionUpdateWithoutSubmoduleInput = {
     id?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -25577,7 +27032,7 @@ export namespace Prisma {
     user?: UserUpdateOneRequiredWithoutUser_permissionsNestedInput
   }
 
-  export type UserPermissionUncheckedUpdateWithoutModuleInput = {
+  export type UserPermissionUncheckedUpdateWithoutSubmoduleInput = {
     id?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -25585,7 +27040,7 @@ export namespace Prisma {
     user_id?: StringFieldUpdateOperationsInput | string
   }
 
-  export type UserPermissionUncheckedUpdateManyWithoutModuleInput = {
+  export type UserPermissionUncheckedUpdateManyWithoutSubmoduleInput = {
     id?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -25618,6 +27073,10 @@ export namespace Prisma {
      * @deprecated Use ModuleCountOutputTypeDefaultArgs instead
      */
     export type ModuleCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ModuleCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use SubModuleCountOutputTypeDefaultArgs instead
+     */
+    export type SubModuleCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = SubModuleCountOutputTypeDefaultArgs<ExtArgs>
     /**
      * @deprecated Use DivisionDefaultArgs instead
      */
@@ -25658,6 +27117,10 @@ export namespace Prisma {
      * @deprecated Use ModuleDefaultArgs instead
      */
     export type ModuleArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ModuleDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use SubModuleDefaultArgs instead
+     */
+    export type SubModuleArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = SubModuleDefaultArgs<ExtArgs>
     /**
      * @deprecated Use JOApproverSettingDefaultArgs instead
      */
