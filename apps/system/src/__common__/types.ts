@@ -36,6 +36,12 @@ export interface Module {
     feature_id: string
 }
 
+export interface SubModule {
+    id: string 
+    name: string 
+    module_id: string
+}
+
 export interface Classification { 
     id: string
     name: string

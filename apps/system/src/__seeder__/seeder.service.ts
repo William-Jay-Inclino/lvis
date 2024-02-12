@@ -15,6 +15,7 @@ export class SeederService {
               await this.seedService();
               await this.seedFeature();
               await this.seedModule();
+              await this.seedSubModule();
               await this.seedDepartment();
               await this.seedClassification();
               await this.seedEmployee();
@@ -55,6 +56,15 @@ export class SeederService {
         console.log('seeding module table...')
         try {
             await this.prisma.module.createMany({ data: data.modules })
+        } catch (error) {
+            console.error(error)           
+        }
+    }
+
+    async seedSubModule() {
+        console.log('seeding submodule table...')
+        try {
+            await this.prisma.subModule.createMany({ data: data.subModules })
         } catch (error) {
             console.error(error)           
         }

@@ -1,9 +1,22 @@
+
+/*
+
+    if last approver approve then:
+
+    1. Create item transaction per rr_item
+    2. Update item quantity per item transaction
+
+    Note: Use db transaction
+
+*/
+
+
 import { BadRequestException, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { CreateRrApproverInput } from './dto/create-rr-approver.input';
 import { UpdateRrApproverInput } from './dto/update-rr-approver.input';
 import { PrismaService } from '../__prisma__/prisma.service';
 import { Prisma, RRApprover } from 'apps/warehouse/prisma/generated/client';
-import { APPROVAL_STATUS } from '../__common__/types';
+import { APPROVAL_STATUS, ITEM_TRANSACTION_TYPE } from '../__common__/types';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { HttpService } from '@nestjs/axios';
 import { catchError, firstValueFrom } from 'rxjs';
@@ -306,7 +319,10 @@ export class RrApproverService {
         return updated;
     }
 
-    // if last approver approves then update rr status to approve
+    // update rr_approver (rr_approver table)
+    // if last approver approves then update rr status to approve (rr_table)
+    // also create item transaction per item (item_transaction table)
+    // update item quantity per item transaction (item table)
     private async handleApprovedStatus(id: string, data: Prisma.RRApproverUpdateInput, rrId: string): Promise<RRApprover> {
         const approvers = await this.findByRrId(rrId);
         const lastApprover = getLastApprover(approvers);
@@ -315,24 +331,24 @@ export class RrApproverService {
             return await this.updateRRApprover(id, data);
         }
 
-        // if last approver approves
+        /*
 
-        const updateRrApprover = this.prisma.rRApprover.update({
-            data,
-            where: { id },
-            include: this.includedFields,
-        }); 
+            if last approver approves:
+
+            query 1 = update rr approver data
+            query 2 = update rr status to APPROVED
+            query 3 = create item transactions for each rr item
+            query 4 = update item quantity (add quantity per item transaction)
+
+        */
+        
     
-        const [updatedRrApprover, updatedRrStatus] = await this.prisma.$transaction([
-            updateRrApprover,
-            this.prisma.rR.update({
-                data: { status: APPROVAL_STATUS.APPROVED },
-                where: { id: rrId },
-            }),
-        ]);
+        const queries = await this.buildQueries(id, data, rrId);
+        const result = await this.prisma.$transaction(queries)
     
-        this.logger.log('Successfully updated RR Approver');
-        return updatedRrApprover;
+        this.logger.log('Successfully updated RR Approver, RR status, created item transactions, updated item quantity per transaction');
+    
+        return result[0];
     }
 
     // also update rr status to disapproved
@@ -376,5 +392,70 @@ export class RrApproverService {
         this.logger.log('Successfully updated RR Approver');
         return updatedRrApprover;
     }
+
+    private async buildQueries(id: string, data: Prisma.RRApproverUpdateInput, rrId: string): Promise<any[]> {
+        const queries = [];
+        
+        const updateRrApproverQuery = this.prisma.rRApprover.update({
+            data,
+            where: { id },
+            include: this.includedFields,
+        });
+        queries.push(updateRrApproverQuery);
+    
+        const updateRrStatusQuery = this.prisma.rR.update({
+            data: { status: APPROVAL_STATUS.APPROVED },
+            where: { id: rrId },
+        });
+        queries.push(updateRrStatusQuery);
+    
+        const rrItems = await this.prisma.rRItem.findMany({ where: { rr_id: rrId } });
+        
+        const itemTransactions: Prisma.ItemTransactionCreateManyInput[] = rrItems.map(i => {
+
+            const data: Prisma.ItemTransactionCreateManyInput = {
+                item_id: i.item_id,
+                rr_item_id: i.id,
+                type: ITEM_TRANSACTION_TYPE.STOCK_IN,
+                quantity: i.quantity_accepted,
+                price: i.net_price,
+            }
+
+            return data
+
+        })
+
+        const createItemTransactionsQuery = this.prisma.itemTransaction.createMany({
+            data: itemTransactions
+        })
+
+        queries.push(createItemTransactionsQuery)
+        
+        const updateItemQuantityQueries = this.prepareUpdateItemQuantityQueries(itemTransactions);
+    
+        queries.push(updateItemQuantityQueries);
+    
+        return queries;
+    }
+    
+
+    private async prepareUpdateItemQuantityQueries(itemTransactions: Prisma.ItemTransactionCreateManyInput[]): Promise<any[]> {
+        const queries = itemTransactions.map(async (transaction) => {
+            const item = await this.prisma.item.findUnique({ where: { id: transaction.item_id } });
+            if (!item) {
+                throw new NotFoundException(`Item not found with item_id: ${transaction.item_id}`);
+            }
+    
+            const totalQuantity = item.quantity + transaction.quantity;
+    
+            return this.prisma.item.update({
+                where: { id: item.id },
+                data: { quantity: totalQuantity },
+            });
+        });
+    
+        return Promise.all(queries);
+    }
+    
 
 }

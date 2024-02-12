@@ -172,7 +172,7 @@ exports.Prisma.UserPermissionScalarFieldEnum = {
   updated_at: 'updated_at',
   is_deleted: 'is_deleted',
   user_id: 'user_id',
-  module_id: 'module_id'
+  submodule_id: 'submodule_id'
 };
 
 exports.Prisma.ServiceScalarFieldEnum = {
@@ -199,6 +199,15 @@ exports.Prisma.ModuleScalarFieldEnum = {
   updated_at: 'updated_at',
   is_deleted: 'is_deleted',
   feature_id: 'feature_id'
+};
+
+exports.Prisma.SubModuleScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  is_deleted: 'is_deleted',
+  module_id: 'module_id'
 };
 
 exports.Prisma.JOApproverSettingScalarFieldEnum = {
@@ -283,7 +292,8 @@ exports.Prisma.NullsOrder = {
 };
 exports.Role = exports.$Enums.Role = {
   USER: 'USER',
-  ADMIN: 'ADMIN'
+  ADMIN: 'ADMIN',
+  IT: 'IT'
 };
 
 exports.Prisma.ModelName = {
@@ -297,6 +307,7 @@ exports.Prisma.ModelName = {
   Service: 'Service',
   Feature: 'Feature',
   Module: 'Module',
+  SubModule: 'SubModule',
   JOApproverSetting: 'JOApproverSetting',
   RVApproverSetting: 'RVApproverSetting',
   SPRApproverSetting: 'SPRApproverSetting',
