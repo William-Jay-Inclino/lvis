@@ -118,24 +118,14 @@ export class RvService {
 
         const existingItem = await this.findOne(id)
 
+
+        // =================== VALIDATIONS =================== 
+
         if(input.status){
-
-            // if(!isValidApprovalStatus(input.status)){
-            //     throw new BadRequestException("Invalid status value")
-            // }
-
             if(input.status !== APPROVAL_STATUS.CANCELLED){
                 throw new BadRequestException("Unable to update status. Only accepts status = cancelled")
             }
 
-        }
-
-        if(input.supervisor_id){
-            const isValidSupervisorId = await this.areEmployeesExist([input.supervisor_id], this.authUser)
-
-            if(!isValidSupervisorId){
-                throw new NotFoundException('Supervisor ID not valid')
-            }
         }
 
         if(input.classification_id){
@@ -146,13 +136,47 @@ export class RvService {
             }
         }
 
-        if(input.canceller_id) {
-            const isValidCancellerId = await this.areEmployeesExist([input.canceller_id], this.authUser)
+        const employeeIds = []
 
-            if(!isValidCancellerId){
-                throw new NotFoundException('Canceller ID not valid')
-            }
+        if(input.supervisor_id){
+            employeeIds.push(input.supervisor_id)
         }
+
+        if(input.canceller_id) {
+            employeeIds.push(input.canceller_id)
+        }
+
+        if(employeeIds.length > 0){
+
+            const isValidEmployeeIds = await this.areEmployeesExist(employeeIds, this.authUser)
+
+            if(!isValidEmployeeIds){
+                throw new NotFoundException('One or more employee IDs is not valid')
+            }
+
+        }
+
+
+        const approvers = await this.prisma.rVApprover.findMany({
+            where: {
+                rv_id: id
+            }
+        })
+
+        
+        for(let approver of approvers) {
+
+            if(approver.status !== APPROVAL_STATUS.PENDING) {
+
+                throw new Error(`Unable to update rv. You can only update if all approver's status is PENDING`)
+
+            }
+
+        }
+
+        // =================== END VALIDATIONS =================== 
+
+
 
         const data: Prisma.RVUpdateInput = {
             supervisor_id: input.supervisor_id ?? existingItem.supervisor_id,
@@ -165,15 +189,68 @@ export class RvService {
             date_cancelled: input.canceller_id ? new Date() : existingItem.date_cancelled
         }
 
-        const updated = await this.prisma.rV.update({
+
+        // if no supervisor input or same supervisor then normal update
+        if(!input.supervisor_id || (input.supervisor_id === existingItem.supervisor_id)){
+
+            const updated = await this.prisma.rV.update({
+                data,
+                where: { id },
+                include: this.includedFields
+            })
+    
+            this.logger.log('Successfully updated RV')
+    
+            return updated
+
+        }
+
+        // if supervisor is updated then delete the existing supervisor and create the new supervisor in rv approver table
+
+        const updateRvQuery = this.prisma.rV.update({
             data,
             where: { id },
             include: this.includedFields
         })
 
-        this.logger.log('Successfully updated RV')
+        const existingRvApprover = await this.prisma.rVApprover.findFirst({
+            where: {
+                rv_id: id,
+                approver_id: existingItem.supervisor_id
+            }
+        })
 
-        return updated
+        if(!existingRvApprover){
+            throw new NotFoundException('RV Approver not found')
+        }
+
+        const deleteRvApproverQuery = this.prisma.rVApprover.delete({
+            where: {
+                id: existingRvApprover.id
+            }
+        })
+
+        const createRvApproverData: Prisma.RVApproverCreateInput = {
+            rv: { connect: { id } },
+            approver_id: input.supervisor_id,
+            status: APPROVAL_STATUS.PENDING,
+            label: existingRvApprover.label,
+            order: existingRvApprover.order
+        }
+
+        const createRvApproverQuery = this.prisma.rVApprover.create({
+            data: createRvApproverData
+        })
+
+        const result = await this.prisma.$transaction([
+            updateRvQuery,
+            deleteRvApproverQuery,
+            createRvApproverQuery
+        ])
+
+        this.logger.log('Successfully updated RV, deleted rv approver associated with previous supervisor, added approver referencing new supervisor')
+
+        return result[0]
 
     }
 
