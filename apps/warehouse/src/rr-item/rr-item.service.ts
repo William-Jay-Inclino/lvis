@@ -1,3 +1,32 @@
+/*
+
+	1. When CREATING rr_item, create also item transaction, and add the rr_item qty in item qty
+	2. quantity_accepted in rr_item should be in sync with quantity in item_transaction
+	3. net_price in rr_item should be in sync with price in item_transaction
+	4. item_id in rr_item should be in sync with item_id in item_transaction
+	5. If there is an UPDATE in quantity in item_transaction, it should also update the quantity in item table
+
+		let inputData
+		let itemTransaction
+
+		5a. If previous item is EQUAL to the new update item then the logic should be: 
+
+			let item
+
+			let itemTotalQty = (item.quantity - itemTransaction.quantity) + inputData.quantity_accepted
+
+		5b. If previous item is NOT EQUAL to the new update item then the logic should be: 
+
+			let prevItem
+			let newItem
+
+			let prevItemQty = prevItem.quantity - itemTransaction.quantity
+			let newItemQty = newItem.quantity + inputData.quantity_accepted
+
+*/
+
+
+
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { CreateRRItemInput } from './dto/create-rr-item.input';
 import { UpdateRrItemInput } from './dto/update-rr-item.input';
@@ -24,12 +53,12 @@ export class RrItemService {
 		
 		this.logger.log('create')
 
-		const itemTransaction: Prisma.ItemTransactionCreateWithoutRr_itemInput = {
-			item: { connect: { id: input.item_id } },
-			type: ITEM_TRANSACTION_TYPE.STOCK_IN,
-			quantity: input.quantity_accepted,
-			price: input.net_price
-		}
+		// const itemTransaction: Prisma.ItemTransactionCreateWithoutRr_itemInput = {
+		// 	item: { connect: { id: input.item_id } },
+		// 	type: ITEM_TRANSACTION_TYPE.STOCK_IN,
+		// 	quantity: input.quantity_accepted,
+		// 	price: input.net_price
+		// }
 
 		const data: Prisma.RRItemCreateInput = {
 			rr: { connect: { id: input.rr_id } },
@@ -44,46 +73,46 @@ export class RrItemService {
 			gross_price: input.gross_price,
 			net_price: input.net_price,
 			freight_cost: input.freight_cost,
-			item_transaction: {
-				create: itemTransaction
-			}
+			// item_transaction: {
+			// 	create: itemTransaction
+			// }
 		}
 
-		const createRRItemQuery = this.prisma.rRItem.create({
+		const created = await this.prisma.rRItem.create({
             data,
             include: this.includedFields
         })
 		
-		const item = await this.prisma.item.findUnique({
-			where: {
-				id: input.item_id
-			}
-		})
+		// const item = await this.prisma.item.findUnique({
+		// 	where: {
+		// 		id: input.item_id
+		// 	}
+		// })
 
-		if(!item) {
-            throw new NotFoundException('Item not found')
-        }
+		// if(!item) {
+        //     throw new NotFoundException('Item not found')
+        // }
 
-		const totalQuantity = item.quantity + input.quantity_accepted
+		// const totalQuantity = item.quantity + input.quantity_accepted
 
-		const updateItemQuery = this.prisma.item.update({
-			where: {
-				id: input.item_id
-			},
-			data: {
-				quantity: totalQuantity
-			}
-		})
+		// const updateItemQuery = this.prisma.item.update({
+		// 	where: {
+		// 		id: input.item_id
+		// 	},
+		// 	data: {
+		// 		quantity: totalQuantity
+		// 	}
+		// })
 
 
-		const [createdRRItem, updatedItem] = await this.prisma.$transaction([
-			createRRItemQuery,
-			updateItemQuery
-		])
+		// const [createdRRItem, updatedItem] = await this.prisma.$transaction([
+		// 	createRRItemQuery,
+		// 	updateItemQuery
+		// ])
 
-        this.logger.log('Successfully created RR Item and updated Item quantity')
+        this.logger.log('Successfully created RR Item')
 
-        return createdRRItem
+        return created
 
 	}
 
@@ -191,6 +220,7 @@ export class RrItemService {
 		// set update item transaction query
 		const updateItemTransactionQuery = this.prisma.itemTransaction.update({
 			data: {
+				item: { connect: { id: input.item_id || itemTransaction.item_id } },
 				quantity: input.quantity_accepted ?? itemTransaction.quantity,
 				price: input.net_price ?? itemTransaction.price
 			},
@@ -199,21 +229,21 @@ export class RrItemService {
 			}
 		})
 
-		// if no quantity_accepted then update only rr item and item transaction. No need to update item new quantity
-		if(!input.quantity_accepted){
+		// if no quantity_accepted and not new item then update only rr item and item transaction. No need to update quantity in item table
+		if(!input.quantity_accepted && !input.item_id){
 
 			const [updatedRRItem, updatedItemTransaction] = await this.prisma.$transaction([
 				updateRRItemQuery,
 				updateItemTransactionQuery
 			])
 
-			this.logger.log('Successfully updated RR Item and Item transaction')
+			this.logger.log('Successfully updated RR Item and Item transaction price')
 
 			return updatedRRItem
 
 		}
 
-		// set update item query to update it's new quantity
+		// get item
         const item = await this.prisma.item.findUnique({
             where: { id: itemTransaction.item_id }
         })
@@ -222,26 +252,73 @@ export class RrItemService {
             throw new NotFoundException('Item not found')
         }
 
-		const newQuantity = (item.quantity - itemTransaction.quantity) + input.quantity_accepted
 
-		const updateItemQuery = this.prisma.item.update({
+		// if same item (previous item equal to new input item)
+		if(itemTransaction.item_id === input.item_id) {
+
+			const newQuantity = (item.quantity - itemTransaction.quantity) + input.quantity_accepted
+			const updateItemQuery = this.prisma.item.update({
+				where: {
+					id: item.id
+				},
+				data: {
+					quantity: newQuantity
+				}
+			})
+
+			// update rr item, item transaction's quantity and price, item's quantity using database transaction
+	
+			const [updatedRRItem, updatedItemTransaction, updatedItem] = await this.prisma.$transaction([
+				updateRRItemQuery,
+				updateItemTransactionQuery,
+				updateItemQuery
+			])
+
+			this.logger.log('Successfully updated RR Item, Item transaction (quantity and/or price), and Item (quantity)')
+	
+			return updatedRRItem
+
+		}
+
+		// if different item then subtract the qty from the prev item and add qty in the new item
+		const deductedQuantity = item.quantity - itemTransaction.quantity
+
+		const prevItemQtyDiffQuery = this.prisma.item.update({
 			where: {
 				id: item.id
 			},
 			data: {
-				quantity: newQuantity
+				quantity: deductedQuantity
 			}
 		})
 
-		// update rr item, item transaction's quantity and price, item's quantity using database transaction
+		const newItem = await this.prisma.item.findUnique({
+			where: { id: input.item_id }
+		})
 
-		const [updatedRRItem, updatedItemTransaction, updatedItem] = await this.prisma.$transaction([
+		if(!newItem) {
+			throw new NotFoundException('Item not found')
+		}
+
+		const newTotalQuantity = newItem.quantity + input.quantity_accepted
+
+		const newItemQtyTotalQuery = this.prisma.item.update({
+			where: {
+				id: item.id
+			},
+			data: {
+				quantity: newTotalQuantity
+			}
+		})
+
+		const [updatedRRItem, updatedItemTransaction, updatedPrevItem, updatedNewItem] = await this.prisma.$transaction([
 			updateRRItemQuery,
 			updateItemTransactionQuery,
-			updateItemQuery
+			prevItemQtyDiffQuery,
+			newItemQtyTotalQuery
 		])
 
-		this.logger.log('Successfully updated RR Item, Item transaction, and Item')
+		this.logger.log('Successfully updated RR Item, Item transaction (quantity and/or price), Previous Item Qty, and New Item Qty')
 
 		return updatedRRItem
 
