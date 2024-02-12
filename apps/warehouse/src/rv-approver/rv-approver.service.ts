@@ -270,13 +270,6 @@ export class RvApproverService {
         }
     }
 
-    private async validateEmployeeExistence(employeeId: string, errorMessage: string): Promise<void> {
-        const isValidEmployeeId = await this.areEmployeesExist([employeeId], this.authUser);
-        if (!isValidEmployeeId) {
-            throw new NotFoundException(`${errorMessage} not valid`);
-        }
-    }
-
     private async updateRVApprover(id: string, data: Prisma.RVApproverUpdateInput): Promise<RVApprover> {
         const updated = await this.prisma.rVApprover.update({
             data,
@@ -337,25 +330,25 @@ export class RvApproverService {
         return updatedRvApprover;
     }
 
-        // also update rv status to pending
-        private async handlePendingStatus(id: string, data: Prisma.RVApproverUpdateInput, rvId: string): Promise<RVApprover> {
+    // also update rv status to pending
+    private async handlePendingStatus(id: string, data: Prisma.RVApproverUpdateInput, rvId: string): Promise<RVApprover> {
 
-            const updateRvApprover = this.prisma.rVApprover.update({
-                data,
-                where: { id },
-                include: this.includedFields,
-            }); 
+        const updateRvApprover = this.prisma.rVApprover.update({
+            data,
+            where: { id },
+            include: this.includedFields,
+        }); 
+
+        const [updatedRvApprover, updatedRvStatus] = await this.prisma.$transaction([
+            updateRvApprover,
+            this.prisma.rV.update({
+                data: { status: APPROVAL_STATUS.PENDING },
+                where: { id: rvId },
+            }),
+        ]);
     
-            const [updatedRvApprover, updatedRvStatus] = await this.prisma.$transaction([
-                updateRvApprover,
-                this.prisma.rV.update({
-                    data: { status: APPROVAL_STATUS.PENDING },
-                    where: { id: rvId },
-                }),
-            ]);
-        
-            this.logger.log('Successfully updated RV Approver');
-            return updatedRvApprover;
-        }
+        this.logger.log('Successfully updated RV Approver');
+        return updatedRvApprover;
+    }
 
 }
