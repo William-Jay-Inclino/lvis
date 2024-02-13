@@ -1,8 +1,8 @@
 import { BadRequestException, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../__prisma__/prisma.service';
 import { CreatePoInput } from './dto/create-po.input';
-import { PO, Prisma } from 'apps/warehouse/prisma/generated/client';
-import { APPROVAL_STATUS } from '../__common__/types';
+import { PO, POApprover, Prisma } from 'apps/warehouse/prisma/generated/client';
+import { APPROVAL_STATUS, Role } from '../__common__/types';
 import { WarehouseRemoveResponse } from '../__common__/classes';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { HttpService } from '@nestjs/axios';
@@ -66,24 +66,9 @@ export class PoService {
         
         this.logger.log('create()')
 
-        // ================================= VALIDATIONS =================================
-
-        // 1. Validate approver ids, and approver proxy ids exist in employees table in system service.
-
-        const employeeIds: string[] = input.approvers.map(({ approver_id, approver_proxy_id }) => {
-            const ids = [approver_id, approver_proxy_id].filter(id => id !== null && id !== undefined);
-            return ids.join(',');
-        });
-
-        this.logger.log('employeeIds', employeeIds)
-
-        const isValidEmployeeIds = await this.areEmployeesExist(employeeIds, this.authUser)
-
-        if(!isValidEmployeeIds){
-            throw new BadRequestException("One or more employee id is invalid")
+        if( !(await this.canCreate(input)) ) {
+            throw new Error('Failed to create PO. Please try again')
         }
-
-        // ================================= END VALIDATIONS =================================
 
         const poNumber = await this.getLatestPoNumber()
 
@@ -143,24 +128,8 @@ export class PoService {
 
         const existingItem = await this.findOne(id)
 
-        if(input.status){
-
-            // if(!isValidApprovalStatus(input.status)){
-            //     throw new BadRequestException("Invalid status value")
-            // }
-
-            if(input.status !== APPROVAL_STATUS.CANCELLED){
-                throw new BadRequestException("Unable to update status. Only accepts status = cancelled")
-            }
-
-        }
-
-        if(input.canceller_id){
-            const isValidCancellerId = await this.areEmployeesExist([input.canceller_id], this.authUser)
-
-            if(!isValidCancellerId){
-                throw new NotFoundException('Canceller ID not valid')
-            }
+        if( !(await this.canUpdate(input, existingItem)) ) {
+            throw new Error('Failed to update PO. Please try again')
         }
 
         const data: Prisma.POUpdateInput = {
@@ -300,6 +269,126 @@ export class PoService {
             console.error('Error querying employees:', error.message);
             return false;
         }
+    }
+
+    private async canCreate(input: CreatePoInput): Promise<boolean> {
+
+        // VALIDATE EMPLOYEE IDS
+
+        const employeeIds: string[] = input.approvers.map(({ approver_id, approver_proxy_id }) => {
+            const ids = [approver_id, approver_proxy_id].filter(id => id !== null && id !== undefined);
+            return ids.join(',');
+        });
+
+        this.logger.log('employeeIds', employeeIds)
+
+        const isValidEmployeeIds = await this.areEmployeesExist(employeeIds, this.authUser)
+
+        if(!isValidEmployeeIds){
+            throw new BadRequestException("One or more employee id is invalid")
+        }
+
+        // FIND MEQS SUPPLIER
+        const meqsSupplier = await this.prisma.mEQSSupplier.findUnique({
+            where: {
+                id: input.meqs_supplier_id
+            }
+        })
+
+        if(!meqsSupplier) {
+            throw new NotFoundException('Meqs Supplier not found with ID: ' + input.meqs_supplier_id)
+        }   
+
+        // VALIDATE IF MEQS SUPPLIER IS REFERENCED
+        if(meqsSupplier.is_referenced) {
+            throw new BadRequestException('Meqs Supplier already been referenced with ID: ' + input.meqs_supplier_id)
+        }
+
+        // FIND MEQS
+        const meqs = await this.prisma.mEQS.findUnique({
+            where: {
+                id: meqsSupplier.meqs_id
+            }
+        })
+
+        if(!meqs) {
+            throw new NotFoundException('MEQS not found with ID: ' + meqsSupplier.meqs_id)
+        }
+
+        // VALIDATE IF MEQS STATUS IS APPROVED
+        if(meqs.status !== APPROVAL_STATUS.APPROVED) {
+            throw new BadRequestException(`Unable to create PO. MEQS Status is not approved with ID: ` + meqsSupplier.meqs_id)
+        }
+
+        return true
+    }
+
+    private async canUpdate(input: UpdatePoInput, existingItem: PO): Promise<boolean> {
+
+        const isNormalUser = this.isNormalUser()
+
+        console.log('isNormalUser', isNormalUser)
+
+        // validates if there is already an approver who take an action
+        if(isNormalUser) {
+
+            console.log('is normal user')
+
+            const approvers = await this.prisma.pOApprover.findMany({
+                where: {
+                    po_id: existingItem.id
+                }
+            })
+
+            // used to indicate whether there is at least one approver whose status is not pending.
+            const isAnyNonPendingApprover = this.isAnyNonPendingApprover(approvers)
+
+            if(isAnyNonPendingApprover) {
+                throw new BadRequestException(`Unable to update PO. Can only update if all approver's status is pending`)
+            }
+        }
+
+        if(input.status){
+
+            if(input.status !== APPROVAL_STATUS.CANCELLED){
+                throw new BadRequestException("Unable to update status. Only accepts status = cancelled")
+            }
+
+        }
+
+        if(input.canceller_id){
+            const isValidCancellerId = await this.areEmployeesExist([input.canceller_id], this.authUser)
+
+            if(!isValidCancellerId){
+                throw new NotFoundException('Canceller ID not valid')
+            }
+        }
+
+        return true 
+    }
+
+    // used to indicate whether there is at least one approver whose status is not pending.
+    private isAnyNonPendingApprover(approvers: POApprover[]): boolean {
+
+        for(let approver of approvers) {
+
+            if(approver.status !== APPROVAL_STATUS.PENDING) {
+
+                return true
+
+            }
+
+        }
+
+        return false
+
+    }
+
+    private isNormalUser(): boolean {
+
+        const isNormalUser = (this.authUser.user.role === Role.USER)
+
+        return isNormalUser
     }
 
 }

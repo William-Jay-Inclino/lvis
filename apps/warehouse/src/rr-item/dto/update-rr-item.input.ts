@@ -58,4 +58,10 @@ export class UpdateRrItemInput extends PartialType(CreateRRItemInput) {
     @Min(0.01, { message: 'Net price must be greater than 0' })
     net_price?: number | null
 
+    @Field(() => Float, { nullable: true })
+    @IsOptional()
+    @IsNumber()
+    @Min(0.00, { message: 'Vat amount must be greater than or equal to 0' })
+    vat_amount?: number | null
+
 }

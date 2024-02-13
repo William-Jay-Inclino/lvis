@@ -325,6 +325,7 @@ model PO {
   po_approvers     POApprover[]
   meqs_supplier    MEQSSupplier @relation(fields: [meqs_supplier_id], references: [id], onDelete: Restrict)
   rr               RR?
+  is_referenced    Boolean      @default(false)
 
   @@map("purchase_order")
 }
@@ -403,6 +404,7 @@ model RRItem {
   vat_type           Int
   gross_price        Float
   net_price          Float
+  vat_amount         Float   @default(0.00)
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt

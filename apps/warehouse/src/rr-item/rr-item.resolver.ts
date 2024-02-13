@@ -4,13 +4,21 @@ import { RrItem } from './entities/rr-item.entity';
 import { CreateRRItemInput } from './dto/create-rr-item.input';
 import { UpdateRrItemInput } from './dto/update-rr-item.input';
 import { WarehouseRemoveResponse } from '../__common__/classes';
-
+import { AuthUser } from '../__common__/auth-user.entity';
+import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
+import { GqlAuthGuard } from '../__auth__/guards/gql-auth.guard';
+import { UseGuards } from '@nestjs/common';
+@UseGuards(GqlAuthGuard)
 @Resolver(() => RrItem)
 export class RrItemResolver {
   constructor(private readonly rrItemService: RrItemService) {}
 
   @Mutation(() => RrItem)
-  createRrItem(@Args('input') createRrItemInput: CreateRRItemInput) {
+  createRrItem(
+    @CurrentAuthUser() authUser: AuthUser,
+    @Args('input') createRrItemInput: CreateRRItemInput
+  ) {
+    this.rrItemService.setAuthUser(authUser)
     return this.rrItemService.create(createRrItemInput);
   }
 
@@ -40,8 +48,10 @@ export class RrItemResolver {
   @Mutation(() => RrItem)
   updateRrItem(
     @Args('id') id: string,
-    @Args('input') updateRrItemInput: UpdateRrItemInput
+    @Args('input') updateRrItemInput: UpdateRrItemInput,
+    @CurrentAuthUser() authUser: AuthUser
   ) {
+    this.rrItemService.setAuthUser(authUser)
     return this.rrItemService.update(id, updateRrItemInput);
   }
 

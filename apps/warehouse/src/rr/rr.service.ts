@@ -4,10 +4,10 @@ import { UpdateRrInput } from './dto/update-rr.input';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { PrismaService } from '../__prisma__/prisma.service';
 import { HttpService } from '@nestjs/axios';
-import { Prisma, RR } from 'apps/warehouse/prisma/generated/client';
+import { Prisma, RR, RRApprover } from 'apps/warehouse/prisma/generated/client';
 import { WarehouseRemoveResponse } from '../__common__/classes';
 import { catchError, firstValueFrom } from 'rxjs';
-import { APPROVAL_STATUS } from '../__common__/types';
+import { APPROVAL_STATUS, Role } from '../__common__/types';
 
 @Injectable()
 export class RrService {
@@ -81,10 +81,8 @@ export class RrService {
 
         this.logger.log('create()')
 
-        const isValidEmployeeIds = await this.areEmployeesExist([input.received_by_id], this.authUser)
-
-        if(!isValidEmployeeIds){
-            throw new BadRequestException("One or more employee id is invalid")
+        if( !(await this.canCreate(input)) ) {
+            throw new Error('Failed to create RR. Please try again')
         }
 
         const rrNumber = await this.getLatestRrNumber()
@@ -191,22 +189,8 @@ export class RrService {
 
         const existingItem = await this.findOne(id)
 
-        const employeeIds = []
-
-        if(input.received_by_id){
-            employeeIds.push(input.received_by_id)
-        }
-
-        if(input.canceller_id) {
-            employeeIds.push(input.canceller_id)
-        }
-
-        if(employeeIds.length > 0){
-            const isValidEmployeeIds = await this.areEmployeesExist(employeeIds, this.authUser)
-    
-            if(!isValidEmployeeIds){
-                throw new BadRequestException("One or more employee id is invalid")
-            }
+        if( !(await this.canUpdate(input, existingItem)) ) {
+            throw new Error('Failed to update RR. Please try again')
         }
 
         const data: Prisma.RRUpdateInput = {
@@ -268,7 +252,6 @@ export class RrService {
         }
     }
 
-
     private async areEmployeesExist(employeeIds: string[], authUser: AuthUser): Promise<boolean> {
 
         this.logger.log('areEmployeesExist', employeeIds);
@@ -313,6 +296,107 @@ export class RrService {
             console.error('Error querying employees:', error.message);
             return false;
         }
+    }
+
+    private async canCreate(input: CreateRrInput): Promise<boolean> {
+
+        const isValidEmployeeIds = await this.areEmployeesExist([input.received_by_id], this.authUser)
+
+        if(!isValidEmployeeIds){
+            throw new BadRequestException("One or more employee id is invalid")
+        }
+
+        const po = await this.prisma.pO.findUnique({
+            where: {
+                id: input.po_id
+            }
+        })
+
+        if(!po) {
+            throw new NotFoundException('Unable to find PO with ID: ' + input.po_id)
+        }
+
+        if(po.is_referenced) {
+            throw new BadRequestException('PO already been referenced with ID: ' + input.po_id)
+        }
+
+        if(po.status !== APPROVAL_STATUS.APPROVED) {
+            throw new BadRequestException(`Unable to create RR. PO Status is not approved with ID: ` + input.po_id)
+        }
+
+        return true
+
+    }
+
+    private async canUpdate(input: UpdateRrInput, existingItem: RR): Promise<boolean> {
+
+
+        const isNormalUser = this.isNormalUser()
+
+        console.log('isNormalUser', isNormalUser)
+
+        // validates if there is already an approver who take an action
+        if(isNormalUser) {
+
+            console.log('is normal user')
+
+            const approvers = await this.prisma.rRApprover.findMany({
+                where: {
+                    rr_id: existingItem.id
+                }
+            })
+
+            // used to indicate whether there is at least one approver whose status is not pending.
+            const isAnyNonPendingApprover = this.isAnyNonPendingApprover(approvers)
+
+            if(isAnyNonPendingApprover) {
+                throw new BadRequestException(`Unable to update RR. Can only update if all approver's status is pending`)
+            }
+        }
+
+        const employeeIds = []
+
+        if(input.received_by_id){
+            employeeIds.push(input.received_by_id)
+        }
+
+        if(input.canceller_id) {
+            employeeIds.push(input.canceller_id)
+        }
+
+        if(employeeIds.length > 0){
+            const isValidEmployeeIds = await this.areEmployeesExist(employeeIds, this.authUser)
+    
+            if(!isValidEmployeeIds){
+                throw new BadRequestException("One or more employee id is invalid")
+            }
+        }
+
+        return true 
+    }
+
+    // used to indicate whether there is at least one approver whose status is not pending.
+    private isAnyNonPendingApprover(approvers: RRApprover[]): boolean {
+
+        for(let approver of approvers) {
+
+            if(approver.status !== APPROVAL_STATUS.PENDING) {
+
+                return true
+
+            }
+
+        }
+
+        return false
+
+    }
+
+    private isNormalUser(): boolean {
+
+        const isNormalUser = (this.authUser.user.role === Role.USER)
+
+        return isNormalUser
     }
 
 }

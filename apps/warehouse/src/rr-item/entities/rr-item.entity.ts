@@ -56,4 +56,7 @@ export class RrItem {
   @Field(() => Float)
   net_price: number
 
+  @Field(() => Float)
+  vat_amount: number
+
 }
