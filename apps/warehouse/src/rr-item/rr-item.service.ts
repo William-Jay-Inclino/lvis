@@ -1,43 +1,17 @@
-/*
-
-	1. quantity_accepted in rr_item should be in sync with quantity in item_transaction
-	2. net_price in rr_item should be in sync with price in item_transaction
-	3. item_id in rr_item should be in sync with item_id in item_transaction
-	4. If there is an UPDATE in quantity in item_transaction, it should also update the quantity in item table
-
-		let inputData
-		let itemTransaction
-
-		5a. If previous item is EQUAL to the new update item then the logic should be: 
-
-			let item
-
-			let itemTotalQty = (item.quantity - itemTransaction.quantity) + inputData.quantity_accepted
-
-		5b. If previous item is NOT EQUAL to the new update item then the logic should be: 
-
-			let prevItem
-			let newItem
-
-			let prevItemQty = prevItem.quantity - itemTransaction.quantity
-			let newItemQty = newItem.quantity + inputData.quantity_accepted
-
-*/
-
-
-
-import { Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { CreateRRItemInput } from './dto/create-rr-item.input';
 import { UpdateRrItemInput } from './dto/update-rr-item.input';
 import { PrismaService } from '../__prisma__/prisma.service';
-import { Prisma, RRItem } from 'apps/warehouse/prisma/generated/client';
-import { ITEM_TRANSACTION_TYPE } from '../__common__/types';
+import { Prisma, RRApprover, RRItem } from 'apps/warehouse/prisma/generated/client';
+import { APPROVAL_STATUS, ITEM_TRANSACTION_TYPE, Role } from '../__common__/types';
 import { WarehouseRemoveResponse } from '../__common__/classes';
+import { AuthUser } from '../__common__/auth-user.entity';
 
 @Injectable()
 export class RrItemService {
 
 	private readonly logger = new Logger(RrItemService.name)
+	private authUser: AuthUser
 	private includedFields = {
 		rr: true
 	}
@@ -45,10 +19,18 @@ export class RrItemService {
     constructor(
         private readonly prisma: PrismaService,
     ) {}
+
+	setAuthUser(authUser: AuthUser){
+        this.authUser = authUser
+    }
 	
 	async create(input: CreateRRItemInput): Promise<RRItem>{
 		
 		this.logger.log('create')
+
+		if( !(await this.canCreate(input)) ) {
+            throw new Error('Failed to create RR Item. Please try again')
+        }
 
 		const data: Prisma.RRItemCreateInput = {
 			rr: { connect: { id: input.rr_id } },
@@ -62,7 +44,7 @@ export class RrItemService {
 			vat_type: input.vat_type,
 			gross_price: input.gross_price,
 			net_price: input.net_price,
-			freight_cost: input.freight_cost,
+			vat_amount: input.vat_amount,
 		}
 
 		const created = await this.prisma.rRItem.create({
@@ -130,6 +112,10 @@ export class RrItemService {
 
         const existingItem = await this.findOne(id)
 
+		if( !(await this.canUpdate(input, existingItem)) ) {
+            throw new Error('Failed to update RR Item. Please try again')
+        }
+
 		const data: Prisma.RRItemUpdateInput = {
 			item: { connect: { id: input.item_id || existingItem.item_id } },
 			item_brand: { connect: { id: input.item_brand_id || existingItem.item_brand_id } },
@@ -141,7 +127,7 @@ export class RrItemService {
 			vat_type: input.vat_type ?? existingItem.vat_type,
 			gross_price: input.gross_price ?? existingItem.gross_price,
 			net_price: input.net_price ?? existingItem.net_price,
-			freight_cost: input.freight_cost ?? existingItem.freight_cost,
+			vat_amount: input.vat_amount ?? existingItem.vat_amount
 		};
 
 
@@ -170,4 +156,117 @@ export class RrItemService {
 			msg: "RR Item successfully deleted"
 		}
 	}
+
+	// 1.  Can only create rr item if associated rr status is pending
+	// 2.  If there is already an approver who takes an action, you cannot create unless if your role is ADMIN OR IT 
+	private async canCreate(input: CreateRRItemInput): Promise<boolean> {
+
+		const rr = await this.prisma.rR.findUnique({
+			where: {
+				id: input.rr_id
+			}
+		})
+
+		if(!rr) {
+			throw new NotFoundException('RR not found with ID: ' + input.rr_id)
+		}
+
+		if(rr.status !== APPROVAL_STATUS.PENDING) {
+			throw new BadRequestException('Can only create RR Item if rr status is PENDING')
+		}
+
+		const isNormalUser = this.isNormalUser()
+
+        console.log('isNormalUser', isNormalUser)
+
+        // validates if there is already an approver who take an action
+        if(isNormalUser) {
+
+            console.log('is normal user')
+
+            const approvers = await this.prisma.rRApprover.findMany({
+                where: {
+                    rr_id: input.rr_id
+                }
+            })
+
+            // used to indicate whether there is at least one approver whose status is not pending.
+            const isAnyNonPendingApprover = this.isAnyNonPendingApprover(approvers)
+
+            if(isAnyNonPendingApprover) {
+                throw new BadRequestException(`Unable to create RR Item. Can only create if all rr approver's status is pending`)
+            }
+        }
+
+		return true
+
+	}
+
+	private async canUpdate(input: UpdateRrItemInput, existingItem: RRItem): Promise<boolean> {
+
+		const rr = await this.prisma.rR.findUnique({
+			where: {
+				id: input.rr_id
+			}
+		})
+
+		if(!rr) {
+			throw new NotFoundException('RR not found with ID: ' + input.rr_id)
+		}
+
+		if(rr.status !== APPROVAL_STATUS.PENDING) {
+			throw new BadRequestException('Can only update RR Item if rr status is PENDING')
+		}
+
+		const isNormalUser = this.isNormalUser()
+
+        console.log('isNormalUser', isNormalUser)
+
+        // validates if there is already an approver who take an action
+        if(isNormalUser) {
+
+            console.log('is normal user')
+
+            const approvers = await this.prisma.rRApprover.findMany({
+                where: {
+                    rr_id: input.rr_id
+                }
+            })
+
+            // used to indicate whether there is at least one approver whose status is not pending.
+            const isAnyNonPendingApprover = this.isAnyNonPendingApprover(approvers)
+
+            if(isAnyNonPendingApprover) {
+                throw new BadRequestException(`Unable to update RR Item. Can only update if all rr approver's status is pending`)
+            }
+        }
+
+		return true
+
+	}
+
+	// used to indicate whether there is at least one approver whose status is not pending.
+	private isAnyNonPendingApprover(approvers: RRApprover[]): boolean {
+
+		for(let approver of approvers) {
+
+			if(approver.status !== APPROVAL_STATUS.PENDING) {
+
+				return true
+
+			}
+
+		}
+
+		return false
+
+	}
+
+	private isNormalUser(): boolean {
+
+		const isNormalUser = (this.authUser.user.role === Role.USER)
+
+		return isNormalUser
+	}
+
 }

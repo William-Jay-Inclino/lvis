@@ -2,6 +2,7 @@ import { ObjectType, Field, Int, ID, Float } from '@nestjs/graphql';
 import { Unit } from '../../unit/entities/unit.entity';
 import { ItemTransaction } from '../../item-transaction/entities/item-transaction.entity';
 import { ItemType } from '../../item-type/entities/item-type.entity';
+import { RrItem } from '../../rr-item/entities/rr-item.entity';
 
 @ObjectType()
 export class Item {
@@ -27,12 +28,6 @@ export class Item {
   @Field(() => Int)
   initial_quantity: number;
 
-  @Field(() => Float)
-  average_price: number;
-
-  @Field(() => Float)
-  initial_average_price: number;
-
   @Field(() => Date)
   created_at: Date;
 
@@ -45,8 +40,8 @@ export class Item {
   @Field(() => [ItemTransaction])
   item_transactions: ItemTransaction[];
 
-  // @Field()
-  // rr_items: string;
+  @Field(() => [RrItem])
+  rr_items: RrItem[];
 
   @Field( () => Unit)
   unit: Unit;

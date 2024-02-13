@@ -1,0 +1,61 @@
+query{
+  items{
+    id
+    item_type {
+      id
+      name
+    }
+    unit {
+      id
+      name
+    }
+    code
+    description
+    initial_quantity
+    quantity
+    item_transactions {
+      rr_item {
+        id
+        rr {
+          rr_number
+        }
+        item_brand {
+          name
+        }
+        unit {
+          name
+        }
+        item_class
+        quantity_delivered
+        quantity_accepted
+        description
+        vat_type
+        gross_price
+        net_price
+      }
+      type
+      quantity
+      price
+      remarks
+    }
+    rr_items {
+      id
+      rr {
+        rr_number
+      }
+      item_brand {
+        name
+      }
+      unit {
+        name
+      }
+      item_class
+      quantity_delivered
+      quantity_accepted
+      description
+      vat_type
+      gross_price
+      net_price
+    }
+  }
+}

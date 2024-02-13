@@ -1,0 +1,24 @@
+mutation {
+  createRr(
+    input: {
+      po_id: "38c36b9f-1f15-4565-9b82-e4c2069b2ec9"
+      rr_date: "2024-02-13"
+      received_by_id: "09246cc4-0e21-4ed5-a229-f18844f480ab"
+      invoice_number: "11111"
+      notes: "rr notes"
+      delivery_charge: 0.00
+      approvers: [
+        { approver_id: "86f98e1e-cd26-4465-9833-5c90fcffdedf", label: "Confirmed By", order: 1 }
+        { approver_id: "60758a68-1e25-40a9-bd89-6941cbaae1f5", label: "Audited By", order: 2 }
+        { approver_id: "690f5a43-2a27-4dd8-ad4e-d5acdb0d3142", label: "Approved By", order: 3 }
+      ],
+      rr_items: [
+        {
+          
+        }
+      ]
+    }
+  ){
+    rr_number
+  }
+}

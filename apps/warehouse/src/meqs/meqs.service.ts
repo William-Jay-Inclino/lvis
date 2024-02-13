@@ -3,11 +3,10 @@ import { AuthUser } from '../__common__/auth-user.entity';
 import { PrismaService } from '../__prisma__/prisma.service';
 import { HttpService } from '@nestjs/axios';
 import { CreateMeqsInput } from './dto/create-meqs.input';
-import { MEQS, Prisma } from 'apps/warehouse/prisma/generated/client';
-import { APPROVAL_STATUS } from '../__common__/types';
+import { JOApprover, MEQS, MEQSApprover, Prisma, RVApprover, SPRApprover } from 'apps/warehouse/prisma/generated/client';
+import { APPROVAL_STATUS, Role } from '../__common__/types';
 import { UpdateMeqsInput } from './dto/update-meqs.input';
 import { catchError, firstValueFrom } from 'rxjs';
-import { isValidApprovalStatus } from '../__common__/helpers';
 
 @Injectable()
 export class MeqsService {
@@ -30,7 +29,6 @@ export class MeqsService {
                 canvass: true
             }
         },
-        meqs_approvers: true,
         meqs_suppliers: {
             include: {
                 supplier: true,
@@ -62,25 +60,9 @@ export class MeqsService {
 
         this.logger.log('create()')
 
-        // ================================= VALIDATIONS =================================
-        
-        if(!input.jo_id && !input.rv_id && !input.spr_id){
-            throw new BadRequestException("Please provide 1 reference either jo, rv, or spr")
+        if(!(await this.canCreate(input)) ) {
+            throw new Error('Unable to create MEQS')
         }
-
-        const employeeIds: string[] = input.approvers.map((input) =>
-            [input.approver_id, input.approver_proxy_id].filter(Boolean).join(',')
-        );
-
-        this.logger.log('employeeIds', employeeIds)
-
-        const isValidEmployeeIds = await this.areEmployeesExist(employeeIds, this.authUser)
-
-        if(!isValidEmployeeIds){
-            throw new BadRequestException("One or more approver id or approver proxy id is invalid")
-        }
-
-        // ================================= END VALIDATIONS =================================
 
         const meqsNumber = await this.getLatestMeqsNumber()
 
@@ -142,18 +124,8 @@ export class MeqsService {
             meqs_suppliers
         }
 
-
-        if(input.jo_id){
-            return await this.createMeqsAndUpdateReference('jO', 'jo_id', data)
-        }
-
-        if(input.rv_id){
-            return await this.createMeqsAndUpdateReference('rV', 'rv_id', data)
-        }
-
-        if(input.spr_id){
-            return await this.createMeqsAndUpdateReference('sPR', 'spr_id', data)
-        }
+        const model = this.getModel(input)
+        return await this.createMeqsAndUpdateReference(model.name, model.id, data)
 
     }
 
@@ -166,6 +138,16 @@ export class MeqsService {
             data,
             include: this.includedFields
         })
+
+        const referenceItem =  await this.prisma[model].findUnique({
+            where: {
+                id: refId
+            }
+        })
+
+        if(!referenceItem) {
+            throw new NotFoundException(`Reference not found either (rv, jo, spr) with id: ${refId} `)
+        }
         
         const updateReferenceQuery = this.prisma[model].update({
             data: {
@@ -191,24 +173,8 @@ export class MeqsService {
 
         const existingItem = await this.findOne(id)
 
-        if(input.status){
-
-            // if(!isValidApprovalStatus(input.status)){
-            //     throw new BadRequestException("Invalid status value")
-            // }
-
-            if(input.status !== APPROVAL_STATUS.CANCELLED){
-                throw new BadRequestException("Unable to update status. Only accepts status = cancelled")
-            }
-
-        }
-
-        if(input.canceller_id){
-            const isValidEmployeeIds = await this.areEmployeesExist([input.canceller_id], this.authUser)
-    
-            if(!isValidEmployeeIds){
-                throw new BadRequestException("Canceller ID is invalid")
-            }
+        if( !(await this.canUpdate(input, existingItem)) ) {
+            throw new Error('Unable to update MEQS')
         }
 
 
@@ -348,6 +314,151 @@ export class MeqsService {
             },
             include: this.includedFields
         })
+    }
+
+    private async canReference(model: string, id: string): Promise<{succes: boolean, msg: string}> {
+
+        const modelText = model.toUpperCase()
+
+        const reference = await this.prisma[model].findUnique({
+            where: { id }
+        })
+
+        if(!reference) {
+            return { succes: false, msg: `${modelText} not found with id: ${id}` }
+        }
+
+        if(reference.is_referenced) {
+            return { succes: false, msg: `${modelText} is already referenced` }
+        }
+
+        if(reference.status !== APPROVAL_STATUS.APPROVED) {
+            return { succes: false, msg: `Cannot reference ${modelText}. Status is not approved` }
+        }
+
+        return { succes: true, msg: '' }
+
+    }
+
+    private getModel(input: CreateMeqsInput): {name: string, id: string} {
+
+        if(input.jo_id) {
+            return { name: 'jO', id: input.jo_id }
+        }
+
+        if(input.rv_id) {
+            return { name: 'rV', id: input.rv_id }
+        }
+
+        if(input.spr_id) {
+            return { name: 'sPR', id: input.spr_id }
+        }
+
+    }
+
+    private async canCreate(input: CreateMeqsInput): Promise<boolean> {
+
+        if(!input.jo_id && !input.rv_id && !input.spr_id){
+            throw new BadRequestException("Please provide 1 reference either jo, rv, or spr")
+        }
+
+        const employeeIds: string[] = input.approvers.map((input) =>
+            [input.approver_id, input.approver_proxy_id].filter(Boolean).join(',')
+        );
+
+        this.logger.log('employeeIds', employeeIds)
+
+        const isValidEmployeeIds = await this.areEmployeesExist(employeeIds, this.authUser)
+
+        if(!isValidEmployeeIds){
+            throw new BadRequestException("One or more approver id or approver proxy id is invalid")
+        }
+
+        const model = this.getModel(input)
+        // validates if reference id is already referenced and if status is approved
+        const canReference = await this.canReference(model.name, model.id)
+
+        if(!canReference.succes) {
+            throw new BadRequestException(canReference.msg)
+        }
+
+        return true
+
+    }
+
+    private async canUpdate(input: UpdateMeqsInput, existingItem: MEQS): Promise<boolean> {
+
+        console.log('canUpdate()')
+        console.log('authUser', this.authUser)
+
+       
+        const isNormalUser = this.isNormalUser()
+
+        console.log('isNormalUser', isNormalUser)
+
+        // validates if there is already an approver who take an action
+        if(isNormalUser) {
+
+            console.log('is normal user')
+
+            const approvers = await this.prisma.mEQSApprover.findMany({
+                where: {
+                    meqs_id: existingItem.id
+                }
+            })
+
+            // used to indicate whether there is at least one approver whose status is not pending.
+            const isAnyNonPendingApprover = this.isAnyNonPendingApprover(approvers)
+
+            if(isAnyNonPendingApprover) {
+                throw new BadRequestException(`Unable to update MEQS. Can only update if all approver's status is pending`)
+            }
+        }
+        
+
+        if(input.status){
+
+            if(input.status !== APPROVAL_STATUS.CANCELLED){
+                throw new BadRequestException("Unable to update status. Only accepts status = cancelled")
+            }
+
+        }
+
+        if(input.canceller_id){
+            const isValidEmployeeIds = await this.areEmployeesExist([input.canceller_id], this.authUser)
+    
+            if(!isValidEmployeeIds){
+                throw new BadRequestException("Canceller ID is invalid")
+            }
+        }
+
+        console.log('can update')
+        return true
+
+    }
+
+    // used to indicate whether there is at least one approver whose status is not pending.
+    private isAnyNonPendingApprover(approvers: MEQSApprover[]): boolean {
+
+        for(let approver of approvers) {
+
+            if(approver.status !== APPROVAL_STATUS.PENDING) {
+
+                return true
+
+            }
+
+        }
+
+        return false
+
+    }
+
+    private isNormalUser(): boolean {
+
+        const isNormalUser = (this.authUser.user.role === Role.USER)
+
+        return isNormalUser
     }
 
 }

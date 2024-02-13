@@ -39,6 +39,9 @@ export class MEQS {
   @Field(() => String)
   meqs_date: string;
 
+  @Field(() => String)
+  notes: string;
+
   @Field(() => Int)
   status: APPROVAL_STATUS;
 

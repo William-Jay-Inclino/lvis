@@ -1,3 +1,4 @@
+import { Role } from "./types";
 
 export class User {
 
@@ -8,4 +9,7 @@ export class User {
   password: string;
 
   status: number;
+
+  role: Role
+
 }

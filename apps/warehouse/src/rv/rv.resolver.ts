@@ -37,8 +37,8 @@ export class RvResolver {
 
     @Query(() => RV)
     rv(
-        @Args('id') id: string,
-        @Args('rv_number') rv_number: string
+        @Args('id', {nullable: true}) id?: string,
+        @Args('rv_number', {nullable: true}) rv_number?: string
     ) {
         if(id){
             return this.rvService.findOne(id);

@@ -8,8 +8,8 @@ import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { GqlAuthGuard } from '../__auth__/guards/gql-auth.guard';
 import { UseGuards } from '@nestjs/common';
-// import { POApprover } from './entities/rr-approver.entity';
-// import { PoApproverService } from '../po-approver/rr-approver.service';
+import { RrApprover } from '../rr-approver/entities/rr-approver.entity';
+import { RrApproverService } from '../rr-approver/rr-approver.service';
 
 @UseGuards(GqlAuthGuard)
 @Resolver( () => RR)
@@ -17,7 +17,7 @@ export class RrResolver {
 
     constructor(
         private readonly rrService: RrService,
-        // private readonly poApproverService: PoApproverService
+        private readonly rrApproverService: RrApproverService
     ) {}
 
     @Mutation(() => RR)
@@ -36,8 +36,8 @@ export class RrResolver {
 
     @Query(() => RR)
     rr(
-        @Args('id') id: string,
-        @Args('rr_number') rr_number: string
+        @Args('id', {nullable: true}) id?: string,
+        @Args('rr_number', {nullable: true}) rr_number?: string
     ) {
         if(id){
             return this.rrService.findOne(id);
@@ -65,10 +65,15 @@ export class RrResolver {
         return { __typename: 'Employee', id: rr.canceller_id }
     }
 
-    // @ResolveField( () => [POApprover])
-    // po_approvers(@Parent() po: PO): any {
-    //     return this.poApproverService.findByPoId(po.id)
-    // }
+    @ResolveField( () => [RrApprover])
+    rr_approvers(@Parent() rr: RR): any {
+        return this.rrApproverService.findByRrId(rr.id)
+    }
+
+    @ResolveField( () => Employee)
+    received_by(@Parent() rr: RR): any {
+        return { __typename: 'Employee', id: rr.received_by_id }
+    }
 
 
 }

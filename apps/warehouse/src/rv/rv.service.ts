@@ -1,9 +1,9 @@
 import { BadRequestException, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { CanvassService } from '../canvass/canvass.service';
 import { PrismaService } from '../__prisma__/prisma.service';
-import { Prisma, RV } from 'apps/warehouse/prisma/generated/client';
+import { Prisma, RV, RVApprover } from 'apps/warehouse/prisma/generated/client';
 import { CreateRvInput } from './dto/create-rv.input';
-import { APPROVAL_STATUS } from '../__common__/types';
+import { APPROVAL_STATUS, Role } from '../__common__/types';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { UpdateRvInput } from './dto/update-rv.input';
 import { catchError, firstValueFrom } from 'rxjs';
@@ -44,24 +44,9 @@ export class RvService {
 
         this.logger.log('create()')
 
-        // ================================= VALIDATIONS =================================
-
-        // 1. Validate approver ids, and approver proxy ids exist in employees table in system service.
-
-        const employeeIds: string[] = input.approvers.map(({ approver_id, approver_proxy_id }) => {
-            const ids = [approver_id, approver_proxy_id].filter(id => id !== null && id !== undefined);
-            return ids.join(',');
-        });
-
-        this.logger.log('employeeIds', employeeIds)
-
-        const isValidEmployeeIds = await this.areEmployeesExist(employeeIds, this.authUser)
-
-        if(!isValidEmployeeIds){
-            throw new BadRequestException("One or more employee id is invalid")
+        if( !(await this.canCreate(input)) ) {
+            throw new Error('Failed to create RV. Please try again')
         }
-
-        // ================================= END VALIDATIONS =================================
 
         const rvNumber = await this.getLatestRvNumber()
 
@@ -118,65 +103,9 @@ export class RvService {
 
         const existingItem = await this.findOne(id)
 
-
-        // =================== VALIDATIONS =================== 
-
-        if(input.status){
-            if(input.status !== APPROVAL_STATUS.CANCELLED){
-                throw new BadRequestException("Unable to update status. Only accepts status = cancelled")
-            }
-
+        if( !(await this.canUpdate(input, existingItem)) ) {
+            throw new Error('Failed to update RV. Please try again')
         }
-
-        if(input.classification_id){
-            const isValidClassificationId = await this.isClassificationExist(input.classification_id, this.authUser)
-
-            if(!isValidClassificationId){
-                throw new NotFoundException('Classification ID not valid')
-            }
-        }
-
-        const employeeIds = []
-
-        if(input.supervisor_id){
-            employeeIds.push(input.supervisor_id)
-        }
-
-        if(input.canceller_id) {
-            employeeIds.push(input.canceller_id)
-        }
-
-        if(employeeIds.length > 0){
-
-            const isValidEmployeeIds = await this.areEmployeesExist(employeeIds, this.authUser)
-
-            if(!isValidEmployeeIds){
-                throw new NotFoundException('One or more employee IDs is not valid')
-            }
-
-        }
-
-
-        const approvers = await this.prisma.rVApprover.findMany({
-            where: {
-                rv_id: id
-            }
-        })
-
-        
-        for(let approver of approvers) {
-
-            if(approver.status !== APPROVAL_STATUS.PENDING) {
-
-                throw new Error(`Unable to update rv. You can only update if all approver's status is PENDING`)
-
-            }
-
-        }
-
-        // =================== END VALIDATIONS =================== 
-
-
 
         const data: Prisma.RVUpdateInput = {
             supervisor_id: input.supervisor_id ?? existingItem.supervisor_id,
@@ -443,6 +372,126 @@ export class RvService {
             console.error('Error querying employees:', error.message);
             return false;
         }
+    }
+
+    private async canCreate(input: CreateRvInput): Promise<boolean> {
+        const employeeIds: string[] = input.approvers.map(({ approver_id, approver_proxy_id }) => {
+            const ids = [approver_id, approver_proxy_id].filter(id => id !== null && id !== undefined);
+            return ids.join(',');
+        });
+
+        this.logger.log('employeeIds', employeeIds)
+
+        const isValidEmployeeIds = await this.areEmployeesExist(employeeIds, this.authUser)
+
+        if(!isValidEmployeeIds){
+            throw new BadRequestException("One or more employee id is invalid")
+        }
+
+        const canvass = await this.prisma.canvass.findUnique({
+            where: { id: input.canvass_id }
+        })
+
+        if(!canvass) {
+            throw new NotFoundException('Canvass not found with id: ' + input.canvass_id)
+        }
+
+        if(canvass.is_referenced) {
+            throw new BadRequestException('Canvass already been referenced with ID: ' + input.canvass_id)
+        }
+
+        return true
+
+    }
+
+    private async canUpdate(input: UpdateRvInput, existingItem: RV): Promise<boolean> {
+
+        const isNormalUser = this.isNormalUser()
+
+        console.log('isNormalUser', isNormalUser)
+
+        // validates if there is already an approver who take an action
+        if(isNormalUser) {
+
+            console.log('is normal user')
+
+            const approvers = await this.prisma.rVApprover.findMany({
+                where: {
+                    rv_id: existingItem.id
+                }
+            })
+
+            // used to indicate whether there is at least one approver whose status is not pending.
+            const isAnyNonPendingApprover = this.isAnyNonPendingApprover(approvers)
+
+            if(isAnyNonPendingApprover) {
+                throw new BadRequestException(`Unable to update RV. Can only update if all approver's status is pending`)
+            }
+        }
+
+
+        if(input.status){
+            if(input.status !== APPROVAL_STATUS.CANCELLED){
+                throw new BadRequestException("Unable to update status. Only accepts status = cancelled")
+            }
+
+        }
+
+        if(input.classification_id){
+            const isValidClassificationId = await this.isClassificationExist(input.classification_id, this.authUser)
+
+            if(!isValidClassificationId){
+                throw new NotFoundException('Classification ID not valid')
+            }
+        }
+
+        const employeeIds = []
+
+        if(input.supervisor_id){
+            employeeIds.push(input.supervisor_id)
+        }
+
+        if(input.canceller_id) {
+            employeeIds.push(input.canceller_id)
+        }
+
+        if(employeeIds.length > 0){
+
+            const isValidEmployeeIds = await this.areEmployeesExist(employeeIds, this.authUser)
+
+            if(!isValidEmployeeIds){
+                throw new NotFoundException('One or more employee IDs is not valid')
+            }
+
+        }
+
+        return true
+
+    }
+
+
+    // used to indicate whether there is at least one approver whose status is not pending.
+    private isAnyNonPendingApprover(approvers: RVApprover[]): boolean {
+
+        for(let approver of approvers) {
+
+            if(approver.status !== APPROVAL_STATUS.PENDING) {
+
+                return true
+
+            }
+
+        }
+
+        return false
+
+    }
+
+    private isNormalUser(): boolean {
+
+        const isNormalUser = (this.authUser.user.role === Role.USER)
+
+        return isNormalUser
     }
 
 }

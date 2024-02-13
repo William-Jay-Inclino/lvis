@@ -65,7 +65,7 @@ export class CreateRRItemInput {
     @Field(() => Float)
     @IsNotEmpty()
     @IsNumber()
-    @Min(0.00, { message: 'Freight price must be greater than or equal to 0' })
-    freight_cost: number
+    @Min(0.00, { message: 'Vat amount must be greater than or equal to 0' })
+    vat_amount: number
 
 }

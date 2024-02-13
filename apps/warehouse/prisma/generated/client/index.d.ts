@@ -20998,6 +20998,7 @@ export namespace Prisma {
     created_at: Date | null
     updated_at: Date | null
     is_deleted: boolean | null
+    is_referenced: boolean | null
   }
 
   export type POMaxAggregateOutputType = {
@@ -21011,6 +21012,7 @@ export namespace Prisma {
     created_at: Date | null
     updated_at: Date | null
     is_deleted: boolean | null
+    is_referenced: boolean | null
   }
 
   export type POCountAggregateOutputType = {
@@ -21024,6 +21026,7 @@ export namespace Prisma {
     created_at: number
     updated_at: number
     is_deleted: number
+    is_referenced: number
     _all: number
   }
 
@@ -21047,6 +21050,7 @@ export namespace Prisma {
     created_at?: true
     updated_at?: true
     is_deleted?: true
+    is_referenced?: true
   }
 
   export type POMaxAggregateInputType = {
@@ -21060,6 +21064,7 @@ export namespace Prisma {
     created_at?: true
     updated_at?: true
     is_deleted?: true
+    is_referenced?: true
   }
 
   export type POCountAggregateInputType = {
@@ -21073,6 +21078,7 @@ export namespace Prisma {
     created_at?: true
     updated_at?: true
     is_deleted?: true
+    is_referenced?: true
     _all?: true
   }
 
@@ -21173,6 +21179,7 @@ export namespace Prisma {
     created_at: Date
     updated_at: Date
     is_deleted: boolean
+    is_referenced: boolean
     _count: POCountAggregateOutputType | null
     _avg: POAvgAggregateOutputType | null
     _sum: POSumAggregateOutputType | null
@@ -21205,6 +21212,7 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     is_deleted?: boolean
+    is_referenced?: boolean
     po_approvers?: boolean | PO$po_approversArgs<ExtArgs>
     meqs_supplier?: boolean | MEQSSupplierDefaultArgs<ExtArgs>
     rr?: boolean | PO$rrArgs<ExtArgs>
@@ -21222,6 +21230,7 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     is_deleted?: boolean
+    is_referenced?: boolean
   }
 
   export type POInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -21250,6 +21259,7 @@ export namespace Prisma {
       created_at: Date
       updated_at: Date
       is_deleted: boolean
+      is_referenced: boolean
     }, ExtArgs["result"]["pO"]>
     composites: {}
   }
@@ -21659,6 +21669,7 @@ export namespace Prisma {
     readonly created_at: FieldRef<"PO", 'DateTime'>
     readonly updated_at: FieldRef<"PO", 'DateTime'>
     readonly is_deleted: FieldRef<"PO", 'Boolean'>
+    readonly is_referenced: FieldRef<"PO", 'Boolean'>
   }
     
 
@@ -25228,7 +25239,7 @@ export namespace Prisma {
     vat_type: number | null
     gross_price: number | null
     net_price: number | null
-    freight_cost: number | null
+    vat_amount: number | null
   }
 
   export type RRItemSumAggregateOutputType = {
@@ -25238,7 +25249,7 @@ export namespace Prisma {
     vat_type: number | null
     gross_price: number | null
     net_price: number | null
-    freight_cost: number | null
+    vat_amount: number | null
   }
 
   export type RRItemMinAggregateOutputType = {
@@ -25254,7 +25265,7 @@ export namespace Prisma {
     vat_type: number | null
     gross_price: number | null
     net_price: number | null
-    freight_cost: number | null
+    vat_amount: number | null
     created_at: Date | null
     updated_at: Date | null
     is_deleted: boolean | null
@@ -25273,7 +25284,7 @@ export namespace Prisma {
     vat_type: number | null
     gross_price: number | null
     net_price: number | null
-    freight_cost: number | null
+    vat_amount: number | null
     created_at: Date | null
     updated_at: Date | null
     is_deleted: boolean | null
@@ -25292,7 +25303,7 @@ export namespace Prisma {
     vat_type: number
     gross_price: number
     net_price: number
-    freight_cost: number
+    vat_amount: number
     created_at: number
     updated_at: number
     is_deleted: number
@@ -25307,7 +25318,7 @@ export namespace Prisma {
     vat_type?: true
     gross_price?: true
     net_price?: true
-    freight_cost?: true
+    vat_amount?: true
   }
 
   export type RRItemSumAggregateInputType = {
@@ -25317,7 +25328,7 @@ export namespace Prisma {
     vat_type?: true
     gross_price?: true
     net_price?: true
-    freight_cost?: true
+    vat_amount?: true
   }
 
   export type RRItemMinAggregateInputType = {
@@ -25333,7 +25344,7 @@ export namespace Prisma {
     vat_type?: true
     gross_price?: true
     net_price?: true
-    freight_cost?: true
+    vat_amount?: true
     created_at?: true
     updated_at?: true
     is_deleted?: true
@@ -25352,7 +25363,7 @@ export namespace Prisma {
     vat_type?: true
     gross_price?: true
     net_price?: true
-    freight_cost?: true
+    vat_amount?: true
     created_at?: true
     updated_at?: true
     is_deleted?: true
@@ -25371,7 +25382,7 @@ export namespace Prisma {
     vat_type?: true
     gross_price?: true
     net_price?: true
-    freight_cost?: true
+    vat_amount?: true
     created_at?: true
     updated_at?: true
     is_deleted?: true
@@ -25477,7 +25488,7 @@ export namespace Prisma {
     vat_type: number
     gross_price: number
     net_price: number
-    freight_cost: number
+    vat_amount: number
     created_at: Date
     updated_at: Date
     is_deleted: boolean
@@ -25515,7 +25526,7 @@ export namespace Prisma {
     vat_type?: boolean
     gross_price?: boolean
     net_price?: boolean
-    freight_cost?: boolean
+    vat_amount?: boolean
     created_at?: boolean
     updated_at?: boolean
     is_deleted?: boolean
@@ -25539,7 +25550,7 @@ export namespace Prisma {
     vat_type?: boolean
     gross_price?: boolean
     net_price?: boolean
-    freight_cost?: boolean
+    vat_amount?: boolean
     created_at?: boolean
     updated_at?: boolean
     is_deleted?: boolean
@@ -25576,7 +25587,7 @@ export namespace Prisma {
       vat_type: number
       gross_price: number
       net_price: number
-      freight_cost: number
+      vat_amount: number
       created_at: Date
       updated_at: Date
       is_deleted: boolean
@@ -25995,7 +26006,7 @@ export namespace Prisma {
     readonly vat_type: FieldRef<"RRItem", 'Int'>
     readonly gross_price: FieldRef<"RRItem", 'Float'>
     readonly net_price: FieldRef<"RRItem", 'Float'>
-    readonly freight_cost: FieldRef<"RRItem", 'Float'>
+    readonly vat_amount: FieldRef<"RRItem", 'Float'>
     readonly created_at: FieldRef<"RRItem", 'DateTime'>
     readonly updated_at: FieldRef<"RRItem", 'DateTime'>
     readonly is_deleted: FieldRef<"RRItem", 'Boolean'>
@@ -29744,7 +29755,8 @@ export namespace Prisma {
     date_cancelled: 'date_cancelled',
     created_at: 'created_at',
     updated_at: 'updated_at',
-    is_deleted: 'is_deleted'
+    is_deleted: 'is_deleted',
+    is_referenced: 'is_referenced'
   };
 
   export type POScalarFieldEnum = (typeof POScalarFieldEnum)[keyof typeof POScalarFieldEnum]
@@ -29820,7 +29832,7 @@ export namespace Prisma {
     vat_type: 'vat_type',
     gross_price: 'gross_price',
     net_price: 'net_price',
-    freight_cost: 'freight_cost',
+    vat_amount: 'vat_amount',
     created_at: 'created_at',
     updated_at: 'updated_at',
     is_deleted: 'is_deleted'
@@ -31437,6 +31449,7 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"PO"> | Date | string
     updated_at?: DateTimeFilter<"PO"> | Date | string
     is_deleted?: BoolFilter<"PO"> | boolean
+    is_referenced?: BoolFilter<"PO"> | boolean
     po_approvers?: POApproverListRelationFilter
     meqs_supplier?: XOR<MEQSSupplierRelationFilter, MEQSSupplierWhereInput>
     rr?: XOR<RRNullableRelationFilter, RRWhereInput> | null
@@ -31453,6 +31466,7 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
+    is_referenced?: SortOrder
     po_approvers?: POApproverOrderByRelationAggregateInput
     meqs_supplier?: MEQSSupplierOrderByWithRelationInput
     rr?: RROrderByWithRelationInput
@@ -31472,6 +31486,7 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"PO"> | Date | string
     updated_at?: DateTimeFilter<"PO"> | Date | string
     is_deleted?: BoolFilter<"PO"> | boolean
+    is_referenced?: BoolFilter<"PO"> | boolean
     po_approvers?: POApproverListRelationFilter
     meqs_supplier?: XOR<MEQSSupplierRelationFilter, MEQSSupplierWhereInput>
     rr?: XOR<RRNullableRelationFilter, RRWhereInput> | null
@@ -31488,6 +31503,7 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
+    is_referenced?: SortOrder
     _count?: POCountOrderByAggregateInput
     _avg?: POAvgOrderByAggregateInput
     _max?: POMaxOrderByAggregateInput
@@ -31509,6 +31525,7 @@ export namespace Prisma {
     created_at?: DateTimeWithAggregatesFilter<"PO"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"PO"> | Date | string
     is_deleted?: BoolWithAggregatesFilter<"PO"> | boolean
+    is_referenced?: BoolWithAggregatesFilter<"PO"> | boolean
   }
 
   export type POApproverWhereInput = {
@@ -31824,7 +31841,7 @@ export namespace Prisma {
     vat_type?: IntFilter<"RRItem"> | number
     gross_price?: FloatFilter<"RRItem"> | number
     net_price?: FloatFilter<"RRItem"> | number
-    freight_cost?: FloatFilter<"RRItem"> | number
+    vat_amount?: FloatFilter<"RRItem"> | number
     created_at?: DateTimeFilter<"RRItem"> | Date | string
     updated_at?: DateTimeFilter<"RRItem"> | Date | string
     is_deleted?: BoolFilter<"RRItem"> | boolean
@@ -31848,7 +31865,7 @@ export namespace Prisma {
     vat_type?: SortOrder
     gross_price?: SortOrder
     net_price?: SortOrder
-    freight_cost?: SortOrder
+    vat_amount?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -31875,7 +31892,7 @@ export namespace Prisma {
     vat_type?: IntFilter<"RRItem"> | number
     gross_price?: FloatFilter<"RRItem"> | number
     net_price?: FloatFilter<"RRItem"> | number
-    freight_cost?: FloatFilter<"RRItem"> | number
+    vat_amount?: FloatFilter<"RRItem"> | number
     created_at?: DateTimeFilter<"RRItem"> | Date | string
     updated_at?: DateTimeFilter<"RRItem"> | Date | string
     is_deleted?: BoolFilter<"RRItem"> | boolean
@@ -31899,7 +31916,7 @@ export namespace Prisma {
     vat_type?: SortOrder
     gross_price?: SortOrder
     net_price?: SortOrder
-    freight_cost?: SortOrder
+    vat_amount?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -31926,7 +31943,7 @@ export namespace Prisma {
     vat_type?: IntWithAggregatesFilter<"RRItem"> | number
     gross_price?: FloatWithAggregatesFilter<"RRItem"> | number
     net_price?: FloatWithAggregatesFilter<"RRItem"> | number
-    freight_cost?: FloatWithAggregatesFilter<"RRItem"> | number
+    vat_amount?: FloatWithAggregatesFilter<"RRItem"> | number
     created_at?: DateTimeWithAggregatesFilter<"RRItem"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"RRItem"> | Date | string
     is_deleted?: BoolWithAggregatesFilter<"RRItem"> | boolean
@@ -33798,6 +33815,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    is_referenced?: boolean
     po_approvers?: POApproverCreateNestedManyWithoutPoInput
     meqs_supplier: MEQSSupplierCreateNestedOneWithoutPoInput
     rr?: RRCreateNestedOneWithoutPoInput
@@ -33814,6 +33832,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    is_referenced?: boolean
     po_approvers?: POApproverUncheckedCreateNestedManyWithoutPoInput
     rr?: RRUncheckedCreateNestedOneWithoutPoInput
   }
@@ -33828,6 +33847,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    is_referenced?: BoolFieldUpdateOperationsInput | boolean
     po_approvers?: POApproverUpdateManyWithoutPoNestedInput
     meqs_supplier?: MEQSSupplierUpdateOneRequiredWithoutPoNestedInput
     rr?: RRUpdateOneWithoutPoNestedInput
@@ -33844,6 +33864,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    is_referenced?: BoolFieldUpdateOperationsInput | boolean
     po_approvers?: POApproverUncheckedUpdateManyWithoutPoNestedInput
     rr?: RRUncheckedUpdateOneWithoutPoNestedInput
   }
@@ -33859,6 +33880,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    is_referenced?: boolean
   }
 
   export type POUpdateManyMutationInput = {
@@ -33871,6 +33893,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    is_referenced?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type POUncheckedUpdateManyInput = {
@@ -33884,6 +33907,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    is_referenced?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type POApproverCreateInput = {
@@ -34236,7 +34260,7 @@ export namespace Prisma {
     vat_type: number
     gross_price: number
     net_price: number
-    freight_cost: number
+    vat_amount?: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -34260,7 +34284,7 @@ export namespace Prisma {
     vat_type: number
     gross_price: number
     net_price: number
-    freight_cost: number
+    vat_amount?: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -34276,7 +34300,7 @@ export namespace Prisma {
     vat_type?: IntFieldUpdateOperationsInput | number
     gross_price?: FloatFieldUpdateOperationsInput | number
     net_price?: FloatFieldUpdateOperationsInput | number
-    freight_cost?: FloatFieldUpdateOperationsInput | number
+    vat_amount?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -34300,7 +34324,7 @@ export namespace Prisma {
     vat_type?: IntFieldUpdateOperationsInput | number
     gross_price?: FloatFieldUpdateOperationsInput | number
     net_price?: FloatFieldUpdateOperationsInput | number
-    freight_cost?: FloatFieldUpdateOperationsInput | number
+    vat_amount?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -34320,7 +34344,7 @@ export namespace Prisma {
     vat_type: number
     gross_price: number
     net_price: number
-    freight_cost: number
+    vat_amount?: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -34335,7 +34359,7 @@ export namespace Prisma {
     vat_type?: IntFieldUpdateOperationsInput | number
     gross_price?: FloatFieldUpdateOperationsInput | number
     net_price?: FloatFieldUpdateOperationsInput | number
-    freight_cost?: FloatFieldUpdateOperationsInput | number
+    vat_amount?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -34354,7 +34378,7 @@ export namespace Prisma {
     vat_type?: IntFieldUpdateOperationsInput | number
     gross_price?: FloatFieldUpdateOperationsInput | number
     net_price?: FloatFieldUpdateOperationsInput | number
-    freight_cost?: FloatFieldUpdateOperationsInput | number
+    vat_amount?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -35772,6 +35796,7 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
+    is_referenced?: SortOrder
   }
 
   export type POAvgOrderByAggregateInput = {
@@ -35789,6 +35814,7 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
+    is_referenced?: SortOrder
   }
 
   export type POMinOrderByAggregateInput = {
@@ -35802,6 +35828,7 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
+    is_referenced?: SortOrder
   }
 
   export type POSumOrderByAggregateInput = {
@@ -36030,7 +36057,7 @@ export namespace Prisma {
     vat_type?: SortOrder
     gross_price?: SortOrder
     net_price?: SortOrder
-    freight_cost?: SortOrder
+    vat_amount?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -36043,7 +36070,7 @@ export namespace Prisma {
     vat_type?: SortOrder
     gross_price?: SortOrder
     net_price?: SortOrder
-    freight_cost?: SortOrder
+    vat_amount?: SortOrder
   }
 
   export type RRItemMaxOrderByAggregateInput = {
@@ -36059,7 +36086,7 @@ export namespace Prisma {
     vat_type?: SortOrder
     gross_price?: SortOrder
     net_price?: SortOrder
-    freight_cost?: SortOrder
+    vat_amount?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -36078,7 +36105,7 @@ export namespace Prisma {
     vat_type?: SortOrder
     gross_price?: SortOrder
     net_price?: SortOrder
-    freight_cost?: SortOrder
+    vat_amount?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -36091,7 +36118,7 @@ export namespace Prisma {
     vat_type?: SortOrder
     gross_price?: SortOrder
     net_price?: SortOrder
-    freight_cost?: SortOrder
+    vat_amount?: SortOrder
   }
 
   export type ItemTypeRelationFilter = {
@@ -38243,7 +38270,7 @@ export namespace Prisma {
     vat_type: number
     gross_price: number
     net_price: number
-    freight_cost: number
+    vat_amount?: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -38265,7 +38292,7 @@ export namespace Prisma {
     vat_type: number
     gross_price: number
     net_price: number
-    freight_cost: number
+    vat_amount?: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -38383,7 +38410,7 @@ export namespace Prisma {
     vat_type?: IntFilter<"RRItem"> | number
     gross_price?: FloatFilter<"RRItem"> | number
     net_price?: FloatFilter<"RRItem"> | number
-    freight_cost?: FloatFilter<"RRItem"> | number
+    vat_amount?: FloatFilter<"RRItem"> | number
     created_at?: DateTimeFilter<"RRItem"> | Date | string
     updated_at?: DateTimeFilter<"RRItem"> | Date | string
     is_deleted?: BoolFilter<"RRItem"> | boolean
@@ -38464,7 +38491,7 @@ export namespace Prisma {
     vat_type: number
     gross_price: number
     net_price: number
-    freight_cost: number
+    vat_amount?: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -38486,7 +38513,7 @@ export namespace Prisma {
     vat_type: number
     gross_price: number
     net_price: number
-    freight_cost: number
+    vat_amount?: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -40764,6 +40791,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    is_referenced?: boolean
     po_approvers?: POApproverCreateNestedManyWithoutPoInput
     rr?: RRCreateNestedOneWithoutPoInput
   }
@@ -40778,6 +40806,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    is_referenced?: boolean
     po_approvers?: POApproverUncheckedCreateNestedManyWithoutPoInput
     rr?: RRUncheckedCreateNestedOneWithoutPoInput
   }
@@ -40928,6 +40957,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    is_referenced?: BoolFieldUpdateOperationsInput | boolean
     po_approvers?: POApproverUpdateManyWithoutPoNestedInput
     rr?: RRUpdateOneWithoutPoNestedInput
   }
@@ -40942,6 +40972,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    is_referenced?: BoolFieldUpdateOperationsInput | boolean
     po_approvers?: POApproverUncheckedUpdateManyWithoutPoNestedInput
     rr?: RRUncheckedUpdateOneWithoutPoNestedInput
   }
@@ -41476,6 +41507,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    is_referenced?: boolean
     meqs_supplier: MEQSSupplierCreateNestedOneWithoutPoInput
     rr?: RRCreateNestedOneWithoutPoInput
   }
@@ -41491,6 +41523,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    is_referenced?: boolean
     rr?: RRUncheckedCreateNestedOneWithoutPoInput
   }
 
@@ -41520,6 +41553,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    is_referenced?: BoolFieldUpdateOperationsInput | boolean
     meqs_supplier?: MEQSSupplierUpdateOneRequiredWithoutPoNestedInput
     rr?: RRUpdateOneWithoutPoNestedInput
   }
@@ -41535,6 +41569,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    is_referenced?: BoolFieldUpdateOperationsInput | boolean
     rr?: RRUncheckedUpdateOneWithoutPoNestedInput
   }
 
@@ -41548,6 +41583,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    is_referenced?: boolean
     po_approvers?: POApproverCreateNestedManyWithoutPoInput
     meqs_supplier: MEQSSupplierCreateNestedOneWithoutPoInput
   }
@@ -41563,6 +41599,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    is_referenced?: boolean
     po_approvers?: POApproverUncheckedCreateNestedManyWithoutPoInput
   }
 
@@ -41618,7 +41655,7 @@ export namespace Prisma {
     vat_type: number
     gross_price: number
     net_price: number
-    freight_cost: number
+    vat_amount?: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -41640,7 +41677,7 @@ export namespace Prisma {
     vat_type: number
     gross_price: number
     net_price: number
-    freight_cost: number
+    vat_amount?: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -41678,6 +41715,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    is_referenced?: BoolFieldUpdateOperationsInput | boolean
     po_approvers?: POApproverUpdateManyWithoutPoNestedInput
     meqs_supplier?: MEQSSupplierUpdateOneRequiredWithoutPoNestedInput
   }
@@ -41693,6 +41731,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    is_referenced?: BoolFieldUpdateOperationsInput | boolean
     po_approvers?: POApproverUncheckedUpdateManyWithoutPoNestedInput
   }
 
@@ -42244,7 +42283,7 @@ export namespace Prisma {
     vat_type: number
     gross_price: number
     net_price: number
-    freight_cost: number
+    vat_amount?: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -42266,7 +42305,7 @@ export namespace Prisma {
     vat_type: number
     gross_price: number
     net_price: number
-    freight_cost: number
+    vat_amount?: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -42511,7 +42550,7 @@ export namespace Prisma {
     vat_type: number
     gross_price: number
     net_price: number
-    freight_cost: number
+    vat_amount?: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -42534,7 +42573,7 @@ export namespace Prisma {
     vat_type: number
     gross_price: number
     net_price: number
-    freight_cost: number
+    vat_amount?: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -42604,7 +42643,7 @@ export namespace Prisma {
     vat_type?: IntFieldUpdateOperationsInput | number
     gross_price?: FloatFieldUpdateOperationsInput | number
     net_price?: FloatFieldUpdateOperationsInput | number
-    freight_cost?: FloatFieldUpdateOperationsInput | number
+    vat_amount?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -42627,7 +42666,7 @@ export namespace Prisma {
     vat_type?: IntFieldUpdateOperationsInput | number
     gross_price?: FloatFieldUpdateOperationsInput | number
     net_price?: FloatFieldUpdateOperationsInput | number
-    freight_cost?: FloatFieldUpdateOperationsInput | number
+    vat_amount?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -42702,7 +42741,7 @@ export namespace Prisma {
     vat_type: number
     gross_price: number
     net_price: number
-    freight_cost: number
+    vat_amount?: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -42764,7 +42803,7 @@ export namespace Prisma {
     vat_type?: IntFieldUpdateOperationsInput | number
     gross_price?: FloatFieldUpdateOperationsInput | number
     net_price?: FloatFieldUpdateOperationsInput | number
-    freight_cost?: FloatFieldUpdateOperationsInput | number
+    vat_amount?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -42786,7 +42825,7 @@ export namespace Prisma {
     vat_type?: IntFieldUpdateOperationsInput | number
     gross_price?: FloatFieldUpdateOperationsInput | number
     net_price?: FloatFieldUpdateOperationsInput | number
-    freight_cost?: FloatFieldUpdateOperationsInput | number
+    vat_amount?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -42805,7 +42844,7 @@ export namespace Prisma {
     vat_type?: IntFieldUpdateOperationsInput | number
     gross_price?: FloatFieldUpdateOperationsInput | number
     net_price?: FloatFieldUpdateOperationsInput | number
-    freight_cost?: FloatFieldUpdateOperationsInput | number
+    vat_amount?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -42874,7 +42913,7 @@ export namespace Prisma {
     vat_type: number
     gross_price: number
     net_price: number
-    freight_cost: number
+    vat_amount?: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -42924,7 +42963,7 @@ export namespace Prisma {
     vat_type?: IntFieldUpdateOperationsInput | number
     gross_price?: FloatFieldUpdateOperationsInput | number
     net_price?: FloatFieldUpdateOperationsInput | number
-    freight_cost?: FloatFieldUpdateOperationsInput | number
+    vat_amount?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -42946,7 +42985,7 @@ export namespace Prisma {
     vat_type?: IntFieldUpdateOperationsInput | number
     gross_price?: FloatFieldUpdateOperationsInput | number
     net_price?: FloatFieldUpdateOperationsInput | number
-    freight_cost?: FloatFieldUpdateOperationsInput | number
+    vat_amount?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -42965,7 +43004,7 @@ export namespace Prisma {
     vat_type?: IntFieldUpdateOperationsInput | number
     gross_price?: FloatFieldUpdateOperationsInput | number
     net_price?: FloatFieldUpdateOperationsInput | number
-    freight_cost?: FloatFieldUpdateOperationsInput | number
+    vat_amount?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -43561,7 +43600,7 @@ export namespace Prisma {
     vat_type: number
     gross_price: number
     net_price: number
-    freight_cost: number
+    vat_amount?: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -43618,7 +43657,7 @@ export namespace Prisma {
     vat_type?: IntFieldUpdateOperationsInput | number
     gross_price?: FloatFieldUpdateOperationsInput | number
     net_price?: FloatFieldUpdateOperationsInput | number
-    freight_cost?: FloatFieldUpdateOperationsInput | number
+    vat_amount?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -43640,7 +43679,7 @@ export namespace Prisma {
     vat_type?: IntFieldUpdateOperationsInput | number
     gross_price?: FloatFieldUpdateOperationsInput | number
     net_price?: FloatFieldUpdateOperationsInput | number
-    freight_cost?: FloatFieldUpdateOperationsInput | number
+    vat_amount?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -43659,7 +43698,7 @@ export namespace Prisma {
     vat_type?: IntFieldUpdateOperationsInput | number
     gross_price?: FloatFieldUpdateOperationsInput | number
     net_price?: FloatFieldUpdateOperationsInput | number
-    freight_cost?: FloatFieldUpdateOperationsInput | number
+    vat_amount?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -43690,7 +43729,7 @@ export namespace Prisma {
     vat_type: number
     gross_price: number
     net_price: number
-    freight_cost: number
+    vat_amount?: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -43744,7 +43783,7 @@ export namespace Prisma {
     vat_type?: IntFieldUpdateOperationsInput | number
     gross_price?: FloatFieldUpdateOperationsInput | number
     net_price?: FloatFieldUpdateOperationsInput | number
-    freight_cost?: FloatFieldUpdateOperationsInput | number
+    vat_amount?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -43766,7 +43805,7 @@ export namespace Prisma {
     vat_type?: IntFieldUpdateOperationsInput | number
     gross_price?: FloatFieldUpdateOperationsInput | number
     net_price?: FloatFieldUpdateOperationsInput | number
-    freight_cost?: FloatFieldUpdateOperationsInput | number
+    vat_amount?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -43785,7 +43824,7 @@ export namespace Prisma {
     vat_type?: IntFieldUpdateOperationsInput | number
     gross_price?: FloatFieldUpdateOperationsInput | number
     net_price?: FloatFieldUpdateOperationsInput | number
-    freight_cost?: FloatFieldUpdateOperationsInput | number
+    vat_amount?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean

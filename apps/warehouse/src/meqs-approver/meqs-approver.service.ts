@@ -115,7 +115,7 @@ export class MeqsApproverService {
             include: this.includedFields,
             where: { is_deleted: false },
             orderBy: {
-                label: 'asc'
+                order: 'asc'
             }
         })
     }
@@ -146,7 +146,7 @@ export class MeqsApproverService {
                 meqs_id: meqsId
             },
             orderBy: {
-                label: 'asc'
+                order: 'asc'
             }
         })
     }
@@ -161,7 +161,7 @@ export class MeqsApproverService {
                 }
             },
             orderBy: {
-                label: 'asc'
+                order: 'asc'
             }
         })
     }

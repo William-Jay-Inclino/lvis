@@ -25,7 +25,7 @@ export class MeqsApproverResolver {
   }
 
   @Query(() => [MEQSApprover])
-  rv_approvers(
+  meqs_approvers(
     @Args('meqs_id', {nullable: true}) meqs_id?: string,
     @Args('meqs_number', {nullable: true}) meqs_number?: string,
   ) {

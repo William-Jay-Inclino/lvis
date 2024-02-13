@@ -49,3 +49,9 @@ export enum ITEM_CLASS {
     STOCK = 1,
     NON_STOCK = 2
 }
+
+export enum Role {
+    USER = 'USER',
+    ADMIN = 'ADMIN',
+    IT = 'IT'
+}

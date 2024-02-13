@@ -6,5 +6,6 @@ import { HttpModule } from '@nestjs/axios';
 @Module({
   imports: [HttpModule],
   providers: [RrApproverResolver, RrApproverService],
+  exports: [RrApproverService]
 })
 export class RrApproverModule {}
