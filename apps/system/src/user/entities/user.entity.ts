@@ -1,4 +1,6 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { Role } from 'apps/system/prisma/generated/client';
+import { UserStatus } from '../../__common__/types';
 
 @ObjectType()
 export class User {
@@ -13,5 +15,9 @@ export class User {
   password: string;
 
   @Field(() => Int)
-  status: number;
+  status: UserStatus;
+
+  @Field(() => Role)
+  role: Role;
+
 }
