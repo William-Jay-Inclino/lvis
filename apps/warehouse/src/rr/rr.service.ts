@@ -126,8 +126,7 @@ export class RrService {
                         description: i.description,
                         vat_type: i.vat_type,
                         gross_price: i.gross_price,
-                        net_price: i.net_price,
-                        freight_cost: i.freight_cost,
+                        net_price: i.net_price
                     }
                     
                     return item

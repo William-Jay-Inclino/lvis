@@ -402,7 +402,6 @@ exports.Prisma.RRItemScalarFieldEnum = {
   vat_type: 'vat_type',
   gross_price: 'gross_price',
   net_price: 'net_price',
-  freight_cost: 'freight_cost',
   created_at: 'created_at',
   updated_at: 'updated_at',
   is_deleted: 'is_deleted'

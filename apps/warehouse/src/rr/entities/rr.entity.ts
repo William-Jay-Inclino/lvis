@@ -28,8 +28,8 @@ export class RR {
   @Field()
   invoice_number: string;
 
-  @Field()
-  delivery_number: string;
+  @Field({ nullable: true })
+  delivery_number?: string | null;
 
   @Field()
   notes: string;

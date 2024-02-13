@@ -1,5 +1,9 @@
 import { ObjectType, Field, Int, ID, Float } from '@nestjs/graphql';
 import { ITEM_CLASS, VAT_TYPE } from '../../__common__/types';
+import { RR } from '../../rr/entities/rr.entity';
+import { Item } from '../../item/entities/item.entity';
+import { Brand } from '../../brand/entities/brand.entity';
+import { Unit } from '../../unit/entities/unit.entity';
 
 @ObjectType()
 export class RrItem {
@@ -10,14 +14,26 @@ export class RrItem {
   @Field()
   rr_id: string
 
+  @Field(() => RR)
+  rr: RR
+
   @Field({ nullable: true })
   item_id: string | null
+
+  @Field(() => Item)
+  item: Item
 
   @Field({ nullable: true })
   item_brand_id: string | null
 
+  @Field(() => Brand)
+  item_brand: Brand
+
   @Field({ nullable: true })
   unit_id: string | null
+
+  @Field(() => Unit)
+  unit: Unit
 
   @Field(() => Int)
   item_class: ITEM_CLASS
@@ -39,8 +55,5 @@ export class RrItem {
 
   @Field(() => Float)
   net_price: number
-
-  @Field(() => Float)
-  freight_cost: number
 
 }

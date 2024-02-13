@@ -57,10 +57,4 @@ export class CreateRRItemSubInput {
     @Min(0.01, { message: 'Net price must be greater than 0' })
     net_price: number
 
-    @Field(() => Float)
-    @IsNotEmpty()
-    @IsNumber()
-    @Min(0.00, { message: 'Freight price must be greater than or equal to 0' })
-    freight_cost: number
-
 }

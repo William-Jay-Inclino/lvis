@@ -7,7 +7,6 @@ import { MEQS, Prisma } from 'apps/warehouse/prisma/generated/client';
 import { APPROVAL_STATUS } from '../__common__/types';
 import { UpdateMeqsInput } from './dto/update-meqs.input';
 import { catchError, firstValueFrom } from 'rxjs';
-import { isValidApprovalStatus } from '../__common__/helpers';
 
 @Injectable()
 export class MeqsService {
@@ -30,7 +29,6 @@ export class MeqsService {
                 canvass: true
             }
         },
-        meqs_approvers: true,
         meqs_suppliers: {
             include: {
                 supplier: true,
@@ -144,15 +142,15 @@ export class MeqsService {
 
 
         if(input.jo_id){
-            return await this.createMeqsAndUpdateReference('jO', 'jo_id', data)
+            return await this.createMeqsAndUpdateReference('jO', input.jo_id, data)
         }
 
         if(input.rv_id){
-            return await this.createMeqsAndUpdateReference('rV', 'rv_id', data)
+            return await this.createMeqsAndUpdateReference('rV', input.rv_id, data)
         }
 
         if(input.spr_id){
-            return await this.createMeqsAndUpdateReference('sPR', 'spr_id', data)
+            return await this.createMeqsAndUpdateReference('sPR', input.spr_id, data)
         }
 
     }
@@ -166,6 +164,16 @@ export class MeqsService {
             data,
             include: this.includedFields
         })
+
+        const referenceItem =  await this.prisma[model].findUnique({
+            where: {
+                id: refId
+            }
+        })
+
+        if(!referenceItem) {
+            throw new NotFoundException(`Reference not found either (rv, jo, spr) with id: ${refId} `)
+        }
         
         const updateReferenceQuery = this.prisma[model].update({
             data: {

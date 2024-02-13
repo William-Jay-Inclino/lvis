@@ -37,8 +37,8 @@ export class CanvassResolver {
 
     @Query(() => Canvass)
     canvass(
-      @Args('id') id: string,
-      @Args('rc_number') rc_number: string
+      @Args('id', {nullable: true}) id?: string,
+      @Args('rc_number', {nullable: true}) rc_number?: string
     ) {
       if(id){
         return this.canvassService.findOne(id);

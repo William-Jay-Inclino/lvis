@@ -1,6 +1,7 @@
 import { ObjectType, Field, Int, ID, Float } from '@nestjs/graphql';
 import { ITEM_TRANSACTION_TYPE } from '../../__common__/types';
 import { Item } from '../../item/entities/item.entity';
+import { RrItem } from '../../rr-item/entities/rr-item.entity';
 
 @ObjectType()
 export class ItemTransaction {
@@ -36,7 +37,7 @@ export class ItemTransaction {
   item: Item;
 
 
-  // @Field(() => Item)
-  // rr_item: Item;
+  @Field(() => RrItem, {nullable: true})
+  rr_item?: RrItem;
 
 }

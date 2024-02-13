@@ -1,0 +1,27 @@
+query{
+  rrs{
+    po{
+      po_number
+    }
+    rr_number
+    received_by_id
+    received_by{
+      firstname
+      lastname
+    }
+    invoice_number
+    delivery_number
+    notes
+    delivery_charge
+    rr_approvers{
+      approver{
+        firstname
+        lastname
+      }
+      label
+      order
+      notes
+      status
+    }
+  }
+}

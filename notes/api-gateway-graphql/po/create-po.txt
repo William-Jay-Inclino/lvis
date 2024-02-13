@@ -1,0 +1,30 @@
+mutation{
+  createPo(input: {
+    meqs_supplier_id: "c5a288ca-0bc9-4e15-b03e-145180e67097",
+    po_date: "2024-02-13",
+    approvers: [
+      {
+        approver_id: "3c30444d-b5a4-4963-8b54-4143bd4511c8",
+        label: "Budget Approved By",
+        order: 1
+      },
+      {
+        approver_id: "837a57ec-df54-455f-8715-a644f82a1b73",
+        label: "Checked By Finance Mngr",
+        order: 2
+      },
+      {
+        approver_id: "60758a68-1e25-40a9-bd89-6941cbaae1f5",
+        label: "Audited By",
+        order: 3
+      },
+      {
+        approver_id: "690f5a43-2a27-4dd8-ad4e-d5acdb0d3142",
+        label: "GM / OIC",
+        order: 4
+      }
+    ]
+  }){
+    po_number
+  }
+}

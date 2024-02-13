@@ -403,7 +403,6 @@ model RRItem {
   vat_type           Int
   gross_price        Float
   net_price          Float
-  freight_cost       Float
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt

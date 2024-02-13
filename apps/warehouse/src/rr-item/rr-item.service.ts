@@ -61,8 +61,7 @@ export class RrItemService {
 			description: input.description,
 			vat_type: input.vat_type,
 			gross_price: input.gross_price,
-			net_price: input.net_price,
-			freight_cost: input.freight_cost,
+			net_price: input.net_price
 		}
 
 		const created = await this.prisma.rRItem.create({
@@ -140,8 +139,7 @@ export class RrItemService {
 			description: input.description ?? existingItem.description,
 			vat_type: input.vat_type ?? existingItem.vat_type,
 			gross_price: input.gross_price ?? existingItem.gross_price,
-			net_price: input.net_price ?? existingItem.net_price,
-			freight_cost: input.freight_cost ?? existingItem.freight_cost,
+			net_price: input.net_price ?? existingItem.net_price
 		};
 
 
