@@ -431,7 +431,7 @@ export const users: User[] = [
         username: 'joshua.tayag',
         password: 'joshua.tayag123',
         status: UserStatus.ACTIVE, 
-        role: Role.IT
+        role: Role.ADMIN
     },
     {
         id: faker.string.uuid(),

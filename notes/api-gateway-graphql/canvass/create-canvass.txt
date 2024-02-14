@@ -2,15 +2,21 @@ mutation {
   createCanvass(
     input: {
       date_requested: "2024-01-01"
-      purpose: "xxx"
-      notes: "xxxx"
-      requested_by_id: "f79c6309-8446-487a-bd06-5cada63707f8"
+      purpose: "canvass purpose"
+      notes: "canvass notes"
+      requested_by_id: "b5b76264-37bc-4587-a09c-b55b6c1b0639"
       canvass_items: [
         {
-          description: "desc1x"
-          brand_id: "262cdb69-1a8b-48e6-9d99-ea319b594db3"
-          unit_id: "6d0fec57-29d6-46f6-927b-da40ead446cd"
-          quantity: 2
+          description: "item 1"
+          brand_id: "65380f9d-222d-4bca-9344-6a295ad317d9"
+          unit_id: "f3bc815a-42ea-4be3-8cf5-c44fb0e891ac"
+          quantity: 10
+        },
+        {
+          description: "item21"
+          brand_id: null
+          unit_id: "f3bc815a-42ea-4be3-8cf5-c44fb0e891ac"
+          quantity: 20
         }
       ]
     }

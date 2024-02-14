@@ -292,8 +292,7 @@ exports.Prisma.NullsOrder = {
 };
 exports.Role = exports.$Enums.Role = {
   USER: 'USER',
-  ADMIN: 'ADMIN',
-  IT: 'IT'
+  ADMIN: 'ADMIN'
 };
 
 exports.Prisma.ModelName = {

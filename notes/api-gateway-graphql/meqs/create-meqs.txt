@@ -1,96 +1,111 @@
-mutation{
-  createMeqs(input: {
-    rv_id: "d0f34830-94bb-4eff-97e5-7c2d1839826e",
-    request_type: 2,
-    meqs_date: "2024-02-03",
-    approvers: [
-      {
-        approver_id: "d81d6f78-27de-4efc-baf6-75a4775bfd65",
-        label: "1st CPC Member",
-        order: 1
-      },
-      {
-        approver_id: "fa70c513-142c-4224-8558-703073164997",
-        label: "2nd CPC Member",
-        order: 2
-      },
-      {
-        approver_id: "e5839237-0ac8-406b-951c-d2b608e6ef72",
-        label: "Witness",
-        order: 3
-      },
-      {
-        approver_id: "79ffa7e5-0f19-42b3-a17f-4305a92460c5",
-        label: "CPC Chairman",
-        order: 4
-      },
-      {
-        approver_id: "d4be4ece-eda9-4c82-b199-bce1efabb043",
-        label: "GM / OIC",
-        order: 5
-      }
-    ],
-    meqs_suppliers: [
-      {
-        supplier_id: "c7ad4110-b769-4f30-8ae8-960b4908ded0",
-        payment_terms: "COD",
-        meqs_supplier_items: [
-          {
-            canvass_item_id: "2926dd4c-2476-442c-a325-f72584a42003",
-            price:150,
-            is_awarded: false,
-            vat_type: 1
-          }
-        ],
-        attachments: [
-          {
-            src: "uploads/warehouse/meqs/1706914914549_phase1.jpg"
-          },
-          {
-            src: "uploads/warehouse/meqs/1706914914550_wallpaperflare.com_wallpaper.jpg"
-          }
-        ]
-      },
-      {
-        supplier_id: "e5dc3011-59b7-4cfd-8855-fe20cf47ca27",
-        payment_terms: "COD",
-        meqs_supplier_items: [
-          {
-            canvass_item_id: "2926dd4c-2476-442c-a325-f72584a42003",
-            price:100,
-            is_awarded: true,
-            vat_type: 1
-          }
-        ],
-        attachments: [
-          {
-            src: "uploads/warehouse/meqs/1706916921798_Phase 2.jpg"
-          }
-        ]
-      },
+mutation {
+  createMeqs(
+    input: {
+      rv_id: "a7499c41-4f64-4c5f-bec6-54aab5250be3"
+      request_type: 2
+      meqs_date: "2024-02-03"
+      notes: "MEQS notes"
+      approvers: [
+        {
+          approver_id: "fffdbf5c-ad41-4f50-88f3-117eeaaf2e4f"
+          label: "1st CPC Member"
+          order: 1
+        }
+        {
+          approver_id: "2091ddb9-37f0-4633-a863-adbcaf1b874f"
+          label: "2nd CPC Member"
+          order: 2
+        }
+        {
+          approver_id: "2a4dec6a-8348-4c62-a946-8238d2fd4e46"
+          label: "Witness"
+          order: 3
+        }
+        {
+          approver_id: "d550799a-feb7-4fd5-97a9-baeaaa4c57bf"
+          label: "CPC Chairman"
+          order: 4
+        }
+        {
+          approver_id: "0a787888-b923-4867-82bd-12cdd58a00c9"
+          label: "GM / OIC"
+          order: 5
+        }
+      ]
+      meqs_suppliers: [
+        {
+          supplier_id: "fb7b608a-bc0c-4694-b62e-8a2f2cc6f57c"
+          payment_terms: "COD"
+          meqs_supplier_items: [
             {
-        supplier_id: "87c963f4-6a7f-43f1-b8c6-aa07ba9a9afe",
-        payment_terms: "COD",
-        meqs_supplier_items: [
-          {
-            canvass_item_id: "2926dd4c-2476-442c-a325-f72584a42003",
-            price:200,
-            is_awarded: false,
-            vat_type: 1
-          }
-        ],
-        attachments: [
-          {
-            src: "uploads/warehouse/meqs/1706916921799_Phase 3.jpg"
-          }
-        ]
-      }
-    ]
-  }){
+              canvass_item_id: "8e82ad16-e8a7-4114-b49c-29d9665d6f32"
+              price: 150
+              is_awarded: false
+              vat_type: 1
+            }
+            {
+              canvass_item_id: "1ad2ddb1-6e7c-463d-bb27-a9d2b428192e"
+              price: 200
+              is_awarded: false
+              vat_type: 1
+            }
+          ]
+          attachments: [
+            { src: "uploads/warehouse/meqs/1706914914549_phase1.jpg" }
+            {
+              src: "uploads/warehouse/meqs/1706914914550_wallpaperflare.com_wallpaper.jpg"
+            }
+          ]
+        }
+        {
+          supplier_id: "6d817da0-93e7-4168-8350-c9259f125eb6"
+          payment_terms: "COD"
+          meqs_supplier_items: [
+            {
+              canvass_item_id: "8e82ad16-e8a7-4114-b49c-29d9665d6f32"
+              price: 100
+              is_awarded: true
+              vat_type: 1
+            }
+            {
+              canvass_item_id: "1ad2ddb1-6e7c-463d-bb27-a9d2b428192e"
+              price: 150
+              is_awarded: true
+              vat_type: 1
+            }
+          ]
+          attachments: [
+            { src: "uploads/warehouse/meqs/1706916921798_Phase 2.jpg" }
+          ]
+        }
+        {
+          supplier_id: "ff81ba6a-7488-4b1b-a58a-7038d5920d0c"
+          payment_terms: "COD"
+          meqs_supplier_items: [
+            {
+              canvass_item_id: "8e82ad16-e8a7-4114-b49c-29d9665d6f32"
+              price: 200
+              is_awarded: false
+              vat_type: 1
+            }
+            {
+              canvass_item_id: "1ad2ddb1-6e7c-463d-bb27-a9d2b428192e"
+              price: 250
+              is_awarded: false
+              vat_type: 1
+            }
+          ]
+          attachments: [
+            { src: "uploads/warehouse/meqs/1706916921799_Phase 3.jpg" }
+          ]
+        }
+      ]
+    }
+  ) {
     rv_id
-    rv{
+    rv {
       rv_number
-      canvass{
+      canvass {
         rc_number
       }
     }
