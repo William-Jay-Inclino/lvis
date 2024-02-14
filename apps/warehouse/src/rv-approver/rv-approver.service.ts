@@ -81,10 +81,7 @@ export class RvApproverService {
     async findAll(): Promise<RVApprover[]> {
         return await this.prisma.rVApprover.findMany({
             include: this.includedFields,
-            where: { is_deleted: false },
-            orderBy: {
-                label: 'asc'
-            }
+            where: { is_deleted: false }
         })
     }
 
@@ -114,7 +111,7 @@ export class RvApproverService {
                 rv_id: rvId
             },
             orderBy: {
-                label: 'asc'
+                order: 'asc'
             }
         })
     }
@@ -129,7 +126,7 @@ export class RvApproverService {
                 }
             },
             orderBy: {
-                label: 'asc'
+                order: 'asc'
             }
         })
     }

@@ -52,6 +52,5 @@ export enum ITEM_CLASS {
 
 export enum Role {
     USER = 'USER',
-    ADMIN = 'ADMIN',
-    IT = 'IT'
+    ADMIN = 'ADMIN'
 }

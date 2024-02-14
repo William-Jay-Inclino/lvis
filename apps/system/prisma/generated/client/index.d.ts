@@ -105,8 +105,7 @@ export type RRApproverSetting = $Result.DefaultSelection<Prisma.$RRApproverSetti
 export namespace $Enums {
   export const Role: {
   USER: 'USER',
-  ADMIN: 'ADMIN',
-  IT: 'IT'
+  ADMIN: 'ADMIN'
 };
 
 export type Role = (typeof Role)[keyof typeof Role]
