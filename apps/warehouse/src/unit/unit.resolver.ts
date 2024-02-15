@@ -20,8 +20,13 @@ export class UnitResolver {
   }
 
   @Query(() => UnitsResponse)
-  units() {
-    return this.unitService.findAll();
+  units(
+    @Args('page') page?: number,
+    @Args('pageSize') pageSize?: number,
+    @Args('searchField', { nullable: true }) searchField?: string,
+    @Args('searchValue', { nullable: true }) searchValue?: string,
+  ) {
+    return this.unitService.findAll(page, pageSize, searchField, searchValue);
   }
 
   @Query(() => Unit)

@@ -29,9 +29,11 @@ export class UnitService {
 
     }
 
-    async findAll(page: number = 1, pageSize: number = 10, searchField?: string, searchValue?: string): Promise<UnitsResponse> {
+    async findAll(page: number, pageSize: number, searchField?: string, searchValue?: string): Promise<UnitsResponse> {
 
 		console.log('findAll')
+		console.log('page', page)
+		console.log('pageSize', pageSize)
 
 		const skip = (page - 1) * pageSize;
 
@@ -58,8 +60,6 @@ export class UnitService {
 			take: pageSize,
 			where: whereCondition
 		} )
-
-		console.log('items', items)
 
 		const totalItems = await this.prisma.unit.count({
 			where: whereCondition
