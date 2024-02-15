@@ -7,6 +7,8 @@ import { GqlAuthGuard } from '../__auth__/guards/gql-auth.guard';
 import { UpdateUnitInput } from './dto/update-unit.input';
 import { WarehouseRemoveResponse } from '../__common__/classes';
 
+import { UnitsResponse } from './entities/units-response.entity'
+
 @UseGuards(GqlAuthGuard)
 @Resolver(() => Unit)
 export class UnitResolver {
@@ -17,7 +19,7 @@ export class UnitResolver {
     return this.unitService.create(createUnitInput);
   }
 
-  @Query(() => [Unit])
+  @Query(() => UnitsResponse)
   units() {
     return this.unitService.findAll();
   }

@@ -22,7 +22,7 @@ model Supplier {
 
 model Unit {
   id            String        @id @default(uuid())
-  name          String
+  name          String        @unique
   created_at    DateTime      @default(now())
   updated_at    DateTime      @updatedAt
   is_deleted    Boolean       @default(false)

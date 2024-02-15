@@ -30067,17 +30067,17 @@ export namespace Prisma {
 
   export type UnitWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    name?: string
     AND?: UnitWhereInput | UnitWhereInput[]
     OR?: UnitWhereInput[]
     NOT?: UnitWhereInput | UnitWhereInput[]
-    name?: StringFilter<"Unit"> | string
     created_at?: DateTimeFilter<"Unit"> | Date | string
     updated_at?: DateTimeFilter<"Unit"> | Date | string
     is_deleted?: BoolFilter<"Unit"> | boolean
     canvass_items?: CanvassItemListRelationFilter
     rr_items?: RRItemListRelationFilter
     items?: ItemListRelationFilter
-  }, "id">
+  }, "id" | "name">
 
   export type UnitOrderByWithAggregationInput = {
     id?: SortOrder

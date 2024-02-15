@@ -4,6 +4,7 @@ import { PrismaService } from '../__prisma__/prisma.service';
 import { Prisma, Unit } from 'apps/warehouse/prisma/generated/client';
 import { UpdateUnitInput } from './dto/update-unit.input';
 import { WarehouseRemoveResponse } from '../__common__/classes';
+import { UnitsResponse } from './entities/units-response.entity';
 
 @Injectable()
 export class UnitService {
@@ -28,12 +29,49 @@ export class UnitService {
 
     }
 
-    async findAll(): Promise<Unit[]> {
-		return await this.prisma.unit.findMany( {
-			where: {
-				is_deleted: false 
-			}
+    async findAll(page: number = 1, pageSize: number = 10, searchField?: string, searchValue?: string): Promise<UnitsResponse> {
+
+		console.log('findAll')
+
+		const skip = (page - 1) * pageSize;
+
+		let whereCondition: any = {
+			is_deleted: false,
+		};
+	  
+		if (searchField && searchValue !== undefined) {
+			whereCondition = {
+				[searchField]: {
+					contains: searchValue,
+					mode: 'insensitive',
+				},
+			};
+		}
+
+		console.log('whereCondition', whereCondition)
+
+		const items = await this.prisma.unit.findMany( {
+			orderBy: {
+				name: 'asc'
+			},
+			skip,
+			take: pageSize,
+			where: whereCondition
 		} )
+
+		console.log('items', items)
+
+		const totalItems = await this.prisma.unit.count({
+			where: whereCondition
+		})
+
+		return {
+			data: items,
+			totalItems,
+			currentPage: page,
+			totalPages: Math.ceil(totalItems / pageSize)
+		}
+
 	}
 
 	async findOne(id: string): Promise<Unit | null> {
