@@ -7,6 +7,7 @@ import { UpdateCanvassInput } from './dto/update-canvass.input';
 import { WarehouseRemoveResponse } from '../__common__/classes';
 import { catchError, firstValueFrom } from 'rxjs';
 import { HttpService } from '@nestjs/axios';
+import { CanvassesResponse } from './entities/canvasses-response.entity';
 
 @Injectable()
 export class CanvassService {
@@ -105,16 +106,51 @@ export class CanvassService {
 
     }
 
-    async findAll(): Promise<Canvass[]> {
-        return this.prisma.canvass.findMany({
-            include: this.includedFields,
-            where: {
-                is_deleted: false
-            },
+    async findAll(page: number, pageSize: number, date_requested?: string, requested_by_id?: string): Promise<CanvassesResponse> {
+        const skip = (page - 1) * pageSize;
+
+        let whereCondition: any = {
+            is_deleted: false,
+        };
+
+        if (date_requested) {
+            const parsedDate = new Date(date_requested); 
+            whereCondition.date_requested = {
+                equals: parsedDate,
+            };
+        }
+
+        if (requested_by_id) {
+            whereCondition.requested_by_id = {
+                equals: requested_by_id,
+            };
+        }
+
+        const items = await this.prisma.canvass.findMany({
+            include: this.includedFields, 
+            where: whereCondition,
             orderBy: {
                 rc_number: 'desc'
-            }
+            },
+            skip,
+            take: pageSize,
         });
+
+        const totalItems = await this.prisma.canvass.count({
+            where: whereCondition,
+        });
+
+        console.log('data', items)
+        console.log('totalItems', totalItems)
+        console.log('currentPage', page)
+        console.log('totalPages', Math.ceil(totalItems / pageSize))
+
+        return {
+            data: items,
+            totalItems,
+            currentPage: page,
+            totalPages: Math.ceil(totalItems / pageSize),
+        };
     }
 
     async findOne(id: string): Promise<Canvass> {

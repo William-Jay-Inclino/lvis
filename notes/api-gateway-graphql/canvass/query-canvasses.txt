@@ -1,25 +1,25 @@
 query {
-  canvasses {
-    id
-    rc_number
-    date_requested
-    purpose
-    notes
-    requested_by_id
-    requested_by{
-      firstname
-    }
-    canvass_items {
-      description
-      brand {
+  canvasses(page: 1, pageSize: 5) {
+    data {
+      id
+      rc_number
+      date_requested
+      purpose
+      notes
+      requested_by_id
+      canvass_items {
         id
-        name
+        description
+        brand {
+          id
+          name
+        }
+        unit {
+          id
+          name
+        }
+        quantity
       }
-      unit {
-        id
-        name
-      }
-      quantity
     }
   }
 }

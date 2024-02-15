@@ -1,0 +1,11 @@
+query{
+  units(page: 1, pageSize: 10){
+    data{
+      id
+      name
+    }
+    currentPage
+    totalItems
+    totalPages
+  }
+}

@@ -9,6 +9,7 @@ import { Logger, UseGuards } from '@nestjs/common';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { UpdateCanvassInput } from './dto/update-canvass.input';
 import { WarehouseRemoveResponse } from '../__common__/classes';
+import { CanvassesResponse } from './entities/canvasses-response.entity';
 
 
 @UseGuards(GqlAuthGuard)
@@ -30,9 +31,14 @@ export class CanvassResolver {
         return await this.canvassService.create(createCanvassInput)
     }
 
-    @Query(() => [Canvass])
-    canvasses() {
-        return this.canvassService.findAll();
+    @Query(() => CanvassesResponse)
+    canvasses(
+      @Args('page') page: number,
+      @Args('pageSize') pageSize: number,
+      @Args('date_requested', {nullable: true}) date_requested?: string,
+      @Args('requested_by_id', {nullable: true}) requested_by_id?: string,
+    ) {
+        return this.canvassService.findAll(page, pageSize, date_requested, requested_by_id);
     }
 
     @Query(() => Canvass)

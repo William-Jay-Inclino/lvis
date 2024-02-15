@@ -31,10 +31,6 @@ export class UnitService {
 
     async findAll(page: number, pageSize: number, searchField?: string, searchValue?: string): Promise<UnitsResponse> {
 
-		console.log('findAll')
-		console.log('page', page)
-		console.log('pageSize', pageSize)
-
 		const skip = (page - 1) * pageSize;
 
 		let whereCondition: any = {
