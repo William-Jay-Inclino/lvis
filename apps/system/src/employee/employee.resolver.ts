@@ -6,6 +6,7 @@ import { UpdateEmployeeInput } from './dto/update-employee.input';
 import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from '../__auth__/guards/gql-auth.guard';
 import { SystemRemoveResponse } from '../__common__/classes';
+import { EmployeesResponse } from './entities/employees-response.entity';
 // import { UpdateEmployeeInput } from './dto/update-employee.input';
 
 @UseGuards(GqlAuthGuard)
@@ -18,9 +19,13 @@ export class EmployeeResolver {
     return this.employeeService.create(createEmployeeInput);
   }
 
-  @Query(() => [Employee])
-  employees() {
-    return this.employeeService.findAll();
+  @Query(() => EmployeesResponse)
+  employees(
+    @Args('page') page?: number,
+    @Args('pageSize') pageSize?: number,
+    @Args('searchValue', { nullable: true }) searchValue?: string,
+  ) {
+    return this.employeeService.findAll(page, pageSize, searchValue);
   }
 
   @Query(() => Employee)

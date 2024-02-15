@@ -1,24 +1,25 @@
-query{
-  canvass(id: "23cadf84-e969-4050-b20f-6d985f23db3c"){
-    id,
-    rc_number
-    date_requested
-    purpose
-    notes 
-    requested_by_id
-    canvass_items{
-      item{
+query {
+  canvasses(page: 1, pageSize: 5, date_requested: "2024-01-01", requested_by_id: "b5b76264-37bc-4587-a09c-b55b6c1b0639") {
+    data {
+      id
+      rc_number
+      date_requested
+      purpose
+      notes
+      requested_by_id
+      canvass_items {
+        id
         description
-        brand{
-          id 
+        brand {
+          id
           name
         }
-        unit{
+        unit {
           id
           name
         }
         quantity
       }
-    } 
+    }
   }
 }
