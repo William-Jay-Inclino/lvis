@@ -155,4 +155,32 @@ export class EmployeeService {
 
 	}
 
+	async findEmployeesByName(name: string): Promise<{
+		id: string, 
+		firstname: string,
+		middlename: string,
+		lastname: string,
+	 }[]> {
+	
+		const employees = await this.prisma.employee.findMany({
+            select: {
+				id: true,
+                firstname: true,
+                middlename: true,
+                lastname: true
+            },
+            where: {
+				is_deleted: false,
+				OR: [
+				  { lastname: { contains: name.trim(), mode: 'insensitive' } },
+				  { firstname: { contains: name.trim(), mode: 'insensitive' } },
+				  { middlename: { contains: name.trim(), mode: 'insensitive' } },
+				],
+			  },
+            take: 5,
+		});
+	
+		return employees;
+	} 
+
 }

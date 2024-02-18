@@ -10,6 +10,7 @@ import { UpdateMeqsInput } from './dto/update-meqs.input';
 import { Employee } from '../__employee__/entities/employee.entity';
 import { MEQSApprover } from '../meqs-approver/entities/meqs-approver.entity';
 import { MeqsApproverService } from '../meqs-approver/meqs-approver.service';
+import { MeqsNumber } from './entities/meqs-number.entity';
 
 @UseGuards(GqlAuthGuard)
 @Resolver( () => MEQS)
@@ -32,6 +33,13 @@ export class MeqsResolver {
     @Query(() => [MEQS])
     meqs() {
         return this.meqsService.findAll();
+    }
+
+    @Query(() => [MeqsNumber])
+    meqs_numbers(
+      @Args('meqs_number') meqs_number: string
+    ): Promise<{ meqs_number: string }[]> {
+      return this.meqsService.findMeqsNumbers(meqs_number);
     }
 
     @Query(() => MEQS)

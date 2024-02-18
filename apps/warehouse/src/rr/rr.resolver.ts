@@ -10,6 +10,7 @@ import { GqlAuthGuard } from '../__auth__/guards/gql-auth.guard';
 import { UseGuards } from '@nestjs/common';
 import { RrApprover } from '../rr-approver/entities/rr-approver.entity';
 import { RrApproverService } from '../rr-approver/rr-approver.service';
+import { RrNumber } from './entities/rr-number.entity';
 
 @UseGuards(GqlAuthGuard)
 @Resolver( () => RR)
@@ -32,6 +33,13 @@ export class RrResolver {
     @Query(() => [RR])
     rrs() {
         return this.rrService.findAll();
+    }
+
+    @Query(() => [RrNumber])
+    rr_numbers(
+      @Args('rr_number') rr_number: string
+    ): Promise<{ rr_number: string }[]> {
+      return this.rrService.findRrNumbers(rr_number);
     }
 
     @Query(() => RR)

@@ -10,6 +10,7 @@ import { GqlAuthGuard } from '../__auth__/guards/gql-auth.guard';
 import { UseGuards } from '@nestjs/common';
 import { POApprover } from './entities/po-approver.entity';
 import { PoApproverService } from '../po-approver/po-approver.service';
+import { PoNumber } from './entities/po-number.entity';
 
 @UseGuards(GqlAuthGuard)
 @Resolver( () => PO)
@@ -32,6 +33,13 @@ export class PoResolver {
     @Query(() => [PO])
     pos() {
         return this.poService.findAll();
+    }
+
+    @Query(() => [PoNumber])
+    po_numbers(
+      @Args('po_number') po_number: string
+    ): Promise<{ po_number: string }[]> {
+      return this.poService.findPoNumbers(po_number);
     }
 
     @Query(() => PO)

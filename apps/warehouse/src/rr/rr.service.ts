@@ -183,6 +183,25 @@ export class RrService {
         return item 
     }
 
+    async findRrNumbers(rrNumber: string): Promise<{ rr_number: string; }[]> {
+	
+		const arrayOfRrNumbers = await this.prisma.rR.findMany({
+            select: {
+                rr_number: true
+            },
+            where: {
+                rr_number: {
+                    contains: rrNumber.trim().toLowerCase(),
+                    mode: 'insensitive',
+                },
+                is_deleted: false
+            },
+            take: 5,
+		});
+	
+		return arrayOfRrNumbers;
+	}
+
     async update(id: string, input: UpdateRrInput): Promise<RR> {
         
         this.logger.log('update(')

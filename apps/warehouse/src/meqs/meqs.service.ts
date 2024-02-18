@@ -238,6 +238,25 @@ export class MeqsService {
 
     }
 
+    async findMeqsNumbers(meqsNumber: string): Promise<{ meqs_number: string; }[]> {
+	
+		const arrayOfMeqsNumbers = await this.prisma.mEQS.findMany({
+            select: {
+                meqs_number: true
+            },
+            where: {
+                meqs_number: {
+                    contains: meqsNumber.trim().toLowerCase(),
+                    mode: 'insensitive',
+                },
+                is_deleted: false
+            },
+            take: 5,
+		});
+	
+		return arrayOfMeqsNumbers;
+	}
+
     private async getLatestMeqsNumber(): Promise<string> {
         const currentYear = new Date().getFullYear().toString().slice(-2);
     

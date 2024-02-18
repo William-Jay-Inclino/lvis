@@ -189,6 +189,25 @@ export class PoService {
         return item 
     }
 
+    async findPoNumbers(poNumber: string): Promise<{ po_number: string; }[]> {
+	
+		const arrayOfPoNumbers = await this.prisma.pO.findMany({
+            select: {
+                po_number: true
+            },
+            where: {
+                po_number: {
+                    contains: poNumber.trim().toLowerCase(),
+                    mode: 'insensitive',
+                },
+                is_deleted: false
+            },
+            take: 5,
+		});
+	
+		return arrayOfPoNumbers;
+	}
+
     async remove(id: string): Promise<WarehouseRemoveResponse> {
 
 		const existingItem = await this.findOne(id)
@@ -204,7 +223,6 @@ export class PoService {
 		}
 
 	}
-
 
     private async getLatestPoNumber(): Promise<string> {
         const currentYear = new Date().getFullYear().toString().slice(-2);

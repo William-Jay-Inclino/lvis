@@ -45,7 +45,7 @@ export class CanvassResolver {
     rc_numbers(
       @Args('rc_number') rc_number: string
     ): Promise<{ rc_number: string }[]> {
-      return this.canvassService.searchByRcNumber(rc_number);
+      return this.canvassService.findRcNumbers(rc_number);
     }
 
     @Query(() => Canvass)

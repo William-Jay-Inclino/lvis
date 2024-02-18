@@ -28,6 +28,13 @@ export class EmployeeResolver {
     return this.employeeService.findAll(page, pageSize, searchValue);
   }
 
+  @Query(() => [Employee])
+  employeesByName(
+    @Args('name') name: string,
+  ) {
+    return this.employeeService.findEmployeesByName(name);
+  }
+
   @Query(() => Employee)
   employee(@Args('id') id: string) {
     return this.employeeService.findOne(id);

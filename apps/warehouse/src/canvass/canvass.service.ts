@@ -187,7 +187,7 @@ export class CanvassService {
         
     }
 
-    async searchByRcNumber(rcNumber: string): Promise<{ rc_number: string; }[]> {
+    async findRcNumbers(rcNumber: string): Promise<{ rc_number: string; }[]> {
 	
 		const arrayOfRcNumbers = await this.prisma.canvass.findMany({
             select: {
@@ -198,6 +198,7 @@ export class CanvassService {
                     contains: rcNumber.trim().toLowerCase(),
                     mode: 'insensitive',
                 },
+                is_deleted: false
             },
             take: 5,
 		});

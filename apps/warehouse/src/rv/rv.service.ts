@@ -237,25 +237,6 @@ export class RvService {
 
 	}
 
-    private async getLatestRvNumber(): Promise<string> {
-        const currentYear = new Date().getFullYear().toString().slice(-2);
-    
-        const latestItem = await this.prisma.rV.findFirst({
-          where: { rv_number: { startsWith: currentYear } },
-          orderBy: { rv_number: 'desc' },
-        });
-    
-        if (latestItem) {
-          const latestNumericPart = parseInt(latestItem.rv_number.slice(-5), 10);
-          const newNumericPart = latestNumericPart + 1;
-          const newRcNumber = `${currentYear}-${newNumericPart.toString().padStart(5, '0')}`;
-          return newRcNumber;
-        } else {
-          // If no existing rc_number with the current year prefix, start with '00001'
-          return `${currentYear}-00001`;
-        }
-    }
-
     async forEmployeeSupervisor(employeeId: string): Promise<RV[]> {
         return await this.prisma.rV.findMany({
             where: {
@@ -284,6 +265,44 @@ export class RvService {
             },
             include: this.includedFields
         })
+    }
+
+    async findRvNumbers(rvNumber: string): Promise<{ rv_number: string; }[]> {
+	
+		const arrayOfRvNumbers = await this.prisma.rV.findMany({
+            select: {
+                rv_number: true
+            },
+            where: {
+                rv_number: {
+                    contains: rvNumber.trim().toLowerCase(),
+                    mode: 'insensitive',
+                },
+                is_deleted: false
+            },
+            take: 5,
+		});
+	
+		return arrayOfRvNumbers;
+	}
+
+    private async getLatestRvNumber(): Promise<string> {
+        const currentYear = new Date().getFullYear().toString().slice(-2);
+    
+        const latestItem = await this.prisma.rV.findFirst({
+          where: { rv_number: { startsWith: currentYear } },
+          orderBy: { rv_number: 'desc' },
+        });
+    
+        if (latestItem) {
+          const latestNumericPart = parseInt(latestItem.rv_number.slice(-5), 10);
+          const newNumericPart = latestNumericPart + 1;
+          const newRcNumber = `${currentYear}-${newNumericPart.toString().padStart(5, '0')}`;
+          return newRcNumber;
+        } else {
+          // If no existing rc_number with the current year prefix, start with '00001'
+          return `${currentYear}-00001`;
+        }
     }
 
     private async isClassificationExist(classification_id: string, authUser: AuthUser): Promise<boolean> {
@@ -468,7 +487,6 @@ export class RvService {
         return true
 
     }
-
 
     // used to indicate whether there is at least one approver whose status is not pending.
     private isAnyNonPendingApprover(approvers: RVApprover[]): boolean {
