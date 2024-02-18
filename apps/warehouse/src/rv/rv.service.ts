@@ -10,6 +10,7 @@ import { catchError, firstValueFrom } from 'rxjs';
 import { HttpService } from '@nestjs/axios';
 import { WarehouseRemoveResponse } from '../__common__/classes';
 import { isValidApprovalStatus } from '../__common__/helpers';
+import { RVsResponse } from './entities/rvs-response.entity';
 
 @Injectable()
 export class RvService {
@@ -196,6 +197,23 @@ export class RvService {
         return item
 	}
 
+    async findByRcNumber(rc_number: string): Promise<RV | null> {
+		const item = await this.prisma.rV.findFirst({
+            include: this.includedFields,
+			where: {
+                canvass: {
+                    rc_number
+                }
+            }
+		})
+
+		if(!item){
+            throw new NotFoundException('RV not found')
+        }
+
+        return item
+	}
+
     async findByRvNumber(rv_number: string): Promise<RV | null> {
 		const item = await this.prisma.rV.findUnique({
             include: this.includedFields,
@@ -209,16 +227,46 @@ export class RvService {
         return item
 	}
 
-    async findAll(): Promise<RV[]> {
-		return await this.prisma.rV.findMany( {
-            include: this.includedFields,
-			where: {
-				is_deleted: false 
-			},
-			orderBy: {
+    async findAll(page: number, pageSize: number, date_requested?: string, requested_by_id?: string): Promise<RVsResponse> {
+		const skip = (page - 1) * pageSize;
+
+        let whereCondition: any = {
+            is_deleted: false,
+        };
+
+        if (date_requested) {
+            const parsedDate = new Date(date_requested); 
+            whereCondition.date_requested = {
+                equals: parsedDate,
+            };
+        }
+
+        if (requested_by_id) {
+            whereCondition.requested_by_id = {
+                equals: requested_by_id,
+            };
+        }
+
+        const items = await this.prisma.rV.findMany({
+            include: this.includedFields, 
+            where: whereCondition,
+            orderBy: {
                 rv_number: 'desc'
-            }
-		} )
+            },
+            skip,
+            take: pageSize,
+        });
+
+        const totalItems = await this.prisma.rV.count({
+            where: whereCondition,
+        });
+
+        return {
+            data: items,
+            totalItems,
+            currentPage: page,
+            totalPages: Math.ceil(totalItems / pageSize),
+        };
 	}
 
     async remove(id: string): Promise<WarehouseRemoveResponse> {

@@ -12,6 +12,7 @@ import { UseGuards } from '@nestjs/common';
 import { RVApprover } from '../rv-approver/entities/rv-approver.entity';
 import { RvApproverService } from '../rv-approver/rv-approver.service';
 import { RvNumber } from './entities/rv-number.entity';
+import { RVsResponse } from './entities/rvs-response.entity';
 
 @UseGuards(GqlAuthGuard)
 @Resolver( () => RV)
@@ -31,9 +32,14 @@ export class RvResolver {
         return await this.rvService.create(createRvInput);
     }
 
-    @Query(() => [RV])
-    rvs() {
-        return this.rvService.findAll();
+    @Query(() => RVsResponse)
+    rvs(
+      @Args('page') page: number,
+      @Args('pageSize') pageSize: number,
+      @Args('date_requested', {nullable: true}) date_requested?: string,
+      @Args('requested_by_id', {nullable: true}) requested_by_id?: string,
+    ) {
+        return this.rvService.findAll(page, pageSize, date_requested, requested_by_id);
     }
 
     @Query(() => [RvNumber])
