@@ -187,6 +187,24 @@ export class CanvassService {
         
     }
 
+    async searchByRcNumber(rcNumber: string): Promise<{ rc_number: string; }[]> {
+	
+		const arrayOfRcNumbers = await this.prisma.canvass.findMany({
+            select: {
+                rc_number: true
+            },
+            where: {
+                rc_number: {
+                    contains: rcNumber.trim().toLowerCase(),
+                    mode: 'insensitive',
+                },
+            },
+            take: 5,
+		});
+	
+		return arrayOfRcNumbers;
+	}
+
     private async getLatestRcNumber(): Promise<string> {
         const currentYear = new Date().getFullYear().toString().slice(-2);
     
@@ -237,48 +255,6 @@ export class CanvassService {
 		}
 
 	}
-
-    // private async isEmployeeExist(employee_id: string, authUser: AuthUser): Promise<boolean> {
-    
-    //     this.logger.log('isEmployeeExist', employee_id)
-
-    //     // console.log('this.authUser', this.authUser)
-
-    //     const query = `
-    //         query{
-    //             employee(id: "${employee_id}") {
-    //                 id
-    //             }
-    //         }
-    //     `;
-
-    //     const { data } = await firstValueFrom(
-    //         this.httpService.post(process.env.API_GATEWAY_URL, 
-    //         { query },
-    //         {
-    //             headers: {
-    //                 Authorization: authUser.authorization,
-    //                 'Content-Type': 'application/json'
-    //             }
-    //         }  
-    //         ).pipe(
-    //             catchError((error) => {
-    //                 throw error
-    //             }),
-    //         ),
-    //     );
-
-    //     console.log('data', data)
-
-    //     if(!data || !data.data || !data.data.employee){
-    //         console.log('employee not found')
-    //         return false 
-    //     }
-    //     const employee = data.data.employee 
-    //     console.log('employee', employee)
-    //     return true 
-
-    // }
 
     private async areEmployeesExist(employeeIds: string[], authUser: AuthUser): Promise<boolean> {
 

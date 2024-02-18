@@ -10,7 +10,7 @@ import { AuthUser } from '../__common__/auth-user.entity';
 import { UpdateCanvassInput } from './dto/update-canvass.input';
 import { WarehouseRemoveResponse } from '../__common__/classes';
 import { CanvassesResponse } from './entities/canvasses-response.entity';
-
+import { RcNumber } from './entities/rc-number.entity'
 
 @UseGuards(GqlAuthGuard)
 @Resolver( () => Canvass)
@@ -39,6 +39,13 @@ export class CanvassResolver {
       @Args('requested_by_id', {nullable: true}) requested_by_id?: string,
     ) {
         return this.canvassService.findAll(page, pageSize, date_requested, requested_by_id);
+    }
+
+    @Query(() => [RcNumber])
+    rc_numbers(
+      @Args('rc_number') rc_number: string
+    ): Promise<{ rc_number: string }[]> {
+      return this.canvassService.searchByRcNumber(rc_number);
     }
 
     @Query(() => Canvass)

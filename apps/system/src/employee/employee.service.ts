@@ -69,16 +69,6 @@ export class EmployeeService {
 		  totalPages: Math.ceil(totalItems / pageSize),
 		};
 	}
-	  
-
-	// async findAll(): Promise<EmployeesResponse[]> {
-	// 	return await this.prisma.employee.findMany( {
-	// 		where: {
-	// 			is_deleted: false 
-	// 		},
-	// 		orderBy: [{ lastname: 'asc' }, { firstname: 'asc' }],
-	// 	} )
-	// }
 
 	async findOne(id: string): Promise<Employee | null> {
 
