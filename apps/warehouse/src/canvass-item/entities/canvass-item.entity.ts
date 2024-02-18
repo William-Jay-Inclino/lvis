@@ -9,6 +9,9 @@ export class CanvassItem {
   id: string;
 
   @Field(() => String)
+  canvass_id: string;
+
+  @Field(() => String)
   description: string;
 
   @Field(() => String, {nullable: true})
@@ -17,10 +20,10 @@ export class CanvassItem {
   @Field(() => Brand, {nullable: true})
   brand: Brand | null;
 
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   unit_id: string;
 
-  @Field(() => Unit)
+  @Field(() => Unit, { nullable: true })
   unit: Unit;
 
   @Field(() => Int)

@@ -7461,7 +7461,7 @@ export namespace Prisma {
     canvass_id: string
     description: string
     brand_id: string | null
-    unit_id: string
+    unit_id: string | null
     quantity: number
     created_at: Date
     updated_at: Date
@@ -7499,7 +7499,7 @@ export namespace Prisma {
     is_deleted?: boolean
     canvass?: boolean | CanvassDefaultArgs<ExtArgs>
     brand?: boolean | CanvassItem$brandArgs<ExtArgs>
-    unit?: boolean | UnitDefaultArgs<ExtArgs>
+    unit?: boolean | CanvassItem$unitArgs<ExtArgs>
     meqs_supplier_items?: boolean | CanvassItem$meqs_supplier_itemsArgs<ExtArgs>
     _count?: boolean | CanvassItemCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["canvassItem"]>
@@ -7519,7 +7519,7 @@ export namespace Prisma {
   export type CanvassItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     canvass?: boolean | CanvassDefaultArgs<ExtArgs>
     brand?: boolean | CanvassItem$brandArgs<ExtArgs>
-    unit?: boolean | UnitDefaultArgs<ExtArgs>
+    unit?: boolean | CanvassItem$unitArgs<ExtArgs>
     meqs_supplier_items?: boolean | CanvassItem$meqs_supplier_itemsArgs<ExtArgs>
     _count?: boolean | CanvassItemCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -7530,7 +7530,7 @@ export namespace Prisma {
     objects: {
       canvass: Prisma.$CanvassPayload<ExtArgs>
       brand: Prisma.$BrandPayload<ExtArgs> | null
-      unit: Prisma.$UnitPayload<ExtArgs>
+      unit: Prisma.$UnitPayload<ExtArgs> | null
       meqs_supplier_items: Prisma.$MEQSSupplierItemPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -7538,7 +7538,7 @@ export namespace Prisma {
       canvass_id: string
       description: string
       brand_id: string | null
-      unit_id: string
+      unit_id: string | null
       quantity: number
       created_at: Date
       updated_at: Date
@@ -7912,7 +7912,7 @@ export namespace Prisma {
 
     brand<T extends CanvassItem$brandArgs<ExtArgs> = {}>(args?: Subset<T, CanvassItem$brandArgs<ExtArgs>>): Prisma__BrandClient<$Result.GetResult<Prisma.$BrandPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
 
-    unit<T extends UnitDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UnitDefaultArgs<ExtArgs>>): Prisma__UnitClient<$Result.GetResult<Prisma.$UnitPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+    unit<T extends CanvassItem$unitArgs<ExtArgs> = {}>(args?: Subset<T, CanvassItem$unitArgs<ExtArgs>>): Prisma__UnitClient<$Result.GetResult<Prisma.$UnitPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
 
     meqs_supplier_items<T extends CanvassItem$meqs_supplier_itemsArgs<ExtArgs> = {}>(args?: Subset<T, CanvassItem$meqs_supplier_itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MEQSSupplierItemPayload<ExtArgs>, T, 'findMany'> | Null>;
 
@@ -8277,6 +8277,22 @@ export namespace Prisma {
      */
     include?: BrandInclude<ExtArgs> | null
     where?: BrandWhereInput
+  }
+
+
+  /**
+   * CanvassItem.unit
+   */
+  export type CanvassItem$unitArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Unit
+     */
+    select?: UnitSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: UnitInclude<ExtArgs> | null
+    where?: UnitWhereInput
   }
 
 
@@ -30227,14 +30243,14 @@ export namespace Prisma {
     canvass_id?: StringFilter<"CanvassItem"> | string
     description?: StringFilter<"CanvassItem"> | string
     brand_id?: StringNullableFilter<"CanvassItem"> | string | null
-    unit_id?: StringFilter<"CanvassItem"> | string
+    unit_id?: StringNullableFilter<"CanvassItem"> | string | null
     quantity?: IntFilter<"CanvassItem"> | number
     created_at?: DateTimeFilter<"CanvassItem"> | Date | string
     updated_at?: DateTimeFilter<"CanvassItem"> | Date | string
     is_deleted?: BoolFilter<"CanvassItem"> | boolean
     canvass?: XOR<CanvassRelationFilter, CanvassWhereInput>
     brand?: XOR<BrandNullableRelationFilter, BrandWhereInput> | null
-    unit?: XOR<UnitRelationFilter, UnitWhereInput>
+    unit?: XOR<UnitNullableRelationFilter, UnitWhereInput> | null
     meqs_supplier_items?: MEQSSupplierItemListRelationFilter
   }
 
@@ -30243,7 +30259,7 @@ export namespace Prisma {
     canvass_id?: SortOrder
     description?: SortOrder
     brand_id?: SortOrderInput | SortOrder
-    unit_id?: SortOrder
+    unit_id?: SortOrderInput | SortOrder
     quantity?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -30262,14 +30278,14 @@ export namespace Prisma {
     canvass_id?: StringFilter<"CanvassItem"> | string
     description?: StringFilter<"CanvassItem"> | string
     brand_id?: StringNullableFilter<"CanvassItem"> | string | null
-    unit_id?: StringFilter<"CanvassItem"> | string
+    unit_id?: StringNullableFilter<"CanvassItem"> | string | null
     quantity?: IntFilter<"CanvassItem"> | number
     created_at?: DateTimeFilter<"CanvassItem"> | Date | string
     updated_at?: DateTimeFilter<"CanvassItem"> | Date | string
     is_deleted?: BoolFilter<"CanvassItem"> | boolean
     canvass?: XOR<CanvassRelationFilter, CanvassWhereInput>
     brand?: XOR<BrandNullableRelationFilter, BrandWhereInput> | null
-    unit?: XOR<UnitRelationFilter, UnitWhereInput>
+    unit?: XOR<UnitNullableRelationFilter, UnitWhereInput> | null
     meqs_supplier_items?: MEQSSupplierItemListRelationFilter
   }, "id">
 
@@ -30278,7 +30294,7 @@ export namespace Prisma {
     canvass_id?: SortOrder
     description?: SortOrder
     brand_id?: SortOrderInput | SortOrder
-    unit_id?: SortOrder
+    unit_id?: SortOrderInput | SortOrder
     quantity?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -30298,7 +30314,7 @@ export namespace Prisma {
     canvass_id?: StringWithAggregatesFilter<"CanvassItem"> | string
     description?: StringWithAggregatesFilter<"CanvassItem"> | string
     brand_id?: StringNullableWithAggregatesFilter<"CanvassItem"> | string | null
-    unit_id?: StringWithAggregatesFilter<"CanvassItem"> | string
+    unit_id?: StringNullableWithAggregatesFilter<"CanvassItem"> | string | null
     quantity?: IntWithAggregatesFilter<"CanvassItem"> | number
     created_at?: DateTimeWithAggregatesFilter<"CanvassItem"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"CanvassItem"> | Date | string
@@ -32460,7 +32476,7 @@ export namespace Prisma {
     is_deleted?: boolean
     canvass: CanvassCreateNestedOneWithoutCanvass_itemsInput
     brand?: BrandCreateNestedOneWithoutCanvass_itemsInput
-    unit: UnitCreateNestedOneWithoutCanvass_itemsInput
+    unit?: UnitCreateNestedOneWithoutCanvass_itemsInput
     meqs_supplier_items?: MEQSSupplierItemCreateNestedManyWithoutCanvass_itemInput
   }
 
@@ -32469,7 +32485,7 @@ export namespace Prisma {
     canvass_id: string
     description: string
     brand_id?: string | null
-    unit_id: string
+    unit_id?: string | null
     quantity: number
     created_at?: Date | string
     updated_at?: Date | string
@@ -32486,7 +32502,7 @@ export namespace Prisma {
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     canvass?: CanvassUpdateOneRequiredWithoutCanvass_itemsNestedInput
     brand?: BrandUpdateOneWithoutCanvass_itemsNestedInput
-    unit?: UnitUpdateOneRequiredWithoutCanvass_itemsNestedInput
+    unit?: UnitUpdateOneWithoutCanvass_itemsNestedInput
     meqs_supplier_items?: MEQSSupplierItemUpdateManyWithoutCanvass_itemNestedInput
   }
 
@@ -32495,7 +32511,7 @@ export namespace Prisma {
     canvass_id?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     brand_id?: NullableStringFieldUpdateOperationsInput | string | null
-    unit_id?: StringFieldUpdateOperationsInput | string
+    unit_id?: NullableStringFieldUpdateOperationsInput | string | null
     quantity?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -32508,7 +32524,7 @@ export namespace Prisma {
     canvass_id: string
     description: string
     brand_id?: string | null
-    unit_id: string
+    unit_id?: string | null
     quantity: number
     created_at?: Date | string
     updated_at?: Date | string
@@ -32529,7 +32545,7 @@ export namespace Prisma {
     canvass_id?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     brand_id?: NullableStringFieldUpdateOperationsInput | string | null
-    unit_id?: StringFieldUpdateOperationsInput | string
+    unit_id?: NullableStringFieldUpdateOperationsInput | string | null
     quantity?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -34896,9 +34912,9 @@ export namespace Prisma {
     isNot?: BrandWhereInput | null
   }
 
-  export type UnitRelationFilter = {
-    is?: UnitWhereInput
-    isNot?: UnitWhereInput
+  export type UnitNullableRelationFilter = {
+    is?: UnitWhereInput | null
+    isNot?: UnitWhereInput | null
   }
 
   export type MEQSSupplierItemListRelationFilter = {
@@ -36034,11 +36050,6 @@ export namespace Prisma {
     isNot?: ItemWhereInput | null
   }
 
-  export type UnitNullableRelationFilter = {
-    is?: UnitWhereInput | null
-    isNot?: UnitWhereInput | null
-  }
-
   export type ItemTransactionNullableRelationFilter = {
     is?: ItemTransactionWhereInput | null
     isNot?: ItemTransactionWhereInput | null
@@ -36130,6 +36141,11 @@ export namespace Prisma {
     every?: ItemTransactionWhereInput
     some?: ItemTransactionWhereInput
     none?: ItemTransactionWhereInput
+  }
+
+  export type UnitRelationFilter = {
+    is?: UnitWhereInput
+    isNot?: UnitWhereInput
   }
 
   export type ItemTransactionOrderByRelationAggregateInput = {
@@ -36637,10 +36653,12 @@ export namespace Prisma {
     update?: XOR<XOR<BrandUpdateToOneWithWhereWithoutCanvass_itemsInput, BrandUpdateWithoutCanvass_itemsInput>, BrandUncheckedUpdateWithoutCanvass_itemsInput>
   }
 
-  export type UnitUpdateOneRequiredWithoutCanvass_itemsNestedInput = {
+  export type UnitUpdateOneWithoutCanvass_itemsNestedInput = {
     create?: XOR<UnitCreateWithoutCanvass_itemsInput, UnitUncheckedCreateWithoutCanvass_itemsInput>
     connectOrCreate?: UnitCreateOrConnectWithoutCanvass_itemsInput
     upsert?: UnitUpsertWithoutCanvass_itemsInput
+    disconnect?: UnitWhereInput | boolean
+    delete?: UnitWhereInput | boolean
     connect?: UnitWhereUniqueInput
     update?: XOR<XOR<UnitUpdateToOneWithWhereWithoutCanvass_itemsInput, UnitUpdateWithoutCanvass_itemsInput>, UnitUncheckedUpdateWithoutCanvass_itemsInput>
   }
@@ -38371,7 +38389,7 @@ export namespace Prisma {
     canvass_id?: StringFilter<"CanvassItem"> | string
     description?: StringFilter<"CanvassItem"> | string
     brand_id?: StringNullableFilter<"CanvassItem"> | string | null
-    unit_id?: StringFilter<"CanvassItem"> | string
+    unit_id?: StringNullableFilter<"CanvassItem"> | string | null
     quantity?: IntFilter<"CanvassItem"> | number
     created_at?: DateTimeFilter<"CanvassItem"> | Date | string
     updated_at?: DateTimeFilter<"CanvassItem"> | Date | string
@@ -38456,7 +38474,7 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     canvass: CanvassCreateNestedOneWithoutCanvass_itemsInput
-    unit: UnitCreateNestedOneWithoutCanvass_itemsInput
+    unit?: UnitCreateNestedOneWithoutCanvass_itemsInput
     meqs_supplier_items?: MEQSSupplierItemCreateNestedManyWithoutCanvass_itemInput
   }
 
@@ -38464,7 +38482,7 @@ export namespace Prisma {
     id?: string
     canvass_id: string
     description: string
-    unit_id: string
+    unit_id?: string | null
     quantity: number
     created_at?: Date | string
     updated_at?: Date | string
@@ -38906,7 +38924,7 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     brand?: BrandCreateNestedOneWithoutCanvass_itemsInput
-    unit: UnitCreateNestedOneWithoutCanvass_itemsInput
+    unit?: UnitCreateNestedOneWithoutCanvass_itemsInput
     meqs_supplier_items?: MEQSSupplierItemCreateNestedManyWithoutCanvass_itemInput
   }
 
@@ -38914,7 +38932,7 @@ export namespace Prisma {
     id?: string
     description: string
     brand_id?: string | null
-    unit_id: string
+    unit_id?: string | null
     quantity: number
     created_at?: Date | string
     updated_at?: Date | string
@@ -40986,7 +41004,7 @@ export namespace Prisma {
     is_deleted?: boolean
     canvass: CanvassCreateNestedOneWithoutCanvass_itemsInput
     brand?: BrandCreateNestedOneWithoutCanvass_itemsInput
-    unit: UnitCreateNestedOneWithoutCanvass_itemsInput
+    unit?: UnitCreateNestedOneWithoutCanvass_itemsInput
   }
 
   export type CanvassItemUncheckedCreateWithoutMeqs_supplier_itemsInput = {
@@ -40994,7 +41012,7 @@ export namespace Prisma {
     canvass_id: string
     description: string
     brand_id?: string | null
-    unit_id: string
+    unit_id?: string | null
     quantity: number
     created_at?: Date | string
     updated_at?: Date | string
@@ -41057,7 +41075,7 @@ export namespace Prisma {
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     canvass?: CanvassUpdateOneRequiredWithoutCanvass_itemsNestedInput
     brand?: BrandUpdateOneWithoutCanvass_itemsNestedInput
-    unit?: UnitUpdateOneRequiredWithoutCanvass_itemsNestedInput
+    unit?: UnitUpdateOneWithoutCanvass_itemsNestedInput
   }
 
   export type CanvassItemUncheckedUpdateWithoutMeqs_supplier_itemsInput = {
@@ -41065,7 +41083,7 @@ export namespace Prisma {
     canvass_id?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     brand_id?: NullableStringFieldUpdateOperationsInput | string | null
-    unit_id?: StringFieldUpdateOperationsInput | string
+    unit_id?: NullableStringFieldUpdateOperationsInput | string | null
     quantity?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -42894,7 +42912,7 @@ export namespace Prisma {
     id?: string
     canvass_id: string
     description: string
-    unit_id: string
+    unit_id?: string | null
     quantity: number
     created_at?: Date | string
     updated_at?: Date | string
@@ -42927,7 +42945,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     canvass?: CanvassUpdateOneRequiredWithoutCanvass_itemsNestedInput
-    unit?: UnitUpdateOneRequiredWithoutCanvass_itemsNestedInput
+    unit?: UnitUpdateOneWithoutCanvass_itemsNestedInput
     meqs_supplier_items?: MEQSSupplierItemUpdateManyWithoutCanvass_itemNestedInput
   }
 
@@ -42935,7 +42953,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     canvass_id?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    unit_id?: StringFieldUpdateOperationsInput | string
+    unit_id?: NullableStringFieldUpdateOperationsInput | string | null
     quantity?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -42947,7 +42965,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     canvass_id?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    unit_id?: StringFieldUpdateOperationsInput | string
+    unit_id?: NullableStringFieldUpdateOperationsInput | string | null
     quantity?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -43130,7 +43148,7 @@ export namespace Prisma {
     id?: string
     description: string
     brand_id?: string | null
-    unit_id: string
+    unit_id?: string | null
     quantity: number
     created_at?: Date | string
     updated_at?: Date | string
@@ -43145,7 +43163,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     brand?: BrandUpdateOneWithoutCanvass_itemsNestedInput
-    unit?: UnitUpdateOneRequiredWithoutCanvass_itemsNestedInput
+    unit?: UnitUpdateOneWithoutCanvass_itemsNestedInput
     meqs_supplier_items?: MEQSSupplierItemUpdateManyWithoutCanvass_itemNestedInput
   }
 
@@ -43153,7 +43171,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     brand_id?: NullableStringFieldUpdateOperationsInput | string | null
-    unit_id?: StringFieldUpdateOperationsInput | string
+    unit_id?: NullableStringFieldUpdateOperationsInput | string | null
     quantity?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -43165,7 +43183,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     brand_id?: NullableStringFieldUpdateOperationsInput | string | null
-    unit_id?: StringFieldUpdateOperationsInput | string
+    unit_id?: NullableStringFieldUpdateOperationsInput | string | null
     quantity?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string

@@ -2,12 +2,7 @@ import { InputType, Int, Field } from '@nestjs/graphql';
 import { IsInt, IsNotEmpty, IsOptional, IsString, Min } from 'class-validator';
 
 @InputType()
-export class CreateCanvassItemInput {
-
-  @Field(() => String)
-  @IsNotEmpty()
-  @IsString()
-  canvass_id: string | null;
+export class CreateCanvassItemSubInput {
 
   @Field(() => String)
   @IsNotEmpty()
@@ -19,10 +14,10 @@ export class CreateCanvassItemInput {
   @IsString()
   brand_id?: string | null;
 
-  @Field(() => String, {nullable: true})
+  @Field(() => String)
   @IsNotEmpty()
   @IsString()
-  unit_id?: string | null;
+  unit_id: string;
 
   @Field(() => Int)
   @IsNotEmpty()

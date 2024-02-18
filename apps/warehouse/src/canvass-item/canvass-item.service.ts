@@ -26,9 +26,7 @@ export class CanvassItemService {
                 connect: { id: input.canvass_id }
             },
 			brand: input.brand_id ? { connect: { id: input.brand_id } } : undefined,
-            unit: {
-                connect: { id: input.unit_id }
-            },
+			unit: input.unit_id ? { connect: { id: input.unit_id } } : undefined,
 			quantity: input.quantity
 		}
 
@@ -40,7 +38,7 @@ export class CanvassItemService {
             }
 		})
 
-		this.logger.log('Successfully created canvass')
+		this.logger.log('Successfully created canvass item')
 
 		return created
 	}
@@ -77,24 +75,10 @@ export class CanvassItemService {
 
 		const existingItem = await this.findOne(id)
 
-        let brand = undefined 
-
-        if(input.brand_id){
-            brand = {
-                connect: { id: input.brand_id }
-            }
-        }else{
-            brand = existingItem.brand_id ? { connect: { id: existingItem.brand_id } } : undefined
-        }
-
-        const canvass = input.canvass_id ? { connect: { id: input.canvass_id } } : { connect: { id: existingItem.canvass_id } }
-        const unit = input.unit_id ? { connect: { id: input.unit_id } } : { connect: { id: existingItem.unit_id } }
-
 		const data: Prisma.CanvassItemUpdateInput = {
 			description: input.description ?? existingItem.description,
-			brand,
-            unit,
-			canvass,
+			brand: input.brand_id ? { connect: { id: input.brand_id } } : { disconnect: true },
+            unit: input.unit_id ? { connect: { id: input.unit_id } } : { disconnect: true },
 			quantity: input.quantity
 		}
 
@@ -109,7 +93,7 @@ export class CanvassItemService {
             }
 		 })
 
-		this.logger.log('Successfully updated Canvass')
+		this.logger.log('Successfully updated Canvass Item')
 
 		return updated
 	}

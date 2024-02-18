@@ -64,8 +64,8 @@ model CanvassItem {
   description String
   brand_id    String?
   brand       Brand?  @relation(fields: [brand_id], references: [id], onDelete: Restrict)
-  unit_id     String
-  unit        Unit    @relation(fields: [unit_id], references: [id], onDelete: Restrict)
+  unit_id     String?
+  unit        Unit?   @relation(fields: [unit_id], references: [id], onDelete: Restrict)
   quantity    Int
 
   created_at DateTime @default(now())
