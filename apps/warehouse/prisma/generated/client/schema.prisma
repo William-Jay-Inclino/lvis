@@ -150,6 +150,7 @@ model RV {
   work_order_date   DateTime?
   status            Int       @default(1)
   is_referenced     Boolean   @default(false)
+  notes             String?
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt

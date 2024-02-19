@@ -33,6 +33,9 @@ export class RV {
   @Field(() => String, {nullable: true})
   work_order_date: string;
 
+  @Field(() => String, {nullable: true})
+  notes: string;
+
   @Field(() => Int)
   status: number
 

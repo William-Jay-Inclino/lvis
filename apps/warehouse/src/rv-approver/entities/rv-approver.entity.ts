@@ -1,5 +1,6 @@
 import { Field, Int, ObjectType } from "@nestjs/graphql";
 import { RV } from "../../rv/entities/rv.entity";
+import { APPROVAL_STATUS } from "../../__common__/types";
 
 
 @ObjectType()
@@ -21,7 +22,7 @@ export class RVApprover {
     notes: string | null
 
     @Field(() => Int)
-    status: number
+    status: APPROVAL_STATUS
 
     @Field(() => String)
     label: string

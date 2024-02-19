@@ -29,6 +29,11 @@ export class UpdateRvInput {
 
   @Field(() => String, {nullable: true})
   @IsOptional()
+  @IsString()
+  notes?: string;
+
+  @Field(() => String, {nullable: true})
+  @IsOptional()
   @Transform(({ value }) => new Date(value))
   @IsDate()
   work_order_date?: string;

@@ -211,6 +211,7 @@ exports.Prisma.RVScalarFieldEnum = {
   work_order_date: 'work_order_date',
   status: 'status',
   is_referenced: 'is_referenced',
+  notes: 'notes',
   created_at: 'created_at',
   updated_at: 'updated_at',
   is_deleted: 'is_deleted'
