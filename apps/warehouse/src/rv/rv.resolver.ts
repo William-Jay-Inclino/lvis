@@ -52,13 +52,17 @@ export class RvResolver {
     @Query(() => RV)
     rv(
         @Args('id', {nullable: true}) id?: string,
-        @Args('rv_number', {nullable: true}) rv_number?: string
+        @Args('rv_number', {nullable: true}) rv_number?: string,
+        @Args('rc_number', {nullable: true}) rc_number?: string
     ) {
         if(id){
             return this.rvService.findOne(id);
         }
         if(rv_number){
             return this.rvService.findByRvNumber(rv_number)
+        }
+        if(rc_number){
+            return this.rvService.findByRcNumber(rc_number)
         }
     }
 
