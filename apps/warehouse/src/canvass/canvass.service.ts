@@ -45,6 +45,7 @@ export class CanvassService {
         const rcNumber = await this.getLatestRcNumber()
 
         const data: Prisma.CanvassCreateInput = {
+            created_by_id: this.authUser.user.id,
             rc_number: rcNumber,
             date_requested: new Date(input.date_requested),
             purpose: input.purpose,

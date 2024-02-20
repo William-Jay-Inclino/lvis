@@ -53,6 +53,7 @@ export class RvService {
 
         // data to be inserted in database
         const data: Prisma.RVCreateInput = {
+            created_by_id: this.authUser.user.id,
             rv_number: rvNumber,
             date_requested: new Date(input.date_requested),
             work_order_no: input.work_order_no ?? null,

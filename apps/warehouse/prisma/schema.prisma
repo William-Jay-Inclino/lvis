@@ -92,6 +92,7 @@ model Canvass {
   jo              JO?
   rv              RV?
   spr             SPR?
+  created_by_id   String
 
   @@map("canvass")
 }
@@ -115,6 +116,8 @@ model JO {
   jo_approvers      JOApprover[]
   canvass           Canvass      @relation(fields: [canvass_id], references: [id], onDelete: Restrict)
   meqs              MEQS?
+
+  created_by_id String
 
   @@map("job_order")
 }
@@ -152,9 +155,10 @@ model RV {
   is_referenced     Boolean   @default(false)
   notes             String?
 
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-  is_deleted Boolean  @default(false)
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+  is_deleted    Boolean  @default(false)
+  created_by_id String
 
   meqs         MEQS?
   rv_approvers RVApprover[]
@@ -199,6 +203,7 @@ model SPR {
   canvass           Canvass       @relation(fields: [canvass_id], references: [id], onDelete: Restrict)
   vehicle           Vehicle       @relation(fields: [vehicle_id], references: [id], onDelete: Restrict)
   spr_approvers     SPRApprover[]
+  created_by_id     String
 
   @@map("spare_parts_request")
 }
@@ -241,6 +246,7 @@ model MEQS {
   spr            SPR?           @relation(fields: [spr_id], references: [id], onDelete: Restrict)
   meqs_approvers MEQSApprover[]
   meqs_suppliers MEQSSupplier[]
+  created_by_id  String
 
   @@map("material_equipment_quotation_summary")
 }
@@ -327,6 +333,7 @@ model PO {
   meqs_supplier    MEQSSupplier @relation(fields: [meqs_supplier_id], references: [id], onDelete: Restrict)
   rr               RR?
   is_referenced    Boolean      @default(false)
+  created_by_id    String
 
   @@map("purchase_order")
 }
@@ -370,6 +377,8 @@ model RR {
   po           PO           @relation(fields: [po_id], references: [id], onDelete: Restrict)
   rr_approvers RRApprover[]
   rr_items     RRItem[]
+
+  created_by_id String
 
   @@map("receiving_report")
 }

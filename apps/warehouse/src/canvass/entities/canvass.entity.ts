@@ -29,6 +29,9 @@ export class Canvass {
   @Field(() => Employee)
   requested_by?: Employee;
 
+  @Field()
+  created_by_id: string;
+
   @Field(() => [CanvassItem])
   canvass_items: CanvassItem[];
 

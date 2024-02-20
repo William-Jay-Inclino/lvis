@@ -18,6 +18,9 @@ export class RV {
   @Field(() => String)
   supervisor_id: string;
 
+  @Field(() => String)
+  created_by_id: string;
+
   @Field(() => String, {nullable: true})
   canceller_id: string | null;
 

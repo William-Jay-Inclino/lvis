@@ -163,7 +163,8 @@ exports.Prisma.CanvassScalarFieldEnum = {
   is_referenced: 'is_referenced',
   created_at: 'created_at',
   updated_at: 'updated_at',
-  is_deleted: 'is_deleted'
+  is_deleted: 'is_deleted',
+  created_by_id: 'created_by_id'
 };
 
 exports.Prisma.JOScalarFieldEnum = {
@@ -181,7 +182,8 @@ exports.Prisma.JOScalarFieldEnum = {
   is_referenced: 'is_referenced',
   created_at: 'created_at',
   updated_at: 'updated_at',
-  is_deleted: 'is_deleted'
+  is_deleted: 'is_deleted',
+  created_by_id: 'created_by_id'
 };
 
 exports.Prisma.JOApproverScalarFieldEnum = {
@@ -214,7 +216,8 @@ exports.Prisma.RVScalarFieldEnum = {
   notes: 'notes',
   created_at: 'created_at',
   updated_at: 'updated_at',
-  is_deleted: 'is_deleted'
+  is_deleted: 'is_deleted',
+  created_by_id: 'created_by_id'
 };
 
 exports.Prisma.RVApproverScalarFieldEnum = {
@@ -246,7 +249,8 @@ exports.Prisma.SPRScalarFieldEnum = {
   is_referenced: 'is_referenced',
   created_at: 'created_at',
   updated_at: 'updated_at',
-  is_deleted: 'is_deleted'
+  is_deleted: 'is_deleted',
+  created_by_id: 'created_by_id'
 };
 
 exports.Prisma.SPRApproverScalarFieldEnum = {
@@ -278,7 +282,8 @@ exports.Prisma.MEQSScalarFieldEnum = {
   date_cancelled: 'date_cancelled',
   created_at: 'created_at',
   updated_at: 'updated_at',
-  is_deleted: 'is_deleted'
+  is_deleted: 'is_deleted',
+  created_by_id: 'created_by_id'
 };
 
 exports.Prisma.MEQSSupplierScalarFieldEnum = {
@@ -340,7 +345,8 @@ exports.Prisma.POScalarFieldEnum = {
   created_at: 'created_at',
   updated_at: 'updated_at',
   is_deleted: 'is_deleted',
-  is_referenced: 'is_referenced'
+  is_referenced: 'is_referenced',
+  created_by_id: 'created_by_id'
 };
 
 exports.Prisma.POApproverScalarFieldEnum = {
@@ -373,7 +379,8 @@ exports.Prisma.RRScalarFieldEnum = {
   status: 'status',
   created_at: 'created_at',
   updated_at: 'updated_at',
-  is_deleted: 'is_deleted'
+  is_deleted: 'is_deleted',
+  created_by_id: 'created_by_id'
 };
 
 exports.Prisma.RRApproverScalarFieldEnum = {

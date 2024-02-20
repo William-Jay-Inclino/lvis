@@ -113,6 +113,7 @@ export class MeqsService {
         }
 
         const data: Prisma.MEQSCreateInput = {
+            created_by_id: this.authUser.user.id,
             jo: input.jo_id ? { connect: { id: input.jo_id } } : undefined,
             rv: input.rv_id ? { connect: { id: input.rv_id } } : undefined,
             spr: input.spr_id ? { connect: { id: input.spr_id } } : undefined,

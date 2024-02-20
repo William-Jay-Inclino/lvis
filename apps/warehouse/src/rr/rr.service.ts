@@ -88,6 +88,7 @@ export class RrService {
         const rrNumber = await this.getLatestRrNumber()
 
         const data: Prisma.RRCreateInput = {
+            created_by_id: this.authUser.user.id,
             po: { connect: { id: input.po_id } },
             rr_number: rrNumber,
             rr_date: new Date(input.rr_date),

@@ -8354,6 +8354,7 @@ export namespace Prisma {
     created_at: Date | null
     updated_at: Date | null
     is_deleted: boolean | null
+    created_by_id: string | null
   }
 
   export type CanvassMaxAggregateOutputType = {
@@ -8367,6 +8368,7 @@ export namespace Prisma {
     created_at: Date | null
     updated_at: Date | null
     is_deleted: boolean | null
+    created_by_id: string | null
   }
 
   export type CanvassCountAggregateOutputType = {
@@ -8380,6 +8382,7 @@ export namespace Prisma {
     created_at: number
     updated_at: number
     is_deleted: number
+    created_by_id: number
     _all: number
   }
 
@@ -8395,6 +8398,7 @@ export namespace Prisma {
     created_at?: true
     updated_at?: true
     is_deleted?: true
+    created_by_id?: true
   }
 
   export type CanvassMaxAggregateInputType = {
@@ -8408,6 +8412,7 @@ export namespace Prisma {
     created_at?: true
     updated_at?: true
     is_deleted?: true
+    created_by_id?: true
   }
 
   export type CanvassCountAggregateInputType = {
@@ -8421,6 +8426,7 @@ export namespace Prisma {
     created_at?: true
     updated_at?: true
     is_deleted?: true
+    created_by_id?: true
     _all?: true
   }
 
@@ -8507,6 +8513,7 @@ export namespace Prisma {
     created_at: Date
     updated_at: Date
     is_deleted: boolean
+    created_by_id: string
     _count: CanvassCountAggregateOutputType | null
     _min: CanvassMinAggregateOutputType | null
     _max: CanvassMaxAggregateOutputType | null
@@ -8537,6 +8544,7 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     is_deleted?: boolean
+    created_by_id?: boolean
     canvass_items?: boolean | Canvass$canvass_itemsArgs<ExtArgs>
     jo?: boolean | Canvass$joArgs<ExtArgs>
     rv?: boolean | Canvass$rvArgs<ExtArgs>
@@ -8555,6 +8563,7 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     is_deleted?: boolean
+    created_by_id?: boolean
   }
 
   export type CanvassInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -8585,6 +8594,7 @@ export namespace Prisma {
       created_at: Date
       updated_at: Date
       is_deleted: boolean
+      created_by_id: string
     }, ExtArgs["result"]["canvass"]>
     composites: {}
   }
@@ -8996,6 +9006,7 @@ export namespace Prisma {
     readonly created_at: FieldRef<"Canvass", 'DateTime'>
     readonly updated_at: FieldRef<"Canvass", 'DateTime'>
     readonly is_deleted: FieldRef<"Canvass", 'Boolean'>
+    readonly created_by_id: FieldRef<"Canvass", 'String'>
   }
     
 
@@ -9428,6 +9439,7 @@ export namespace Prisma {
     created_at: Date | null
     updated_at: Date | null
     is_deleted: boolean | null
+    created_by_id: string | null
   }
 
   export type JOMaxAggregateOutputType = {
@@ -9446,6 +9458,7 @@ export namespace Prisma {
     created_at: Date | null
     updated_at: Date | null
     is_deleted: boolean | null
+    created_by_id: string | null
   }
 
   export type JOCountAggregateOutputType = {
@@ -9464,6 +9477,7 @@ export namespace Prisma {
     created_at: number
     updated_at: number
     is_deleted: number
+    created_by_id: number
     _all: number
   }
 
@@ -9492,6 +9506,7 @@ export namespace Prisma {
     created_at?: true
     updated_at?: true
     is_deleted?: true
+    created_by_id?: true
   }
 
   export type JOMaxAggregateInputType = {
@@ -9510,6 +9525,7 @@ export namespace Prisma {
     created_at?: true
     updated_at?: true
     is_deleted?: true
+    created_by_id?: true
   }
 
   export type JOCountAggregateInputType = {
@@ -9528,6 +9544,7 @@ export namespace Prisma {
     created_at?: true
     updated_at?: true
     is_deleted?: true
+    created_by_id?: true
     _all?: true
   }
 
@@ -9633,6 +9650,7 @@ export namespace Prisma {
     created_at: Date
     updated_at: Date
     is_deleted: boolean
+    created_by_id: string
     _count: JOCountAggregateOutputType | null
     _avg: JOAvgAggregateOutputType | null
     _sum: JOSumAggregateOutputType | null
@@ -9670,6 +9688,7 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     is_deleted?: boolean
+    created_by_id?: boolean
     jo_approvers?: boolean | JO$jo_approversArgs<ExtArgs>
     canvass?: boolean | CanvassDefaultArgs<ExtArgs>
     meqs?: boolean | JO$meqsArgs<ExtArgs>
@@ -9692,6 +9711,7 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     is_deleted?: boolean
+    created_by_id?: boolean
   }
 
   export type JOInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -9725,6 +9745,7 @@ export namespace Prisma {
       created_at: Date
       updated_at: Date
       is_deleted: boolean
+      created_by_id: string
     }, ExtArgs["result"]["jO"]>
     composites: {}
   }
@@ -10139,6 +10160,7 @@ export namespace Prisma {
     readonly created_at: FieldRef<"JO", 'DateTime'>
     readonly updated_at: FieldRef<"JO", 'DateTime'>
     readonly is_deleted: FieldRef<"JO", 'Boolean'>
+    readonly created_by_id: FieldRef<"JO", 'String'>
   }
     
 
@@ -11562,6 +11584,7 @@ export namespace Prisma {
     created_at: Date | null
     updated_at: Date | null
     is_deleted: boolean | null
+    created_by_id: string | null
   }
 
   export type RVMaxAggregateOutputType = {
@@ -11581,6 +11604,7 @@ export namespace Prisma {
     created_at: Date | null
     updated_at: Date | null
     is_deleted: boolean | null
+    created_by_id: string | null
   }
 
   export type RVCountAggregateOutputType = {
@@ -11600,6 +11624,7 @@ export namespace Prisma {
     created_at: number
     updated_at: number
     is_deleted: number
+    created_by_id: number
     _all: number
   }
 
@@ -11629,6 +11654,7 @@ export namespace Prisma {
     created_at?: true
     updated_at?: true
     is_deleted?: true
+    created_by_id?: true
   }
 
   export type RVMaxAggregateInputType = {
@@ -11648,6 +11674,7 @@ export namespace Prisma {
     created_at?: true
     updated_at?: true
     is_deleted?: true
+    created_by_id?: true
   }
 
   export type RVCountAggregateInputType = {
@@ -11667,6 +11694,7 @@ export namespace Prisma {
     created_at?: true
     updated_at?: true
     is_deleted?: true
+    created_by_id?: true
     _all?: true
   }
 
@@ -11773,6 +11801,7 @@ export namespace Prisma {
     created_at: Date
     updated_at: Date
     is_deleted: boolean
+    created_by_id: string
     _count: RVCountAggregateOutputType | null
     _avg: RVAvgAggregateOutputType | null
     _sum: RVSumAggregateOutputType | null
@@ -11811,6 +11840,7 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     is_deleted?: boolean
+    created_by_id?: boolean
     canvass?: boolean | CanvassDefaultArgs<ExtArgs>
     meqs?: boolean | RV$meqsArgs<ExtArgs>
     rv_approvers?: boolean | RV$rv_approversArgs<ExtArgs>
@@ -11834,6 +11864,7 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     is_deleted?: boolean
+    created_by_id?: boolean
   }
 
   export type RVInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -11868,6 +11899,7 @@ export namespace Prisma {
       created_at: Date
       updated_at: Date
       is_deleted: boolean
+      created_by_id: string
     }, ExtArgs["result"]["rV"]>
     composites: {}
   }
@@ -12283,6 +12315,7 @@ export namespace Prisma {
     readonly created_at: FieldRef<"RV", 'DateTime'>
     readonly updated_at: FieldRef<"RV", 'DateTime'>
     readonly is_deleted: FieldRef<"RV", 'Boolean'>
+    readonly created_by_id: FieldRef<"RV", 'String'>
   }
     
 
@@ -13715,6 +13748,7 @@ export namespace Prisma {
     created_at: Date | null
     updated_at: Date | null
     is_deleted: boolean | null
+    created_by_id: string | null
   }
 
   export type SPRMaxAggregateOutputType = {
@@ -13732,6 +13766,7 @@ export namespace Prisma {
     created_at: Date | null
     updated_at: Date | null
     is_deleted: boolean | null
+    created_by_id: string | null
   }
 
   export type SPRCountAggregateOutputType = {
@@ -13749,6 +13784,7 @@ export namespace Prisma {
     created_at: number
     updated_at: number
     is_deleted: number
+    created_by_id: number
     _all: number
   }
 
@@ -13776,6 +13812,7 @@ export namespace Prisma {
     created_at?: true
     updated_at?: true
     is_deleted?: true
+    created_by_id?: true
   }
 
   export type SPRMaxAggregateInputType = {
@@ -13793,6 +13830,7 @@ export namespace Prisma {
     created_at?: true
     updated_at?: true
     is_deleted?: true
+    created_by_id?: true
   }
 
   export type SPRCountAggregateInputType = {
@@ -13810,6 +13848,7 @@ export namespace Prisma {
     created_at?: true
     updated_at?: true
     is_deleted?: true
+    created_by_id?: true
     _all?: true
   }
 
@@ -13914,6 +13953,7 @@ export namespace Prisma {
     created_at: Date
     updated_at: Date
     is_deleted: boolean
+    created_by_id: string
     _count: SPRCountAggregateOutputType | null
     _avg: SPRAvgAggregateOutputType | null
     _sum: SPRSumAggregateOutputType | null
@@ -13950,6 +13990,7 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     is_deleted?: boolean
+    created_by_id?: boolean
     meqs?: boolean | SPR$meqsArgs<ExtArgs>
     canvass?: boolean | CanvassDefaultArgs<ExtArgs>
     vehicle?: boolean | VehicleDefaultArgs<ExtArgs>
@@ -13972,6 +14013,7 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     is_deleted?: boolean
+    created_by_id?: boolean
   }
 
   export type SPRInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -14006,6 +14048,7 @@ export namespace Prisma {
       created_at: Date
       updated_at: Date
       is_deleted: boolean
+      created_by_id: string
     }, ExtArgs["result"]["sPR"]>
     composites: {}
   }
@@ -14421,6 +14464,7 @@ export namespace Prisma {
     readonly created_at: FieldRef<"SPR", 'DateTime'>
     readonly updated_at: FieldRef<"SPR", 'DateTime'>
     readonly is_deleted: FieldRef<"SPR", 'Boolean'>
+    readonly created_by_id: FieldRef<"SPR", 'String'>
   }
     
 
@@ -15855,6 +15899,7 @@ export namespace Prisma {
     created_at: Date | null
     updated_at: Date | null
     is_deleted: boolean | null
+    created_by_id: string | null
   }
 
   export type MEQSMaxAggregateOutputType = {
@@ -15872,6 +15917,7 @@ export namespace Prisma {
     created_at: Date | null
     updated_at: Date | null
     is_deleted: boolean | null
+    created_by_id: string | null
   }
 
   export type MEQSCountAggregateOutputType = {
@@ -15889,6 +15935,7 @@ export namespace Prisma {
     created_at: number
     updated_at: number
     is_deleted: number
+    created_by_id: number
     _all: number
   }
 
@@ -15918,6 +15965,7 @@ export namespace Prisma {
     created_at?: true
     updated_at?: true
     is_deleted?: true
+    created_by_id?: true
   }
 
   export type MEQSMaxAggregateInputType = {
@@ -15935,6 +15983,7 @@ export namespace Prisma {
     created_at?: true
     updated_at?: true
     is_deleted?: true
+    created_by_id?: true
   }
 
   export type MEQSCountAggregateInputType = {
@@ -15952,6 +16001,7 @@ export namespace Prisma {
     created_at?: true
     updated_at?: true
     is_deleted?: true
+    created_by_id?: true
     _all?: true
   }
 
@@ -16056,6 +16106,7 @@ export namespace Prisma {
     created_at: Date
     updated_at: Date
     is_deleted: boolean
+    created_by_id: string
     _count: MEQSCountAggregateOutputType | null
     _avg: MEQSAvgAggregateOutputType | null
     _sum: MEQSSumAggregateOutputType | null
@@ -16092,6 +16143,7 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     is_deleted?: boolean
+    created_by_id?: boolean
     jo?: boolean | MEQS$joArgs<ExtArgs>
     rv?: boolean | MEQS$rvArgs<ExtArgs>
     spr?: boolean | MEQS$sprArgs<ExtArgs>
@@ -16115,6 +16167,7 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     is_deleted?: boolean
+    created_by_id?: boolean
   }
 
   export type MEQSInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -16151,6 +16204,7 @@ export namespace Prisma {
       created_at: Date
       updated_at: Date
       is_deleted: boolean
+      created_by_id: string
     }, ExtArgs["result"]["mEQS"]>
     composites: {}
   }
@@ -16568,6 +16622,7 @@ export namespace Prisma {
     readonly created_at: FieldRef<"MEQS", 'DateTime'>
     readonly updated_at: FieldRef<"MEQS", 'DateTime'>
     readonly is_deleted: FieldRef<"MEQS", 'Boolean'>
+    readonly created_by_id: FieldRef<"MEQS", 'String'>
   }
     
 
@@ -21026,6 +21081,7 @@ export namespace Prisma {
     updated_at: Date | null
     is_deleted: boolean | null
     is_referenced: boolean | null
+    created_by_id: string | null
   }
 
   export type POMaxAggregateOutputType = {
@@ -21040,6 +21096,7 @@ export namespace Prisma {
     updated_at: Date | null
     is_deleted: boolean | null
     is_referenced: boolean | null
+    created_by_id: string | null
   }
 
   export type POCountAggregateOutputType = {
@@ -21054,6 +21111,7 @@ export namespace Prisma {
     updated_at: number
     is_deleted: number
     is_referenced: number
+    created_by_id: number
     _all: number
   }
 
@@ -21078,6 +21136,7 @@ export namespace Prisma {
     updated_at?: true
     is_deleted?: true
     is_referenced?: true
+    created_by_id?: true
   }
 
   export type POMaxAggregateInputType = {
@@ -21092,6 +21151,7 @@ export namespace Prisma {
     updated_at?: true
     is_deleted?: true
     is_referenced?: true
+    created_by_id?: true
   }
 
   export type POCountAggregateInputType = {
@@ -21106,6 +21166,7 @@ export namespace Prisma {
     updated_at?: true
     is_deleted?: true
     is_referenced?: true
+    created_by_id?: true
     _all?: true
   }
 
@@ -21207,6 +21268,7 @@ export namespace Prisma {
     updated_at: Date
     is_deleted: boolean
     is_referenced: boolean
+    created_by_id: string
     _count: POCountAggregateOutputType | null
     _avg: POAvgAggregateOutputType | null
     _sum: POSumAggregateOutputType | null
@@ -21240,6 +21302,7 @@ export namespace Prisma {
     updated_at?: boolean
     is_deleted?: boolean
     is_referenced?: boolean
+    created_by_id?: boolean
     po_approvers?: boolean | PO$po_approversArgs<ExtArgs>
     meqs_supplier?: boolean | MEQSSupplierDefaultArgs<ExtArgs>
     rr?: boolean | PO$rrArgs<ExtArgs>
@@ -21258,6 +21321,7 @@ export namespace Prisma {
     updated_at?: boolean
     is_deleted?: boolean
     is_referenced?: boolean
+    created_by_id?: boolean
   }
 
   export type POInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -21287,6 +21351,7 @@ export namespace Prisma {
       updated_at: Date
       is_deleted: boolean
       is_referenced: boolean
+      created_by_id: string
     }, ExtArgs["result"]["pO"]>
     composites: {}
   }
@@ -21697,6 +21762,7 @@ export namespace Prisma {
     readonly updated_at: FieldRef<"PO", 'DateTime'>
     readonly is_deleted: FieldRef<"PO", 'Boolean'>
     readonly is_referenced: FieldRef<"PO", 'Boolean'>
+    readonly created_by_id: FieldRef<"PO", 'String'>
   }
     
 
@@ -23132,6 +23198,7 @@ export namespace Prisma {
     created_at: Date | null
     updated_at: Date | null
     is_deleted: boolean | null
+    created_by_id: string | null
   }
 
   export type RRMaxAggregateOutputType = {
@@ -23150,6 +23217,7 @@ export namespace Prisma {
     created_at: Date | null
     updated_at: Date | null
     is_deleted: boolean | null
+    created_by_id: string | null
   }
 
   export type RRCountAggregateOutputType = {
@@ -23168,6 +23236,7 @@ export namespace Prisma {
     created_at: number
     updated_at: number
     is_deleted: number
+    created_by_id: number
     _all: number
   }
 
@@ -23198,6 +23267,7 @@ export namespace Prisma {
     created_at?: true
     updated_at?: true
     is_deleted?: true
+    created_by_id?: true
   }
 
   export type RRMaxAggregateInputType = {
@@ -23216,6 +23286,7 @@ export namespace Prisma {
     created_at?: true
     updated_at?: true
     is_deleted?: true
+    created_by_id?: true
   }
 
   export type RRCountAggregateInputType = {
@@ -23234,6 +23305,7 @@ export namespace Prisma {
     created_at?: true
     updated_at?: true
     is_deleted?: true
+    created_by_id?: true
     _all?: true
   }
 
@@ -23339,6 +23411,7 @@ export namespace Prisma {
     created_at: Date
     updated_at: Date
     is_deleted: boolean
+    created_by_id: string
     _count: RRCountAggregateOutputType | null
     _avg: RRAvgAggregateOutputType | null
     _sum: RRSumAggregateOutputType | null
@@ -23376,6 +23449,7 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     is_deleted?: boolean
+    created_by_id?: boolean
     po?: boolean | PODefaultArgs<ExtArgs>
     rr_approvers?: boolean | RR$rr_approversArgs<ExtArgs>
     rr_items?: boolean | RR$rr_itemsArgs<ExtArgs>
@@ -23398,6 +23472,7 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     is_deleted?: boolean
+    created_by_id?: boolean
   }
 
   export type RRInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -23431,6 +23506,7 @@ export namespace Prisma {
       created_at: Date
       updated_at: Date
       is_deleted: boolean
+      created_by_id: string
     }, ExtArgs["result"]["rR"]>
     composites: {}
   }
@@ -23845,6 +23921,7 @@ export namespace Prisma {
     readonly created_at: FieldRef<"RR", 'DateTime'>
     readonly updated_at: FieldRef<"RR", 'DateTime'>
     readonly is_deleted: FieldRef<"RR", 'Boolean'>
+    readonly created_by_id: FieldRef<"RR", 'String'>
   }
     
 
@@ -29571,7 +29648,8 @@ export namespace Prisma {
     is_referenced: 'is_referenced',
     created_at: 'created_at',
     updated_at: 'updated_at',
-    is_deleted: 'is_deleted'
+    is_deleted: 'is_deleted',
+    created_by_id: 'created_by_id'
   };
 
   export type CanvassScalarFieldEnum = (typeof CanvassScalarFieldEnum)[keyof typeof CanvassScalarFieldEnum]
@@ -29592,7 +29670,8 @@ export namespace Prisma {
     is_referenced: 'is_referenced',
     created_at: 'created_at',
     updated_at: 'updated_at',
-    is_deleted: 'is_deleted'
+    is_deleted: 'is_deleted',
+    created_by_id: 'created_by_id'
   };
 
   export type JOScalarFieldEnum = (typeof JOScalarFieldEnum)[keyof typeof JOScalarFieldEnum]
@@ -29631,7 +29710,8 @@ export namespace Prisma {
     notes: 'notes',
     created_at: 'created_at',
     updated_at: 'updated_at',
-    is_deleted: 'is_deleted'
+    is_deleted: 'is_deleted',
+    created_by_id: 'created_by_id'
   };
 
   export type RVScalarFieldEnum = (typeof RVScalarFieldEnum)[keyof typeof RVScalarFieldEnum]
@@ -29669,7 +29749,8 @@ export namespace Prisma {
     is_referenced: 'is_referenced',
     created_at: 'created_at',
     updated_at: 'updated_at',
-    is_deleted: 'is_deleted'
+    is_deleted: 'is_deleted',
+    created_by_id: 'created_by_id'
   };
 
   export type SPRScalarFieldEnum = (typeof SPRScalarFieldEnum)[keyof typeof SPRScalarFieldEnum]
@@ -29707,7 +29788,8 @@ export namespace Prisma {
     date_cancelled: 'date_cancelled',
     created_at: 'created_at',
     updated_at: 'updated_at',
-    is_deleted: 'is_deleted'
+    is_deleted: 'is_deleted',
+    created_by_id: 'created_by_id'
   };
 
   export type MEQSScalarFieldEnum = (typeof MEQSScalarFieldEnum)[keyof typeof MEQSScalarFieldEnum]
@@ -29784,7 +29866,8 @@ export namespace Prisma {
     created_at: 'created_at',
     updated_at: 'updated_at',
     is_deleted: 'is_deleted',
-    is_referenced: 'is_referenced'
+    is_referenced: 'is_referenced',
+    created_by_id: 'created_by_id'
   };
 
   export type POScalarFieldEnum = (typeof POScalarFieldEnum)[keyof typeof POScalarFieldEnum]
@@ -29823,7 +29906,8 @@ export namespace Prisma {
     status: 'status',
     created_at: 'created_at',
     updated_at: 'updated_at',
-    is_deleted: 'is_deleted'
+    is_deleted: 'is_deleted',
+    created_by_id: 'created_by_id'
   };
 
   export type RRScalarFieldEnum = (typeof RRScalarFieldEnum)[keyof typeof RRScalarFieldEnum]
@@ -30347,6 +30431,7 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"Canvass"> | Date | string
     updated_at?: DateTimeFilter<"Canvass"> | Date | string
     is_deleted?: BoolFilter<"Canvass"> | boolean
+    created_by_id?: StringFilter<"Canvass"> | string
     canvass_items?: CanvassItemListRelationFilter
     jo?: XOR<JONullableRelationFilter, JOWhereInput> | null
     rv?: XOR<RVNullableRelationFilter, RVWhereInput> | null
@@ -30364,6 +30449,7 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
+    created_by_id?: SortOrder
     canvass_items?: CanvassItemOrderByRelationAggregateInput
     jo?: JOOrderByWithRelationInput
     rv?: RVOrderByWithRelationInput
@@ -30384,6 +30470,7 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"Canvass"> | Date | string
     updated_at?: DateTimeFilter<"Canvass"> | Date | string
     is_deleted?: BoolFilter<"Canvass"> | boolean
+    created_by_id?: StringFilter<"Canvass"> | string
     canvass_items?: CanvassItemListRelationFilter
     jo?: XOR<JONullableRelationFilter, JOWhereInput> | null
     rv?: XOR<RVNullableRelationFilter, RVWhereInput> | null
@@ -30401,6 +30488,7 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
+    created_by_id?: SortOrder
     _count?: CanvassCountOrderByAggregateInput
     _max?: CanvassMaxOrderByAggregateInput
     _min?: CanvassMinOrderByAggregateInput
@@ -30420,6 +30508,7 @@ export namespace Prisma {
     created_at?: DateTimeWithAggregatesFilter<"Canvass"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"Canvass"> | Date | string
     is_deleted?: BoolWithAggregatesFilter<"Canvass"> | boolean
+    created_by_id?: StringWithAggregatesFilter<"Canvass"> | string
   }
 
   export type JOWhereInput = {
@@ -30441,6 +30530,7 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"JO"> | Date | string
     updated_at?: DateTimeFilter<"JO"> | Date | string
     is_deleted?: BoolFilter<"JO"> | boolean
+    created_by_id?: StringFilter<"JO"> | string
     jo_approvers?: JOApproverListRelationFilter
     canvass?: XOR<CanvassRelationFilter, CanvassWhereInput>
     meqs?: XOR<MEQSNullableRelationFilter, MEQSWhereInput> | null
@@ -30462,6 +30552,7 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
+    created_by_id?: SortOrder
     jo_approvers?: JOApproverOrderByRelationAggregateInput
     canvass?: CanvassOrderByWithRelationInput
     meqs?: MEQSOrderByWithRelationInput
@@ -30486,6 +30577,7 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"JO"> | Date | string
     updated_at?: DateTimeFilter<"JO"> | Date | string
     is_deleted?: BoolFilter<"JO"> | boolean
+    created_by_id?: StringFilter<"JO"> | string
     jo_approvers?: JOApproverListRelationFilter
     canvass?: XOR<CanvassRelationFilter, CanvassWhereInput>
     meqs?: XOR<MEQSNullableRelationFilter, MEQSWhereInput> | null
@@ -30507,6 +30599,7 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
+    created_by_id?: SortOrder
     _count?: JOCountOrderByAggregateInput
     _avg?: JOAvgOrderByAggregateInput
     _max?: JOMaxOrderByAggregateInput
@@ -30533,6 +30626,7 @@ export namespace Prisma {
     created_at?: DateTimeWithAggregatesFilter<"JO"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"JO"> | Date | string
     is_deleted?: BoolWithAggregatesFilter<"JO"> | boolean
+    created_by_id?: StringWithAggregatesFilter<"JO"> | string
   }
 
   export type JOApproverWhereInput = {
@@ -30642,6 +30736,7 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"RV"> | Date | string
     updated_at?: DateTimeFilter<"RV"> | Date | string
     is_deleted?: BoolFilter<"RV"> | boolean
+    created_by_id?: StringFilter<"RV"> | string
     canvass?: XOR<CanvassRelationFilter, CanvassWhereInput>
     meqs?: XOR<MEQSNullableRelationFilter, MEQSWhereInput> | null
     rv_approvers?: RVApproverListRelationFilter
@@ -30664,6 +30759,7 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
+    created_by_id?: SortOrder
     canvass?: CanvassOrderByWithRelationInput
     meqs?: MEQSOrderByWithRelationInput
     rv_approvers?: RVApproverOrderByRelationAggregateInput
@@ -30689,6 +30785,7 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"RV"> | Date | string
     updated_at?: DateTimeFilter<"RV"> | Date | string
     is_deleted?: BoolFilter<"RV"> | boolean
+    created_by_id?: StringFilter<"RV"> | string
     canvass?: XOR<CanvassRelationFilter, CanvassWhereInput>
     meqs?: XOR<MEQSNullableRelationFilter, MEQSWhereInput> | null
     rv_approvers?: RVApproverListRelationFilter
@@ -30711,6 +30808,7 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
+    created_by_id?: SortOrder
     _count?: RVCountOrderByAggregateInput
     _avg?: RVAvgOrderByAggregateInput
     _max?: RVMaxOrderByAggregateInput
@@ -30738,6 +30836,7 @@ export namespace Prisma {
     created_at?: DateTimeWithAggregatesFilter<"RV"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"RV"> | Date | string
     is_deleted?: BoolWithAggregatesFilter<"RV"> | boolean
+    created_by_id?: StringWithAggregatesFilter<"RV"> | string
   }
 
   export type RVApproverWhereInput = {
@@ -30850,6 +30949,7 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"SPR"> | Date | string
     updated_at?: DateTimeFilter<"SPR"> | Date | string
     is_deleted?: BoolFilter<"SPR"> | boolean
+    created_by_id?: StringFilter<"SPR"> | string
     meqs?: XOR<MEQSNullableRelationFilter, MEQSWhereInput> | null
     canvass?: XOR<CanvassRelationFilter, CanvassWhereInput>
     vehicle?: XOR<VehicleRelationFilter, VehicleWhereInput>
@@ -30871,6 +30971,7 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
+    created_by_id?: SortOrder
     meqs?: MEQSOrderByWithRelationInput
     canvass?: CanvassOrderByWithRelationInput
     vehicle?: VehicleOrderByWithRelationInput
@@ -30895,6 +30996,7 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"SPR"> | Date | string
     updated_at?: DateTimeFilter<"SPR"> | Date | string
     is_deleted?: BoolFilter<"SPR"> | boolean
+    created_by_id?: StringFilter<"SPR"> | string
     meqs?: XOR<MEQSNullableRelationFilter, MEQSWhereInput> | null
     canvass?: XOR<CanvassRelationFilter, CanvassWhereInput>
     vehicle?: XOR<VehicleRelationFilter, VehicleWhereInput>
@@ -30916,6 +31018,7 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
+    created_by_id?: SortOrder
     _count?: SPRCountOrderByAggregateInput
     _avg?: SPRAvgOrderByAggregateInput
     _max?: SPRMaxOrderByAggregateInput
@@ -30941,6 +31044,7 @@ export namespace Prisma {
     created_at?: DateTimeWithAggregatesFilter<"SPR"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"SPR"> | Date | string
     is_deleted?: BoolWithAggregatesFilter<"SPR"> | boolean
+    created_by_id?: StringWithAggregatesFilter<"SPR"> | string
   }
 
   export type SPRApproverWhereInput = {
@@ -31053,6 +31157,7 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"MEQS"> | Date | string
     updated_at?: DateTimeFilter<"MEQS"> | Date | string
     is_deleted?: BoolFilter<"MEQS"> | boolean
+    created_by_id?: StringFilter<"MEQS"> | string
     jo?: XOR<JONullableRelationFilter, JOWhereInput> | null
     rv?: XOR<RVNullableRelationFilter, RVWhereInput> | null
     spr?: XOR<SPRNullableRelationFilter, SPRWhereInput> | null
@@ -31075,6 +31180,7 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
+    created_by_id?: SortOrder
     jo?: JOOrderByWithRelationInput
     rv?: RVOrderByWithRelationInput
     spr?: SPROrderByWithRelationInput
@@ -31100,6 +31206,7 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"MEQS"> | Date | string
     updated_at?: DateTimeFilter<"MEQS"> | Date | string
     is_deleted?: BoolFilter<"MEQS"> | boolean
+    created_by_id?: StringFilter<"MEQS"> | string
     jo?: XOR<JONullableRelationFilter, JOWhereInput> | null
     rv?: XOR<RVNullableRelationFilter, RVWhereInput> | null
     spr?: XOR<SPRNullableRelationFilter, SPRWhereInput> | null
@@ -31122,6 +31229,7 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
+    created_by_id?: SortOrder
     _count?: MEQSCountOrderByAggregateInput
     _avg?: MEQSAvgOrderByAggregateInput
     _max?: MEQSMaxOrderByAggregateInput
@@ -31147,6 +31255,7 @@ export namespace Prisma {
     created_at?: DateTimeWithAggregatesFilter<"MEQS"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"MEQS"> | Date | string
     is_deleted?: BoolWithAggregatesFilter<"MEQS"> | boolean
+    created_by_id?: StringWithAggregatesFilter<"MEQS"> | string
   }
 
   export type MEQSSupplierWhereInput = {
@@ -31483,6 +31592,7 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"PO"> | Date | string
     is_deleted?: BoolFilter<"PO"> | boolean
     is_referenced?: BoolFilter<"PO"> | boolean
+    created_by_id?: StringFilter<"PO"> | string
     po_approvers?: POApproverListRelationFilter
     meqs_supplier?: XOR<MEQSSupplierRelationFilter, MEQSSupplierWhereInput>
     rr?: XOR<RRNullableRelationFilter, RRWhereInput> | null
@@ -31500,6 +31610,7 @@ export namespace Prisma {
     updated_at?: SortOrder
     is_deleted?: SortOrder
     is_referenced?: SortOrder
+    created_by_id?: SortOrder
     po_approvers?: POApproverOrderByRelationAggregateInput
     meqs_supplier?: MEQSSupplierOrderByWithRelationInput
     rr?: RROrderByWithRelationInput
@@ -31520,6 +31631,7 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"PO"> | Date | string
     is_deleted?: BoolFilter<"PO"> | boolean
     is_referenced?: BoolFilter<"PO"> | boolean
+    created_by_id?: StringFilter<"PO"> | string
     po_approvers?: POApproverListRelationFilter
     meqs_supplier?: XOR<MEQSSupplierRelationFilter, MEQSSupplierWhereInput>
     rr?: XOR<RRNullableRelationFilter, RRWhereInput> | null
@@ -31537,6 +31649,7 @@ export namespace Prisma {
     updated_at?: SortOrder
     is_deleted?: SortOrder
     is_referenced?: SortOrder
+    created_by_id?: SortOrder
     _count?: POCountOrderByAggregateInput
     _avg?: POAvgOrderByAggregateInput
     _max?: POMaxOrderByAggregateInput
@@ -31559,6 +31672,7 @@ export namespace Prisma {
     updated_at?: DateTimeWithAggregatesFilter<"PO"> | Date | string
     is_deleted?: BoolWithAggregatesFilter<"PO"> | boolean
     is_referenced?: BoolWithAggregatesFilter<"PO"> | boolean
+    created_by_id?: StringWithAggregatesFilter<"PO"> | string
   }
 
   export type POApproverWhereInput = {
@@ -31672,6 +31786,7 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"RR"> | Date | string
     updated_at?: DateTimeFilter<"RR"> | Date | string
     is_deleted?: BoolFilter<"RR"> | boolean
+    created_by_id?: StringFilter<"RR"> | string
     po?: XOR<PORelationFilter, POWhereInput>
     rr_approvers?: RRApproverListRelationFilter
     rr_items?: RRItemListRelationFilter
@@ -31693,6 +31808,7 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
+    created_by_id?: SortOrder
     po?: POOrderByWithRelationInput
     rr_approvers?: RRApproverOrderByRelationAggregateInput
     rr_items?: RRItemOrderByRelationAggregateInput
@@ -31717,6 +31833,7 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"RR"> | Date | string
     updated_at?: DateTimeFilter<"RR"> | Date | string
     is_deleted?: BoolFilter<"RR"> | boolean
+    created_by_id?: StringFilter<"RR"> | string
     po?: XOR<PORelationFilter, POWhereInput>
     rr_approvers?: RRApproverListRelationFilter
     rr_items?: RRItemListRelationFilter
@@ -31738,6 +31855,7 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
+    created_by_id?: SortOrder
     _count?: RRCountOrderByAggregateInput
     _avg?: RRAvgOrderByAggregateInput
     _max?: RRMaxOrderByAggregateInput
@@ -31764,6 +31882,7 @@ export namespace Prisma {
     created_at?: DateTimeWithAggregatesFilter<"RR"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"RR"> | Date | string
     is_deleted?: BoolWithAggregatesFilter<"RR"> | boolean
+    created_by_id?: StringWithAggregatesFilter<"RR"> | string
   }
 
   export type RRApproverWhereInput = {
@@ -32580,6 +32699,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     canvass_items?: CanvassItemCreateNestedManyWithoutCanvassInput
     jo?: JOCreateNestedOneWithoutCanvassInput
     rv?: RVCreateNestedOneWithoutCanvassInput
@@ -32597,6 +32717,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     canvass_items?: CanvassItemUncheckedCreateNestedManyWithoutCanvassInput
     jo?: JOUncheckedCreateNestedOneWithoutCanvassInput
     rv?: RVUncheckedCreateNestedOneWithoutCanvassInput
@@ -32614,6 +32735,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     canvass_items?: CanvassItemUpdateManyWithoutCanvassNestedInput
     jo?: JOUpdateOneWithoutCanvassNestedInput
     rv?: RVUpdateOneWithoutCanvassNestedInput
@@ -32631,6 +32753,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     canvass_items?: CanvassItemUncheckedUpdateManyWithoutCanvassNestedInput
     jo?: JOUncheckedUpdateOneWithoutCanvassNestedInput
     rv?: RVUncheckedUpdateOneWithoutCanvassNestedInput
@@ -32648,6 +32771,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
   }
 
   export type CanvassUpdateManyMutationInput = {
@@ -32661,6 +32785,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type CanvassUncheckedUpdateManyInput = {
@@ -32674,6 +32799,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type JOCreateInput = {
@@ -32691,6 +32817,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     jo_approvers?: JOApproverCreateNestedManyWithoutJoInput
     canvass: CanvassCreateNestedOneWithoutJoInput
     meqs?: MEQSCreateNestedOneWithoutJoInput
@@ -32712,6 +32839,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     jo_approvers?: JOApproverUncheckedCreateNestedManyWithoutJoInput
     meqs?: MEQSUncheckedCreateNestedOneWithoutJoInput
   }
@@ -32731,6 +32859,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     jo_approvers?: JOApproverUpdateManyWithoutJoNestedInput
     canvass?: CanvassUpdateOneRequiredWithoutJoNestedInput
     meqs?: MEQSUpdateOneWithoutJoNestedInput
@@ -32752,6 +32881,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     jo_approvers?: JOApproverUncheckedUpdateManyWithoutJoNestedInput
     meqs?: MEQSUncheckedUpdateOneWithoutJoNestedInput
   }
@@ -32772,6 +32902,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
   }
 
   export type JOUpdateManyMutationInput = {
@@ -32789,6 +32920,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type JOUncheckedUpdateManyInput = {
@@ -32807,6 +32939,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type JOApproverCreateInput = {
@@ -32922,6 +33055,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     canvass: CanvassCreateNestedOneWithoutRvInput
     meqs?: MEQSCreateNestedOneWithoutRvInput
     rv_approvers?: RVApproverCreateNestedManyWithoutRvInput
@@ -32944,6 +33078,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     meqs?: MEQSUncheckedCreateNestedOneWithoutRvInput
     rv_approvers?: RVApproverUncheckedCreateNestedManyWithoutRvInput
   }
@@ -32964,6 +33099,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     canvass?: CanvassUpdateOneRequiredWithoutRvNestedInput
     meqs?: MEQSUpdateOneWithoutRvNestedInput
     rv_approvers?: RVApproverUpdateManyWithoutRvNestedInput
@@ -32986,6 +33122,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     meqs?: MEQSUncheckedUpdateOneWithoutRvNestedInput
     rv_approvers?: RVApproverUncheckedUpdateManyWithoutRvNestedInput
   }
@@ -33007,6 +33144,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
   }
 
   export type RVUpdateManyMutationInput = {
@@ -33025,6 +33163,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type RVUncheckedUpdateManyInput = {
@@ -33044,6 +33183,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type RVApproverCreateInput = {
@@ -33163,6 +33303,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     meqs?: MEQSCreateNestedOneWithoutSprInput
     canvass: CanvassCreateNestedOneWithoutSprInput
     vehicle: VehicleCreateNestedOneWithoutSprsInput
@@ -33184,6 +33325,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     meqs?: MEQSUncheckedCreateNestedOneWithoutSprInput
     spr_approvers?: SPRApproverUncheckedCreateNestedManyWithoutSprInput
   }
@@ -33201,6 +33343,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     meqs?: MEQSUpdateOneWithoutSprNestedInput
     canvass?: CanvassUpdateOneRequiredWithoutSprNestedInput
     vehicle?: VehicleUpdateOneRequiredWithoutSprsNestedInput
@@ -33222,6 +33365,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     meqs?: MEQSUncheckedUpdateOneWithoutSprNestedInput
     spr_approvers?: SPRApproverUncheckedUpdateManyWithoutSprNestedInput
   }
@@ -33241,6 +33385,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
   }
 
   export type SPRUpdateManyMutationInput = {
@@ -33256,6 +33401,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type SPRUncheckedUpdateManyInput = {
@@ -33273,6 +33419,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type SPRApproverCreateInput = {
@@ -33391,6 +33538,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     jo?: JOCreateNestedOneWithoutMeqsInput
     rv?: RVCreateNestedOneWithoutMeqsInput
     spr?: SPRCreateNestedOneWithoutMeqsInput
@@ -33413,6 +33561,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     meqs_approvers?: MEQSApproverUncheckedCreateNestedManyWithoutMeqsInput
     meqs_suppliers?: MEQSSupplierUncheckedCreateNestedManyWithoutMeqsInput
   }
@@ -33429,6 +33578,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     jo?: JOUpdateOneWithoutMeqsNestedInput
     rv?: RVUpdateOneWithoutMeqsNestedInput
     spr?: SPRUpdateOneWithoutMeqsNestedInput
@@ -33451,6 +33601,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     meqs_approvers?: MEQSApproverUncheckedUpdateManyWithoutMeqsNestedInput
     meqs_suppliers?: MEQSSupplierUncheckedUpdateManyWithoutMeqsNestedInput
   }
@@ -33470,6 +33621,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
   }
 
   export type MEQSUpdateManyMutationInput = {
@@ -33484,6 +33636,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type MEQSUncheckedUpdateManyInput = {
@@ -33501,6 +33654,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type MEQSSupplierCreateInput = {
@@ -33856,6 +34010,7 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     is_referenced?: boolean
+    created_by_id: string
     po_approvers?: POApproverCreateNestedManyWithoutPoInput
     meqs_supplier: MEQSSupplierCreateNestedOneWithoutPoInput
     rr?: RRCreateNestedOneWithoutPoInput
@@ -33873,6 +34028,7 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     is_referenced?: boolean
+    created_by_id: string
     po_approvers?: POApproverUncheckedCreateNestedManyWithoutPoInput
     rr?: RRUncheckedCreateNestedOneWithoutPoInput
   }
@@ -33888,6 +34044,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     is_referenced?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     po_approvers?: POApproverUpdateManyWithoutPoNestedInput
     meqs_supplier?: MEQSSupplierUpdateOneRequiredWithoutPoNestedInput
     rr?: RRUpdateOneWithoutPoNestedInput
@@ -33905,6 +34062,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     is_referenced?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     po_approvers?: POApproverUncheckedUpdateManyWithoutPoNestedInput
     rr?: RRUncheckedUpdateOneWithoutPoNestedInput
   }
@@ -33921,6 +34079,7 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     is_referenced?: boolean
+    created_by_id: string
   }
 
   export type POUpdateManyMutationInput = {
@@ -33934,6 +34093,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     is_referenced?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type POUncheckedUpdateManyInput = {
@@ -33948,6 +34108,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     is_referenced?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type POApproverCreateInput = {
@@ -34069,6 +34230,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     po: POCreateNestedOneWithoutRrInput
     rr_approvers?: RRApproverCreateNestedManyWithoutRrInput
     rr_items?: RRItemCreateNestedManyWithoutRrInput
@@ -34090,6 +34252,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     rr_approvers?: RRApproverUncheckedCreateNestedManyWithoutRrInput
     rr_items?: RRItemUncheckedCreateNestedManyWithoutRrInput
   }
@@ -34109,6 +34272,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     po?: POUpdateOneRequiredWithoutRrNestedInput
     rr_approvers?: RRApproverUpdateManyWithoutRrNestedInput
     rr_items?: RRItemUpdateManyWithoutRrNestedInput
@@ -34130,6 +34294,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     rr_approvers?: RRApproverUncheckedUpdateManyWithoutRrNestedInput
     rr_items?: RRItemUncheckedUpdateManyWithoutRrNestedInput
   }
@@ -34150,6 +34315,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
   }
 
   export type RRUpdateManyMutationInput = {
@@ -34167,6 +34333,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type RRUncheckedUpdateManyInput = {
@@ -34185,6 +34352,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type RRApproverCreateInput = {
@@ -35060,6 +35228,7 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
+    created_by_id?: SortOrder
   }
 
   export type CanvassMaxOrderByAggregateInput = {
@@ -35073,6 +35242,7 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
+    created_by_id?: SortOrder
   }
 
   export type CanvassMinOrderByAggregateInput = {
@@ -35086,6 +35256,7 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
+    created_by_id?: SortOrder
   }
 
   export type DateTimeNullableFilter<$PrismaModel = never> = {
@@ -35130,6 +35301,7 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
+    created_by_id?: SortOrder
   }
 
   export type JOAvgOrderByAggregateInput = {
@@ -35152,6 +35324,7 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
+    created_by_id?: SortOrder
   }
 
   export type JOMinOrderByAggregateInput = {
@@ -35170,6 +35343,7 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
+    created_by_id?: SortOrder
   }
 
   export type JOSumOrderByAggregateInput = {
@@ -35274,6 +35448,7 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
+    created_by_id?: SortOrder
   }
 
   export type RVAvgOrderByAggregateInput = {
@@ -35297,6 +35472,7 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
+    created_by_id?: SortOrder
   }
 
   export type RVMinOrderByAggregateInput = {
@@ -35316,6 +35492,7 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
+    created_by_id?: SortOrder
   }
 
   export type RVSumOrderByAggregateInput = {
@@ -35412,6 +35589,7 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
+    created_by_id?: SortOrder
   }
 
   export type SPRAvgOrderByAggregateInput = {
@@ -35433,6 +35611,7 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
+    created_by_id?: SortOrder
   }
 
   export type SPRMinOrderByAggregateInput = {
@@ -35450,6 +35629,7 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
+    created_by_id?: SortOrder
   }
 
   export type SPRSumOrderByAggregateInput = {
@@ -35541,6 +35721,7 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
+    created_by_id?: SortOrder
   }
 
   export type MEQSAvgOrderByAggregateInput = {
@@ -35563,6 +35744,7 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
+    created_by_id?: SortOrder
   }
 
   export type MEQSMinOrderByAggregateInput = {
@@ -35580,6 +35762,7 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
+    created_by_id?: SortOrder
   }
 
   export type MEQSSumOrderByAggregateInput = {
@@ -35840,6 +36023,7 @@ export namespace Prisma {
     updated_at?: SortOrder
     is_deleted?: SortOrder
     is_referenced?: SortOrder
+    created_by_id?: SortOrder
   }
 
   export type POAvgOrderByAggregateInput = {
@@ -35858,6 +36042,7 @@ export namespace Prisma {
     updated_at?: SortOrder
     is_deleted?: SortOrder
     is_referenced?: SortOrder
+    created_by_id?: SortOrder
   }
 
   export type POMinOrderByAggregateInput = {
@@ -35872,6 +36057,7 @@ export namespace Prisma {
     updated_at?: SortOrder
     is_deleted?: SortOrder
     is_referenced?: SortOrder
+    created_by_id?: SortOrder
   }
 
   export type POSumOrderByAggregateInput = {
@@ -35964,6 +36150,7 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
+    created_by_id?: SortOrder
   }
 
   export type RRAvgOrderByAggregateInput = {
@@ -35987,6 +36174,7 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
+    created_by_id?: SortOrder
   }
 
   export type RRMinOrderByAggregateInput = {
@@ -36005,6 +36193,7 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
+    created_by_id?: SortOrder
   }
 
   export type RRSumOrderByAggregateInput = {
@@ -38620,6 +38809,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     meqs?: MEQSCreateNestedOneWithoutSprInput
     canvass: CanvassCreateNestedOneWithoutSprInput
     spr_approvers?: SPRApproverCreateNestedManyWithoutSprInput
@@ -38639,6 +38829,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     meqs?: MEQSUncheckedCreateNestedOneWithoutSprInput
     spr_approvers?: SPRApproverUncheckedCreateNestedManyWithoutSprInput
   }
@@ -38687,6 +38878,7 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"SPR"> | Date | string
     updated_at?: DateTimeFilter<"SPR"> | Date | string
     is_deleted?: BoolFilter<"SPR"> | boolean
+    created_by_id?: StringFilter<"SPR"> | string
   }
 
   export type CanvassCreateWithoutCanvass_itemsInput = {
@@ -38700,6 +38892,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     jo?: JOCreateNestedOneWithoutCanvassInput
     rv?: RVCreateNestedOneWithoutCanvassInput
     spr?: SPRCreateNestedOneWithoutCanvassInput
@@ -38716,6 +38909,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     jo?: JOUncheckedCreateNestedOneWithoutCanvassInput
     rv?: RVUncheckedCreateNestedOneWithoutCanvassInput
     spr?: SPRUncheckedCreateNestedOneWithoutCanvassInput
@@ -38830,6 +39024,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     jo?: JOUpdateOneWithoutCanvassNestedInput
     rv?: RVUpdateOneWithoutCanvassNestedInput
     spr?: SPRUpdateOneWithoutCanvassNestedInput
@@ -38846,6 +39041,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     jo?: JOUncheckedUpdateOneWithoutCanvassNestedInput
     rv?: RVUncheckedUpdateOneWithoutCanvassNestedInput
     spr?: SPRUncheckedUpdateOneWithoutCanvassNestedInput
@@ -38992,6 +39188,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     jo_approvers?: JOApproverCreateNestedManyWithoutJoInput
     meqs?: MEQSCreateNestedOneWithoutJoInput
   }
@@ -39011,6 +39208,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     jo_approvers?: JOApproverUncheckedCreateNestedManyWithoutJoInput
     meqs?: MEQSUncheckedCreateNestedOneWithoutJoInput
   }
@@ -39036,6 +39234,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     meqs?: MEQSCreateNestedOneWithoutRvInput
     rv_approvers?: RVApproverCreateNestedManyWithoutRvInput
   }
@@ -39056,6 +39255,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     meqs?: MEQSUncheckedCreateNestedOneWithoutRvInput
     rv_approvers?: RVApproverUncheckedCreateNestedManyWithoutRvInput
   }
@@ -39078,6 +39278,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     meqs?: MEQSCreateNestedOneWithoutSprInput
     vehicle: VehicleCreateNestedOneWithoutSprsInput
     spr_approvers?: SPRApproverCreateNestedManyWithoutSprInput
@@ -39097,6 +39298,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     meqs?: MEQSUncheckedCreateNestedOneWithoutSprInput
     spr_approvers?: SPRApproverUncheckedCreateNestedManyWithoutSprInput
   }
@@ -39148,6 +39350,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     jo_approvers?: JOApproverUpdateManyWithoutJoNestedInput
     meqs?: MEQSUpdateOneWithoutJoNestedInput
   }
@@ -39167,6 +39370,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     jo_approvers?: JOApproverUncheckedUpdateManyWithoutJoNestedInput
     meqs?: MEQSUncheckedUpdateOneWithoutJoNestedInput
   }
@@ -39198,6 +39402,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     meqs?: MEQSUpdateOneWithoutRvNestedInput
     rv_approvers?: RVApproverUpdateManyWithoutRvNestedInput
   }
@@ -39218,6 +39423,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     meqs?: MEQSUncheckedUpdateOneWithoutRvNestedInput
     rv_approvers?: RVApproverUncheckedUpdateManyWithoutRvNestedInput
   }
@@ -39246,6 +39452,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     meqs?: MEQSUpdateOneWithoutSprNestedInput
     vehicle?: VehicleUpdateOneRequiredWithoutSprsNestedInput
     spr_approvers?: SPRApproverUpdateManyWithoutSprNestedInput
@@ -39265,6 +39472,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     meqs?: MEQSUncheckedUpdateOneWithoutSprNestedInput
     spr_approvers?: SPRApproverUncheckedUpdateManyWithoutSprNestedInput
   }
@@ -39316,6 +39524,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     canvass_items?: CanvassItemCreateNestedManyWithoutCanvassInput
     rv?: RVCreateNestedOneWithoutCanvassInput
     spr?: SPRCreateNestedOneWithoutCanvassInput
@@ -39332,6 +39541,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     canvass_items?: CanvassItemUncheckedCreateNestedManyWithoutCanvassInput
     rv?: RVUncheckedCreateNestedOneWithoutCanvassInput
     spr?: SPRUncheckedCreateNestedOneWithoutCanvassInput
@@ -39354,6 +39564,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     rv?: RVCreateNestedOneWithoutMeqsInput
     spr?: SPRCreateNestedOneWithoutMeqsInput
     meqs_approvers?: MEQSApproverCreateNestedManyWithoutMeqsInput
@@ -39374,6 +39585,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     meqs_approvers?: MEQSApproverUncheckedCreateNestedManyWithoutMeqsInput
     meqs_suppliers?: MEQSSupplierUncheckedCreateNestedManyWithoutMeqsInput
   }
@@ -39438,6 +39650,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     canvass_items?: CanvassItemUpdateManyWithoutCanvassNestedInput
     rv?: RVUpdateOneWithoutCanvassNestedInput
     spr?: SPRUpdateOneWithoutCanvassNestedInput
@@ -39454,6 +39667,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     canvass_items?: CanvassItemUncheckedUpdateManyWithoutCanvassNestedInput
     rv?: RVUncheckedUpdateOneWithoutCanvassNestedInput
     spr?: SPRUncheckedUpdateOneWithoutCanvassNestedInput
@@ -39482,6 +39696,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     rv?: RVUpdateOneWithoutMeqsNestedInput
     spr?: SPRUpdateOneWithoutMeqsNestedInput
     meqs_approvers?: MEQSApproverUpdateManyWithoutMeqsNestedInput
@@ -39502,6 +39717,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     meqs_approvers?: MEQSApproverUncheckedUpdateManyWithoutMeqsNestedInput
     meqs_suppliers?: MEQSSupplierUncheckedUpdateManyWithoutMeqsNestedInput
   }
@@ -39521,6 +39737,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     canvass: CanvassCreateNestedOneWithoutJoInput
     meqs?: MEQSCreateNestedOneWithoutJoInput
   }
@@ -39541,6 +39758,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     meqs?: MEQSUncheckedCreateNestedOneWithoutJoInput
   }
 
@@ -39575,6 +39793,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     canvass?: CanvassUpdateOneRequiredWithoutJoNestedInput
     meqs?: MEQSUpdateOneWithoutJoNestedInput
   }
@@ -39595,6 +39814,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     meqs?: MEQSUncheckedUpdateOneWithoutJoNestedInput
   }
 
@@ -39609,6 +39829,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     canvass_items?: CanvassItemCreateNestedManyWithoutCanvassInput
     jo?: JOCreateNestedOneWithoutCanvassInput
     spr?: SPRCreateNestedOneWithoutCanvassInput
@@ -39625,6 +39846,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     canvass_items?: CanvassItemUncheckedCreateNestedManyWithoutCanvassInput
     jo?: JOUncheckedCreateNestedOneWithoutCanvassInput
     spr?: SPRUncheckedCreateNestedOneWithoutCanvassInput
@@ -39647,6 +39869,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     jo?: JOCreateNestedOneWithoutMeqsInput
     spr?: SPRCreateNestedOneWithoutMeqsInput
     meqs_approvers?: MEQSApproverCreateNestedManyWithoutMeqsInput
@@ -39667,6 +39890,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     meqs_approvers?: MEQSApproverUncheckedCreateNestedManyWithoutMeqsInput
     meqs_suppliers?: MEQSSupplierUncheckedCreateNestedManyWithoutMeqsInput
   }
@@ -39736,6 +39960,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     canvass_items?: CanvassItemUpdateManyWithoutCanvassNestedInput
     jo?: JOUpdateOneWithoutCanvassNestedInput
     spr?: SPRUpdateOneWithoutCanvassNestedInput
@@ -39752,6 +39977,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     canvass_items?: CanvassItemUncheckedUpdateManyWithoutCanvassNestedInput
     jo?: JOUncheckedUpdateOneWithoutCanvassNestedInput
     spr?: SPRUncheckedUpdateOneWithoutCanvassNestedInput
@@ -39780,6 +40006,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     jo?: JOUpdateOneWithoutMeqsNestedInput
     spr?: SPRUpdateOneWithoutMeqsNestedInput
     meqs_approvers?: MEQSApproverUpdateManyWithoutMeqsNestedInput
@@ -39800,6 +40027,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     meqs_approvers?: MEQSApproverUncheckedUpdateManyWithoutMeqsNestedInput
     meqs_suppliers?: MEQSSupplierUncheckedUpdateManyWithoutMeqsNestedInput
   }
@@ -39854,6 +40082,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     canvass: CanvassCreateNestedOneWithoutRvInput
     meqs?: MEQSCreateNestedOneWithoutRvInput
   }
@@ -39875,6 +40104,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     meqs?: MEQSUncheckedCreateNestedOneWithoutRvInput
   }
 
@@ -39910,6 +40140,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     canvass?: CanvassUpdateOneRequiredWithoutRvNestedInput
     meqs?: MEQSUpdateOneWithoutRvNestedInput
   }
@@ -39931,6 +40162,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     meqs?: MEQSUncheckedUpdateOneWithoutRvNestedInput
   }
 
@@ -39946,6 +40178,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     jo?: JOCreateNestedOneWithoutMeqsInput
     rv?: RVCreateNestedOneWithoutMeqsInput
     meqs_approvers?: MEQSApproverCreateNestedManyWithoutMeqsInput
@@ -39966,6 +40199,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     meqs_approvers?: MEQSApproverUncheckedCreateNestedManyWithoutMeqsInput
     meqs_suppliers?: MEQSSupplierUncheckedCreateNestedManyWithoutMeqsInput
   }
@@ -39986,6 +40220,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     canvass_items?: CanvassItemCreateNestedManyWithoutCanvassInput
     jo?: JOCreateNestedOneWithoutCanvassInput
     rv?: RVCreateNestedOneWithoutCanvassInput
@@ -40002,6 +40237,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     canvass_items?: CanvassItemUncheckedCreateNestedManyWithoutCanvassInput
     jo?: JOUncheckedCreateNestedOneWithoutCanvassInput
     rv?: RVUncheckedCreateNestedOneWithoutCanvassInput
@@ -40096,6 +40332,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     jo?: JOUpdateOneWithoutMeqsNestedInput
     rv?: RVUpdateOneWithoutMeqsNestedInput
     meqs_approvers?: MEQSApproverUpdateManyWithoutMeqsNestedInput
@@ -40116,6 +40353,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     meqs_approvers?: MEQSApproverUncheckedUpdateManyWithoutMeqsNestedInput
     meqs_suppliers?: MEQSSupplierUncheckedUpdateManyWithoutMeqsNestedInput
   }
@@ -40142,6 +40380,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     canvass_items?: CanvassItemUpdateManyWithoutCanvassNestedInput
     jo?: JOUpdateOneWithoutCanvassNestedInput
     rv?: RVUpdateOneWithoutCanvassNestedInput
@@ -40158,6 +40397,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     canvass_items?: CanvassItemUncheckedUpdateManyWithoutCanvassNestedInput
     jo?: JOUncheckedUpdateOneWithoutCanvassNestedInput
     rv?: RVUncheckedUpdateOneWithoutCanvassNestedInput
@@ -40239,6 +40479,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     meqs?: MEQSCreateNestedOneWithoutSprInput
     canvass: CanvassCreateNestedOneWithoutSprInput
     vehicle: VehicleCreateNestedOneWithoutSprsInput
@@ -40259,6 +40500,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     meqs?: MEQSUncheckedCreateNestedOneWithoutSprInput
   }
 
@@ -40291,6 +40533,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     meqs?: MEQSUpdateOneWithoutSprNestedInput
     canvass?: CanvassUpdateOneRequiredWithoutSprNestedInput
     vehicle?: VehicleUpdateOneRequiredWithoutSprsNestedInput
@@ -40311,6 +40554,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     meqs?: MEQSUncheckedUpdateOneWithoutSprNestedInput
   }
 
@@ -40329,6 +40573,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     jo_approvers?: JOApproverCreateNestedManyWithoutJoInput
     canvass: CanvassCreateNestedOneWithoutJoInput
   }
@@ -40349,6 +40594,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     jo_approvers?: JOApproverUncheckedCreateNestedManyWithoutJoInput
   }
 
@@ -40373,6 +40619,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     canvass: CanvassCreateNestedOneWithoutRvInput
     rv_approvers?: RVApproverCreateNestedManyWithoutRvInput
   }
@@ -40394,6 +40641,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     rv_approvers?: RVApproverUncheckedCreateNestedManyWithoutRvInput
   }
 
@@ -40415,6 +40663,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     canvass: CanvassCreateNestedOneWithoutSprInput
     vehicle: VehicleCreateNestedOneWithoutSprsInput
     spr_approvers?: SPRApproverCreateNestedManyWithoutSprInput
@@ -40435,6 +40684,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     spr_approvers?: SPRApproverUncheckedCreateNestedManyWithoutSprInput
   }
 
@@ -40543,6 +40793,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     jo_approvers?: JOApproverUpdateManyWithoutJoNestedInput
     canvass?: CanvassUpdateOneRequiredWithoutJoNestedInput
   }
@@ -40563,6 +40814,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     jo_approvers?: JOApproverUncheckedUpdateManyWithoutJoNestedInput
   }
 
@@ -40593,6 +40845,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     canvass?: CanvassUpdateOneRequiredWithoutRvNestedInput
     rv_approvers?: RVApproverUpdateManyWithoutRvNestedInput
   }
@@ -40614,6 +40867,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     rv_approvers?: RVApproverUncheckedUpdateManyWithoutRvNestedInput
   }
 
@@ -40641,6 +40895,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     canvass?: CanvassUpdateOneRequiredWithoutSprNestedInput
     vehicle?: VehicleUpdateOneRequiredWithoutSprsNestedInput
     spr_approvers?: SPRApproverUpdateManyWithoutSprNestedInput
@@ -40661,6 +40916,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     spr_approvers?: SPRApproverUncheckedUpdateManyWithoutSprNestedInput
   }
 
@@ -40726,6 +40982,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     jo?: JOCreateNestedOneWithoutMeqsInput
     rv?: RVCreateNestedOneWithoutMeqsInput
     spr?: SPRCreateNestedOneWithoutMeqsInput
@@ -40747,6 +41004,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     meqs_approvers?: MEQSApproverUncheckedCreateNestedManyWithoutMeqsInput
   }
 
@@ -40849,6 +41107,7 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     is_referenced?: boolean
+    created_by_id: string
     po_approvers?: POApproverCreateNestedManyWithoutPoInput
     rr?: RRCreateNestedOneWithoutPoInput
   }
@@ -40864,6 +41123,7 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     is_referenced?: boolean
+    created_by_id: string
     po_approvers?: POApproverUncheckedCreateNestedManyWithoutPoInput
     rr?: RRUncheckedCreateNestedOneWithoutPoInput
   }
@@ -40896,6 +41156,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     jo?: JOUpdateOneWithoutMeqsNestedInput
     rv?: RVUpdateOneWithoutMeqsNestedInput
     spr?: SPRUpdateOneWithoutMeqsNestedInput
@@ -40917,6 +41178,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     meqs_approvers?: MEQSApproverUncheckedUpdateManyWithoutMeqsNestedInput
   }
 
@@ -41015,6 +41277,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     is_referenced?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     po_approvers?: POApproverUpdateManyWithoutPoNestedInput
     rr?: RRUpdateOneWithoutPoNestedInput
   }
@@ -41030,6 +41293,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     is_referenced?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     po_approvers?: POApproverUncheckedUpdateManyWithoutPoNestedInput
     rr?: RRUncheckedUpdateOneWithoutPoNestedInput
   }
@@ -41246,6 +41510,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     jo?: JOCreateNestedOneWithoutMeqsInput
     rv?: RVCreateNestedOneWithoutMeqsInput
     spr?: SPRCreateNestedOneWithoutMeqsInput
@@ -41267,6 +41532,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     meqs_suppliers?: MEQSSupplierUncheckedCreateNestedManyWithoutMeqsInput
   }
 
@@ -41298,6 +41564,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     jo?: JOUpdateOneWithoutMeqsNestedInput
     rv?: RVUpdateOneWithoutMeqsNestedInput
     spr?: SPRUpdateOneWithoutMeqsNestedInput
@@ -41319,6 +41586,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     meqs_suppliers?: MEQSSupplierUncheckedUpdateManyWithoutMeqsNestedInput
   }
 
@@ -41406,6 +41674,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     rr_approvers?: RRApproverCreateNestedManyWithoutRrInput
     rr_items?: RRItemCreateNestedManyWithoutRrInput
   }
@@ -41425,6 +41694,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     rr_approvers?: RRApproverUncheckedCreateNestedManyWithoutRrInput
     rr_items?: RRItemUncheckedCreateNestedManyWithoutRrInput
   }
@@ -41531,6 +41801,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     rr_approvers?: RRApproverUpdateManyWithoutRrNestedInput
     rr_items?: RRItemUpdateManyWithoutRrNestedInput
   }
@@ -41550,6 +41821,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     rr_approvers?: RRApproverUncheckedUpdateManyWithoutRrNestedInput
     rr_items?: RRItemUncheckedUpdateManyWithoutRrNestedInput
   }
@@ -41565,6 +41837,7 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     is_referenced?: boolean
+    created_by_id: string
     meqs_supplier: MEQSSupplierCreateNestedOneWithoutPoInput
     rr?: RRCreateNestedOneWithoutPoInput
   }
@@ -41581,6 +41854,7 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     is_referenced?: boolean
+    created_by_id: string
     rr?: RRUncheckedCreateNestedOneWithoutPoInput
   }
 
@@ -41611,6 +41885,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     is_referenced?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     meqs_supplier?: MEQSSupplierUpdateOneRequiredWithoutPoNestedInput
     rr?: RRUpdateOneWithoutPoNestedInput
   }
@@ -41627,6 +41902,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     is_referenced?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     rr?: RRUncheckedUpdateOneWithoutPoNestedInput
   }
 
@@ -41641,6 +41917,7 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     is_referenced?: boolean
+    created_by_id: string
     po_approvers?: POApproverCreateNestedManyWithoutPoInput
     meqs_supplier: MEQSSupplierCreateNestedOneWithoutPoInput
   }
@@ -41657,6 +41934,7 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     is_referenced?: boolean
+    created_by_id: string
     po_approvers?: POApproverUncheckedCreateNestedManyWithoutPoInput
   }
 
@@ -41773,6 +42051,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     is_referenced?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     po_approvers?: POApproverUpdateManyWithoutPoNestedInput
     meqs_supplier?: MEQSSupplierUpdateOneRequiredWithoutPoNestedInput
   }
@@ -41789,6 +42068,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     is_referenced?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     po_approvers?: POApproverUncheckedUpdateManyWithoutPoNestedInput
   }
 
@@ -41857,6 +42137,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     po: POCreateNestedOneWithoutRrInput
     rr_items?: RRItemCreateNestedManyWithoutRrInput
   }
@@ -41877,6 +42158,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     rr_items?: RRItemUncheckedCreateNestedManyWithoutRrInput
   }
 
@@ -41911,6 +42193,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     po?: POUpdateOneRequiredWithoutRrNestedInput
     rr_items?: RRItemUpdateManyWithoutRrNestedInput
   }
@@ -41931,6 +42214,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     rr_items?: RRItemUncheckedUpdateManyWithoutRrNestedInput
   }
 
@@ -41949,6 +42233,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     po: POCreateNestedOneWithoutRrInput
     rr_approvers?: RRApproverCreateNestedManyWithoutRrInput
   }
@@ -41969,6 +42254,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
     rr_approvers?: RRApproverUncheckedCreateNestedManyWithoutRrInput
   }
 
@@ -42115,6 +42401,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     po?: POUpdateOneRequiredWithoutRrNestedInput
     rr_approvers?: RRApproverUpdateManyWithoutRrNestedInput
   }
@@ -42135,6 +42422,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     rr_approvers?: RRApproverUncheckedUpdateManyWithoutRrNestedInput
   }
 
@@ -43081,6 +43369,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
+    created_by_id: string
   }
 
   export type SPRUpdateWithoutVehicleInput = {
@@ -43096,6 +43385,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     meqs?: MEQSUpdateOneWithoutSprNestedInput
     canvass?: CanvassUpdateOneRequiredWithoutSprNestedInput
     spr_approvers?: SPRApproverUpdateManyWithoutSprNestedInput
@@ -43115,6 +43405,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
     meqs?: MEQSUncheckedUpdateOneWithoutSprNestedInput
     spr_approvers?: SPRApproverUncheckedUpdateManyWithoutSprNestedInput
   }
@@ -43133,6 +43424,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    created_by_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type MEQSSupplierItemCreateManyCanvass_itemInput = {
