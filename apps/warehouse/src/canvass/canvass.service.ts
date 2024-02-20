@@ -59,7 +59,7 @@ export class CanvassService {
                     return {
                         description: item.description,
                         brand: item.brand_id ? { connect: { id: item.brand_id } } : undefined,
-                        unit: { connect: { id: item.unit_id } },
+                        unit: item.unit_id ? { connect: { id: item.unit_id } } : undefined,
                         quantity: item.quantity
                     }
                 })

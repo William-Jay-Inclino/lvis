@@ -56,6 +56,7 @@ export class RvService {
             created_by: this.authUser.user.username,
             rv_number: rvNumber,
             date_requested: new Date(input.date_requested),
+            classification_id: input.classification_id ?? null,
             work_order_no: input.work_order_no ?? null,
             notes: input.notes ?? null,
             work_order_date: input.work_order_date ? new Date(input.date_requested) : null,
@@ -446,6 +447,15 @@ export class RvService {
     }
 
     private async canCreate(input: CreateRvInput): Promise<boolean> {
+
+        if(input.classification_id){
+            const isValidClassificationId = await this.isClassificationExist(input.classification_id, this.authUser)
+
+            if(!isValidClassificationId){
+                throw new NotFoundException('Classification ID not valid')
+            }
+        }
+
         const employeeIds: string[] = input.approvers.map(({ approver_id, approver_proxy_id }) => {
             const ids = [approver_id, approver_proxy_id].filter(id => id !== null && id !== undefined);
             return ids.join(',');

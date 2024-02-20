@@ -16,6 +16,11 @@ export class CreateRvInput {
   @IsString()
   supervisor_id: string;
 
+  @Field(() => String, { nullable: true })
+  @IsOptional()
+  @IsString()
+  classification_id: string;
+
   @Field(() => String)
   @IsNotEmpty()
   @Transform(({ value }) => new Date(value))
