@@ -12,6 +12,9 @@ export class PO {
   meqs_supplier_id: string;
 
   @Field(() => String)
+  created_by: string;
+
+  @Field(() => String)
   po_number: string;
 
   @Field(() => String)
@@ -22,6 +25,7 @@ export class PO {
 
   @Field(() => String, {nullable: true})
   canceller_id: string;
+  
 
   @Field(() => Date)
   created_at: Date;

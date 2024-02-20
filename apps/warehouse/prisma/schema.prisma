@@ -8,6 +8,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum LOG_OPERATION {
+  CREATE
+  UPDATE
+}
+
 model Supplier {
   id           String         @id @default(uuid())
   name         String
@@ -92,9 +97,18 @@ model Canvass {
   jo              JO?
   rv              RV?
   spr             SPR?
-  created_by_id   String
+  created_by      String
 
   @@map("canvass")
+}
+
+model CanvassHistory {
+  id          Int           @id @default(autoincrement())
+  rc_number   String
+  executed_by String
+  operation   LOG_OPERATION
+  timestamp   DateTime      @default(now())
+  json_data   Json
 }
 
 model JO {
@@ -117,7 +131,7 @@ model JO {
   canvass           Canvass      @relation(fields: [canvass_id], references: [id], onDelete: Restrict)
   meqs              MEQS?
 
-  created_by_id String
+  created_by String
 
   @@map("job_order")
 }
@@ -155,10 +169,10 @@ model RV {
   is_referenced     Boolean   @default(false)
   notes             String?
 
-  created_at    DateTime @default(now())
-  updated_at    DateTime @updatedAt
-  is_deleted    Boolean  @default(false)
-  created_by_id String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  is_deleted Boolean  @default(false)
+  created_by String
 
   meqs         MEQS?
   rv_approvers RVApprover[]
@@ -203,7 +217,7 @@ model SPR {
   canvass           Canvass       @relation(fields: [canvass_id], references: [id], onDelete: Restrict)
   vehicle           Vehicle       @relation(fields: [vehicle_id], references: [id], onDelete: Restrict)
   spr_approvers     SPRApprover[]
-  created_by_id     String
+  created_by        String
 
   @@map("spare_parts_request")
 }
@@ -246,7 +260,7 @@ model MEQS {
   spr            SPR?           @relation(fields: [spr_id], references: [id], onDelete: Restrict)
   meqs_approvers MEQSApprover[]
   meqs_suppliers MEQSSupplier[]
-  created_by_id  String
+  created_by     String
 
   @@map("material_equipment_quotation_summary")
 }
@@ -333,7 +347,7 @@ model PO {
   meqs_supplier    MEQSSupplier @relation(fields: [meqs_supplier_id], references: [id], onDelete: Restrict)
   rr               RR?
   is_referenced    Boolean      @default(false)
-  created_by_id    String
+  created_by       String
 
   @@map("purchase_order")
 }
@@ -378,7 +392,7 @@ model RR {
   rr_approvers RRApprover[]
   rr_items     RRItem[]
 
-  created_by_id String
+  created_by String
 
   @@map("receiving_report")
 }

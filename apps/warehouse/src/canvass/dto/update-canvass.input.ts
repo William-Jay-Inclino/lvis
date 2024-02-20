@@ -9,12 +9,6 @@ export class UpdateCanvassInput {
 
   @Field(() => String, { nullable: true })
   @IsOptional()
-  @Transform(({ value }) => (value ? new Date(value) : null))
-  @IsDate()
-  date_requested?: string;
-
-  @Field(() => String, { nullable: true })
-  @IsOptional()
   @IsString()
   purpose?: string;
 
@@ -27,6 +21,11 @@ export class UpdateCanvassInput {
   @IsOptional()
   @IsString()
   requested_by_id?: string;
+
+  @Field(() => String, { nullable: true })
+  @IsOptional()
+  @IsString()
+  requested_by_fullname?: string;
 
   @Field(() => Boolean, { nullable: true })
   @IsOptional()

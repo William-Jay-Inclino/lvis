@@ -19,7 +19,7 @@ export class RV {
   supervisor_id: string;
 
   @Field(() => String)
-  created_by_id: string;
+  created_by: string;
 
   @Field(() => String, {nullable: true})
   canceller_id: string | null;

@@ -164,7 +164,16 @@ exports.Prisma.CanvassScalarFieldEnum = {
   created_at: 'created_at',
   updated_at: 'updated_at',
   is_deleted: 'is_deleted',
-  created_by_id: 'created_by_id'
+  created_by: 'created_by'
+};
+
+exports.Prisma.CanvassHistoryScalarFieldEnum = {
+  id: 'id',
+  rc_number: 'rc_number',
+  executed_by: 'executed_by',
+  operation: 'operation',
+  timestamp: 'timestamp',
+  json_data: 'json_data'
 };
 
 exports.Prisma.JOScalarFieldEnum = {
@@ -183,7 +192,7 @@ exports.Prisma.JOScalarFieldEnum = {
   created_at: 'created_at',
   updated_at: 'updated_at',
   is_deleted: 'is_deleted',
-  created_by_id: 'created_by_id'
+  created_by: 'created_by'
 };
 
 exports.Prisma.JOApproverScalarFieldEnum = {
@@ -217,7 +226,7 @@ exports.Prisma.RVScalarFieldEnum = {
   created_at: 'created_at',
   updated_at: 'updated_at',
   is_deleted: 'is_deleted',
-  created_by_id: 'created_by_id'
+  created_by: 'created_by'
 };
 
 exports.Prisma.RVApproverScalarFieldEnum = {
@@ -250,7 +259,7 @@ exports.Prisma.SPRScalarFieldEnum = {
   created_at: 'created_at',
   updated_at: 'updated_at',
   is_deleted: 'is_deleted',
-  created_by_id: 'created_by_id'
+  created_by: 'created_by'
 };
 
 exports.Prisma.SPRApproverScalarFieldEnum = {
@@ -283,7 +292,7 @@ exports.Prisma.MEQSScalarFieldEnum = {
   created_at: 'created_at',
   updated_at: 'updated_at',
   is_deleted: 'is_deleted',
-  created_by_id: 'created_by_id'
+  created_by: 'created_by'
 };
 
 exports.Prisma.MEQSSupplierScalarFieldEnum = {
@@ -346,7 +355,7 @@ exports.Prisma.POScalarFieldEnum = {
   updated_at: 'updated_at',
   is_deleted: 'is_deleted',
   is_referenced: 'is_referenced',
-  created_by_id: 'created_by_id'
+  created_by: 'created_by'
 };
 
 exports.Prisma.POApproverScalarFieldEnum = {
@@ -380,7 +389,7 @@ exports.Prisma.RRScalarFieldEnum = {
   created_at: 'created_at',
   updated_at: 'updated_at',
   is_deleted: 'is_deleted',
-  created_by_id: 'created_by_id'
+  created_by: 'created_by'
 };
 
 exports.Prisma.RRApproverScalarFieldEnum = {
@@ -457,6 +466,10 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
+exports.Prisma.JsonNullValueInput = {
+  JsonNull: Prisma.JsonNull
+};
+
 exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
@@ -467,6 +480,15 @@ exports.Prisma.NullsOrder = {
   last: 'last'
 };
 
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
+};
+exports.LOG_OPERATION = exports.$Enums.LOG_OPERATION = {
+  CREATE: 'CREATE',
+  UPDATE: 'UPDATE'
+};
 
 exports.Prisma.ModelName = {
   Supplier: 'Supplier',
@@ -475,6 +497,7 @@ exports.Prisma.ModelName = {
   Vehicle: 'Vehicle',
   CanvassItem: 'CanvassItem',
   Canvass: 'Canvass',
+  CanvassHistory: 'CanvassHistory',
   JO: 'JO',
   JOApprover: 'JOApprover',
   RV: 'RV',

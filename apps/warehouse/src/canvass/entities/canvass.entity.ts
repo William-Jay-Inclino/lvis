@@ -30,7 +30,7 @@ export class Canvass {
   requested_by?: Employee;
 
   @Field()
-  created_by_id: string;
+  created_by: string;
 
   @Field(() => [CanvassItem])
   canvass_items: CanvassItem[];

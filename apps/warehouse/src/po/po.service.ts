@@ -73,6 +73,7 @@ export class PoService {
         const poNumber = await this.getLatestPoNumber()
 
         const data: Prisma.POCreateInput = {
+            created_by: this.authUser.user.username,
             po_number: poNumber,
             meqs_supplier: {
                 connect: {

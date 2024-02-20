@@ -23,7 +23,7 @@ export class RR {
   canceller_id: string;
 
   @Field()
-  created_by_id: string;
+  created_by: string;
 
   @Field(() => Date)
   date_cancelled: Date;

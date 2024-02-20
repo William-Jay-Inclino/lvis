@@ -13,7 +13,7 @@ export class MEQS {
   id: string;
 
   @Field()
-  created_by_id: string;
+  created_by: string;
 
   @Field(() => String, {nullable: true})
   jo_id: string | null;

@@ -14,10 +14,22 @@ export class CreateCanvassItemSubInput {
   @IsString()
   brand_id?: string | null;
 
+  // use for audit purposes
+  @Field(() => String, {nullable: true})
+  @IsOptional()
+  @IsString()
+  brand_name?: string | null;
+
   @Field(() => String)
   @IsNotEmpty()
   @IsString()
   unit_id: string;
+
+  // use for audit purposes
+  @Field(() => String, {nullable: true})
+  @IsOptional()
+  @IsString()
+  unit_name?: string | null;
 
   @Field(() => Int)
   @IsNotEmpty()
