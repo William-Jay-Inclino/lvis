@@ -18,12 +18,6 @@ export class UpdateRvInput {
 
   @Field(() => String, {nullable: true})
   @IsOptional()
-  @Transform(({ value }) => new Date(value))
-  @IsDate()
-  date_requested?: string;
-
-  @Field(() => String, {nullable: true})
-  @IsOptional()
   @IsString()
   work_order_no?: string;
 

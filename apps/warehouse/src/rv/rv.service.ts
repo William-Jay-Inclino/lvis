@@ -115,7 +115,6 @@ export class RvService {
             updated_by: this.authUser.user.username,
             supervisor_id: input.supervisor_id ?? existingItem.supervisor_id,
             classification_id: input.classification_id ?? existingItem.classification_id,
-            date_requested: input.date_requested ? new Date(input.date_requested) : existingItem.date_requested,
             work_order_no: input.work_order_no ?? existingItem.work_order_no,
             notes: input.notes ?? existingItem.notes,
             work_order_date: input.work_order_date ? new Date(input.work_order_date) : existingItem.work_order_date,
