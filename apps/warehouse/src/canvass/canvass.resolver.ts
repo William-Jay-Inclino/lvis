@@ -80,4 +80,5 @@ export class CanvassResolver {
     requested_by(@Parent() canvass: Canvass): any {
         return { __typename: 'Employee', id: canvass.requested_by_id }
     }
+    
 }

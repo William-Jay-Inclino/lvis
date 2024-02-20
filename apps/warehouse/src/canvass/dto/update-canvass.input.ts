@@ -22,11 +22,6 @@ export class UpdateCanvassInput {
   @IsString()
   requested_by_id?: string;
 
-  @Field(() => String, { nullable: true })
-  @IsOptional()
-  @IsString()
-  requested_by_fullname?: string;
-
   @Field(() => Boolean, { nullable: true })
   @IsOptional()
   @IsBoolean()

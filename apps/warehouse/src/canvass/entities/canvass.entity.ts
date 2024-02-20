@@ -29,9 +29,6 @@ export class Canvass {
   @Field(() => Employee)
   requested_by?: Employee;
 
-  @Field()
-  created_by: string;
-
   @Field(() => [CanvassItem])
   canvass_items: CanvassItem[];
 
@@ -52,6 +49,15 @@ export class Canvass {
 
   @Field(() => Date)
   updated_at: Date;
+
+  @Field()
+  created_by: string;
+
+  @Field({ nullable: true })
+  updated_by: string | null;
+
+  @Field({ nullable: true })
+  deleted_by: string | null;
 
 }
 

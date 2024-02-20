@@ -27,12 +27,6 @@ export class CreateCanvassInput {
   @IsString()
   requested_by_id: string;
 
-  // use for audit purposes
-  @Field(() => String)
-  @IsNotEmpty()
-  @IsString()
-  requested_by_fullname: string;
-
   @Field(() => [CreateCanvassItemSubInput])
   @IsNotEmpty()
   @IsArray()

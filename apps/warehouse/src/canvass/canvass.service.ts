@@ -1,7 +1,7 @@
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../__prisma__/prisma.service';
 import { CreateCanvassInput } from './dto/create-canvass.input';
-import { Brand, Canvass, CanvassItem, LOG_OPERATION, Prisma, Unit } from 'apps/warehouse/prisma/generated/client';
+import { Canvass, Prisma } from 'apps/warehouse/prisma/generated/client';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { UpdateCanvassInput } from './dto/update-canvass.input';
 import { WarehouseRemoveResponse } from '../__common__/classes';
@@ -66,32 +66,14 @@ export class CanvassService {
             }
         }
 
-        const createCanvassQuery = this.prisma.canvass.create({
+        const created = await this.prisma.canvass.create({
             data,
             include: this.includedFields
         })
 
-        const auditableData = this.getAuditableDataForCreate(input, rcNumber, this.authUser.user.username)
-
-        console.log('auditableData', auditableData)
-
-        const createCanvassHistoryQuery = this.prisma.canvassHistory.create({
-            data: {
-                rc_number: rcNumber,
-                executed_by: this.authUser.user.username,
-                operation: LOG_OPERATION.CREATE,
-                json_data: JSON.stringify(auditableData)
-            }
-        })
-
-        const result = await this.prisma.$transaction([
-            createCanvassQuery,
-            createCanvassHistoryQuery
-        ])
-
         this.logger.log('Successfully created canvass')
 
-        return result[0]
+        return created
 
     }
 
@@ -109,39 +91,22 @@ export class CanvassService {
         }
     
         const data: Prisma.CanvassUpdateInput = {
+            updated_by: this.authUser.user.username,
             purpose: input.purpose ?? existingItem.purpose,
             notes: input.notes ?? existingItem.notes,
             requested_by_id: input.requested_by_id ?? existingItem.requested_by_id,
             is_referenced: input.is_referenced ?? existingItem.is_referenced,
         };
     
-        const updateCanvassQuery = this.prisma.canvass.update({
+        const updated = await this.prisma.canvass.update({
             data,
             where: { id },
             include: this.includedFields,
         }); 
-
-        const auditableData = this.getAuditableDataForUpdate(input, existingItem)
-        
-        console.log('auditableData', auditableData)
-
-        const createCanvassHistoryQuery = this.prisma.canvassHistory.create({
-            data: {
-                rc_number: existingItem.rc_number,
-                executed_by: this.authUser.user.username,
-                operation: LOG_OPERATION.UPDATE,
-                json_data: JSON.stringify(auditableData),
-            },
-        });
-    
-        const result = await this.prisma.$transaction([
-            updateCanvassQuery,
-            createCanvassHistoryQuery,
-        ]);
     
         this.logger.log('Successfully updated canvass');
     
-        return result[0];
+        return updated
     }
 
     async findAll(page: number, pageSize: number, date_requested?: string, requested_by_id?: string): Promise<CanvassesResponse> {
@@ -285,7 +250,10 @@ export class CanvassService {
 
 		await this.prisma.canvass.update( {
 			where: { id },
-			data: { is_deleted: true }
+			data: {
+                is_deleted: true,
+                deleted_by: this.authUser.user.username
+            }
 		} )
 
 		return {
@@ -339,54 +307,6 @@ export class CanvassService {
             console.error('Error querying employees:', error.message);
             return false;
         }
-    }
-
-    private getAuditableDataForCreate(input: CreateCanvassInput, rc_number: string, created_by: string) {
-
-        return {
-            rc_number: rc_number,
-            date_requested: input.date_requested,
-            purpose: input.purpose,
-            notes: input.notes,
-            requested_by_fullname: input.requested_by_fullname,
-            created_by,
-            canvass_items: input.canvass_items.map(i => {
-                const x = {
-                    description: i.description,
-                    brand_name: i.brand_name,
-                    unit_name: i.unit_name,
-                    quantity: i.quantity
-                }
-                return x
-            })
-        }
-
-    }
-
-    private getAuditableDataForUpdate(input: UpdateCanvassInput, existingItem: FindOneResponse) {
-
-        console.log('input', input)
-        console.log('existingItem', existingItem)
-
-        const data = {}
-
-        if(input.purpose && input.purpose !== existingItem.purpose) {
-            console.log('purpose updated')
-            data['purpose'] = input.purpose
-        }
-
-        if(input.notes && input.notes !== existingItem.notes) {
-            console.log('notes updated')
-            data['notes'] = input.notes
-        }
-
-        if(input.requested_by_id && input.requested_by_id !== existingItem.requested_by_id) {
-            console.log('requested_by_id updated')
-            data['requested_by_fullname'] = input.requested_by_fullname
-        }
-
-        return data
-
     }
 
 }

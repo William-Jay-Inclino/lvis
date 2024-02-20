@@ -18,9 +18,6 @@ export class RV {
   @Field(() => String)
   supervisor_id: string;
 
-  @Field(() => String)
-  created_by: string;
-
   @Field(() => String, {nullable: true})
   canceller_id: string | null;
 
@@ -53,5 +50,14 @@ export class RV {
 
   @Field(() => Boolean)
   is_deleted: boolean;
+
+  @Field()
+  created_by: string;
+
+  @Field({ nullable: true })
+  updated_by: string | null;
+
+  @Field({ nullable: true })
+  deleted_by: string | null;
   
 }

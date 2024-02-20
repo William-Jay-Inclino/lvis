@@ -1,4 +1,4 @@
-import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, ResolveReference } from '@nestjs/graphql';
 import { UserService } from './user.service';
 import { User } from './entities/user.entity';
 import { CreateUserInput } from './dto/create-user.input';
@@ -73,6 +73,22 @@ export class UserResolver {
   @Mutation(() => Boolean)
   removeUser(@Args('id') id: string) {
     return this.userService.remove(id);
+  }
+
+
+  @ResolveReference()
+  async resolveReference(reference: { __typename: string, id?: string, username?: string}): Promise<User> {
+
+    console.log('reference', reference)
+
+    if(reference.__typename === 'User' && reference.id){
+      return await this.userService.findOne(reference.id)
+    }
+
+    if(reference.__typename === 'User' && reference.username){
+      return await this.userService.findByUserName(reference.username)
+    }
+
   }
 
 }

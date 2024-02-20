@@ -111,6 +111,7 @@ export class RvService {
         }
 
         const data: Prisma.RVUpdateInput = {
+            updated_by: this.authUser.user.username,
             supervisor_id: input.supervisor_id ?? existingItem.supervisor_id,
             classification_id: input.classification_id ?? existingItem.classification_id,
             date_requested: input.date_requested ? new Date(input.date_requested) : existingItem.date_requested,

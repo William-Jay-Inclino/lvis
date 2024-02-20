@@ -22,9 +22,6 @@ export class RR {
   @Field()
   canceller_id: string;
 
-  @Field()
-  created_by: string;
-
   @Field(() => Date)
   date_cancelled: Date;
 
@@ -54,5 +51,14 @@ export class RR {
 
   // @Field()
   // rr_items: string;
+
+  @Field()
+  created_by: string;
+
+  @Field({ nullable: true })
+  updated_by: string | null;
+
+  @Field({ nullable: true })
+  deleted_by: string | null;
 
 }

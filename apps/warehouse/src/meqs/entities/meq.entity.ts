@@ -12,9 +12,6 @@ export class MEQS {
   @Field(() => ID)
   id: string;
 
-  @Field()
-  created_by: string;
-
   @Field(() => String, {nullable: true})
   jo_id: string | null;
 
@@ -65,5 +62,14 @@ export class MEQS {
 
   @Field(() => Date)
   updated_at: Date;
+
+  @Field()
+  created_by: string;
+
+  @Field({ nullable: true })
+  updated_by: string | null;
+
+  @Field({ nullable: true })
+  deleted_by: string | null;
 
 }

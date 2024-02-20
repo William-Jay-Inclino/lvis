@@ -98,17 +98,10 @@ model Canvass {
   rv              RV?
   spr             SPR?
   created_by      String
+  updated_by      String?
+  deleted_by      String?
 
   @@map("canvass")
-}
-
-model CanvassHistory {
-  id          Int           @id @default(autoincrement())
-  rc_number   String
-  executed_by String
-  operation   LOG_OPERATION
-  timestamp   DateTime      @default(now())
-  json_data   Json
 }
 
 model JO {
@@ -132,6 +125,8 @@ model JO {
   meqs              MEQS?
 
   created_by String
+  updated_by String?
+  deleted_by String?
 
   @@map("job_order")
 }
@@ -172,7 +167,10 @@ model RV {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
   is_deleted Boolean  @default(false)
+
   created_by String
+  updated_by String?
+  deleted_by String?
 
   meqs         MEQS?
   rv_approvers RVApprover[]
@@ -218,6 +216,8 @@ model SPR {
   vehicle           Vehicle       @relation(fields: [vehicle_id], references: [id], onDelete: Restrict)
   spr_approvers     SPRApprover[]
   created_by        String
+  updated_by        String?
+  deleted_by        String?
 
   @@map("spare_parts_request")
 }
@@ -261,6 +261,8 @@ model MEQS {
   meqs_approvers MEQSApprover[]
   meqs_suppliers MEQSSupplier[]
   created_by     String
+  updated_by     String?
+  deleted_by     String?
 
   @@map("material_equipment_quotation_summary")
 }
@@ -348,6 +350,8 @@ model PO {
   rr               RR?
   is_referenced    Boolean      @default(false)
   created_by       String
+  updated_by       String?
+  deleted_by       String?
 
   @@map("purchase_order")
 }
@@ -393,6 +397,8 @@ model RR {
   rr_items     RRItem[]
 
   created_by String
+  updated_by String?
+  deleted_by String?
 
   @@map("receiving_report")
 }

@@ -7,7 +7,6 @@ import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from '../__auth__/guards/gql-auth.guard';
 import { SystemRemoveResponse } from '../__common__/classes';
 import { EmployeesResponse } from './entities/employees-response.entity';
-// import { UpdateEmployeeInput } from './dto/update-employee.input';
 
 @UseGuards(GqlAuthGuard)
 @Resolver(() => Employee)

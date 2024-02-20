@@ -12,9 +12,6 @@ export class PO {
   meqs_supplier_id: string;
 
   @Field(() => String)
-  created_by: string;
-
-  @Field(() => String)
   po_number: string;
 
   @Field(() => String)
@@ -35,5 +32,14 @@ export class PO {
 
   @Field(() => MeqsSupplier)
   meqs_supplier: MeqsSupplier
+
+  @Field()
+  created_by: string;
+
+  @Field({ nullable: true })
+  updated_by: string | null;
+
+  @Field({ nullable: true })
+  deleted_by: string | null;
 
 }
