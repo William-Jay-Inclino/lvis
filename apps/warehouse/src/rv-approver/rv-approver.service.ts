@@ -9,6 +9,7 @@ import { HttpService } from '@nestjs/axios';
 import { catchError, firstValueFrom } from 'rxjs';
 import { WarehouseRemoveResponse } from '../__common__/classes';
 import { getLastApprover, isValidApprovalStatus } from '../__common__/helpers';
+import { UpdateManyOrderResponse } from './entities/update-many-order-response.entity';
 
 @Injectable()
 export class RvApproverService {
@@ -104,6 +105,10 @@ export class RvApproverService {
 
         this.logger.log('findByRvId()', rvId)
 
+        if(!rvId) {
+            throw new BadRequestException('rv_id is undefined')
+        }
+
         return await this.prisma.rVApprover.findMany({
             include: this.includedFields,
             where: {
@@ -183,24 +188,7 @@ export class RvApproverService {
 
 	}
 
-
-    // async updateManyOrders(inputs: { id: string; order: number }[]): Promise<{ success: boolean }> {
-    //     try {
-    //         await Promise.all(inputs.map(async ({ id, order }) => {
-    //             await this.prisma.rVApprover.update({
-    //                 where: { id },
-    //                 data: { order: { set: order } },
-    //             });
-    //         }));
-    
-    //         return { success: true };
-    //     } catch (error) {
-    //         this.logger.error(error);
-    //         return { success: false };
-    //     }
-    // }
-
-    async updateManyOrders(inputs: { id: string; order: number }[]): Promise<{ success: boolean }> {
+    async updateManyOrders(inputs: { id: string; order: number }[]): Promise<UpdateManyOrderResponse> {
         try {
             
             const queries = []
@@ -209,19 +197,31 @@ export class RvApproverService {
 
                 const updateQuery = this.prisma.rVApprover.update({
                     where: { id: input.id },
-                    data: { order: input.order }
+                    data: { order: input.order },
+                    select: {
+                        rv_id: true
+                    }
                 })
 
                 queries.push(updateQuery)
 
             }
 
-            await this.prisma.$transaction(queries)
+            const result = await this.prisma.$transaction(queries)
+
+            const rv = result[0] as RVApprover
+
+            console.log('rv', rv)
+
+            const approvers = await this.findByRvId(rv.rv_id)
     
-            return { success: true };
+            return {
+                success: true,
+                approvers: approvers
+            };
         } catch (error) {
             this.logger.error(error);
-            return { success: false };
+            return { success: false, approvers: [] };
         }
     }
     
