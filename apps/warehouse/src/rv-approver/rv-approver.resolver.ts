@@ -1,4 +1,4 @@
-import { Resolver, Query, Mutation, Args, ResolveField, Parent } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, ResolveField, Parent, Int } from '@nestjs/graphql';
 import { RvApproverService } from './rv-approver.service';
 import { RVApprover } from './entities/rv-approver.entity';
 import { CreateRvApproverInput } from './dto/create-rv-approver.input';
@@ -10,6 +10,8 @@ import { AuthUser } from '../__common__/auth-user.entity';
 import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
 import { Employee } from '../__employee__/entities/employee.entity';
 import { RV } from '../rv/entities/rv.entity';
+import { UpdateManyOrderResponse } from './entities/update-many-order-response.entity';
+import { UpdateOrderInput } from './dto/update-order.input'
 
 @UseGuards(GqlAuthGuard)
 @Resolver(() => RVApprover)
@@ -49,6 +51,13 @@ export class RvApproverResolver {
     @Args('input') updateRvApproverInput: UpdateRvApproverInput
   ) {
     return this.rvApproverService.update(id, updateRvApproverInput);
+  }
+
+  @Mutation(() => UpdateManyOrderResponse)
+  async updateManyRVApproverOrders(@Args('inputs', { type: () => [UpdateOrderInput] }) inputs: UpdateOrderInput[]){
+
+    return await this.rvApproverService.updateManyOrders(inputs);
+
   }
 
   @Mutation(() => WarehouseRemoveResponse)

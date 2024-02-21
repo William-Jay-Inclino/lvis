@@ -183,6 +183,49 @@ export class RvApproverService {
 
 	}
 
+
+    // async updateManyOrders(inputs: { id: string; order: number }[]): Promise<{ success: boolean }> {
+    //     try {
+    //         await Promise.all(inputs.map(async ({ id, order }) => {
+    //             await this.prisma.rVApprover.update({
+    //                 where: { id },
+    //                 data: { order: { set: order } },
+    //             });
+    //         }));
+    
+    //         return { success: true };
+    //     } catch (error) {
+    //         this.logger.error(error);
+    //         return { success: false };
+    //     }
+    // }
+
+    async updateManyOrders(inputs: { id: string; order: number }[]): Promise<{ success: boolean }> {
+        try {
+            
+            const queries = []
+
+            for(let input of inputs) {
+
+                const updateQuery = this.prisma.rVApprover.update({
+                    where: { id: input.id },
+                    data: { order: input.order }
+                })
+
+                queries.push(updateQuery)
+
+            }
+
+            await this.prisma.$transaction(queries)
+    
+            return { success: true };
+        } catch (error) {
+            this.logger.error(error);
+            return { success: false };
+        }
+    }
+    
+    
     async forEmployee(employeeId: string): Promise<RVApprover[]> {
         return await this.prisma.rVApprover.findMany({
             where: {
