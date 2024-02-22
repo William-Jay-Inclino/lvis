@@ -7,6 +7,7 @@ import { JOApprover, MEQS, MEQSApprover, Prisma, RVApprover, SPRApprover } from 
 import { APPROVAL_STATUS, Role } from '../__common__/types';
 import { UpdateMeqsInput } from './dto/update-meqs.input';
 import { catchError, firstValueFrom } from 'rxjs';
+import { MEQSsResponse } from './entities/meqs-response.entity';
 
 @Injectable()
 export class MeqsService {
@@ -198,14 +199,49 @@ export class MeqsService {
 
     }
 
-    async findAll(): Promise<MEQS[]> { 
-        return await this.prisma.mEQS.findMany({
-            where: { is_deleted: false },
+    async findAll(page: number, pageSize: number, date_requested?: string, requested_by_id?: string): Promise<MEQSsResponse> { 
+
+        const skip = (page - 1) * pageSize;
+
+        let whereCondition: any = {
+            is_deleted: false,
+        };
+
+        if (date_requested) {
+            const parsedDate = new Date(date_requested); 
+            whereCondition.date_requested = {
+                equals: parsedDate,
+            };
+        }
+
+        if (requested_by_id) {
+            whereCondition.requested_by_id = {
+                equals: requested_by_id,
+            };
+        }
+
+
+        const items = await this.prisma.mEQS.findMany({
+            include: this.includedFields,
+            where: whereCondition,
             orderBy: {
                 meqs_number: 'desc'
             },
-            include: this.includedFields
+            skip,
+            take: pageSize,
         })
+
+        const totalItems = await this.prisma.mEQS.count({
+            where: whereCondition,
+        });
+
+        return {
+            data: items,
+            totalItems,
+            currentPage: page,
+            totalPages: Math.ceil(totalItems / pageSize),
+        };
+
     }
 
     async findOne(id: string): Promise<MEQS | null> {
@@ -335,24 +371,46 @@ export class MeqsService {
         })
     }
 
-    private async canReference(model: string, id: string): Promise<{succes: boolean, msg: string}> {
+    private async canReference(input: CreateMeqsInput): Promise<{succes: boolean, msg: string}> {
 
-        const modelText = model.toUpperCase()
 
-        const reference = await this.prisma[model].findUnique({
-            where: { id }
-        })
+        if(input.rv_id) {
 
-        if(!reference) {
-            return { succes: false, msg: `${modelText} not found with id: ${id}` }
-        }
 
-        if(reference.is_referenced) {
-            return { succes: false, msg: `${modelText} is already referenced` }
-        }
+            // find rv
+            const rv = await this.prisma.rV.findUnique({
+                where: { id: input.rv_id }
+            })
 
-        if(reference.status !== APPROVAL_STATUS.APPROVED) {
-            return { succes: false, msg: `Cannot reference ${modelText}. Status is not approved` }
+            // check if rv is found
+            if(!rv) {
+                return { succes: false, msg: `RV not found with id: ${input.rv_id}` }
+            }
+
+            // validate if it's referenced
+            if(rv.is_referenced) {
+                return { succes: false, msg: `RV is already referenced` }
+            }
+
+            // get all approvers
+            const approvers = await this.prisma.rVApprover.findMany({
+                where: {
+                    rv_id: input.rv_id,
+                    is_deleted: false
+                }
+            })
+
+            // validate if rv status is approved
+            for(let approver of approvers) {
+
+                if(approver.status !== APPROVAL_STATUS.APPROVED) {
+
+                    return { succes: false, msg: 'Cannot reference RV. Status is not approved' }
+
+                }
+
+            }
+
         }
 
         return { succes: true, msg: '' }
@@ -393,9 +451,8 @@ export class MeqsService {
             throw new BadRequestException("One or more approver id or approver proxy id is invalid")
         }
 
-        const model = this.getModel(input)
         // validates if reference id is already referenced and if status is approved
-        const canReference = await this.canReference(model.name, model.id)
+        const canReference = await this.canReference(input)
 
         if(!canReference.succes) {
             throw new BadRequestException(canReference.msg)

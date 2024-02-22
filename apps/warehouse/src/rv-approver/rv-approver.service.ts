@@ -8,7 +8,7 @@ import { AuthUser } from '../__common__/auth-user.entity';
 import { HttpService } from '@nestjs/axios';
 import { catchError, firstValueFrom } from 'rxjs';
 import { WarehouseRemoveResponse } from '../__common__/classes';
-import { getLastApprover, isValidApprovalStatus } from '../__common__/helpers';
+import { isValidApprovalStatus } from '../__common__/helpers';
 import { UpdateManyOrderResponse } from './entities/update-many-order-response.entity';
 
 @Injectable()
@@ -239,6 +239,7 @@ export class RvApproverService {
         `;
 
         console.log('query', query)
+        console.log('authUser', authUser)
     
         try {
             const { data } = await firstValueFrom(
@@ -293,6 +294,7 @@ export class RvApproverService {
             employeeIds.push(input.approver_proxy_id)
         }
 
+        console.log('employeeIds', employeeIds)
         if(employeeIds.length > 0){
             const isValidEmployeeIds = await this.areEmployeesExist(employeeIds, this.authUser)
     

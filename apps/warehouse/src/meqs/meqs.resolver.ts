@@ -11,6 +11,7 @@ import { Employee } from '../__employee__/entities/employee.entity';
 import { MEQSApprover } from '../meqs-approver/entities/meqs-approver.entity';
 import { MeqsApproverService } from '../meqs-approver/meqs-approver.service';
 import { MeqsNumber } from './entities/meqs-number.entity';
+import { MEQSsResponse } from './entities/meqs-response.entity';
 
 @UseGuards(GqlAuthGuard)
 @Resolver( () => MEQS)
@@ -30,9 +31,14 @@ export class MeqsResolver {
         return await this.meqsService.create(createMeqsInput);
     }
 
-    @Query(() => [MEQS])
-    meqs() {
-        return this.meqsService.findAll();
+    @Query(() => MEQSsResponse)
+    meqs(
+      @Args('page') page: number,
+      @Args('pageSize') pageSize: number,
+      @Args('date_requested', {nullable: true}) date_requested?: string,
+      @Args('requested_by_id', {nullable: true}) requested_by_id?: string,
+    ) {
+        return this.meqsService.findAll(page, pageSize, date_requested, requested_by_id);
     }
 
     @Query(() => [MeqsNumber])

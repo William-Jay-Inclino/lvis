@@ -48,8 +48,10 @@ export class RvApproverResolver {
   @Mutation(() => RVApprover)
   updateRvApprover(
     @Args('id') id: string,
-    @Args('input') updateRvApproverInput: UpdateRvApproverInput
+    @Args('input') updateRvApproverInput: UpdateRvApproverInput,
+    @CurrentAuthUser() authUser: AuthUser
   ) {
+    this.rvApproverService.setAuthUser(authUser)
     return this.rvApproverService.update(id, updateRvApproverInput);
   }
 
