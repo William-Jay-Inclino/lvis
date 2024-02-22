@@ -135,7 +135,6 @@ export class PoService {
 
         const data: Prisma.POUpdateInput = {
             po_date: input.po_date ? new Date(input.po_date) : existingItem.po_date,
-            status: input.status ?? existingItem.status,
             canceller_id: input.canceller_id ?? existingItem.canceller_id,
             date_cancelled: input.canceller_id ? new Date() : existingItem.date_cancelled
         }
@@ -332,11 +331,6 @@ export class PoService {
 
         if(!meqs) {
             throw new NotFoundException('MEQS not found with ID: ' + meqsSupplier.meqs_id)
-        }
-
-        // VALIDATE IF MEQS STATUS IS APPROVED
-        if(meqs.status !== APPROVAL_STATUS.APPROVED) {
-            throw new BadRequestException(`Unable to create PO. MEQS Status is not approved with ID: ` + meqsSupplier.meqs_id)
         }
 
         return true

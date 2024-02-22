@@ -222,7 +222,6 @@ export class RrService {
             delivery_number: input.delivery_number ?? existingItem.delivery_number,
             notes: input.notes ?? existingItem.notes,
             delivery_charge: input.delivery_charge ?? existingItem.delivery_charge,
-            status: input.status ?? existingItem.status,
         }
 
         const updated = await this.prisma.rR.update({
@@ -338,10 +337,6 @@ export class RrService {
 
         if(po.is_referenced) {
             throw new BadRequestException('PO already been referenced with ID: ' + input.po_id)
-        }
-
-        if(po.status !== APPROVAL_STATUS.APPROVED) {
-            throw new BadRequestException(`Unable to create RR. PO Status is not approved with ID: ` + input.po_id)
         }
 
         return true

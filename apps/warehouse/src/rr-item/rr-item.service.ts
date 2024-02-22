@@ -171,9 +171,9 @@ export class RrItemService {
 			throw new NotFoundException('RR not found with ID: ' + input.rr_id)
 		}
 
-		if(rr.status !== APPROVAL_STATUS.PENDING) {
-			throw new BadRequestException('Can only create RR Item if rr status is PENDING')
-		}
+		// if(rr.status !== APPROVAL_STATUS.PENDING) {
+		// 	throw new BadRequestException('Can only create RR Item if rr status is PENDING')
+		// }
 
 		const isNormalUser = this.isNormalUser()
 
@@ -214,9 +214,9 @@ export class RrItemService {
 			throw new NotFoundException('RR not found with ID: ' + input.rr_id)
 		}
 
-		if(rr.status !== APPROVAL_STATUS.PENDING) {
-			throw new BadRequestException('Can only update RR Item if rr status is PENDING')
-		}
+		// if(rr.status !== APPROVAL_STATUS.PENDING) {
+		// 	throw new BadRequestException('Can only update RR Item if rr status is PENDING')
+		// }
 
 		const isNormalUser = this.isNormalUser()
 
