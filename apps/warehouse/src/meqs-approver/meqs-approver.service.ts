@@ -183,22 +183,13 @@ export class MeqsApproverService {
             order: input.order ?? existingItem.order,
         }
 
-        // if no status then normal update
-        if(!input.status){
-            return await this.updateMEQSApprover(id, data)
-        }
-
-        if(input.status === APPROVAL_STATUS.APPROVED){
-            return await this.handleApprovedStatus(id, data, existingItem.meqs_id)
-        }
-
-        if(input.status === APPROVAL_STATUS.DISAPPROVED){
-            return await this.handleDisapprovedStatus(id, data, existingItem.meqs_id)
-        }
-
-        if(input.status === APPROVAL_STATUS.PENDING){
-            return await this.handlePendingStatus(id, data, existingItem.meqs_id)
-        }
+        const updated = await this.prisma.mEQSApprover.update({
+            data,
+            where: { id },
+            include: this.includedFields,
+        });
+        this.logger.log('Successfully updated MEQS Approver');
+        return updated;
 
     }
 
@@ -301,94 +292,6 @@ export class MeqsApproverService {
                 throw new BadRequestException("One or more employee id is invalid")
             }
         }
-    }
-
-    // private async validateEmployeeExistence(employeeId: string, errorMessage: string): Promise<void> {
-    //     const isValidEmployeeId = await this.areEmployeesExist([employeeId], this.authUser);
-    //     if (!isValidEmployeeId) {
-    //         throw new NotFoundException(`${errorMessage} not valid`);
-    //     }
-    // }
-
-    private async updateMEQSApprover(id: string, data: Prisma.MEQSApproverUpdateInput): Promise<MEQSApprover> {
-        const updated = await this.prisma.mEQSApprover.update({
-            data,
-            where: { id },
-            include: this.includedFields,
-        });
-        this.logger.log('Successfully updated MEQS Approver');
-        return updated;
-    }
-
-    // if last approver approves then update meqs status to approve
-    private async handleApprovedStatus(id: string, data: Prisma.MEQSApproverUpdateInput, meqsId: string): Promise<MEQSApprover> {
-        const approvers = await this.findByMeqsId(meqsId);
-        const lastApprover = getLastApprover(approvers);
-    
-        if (lastApprover.id !== id) {
-            return await this.updateMEQSApprover(id, data);
-        }
-
-        // if last approver approves
-
-        const updateMeqsApprover = this.prisma.mEQSApprover.update({
-            data,
-            where: { id },
-            include: this.includedFields,
-        }); 
-    
-        const [updatedMeqsApprover, updatedMeqsStatus] = await this.prisma.$transaction([
-            updateMeqsApprover,
-            this.prisma.mEQS.update({
-                data: { status: APPROVAL_STATUS.APPROVED },
-                where: { id: meqsId },
-            }),
-        ]);
-    
-        this.logger.log('Successfully updated MEQS Approver');
-        return updatedMeqsApprover;
-    }
-
-    // also update meqs status to disapproved
-    private async handleDisapprovedStatus(id: string, data: Prisma.MEQSApproverUpdateInput, meqsId: string): Promise<MEQSApprover> {
-
-        const updateMeqsApprover = this.prisma.mEQSApprover.update({
-            data,
-            where: { id },
-            include: this.includedFields,
-        }); 
-
-        const [updatedMeqsApprover, updatedMeqsStatus] = await this.prisma.$transaction([
-            updateMeqsApprover,
-            this.prisma.mEQS.update({
-                data: { status: APPROVAL_STATUS.DISAPPROVED },
-                where: { id: meqsId },
-            }),
-        ]);
-    
-        this.logger.log('Successfully updated MEQS Approver');
-        return updatedMeqsApprover;
-    }
-
-    // also update meqs status to pending
-    private async handlePendingStatus(id: string, data: Prisma.MEQSApproverUpdateInput, meqsId: string): Promise<MEQSApprover> {
-
-        const updateMeqsApprover = this.prisma.mEQSApprover.update({
-            data,
-            where: { id },
-            include: this.includedFields,
-        }); 
-
-        const [updatedMeqsApprover, updatedMeqsStatus] = await this.prisma.$transaction([
-            updateMeqsApprover,
-            this.prisma.mEQS.update({
-                data: { status: APPROVAL_STATUS.PENDING },
-                where: { id: meqsId },
-            }),
-        ]);
-    
-        this.logger.log('Successfully updated MEQS Approver');
-        return updatedMeqsApprover;
     }
 
 }

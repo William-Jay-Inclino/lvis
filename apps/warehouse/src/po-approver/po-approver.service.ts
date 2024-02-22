@@ -176,22 +176,13 @@ export class PoApproverService {
             order: input.order ?? existingItem.order,
         }
 
-        // if no status then normal update
-        if(!input.status){
-            return await this.updatePOApprover(id, data)
-        }
-
-        if(input.status === APPROVAL_STATUS.APPROVED){
-            return await this.handleApprovedStatus(id, data, existingItem.po_id)
-        }
-
-        if(input.status === APPROVAL_STATUS.DISAPPROVED){
-            return await this.handleDisapprovedStatus(id, data, existingItem.po_id)
-        }
-
-        if(input.status === APPROVAL_STATUS.PENDING){
-            return await this.handlePendingStatus(id, data, existingItem.po_id)
-        }
+        const updated = await this.prisma.pOApprover.update({
+            data,
+            where: { id },
+            include: this.includedFields,
+        });
+        this.logger.log('Successfully updated PO Approver');
+        return updated;
 
     }
 
@@ -293,94 +284,6 @@ export class PoApproverService {
                 throw new BadRequestException("One or more employee id is invalid")
             }
         }
-    }
-
-    // private async validateEmployeeExistence(employeeId: string, errorMessage: string): Promise<void> {
-    //     const isValidEmployeeId = await this.areEmployeesExist([employeeId], this.authUser);
-    //     if (!isValidEmployeeId) {
-    //         throw new NotFoundException(`${errorMessage} not valid`);
-    //     }
-    // }
-
-    private async updatePOApprover(id: string, data: Prisma.POApproverUpdateInput): Promise<POApprover> {
-        const updated = await this.prisma.pOApprover.update({
-            data,
-            where: { id },
-            include: this.includedFields,
-        });
-        this.logger.log('Successfully updated PO Approver');
-        return updated;
-    }
-
-    // if last approver approves then update po status to approve
-    private async handleApprovedStatus(id: string, data: Prisma.POApproverUpdateInput, poId: string): Promise<POApprover> {
-        const approvers = await this.findByPoId(poId);
-        const lastApprover = getLastApprover(approvers);
-    
-        if (lastApprover.id !== id) {
-            return await this.updatePOApprover(id, data);
-        }
-
-        // if last approver approves
-
-        const updatePoApprover = this.prisma.pOApprover.update({
-            data,
-            where: { id },
-            include: this.includedFields,
-        }); 
-    
-        const [updatedPoApprover, updatedPoStatus] = await this.prisma.$transaction([
-            updatePoApprover,
-            this.prisma.pO.update({
-                data: { status: APPROVAL_STATUS.APPROVED },
-                where: { id: poId },
-            }),
-        ]);
-    
-        this.logger.log('Successfully updated PO Approver');
-        return updatedPoApprover;
-    }
-
-    // also update po status to disapproved
-    private async handleDisapprovedStatus(id: string, data: Prisma.POApproverUpdateInput, poId: string): Promise<POApprover> {
-
-        const updatePoApprover = this.prisma.pOApprover.update({
-            data,
-            where: { id },
-            include: this.includedFields,
-        }); 
-
-        const [updatedPoApprover, updatedPoStatus] = await this.prisma.$transaction([
-            updatePoApprover,
-            this.prisma.pO.update({
-                data: { status: APPROVAL_STATUS.DISAPPROVED },
-                where: { id: poId },
-            }),
-        ]);
-    
-        this.logger.log('Successfully updated PO Approver');
-        return updatedPoApprover;
-    }
-
-    // also update po status to pending
-    private async handlePendingStatus(id: string, data: Prisma.POApproverUpdateInput, poId: string): Promise<POApprover> {
-
-        const updatePoApprover = this.prisma.pOApprover.update({
-            data,
-            where: { id },
-            include: this.includedFields,
-        }); 
-
-        const [updatedPoApprover, updatedPoStatus] = await this.prisma.$transaction([
-            updatePoApprover,
-            this.prisma.pO.update({
-                data: { status: APPROVAL_STATUS.PENDING },
-                where: { id: poId },
-            }),
-        ]);
-    
-        this.logger.log('Successfully updated PO Approver');
-        return updatedPoApprover;
     }
 
 }
