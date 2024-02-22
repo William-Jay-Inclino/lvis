@@ -32,11 +32,6 @@ export class UpdateRvInput {
   @IsDate()
   work_order_date?: string;
 
-  @Field(() => Int, {nullable: true})
-  @IsOptional()
-  @IsEnum(APPROVAL_STATUS)
-  status?: APPROVAL_STATUS;
-
   @Field(() => String, {nullable: true})
   @IsString()
   @IsOptional()

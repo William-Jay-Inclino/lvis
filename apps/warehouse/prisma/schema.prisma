@@ -108,7 +108,7 @@ model JO {
   classification_id String?
   department_id     String
   supervisor_id     String
-  status            Int          @default(1)
+  is_cancelled      Boolean      @default(false)
   canceller_id      String?
   date_cancelled    DateTime?
   is_referenced     Boolean      @default(false)
@@ -155,8 +155,8 @@ model RV {
   date_requested    DateTime
   work_order_no     String?
   work_order_date   DateTime?
-  status            Int       @default(1)
   is_referenced     Boolean   @default(false)
+  is_cancelled      Boolean   @default(false)
   notes             String?
 
   created_at DateTime @default(now())
@@ -199,7 +199,7 @@ model SPR {
   vehicle_id        String
   classification_id String?
   supervisor_id     String
-  status            Int           @default(1)
+  is_cancelled      Boolean       @default(false)
   canceller_id      String?
   date_cancelled    DateTime?
   is_referenced     Boolean       @default(false)
@@ -243,7 +243,7 @@ model MEQS {
   meqs_number    String         @unique
   request_type   Int            @default(1)
   meqs_date      DateTime
-  status         Int            @default(1)
+  is_cancelled   Boolean        @default(false)
   notes          String?
   canceller_id   String?
   date_cancelled DateTime?
@@ -334,7 +334,7 @@ model PO {
   meqs_supplier_id String       @unique
   po_number        String       @unique
   po_date          DateTime
-  status           Int          @default(1)
+  is_cancelled     Boolean      @default(false)
   canceller_id     String?
   date_cancelled   DateTime?
   created_at       DateTime     @default(now())
@@ -381,7 +381,7 @@ model RR {
   delivery_number String?
   notes           String?
   delivery_charge Float
-  status          Int       @default(1)
+  is_cancelled    Boolean   @default(false)
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt

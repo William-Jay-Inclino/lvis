@@ -36,8 +36,8 @@ export class RV {
   @Field(() => String, {nullable: true})
   notes: string;
 
-  @Field(() => Int)
-  status: number
+  @Field(() => Boolean)
+  is_cancelled: boolean
 
   @Field(() => Boolean)
   is_referenced: boolean;

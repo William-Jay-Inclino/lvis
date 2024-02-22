@@ -17,11 +17,11 @@ exports.$Enums = {}
 
 /**
  * Prisma Client JS version: 5.8.1
- * Query Engine version: 23fdc5965b1e05fc54e5f26ed3de66776b93de64
+ * Query Engine version: 5a9203d0590c951969e85a7d07215503f4672eb9
  */
 Prisma.prismaVersion = {
   client: "5.8.1",
-  engine: "23fdc5965b1e05fc54e5f26ed3de66776b93de64"
+  engine: "5a9203d0590c951969e85a7d07215503f4672eb9"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -178,7 +178,7 @@ exports.Prisma.JOScalarFieldEnum = {
   classification_id: 'classification_id',
   department_id: 'department_id',
   supervisor_id: 'supervisor_id',
-  status: 'status',
+  is_cancelled: 'is_cancelled',
   canceller_id: 'canceller_id',
   date_cancelled: 'date_cancelled',
   is_referenced: 'is_referenced',
@@ -215,8 +215,8 @@ exports.Prisma.RVScalarFieldEnum = {
   date_requested: 'date_requested',
   work_order_no: 'work_order_no',
   work_order_date: 'work_order_date',
-  status: 'status',
   is_referenced: 'is_referenced',
+  is_cancelled: 'is_cancelled',
   notes: 'notes',
   created_at: 'created_at',
   updated_at: 'updated_at',
@@ -249,7 +249,7 @@ exports.Prisma.SPRScalarFieldEnum = {
   vehicle_id: 'vehicle_id',
   classification_id: 'classification_id',
   supervisor_id: 'supervisor_id',
-  status: 'status',
+  is_cancelled: 'is_cancelled',
   canceller_id: 'canceller_id',
   date_cancelled: 'date_cancelled',
   is_referenced: 'is_referenced',
@@ -284,7 +284,7 @@ exports.Prisma.MEQSScalarFieldEnum = {
   meqs_number: 'meqs_number',
   request_type: 'request_type',
   meqs_date: 'meqs_date',
-  status: 'status',
+  is_cancelled: 'is_cancelled',
   notes: 'notes',
   canceller_id: 'canceller_id',
   date_cancelled: 'date_cancelled',
@@ -349,7 +349,7 @@ exports.Prisma.POScalarFieldEnum = {
   meqs_supplier_id: 'meqs_supplier_id',
   po_number: 'po_number',
   po_date: 'po_date',
-  status: 'status',
+  is_cancelled: 'is_cancelled',
   canceller_id: 'canceller_id',
   date_cancelled: 'date_cancelled',
   created_at: 'created_at',
@@ -388,7 +388,7 @@ exports.Prisma.RRScalarFieldEnum = {
   delivery_number: 'delivery_number',
   notes: 'notes',
   delivery_charge: 'delivery_charge',
-  status: 'status',
+  is_cancelled: 'is_cancelled',
   created_at: 'created_at',
   updated_at: 'updated_at',
   is_deleted: 'is_deleted',

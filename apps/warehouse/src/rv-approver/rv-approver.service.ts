@@ -154,21 +154,13 @@ export class RvApproverService {
             order: input.order ?? existingItem.order,
         }
 
-        if(!input.status){
-            return await this.updateRVApprover(id, data)
-        }
-
-        if(input.status === APPROVAL_STATUS.APPROVED){
-            return await this.handleApprovedStatus(id, data, existingItem.rv_id)
-        }
-
-        if(input.status === APPROVAL_STATUS.DISAPPROVED){
-            return await this.handleDisapprovedStatus(id, data, existingItem.rv_id)
-        }
-
-        if(input.status === APPROVAL_STATUS.PENDING){
-            return await this.handlePendingStatus(id, data, existingItem.rv_id)
-        }
+        const updated = await this.prisma.rVApprover.update({
+            data,
+            where: { id },
+            include: this.includedFields,
+        });
+        this.logger.log('Successfully updated RV Approver');
+        return updated;
 
     }
 
@@ -308,87 +300,6 @@ export class RvApproverService {
                 throw new BadRequestException("One or more employee id is invalid")
             }
         }
-    }
-
-    private async updateRVApprover(id: string, data: Prisma.RVApproverUpdateInput): Promise<RVApprover> {
-        const updated = await this.prisma.rVApprover.update({
-            data,
-            where: { id },
-            include: this.includedFields,
-        });
-        this.logger.log('Successfully updated RV Approver');
-        return updated;
-    }
-
-    // if last approver approves then update rv status to approve
-    private async handleApprovedStatus(id: string, data: Prisma.RVApproverUpdateInput, rvId: string): Promise<RVApprover> {
-        const approvers = await this.findByRvId(rvId);
-        const lastApprover = getLastApprover(approvers);
-    
-        if (lastApprover.id !== id) {
-            return await this.updateRVApprover(id, data);
-        }
-
-        // if last approver approves
-
-        const updateRvApprover = this.prisma.rVApprover.update({
-            data,
-            where: { id },
-            include: this.includedFields,
-        }); 
-    
-        const [updatedRvApprover, updatedRvStatus] = await this.prisma.$transaction([
-            updateRvApprover,
-            this.prisma.rV.update({
-                data: { status: APPROVAL_STATUS.APPROVED },
-                where: { id: rvId },
-            }),
-        ]);
-    
-        this.logger.log('Successfully updated RV Approver');
-        return updatedRvApprover;
-    }
-
-    // also update rv status to disapproved
-    private async handleDisapprovedStatus(id: string, data: Prisma.RVApproverUpdateInput, rvId: string): Promise<RVApprover> {
-
-        const updateRvApprover = this.prisma.rVApprover.update({
-            data,
-            where: { id },
-            include: this.includedFields,
-        }); 
-
-        const [updatedRvApprover, updatedRvStatus] = await this.prisma.$transaction([
-            updateRvApprover,
-            this.prisma.rV.update({
-                data: { status: APPROVAL_STATUS.DISAPPROVED },
-                where: { id: rvId },
-            }),
-        ]);
-    
-        this.logger.log('Successfully updated RV Approver');
-        return updatedRvApprover;
-    }
-
-    // also update rv status to pending
-    private async handlePendingStatus(id: string, data: Prisma.RVApproverUpdateInput, rvId: string): Promise<RVApprover> {
-
-        const updateRvApprover = this.prisma.rVApprover.update({
-            data,
-            where: { id },
-            include: this.includedFields,
-        }); 
-
-        const [updatedRvApprover, updatedRvStatus] = await this.prisma.$transaction([
-            updateRvApprover,
-            this.prisma.rV.update({
-                data: { status: APPROVAL_STATUS.PENDING },
-                where: { id: rvId },
-            }),
-        ]);
-    
-        this.logger.log('Successfully updated RV Approver');
-        return updatedRvApprover;
     }
 
 }

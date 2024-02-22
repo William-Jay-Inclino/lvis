@@ -118,7 +118,6 @@ export class RvService {
             work_order_no: input.work_order_no ?? existingItem.work_order_no,
             notes: input.notes ?? existingItem.notes,
             work_order_date: input.work_order_date ? new Date(input.work_order_date) : existingItem.work_order_date,
-            status: input.status ?? existingItem.status,
             canceller_id: input.canceller_id ?? existingItem.canceller_id,
             date_cancelled: input.canceller_id ? new Date() : existingItem.date_cancelled
         }
@@ -507,14 +506,6 @@ export class RvService {
             if(isAnyNonPendingApprover) {
                 throw new BadRequestException(`Unable to update RV. Can only update if all approver's status is pending`)
             }
-        }
-
-
-        if(input.status){
-            if(input.status !== APPROVAL_STATUS.CANCELLED){
-                throw new BadRequestException("Unable to update status. Only accepts status = cancelled")
-            }
-
         }
 
         if(input.classification_id){
