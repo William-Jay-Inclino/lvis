@@ -126,47 +126,97 @@ export class MeqsService {
             meqs_suppliers
         }
 
-        const model = this.getModel(input)
-        return await this.createMeqsAndUpdateReference(model.name, model.id, data)
 
-    }
-
-    async createMeqsAndUpdateReference(model: string, refId: string, data: Prisma.MEQSCreateInput): Promise<MEQS> {
-
-        // model can be jO, rV, or sPR
-        // refId can be jo_id, rv_id, spr_id
 
         const createMeqsQuery = this.prisma.mEQS.create({
             data,
             include: this.includedFields
         })
 
-        const referenceItem =  await this.prisma[model].findUnique({
-            where: {
-                id: refId
-            }
-        })
+        // IF REFERENCE IS RV
+        if(input.rv_id) {
+            const rv = await this.prisma.rV.findUnique({
+                where: { id: input.rv_id }
+            })
 
-        if(!referenceItem) {
-            throw new NotFoundException(`Reference not found either (rv, jo, spr) with id: ${refId} `)
+            if(!rv) {
+                throw new NotFoundException(`RV not found with id: ${input.rv_id} `)
+            }
+
+            const updateRvQuery = this.prisma.rV.update({
+                data: {
+                    is_referenced: true
+                },
+                where: {
+                    id: input.rv_id
+                }
+            })
+
+            const [createdMeqs, updatedRv] = await this.prisma.$transaction([
+                createMeqsQuery,
+                updateRvQuery
+            ])
+
+            this.logger.log(`Successfully created MEQS and updated RV field "is_reference" to true`)
+            return createdMeqs
         }
-        
-        const updateReferenceQuery = this.prisma[model].update({
-            data: {
-                is_referenced: true
-            },
-            where: {
-                id: refId
+
+        // IF REFERENCE IS JO
+        if(input.jo_id) {
+            const jo = await this.prisma.jO.findUnique({
+                where: { id: input.jo_id }
+            })
+
+            if(!jo) {
+                throw new NotFoundException(`JO not found with id: ${input.jo_id} `)
             }
-        })
 
-        const [createdMeqs, updatedRef] = await this.prisma.$transaction([
-            createMeqsQuery,
-            updateReferenceQuery
-        ])
+            const updateJoQuery = this.prisma.jO.update({
+                data: {
+                    is_referenced: true
+                },
+                where: {
+                    id: input.jo_id
+                }
+            })
 
-        this.logger.log(`Successfully created MEQS and updated model: ${model} is_reference to true`)
-        return createdMeqs
+            const [createdMeqs, updatedJo] = await this.prisma.$transaction([
+                createMeqsQuery,
+                updateJoQuery
+            ])
+
+            this.logger.log(`Successfully created MEQS and updated JO field "is_reference" to true`)
+            return createdMeqs
+        }
+
+        // IF REFERENCE IS SPR
+        if(input.spr_id) {
+            const spr = await this.prisma.sPR.findUnique({
+                where: { id: input.spr_id }
+            })
+
+            if(!spr) {
+                throw new NotFoundException(`SPR not found with id: ${input.spr_id} `)
+            }
+
+            const updateSprQuery = this.prisma.sPR.update({
+                data: {
+                    is_referenced: true
+                },
+                where: {
+                    id: input.spr_id
+                }
+            })
+
+            const [createdMeqs, updatedSpr] = await this.prisma.$transaction([
+                createMeqsQuery,
+                updateSprQuery
+            ])
+
+            this.logger.log(`Successfully created MEQS and updated SPR field "is_reference" to true`)
+            return createdMeqs
+        }
+
     }
 
     async update(id: string, input: UpdateMeqsInput): Promise<MEQS> {
@@ -209,15 +259,17 @@ export class MeqsService {
 
         if (date_requested) {
             const parsedDate = new Date(date_requested); 
-            whereCondition.date_requested = {
+            whereCondition.meqs_date = {
                 equals: parsedDate,
             };
         }
 
         if (requested_by_id) {
-            whereCondition.requested_by_id = {
-                equals: requested_by_id,
-            };
+            whereCondition.OR = [
+                { jo: { canvass: { requested_by_id: requested_by_id } } },
+                { rv: { canvass: { requested_by_id: requested_by_id } } },
+                { spr: { canvass: { requested_by_id: requested_by_id } } }
+            ];
         }
 
 
@@ -274,7 +326,48 @@ export class MeqsService {
 
     }
 
-    async findMeqsNumbers(meqsNumber: string): Promise<{ meqs_number: string; }[]> {
+    async findByReference(payload: {
+        rv_number?: string, 
+        jo_number?: string, 
+        spr_number?: string
+    }):  Promise<MEQS | null> {
+
+        const { rv_number, spr_number, jo_number } = payload
+        let item = null
+
+        if(rv_number) {
+            item = await this.prisma.mEQS.findFirst({
+                where: {
+                    rv: { rv_number }
+                },
+                include: this.includedFields
+            })
+
+        } else if(jo_number) {
+            item = await this.prisma.mEQS.findFirst({
+                where: {
+                    jo: { jo_number }
+                },
+                include: this.includedFields
+            })
+        } else {
+            item = await this.prisma.mEQS.findFirst({
+                where: {
+                    spr: { spr_number }
+                },
+                include: this.includedFields
+            })
+        }
+
+
+        if(!item){
+            throw new NotFoundException('MEQS not found')
+        }
+
+        return item
+    }
+
+    async searchByMeqsNumber(searchKeyword: string): Promise<{ meqs_number: string; }[]> {
 	
 		const arrayOfMeqsNumbers = await this.prisma.mEQS.findMany({
             select: {
@@ -282,7 +375,7 @@ export class MeqsService {
             },
             where: {
                 meqs_number: {
-                    contains: meqsNumber.trim().toLowerCase(),
+                    contains: searchKeyword.trim().toLowerCase(),
                     mode: 'insensitive',
                 },
                 is_deleted: false
@@ -414,22 +507,6 @@ export class MeqsService {
         }
 
         return { succes: true, msg: '' }
-
-    }
-
-    private getModel(input: CreateMeqsInput): {name: string, id: string} {
-
-        if(input.jo_id) {
-            return { name: 'jO', id: input.jo_id }
-        }
-
-        if(input.rv_id) {
-            return { name: 'rV', id: input.rv_id }
-        }
-
-        if(input.spr_id) {
-            return { name: 'sPR', id: input.spr_id }
-        }
 
     }
 

@@ -45,19 +45,31 @@ export class MeqsResolver {
     meqs_numbers(
       @Args('meqs_number') meqs_number: string
     ): Promise<{ meqs_number: string }[]> {
-      return this.meqsService.findMeqsNumbers(meqs_number);
+      return this.meqsService.searchByMeqsNumber(meqs_number);
     }
 
     @Query(() => MEQS)
     meq(
         @Args('id', {nullable: true}) id?: string,
-        @Args('meqs_number', {nullable: true}) meqs_number?: string
+        @Args('meqs_number', {nullable: true}) meqs_number?: string,
+        @Args('rv_number', {nullable: true}) rv_number?: string,
+        @Args('spr_number', {nullable: true}) spr_number?: string,
+        @Args('jo_number', {nullable: true}) jo_number?: string,
     ) {
         if(id){
             return this.meqsService.findOne(id);
         }
         if(meqs_number){
             return this.meqsService.findByMeqsNumber(meqs_number)
+        }
+        if(rv_number){
+            return this.meqsService.findByReference({ rv_number })
+        }
+        if(spr_number){
+            return this.meqsService.findByReference({ spr_number })
+        }
+        if(jo_number){
+            return this.meqsService.findByReference({ jo_number })
         }
     }
 
