@@ -12,6 +12,7 @@ services:
       POSTGRES_DB: lvis_system_db
     networks:
       - lvis-network
+    restart: always
 
   system-test-db:
     image: postgres:16
@@ -36,6 +37,7 @@ services:
       POSTGRES_DB: lvis_warehouse_db
     networks:
       - lvis-network
+    restart: always
 
   warehouse-test-db:
     image: postgres:16

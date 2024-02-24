@@ -1,4 +1,4 @@
-import { Args, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
+import { Args, Int, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import { RV } from './entities/rv.entity';
 import { CreateRvInput } from './dto/create-rv.input';
 import { RvService } from './rv.service';
@@ -13,6 +13,7 @@ import { RVApprover } from '../rv-approver/entities/rv-approver.entity';
 import { RvApproverService } from '../rv-approver/rv-approver.service';
 import { RvNumber } from './entities/rv-number.entity';
 import { RVsResponse } from './entities/rvs-response.entity';
+import { APPROVAL_STATUS } from '../__common__/types';
 
 @UseGuards(GqlAuthGuard)
 @Resolver( () => RV)
@@ -100,6 +101,17 @@ export class RvResolver {
     @ResolveField( () => [RVApprover])
     rv_approvers(@Parent() rv: RV): any {
         return this.rvApproverService.findByRvId(rv.id)
+    }
+    
+    @ResolveField( () => Int)
+    async status(@Parent() rv: RV) {
+        
+        if(rv.is_cancelled) {
+            return APPROVAL_STATUS.CANCELLED
+        }
+
+        return await this.rvService.getStatus(rv.id)
+
     }
 
 }

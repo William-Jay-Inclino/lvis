@@ -338,6 +338,28 @@ export class RvService {
 		return arrayOfRvNumbers;
 	}
 
+    async getStatus(id: string): Promise<APPROVAL_STATUS> {
+
+        const approvers = await this.prisma.rVApprover.findMany({
+            where: { rv_id: id }
+        })
+
+        const hasDisapproved = approvers.find(i => i.status === APPROVAL_STATUS.DISAPPROVED)
+
+        if(hasDisapproved) {
+            return APPROVAL_STATUS.DISAPPROVED
+        }
+
+        const hasPending = approvers.find(i => i.status === APPROVAL_STATUS.PENDING)
+
+        if(hasPending) {
+            return APPROVAL_STATUS.PENDING
+        }
+
+        return APPROVAL_STATUS.APPROVED
+
+    }
+
     private async getLatestRvNumber(): Promise<string> {
         const currentYear = new Date().getFullYear().toString().slice(-2);
     
