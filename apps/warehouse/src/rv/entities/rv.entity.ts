@@ -39,9 +39,6 @@ export class RV {
   @Field(() => Boolean)
   is_cancelled: boolean
 
-  @Field(() => Boolean)
-  is_referenced: boolean;
-
   @Field(() => Date)
   created_at: Date;
 

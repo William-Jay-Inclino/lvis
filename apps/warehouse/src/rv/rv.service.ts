@@ -9,7 +9,6 @@ import { UpdateRvInput } from './dto/update-rv.input';
 import { catchError, firstValueFrom } from 'rxjs';
 import { HttpService } from '@nestjs/axios';
 import { WarehouseRemoveResponse } from '../__common__/classes';
-import { isValidApprovalStatus } from '../__common__/helpers';
 import { RVsResponse } from './entities/rvs-response.entity';
 
 @Injectable()
@@ -35,6 +34,7 @@ export class RvService {
     constructor(
         private readonly prisma: PrismaService,
         private readonly httpService: HttpService,
+        private readonly canvassService: CanvassService
     ) {}
     
     setAuthUser(authUser: AuthUser){
@@ -75,29 +75,14 @@ export class RvService {
             }
         }
 
-        // execute db transaction 
-        // 1. Create RV
-        // 2. Update is_reference field in canvass table
-        const [createdRv, updatedCanvass] = await this.prisma.$transaction([
-            this.prisma.rV.create({ 
-                data,
-                include: this.includedFields
-            }),
-            this.prisma.canvass.update({
-                data: {
-                    is_referenced: true
-                },
-                where: {
-                    id: input.canvass_id
-                }
-            })
-        ])
+        const created = await this.prisma.rV.create({ 
+            data,
+            include: this.includedFields
+        })
 
         this.logger.log('Successfully created RV')
-        this.logger.log(createdRv)
-        this.logger.log(updatedCanvass)
 
-		return createdRv
+		return created
 
     }
 
@@ -360,6 +345,18 @@ export class RvService {
 
     }
 
+    async isReferenced(rvId: string): Promise<Boolean> {
+
+        const meqs = await this.prisma.mEQS.findUnique({
+            where: { rv_id: rvId }
+        })
+
+        if(meqs) return true  
+
+        return false
+
+    }
+
     private async getLatestRvNumber(): Promise<string> {
         const currentYear = new Date().getFullYear().toString().slice(-2);
     
@@ -497,8 +494,10 @@ export class RvService {
         if(!canvass) {
             throw new NotFoundException('Canvass not found with id: ' + input.canvass_id)
         }
+        
+        const isCanvassReferenced = await this.canvassService.isReferenced((canvass.id))
 
-        if(canvass.is_referenced) {
+        if(isCanvassReferenced) {
             throw new BadRequestException('Canvass already been referenced with ID: ' + input.canvass_id)
         }
 

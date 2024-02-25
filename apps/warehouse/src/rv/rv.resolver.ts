@@ -114,4 +114,9 @@ export class RvResolver {
 
     }
 
+    @ResolveField( () => Boolean)
+    async is_referenced(@Parent() rv: RV) {
+        return await this.rvService.isReferenced(rv.id)
+    }
+
 }

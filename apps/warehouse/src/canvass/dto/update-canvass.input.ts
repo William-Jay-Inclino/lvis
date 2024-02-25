@@ -22,10 +22,10 @@ export class UpdateCanvassInput {
   @IsString()
   requested_by_id?: string;
 
-  @Field(() => Boolean, { nullable: true })
-  @IsOptional()
-  @IsBoolean()
-  is_referenced: boolean;
+  // @Field(() => Boolean, { nullable: true })
+  // @IsOptional()
+  // @IsBoolean()
+  // is_referenced: boolean;
 
 
 }

@@ -94,8 +94,7 @@ export class CanvassService {
             updated_by: this.authUser.user.username,
             purpose: input.purpose ?? existingItem.purpose,
             notes: input.notes ?? existingItem.notes,
-            requested_by_id: input.requested_by_id ?? existingItem.requested_by_id,
-            is_referenced: input.is_referenced ?? existingItem.is_referenced,
+            requested_by_id: input.requested_by_id ?? existingItem.requested_by_id
         };
     
         const updated = await this.prisma.canvass.update({
@@ -241,13 +240,6 @@ export class CanvassService {
 
 		const existingItem = await this.findOne(id)
 
-        if(existingItem.is_referenced){
-            return {
-                success: false,
-                msg: "Unable to delete. Canvass is reference"
-            }
-        }
-
 		await this.prisma.canvass.update( {
 			where: { id },
 			data: {
@@ -262,6 +254,31 @@ export class CanvassService {
 		}
 
 	}
+
+    async isReferenced(canvassId: string): Promise<Boolean> {
+
+        const rv = await this.prisma.rV.findUnique({
+            where: { canvass_id: canvassId }
+        })
+
+        if(rv) return true 
+
+        const spr = await this.prisma.sPR.findUnique({
+            where: { canvass_id: canvassId }
+        })
+
+        if(spr) return true 
+
+        const jo = await this.prisma.jO.findUnique({
+            where: { canvass_id: canvassId }
+        })
+
+        if(jo) return true 
+
+
+        return false
+
+    }
 
     private async areEmployeesExist(employeeIds: string[], authUser: AuthUser): Promise<boolean> {
 

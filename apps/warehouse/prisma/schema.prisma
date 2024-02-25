@@ -84,7 +84,6 @@ model Canvass {
   purpose         String
   notes           String?
   requested_by_id String
-  is_referenced   Boolean       @default(false)
   created_at      DateTime      @default(now())
   updated_at      DateTime      @updatedAt
   is_deleted      Boolean       @default(false)
@@ -155,7 +154,6 @@ model RV {
   date_requested    DateTime
   work_order_no     String?
   work_order_date   DateTime?
-  is_referenced     Boolean   @default(false)
   is_cancelled      Boolean   @default(false)
   notes             String?
 

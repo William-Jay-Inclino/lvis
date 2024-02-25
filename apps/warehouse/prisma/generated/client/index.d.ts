@@ -8350,7 +8350,6 @@ export namespace Prisma {
     purpose: string | null
     notes: string | null
     requested_by_id: string | null
-    is_referenced: boolean | null
     created_at: Date | null
     updated_at: Date | null
     is_deleted: boolean | null
@@ -8366,7 +8365,6 @@ export namespace Prisma {
     purpose: string | null
     notes: string | null
     requested_by_id: string | null
-    is_referenced: boolean | null
     created_at: Date | null
     updated_at: Date | null
     is_deleted: boolean | null
@@ -8382,7 +8380,6 @@ export namespace Prisma {
     purpose: number
     notes: number
     requested_by_id: number
-    is_referenced: number
     created_at: number
     updated_at: number
     is_deleted: number
@@ -8400,7 +8397,6 @@ export namespace Prisma {
     purpose?: true
     notes?: true
     requested_by_id?: true
-    is_referenced?: true
     created_at?: true
     updated_at?: true
     is_deleted?: true
@@ -8416,7 +8412,6 @@ export namespace Prisma {
     purpose?: true
     notes?: true
     requested_by_id?: true
-    is_referenced?: true
     created_at?: true
     updated_at?: true
     is_deleted?: true
@@ -8432,7 +8427,6 @@ export namespace Prisma {
     purpose?: true
     notes?: true
     requested_by_id?: true
-    is_referenced?: true
     created_at?: true
     updated_at?: true
     is_deleted?: true
@@ -8521,7 +8515,6 @@ export namespace Prisma {
     purpose: string
     notes: string | null
     requested_by_id: string
-    is_referenced: boolean
     created_at: Date
     updated_at: Date
     is_deleted: boolean
@@ -8554,7 +8547,6 @@ export namespace Prisma {
     purpose?: boolean
     notes?: boolean
     requested_by_id?: boolean
-    is_referenced?: boolean
     created_at?: boolean
     updated_at?: boolean
     is_deleted?: boolean
@@ -8575,7 +8567,6 @@ export namespace Prisma {
     purpose?: boolean
     notes?: boolean
     requested_by_id?: boolean
-    is_referenced?: boolean
     created_at?: boolean
     updated_at?: boolean
     is_deleted?: boolean
@@ -8608,7 +8599,6 @@ export namespace Prisma {
       purpose: string
       notes: string | null
       requested_by_id: string
-      is_referenced: boolean
       created_at: Date
       updated_at: Date
       is_deleted: boolean
@@ -9022,7 +9012,6 @@ export namespace Prisma {
     readonly purpose: FieldRef<"Canvass", 'String'>
     readonly notes: FieldRef<"Canvass", 'String'>
     readonly requested_by_id: FieldRef<"Canvass", 'String'>
-    readonly is_referenced: FieldRef<"Canvass", 'Boolean'>
     readonly created_at: FieldRef<"Canvass", 'DateTime'>
     readonly updated_at: FieldRef<"Canvass", 'DateTime'>
     readonly is_deleted: FieldRef<"Canvass", 'Boolean'>
@@ -11578,7 +11567,6 @@ export namespace Prisma {
     date_requested: Date | null
     work_order_no: string | null
     work_order_date: Date | null
-    is_referenced: boolean | null
     is_cancelled: boolean | null
     notes: string | null
     created_at: Date | null
@@ -11600,7 +11588,6 @@ export namespace Prisma {
     date_requested: Date | null
     work_order_no: string | null
     work_order_date: Date | null
-    is_referenced: boolean | null
     is_cancelled: boolean | null
     notes: string | null
     created_at: Date | null
@@ -11622,7 +11609,6 @@ export namespace Prisma {
     date_requested: number
     work_order_no: number
     work_order_date: number
-    is_referenced: number
     is_cancelled: number
     notes: number
     created_at: number
@@ -11646,7 +11632,6 @@ export namespace Prisma {
     date_requested?: true
     work_order_no?: true
     work_order_date?: true
-    is_referenced?: true
     is_cancelled?: true
     notes?: true
     created_at?: true
@@ -11668,7 +11653,6 @@ export namespace Prisma {
     date_requested?: true
     work_order_no?: true
     work_order_date?: true
-    is_referenced?: true
     is_cancelled?: true
     notes?: true
     created_at?: true
@@ -11690,7 +11674,6 @@ export namespace Prisma {
     date_requested?: true
     work_order_no?: true
     work_order_date?: true
-    is_referenced?: true
     is_cancelled?: true
     notes?: true
     created_at?: true
@@ -11785,7 +11768,6 @@ export namespace Prisma {
     date_requested: Date
     work_order_no: string | null
     work_order_date: Date | null
-    is_referenced: boolean
     is_cancelled: boolean
     notes: string | null
     created_at: Date
@@ -11824,7 +11806,6 @@ export namespace Prisma {
     date_requested?: boolean
     work_order_no?: boolean
     work_order_date?: boolean
-    is_referenced?: boolean
     is_cancelled?: boolean
     notes?: boolean
     created_at?: boolean
@@ -11850,7 +11831,6 @@ export namespace Prisma {
     date_requested?: boolean
     work_order_no?: boolean
     work_order_date?: boolean
-    is_referenced?: boolean
     is_cancelled?: boolean
     notes?: boolean
     created_at?: boolean
@@ -11887,7 +11867,6 @@ export namespace Prisma {
       date_requested: Date
       work_order_no: string | null
       work_order_date: Date | null
-      is_referenced: boolean
       is_cancelled: boolean
       notes: string | null
       created_at: Date
@@ -12305,7 +12284,6 @@ export namespace Prisma {
     readonly date_requested: FieldRef<"RV", 'DateTime'>
     readonly work_order_no: FieldRef<"RV", 'String'>
     readonly work_order_date: FieldRef<"RV", 'DateTime'>
-    readonly is_referenced: FieldRef<"RV", 'Boolean'>
     readonly is_cancelled: FieldRef<"RV", 'Boolean'>
     readonly notes: FieldRef<"RV", 'String'>
     readonly created_at: FieldRef<"RV", 'DateTime'>
@@ -29655,7 +29633,6 @@ export namespace Prisma {
     purpose: 'purpose',
     notes: 'notes',
     requested_by_id: 'requested_by_id',
-    is_referenced: 'is_referenced',
     created_at: 'created_at',
     updated_at: 'updated_at',
     is_deleted: 'is_deleted',
@@ -29719,7 +29696,6 @@ export namespace Prisma {
     date_requested: 'date_requested',
     work_order_no: 'work_order_no',
     work_order_date: 'work_order_date',
-    is_referenced: 'is_referenced',
     is_cancelled: 'is_cancelled',
     notes: 'notes',
     created_at: 'created_at',
@@ -30451,7 +30427,6 @@ export namespace Prisma {
     purpose?: StringFilter<"Canvass"> | string
     notes?: StringNullableFilter<"Canvass"> | string | null
     requested_by_id?: StringFilter<"Canvass"> | string
-    is_referenced?: BoolFilter<"Canvass"> | boolean
     created_at?: DateTimeFilter<"Canvass"> | Date | string
     updated_at?: DateTimeFilter<"Canvass"> | Date | string
     is_deleted?: BoolFilter<"Canvass"> | boolean
@@ -30471,7 +30446,6 @@ export namespace Prisma {
     purpose?: SortOrder
     notes?: SortOrderInput | SortOrder
     requested_by_id?: SortOrder
-    is_referenced?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -30494,7 +30468,6 @@ export namespace Prisma {
     purpose?: StringFilter<"Canvass"> | string
     notes?: StringNullableFilter<"Canvass"> | string | null
     requested_by_id?: StringFilter<"Canvass"> | string
-    is_referenced?: BoolFilter<"Canvass"> | boolean
     created_at?: DateTimeFilter<"Canvass"> | Date | string
     updated_at?: DateTimeFilter<"Canvass"> | Date | string
     is_deleted?: BoolFilter<"Canvass"> | boolean
@@ -30514,7 +30487,6 @@ export namespace Prisma {
     purpose?: SortOrder
     notes?: SortOrderInput | SortOrder
     requested_by_id?: SortOrder
-    is_referenced?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -30536,7 +30508,6 @@ export namespace Prisma {
     purpose?: StringWithAggregatesFilter<"Canvass"> | string
     notes?: StringNullableWithAggregatesFilter<"Canvass"> | string | null
     requested_by_id?: StringWithAggregatesFilter<"Canvass"> | string
-    is_referenced?: BoolWithAggregatesFilter<"Canvass"> | boolean
     created_at?: DateTimeWithAggregatesFilter<"Canvass"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"Canvass"> | Date | string
     is_deleted?: BoolWithAggregatesFilter<"Canvass"> | boolean
@@ -30772,7 +30743,6 @@ export namespace Prisma {
     date_requested?: DateTimeFilter<"RV"> | Date | string
     work_order_no?: StringNullableFilter<"RV"> | string | null
     work_order_date?: DateTimeNullableFilter<"RV"> | Date | string | null
-    is_referenced?: BoolFilter<"RV"> | boolean
     is_cancelled?: BoolFilter<"RV"> | boolean
     notes?: StringNullableFilter<"RV"> | string | null
     created_at?: DateTimeFilter<"RV"> | Date | string
@@ -30797,7 +30767,6 @@ export namespace Prisma {
     date_requested?: SortOrder
     work_order_no?: SortOrderInput | SortOrder
     work_order_date?: SortOrderInput | SortOrder
-    is_referenced?: SortOrder
     is_cancelled?: SortOrder
     notes?: SortOrderInput | SortOrder
     created_at?: SortOrder
@@ -30825,7 +30794,6 @@ export namespace Prisma {
     date_requested?: DateTimeFilter<"RV"> | Date | string
     work_order_no?: StringNullableFilter<"RV"> | string | null
     work_order_date?: DateTimeNullableFilter<"RV"> | Date | string | null
-    is_referenced?: BoolFilter<"RV"> | boolean
     is_cancelled?: BoolFilter<"RV"> | boolean
     notes?: StringNullableFilter<"RV"> | string | null
     created_at?: DateTimeFilter<"RV"> | Date | string
@@ -30850,7 +30818,6 @@ export namespace Prisma {
     date_requested?: SortOrder
     work_order_no?: SortOrderInput | SortOrder
     work_order_date?: SortOrderInput | SortOrder
-    is_referenced?: SortOrder
     is_cancelled?: SortOrder
     notes?: SortOrderInput | SortOrder
     created_at?: SortOrder
@@ -30878,7 +30845,6 @@ export namespace Prisma {
     date_requested?: DateTimeWithAggregatesFilter<"RV"> | Date | string
     work_order_no?: StringNullableWithAggregatesFilter<"RV"> | string | null
     work_order_date?: DateTimeNullableWithAggregatesFilter<"RV"> | Date | string | null
-    is_referenced?: BoolWithAggregatesFilter<"RV"> | boolean
     is_cancelled?: BoolWithAggregatesFilter<"RV"> | boolean
     notes?: StringNullableWithAggregatesFilter<"RV"> | string | null
     created_at?: DateTimeWithAggregatesFilter<"RV"> | Date | string
@@ -32781,7 +32747,6 @@ export namespace Prisma {
     purpose: string
     notes?: string | null
     requested_by_id: string
-    is_referenced?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -32801,7 +32766,6 @@ export namespace Prisma {
     purpose: string
     notes?: string | null
     requested_by_id: string
-    is_referenced?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -32821,7 +32785,6 @@ export namespace Prisma {
     purpose?: StringFieldUpdateOperationsInput | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     requested_by_id?: StringFieldUpdateOperationsInput | string
-    is_referenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -32841,7 +32804,6 @@ export namespace Prisma {
     purpose?: StringFieldUpdateOperationsInput | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     requested_by_id?: StringFieldUpdateOperationsInput | string
-    is_referenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -32861,7 +32823,6 @@ export namespace Prisma {
     purpose: string
     notes?: string | null
     requested_by_id: string
-    is_referenced?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -32877,7 +32838,6 @@ export namespace Prisma {
     purpose?: StringFieldUpdateOperationsInput | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     requested_by_id?: StringFieldUpdateOperationsInput | string
-    is_referenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -32893,7 +32853,6 @@ export namespace Prisma {
     purpose?: StringFieldUpdateOperationsInput | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     requested_by_id?: StringFieldUpdateOperationsInput | string
-    is_referenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -33163,7 +33122,6 @@ export namespace Prisma {
     date_requested: Date | string
     work_order_no?: string | null
     work_order_date?: Date | string | null
-    is_referenced?: boolean
     is_cancelled?: boolean
     notes?: string | null
     created_at?: Date | string
@@ -33188,7 +33146,6 @@ export namespace Prisma {
     date_requested: Date | string
     work_order_no?: string | null
     work_order_date?: Date | string | null
-    is_referenced?: boolean
     is_cancelled?: boolean
     notes?: string | null
     created_at?: Date | string
@@ -33211,7 +33168,6 @@ export namespace Prisma {
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
     work_order_no?: NullableStringFieldUpdateOperationsInput | string | null
     work_order_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    is_referenced?: BoolFieldUpdateOperationsInput | boolean
     is_cancelled?: BoolFieldUpdateOperationsInput | boolean
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -33236,7 +33192,6 @@ export namespace Prisma {
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
     work_order_no?: NullableStringFieldUpdateOperationsInput | string | null
     work_order_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    is_referenced?: BoolFieldUpdateOperationsInput | boolean
     is_cancelled?: BoolFieldUpdateOperationsInput | boolean
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -33260,7 +33215,6 @@ export namespace Prisma {
     date_requested: Date | string
     work_order_no?: string | null
     work_order_date?: Date | string | null
-    is_referenced?: boolean
     is_cancelled?: boolean
     notes?: string | null
     created_at?: Date | string
@@ -33281,7 +33235,6 @@ export namespace Prisma {
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
     work_order_no?: NullableStringFieldUpdateOperationsInput | string | null
     work_order_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    is_referenced?: BoolFieldUpdateOperationsInput | boolean
     is_cancelled?: BoolFieldUpdateOperationsInput | boolean
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -33303,7 +33256,6 @@ export namespace Prisma {
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
     work_order_no?: NullableStringFieldUpdateOperationsInput | string | null
     work_order_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    is_referenced?: BoolFieldUpdateOperationsInput | boolean
     is_cancelled?: BoolFieldUpdateOperationsInput | boolean
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -35408,7 +35360,6 @@ export namespace Prisma {
     purpose?: SortOrder
     notes?: SortOrder
     requested_by_id?: SortOrder
-    is_referenced?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -35424,7 +35375,6 @@ export namespace Prisma {
     purpose?: SortOrder
     notes?: SortOrder
     requested_by_id?: SortOrder
-    is_referenced?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -35440,7 +35390,6 @@ export namespace Prisma {
     purpose?: SortOrder
     notes?: SortOrder
     requested_by_id?: SortOrder
-    is_referenced?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -35630,7 +35579,6 @@ export namespace Prisma {
     date_requested?: SortOrder
     work_order_no?: SortOrder
     work_order_date?: SortOrder
-    is_referenced?: SortOrder
     is_cancelled?: SortOrder
     notes?: SortOrder
     created_at?: SortOrder
@@ -35652,7 +35600,6 @@ export namespace Prisma {
     date_requested?: SortOrder
     work_order_no?: SortOrder
     work_order_date?: SortOrder
-    is_referenced?: SortOrder
     is_cancelled?: SortOrder
     notes?: SortOrder
     created_at?: SortOrder
@@ -35674,7 +35621,6 @@ export namespace Prisma {
     date_requested?: SortOrder
     work_order_no?: SortOrder
     work_order_date?: SortOrder
-    is_referenced?: SortOrder
     is_cancelled?: SortOrder
     notes?: SortOrder
     created_at?: SortOrder
@@ -39084,7 +39030,6 @@ export namespace Prisma {
     purpose: string
     notes?: string | null
     requested_by_id: string
-    is_referenced?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -39103,7 +39048,6 @@ export namespace Prisma {
     purpose: string
     notes?: string | null
     requested_by_id: string
-    is_referenced?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -39220,7 +39164,6 @@ export namespace Prisma {
     purpose?: StringFieldUpdateOperationsInput | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     requested_by_id?: StringFieldUpdateOperationsInput | string
-    is_referenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -39239,7 +39182,6 @@ export namespace Prisma {
     purpose?: StringFieldUpdateOperationsInput | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     requested_by_id?: StringFieldUpdateOperationsInput | string
-    is_referenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -39436,7 +39378,6 @@ export namespace Prisma {
     date_requested: Date | string
     work_order_no?: string | null
     work_order_date?: Date | string | null
-    is_referenced?: boolean
     is_cancelled?: boolean
     notes?: string | null
     created_at?: Date | string
@@ -39459,7 +39400,6 @@ export namespace Prisma {
     date_requested: Date | string
     work_order_no?: string | null
     work_order_date?: Date | string | null
-    is_referenced?: boolean
     is_cancelled?: boolean
     notes?: string | null
     created_at?: Date | string
@@ -39616,7 +39556,6 @@ export namespace Prisma {
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
     work_order_no?: NullableStringFieldUpdateOperationsInput | string | null
     work_order_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    is_referenced?: BoolFieldUpdateOperationsInput | boolean
     is_cancelled?: BoolFieldUpdateOperationsInput | boolean
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -39639,7 +39578,6 @@ export namespace Prisma {
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
     work_order_no?: NullableStringFieldUpdateOperationsInput | string | null
     work_order_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    is_referenced?: BoolFieldUpdateOperationsInput | boolean
     is_cancelled?: BoolFieldUpdateOperationsInput | boolean
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -39748,7 +39686,6 @@ export namespace Prisma {
     purpose: string
     notes?: string | null
     requested_by_id: string
-    is_referenced?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -39767,7 +39704,6 @@ export namespace Prisma {
     purpose: string
     notes?: string | null
     requested_by_id: string
-    is_referenced?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -39882,7 +39818,6 @@ export namespace Prisma {
     purpose?: StringFieldUpdateOperationsInput | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     requested_by_id?: StringFieldUpdateOperationsInput | string
-    is_referenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -39901,7 +39836,6 @@ export namespace Prisma {
     purpose?: StringFieldUpdateOperationsInput | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     requested_by_id?: StringFieldUpdateOperationsInput | string
-    is_referenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -40077,7 +40011,6 @@ export namespace Prisma {
     purpose: string
     notes?: string | null
     requested_by_id: string
-    is_referenced?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -40096,7 +40029,6 @@ export namespace Prisma {
     purpose: string
     notes?: string | null
     requested_by_id: string
-    is_referenced?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -40216,7 +40148,6 @@ export namespace Prisma {
     purpose?: StringFieldUpdateOperationsInput | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     requested_by_id?: StringFieldUpdateOperationsInput | string
-    is_referenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -40235,7 +40166,6 @@ export namespace Prisma {
     purpose?: StringFieldUpdateOperationsInput | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     requested_by_id?: StringFieldUpdateOperationsInput | string
-    is_referenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -40344,7 +40274,6 @@ export namespace Prisma {
     date_requested: Date | string
     work_order_no?: string | null
     work_order_date?: Date | string | null
-    is_referenced?: boolean
     is_cancelled?: boolean
     notes?: string | null
     created_at?: Date | string
@@ -40368,7 +40297,6 @@ export namespace Prisma {
     date_requested: Date | string
     work_order_no?: string | null
     work_order_date?: Date | string | null
-    is_referenced?: boolean
     is_cancelled?: boolean
     notes?: string | null
     created_at?: Date | string
@@ -40406,7 +40334,6 @@ export namespace Prisma {
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
     work_order_no?: NullableStringFieldUpdateOperationsInput | string | null
     work_order_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    is_referenced?: BoolFieldUpdateOperationsInput | boolean
     is_cancelled?: BoolFieldUpdateOperationsInput | boolean
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -40430,7 +40357,6 @@ export namespace Prisma {
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
     work_order_no?: NullableStringFieldUpdateOperationsInput | string | null
     work_order_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    is_referenced?: BoolFieldUpdateOperationsInput | boolean
     is_cancelled?: BoolFieldUpdateOperationsInput | boolean
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -40496,7 +40422,6 @@ export namespace Prisma {
     purpose: string
     notes?: string | null
     requested_by_id: string
-    is_referenced?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -40515,7 +40440,6 @@ export namespace Prisma {
     purpose: string
     notes?: string | null
     requested_by_id: string
-    is_referenced?: boolean
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -40664,7 +40588,6 @@ export namespace Prisma {
     purpose?: StringFieldUpdateOperationsInput | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     requested_by_id?: StringFieldUpdateOperationsInput | string
-    is_referenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -40683,7 +40606,6 @@ export namespace Prisma {
     purpose?: StringFieldUpdateOperationsInput | string
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     requested_by_id?: StringFieldUpdateOperationsInput | string
-    is_referenced?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -40917,7 +40839,6 @@ export namespace Prisma {
     date_requested: Date | string
     work_order_no?: string | null
     work_order_date?: Date | string | null
-    is_referenced?: boolean
     is_cancelled?: boolean
     notes?: string | null
     created_at?: Date | string
@@ -40941,7 +40862,6 @@ export namespace Prisma {
     date_requested: Date | string
     work_order_no?: string | null
     work_order_date?: Date | string | null
-    is_referenced?: boolean
     is_cancelled?: boolean
     notes?: string | null
     created_at?: Date | string
@@ -41155,7 +41075,6 @@ export namespace Prisma {
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
     work_order_no?: NullableStringFieldUpdateOperationsInput | string | null
     work_order_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    is_referenced?: BoolFieldUpdateOperationsInput | boolean
     is_cancelled?: BoolFieldUpdateOperationsInput | boolean
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -41179,7 +41098,6 @@ export namespace Prisma {
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
     work_order_no?: NullableStringFieldUpdateOperationsInput | string | null
     work_order_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    is_referenced?: BoolFieldUpdateOperationsInput | boolean
     is_cancelled?: BoolFieldUpdateOperationsInput | boolean
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string

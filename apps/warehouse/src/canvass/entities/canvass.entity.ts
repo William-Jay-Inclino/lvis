@@ -32,8 +32,8 @@ export class Canvass {
   @Field(() => [CanvassItem])
   canvass_items: CanvassItem[];
 
-  @Field(() => Boolean)
-  is_referenced: boolean;
+  // @Field(() => Boolean)
+  // is_referenced: boolean;
 
   @Field( () => JO)
   jo?: JO

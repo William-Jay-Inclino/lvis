@@ -128,94 +128,15 @@ export class MeqsService {
 
 
 
-        const createMeqsQuery = this.prisma.mEQS.create({
+        const created = await this.prisma.mEQS.create({
             data,
             include: this.includedFields
         })
 
-        // IF REFERENCE IS RV
-        if(input.rv_id) {
-            const rv = await this.prisma.rV.findUnique({
-                where: { id: input.rv_id }
-            })
+        this.logger.log('MEQS successfully created')
 
-            if(!rv) {
-                throw new NotFoundException(`RV not found with id: ${input.rv_id} `)
-            }
+        return created 
 
-            const updateRvQuery = this.prisma.rV.update({
-                data: {
-                    is_referenced: true
-                },
-                where: {
-                    id: input.rv_id
-                }
-            })
-
-            const [createdMeqs, updatedRv] = await this.prisma.$transaction([
-                createMeqsQuery,
-                updateRvQuery
-            ])
-
-            this.logger.log(`Successfully created MEQS and updated RV field "is_reference" to true`)
-            return createdMeqs
-        }
-
-        // IF REFERENCE IS JO
-        if(input.jo_id) {
-            const jo = await this.prisma.jO.findUnique({
-                where: { id: input.jo_id }
-            })
-
-            if(!jo) {
-                throw new NotFoundException(`JO not found with id: ${input.jo_id} `)
-            }
-
-            const updateJoQuery = this.prisma.jO.update({
-                data: {
-                    is_referenced: true
-                },
-                where: {
-                    id: input.jo_id
-                }
-            })
-
-            const [createdMeqs, updatedJo] = await this.prisma.$transaction([
-                createMeqsQuery,
-                updateJoQuery
-            ])
-
-            this.logger.log(`Successfully created MEQS and updated JO field "is_reference" to true`)
-            return createdMeqs
-        }
-
-        // IF REFERENCE IS SPR
-        if(input.spr_id) {
-            const spr = await this.prisma.sPR.findUnique({
-                where: { id: input.spr_id }
-            })
-
-            if(!spr) {
-                throw new NotFoundException(`SPR not found with id: ${input.spr_id} `)
-            }
-
-            const updateSprQuery = this.prisma.sPR.update({
-                data: {
-                    is_referenced: true
-                },
-                where: {
-                    id: input.spr_id
-                }
-            })
-
-            const [createdMeqs, updatedSpr] = await this.prisma.$transaction([
-                createMeqsQuery,
-                updateSprQuery
-            ])
-
-            this.logger.log(`Successfully created MEQS and updated SPR field "is_reference" to true`)
-            return createdMeqs
-        }
 
     }
 
@@ -481,7 +402,12 @@ export class MeqsService {
             }
 
             // validate if it's referenced
-            if(rv.is_referenced) {
+
+            const isRvReferenced = await this.prisma.mEQS.findUnique({
+                where: { rv_id: rv.id }
+            })
+
+            if(isRvReferenced) {
                 return { succes: false, msg: `RV is already referenced` }
             }
 
