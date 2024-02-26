@@ -15832,18 +15832,8 @@ export namespace Prisma {
 
   export type AggregateMEQS = {
     _count: MEQSCountAggregateOutputType | null
-    _avg: MEQSAvgAggregateOutputType | null
-    _sum: MEQSSumAggregateOutputType | null
     _min: MEQSMinAggregateOutputType | null
     _max: MEQSMaxAggregateOutputType | null
-  }
-
-  export type MEQSAvgAggregateOutputType = {
-    request_type: number | null
-  }
-
-  export type MEQSSumAggregateOutputType = {
-    request_type: number | null
   }
 
   export type MEQSMinAggregateOutputType = {
@@ -15852,7 +15842,6 @@ export namespace Prisma {
     rv_id: string | null
     spr_id: string | null
     meqs_number: string | null
-    request_type: number | null
     meqs_date: Date | null
     is_cancelled: boolean | null
     notes: string | null
@@ -15872,7 +15861,6 @@ export namespace Prisma {
     rv_id: string | null
     spr_id: string | null
     meqs_number: string | null
-    request_type: number | null
     meqs_date: Date | null
     is_cancelled: boolean | null
     notes: string | null
@@ -15892,7 +15880,6 @@ export namespace Prisma {
     rv_id: number
     spr_id: number
     meqs_number: number
-    request_type: number
     meqs_date: number
     is_cancelled: number
     notes: number
@@ -15908,21 +15895,12 @@ export namespace Prisma {
   }
 
 
-  export type MEQSAvgAggregateInputType = {
-    request_type?: true
-  }
-
-  export type MEQSSumAggregateInputType = {
-    request_type?: true
-  }
-
   export type MEQSMinAggregateInputType = {
     id?: true
     jo_id?: true
     rv_id?: true
     spr_id?: true
     meqs_number?: true
-    request_type?: true
     meqs_date?: true
     is_cancelled?: true
     notes?: true
@@ -15942,7 +15920,6 @@ export namespace Prisma {
     rv_id?: true
     spr_id?: true
     meqs_number?: true
-    request_type?: true
     meqs_date?: true
     is_cancelled?: true
     notes?: true
@@ -15962,7 +15939,6 @@ export namespace Prisma {
     rv_id?: true
     spr_id?: true
     meqs_number?: true
-    request_type?: true
     meqs_date?: true
     is_cancelled?: true
     notes?: true
@@ -16015,18 +15991,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: MEQSAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: MEQSSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: MEQSMinAggregateInputType
@@ -16057,8 +16021,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: MEQSCountAggregateInputType | true
-    _avg?: MEQSAvgAggregateInputType
-    _sum?: MEQSSumAggregateInputType
     _min?: MEQSMinAggregateInputType
     _max?: MEQSMaxAggregateInputType
   }
@@ -16069,7 +16031,6 @@ export namespace Prisma {
     rv_id: string | null
     spr_id: string | null
     meqs_number: string
-    request_type: number
     meqs_date: Date
     is_cancelled: boolean
     notes: string | null
@@ -16082,8 +16043,6 @@ export namespace Prisma {
     updated_by: string | null
     deleted_by: string | null
     _count: MEQSCountAggregateOutputType | null
-    _avg: MEQSAvgAggregateOutputType | null
-    _sum: MEQSSumAggregateOutputType | null
     _min: MEQSMinAggregateOutputType | null
     _max: MEQSMaxAggregateOutputType | null
   }
@@ -16108,7 +16067,6 @@ export namespace Prisma {
     rv_id?: boolean
     spr_id?: boolean
     meqs_number?: boolean
-    request_type?: boolean
     meqs_date?: boolean
     is_cancelled?: boolean
     notes?: boolean
@@ -16134,7 +16092,6 @@ export namespace Prisma {
     rv_id?: boolean
     spr_id?: boolean
     meqs_number?: boolean
-    request_type?: boolean
     meqs_date?: boolean
     is_cancelled?: boolean
     notes?: boolean
@@ -16173,7 +16130,6 @@ export namespace Prisma {
       rv_id: string | null
       spr_id: string | null
       meqs_number: string
-      request_type: number
       meqs_date: Date
       is_cancelled: boolean
       notes: string | null
@@ -16593,7 +16549,6 @@ export namespace Prisma {
     readonly rv_id: FieldRef<"MEQS", 'String'>
     readonly spr_id: FieldRef<"MEQS", 'String'>
     readonly meqs_number: FieldRef<"MEQS", 'String'>
-    readonly request_type: FieldRef<"MEQS", 'Int'>
     readonly meqs_date: FieldRef<"MEQS", 'DateTime'>
     readonly is_cancelled: FieldRef<"MEQS", 'Boolean'>
     readonly notes: FieldRef<"MEQS", 'String'>
@@ -29774,7 +29729,6 @@ export namespace Prisma {
     rv_id: 'rv_id',
     spr_id: 'spr_id',
     meqs_number: 'meqs_number',
-    request_type: 'request_type',
     meqs_date: 'meqs_date',
     is_cancelled: 'is_cancelled',
     notes: 'notes',
@@ -31172,7 +31126,6 @@ export namespace Prisma {
     rv_id?: StringNullableFilter<"MEQS"> | string | null
     spr_id?: StringNullableFilter<"MEQS"> | string | null
     meqs_number?: StringFilter<"MEQS"> | string
-    request_type?: IntFilter<"MEQS"> | number
     meqs_date?: DateTimeFilter<"MEQS"> | Date | string
     is_cancelled?: BoolFilter<"MEQS"> | boolean
     notes?: StringNullableFilter<"MEQS"> | string | null
@@ -31197,7 +31150,6 @@ export namespace Prisma {
     rv_id?: SortOrderInput | SortOrder
     spr_id?: SortOrderInput | SortOrder
     meqs_number?: SortOrder
-    request_type?: SortOrder
     meqs_date?: SortOrder
     is_cancelled?: SortOrder
     notes?: SortOrderInput | SortOrder
@@ -31225,7 +31177,6 @@ export namespace Prisma {
     AND?: MEQSWhereInput | MEQSWhereInput[]
     OR?: MEQSWhereInput[]
     NOT?: MEQSWhereInput | MEQSWhereInput[]
-    request_type?: IntFilter<"MEQS"> | number
     meqs_date?: DateTimeFilter<"MEQS"> | Date | string
     is_cancelled?: BoolFilter<"MEQS"> | boolean
     notes?: StringNullableFilter<"MEQS"> | string | null
@@ -31250,7 +31201,6 @@ export namespace Prisma {
     rv_id?: SortOrderInput | SortOrder
     spr_id?: SortOrderInput | SortOrder
     meqs_number?: SortOrder
-    request_type?: SortOrder
     meqs_date?: SortOrder
     is_cancelled?: SortOrder
     notes?: SortOrderInput | SortOrder
@@ -31263,10 +31213,8 @@ export namespace Prisma {
     updated_by?: SortOrderInput | SortOrder
     deleted_by?: SortOrderInput | SortOrder
     _count?: MEQSCountOrderByAggregateInput
-    _avg?: MEQSAvgOrderByAggregateInput
     _max?: MEQSMaxOrderByAggregateInput
     _min?: MEQSMinOrderByAggregateInput
-    _sum?: MEQSSumOrderByAggregateInput
   }
 
   export type MEQSScalarWhereWithAggregatesInput = {
@@ -31278,7 +31226,6 @@ export namespace Prisma {
     rv_id?: StringNullableWithAggregatesFilter<"MEQS"> | string | null
     spr_id?: StringNullableWithAggregatesFilter<"MEQS"> | string | null
     meqs_number?: StringWithAggregatesFilter<"MEQS"> | string
-    request_type?: IntWithAggregatesFilter<"MEQS"> | number
     meqs_date?: DateTimeWithAggregatesFilter<"MEQS"> | Date | string
     is_cancelled?: BoolWithAggregatesFilter<"MEQS"> | boolean
     notes?: StringNullableWithAggregatesFilter<"MEQS"> | string | null
@@ -33623,7 +33570,6 @@ export namespace Prisma {
   export type MEQSCreateInput = {
     id?: string
     meqs_number: string
-    request_type?: number
     meqs_date: Date | string
     is_cancelled?: boolean
     notes?: string | null
@@ -33648,7 +33594,6 @@ export namespace Prisma {
     rv_id?: string | null
     spr_id?: string | null
     meqs_number: string
-    request_type?: number
     meqs_date: Date | string
     is_cancelled?: boolean
     notes?: string | null
@@ -33667,7 +33612,6 @@ export namespace Prisma {
   export type MEQSUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     meqs_number?: StringFieldUpdateOperationsInput | string
-    request_type?: IntFieldUpdateOperationsInput | number
     meqs_date?: DateTimeFieldUpdateOperationsInput | Date | string
     is_cancelled?: BoolFieldUpdateOperationsInput | boolean
     notes?: NullableStringFieldUpdateOperationsInput | string | null
@@ -33692,7 +33636,6 @@ export namespace Prisma {
     rv_id?: NullableStringFieldUpdateOperationsInput | string | null
     spr_id?: NullableStringFieldUpdateOperationsInput | string | null
     meqs_number?: StringFieldUpdateOperationsInput | string
-    request_type?: IntFieldUpdateOperationsInput | number
     meqs_date?: DateTimeFieldUpdateOperationsInput | Date | string
     is_cancelled?: BoolFieldUpdateOperationsInput | boolean
     notes?: NullableStringFieldUpdateOperationsInput | string | null
@@ -33714,7 +33657,6 @@ export namespace Prisma {
     rv_id?: string | null
     spr_id?: string | null
     meqs_number: string
-    request_type?: number
     meqs_date: Date | string
     is_cancelled?: boolean
     notes?: string | null
@@ -33731,7 +33673,6 @@ export namespace Prisma {
   export type MEQSUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     meqs_number?: StringFieldUpdateOperationsInput | string
-    request_type?: IntFieldUpdateOperationsInput | number
     meqs_date?: DateTimeFieldUpdateOperationsInput | Date | string
     is_cancelled?: BoolFieldUpdateOperationsInput | boolean
     notes?: NullableStringFieldUpdateOperationsInput | string | null
@@ -33751,7 +33692,6 @@ export namespace Prisma {
     rv_id?: NullableStringFieldUpdateOperationsInput | string | null
     spr_id?: NullableStringFieldUpdateOperationsInput | string | null
     meqs_number?: StringFieldUpdateOperationsInput | string
-    request_type?: IntFieldUpdateOperationsInput | number
     meqs_date?: DateTimeFieldUpdateOperationsInput | Date | string
     is_cancelled?: BoolFieldUpdateOperationsInput | boolean
     notes?: NullableStringFieldUpdateOperationsInput | string | null
@@ -35842,7 +35782,6 @@ export namespace Prisma {
     rv_id?: SortOrder
     spr_id?: SortOrder
     meqs_number?: SortOrder
-    request_type?: SortOrder
     meqs_date?: SortOrder
     is_cancelled?: SortOrder
     notes?: SortOrder
@@ -35856,17 +35795,12 @@ export namespace Prisma {
     deleted_by?: SortOrder
   }
 
-  export type MEQSAvgOrderByAggregateInput = {
-    request_type?: SortOrder
-  }
-
   export type MEQSMaxOrderByAggregateInput = {
     id?: SortOrder
     jo_id?: SortOrder
     rv_id?: SortOrder
     spr_id?: SortOrder
     meqs_number?: SortOrder
-    request_type?: SortOrder
     meqs_date?: SortOrder
     is_cancelled?: SortOrder
     notes?: SortOrder
@@ -35886,7 +35820,6 @@ export namespace Prisma {
     rv_id?: SortOrder
     spr_id?: SortOrder
     meqs_number?: SortOrder
-    request_type?: SortOrder
     meqs_date?: SortOrder
     is_cancelled?: SortOrder
     notes?: SortOrder
@@ -35898,10 +35831,6 @@ export namespace Prisma {
     created_by?: SortOrder
     updated_by?: SortOrder
     deleted_by?: SortOrder
-  }
-
-  export type MEQSSumOrderByAggregateInput = {
-    request_type?: SortOrder
   }
 
   export type MEQSRelationFilter = {
@@ -39723,7 +39652,6 @@ export namespace Prisma {
   export type MEQSCreateWithoutJoInput = {
     id?: string
     meqs_number: string
-    request_type?: number
     meqs_date: Date | string
     is_cancelled?: boolean
     notes?: string | null
@@ -39746,7 +39674,6 @@ export namespace Prisma {
     rv_id?: string | null
     spr_id?: string | null
     meqs_number: string
-    request_type?: number
     meqs_date: Date | string
     is_cancelled?: boolean
     notes?: string | null
@@ -39861,7 +39788,6 @@ export namespace Prisma {
   export type MEQSUpdateWithoutJoInput = {
     id?: StringFieldUpdateOperationsInput | string
     meqs_number?: StringFieldUpdateOperationsInput | string
-    request_type?: IntFieldUpdateOperationsInput | number
     meqs_date?: DateTimeFieldUpdateOperationsInput | Date | string
     is_cancelled?: BoolFieldUpdateOperationsInput | boolean
     notes?: NullableStringFieldUpdateOperationsInput | string | null
@@ -39884,7 +39810,6 @@ export namespace Prisma {
     rv_id?: NullableStringFieldUpdateOperationsInput | string | null
     spr_id?: NullableStringFieldUpdateOperationsInput | string | null
     meqs_number?: StringFieldUpdateOperationsInput | string
-    request_type?: IntFieldUpdateOperationsInput | number
     meqs_date?: DateTimeFieldUpdateOperationsInput | Date | string
     is_cancelled?: BoolFieldUpdateOperationsInput | boolean
     notes?: NullableStringFieldUpdateOperationsInput | string | null
@@ -40048,7 +39973,6 @@ export namespace Prisma {
   export type MEQSCreateWithoutRvInput = {
     id?: string
     meqs_number: string
-    request_type?: number
     meqs_date: Date | string
     is_cancelled?: boolean
     notes?: string | null
@@ -40071,7 +39995,6 @@ export namespace Prisma {
     jo_id?: string | null
     spr_id?: string | null
     meqs_number: string
-    request_type?: number
     meqs_date: Date | string
     is_cancelled?: boolean
     notes?: string | null
@@ -40191,7 +40114,6 @@ export namespace Prisma {
   export type MEQSUpdateWithoutRvInput = {
     id?: StringFieldUpdateOperationsInput | string
     meqs_number?: StringFieldUpdateOperationsInput | string
-    request_type?: IntFieldUpdateOperationsInput | number
     meqs_date?: DateTimeFieldUpdateOperationsInput | Date | string
     is_cancelled?: BoolFieldUpdateOperationsInput | boolean
     notes?: NullableStringFieldUpdateOperationsInput | string | null
@@ -40214,7 +40136,6 @@ export namespace Prisma {
     jo_id?: NullableStringFieldUpdateOperationsInput | string | null
     spr_id?: NullableStringFieldUpdateOperationsInput | string | null
     meqs_number?: StringFieldUpdateOperationsInput | string
-    request_type?: IntFieldUpdateOperationsInput | number
     meqs_date?: DateTimeFieldUpdateOperationsInput | Date | string
     is_cancelled?: BoolFieldUpdateOperationsInput | boolean
     notes?: NullableStringFieldUpdateOperationsInput | string | null
@@ -40371,7 +40292,6 @@ export namespace Prisma {
   export type MEQSCreateWithoutSprInput = {
     id?: string
     meqs_number: string
-    request_type?: number
     meqs_date: Date | string
     is_cancelled?: boolean
     notes?: string | null
@@ -40394,7 +40314,6 @@ export namespace Prisma {
     jo_id?: string | null
     rv_id?: string | null
     meqs_number: string
-    request_type?: number
     meqs_date: Date | string
     is_cancelled?: boolean
     notes?: string | null
@@ -40531,7 +40450,6 @@ export namespace Prisma {
   export type MEQSUpdateWithoutSprInput = {
     id?: StringFieldUpdateOperationsInput | string
     meqs_number?: StringFieldUpdateOperationsInput | string
-    request_type?: IntFieldUpdateOperationsInput | number
     meqs_date?: DateTimeFieldUpdateOperationsInput | Date | string
     is_cancelled?: BoolFieldUpdateOperationsInput | boolean
     notes?: NullableStringFieldUpdateOperationsInput | string | null
@@ -40554,7 +40472,6 @@ export namespace Prisma {
     jo_id?: NullableStringFieldUpdateOperationsInput | string | null
     rv_id?: NullableStringFieldUpdateOperationsInput | string | null
     meqs_number?: StringFieldUpdateOperationsInput | string
-    request_type?: IntFieldUpdateOperationsInput | number
     meqs_date?: DateTimeFieldUpdateOperationsInput | Date | string
     is_cancelled?: BoolFieldUpdateOperationsInput | boolean
     notes?: NullableStringFieldUpdateOperationsInput | string | null
@@ -41215,7 +41132,6 @@ export namespace Prisma {
   export type MEQSCreateWithoutMeqs_suppliersInput = {
     id?: string
     meqs_number: string
-    request_type?: number
     meqs_date: Date | string
     is_cancelled?: boolean
     notes?: string | null
@@ -41239,7 +41155,6 @@ export namespace Prisma {
     rv_id?: string | null
     spr_id?: string | null
     meqs_number: string
-    request_type?: number
     meqs_date: Date | string
     is_cancelled?: boolean
     notes?: string | null
@@ -41397,7 +41312,6 @@ export namespace Prisma {
   export type MEQSUpdateWithoutMeqs_suppliersInput = {
     id?: StringFieldUpdateOperationsInput | string
     meqs_number?: StringFieldUpdateOperationsInput | string
-    request_type?: IntFieldUpdateOperationsInput | number
     meqs_date?: DateTimeFieldUpdateOperationsInput | Date | string
     is_cancelled?: BoolFieldUpdateOperationsInput | boolean
     notes?: NullableStringFieldUpdateOperationsInput | string | null
@@ -41421,7 +41335,6 @@ export namespace Prisma {
     rv_id?: NullableStringFieldUpdateOperationsInput | string | null
     spr_id?: NullableStringFieldUpdateOperationsInput | string | null
     meqs_number?: StringFieldUpdateOperationsInput | string
-    request_type?: IntFieldUpdateOperationsInput | number
     meqs_date?: DateTimeFieldUpdateOperationsInput | Date | string
     is_cancelled?: BoolFieldUpdateOperationsInput | boolean
     notes?: NullableStringFieldUpdateOperationsInput | string | null
@@ -41759,7 +41672,6 @@ export namespace Prisma {
   export type MEQSCreateWithoutMeqs_approversInput = {
     id?: string
     meqs_number: string
-    request_type?: number
     meqs_date: Date | string
     is_cancelled?: boolean
     notes?: string | null
@@ -41783,7 +41695,6 @@ export namespace Prisma {
     rv_id?: string | null
     spr_id?: string | null
     meqs_number: string
-    request_type?: number
     meqs_date: Date | string
     is_cancelled?: boolean
     notes?: string | null
@@ -41817,7 +41728,6 @@ export namespace Prisma {
   export type MEQSUpdateWithoutMeqs_approversInput = {
     id?: StringFieldUpdateOperationsInput | string
     meqs_number?: StringFieldUpdateOperationsInput | string
-    request_type?: IntFieldUpdateOperationsInput | number
     meqs_date?: DateTimeFieldUpdateOperationsInput | Date | string
     is_cancelled?: BoolFieldUpdateOperationsInput | boolean
     notes?: NullableStringFieldUpdateOperationsInput | string | null
@@ -41841,7 +41751,6 @@ export namespace Prisma {
     rv_id?: NullableStringFieldUpdateOperationsInput | string | null
     spr_id?: NullableStringFieldUpdateOperationsInput | string | null
     meqs_number?: StringFieldUpdateOperationsInput | string
-    request_type?: IntFieldUpdateOperationsInput | number
     meqs_date?: DateTimeFieldUpdateOperationsInput | Date | string
     is_cancelled?: BoolFieldUpdateOperationsInput | boolean
     notes?: NullableStringFieldUpdateOperationsInput | string | null

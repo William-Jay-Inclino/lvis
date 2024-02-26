@@ -28,11 +28,6 @@ export class CreateMeqsInput {
   @IsString()
   notes: string;
 
-  @Field(() => Int)
-  @IsNotEmpty()
-  @IsInt()
-  request_type: REQUEST_TYPE;
-
   @Field(() => String)
   @IsNotEmpty()
   @Transform(({ value }) => new Date(value))

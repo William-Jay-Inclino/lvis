@@ -239,7 +239,6 @@ model MEQS {
   rv_id          String?        @unique
   spr_id         String?        @unique
   meqs_number    String         @unique
-  request_type   Int            @default(1)
   meqs_date      DateTime
   is_cancelled   Boolean        @default(false)
   notes          String?

@@ -16,11 +16,6 @@ export class UpdateMeqsInput {
   @IsDate()
   meqs_date?: string;
 
-  @Field(() => Int, {nullable: true})
-  @IsInt()
-  @IsOptional()
-  status?: number;
-
   @Field(() => String, {nullable: true})
   @IsString()
   @IsOptional()

@@ -1,4 +1,4 @@
-import { Args, Mutation, Resolver, Query, ResolveField, Parent } from '@nestjs/graphql';
+import { Args, Mutation, Resolver, Query, ResolveField, Parent, Int } from '@nestjs/graphql';
 import { GqlAuthGuard } from '../__auth__/guards/gql-auth.guard';
 import { UseGuards } from '@nestjs/common';
 import { MeqsService } from './meqs.service';
@@ -12,6 +12,7 @@ import { MEQSApprover } from '../meqs-approver/entities/meqs-approver.entity';
 import { MeqsApproverService } from '../meqs-approver/meqs-approver.service';
 import { MeqsNumber } from './entities/meqs-number.entity';
 import { MEQSsResponse } from './entities/meqs-response.entity';
+import { APPROVAL_STATUS } from '../__common__/types';
 
 @UseGuards(GqlAuthGuard)
 @Resolver( () => MEQS)
@@ -94,6 +95,17 @@ export class MeqsResolver {
     @ResolveField( () => [MEQSApprover])
     meqs_approvers(@Parent() meqs: MEQS): any {
         return this.meqsApproverService.findByMeqsId(meqs.id)
+    }
+
+    @ResolveField( () => Int)
+    async status(@Parent() meqs: MEQS) {
+        
+        if(meqs.is_cancelled) {
+            return APPROVAL_STATUS.CANCELLED
+        }
+
+        return await this.meqsService.getStatus(meqs.id)
+
     }
 
 }

@@ -120,7 +120,6 @@ export class MeqsService {
             spr: input.spr_id ? { connect: { id: input.spr_id } } : undefined,
             notes: input.notes,
             meqs_number: meqsNumber,
-            request_type: input.request_type,
             meqs_date: new Date(input.meqs_date),
             meqs_approvers,
             meqs_suppliers
@@ -286,6 +285,28 @@ export class MeqsService {
         }
 
         return item
+    }
+
+    async getStatus(id: string): Promise<APPROVAL_STATUS> {
+
+        const approvers = await this.prisma.mEQSApprover.findMany({
+            where: { meqs_id: id }
+        })
+
+        const hasDisapproved = approvers.find(i => i.status === APPROVAL_STATUS.DISAPPROVED)
+
+        if(hasDisapproved) {
+            return APPROVAL_STATUS.DISAPPROVED
+        }
+
+        const hasPending = approvers.find(i => i.status === APPROVAL_STATUS.PENDING)
+
+        if(hasPending) {
+            return APPROVAL_STATUS.PENDING
+        }
+
+        return APPROVAL_STATUS.APPROVED
+
     }
 
     async searchByMeqsNumber(searchKeyword: string): Promise<{ meqs_number: string; }[]> {
@@ -492,15 +513,6 @@ export class MeqsService {
             if(isAnyNonPendingApprover) {
                 throw new BadRequestException(`Unable to update MEQS. Can only update if all approver's status is pending`)
             }
-        }
-        
-
-        if(input.status){
-
-            if(input.status !== APPROVAL_STATUS.CANCELLED){
-                throw new BadRequestException("Unable to update status. Only accepts status = cancelled")
-            }
-
         }
 
         if(input.canceller_id){

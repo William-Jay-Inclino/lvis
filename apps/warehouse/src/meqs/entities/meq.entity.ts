@@ -33,17 +33,11 @@ export class MEQS {
   @Field(() => String)
   meqs_number: string;
 
-  @Field(() => Int)
-  request_type: REQUEST_TYPE;
-
   @Field(() => String)
   meqs_date: string;
 
   @Field(() => String)
   notes: string;
-
-  @Field(() => Int)
-  status: APPROVAL_STATUS;
 
   @Field(() => String, {nullable: true})
   canceller_id: string;
