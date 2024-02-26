@@ -1,2 +1,0 @@
--- AlterTable
-ALTER TABLE "rr_item" ADD COLUMN     "vat_amount" DOUBLE PRECISION NOT NULL DEFAULT 0.00;

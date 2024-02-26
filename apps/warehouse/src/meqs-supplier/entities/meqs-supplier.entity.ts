@@ -1,8 +1,9 @@
-import { ObjectType, Field, ID } from '@nestjs/graphql';
+import { ObjectType, Field, ID, Int } from '@nestjs/graphql';
 import { Supplier } from '../../supplier/entities/supplier.entity';
 import { MeqsSupplierItem } from '../../meqs-supplier-item/entities/meqs-supplier-item.entity';
 import { MeqsSupplierAttachment } from '../../meqs-supplier-attachment/entities/meqs-supplier-attachment.entity';
 import { MEQS } from '../../meqs/entities/meq.entity';
+import { VAT_TYPE } from '../../__common__/types';
 
 @ObjectType()
 export class MeqsSupplier {
@@ -33,6 +34,9 @@ export class MeqsSupplier {
 
   @Field(() => [MeqsSupplierAttachment])
   attachments: MeqsSupplierAttachment[];
+
+  @Field(() =>Int)
+  vat_type: VAT_TYPE;
 
   @Field(() => Date)
   created_at: Date;

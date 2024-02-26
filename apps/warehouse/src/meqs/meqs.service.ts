@@ -17,17 +17,44 @@ export class MeqsService {
     private includedFields = {
         rv: {
             include: {
-                canvass: true
+                canvass: {
+                    include: {
+                        canvass_items: {
+                            include: {
+                                brand: true,
+                                unit: true
+                            }
+                        }
+                    }
+                }
             }
         },
         spr: {
             include: {
-                canvass: true
+                canvass: {
+                    include: {
+                        canvass_items: {
+                            include: {
+                                brand: true,
+                                unit: true
+                            }
+                        }
+                    }
+                }
             }
         },
         jo: {
             include: {
-                canvass: true
+                canvass: {
+                    include: {
+                        canvass_items: {
+                            include: {
+                                brand: true,
+                                unit: true
+                            }
+                        }
+                    }
+                }
             }
         },
         meqs_suppliers: {
@@ -93,6 +120,7 @@ export class MeqsService {
                             return attachmentInput
                         })
                     },
+                    vat_type: supplier.vat_type,
                     meqs_supplier_items: {
                         create: supplier.meqs_supplier_items.map(item => {
 
@@ -100,7 +128,6 @@ export class MeqsService {
                                 price: item.price,
                                 notes: item.notes,
                                 is_awarded: item.is_awarded,
-                                vat_type: item.vat_type,
                                 canvass_item: { connect: { id: item.canvass_item_id } }
                             }
 

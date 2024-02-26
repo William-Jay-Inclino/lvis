@@ -298,10 +298,10 @@ exports.Prisma.MEQSSupplierScalarFieldEnum = {
   meqs_id: 'meqs_id',
   supplier_id: 'supplier_id',
   payment_terms: 'payment_terms',
-  is_referenced: 'is_referenced',
   created_at: 'created_at',
   updated_at: 'updated_at',
-  is_deleted: 'is_deleted'
+  is_deleted: 'is_deleted',
+  vat_type: 'vat_type'
 };
 
 exports.Prisma.MEQSSupplierItemScalarFieldEnum = {
@@ -311,7 +311,6 @@ exports.Prisma.MEQSSupplierItemScalarFieldEnum = {
   price: 'price',
   is_awarded: 'is_awarded',
   notes: 'notes',
-  vat_type: 'vat_type',
   created_at: 'created_at',
   updated_at: 'updated_at',
   is_deleted: 'is_deleted'

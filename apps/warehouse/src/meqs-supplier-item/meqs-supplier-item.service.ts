@@ -19,8 +19,7 @@ export class MeqsSupplierItemService {
 			canvass_item: { connect: { id: input.canvass_item_id } },
 			price: input.price,
 			notes: input.notes ?? null,
-			is_awarded: input.is_awarded,
-			vat_type: input.vat_type
+			is_awarded: input.is_awarded
 		}
 
 		const created = await this.prisma.mEQSSupplierItem.create({
@@ -72,8 +71,7 @@ export class MeqsSupplierItemService {
 		const data: Prisma.MEQSSupplierItemUpdateInput = {
 			price: input.price ?? existingItem.price,
 			notes: input.notes ?? existingItem.notes,
-			is_awarded: input.is_awarded ?? existingItem.is_awarded,
-			vat_type: input.vat_type ?? existingItem.vat_type
+			is_awarded: input.is_awarded ?? existingItem.is_awarded
 		}
 
 		const updated = await this.prisma.mEQSSupplierItem.update({ 

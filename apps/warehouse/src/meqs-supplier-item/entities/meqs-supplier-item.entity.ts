@@ -30,9 +30,6 @@ export class MeqsSupplierItem {
   @Field(() => Boolean)
   is_awarded: boolean;
 
-  @Field(() =>Int)
-  vat_type: VAT_TYPE;
-
   @Field(() => Date)
   created_at: Date;
 

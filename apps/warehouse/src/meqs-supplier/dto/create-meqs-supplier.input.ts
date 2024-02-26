@@ -1,5 +1,6 @@
-import { InputType, Field } from '@nestjs/graphql';
-import { IsNotEmpty, IsString } from 'class-validator';
+import { InputType, Field, Int } from '@nestjs/graphql';
+import { IsInt, IsNotEmpty, IsString } from 'class-validator';
+import { VAT_TYPE } from '../../__common__/types';
 
 @InputType()
 export class CreateMeqsSupplierInput {
@@ -18,5 +19,10 @@ export class CreateMeqsSupplierInput {
   @IsNotEmpty()
   @IsString()
   payment_terms: string;
+
+  @Field(() => Int)
+  @IsNotEmpty()
+  @IsInt()
+  vat_type: VAT_TYPE;
 
 }

@@ -17,7 +17,8 @@ export class MeqsSupplierService {
         const data: Prisma.MEQSSupplierCreateInput = {
             meqs: { connect: { id: input.meqs_id } },
             supplier: { connect: { id: input.supplier_id } },
-            payment_terms: input.payment_terms
+            payment_terms: input.payment_terms,
+            vat_type: input.vat_type
         }
 
         const created = await this.prisma.mEQSSupplier.create({
@@ -70,7 +71,7 @@ export class MeqsSupplierService {
 
         const data: Prisma.MEQSSupplierUpdateInput = {
             payment_terms: input.payment_terms ?? existingItem.payment_terms,
-            is_referenced: input.is_referenced ?? existingItem.is_referenced
+            vat_type: input.vat_type ?? existingItem.vat_type,
         }
 
         const updated = await this.prisma.mEQSSupplier.update({
