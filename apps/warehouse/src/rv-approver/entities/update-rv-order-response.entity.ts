@@ -3,7 +3,7 @@ import { RVApprover as R } from "./rv-approver.entity";
 import { RVApprover } from "apps/warehouse/prisma/generated/client";
 
 @ObjectType()
-export class UpdateManyOrderResponse {
+export class UpdateRVOrderResponse {
   @Field(() => Boolean)
   success: boolean;
 

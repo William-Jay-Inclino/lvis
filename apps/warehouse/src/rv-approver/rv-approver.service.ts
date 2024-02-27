@@ -9,7 +9,7 @@ import { HttpService } from '@nestjs/axios';
 import { catchError, firstValueFrom } from 'rxjs';
 import { WarehouseRemoveResponse } from '../__common__/classes';
 import { isValidApprovalStatus } from '../__common__/helpers';
-import { UpdateManyOrderResponse } from './entities/update-many-order-response.entity';
+import { UpdateRVOrderResponse } from './entities/update-rv-order-response.entity';
 
 @Injectable()
 export class RvApproverService {
@@ -180,7 +180,7 @@ export class RvApproverService {
 
 	}
 
-    async updateManyOrders(inputs: { id: string; order: number }[]): Promise<UpdateManyOrderResponse> {
+    async updateManyOrders(inputs: { id: string; order: number }[]): Promise<UpdateRVOrderResponse> {
         try {
             
             const queries = []

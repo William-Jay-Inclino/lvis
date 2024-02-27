@@ -8,7 +8,8 @@ import { AuthUser } from '../__common__/auth-user.entity';
 import { HttpService } from '@nestjs/axios';
 import { catchError, firstValueFrom } from 'rxjs';
 import { WarehouseRemoveResponse } from '../__common__/classes';
-import { getLastApprover, isValidApprovalStatus } from '../__common__/helpers';
+import { isValidApprovalStatus } from '../__common__/helpers';
+import { UpdateMeqsOrderResponse } from './entities/update-meqs-order-response.entity';
 
 @Injectable()
 export class MeqsApproverService {
@@ -208,6 +209,43 @@ export class MeqsApproverService {
 		}
 
 	}
+
+    async updateManyOrders(inputs: { id: string; order: number }[]): Promise<UpdateMeqsOrderResponse> {
+        try {
+            
+            const queries = []
+
+            for(let input of inputs) {
+
+                const updateQuery = this.prisma.mEQSApprover.update({
+                    where: { id: input.id },
+                    data: { order: input.order },
+                    select: {
+                        meqs_id: true
+                    }
+                })
+
+                queries.push(updateQuery)
+
+            }
+
+            const result = await this.prisma.$transaction(queries)
+
+            const meqs = result[0] as MEQSApprover
+
+            console.log('meqs', meqs)
+
+            const approvers = await this.findByMeqsId(meqs.meqs_id)
+    
+            return {
+                success: true,
+                approvers: approvers
+            };
+        } catch (error) {
+            this.logger.error(error);
+            return { success: false, approvers: [] };
+        }
+    }
 
     private async areEmployeesExist(employeeIds: string[], authUser: AuthUser): Promise<boolean> {
 

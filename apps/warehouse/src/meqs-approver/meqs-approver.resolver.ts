@@ -9,6 +9,8 @@ import { UseGuards } from '@nestjs/common';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
 import { Employee } from '../__employee__/entities/employee.entity';
+import { UpdateMeqsOrderResponse } from './entities/update-meqs-order-response.entity';
+import { UpdateMeqsOrderInput } from './dto/update-meqs-order.input';
 
 @UseGuards(GqlAuthGuard)
 @Resolver(() => MEQSApprover)
@@ -48,6 +50,13 @@ export class MeqsApproverResolver {
     @Args('input') updateMeqsApproverInput: UpdateMeqsApproverInput
   ) {
     return this.meqsApproverService.update(id, updateMeqsApproverInput);
+  }
+
+  @Mutation(() => UpdateMeqsOrderResponse)
+  async updateMEQSApproverOrder(@Args('inputs', { type: () => [UpdateMeqsOrderInput] }) inputs: UpdateMeqsOrderInput[]){
+
+    return await this.meqsApproverService.updateManyOrders(inputs);
+
   }
 
   @Mutation(() => WarehouseRemoveResponse)

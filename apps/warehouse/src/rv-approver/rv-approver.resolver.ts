@@ -10,8 +10,8 @@ import { AuthUser } from '../__common__/auth-user.entity';
 import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
 import { Employee } from '../__employee__/entities/employee.entity';
 import { RV } from '../rv/entities/rv.entity';
-import { UpdateManyOrderResponse } from './entities/update-many-order-response.entity';
-import { UpdateOrderInput } from './dto/update-order.input'
+import { UpdateRVOrderResponse } from './entities/update-rv-order-response.entity';
+import { UpdateRVOrderInput } from './dto/update-rv-order.input'
 
 @UseGuards(GqlAuthGuard)
 @Resolver(() => RVApprover)
@@ -55,8 +55,8 @@ export class RvApproverResolver {
     return this.rvApproverService.update(id, updateRvApproverInput);
   }
 
-  @Mutation(() => UpdateManyOrderResponse)
-  async updateManyRVApproverOrders(@Args('inputs', { type: () => [UpdateOrderInput] }) inputs: UpdateOrderInput[]){
+  @Mutation(() => UpdateRVOrderResponse)
+  async updateRVApproverOrder(@Args('inputs', { type: () => [UpdateRVOrderInput] }) inputs: UpdateRVOrderInput[]){
 
     return await this.rvApproverService.updateManyOrders(inputs);
 
