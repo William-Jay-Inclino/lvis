@@ -275,6 +275,7 @@ model MEQSSupplier {
 
   vat_type Int @default(1)
 
+  @@unique([meqs_id, supplier_id])
   @@map("meqs_supplier")
 }
 

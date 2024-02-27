@@ -1,4 +1,4 @@
-import { Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { CreateMeqsSupplierInput } from './dto/create-meqs-supplier.input';
 import { UpdateMeqsSupplierInput } from './dto/update-meqs-supplier.input';
 import { PrismaService } from '../__prisma__/prisma.service';
@@ -13,6 +13,10 @@ export class MeqsSupplierService {
     constructor(private readonly prisma: PrismaService) {}
 
     async create(input: CreateMeqsSupplierInput): Promise<MEQSSupplier> {
+
+        if(!this.canCreate(input)) {
+            throw new BadRequestException()
+        }
         
         const data: Prisma.MEQSSupplierCreateInput = {
             meqs: { connect: { id: input.meqs_id } },
@@ -103,5 +107,22 @@ export class MeqsSupplierService {
 		}
 
 	}
+
+    async canCreate(input: CreateMeqsSupplierInput): Promise<boolean> {
+
+        const existingMeqsSupplier = await this.prisma.mEQSSupplier.findFirst({
+            where: {
+                meqs_id: input.meqs_id,
+                supplier_id: input.supplier_id
+            }
+        })
+
+        if(existingMeqsSupplier) {
+            throw new BadRequestException(`Meqs ID: ${input.meqs_id} with Supplier ID: ${input.supplier_id} already referenced`)
+        }
+
+        return true
+
+    }
 
 }

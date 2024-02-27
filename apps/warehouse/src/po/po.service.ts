@@ -98,28 +98,14 @@ export class PoService {
             }
         }
 
-        const createPoQuery = this.prisma.pO.create({
+        const created = await this.prisma.pO.create({
             data,
             include: this.includedFields
         })
 
-        const updateMeqsSupplierQuery = this.prisma.mEQSSupplier.update({
-            data: {
-                is_referenced: true
-            },
-            where: {
-                id: input.meqs_supplier_id
-            }
-        })
+        this.logger.log('Successfully created PO')
 
-        const [createdPo, updatedMeqsSupplier] = await this.prisma.$transaction([
-            createPoQuery,
-            updateMeqsSupplierQuery
-        ])
-
-        this.logger.log(`Successfully created PO and updated field is_reference to true in meqs_supplier table`)
-
-        return createdPo
+        return created
 
     }
 
@@ -306,34 +292,8 @@ export class PoService {
             throw new BadRequestException("One or more employee id is invalid")
         }
 
-        // FIND MEQS SUPPLIER
-        const meqsSupplier = await this.prisma.mEQSSupplier.findUnique({
-            where: {
-                id: input.meqs_supplier_id
-            }
-        })
-
-        if(!meqsSupplier) {
-            throw new NotFoundException('Meqs Supplier not found with ID: ' + input.meqs_supplier_id)
-        }   
-
-        // VALIDATE IF MEQS SUPPLIER IS REFERENCED
-        if(meqsSupplier.is_referenced) {
-            throw new BadRequestException('Meqs Supplier already been referenced with ID: ' + input.meqs_supplier_id)
-        }
-
-        // FIND MEQS
-        const meqs = await this.prisma.mEQS.findUnique({
-            where: {
-                id: meqsSupplier.meqs_id
-            }
-        })
-
-        if(!meqs) {
-            throw new NotFoundException('MEQS not found with ID: ' + meqsSupplier.meqs_id)
-        }
-
         return true
+
     }
 
     private async canUpdate(input: UpdatePoInput, existingItem: PO): Promise<boolean> {

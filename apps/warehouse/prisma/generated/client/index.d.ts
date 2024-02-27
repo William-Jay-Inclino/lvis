@@ -31294,6 +31294,7 @@ export namespace Prisma {
 
   export type MEQSSupplierWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    meqs_id_supplier_id?: MEQSSupplierMeqs_idSupplier_idCompoundUniqueInput
     AND?: MEQSSupplierWhereInput | MEQSSupplierWhereInput[]
     OR?: MEQSSupplierWhereInput[]
     NOT?: MEQSSupplierWhereInput | MEQSSupplierWhereInput[]
@@ -31309,7 +31310,7 @@ export namespace Prisma {
     attachments?: MEQSSupplierAttachmentListRelationFilter
     meqs_supplier_items?: MEQSSupplierItemListRelationFilter
     po?: XOR<PONullableRelationFilter, POWhereInput> | null
-  }, "id">
+  }, "id" | "meqs_id_supplier_id">
 
   export type MEQSSupplierOrderByWithAggregationInput = {
     id?: SortOrder
@@ -35864,6 +35865,11 @@ export namespace Prisma {
 
   export type MEQSSupplierAttachmentOrderByRelationAggregateInput = {
     _count?: SortOrder
+  }
+
+  export type MEQSSupplierMeqs_idSupplier_idCompoundUniqueInput = {
+    meqs_id: string
+    supplier_id: string
   }
 
   export type MEQSSupplierCountOrderByAggregateInput = {
