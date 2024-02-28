@@ -4,6 +4,7 @@ import { MeqsSupplierItem } from '../../meqs-supplier-item/entities/meqs-supplie
 import { MeqsSupplierAttachment } from '../../meqs-supplier-attachment/entities/meqs-supplier-attachment.entity';
 import { MEQS } from '../../meqs/entities/meq.entity';
 import { VAT_TYPE } from '../../__common__/types';
+import { PO } from '../../po/entities/po.entity';
 
 @ObjectType()
 export class MeqsSupplier {
@@ -16,6 +17,9 @@ export class MeqsSupplier {
 
   @Field(() => MEQS)
   meqs: MEQS;
+
+  @Field(() => PO, { nullable: true })
+  po: PO;
 
   @Field(() => String)
   supplier_id: string;

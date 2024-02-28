@@ -30,6 +30,15 @@ export class RvService {
                 }
             }
         },
+        meqs: {
+            include: {
+                meqs_suppliers: {
+                    include: {
+                        po: true
+                    }
+                }
+            }
+        }
     }
 
     constructor(

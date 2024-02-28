@@ -24,6 +24,19 @@ export class CanvassService {
                 brand: true
             }
         }, 
+        rv: {
+            include: {
+                meqs: {
+                    include: {
+                        meqs_suppliers: {
+                            include: {
+                                po: true
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     constructor(

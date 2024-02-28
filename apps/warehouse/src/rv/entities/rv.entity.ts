@@ -1,5 +1,6 @@
 import { ObjectType, Field, Int, ID } from '@nestjs/graphql';
 import { Canvass } from '../../canvass/entities/canvass.entity';
+import { MEQS } from '../../meqs/entities/meq.entity';
 @ObjectType()
 export class RV {
   
@@ -56,5 +57,8 @@ export class RV {
 
   @Field({ nullable: true })
   deleted_by: string | null;
+
+  @Field(() => MEQS, { nullable: true })
+  meqs?: MEQS;
   
 }
