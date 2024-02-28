@@ -326,7 +326,10 @@ export class RvService {
     async getStatus(id: string): Promise<APPROVAL_STATUS> {
 
         const approvers = await this.prisma.rVApprover.findMany({
-            where: { rv_id: id }
+            where: {
+                rv_id: id,
+                is_deleted: false
+            }
         })
 
         const hasDisapproved = approvers.find(i => i.status === APPROVAL_STATUS.DISAPPROVED)

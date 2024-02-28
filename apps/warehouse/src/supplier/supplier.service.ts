@@ -16,7 +16,7 @@ export class SupplierService {
 
         const data: Prisma.SupplierCreateInput = {
             name: input.name,
-            contact: input.contact
+            contact: input.contact,
         }
 
         const created = await this.prisma.supplier.create({

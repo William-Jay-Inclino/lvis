@@ -120,7 +120,6 @@ export class MeqsService {
                             return attachmentInput
                         })
                     },
-                    vat_type: supplier.vat_type,
                     meqs_supplier_items: {
                         create: supplier.meqs_supplier_items.map(item => {
 
@@ -181,8 +180,11 @@ export class MeqsService {
             notes: input.notes ?? existingItem.notes,
             meqs_date: input.meqs_date ? new Date(input.meqs_date) : existingItem.meqs_date,
             canceller_id: input.canceller_id ?? existingItem.canceller_id,
-            date_cancelled: input.canceller_id ? new Date() : existingItem.date_cancelled
+            date_cancelled: input.canceller_id ? new Date() : existingItem.date_cancelled,
+            is_cancelled: input.canceller_id ? true : existingItem.is_cancelled
         }
+
+        console.log('data', data)
 
         const updated = await this.prisma.mEQS.update({
             where: { id },
@@ -317,7 +319,10 @@ export class MeqsService {
     async getStatus(id: string): Promise<APPROVAL_STATUS> {
 
         const approvers = await this.prisma.mEQSApprover.findMany({
-            where: { meqs_id: id }
+            where: {
+                meqs_id: id,
+                is_deleted: false
+            }
         })
 
         const hasDisapproved = approvers.find(i => i.status === APPROVAL_STATUS.DISAPPROVED)
@@ -542,11 +547,11 @@ export class MeqsService {
             }
         }
 
-        if(input.canceller_id){
-            const isValidEmployeeIds = await this.areEmployeesExist([input.canceller_id], this.authUser)
-    
-            if(!isValidEmployeeIds){
-                throw new BadRequestException("Canceller ID is invalid")
+        if(input.canceller_id) {
+            const isUserExist = await this.isUserExist(input.canceller_id, this.authUser)
+            if(!isUserExist) {
+                this.logger.error('canceller_id which also is user_id not found in table users')
+                throw new NotFoundException('Canceller does not exist')
             }
         }
 
@@ -577,6 +582,44 @@ export class MeqsService {
         const isNormalUser = (this.authUser.user.role === Role.USER)
 
         return isNormalUser
+    }
+
+    private async isUserExist(user_id: string, authUser: AuthUser): Promise<boolean> {
+    
+        this.logger.log('isUserExist', user_id)
+
+        const query = `
+            query{
+                user(id: "${user_id}") {
+                    id
+                }
+            }
+        `;
+
+        const { data } = await firstValueFrom(
+            this.httpService.post(process.env.API_GATEWAY_URL, 
+            { query },
+            {
+                headers: {
+                    Authorization: authUser.authorization,
+                    'Content-Type': 'application/json'
+                }
+            }  
+            ).pipe(
+                catchError((error) => {
+                    throw error
+                }),
+            ),
+        );
+
+        console.log('data', data)
+
+        if(!data || !data.data || !data.data.user){
+            console.log('User not found')
+            return false 
+        }
+        return true 
+
     }
 
 }

@@ -9,9 +9,11 @@ datasource db {
 }
 
 model Supplier {
-  id           String         @id @default(uuid())
-  name         String
-  contact      String
+  id       String @id @default(uuid())
+  name     String
+  contact  String
+  vat_type Int    @default(1)
+
   created_at   DateTime       @default(now())
   updated_at   DateTime       @updatedAt
   is_deleted   Boolean        @default(false)
@@ -272,8 +274,6 @@ model MEQSSupplier {
   attachments         MEQSSupplierAttachment[]
   meqs_supplier_items MEQSSupplierItem[]
   po                  PO?
-
-  vat_type Int @default(1)
 
   @@unique([meqs_id, supplier_id])
   @@map("meqs_supplier")

@@ -20,9 +20,4 @@ export class CreateMeqsSupplierInput {
   @IsString()
   payment_terms: string;
 
-  @Field(() => Int)
-  @IsNotEmpty()
-  @IsInt()
-  vat_type: VAT_TYPE;
-
 }

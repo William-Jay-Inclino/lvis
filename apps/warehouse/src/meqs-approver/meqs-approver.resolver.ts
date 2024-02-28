@@ -47,9 +47,11 @@ export class MeqsApproverResolver {
   @Mutation(() => MEQSApprover)
   updateMeqsApprover(
     @Args('id') id: string,
-    @Args('input') updateMeqsApproverInput: UpdateMeqsApproverInput
+    @Args('input') updateMeqsApproverInput: UpdateMeqsApproverInput,
+    @CurrentAuthUser() authUser: AuthUser
   ) {
-    return this.meqsApproverService.update(id, updateMeqsApproverInput);
+        this.meqsApproverService.setAuthUser(authUser)
+        return this.meqsApproverService.update(id, updateMeqsApproverInput);
   }
 
   @Mutation(() => UpdateMeqsOrderResponse)

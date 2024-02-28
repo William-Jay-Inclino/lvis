@@ -111,6 +111,7 @@ exports.Prisma.SupplierScalarFieldEnum = {
   id: 'id',
   name: 'name',
   contact: 'contact',
+  vat_type: 'vat_type',
   created_at: 'created_at',
   updated_at: 'updated_at',
   is_deleted: 'is_deleted'
@@ -300,8 +301,7 @@ exports.Prisma.MEQSSupplierScalarFieldEnum = {
   payment_terms: 'payment_terms',
   created_at: 'created_at',
   updated_at: 'updated_at',
-  is_deleted: 'is_deleted',
-  vat_type: 'vat_type'
+  is_deleted: 'is_deleted'
 };
 
 exports.Prisma.MEQSSupplierItemScalarFieldEnum = {

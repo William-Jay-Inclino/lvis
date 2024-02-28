@@ -1,6 +1,7 @@
-import { IsOptional, IsString } from 'class-validator';
+import { IsInt, IsOptional, IsString } from 'class-validator';
 import { CreateSupplierInput } from './create-supplier.input';
-import { InputType, Field, PartialType } from '@nestjs/graphql';
+import { InputType, Field, PartialType, Int } from '@nestjs/graphql';
+import { VAT_TYPE } from '../../__common__/types';
 
 @InputType()
 export class UpdateSupplierInput extends PartialType(CreateSupplierInput) {
@@ -14,5 +15,10 @@ export class UpdateSupplierInput extends PartialType(CreateSupplierInput) {
   @IsOptional()
   @IsString()
   contact?: string | null;
+
+  @Field(() => Int, { nullable: true })
+  @IsOptional()
+  @IsInt()
+  vat_type: VAT_TYPE;
 
 }

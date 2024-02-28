@@ -3409,14 +3409,25 @@ export namespace Prisma {
 
   export type AggregateSupplier = {
     _count: SupplierCountAggregateOutputType | null
+    _avg: SupplierAvgAggregateOutputType | null
+    _sum: SupplierSumAggregateOutputType | null
     _min: SupplierMinAggregateOutputType | null
     _max: SupplierMaxAggregateOutputType | null
+  }
+
+  export type SupplierAvgAggregateOutputType = {
+    vat_type: number | null
+  }
+
+  export type SupplierSumAggregateOutputType = {
+    vat_type: number | null
   }
 
   export type SupplierMinAggregateOutputType = {
     id: string | null
     name: string | null
     contact: string | null
+    vat_type: number | null
     created_at: Date | null
     updated_at: Date | null
     is_deleted: boolean | null
@@ -3426,6 +3437,7 @@ export namespace Prisma {
     id: string | null
     name: string | null
     contact: string | null
+    vat_type: number | null
     created_at: Date | null
     updated_at: Date | null
     is_deleted: boolean | null
@@ -3435,6 +3447,7 @@ export namespace Prisma {
     id: number
     name: number
     contact: number
+    vat_type: number
     created_at: number
     updated_at: number
     is_deleted: number
@@ -3442,10 +3455,19 @@ export namespace Prisma {
   }
 
 
+  export type SupplierAvgAggregateInputType = {
+    vat_type?: true
+  }
+
+  export type SupplierSumAggregateInputType = {
+    vat_type?: true
+  }
+
   export type SupplierMinAggregateInputType = {
     id?: true
     name?: true
     contact?: true
+    vat_type?: true
     created_at?: true
     updated_at?: true
     is_deleted?: true
@@ -3455,6 +3477,7 @@ export namespace Prisma {
     id?: true
     name?: true
     contact?: true
+    vat_type?: true
     created_at?: true
     updated_at?: true
     is_deleted?: true
@@ -3464,6 +3487,7 @@ export namespace Prisma {
     id?: true
     name?: true
     contact?: true
+    vat_type?: true
     created_at?: true
     updated_at?: true
     is_deleted?: true
@@ -3508,6 +3532,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: SupplierAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SupplierSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: SupplierMinAggregateInputType
@@ -3538,6 +3574,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: SupplierCountAggregateInputType | true
+    _avg?: SupplierAvgAggregateInputType
+    _sum?: SupplierSumAggregateInputType
     _min?: SupplierMinAggregateInputType
     _max?: SupplierMaxAggregateInputType
   }
@@ -3546,10 +3584,13 @@ export namespace Prisma {
     id: string
     name: string
     contact: string
+    vat_type: number
     created_at: Date
     updated_at: Date
     is_deleted: boolean
     _count: SupplierCountAggregateOutputType | null
+    _avg: SupplierAvgAggregateOutputType | null
+    _sum: SupplierSumAggregateOutputType | null
     _min: SupplierMinAggregateOutputType | null
     _max: SupplierMaxAggregateOutputType | null
   }
@@ -3572,6 +3613,7 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     contact?: boolean
+    vat_type?: boolean
     created_at?: boolean
     updated_at?: boolean
     is_deleted?: boolean
@@ -3583,6 +3625,7 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     contact?: boolean
+    vat_type?: boolean
     created_at?: boolean
     updated_at?: boolean
     is_deleted?: boolean
@@ -3603,6 +3646,7 @@ export namespace Prisma {
       id: string
       name: string
       contact: string
+      vat_type: number
       created_at: Date
       updated_at: Date
       is_deleted: boolean
@@ -4004,6 +4048,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Supplier", 'String'>
     readonly name: FieldRef<"Supplier", 'String'>
     readonly contact: FieldRef<"Supplier", 'String'>
+    readonly vat_type: FieldRef<"Supplier", 'Int'>
     readonly created_at: FieldRef<"Supplier", 'DateTime'>
     readonly updated_at: FieldRef<"Supplier", 'DateTime'>
     readonly is_deleted: FieldRef<"Supplier", 'Boolean'>
@@ -16983,18 +17028,8 @@ export namespace Prisma {
 
   export type AggregateMEQSSupplier = {
     _count: MEQSSupplierCountAggregateOutputType | null
-    _avg: MEQSSupplierAvgAggregateOutputType | null
-    _sum: MEQSSupplierSumAggregateOutputType | null
     _min: MEQSSupplierMinAggregateOutputType | null
     _max: MEQSSupplierMaxAggregateOutputType | null
-  }
-
-  export type MEQSSupplierAvgAggregateOutputType = {
-    vat_type: number | null
-  }
-
-  export type MEQSSupplierSumAggregateOutputType = {
-    vat_type: number | null
   }
 
   export type MEQSSupplierMinAggregateOutputType = {
@@ -17005,7 +17040,6 @@ export namespace Prisma {
     created_at: Date | null
     updated_at: Date | null
     is_deleted: boolean | null
-    vat_type: number | null
   }
 
   export type MEQSSupplierMaxAggregateOutputType = {
@@ -17016,7 +17050,6 @@ export namespace Prisma {
     created_at: Date | null
     updated_at: Date | null
     is_deleted: boolean | null
-    vat_type: number | null
   }
 
   export type MEQSSupplierCountAggregateOutputType = {
@@ -17027,18 +17060,9 @@ export namespace Prisma {
     created_at: number
     updated_at: number
     is_deleted: number
-    vat_type: number
     _all: number
   }
 
-
-  export type MEQSSupplierAvgAggregateInputType = {
-    vat_type?: true
-  }
-
-  export type MEQSSupplierSumAggregateInputType = {
-    vat_type?: true
-  }
 
   export type MEQSSupplierMinAggregateInputType = {
     id?: true
@@ -17048,7 +17072,6 @@ export namespace Prisma {
     created_at?: true
     updated_at?: true
     is_deleted?: true
-    vat_type?: true
   }
 
   export type MEQSSupplierMaxAggregateInputType = {
@@ -17059,7 +17082,6 @@ export namespace Prisma {
     created_at?: true
     updated_at?: true
     is_deleted?: true
-    vat_type?: true
   }
 
   export type MEQSSupplierCountAggregateInputType = {
@@ -17070,7 +17092,6 @@ export namespace Prisma {
     created_at?: true
     updated_at?: true
     is_deleted?: true
-    vat_type?: true
     _all?: true
   }
 
@@ -17112,18 +17133,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: MEQSSupplierAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: MEQSSupplierSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: MEQSSupplierMinAggregateInputType
@@ -17154,8 +17163,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: MEQSSupplierCountAggregateInputType | true
-    _avg?: MEQSSupplierAvgAggregateInputType
-    _sum?: MEQSSupplierSumAggregateInputType
     _min?: MEQSSupplierMinAggregateInputType
     _max?: MEQSSupplierMaxAggregateInputType
   }
@@ -17168,10 +17175,7 @@ export namespace Prisma {
     created_at: Date
     updated_at: Date
     is_deleted: boolean
-    vat_type: number
     _count: MEQSSupplierCountAggregateOutputType | null
-    _avg: MEQSSupplierAvgAggregateOutputType | null
-    _sum: MEQSSupplierSumAggregateOutputType | null
     _min: MEQSSupplierMinAggregateOutputType | null
     _max: MEQSSupplierMaxAggregateOutputType | null
   }
@@ -17198,7 +17202,6 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     is_deleted?: boolean
-    vat_type?: boolean
     meqs?: boolean | MEQSDefaultArgs<ExtArgs>
     supplier?: boolean | SupplierDefaultArgs<ExtArgs>
     attachments?: boolean | MEQSSupplier$attachmentsArgs<ExtArgs>
@@ -17215,7 +17218,6 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     is_deleted?: boolean
-    vat_type?: boolean
   }
 
   export type MEQSSupplierInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -17245,7 +17247,6 @@ export namespace Prisma {
       created_at: Date
       updated_at: Date
       is_deleted: boolean
-      vat_type: number
     }, ExtArgs["result"]["mEQSSupplier"]>
     composites: {}
   }
@@ -17656,7 +17657,6 @@ export namespace Prisma {
     readonly created_at: FieldRef<"MEQSSupplier", 'DateTime'>
     readonly updated_at: FieldRef<"MEQSSupplier", 'DateTime'>
     readonly is_deleted: FieldRef<"MEQSSupplier", 'Boolean'>
-    readonly vat_type: FieldRef<"MEQSSupplier", 'Int'>
   }
     
 
@@ -29543,6 +29543,7 @@ export namespace Prisma {
     id: 'id',
     name: 'name',
     contact: 'contact',
+    vat_type: 'vat_type',
     created_at: 'created_at',
     updated_at: 'updated_at',
     is_deleted: 'is_deleted'
@@ -29771,8 +29772,7 @@ export namespace Prisma {
     payment_terms: 'payment_terms',
     created_at: 'created_at',
     updated_at: 'updated_at',
-    is_deleted: 'is_deleted',
-    vat_type: 'vat_type'
+    is_deleted: 'is_deleted'
   };
 
   export type MEQSSupplierScalarFieldEnum = (typeof MEQSSupplierScalarFieldEnum)[keyof typeof MEQSSupplierScalarFieldEnum]
@@ -30013,6 +30013,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Int'
+   */
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int[]'
+   */
+  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -30030,20 +30044,6 @@ export namespace Prisma {
    * Reference to a field of type 'Boolean'
    */
   export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
-    
-
-
-  /**
-   * Reference to a field of type 'Int'
-   */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
-    
-
-
-  /**
-   * Reference to a field of type 'Int[]'
-   */
-  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
     
 
 
@@ -30071,6 +30071,7 @@ export namespace Prisma {
     id?: StringFilter<"Supplier"> | string
     name?: StringFilter<"Supplier"> | string
     contact?: StringFilter<"Supplier"> | string
+    vat_type?: IntFilter<"Supplier"> | number
     created_at?: DateTimeFilter<"Supplier"> | Date | string
     updated_at?: DateTimeFilter<"Supplier"> | Date | string
     is_deleted?: BoolFilter<"Supplier"> | boolean
@@ -30081,6 +30082,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     contact?: SortOrder
+    vat_type?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -30094,6 +30096,7 @@ export namespace Prisma {
     NOT?: SupplierWhereInput | SupplierWhereInput[]
     name?: StringFilter<"Supplier"> | string
     contact?: StringFilter<"Supplier"> | string
+    vat_type?: IntFilter<"Supplier"> | number
     created_at?: DateTimeFilter<"Supplier"> | Date | string
     updated_at?: DateTimeFilter<"Supplier"> | Date | string
     is_deleted?: BoolFilter<"Supplier"> | boolean
@@ -30104,12 +30107,15 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     contact?: SortOrder
+    vat_type?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
     _count?: SupplierCountOrderByAggregateInput
+    _avg?: SupplierAvgOrderByAggregateInput
     _max?: SupplierMaxOrderByAggregateInput
     _min?: SupplierMinOrderByAggregateInput
+    _sum?: SupplierSumOrderByAggregateInput
   }
 
   export type SupplierScalarWhereWithAggregatesInput = {
@@ -30119,6 +30125,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Supplier"> | string
     name?: StringWithAggregatesFilter<"Supplier"> | string
     contact?: StringWithAggregatesFilter<"Supplier"> | string
+    vat_type?: IntWithAggregatesFilter<"Supplier"> | number
     created_at?: DateTimeWithAggregatesFilter<"Supplier"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"Supplier"> | Date | string
     is_deleted?: BoolWithAggregatesFilter<"Supplier"> | boolean
@@ -31268,7 +31275,6 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"MEQSSupplier"> | Date | string
     updated_at?: DateTimeFilter<"MEQSSupplier"> | Date | string
     is_deleted?: BoolFilter<"MEQSSupplier"> | boolean
-    vat_type?: IntFilter<"MEQSSupplier"> | number
     meqs?: XOR<MEQSRelationFilter, MEQSWhereInput>
     supplier?: XOR<SupplierRelationFilter, SupplierWhereInput>
     attachments?: MEQSSupplierAttachmentListRelationFilter
@@ -31284,7 +31290,6 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
-    vat_type?: SortOrder
     meqs?: MEQSOrderByWithRelationInput
     supplier?: SupplierOrderByWithRelationInput
     attachments?: MEQSSupplierAttachmentOrderByRelationAggregateInput
@@ -31304,7 +31309,6 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"MEQSSupplier"> | Date | string
     updated_at?: DateTimeFilter<"MEQSSupplier"> | Date | string
     is_deleted?: BoolFilter<"MEQSSupplier"> | boolean
-    vat_type?: IntFilter<"MEQSSupplier"> | number
     meqs?: XOR<MEQSRelationFilter, MEQSWhereInput>
     supplier?: XOR<SupplierRelationFilter, SupplierWhereInput>
     attachments?: MEQSSupplierAttachmentListRelationFilter
@@ -31320,12 +31324,9 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
-    vat_type?: SortOrder
     _count?: MEQSSupplierCountOrderByAggregateInput
-    _avg?: MEQSSupplierAvgOrderByAggregateInput
     _max?: MEQSSupplierMaxOrderByAggregateInput
     _min?: MEQSSupplierMinOrderByAggregateInput
-    _sum?: MEQSSupplierSumOrderByAggregateInput
   }
 
   export type MEQSSupplierScalarWhereWithAggregatesInput = {
@@ -31339,7 +31340,6 @@ export namespace Prisma {
     created_at?: DateTimeWithAggregatesFilter<"MEQSSupplier"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"MEQSSupplier"> | Date | string
     is_deleted?: BoolWithAggregatesFilter<"MEQSSupplier"> | boolean
-    vat_type?: IntWithAggregatesFilter<"MEQSSupplier"> | number
   }
 
   export type MEQSSupplierItemWhereInput = {
@@ -32356,6 +32356,7 @@ export namespace Prisma {
     id?: string
     name: string
     contact: string
+    vat_type?: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -32366,6 +32367,7 @@ export namespace Prisma {
     id?: string
     name: string
     contact: string
+    vat_type?: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -32376,6 +32378,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     contact?: StringFieldUpdateOperationsInput | string
+    vat_type?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -32386,6 +32389,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     contact?: StringFieldUpdateOperationsInput | string
+    vat_type?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -32396,6 +32400,7 @@ export namespace Prisma {
     id?: string
     name: string
     contact: string
+    vat_type?: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -32405,6 +32410,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     contact?: StringFieldUpdateOperationsInput | string
+    vat_type?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -32414,6 +32420,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     contact?: StringFieldUpdateOperationsInput | string
+    vat_type?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -33727,7 +33734,6 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    vat_type?: number
     meqs: MEQSCreateNestedOneWithoutMeqs_suppliersInput
     supplier: SupplierCreateNestedOneWithoutMEQSSupplierInput
     attachments?: MEQSSupplierAttachmentCreateNestedManyWithoutMeqs_supplierInput
@@ -33743,7 +33749,6 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    vat_type?: number
     attachments?: MEQSSupplierAttachmentUncheckedCreateNestedManyWithoutMeqs_supplierInput
     meqs_supplier_items?: MEQSSupplierItemUncheckedCreateNestedManyWithoutMeqs_supplierInput
     po?: POUncheckedCreateNestedOneWithoutMeqs_supplierInput
@@ -33755,7 +33760,6 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    vat_type?: IntFieldUpdateOperationsInput | number
     meqs?: MEQSUpdateOneRequiredWithoutMeqs_suppliersNestedInput
     supplier?: SupplierUpdateOneRequiredWithoutMEQSSupplierNestedInput
     attachments?: MEQSSupplierAttachmentUpdateManyWithoutMeqs_supplierNestedInput
@@ -33771,7 +33775,6 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    vat_type?: IntFieldUpdateOperationsInput | number
     attachments?: MEQSSupplierAttachmentUncheckedUpdateManyWithoutMeqs_supplierNestedInput
     meqs_supplier_items?: MEQSSupplierItemUncheckedUpdateManyWithoutMeqs_supplierNestedInput
     po?: POUncheckedUpdateOneWithoutMeqs_supplierNestedInput
@@ -33785,7 +33788,6 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    vat_type?: number
   }
 
   export type MEQSSupplierUpdateManyMutationInput = {
@@ -33794,7 +33796,6 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    vat_type?: IntFieldUpdateOperationsInput | number
   }
 
   export type MEQSSupplierUncheckedUpdateManyInput = {
@@ -33805,7 +33806,6 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    vat_type?: IntFieldUpdateOperationsInput | number
   }
 
   export type MEQSSupplierItemCreateInput = {
@@ -34945,6 +34945,17 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -34975,15 +34986,21 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     contact?: SortOrder
+    vat_type?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
+  }
+
+  export type SupplierAvgOrderByAggregateInput = {
+    vat_type?: SortOrder
   }
 
   export type SupplierMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     contact?: SortOrder
+    vat_type?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -34993,9 +35010,14 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     contact?: SortOrder
+    vat_type?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
+  }
+
+  export type SupplierSumOrderByAggregateInput = {
+    vat_type?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -35014,6 +35036,22 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
     _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -35168,17 +35206,6 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
-  }
-
   export type CanvassRelationFilter = {
     is?: CanvassWhereInput
     isNot?: CanvassWhereInput
@@ -35269,22 +35296,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type JONullableRelationFilter = {
@@ -35880,11 +35891,6 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
-    vat_type?: SortOrder
-  }
-
-  export type MEQSSupplierAvgOrderByAggregateInput = {
-    vat_type?: SortOrder
   }
 
   export type MEQSSupplierMaxOrderByAggregateInput = {
@@ -35895,7 +35901,6 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
-    vat_type?: SortOrder
   }
 
   export type MEQSSupplierMinOrderByAggregateInput = {
@@ -35906,11 +35911,6 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
-    vat_type?: SortOrder
-  }
-
-  export type MEQSSupplierSumOrderByAggregateInput = {
-    vat_type?: SortOrder
   }
 
   export type FloatFilter<$PrismaModel = never> = {
@@ -36605,6 +36605,14 @@ export namespace Prisma {
     set?: string
   }
 
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
   }
@@ -36923,14 +36931,6 @@ export namespace Prisma {
     connectOrCreate?: MEQSSupplierItemCreateOrConnectWithoutCanvass_itemInput | MEQSSupplierItemCreateOrConnectWithoutCanvass_itemInput[]
     createMany?: MEQSSupplierItemCreateManyCanvass_itemInputEnvelope
     connect?: MEQSSupplierItemWhereUniqueInput | MEQSSupplierItemWhereUniqueInput[]
-  }
-
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
   }
 
   export type CanvassUpdateOneRequiredWithoutCanvass_itemsNestedInput = {
@@ -38301,6 +38301,17 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type NestedIntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -38334,7 +38345,7 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type NestedIntFilter<$PrismaModel = never> = {
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
     notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -38342,7 +38353,23 @@ export namespace Prisma {
     lte?: number | IntFieldRefInput<$PrismaModel>
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
   }
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -38409,33 +38436,6 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
-  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type NestedFloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
-  }
-
   export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -38483,7 +38483,6 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    vat_type?: number
     meqs: MEQSCreateNestedOneWithoutMeqs_suppliersInput
     attachments?: MEQSSupplierAttachmentCreateNestedManyWithoutMeqs_supplierInput
     meqs_supplier_items?: MEQSSupplierItemCreateNestedManyWithoutMeqs_supplierInput
@@ -38497,7 +38496,6 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    vat_type?: number
     attachments?: MEQSSupplierAttachmentUncheckedCreateNestedManyWithoutMeqs_supplierInput
     meqs_supplier_items?: MEQSSupplierItemUncheckedCreateNestedManyWithoutMeqs_supplierInput
     po?: POUncheckedCreateNestedOneWithoutMeqs_supplierInput
@@ -38540,7 +38538,6 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"MEQSSupplier"> | Date | string
     updated_at?: DateTimeFilter<"MEQSSupplier"> | Date | string
     is_deleted?: BoolFilter<"MEQSSupplier"> | boolean
-    vat_type?: IntFilter<"MEQSSupplier"> | number
   }
 
   export type CanvassItemCreateWithoutUnitInput = {
@@ -40900,7 +40897,6 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    vat_type?: number
     supplier: SupplierCreateNestedOneWithoutMEQSSupplierInput
     attachments?: MEQSSupplierAttachmentCreateNestedManyWithoutMeqs_supplierInput
     meqs_supplier_items?: MEQSSupplierItemCreateNestedManyWithoutMeqs_supplierInput
@@ -40914,7 +40910,6 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    vat_type?: number
     attachments?: MEQSSupplierAttachmentUncheckedCreateNestedManyWithoutMeqs_supplierInput
     meqs_supplier_items?: MEQSSupplierItemUncheckedCreateNestedManyWithoutMeqs_supplierInput
     po?: POUncheckedCreateNestedOneWithoutMeqs_supplierInput
@@ -41192,6 +41187,7 @@ export namespace Prisma {
     id?: string
     name: string
     contact: string
+    vat_type?: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -41201,6 +41197,7 @@ export namespace Prisma {
     id?: string
     name: string
     contact: string
+    vat_type?: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -41376,6 +41373,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     contact?: StringFieldUpdateOperationsInput | string
+    vat_type?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -41385,6 +41383,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     contact?: StringFieldUpdateOperationsInput | string
+    vat_type?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -41516,7 +41515,6 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    vat_type?: number
     meqs: MEQSCreateNestedOneWithoutMeqs_suppliersInput
     supplier: SupplierCreateNestedOneWithoutMEQSSupplierInput
     attachments?: MEQSSupplierAttachmentCreateNestedManyWithoutMeqs_supplierInput
@@ -41531,7 +41529,6 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    vat_type?: number
     attachments?: MEQSSupplierAttachmentUncheckedCreateNestedManyWithoutMeqs_supplierInput
     po?: POUncheckedCreateNestedOneWithoutMeqs_supplierInput
   }
@@ -41593,7 +41590,6 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    vat_type?: IntFieldUpdateOperationsInput | number
     meqs?: MEQSUpdateOneRequiredWithoutMeqs_suppliersNestedInput
     supplier?: SupplierUpdateOneRequiredWithoutMEQSSupplierNestedInput
     attachments?: MEQSSupplierAttachmentUpdateManyWithoutMeqs_supplierNestedInput
@@ -41608,7 +41604,6 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    vat_type?: IntFieldUpdateOperationsInput | number
     attachments?: MEQSSupplierAttachmentUncheckedUpdateManyWithoutMeqs_supplierNestedInput
     po?: POUncheckedUpdateOneWithoutMeqs_supplierNestedInput
   }
@@ -41619,7 +41614,6 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    vat_type?: number
     meqs: MEQSCreateNestedOneWithoutMeqs_suppliersInput
     supplier: SupplierCreateNestedOneWithoutMEQSSupplierInput
     meqs_supplier_items?: MEQSSupplierItemCreateNestedManyWithoutMeqs_supplierInput
@@ -41634,7 +41628,6 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    vat_type?: number
     meqs_supplier_items?: MEQSSupplierItemUncheckedCreateNestedManyWithoutMeqs_supplierInput
     po?: POUncheckedCreateNestedOneWithoutMeqs_supplierInput
   }
@@ -41661,7 +41654,6 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    vat_type?: IntFieldUpdateOperationsInput | number
     meqs?: MEQSUpdateOneRequiredWithoutMeqs_suppliersNestedInput
     supplier?: SupplierUpdateOneRequiredWithoutMEQSSupplierNestedInput
     meqs_supplier_items?: MEQSSupplierItemUpdateManyWithoutMeqs_supplierNestedInput
@@ -41676,7 +41668,6 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    vat_type?: IntFieldUpdateOperationsInput | number
     meqs_supplier_items?: MEQSSupplierItemUncheckedUpdateManyWithoutMeqs_supplierNestedInput
     po?: POUncheckedUpdateOneWithoutMeqs_supplierNestedInput
   }
@@ -41821,7 +41812,6 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    vat_type?: number
     meqs: MEQSCreateNestedOneWithoutMeqs_suppliersInput
     supplier: SupplierCreateNestedOneWithoutMEQSSupplierInput
     attachments?: MEQSSupplierAttachmentCreateNestedManyWithoutMeqs_supplierInput
@@ -41836,7 +41826,6 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    vat_type?: number
     attachments?: MEQSSupplierAttachmentUncheckedCreateNestedManyWithoutMeqs_supplierInput
     meqs_supplier_items?: MEQSSupplierItemUncheckedCreateNestedManyWithoutMeqs_supplierInput
   }
@@ -41946,7 +41935,6 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    vat_type?: IntFieldUpdateOperationsInput | number
     meqs?: MEQSUpdateOneRequiredWithoutMeqs_suppliersNestedInput
     supplier?: SupplierUpdateOneRequiredWithoutMEQSSupplierNestedInput
     attachments?: MEQSSupplierAttachmentUpdateManyWithoutMeqs_supplierNestedInput
@@ -41961,7 +41949,6 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    vat_type?: IntFieldUpdateOperationsInput | number
     attachments?: MEQSSupplierAttachmentUncheckedUpdateManyWithoutMeqs_supplierNestedInput
     meqs_supplier_items?: MEQSSupplierItemUncheckedUpdateManyWithoutMeqs_supplierNestedInput
   }
@@ -43251,7 +43238,6 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    vat_type?: number
   }
 
   export type MEQSSupplierUpdateWithoutSupplierInput = {
@@ -43260,7 +43246,6 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    vat_type?: IntFieldUpdateOperationsInput | number
     meqs?: MEQSUpdateOneRequiredWithoutMeqs_suppliersNestedInput
     attachments?: MEQSSupplierAttachmentUpdateManyWithoutMeqs_supplierNestedInput
     meqs_supplier_items?: MEQSSupplierItemUpdateManyWithoutMeqs_supplierNestedInput
@@ -43274,7 +43259,6 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    vat_type?: IntFieldUpdateOperationsInput | number
     attachments?: MEQSSupplierAttachmentUncheckedUpdateManyWithoutMeqs_supplierNestedInput
     meqs_supplier_items?: MEQSSupplierItemUncheckedUpdateManyWithoutMeqs_supplierNestedInput
     po?: POUncheckedUpdateOneWithoutMeqs_supplierNestedInput
@@ -43287,7 +43271,6 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    vat_type?: IntFieldUpdateOperationsInput | number
   }
 
   export type CanvassItemCreateManyUnitInput = {
@@ -43937,7 +43920,6 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    vat_type?: number
   }
 
   export type MEQSApproverUpdateWithoutMeqsInput = {
@@ -43988,7 +43970,6 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    vat_type?: IntFieldUpdateOperationsInput | number
     supplier?: SupplierUpdateOneRequiredWithoutMEQSSupplierNestedInput
     attachments?: MEQSSupplierAttachmentUpdateManyWithoutMeqs_supplierNestedInput
     meqs_supplier_items?: MEQSSupplierItemUpdateManyWithoutMeqs_supplierNestedInput
@@ -44002,7 +43983,6 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    vat_type?: IntFieldUpdateOperationsInput | number
     attachments?: MEQSSupplierAttachmentUncheckedUpdateManyWithoutMeqs_supplierNestedInput
     meqs_supplier_items?: MEQSSupplierItemUncheckedUpdateManyWithoutMeqs_supplierNestedInput
     po?: POUncheckedUpdateOneWithoutMeqs_supplierNestedInput
@@ -44015,7 +43995,6 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    vat_type?: IntFieldUpdateOperationsInput | number
   }
 
   export type MEQSSupplierAttachmentCreateManyMeqs_supplierInput = {

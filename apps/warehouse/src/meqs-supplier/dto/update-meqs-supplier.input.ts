@@ -11,9 +11,4 @@ export class UpdateMeqsSupplierInput extends PartialType(CreateMeqsSupplierInput
   @IsString()
   payment_terms: string;
 
-  @Field(() => Int, { nullable: true })
-  @IsOptional()
-  @IsInt()
-  vat_type: VAT_TYPE;
-
 }

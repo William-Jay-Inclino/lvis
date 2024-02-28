@@ -1,4 +1,5 @@
-import { ObjectType, Field, ID } from '@nestjs/graphql';
+import { ObjectType, Field, ID, Int } from '@nestjs/graphql';
+import { VAT_TYPE } from '../../__common__/types';
 
 @ObjectType()
 export class Supplier {
@@ -11,6 +12,9 @@ export class Supplier {
 
   @Field()
   contact: string;
+  
+  @Field(() =>Int)
+  vat_type: VAT_TYPE;
 
   @Field(() => Date)
   created_at: Date;

@@ -30,9 +30,4 @@ export class CreateMeqsSupplierSubInput {
   @Type(() => CreateMeqsSupplierAttachmentSubInput)
   attachments: CreateMeqsSupplierAttachmentSubInput[]; 
 
-  @Field(() => Int)
-  @IsNotEmpty()
-  @IsInt()
-  vat_type: VAT_TYPE;
-
 }
