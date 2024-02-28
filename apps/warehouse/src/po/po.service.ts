@@ -8,6 +8,7 @@ import { AuthUser } from '../__common__/auth-user.entity';
 import { HttpService } from '@nestjs/axios';
 import { catchError, firstValueFrom } from 'rxjs';
 import { UpdatePoInput } from './dto/update-po.input';
+import { POsResponse } from './entities/pos-response.entity';
 
 @Injectable()
 export class PoService {
@@ -80,7 +81,7 @@ export class PoService {
                     id: input.meqs_supplier_id
                 }
             },
-            po_date: new Date(input.po_date),
+            po_date: new Date(),
             po_approvers: {
                 create: input.approvers.map(i => {
 
@@ -120,7 +121,6 @@ export class PoService {
         }
 
         const data: Prisma.POUpdateInput = {
-            po_date: input.po_date ? new Date(input.po_date) : existingItem.po_date,
             canceller_id: input.canceller_id ?? existingItem.canceller_id,
             date_cancelled: input.canceller_id ? new Date() : existingItem.date_cancelled
         }
@@ -137,16 +137,56 @@ export class PoService {
 
     }
 
-    async findAll(): Promise<PO[]> {
-        return await this.prisma.pO.findMany({
+    async findAll(page: number, pageSize: number, date_requested?: string, requested_by_id?: string): Promise<POsResponse> {
+
+        const skip = (page - 1) * pageSize;
+
+        let whereCondition: any = {
+            is_deleted: false,
+        };
+
+        if (date_requested) {
+            const parsedDate = new Date(date_requested); 
+            whereCondition.po_date = {
+                equals: parsedDate,
+            };
+        }
+
+        if (requested_by_id) {
+            whereCondition = {
+                meqs_supplier: {
+                    meqs: {
+                        OR: [
+                            { jo: { canvass: { requested_by_id: requested_by_id } } },
+                            { rv: { canvass: { requested_by_id: requested_by_id } } },
+                            { spr: { canvass: { requested_by_id: requested_by_id } } }
+                        ]
+                    }
+                }
+            };
+        }
+
+        const items = await this.prisma.pO.findMany({
             include: this.includedFields,
-            where: {
-                is_deleted: false
-            },
+            where: whereCondition,
             orderBy: {
                 po_number: 'desc'
-            }
+            },
+            skip,
+            take: pageSize,
         })
+
+        const totalItems = await this.prisma.mEQS.count({
+            where: whereCondition,
+        });
+
+        return {
+            data: items,
+            totalItems,
+            currentPage: page,
+            totalPages: Math.ceil(totalItems / pageSize),
+        };
+
     }
 
     async findOne(id: string): Promise<PO | null> {
@@ -166,6 +206,25 @@ export class PoService {
         const item = await this.prisma.pO.findUnique({
             include: this.includedFields,
             where: { po_number }
+        })
+
+        if(!item) {
+            throw new NotFoundException('PO not found')
+        }
+        
+        return item 
+    }
+
+    async findByMeqsNumber(meqs_number: string): Promise<PO | null> {
+        const item = await this.prisma.pO.findFirst({
+            include: this.includedFields,
+            where: {
+                meqs_supplier: {
+                    meqs: {
+                        meqs_number
+                    }
+                }
+            }
         })
 
         if(!item) {
@@ -319,14 +378,6 @@ export class PoService {
             if(isAnyNonPendingApprover) {
                 throw new BadRequestException(`Unable to update PO. Can only update if all approver's status is pending`)
             }
-        }
-
-        if(input.status){
-
-            if(input.status !== APPROVAL_STATUS.CANCELLED){
-                throw new BadRequestException("Unable to update status. Only accepts status = cancelled")
-            }
-
         }
 
         if(input.canceller_id){

@@ -11,12 +11,6 @@ export class CreatePoInput {
   @IsString()
   meqs_supplier_id: string;
 
-  @Field(() => String)
-  @IsNotEmpty()
-  @Transform(({ value }) => new Date(value))
-  @IsDate()
-  po_date: string;
-
   @Field(() => [CreatePoApproverSubInput])
   @IsNotEmpty({each: true})
   @IsArray()

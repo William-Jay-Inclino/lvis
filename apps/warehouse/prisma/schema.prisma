@@ -332,8 +332,8 @@ model PO {
   meqs_supplier_id String       @unique
   po_number        String       @unique
   po_date          DateTime
-  is_cancelled     Boolean      @default(false)
   canceller_id     String?
+  notes            String?
   date_cancelled   DateTime?
   created_at       DateTime     @default(now())
   updated_at       DateTime     @updatedAt

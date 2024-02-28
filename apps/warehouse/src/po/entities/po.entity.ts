@@ -17,13 +17,15 @@ export class PO {
   @Field(() => String)
   po_date: string;
 
-  @Field(() => Int)
-  status: APPROVAL_STATUS;
-
   @Field(() => String, {nullable: true})
   canceller_id: string;
-  
 
+  @Field(() => Date, {nullable: true})
+  date_cancelled: Date | null;
+
+  @Field(() => String, {nullable: true})
+  notes: string;
+  
   @Field(() => Date)
   created_at: Date;
 

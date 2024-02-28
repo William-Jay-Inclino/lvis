@@ -1,4 +1,4 @@
-import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, Int, ResolveField, Parent } from '@nestjs/graphql';
 import { MeqsSupplierService } from './meqs-supplier.service';
 import { MeqsSupplier } from './entities/meqs-supplier.entity';
 import { CreateMeqsSupplierInput } from './dto/create-meqs-supplier.input';
@@ -35,4 +35,11 @@ export class MeqsSupplierResolver {
   removeMeqsSupplier(@Args('id') id: string) {
     return this.meqsSupplierService.remove(id);
   }
+
+  @ResolveField( () => Boolean)
+    async is_referenced(@Parent() meqsSupplier: MeqsSupplier) {
+        return await this.meqsSupplierService.isReferenced(meqsSupplier.id)
+  }
+
+
 }

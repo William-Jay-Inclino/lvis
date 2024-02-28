@@ -21020,8 +21020,8 @@ export namespace Prisma {
     meqs_supplier_id: string | null
     po_number: string | null
     po_date: Date | null
-    is_cancelled: boolean | null
     canceller_id: string | null
+    notes: string | null
     date_cancelled: Date | null
     created_at: Date | null
     updated_at: Date | null
@@ -21037,8 +21037,8 @@ export namespace Prisma {
     meqs_supplier_id: string | null
     po_number: string | null
     po_date: Date | null
-    is_cancelled: boolean | null
     canceller_id: string | null
+    notes: string | null
     date_cancelled: Date | null
     created_at: Date | null
     updated_at: Date | null
@@ -21054,8 +21054,8 @@ export namespace Prisma {
     meqs_supplier_id: number
     po_number: number
     po_date: number
-    is_cancelled: number
     canceller_id: number
+    notes: number
     date_cancelled: number
     created_at: number
     updated_at: number
@@ -21073,8 +21073,8 @@ export namespace Prisma {
     meqs_supplier_id?: true
     po_number?: true
     po_date?: true
-    is_cancelled?: true
     canceller_id?: true
+    notes?: true
     date_cancelled?: true
     created_at?: true
     updated_at?: true
@@ -21090,8 +21090,8 @@ export namespace Prisma {
     meqs_supplier_id?: true
     po_number?: true
     po_date?: true
-    is_cancelled?: true
     canceller_id?: true
+    notes?: true
     date_cancelled?: true
     created_at?: true
     updated_at?: true
@@ -21107,8 +21107,8 @@ export namespace Prisma {
     meqs_supplier_id?: true
     po_number?: true
     po_date?: true
-    is_cancelled?: true
     canceller_id?: true
+    notes?: true
     date_cancelled?: true
     created_at?: true
     updated_at?: true
@@ -21197,8 +21197,8 @@ export namespace Prisma {
     meqs_supplier_id: string
     po_number: string
     po_date: Date
-    is_cancelled: boolean
     canceller_id: string | null
+    notes: string | null
     date_cancelled: Date | null
     created_at: Date
     updated_at: Date
@@ -21231,8 +21231,8 @@ export namespace Prisma {
     meqs_supplier_id?: boolean
     po_number?: boolean
     po_date?: boolean
-    is_cancelled?: boolean
     canceller_id?: boolean
+    notes?: boolean
     date_cancelled?: boolean
     created_at?: boolean
     updated_at?: boolean
@@ -21252,8 +21252,8 @@ export namespace Prisma {
     meqs_supplier_id?: boolean
     po_number?: boolean
     po_date?: boolean
-    is_cancelled?: boolean
     canceller_id?: boolean
+    notes?: boolean
     date_cancelled?: boolean
     created_at?: boolean
     updated_at?: boolean
@@ -21284,8 +21284,8 @@ export namespace Prisma {
       meqs_supplier_id: string
       po_number: string
       po_date: Date
-      is_cancelled: boolean
       canceller_id: string | null
+      notes: string | null
       date_cancelled: Date | null
       created_at: Date
       updated_at: Date
@@ -21697,8 +21697,8 @@ export namespace Prisma {
     readonly meqs_supplier_id: FieldRef<"PO", 'String'>
     readonly po_number: FieldRef<"PO", 'String'>
     readonly po_date: FieldRef<"PO", 'DateTime'>
-    readonly is_cancelled: FieldRef<"PO", 'Boolean'>
     readonly canceller_id: FieldRef<"PO", 'String'>
+    readonly notes: FieldRef<"PO", 'String'>
     readonly date_cancelled: FieldRef<"PO", 'DateTime'>
     readonly created_at: FieldRef<"PO", 'DateTime'>
     readonly updated_at: FieldRef<"PO", 'DateTime'>
@@ -29828,8 +29828,8 @@ export namespace Prisma {
     meqs_supplier_id: 'meqs_supplier_id',
     po_number: 'po_number',
     po_date: 'po_date',
-    is_cancelled: 'is_cancelled',
     canceller_id: 'canceller_id',
+    notes: 'notes',
     date_cancelled: 'date_cancelled',
     created_at: 'created_at',
     updated_at: 'updated_at',
@@ -31582,8 +31582,8 @@ export namespace Prisma {
     meqs_supplier_id?: StringFilter<"PO"> | string
     po_number?: StringFilter<"PO"> | string
     po_date?: DateTimeFilter<"PO"> | Date | string
-    is_cancelled?: BoolFilter<"PO"> | boolean
     canceller_id?: StringNullableFilter<"PO"> | string | null
+    notes?: StringNullableFilter<"PO"> | string | null
     date_cancelled?: DateTimeNullableFilter<"PO"> | Date | string | null
     created_at?: DateTimeFilter<"PO"> | Date | string
     updated_at?: DateTimeFilter<"PO"> | Date | string
@@ -31602,8 +31602,8 @@ export namespace Prisma {
     meqs_supplier_id?: SortOrder
     po_number?: SortOrder
     po_date?: SortOrder
-    is_cancelled?: SortOrder
     canceller_id?: SortOrderInput | SortOrder
+    notes?: SortOrderInput | SortOrder
     date_cancelled?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -31625,8 +31625,8 @@ export namespace Prisma {
     OR?: POWhereInput[]
     NOT?: POWhereInput | POWhereInput[]
     po_date?: DateTimeFilter<"PO"> | Date | string
-    is_cancelled?: BoolFilter<"PO"> | boolean
     canceller_id?: StringNullableFilter<"PO"> | string | null
+    notes?: StringNullableFilter<"PO"> | string | null
     date_cancelled?: DateTimeNullableFilter<"PO"> | Date | string | null
     created_at?: DateTimeFilter<"PO"> | Date | string
     updated_at?: DateTimeFilter<"PO"> | Date | string
@@ -31645,8 +31645,8 @@ export namespace Prisma {
     meqs_supplier_id?: SortOrder
     po_number?: SortOrder
     po_date?: SortOrder
-    is_cancelled?: SortOrder
     canceller_id?: SortOrderInput | SortOrder
+    notes?: SortOrderInput | SortOrder
     date_cancelled?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -31668,8 +31668,8 @@ export namespace Prisma {
     meqs_supplier_id?: StringWithAggregatesFilter<"PO"> | string
     po_number?: StringWithAggregatesFilter<"PO"> | string
     po_date?: DateTimeWithAggregatesFilter<"PO"> | Date | string
-    is_cancelled?: BoolWithAggregatesFilter<"PO"> | boolean
     canceller_id?: StringNullableWithAggregatesFilter<"PO"> | string | null
+    notes?: StringNullableWithAggregatesFilter<"PO"> | string | null
     date_cancelled?: DateTimeNullableWithAggregatesFilter<"PO"> | Date | string | null
     created_at?: DateTimeWithAggregatesFilter<"PO"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"PO"> | Date | string
@@ -34060,8 +34060,8 @@ export namespace Prisma {
     id?: string
     po_number: string
     po_date: Date | string
-    is_cancelled?: boolean
     canceller_id?: string | null
+    notes?: string | null
     date_cancelled?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
@@ -34080,8 +34080,8 @@ export namespace Prisma {
     meqs_supplier_id: string
     po_number: string
     po_date: Date | string
-    is_cancelled?: boolean
     canceller_id?: string | null
+    notes?: string | null
     date_cancelled?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
@@ -34098,8 +34098,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     po_number?: StringFieldUpdateOperationsInput | string
     po_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_cancelled?: BoolFieldUpdateOperationsInput | boolean
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -34118,8 +34118,8 @@ export namespace Prisma {
     meqs_supplier_id?: StringFieldUpdateOperationsInput | string
     po_number?: StringFieldUpdateOperationsInput | string
     po_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_cancelled?: BoolFieldUpdateOperationsInput | boolean
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -34137,8 +34137,8 @@ export namespace Prisma {
     meqs_supplier_id: string
     po_number: string
     po_date: Date | string
-    is_cancelled?: boolean
     canceller_id?: string | null
+    notes?: string | null
     date_cancelled?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
@@ -34153,8 +34153,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     po_number?: StringFieldUpdateOperationsInput | string
     po_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_cancelled?: BoolFieldUpdateOperationsInput | boolean
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -34170,8 +34170,8 @@ export namespace Prisma {
     meqs_supplier_id?: StringFieldUpdateOperationsInput | string
     po_number?: StringFieldUpdateOperationsInput | string
     po_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_cancelled?: BoolFieldUpdateOperationsInput | boolean
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -36096,8 +36096,8 @@ export namespace Prisma {
     meqs_supplier_id?: SortOrder
     po_number?: SortOrder
     po_date?: SortOrder
-    is_cancelled?: SortOrder
     canceller_id?: SortOrder
+    notes?: SortOrder
     date_cancelled?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -36113,8 +36113,8 @@ export namespace Prisma {
     meqs_supplier_id?: SortOrder
     po_number?: SortOrder
     po_date?: SortOrder
-    is_cancelled?: SortOrder
     canceller_id?: SortOrder
+    notes?: SortOrder
     date_cancelled?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -36130,8 +36130,8 @@ export namespace Prisma {
     meqs_supplier_id?: SortOrder
     po_number?: SortOrder
     po_date?: SortOrder
-    is_cancelled?: SortOrder
     canceller_id?: SortOrder
+    notes?: SortOrder
     date_cancelled?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -41270,8 +41270,8 @@ export namespace Prisma {
     id?: string
     po_number: string
     po_date: Date | string
-    is_cancelled?: boolean
     canceller_id?: string | null
+    notes?: string | null
     date_cancelled?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
@@ -41288,8 +41288,8 @@ export namespace Prisma {
     id?: string
     po_number: string
     po_date: Date | string
-    is_cancelled?: boolean
     canceller_id?: string | null
+    notes?: string | null
     date_cancelled?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
@@ -41448,8 +41448,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     po_number?: StringFieldUpdateOperationsInput | string
     po_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_cancelled?: BoolFieldUpdateOperationsInput | boolean
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -41466,8 +41466,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     po_number?: StringFieldUpdateOperationsInput | string
     po_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_cancelled?: BoolFieldUpdateOperationsInput | boolean
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -42012,8 +42012,8 @@ export namespace Prisma {
     id?: string
     po_number: string
     po_date: Date | string
-    is_cancelled?: boolean
     canceller_id?: string | null
+    notes?: string | null
     date_cancelled?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
@@ -42031,8 +42031,8 @@ export namespace Prisma {
     meqs_supplier_id: string
     po_number: string
     po_date: Date | string
-    is_cancelled?: boolean
     canceller_id?: string | null
+    notes?: string | null
     date_cancelled?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
@@ -42064,8 +42064,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     po_number?: StringFieldUpdateOperationsInput | string
     po_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_cancelled?: BoolFieldUpdateOperationsInput | boolean
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -42083,8 +42083,8 @@ export namespace Prisma {
     meqs_supplier_id?: StringFieldUpdateOperationsInput | string
     po_number?: StringFieldUpdateOperationsInput | string
     po_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_cancelled?: BoolFieldUpdateOperationsInput | boolean
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -42100,8 +42100,8 @@ export namespace Prisma {
     id?: string
     po_number: string
     po_date: Date | string
-    is_cancelled?: boolean
     canceller_id?: string | null
+    notes?: string | null
     date_cancelled?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
@@ -42119,8 +42119,8 @@ export namespace Prisma {
     meqs_supplier_id: string
     po_number: string
     po_date: Date | string
-    is_cancelled?: boolean
     canceller_id?: string | null
+    notes?: string | null
     date_cancelled?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
@@ -42238,8 +42238,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     po_number?: StringFieldUpdateOperationsInput | string
     po_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_cancelled?: BoolFieldUpdateOperationsInput | boolean
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -42257,8 +42257,8 @@ export namespace Prisma {
     meqs_supplier_id?: StringFieldUpdateOperationsInput | string
     po_number?: StringFieldUpdateOperationsInput | string
     po_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_cancelled?: BoolFieldUpdateOperationsInput | boolean
     canceller_id?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
     date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string

@@ -123,4 +123,16 @@ export class MeqsSupplierService {
 
     }
 
+    async isReferenced(meqs_supplier_id: string): Promise<Boolean> {
+
+        const meqs = await this.prisma.pO.findUnique({
+            where: { meqs_supplier_id }
+        })
+
+        if(meqs) return true  
+
+        return false
+
+    } 
+
 }

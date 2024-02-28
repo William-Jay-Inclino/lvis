@@ -11,6 +11,7 @@ import { UseGuards } from '@nestjs/common';
 import { POApprover } from './entities/po-approver.entity';
 import { PoApproverService } from '../po-approver/po-approver.service';
 import { PoNumber } from './entities/po-number.entity';
+import { POsResponse } from './entities/pos-response.entity';
 
 @UseGuards(GqlAuthGuard)
 @Resolver( () => PO)
@@ -30,9 +31,14 @@ export class PoResolver {
         return await this.poService.create(createPoInput);
     }
 
-    @Query(() => [PO])
-    pos() {
-        return this.poService.findAll();
+    @Query(() => POsResponse)
+    pos(
+        @Args('page') page: number,
+        @Args('pageSize') pageSize: number,
+        @Args('date_requested', {nullable: true}) date_requested?: string,
+        @Args('requested_by_id', {nullable: true}) requested_by_id?: string,
+    ) {
+        return this.poService.findAll(page, pageSize, date_requested, requested_by_id);
     }
 
     @Query(() => [PoNumber])
@@ -44,14 +50,18 @@ export class PoResolver {
 
     @Query(() => PO)
     po(
-        @Args('id') id: string,
-        @Args('po_number') po_number: string
+        @Args('id', {nullable: true}) id?: string | null,
+        @Args('po_number', {nullable: true}) po_number?: string | null,
+        @Args('meqs_number', {nullable: true}) meqs_number?: string | null,
     ) {
         if(id){
             return this.poService.findOne(id);
         }
         if(po_number){
             return this.poService.findByPoNumber(po_number)
+        }
+        if(meqs_number){
+            return this.poService.findByMeqsNumber(meqs_number)
         }
     }
 
