@@ -1,4 +1,4 @@
-import { Args, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
+import { Args, Int, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import { PO } from './entities/po.entity';
 import { CreatePoInput } from './dto/create-po.input';
 import { PoService } from './po.service';
@@ -12,6 +12,7 @@ import { POApprover } from './entities/po-approver.entity';
 import { PoApproverService } from '../po-approver/po-approver.service';
 import { PoNumber } from './entities/po-number.entity';
 import { POsResponse } from './entities/pos-response.entity';
+import { APPROVAL_STATUS } from '../__common__/types';
 
 @UseGuards(GqlAuthGuard)
 @Resolver( () => PO)
@@ -86,6 +87,17 @@ export class PoResolver {
     @ResolveField( () => [POApprover])
     po_approvers(@Parent() po: PO): any {
         return this.poApproverService.findByPoId(po.id)
+    }
+
+    @ResolveField( () => Int)
+    async status(@Parent() po: PO) {
+        
+        if(po.canceller_id) {
+            return APPROVAL_STATUS.CANCELLED
+        }
+
+        return await this.poService.getStatus(po.id)
+
     }
 
 

@@ -28,12 +28,6 @@ export class CreateMeqsInput {
   @IsString()
   notes: string;
 
-  @Field(() => String)
-  @IsNotEmpty()
-  @Transform(({ value }) => new Date(value))
-  @IsDate()
-  meqs_date: string;
-
   @Field(() => [CreateMeqsApproverSubInput])
   @IsArray()
   @ValidateNested({ each: true })

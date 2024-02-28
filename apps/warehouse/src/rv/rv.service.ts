@@ -10,6 +10,7 @@ import { catchError, firstValueFrom } from 'rxjs';
 import { HttpService } from '@nestjs/axios';
 import { WarehouseRemoveResponse } from '../__common__/classes';
 import { RVsResponse } from './entities/rvs-response.entity';
+import * as moment from 'moment';
 
 @Injectable()
 export class RvService {
@@ -50,16 +51,17 @@ export class RvService {
         }
 
         const rvNumber = await this.getLatestRvNumber()
+        const today = moment().format('MM/DD/YYYY')
 
         // data to be inserted in database
         const data: Prisma.RVCreateInput = {
             created_by: this.authUser.user.username,
             rv_number: rvNumber,
-            date_requested: new Date(input.date_requested),
+            date_requested: new Date(today),
             classification_id: input.classification_id ?? null,
             work_order_no: input.work_order_no ?? null,
             notes: input.notes ?? null,
-            work_order_date: input.work_order_date ? new Date(input.date_requested) : null,
+            work_order_date: input.work_order_date ?? null,
             supervisor_id: input.supervisor_id,
             canvass: { connect: { id: input.canvass_id } },
             rv_approvers: {

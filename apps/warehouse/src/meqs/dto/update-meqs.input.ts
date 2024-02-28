@@ -9,13 +9,7 @@ export class UpdateMeqsInput {
   @IsOptional()
   @IsString()
   notes?: string;
-
-  @Field(() => String, {nullable: true})
-  @IsOptional()
-  @Transform(({ value }) => new Date(value))
-  @IsDate()
-  meqs_date?: string;
-
+  
   @Field(() => String, {nullable: true})
   @IsString()
   @IsOptional()

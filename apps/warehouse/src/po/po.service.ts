@@ -9,6 +9,7 @@ import { HttpService } from '@nestjs/axios';
 import { catchError, firstValueFrom } from 'rxjs';
 import { UpdatePoInput } from './dto/update-po.input';
 import { POsResponse } from './entities/pos-response.entity';
+import * as moment from 'moment';
 
 @Injectable()
 export class PoService {
@@ -72,6 +73,9 @@ export class PoService {
         }
 
         const poNumber = await this.getLatestPoNumber()
+        const today = moment().format('MM/DD/YYYY')
+
+        console.log('today', today)
 
         const data: Prisma.POCreateInput = {
             created_by: this.authUser.user.username,
@@ -81,7 +85,7 @@ export class PoService {
                     id: input.meqs_supplier_id
                 }
             },
-            po_date: new Date(),
+            po_date: new Date(today),
             po_approvers: {
                 create: input.approvers.map(i => {
 
@@ -153,17 +157,11 @@ export class PoService {
         }
 
         if (requested_by_id) {
-            whereCondition = {
-                meqs_supplier: {
-                    meqs: {
-                        OR: [
-                            { jo: { canvass: { requested_by_id: requested_by_id } } },
-                            { rv: { canvass: { requested_by_id: requested_by_id } } },
-                            { spr: { canvass: { requested_by_id: requested_by_id } } }
-                        ]
-                    }
-                }
-            };
+            whereCondition.OR = [
+                { meqs_supplier: { meqs: { jo: { canvass: { requested_by_id: requested_by_id } } } } },
+                { meqs_supplier: { meqs: { rv: { canvass: { requested_by_id: requested_by_id } } } } },
+                { meqs_supplier: { meqs: { spr: { canvass: { requested_by_id: requested_by_id } } } } }
+            ];
         }
 
         const items = await this.prisma.pO.findMany({
@@ -176,7 +174,7 @@ export class PoService {
             take: pageSize,
         })
 
-        const totalItems = await this.prisma.mEQS.count({
+        const totalItems = await this.prisma.pO.count({
             where: whereCondition,
         });
 
@@ -252,6 +250,31 @@ export class PoService {
 	
 		return arrayOfPoNumbers;
 	}
+
+    async getStatus(po_id: string): Promise<APPROVAL_STATUS> {
+
+        const approvers = await this.prisma.pOApprover.findMany({
+            where: {
+                po_id,
+                is_deleted: false
+            }
+        })
+
+        const hasDisapproved = approvers.find(i => i.status === APPROVAL_STATUS.DISAPPROVED)
+
+        if(hasDisapproved) {
+            return APPROVAL_STATUS.DISAPPROVED
+        }
+
+        const hasPending = approvers.find(i => i.status === APPROVAL_STATUS.PENDING)
+
+        if(hasPending) {
+            return APPROVAL_STATUS.PENDING
+        }
+
+        return APPROVAL_STATUS.APPROVED
+
+    }
 
     async remove(id: string): Promise<WarehouseRemoveResponse> {
 

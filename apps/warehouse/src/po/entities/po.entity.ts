@@ -44,4 +44,7 @@ export class PO {
   @Field({ nullable: true })
   deleted_by: string | null;
 
+  @Field(() => Boolean)
+  is_deleted: boolean;
+
 }

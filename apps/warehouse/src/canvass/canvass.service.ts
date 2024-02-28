@@ -9,8 +9,8 @@ import { catchError, firstValueFrom } from 'rxjs';
 import { HttpService } from '@nestjs/axios';
 import { CanvassesResponse } from './entities/canvasses-response.entity';
 import { Employee } from '../__employee__/entities/employee.entity';
-import { getFullname } from '../__common__/helpers';
 import { FindOneResponse } from './entities/types';
+import * as moment from 'moment';
 
 @Injectable()
 export class CanvassService {
@@ -46,11 +46,12 @@ export class CanvassService {
         }
 
         const rcNumber = await this.getLatestRcNumber()
+        const today = moment().format('MM/DD/YYYY')
 
         const data: Prisma.CanvassCreateInput = {
             created_by: this.authUser.user.username,
             rc_number: rcNumber,
-            date_requested: new Date(input.date_requested),
+            date_requested: new Date(today),
             purpose: input.purpose,
             notes: input.notes,
             requested_by_id: input.requested_by_id,

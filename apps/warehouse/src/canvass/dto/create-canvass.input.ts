@@ -8,12 +8,6 @@ export class CreateCanvassInput {
 
   @Field(() => String)
   @IsNotEmpty()
-  @Transform(({ value }) => new Date(value))
-  @IsDate()
-  date_requested: string;
-
-  @Field(() => String)
-  @IsNotEmpty()
   @IsString()
   purpose: string;
 

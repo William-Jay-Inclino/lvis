@@ -8,6 +8,7 @@ import { APPROVAL_STATUS, Role } from '../__common__/types';
 import { UpdateMeqsInput } from './dto/update-meqs.input';
 import { catchError, firstValueFrom } from 'rxjs';
 import { MEQSsResponse } from './entities/meqs-response.entity';
+import * as moment from 'moment';
 
 @Injectable()
 export class MeqsService {
@@ -93,6 +94,7 @@ export class MeqsService {
         }
 
         const meqsNumber = await this.getLatestMeqsNumber()
+        const today = moment().format('MM/DD/YYYY')
 
         const meqs_approvers: Prisma.MEQSApproverCreateNestedManyWithoutMeqsInput = {
             create: input.approvers.map(i => {
@@ -146,7 +148,7 @@ export class MeqsService {
             spr: input.spr_id ? { connect: { id: input.spr_id } } : undefined,
             notes: input.notes,
             meqs_number: meqsNumber,
-            meqs_date: new Date(input.meqs_date),
+            meqs_date: new Date(today),
             meqs_approvers,
             meqs_suppliers
         }
@@ -178,7 +180,6 @@ export class MeqsService {
 
         const data: Prisma.MEQSUpdateInput = {
             notes: input.notes ?? existingItem.notes,
-            meqs_date: input.meqs_date ? new Date(input.meqs_date) : existingItem.meqs_date,
             canceller_id: input.canceller_id ?? existingItem.canceller_id,
             date_cancelled: input.canceller_id ? new Date() : existingItem.date_cancelled,
             is_cancelled: input.canceller_id ? true : existingItem.is_cancelled

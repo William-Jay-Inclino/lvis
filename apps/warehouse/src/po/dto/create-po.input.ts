@@ -1,6 +1,6 @@
 import { InputType, Field } from '@nestjs/graphql';
 import { Transform, Type } from 'class-transformer';
-import { IsArray, IsDate, IsNotEmpty, IsString, ValidateNested } from 'class-validator';
+import { IsArray, IsDate, IsNotEmpty, IsOptional, IsString, ValidateNested } from 'class-validator';
 import { CreatePoApproverSubInput } from './create-po-approver.sub.input';
 
 @InputType()
@@ -17,5 +17,10 @@ export class CreatePoInput {
   @ValidateNested({ each: true })
   @Type(() => CreatePoApproverSubInput)
   approvers: CreatePoApproverSubInput[];
+
+  @Field(() => String, { nullable: true })
+  @IsOptional()
+  @IsString()
+  notes?: string;
 
 }
