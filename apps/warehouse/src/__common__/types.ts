@@ -19,6 +19,7 @@ export interface Supplier {
     id: string 
     name: string 
     contact: string 
+    vat_type: VAT_TYPE
 }
 
 export interface Station {

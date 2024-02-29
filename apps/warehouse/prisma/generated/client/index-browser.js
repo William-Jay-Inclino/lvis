@@ -358,14 +358,13 @@ exports.Prisma.POScalarFieldEnum = {
   canceller_id: 'canceller_id',
   notes: 'notes',
   date_cancelled: 'date_cancelled',
-  created_at: 'created_at',
-  updated_at: 'updated_at',
   is_deleted: 'is_deleted',
-  is_referenced: 'is_referenced',
   is_cancelled: 'is_cancelled',
   created_by: 'created_by',
   updated_by: 'updated_by',
-  deleted_by: 'deleted_by'
+  deleted_by: 'deleted_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
 };
 
 exports.Prisma.POApproverScalarFieldEnum = {
@@ -390,18 +389,18 @@ exports.Prisma.RRScalarFieldEnum = {
   rr_date: 'rr_date',
   received_by_id: 'received_by_id',
   canceller_id: 'canceller_id',
-  date_cancelled: 'date_cancelled',
   invoice_number: 'invoice_number',
   delivery_number: 'delivery_number',
   notes: 'notes',
   delivery_charge: 'delivery_charge',
-  is_cancelled: 'is_cancelled',
-  created_at: 'created_at',
-  updated_at: 'updated_at',
   is_deleted: 'is_deleted',
+  is_cancelled: 'is_cancelled',
+  date_cancelled: 'date_cancelled',
   created_by: 'created_by',
   updated_by: 'updated_by',
-  deleted_by: 'deleted_by'
+  deleted_by: 'deleted_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
 };
 
 exports.Prisma.RRApproverScalarFieldEnum = {

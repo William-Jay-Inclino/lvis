@@ -70,7 +70,7 @@ export class RvService {
             classification_id: input.classification_id ?? null,
             work_order_no: input.work_order_no ?? null,
             notes: input.notes ?? null,
-            work_order_date: input.work_order_date ?? null,
+            work_order_date: new Date(input.work_order_date) ?? null,
             supervisor_id: input.supervisor_id,
             canvass: { connect: { id: input.canvass_id } },
             rv_approvers: {

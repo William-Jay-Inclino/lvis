@@ -325,18 +325,33 @@ export class RrService {
             throw new BadRequestException("One or more employee id is invalid")
         }
 
-        const po = await this.prisma.pO.findUnique({
+        const po = await this.prisma.rR.findUnique({
             where: {
-                id: input.po_id
+                po_id: input.po_id
             }
         })
 
-        if(!po) {
-            throw new NotFoundException('Unable to find PO with ID: ' + input.po_id)
+        if(po) {
+            throw new BadRequestException('PO already been referenced with ID: ' + input.po_id)
         }
 
-        if(po.is_referenced) {
-            throw new BadRequestException('PO already been referenced with ID: ' + input.po_id)
+        // get all approvers
+        const approvers = await this.prisma.pOApprover.findMany({
+            where: {
+                po_id: input.po_id,
+                is_deleted: false
+            }
+        })
+
+        // validate if po status is approved
+        for(let approver of approvers) {
+
+            if(approver.status !== APPROVAL_STATUS.APPROVED) {
+
+                throw new BadRequestException('Cannot reference PO. Status is not approved')
+
+            }
+
         }
 
         return true

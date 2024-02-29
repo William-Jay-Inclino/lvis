@@ -341,24 +341,27 @@ model MEQSApprover {
 }
 
 model PO {
-  id               String       @id @default(uuid())
-  meqs_supplier_id String       @unique
-  po_number        String       @unique
+  id               String    @id @default(uuid())
+  meqs_supplier_id String    @unique
+  po_number        String    @unique
   po_date          DateTime
   canceller_id     String?
   notes            String?
   date_cancelled   DateTime?
-  created_at       DateTime     @default(now())
-  updated_at       DateTime     @updatedAt
-  is_deleted       Boolean      @default(false)
-  po_approvers     POApprover[]
-  meqs_supplier    MEQSSupplier @relation(fields: [meqs_supplier_id], references: [id], onDelete: Restrict)
-  rr               RR?
-  is_referenced    Boolean      @default(false)
-  is_cancelled     Boolean      @default(false)
-  created_by       String
-  updated_by       String?
-  deleted_by       String?
+
+  po_approvers  POApprover[]
+  meqs_supplier MEQSSupplier @relation(fields: [meqs_supplier_id], references: [id], onDelete: Restrict)
+  rr            RR?
+
+  is_deleted   Boolean @default(false)
+  is_cancelled Boolean @default(false)
+
+  created_by String
+  updated_by String?
+  deleted_by String?
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
   @@map("purchase_order")
 }
@@ -382,22 +385,21 @@ model POApprover {
 }
 
 model RR {
-  id              String    @id @default(uuid())
-  po_id           String    @unique
-  rr_number       String    @unique
+  id              String   @id @default(uuid())
+  po_id           String   @unique
+  rr_number       String   @unique
   rr_date         DateTime
   received_by_id  String
   canceller_id    String?
-  date_cancelled  DateTime?
   invoice_number  String
   delivery_number String?
   notes           String?
   delivery_charge Float
-  is_cancelled    Boolean   @default(false)
 
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-  is_deleted Boolean  @default(false)
+  is_deleted   Boolean @default(false)
+  is_cancelled Boolean @default(false)
+
+  date_cancelled DateTime?
 
   po           PO           @relation(fields: [po_id], references: [id], onDelete: Restrict)
   rr_approvers RRApprover[]
@@ -406,6 +408,9 @@ model RR {
   created_by String
   updated_by String?
   deleted_by String?
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
   @@map("receiving_report")
 }
