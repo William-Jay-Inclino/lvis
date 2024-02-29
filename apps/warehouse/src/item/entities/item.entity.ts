@@ -23,7 +23,7 @@ export class Item {
   description: string;
 
   @Field(() => Int)
-  quantity: number;
+  total_quantity: number;
 
   @Field(() => Int)
   initial_quantity: number;

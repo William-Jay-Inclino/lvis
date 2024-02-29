@@ -142,6 +142,15 @@ exports.Prisma.VehicleScalarFieldEnum = {
   is_deleted: 'is_deleted'
 };
 
+exports.Prisma.StationScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  address: 'address',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  is_deleted: 'is_deleted'
+};
+
 exports.Prisma.CanvassItemScalarFieldEnum = {
   id: 'id',
   canvass_id: 'canvass_id',
@@ -435,8 +444,28 @@ exports.Prisma.ItemScalarFieldEnum = {
   unit_id: 'unit_id',
   code: 'code',
   description: 'description',
-  quantity: 'quantity',
+  total_quantity: 'total_quantity',
   initial_quantity: 'initial_quantity',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  is_deleted: 'is_deleted'
+};
+
+exports.Prisma.ItemLocationScalarFieldEnum = {
+  id: 'id',
+  item_id: 'item_id',
+  station_id: 'station_id',
+  quantity_on_hand: 'quantity_on_hand',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  is_deleted: 'is_deleted'
+};
+
+exports.Prisma.ItemMovementScalarFieldEnum = {
+  id: 'id',
+  origin_id: 'origin_id',
+  destination_id: 'destination_id',
+  quantity_moved: 'quantity_moved',
   created_at: 'created_at',
   updated_at: 'updated_at',
   is_deleted: 'is_deleted'
@@ -485,6 +514,7 @@ exports.Prisma.ModelName = {
   Unit: 'Unit',
   Brand: 'Brand',
   Vehicle: 'Vehicle',
+  Station: 'Station',
   CanvassItem: 'CanvassItem',
   Canvass: 'Canvass',
   JO: 'JO',
@@ -504,6 +534,8 @@ exports.Prisma.ModelName = {
   RRApprover: 'RRApprover',
   RRItem: 'RRItem',
   Item: 'Item',
+  ItemLocation: 'ItemLocation',
+  ItemMovement: 'ItemMovement',
   ItemType: 'ItemType',
   ItemTransaction: 'ItemTransaction'
 };

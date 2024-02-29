@@ -37,6 +37,7 @@ import { ItemTransactionModule } from './item-transaction/item-transaction.modul
 import { RrModule } from './rr/rr.module';
 import { RrApproverModule } from './rr-approver/rr-approver.module';
 import { RrItemModule } from './rr-item/rr-item.module';
+import { StationModule } from './station/station.module';
 
 
 @Module({
@@ -73,7 +74,8 @@ import { RrItemModule } from './rr-item/rr-item.module';
     ItemTransactionModule,
     RrModule,
     RrApproverModule,
-    RrItemModule
+    RrItemModule,
+    StationModule
   ],
   controllers: [],
   providers: [RvService, MeqsService, MeqsResolver, PoService, PoResolver, PoApproverResolver],

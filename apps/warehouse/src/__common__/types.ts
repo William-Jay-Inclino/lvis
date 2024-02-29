@@ -21,6 +21,12 @@ export interface Supplier {
     contact: string 
 }
 
+export interface Station {
+    id: string 
+    name: string 
+    address: string 
+}
+
 export enum APPROVAL_STATUS {
     PENDING = 1,
     APPROVED = 2,

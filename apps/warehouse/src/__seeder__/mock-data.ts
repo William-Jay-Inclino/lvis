@@ -1,5 +1,5 @@
 import { faker } from "@faker-js/faker"
-import { Brand, Supplier, Unit, Vehicle } from "../__common__/types"
+import { Brand, Station, Supplier, Unit, Vehicle } from "../__common__/types"
 
 export const suppliers: Supplier[] = [
     { 
@@ -16,6 +16,49 @@ export const suppliers: Supplier[] = [
         id: faker.string.uuid(),
         name: 'Puregold',
         contact: '+639000000000',
+    }
+]
+
+export const stations: Station[] = [
+    { 
+        id: faker.string.uuid(),
+        name: 'Main Office',
+        address: 'Ormoc City',
+    },
+    { 
+        id: faker.string.uuid(),
+        name: 'Talisayan',
+        address: 'Talisayan kilid julies',
+    },
+    { 
+        id: faker.string.uuid(),
+        name: 'Mahayag',
+        address: 'Mahayag Eskina kanang dili ngit2',
+    },
+    { 
+        id: faker.string.uuid(),
+        name: 'Tabango',
+        address: 'Tabango mo tanan kay akoy pinaka isog',
+    },
+    { 
+        id: faker.string.uuid(),
+        name: 'Sambulawan',
+        address: 'Sambulawan Dimension',
+    },
+    { 
+        id: faker.string.uuid(),
+        name: 'Libongao',
+        address: 'Libongao States',
+    },
+    { 
+        id: faker.string.uuid(),
+        name: 'Calibuan',
+        address: 'Calibuan atbang sapa',
+    },
+    { 
+        id: faker.string.uuid(),
+        name: 'Palompon',
+        address: 'Palompon atbang kalanggaman',
     }
 ]
 

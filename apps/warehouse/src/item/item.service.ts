@@ -42,7 +42,7 @@ export class ItemService {
 			code: input.code,
 			description: input.code,
 			initial_quantity: input.initial_quantity,
-			quantity: input.initial_quantity,
+			total_quantity: input.initial_quantity,
 			item_transactions: {
 				create: item_transaction
 			}

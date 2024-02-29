@@ -51,12 +51,12 @@ export class ItemTransactionService {
             throw new Error(`Item with ID ${input.item_id} not found.`);
         }
 
-        const totalQuantity = item.quantity + input.quantity;
+        const totalQuantity = item.total_quantity + input.quantity;
 
         const updateItem = this.prisma.item.update({
             where: { id: item.id },
             data: {
-                quantity: totalQuantity
+                total_quantity: totalQuantity
             }
         })
 
@@ -150,12 +150,12 @@ export class ItemTransactionService {
             throw new Error(`Item with ID ${input.item_id} not found.`);
         }
 
-        const newQuantity = (item.quantity - existingItem.quantity) + input.quantity
+        const newQuantity = (item.total_quantity - existingItem.quantity) + input.quantity
 
         const updateItem = this.prisma.item.update({
             where: { id: item.id },
             data: {
-                quantity: newQuantity
+                total_quantity: newQuantity
             }
         })
 

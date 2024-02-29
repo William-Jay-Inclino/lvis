@@ -34,6 +34,11 @@ export type Brand = $Result.DefaultSelection<Prisma.$BrandPayload>
  */
 export type Vehicle = $Result.DefaultSelection<Prisma.$VehiclePayload>
 /**
+ * Model Station
+ * 
+ */
+export type Station = $Result.DefaultSelection<Prisma.$StationPayload>
+/**
  * Model CanvassItem
  * 
  */
@@ -128,6 +133,16 @@ export type RRItem = $Result.DefaultSelection<Prisma.$RRItemPayload>
  * 
  */
 export type Item = $Result.DefaultSelection<Prisma.$ItemPayload>
+/**
+ * Model ItemLocation
+ * 
+ */
+export type ItemLocation = $Result.DefaultSelection<Prisma.$ItemLocationPayload>
+/**
+ * Model ItemMovement
+ * 
+ */
+export type ItemMovement = $Result.DefaultSelection<Prisma.$ItemMovementPayload>
 /**
  * Model ItemType
  * 
@@ -300,6 +315,16 @@ export class PrismaClient<
     * ```
     */
   get vehicle(): Prisma.VehicleDelegate<ExtArgs>;
+
+  /**
+   * `prisma.station`: Exposes CRUD operations for the **Station** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Stations
+    * const stations = await prisma.station.findMany()
+    * ```
+    */
+  get station(): Prisma.StationDelegate<ExtArgs>;
 
   /**
    * `prisma.canvassItem`: Exposes CRUD operations for the **CanvassItem** model.
@@ -490,6 +515,26 @@ export class PrismaClient<
     * ```
     */
   get item(): Prisma.ItemDelegate<ExtArgs>;
+
+  /**
+   * `prisma.itemLocation`: Exposes CRUD operations for the **ItemLocation** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ItemLocations
+    * const itemLocations = await prisma.itemLocation.findMany()
+    * ```
+    */
+  get itemLocation(): Prisma.ItemLocationDelegate<ExtArgs>;
+
+  /**
+   * `prisma.itemMovement`: Exposes CRUD operations for the **ItemMovement** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ItemMovements
+    * const itemMovements = await prisma.itemMovement.findMany()
+    * ```
+    */
+  get itemMovement(): Prisma.ItemMovementDelegate<ExtArgs>;
 
   /**
    * `prisma.itemType`: Exposes CRUD operations for the **ItemType** model.
@@ -984,6 +1029,7 @@ export namespace Prisma {
     Unit: 'Unit',
     Brand: 'Brand',
     Vehicle: 'Vehicle',
+    Station: 'Station',
     CanvassItem: 'CanvassItem',
     Canvass: 'Canvass',
     JO: 'JO',
@@ -1003,6 +1049,8 @@ export namespace Prisma {
     RRApprover: 'RRApprover',
     RRItem: 'RRItem',
     Item: 'Item',
+    ItemLocation: 'ItemLocation',
+    ItemMovement: 'ItemMovement',
     ItemType: 'ItemType',
     ItemTransaction: 'ItemTransaction'
   };
@@ -1021,7 +1069,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'supplier' | 'unit' | 'brand' | 'vehicle' | 'canvassItem' | 'canvass' | 'jO' | 'jOApprover' | 'rV' | 'rVApprover' | 'sPR' | 'sPRApprover' | 'mEQS' | 'mEQSSupplier' | 'mEQSSupplierItem' | 'mEQSSupplierAttachment' | 'mEQSApprover' | 'pO' | 'pOApprover' | 'rR' | 'rRApprover' | 'rRItem' | 'item' | 'itemType' | 'itemTransaction'
+      modelProps: 'supplier' | 'unit' | 'brand' | 'vehicle' | 'station' | 'canvassItem' | 'canvass' | 'jO' | 'jOApprover' | 'rV' | 'rVApprover' | 'sPR' | 'sPRApprover' | 'mEQS' | 'mEQSSupplier' | 'mEQSSupplierItem' | 'mEQSSupplierAttachment' | 'mEQSApprover' | 'pO' | 'pOApprover' | 'rR' | 'rRApprover' | 'rRItem' | 'item' | 'itemLocation' | 'itemMovement' | 'itemType' | 'itemTransaction'
       txIsolationLevel: Prisma.TransactionIsolationLevel
     },
     model: {
@@ -1286,6 +1334,72 @@ export namespace Prisma {
           count: {
             args: Prisma.VehicleCountArgs<ExtArgs>,
             result: $Utils.Optional<VehicleCountAggregateOutputType> | number
+          }
+        }
+      }
+      Station: {
+        payload: Prisma.$StationPayload<ExtArgs>
+        fields: Prisma.StationFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.StationFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$StationPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.StationFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$StationPayload>
+          }
+          findFirst: {
+            args: Prisma.StationFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$StationPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.StationFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$StationPayload>
+          }
+          findMany: {
+            args: Prisma.StationFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$StationPayload>[]
+          }
+          create: {
+            args: Prisma.StationCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$StationPayload>
+          }
+          createMany: {
+            args: Prisma.StationCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.StationDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$StationPayload>
+          }
+          update: {
+            args: Prisma.StationUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$StationPayload>
+          }
+          deleteMany: {
+            args: Prisma.StationDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.StationUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.StationUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$StationPayload>
+          }
+          aggregate: {
+            args: Prisma.StationAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateStation>
+          }
+          groupBy: {
+            args: Prisma.StationGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<StationGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.StationCountArgs<ExtArgs>,
+            result: $Utils.Optional<StationCountAggregateOutputType> | number
           }
         }
       }
@@ -2543,6 +2657,138 @@ export namespace Prisma {
           }
         }
       }
+      ItemLocation: {
+        payload: Prisma.$ItemLocationPayload<ExtArgs>
+        fields: Prisma.ItemLocationFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ItemLocationFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ItemLocationPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ItemLocationFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ItemLocationPayload>
+          }
+          findFirst: {
+            args: Prisma.ItemLocationFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ItemLocationPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ItemLocationFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ItemLocationPayload>
+          }
+          findMany: {
+            args: Prisma.ItemLocationFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ItemLocationPayload>[]
+          }
+          create: {
+            args: Prisma.ItemLocationCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ItemLocationPayload>
+          }
+          createMany: {
+            args: Prisma.ItemLocationCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.ItemLocationDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ItemLocationPayload>
+          }
+          update: {
+            args: Prisma.ItemLocationUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ItemLocationPayload>
+          }
+          deleteMany: {
+            args: Prisma.ItemLocationDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ItemLocationUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.ItemLocationUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ItemLocationPayload>
+          }
+          aggregate: {
+            args: Prisma.ItemLocationAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateItemLocation>
+          }
+          groupBy: {
+            args: Prisma.ItemLocationGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<ItemLocationGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ItemLocationCountArgs<ExtArgs>,
+            result: $Utils.Optional<ItemLocationCountAggregateOutputType> | number
+          }
+        }
+      }
+      ItemMovement: {
+        payload: Prisma.$ItemMovementPayload<ExtArgs>
+        fields: Prisma.ItemMovementFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ItemMovementFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ItemMovementPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ItemMovementFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ItemMovementPayload>
+          }
+          findFirst: {
+            args: Prisma.ItemMovementFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ItemMovementPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ItemMovementFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ItemMovementPayload>
+          }
+          findMany: {
+            args: Prisma.ItemMovementFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ItemMovementPayload>[]
+          }
+          create: {
+            args: Prisma.ItemMovementCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ItemMovementPayload>
+          }
+          createMany: {
+            args: Prisma.ItemMovementCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.ItemMovementDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ItemMovementPayload>
+          }
+          update: {
+            args: Prisma.ItemMovementUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ItemMovementPayload>
+          }
+          deleteMany: {
+            args: Prisma.ItemMovementDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ItemMovementUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.ItemMovementUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ItemMovementPayload>
+          }
+          aggregate: {
+            args: Prisma.ItemMovementAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateItemMovement>
+          }
+          groupBy: {
+            args: Prisma.ItemMovementGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<ItemMovementGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ItemMovementCountArgs<ExtArgs>,
+            result: $Utils.Optional<ItemMovementCountAggregateOutputType> | number
+          }
+        }
+      }
       ItemType: {
         payload: Prisma.$ItemTypePayload<ExtArgs>
         fields: Prisma.ItemTypeFieldRefs
@@ -2986,6 +3232,40 @@ export namespace Prisma {
 
 
   /**
+   * Count Type StationCountOutputType
+   */
+
+  export type StationCountOutputType = {
+    items: number
+  }
+
+  export type StationCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    items?: boolean | StationCountOutputTypeCountItemsArgs
+  }
+
+  // Custom InputTypes
+
+  /**
+   * StationCountOutputType without action
+   */
+  export type StationCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StationCountOutputType
+     */
+    select?: StationCountOutputTypeSelect<ExtArgs> | null
+  }
+
+
+  /**
+   * StationCountOutputType without action
+   */
+  export type StationCountOutputTypeCountItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ItemLocationWhereInput
+  }
+
+
+
+  /**
    * Count Type CanvassItemCountOutputType
    */
 
@@ -3328,11 +3608,13 @@ export namespace Prisma {
   export type ItemCountOutputType = {
     item_transactions: number
     rr_items: number
+    stations: number
   }
 
   export type ItemCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     item_transactions?: boolean | ItemCountOutputTypeCountItem_transactionsArgs
     rr_items?: boolean | ItemCountOutputTypeCountRr_itemsArgs
+    stations?: boolean | ItemCountOutputTypeCountStationsArgs
   }
 
   // Custom InputTypes
@@ -3361,6 +3643,58 @@ export namespace Prisma {
    */
   export type ItemCountOutputTypeCountRr_itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: RRItemWhereInput
+  }
+
+
+  /**
+   * ItemCountOutputType without action
+   */
+  export type ItemCountOutputTypeCountStationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ItemLocationWhereInput
+  }
+
+
+
+  /**
+   * Count Type ItemLocationCountOutputType
+   */
+
+  export type ItemLocationCountOutputType = {
+    origin_movements: number
+    destination_movements: number
+  }
+
+  export type ItemLocationCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    origin_movements?: boolean | ItemLocationCountOutputTypeCountOrigin_movementsArgs
+    destination_movements?: boolean | ItemLocationCountOutputTypeCountDestination_movementsArgs
+  }
+
+  // Custom InputTypes
+
+  /**
+   * ItemLocationCountOutputType without action
+   */
+  export type ItemLocationCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ItemLocationCountOutputType
+     */
+    select?: ItemLocationCountOutputTypeSelect<ExtArgs> | null
+  }
+
+
+  /**
+   * ItemLocationCountOutputType without action
+   */
+  export type ItemLocationCountOutputTypeCountOrigin_movementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ItemMovementWhereInput
+  }
+
+
+  /**
+   * ItemLocationCountOutputType without action
+   */
+  export type ItemLocationCountOutputTypeCountDestination_movementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ItemMovementWhereInput
   }
 
 
@@ -7308,6 +7642,958 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well.
      */
     include?: VehicleInclude<ExtArgs> | null
+  }
+
+
+
+  /**
+   * Model Station
+   */
+
+  export type AggregateStation = {
+    _count: StationCountAggregateOutputType | null
+    _min: StationMinAggregateOutputType | null
+    _max: StationMaxAggregateOutputType | null
+  }
+
+  export type StationMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    address: string | null
+    created_at: Date | null
+    updated_at: Date | null
+    is_deleted: boolean | null
+  }
+
+  export type StationMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    address: string | null
+    created_at: Date | null
+    updated_at: Date | null
+    is_deleted: boolean | null
+  }
+
+  export type StationCountAggregateOutputType = {
+    id: number
+    name: number
+    address: number
+    created_at: number
+    updated_at: number
+    is_deleted: number
+    _all: number
+  }
+
+
+  export type StationMinAggregateInputType = {
+    id?: true
+    name?: true
+    address?: true
+    created_at?: true
+    updated_at?: true
+    is_deleted?: true
+  }
+
+  export type StationMaxAggregateInputType = {
+    id?: true
+    name?: true
+    address?: true
+    created_at?: true
+    updated_at?: true
+    is_deleted?: true
+  }
+
+  export type StationCountAggregateInputType = {
+    id?: true
+    name?: true
+    address?: true
+    created_at?: true
+    updated_at?: true
+    is_deleted?: true
+    _all?: true
+  }
+
+  export type StationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Station to aggregate.
+     */
+    where?: StationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Stations to fetch.
+     */
+    orderBy?: StationOrderByWithRelationInput | StationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: StationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Stations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Stations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Stations
+    **/
+    _count?: true | StationCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: StationMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: StationMaxAggregateInputType
+  }
+
+  export type GetStationAggregateType<T extends StationAggregateArgs> = {
+        [P in keyof T & keyof AggregateStation]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateStation[P]>
+      : GetScalarType<T[P], AggregateStation[P]>
+  }
+
+
+
+
+  export type StationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StationWhereInput
+    orderBy?: StationOrderByWithAggregationInput | StationOrderByWithAggregationInput[]
+    by: StationScalarFieldEnum[] | StationScalarFieldEnum
+    having?: StationScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: StationCountAggregateInputType | true
+    _min?: StationMinAggregateInputType
+    _max?: StationMaxAggregateInputType
+  }
+
+  export type StationGroupByOutputType = {
+    id: string
+    name: string
+    address: string
+    created_at: Date
+    updated_at: Date
+    is_deleted: boolean
+    _count: StationCountAggregateOutputType | null
+    _min: StationMinAggregateOutputType | null
+    _max: StationMaxAggregateOutputType | null
+  }
+
+  type GetStationGroupByPayload<T extends StationGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<StationGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof StationGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], StationGroupByOutputType[P]>
+            : GetScalarType<T[P], StationGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type StationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    address?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    is_deleted?: boolean
+    items?: boolean | Station$itemsArgs<ExtArgs>
+    _count?: boolean | StationCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["station"]>
+
+  export type StationSelectScalar = {
+    id?: boolean
+    name?: boolean
+    address?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    is_deleted?: boolean
+  }
+
+  export type StationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    items?: boolean | Station$itemsArgs<ExtArgs>
+    _count?: boolean | StationCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+
+  export type $StationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Station"
+    objects: {
+      items: Prisma.$ItemLocationPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      address: string
+      created_at: Date
+      updated_at: Date
+      is_deleted: boolean
+    }, ExtArgs["result"]["station"]>
+    composites: {}
+  }
+
+
+  type StationGetPayload<S extends boolean | null | undefined | StationDefaultArgs> = $Result.GetResult<Prisma.$StationPayload, S>
+
+  type StationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<StationFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: StationCountAggregateInputType | true
+    }
+
+  export interface StationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Station'], meta: { name: 'Station' } }
+    /**
+     * Find zero or one Station that matches the filter.
+     * @param {StationFindUniqueArgs} args - Arguments to find a Station
+     * @example
+     * // Get one Station
+     * const station = await prisma.station.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends StationFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, StationFindUniqueArgs<ExtArgs>>
+    ): Prisma__StationClient<$Result.GetResult<Prisma.$StationPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one Station that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {StationFindUniqueOrThrowArgs} args - Arguments to find a Station
+     * @example
+     * // Get one Station
+     * const station = await prisma.station.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends StationFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, StationFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__StationClient<$Result.GetResult<Prisma.$StationPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first Station that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StationFindFirstArgs} args - Arguments to find a Station
+     * @example
+     * // Get one Station
+     * const station = await prisma.station.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends StationFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, StationFindFirstArgs<ExtArgs>>
+    ): Prisma__StationClient<$Result.GetResult<Prisma.$StationPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first Station that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StationFindFirstOrThrowArgs} args - Arguments to find a Station
+     * @example
+     * // Get one Station
+     * const station = await prisma.station.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends StationFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, StationFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__StationClient<$Result.GetResult<Prisma.$StationPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more Stations that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StationFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Stations
+     * const stations = await prisma.station.findMany()
+     * 
+     * // Get first 10 Stations
+     * const stations = await prisma.station.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const stationWithIdOnly = await prisma.station.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends StationFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, StationFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StationPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a Station.
+     * @param {StationCreateArgs} args - Arguments to create a Station.
+     * @example
+     * // Create one Station
+     * const Station = await prisma.station.create({
+     *   data: {
+     *     // ... data to create a Station
+     *   }
+     * })
+     * 
+    **/
+    create<T extends StationCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, StationCreateArgs<ExtArgs>>
+    ): Prisma__StationClient<$Result.GetResult<Prisma.$StationPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many Stations.
+     *     @param {StationCreateManyArgs} args - Arguments to create many Stations.
+     *     @example
+     *     // Create many Stations
+     *     const station = await prisma.station.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends StationCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, StationCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Station.
+     * @param {StationDeleteArgs} args - Arguments to delete one Station.
+     * @example
+     * // Delete one Station
+     * const Station = await prisma.station.delete({
+     *   where: {
+     *     // ... filter to delete one Station
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends StationDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, StationDeleteArgs<ExtArgs>>
+    ): Prisma__StationClient<$Result.GetResult<Prisma.$StationPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one Station.
+     * @param {StationUpdateArgs} args - Arguments to update one Station.
+     * @example
+     * // Update one Station
+     * const station = await prisma.station.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends StationUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, StationUpdateArgs<ExtArgs>>
+    ): Prisma__StationClient<$Result.GetResult<Prisma.$StationPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more Stations.
+     * @param {StationDeleteManyArgs} args - Arguments to filter Stations to delete.
+     * @example
+     * // Delete a few Stations
+     * const { count } = await prisma.station.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends StationDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, StationDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Stations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StationUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Stations
+     * const station = await prisma.station.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends StationUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, StationUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Station.
+     * @param {StationUpsertArgs} args - Arguments to update or create a Station.
+     * @example
+     * // Update or create a Station
+     * const station = await prisma.station.upsert({
+     *   create: {
+     *     // ... data to create a Station
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Station we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends StationUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, StationUpsertArgs<ExtArgs>>
+    ): Prisma__StationClient<$Result.GetResult<Prisma.$StationPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of Stations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StationCountArgs} args - Arguments to filter Stations to count.
+     * @example
+     * // Count the number of Stations
+     * const count = await prisma.station.count({
+     *   where: {
+     *     // ... the filter for the Stations we want to count
+     *   }
+     * })
+    **/
+    count<T extends StationCountArgs>(
+      args?: Subset<T, StationCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], StationCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Station.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends StationAggregateArgs>(args: Subset<T, StationAggregateArgs>): Prisma.PrismaPromise<GetStationAggregateType<T>>
+
+    /**
+     * Group by Station.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StationGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends StationGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: StationGroupByArgs['orderBy'] }
+        : { orderBy?: StationGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, StationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetStationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Station model
+   */
+  readonly fields: StationFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Station.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__StationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+    items<T extends Station$itemsArgs<ExtArgs> = {}>(args?: Subset<T, Station$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ItemLocationPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the Station model
+   */ 
+  interface StationFieldRefs {
+    readonly id: FieldRef<"Station", 'String'>
+    readonly name: FieldRef<"Station", 'String'>
+    readonly address: FieldRef<"Station", 'String'>
+    readonly created_at: FieldRef<"Station", 'DateTime'>
+    readonly updated_at: FieldRef<"Station", 'DateTime'>
+    readonly is_deleted: FieldRef<"Station", 'Boolean'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * Station findUnique
+   */
+  export type StationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Station
+     */
+    select?: StationSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: StationInclude<ExtArgs> | null
+    /**
+     * Filter, which Station to fetch.
+     */
+    where: StationWhereUniqueInput
+  }
+
+
+  /**
+   * Station findUniqueOrThrow
+   */
+  export type StationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Station
+     */
+    select?: StationSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: StationInclude<ExtArgs> | null
+    /**
+     * Filter, which Station to fetch.
+     */
+    where: StationWhereUniqueInput
+  }
+
+
+  /**
+   * Station findFirst
+   */
+  export type StationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Station
+     */
+    select?: StationSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: StationInclude<ExtArgs> | null
+    /**
+     * Filter, which Station to fetch.
+     */
+    where?: StationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Stations to fetch.
+     */
+    orderBy?: StationOrderByWithRelationInput | StationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Stations.
+     */
+    cursor?: StationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Stations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Stations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Stations.
+     */
+    distinct?: StationScalarFieldEnum | StationScalarFieldEnum[]
+  }
+
+
+  /**
+   * Station findFirstOrThrow
+   */
+  export type StationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Station
+     */
+    select?: StationSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: StationInclude<ExtArgs> | null
+    /**
+     * Filter, which Station to fetch.
+     */
+    where?: StationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Stations to fetch.
+     */
+    orderBy?: StationOrderByWithRelationInput | StationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Stations.
+     */
+    cursor?: StationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Stations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Stations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Stations.
+     */
+    distinct?: StationScalarFieldEnum | StationScalarFieldEnum[]
+  }
+
+
+  /**
+   * Station findMany
+   */
+  export type StationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Station
+     */
+    select?: StationSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: StationInclude<ExtArgs> | null
+    /**
+     * Filter, which Stations to fetch.
+     */
+    where?: StationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Stations to fetch.
+     */
+    orderBy?: StationOrderByWithRelationInput | StationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Stations.
+     */
+    cursor?: StationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Stations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Stations.
+     */
+    skip?: number
+    distinct?: StationScalarFieldEnum | StationScalarFieldEnum[]
+  }
+
+
+  /**
+   * Station create
+   */
+  export type StationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Station
+     */
+    select?: StationSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: StationInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Station.
+     */
+    data: XOR<StationCreateInput, StationUncheckedCreateInput>
+  }
+
+
+  /**
+   * Station createMany
+   */
+  export type StationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Stations.
+     */
+    data: StationCreateManyInput | StationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * Station update
+   */
+  export type StationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Station
+     */
+    select?: StationSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: StationInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Station.
+     */
+    data: XOR<StationUpdateInput, StationUncheckedUpdateInput>
+    /**
+     * Choose, which Station to update.
+     */
+    where: StationWhereUniqueInput
+  }
+
+
+  /**
+   * Station updateMany
+   */
+  export type StationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Stations.
+     */
+    data: XOR<StationUpdateManyMutationInput, StationUncheckedUpdateManyInput>
+    /**
+     * Filter which Stations to update
+     */
+    where?: StationWhereInput
+  }
+
+
+  /**
+   * Station upsert
+   */
+  export type StationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Station
+     */
+    select?: StationSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: StationInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Station to update in case it exists.
+     */
+    where: StationWhereUniqueInput
+    /**
+     * In case the Station found by the `where` argument doesn't exist, create a new Station with this data.
+     */
+    create: XOR<StationCreateInput, StationUncheckedCreateInput>
+    /**
+     * In case the Station was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<StationUpdateInput, StationUncheckedUpdateInput>
+  }
+
+
+  /**
+   * Station delete
+   */
+  export type StationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Station
+     */
+    select?: StationSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: StationInclude<ExtArgs> | null
+    /**
+     * Filter which Station to delete.
+     */
+    where: StationWhereUniqueInput
+  }
+
+
+  /**
+   * Station deleteMany
+   */
+  export type StationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Stations to delete
+     */
+    where?: StationWhereInput
+  }
+
+
+  /**
+   * Station.items
+   */
+  export type Station$itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ItemLocation
+     */
+    select?: ItemLocationSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemLocationInclude<ExtArgs> | null
+    where?: ItemLocationWhereInput
+    orderBy?: ItemLocationOrderByWithRelationInput | ItemLocationOrderByWithRelationInput[]
+    cursor?: ItemLocationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ItemLocationScalarFieldEnum | ItemLocationScalarFieldEnum[]
+  }
+
+
+  /**
+   * Station without action
+   */
+  export type StationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Station
+     */
+    select?: StationSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: StationInclude<ExtArgs> | null
   }
 
 
@@ -26506,12 +27792,12 @@ export namespace Prisma {
   }
 
   export type ItemAvgAggregateOutputType = {
-    quantity: number | null
+    total_quantity: number | null
     initial_quantity: number | null
   }
 
   export type ItemSumAggregateOutputType = {
-    quantity: number | null
+    total_quantity: number | null
     initial_quantity: number | null
   }
 
@@ -26521,7 +27807,7 @@ export namespace Prisma {
     unit_id: string | null
     code: string | null
     description: string | null
-    quantity: number | null
+    total_quantity: number | null
     initial_quantity: number | null
     created_at: Date | null
     updated_at: Date | null
@@ -26534,7 +27820,7 @@ export namespace Prisma {
     unit_id: string | null
     code: string | null
     description: string | null
-    quantity: number | null
+    total_quantity: number | null
     initial_quantity: number | null
     created_at: Date | null
     updated_at: Date | null
@@ -26547,7 +27833,7 @@ export namespace Prisma {
     unit_id: number
     code: number
     description: number
-    quantity: number
+    total_quantity: number
     initial_quantity: number
     created_at: number
     updated_at: number
@@ -26557,12 +27843,12 @@ export namespace Prisma {
 
 
   export type ItemAvgAggregateInputType = {
-    quantity?: true
+    total_quantity?: true
     initial_quantity?: true
   }
 
   export type ItemSumAggregateInputType = {
-    quantity?: true
+    total_quantity?: true
     initial_quantity?: true
   }
 
@@ -26572,7 +27858,7 @@ export namespace Prisma {
     unit_id?: true
     code?: true
     description?: true
-    quantity?: true
+    total_quantity?: true
     initial_quantity?: true
     created_at?: true
     updated_at?: true
@@ -26585,7 +27871,7 @@ export namespace Prisma {
     unit_id?: true
     code?: true
     description?: true
-    quantity?: true
+    total_quantity?: true
     initial_quantity?: true
     created_at?: true
     updated_at?: true
@@ -26598,7 +27884,7 @@ export namespace Prisma {
     unit_id?: true
     code?: true
     description?: true
-    quantity?: true
+    total_quantity?: true
     initial_quantity?: true
     created_at?: true
     updated_at?: true
@@ -26698,7 +27984,7 @@ export namespace Prisma {
     unit_id: string
     code: string
     description: string
-    quantity: number
+    total_quantity: number
     initial_quantity: number
     created_at: Date
     updated_at: Date
@@ -26730,7 +28016,7 @@ export namespace Prisma {
     unit_id?: boolean
     code?: boolean
     description?: boolean
-    quantity?: boolean
+    total_quantity?: boolean
     initial_quantity?: boolean
     created_at?: boolean
     updated_at?: boolean
@@ -26738,6 +28024,7 @@ export namespace Prisma {
     item_type?: boolean | ItemTypeDefaultArgs<ExtArgs>
     item_transactions?: boolean | Item$item_transactionsArgs<ExtArgs>
     rr_items?: boolean | Item$rr_itemsArgs<ExtArgs>
+    stations?: boolean | Item$stationsArgs<ExtArgs>
     unit?: boolean | UnitDefaultArgs<ExtArgs>
     _count?: boolean | ItemCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["item"]>
@@ -26748,7 +28035,7 @@ export namespace Prisma {
     unit_id?: boolean
     code?: boolean
     description?: boolean
-    quantity?: boolean
+    total_quantity?: boolean
     initial_quantity?: boolean
     created_at?: boolean
     updated_at?: boolean
@@ -26759,6 +28046,7 @@ export namespace Prisma {
     item_type?: boolean | ItemTypeDefaultArgs<ExtArgs>
     item_transactions?: boolean | Item$item_transactionsArgs<ExtArgs>
     rr_items?: boolean | Item$rr_itemsArgs<ExtArgs>
+    stations?: boolean | Item$stationsArgs<ExtArgs>
     unit?: boolean | UnitDefaultArgs<ExtArgs>
     _count?: boolean | ItemCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -26770,6 +28058,7 @@ export namespace Prisma {
       item_type: Prisma.$ItemTypePayload<ExtArgs>
       item_transactions: Prisma.$ItemTransactionPayload<ExtArgs>[]
       rr_items: Prisma.$RRItemPayload<ExtArgs>[]
+      stations: Prisma.$ItemLocationPayload<ExtArgs>[]
       unit: Prisma.$UnitPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -26778,7 +28067,7 @@ export namespace Prisma {
       unit_id: string
       code: string
       description: string
-      quantity: number
+      total_quantity: number
       initial_quantity: number
       created_at: Date
       updated_at: Date
@@ -27154,6 +28443,8 @@ export namespace Prisma {
 
     rr_items<T extends Item$rr_itemsArgs<ExtArgs> = {}>(args?: Subset<T, Item$rr_itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RRItemPayload<ExtArgs>, T, 'findMany'> | Null>;
 
+    stations<T extends Item$stationsArgs<ExtArgs> = {}>(args?: Subset<T, Item$stationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ItemLocationPayload<ExtArgs>, T, 'findMany'> | Null>;
+
     unit<T extends UnitDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UnitDefaultArgs<ExtArgs>>): Prisma__UnitClient<$Result.GetResult<Prisma.$UnitPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
     /**
@@ -27189,7 +28480,7 @@ export namespace Prisma {
     readonly unit_id: FieldRef<"Item", 'String'>
     readonly code: FieldRef<"Item", 'String'>
     readonly description: FieldRef<"Item", 'String'>
-    readonly quantity: FieldRef<"Item", 'Int'>
+    readonly total_quantity: FieldRef<"Item", 'Int'>
     readonly initial_quantity: FieldRef<"Item", 'Int'>
     readonly created_at: FieldRef<"Item", 'DateTime'>
     readonly updated_at: FieldRef<"Item", 'DateTime'>
@@ -27548,6 +28839,27 @@ export namespace Prisma {
 
 
   /**
+   * Item.stations
+   */
+  export type Item$stationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ItemLocation
+     */
+    select?: ItemLocationSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemLocationInclude<ExtArgs> | null
+    where?: ItemLocationWhereInput
+    orderBy?: ItemLocationOrderByWithRelationInput | ItemLocationOrderByWithRelationInput[]
+    cursor?: ItemLocationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ItemLocationScalarFieldEnum | ItemLocationScalarFieldEnum[]
+  }
+
+
+  /**
    * Item without action
    */
   export type ItemDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -27559,6 +28871,2018 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well.
      */
     include?: ItemInclude<ExtArgs> | null
+  }
+
+
+
+  /**
+   * Model ItemLocation
+   */
+
+  export type AggregateItemLocation = {
+    _count: ItemLocationCountAggregateOutputType | null
+    _avg: ItemLocationAvgAggregateOutputType | null
+    _sum: ItemLocationSumAggregateOutputType | null
+    _min: ItemLocationMinAggregateOutputType | null
+    _max: ItemLocationMaxAggregateOutputType | null
+  }
+
+  export type ItemLocationAvgAggregateOutputType = {
+    quantity_on_hand: number | null
+  }
+
+  export type ItemLocationSumAggregateOutputType = {
+    quantity_on_hand: number | null
+  }
+
+  export type ItemLocationMinAggregateOutputType = {
+    id: string | null
+    item_id: string | null
+    station_id: string | null
+    quantity_on_hand: number | null
+    created_at: Date | null
+    updated_at: Date | null
+    is_deleted: boolean | null
+  }
+
+  export type ItemLocationMaxAggregateOutputType = {
+    id: string | null
+    item_id: string | null
+    station_id: string | null
+    quantity_on_hand: number | null
+    created_at: Date | null
+    updated_at: Date | null
+    is_deleted: boolean | null
+  }
+
+  export type ItemLocationCountAggregateOutputType = {
+    id: number
+    item_id: number
+    station_id: number
+    quantity_on_hand: number
+    created_at: number
+    updated_at: number
+    is_deleted: number
+    _all: number
+  }
+
+
+  export type ItemLocationAvgAggregateInputType = {
+    quantity_on_hand?: true
+  }
+
+  export type ItemLocationSumAggregateInputType = {
+    quantity_on_hand?: true
+  }
+
+  export type ItemLocationMinAggregateInputType = {
+    id?: true
+    item_id?: true
+    station_id?: true
+    quantity_on_hand?: true
+    created_at?: true
+    updated_at?: true
+    is_deleted?: true
+  }
+
+  export type ItemLocationMaxAggregateInputType = {
+    id?: true
+    item_id?: true
+    station_id?: true
+    quantity_on_hand?: true
+    created_at?: true
+    updated_at?: true
+    is_deleted?: true
+  }
+
+  export type ItemLocationCountAggregateInputType = {
+    id?: true
+    item_id?: true
+    station_id?: true
+    quantity_on_hand?: true
+    created_at?: true
+    updated_at?: true
+    is_deleted?: true
+    _all?: true
+  }
+
+  export type ItemLocationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ItemLocation to aggregate.
+     */
+    where?: ItemLocationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ItemLocations to fetch.
+     */
+    orderBy?: ItemLocationOrderByWithRelationInput | ItemLocationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ItemLocationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ItemLocations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ItemLocations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ItemLocations
+    **/
+    _count?: true | ItemLocationCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ItemLocationAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ItemLocationSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ItemLocationMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ItemLocationMaxAggregateInputType
+  }
+
+  export type GetItemLocationAggregateType<T extends ItemLocationAggregateArgs> = {
+        [P in keyof T & keyof AggregateItemLocation]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateItemLocation[P]>
+      : GetScalarType<T[P], AggregateItemLocation[P]>
+  }
+
+
+
+
+  export type ItemLocationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ItemLocationWhereInput
+    orderBy?: ItemLocationOrderByWithAggregationInput | ItemLocationOrderByWithAggregationInput[]
+    by: ItemLocationScalarFieldEnum[] | ItemLocationScalarFieldEnum
+    having?: ItemLocationScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ItemLocationCountAggregateInputType | true
+    _avg?: ItemLocationAvgAggregateInputType
+    _sum?: ItemLocationSumAggregateInputType
+    _min?: ItemLocationMinAggregateInputType
+    _max?: ItemLocationMaxAggregateInputType
+  }
+
+  export type ItemLocationGroupByOutputType = {
+    id: string
+    item_id: string
+    station_id: string
+    quantity_on_hand: number
+    created_at: Date
+    updated_at: Date
+    is_deleted: boolean
+    _count: ItemLocationCountAggregateOutputType | null
+    _avg: ItemLocationAvgAggregateOutputType | null
+    _sum: ItemLocationSumAggregateOutputType | null
+    _min: ItemLocationMinAggregateOutputType | null
+    _max: ItemLocationMaxAggregateOutputType | null
+  }
+
+  type GetItemLocationGroupByPayload<T extends ItemLocationGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ItemLocationGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ItemLocationGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ItemLocationGroupByOutputType[P]>
+            : GetScalarType<T[P], ItemLocationGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ItemLocationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    item_id?: boolean
+    station_id?: boolean
+    quantity_on_hand?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    is_deleted?: boolean
+    item?: boolean | ItemDefaultArgs<ExtArgs>
+    station?: boolean | StationDefaultArgs<ExtArgs>
+    origin_movements?: boolean | ItemLocation$origin_movementsArgs<ExtArgs>
+    destination_movements?: boolean | ItemLocation$destination_movementsArgs<ExtArgs>
+    _count?: boolean | ItemLocationCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["itemLocation"]>
+
+  export type ItemLocationSelectScalar = {
+    id?: boolean
+    item_id?: boolean
+    station_id?: boolean
+    quantity_on_hand?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    is_deleted?: boolean
+  }
+
+  export type ItemLocationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    item?: boolean | ItemDefaultArgs<ExtArgs>
+    station?: boolean | StationDefaultArgs<ExtArgs>
+    origin_movements?: boolean | ItemLocation$origin_movementsArgs<ExtArgs>
+    destination_movements?: boolean | ItemLocation$destination_movementsArgs<ExtArgs>
+    _count?: boolean | ItemLocationCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+
+  export type $ItemLocationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ItemLocation"
+    objects: {
+      item: Prisma.$ItemPayload<ExtArgs>
+      station: Prisma.$StationPayload<ExtArgs>
+      origin_movements: Prisma.$ItemMovementPayload<ExtArgs>[]
+      destination_movements: Prisma.$ItemMovementPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      item_id: string
+      station_id: string
+      quantity_on_hand: number
+      created_at: Date
+      updated_at: Date
+      is_deleted: boolean
+    }, ExtArgs["result"]["itemLocation"]>
+    composites: {}
+  }
+
+
+  type ItemLocationGetPayload<S extends boolean | null | undefined | ItemLocationDefaultArgs> = $Result.GetResult<Prisma.$ItemLocationPayload, S>
+
+  type ItemLocationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<ItemLocationFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: ItemLocationCountAggregateInputType | true
+    }
+
+  export interface ItemLocationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ItemLocation'], meta: { name: 'ItemLocation' } }
+    /**
+     * Find zero or one ItemLocation that matches the filter.
+     * @param {ItemLocationFindUniqueArgs} args - Arguments to find a ItemLocation
+     * @example
+     * // Get one ItemLocation
+     * const itemLocation = await prisma.itemLocation.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends ItemLocationFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, ItemLocationFindUniqueArgs<ExtArgs>>
+    ): Prisma__ItemLocationClient<$Result.GetResult<Prisma.$ItemLocationPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one ItemLocation that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {ItemLocationFindUniqueOrThrowArgs} args - Arguments to find a ItemLocation
+     * @example
+     * // Get one ItemLocation
+     * const itemLocation = await prisma.itemLocation.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends ItemLocationFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, ItemLocationFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__ItemLocationClient<$Result.GetResult<Prisma.$ItemLocationPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first ItemLocation that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ItemLocationFindFirstArgs} args - Arguments to find a ItemLocation
+     * @example
+     * // Get one ItemLocation
+     * const itemLocation = await prisma.itemLocation.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends ItemLocationFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, ItemLocationFindFirstArgs<ExtArgs>>
+    ): Prisma__ItemLocationClient<$Result.GetResult<Prisma.$ItemLocationPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first ItemLocation that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ItemLocationFindFirstOrThrowArgs} args - Arguments to find a ItemLocation
+     * @example
+     * // Get one ItemLocation
+     * const itemLocation = await prisma.itemLocation.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends ItemLocationFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, ItemLocationFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__ItemLocationClient<$Result.GetResult<Prisma.$ItemLocationPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more ItemLocations that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ItemLocationFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ItemLocations
+     * const itemLocations = await prisma.itemLocation.findMany()
+     * 
+     * // Get first 10 ItemLocations
+     * const itemLocations = await prisma.itemLocation.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const itemLocationWithIdOnly = await prisma.itemLocation.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends ItemLocationFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, ItemLocationFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ItemLocationPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a ItemLocation.
+     * @param {ItemLocationCreateArgs} args - Arguments to create a ItemLocation.
+     * @example
+     * // Create one ItemLocation
+     * const ItemLocation = await prisma.itemLocation.create({
+     *   data: {
+     *     // ... data to create a ItemLocation
+     *   }
+     * })
+     * 
+    **/
+    create<T extends ItemLocationCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, ItemLocationCreateArgs<ExtArgs>>
+    ): Prisma__ItemLocationClient<$Result.GetResult<Prisma.$ItemLocationPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many ItemLocations.
+     *     @param {ItemLocationCreateManyArgs} args - Arguments to create many ItemLocations.
+     *     @example
+     *     // Create many ItemLocations
+     *     const itemLocation = await prisma.itemLocation.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends ItemLocationCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, ItemLocationCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a ItemLocation.
+     * @param {ItemLocationDeleteArgs} args - Arguments to delete one ItemLocation.
+     * @example
+     * // Delete one ItemLocation
+     * const ItemLocation = await prisma.itemLocation.delete({
+     *   where: {
+     *     // ... filter to delete one ItemLocation
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends ItemLocationDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, ItemLocationDeleteArgs<ExtArgs>>
+    ): Prisma__ItemLocationClient<$Result.GetResult<Prisma.$ItemLocationPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one ItemLocation.
+     * @param {ItemLocationUpdateArgs} args - Arguments to update one ItemLocation.
+     * @example
+     * // Update one ItemLocation
+     * const itemLocation = await prisma.itemLocation.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends ItemLocationUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, ItemLocationUpdateArgs<ExtArgs>>
+    ): Prisma__ItemLocationClient<$Result.GetResult<Prisma.$ItemLocationPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more ItemLocations.
+     * @param {ItemLocationDeleteManyArgs} args - Arguments to filter ItemLocations to delete.
+     * @example
+     * // Delete a few ItemLocations
+     * const { count } = await prisma.itemLocation.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends ItemLocationDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, ItemLocationDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ItemLocations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ItemLocationUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ItemLocations
+     * const itemLocation = await prisma.itemLocation.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends ItemLocationUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, ItemLocationUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one ItemLocation.
+     * @param {ItemLocationUpsertArgs} args - Arguments to update or create a ItemLocation.
+     * @example
+     * // Update or create a ItemLocation
+     * const itemLocation = await prisma.itemLocation.upsert({
+     *   create: {
+     *     // ... data to create a ItemLocation
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ItemLocation we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends ItemLocationUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, ItemLocationUpsertArgs<ExtArgs>>
+    ): Prisma__ItemLocationClient<$Result.GetResult<Prisma.$ItemLocationPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of ItemLocations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ItemLocationCountArgs} args - Arguments to filter ItemLocations to count.
+     * @example
+     * // Count the number of ItemLocations
+     * const count = await prisma.itemLocation.count({
+     *   where: {
+     *     // ... the filter for the ItemLocations we want to count
+     *   }
+     * })
+    **/
+    count<T extends ItemLocationCountArgs>(
+      args?: Subset<T, ItemLocationCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ItemLocationCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ItemLocation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ItemLocationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ItemLocationAggregateArgs>(args: Subset<T, ItemLocationAggregateArgs>): Prisma.PrismaPromise<GetItemLocationAggregateType<T>>
+
+    /**
+     * Group by ItemLocation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ItemLocationGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ItemLocationGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ItemLocationGroupByArgs['orderBy'] }
+        : { orderBy?: ItemLocationGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ItemLocationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetItemLocationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ItemLocation model
+   */
+  readonly fields: ItemLocationFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ItemLocation.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ItemLocationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+    item<T extends ItemDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ItemDefaultArgs<ExtArgs>>): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    station<T extends StationDefaultArgs<ExtArgs> = {}>(args?: Subset<T, StationDefaultArgs<ExtArgs>>): Prisma__StationClient<$Result.GetResult<Prisma.$StationPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    origin_movements<T extends ItemLocation$origin_movementsArgs<ExtArgs> = {}>(args?: Subset<T, ItemLocation$origin_movementsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ItemMovementPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    destination_movements<T extends ItemLocation$destination_movementsArgs<ExtArgs> = {}>(args?: Subset<T, ItemLocation$destination_movementsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ItemMovementPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the ItemLocation model
+   */ 
+  interface ItemLocationFieldRefs {
+    readonly id: FieldRef<"ItemLocation", 'String'>
+    readonly item_id: FieldRef<"ItemLocation", 'String'>
+    readonly station_id: FieldRef<"ItemLocation", 'String'>
+    readonly quantity_on_hand: FieldRef<"ItemLocation", 'Int'>
+    readonly created_at: FieldRef<"ItemLocation", 'DateTime'>
+    readonly updated_at: FieldRef<"ItemLocation", 'DateTime'>
+    readonly is_deleted: FieldRef<"ItemLocation", 'Boolean'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * ItemLocation findUnique
+   */
+  export type ItemLocationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ItemLocation
+     */
+    select?: ItemLocationSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemLocationInclude<ExtArgs> | null
+    /**
+     * Filter, which ItemLocation to fetch.
+     */
+    where: ItemLocationWhereUniqueInput
+  }
+
+
+  /**
+   * ItemLocation findUniqueOrThrow
+   */
+  export type ItemLocationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ItemLocation
+     */
+    select?: ItemLocationSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemLocationInclude<ExtArgs> | null
+    /**
+     * Filter, which ItemLocation to fetch.
+     */
+    where: ItemLocationWhereUniqueInput
+  }
+
+
+  /**
+   * ItemLocation findFirst
+   */
+  export type ItemLocationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ItemLocation
+     */
+    select?: ItemLocationSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemLocationInclude<ExtArgs> | null
+    /**
+     * Filter, which ItemLocation to fetch.
+     */
+    where?: ItemLocationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ItemLocations to fetch.
+     */
+    orderBy?: ItemLocationOrderByWithRelationInput | ItemLocationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ItemLocations.
+     */
+    cursor?: ItemLocationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ItemLocations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ItemLocations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ItemLocations.
+     */
+    distinct?: ItemLocationScalarFieldEnum | ItemLocationScalarFieldEnum[]
+  }
+
+
+  /**
+   * ItemLocation findFirstOrThrow
+   */
+  export type ItemLocationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ItemLocation
+     */
+    select?: ItemLocationSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemLocationInclude<ExtArgs> | null
+    /**
+     * Filter, which ItemLocation to fetch.
+     */
+    where?: ItemLocationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ItemLocations to fetch.
+     */
+    orderBy?: ItemLocationOrderByWithRelationInput | ItemLocationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ItemLocations.
+     */
+    cursor?: ItemLocationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ItemLocations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ItemLocations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ItemLocations.
+     */
+    distinct?: ItemLocationScalarFieldEnum | ItemLocationScalarFieldEnum[]
+  }
+
+
+  /**
+   * ItemLocation findMany
+   */
+  export type ItemLocationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ItemLocation
+     */
+    select?: ItemLocationSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemLocationInclude<ExtArgs> | null
+    /**
+     * Filter, which ItemLocations to fetch.
+     */
+    where?: ItemLocationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ItemLocations to fetch.
+     */
+    orderBy?: ItemLocationOrderByWithRelationInput | ItemLocationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ItemLocations.
+     */
+    cursor?: ItemLocationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ItemLocations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ItemLocations.
+     */
+    skip?: number
+    distinct?: ItemLocationScalarFieldEnum | ItemLocationScalarFieldEnum[]
+  }
+
+
+  /**
+   * ItemLocation create
+   */
+  export type ItemLocationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ItemLocation
+     */
+    select?: ItemLocationSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemLocationInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ItemLocation.
+     */
+    data: XOR<ItemLocationCreateInput, ItemLocationUncheckedCreateInput>
+  }
+
+
+  /**
+   * ItemLocation createMany
+   */
+  export type ItemLocationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ItemLocations.
+     */
+    data: ItemLocationCreateManyInput | ItemLocationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * ItemLocation update
+   */
+  export type ItemLocationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ItemLocation
+     */
+    select?: ItemLocationSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemLocationInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ItemLocation.
+     */
+    data: XOR<ItemLocationUpdateInput, ItemLocationUncheckedUpdateInput>
+    /**
+     * Choose, which ItemLocation to update.
+     */
+    where: ItemLocationWhereUniqueInput
+  }
+
+
+  /**
+   * ItemLocation updateMany
+   */
+  export type ItemLocationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ItemLocations.
+     */
+    data: XOR<ItemLocationUpdateManyMutationInput, ItemLocationUncheckedUpdateManyInput>
+    /**
+     * Filter which ItemLocations to update
+     */
+    where?: ItemLocationWhereInput
+  }
+
+
+  /**
+   * ItemLocation upsert
+   */
+  export type ItemLocationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ItemLocation
+     */
+    select?: ItemLocationSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemLocationInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ItemLocation to update in case it exists.
+     */
+    where: ItemLocationWhereUniqueInput
+    /**
+     * In case the ItemLocation found by the `where` argument doesn't exist, create a new ItemLocation with this data.
+     */
+    create: XOR<ItemLocationCreateInput, ItemLocationUncheckedCreateInput>
+    /**
+     * In case the ItemLocation was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ItemLocationUpdateInput, ItemLocationUncheckedUpdateInput>
+  }
+
+
+  /**
+   * ItemLocation delete
+   */
+  export type ItemLocationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ItemLocation
+     */
+    select?: ItemLocationSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemLocationInclude<ExtArgs> | null
+    /**
+     * Filter which ItemLocation to delete.
+     */
+    where: ItemLocationWhereUniqueInput
+  }
+
+
+  /**
+   * ItemLocation deleteMany
+   */
+  export type ItemLocationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ItemLocations to delete
+     */
+    where?: ItemLocationWhereInput
+  }
+
+
+  /**
+   * ItemLocation.origin_movements
+   */
+  export type ItemLocation$origin_movementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ItemMovement
+     */
+    select?: ItemMovementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemMovementInclude<ExtArgs> | null
+    where?: ItemMovementWhereInput
+    orderBy?: ItemMovementOrderByWithRelationInput | ItemMovementOrderByWithRelationInput[]
+    cursor?: ItemMovementWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ItemMovementScalarFieldEnum | ItemMovementScalarFieldEnum[]
+  }
+
+
+  /**
+   * ItemLocation.destination_movements
+   */
+  export type ItemLocation$destination_movementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ItemMovement
+     */
+    select?: ItemMovementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemMovementInclude<ExtArgs> | null
+    where?: ItemMovementWhereInput
+    orderBy?: ItemMovementOrderByWithRelationInput | ItemMovementOrderByWithRelationInput[]
+    cursor?: ItemMovementWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ItemMovementScalarFieldEnum | ItemMovementScalarFieldEnum[]
+  }
+
+
+  /**
+   * ItemLocation without action
+   */
+  export type ItemLocationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ItemLocation
+     */
+    select?: ItemLocationSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemLocationInclude<ExtArgs> | null
+  }
+
+
+
+  /**
+   * Model ItemMovement
+   */
+
+  export type AggregateItemMovement = {
+    _count: ItemMovementCountAggregateOutputType | null
+    _avg: ItemMovementAvgAggregateOutputType | null
+    _sum: ItemMovementSumAggregateOutputType | null
+    _min: ItemMovementMinAggregateOutputType | null
+    _max: ItemMovementMaxAggregateOutputType | null
+  }
+
+  export type ItemMovementAvgAggregateOutputType = {
+    quantity_moved: number | null
+  }
+
+  export type ItemMovementSumAggregateOutputType = {
+    quantity_moved: number | null
+  }
+
+  export type ItemMovementMinAggregateOutputType = {
+    id: string | null
+    origin_id: string | null
+    destination_id: string | null
+    quantity_moved: number | null
+    created_at: Date | null
+    updated_at: Date | null
+    is_deleted: boolean | null
+  }
+
+  export type ItemMovementMaxAggregateOutputType = {
+    id: string | null
+    origin_id: string | null
+    destination_id: string | null
+    quantity_moved: number | null
+    created_at: Date | null
+    updated_at: Date | null
+    is_deleted: boolean | null
+  }
+
+  export type ItemMovementCountAggregateOutputType = {
+    id: number
+    origin_id: number
+    destination_id: number
+    quantity_moved: number
+    created_at: number
+    updated_at: number
+    is_deleted: number
+    _all: number
+  }
+
+
+  export type ItemMovementAvgAggregateInputType = {
+    quantity_moved?: true
+  }
+
+  export type ItemMovementSumAggregateInputType = {
+    quantity_moved?: true
+  }
+
+  export type ItemMovementMinAggregateInputType = {
+    id?: true
+    origin_id?: true
+    destination_id?: true
+    quantity_moved?: true
+    created_at?: true
+    updated_at?: true
+    is_deleted?: true
+  }
+
+  export type ItemMovementMaxAggregateInputType = {
+    id?: true
+    origin_id?: true
+    destination_id?: true
+    quantity_moved?: true
+    created_at?: true
+    updated_at?: true
+    is_deleted?: true
+  }
+
+  export type ItemMovementCountAggregateInputType = {
+    id?: true
+    origin_id?: true
+    destination_id?: true
+    quantity_moved?: true
+    created_at?: true
+    updated_at?: true
+    is_deleted?: true
+    _all?: true
+  }
+
+  export type ItemMovementAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ItemMovement to aggregate.
+     */
+    where?: ItemMovementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ItemMovements to fetch.
+     */
+    orderBy?: ItemMovementOrderByWithRelationInput | ItemMovementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ItemMovementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ItemMovements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ItemMovements.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ItemMovements
+    **/
+    _count?: true | ItemMovementCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ItemMovementAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ItemMovementSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ItemMovementMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ItemMovementMaxAggregateInputType
+  }
+
+  export type GetItemMovementAggregateType<T extends ItemMovementAggregateArgs> = {
+        [P in keyof T & keyof AggregateItemMovement]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateItemMovement[P]>
+      : GetScalarType<T[P], AggregateItemMovement[P]>
+  }
+
+
+
+
+  export type ItemMovementGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ItemMovementWhereInput
+    orderBy?: ItemMovementOrderByWithAggregationInput | ItemMovementOrderByWithAggregationInput[]
+    by: ItemMovementScalarFieldEnum[] | ItemMovementScalarFieldEnum
+    having?: ItemMovementScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ItemMovementCountAggregateInputType | true
+    _avg?: ItemMovementAvgAggregateInputType
+    _sum?: ItemMovementSumAggregateInputType
+    _min?: ItemMovementMinAggregateInputType
+    _max?: ItemMovementMaxAggregateInputType
+  }
+
+  export type ItemMovementGroupByOutputType = {
+    id: string
+    origin_id: string
+    destination_id: string
+    quantity_moved: number
+    created_at: Date
+    updated_at: Date
+    is_deleted: boolean
+    _count: ItemMovementCountAggregateOutputType | null
+    _avg: ItemMovementAvgAggregateOutputType | null
+    _sum: ItemMovementSumAggregateOutputType | null
+    _min: ItemMovementMinAggregateOutputType | null
+    _max: ItemMovementMaxAggregateOutputType | null
+  }
+
+  type GetItemMovementGroupByPayload<T extends ItemMovementGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ItemMovementGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ItemMovementGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ItemMovementGroupByOutputType[P]>
+            : GetScalarType<T[P], ItemMovementGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ItemMovementSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    origin_id?: boolean
+    destination_id?: boolean
+    quantity_moved?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    is_deleted?: boolean
+    origin?: boolean | ItemLocationDefaultArgs<ExtArgs>
+    destination?: boolean | ItemLocationDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["itemMovement"]>
+
+  export type ItemMovementSelectScalar = {
+    id?: boolean
+    origin_id?: boolean
+    destination_id?: boolean
+    quantity_moved?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    is_deleted?: boolean
+  }
+
+  export type ItemMovementInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    origin?: boolean | ItemLocationDefaultArgs<ExtArgs>
+    destination?: boolean | ItemLocationDefaultArgs<ExtArgs>
+  }
+
+
+  export type $ItemMovementPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ItemMovement"
+    objects: {
+      origin: Prisma.$ItemLocationPayload<ExtArgs>
+      destination: Prisma.$ItemLocationPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      origin_id: string
+      destination_id: string
+      quantity_moved: number
+      created_at: Date
+      updated_at: Date
+      is_deleted: boolean
+    }, ExtArgs["result"]["itemMovement"]>
+    composites: {}
+  }
+
+
+  type ItemMovementGetPayload<S extends boolean | null | undefined | ItemMovementDefaultArgs> = $Result.GetResult<Prisma.$ItemMovementPayload, S>
+
+  type ItemMovementCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<ItemMovementFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: ItemMovementCountAggregateInputType | true
+    }
+
+  export interface ItemMovementDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ItemMovement'], meta: { name: 'ItemMovement' } }
+    /**
+     * Find zero or one ItemMovement that matches the filter.
+     * @param {ItemMovementFindUniqueArgs} args - Arguments to find a ItemMovement
+     * @example
+     * // Get one ItemMovement
+     * const itemMovement = await prisma.itemMovement.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends ItemMovementFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, ItemMovementFindUniqueArgs<ExtArgs>>
+    ): Prisma__ItemMovementClient<$Result.GetResult<Prisma.$ItemMovementPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one ItemMovement that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {ItemMovementFindUniqueOrThrowArgs} args - Arguments to find a ItemMovement
+     * @example
+     * // Get one ItemMovement
+     * const itemMovement = await prisma.itemMovement.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends ItemMovementFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, ItemMovementFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__ItemMovementClient<$Result.GetResult<Prisma.$ItemMovementPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first ItemMovement that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ItemMovementFindFirstArgs} args - Arguments to find a ItemMovement
+     * @example
+     * // Get one ItemMovement
+     * const itemMovement = await prisma.itemMovement.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends ItemMovementFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, ItemMovementFindFirstArgs<ExtArgs>>
+    ): Prisma__ItemMovementClient<$Result.GetResult<Prisma.$ItemMovementPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first ItemMovement that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ItemMovementFindFirstOrThrowArgs} args - Arguments to find a ItemMovement
+     * @example
+     * // Get one ItemMovement
+     * const itemMovement = await prisma.itemMovement.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends ItemMovementFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, ItemMovementFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__ItemMovementClient<$Result.GetResult<Prisma.$ItemMovementPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more ItemMovements that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ItemMovementFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ItemMovements
+     * const itemMovements = await prisma.itemMovement.findMany()
+     * 
+     * // Get first 10 ItemMovements
+     * const itemMovements = await prisma.itemMovement.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const itemMovementWithIdOnly = await prisma.itemMovement.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends ItemMovementFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, ItemMovementFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ItemMovementPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a ItemMovement.
+     * @param {ItemMovementCreateArgs} args - Arguments to create a ItemMovement.
+     * @example
+     * // Create one ItemMovement
+     * const ItemMovement = await prisma.itemMovement.create({
+     *   data: {
+     *     // ... data to create a ItemMovement
+     *   }
+     * })
+     * 
+    **/
+    create<T extends ItemMovementCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, ItemMovementCreateArgs<ExtArgs>>
+    ): Prisma__ItemMovementClient<$Result.GetResult<Prisma.$ItemMovementPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many ItemMovements.
+     *     @param {ItemMovementCreateManyArgs} args - Arguments to create many ItemMovements.
+     *     @example
+     *     // Create many ItemMovements
+     *     const itemMovement = await prisma.itemMovement.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends ItemMovementCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, ItemMovementCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a ItemMovement.
+     * @param {ItemMovementDeleteArgs} args - Arguments to delete one ItemMovement.
+     * @example
+     * // Delete one ItemMovement
+     * const ItemMovement = await prisma.itemMovement.delete({
+     *   where: {
+     *     // ... filter to delete one ItemMovement
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends ItemMovementDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, ItemMovementDeleteArgs<ExtArgs>>
+    ): Prisma__ItemMovementClient<$Result.GetResult<Prisma.$ItemMovementPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one ItemMovement.
+     * @param {ItemMovementUpdateArgs} args - Arguments to update one ItemMovement.
+     * @example
+     * // Update one ItemMovement
+     * const itemMovement = await prisma.itemMovement.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends ItemMovementUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, ItemMovementUpdateArgs<ExtArgs>>
+    ): Prisma__ItemMovementClient<$Result.GetResult<Prisma.$ItemMovementPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more ItemMovements.
+     * @param {ItemMovementDeleteManyArgs} args - Arguments to filter ItemMovements to delete.
+     * @example
+     * // Delete a few ItemMovements
+     * const { count } = await prisma.itemMovement.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends ItemMovementDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, ItemMovementDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ItemMovements.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ItemMovementUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ItemMovements
+     * const itemMovement = await prisma.itemMovement.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends ItemMovementUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, ItemMovementUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one ItemMovement.
+     * @param {ItemMovementUpsertArgs} args - Arguments to update or create a ItemMovement.
+     * @example
+     * // Update or create a ItemMovement
+     * const itemMovement = await prisma.itemMovement.upsert({
+     *   create: {
+     *     // ... data to create a ItemMovement
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ItemMovement we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends ItemMovementUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, ItemMovementUpsertArgs<ExtArgs>>
+    ): Prisma__ItemMovementClient<$Result.GetResult<Prisma.$ItemMovementPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of ItemMovements.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ItemMovementCountArgs} args - Arguments to filter ItemMovements to count.
+     * @example
+     * // Count the number of ItemMovements
+     * const count = await prisma.itemMovement.count({
+     *   where: {
+     *     // ... the filter for the ItemMovements we want to count
+     *   }
+     * })
+    **/
+    count<T extends ItemMovementCountArgs>(
+      args?: Subset<T, ItemMovementCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ItemMovementCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ItemMovement.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ItemMovementAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ItemMovementAggregateArgs>(args: Subset<T, ItemMovementAggregateArgs>): Prisma.PrismaPromise<GetItemMovementAggregateType<T>>
+
+    /**
+     * Group by ItemMovement.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ItemMovementGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ItemMovementGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ItemMovementGroupByArgs['orderBy'] }
+        : { orderBy?: ItemMovementGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ItemMovementGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetItemMovementGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ItemMovement model
+   */
+  readonly fields: ItemMovementFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ItemMovement.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ItemMovementClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+    origin<T extends ItemLocationDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ItemLocationDefaultArgs<ExtArgs>>): Prisma__ItemLocationClient<$Result.GetResult<Prisma.$ItemLocationPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    destination<T extends ItemLocationDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ItemLocationDefaultArgs<ExtArgs>>): Prisma__ItemLocationClient<$Result.GetResult<Prisma.$ItemLocationPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the ItemMovement model
+   */ 
+  interface ItemMovementFieldRefs {
+    readonly id: FieldRef<"ItemMovement", 'String'>
+    readonly origin_id: FieldRef<"ItemMovement", 'String'>
+    readonly destination_id: FieldRef<"ItemMovement", 'String'>
+    readonly quantity_moved: FieldRef<"ItemMovement", 'Int'>
+    readonly created_at: FieldRef<"ItemMovement", 'DateTime'>
+    readonly updated_at: FieldRef<"ItemMovement", 'DateTime'>
+    readonly is_deleted: FieldRef<"ItemMovement", 'Boolean'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * ItemMovement findUnique
+   */
+  export type ItemMovementFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ItemMovement
+     */
+    select?: ItemMovementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemMovementInclude<ExtArgs> | null
+    /**
+     * Filter, which ItemMovement to fetch.
+     */
+    where: ItemMovementWhereUniqueInput
+  }
+
+
+  /**
+   * ItemMovement findUniqueOrThrow
+   */
+  export type ItemMovementFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ItemMovement
+     */
+    select?: ItemMovementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemMovementInclude<ExtArgs> | null
+    /**
+     * Filter, which ItemMovement to fetch.
+     */
+    where: ItemMovementWhereUniqueInput
+  }
+
+
+  /**
+   * ItemMovement findFirst
+   */
+  export type ItemMovementFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ItemMovement
+     */
+    select?: ItemMovementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemMovementInclude<ExtArgs> | null
+    /**
+     * Filter, which ItemMovement to fetch.
+     */
+    where?: ItemMovementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ItemMovements to fetch.
+     */
+    orderBy?: ItemMovementOrderByWithRelationInput | ItemMovementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ItemMovements.
+     */
+    cursor?: ItemMovementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ItemMovements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ItemMovements.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ItemMovements.
+     */
+    distinct?: ItemMovementScalarFieldEnum | ItemMovementScalarFieldEnum[]
+  }
+
+
+  /**
+   * ItemMovement findFirstOrThrow
+   */
+  export type ItemMovementFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ItemMovement
+     */
+    select?: ItemMovementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemMovementInclude<ExtArgs> | null
+    /**
+     * Filter, which ItemMovement to fetch.
+     */
+    where?: ItemMovementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ItemMovements to fetch.
+     */
+    orderBy?: ItemMovementOrderByWithRelationInput | ItemMovementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ItemMovements.
+     */
+    cursor?: ItemMovementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ItemMovements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ItemMovements.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ItemMovements.
+     */
+    distinct?: ItemMovementScalarFieldEnum | ItemMovementScalarFieldEnum[]
+  }
+
+
+  /**
+   * ItemMovement findMany
+   */
+  export type ItemMovementFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ItemMovement
+     */
+    select?: ItemMovementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemMovementInclude<ExtArgs> | null
+    /**
+     * Filter, which ItemMovements to fetch.
+     */
+    where?: ItemMovementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ItemMovements to fetch.
+     */
+    orderBy?: ItemMovementOrderByWithRelationInput | ItemMovementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ItemMovements.
+     */
+    cursor?: ItemMovementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ItemMovements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ItemMovements.
+     */
+    skip?: number
+    distinct?: ItemMovementScalarFieldEnum | ItemMovementScalarFieldEnum[]
+  }
+
+
+  /**
+   * ItemMovement create
+   */
+  export type ItemMovementCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ItemMovement
+     */
+    select?: ItemMovementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemMovementInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ItemMovement.
+     */
+    data: XOR<ItemMovementCreateInput, ItemMovementUncheckedCreateInput>
+  }
+
+
+  /**
+   * ItemMovement createMany
+   */
+  export type ItemMovementCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ItemMovements.
+     */
+    data: ItemMovementCreateManyInput | ItemMovementCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * ItemMovement update
+   */
+  export type ItemMovementUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ItemMovement
+     */
+    select?: ItemMovementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemMovementInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ItemMovement.
+     */
+    data: XOR<ItemMovementUpdateInput, ItemMovementUncheckedUpdateInput>
+    /**
+     * Choose, which ItemMovement to update.
+     */
+    where: ItemMovementWhereUniqueInput
+  }
+
+
+  /**
+   * ItemMovement updateMany
+   */
+  export type ItemMovementUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ItemMovements.
+     */
+    data: XOR<ItemMovementUpdateManyMutationInput, ItemMovementUncheckedUpdateManyInput>
+    /**
+     * Filter which ItemMovements to update
+     */
+    where?: ItemMovementWhereInput
+  }
+
+
+  /**
+   * ItemMovement upsert
+   */
+  export type ItemMovementUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ItemMovement
+     */
+    select?: ItemMovementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemMovementInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ItemMovement to update in case it exists.
+     */
+    where: ItemMovementWhereUniqueInput
+    /**
+     * In case the ItemMovement found by the `where` argument doesn't exist, create a new ItemMovement with this data.
+     */
+    create: XOR<ItemMovementCreateInput, ItemMovementUncheckedCreateInput>
+    /**
+     * In case the ItemMovement was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ItemMovementUpdateInput, ItemMovementUncheckedUpdateInput>
+  }
+
+
+  /**
+   * ItemMovement delete
+   */
+  export type ItemMovementDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ItemMovement
+     */
+    select?: ItemMovementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemMovementInclude<ExtArgs> | null
+    /**
+     * Filter which ItemMovement to delete.
+     */
+    where: ItemMovementWhereUniqueInput
+  }
+
+
+  /**
+   * ItemMovement deleteMany
+   */
+  export type ItemMovementDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ItemMovements to delete
+     */
+    where?: ItemMovementWhereInput
+  }
+
+
+  /**
+   * ItemMovement without action
+   */
+  export type ItemMovementDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ItemMovement
+     */
+    select?: ItemMovementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ItemMovementInclude<ExtArgs> | null
   }
 
 
@@ -29612,6 +32936,18 @@ export namespace Prisma {
   export type VehicleScalarFieldEnum = (typeof VehicleScalarFieldEnum)[keyof typeof VehicleScalarFieldEnum]
 
 
+  export const StationScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    address: 'address',
+    created_at: 'created_at',
+    updated_at: 'updated_at',
+    is_deleted: 'is_deleted'
+  };
+
+  export type StationScalarFieldEnum = (typeof StationScalarFieldEnum)[keyof typeof StationScalarFieldEnum]
+
+
   export const CanvassItemScalarFieldEnum: {
     id: 'id',
     canvass_id: 'canvass_id',
@@ -29959,7 +33295,7 @@ export namespace Prisma {
     unit_id: 'unit_id',
     code: 'code',
     description: 'description',
-    quantity: 'quantity',
+    total_quantity: 'total_quantity',
     initial_quantity: 'initial_quantity',
     created_at: 'created_at',
     updated_at: 'updated_at',
@@ -29967,6 +33303,32 @@ export namespace Prisma {
   };
 
   export type ItemScalarFieldEnum = (typeof ItemScalarFieldEnum)[keyof typeof ItemScalarFieldEnum]
+
+
+  export const ItemLocationScalarFieldEnum: {
+    id: 'id',
+    item_id: 'item_id',
+    station_id: 'station_id',
+    quantity_on_hand: 'quantity_on_hand',
+    created_at: 'created_at',
+    updated_at: 'updated_at',
+    is_deleted: 'is_deleted'
+  };
+
+  export type ItemLocationScalarFieldEnum = (typeof ItemLocationScalarFieldEnum)[keyof typeof ItemLocationScalarFieldEnum]
+
+
+  export const ItemMovementScalarFieldEnum: {
+    id: 'id',
+    origin_id: 'origin_id',
+    destination_id: 'destination_id',
+    quantity_moved: 'quantity_moved',
+    created_at: 'created_at',
+    updated_at: 'updated_at',
+    is_deleted: 'is_deleted'
+  };
+
+  export type ItemMovementScalarFieldEnum = (typeof ItemMovementScalarFieldEnum)[keyof typeof ItemMovementScalarFieldEnum]
 
 
   export const ItemTypeScalarFieldEnum: {
@@ -30336,6 +33698,66 @@ export namespace Prisma {
     created_at?: DateTimeWithAggregatesFilter<"Vehicle"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"Vehicle"> | Date | string
     is_deleted?: BoolWithAggregatesFilter<"Vehicle"> | boolean
+  }
+
+  export type StationWhereInput = {
+    AND?: StationWhereInput | StationWhereInput[]
+    OR?: StationWhereInput[]
+    NOT?: StationWhereInput | StationWhereInput[]
+    id?: StringFilter<"Station"> | string
+    name?: StringFilter<"Station"> | string
+    address?: StringFilter<"Station"> | string
+    created_at?: DateTimeFilter<"Station"> | Date | string
+    updated_at?: DateTimeFilter<"Station"> | Date | string
+    is_deleted?: BoolFilter<"Station"> | boolean
+    items?: ItemLocationListRelationFilter
+  }
+
+  export type StationOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    address?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+    items?: ItemLocationOrderByRelationAggregateInput
+  }
+
+  export type StationWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: StationWhereInput | StationWhereInput[]
+    OR?: StationWhereInput[]
+    NOT?: StationWhereInput | StationWhereInput[]
+    name?: StringFilter<"Station"> | string
+    address?: StringFilter<"Station"> | string
+    created_at?: DateTimeFilter<"Station"> | Date | string
+    updated_at?: DateTimeFilter<"Station"> | Date | string
+    is_deleted?: BoolFilter<"Station"> | boolean
+    items?: ItemLocationListRelationFilter
+  }, "id">
+
+  export type StationOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    address?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+    _count?: StationCountOrderByAggregateInput
+    _max?: StationMaxOrderByAggregateInput
+    _min?: StationMinOrderByAggregateInput
+  }
+
+  export type StationScalarWhereWithAggregatesInput = {
+    AND?: StationScalarWhereWithAggregatesInput | StationScalarWhereWithAggregatesInput[]
+    OR?: StationScalarWhereWithAggregatesInput[]
+    NOT?: StationScalarWhereWithAggregatesInput | StationScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Station"> | string
+    name?: StringWithAggregatesFilter<"Station"> | string
+    address?: StringWithAggregatesFilter<"Station"> | string
+    created_at?: DateTimeWithAggregatesFilter<"Station"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"Station"> | Date | string
+    is_deleted?: BoolWithAggregatesFilter<"Station"> | boolean
   }
 
   export type CanvassItemWhereInput = {
@@ -32163,7 +35585,7 @@ export namespace Prisma {
     unit_id?: StringFilter<"Item"> | string
     code?: StringFilter<"Item"> | string
     description?: StringFilter<"Item"> | string
-    quantity?: IntFilter<"Item"> | number
+    total_quantity?: IntFilter<"Item"> | number
     initial_quantity?: IntFilter<"Item"> | number
     created_at?: DateTimeFilter<"Item"> | Date | string
     updated_at?: DateTimeFilter<"Item"> | Date | string
@@ -32171,6 +35593,7 @@ export namespace Prisma {
     item_type?: XOR<ItemTypeRelationFilter, ItemTypeWhereInput>
     item_transactions?: ItemTransactionListRelationFilter
     rr_items?: RRItemListRelationFilter
+    stations?: ItemLocationListRelationFilter
     unit?: XOR<UnitRelationFilter, UnitWhereInput>
   }
 
@@ -32180,7 +35603,7 @@ export namespace Prisma {
     unit_id?: SortOrder
     code?: SortOrder
     description?: SortOrder
-    quantity?: SortOrder
+    total_quantity?: SortOrder
     initial_quantity?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -32188,6 +35611,7 @@ export namespace Prisma {
     item_type?: ItemTypeOrderByWithRelationInput
     item_transactions?: ItemTransactionOrderByRelationAggregateInput
     rr_items?: RRItemOrderByRelationAggregateInput
+    stations?: ItemLocationOrderByRelationAggregateInput
     unit?: UnitOrderByWithRelationInput
   }
 
@@ -32200,7 +35624,7 @@ export namespace Prisma {
     item_type_id?: StringFilter<"Item"> | string
     unit_id?: StringFilter<"Item"> | string
     description?: StringFilter<"Item"> | string
-    quantity?: IntFilter<"Item"> | number
+    total_quantity?: IntFilter<"Item"> | number
     initial_quantity?: IntFilter<"Item"> | number
     created_at?: DateTimeFilter<"Item"> | Date | string
     updated_at?: DateTimeFilter<"Item"> | Date | string
@@ -32208,6 +35632,7 @@ export namespace Prisma {
     item_type?: XOR<ItemTypeRelationFilter, ItemTypeWhereInput>
     item_transactions?: ItemTransactionListRelationFilter
     rr_items?: RRItemListRelationFilter
+    stations?: ItemLocationListRelationFilter
     unit?: XOR<UnitRelationFilter, UnitWhereInput>
   }, "id" | "code">
 
@@ -32217,7 +35642,7 @@ export namespace Prisma {
     unit_id?: SortOrder
     code?: SortOrder
     description?: SortOrder
-    quantity?: SortOrder
+    total_quantity?: SortOrder
     initial_quantity?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -32238,11 +35663,157 @@ export namespace Prisma {
     unit_id?: StringWithAggregatesFilter<"Item"> | string
     code?: StringWithAggregatesFilter<"Item"> | string
     description?: StringWithAggregatesFilter<"Item"> | string
-    quantity?: IntWithAggregatesFilter<"Item"> | number
+    total_quantity?: IntWithAggregatesFilter<"Item"> | number
     initial_quantity?: IntWithAggregatesFilter<"Item"> | number
     created_at?: DateTimeWithAggregatesFilter<"Item"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"Item"> | Date | string
     is_deleted?: BoolWithAggregatesFilter<"Item"> | boolean
+  }
+
+  export type ItemLocationWhereInput = {
+    AND?: ItemLocationWhereInput | ItemLocationWhereInput[]
+    OR?: ItemLocationWhereInput[]
+    NOT?: ItemLocationWhereInput | ItemLocationWhereInput[]
+    id?: StringFilter<"ItemLocation"> | string
+    item_id?: StringFilter<"ItemLocation"> | string
+    station_id?: StringFilter<"ItemLocation"> | string
+    quantity_on_hand?: IntFilter<"ItemLocation"> | number
+    created_at?: DateTimeFilter<"ItemLocation"> | Date | string
+    updated_at?: DateTimeFilter<"ItemLocation"> | Date | string
+    is_deleted?: BoolFilter<"ItemLocation"> | boolean
+    item?: XOR<ItemRelationFilter, ItemWhereInput>
+    station?: XOR<StationRelationFilter, StationWhereInput>
+    origin_movements?: ItemMovementListRelationFilter
+    destination_movements?: ItemMovementListRelationFilter
+  }
+
+  export type ItemLocationOrderByWithRelationInput = {
+    id?: SortOrder
+    item_id?: SortOrder
+    station_id?: SortOrder
+    quantity_on_hand?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+    item?: ItemOrderByWithRelationInput
+    station?: StationOrderByWithRelationInput
+    origin_movements?: ItemMovementOrderByRelationAggregateInput
+    destination_movements?: ItemMovementOrderByRelationAggregateInput
+  }
+
+  export type ItemLocationWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ItemLocationWhereInput | ItemLocationWhereInput[]
+    OR?: ItemLocationWhereInput[]
+    NOT?: ItemLocationWhereInput | ItemLocationWhereInput[]
+    item_id?: StringFilter<"ItemLocation"> | string
+    station_id?: StringFilter<"ItemLocation"> | string
+    quantity_on_hand?: IntFilter<"ItemLocation"> | number
+    created_at?: DateTimeFilter<"ItemLocation"> | Date | string
+    updated_at?: DateTimeFilter<"ItemLocation"> | Date | string
+    is_deleted?: BoolFilter<"ItemLocation"> | boolean
+    item?: XOR<ItemRelationFilter, ItemWhereInput>
+    station?: XOR<StationRelationFilter, StationWhereInput>
+    origin_movements?: ItemMovementListRelationFilter
+    destination_movements?: ItemMovementListRelationFilter
+  }, "id">
+
+  export type ItemLocationOrderByWithAggregationInput = {
+    id?: SortOrder
+    item_id?: SortOrder
+    station_id?: SortOrder
+    quantity_on_hand?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+    _count?: ItemLocationCountOrderByAggregateInput
+    _avg?: ItemLocationAvgOrderByAggregateInput
+    _max?: ItemLocationMaxOrderByAggregateInput
+    _min?: ItemLocationMinOrderByAggregateInput
+    _sum?: ItemLocationSumOrderByAggregateInput
+  }
+
+  export type ItemLocationScalarWhereWithAggregatesInput = {
+    AND?: ItemLocationScalarWhereWithAggregatesInput | ItemLocationScalarWhereWithAggregatesInput[]
+    OR?: ItemLocationScalarWhereWithAggregatesInput[]
+    NOT?: ItemLocationScalarWhereWithAggregatesInput | ItemLocationScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ItemLocation"> | string
+    item_id?: StringWithAggregatesFilter<"ItemLocation"> | string
+    station_id?: StringWithAggregatesFilter<"ItemLocation"> | string
+    quantity_on_hand?: IntWithAggregatesFilter<"ItemLocation"> | number
+    created_at?: DateTimeWithAggregatesFilter<"ItemLocation"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"ItemLocation"> | Date | string
+    is_deleted?: BoolWithAggregatesFilter<"ItemLocation"> | boolean
+  }
+
+  export type ItemMovementWhereInput = {
+    AND?: ItemMovementWhereInput | ItemMovementWhereInput[]
+    OR?: ItemMovementWhereInput[]
+    NOT?: ItemMovementWhereInput | ItemMovementWhereInput[]
+    id?: StringFilter<"ItemMovement"> | string
+    origin_id?: StringFilter<"ItemMovement"> | string
+    destination_id?: StringFilter<"ItemMovement"> | string
+    quantity_moved?: IntFilter<"ItemMovement"> | number
+    created_at?: DateTimeFilter<"ItemMovement"> | Date | string
+    updated_at?: DateTimeFilter<"ItemMovement"> | Date | string
+    is_deleted?: BoolFilter<"ItemMovement"> | boolean
+    origin?: XOR<ItemLocationRelationFilter, ItemLocationWhereInput>
+    destination?: XOR<ItemLocationRelationFilter, ItemLocationWhereInput>
+  }
+
+  export type ItemMovementOrderByWithRelationInput = {
+    id?: SortOrder
+    origin_id?: SortOrder
+    destination_id?: SortOrder
+    quantity_moved?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+    origin?: ItemLocationOrderByWithRelationInput
+    destination?: ItemLocationOrderByWithRelationInput
+  }
+
+  export type ItemMovementWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ItemMovementWhereInput | ItemMovementWhereInput[]
+    OR?: ItemMovementWhereInput[]
+    NOT?: ItemMovementWhereInput | ItemMovementWhereInput[]
+    origin_id?: StringFilter<"ItemMovement"> | string
+    destination_id?: StringFilter<"ItemMovement"> | string
+    quantity_moved?: IntFilter<"ItemMovement"> | number
+    created_at?: DateTimeFilter<"ItemMovement"> | Date | string
+    updated_at?: DateTimeFilter<"ItemMovement"> | Date | string
+    is_deleted?: BoolFilter<"ItemMovement"> | boolean
+    origin?: XOR<ItemLocationRelationFilter, ItemLocationWhereInput>
+    destination?: XOR<ItemLocationRelationFilter, ItemLocationWhereInput>
+  }, "id">
+
+  export type ItemMovementOrderByWithAggregationInput = {
+    id?: SortOrder
+    origin_id?: SortOrder
+    destination_id?: SortOrder
+    quantity_moved?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+    _count?: ItemMovementCountOrderByAggregateInput
+    _avg?: ItemMovementAvgOrderByAggregateInput
+    _max?: ItemMovementMaxOrderByAggregateInput
+    _min?: ItemMovementMinOrderByAggregateInput
+    _sum?: ItemMovementSumOrderByAggregateInput
+  }
+
+  export type ItemMovementScalarWhereWithAggregatesInput = {
+    AND?: ItemMovementScalarWhereWithAggregatesInput | ItemMovementScalarWhereWithAggregatesInput[]
+    OR?: ItemMovementScalarWhereWithAggregatesInput[]
+    NOT?: ItemMovementScalarWhereWithAggregatesInput | ItemMovementScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ItemMovement"> | string
+    origin_id?: StringWithAggregatesFilter<"ItemMovement"> | string
+    destination_id?: StringWithAggregatesFilter<"ItemMovement"> | string
+    quantity_moved?: IntWithAggregatesFilter<"ItemMovement"> | number
+    created_at?: DateTimeWithAggregatesFilter<"ItemMovement"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"ItemMovement"> | Date | string
+    is_deleted?: BoolWithAggregatesFilter<"ItemMovement"> | boolean
   }
 
   export type ItemTypeWhereInput = {
@@ -32658,6 +36229,73 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     plate_number?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type StationCreateInput = {
+    id?: string
+    name: string
+    address: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    items?: ItemLocationCreateNestedManyWithoutStationInput
+  }
+
+  export type StationUncheckedCreateInput = {
+    id?: string
+    name: string
+    address: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    items?: ItemLocationUncheckedCreateNestedManyWithoutStationInput
+  }
+
+  export type StationUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    items?: ItemLocationUpdateManyWithoutStationNestedInput
+  }
+
+  export type StationUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    items?: ItemLocationUncheckedUpdateManyWithoutStationNestedInput
+  }
+
+  export type StationCreateManyInput = {
+    id?: string
+    name: string
+    address: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
+  export type StationUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type StationUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -34733,7 +38371,7 @@ export namespace Prisma {
     id?: string
     code: string
     description: string
-    quantity: number
+    total_quantity: number
     initial_quantity: number
     created_at?: Date | string
     updated_at?: Date | string
@@ -34741,6 +38379,7 @@ export namespace Prisma {
     item_type: ItemTypeCreateNestedOneWithoutItemsInput
     item_transactions?: ItemTransactionCreateNestedManyWithoutItemInput
     rr_items?: RRItemCreateNestedManyWithoutItemInput
+    stations?: ItemLocationCreateNestedManyWithoutItemInput
     unit: UnitCreateNestedOneWithoutItemsInput
   }
 
@@ -34750,20 +38389,21 @@ export namespace Prisma {
     unit_id: string
     code: string
     description: string
-    quantity: number
+    total_quantity: number
     initial_quantity: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
     item_transactions?: ItemTransactionUncheckedCreateNestedManyWithoutItemInput
     rr_items?: RRItemUncheckedCreateNestedManyWithoutItemInput
+    stations?: ItemLocationUncheckedCreateNestedManyWithoutItemInput
   }
 
   export type ItemUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
+    total_quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -34771,6 +38411,7 @@ export namespace Prisma {
     item_type?: ItemTypeUpdateOneRequiredWithoutItemsNestedInput
     item_transactions?: ItemTransactionUpdateManyWithoutItemNestedInput
     rr_items?: RRItemUpdateManyWithoutItemNestedInput
+    stations?: ItemLocationUpdateManyWithoutItemNestedInput
     unit?: UnitUpdateOneRequiredWithoutItemsNestedInput
   }
 
@@ -34780,13 +38421,14 @@ export namespace Prisma {
     unit_id?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
+    total_quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     item_transactions?: ItemTransactionUncheckedUpdateManyWithoutItemNestedInput
     rr_items?: RRItemUncheckedUpdateManyWithoutItemNestedInput
+    stations?: ItemLocationUncheckedUpdateManyWithoutItemNestedInput
   }
 
   export type ItemCreateManyInput = {
@@ -34795,7 +38437,7 @@ export namespace Prisma {
     unit_id: string
     code: string
     description: string
-    quantity: number
+    total_quantity: number
     initial_quantity: number
     created_at?: Date | string
     updated_at?: Date | string
@@ -34806,7 +38448,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
+    total_quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -34819,8 +38461,152 @@ export namespace Prisma {
     unit_id?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
+    total_quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type ItemLocationCreateInput = {
+    id?: string
+    quantity_on_hand: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    item: ItemCreateNestedOneWithoutStationsInput
+    station: StationCreateNestedOneWithoutItemsInput
+    origin_movements?: ItemMovementCreateNestedManyWithoutOriginInput
+    destination_movements?: ItemMovementCreateNestedManyWithoutDestinationInput
+  }
+
+  export type ItemLocationUncheckedCreateInput = {
+    id?: string
+    item_id: string
+    station_id: string
+    quantity_on_hand: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    origin_movements?: ItemMovementUncheckedCreateNestedManyWithoutOriginInput
+    destination_movements?: ItemMovementUncheckedCreateNestedManyWithoutDestinationInput
+  }
+
+  export type ItemLocationUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    quantity_on_hand?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    item?: ItemUpdateOneRequiredWithoutStationsNestedInput
+    station?: StationUpdateOneRequiredWithoutItemsNestedInput
+    origin_movements?: ItemMovementUpdateManyWithoutOriginNestedInput
+    destination_movements?: ItemMovementUpdateManyWithoutDestinationNestedInput
+  }
+
+  export type ItemLocationUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    item_id?: StringFieldUpdateOperationsInput | string
+    station_id?: StringFieldUpdateOperationsInput | string
+    quantity_on_hand?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    origin_movements?: ItemMovementUncheckedUpdateManyWithoutOriginNestedInput
+    destination_movements?: ItemMovementUncheckedUpdateManyWithoutDestinationNestedInput
+  }
+
+  export type ItemLocationCreateManyInput = {
+    id?: string
+    item_id: string
+    station_id: string
+    quantity_on_hand: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
+  export type ItemLocationUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    quantity_on_hand?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type ItemLocationUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    item_id?: StringFieldUpdateOperationsInput | string
+    station_id?: StringFieldUpdateOperationsInput | string
+    quantity_on_hand?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type ItemMovementCreateInput = {
+    id?: string
+    quantity_moved: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    origin: ItemLocationCreateNestedOneWithoutOrigin_movementsInput
+    destination: ItemLocationCreateNestedOneWithoutDestination_movementsInput
+  }
+
+  export type ItemMovementUncheckedCreateInput = {
+    id?: string
+    origin_id: string
+    destination_id: string
+    quantity_moved: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
+  export type ItemMovementUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    quantity_moved?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    origin?: ItemLocationUpdateOneRequiredWithoutOrigin_movementsNestedInput
+    destination?: ItemLocationUpdateOneRequiredWithoutDestination_movementsNestedInput
+  }
+
+  export type ItemMovementUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    origin_id?: StringFieldUpdateOperationsInput | string
+    destination_id?: StringFieldUpdateOperationsInput | string
+    quantity_moved?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type ItemMovementCreateManyInput = {
+    id?: string
+    origin_id: string
+    destination_id: string
+    quantity_moved: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
+  export type ItemMovementUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    quantity_moved?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type ItemMovementUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    origin_id?: StringFieldUpdateOperationsInput | string
+    destination_id?: StringFieldUpdateOperationsInput | string
+    quantity_moved?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -35238,6 +39024,43 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     plate_number?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+  }
+
+  export type ItemLocationListRelationFilter = {
+    every?: ItemLocationWhereInput
+    some?: ItemLocationWhereInput
+    none?: ItemLocationWhereInput
+  }
+
+  export type ItemLocationOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type StationCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    address?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+  }
+
+  export type StationMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    address?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+  }
+
+  export type StationMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    address?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -36516,7 +40339,7 @@ export namespace Prisma {
     unit_id?: SortOrder
     code?: SortOrder
     description?: SortOrder
-    quantity?: SortOrder
+    total_quantity?: SortOrder
     initial_quantity?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -36524,7 +40347,7 @@ export namespace Prisma {
   }
 
   export type ItemAvgOrderByAggregateInput = {
-    quantity?: SortOrder
+    total_quantity?: SortOrder
     initial_quantity?: SortOrder
   }
 
@@ -36534,7 +40357,7 @@ export namespace Prisma {
     unit_id?: SortOrder
     code?: SortOrder
     description?: SortOrder
-    quantity?: SortOrder
+    total_quantity?: SortOrder
     initial_quantity?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -36547,7 +40370,7 @@ export namespace Prisma {
     unit_id?: SortOrder
     code?: SortOrder
     description?: SortOrder
-    quantity?: SortOrder
+    total_quantity?: SortOrder
     initial_quantity?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -36555,8 +40378,109 @@ export namespace Prisma {
   }
 
   export type ItemSumOrderByAggregateInput = {
-    quantity?: SortOrder
+    total_quantity?: SortOrder
     initial_quantity?: SortOrder
+  }
+
+  export type ItemRelationFilter = {
+    is?: ItemWhereInput
+    isNot?: ItemWhereInput
+  }
+
+  export type StationRelationFilter = {
+    is?: StationWhereInput
+    isNot?: StationWhereInput
+  }
+
+  export type ItemMovementListRelationFilter = {
+    every?: ItemMovementWhereInput
+    some?: ItemMovementWhereInput
+    none?: ItemMovementWhereInput
+  }
+
+  export type ItemMovementOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ItemLocationCountOrderByAggregateInput = {
+    id?: SortOrder
+    item_id?: SortOrder
+    station_id?: SortOrder
+    quantity_on_hand?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+  }
+
+  export type ItemLocationAvgOrderByAggregateInput = {
+    quantity_on_hand?: SortOrder
+  }
+
+  export type ItemLocationMaxOrderByAggregateInput = {
+    id?: SortOrder
+    item_id?: SortOrder
+    station_id?: SortOrder
+    quantity_on_hand?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+  }
+
+  export type ItemLocationMinOrderByAggregateInput = {
+    id?: SortOrder
+    item_id?: SortOrder
+    station_id?: SortOrder
+    quantity_on_hand?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+  }
+
+  export type ItemLocationSumOrderByAggregateInput = {
+    quantity_on_hand?: SortOrder
+  }
+
+  export type ItemLocationRelationFilter = {
+    is?: ItemLocationWhereInput
+    isNot?: ItemLocationWhereInput
+  }
+
+  export type ItemMovementCountOrderByAggregateInput = {
+    id?: SortOrder
+    origin_id?: SortOrder
+    destination_id?: SortOrder
+    quantity_moved?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+  }
+
+  export type ItemMovementAvgOrderByAggregateInput = {
+    quantity_moved?: SortOrder
+  }
+
+  export type ItemMovementMaxOrderByAggregateInput = {
+    id?: SortOrder
+    origin_id?: SortOrder
+    destination_id?: SortOrder
+    quantity_moved?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+  }
+
+  export type ItemMovementMinOrderByAggregateInput = {
+    id?: SortOrder
+    origin_id?: SortOrder
+    destination_id?: SortOrder
+    quantity_moved?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    is_deleted?: SortOrder
+  }
+
+  export type ItemMovementSumOrderByAggregateInput = {
+    quantity_moved?: SortOrder
   }
 
   export type ItemTypeCountOrderByAggregateInput = {
@@ -36581,11 +40505,6 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
-  }
-
-  export type ItemRelationFilter = {
-    is?: ItemWhereInput
-    isNot?: ItemWhereInput
   }
 
   export type RRItemNullableRelationFilter = {
@@ -36959,6 +40878,48 @@ export namespace Prisma {
     update?: SPRUpdateWithWhereUniqueWithoutVehicleInput | SPRUpdateWithWhereUniqueWithoutVehicleInput[]
     updateMany?: SPRUpdateManyWithWhereWithoutVehicleInput | SPRUpdateManyWithWhereWithoutVehicleInput[]
     deleteMany?: SPRScalarWhereInput | SPRScalarWhereInput[]
+  }
+
+  export type ItemLocationCreateNestedManyWithoutStationInput = {
+    create?: XOR<ItemLocationCreateWithoutStationInput, ItemLocationUncheckedCreateWithoutStationInput> | ItemLocationCreateWithoutStationInput[] | ItemLocationUncheckedCreateWithoutStationInput[]
+    connectOrCreate?: ItemLocationCreateOrConnectWithoutStationInput | ItemLocationCreateOrConnectWithoutStationInput[]
+    createMany?: ItemLocationCreateManyStationInputEnvelope
+    connect?: ItemLocationWhereUniqueInput | ItemLocationWhereUniqueInput[]
+  }
+
+  export type ItemLocationUncheckedCreateNestedManyWithoutStationInput = {
+    create?: XOR<ItemLocationCreateWithoutStationInput, ItemLocationUncheckedCreateWithoutStationInput> | ItemLocationCreateWithoutStationInput[] | ItemLocationUncheckedCreateWithoutStationInput[]
+    connectOrCreate?: ItemLocationCreateOrConnectWithoutStationInput | ItemLocationCreateOrConnectWithoutStationInput[]
+    createMany?: ItemLocationCreateManyStationInputEnvelope
+    connect?: ItemLocationWhereUniqueInput | ItemLocationWhereUniqueInput[]
+  }
+
+  export type ItemLocationUpdateManyWithoutStationNestedInput = {
+    create?: XOR<ItemLocationCreateWithoutStationInput, ItemLocationUncheckedCreateWithoutStationInput> | ItemLocationCreateWithoutStationInput[] | ItemLocationUncheckedCreateWithoutStationInput[]
+    connectOrCreate?: ItemLocationCreateOrConnectWithoutStationInput | ItemLocationCreateOrConnectWithoutStationInput[]
+    upsert?: ItemLocationUpsertWithWhereUniqueWithoutStationInput | ItemLocationUpsertWithWhereUniqueWithoutStationInput[]
+    createMany?: ItemLocationCreateManyStationInputEnvelope
+    set?: ItemLocationWhereUniqueInput | ItemLocationWhereUniqueInput[]
+    disconnect?: ItemLocationWhereUniqueInput | ItemLocationWhereUniqueInput[]
+    delete?: ItemLocationWhereUniqueInput | ItemLocationWhereUniqueInput[]
+    connect?: ItemLocationWhereUniqueInput | ItemLocationWhereUniqueInput[]
+    update?: ItemLocationUpdateWithWhereUniqueWithoutStationInput | ItemLocationUpdateWithWhereUniqueWithoutStationInput[]
+    updateMany?: ItemLocationUpdateManyWithWhereWithoutStationInput | ItemLocationUpdateManyWithWhereWithoutStationInput[]
+    deleteMany?: ItemLocationScalarWhereInput | ItemLocationScalarWhereInput[]
+  }
+
+  export type ItemLocationUncheckedUpdateManyWithoutStationNestedInput = {
+    create?: XOR<ItemLocationCreateWithoutStationInput, ItemLocationUncheckedCreateWithoutStationInput> | ItemLocationCreateWithoutStationInput[] | ItemLocationUncheckedCreateWithoutStationInput[]
+    connectOrCreate?: ItemLocationCreateOrConnectWithoutStationInput | ItemLocationCreateOrConnectWithoutStationInput[]
+    upsert?: ItemLocationUpsertWithWhereUniqueWithoutStationInput | ItemLocationUpsertWithWhereUniqueWithoutStationInput[]
+    createMany?: ItemLocationCreateManyStationInputEnvelope
+    set?: ItemLocationWhereUniqueInput | ItemLocationWhereUniqueInput[]
+    disconnect?: ItemLocationWhereUniqueInput | ItemLocationWhereUniqueInput[]
+    delete?: ItemLocationWhereUniqueInput | ItemLocationWhereUniqueInput[]
+    connect?: ItemLocationWhereUniqueInput | ItemLocationWhereUniqueInput[]
+    update?: ItemLocationUpdateWithWhereUniqueWithoutStationInput | ItemLocationUpdateWithWhereUniqueWithoutStationInput[]
+    updateMany?: ItemLocationUpdateManyWithWhereWithoutStationInput | ItemLocationUpdateManyWithWhereWithoutStationInput[]
+    deleteMany?: ItemLocationScalarWhereInput | ItemLocationScalarWhereInput[]
   }
 
   export type CanvassCreateNestedOneWithoutCanvass_itemsInput = {
@@ -38183,6 +42144,13 @@ export namespace Prisma {
     connect?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
   }
 
+  export type ItemLocationCreateNestedManyWithoutItemInput = {
+    create?: XOR<ItemLocationCreateWithoutItemInput, ItemLocationUncheckedCreateWithoutItemInput> | ItemLocationCreateWithoutItemInput[] | ItemLocationUncheckedCreateWithoutItemInput[]
+    connectOrCreate?: ItemLocationCreateOrConnectWithoutItemInput | ItemLocationCreateOrConnectWithoutItemInput[]
+    createMany?: ItemLocationCreateManyItemInputEnvelope
+    connect?: ItemLocationWhereUniqueInput | ItemLocationWhereUniqueInput[]
+  }
+
   export type UnitCreateNestedOneWithoutItemsInput = {
     create?: XOR<UnitCreateWithoutItemsInput, UnitUncheckedCreateWithoutItemsInput>
     connectOrCreate?: UnitCreateOrConnectWithoutItemsInput
@@ -38201,6 +42169,13 @@ export namespace Prisma {
     connectOrCreate?: RRItemCreateOrConnectWithoutItemInput | RRItemCreateOrConnectWithoutItemInput[]
     createMany?: RRItemCreateManyItemInputEnvelope
     connect?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
+  }
+
+  export type ItemLocationUncheckedCreateNestedManyWithoutItemInput = {
+    create?: XOR<ItemLocationCreateWithoutItemInput, ItemLocationUncheckedCreateWithoutItemInput> | ItemLocationCreateWithoutItemInput[] | ItemLocationUncheckedCreateWithoutItemInput[]
+    connectOrCreate?: ItemLocationCreateOrConnectWithoutItemInput | ItemLocationCreateOrConnectWithoutItemInput[]
+    createMany?: ItemLocationCreateManyItemInputEnvelope
+    connect?: ItemLocationWhereUniqueInput | ItemLocationWhereUniqueInput[]
   }
 
   export type ItemTypeUpdateOneRequiredWithoutItemsNestedInput = {
@@ -38239,6 +42214,20 @@ export namespace Prisma {
     deleteMany?: RRItemScalarWhereInput | RRItemScalarWhereInput[]
   }
 
+  export type ItemLocationUpdateManyWithoutItemNestedInput = {
+    create?: XOR<ItemLocationCreateWithoutItemInput, ItemLocationUncheckedCreateWithoutItemInput> | ItemLocationCreateWithoutItemInput[] | ItemLocationUncheckedCreateWithoutItemInput[]
+    connectOrCreate?: ItemLocationCreateOrConnectWithoutItemInput | ItemLocationCreateOrConnectWithoutItemInput[]
+    upsert?: ItemLocationUpsertWithWhereUniqueWithoutItemInput | ItemLocationUpsertWithWhereUniqueWithoutItemInput[]
+    createMany?: ItemLocationCreateManyItemInputEnvelope
+    set?: ItemLocationWhereUniqueInput | ItemLocationWhereUniqueInput[]
+    disconnect?: ItemLocationWhereUniqueInput | ItemLocationWhereUniqueInput[]
+    delete?: ItemLocationWhereUniqueInput | ItemLocationWhereUniqueInput[]
+    connect?: ItemLocationWhereUniqueInput | ItemLocationWhereUniqueInput[]
+    update?: ItemLocationUpdateWithWhereUniqueWithoutItemInput | ItemLocationUpdateWithWhereUniqueWithoutItemInput[]
+    updateMany?: ItemLocationUpdateManyWithWhereWithoutItemInput | ItemLocationUpdateManyWithWhereWithoutItemInput[]
+    deleteMany?: ItemLocationScalarWhereInput | ItemLocationScalarWhereInput[]
+  }
+
   export type UnitUpdateOneRequiredWithoutItemsNestedInput = {
     create?: XOR<UnitCreateWithoutItemsInput, UnitUncheckedCreateWithoutItemsInput>
     connectOrCreate?: UnitCreateOrConnectWithoutItemsInput
@@ -38273,6 +42262,160 @@ export namespace Prisma {
     update?: RRItemUpdateWithWhereUniqueWithoutItemInput | RRItemUpdateWithWhereUniqueWithoutItemInput[]
     updateMany?: RRItemUpdateManyWithWhereWithoutItemInput | RRItemUpdateManyWithWhereWithoutItemInput[]
     deleteMany?: RRItemScalarWhereInput | RRItemScalarWhereInput[]
+  }
+
+  export type ItemLocationUncheckedUpdateManyWithoutItemNestedInput = {
+    create?: XOR<ItemLocationCreateWithoutItemInput, ItemLocationUncheckedCreateWithoutItemInput> | ItemLocationCreateWithoutItemInput[] | ItemLocationUncheckedCreateWithoutItemInput[]
+    connectOrCreate?: ItemLocationCreateOrConnectWithoutItemInput | ItemLocationCreateOrConnectWithoutItemInput[]
+    upsert?: ItemLocationUpsertWithWhereUniqueWithoutItemInput | ItemLocationUpsertWithWhereUniqueWithoutItemInput[]
+    createMany?: ItemLocationCreateManyItemInputEnvelope
+    set?: ItemLocationWhereUniqueInput | ItemLocationWhereUniqueInput[]
+    disconnect?: ItemLocationWhereUniqueInput | ItemLocationWhereUniqueInput[]
+    delete?: ItemLocationWhereUniqueInput | ItemLocationWhereUniqueInput[]
+    connect?: ItemLocationWhereUniqueInput | ItemLocationWhereUniqueInput[]
+    update?: ItemLocationUpdateWithWhereUniqueWithoutItemInput | ItemLocationUpdateWithWhereUniqueWithoutItemInput[]
+    updateMany?: ItemLocationUpdateManyWithWhereWithoutItemInput | ItemLocationUpdateManyWithWhereWithoutItemInput[]
+    deleteMany?: ItemLocationScalarWhereInput | ItemLocationScalarWhereInput[]
+  }
+
+  export type ItemCreateNestedOneWithoutStationsInput = {
+    create?: XOR<ItemCreateWithoutStationsInput, ItemUncheckedCreateWithoutStationsInput>
+    connectOrCreate?: ItemCreateOrConnectWithoutStationsInput
+    connect?: ItemWhereUniqueInput
+  }
+
+  export type StationCreateNestedOneWithoutItemsInput = {
+    create?: XOR<StationCreateWithoutItemsInput, StationUncheckedCreateWithoutItemsInput>
+    connectOrCreate?: StationCreateOrConnectWithoutItemsInput
+    connect?: StationWhereUniqueInput
+  }
+
+  export type ItemMovementCreateNestedManyWithoutOriginInput = {
+    create?: XOR<ItemMovementCreateWithoutOriginInput, ItemMovementUncheckedCreateWithoutOriginInput> | ItemMovementCreateWithoutOriginInput[] | ItemMovementUncheckedCreateWithoutOriginInput[]
+    connectOrCreate?: ItemMovementCreateOrConnectWithoutOriginInput | ItemMovementCreateOrConnectWithoutOriginInput[]
+    createMany?: ItemMovementCreateManyOriginInputEnvelope
+    connect?: ItemMovementWhereUniqueInput | ItemMovementWhereUniqueInput[]
+  }
+
+  export type ItemMovementCreateNestedManyWithoutDestinationInput = {
+    create?: XOR<ItemMovementCreateWithoutDestinationInput, ItemMovementUncheckedCreateWithoutDestinationInput> | ItemMovementCreateWithoutDestinationInput[] | ItemMovementUncheckedCreateWithoutDestinationInput[]
+    connectOrCreate?: ItemMovementCreateOrConnectWithoutDestinationInput | ItemMovementCreateOrConnectWithoutDestinationInput[]
+    createMany?: ItemMovementCreateManyDestinationInputEnvelope
+    connect?: ItemMovementWhereUniqueInput | ItemMovementWhereUniqueInput[]
+  }
+
+  export type ItemMovementUncheckedCreateNestedManyWithoutOriginInput = {
+    create?: XOR<ItemMovementCreateWithoutOriginInput, ItemMovementUncheckedCreateWithoutOriginInput> | ItemMovementCreateWithoutOriginInput[] | ItemMovementUncheckedCreateWithoutOriginInput[]
+    connectOrCreate?: ItemMovementCreateOrConnectWithoutOriginInput | ItemMovementCreateOrConnectWithoutOriginInput[]
+    createMany?: ItemMovementCreateManyOriginInputEnvelope
+    connect?: ItemMovementWhereUniqueInput | ItemMovementWhereUniqueInput[]
+  }
+
+  export type ItemMovementUncheckedCreateNestedManyWithoutDestinationInput = {
+    create?: XOR<ItemMovementCreateWithoutDestinationInput, ItemMovementUncheckedCreateWithoutDestinationInput> | ItemMovementCreateWithoutDestinationInput[] | ItemMovementUncheckedCreateWithoutDestinationInput[]
+    connectOrCreate?: ItemMovementCreateOrConnectWithoutDestinationInput | ItemMovementCreateOrConnectWithoutDestinationInput[]
+    createMany?: ItemMovementCreateManyDestinationInputEnvelope
+    connect?: ItemMovementWhereUniqueInput | ItemMovementWhereUniqueInput[]
+  }
+
+  export type ItemUpdateOneRequiredWithoutStationsNestedInput = {
+    create?: XOR<ItemCreateWithoutStationsInput, ItemUncheckedCreateWithoutStationsInput>
+    connectOrCreate?: ItemCreateOrConnectWithoutStationsInput
+    upsert?: ItemUpsertWithoutStationsInput
+    connect?: ItemWhereUniqueInput
+    update?: XOR<XOR<ItemUpdateToOneWithWhereWithoutStationsInput, ItemUpdateWithoutStationsInput>, ItemUncheckedUpdateWithoutStationsInput>
+  }
+
+  export type StationUpdateOneRequiredWithoutItemsNestedInput = {
+    create?: XOR<StationCreateWithoutItemsInput, StationUncheckedCreateWithoutItemsInput>
+    connectOrCreate?: StationCreateOrConnectWithoutItemsInput
+    upsert?: StationUpsertWithoutItemsInput
+    connect?: StationWhereUniqueInput
+    update?: XOR<XOR<StationUpdateToOneWithWhereWithoutItemsInput, StationUpdateWithoutItemsInput>, StationUncheckedUpdateWithoutItemsInput>
+  }
+
+  export type ItemMovementUpdateManyWithoutOriginNestedInput = {
+    create?: XOR<ItemMovementCreateWithoutOriginInput, ItemMovementUncheckedCreateWithoutOriginInput> | ItemMovementCreateWithoutOriginInput[] | ItemMovementUncheckedCreateWithoutOriginInput[]
+    connectOrCreate?: ItemMovementCreateOrConnectWithoutOriginInput | ItemMovementCreateOrConnectWithoutOriginInput[]
+    upsert?: ItemMovementUpsertWithWhereUniqueWithoutOriginInput | ItemMovementUpsertWithWhereUniqueWithoutOriginInput[]
+    createMany?: ItemMovementCreateManyOriginInputEnvelope
+    set?: ItemMovementWhereUniqueInput | ItemMovementWhereUniqueInput[]
+    disconnect?: ItemMovementWhereUniqueInput | ItemMovementWhereUniqueInput[]
+    delete?: ItemMovementWhereUniqueInput | ItemMovementWhereUniqueInput[]
+    connect?: ItemMovementWhereUniqueInput | ItemMovementWhereUniqueInput[]
+    update?: ItemMovementUpdateWithWhereUniqueWithoutOriginInput | ItemMovementUpdateWithWhereUniqueWithoutOriginInput[]
+    updateMany?: ItemMovementUpdateManyWithWhereWithoutOriginInput | ItemMovementUpdateManyWithWhereWithoutOriginInput[]
+    deleteMany?: ItemMovementScalarWhereInput | ItemMovementScalarWhereInput[]
+  }
+
+  export type ItemMovementUpdateManyWithoutDestinationNestedInput = {
+    create?: XOR<ItemMovementCreateWithoutDestinationInput, ItemMovementUncheckedCreateWithoutDestinationInput> | ItemMovementCreateWithoutDestinationInput[] | ItemMovementUncheckedCreateWithoutDestinationInput[]
+    connectOrCreate?: ItemMovementCreateOrConnectWithoutDestinationInput | ItemMovementCreateOrConnectWithoutDestinationInput[]
+    upsert?: ItemMovementUpsertWithWhereUniqueWithoutDestinationInput | ItemMovementUpsertWithWhereUniqueWithoutDestinationInput[]
+    createMany?: ItemMovementCreateManyDestinationInputEnvelope
+    set?: ItemMovementWhereUniqueInput | ItemMovementWhereUniqueInput[]
+    disconnect?: ItemMovementWhereUniqueInput | ItemMovementWhereUniqueInput[]
+    delete?: ItemMovementWhereUniqueInput | ItemMovementWhereUniqueInput[]
+    connect?: ItemMovementWhereUniqueInput | ItemMovementWhereUniqueInput[]
+    update?: ItemMovementUpdateWithWhereUniqueWithoutDestinationInput | ItemMovementUpdateWithWhereUniqueWithoutDestinationInput[]
+    updateMany?: ItemMovementUpdateManyWithWhereWithoutDestinationInput | ItemMovementUpdateManyWithWhereWithoutDestinationInput[]
+    deleteMany?: ItemMovementScalarWhereInput | ItemMovementScalarWhereInput[]
+  }
+
+  export type ItemMovementUncheckedUpdateManyWithoutOriginNestedInput = {
+    create?: XOR<ItemMovementCreateWithoutOriginInput, ItemMovementUncheckedCreateWithoutOriginInput> | ItemMovementCreateWithoutOriginInput[] | ItemMovementUncheckedCreateWithoutOriginInput[]
+    connectOrCreate?: ItemMovementCreateOrConnectWithoutOriginInput | ItemMovementCreateOrConnectWithoutOriginInput[]
+    upsert?: ItemMovementUpsertWithWhereUniqueWithoutOriginInput | ItemMovementUpsertWithWhereUniqueWithoutOriginInput[]
+    createMany?: ItemMovementCreateManyOriginInputEnvelope
+    set?: ItemMovementWhereUniqueInput | ItemMovementWhereUniqueInput[]
+    disconnect?: ItemMovementWhereUniqueInput | ItemMovementWhereUniqueInput[]
+    delete?: ItemMovementWhereUniqueInput | ItemMovementWhereUniqueInput[]
+    connect?: ItemMovementWhereUniqueInput | ItemMovementWhereUniqueInput[]
+    update?: ItemMovementUpdateWithWhereUniqueWithoutOriginInput | ItemMovementUpdateWithWhereUniqueWithoutOriginInput[]
+    updateMany?: ItemMovementUpdateManyWithWhereWithoutOriginInput | ItemMovementUpdateManyWithWhereWithoutOriginInput[]
+    deleteMany?: ItemMovementScalarWhereInput | ItemMovementScalarWhereInput[]
+  }
+
+  export type ItemMovementUncheckedUpdateManyWithoutDestinationNestedInput = {
+    create?: XOR<ItemMovementCreateWithoutDestinationInput, ItemMovementUncheckedCreateWithoutDestinationInput> | ItemMovementCreateWithoutDestinationInput[] | ItemMovementUncheckedCreateWithoutDestinationInput[]
+    connectOrCreate?: ItemMovementCreateOrConnectWithoutDestinationInput | ItemMovementCreateOrConnectWithoutDestinationInput[]
+    upsert?: ItemMovementUpsertWithWhereUniqueWithoutDestinationInput | ItemMovementUpsertWithWhereUniqueWithoutDestinationInput[]
+    createMany?: ItemMovementCreateManyDestinationInputEnvelope
+    set?: ItemMovementWhereUniqueInput | ItemMovementWhereUniqueInput[]
+    disconnect?: ItemMovementWhereUniqueInput | ItemMovementWhereUniqueInput[]
+    delete?: ItemMovementWhereUniqueInput | ItemMovementWhereUniqueInput[]
+    connect?: ItemMovementWhereUniqueInput | ItemMovementWhereUniqueInput[]
+    update?: ItemMovementUpdateWithWhereUniqueWithoutDestinationInput | ItemMovementUpdateWithWhereUniqueWithoutDestinationInput[]
+    updateMany?: ItemMovementUpdateManyWithWhereWithoutDestinationInput | ItemMovementUpdateManyWithWhereWithoutDestinationInput[]
+    deleteMany?: ItemMovementScalarWhereInput | ItemMovementScalarWhereInput[]
+  }
+
+  export type ItemLocationCreateNestedOneWithoutOrigin_movementsInput = {
+    create?: XOR<ItemLocationCreateWithoutOrigin_movementsInput, ItemLocationUncheckedCreateWithoutOrigin_movementsInput>
+    connectOrCreate?: ItemLocationCreateOrConnectWithoutOrigin_movementsInput
+    connect?: ItemLocationWhereUniqueInput
+  }
+
+  export type ItemLocationCreateNestedOneWithoutDestination_movementsInput = {
+    create?: XOR<ItemLocationCreateWithoutDestination_movementsInput, ItemLocationUncheckedCreateWithoutDestination_movementsInput>
+    connectOrCreate?: ItemLocationCreateOrConnectWithoutDestination_movementsInput
+    connect?: ItemLocationWhereUniqueInput
+  }
+
+  export type ItemLocationUpdateOneRequiredWithoutOrigin_movementsNestedInput = {
+    create?: XOR<ItemLocationCreateWithoutOrigin_movementsInput, ItemLocationUncheckedCreateWithoutOrigin_movementsInput>
+    connectOrCreate?: ItemLocationCreateOrConnectWithoutOrigin_movementsInput
+    upsert?: ItemLocationUpsertWithoutOrigin_movementsInput
+    connect?: ItemLocationWhereUniqueInput
+    update?: XOR<XOR<ItemLocationUpdateToOneWithWhereWithoutOrigin_movementsInput, ItemLocationUpdateWithoutOrigin_movementsInput>, ItemLocationUncheckedUpdateWithoutOrigin_movementsInput>
+  }
+
+  export type ItemLocationUpdateOneRequiredWithoutDestination_movementsNestedInput = {
+    create?: XOR<ItemLocationCreateWithoutDestination_movementsInput, ItemLocationUncheckedCreateWithoutDestination_movementsInput>
+    connectOrCreate?: ItemLocationCreateOrConnectWithoutDestination_movementsInput
+    upsert?: ItemLocationUpsertWithoutDestination_movementsInput
+    connect?: ItemLocationWhereUniqueInput
+    update?: XOR<XOR<ItemLocationUpdateToOneWithWhereWithoutDestination_movementsInput, ItemLocationUpdateWithoutDestination_movementsInput>, ItemLocationUncheckedUpdateWithoutDestination_movementsInput>
   }
 
   export type ItemCreateNestedManyWithoutItem_typeInput = {
@@ -38686,7 +42829,7 @@ export namespace Prisma {
     id?: string
     code: string
     description: string
-    quantity: number
+    total_quantity: number
     initial_quantity: number
     created_at?: Date | string
     updated_at?: Date | string
@@ -38694,6 +42837,7 @@ export namespace Prisma {
     item_type: ItemTypeCreateNestedOneWithoutItemsInput
     item_transactions?: ItemTransactionCreateNestedManyWithoutItemInput
     rr_items?: RRItemCreateNestedManyWithoutItemInput
+    stations?: ItemLocationCreateNestedManyWithoutItemInput
   }
 
   export type ItemUncheckedCreateWithoutUnitInput = {
@@ -38701,13 +42845,14 @@ export namespace Prisma {
     item_type_id: string
     code: string
     description: string
-    quantity: number
+    total_quantity: number
     initial_quantity: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
     item_transactions?: ItemTransactionUncheckedCreateNestedManyWithoutItemInput
     rr_items?: RRItemUncheckedCreateNestedManyWithoutItemInput
+    stations?: ItemLocationUncheckedCreateNestedManyWithoutItemInput
   }
 
   export type ItemCreateOrConnectWithoutUnitInput = {
@@ -38814,7 +42959,7 @@ export namespace Prisma {
     unit_id?: StringFilter<"Item"> | string
     code?: StringFilter<"Item"> | string
     description?: StringFilter<"Item"> | string
-    quantity?: IntFilter<"Item"> | number
+    total_quantity?: IntFilter<"Item"> | number
     initial_quantity?: IntFilter<"Item"> | number
     created_at?: DateTimeFilter<"Item"> | Date | string
     updated_at?: DateTimeFilter<"Item"> | Date | string
@@ -39024,6 +43169,67 @@ export namespace Prisma {
     created_by?: StringFilter<"SPR"> | string
     updated_by?: StringNullableFilter<"SPR"> | string | null
     deleted_by?: StringNullableFilter<"SPR"> | string | null
+  }
+
+  export type ItemLocationCreateWithoutStationInput = {
+    id?: string
+    quantity_on_hand: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    item: ItemCreateNestedOneWithoutStationsInput
+    origin_movements?: ItemMovementCreateNestedManyWithoutOriginInput
+    destination_movements?: ItemMovementCreateNestedManyWithoutDestinationInput
+  }
+
+  export type ItemLocationUncheckedCreateWithoutStationInput = {
+    id?: string
+    item_id: string
+    quantity_on_hand: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    origin_movements?: ItemMovementUncheckedCreateNestedManyWithoutOriginInput
+    destination_movements?: ItemMovementUncheckedCreateNestedManyWithoutDestinationInput
+  }
+
+  export type ItemLocationCreateOrConnectWithoutStationInput = {
+    where: ItemLocationWhereUniqueInput
+    create: XOR<ItemLocationCreateWithoutStationInput, ItemLocationUncheckedCreateWithoutStationInput>
+  }
+
+  export type ItemLocationCreateManyStationInputEnvelope = {
+    data: ItemLocationCreateManyStationInput | ItemLocationCreateManyStationInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ItemLocationUpsertWithWhereUniqueWithoutStationInput = {
+    where: ItemLocationWhereUniqueInput
+    update: XOR<ItemLocationUpdateWithoutStationInput, ItemLocationUncheckedUpdateWithoutStationInput>
+    create: XOR<ItemLocationCreateWithoutStationInput, ItemLocationUncheckedCreateWithoutStationInput>
+  }
+
+  export type ItemLocationUpdateWithWhereUniqueWithoutStationInput = {
+    where: ItemLocationWhereUniqueInput
+    data: XOR<ItemLocationUpdateWithoutStationInput, ItemLocationUncheckedUpdateWithoutStationInput>
+  }
+
+  export type ItemLocationUpdateManyWithWhereWithoutStationInput = {
+    where: ItemLocationScalarWhereInput
+    data: XOR<ItemLocationUpdateManyMutationInput, ItemLocationUncheckedUpdateManyWithoutStationInput>
+  }
+
+  export type ItemLocationScalarWhereInput = {
+    AND?: ItemLocationScalarWhereInput | ItemLocationScalarWhereInput[]
+    OR?: ItemLocationScalarWhereInput[]
+    NOT?: ItemLocationScalarWhereInput | ItemLocationScalarWhereInput[]
+    id?: StringFilter<"ItemLocation"> | string
+    item_id?: StringFilter<"ItemLocation"> | string
+    station_id?: StringFilter<"ItemLocation"> | string
+    quantity_on_hand?: IntFilter<"ItemLocation"> | number
+    created_at?: DateTimeFilter<"ItemLocation"> | Date | string
+    updated_at?: DateTimeFilter<"ItemLocation"> | Date | string
+    is_deleted?: BoolFilter<"ItemLocation"> | boolean
   }
 
   export type CanvassCreateWithoutCanvass_itemsInput = {
@@ -42554,13 +46760,14 @@ export namespace Prisma {
     id?: string
     code: string
     description: string
-    quantity: number
+    total_quantity: number
     initial_quantity: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
     item_type: ItemTypeCreateNestedOneWithoutItemsInput
     item_transactions?: ItemTransactionCreateNestedManyWithoutItemInput
+    stations?: ItemLocationCreateNestedManyWithoutItemInput
     unit: UnitCreateNestedOneWithoutItemsInput
   }
 
@@ -42570,12 +46777,13 @@ export namespace Prisma {
     unit_id: string
     code: string
     description: string
-    quantity: number
+    total_quantity: number
     initial_quantity: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
     item_transactions?: ItemTransactionUncheckedCreateNestedManyWithoutItemInput
+    stations?: ItemLocationUncheckedCreateNestedManyWithoutItemInput
   }
 
   export type ItemCreateOrConnectWithoutRr_itemsInput = {
@@ -42732,13 +46940,14 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
+    total_quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     item_type?: ItemTypeUpdateOneRequiredWithoutItemsNestedInput
     item_transactions?: ItemTransactionUpdateManyWithoutItemNestedInput
+    stations?: ItemLocationUpdateManyWithoutItemNestedInput
     unit?: UnitUpdateOneRequiredWithoutItemsNestedInput
   }
 
@@ -42748,12 +46957,13 @@ export namespace Prisma {
     unit_id?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
+    total_quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     item_transactions?: ItemTransactionUncheckedUpdateManyWithoutItemNestedInput
+    stations?: ItemLocationUncheckedUpdateManyWithoutItemNestedInput
   }
 
   export type BrandUpsertWithoutRr_itemsInput = {
@@ -42958,6 +47168,38 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ItemLocationCreateWithoutItemInput = {
+    id?: string
+    quantity_on_hand: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    station: StationCreateNestedOneWithoutItemsInput
+    origin_movements?: ItemMovementCreateNestedManyWithoutOriginInput
+    destination_movements?: ItemMovementCreateNestedManyWithoutDestinationInput
+  }
+
+  export type ItemLocationUncheckedCreateWithoutItemInput = {
+    id?: string
+    station_id: string
+    quantity_on_hand: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    origin_movements?: ItemMovementUncheckedCreateNestedManyWithoutOriginInput
+    destination_movements?: ItemMovementUncheckedCreateNestedManyWithoutDestinationInput
+  }
+
+  export type ItemLocationCreateOrConnectWithoutItemInput = {
+    where: ItemLocationWhereUniqueInput
+    create: XOR<ItemLocationCreateWithoutItemInput, ItemLocationUncheckedCreateWithoutItemInput>
+  }
+
+  export type ItemLocationCreateManyItemInputEnvelope = {
+    data: ItemLocationCreateManyItemInput | ItemLocationCreateManyItemInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UnitCreateWithoutItemsInput = {
     id?: string
     name: string
@@ -43059,6 +47301,22 @@ export namespace Prisma {
     data: XOR<RRItemUpdateManyMutationInput, RRItemUncheckedUpdateManyWithoutItemInput>
   }
 
+  export type ItemLocationUpsertWithWhereUniqueWithoutItemInput = {
+    where: ItemLocationWhereUniqueInput
+    update: XOR<ItemLocationUpdateWithoutItemInput, ItemLocationUncheckedUpdateWithoutItemInput>
+    create: XOR<ItemLocationCreateWithoutItemInput, ItemLocationUncheckedCreateWithoutItemInput>
+  }
+
+  export type ItemLocationUpdateWithWhereUniqueWithoutItemInput = {
+    where: ItemLocationWhereUniqueInput
+    data: XOR<ItemLocationUpdateWithoutItemInput, ItemLocationUncheckedUpdateWithoutItemInput>
+  }
+
+  export type ItemLocationUpdateManyWithWhereWithoutItemInput = {
+    where: ItemLocationScalarWhereInput
+    data: XOR<ItemLocationUpdateManyMutationInput, ItemLocationUncheckedUpdateManyWithoutItemInput>
+  }
+
   export type UnitUpsertWithoutItemsInput = {
     update: XOR<UnitUpdateWithoutItemsInput, UnitUncheckedUpdateWithoutItemsInput>
     create: XOR<UnitCreateWithoutItemsInput, UnitUncheckedCreateWithoutItemsInput>
@@ -43090,17 +47348,367 @@ export namespace Prisma {
     rr_items?: RRItemUncheckedUpdateManyWithoutUnitNestedInput
   }
 
+  export type ItemCreateWithoutStationsInput = {
+    id?: string
+    code: string
+    description: string
+    total_quantity: number
+    initial_quantity: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    item_type: ItemTypeCreateNestedOneWithoutItemsInput
+    item_transactions?: ItemTransactionCreateNestedManyWithoutItemInput
+    rr_items?: RRItemCreateNestedManyWithoutItemInput
+    unit: UnitCreateNestedOneWithoutItemsInput
+  }
+
+  export type ItemUncheckedCreateWithoutStationsInput = {
+    id?: string
+    item_type_id: string
+    unit_id: string
+    code: string
+    description: string
+    total_quantity: number
+    initial_quantity: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    item_transactions?: ItemTransactionUncheckedCreateNestedManyWithoutItemInput
+    rr_items?: RRItemUncheckedCreateNestedManyWithoutItemInput
+  }
+
+  export type ItemCreateOrConnectWithoutStationsInput = {
+    where: ItemWhereUniqueInput
+    create: XOR<ItemCreateWithoutStationsInput, ItemUncheckedCreateWithoutStationsInput>
+  }
+
+  export type StationCreateWithoutItemsInput = {
+    id?: string
+    name: string
+    address: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
+  export type StationUncheckedCreateWithoutItemsInput = {
+    id?: string
+    name: string
+    address: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
+  export type StationCreateOrConnectWithoutItemsInput = {
+    where: StationWhereUniqueInput
+    create: XOR<StationCreateWithoutItemsInput, StationUncheckedCreateWithoutItemsInput>
+  }
+
+  export type ItemMovementCreateWithoutOriginInput = {
+    id?: string
+    quantity_moved: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    destination: ItemLocationCreateNestedOneWithoutDestination_movementsInput
+  }
+
+  export type ItemMovementUncheckedCreateWithoutOriginInput = {
+    id?: string
+    destination_id: string
+    quantity_moved: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
+  export type ItemMovementCreateOrConnectWithoutOriginInput = {
+    where: ItemMovementWhereUniqueInput
+    create: XOR<ItemMovementCreateWithoutOriginInput, ItemMovementUncheckedCreateWithoutOriginInput>
+  }
+
+  export type ItemMovementCreateManyOriginInputEnvelope = {
+    data: ItemMovementCreateManyOriginInput | ItemMovementCreateManyOriginInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ItemMovementCreateWithoutDestinationInput = {
+    id?: string
+    quantity_moved: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    origin: ItemLocationCreateNestedOneWithoutOrigin_movementsInput
+  }
+
+  export type ItemMovementUncheckedCreateWithoutDestinationInput = {
+    id?: string
+    origin_id: string
+    quantity_moved: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
+  export type ItemMovementCreateOrConnectWithoutDestinationInput = {
+    where: ItemMovementWhereUniqueInput
+    create: XOR<ItemMovementCreateWithoutDestinationInput, ItemMovementUncheckedCreateWithoutDestinationInput>
+  }
+
+  export type ItemMovementCreateManyDestinationInputEnvelope = {
+    data: ItemMovementCreateManyDestinationInput | ItemMovementCreateManyDestinationInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ItemUpsertWithoutStationsInput = {
+    update: XOR<ItemUpdateWithoutStationsInput, ItemUncheckedUpdateWithoutStationsInput>
+    create: XOR<ItemCreateWithoutStationsInput, ItemUncheckedCreateWithoutStationsInput>
+    where?: ItemWhereInput
+  }
+
+  export type ItemUpdateToOneWithWhereWithoutStationsInput = {
+    where?: ItemWhereInput
+    data: XOR<ItemUpdateWithoutStationsInput, ItemUncheckedUpdateWithoutStationsInput>
+  }
+
+  export type ItemUpdateWithoutStationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    total_quantity?: IntFieldUpdateOperationsInput | number
+    initial_quantity?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    item_type?: ItemTypeUpdateOneRequiredWithoutItemsNestedInput
+    item_transactions?: ItemTransactionUpdateManyWithoutItemNestedInput
+    rr_items?: RRItemUpdateManyWithoutItemNestedInput
+    unit?: UnitUpdateOneRequiredWithoutItemsNestedInput
+  }
+
+  export type ItemUncheckedUpdateWithoutStationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    item_type_id?: StringFieldUpdateOperationsInput | string
+    unit_id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    total_quantity?: IntFieldUpdateOperationsInput | number
+    initial_quantity?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    item_transactions?: ItemTransactionUncheckedUpdateManyWithoutItemNestedInput
+    rr_items?: RRItemUncheckedUpdateManyWithoutItemNestedInput
+  }
+
+  export type StationUpsertWithoutItemsInput = {
+    update: XOR<StationUpdateWithoutItemsInput, StationUncheckedUpdateWithoutItemsInput>
+    create: XOR<StationCreateWithoutItemsInput, StationUncheckedCreateWithoutItemsInput>
+    where?: StationWhereInput
+  }
+
+  export type StationUpdateToOneWithWhereWithoutItemsInput = {
+    where?: StationWhereInput
+    data: XOR<StationUpdateWithoutItemsInput, StationUncheckedUpdateWithoutItemsInput>
+  }
+
+  export type StationUpdateWithoutItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type StationUncheckedUpdateWithoutItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type ItemMovementUpsertWithWhereUniqueWithoutOriginInput = {
+    where: ItemMovementWhereUniqueInput
+    update: XOR<ItemMovementUpdateWithoutOriginInput, ItemMovementUncheckedUpdateWithoutOriginInput>
+    create: XOR<ItemMovementCreateWithoutOriginInput, ItemMovementUncheckedCreateWithoutOriginInput>
+  }
+
+  export type ItemMovementUpdateWithWhereUniqueWithoutOriginInput = {
+    where: ItemMovementWhereUniqueInput
+    data: XOR<ItemMovementUpdateWithoutOriginInput, ItemMovementUncheckedUpdateWithoutOriginInput>
+  }
+
+  export type ItemMovementUpdateManyWithWhereWithoutOriginInput = {
+    where: ItemMovementScalarWhereInput
+    data: XOR<ItemMovementUpdateManyMutationInput, ItemMovementUncheckedUpdateManyWithoutOriginInput>
+  }
+
+  export type ItemMovementScalarWhereInput = {
+    AND?: ItemMovementScalarWhereInput | ItemMovementScalarWhereInput[]
+    OR?: ItemMovementScalarWhereInput[]
+    NOT?: ItemMovementScalarWhereInput | ItemMovementScalarWhereInput[]
+    id?: StringFilter<"ItemMovement"> | string
+    origin_id?: StringFilter<"ItemMovement"> | string
+    destination_id?: StringFilter<"ItemMovement"> | string
+    quantity_moved?: IntFilter<"ItemMovement"> | number
+    created_at?: DateTimeFilter<"ItemMovement"> | Date | string
+    updated_at?: DateTimeFilter<"ItemMovement"> | Date | string
+    is_deleted?: BoolFilter<"ItemMovement"> | boolean
+  }
+
+  export type ItemMovementUpsertWithWhereUniqueWithoutDestinationInput = {
+    where: ItemMovementWhereUniqueInput
+    update: XOR<ItemMovementUpdateWithoutDestinationInput, ItemMovementUncheckedUpdateWithoutDestinationInput>
+    create: XOR<ItemMovementCreateWithoutDestinationInput, ItemMovementUncheckedCreateWithoutDestinationInput>
+  }
+
+  export type ItemMovementUpdateWithWhereUniqueWithoutDestinationInput = {
+    where: ItemMovementWhereUniqueInput
+    data: XOR<ItemMovementUpdateWithoutDestinationInput, ItemMovementUncheckedUpdateWithoutDestinationInput>
+  }
+
+  export type ItemMovementUpdateManyWithWhereWithoutDestinationInput = {
+    where: ItemMovementScalarWhereInput
+    data: XOR<ItemMovementUpdateManyMutationInput, ItemMovementUncheckedUpdateManyWithoutDestinationInput>
+  }
+
+  export type ItemLocationCreateWithoutOrigin_movementsInput = {
+    id?: string
+    quantity_on_hand: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    item: ItemCreateNestedOneWithoutStationsInput
+    station: StationCreateNestedOneWithoutItemsInput
+    destination_movements?: ItemMovementCreateNestedManyWithoutDestinationInput
+  }
+
+  export type ItemLocationUncheckedCreateWithoutOrigin_movementsInput = {
+    id?: string
+    item_id: string
+    station_id: string
+    quantity_on_hand: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    destination_movements?: ItemMovementUncheckedCreateNestedManyWithoutDestinationInput
+  }
+
+  export type ItemLocationCreateOrConnectWithoutOrigin_movementsInput = {
+    where: ItemLocationWhereUniqueInput
+    create: XOR<ItemLocationCreateWithoutOrigin_movementsInput, ItemLocationUncheckedCreateWithoutOrigin_movementsInput>
+  }
+
+  export type ItemLocationCreateWithoutDestination_movementsInput = {
+    id?: string
+    quantity_on_hand: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    item: ItemCreateNestedOneWithoutStationsInput
+    station: StationCreateNestedOneWithoutItemsInput
+    origin_movements?: ItemMovementCreateNestedManyWithoutOriginInput
+  }
+
+  export type ItemLocationUncheckedCreateWithoutDestination_movementsInput = {
+    id?: string
+    item_id: string
+    station_id: string
+    quantity_on_hand: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+    origin_movements?: ItemMovementUncheckedCreateNestedManyWithoutOriginInput
+  }
+
+  export type ItemLocationCreateOrConnectWithoutDestination_movementsInput = {
+    where: ItemLocationWhereUniqueInput
+    create: XOR<ItemLocationCreateWithoutDestination_movementsInput, ItemLocationUncheckedCreateWithoutDestination_movementsInput>
+  }
+
+  export type ItemLocationUpsertWithoutOrigin_movementsInput = {
+    update: XOR<ItemLocationUpdateWithoutOrigin_movementsInput, ItemLocationUncheckedUpdateWithoutOrigin_movementsInput>
+    create: XOR<ItemLocationCreateWithoutOrigin_movementsInput, ItemLocationUncheckedCreateWithoutOrigin_movementsInput>
+    where?: ItemLocationWhereInput
+  }
+
+  export type ItemLocationUpdateToOneWithWhereWithoutOrigin_movementsInput = {
+    where?: ItemLocationWhereInput
+    data: XOR<ItemLocationUpdateWithoutOrigin_movementsInput, ItemLocationUncheckedUpdateWithoutOrigin_movementsInput>
+  }
+
+  export type ItemLocationUpdateWithoutOrigin_movementsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    quantity_on_hand?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    item?: ItemUpdateOneRequiredWithoutStationsNestedInput
+    station?: StationUpdateOneRequiredWithoutItemsNestedInput
+    destination_movements?: ItemMovementUpdateManyWithoutDestinationNestedInput
+  }
+
+  export type ItemLocationUncheckedUpdateWithoutOrigin_movementsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    item_id?: StringFieldUpdateOperationsInput | string
+    station_id?: StringFieldUpdateOperationsInput | string
+    quantity_on_hand?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    destination_movements?: ItemMovementUncheckedUpdateManyWithoutDestinationNestedInput
+  }
+
+  export type ItemLocationUpsertWithoutDestination_movementsInput = {
+    update: XOR<ItemLocationUpdateWithoutDestination_movementsInput, ItemLocationUncheckedUpdateWithoutDestination_movementsInput>
+    create: XOR<ItemLocationCreateWithoutDestination_movementsInput, ItemLocationUncheckedCreateWithoutDestination_movementsInput>
+    where?: ItemLocationWhereInput
+  }
+
+  export type ItemLocationUpdateToOneWithWhereWithoutDestination_movementsInput = {
+    where?: ItemLocationWhereInput
+    data: XOR<ItemLocationUpdateWithoutDestination_movementsInput, ItemLocationUncheckedUpdateWithoutDestination_movementsInput>
+  }
+
+  export type ItemLocationUpdateWithoutDestination_movementsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    quantity_on_hand?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    item?: ItemUpdateOneRequiredWithoutStationsNestedInput
+    station?: StationUpdateOneRequiredWithoutItemsNestedInput
+    origin_movements?: ItemMovementUpdateManyWithoutOriginNestedInput
+  }
+
+  export type ItemLocationUncheckedUpdateWithoutDestination_movementsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    item_id?: StringFieldUpdateOperationsInput | string
+    station_id?: StringFieldUpdateOperationsInput | string
+    quantity_on_hand?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    origin_movements?: ItemMovementUncheckedUpdateManyWithoutOriginNestedInput
+  }
+
   export type ItemCreateWithoutItem_typeInput = {
     id?: string
     code: string
     description: string
-    quantity: number
+    total_quantity: number
     initial_quantity: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
     item_transactions?: ItemTransactionCreateNestedManyWithoutItemInput
     rr_items?: RRItemCreateNestedManyWithoutItemInput
+    stations?: ItemLocationCreateNestedManyWithoutItemInput
     unit: UnitCreateNestedOneWithoutItemsInput
   }
 
@@ -43109,13 +47717,14 @@ export namespace Prisma {
     unit_id: string
     code: string
     description: string
-    quantity: number
+    total_quantity: number
     initial_quantity: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
     item_transactions?: ItemTransactionUncheckedCreateNestedManyWithoutItemInput
     rr_items?: RRItemUncheckedCreateNestedManyWithoutItemInput
+    stations?: ItemLocationUncheckedCreateNestedManyWithoutItemInput
   }
 
   export type ItemCreateOrConnectWithoutItem_typeInput = {
@@ -43148,13 +47757,14 @@ export namespace Prisma {
     id?: string
     code: string
     description: string
-    quantity: number
+    total_quantity: number
     initial_quantity: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
     item_type: ItemTypeCreateNestedOneWithoutItemsInput
     rr_items?: RRItemCreateNestedManyWithoutItemInput
+    stations?: ItemLocationCreateNestedManyWithoutItemInput
     unit: UnitCreateNestedOneWithoutItemsInput
   }
 
@@ -43164,12 +47774,13 @@ export namespace Prisma {
     unit_id: string
     code: string
     description: string
-    quantity: number
+    total_quantity: number
     initial_quantity: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
     rr_items?: RRItemUncheckedCreateNestedManyWithoutItemInput
+    stations?: ItemLocationUncheckedCreateNestedManyWithoutItemInput
   }
 
   export type ItemCreateOrConnectWithoutItem_transactionsInput = {
@@ -43235,13 +47846,14 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
+    total_quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     item_type?: ItemTypeUpdateOneRequiredWithoutItemsNestedInput
     rr_items?: RRItemUpdateManyWithoutItemNestedInput
+    stations?: ItemLocationUpdateManyWithoutItemNestedInput
     unit?: UnitUpdateOneRequiredWithoutItemsNestedInput
   }
 
@@ -43251,12 +47863,13 @@ export namespace Prisma {
     unit_id?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
+    total_quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     rr_items?: RRItemUncheckedUpdateManyWithoutItemNestedInput
+    stations?: ItemLocationUncheckedUpdateManyWithoutItemNestedInput
   }
 
   export type RRItemUpsertWithoutItem_transactionInput = {
@@ -43384,7 +47997,7 @@ export namespace Prisma {
     item_type_id: string
     code: string
     description: string
-    quantity: number
+    total_quantity: number
     initial_quantity: number
     created_at?: Date | string
     updated_at?: Date | string
@@ -43486,7 +48099,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
+    total_quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -43494,6 +48107,7 @@ export namespace Prisma {
     item_type?: ItemTypeUpdateOneRequiredWithoutItemsNestedInput
     item_transactions?: ItemTransactionUpdateManyWithoutItemNestedInput
     rr_items?: RRItemUpdateManyWithoutItemNestedInput
+    stations?: ItemLocationUpdateManyWithoutItemNestedInput
   }
 
   export type ItemUncheckedUpdateWithoutUnitInput = {
@@ -43501,13 +48115,14 @@ export namespace Prisma {
     item_type_id?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
+    total_quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     item_transactions?: ItemTransactionUncheckedUpdateManyWithoutItemNestedInput
     rr_items?: RRItemUncheckedUpdateManyWithoutItemNestedInput
+    stations?: ItemLocationUncheckedUpdateManyWithoutItemNestedInput
   }
 
   export type ItemUncheckedUpdateManyWithoutUnitInput = {
@@ -43515,7 +48130,7 @@ export namespace Prisma {
     item_type_id?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
+    total_quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -43720,6 +48335,46 @@ export namespace Prisma {
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ItemLocationCreateManyStationInput = {
+    id?: string
+    item_id: string
+    quantity_on_hand: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
+  export type ItemLocationUpdateWithoutStationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    quantity_on_hand?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    item?: ItemUpdateOneRequiredWithoutStationsNestedInput
+    origin_movements?: ItemMovementUpdateManyWithoutOriginNestedInput
+    destination_movements?: ItemMovementUpdateManyWithoutDestinationNestedInput
+  }
+
+  export type ItemLocationUncheckedUpdateWithoutStationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    item_id?: StringFieldUpdateOperationsInput | string
+    quantity_on_hand?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    origin_movements?: ItemMovementUncheckedUpdateManyWithoutOriginNestedInput
+    destination_movements?: ItemMovementUncheckedUpdateManyWithoutDestinationNestedInput
+  }
+
+  export type ItemLocationUncheckedUpdateManyWithoutStationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    item_id?: StringFieldUpdateOperationsInput | string
+    quantity_on_hand?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type MEQSSupplierItemCreateManyCanvass_itemInput = {
@@ -44375,6 +49030,15 @@ export namespace Prisma {
     is_deleted?: boolean
   }
 
+  export type ItemLocationCreateManyItemInput = {
+    id?: string
+    station_id: string
+    quantity_on_hand: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
   export type ItemTransactionUpdateWithoutItemInput = {
     id?: StringFieldUpdateOperationsInput | string
     type?: IntFieldUpdateOperationsInput | number
@@ -44470,12 +49134,115 @@ export namespace Prisma {
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
+  export type ItemLocationUpdateWithoutItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    quantity_on_hand?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    station?: StationUpdateOneRequiredWithoutItemsNestedInput
+    origin_movements?: ItemMovementUpdateManyWithoutOriginNestedInput
+    destination_movements?: ItemMovementUpdateManyWithoutDestinationNestedInput
+  }
+
+  export type ItemLocationUncheckedUpdateWithoutItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    station_id?: StringFieldUpdateOperationsInput | string
+    quantity_on_hand?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    origin_movements?: ItemMovementUncheckedUpdateManyWithoutOriginNestedInput
+    destination_movements?: ItemMovementUncheckedUpdateManyWithoutDestinationNestedInput
+  }
+
+  export type ItemLocationUncheckedUpdateManyWithoutItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    station_id?: StringFieldUpdateOperationsInput | string
+    quantity_on_hand?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type ItemMovementCreateManyOriginInput = {
+    id?: string
+    destination_id: string
+    quantity_moved: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
+  export type ItemMovementCreateManyDestinationInput = {
+    id?: string
+    origin_id: string
+    quantity_moved: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    is_deleted?: boolean
+  }
+
+  export type ItemMovementUpdateWithoutOriginInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    quantity_moved?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    destination?: ItemLocationUpdateOneRequiredWithoutDestination_movementsNestedInput
+  }
+
+  export type ItemMovementUncheckedUpdateWithoutOriginInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    destination_id?: StringFieldUpdateOperationsInput | string
+    quantity_moved?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type ItemMovementUncheckedUpdateManyWithoutOriginInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    destination_id?: StringFieldUpdateOperationsInput | string
+    quantity_moved?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type ItemMovementUpdateWithoutDestinationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    quantity_moved?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    origin?: ItemLocationUpdateOneRequiredWithoutOrigin_movementsNestedInput
+  }
+
+  export type ItemMovementUncheckedUpdateWithoutDestinationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    origin_id?: StringFieldUpdateOperationsInput | string
+    quantity_moved?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type ItemMovementUncheckedUpdateManyWithoutDestinationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    origin_id?: StringFieldUpdateOperationsInput | string
+    quantity_moved?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
   export type ItemCreateManyItem_typeInput = {
     id?: string
     unit_id: string
     code: string
     description: string
-    quantity: number
+    total_quantity: number
     initial_quantity: number
     created_at?: Date | string
     updated_at?: Date | string
@@ -44486,13 +49253,14 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
+    total_quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     item_transactions?: ItemTransactionUpdateManyWithoutItemNestedInput
     rr_items?: RRItemUpdateManyWithoutItemNestedInput
+    stations?: ItemLocationUpdateManyWithoutItemNestedInput
     unit?: UnitUpdateOneRequiredWithoutItemsNestedInput
   }
 
@@ -44501,13 +49269,14 @@ export namespace Prisma {
     unit_id?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
+    total_quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     item_transactions?: ItemTransactionUncheckedUpdateManyWithoutItemNestedInput
     rr_items?: RRItemUncheckedUpdateManyWithoutItemNestedInput
+    stations?: ItemLocationUncheckedUpdateManyWithoutItemNestedInput
   }
 
   export type ItemUncheckedUpdateManyWithoutItem_typeInput = {
@@ -44515,7 +49284,7 @@ export namespace Prisma {
     unit_id?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    quantity?: IntFieldUpdateOperationsInput | number
+    total_quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -44543,6 +49312,10 @@ export namespace Prisma {
      * @deprecated Use VehicleCountOutputTypeDefaultArgs instead
      */
     export type VehicleCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = VehicleCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use StationCountOutputTypeDefaultArgs instead
+     */
+    export type StationCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = StationCountOutputTypeDefaultArgs<ExtArgs>
     /**
      * @deprecated Use CanvassItemCountOutputTypeDefaultArgs instead
      */
@@ -44584,6 +49357,10 @@ export namespace Prisma {
      */
     export type ItemCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ItemCountOutputTypeDefaultArgs<ExtArgs>
     /**
+     * @deprecated Use ItemLocationCountOutputTypeDefaultArgs instead
+     */
+    export type ItemLocationCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ItemLocationCountOutputTypeDefaultArgs<ExtArgs>
+    /**
      * @deprecated Use ItemTypeCountOutputTypeDefaultArgs instead
      */
     export type ItemTypeCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ItemTypeCountOutputTypeDefaultArgs<ExtArgs>
@@ -44603,6 +49380,10 @@ export namespace Prisma {
      * @deprecated Use VehicleDefaultArgs instead
      */
     export type VehicleArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = VehicleDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use StationDefaultArgs instead
+     */
+    export type StationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = StationDefaultArgs<ExtArgs>
     /**
      * @deprecated Use CanvassItemDefaultArgs instead
      */
@@ -44679,6 +49460,14 @@ export namespace Prisma {
      * @deprecated Use ItemDefaultArgs instead
      */
     export type ItemArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ItemDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use ItemLocationDefaultArgs instead
+     */
+    export type ItemLocationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ItemLocationDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use ItemMovementDefaultArgs instead
+     */
+    export type ItemMovementArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ItemMovementDefaultArgs<ExtArgs>
     /**
      * @deprecated Use ItemTypeDefaultArgs instead
      */
