@@ -2,7 +2,7 @@ import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { PO } from '../../po/entities/po.entity';
 
 @ObjectType()
-export class PoApprover {
+export class POApprover {
   
   @Field(() => String)
   id: string;

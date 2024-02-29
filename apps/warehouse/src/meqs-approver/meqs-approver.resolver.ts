@@ -40,7 +40,7 @@ export class MeqsApproverResolver {
   }
 
   @Query(() => MEQSApprover)
-  meqsApprover(@Args('id') id: string) {
+  meqs_approver(@Args('id') id: string) {
     return this.meqsApproverService.findOne(id);
   }
 

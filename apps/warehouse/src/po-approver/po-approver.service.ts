@@ -9,6 +9,7 @@ import { HttpService } from '@nestjs/axios';
 import { catchError, firstValueFrom } from 'rxjs';
 import { WarehouseRemoveResponse } from '../__common__/classes';
 import { getLastApprover, isValidApprovalStatus } from '../__common__/helpers';
+import { UpdatePoOrderResponse } from './entities/update-po-order-response.entity';
 
 @Injectable()
 export class PoApproverService {
@@ -139,7 +140,7 @@ export class PoApproverService {
                 po_id: poId
             },
             orderBy: {
-                label: 'asc'
+                order: 'asc'
             }
         })
     }
@@ -154,7 +155,7 @@ export class PoApproverService {
                 }
             },
             orderBy: {
-                label: 'asc'
+                order: 'asc'
             }
         })
     }
@@ -201,6 +202,43 @@ export class PoApproverService {
 		}
 
 	}
+
+    async updateManyOrders(inputs: { id: string; order: number }[]): Promise<UpdatePoOrderResponse> {
+        try {
+            
+            const queries = []
+
+            for(let input of inputs) {
+
+                const updateQuery = this.prisma.pOApprover.update({
+                    where: { id: input.id },
+                    data: { order: input.order },
+                    select: {
+                        po_id: true
+                    }
+                })
+
+                queries.push(updateQuery)
+
+            }
+
+            const result = await this.prisma.$transaction(queries)
+
+            const po = result[0] as POApprover
+
+            console.log('po', po)
+
+            const approvers = await this.findByPoId(po.po_id)
+    
+            return {
+                success: true,
+                approvers: approvers
+            };
+        } catch (error) {
+            this.logger.error(error);
+            return { success: false, approvers: [] };
+        }
+    }
 
     async forEmployee(employeeId: string): Promise<POApprover[]> {
         return await this.prisma.pOApprover.findMany({

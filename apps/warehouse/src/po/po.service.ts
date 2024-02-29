@@ -125,6 +125,7 @@ export class PoService {
         }
 
         const data: Prisma.POUpdateInput = {
+            notes: input.notes ?? existingItem.notes,
             canceller_id: input.canceller_id ?? existingItem.canceller_id,
             date_cancelled: input.canceller_id ? new Date() : existingItem.date_cancelled,
             is_cancelled: input.canceller_id ? true : existingItem.is_cancelled

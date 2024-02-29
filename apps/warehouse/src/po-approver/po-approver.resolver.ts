@@ -8,7 +8,9 @@ import { UseGuards } from '@nestjs/common';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
 import { Employee } from '../__employee__/entities/employee.entity';
-import { POApprover } from '../po/entities/po-approver.entity';
+import { UpdatePoOrderResponse } from './entities/update-po-order-response.entity';
+import { UpdatePoOrderInput } from './dto/update-po-order.input';
+import { POApprover } from './entities/po-approver.entity';
 
 @UseGuards(GqlAuthGuard)
 @Resolver(() => POApprover)
@@ -48,6 +50,13 @@ export class PoApproverResolver {
     @Args('input') updatePoApproverInput: UpdatePoApproverInput
   ) {
     return this.poApproverService.update(id, updatePoApproverInput);
+  }
+
+  @Mutation(() => UpdatePoOrderResponse)
+  async updatePOApproverOrder(@Args('inputs', { type: () => [UpdatePoOrderInput] }) inputs: UpdatePoOrderInput[]){
+
+    return await this.poApproverService.updateManyOrders(inputs);
+
   }
 
   @Mutation(() => WarehouseRemoveResponse)

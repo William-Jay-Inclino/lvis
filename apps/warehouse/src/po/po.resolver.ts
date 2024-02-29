@@ -8,11 +8,11 @@ import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { GqlAuthGuard } from '../__auth__/guards/gql-auth.guard';
 import { UseGuards } from '@nestjs/common';
-import { POApprover } from './entities/po-approver.entity';
 import { PoApproverService } from '../po-approver/po-approver.service';
 import { PoNumber } from './entities/po-number.entity';
 import { POsResponse } from './entities/pos-response.entity';
 import { APPROVAL_STATUS } from '../__common__/types';
+import { POApprover } from '../po-approver/entities/po-approver.entity';
 
 @UseGuards(GqlAuthGuard)
 @Resolver( () => PO)
