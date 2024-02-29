@@ -14,6 +14,7 @@ export class SeederService {
             await this.prisma.$transaction([
                 this.seedSupplier(),
                 this.seedStation(),
+                this.seedItemType(),
                 this.seedUnit(),
                 this.seedBrand(),
                 this.seedVehicle()
@@ -39,6 +40,15 @@ export class SeederService {
         console.log('seeding station table...')
         try {
             return this.prisma.station.createMany({ data: data.stations })
+        } catch (error) {
+            console.error(error)            
+        }
+    }
+
+    seedItemType() {
+        console.log('seeding item type table...')
+        try {
+            return this.prisma.itemType.createMany({ data: data.itemTypes })
         } catch (error) {
             console.error(error)            
         }

@@ -27,6 +27,11 @@ export interface Station {
     address: string 
 }
 
+export interface ItemType {
+    id: string 
+    name: string 
+}
+
 export enum APPROVAL_STATUS {
     PENDING = 1,
     APPROVED = 2,
