@@ -405,11 +405,11 @@ export class PoService {
             }
         }
 
-        if(input.canceller_id){
-            const isValidCancellerId = await this.areEmployeesExist([input.canceller_id], this.authUser)
-
-            if(!isValidCancellerId){
-                throw new NotFoundException('Canceller ID not valid')
+        if(input.canceller_id) {
+            const isUserExist = await this.isUserExist(input.canceller_id, this.authUser)
+            if(!isUserExist) {
+                this.logger.error('canceller_id which also is user_id not found in table users')
+                throw new NotFoundException('Canceller does not exist')
             }
         }
 
@@ -438,6 +438,44 @@ export class PoService {
         const isNormalUser = (this.authUser.user.role === Role.USER)
 
         return isNormalUser
+    }
+
+    private async isUserExist(user_id: string, authUser: AuthUser): Promise<boolean> {
+    
+        this.logger.log('isUserExist', user_id)
+
+        const query = `
+            query{
+                user(id: "${user_id}") {
+                    id
+                }
+            }
+        `;
+
+        const { data } = await firstValueFrom(
+            this.httpService.post(process.env.API_GATEWAY_URL, 
+            { query },
+            {
+                headers: {
+                    Authorization: authUser.authorization,
+                    'Content-Type': 'application/json'
+                }
+            }  
+            ).pipe(
+                catchError((error) => {
+                    throw error
+                }),
+            ),
+        );
+
+        console.log('data', data)
+
+        if(!data || !data.data || !data.data.user){
+            console.log('User not found')
+            return false 
+        }
+        return true 
+
     }
 
 }
