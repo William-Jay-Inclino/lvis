@@ -353,6 +353,7 @@ exports.Prisma.POScalarFieldEnum = {
   updated_at: 'updated_at',
   is_deleted: 'is_deleted',
   is_referenced: 'is_referenced',
+  is_cancelled: 'is_cancelled',
   created_by: 'created_by',
   updated_by: 'updated_by',
   deleted_by: 'deleted_by'

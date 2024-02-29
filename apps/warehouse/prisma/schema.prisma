@@ -343,6 +343,7 @@ model PO {
   meqs_supplier    MEQSSupplier @relation(fields: [meqs_supplier_id], references: [id], onDelete: Restrict)
   rr               RR?
   is_referenced    Boolean      @default(false)
+  is_cancelled     Boolean      @default(false)
   created_by       String
   updated_by       String?
   deleted_by       String?

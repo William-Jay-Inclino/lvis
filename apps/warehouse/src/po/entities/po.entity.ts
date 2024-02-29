@@ -47,4 +47,7 @@ export class PO {
   @Field(() => Boolean)
   is_deleted: boolean;
 
+  @Field(() => Boolean)
+  is_cancelled: boolean;
+
 }
