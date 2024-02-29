@@ -311,6 +311,7 @@ exports.Prisma.MEQSSupplierItemScalarFieldEnum = {
   price: 'price',
   is_awarded: 'is_awarded',
   notes: 'notes',
+  vat_type: 'vat_type',
   created_at: 'created_at',
   updated_at: 'updated_at',
   is_deleted: 'is_deleted'

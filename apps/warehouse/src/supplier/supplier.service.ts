@@ -17,6 +17,7 @@ export class SupplierService {
         const data: Prisma.SupplierCreateInput = {
             name: input.name,
             contact: input.contact,
+			vat_type: input.vat_type
         }
 
         const created = await this.prisma.supplier.create({
@@ -59,6 +60,7 @@ export class SupplierService {
 		const data: Prisma.SupplierUpdateInput = {
 			name: input.name ?? existingItem.name,
 			contact: input.contact ?? existingItem.contact,
+			vat_type: input.vat_type ?? existingItem.vat_type,
 		}
 
 		

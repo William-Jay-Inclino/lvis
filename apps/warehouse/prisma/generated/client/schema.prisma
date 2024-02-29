@@ -286,6 +286,7 @@ model MEQSSupplierItem {
   price            Float
   is_awarded       Boolean @default(false)
   notes            String?
+  vat_type         Int     @default(1)
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt

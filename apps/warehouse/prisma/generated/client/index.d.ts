@@ -18056,10 +18056,12 @@ export namespace Prisma {
 
   export type MEQSSupplierItemAvgAggregateOutputType = {
     price: number | null
+    vat_type: number | null
   }
 
   export type MEQSSupplierItemSumAggregateOutputType = {
     price: number | null
+    vat_type: number | null
   }
 
   export type MEQSSupplierItemMinAggregateOutputType = {
@@ -18069,6 +18071,7 @@ export namespace Prisma {
     price: number | null
     is_awarded: boolean | null
     notes: string | null
+    vat_type: number | null
     created_at: Date | null
     updated_at: Date | null
     is_deleted: boolean | null
@@ -18081,6 +18084,7 @@ export namespace Prisma {
     price: number | null
     is_awarded: boolean | null
     notes: string | null
+    vat_type: number | null
     created_at: Date | null
     updated_at: Date | null
     is_deleted: boolean | null
@@ -18093,6 +18097,7 @@ export namespace Prisma {
     price: number
     is_awarded: number
     notes: number
+    vat_type: number
     created_at: number
     updated_at: number
     is_deleted: number
@@ -18102,10 +18107,12 @@ export namespace Prisma {
 
   export type MEQSSupplierItemAvgAggregateInputType = {
     price?: true
+    vat_type?: true
   }
 
   export type MEQSSupplierItemSumAggregateInputType = {
     price?: true
+    vat_type?: true
   }
 
   export type MEQSSupplierItemMinAggregateInputType = {
@@ -18115,6 +18122,7 @@ export namespace Prisma {
     price?: true
     is_awarded?: true
     notes?: true
+    vat_type?: true
     created_at?: true
     updated_at?: true
     is_deleted?: true
@@ -18127,6 +18135,7 @@ export namespace Prisma {
     price?: true
     is_awarded?: true
     notes?: true
+    vat_type?: true
     created_at?: true
     updated_at?: true
     is_deleted?: true
@@ -18139,6 +18148,7 @@ export namespace Prisma {
     price?: true
     is_awarded?: true
     notes?: true
+    vat_type?: true
     created_at?: true
     updated_at?: true
     is_deleted?: true
@@ -18238,6 +18248,7 @@ export namespace Prisma {
     price: number
     is_awarded: boolean
     notes: string | null
+    vat_type: number
     created_at: Date
     updated_at: Date
     is_deleted: boolean
@@ -18269,6 +18280,7 @@ export namespace Prisma {
     price?: boolean
     is_awarded?: boolean
     notes?: boolean
+    vat_type?: boolean
     created_at?: boolean
     updated_at?: boolean
     is_deleted?: boolean
@@ -18283,6 +18295,7 @@ export namespace Prisma {
     price?: boolean
     is_awarded?: boolean
     notes?: boolean
+    vat_type?: boolean
     created_at?: boolean
     updated_at?: boolean
     is_deleted?: boolean
@@ -18307,6 +18320,7 @@ export namespace Prisma {
       price: number
       is_awarded: boolean
       notes: string | null
+      vat_type: number
       created_at: Date
       updated_at: Date
       is_deleted: boolean
@@ -18713,6 +18727,7 @@ export namespace Prisma {
     readonly price: FieldRef<"MEQSSupplierItem", 'Float'>
     readonly is_awarded: FieldRef<"MEQSSupplierItem", 'Boolean'>
     readonly notes: FieldRef<"MEQSSupplierItem", 'String'>
+    readonly vat_type: FieldRef<"MEQSSupplierItem", 'Int'>
     readonly created_at: FieldRef<"MEQSSupplierItem", 'DateTime'>
     readonly updated_at: FieldRef<"MEQSSupplierItem", 'DateTime'>
     readonly is_deleted: FieldRef<"MEQSSupplierItem", 'Boolean'>
@@ -29785,6 +29800,7 @@ export namespace Prisma {
     price: 'price',
     is_awarded: 'is_awarded',
     notes: 'notes',
+    vat_type: 'vat_type',
     created_at: 'created_at',
     updated_at: 'updated_at',
     is_deleted: 'is_deleted'
@@ -31352,6 +31368,7 @@ export namespace Prisma {
     price?: FloatFilter<"MEQSSupplierItem"> | number
     is_awarded?: BoolFilter<"MEQSSupplierItem"> | boolean
     notes?: StringNullableFilter<"MEQSSupplierItem"> | string | null
+    vat_type?: IntFilter<"MEQSSupplierItem"> | number
     created_at?: DateTimeFilter<"MEQSSupplierItem"> | Date | string
     updated_at?: DateTimeFilter<"MEQSSupplierItem"> | Date | string
     is_deleted?: BoolFilter<"MEQSSupplierItem"> | boolean
@@ -31366,6 +31383,7 @@ export namespace Prisma {
     price?: SortOrder
     is_awarded?: SortOrder
     notes?: SortOrderInput | SortOrder
+    vat_type?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -31383,6 +31401,7 @@ export namespace Prisma {
     price?: FloatFilter<"MEQSSupplierItem"> | number
     is_awarded?: BoolFilter<"MEQSSupplierItem"> | boolean
     notes?: StringNullableFilter<"MEQSSupplierItem"> | string | null
+    vat_type?: IntFilter<"MEQSSupplierItem"> | number
     created_at?: DateTimeFilter<"MEQSSupplierItem"> | Date | string
     updated_at?: DateTimeFilter<"MEQSSupplierItem"> | Date | string
     is_deleted?: BoolFilter<"MEQSSupplierItem"> | boolean
@@ -31397,6 +31416,7 @@ export namespace Prisma {
     price?: SortOrder
     is_awarded?: SortOrder
     notes?: SortOrderInput | SortOrder
+    vat_type?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -31417,6 +31437,7 @@ export namespace Prisma {
     price?: FloatWithAggregatesFilter<"MEQSSupplierItem"> | number
     is_awarded?: BoolWithAggregatesFilter<"MEQSSupplierItem"> | boolean
     notes?: StringNullableWithAggregatesFilter<"MEQSSupplierItem"> | string | null
+    vat_type?: IntWithAggregatesFilter<"MEQSSupplierItem"> | number
     created_at?: DateTimeWithAggregatesFilter<"MEQSSupplierItem"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"MEQSSupplierItem"> | Date | string
     is_deleted?: BoolWithAggregatesFilter<"MEQSSupplierItem"> | boolean
@@ -33813,6 +33834,7 @@ export namespace Prisma {
     price: number
     is_awarded?: boolean
     notes?: string | null
+    vat_type?: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -33827,6 +33849,7 @@ export namespace Prisma {
     price: number
     is_awarded?: boolean
     notes?: string | null
+    vat_type?: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -33837,6 +33860,7 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     is_awarded?: BoolFieldUpdateOperationsInput | boolean
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    vat_type?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -33851,6 +33875,7 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     is_awarded?: BoolFieldUpdateOperationsInput | boolean
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    vat_type?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -33863,6 +33888,7 @@ export namespace Prisma {
     price: number
     is_awarded?: boolean
     notes?: string | null
+    vat_type?: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -33873,6 +33899,7 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     is_awarded?: BoolFieldUpdateOperationsInput | boolean
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    vat_type?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -33885,6 +33912,7 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     is_awarded?: BoolFieldUpdateOperationsInput | boolean
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    vat_type?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -35941,6 +35969,7 @@ export namespace Prisma {
     price?: SortOrder
     is_awarded?: SortOrder
     notes?: SortOrder
+    vat_type?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -35948,6 +35977,7 @@ export namespace Prisma {
 
   export type MEQSSupplierItemAvgOrderByAggregateInput = {
     price?: SortOrder
+    vat_type?: SortOrder
   }
 
   export type MEQSSupplierItemMaxOrderByAggregateInput = {
@@ -35957,6 +35987,7 @@ export namespace Prisma {
     price?: SortOrder
     is_awarded?: SortOrder
     notes?: SortOrder
+    vat_type?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -35969,6 +36000,7 @@ export namespace Prisma {
     price?: SortOrder
     is_awarded?: SortOrder
     notes?: SortOrder
+    vat_type?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_deleted?: SortOrder
@@ -35976,6 +36008,7 @@ export namespace Prisma {
 
   export type MEQSSupplierItemSumOrderByAggregateInput = {
     price?: SortOrder
+    vat_type?: SortOrder
   }
 
   export type FloatWithAggregatesFilter<$PrismaModel = never> = {
@@ -39060,6 +39093,7 @@ export namespace Prisma {
     price: number
     is_awarded?: boolean
     notes?: string | null
+    vat_type?: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -39072,6 +39106,7 @@ export namespace Prisma {
     price: number
     is_awarded?: boolean
     notes?: string | null
+    vat_type?: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -39220,6 +39255,7 @@ export namespace Prisma {
     price?: FloatFilter<"MEQSSupplierItem"> | number
     is_awarded?: BoolFilter<"MEQSSupplierItem"> | boolean
     notes?: StringNullableFilter<"MEQSSupplierItem"> | string | null
+    vat_type?: IntFilter<"MEQSSupplierItem"> | number
     created_at?: DateTimeFilter<"MEQSSupplierItem"> | Date | string
     updated_at?: DateTimeFilter<"MEQSSupplierItem"> | Date | string
     is_deleted?: BoolFilter<"MEQSSupplierItem"> | boolean
@@ -41239,6 +41275,7 @@ export namespace Prisma {
     price: number
     is_awarded?: boolean
     notes?: string | null
+    vat_type?: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -41251,6 +41288,7 @@ export namespace Prisma {
     price: number
     is_awarded?: boolean
     notes?: string | null
+    vat_type?: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -43651,6 +43689,7 @@ export namespace Prisma {
     price: number
     is_awarded?: boolean
     notes?: string | null
+    vat_type?: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -43661,6 +43700,7 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     is_awarded?: BoolFieldUpdateOperationsInput | boolean
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    vat_type?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -43673,6 +43713,7 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     is_awarded?: BoolFieldUpdateOperationsInput | boolean
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    vat_type?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -43684,6 +43725,7 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     is_awarded?: BoolFieldUpdateOperationsInput | boolean
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    vat_type?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -44011,6 +44053,7 @@ export namespace Prisma {
     price: number
     is_awarded?: boolean
     notes?: string | null
+    vat_type?: number
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
@@ -44045,6 +44088,7 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     is_awarded?: BoolFieldUpdateOperationsInput | boolean
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    vat_type?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -44057,6 +44101,7 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     is_awarded?: BoolFieldUpdateOperationsInput | boolean
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    vat_type?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
@@ -44068,6 +44113,7 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     is_awarded?: BoolFieldUpdateOperationsInput | boolean
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    vat_type?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean

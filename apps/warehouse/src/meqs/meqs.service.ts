@@ -129,6 +129,7 @@ export class MeqsService {
                             const itemInput: Prisma.MEQSSupplierItemCreateWithoutMeqs_supplierInput = {
                                 price: item.price,
                                 notes: item.notes,
+                                vat_type: item.vat_type,
                                 is_awarded: item.is_awarded,
                                 canvass_item: { connect: { id: item.canvass_item_id } }
                             }

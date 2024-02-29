@@ -25,4 +25,9 @@ export class CreateMeqsSupplierItemSubInput {
   @IsBoolean()
   is_awarded: boolean;
 
+  @Field(() => Int)
+  @IsNotEmpty()
+  @IsInt()
+  vat_type: VAT_TYPE;
+
 }
