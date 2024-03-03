@@ -13,12 +13,6 @@ export class CreateRrInput {
   po_id: string;
 
   @Field()
-  @IsNotEmpty()
-  @Transform(({ value }) => new Date(value))
-  @IsDate()
-  rr_date: string;
-
-  @Field()
   @IsString()
   @IsNotEmpty()
   received_by_id: string;

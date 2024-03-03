@@ -7,12 +7,6 @@ import { APPROVAL_STATUS } from '../../__common__/types';
 @InputType()
 export class UpdateRrInput extends PartialType(CreateRrInput) {
 
-  @Field({ nullable: true })
-  @IsOptional()
-  @Transform(({ value }) => new Date(value))
-  @IsDate()
-  rr_date: string;
-
   @Field(() => String, {nullable: true})
   @IsString()
   @IsOptional()

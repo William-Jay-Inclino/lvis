@@ -9,6 +9,7 @@ import { WarehouseRemoveResponse } from '../__common__/classes';
 import { catchError, firstValueFrom } from 'rxjs';
 import { APPROVAL_STATUS, Role } from '../__common__/types';
 import { RRsResponse } from './entities/rr-response.entity';
+import * as moment from 'moment';
 
 @Injectable()
 export class RrService {
@@ -87,12 +88,13 @@ export class RrService {
         }
 
         const rrNumber = await this.getLatestRrNumber()
+        const today = moment().format('MM/DD/YYYY')
 
         const data: Prisma.RRCreateInput = {
             created_by: this.authUser.user.username,
             po: { connect: { id: input.po_id } },
             rr_number: rrNumber,
-            rr_date: new Date(input.rr_date),
+            rr_date: new Date(today),
             received_by_id: input.received_by_id,
             invoice_number: input.invoice_number,
             delivery_number: input.delivery_number ?? undefined,
@@ -289,10 +291,10 @@ export class RrService {
         }
 
         const data: Prisma.RRUpdateInput = {
-            rr_date: new Date(input.rr_date) ?? existingItem.rr_date,
             received_by_id: input.received_by_id ?? existingItem.received_by_id,
             canceller_id: input.canceller_id ?? existingItem.canceller_id,
             date_cancelled: input.canceller_id ? new Date() : existingItem.date_cancelled,
+            is_cancelled: input.canceller_id ? true : existingItem.is_cancelled,
             invoice_number: input.invoice_number ?? existingItem.invoice_number,
             delivery_number: input.delivery_number ?? existingItem.delivery_number,
             notes: input.notes ?? existingItem.notes,
