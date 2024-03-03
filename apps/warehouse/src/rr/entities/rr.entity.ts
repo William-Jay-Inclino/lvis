@@ -61,4 +61,10 @@ export class RR {
   @Field({ nullable: true })
   deleted_by: string | null;
 
+  @Field(() => Boolean)
+  is_deleted: boolean;
+
+  @Field(() => Boolean)
+  is_cancelled: boolean;
+
 }

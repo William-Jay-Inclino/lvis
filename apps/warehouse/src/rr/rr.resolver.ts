@@ -1,4 +1,4 @@
-import { Args, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
+import { Args, Int, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import { RR } from './entities/rr.entity';
 import { CreateRrInput } from './dto/create-rr.input';
 import { RrService } from './rr.service';
@@ -11,6 +11,8 @@ import { UseGuards } from '@nestjs/common';
 import { RrApprover } from '../rr-approver/entities/rr-approver.entity';
 import { RrApproverService } from '../rr-approver/rr-approver.service';
 import { RrNumber } from './entities/rr-number.entity';
+import { RRsResponse } from './entities/rr-response.entity';
+import { APPROVAL_STATUS } from '../__common__/types';
 
 @UseGuards(GqlAuthGuard)
 @Resolver( () => RR)
@@ -30,9 +32,14 @@ export class RrResolver {
         return await this.rrService.create(createRrInput);
     }
 
-    @Query(() => [RR])
-    rrs() {
-        return this.rrService.findAll();
+    @Query(() => RRsResponse)
+    rrs(
+        @Args('page') page: number,
+        @Args('pageSize') pageSize: number,
+        @Args('date_requested', {nullable: true}) date_requested?: string,
+        @Args('requested_by_id', {nullable: true}) requested_by_id?: string,
+    ) {
+        return this.rrService.findAll(page, pageSize, date_requested, requested_by_id);
     }
 
     @Query(() => [RrNumber])
@@ -45,13 +52,17 @@ export class RrResolver {
     @Query(() => RR)
     rr(
         @Args('id', {nullable: true}) id?: string,
-        @Args('rr_number', {nullable: true}) rr_number?: string
+        @Args('rr_number', {nullable: true}) rr_number?: string,
+        @Args('po_number', {nullable: true}) po_number?: string,
     ) {
         if(id){
             return this.rrService.findOne(id);
         }
         if(rr_number){
             return this.rrService.findByRrNumber(rr_number)
+        }
+        if(po_number){
+            return this.rrService.findByPoNumber(po_number)
         }
     }
 
@@ -81,6 +92,17 @@ export class RrResolver {
     @ResolveField( () => Employee)
     received_by(@Parent() rr: RR): any {
         return { __typename: 'Employee', id: rr.received_by_id }
+    }
+
+    @ResolveField( () => Int)
+    async status(@Parent() rr: RR) {
+        
+        if(rr.is_cancelled) {
+            return APPROVAL_STATUS.CANCELLED
+        }
+
+        return await this.rrService.getStatus(rr.id)
+
     }
 
 

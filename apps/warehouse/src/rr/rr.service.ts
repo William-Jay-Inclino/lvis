@@ -8,6 +8,7 @@ import { Prisma, RR, RRApprover } from 'apps/warehouse/prisma/generated/client';
 import { WarehouseRemoveResponse } from '../__common__/classes';
 import { catchError, firstValueFrom } from 'rxjs';
 import { APPROVAL_STATUS, Role } from '../__common__/types';
+import { RRsResponse } from './entities/rr-response.entity';
 
 @Injectable()
 export class RrService {
@@ -144,17 +145,49 @@ export class RrService {
 
     }
 
-    async findAll(): Promise<RR[]> {
+    async findAll(page: number, pageSize: number, date_requested?: string, requested_by_id?: string): Promise<RRsResponse> {
+
+        const skip = (page - 1) * pageSize;
+
+        let whereCondition: any = {
+            is_deleted: false,
+        };
+
+        if (date_requested) {
+            const parsedDate = new Date(date_requested); 
+            whereCondition.meqs_date = {
+                equals: parsedDate,
+            };
+        }
+
+        if (requested_by_id) {
+            whereCondition.OR = [
+                { po: { meqs_supplier: { meqs: { jo: { canvass: { requested_by_id: requested_by_id } } } } } },
+                { po: { meqs_supplier: { meqs: { rv: { canvass: { requested_by_id: requested_by_id } } } } } },
+                { po: { meqs_supplier: { meqs: { spr: { canvass: { requested_by_id: requested_by_id } } } } } },
+            ];
+        }
         
-        return await this.prisma.rR.findMany({
+        const items = await this.prisma.rR.findMany({
             include: this.includedFields,
-            where: {
-                is_deleted: false
-            },
+            where: whereCondition,
             orderBy: {
                 rr_number: 'desc'
-            }
+            },
+            skip,
+            take: pageSize
         })
+
+        const totalItems = await this.prisma.rR.count({
+            where: whereCondition,
+        });
+
+        return {
+            data: items,
+            totalItems,
+            currentPage: page,
+            totalPages: Math.ceil(totalItems / pageSize),
+        };
 
     }
 
@@ -184,6 +217,23 @@ export class RrService {
         return item 
     }
 
+    async findByPoNumber(po_number: string): Promise<RR | null> {
+        const item = await this.prisma.rR.findFirst({
+            include: this.includedFields,
+            where: {
+                po: {
+                    po_number
+                }
+            }
+        })
+
+        if(!item) {
+            throw new NotFoundException('RR not found')
+        }
+
+        return item 
+    }
+
     async findRrNumbers(rrNumber: string): Promise<{ rr_number: string; }[]> {
 	
 		const arrayOfRrNumbers = await this.prisma.rR.findMany({
@@ -202,6 +252,31 @@ export class RrService {
 	
 		return arrayOfRrNumbers;
 	}
+
+    async getStatus(rr_id: string): Promise<APPROVAL_STATUS> {
+
+        const approvers = await this.prisma.rRApprover.findMany({
+            where: {
+                rr_id,
+                is_deleted: false
+            }
+        })
+
+        const hasDisapproved = approvers.find(i => i.status === APPROVAL_STATUS.DISAPPROVED)
+
+        if(hasDisapproved) {
+            return APPROVAL_STATUS.DISAPPROVED
+        }
+
+        const hasPending = approvers.find(i => i.status === APPROVAL_STATUS.PENDING)
+
+        if(hasPending) {
+            return APPROVAL_STATUS.PENDING
+        }
+
+        return APPROVAL_STATUS.APPROVED
+
+    }
 
     async update(id: string, input: UpdateRrInput): Promise<RR> {
         
@@ -391,7 +466,11 @@ export class RrService {
         }
 
         if(input.canceller_id) {
-            employeeIds.push(input.canceller_id)
+            const isUserExist = await this.isUserExist(input.canceller_id, this.authUser)
+            if(!isUserExist) {
+                this.logger.error('canceller_id which also is user_id not found in table users')
+                throw new NotFoundException('Canceller does not exist')
+            }
         }
 
         if(employeeIds.length > 0){
@@ -427,6 +506,44 @@ export class RrService {
         const isNormalUser = (this.authUser.user.role === Role.USER)
 
         return isNormalUser
+    }
+
+    private async isUserExist(user_id: string, authUser: AuthUser): Promise<boolean> {
+    
+        this.logger.log('isUserExist', user_id)
+
+        const query = `
+            query{
+                user(id: "${user_id}") {
+                    id
+                }
+            }
+        `;
+
+        const { data } = await firstValueFrom(
+            this.httpService.post(process.env.API_GATEWAY_URL, 
+            { query },
+            {
+                headers: {
+                    Authorization: authUser.authorization,
+                    'Content-Type': 'application/json'
+                }
+            }  
+            ).pipe(
+                catchError((error) => {
+                    throw error
+                }),
+            ),
+        );
+
+        console.log('data', data)
+
+        if(!data || !data.data || !data.data.user){
+            console.log('User not found')
+            return false 
+        }
+        return true 
+
     }
 
 }
