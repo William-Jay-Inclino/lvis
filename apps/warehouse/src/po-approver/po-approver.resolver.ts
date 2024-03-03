@@ -47,8 +47,10 @@ export class PoApproverResolver {
   @Mutation(() => POApprover)
   updatePoApprover(
     @Args('id') id: string,
-    @Args('input') updatePoApproverInput: UpdatePoApproverInput
+    @Args('input') updatePoApproverInput: UpdatePoApproverInput,
+    @CurrentAuthUser() authUser: AuthUser
   ) {
+    this.poApproverService.setAuthUser(authUser)   
     return this.poApproverService.update(id, updatePoApproverInput);
   }
 

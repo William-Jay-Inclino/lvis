@@ -4,7 +4,11 @@ import { RrApprover } from './entities/rr-approver.entity';
 import { CreateRrApproverInput } from './dto/create-rr-approver.input';
 import { UpdateRrApproverInput } from './dto/update-rr-approver.input';
 import { Employee } from '../__employee__/entities/employee.entity';
-
+import { GqlAuthGuard } from '../__auth__/guards/gql-auth.guard';
+import { UseGuards } from '@nestjs/common';
+import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
+import { AuthUser } from '../__common__/auth-user.entity';
+@UseGuards(GqlAuthGuard)
 @Resolver(() => RrApprover)
 export class RrApproverResolver {
   constructor(private readonly rrApproverService: RrApproverService) {}
@@ -27,8 +31,10 @@ export class RrApproverResolver {
   @Mutation(() => RrApprover)
   updateRrApprover(
     @Args('id') id: string,
-    @Args('input') updateRrApproverInput: UpdateRrApproverInput
+    @Args('input') updateRrApproverInput: UpdateRrApproverInput,
+    @CurrentAuthUser() authUser: AuthUser
   ) {
+    this.rrApproverService.setAuthUser(authUser)   
     return this.rrApproverService.update(id, updateRrApproverInput);
   }
 
