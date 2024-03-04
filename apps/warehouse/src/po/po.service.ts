@@ -294,6 +294,18 @@ export class PoService {
 
 	}
 
+    async isReferenced(poId: string): Promise<Boolean> {
+
+        const rr = await this.prisma.rR.findUnique({
+            where: { po_id: poId }
+        })
+
+        if(rr) return true  
+
+        return false
+
+    }
+
     private async getLatestPoNumber(): Promise<string> {
         const currentYear = new Date().getFullYear().toString().slice(-2);
     
