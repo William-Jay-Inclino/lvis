@@ -30,7 +30,11 @@ export class CanvassService {
                     include: {
                         meqs_suppliers: {
                             include: {
-                                po: true
+                                po: {
+                                    include: {
+                                        rr: true
+                                    }
+                                }
                             }
                         }
                     }

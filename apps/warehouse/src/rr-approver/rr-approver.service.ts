@@ -124,9 +124,6 @@ export class RrApproverService {
         return await this.prisma.rRApprover.findMany({
             include: this.includedFields,
             where: { is_deleted: false },
-            orderBy: {
-                label: 'asc'
-            }
         })
     }
 
@@ -156,7 +153,7 @@ export class RrApproverService {
                 rr_id: rrId
             },
             orderBy: {
-                label: 'asc'
+                order: 'asc'
             }
         })
     }
@@ -171,7 +168,7 @@ export class RrApproverService {
                 }
             },
             orderBy: {
-                label: 'asc'
+                order: 'asc'
             }
         })
     }

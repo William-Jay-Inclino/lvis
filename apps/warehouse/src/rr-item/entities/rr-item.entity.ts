@@ -20,19 +20,19 @@ export class RrItem {
   @Field({ nullable: true })
   item_id: string | null
 
-  @Field(() => Item)
+  @Field(() => Item, { nullable: true })
   item: Item
 
   @Field({ nullable: true })
   item_brand_id: string | null
 
-  @Field(() => Brand)
+  @Field(() => Brand, { nullable: true })
   item_brand: Brand
 
   @Field({ nullable: true })
   unit_id: string | null
 
-  @Field(() => Unit)
+  @Field(() => Unit, { nullable: true })
   unit: Unit
 
   @Field(() => Int)

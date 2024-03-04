@@ -1,6 +1,7 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { APPROVAL_STATUS } from '../../__common__/types';
 import { MeqsSupplier } from '../../meqs-supplier/entities/meqs-supplier.entity';
+import { RR } from '../../rr/entities/rr.entity';
 
 @ObjectType()
 export class PO {
@@ -49,5 +50,8 @@ export class PO {
 
   @Field(() => Boolean)
   is_cancelled: boolean;
+
+  @Field(() => RR, { nullable: true })
+  rr?: RR;
 
 }

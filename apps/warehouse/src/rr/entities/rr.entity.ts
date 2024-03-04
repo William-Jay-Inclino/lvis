@@ -1,5 +1,6 @@
 import { ObjectType, Field, Int, ID, Float } from '@nestjs/graphql';
 import { PO } from '../../po/entities/po.entity';
+import { RrItem } from '../../rr-item/entities/rr-item.entity';
 
 @ObjectType()
 export class RR {
@@ -49,8 +50,8 @@ export class RR {
   // @Field()
   // rr_approvers: string;
 
-  // @Field()
-  // rr_items: string;
+  @Field(() => [RrItem])
+  rr_items: RrItem[];
 
   @Field()
   created_by: string;

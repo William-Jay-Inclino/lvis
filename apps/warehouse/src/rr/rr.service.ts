@@ -90,6 +90,15 @@ export class RrService {
         const rrNumber = await this.getLatestRrNumber()
         const today = moment().format('MM/DD/YYYY')
 
+        // add the requisitioner as the 1st approver
+        const requested_by_id = await this.getRequestedById(input.po_id)
+
+        input.approvers.push({
+            approver_id: requested_by_id,
+            label: 'Confirmed By',
+            order: 1
+        })
+
         const data: Prisma.RRCreateInput = {
             created_by: this.authUser.user.username,
             po: { connect: { id: input.po_id } },
@@ -557,6 +566,35 @@ export class RrService {
             return false 
         }
         return true 
+
+    }
+
+    private async getRequestedById(poId: string) {
+        
+        const canvass = await this.prisma.canvass.findFirst({
+            where: {
+                rv: {
+                    meqs: {
+                        meqs_suppliers: {
+                            some: {
+                                po: {
+                                    id: poId
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            select: {
+                requested_by_id: true
+            }
+        });
+
+        if(!canvass) {
+            throw new NotFoundException('requested_by_id not found in canvass associate with PO ID of ' + poId)
+        }
+
+        return canvass.requested_by_id;
 
     }
 

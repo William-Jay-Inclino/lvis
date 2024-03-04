@@ -60,7 +60,11 @@ export class MeqsService {
         },
         meqs_suppliers: {
             include: {
-                po: true,
+                po: {
+                    include: {
+                        rr: true
+                    }
+                },
                 supplier: true,
                 attachments: true,
                 meqs_supplier_items: {
