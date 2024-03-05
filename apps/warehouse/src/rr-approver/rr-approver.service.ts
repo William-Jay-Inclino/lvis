@@ -22,6 +22,7 @@ import { HttpService } from '@nestjs/axios';
 import { catchError, firstValueFrom } from 'rxjs';
 import { WarehouseRemoveResponse } from '../__common__/classes';
 import { getLastApprover, isValidApprovalStatus } from '../__common__/helpers';
+import { UpdateRrOrderResponse } from './entities/update-rr-order-response.entity';
 
 @Injectable()
 export class RrApproverService {
@@ -232,6 +233,43 @@ export class RrApproverService {
 		}
 
 	}
+
+    async updateManyOrders(inputs: { id: string; order: number }[]): Promise<UpdateRrOrderResponse> {
+        try {
+            
+            const queries = []
+
+            for(let input of inputs) {
+
+                const updateQuery = this.prisma.rRApprover.update({
+                    where: { id: input.id },
+                    data: { order: input.order },
+                    select: {
+                        rr_id: true
+                    }
+                })
+
+                queries.push(updateQuery)
+
+            }
+
+            const result = await this.prisma.$transaction(queries)
+
+            const rr = result[0] as RRApprover
+
+            console.log('rr', rr)
+
+            const approvers = await this.findByRrId(rr.rr_id)
+    
+            return {
+                success: true,
+                approvers: approvers
+            };
+        } catch (error) {
+            this.logger.error(error);
+            return { success: false, approvers: [] };
+        }
+    }
 
     async forEmployee(employeeId: string): Promise<RRApprover[]> {
         return await this.prisma.rRApprover.findMany({

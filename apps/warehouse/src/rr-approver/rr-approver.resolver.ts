@@ -8,13 +8,20 @@ import { GqlAuthGuard } from '../__auth__/guards/gql-auth.guard';
 import { UseGuards } from '@nestjs/common';
 import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
 import { AuthUser } from '../__common__/auth-user.entity';
+import { UpdateRrOrderResponse } from './entities/update-rr-order-response.entity';
+import { UpdateRrOrderInput } from './dto/update-rr-order.input';
+import { WarehouseRemoveResponse } from '../__common__/classes';
 @UseGuards(GqlAuthGuard)
 @Resolver(() => RrApprover)
 export class RrApproverResolver {
   constructor(private readonly rrApproverService: RrApproverService) {}
 
   @Mutation(() => RrApprover)
-  createRrApprover(@Args('input') createRrApproverInput: CreateRrApproverInput) {
+  createRrApprover(
+    @Args('input') createRrApproverInput: CreateRrApproverInput,
+    @CurrentAuthUser() authUser: AuthUser
+  ) {
+    this.rrApproverService.setAuthUser(authUser)   
     return this.rrApproverService.create(createRrApproverInput);
   }
 
@@ -38,7 +45,14 @@ export class RrApproverResolver {
     return this.rrApproverService.update(id, updateRrApproverInput);
   }
 
-  @Mutation(() => RrApprover)
+  @Mutation(() => UpdateRrOrderResponse)
+  async updateRRApproverOrder(@Args('inputs', { type: () => [UpdateRrOrderInput] }) inputs: UpdateRrOrderInput[]){
+
+    return await this.rrApproverService.updateManyOrders(inputs);
+
+  }
+
+  @Mutation(() => WarehouseRemoveResponse)
   removeRrApprover(@Args('id') id: string) {
     return this.rrApproverService.remove(id);
   }

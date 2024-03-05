@@ -37,9 +37,4 @@ export class UpdateRrInput extends PartialType(CreateRrInput) {
   @Min(0.01, { message: 'Delivery charge must be greater than 0' })
   @IsOptional()
   delivery_charge?: number;
-
-  @Field( () => Int, { nullable: true })
-  @IsOptional()
-  @IsEnum(APPROVAL_STATUS)
-  status?: APPROVAL_STATUS;
 }
