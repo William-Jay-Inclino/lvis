@@ -68,4 +68,7 @@ export class RR {
   @Field(() => Boolean)
   is_cancelled: boolean;
 
+  @Field(() => Boolean)
+  is_completed: boolean;
+
 }

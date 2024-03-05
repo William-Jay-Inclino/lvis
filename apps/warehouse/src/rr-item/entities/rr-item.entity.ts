@@ -14,7 +14,7 @@ export class RrItem {
   @Field()
   rr_id: string
 
-  @Field(() => RR)
+  @Field(() => RR, { nullable: true })
   rr: RR
 
   @Field({ nullable: true })

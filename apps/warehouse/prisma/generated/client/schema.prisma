@@ -398,6 +398,7 @@ model RR {
 
   is_deleted   Boolean @default(false)
   is_cancelled Boolean @default(false)
+  is_completed Boolean @default(false)
 
   date_cancelled DateTime?
 
