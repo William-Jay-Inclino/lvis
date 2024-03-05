@@ -12,6 +12,9 @@ export class ItemTransaction {
   @Field()
   item_id: string;
 
+  @Field()
+  txn_number: string;
+
   @Field({ nullable: true })
   rr_item_id?: string | null;
 
@@ -35,7 +38,6 @@ export class ItemTransaction {
 
   @Field(() => Item)
   item: Item;
-
 
   @Field(() => RrItem, {nullable: true})
   rr_item?: RrItem;

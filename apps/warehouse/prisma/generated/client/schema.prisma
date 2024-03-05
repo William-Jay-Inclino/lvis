@@ -467,7 +467,7 @@ model Item {
   item_type_id     String
   unit_id          String
   code             String  @unique
-  name             String  @default("test name")
+  name             String
   description      String?
   total_quantity   Int
   initial_quantity Int
@@ -536,6 +536,7 @@ model ItemTransaction {
   id         String  @id @default(uuid())
   item_id    String
   rr_item_id String? @unique
+  txn_number String  @unique
   type       Int
   quantity   Float
   price      Float

@@ -1,9 +1,10 @@
 mutation {
   createItem(input:{
-    item_type_id: "90b913c7-2caa-49a1-a3f4-1928f2486625",
-    unit_id: "d09e9c2d-de3b-43d8-8163-683f790ef195",
-    code: "ItemCode1",
-    description: "This is a description for ItemCode1",
+    item_type_id: "df95d476-f0d4-4f3a-9915-2e495e45af4d",
+    unit_id: "3bfb323b-d92f-40d9-92eb-579b865cd6f5",
+    code: "ItemCode3",
+    name: "Item3",
+    description: "This is a description for ItemCode3",
     initial_quantity: 10,
     initial_average_price:100
   }) {

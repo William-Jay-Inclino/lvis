@@ -536,6 +536,7 @@ model ItemTransaction {
   id         String  @id @default(uuid())
   item_id    String
   rr_item_id String? @unique
+  txn_number String  @unique
   type       Int
   quantity   Float
   price      Float

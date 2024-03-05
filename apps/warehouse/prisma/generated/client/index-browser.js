@@ -484,6 +484,7 @@ exports.Prisma.ItemTransactionScalarFieldEnum = {
   id: 'id',
   item_id: 'item_id',
   rr_item_id: 'rr_item_id',
+  txn_number: 'txn_number',
   type: 'type',
   quantity: 'quantity',
   price: 'price',

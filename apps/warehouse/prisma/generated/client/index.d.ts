@@ -31867,6 +31867,7 @@ export namespace Prisma {
     id: string | null
     item_id: string | null
     rr_item_id: string | null
+    txn_number: string | null
     type: number | null
     quantity: number | null
     price: number | null
@@ -31881,6 +31882,7 @@ export namespace Prisma {
     id: string | null
     item_id: string | null
     rr_item_id: string | null
+    txn_number: string | null
     type: number | null
     quantity: number | null
     price: number | null
@@ -31895,6 +31897,7 @@ export namespace Prisma {
     id: number
     item_id: number
     rr_item_id: number
+    txn_number: number
     type: number
     quantity: number
     price: number
@@ -31923,6 +31926,7 @@ export namespace Prisma {
     id?: true
     item_id?: true
     rr_item_id?: true
+    txn_number?: true
     type?: true
     quantity?: true
     price?: true
@@ -31937,6 +31941,7 @@ export namespace Prisma {
     id?: true
     item_id?: true
     rr_item_id?: true
+    txn_number?: true
     type?: true
     quantity?: true
     price?: true
@@ -31951,6 +31956,7 @@ export namespace Prisma {
     id?: true
     item_id?: true
     rr_item_id?: true
+    txn_number?: true
     type?: true
     quantity?: true
     price?: true
@@ -32052,6 +32058,7 @@ export namespace Prisma {
     id: string
     item_id: string
     rr_item_id: string | null
+    txn_number: string
     type: number
     quantity: number
     price: number
@@ -32085,6 +32092,7 @@ export namespace Prisma {
     id?: boolean
     item_id?: boolean
     rr_item_id?: boolean
+    txn_number?: boolean
     type?: boolean
     quantity?: boolean
     price?: boolean
@@ -32101,6 +32109,7 @@ export namespace Prisma {
     id?: boolean
     item_id?: boolean
     rr_item_id?: boolean
+    txn_number?: boolean
     type?: boolean
     quantity?: boolean
     price?: boolean
@@ -32127,6 +32136,7 @@ export namespace Prisma {
       id: string
       item_id: string
       rr_item_id: string | null
+      txn_number: string
       type: number
       quantity: number
       price: number
@@ -32535,6 +32545,7 @@ export namespace Prisma {
     readonly id: FieldRef<"ItemTransaction", 'String'>
     readonly item_id: FieldRef<"ItemTransaction", 'String'>
     readonly rr_item_id: FieldRef<"ItemTransaction", 'String'>
+    readonly txn_number: FieldRef<"ItemTransaction", 'String'>
     readonly type: FieldRef<"ItemTransaction", 'Int'>
     readonly quantity: FieldRef<"ItemTransaction", 'Float'>
     readonly price: FieldRef<"ItemTransaction", 'Float'>
@@ -33358,6 +33369,7 @@ export namespace Prisma {
     id: 'id',
     item_id: 'item_id',
     rr_item_id: 'rr_item_id',
+    txn_number: 'txn_number',
     type: 'type',
     quantity: 'quantity',
     price: 'price',
@@ -35895,6 +35907,7 @@ export namespace Prisma {
     id?: StringFilter<"ItemTransaction"> | string
     item_id?: StringFilter<"ItemTransaction"> | string
     rr_item_id?: StringNullableFilter<"ItemTransaction"> | string | null
+    txn_number?: StringFilter<"ItemTransaction"> | string
     type?: IntFilter<"ItemTransaction"> | number
     quantity?: FloatFilter<"ItemTransaction"> | number
     price?: FloatFilter<"ItemTransaction"> | number
@@ -35911,6 +35924,7 @@ export namespace Prisma {
     id?: SortOrder
     item_id?: SortOrder
     rr_item_id?: SortOrderInput | SortOrder
+    txn_number?: SortOrder
     type?: SortOrder
     quantity?: SortOrder
     price?: SortOrder
@@ -35926,6 +35940,7 @@ export namespace Prisma {
   export type ItemTransactionWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     rr_item_id?: string
+    txn_number?: string
     AND?: ItemTransactionWhereInput | ItemTransactionWhereInput[]
     OR?: ItemTransactionWhereInput[]
     NOT?: ItemTransactionWhereInput | ItemTransactionWhereInput[]
@@ -35940,12 +35955,13 @@ export namespace Prisma {
     is_deleted?: BoolFilter<"ItemTransaction"> | boolean
     item?: XOR<ItemRelationFilter, ItemWhereInput>
     rr_item?: XOR<RRItemNullableRelationFilter, RRItemWhereInput> | null
-  }, "id" | "rr_item_id">
+  }, "id" | "rr_item_id" | "txn_number">
 
   export type ItemTransactionOrderByWithAggregationInput = {
     id?: SortOrder
     item_id?: SortOrder
     rr_item_id?: SortOrderInput | SortOrder
+    txn_number?: SortOrder
     type?: SortOrder
     quantity?: SortOrder
     price?: SortOrder
@@ -35968,6 +35984,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"ItemTransaction"> | string
     item_id?: StringWithAggregatesFilter<"ItemTransaction"> | string
     rr_item_id?: StringNullableWithAggregatesFilter<"ItemTransaction"> | string | null
+    txn_number?: StringWithAggregatesFilter<"ItemTransaction"> | string
     type?: IntWithAggregatesFilter<"ItemTransaction"> | number
     quantity?: FloatWithAggregatesFilter<"ItemTransaction"> | number
     price?: FloatWithAggregatesFilter<"ItemTransaction"> | number
@@ -38387,7 +38404,7 @@ export namespace Prisma {
   export type ItemCreateInput = {
     id?: string
     code: string
-    name?: string
+    name: string
     description?: string | null
     total_quantity: number
     initial_quantity: number
@@ -38406,7 +38423,7 @@ export namespace Prisma {
     item_type_id: string
     unit_id: string
     code: string
-    name?: string
+    name: string
     description?: string | null
     total_quantity: number
     initial_quantity: number
@@ -38457,7 +38474,7 @@ export namespace Prisma {
     item_type_id: string
     unit_id: string
     code: string
-    name?: string
+    name: string
     description?: string | null
     total_quantity: number
     initial_quantity: number
@@ -38698,6 +38715,7 @@ export namespace Prisma {
 
   export type ItemTransactionCreateInput = {
     id?: string
+    txn_number: string
     type: number
     quantity: number
     price: number
@@ -38714,6 +38732,7 @@ export namespace Prisma {
     id?: string
     item_id: string
     rr_item_id?: string | null
+    txn_number: string
     type: number
     quantity: number
     price: number
@@ -38726,6 +38745,7 @@ export namespace Prisma {
 
   export type ItemTransactionUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    txn_number?: StringFieldUpdateOperationsInput | string
     type?: IntFieldUpdateOperationsInput | number
     quantity?: FloatFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
@@ -38742,6 +38762,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     item_id?: StringFieldUpdateOperationsInput | string
     rr_item_id?: NullableStringFieldUpdateOperationsInput | string | null
+    txn_number?: StringFieldUpdateOperationsInput | string
     type?: IntFieldUpdateOperationsInput | number
     quantity?: FloatFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
@@ -38756,6 +38777,7 @@ export namespace Prisma {
     id?: string
     item_id: string
     rr_item_id?: string | null
+    txn_number: string
     type: number
     quantity: number
     price: number
@@ -38768,6 +38790,7 @@ export namespace Prisma {
 
   export type ItemTransactionUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    txn_number?: StringFieldUpdateOperationsInput | string
     type?: IntFieldUpdateOperationsInput | number
     quantity?: FloatFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
@@ -38782,6 +38805,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     item_id?: StringFieldUpdateOperationsInput | string
     rr_item_id?: NullableStringFieldUpdateOperationsInput | string | null
+    txn_number?: StringFieldUpdateOperationsInput | string
     type?: IntFieldUpdateOperationsInput | number
     quantity?: FloatFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
@@ -40543,6 +40567,7 @@ export namespace Prisma {
     id?: SortOrder
     item_id?: SortOrder
     rr_item_id?: SortOrder
+    txn_number?: SortOrder
     type?: SortOrder
     quantity?: SortOrder
     price?: SortOrder
@@ -40563,6 +40588,7 @@ export namespace Prisma {
     id?: SortOrder
     item_id?: SortOrder
     rr_item_id?: SortOrder
+    txn_number?: SortOrder
     type?: SortOrder
     quantity?: SortOrder
     price?: SortOrder
@@ -40577,6 +40603,7 @@ export namespace Prisma {
     id?: SortOrder
     item_id?: SortOrder
     rr_item_id?: SortOrder
+    txn_number?: SortOrder
     type?: SortOrder
     quantity?: SortOrder
     price?: SortOrder
@@ -42855,7 +42882,7 @@ export namespace Prisma {
   export type ItemCreateWithoutUnitInput = {
     id?: string
     code: string
-    name?: string
+    name: string
     description?: string | null
     total_quantity: number
     initial_quantity: number
@@ -42872,7 +42899,7 @@ export namespace Prisma {
     id?: string
     item_type_id: string
     code: string
-    name?: string
+    name: string
     description?: string | null
     total_quantity: number
     initial_quantity: number
@@ -46787,7 +46814,7 @@ export namespace Prisma {
   export type ItemCreateWithoutRr_itemsInput = {
     id?: string
     code: string
-    name?: string
+    name: string
     description?: string | null
     total_quantity: number
     initial_quantity: number
@@ -46805,7 +46832,7 @@ export namespace Prisma {
     item_type_id: string
     unit_id: string
     code: string
-    name?: string
+    name: string
     description?: string | null
     total_quantity: number
     initial_quantity: number
@@ -46871,6 +46898,7 @@ export namespace Prisma {
 
   export type ItemTransactionCreateWithoutRr_itemInput = {
     id?: string
+    txn_number: string
     type: number
     quantity: number
     price: number
@@ -46885,6 +46913,7 @@ export namespace Prisma {
   export type ItemTransactionUncheckedCreateWithoutRr_itemInput = {
     id?: string
     item_id: string
+    txn_number: string
     type: number
     quantity: number
     price: number
@@ -47073,6 +47102,7 @@ export namespace Prisma {
 
   export type ItemTransactionUpdateWithoutRr_itemInput = {
     id?: StringFieldUpdateOperationsInput | string
+    txn_number?: StringFieldUpdateOperationsInput | string
     type?: IntFieldUpdateOperationsInput | number
     quantity?: FloatFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
@@ -47087,6 +47117,7 @@ export namespace Prisma {
   export type ItemTransactionUncheckedUpdateWithoutRr_itemInput = {
     id?: StringFieldUpdateOperationsInput | string
     item_id?: StringFieldUpdateOperationsInput | string
+    txn_number?: StringFieldUpdateOperationsInput | string
     type?: IntFieldUpdateOperationsInput | number
     quantity?: FloatFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
@@ -47120,6 +47151,7 @@ export namespace Prisma {
 
   export type ItemTransactionCreateWithoutItemInput = {
     id?: string
+    txn_number: string
     type: number
     quantity: number
     price: number
@@ -47134,6 +47166,7 @@ export namespace Prisma {
   export type ItemTransactionUncheckedCreateWithoutItemInput = {
     id?: string
     rr_item_id?: string | null
+    txn_number: string
     type: number
     quantity: number
     price: number
@@ -47309,6 +47342,7 @@ export namespace Prisma {
     id?: StringFilter<"ItemTransaction"> | string
     item_id?: StringFilter<"ItemTransaction"> | string
     rr_item_id?: StringNullableFilter<"ItemTransaction"> | string | null
+    txn_number?: StringFilter<"ItemTransaction"> | string
     type?: IntFilter<"ItemTransaction"> | number
     quantity?: FloatFilter<"ItemTransaction"> | number
     price?: FloatFilter<"ItemTransaction"> | number
@@ -47385,7 +47419,7 @@ export namespace Prisma {
   export type ItemCreateWithoutStationsInput = {
     id?: string
     code: string
-    name?: string
+    name: string
     description?: string | null
     total_quantity: number
     initial_quantity: number
@@ -47403,7 +47437,7 @@ export namespace Prisma {
     item_type_id: string
     unit_id: string
     code: string
-    name?: string
+    name: string
     description?: string | null
     total_quantity: number
     initial_quantity: number
@@ -47738,7 +47772,7 @@ export namespace Prisma {
   export type ItemCreateWithoutItem_typeInput = {
     id?: string
     code: string
-    name?: string
+    name: string
     description?: string | null
     total_quantity: number
     initial_quantity: number
@@ -47755,7 +47789,7 @@ export namespace Prisma {
     id?: string
     unit_id: string
     code: string
-    name?: string
+    name: string
     description?: string | null
     total_quantity: number
     initial_quantity: number
@@ -47796,7 +47830,7 @@ export namespace Prisma {
   export type ItemCreateWithoutItem_transactionsInput = {
     id?: string
     code: string
-    name?: string
+    name: string
     description?: string | null
     total_quantity: number
     initial_quantity: number
@@ -47814,7 +47848,7 @@ export namespace Prisma {
     item_type_id: string
     unit_id: string
     code: string
-    name?: string
+    name: string
     description?: string | null
     total_quantity: number
     initial_quantity: number
@@ -48040,7 +48074,7 @@ export namespace Prisma {
     id?: string
     item_type_id: string
     code: string
-    name?: string
+    name: string
     description?: string | null
     total_quantity: number
     initial_quantity: number
@@ -49050,6 +49084,7 @@ export namespace Prisma {
   export type ItemTransactionCreateManyItemInput = {
     id?: string
     rr_item_id?: string | null
+    txn_number: string
     type: number
     quantity: number
     price: number
@@ -49089,6 +49124,7 @@ export namespace Prisma {
 
   export type ItemTransactionUpdateWithoutItemInput = {
     id?: StringFieldUpdateOperationsInput | string
+    txn_number?: StringFieldUpdateOperationsInput | string
     type?: IntFieldUpdateOperationsInput | number
     quantity?: FloatFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
@@ -49103,6 +49139,7 @@ export namespace Prisma {
   export type ItemTransactionUncheckedUpdateWithoutItemInput = {
     id?: StringFieldUpdateOperationsInput | string
     rr_item_id?: NullableStringFieldUpdateOperationsInput | string | null
+    txn_number?: StringFieldUpdateOperationsInput | string
     type?: IntFieldUpdateOperationsInput | number
     quantity?: FloatFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
@@ -49116,6 +49153,7 @@ export namespace Prisma {
   export type ItemTransactionUncheckedUpdateManyWithoutItemInput = {
     id?: StringFieldUpdateOperationsInput | string
     rr_item_id?: NullableStringFieldUpdateOperationsInput | string | null
+    txn_number?: StringFieldUpdateOperationsInput | string
     type?: IntFieldUpdateOperationsInput | number
     quantity?: FloatFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
@@ -49289,7 +49327,7 @@ export namespace Prisma {
     id?: string
     unit_id: string
     code: string
-    name?: string
+    name: string
     description?: string | null
     total_quantity: number
     initial_quantity: number
