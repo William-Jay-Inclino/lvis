@@ -2,9 +2,11 @@ import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { CreateItemInput } from './dto/create-item.input';
 import { UpdateItemInput } from './dto/update-item.input';
 import { PrismaService } from '../__prisma__/prisma.service';
-import { Item, Prisma } from 'apps/warehouse/prisma/generated/client';
-import { ITEM_TRANSACTION_TYPE } from '../__common__/types';
+import { Item, Prisma, RRApprover } from 'apps/warehouse/prisma/generated/client';
+import { APPROVAL_STATUS, ITEM_TRANSACTION_TYPE } from '../__common__/types';
 import { WarehouseRemoveResponse } from '../__common__/classes';
+import { OnEvent } from '@nestjs/event-emitter';
+import { RrApproverStatusUpdated } from '../rr-approver/events/rr-approver-status-updated.event';
 
 @Injectable()
 export class ItemService {
@@ -20,6 +22,31 @@ export class ItemService {
 	constructor(
 		private readonly prisma: PrismaService
 	) {}
+
+	@OnEvent('rr-approver-status.updated')
+    async handleRrApproverStatusUpdated(payload: RrApproverStatusUpdated) {
+		
+		const rrApprover = await this.prisma.rRApprover.findUnique({
+			where: { id: payload.id }
+		})
+
+		if(!rrApprover) {
+			throw new NotFoundException('rrApprover not found with id: ' + payload.id)
+		}
+
+		const approvers = await this.prisma.rRApprover.findMany({
+			where: { rr_id: rrApprover.rr_id }
+		})
+
+		const isApproved = this.isRrStatusApproved(approvers)
+
+		console.log('RR Status isApproved', isApproved)
+
+		if(isApproved) {
+			console.log('Adding items to item table')
+		}
+
+    }
 
 	async create(input: CreateItemInput): Promise<Item> {
 		
@@ -146,4 +173,19 @@ export class ItemService {
 			msg: "Item successfully deleted"
 		}
 	}
+
+	private isRrStatusApproved(approvers: RRApprover[]): boolean {
+
+		for(let approver of approvers) {
+
+			if(approver.status !== APPROVAL_STATUS.APPROVED) {
+				return false 
+			}
+
+		}
+
+		return true
+
+	}
+
 }

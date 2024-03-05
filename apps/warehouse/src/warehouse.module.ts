@@ -38,6 +38,7 @@ import { RrModule } from './rr/rr.module';
 import { RrApproverModule } from './rr-approver/rr-approver.module';
 import { RrItemModule } from './rr-item/rr-item.module';
 import { StationModule } from './station/station.module';
+import { EventEmitterModule } from '@nestjs/event-emitter';
 
 
 @Module({
@@ -48,6 +49,7 @@ import { StationModule } from './station/station.module';
         federation: 2,
       },
     }),
+    EventEmitterModule.forRoot(),
     HttpModule,
     BrandModule,
     AuthModule,

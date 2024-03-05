@@ -23,6 +23,8 @@ import { catchError, firstValueFrom } from 'rxjs';
 import { WarehouseRemoveResponse } from '../__common__/classes';
 import { getLastApprover, isValidApprovalStatus } from '../__common__/helpers';
 import { UpdateRrOrderResponse } from './entities/update-rr-order-response.entity';
+import { EventEmitter2, OnEvent } from '@nestjs/event-emitter';
+import { RrApproverStatusUpdated } from './events/rr-approver-status-updated.event';
 
 @Injectable()
 export class RrApproverService {
@@ -78,6 +80,7 @@ export class RrApproverService {
 	constructor(
         private readonly prisma: PrismaService,
         private readonly httpService: HttpService,
+        private eventEmitter: EventEmitter2
     ) {}
 
     setAuthUser(authUser: AuthUser){
@@ -197,25 +200,16 @@ export class RrApproverService {
             include: this.includedFields,
         });
         this.logger.log('Successfully updated RR Approver');
+        
+        // emit event if status is updated
+        if(input.status !== existingItem.status) {
+            console.log('status updated...')
+            this.eventEmitter.emit('rr-approver-status.updated', new RrApproverStatusUpdated(id))
+        }
+
+        console.log('returned rrApprover to client')
+
         return updated;
-
-        // if no status then normal update
-        // if(!input.status){
-        //     return await this.updateRRApprover(id, data)
-        // }
-
-        // if(input.status === APPROVAL_STATUS.APPROVED){
-        //     return await this.handleApprovedStatus(id, data, existingItem.rr_id)
-        // }
-
-        // if(input.status === APPROVAL_STATUS.DISAPPROVED){
-        //     return await this.handleDisapprovedStatus(id, data, existingItem.rr_id)
-        // }
-
-        // if(input.status === APPROVAL_STATUS.PENDING){
-        //     return await this.handlePendingStatus(id, data, existingItem.rr_id)
-        // }
-
     }
 
     async remove(id: string): Promise<WarehouseRemoveResponse> {
