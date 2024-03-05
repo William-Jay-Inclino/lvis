@@ -61,7 +61,7 @@ export class ItemService {
 
 	}
 
-	async findAll(page: number, pageSize: number, name?: string, itemTypeId?: string): Promise<ItemsResponse> {
+	async findAll(page: number, pageSize: number, name?: string, item_type_id?: string): Promise<ItemsResponse> {
 
 		const skip = (page - 1) * pageSize;
 
@@ -75,9 +75,9 @@ export class ItemService {
 			};
 		}
 
-		if(itemTypeId) {
+		if(item_type_id) {
 			whereCondition.item_type_id = {
-                equals: itemTypeId,
+                equals: item_type_id,
             };
 		}
 

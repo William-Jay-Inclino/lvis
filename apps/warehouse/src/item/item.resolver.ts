@@ -19,9 +19,9 @@ export class ItemResolver {
     @Args('page') page: number,
     @Args('pageSize') pageSize: number,
     @Args('name', {nullable: true}) name?: string,
-    @Args('itemTypeId', {nullable: true}) itemTypeId?: string,
+    @Args('item_type_id', {nullable: true}) item_type_id?: string,
   ) {
-    return this.itemService.findAll(page, pageSize, name, itemTypeId);
+    return this.itemService.findAll(page, pageSize, name, item_type_id);
   }
 
   @Query(() => Item)
