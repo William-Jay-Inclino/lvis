@@ -157,13 +157,8 @@ export class CanvassService {
         });
 
         const totalItems = await this.prisma.canvass.count({
-            where: whereCondition,
+            where: whereCondition
         });
-
-        console.log('data', items)
-        console.log('totalItems', totalItems)
-        console.log('currentPage', page)
-        console.log('totalPages', Math.ceil(totalItems / pageSize))
 
         return {
             data: items,

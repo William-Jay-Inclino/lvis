@@ -463,11 +463,12 @@ model RRItem {
 }
 
 model Item {
-  id               String @id @default(uuid())
+  id               String  @id @default(uuid())
   item_type_id     String
   unit_id          String
-  code             String @unique
-  description      String
+  code             String  @unique
+  name             String
+  description      String?
   total_quantity   Int
   initial_quantity Int
 

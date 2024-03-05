@@ -23,29 +23,11 @@ export class UpdateItemInput extends PartialType(CreateItemInput) {
   @Field({ nullable: true })
   @IsOptional()
   @IsString()
+  name?: string
+
+  @Field({ nullable: true })
+  @IsOptional()
+  @IsString()
   description?: string
-
-  // @Field(() => Int, {nullable: true})
-  // @IsOptional()
-  // @IsInt()
-  // @Min(1, { message: 'Quantity must be a positive integer' })
-  // quantity?: number
-
-  // @Field(() => Int, {nullable: true})
-  // @IsOptional()
-  // @IsInt()
-  // initial_quantity?: number
-
-  // @Field(() => Float, {nullable: true})
-  // @IsOptional()
-  // @IsNumber()
-  // @Min(0.01, { message: 'Average Price must be greater than 0' })
-  // average_price?: number
-
-  // @Field(() => Float, {nullable: true})
-  // @IsOptional()
-  // @IsNumber()
-  // @Min(0.01, { message: 'Initial Average Price must be greater than 0' })
-  // initial_average_price?: number
 
 }

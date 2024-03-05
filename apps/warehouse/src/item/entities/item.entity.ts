@@ -20,7 +20,10 @@ export class Item {
   code: string;
 
   @Field()
-  description: string;
+  name: string;
+
+  @Field({ nullable: true })
+  description: string | null;
 
   @Field(() => Int)
   total_quantity: number;

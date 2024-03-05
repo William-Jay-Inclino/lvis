@@ -443,6 +443,7 @@ exports.Prisma.ItemScalarFieldEnum = {
   item_type_id: 'item_type_id',
   unit_id: 'unit_id',
   code: 'code',
+  name: 'name',
   description: 'description',
   total_quantity: 'total_quantity',
   initial_quantity: 'initial_quantity',

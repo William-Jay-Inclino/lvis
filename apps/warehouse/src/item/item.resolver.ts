@@ -3,6 +3,7 @@ import { ItemService } from './item.service';
 import { Item } from './entities/item.entity';
 import { CreateItemInput } from './dto/create-item.input';
 import { UpdateItemInput } from './dto/update-item.input';
+import { ItemsResponse } from './entities/items-response.entity';
 
 @Resolver(() => Item)
 export class ItemResolver {
@@ -13,14 +14,27 @@ export class ItemResolver {
     return this.itemService.create(createItemInput);
   }
 
-  @Query(() => [Item])
-  items() {
-    return this.itemService.findAll();
+  @Query(() => ItemsResponse)
+  items(
+    @Args('page') page: number,
+    @Args('pageSize') pageSize: number,
+    @Args('name', {nullable: true}) name?: string,
+    @Args('itemTypeId', {nullable: true}) itemTypeId?: string,
+  ) {
+    return this.itemService.findAll(page, pageSize, name, itemTypeId);
   }
 
   @Query(() => Item)
-  item(@Args('id') id: string) {
-    return this.itemService.findOne(id);
+  item(
+    @Args('id', { nullable: true }) id?: string,
+    @Args('code', { nullable: true }) code?: string,
+  ) {
+    if(id) {
+      return this.itemService.findOne(id);
+    }
+    if(code) {
+      return this.itemService.findByCode(code)
+    }
   }
 
   @Mutation(() => Item)

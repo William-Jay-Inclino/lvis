@@ -27806,6 +27806,7 @@ export namespace Prisma {
     item_type_id: string | null
     unit_id: string | null
     code: string | null
+    name: string | null
     description: string | null
     total_quantity: number | null
     initial_quantity: number | null
@@ -27819,6 +27820,7 @@ export namespace Prisma {
     item_type_id: string | null
     unit_id: string | null
     code: string | null
+    name: string | null
     description: string | null
     total_quantity: number | null
     initial_quantity: number | null
@@ -27832,6 +27834,7 @@ export namespace Prisma {
     item_type_id: number
     unit_id: number
     code: number
+    name: number
     description: number
     total_quantity: number
     initial_quantity: number
@@ -27857,6 +27860,7 @@ export namespace Prisma {
     item_type_id?: true
     unit_id?: true
     code?: true
+    name?: true
     description?: true
     total_quantity?: true
     initial_quantity?: true
@@ -27870,6 +27874,7 @@ export namespace Prisma {
     item_type_id?: true
     unit_id?: true
     code?: true
+    name?: true
     description?: true
     total_quantity?: true
     initial_quantity?: true
@@ -27883,6 +27888,7 @@ export namespace Prisma {
     item_type_id?: true
     unit_id?: true
     code?: true
+    name?: true
     description?: true
     total_quantity?: true
     initial_quantity?: true
@@ -27983,7 +27989,8 @@ export namespace Prisma {
     item_type_id: string
     unit_id: string
     code: string
-    description: string
+    name: string
+    description: string | null
     total_quantity: number
     initial_quantity: number
     created_at: Date
@@ -28015,6 +28022,7 @@ export namespace Prisma {
     item_type_id?: boolean
     unit_id?: boolean
     code?: boolean
+    name?: boolean
     description?: boolean
     total_quantity?: boolean
     initial_quantity?: boolean
@@ -28034,6 +28042,7 @@ export namespace Prisma {
     item_type_id?: boolean
     unit_id?: boolean
     code?: boolean
+    name?: boolean
     description?: boolean
     total_quantity?: boolean
     initial_quantity?: boolean
@@ -28066,7 +28075,8 @@ export namespace Prisma {
       item_type_id: string
       unit_id: string
       code: string
-      description: string
+      name: string
+      description: string | null
       total_quantity: number
       initial_quantity: number
       created_at: Date
@@ -28479,6 +28489,7 @@ export namespace Prisma {
     readonly item_type_id: FieldRef<"Item", 'String'>
     readonly unit_id: FieldRef<"Item", 'String'>
     readonly code: FieldRef<"Item", 'String'>
+    readonly name: FieldRef<"Item", 'String'>
     readonly description: FieldRef<"Item", 'String'>
     readonly total_quantity: FieldRef<"Item", 'Int'>
     readonly initial_quantity: FieldRef<"Item", 'Int'>
@@ -33294,6 +33305,7 @@ export namespace Prisma {
     item_type_id: 'item_type_id',
     unit_id: 'unit_id',
     code: 'code',
+    name: 'name',
     description: 'description',
     total_quantity: 'total_quantity',
     initial_quantity: 'initial_quantity',
@@ -35584,7 +35596,8 @@ export namespace Prisma {
     item_type_id?: StringFilter<"Item"> | string
     unit_id?: StringFilter<"Item"> | string
     code?: StringFilter<"Item"> | string
-    description?: StringFilter<"Item"> | string
+    name?: StringFilter<"Item"> | string
+    description?: StringNullableFilter<"Item"> | string | null
     total_quantity?: IntFilter<"Item"> | number
     initial_quantity?: IntFilter<"Item"> | number
     created_at?: DateTimeFilter<"Item"> | Date | string
@@ -35602,7 +35615,8 @@ export namespace Prisma {
     item_type_id?: SortOrder
     unit_id?: SortOrder
     code?: SortOrder
-    description?: SortOrder
+    name?: SortOrder
+    description?: SortOrderInput | SortOrder
     total_quantity?: SortOrder
     initial_quantity?: SortOrder
     created_at?: SortOrder
@@ -35623,7 +35637,8 @@ export namespace Prisma {
     NOT?: ItemWhereInput | ItemWhereInput[]
     item_type_id?: StringFilter<"Item"> | string
     unit_id?: StringFilter<"Item"> | string
-    description?: StringFilter<"Item"> | string
+    name?: StringFilter<"Item"> | string
+    description?: StringNullableFilter<"Item"> | string | null
     total_quantity?: IntFilter<"Item"> | number
     initial_quantity?: IntFilter<"Item"> | number
     created_at?: DateTimeFilter<"Item"> | Date | string
@@ -35641,7 +35656,8 @@ export namespace Prisma {
     item_type_id?: SortOrder
     unit_id?: SortOrder
     code?: SortOrder
-    description?: SortOrder
+    name?: SortOrder
+    description?: SortOrderInput | SortOrder
     total_quantity?: SortOrder
     initial_quantity?: SortOrder
     created_at?: SortOrder
@@ -35662,7 +35678,8 @@ export namespace Prisma {
     item_type_id?: StringWithAggregatesFilter<"Item"> | string
     unit_id?: StringWithAggregatesFilter<"Item"> | string
     code?: StringWithAggregatesFilter<"Item"> | string
-    description?: StringWithAggregatesFilter<"Item"> | string
+    name?: StringWithAggregatesFilter<"Item"> | string
+    description?: StringNullableWithAggregatesFilter<"Item"> | string | null
     total_quantity?: IntWithAggregatesFilter<"Item"> | number
     initial_quantity?: IntWithAggregatesFilter<"Item"> | number
     created_at?: DateTimeWithAggregatesFilter<"Item"> | Date | string
@@ -38370,7 +38387,8 @@ export namespace Prisma {
   export type ItemCreateInput = {
     id?: string
     code: string
-    description: string
+    name?: string
+    description?: string | null
     total_quantity: number
     initial_quantity: number
     created_at?: Date | string
@@ -38388,7 +38406,8 @@ export namespace Prisma {
     item_type_id: string
     unit_id: string
     code: string
-    description: string
+    name?: string
+    description?: string | null
     total_quantity: number
     initial_quantity: number
     created_at?: Date | string
@@ -38402,7 +38421,8 @@ export namespace Prisma {
   export type ItemUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     total_quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -38420,7 +38440,8 @@ export namespace Prisma {
     item_type_id?: StringFieldUpdateOperationsInput | string
     unit_id?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     total_quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -38436,7 +38457,8 @@ export namespace Prisma {
     item_type_id: string
     unit_id: string
     code: string
-    description: string
+    name?: string
+    description?: string | null
     total_quantity: number
     initial_quantity: number
     created_at?: Date | string
@@ -38447,7 +38469,8 @@ export namespace Prisma {
   export type ItemUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     total_quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -38460,7 +38483,8 @@ export namespace Prisma {
     item_type_id?: StringFieldUpdateOperationsInput | string
     unit_id?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     total_quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -40338,6 +40362,7 @@ export namespace Prisma {
     item_type_id?: SortOrder
     unit_id?: SortOrder
     code?: SortOrder
+    name?: SortOrder
     description?: SortOrder
     total_quantity?: SortOrder
     initial_quantity?: SortOrder
@@ -40356,6 +40381,7 @@ export namespace Prisma {
     item_type_id?: SortOrder
     unit_id?: SortOrder
     code?: SortOrder
+    name?: SortOrder
     description?: SortOrder
     total_quantity?: SortOrder
     initial_quantity?: SortOrder
@@ -40369,6 +40395,7 @@ export namespace Prisma {
     item_type_id?: SortOrder
     unit_id?: SortOrder
     code?: SortOrder
+    name?: SortOrder
     description?: SortOrder
     total_quantity?: SortOrder
     initial_quantity?: SortOrder
@@ -42828,7 +42855,8 @@ export namespace Prisma {
   export type ItemCreateWithoutUnitInput = {
     id?: string
     code: string
-    description: string
+    name?: string
+    description?: string | null
     total_quantity: number
     initial_quantity: number
     created_at?: Date | string
@@ -42844,7 +42872,8 @@ export namespace Prisma {
     id?: string
     item_type_id: string
     code: string
-    description: string
+    name?: string
+    description?: string | null
     total_quantity: number
     initial_quantity: number
     created_at?: Date | string
@@ -42958,7 +42987,8 @@ export namespace Prisma {
     item_type_id?: StringFilter<"Item"> | string
     unit_id?: StringFilter<"Item"> | string
     code?: StringFilter<"Item"> | string
-    description?: StringFilter<"Item"> | string
+    name?: StringFilter<"Item"> | string
+    description?: StringNullableFilter<"Item"> | string | null
     total_quantity?: IntFilter<"Item"> | number
     initial_quantity?: IntFilter<"Item"> | number
     created_at?: DateTimeFilter<"Item"> | Date | string
@@ -46757,7 +46787,8 @@ export namespace Prisma {
   export type ItemCreateWithoutRr_itemsInput = {
     id?: string
     code: string
-    description: string
+    name?: string
+    description?: string | null
     total_quantity: number
     initial_quantity: number
     created_at?: Date | string
@@ -46774,7 +46805,8 @@ export namespace Prisma {
     item_type_id: string
     unit_id: string
     code: string
-    description: string
+    name?: string
+    description?: string | null
     total_quantity: number
     initial_quantity: number
     created_at?: Date | string
@@ -46939,7 +46971,8 @@ export namespace Prisma {
   export type ItemUpdateWithoutRr_itemsInput = {
     id?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     total_quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -46956,7 +46989,8 @@ export namespace Prisma {
     item_type_id?: StringFieldUpdateOperationsInput | string
     unit_id?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     total_quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -47351,7 +47385,8 @@ export namespace Prisma {
   export type ItemCreateWithoutStationsInput = {
     id?: string
     code: string
-    description: string
+    name?: string
+    description?: string | null
     total_quantity: number
     initial_quantity: number
     created_at?: Date | string
@@ -47368,7 +47403,8 @@ export namespace Prisma {
     item_type_id: string
     unit_id: string
     code: string
-    description: string
+    name?: string
+    description?: string | null
     total_quantity: number
     initial_quantity: number
     created_at?: Date | string
@@ -47476,7 +47512,8 @@ export namespace Prisma {
   export type ItemUpdateWithoutStationsInput = {
     id?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     total_quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -47493,7 +47530,8 @@ export namespace Prisma {
     item_type_id?: StringFieldUpdateOperationsInput | string
     unit_id?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     total_quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -47700,7 +47738,8 @@ export namespace Prisma {
   export type ItemCreateWithoutItem_typeInput = {
     id?: string
     code: string
-    description: string
+    name?: string
+    description?: string | null
     total_quantity: number
     initial_quantity: number
     created_at?: Date | string
@@ -47716,7 +47755,8 @@ export namespace Prisma {
     id?: string
     unit_id: string
     code: string
-    description: string
+    name?: string
+    description?: string | null
     total_quantity: number
     initial_quantity: number
     created_at?: Date | string
@@ -47756,7 +47796,8 @@ export namespace Prisma {
   export type ItemCreateWithoutItem_transactionsInput = {
     id?: string
     code: string
-    description: string
+    name?: string
+    description?: string | null
     total_quantity: number
     initial_quantity: number
     created_at?: Date | string
@@ -47773,7 +47814,8 @@ export namespace Prisma {
     item_type_id: string
     unit_id: string
     code: string
-    description: string
+    name?: string
+    description?: string | null
     total_quantity: number
     initial_quantity: number
     created_at?: Date | string
@@ -47845,7 +47887,8 @@ export namespace Prisma {
   export type ItemUpdateWithoutItem_transactionsInput = {
     id?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     total_quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -47862,7 +47905,8 @@ export namespace Prisma {
     item_type_id?: StringFieldUpdateOperationsInput | string
     unit_id?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     total_quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -47996,7 +48040,8 @@ export namespace Prisma {
     id?: string
     item_type_id: string
     code: string
-    description: string
+    name?: string
+    description?: string | null
     total_quantity: number
     initial_quantity: number
     created_at?: Date | string
@@ -48098,7 +48143,8 @@ export namespace Prisma {
   export type ItemUpdateWithoutUnitInput = {
     id?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     total_quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -48114,7 +48160,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     item_type_id?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     total_quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -48129,7 +48176,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     item_type_id?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     total_quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -49241,7 +49289,8 @@ export namespace Prisma {
     id?: string
     unit_id: string
     code: string
-    description: string
+    name?: string
+    description?: string | null
     total_quantity: number
     initial_quantity: number
     created_at?: Date | string
@@ -49252,7 +49301,8 @@ export namespace Prisma {
   export type ItemUpdateWithoutItem_typeInput = {
     id?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     total_quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -49268,7 +49318,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     unit_id?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     total_quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -49283,7 +49334,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     unit_id?: StringFieldUpdateOperationsInput | string
     code?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     total_quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string

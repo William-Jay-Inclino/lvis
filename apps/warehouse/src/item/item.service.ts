@@ -5,6 +5,7 @@ import { PrismaService } from '../__prisma__/prisma.service';
 import { Item, Prisma, RRApprover } from 'apps/warehouse/prisma/generated/client';
 import { APPROVAL_STATUS, ITEM_TRANSACTION_TYPE } from '../__common__/types';
 import { WarehouseRemoveResponse } from '../__common__/classes';
+import { ItemsResponse } from './entities/items-response.entity';
 
 @Injectable()
 export class ItemService {
@@ -40,7 +41,8 @@ export class ItemService {
 				connect: { id: input.unit_id }
 			},
 			code: input.code,
-			description: input.code,
+			name: input.name,
+			description: input.description,
 			initial_quantity: input.initial_quantity,
 			total_quantity: input.initial_quantity,
 			item_transactions: {
@@ -59,16 +61,50 @@ export class ItemService {
 
 	}
 
-	async findAll(): Promise<Item[]> {
-		return this.prisma.item.findMany({
+	async findAll(page: number, pageSize: number, name?: string, itemTypeId?: string): Promise<ItemsResponse> {
+
+		const skip = (page - 1) * pageSize;
+
+        let whereCondition: any = {
+            is_deleted: false,
+        };
+
+		if(name) {
+			whereCondition = {
+				name: { contains: name.trim(), mode: 'insensitive' } ,
+			};
+		}
+
+		if(itemTypeId) {
+			whereCondition.item_type_id = {
+                equals: itemTypeId,
+            };
+		}
+
+		const items = await this.prisma.item.findMany({
 			include: this.includedFields,
-			where: {
-				is_deleted: false
-			}
+			where: whereCondition,
+			orderBy: {
+				code: 'asc'
+			},
+			skip,
+			take: pageSize
 		})
+
+		const totalItems = await this.prisma.item.count({
+			where: whereCondition
+		})
+
+		return {
+            data: items,
+            totalItems,
+            currentPage: page,
+            totalPages: Math.ceil(totalItems / pageSize),
+        };
+
 	}
 
-	async findOne(id: string): Promise<Item> {
+	async findOne(id: string): Promise<Item | undefined> {
 		
 		this.logger.log('fineOne()', id)
 
@@ -116,6 +152,7 @@ export class ItemService {
 				: 
 				{ connect: { id: existingItem.unit_id } },
 			code: input.code ?? existingItem.code,
+			name: input.name ?? existingItem.name,
 			description: input.description ?? existingItem.description
 		}
 
