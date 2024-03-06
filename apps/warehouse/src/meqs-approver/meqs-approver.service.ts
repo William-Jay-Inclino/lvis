@@ -304,7 +304,11 @@ export class MeqsApproverService {
                 created_at: 'asc'
             },
             include: {
-                meqs: true
+                meqs: {
+                    include: {
+                        meqs_approvers: true
+                    }
+                }
             }
         })
     }

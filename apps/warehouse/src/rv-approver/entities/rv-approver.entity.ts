@@ -15,10 +15,10 @@ export class RVApprover {
     @Field(() => String, { nullable: true })
     approver_proxy_id: string | null
 
-    @Field(() => String, {nullable: true})
+    @Field(() => String, { nullable: true })
     date_approval: string | null
-    
-    @Field(() => String, {nullable: true})
+
+    @Field(() => String, { nullable: true })
     notes: string | null
 
     @Field(() => Int)
@@ -26,7 +26,7 @@ export class RVApprover {
 
     @Field(() => String)
     label: string
-    
+
     @Field(() => Int)
     order: number
 
@@ -35,14 +35,14 @@ export class RVApprover {
 
     @Field(() => RV)
     rv: RV
-    
+
     @Field(() => Date)
     created_at: Date;
-  
+
     @Field(() => Date)
     updated_at: Date;
 
     @Field(() => Boolean)
     is_deleted: boolean;
-    
+
 }

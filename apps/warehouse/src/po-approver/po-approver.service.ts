@@ -251,7 +251,11 @@ export class PoApproverService {
                 created_at: 'asc'
             },
             include: {
-                po: true
+                po: {
+                    include: {
+                        po_approvers: true
+                    }
+                }
             }
         })
     }

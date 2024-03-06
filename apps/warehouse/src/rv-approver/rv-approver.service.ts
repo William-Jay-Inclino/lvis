@@ -228,7 +228,11 @@ export class RvApproverService {
                 created_at: 'asc'
             },
             include: {
-                rv: true
+                rv: {
+                    include: {
+                        rv_approvers: true
+                    }
+                }
             }
         })
     }

@@ -8,11 +8,13 @@ import { MeqsService } from '../meqs/meqs.service';
 import { MeqsApproverService } from '../meqs-approver/meqs-approver.service';
 import { PoApproverService } from '../po-approver/po-approver.service';
 import { RrApproverService } from '../rr-approver/rr-approver.service';
+import { EmployeeService } from './employee.service';
 
 @Module({
   imports: [HttpModule],
   providers: [
     EmployeeResolver,
+    EmployeeService,
     CanvassService,
     RvService,
     RvApproverService,

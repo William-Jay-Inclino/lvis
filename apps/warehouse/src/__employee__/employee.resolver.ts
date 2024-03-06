@@ -14,10 +14,13 @@ import { POApprover } from '../po-approver/entities/po-approver.entity';
 import { RrApprover } from '../rr-approver/entities/rr-approver.entity';
 import { PoApproverService } from '../po-approver/po-approver.service';
 import { RrApproverService } from '../rr-approver/rr-approver.service';
+import { EmployeeService } from './employee.service';
+import { PendingApproval } from './entities/pending-approval.entity';
 
 @Resolver(() => Employee)
 export class EmployeeResolver {
     constructor(
+        private readonly employeeService: EmployeeService,
         private readonly canvassService: CanvassService,
         private readonly rvService: RvService,
         private readonly rvApproverService: RvApproverService,
@@ -65,6 +68,24 @@ export class EmployeeResolver {
     @ResolveField(() => [RrApprover])
     rr_pending_approvals(@Parent() employee: Employee) {
         return this.rrApproverService.forEmployeePendingApprovals(employee.id)
+    }
+
+    @ResolveField(() => [PendingApproval])
+    async pending_approvals(@Parent() employee: Employee) {
+
+        const [rvPendingApprovals, meqsPendingApprovals, poPendingApprovals, rrPendingApprovals] = await Promise.all([
+            this.rvApproverService.forEmployeePendingApprovals(employee.id),
+            this.meqsApproverService.forEmployeePendingApprovals(employee.id),
+            this.poApproverService.forEmployeePendingApprovals(employee.id),
+            this.rrApproverService.forEmployeePendingApprovals(employee.id)
+        ]);
+
+        return this.employeeService.getAllPendingApprovals({
+            rvApprovals: rvPendingApprovals,
+            meqsApprovals: meqsPendingApprovals,
+            poApprovals: poPendingApprovals,
+            rrApprovals: rrPendingApprovals
+        })
     }
 
 }

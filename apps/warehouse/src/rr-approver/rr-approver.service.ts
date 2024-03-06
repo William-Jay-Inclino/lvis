@@ -276,7 +276,11 @@ export class RrApproverService {
                 created_at: 'asc'
             },
             include: {
-                rr: true
+                rr: {
+                    include: {
+                        rr_approvers: true
+                    }
+                }
             }
         })
     }
