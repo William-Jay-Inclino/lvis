@@ -534,9 +534,9 @@ model ItemType {
 
 model ItemTransaction {
   id         String  @id @default(uuid())
+  txn_number Int     @unique @default(autoincrement())
   item_id    String
   rr_item_id String? @unique
-  txn_number String  @unique
   type       Int
   quantity   Float
   price      Float

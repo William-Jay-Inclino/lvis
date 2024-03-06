@@ -29,10 +29,7 @@ export class ItemTransactionService {
 
         this.logger.log('create()', input)
 
-        const txnNumber = await this.getLatestTxnNumber()
-
         const data: Prisma.ItemTransactionCreateInput = {
-            txn_number: txnNumber,
             item: { connect: { id: input.item_id } },
             type: input.type,
             quantity: input.quantity,
@@ -209,7 +206,6 @@ export class ItemTransactionService {
 
         console.log('transactRrItems', rrItems)
 
-        let txnNumber = await this.getLatestTxnNumber()
         const queries = []
 
         // prepare query for item transaction
@@ -223,7 +219,6 @@ export class ItemTransactionService {
             }
 
             const data: Prisma.ItemTransactionCreateManyInput = {
-                txn_number: txnNumber,
                 item_id: rrItem.item_id,
                 rr_item_id: rrItem.id,
                 type: ITEM_TRANSACTION_TYPE.STOCK_IN,
@@ -233,11 +228,6 @@ export class ItemTransactionService {
             } 
 
             itemTransactions.push(data)
-
-            // Increment txnNumber for the next iteration
-            const currentNumericPart = parseInt(txnNumber.slice(-5), 10);
-            const newNumericPart = currentNumericPart + 1;
-            txnNumber = `${txnNumber.slice(0, 3)}-${newNumericPart.toString().padStart(5, '0')}`;
 
         }
 
@@ -386,26 +376,6 @@ export class ItemTransactionService {
 
         console.log('response', response)
 
-    }
-
-
-    private async getLatestTxnNumber(): Promise<string> {
-        const currentYear = new Date().getFullYear().toString().slice(-2);
-    
-        const latestItem = await this.prisma.itemTransaction.findFirst({
-          where: { txn_number: { startsWith: currentYear } },
-          orderBy: { txn_number: 'desc' },
-        });
-    
-        if (latestItem) {
-          const latestNumericPart = parseInt(latestItem.txn_number.slice(-5), 10);
-          const newNumericPart = latestNumericPart + 1;
-          const newRcNumber = `${currentYear}-${newNumericPart.toString().padStart(5, '0')}`;
-          return newRcNumber;
-        } else {
-          // If no existing rc_number with the current year prefix, start with '00001'
-          return `${currentYear}-00001`;
-        }
     }
 
 }

@@ -26,10 +26,8 @@ export class ItemService {
 		
 		this.logger.log('create()', input)
 
-		const txnNumber = await this.getLatestTxnNumber()
 
 		const item_transaction: Prisma.ItemTransactionCreateWithoutItemInput = {
-			txn_number: txnNumber,
 			type: ITEM_TRANSACTION_TYPE.STOCK_IN,
 			quantity: input.initial_quantity,
 			price: input.initial_average_price,
@@ -115,7 +113,7 @@ export class ItemService {
 			include: {
 				item_transactions: {
 					orderBy: {
-						created_at: 'desc'
+						txn_number: 'desc'
 					},
 					include: {
 						rr_item: {
@@ -202,24 +200,4 @@ export class ItemService {
 			msg: "Item successfully deleted"
 		}
 	}
-
-	private async getLatestTxnNumber(): Promise<string> {
-        const currentYear = new Date().getFullYear().toString().slice(-2);
-    
-        const latestItem = await this.prisma.itemTransaction.findFirst({
-          where: { txn_number: { startsWith: currentYear } },
-          orderBy: { txn_number: 'desc' },
-        });
-    
-        if (latestItem) {
-          const latestNumericPart = parseInt(latestItem.txn_number.slice(-5), 10);
-          const newNumericPart = latestNumericPart + 1;
-          const newRcNumber = `${currentYear}-${newNumericPart.toString().padStart(5, '0')}`;
-          return newRcNumber;
-        } else {
-          // If no existing rc_number with the current year prefix, start with '00001'
-          return `${currentYear}-00001`;
-        }
-    }
-
 }
