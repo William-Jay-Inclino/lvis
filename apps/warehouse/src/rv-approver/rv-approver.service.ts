@@ -18,27 +18,27 @@ export class RvApproverService {
     private authUser: AuthUser
     private includedFields = {
         rv: {
-        include: {
-            canvass: {
             include: {
-                canvass_items: {
-                include: {
-                    unit: true,
-                    brand: true
-                }
+                canvass: {
+                    include: {
+                        canvass_items: {
+                            include: {
+                                unit: true,
+                                brand: true
+                            }
+                        }
+                    }
                 }
             }
-            }
-        }
         }
     }
 
-	constructor(
+    constructor(
         private readonly prisma: PrismaService,
         private readonly httpService: HttpService,
-    ) {}
+    ) { }
 
-    setAuthUser(authUser: AuthUser){
+    setAuthUser(authUser: AuthUser) {
         this.authUser = authUser
     }
 
@@ -48,25 +48,25 @@ export class RvApproverService {
 
         employeeIds.push(input.approver_id)
 
-        if(input.approver_proxy_id) {
+        if (input.approver_proxy_id) {
             employeeIds.push(input.approver_proxy_id)
         }
 
-        if(employeeIds.length > 0){
+        if (employeeIds.length > 0) {
             const isValidEmployeeIds = await this.areEmployeesExist(employeeIds, this.authUser)
-    
-            if(!isValidEmployeeIds){
+
+            if (!isValidEmployeeIds) {
                 throw new BadRequestException("One or more employee id is invalid")
             }
         }
 
         const data: Prisma.RVApproverCreateInput = {
-        rv: { connect: { id: input.rv_id } },
+            rv: { connect: { id: input.rv_id } },
             approver_id: input.approver_id,
-        approver_proxy_id: input.approver_proxy_id ?? null,
-        label: input.label,
-        order: input.order,
-        status: APPROVAL_STATUS.PENDING
+            approver_proxy_id: input.approver_proxy_id ?? null,
+            label: input.label,
+            order: input.order,
+            status: APPROVAL_STATUS.PENDING
         }
 
         const created = await this.prisma.rVApprover.create({
@@ -87,13 +87,13 @@ export class RvApproverService {
     }
 
     findOne(id: string): Promise<RVApprover | null> {
-        
+
         const item = this.prisma.rVApprover.findUnique({
             where: { id },
             include: this.includedFields
         })
 
-        if(!item){
+        if (!item) {
             throw new NotFoundException('RV Approver not found')
         }
 
@@ -105,12 +105,12 @@ export class RvApproverService {
 
         this.logger.log('findByRvId()', rvId)
 
-        if(!rvId) {
+        if (!rvId) {
             throw new BadRequestException('rv_id is undefined')
         }
 
         return await this.prisma.rVApprover.findMany({
-            include: this.includedFields,
+            // include: this.includedFields,
             where: {
                 is_deleted: false,
                 rv_id: rvId
@@ -166,26 +166,26 @@ export class RvApproverService {
 
     async remove(id: string): Promise<WarehouseRemoveResponse> {
 
-		const existingItem = await this.findOne(id)
+        const existingItem = await this.findOne(id)
 
-		await this.prisma.rVApprover.update( {
-			where: { id },
-			data: { is_deleted: true }
-		} )
+        await this.prisma.rVApprover.update({
+            where: { id },
+            data: { is_deleted: true }
+        })
 
-		return {
-			success: true,
-			msg: "RV Approver successfully deleted"
-		}
+        return {
+            success: true,
+            msg: "RV Approver successfully deleted"
+        }
 
-	}
+    }
 
     async updateManyOrders(inputs: { id: string; order: number }[]): Promise<UpdateRVOrderResponse> {
         try {
-            
+
             const queries = []
 
-            for(let input of inputs) {
+            for (let input of inputs) {
 
                 const updateQuery = this.prisma.rVApprover.update({
                     where: { id: input.id },
@@ -206,7 +206,7 @@ export class RvApproverService {
             console.log('rv', rv)
 
             const approvers = await this.findByRvId(rv.rv_id)
-    
+
             return {
                 success: true,
                 approvers: approvers
@@ -216,22 +216,27 @@ export class RvApproverService {
             return { success: false, approvers: [] };
         }
     }
-    
-    
-    async forEmployee(employeeId: string): Promise<RVApprover[]> {
+
+    async forEmployeePendingApprovals(employeeId: string): Promise<RVApprover[]> {
         return await this.prisma.rVApprover.findMany({
             where: {
                 approver_id: employeeId,
+                status: APPROVAL_STATUS.PENDING,
                 is_deleted: false
             },
-            include: this.includedFields
+            orderBy: {
+                created_at: 'asc'
+            },
+            include: {
+                rv: true
+            }
         })
     }
 
     private async areEmployeesExist(employeeIds: string[], authUser: AuthUser): Promise<boolean> {
 
         this.logger.log('areEmployeesExist', employeeIds);
-    
+
         const query = `
             query {
                 validateEmployeeIds(ids: ${JSON.stringify(employeeIds)})
@@ -240,7 +245,7 @@ export class RvApproverService {
 
         console.log('query', query)
         console.log('authUser', authUser)
-    
+
         try {
             const { data } = await firstValueFrom(
                 this.httpService.post(
@@ -258,17 +263,17 @@ export class RvApproverService {
                     }),
                 ),
             );
-    
+
             console.log('data', data);
             console.log('data.data.validateEmployeeIds', data.data.validateEmployeeIds)
-    
+
             if (!data || !data.data) {
                 console.log('No data returned');
                 return false;
             }
-    
+
             return data.data.validateEmployeeIds;
-    
+
         } catch (error) {
             console.error('Error querying employees:', error.message);
             return false;
@@ -279,26 +284,26 @@ export class RvApproverService {
         if (input.status && !isValidApprovalStatus(input.status)) {
             throw new BadRequestException('Invalid status value');
         }
-    
+
         if (input.status && input.status === APPROVAL_STATUS.CANCELLED) {
             throw new BadRequestException('Cancelled status not allowed');
         }
-    
+
         const employeeIds = []
 
-        if(input.approver_id){
+        if (input.approver_id) {
             employeeIds.push(input.approver_id)
         }
 
-        if(input.approver_proxy_id) {
+        if (input.approver_proxy_id) {
             employeeIds.push(input.approver_proxy_id)
         }
 
         console.log('employeeIds', employeeIds)
-        if(employeeIds.length > 0){
+        if (employeeIds.length > 0) {
             const isValidEmployeeIds = await this.areEmployeesExist(employeeIds, this.authUser)
-    
-            if(!isValidEmployeeIds){
+
+            if (!isValidEmployeeIds) {
                 throw new BadRequestException("One or more employee id is invalid")
             }
         }

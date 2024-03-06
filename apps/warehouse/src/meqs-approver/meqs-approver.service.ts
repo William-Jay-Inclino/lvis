@@ -65,12 +65,12 @@ export class MeqsApproverService {
         }
     }
 
-	constructor(
+    constructor(
         private readonly prisma: PrismaService,
         private readonly httpService: HttpService,
-    ) {}
+    ) { }
 
-    setAuthUser(authUser: AuthUser){
+    setAuthUser(authUser: AuthUser) {
         this.authUser = authUser
     }
 
@@ -80,25 +80,25 @@ export class MeqsApproverService {
 
         employeeIds.push(input.approver_id)
 
-        if(input.approver_proxy_id) {
+        if (input.approver_proxy_id) {
             employeeIds.push(input.approver_proxy_id)
         }
 
-        if(employeeIds.length > 0){
+        if (employeeIds.length > 0) {
             const isValidEmployeeIds = await this.areEmployeesExist(employeeIds, this.authUser)
-    
-            if(!isValidEmployeeIds){
+
+            if (!isValidEmployeeIds) {
                 throw new BadRequestException("One or more employee id is invalid")
             }
         }
 
         const data: Prisma.MEQSApproverCreateInput = {
-        meqs: { connect: { id: input.meqs_id } },
+            meqs: { connect: { id: input.meqs_id } },
             approver_id: input.approver_id,
-        approver_proxy_id: input.approver_proxy_id ?? null,
-        label: input.label,
-        order: input.order,
-        status: APPROVAL_STATUS.PENDING
+            approver_proxy_id: input.approver_proxy_id ?? null,
+            label: input.label,
+            order: input.order,
+            status: APPROVAL_STATUS.PENDING
         }
 
         const created = await this.prisma.mEQSApprover.create({
@@ -122,13 +122,13 @@ export class MeqsApproverService {
     }
 
     async findOne(id: string): Promise<MEQSApprover | null> {
-        
+
         const item = await this.prisma.mEQSApprover.findUnique({
             where: { id },
             include: this.includedFields
         })
 
-        if(!item){
+        if (!item) {
             throw new NotFoundException('MEQS Approver not found')
         }
 
@@ -141,7 +141,7 @@ export class MeqsApproverService {
         this.logger.log('findByMeqsId()', meqsId)
 
         return await this.prisma.mEQSApprover.findMany({
-            include: this.includedFields,
+            // include: this.includedFields,
             where: {
                 is_deleted: false,
                 meqs_id: meqsId
@@ -196,26 +196,26 @@ export class MeqsApproverService {
 
     async remove(id: string): Promise<WarehouseRemoveResponse> {
 
-		const existingItem = await this.findOne(id)
+        const existingItem = await this.findOne(id)
 
-		await this.prisma.mEQSApprover.update( {
-			where: { id },
-			data: { is_deleted: true }
-		} )
+        await this.prisma.mEQSApprover.update({
+            where: { id },
+            data: { is_deleted: true }
+        })
 
-		return {
-			success: true,
-			msg: "MEQS Approver successfully deleted"
-		}
+        return {
+            success: true,
+            msg: "MEQS Approver successfully deleted"
+        }
 
-	}
+    }
 
     async updateManyOrders(inputs: { id: string; order: number }[]): Promise<UpdateMeqsOrderResponse> {
         try {
-            
+
             const queries = []
 
-            for(let input of inputs) {
+            for (let input of inputs) {
 
                 const updateQuery = this.prisma.mEQSApprover.update({
                     where: { id: input.id },
@@ -236,7 +236,7 @@ export class MeqsApproverService {
             console.log('meqs', meqs)
 
             const approvers = await this.findByMeqsId(meqs.meqs_id)
-    
+
             return {
                 success: true,
                 approvers: approvers
@@ -250,7 +250,7 @@ export class MeqsApproverService {
     private async areEmployeesExist(employeeIds: string[], authUser: AuthUser): Promise<boolean> {
 
         this.logger.log('areEmployeesExist', employeeIds);
-    
+
         const query = `
             query {
                 validateEmployeeIds(ids: ${JSON.stringify(employeeIds)})
@@ -258,7 +258,7 @@ export class MeqsApproverService {
         `;
 
         console.log('query', query)
-    
+
         try {
             const { data } = await firstValueFrom(
                 this.httpService.post(
@@ -276,57 +276,62 @@ export class MeqsApproverService {
                     }),
                 ),
             );
-    
+
             console.log('data', data);
             console.log('data.data.validateEmployeeIds', data.data.validateEmployeeIds)
-    
+
             if (!data || !data.data) {
                 console.log('No data returned');
                 return false;
             }
-    
+
             return data.data.validateEmployeeIds;
-    
+
         } catch (error) {
             console.error('Error querying employees:', error.message);
             return false;
         }
     }
 
-    async forEmployee(employeeId: string): Promise<MEQSApprover[]> {
+    async forEmployeePendingApprovals(employeeId: string): Promise<MEQSApprover[]> {
         return await this.prisma.mEQSApprover.findMany({
             where: {
                 approver_id: employeeId,
+                status: APPROVAL_STATUS.PENDING,
                 is_deleted: false
             },
-            include: this.includedFields
+            orderBy: {
+                created_at: 'asc'
+            },
+            include: {
+                meqs: true
+            }
         })
     }
-
 
     private async validateInput(input: UpdateMeqsApproverInput): Promise<void> {
         if (input.status && !isValidApprovalStatus(input.status)) {
             throw new BadRequestException('Invalid status value');
         }
-    
+
         if (input.status && input.status === APPROVAL_STATUS.CANCELLED) {
             throw new BadRequestException('Cancelled status not allowed');
         }
-    
+
         const employeeIds = []
 
-        if(input.approver_id){
+        if (input.approver_id) {
             employeeIds.push(input.approver_id)
         }
 
-        if(input.approver_proxy_id) {
+        if (input.approver_proxy_id) {
             employeeIds.push(input.approver_proxy_id)
         }
 
-        if(employeeIds.length > 0){
+        if (employeeIds.length > 0) {
             const isValidEmployeeIds = await this.areEmployeesExist(employeeIds, this.authUser)
-    
-            if(!isValidEmployeeIds){
+
+            if (!isValidEmployeeIds) {
                 throw new BadRequestException("One or more employee id is invalid")
             }
         }

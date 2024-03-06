@@ -40,32 +40,32 @@ export class RrApproverService {
                             include: {
                                 meqs: {
                                     include: {
-                                    rv: {
-                                        include: {
-                                        canvass: true
+                                        rv: {
+                                            include: {
+                                                canvass: true
+                                            }
+                                        },
+                                        jo: {
+                                            include: {
+                                                canvass: true
+                                            }
+                                        },
+                                        spr: {
+                                            include: {
+                                                canvass: true
+                                            }
                                         }
-                                    },
-                                    jo: {
-                                        include: {
-                                        canvass: true
-                                        }
-                                    },
-                                    spr: {
-                                        include: {
-                                        canvass: true
-                                        }
-                                    }
                                     }
                                 },
                                 supplier: true,
                                 meqs_supplier_items: {
                                     include: {
-                                    canvass_item: {
-                                        include: {
-                                        unit: true,
-                                        brand: true
+                                        canvass_item: {
+                                            include: {
+                                                unit: true,
+                                                brand: true
+                                            }
                                         }
-                                    }
                                     }
                                 },
                                 attachments: true
@@ -77,13 +77,13 @@ export class RrApproverService {
         }
     }
 
-	constructor(
+    constructor(
         private readonly prisma: PrismaService,
         private readonly httpService: HttpService,
         private eventEmitter: EventEmitter2
-    ) {}
+    ) { }
 
-    setAuthUser(authUser: AuthUser){
+    setAuthUser(authUser: AuthUser) {
         this.authUser = authUser
     }
 
@@ -93,25 +93,25 @@ export class RrApproverService {
 
         employeeIds.push(input.approver_id)
 
-        if(input.approver_proxy_id) {
+        if (input.approver_proxy_id) {
             employeeIds.push(input.approver_proxy_id)
         }
 
-        if(employeeIds.length > 0){
+        if (employeeIds.length > 0) {
             const isValidEmployeeIds = await this.areEmployeesExist(employeeIds, this.authUser)
-    
-            if(!isValidEmployeeIds){
+
+            if (!isValidEmployeeIds) {
                 throw new BadRequestException("One or more employee id is invalid")
             }
         }
 
         const data: Prisma.RRApproverCreateInput = {
-        rr: { connect: { id: input.rr_id } },
+            rr: { connect: { id: input.rr_id } },
             approver_id: input.approver_id,
-        approver_proxy_id: input.approver_proxy_id ?? null,
-        label: input.label,
-        order: input.order,
-        status: APPROVAL_STATUS.PENDING
+            approver_proxy_id: input.approver_proxy_id ?? null,
+            label: input.label,
+            order: input.order,
+            status: APPROVAL_STATUS.PENDING
         }
 
         const created = await this.prisma.rRApprover.create({
@@ -132,13 +132,13 @@ export class RrApproverService {
     }
 
     async findOne(id: string): Promise<RRApprover | null> {
-        
+
         const item = await this.prisma.rRApprover.findUnique({
             where: { id },
             include: this.includedFields
         })
 
-        if(!item){
+        if (!item) {
             throw new NotFoundException('RR Approver not found')
         }
 
@@ -151,7 +151,7 @@ export class RrApproverService {
         this.logger.log('findByRrId()', rrId)
 
         return await this.prisma.rRApprover.findMany({
-            include: this.includedFields,
+            // include: this.includedFields,
             where: {
                 is_deleted: false,
                 rr_id: rrId
@@ -200,9 +200,9 @@ export class RrApproverService {
             include: this.includedFields,
         });
         this.logger.log('Successfully updated RR Approver');
-        
+
         // emit event if status is updated
-        if(input.status !== existingItem.status) {
+        if (input.status !== existingItem.status) {
             console.log('status updated...')
             this.eventEmitter.emit('rr-approver-status.updated', new RrApproverStatusUpdated(id))
         }
@@ -214,26 +214,26 @@ export class RrApproverService {
 
     async remove(id: string): Promise<WarehouseRemoveResponse> {
 
-		const existingItem = await this.findOne(id)
+        const existingItem = await this.findOne(id)
 
-		await this.prisma.rRApprover.update( {
-			where: { id },
-			data: { is_deleted: true }
-		} )
+        await this.prisma.rRApprover.update({
+            where: { id },
+            data: { is_deleted: true }
+        })
 
-		return {
-			success: true,
-			msg: "RR Approver successfully deleted"
-		}
+        return {
+            success: true,
+            msg: "RR Approver successfully deleted"
+        }
 
-	}
+    }
 
     async updateManyOrders(inputs: { id: string; order: number }[]): Promise<UpdateRrOrderResponse> {
         try {
-            
+
             const queries = []
 
-            for(let input of inputs) {
+            for (let input of inputs) {
 
                 const updateQuery = this.prisma.rRApprover.update({
                     where: { id: input.id },
@@ -254,7 +254,7 @@ export class RrApproverService {
             console.log('rr', rr)
 
             const approvers = await this.findByRrId(rr.rr_id)
-    
+
             return {
                 success: true,
                 approvers: approvers
@@ -265,20 +265,26 @@ export class RrApproverService {
         }
     }
 
-    async forEmployee(employeeId: string): Promise<RRApprover[]> {
+    async forEmployeePendingApprovals(employeeId: string): Promise<RRApprover[]> {
         return await this.prisma.rRApprover.findMany({
             where: {
                 approver_id: employeeId,
+                status: APPROVAL_STATUS.PENDING,
                 is_deleted: false
             },
-            include: this.includedFields
+            orderBy: {
+                created_at: 'asc'
+            },
+            include: {
+                rr: true
+            }
         })
     }
 
-	private async areEmployeesExist(employeeIds: string[], authUser: AuthUser): Promise<boolean> {
+    private async areEmployeesExist(employeeIds: string[], authUser: AuthUser): Promise<boolean> {
 
         this.logger.log('areEmployeesExist', employeeIds);
-    
+
         const query = `
             query {
                 validateEmployeeIds(ids: ${JSON.stringify(employeeIds)})
@@ -286,7 +292,7 @@ export class RrApproverService {
         `;
 
         console.log('query', query)
-    
+
         try {
             const { data } = await firstValueFrom(
                 this.httpService.post(
@@ -304,17 +310,17 @@ export class RrApproverService {
                     }),
                 ),
             );
-    
+
             console.log('data', data);
             console.log('data.data.validateEmployeeIds', data.data.validateEmployeeIds)
-    
+
             if (!data || !data.data) {
                 console.log('No data returned');
                 return false;
             }
-    
+
             return data.data.validateEmployeeIds;
-    
+
         } catch (error) {
             console.error('Error querying employees:', error.message);
             return false;
@@ -325,15 +331,15 @@ export class RrApproverService {
         if (input.status && !isValidApprovalStatus(input.status)) {
             throw new BadRequestException('Invalid status value');
         }
-    
+
         if (input.status && input.status === APPROVAL_STATUS.CANCELLED) {
             throw new BadRequestException('Cancelled status not allowed');
         }
-    
+
         if (input.approver_id) {
             await this.validateEmployeeExistence(input.approver_id, 'Approver ID');
         }
-    
+
         if (input.approver_proxy_id) {
             await this.validateEmployeeExistence(input.approver_proxy_id, 'Approver Proxy ID');
         }
@@ -359,7 +365,7 @@ export class RrApproverService {
     // private async handleApprovedStatus(id: string, data: Prisma.RRApproverUpdateInput, rrId: string): Promise<RRApprover> {
     //     const approvers = await this.findByRrId(rrId);
     //     const lastApprover = getLastApprover(approvers);
-    
+
     //     if (lastApprover.id !== id) {
     //         return await this.updateRRApprover(id, data);
     //     }
@@ -374,13 +380,13 @@ export class RrApproverService {
     //         query 4 = update item quantity (add quantity per item transaction)
 
     //     */
-        
-    
+
+
     //     const queries = await this.buildQueries(id, data, rrId);
     //     const result = await this.prisma.$transaction(queries)
-    
+
     //     this.logger.log('Successfully updated RR Approver, RR status, created item transactions, updated item quantity per transaction');
-    
+
     //     return result[0];
     // }
 
@@ -400,7 +406,7 @@ export class RrApproverService {
     //             where: { id: rrId },
     //         }),
     //     ]);
-    
+
     //     this.logger.log('Successfully updated RR Approver');
     //     return updatedRrApprover;
     // }
@@ -421,29 +427,29 @@ export class RrApproverService {
     //             where: { id: rrId },
     //         }),
     //     ]);
-    
+
     //     this.logger.log('Successfully updated RR Approver');
     //     return updatedRrApprover;
     // }
 
     // private async buildQueries(id: string, data: Prisma.RRApproverUpdateInput, rrId: string): Promise<any[]> {
     //     const queries = [];
-        
+
     //     const updateRrApproverQuery = this.prisma.rRApprover.update({
     //         data,
     //         where: { id },
     //         include: this.includedFields,
     //     });
     //     queries.push(updateRrApproverQuery);
-    
+
     //     const updateRrStatusQuery = this.prisma.rR.update({
     //         data: { status: APPROVAL_STATUS.APPROVED },
     //         where: { id: rrId },
     //     });
     //     queries.push(updateRrStatusQuery);
-    
+
     //     const rrItems = await this.prisma.rRItem.findMany({ where: { rr_id: rrId } });
-        
+
     //     const itemTransactions: Prisma.ItemTransactionCreateManyInput[] = rrItems.map(i => {
 
     //         const data: Prisma.ItemTransactionCreateManyInput = {
@@ -463,14 +469,14 @@ export class RrApproverService {
     //     })
 
     //     queries.push(createItemTransactionsQuery)
-        
+
     //     const updateItemQuantityQueries = this.prepareUpdateItemQuantityQueries(itemTransactions);
-    
+
     //     queries.push(updateItemQuantityQueries);
-    
+
     //     return queries;
     // }
-    
+
 
     // private async prepareUpdateItemQuantityQueries(itemTransactions: Prisma.ItemTransactionCreateManyInput[]): Promise<any[]> {
     //     const queries = itemTransactions.map(async (transaction) => {
@@ -478,17 +484,17 @@ export class RrApproverService {
     //         if (!item) {
     //             throw new NotFoundException(`Item not found with item_id: ${transaction.item_id}`);
     //         }
-    
+
     //         const totalQuantity = item.quantity + transaction.quantity;
-    
+
     //         return this.prisma.item.update({
     //             where: { id: item.id },
     //             data: { quantity: totalQuantity },
     //         });
     //     });
-    
+
     //     return Promise.all(queries);
     // }
-    
+
 
 }

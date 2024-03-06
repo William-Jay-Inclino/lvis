@@ -10,7 +10,7 @@ export class AuthService {
     constructor(
         private readonly jwtService: JwtService,
         private readonly httpService: HttpService
-    ) {}
+    ) { }
 
     async validateUser(username: string, password: string): Promise<User> {
 
@@ -20,7 +20,7 @@ export class AuthService {
 
         console.log('user', user)
 
-        if(user && user.password === password){
+        if (user && user.password === password) {
             return user
         }
 
@@ -37,7 +37,7 @@ export class AuthService {
         };
     }
 
-    private async findByUserName(username): Promise<User>{
+    private async findByUserName(username): Promise<User> {
         const query = `
             query{
                 getUserByUserName(username: "${username}") {
@@ -45,6 +45,11 @@ export class AuthService {
                     username
                     password
                     status
+                    user_employee {
+                        employee {
+                            id
+                        }
+                    }
                 }
             }
         `;
@@ -52,16 +57,16 @@ export class AuthService {
         console.log('query', query)
 
         const { data } = await firstValueFrom(
-            this.httpService.post(process.env.API_GATEWAY_URL, { query } ).pipe(
-            catchError((error) => {
-                throw error
-            }),
+            this.httpService.post(process.env.API_GATEWAY_URL, { query }).pipe(
+                catchError((error) => {
+                    throw error
+                }),
             ),
         );
 
         console.log('data', data)
 
-        if(!data || !data.data || !data.data.getUserByUserName){
+        if (!data || !data.data || !data.data.getUserByUserName) {
             throw new UnauthorizedException("Unauthorized User")
         }
 

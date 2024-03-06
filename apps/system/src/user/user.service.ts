@@ -8,41 +8,51 @@ import { Prisma, Role, User } from 'apps/system/prisma/generated/client';
 export class UserService {
 
   private readonly logger = new Logger(UserService.name);
+  private includedFields = {
+    user_employee: {
+      include: {
+        employee: true
+      }
+    }
+  }
 
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) { }
 
-	async create(input: CreateUserInput): Promise<User> {
+  async create(input: CreateUserInput): Promise<User> {
 
-		const data: Prisma.UserCreateInput = {
-			username: input.username,
-			password: input.password,
+    const data: Prisma.UserCreateInput = {
+      username: input.username,
+      password: input.password,
       role: input.role ?? Role.USER
-		}
+    }
 
-		const created = await this.prisma.user.create( { data } )
+    const created = await this.prisma.user.create({ data })
 
-		this.logger.log('Successfully created User')
+    this.logger.log('Successfully created User')
 
-		return created
-	}
+    return created
+  }
 
   async findAll(): Promise<User[]> {
     return await this.prisma.user.findMany({
       where: {
-          is_deleted: false
-      }
+        is_deleted: false
+      },
+      include: this.includedFields
     })
   }
 
   async findOne(id: string): Promise<User | null> {
 
     const user = await this.prisma.user.findUnique({
-      where: {id, is_deleted: false}
+      where: { id, is_deleted: false },
+      include: this.includedFields
+
     })
 
     console.log('user', user)
-    
-    if(!user){
+
+    if (!user) {
       return null
     }
 
@@ -50,12 +60,14 @@ export class UserService {
 
   }
 
-  async findByUserName(username: string): Promise<User | null>{
+  async findByUserName(username: string): Promise<User | null> {
     const user = await this.prisma.user.findUnique({
-      where: {username}
+      where: { username },
+      include: this.includedFields
+
     })
 
-    if(!user){
+    if (!user) {
       return null
     }
 
@@ -70,28 +82,29 @@ export class UserService {
     const data: Prisma.UserUpdateInput = {
       password: input.password ?? existingUser.password,
     }
-        
-    const updated = await this.prisma.user.update( {
-        where: { id },
-       data
-    } )
+
+    const updated = await this.prisma.user.update({
+      where: { id },
+      data,
+      include: this.includedFields
+    })
 
     this.logger.log('Successfully updated User')
 
-		return updated
+    return updated
 
 
   }
 
   async remove(id: string): Promise<boolean> {
-        
+
     await this.findOne(id)
-    
+
     await this.prisma.user.update({
-        where: { id },
-        data: {
-            is_deleted: true
-        }
+      where: { id },
+      data: {
+        is_deleted: true
+      }
     })
 
     return true

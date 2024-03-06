@@ -6,9 +6,20 @@ import { RvService } from '../rv/rv.service';
 import { RvApproverService } from '../rv-approver/rv-approver.service';
 import { MeqsService } from '../meqs/meqs.service';
 import { MeqsApproverService } from '../meqs-approver/meqs-approver.service';
+import { PoApproverService } from '../po-approver/po-approver.service';
+import { RrApproverService } from '../rr-approver/rr-approver.service';
 
 @Module({
   imports: [HttpModule],
-  providers: [EmployeeResolver, CanvassService, RvService, RvApproverService, MeqsService, MeqsApproverService],
+  providers: [
+    EmployeeResolver,
+    CanvassService,
+    RvService,
+    RvApproverService,
+    MeqsService,
+    MeqsApproverService,
+    PoApproverService,
+    RrApproverService
+  ],
 })
-export class EmployeeModule {}
+export class EmployeeModule { }

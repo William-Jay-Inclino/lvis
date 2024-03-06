@@ -13,13 +13,13 @@ export class UserResolver {
 
   private readonly logger = new Logger(UserResolver.name);
 
-  constructor(private readonly userService: UserService) {}
+  constructor(private readonly userService: UserService) { }
 
   @Query(() => User)
   async validateUserId(@Args('id') id: string) {
     const userFound = await this.userService.findOne(id);
     console.log('userFound', userFound)
-    if(!userFound){
+    if (!userFound) {
       throw new NotFoundException("User not found")
     }
     return userFound
@@ -30,7 +30,7 @@ export class UserResolver {
   createUser(@Args('input') input: CreateUserInput) {
     return this.userService.create(input);
   }
-  
+
   @UseGuards(GqlAuthGuard)
   @Query(() => [User])
   users(@CurrentUser() user: User) {
@@ -44,17 +44,17 @@ export class UserResolver {
     console.log('user: current-user', user)
     const userFound = await this.userService.findOne(id);
     console.log('userFound', userFound)
-    if(!userFound){
+    if (!userFound) {
       throw new NotFoundException("User not found")
     }
     return userFound
   }
-  
+
   // @UseGuards(GqlAuthGuard)
   @Query(() => User)
   async getUserByUserName(@Args('username') username: string) {
     const userFound = await this.userService.findByUserName(username);
-    if(!userFound){
+    if (!userFound) {
       throw new NotFoundException("User not found")
     }
     return userFound
@@ -77,15 +77,15 @@ export class UserResolver {
 
 
   @ResolveReference()
-  async resolveReference(reference: { __typename: string, id?: string, username?: string}): Promise<User> {
+  async resolveReference(reference: { __typename: string, id?: string, username?: string }) {
 
     console.log('reference', reference)
 
-    if(reference.__typename === 'User' && reference.id){
+    if (reference.__typename === 'User' && reference.id) {
       return await this.userService.findOne(reference.id)
     }
 
-    if(reference.__typename === 'User' && reference.username){
+    if (reference.__typename === 'User' && reference.username) {
       return await this.userService.findByUserName(reference.username)
     }
 
