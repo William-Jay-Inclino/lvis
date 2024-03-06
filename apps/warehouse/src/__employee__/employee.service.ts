@@ -66,7 +66,8 @@ export class EmployeeService {
                     description: `RV no. ${approval.rv.rv_number}`,
                     // @ts-ignore
                     reference_id: approval.rv.id,
-                    transaction_date: approval.created_at
+                    // @ts-ignore
+                    transaction_date: approval.rv.created_at
                 })
             }
 
@@ -103,7 +104,8 @@ export class EmployeeService {
                     description: `MEQS no. ${approval.meqs.meqs_number}`,
                     // @ts-ignore
                     reference_id: approval.meqs.id,
-                    transaction_date: approval.created_at
+                    // @ts-ignore
+                    transaction_date: approval.meqs.created_at
                 })
             }
 
@@ -140,7 +142,8 @@ export class EmployeeService {
                     description: `PO no. ${approval.po.po_number}`,
                     // @ts-ignore
                     reference_id: approval.po.id,
-                    transaction_date: approval.created_at
+                    // @ts-ignore
+                    transaction_date: approval.po.created_at
                 })
             }
 
@@ -177,7 +180,8 @@ export class EmployeeService {
                     description: `RR no. ${approval.rr.rr_number}`,
                     // @ts-ignore
                     reference_id: approval.rr.id,
-                    transaction_date: approval.created_at
+                    // @ts-ignore
+                    transaction_date: approval.rr.created_at
                 })
             }
 
