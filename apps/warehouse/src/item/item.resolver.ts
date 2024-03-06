@@ -1,4 +1,4 @@
-import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, ResolveField, Parent } from '@nestjs/graphql';
 import { ItemService } from './item.service';
 import { Item } from './entities/item.entity';
 import { CreateItemInput } from './dto/create-item.input';
@@ -49,4 +49,10 @@ export class ItemResolver {
   removeItem(@Args('id') id: string) {
     return this.itemService.remove(id);
   }
+
+  @ResolveField( () => Number)
+    GWAPrice(@Parent() item: Item) {
+        return this.itemService.getGWAPrice(item.item_transactions)
+    }
+
 }

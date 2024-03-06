@@ -6,6 +6,7 @@ import { Item, Prisma, RRApprover } from 'apps/warehouse/prisma/generated/client
 import { APPROVAL_STATUS, ITEM_TRANSACTION_TYPE } from '../__common__/types';
 import { WarehouseRemoveResponse } from '../__common__/classes';
 import { ItemsResponse } from './entities/items-response.entity';
+import { ItemTransaction } from '../item-transaction/entities/item-transaction.entity';
 
 @Injectable()
 export class ItemService {
@@ -200,4 +201,14 @@ export class ItemService {
 			msg: "Item successfully deleted"
 		}
 	}
+
+	getGWAPrice(itemTransactions: ItemTransaction[]): number {
+
+		const totalPrices = itemTransactions.reduce((total, item) => total + item.price, 0);
+        const gwa = totalPrices / itemTransactions.length;
+
+		return gwa
+
+	}
+
 }
