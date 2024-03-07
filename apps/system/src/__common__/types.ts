@@ -1,3 +1,4 @@
+import { Role } from "apps/system/prisma/generated/client"
 
 
 export const enum UserStatus {
@@ -10,89 +11,94 @@ export const enum DepartmentStatus {
     INACTIVE = 2
 }
 
+export interface User {
+    id: string
+    username: string
+    password: string
+    status: UserStatus
+    role: Role
+}
 
 export interface Division {
-    id: string     
+    id: string
     department_id: string
-    code: string    
+    code: string
     name: string
-    status: number       
+    status: number
 }
 
 export interface Service {
-    id: string 
-    name: string 
+    id: string
+    name: string
 }
 
 export interface Feature {
-    id: string 
-    name: string 
+    id: string
+    name: string
     service_id: string
 }
 
 export interface Module {
-    id: string 
-    name: string 
+    id: string
+    name: string
     feature_id: string
 }
 
 export interface SubModule {
-    id: string 
-    name: string 
+    id: string
+    name: string
     module_id: string
 }
 
-export interface Classification { 
+export interface Classification {
     id: string
     name: string
 }
 
 export interface UserEmployee {
-    id: string 
-    user_id: string 
-    employee_id: string 
+    id: string
+    user_id: string
+    employee_id: string
 }
 
-export interface JOApproverSetting { 
-    id: string 
-    approver_id: string 
+export interface JOApproverSetting {
+    id: string
+    approver_id: string
     label: string
     order: number
 }
 
-export interface RVApproverSetting { 
-    id: string 
-    approver_id: string 
+export interface RVApproverSetting {
+    id: string
+    approver_id: string
     label: string
     order: number
 }
 
-export interface SPRApproverSetting { 
-    id: string 
-    approver_id: string 
+export interface SPRApproverSetting {
+    id: string
+    approver_id: string
     label: string
     order: number
 }
 
-export interface MEQSApproverSetting { 
-    id: string 
-    approver_id: string 
+export interface MEQSApproverSetting {
+    id: string
+    approver_id: string
     label: string
     order: number
 }
 
-
-export interface POApproverSetting { 
-    id: string 
-    approver_id: string 
+export interface POApproverSetting {
+    id: string
+    approver_id: string
     label: string
     order: number
 }
 
-
-export interface RRApproverSetting { 
-    id: string 
-    approver_id: string 
+export interface RRApproverSetting {
+    id: string
+    approver_id: string
     label: string
     order: number
 }

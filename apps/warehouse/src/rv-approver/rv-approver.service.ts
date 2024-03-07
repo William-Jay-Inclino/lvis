@@ -230,7 +230,11 @@ export class RvApproverService {
             include: {
                 rv: {
                     include: {
-                        rv_approvers: true
+                        rv_approvers: {
+                            orderBy: {
+                                order: 'asc'
+                            }
+                        }
                     }
                 }
             }

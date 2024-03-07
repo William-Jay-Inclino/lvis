@@ -253,7 +253,11 @@ export class PoApproverService {
             include: {
                 po: {
                     include: {
-                        po_approvers: true
+                        po_approvers: {
+                            orderBy: {
+                                order: 'asc'
+                            }
+                        }
                     }
                 }
             }

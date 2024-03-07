@@ -14,6 +14,9 @@ registerEnumType(PENDING_APPROVAL_TYPE, {
 @ObjectType()
 export class PendingApproval {
 
+    @Field()
+    id: string
+
     @Field(() => PENDING_APPROVAL_TYPE)
     type: PENDING_APPROVAL_TYPE
 

@@ -1,8 +1,7 @@
 import { faker } from "@faker-js/faker";
 import { Department } from "../department/entities/department.entity";
-import { Classification, DepartmentStatus, Feature, JOApproverSetting, MEQSApproverSetting, Module, POApproverSetting, RRApproverSetting, RVApproverSetting, SPRApproverSetting, Service, SubModule, UserEmployee, UserStatus } from "../__common__/types";
+import { Classification, DepartmentStatus, Feature, JOApproverSetting, MEQSApproverSetting, Module, POApproverSetting, RRApproverSetting, RVApproverSetting, SPRApproverSetting, Service, SubModule, User, UserEmployee, UserStatus } from "../__common__/types";
 import { Employee } from "../employee/entities/employee.entity";
-import { User } from "../user/entities/user.entity";
 import { Role } from "apps/system/prisma/generated/client";
 
 
@@ -220,9 +219,9 @@ const subModules: SubModule[] = []
 
 const crud = ['create', 'read', 'update', 'delete']
 
-for(let module of modules) {
+for (let module of modules) {
 
-    for(let i of crud) {
+    for (let i of crud) {
 
         const x: SubModule = {
             id: faker.string.uuid(),
@@ -360,119 +359,119 @@ export const users: User[] = [
         id: faker.string.uuid(),
         username: 'anamaria.pastor',
         password: 'anamaria.pastor123',
-        status: UserStatus.ACTIVE, 
+        status: UserStatus.ACTIVE,
         role: Role.USER
     },
     {
         id: faker.string.uuid(),
         username: 'suan.ricaflor',
         password: 'suan.ricaflor123',
-        status: UserStatus.ACTIVE, 
+        status: UserStatus.ACTIVE,
         role: Role.USER
     },
     {
         id: faker.string.uuid(),
         username: 'marlon.sanico',
         password: 'marlon.sanico123',
-        status: UserStatus.ACTIVE, 
+        status: UserStatus.ACTIVE,
         role: Role.USER
     },
     {
         id: faker.string.uuid(),
         username: 'jannieanne.dayandayan',
         password: 'jannieanne.dayandayan123',
-        status: UserStatus.ACTIVE, 
+        status: UserStatus.ACTIVE,
         role: Role.USER
     },
     {
         id: faker.string.uuid(),
         username: 'jhunrey.nahine',
         password: 'jhunrey.nahine123',
-        status: UserStatus.ACTIVE, 
+        status: UserStatus.ACTIVE,
         role: Role.USER
     },
     {
         id: faker.string.uuid(),
         username: 'gretchen.tagalog',
         password: 'gretchen.tagalog123',
-        status: UserStatus.ACTIVE, 
+        status: UserStatus.ACTIVE,
         role: Role.USER
     },
     {
         id: faker.string.uuid(),
         username: 'dionic.delapena',
         password: 'dionic.delapena123',
-        status: UserStatus.ACTIVE, 
+        status: UserStatus.ACTIVE,
         role: Role.USER
     },
     {
         id: faker.string.uuid(),
         username: 'anthony.cecilio',
         password: 'anthony.cecilio123',
-        status: UserStatus.ACTIVE, 
+        status: UserStatus.ACTIVE,
         role: Role.USER
     },
     {
         id: faker.string.uuid(),
         username: 'francespaula.lumacang',
         password: 'francespaula.lumacang123',
-        status: UserStatus.ACTIVE, 
+        status: UserStatus.ACTIVE,
         role: Role.USER
     },
     {
         id: faker.string.uuid(),
         username: 'williamjay.inclino',
         password: 'williamjay.inclino123',
-        status: UserStatus.ACTIVE, 
+        status: UserStatus.ACTIVE,
         role: Role.ADMIN
     },
     {
         id: faker.string.uuid(),
         username: 'joshua.tayag',
         password: 'joshua.tayag123',
-        status: UserStatus.ACTIVE, 
+        status: UserStatus.ACTIVE,
         role: Role.ADMIN
     },
     {
         id: faker.string.uuid(),
         username: 'jessa.pelones',
         password: 'jessa.pelones123',
-        status: UserStatus.ACTIVE, 
+        status: UserStatus.ACTIVE,
         role: Role.USER
     },
     {
         id: faker.string.uuid(),
         username: 'josephken.estrera',
         password: 'josephken.estrera123',
-        status: UserStatus.ACTIVE, 
+        status: UserStatus.ACTIVE,
         role: Role.USER
     },
     {
         id: faker.string.uuid(),
         username: 'jared.singkol',
         password: 'jared.singkol123',
-        status: UserStatus.ACTIVE, 
+        status: UserStatus.ACTIVE,
         role: Role.USER
     },
     {
         id: faker.string.uuid(),
         username: 'hannahgrace.tudio',
         password: 'hannahgrace.tudio123',
-        status: UserStatus.ACTIVE, 
+        status: UserStatus.ACTIVE,
         role: Role.USER
     },
     {
         id: faker.string.uuid(),
         username: 'jessa.valida',
         password: 'jessa.valida123',
-        status: UserStatus.ACTIVE, 
+        status: UserStatus.ACTIVE,
         role: Role.USER
     },
     {
         id: faker.string.uuid(),
         username: 'roger.laurente',
         password: 'roger.laurente123',
-        status: UserStatus.ACTIVE, 
+        status: UserStatus.ACTIVE,
         role: Role.USER
     }
 ]

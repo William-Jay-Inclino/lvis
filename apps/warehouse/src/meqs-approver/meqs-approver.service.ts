@@ -306,7 +306,11 @@ export class MeqsApproverService {
             include: {
                 meqs: {
                     include: {
-                        meqs_approvers: true
+                        meqs_approvers: {
+                            orderBy: {
+                                order: 'asc'
+                            }
+                        }
                     }
                 }
             }

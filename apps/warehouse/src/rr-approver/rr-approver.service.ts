@@ -278,7 +278,11 @@ export class RrApproverService {
             include: {
                 rr: {
                     include: {
-                        rr_approvers: true
+                        rr_approvers: {
+                            orderBy: {
+                                order: 'asc'
+                            }
+                        }
                     }
                 }
             }

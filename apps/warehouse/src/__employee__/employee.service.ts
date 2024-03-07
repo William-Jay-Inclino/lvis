@@ -50,17 +50,26 @@ export class EmployeeService {
             // @ts-ignore
             const thisApproverIndx = approval.rv.rv_approvers.findIndex((i: RVApprover) => i.approver_id === approval.approver_id)
 
+            console.log('thisApproverIndx', thisApproverIndx)
+
+            // @ts-ignore
+            console.log('approval.rv.rv_approvers', approval.rv.rv_approvers[thisApproverIndx])
+
             if (!thisApproverIndx) {
                 console.error('thisApproverIndx not found', thisApproverIndx)
             }
 
+            console.log('thisApproverIndx - 1', thisApproverIndx - 1)
             // ang ge sundan nga approver
             // @ts-ignore 
             const leadApprover = approval.rv.rv_approvers[thisApproverIndx - 1]
 
+            console.log('leadApprover', leadApprover)
+
             // if walay nag una nga approver OR naka approve na ang nag una 
             if (!leadApprover || leadApprover.status === APPROVAL_STATUS.APPROVED) {
                 pendings.push({
+                    id: approval.id,
                     type: PENDING_APPROVAL_TYPE.RV,
                     // @ts-ignore
                     description: `RV no. ${approval.rv.rv_number}`,
@@ -99,6 +108,7 @@ export class EmployeeService {
             // if walay nag una nga approver OR naka approve na ang nag una 
             if (!leadApprover || leadApprover.status === APPROVAL_STATUS.APPROVED) {
                 pendings.push({
+                    id: approval.id,
                     type: PENDING_APPROVAL_TYPE.MEQS,
                     // @ts-ignore
                     description: `MEQS no. ${approval.meqs.meqs_number}`,
@@ -137,6 +147,7 @@ export class EmployeeService {
             // if walay nag una nga approver OR naka approve na ang nag una 
             if (!leadApprover || leadApprover.status === APPROVAL_STATUS.APPROVED) {
                 pendings.push({
+                    id: approval.id,
                     type: PENDING_APPROVAL_TYPE.PO,
                     // @ts-ignore
                     description: `PO no. ${approval.po.po_number}`,
@@ -175,6 +186,7 @@ export class EmployeeService {
             // if walay nag una nga approver OR naka approve na ang nag una 
             if (!leadApprover || leadApprover.status === APPROVAL_STATUS.APPROVED) {
                 pendings.push({
+                    id: approval.id,
                     type: PENDING_APPROVAL_TYPE.RR,
                     // @ts-ignore
                     description: `RR no. ${approval.rr.rr_number}`,
