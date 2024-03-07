@@ -11,6 +11,7 @@ import { HttpService } from '@nestjs/axios';
 import { WarehouseRemoveResponse } from '../__common__/classes';
 import { RVsResponse } from './entities/rvs-response.entity';
 import * as moment from 'moment';
+import { getDateRange } from '../__common__/helpers';
 
 @Injectable()
 export class RvService {
@@ -49,17 +50,17 @@ export class RvService {
         private readonly prisma: PrismaService,
         private readonly httpService: HttpService,
         private readonly canvassService: CanvassService
-    ) {}
-    
-    setAuthUser(authUser: AuthUser){
+    ) { }
+
+    setAuthUser(authUser: AuthUser) {
         this.authUser = authUser
     }
-    
+
     async create(input: CreateRvInput): Promise<RV> {
 
         this.logger.log('create()')
 
-        if( !(await this.canCreate(input)) ) {
+        if (!(await this.canCreate(input))) {
             throw new Error('Failed to create RV. Please try again')
         }
 
@@ -90,14 +91,14 @@ export class RvService {
             }
         }
 
-        const created = await this.prisma.rV.create({ 
+        const created = await this.prisma.rV.create({
             data,
             include: this.includedFields
         })
 
         this.logger.log('Successfully created RV')
 
-		return created
+        return created
 
     }
 
@@ -107,7 +108,7 @@ export class RvService {
 
         const existingItem = await this.findOne(id)
 
-        if( !(await this.canUpdate(input, existingItem)) ) {
+        if (!(await this.canUpdate(input, existingItem))) {
             throw new Error('Failed to update RV. Please try again')
         }
 
@@ -125,16 +126,16 @@ export class RvService {
 
 
         // if no supervisor input or same supervisor then normal update
-        if(!input.supervisor_id || (input.supervisor_id === existingItem.supervisor_id)){
+        if (!input.supervisor_id || (input.supervisor_id === existingItem.supervisor_id)) {
 
             const updated = await this.prisma.rV.update({
                 data,
                 where: { id },
                 include: this.includedFields
             })
-    
+
             this.logger.log('Successfully updated RV')
-    
+
             return updated
 
         }
@@ -154,7 +155,7 @@ export class RvService {
             }
         })
 
-        if(!existingRvApprover){
+        if (!existingRvApprover) {
             throw new NotFoundException('RV Approver not found')
         }
 
@@ -189,70 +190,72 @@ export class RvService {
     }
 
     async findOne(id: string): Promise<RV | null> {
-		const item = await this.prisma.rV.findUnique({
+        const item = await this.prisma.rV.findUnique({
             include: this.includedFields,
-			where: { id }
-		})
+            where: { id }
+        })
 
-		if(!item){
+        if (!item) {
             throw new NotFoundException('RV not found')
         }
 
         return item
-	}
+    }
 
     async findByRcNumber(rc_number: string): Promise<RV | null> {
-		const item = await this.prisma.rV.findFirst({
+        const item = await this.prisma.rV.findFirst({
             include: this.includedFields,
-			where: {
+            where: {
                 canvass: {
                     rc_number
                 }
             }
-		})
+        })
 
-		if(!item){
+        if (!item) {
             throw new NotFoundException('RV not found')
         }
 
         return item
-	}
+    }
 
     async findByRvNumber(rv_number: string): Promise<RV | null> {
-		const item = await this.prisma.rV.findUnique({
+        const item = await this.prisma.rV.findUnique({
             include: this.includedFields,
-			where: { rv_number }
-		})
+            where: { rv_number }
+        })
 
-		if(!item){
+        if (!item) {
             throw new NotFoundException('RV not found')
         }
 
         return item
-	}
+    }
 
     async findAll(page: number, pageSize: number, date_requested?: string, requested_by_id?: string): Promise<RVsResponse> {
-		const skip = (page - 1) * pageSize;
+        const skip = (page - 1) * pageSize;
 
         let whereCondition: any = {
             is_deleted: false,
         };
 
         if (date_requested) {
-            const parsedDate = new Date(date_requested); 
+            const { startDate, endDate } = getDateRange(date_requested);
+            console.log('startDate', startDate);
+            console.log('endDate', endDate)
+
             whereCondition.date_requested = {
-                equals: parsedDate,
+                gte: startDate,
+                lte: endDate,
             };
         }
 
         if (requested_by_id) {
-            whereCondition.requested_by_id = {
-                equals: requested_by_id,
-            };
+            whereCondition = { canvass: { requested_by_id: requested_by_id } }
         }
 
         const items = await this.prisma.rV.findMany({
-            include: this.includedFields, 
+            include: this.includedFields,
             where: whereCondition,
             orderBy: {
                 rv_number: 'desc'
@@ -271,23 +274,23 @@ export class RvService {
             currentPage: page,
             totalPages: Math.ceil(totalItems / pageSize),
         };
-	}
+    }
 
     async remove(id: string): Promise<WarehouseRemoveResponse> {
 
-		const existingItem = await this.findOne(id)
+        const existingItem = await this.findOne(id)
 
-		await this.prisma.rV.update( {
-			where: { id },
-			data: { is_deleted: true }
-		} )
+        await this.prisma.rV.update({
+            where: { id },
+            data: { is_deleted: true }
+        })
 
-		return {
-			success: true,
-			msg: "RV successfully deleted"
-		}
+        return {
+            success: true,
+            msg: "RV successfully deleted"
+        }
 
-	}
+    }
 
     async forEmployeeSupervisor(employeeId: string): Promise<RV[]> {
         return await this.prisma.rV.findMany({
@@ -320,8 +323,8 @@ export class RvService {
     }
 
     async findRvNumbers(rvNumber: string): Promise<{ rv_number: string; }[]> {
-	
-		const arrayOfRvNumbers = await this.prisma.rV.findMany({
+
+        const arrayOfRvNumbers = await this.prisma.rV.findMany({
             select: {
                 rv_number: true
             },
@@ -333,10 +336,10 @@ export class RvService {
                 is_deleted: false
             },
             take: 5,
-		});
-	
-		return arrayOfRvNumbers;
-	}
+        });
+
+        return arrayOfRvNumbers;
+    }
 
     async getStatus(id: string): Promise<APPROVAL_STATUS> {
 
@@ -349,13 +352,13 @@ export class RvService {
 
         const hasDisapproved = approvers.find(i => i.status === APPROVAL_STATUS.DISAPPROVED)
 
-        if(hasDisapproved) {
+        if (hasDisapproved) {
             return APPROVAL_STATUS.DISAPPROVED
         }
 
         const hasPending = approvers.find(i => i.status === APPROVAL_STATUS.PENDING)
 
-        if(hasPending) {
+        if (hasPending) {
             return APPROVAL_STATUS.PENDING
         }
 
@@ -369,7 +372,7 @@ export class RvService {
             where: { rv_id: rvId }
         })
 
-        if(meqs) return true  
+        if (meqs) return true
 
         return false
 
@@ -377,25 +380,25 @@ export class RvService {
 
     private async getLatestRvNumber(): Promise<string> {
         const currentYear = new Date().getFullYear().toString().slice(-2);
-    
+
         const latestItem = await this.prisma.rV.findFirst({
-          where: { rv_number: { startsWith: currentYear } },
-          orderBy: { rv_number: 'desc' },
+            where: { rv_number: { startsWith: currentYear } },
+            orderBy: { rv_number: 'desc' },
         });
-    
+
         if (latestItem) {
-          const latestNumericPart = parseInt(latestItem.rv_number.slice(-5), 10);
-          const newNumericPart = latestNumericPart + 1;
-          const newRcNumber = `${currentYear}-${newNumericPart.toString().padStart(5, '0')}`;
-          return newRcNumber;
+            const latestNumericPart = parseInt(latestItem.rv_number.slice(-5), 10);
+            const newNumericPart = latestNumericPart + 1;
+            const newRcNumber = `${currentYear}-${newNumericPart.toString().padStart(5, '0')}`;
+            return newRcNumber;
         } else {
-          // If no existing rc_number with the current year prefix, start with '00001'
-          return `${currentYear}-00001`;
+            // If no existing rc_number with the current year prefix, start with '00001'
+            return `${currentYear}-00001`;
         }
     }
 
     private async isClassificationExist(classification_id: string, authUser: AuthUser): Promise<boolean> {
-    
+
         this.logger.log('isClassificationExist', classification_id)
 
         // console.log('this.authUser', this.authUser)
@@ -409,14 +412,14 @@ export class RvService {
         `;
 
         const { data } = await firstValueFrom(
-            this.httpService.post(process.env.API_GATEWAY_URL, 
-            { query },
-            {
-                headers: {
-                    Authorization: authUser.authorization,
-                    'Content-Type': 'application/json'
+            this.httpService.post(process.env.API_GATEWAY_URL,
+                { query },
+                {
+                    headers: {
+                        Authorization: authUser.authorization,
+                        'Content-Type': 'application/json'
+                    }
                 }
-            }  
             ).pipe(
                 catchError((error) => {
                     throw error
@@ -426,20 +429,20 @@ export class RvService {
 
         console.log('data', data)
 
-        if(!data || !data.data || !data.data.classification){
+        if (!data || !data.data || !data.data.classification) {
             console.log('classification not found')
-            return false 
+            return false
         }
-        const classification = data.data.classification 
+        const classification = data.data.classification
         console.log('classification', classification)
-        return true 
+        return true
 
     }
 
     private async areEmployeesExist(employeeIds: string[], authUser: AuthUser): Promise<boolean> {
 
         this.logger.log('areEmployeesExist', employeeIds);
-    
+
         const query = `
             query {
                 validateEmployeeIds(ids: ${JSON.stringify(employeeIds)})
@@ -447,7 +450,7 @@ export class RvService {
         `;
 
         console.log('query', query)
-    
+
         try {
             const { data } = await firstValueFrom(
                 this.httpService.post(
@@ -465,17 +468,17 @@ export class RvService {
                     }),
                 ),
             );
-    
+
             console.log('data', data);
             console.log('data.data.validateEmployeeIds', data.data.validateEmployeeIds)
-    
+
             if (!data || !data.data) {
                 console.log('No data returned');
                 return false;
             }
-    
+
             return data.data.validateEmployeeIds;
-    
+
         } catch (error) {
             console.error('Error querying employees:', error.message);
             return false;
@@ -484,10 +487,10 @@ export class RvService {
 
     private async canCreate(input: CreateRvInput): Promise<boolean> {
 
-        if(input.classification_id){
+        if (input.classification_id) {
             const isValidClassificationId = await this.isClassificationExist(input.classification_id, this.authUser)
 
-            if(!isValidClassificationId){
+            if (!isValidClassificationId) {
                 throw new NotFoundException('Classification ID not valid')
             }
         }
@@ -501,7 +504,7 @@ export class RvService {
 
         const isValidEmployeeIds = await this.areEmployeesExist(employeeIds, this.authUser)
 
-        if(!isValidEmployeeIds){
+        if (!isValidEmployeeIds) {
             throw new BadRequestException("One or more employee id is invalid")
         }
 
@@ -509,13 +512,13 @@ export class RvService {
             where: { id: input.canvass_id }
         })
 
-        if(!canvass) {
+        if (!canvass) {
             throw new NotFoundException('Canvass not found with id: ' + input.canvass_id)
         }
-        
+
         const isCanvassReferenced = await this.canvassService.isReferenced((canvass.id))
 
-        if(isCanvassReferenced) {
+        if (isCanvassReferenced) {
             throw new BadRequestException('Canvass already been referenced with ID: ' + input.canvass_id)
         }
 
@@ -530,7 +533,7 @@ export class RvService {
         console.log('isNormalUser', isNormalUser)
 
         // validates if there is already an approver who take an action
-        if(isNormalUser) {
+        if (isNormalUser) {
 
             console.log('is normal user')
 
@@ -543,38 +546,38 @@ export class RvService {
             // used to indicate whether there is at least one approver whose status is not pending.
             const isAnyNonPendingApprover = this.isAnyNonPendingApprover(approvers)
 
-            if(isAnyNonPendingApprover) {
+            if (isAnyNonPendingApprover) {
                 throw new BadRequestException(`Unable to update RV. Can only update if all approver's status is pending`)
             }
         }
 
-        if(input.classification_id){
+        if (input.classification_id) {
             const isValidClassificationId = await this.isClassificationExist(input.classification_id, this.authUser)
 
-            if(!isValidClassificationId){
+            if (!isValidClassificationId) {
                 throw new NotFoundException('Classification ID not valid')
             }
         }
 
         const employeeIds = []
 
-        if(input.supervisor_id){
+        if (input.supervisor_id) {
             employeeIds.push(input.supervisor_id)
         }
 
-        if(input.canceller_id) {
+        if (input.canceller_id) {
             const isUserExist = await this.isUserExist(input.canceller_id, this.authUser)
-            if(!isUserExist) {
+            if (!isUserExist) {
                 this.logger.error('canceller_id which also is user_id not found in table users')
                 throw new NotFoundException('Canceller does not exist')
             }
         }
 
-        if(employeeIds.length > 0){
+        if (employeeIds.length > 0) {
 
             const isValidEmployeeIds = await this.areEmployeesExist(employeeIds, this.authUser)
 
-            if(!isValidEmployeeIds){
+            if (!isValidEmployeeIds) {
                 throw new NotFoundException('One or more employee IDs is not valid')
             }
 
@@ -587,9 +590,9 @@ export class RvService {
     // used to indicate whether there is at least one approver whose status is not pending.
     private isAnyNonPendingApprover(approvers: RVApprover[]): boolean {
 
-        for(let approver of approvers) {
+        for (let approver of approvers) {
 
-            if(approver.status !== APPROVAL_STATUS.PENDING) {
+            if (approver.status !== APPROVAL_STATUS.PENDING) {
 
                 return true
 
@@ -609,7 +612,7 @@ export class RvService {
     }
 
     private async isUserExist(user_id: string, authUser: AuthUser): Promise<boolean> {
-    
+
         this.logger.log('isUserExist', user_id)
 
         const query = `
@@ -621,14 +624,14 @@ export class RvService {
         `;
 
         const { data } = await firstValueFrom(
-            this.httpService.post(process.env.API_GATEWAY_URL, 
-            { query },
-            {
-                headers: {
-                    Authorization: authUser.authorization,
-                    'Content-Type': 'application/json'
+            this.httpService.post(process.env.API_GATEWAY_URL,
+                { query },
+                {
+                    headers: {
+                        Authorization: authUser.authorization,
+                        'Content-Type': 'application/json'
+                    }
                 }
-            }  
             ).pipe(
                 catchError((error) => {
                     throw error
@@ -638,11 +641,11 @@ export class RvService {
 
         console.log('data', data)
 
-        if(!data || !data.data || !data.data.user){
+        if (!data || !data.data || !data.data.user) {
             console.log('User not found')
-            return false 
+            return false
         }
-        return true 
+        return true
 
     }
 

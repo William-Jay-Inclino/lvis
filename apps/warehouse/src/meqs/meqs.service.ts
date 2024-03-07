@@ -9,6 +9,7 @@ import { UpdateMeqsInput } from './dto/update-meqs.input';
 import { catchError, firstValueFrom } from 'rxjs';
 import { MEQSsResponse } from './entities/meqs-response.entity';
 import * as moment from 'moment';
+import { getDateRange } from '../__common__/helpers';
 
 @Injectable()
 export class MeqsService {
@@ -84,9 +85,9 @@ export class MeqsService {
     constructor(
         private readonly prisma: PrismaService,
         private readonly httpService: HttpService,
-    ) {}
+    ) { }
 
-    setAuthUser(authUser: AuthUser){
+    setAuthUser(authUser: AuthUser) {
         this.authUser = authUser
     }
 
@@ -94,7 +95,7 @@ export class MeqsService {
 
         this.logger.log('create()')
 
-        if(!(await this.canCreate(input)) ) {
+        if (!(await this.canCreate(input))) {
             throw new Error('Unable to create MEQS')
         }
 
@@ -168,7 +169,7 @@ export class MeqsService {
 
         this.logger.log('MEQS successfully created')
 
-        return created 
+        return created
 
 
     }
@@ -179,7 +180,7 @@ export class MeqsService {
 
         const existingItem = await this.findOne(id)
 
-        if( !(await this.canUpdate(input, existingItem)) ) {
+        if (!(await this.canUpdate(input, existingItem))) {
             throw new Error('Unable to update MEQS')
         }
 
@@ -205,7 +206,7 @@ export class MeqsService {
 
     }
 
-    async findAll(page: number, pageSize: number, date_requested?: string, requested_by_id?: string): Promise<MEQSsResponse> { 
+    async findAll(page: number, pageSize: number, date_requested?: string, requested_by_id?: string): Promise<MEQSsResponse> {
 
         const skip = (page - 1) * pageSize;
 
@@ -214,9 +215,13 @@ export class MeqsService {
         };
 
         if (date_requested) {
-            const parsedDate = new Date(date_requested); 
+            const { startDate, endDate } = getDateRange(date_requested);
+            console.log('startDate', startDate);
+            console.log('endDate', endDate)
+
             whereCondition.meqs_date = {
-                equals: parsedDate,
+                gte: startDate,
+                lte: endDate,
             };
         }
 
@@ -259,7 +264,7 @@ export class MeqsService {
             include: this.includedFields
         })
 
-        if(!item){
+        if (!item) {
             throw new NotFoundException('MEQS not found')
         }
 
@@ -274,7 +279,7 @@ export class MeqsService {
             include: this.includedFields
         })
 
-        if(!item){
+        if (!item) {
             throw new NotFoundException('MEQS not found')
         }
 
@@ -283,15 +288,15 @@ export class MeqsService {
     }
 
     async findByReference(payload: {
-        rv_number?: string, 
-        jo_number?: string, 
+        rv_number?: string,
+        jo_number?: string,
         spr_number?: string
-    }):  Promise<MEQS | null> {
+    }): Promise<MEQS | null> {
 
         const { rv_number, spr_number, jo_number } = payload
         let item = null
 
-        if(rv_number) {
+        if (rv_number) {
             item = await this.prisma.mEQS.findFirst({
                 where: {
                     rv: { rv_number }
@@ -299,7 +304,7 @@ export class MeqsService {
                 include: this.includedFields
             })
 
-        } else if(jo_number) {
+        } else if (jo_number) {
             item = await this.prisma.mEQS.findFirst({
                 where: {
                     jo: { jo_number }
@@ -316,7 +321,7 @@ export class MeqsService {
         }
 
 
-        if(!item){
+        if (!item) {
             throw new NotFoundException('MEQS not found')
         }
 
@@ -334,13 +339,13 @@ export class MeqsService {
 
         const hasDisapproved = approvers.find(i => i.status === APPROVAL_STATUS.DISAPPROVED)
 
-        if(hasDisapproved) {
+        if (hasDisapproved) {
             return APPROVAL_STATUS.DISAPPROVED
         }
 
         const hasPending = approvers.find(i => i.status === APPROVAL_STATUS.PENDING)
 
-        if(hasPending) {
+        if (hasPending) {
             return APPROVAL_STATUS.PENDING
         }
 
@@ -349,8 +354,8 @@ export class MeqsService {
     }
 
     async searchByMeqsNumber(searchKeyword: string): Promise<{ meqs_number: string; }[]> {
-	
-		const arrayOfMeqsNumbers = await this.prisma.mEQS.findMany({
+
+        const arrayOfMeqsNumbers = await this.prisma.mEQS.findMany({
             select: {
                 meqs_number: true
             },
@@ -362,34 +367,34 @@ export class MeqsService {
                 is_deleted: false
             },
             take: 5,
-		});
-	
-		return arrayOfMeqsNumbers;
-	}
+        });
+
+        return arrayOfMeqsNumbers;
+    }
 
     private async getLatestMeqsNumber(): Promise<string> {
         const currentYear = new Date().getFullYear().toString().slice(-2);
-    
+
         const latestItem = await this.prisma.mEQS.findFirst({
-          where: { meqs_number: { startsWith: currentYear } },
-          orderBy: { meqs_number: 'desc' },
+            where: { meqs_number: { startsWith: currentYear } },
+            orderBy: { meqs_number: 'desc' },
         });
-    
+
         if (latestItem) {
-          const latestNumericPart = parseInt(latestItem.meqs_number.slice(-5), 10);
-          const newNumericPart = latestNumericPart + 1;
-          const newRcNumber = `${currentYear}-${newNumericPart.toString().padStart(5, '0')}`;
-          return newRcNumber;
+            const latestNumericPart = parseInt(latestItem.meqs_number.slice(-5), 10);
+            const newNumericPart = latestNumericPart + 1;
+            const newRcNumber = `${currentYear}-${newNumericPart.toString().padStart(5, '0')}`;
+            return newRcNumber;
         } else {
-          // If no existing meqs_number with the current year prefix, start with '00001'
-          return `${currentYear}-00001`;
+            // If no existing meqs_number with the current year prefix, start with '00001'
+            return `${currentYear}-00001`;
         }
     }
 
     private async areEmployeesExist(employeeIds: string[], authUser: AuthUser): Promise<boolean> {
 
         this.logger.log('areEmployeesExist', employeeIds);
-    
+
         const query = `
             query {
                 validateEmployeeIds(ids: ${JSON.stringify(employeeIds)})
@@ -397,7 +402,7 @@ export class MeqsService {
         `;
 
         console.log('query', query)
-    
+
         try {
             const { data } = await firstValueFrom(
                 this.httpService.post(
@@ -415,20 +420,20 @@ export class MeqsService {
                     }),
                 ),
             );
-    
+
             console.log('data', data);
-    
+
             if (!data || !data.data) {
                 console.log('No data returned');
                 return false;
             }
 
-            if(data.data.validateEmployeeIds){
+            if (data.data.validateEmployeeIds) {
                 return data.data.validateEmployeeIds;
             }
-            
+
             return false
-    
+
         } catch (error) {
             console.error('Error querying employees:', error.message);
             return false;
@@ -445,10 +450,10 @@ export class MeqsService {
         })
     }
 
-    private async canReference(input: CreateMeqsInput): Promise<{succes: boolean, msg: string}> {
+    private async canReference(input: CreateMeqsInput): Promise<{ succes: boolean, msg: string }> {
 
 
-        if(input.rv_id) {
+        if (input.rv_id) {
 
 
             // find rv
@@ -457,7 +462,7 @@ export class MeqsService {
             })
 
             // check if rv is found
-            if(!rv) {
+            if (!rv) {
                 return { succes: false, msg: `RV not found with id: ${input.rv_id}` }
             }
 
@@ -467,7 +472,7 @@ export class MeqsService {
                 where: { rv_id: rv.id }
             })
 
-            if(isRvReferenced) {
+            if (isRvReferenced) {
                 return { succes: false, msg: `RV is already referenced` }
             }
 
@@ -480,9 +485,9 @@ export class MeqsService {
             })
 
             // validate if rv status is approved
-            for(let approver of approvers) {
+            for (let approver of approvers) {
 
-                if(approver.status !== APPROVAL_STATUS.APPROVED) {
+                if (approver.status !== APPROVAL_STATUS.APPROVED) {
 
                     return { succes: false, msg: 'Cannot reference RV. Status is not approved' }
 
@@ -498,7 +503,7 @@ export class MeqsService {
 
     private async canCreate(input: CreateMeqsInput): Promise<boolean> {
 
-        if(!input.jo_id && !input.rv_id && !input.spr_id){
+        if (!input.jo_id && !input.rv_id && !input.spr_id) {
             throw new BadRequestException("Please provide 1 reference either jo, rv, or spr")
         }
 
@@ -510,14 +515,14 @@ export class MeqsService {
 
         const isValidEmployeeIds = await this.areEmployeesExist(employeeIds, this.authUser)
 
-        if(!isValidEmployeeIds){
+        if (!isValidEmployeeIds) {
             throw new BadRequestException("One or more approver id or approver proxy id is invalid")
         }
 
         // validates if reference id is already referenced and if status is approved
         const canReference = await this.canReference(input)
 
-        if(!canReference.succes) {
+        if (!canReference.succes) {
             throw new BadRequestException(canReference.msg)
         }
 
@@ -530,13 +535,13 @@ export class MeqsService {
         console.log('canUpdate()')
         console.log('authUser', this.authUser)
 
-       
+
         const isNormalUser = this.isNormalUser()
 
         console.log('isNormalUser', isNormalUser)
 
         // validates if there is already an approver who take an action
-        if(isNormalUser) {
+        if (isNormalUser) {
 
             console.log('is normal user')
 
@@ -549,14 +554,14 @@ export class MeqsService {
             // used to indicate whether there is at least one approver whose status is not pending.
             const isAnyNonPendingApprover = this.isAnyNonPendingApprover(approvers)
 
-            if(isAnyNonPendingApprover) {
+            if (isAnyNonPendingApprover) {
                 throw new BadRequestException(`Unable to update MEQS. Can only update if all approver's status is pending`)
             }
         }
 
-        if(input.canceller_id) {
+        if (input.canceller_id) {
             const isUserExist = await this.isUserExist(input.canceller_id, this.authUser)
-            if(!isUserExist) {
+            if (!isUserExist) {
                 this.logger.error('canceller_id which also is user_id not found in table users')
                 throw new NotFoundException('Canceller does not exist')
             }
@@ -570,9 +575,9 @@ export class MeqsService {
     // used to indicate whether there is at least one approver whose status is not pending.
     private isAnyNonPendingApprover(approvers: MEQSApprover[]): boolean {
 
-        for(let approver of approvers) {
+        for (let approver of approvers) {
 
-            if(approver.status !== APPROVAL_STATUS.PENDING) {
+            if (approver.status !== APPROVAL_STATUS.PENDING) {
 
                 return true
 
@@ -592,7 +597,7 @@ export class MeqsService {
     }
 
     private async isUserExist(user_id: string, authUser: AuthUser): Promise<boolean> {
-    
+
         this.logger.log('isUserExist', user_id)
 
         const query = `
@@ -604,14 +609,14 @@ export class MeqsService {
         `;
 
         const { data } = await firstValueFrom(
-            this.httpService.post(process.env.API_GATEWAY_URL, 
-            { query },
-            {
-                headers: {
-                    Authorization: authUser.authorization,
-                    'Content-Type': 'application/json'
+            this.httpService.post(process.env.API_GATEWAY_URL,
+                { query },
+                {
+                    headers: {
+                        Authorization: authUser.authorization,
+                        'Content-Type': 'application/json'
+                    }
                 }
-            }  
             ).pipe(
                 catchError((error) => {
                     throw error
@@ -621,11 +626,11 @@ export class MeqsService {
 
         console.log('data', data)
 
-        if(!data || !data.data || !data.data.user){
+        if (!data || !data.data || !data.data.user) {
             console.log('User not found')
-            return false 
+            return false
         }
-        return true 
+        return true
 
     }
 

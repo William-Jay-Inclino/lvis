@@ -11,6 +11,7 @@ import { CanvassesResponse } from './entities/canvasses-response.entity';
 import { Employee } from '../__employee__/entities/employee.entity';
 import { FindOneResponse } from './entities/types';
 import * as moment from 'moment';
+import { getDateRange } from '../__common__/helpers';
 
 @Injectable()
 export class CanvassService {
@@ -20,10 +21,10 @@ export class CanvassService {
     private includedFields = {
         canvass_items: {
             include: {
-                unit: true, 
+                unit: true,
                 brand: true
             }
-        }, 
+        },
         rv: {
             include: {
                 meqs: {
@@ -46,9 +47,9 @@ export class CanvassService {
     constructor(
         private readonly prisma: PrismaService,
         private readonly httpService: HttpService,
-    ) {}
-    
-    setAuthUser(authUser: AuthUser){
+    ) { }
+
+    setAuthUser(authUser: AuthUser) {
         this.authUser = authUser
     }
 
@@ -58,7 +59,7 @@ export class CanvassService {
 
         const isValidRequestedById = await this.areEmployeesExist([input.requested_by_id], this.authUser)
 
-        if(!isValidRequestedById){
+        if (!isValidRequestedById) {
             throw new NotFoundException('Requested by ID not valid')
         }
 
@@ -97,36 +98,39 @@ export class CanvassService {
 
     async update(id: string, input: UpdateCanvassInput): Promise<Canvass> {
         this.logger.log('update()', input);
-    
+
         const existingItem = await this.findOne(id);
-    
+
         if (input.requested_by_id) {
             const isValidRequestedById = await this.areEmployeesExist([input.requested_by_id], this.authUser);
-    
+
             if (!isValidRequestedById) {
                 throw new NotFoundException('Requested by ID not found');
             }
         }
-    
+
         const data: Prisma.CanvassUpdateInput = {
             updated_by: this.authUser.user.username,
             purpose: input.purpose ?? existingItem.purpose,
             notes: input.notes ?? existingItem.notes,
             requested_by_id: input.requested_by_id ?? existingItem.requested_by_id
         };
-    
+
         const updated = await this.prisma.canvass.update({
             data,
             where: { id },
             include: this.includedFields,
-        }); 
-    
+        });
+
         this.logger.log('Successfully updated canvass');
-    
+
         return updated
     }
 
     async findAll(page: number, pageSize: number, date_requested?: string, requested_by_id?: string): Promise<CanvassesResponse> {
+
+        console.log('findAll')
+
         const skip = (page - 1) * pageSize;
 
         let whereCondition: any = {
@@ -134,9 +138,13 @@ export class CanvassService {
         };
 
         if (date_requested) {
-            const parsedDate = new Date(date_requested); 
+            const { startDate, endDate } = getDateRange(date_requested);
+            console.log('startDate', startDate);
+            console.log('endDate', endDate)
+
             whereCondition.date_requested = {
-                equals: parsedDate,
+                gte: startDate,
+                lte: endDate,
             };
         }
 
@@ -147,7 +155,7 @@ export class CanvassService {
         }
 
         const items = await this.prisma.canvass.findMany({
-            include: this.includedFields, 
+            include: this.includedFields,
             where: whereCondition,
             orderBy: {
                 rc_number: 'desc'
@@ -169,42 +177,42 @@ export class CanvassService {
     }
 
     async findOne(id: string): Promise<FindOneResponse> {
-        
+
         this.logger.log('findOne()', id)
 
         const item = await this.prisma.canvass.findUnique({
-          include: this.includedFields,
-          where: { id }
+            include: this.includedFields,
+            where: { id }
         })
 
-        if(!item){
+        if (!item) {
             throw new NotFoundException('Canvass not found')
         }
 
         return item
-        
+
     }
 
     async findByRcNumber(rc_number: string): Promise<Canvass> {
-        
+
         this.logger.log('findByRcNumber()', rc_number)
 
         const item = await this.prisma.canvass.findUnique({
-          include: this.includedFields,
-          where: { rc_number }
+            include: this.includedFields,
+            where: { rc_number }
         })
 
-        if(!item){
+        if (!item) {
             throw new NotFoundException('Canvass not found')
         }
 
         return item
-        
+
     }
 
     async findRcNumbers(rcNumber: string): Promise<{ rc_number: string; }[]> {
-	
-		const arrayOfRcNumbers = await this.prisma.canvass.findMany({
+
+        const arrayOfRcNumbers = await this.prisma.canvass.findMany({
             select: {
                 rc_number: true
             },
@@ -216,27 +224,27 @@ export class CanvassService {
                 is_deleted: false
             },
             take: 5,
-		});
-	
-		return arrayOfRcNumbers;
-	}
+        });
+
+        return arrayOfRcNumbers;
+    }
 
     private async getLatestRcNumber(): Promise<string> {
         const currentYear = new Date().getFullYear().toString().slice(-2);
-    
+
         const latestItem = await this.prisma.canvass.findFirst({
-          where: { rc_number: { startsWith: currentYear } },
-          orderBy: { rc_number: 'desc' },
+            where: { rc_number: { startsWith: currentYear } },
+            orderBy: { rc_number: 'desc' },
         });
-    
+
         if (latestItem) {
-          const latestNumericPart = parseInt(latestItem.rc_number.slice(-5), 10);
-          const newNumericPart = latestNumericPart + 1;
-          const newRcNumber = `${currentYear}-${newNumericPart.toString().padStart(5, '0')}`;
-          return newRcNumber;
+            const latestNumericPart = parseInt(latestItem.rc_number.slice(-5), 10);
+            const newNumericPart = latestNumericPart + 1;
+            const newRcNumber = `${currentYear}-${newNumericPart.toString().padStart(5, '0')}`;
+            return newRcNumber;
         } else {
-          // If no existing rc_number with the current year prefix, start with '00001'
-          return `${currentYear}-00001`;
+            // If no existing rc_number with the current year prefix, start with '00001'
+            return `${currentYear}-00001`;
         }
     }
 
@@ -251,22 +259,22 @@ export class CanvassService {
 
     async remove(id: string): Promise<WarehouseRemoveResponse> {
 
-		const existingItem = await this.findOne(id)
+        const existingItem = await this.findOne(id)
 
-		await this.prisma.canvass.update( {
-			where: { id },
-			data: {
+        await this.prisma.canvass.update({
+            where: { id },
+            data: {
                 is_deleted: true,
                 deleted_by: this.authUser.user.username
             }
-		} )
+        })
 
-		return {
-			success: true,
-			msg: "Canvass successfully deleted"
-		}
+        return {
+            success: true,
+            msg: "Canvass successfully deleted"
+        }
 
-	}
+    }
 
     async isReferenced(canvassId: string): Promise<Boolean> {
 
@@ -274,19 +282,19 @@ export class CanvassService {
             where: { canvass_id: canvassId }
         })
 
-        if(rv) return true 
+        if (rv) return true
 
         const spr = await this.prisma.sPR.findUnique({
             where: { canvass_id: canvassId }
         })
 
-        if(spr) return true 
+        if (spr) return true
 
         const jo = await this.prisma.jO.findUnique({
             where: { canvass_id: canvassId }
         })
 
-        if(jo) return true 
+        if (jo) return true
 
 
         return false
@@ -296,7 +304,7 @@ export class CanvassService {
     private async areEmployeesExist(employeeIds: string[], authUser: AuthUser): Promise<boolean> {
 
         this.logger.log('areEmployeesExist', employeeIds);
-    
+
         const query = `
             query {
                 validateEmployeeIds(ids: ${JSON.stringify(employeeIds)})
@@ -304,7 +312,7 @@ export class CanvassService {
         `;
 
         console.log('query', query)
-    
+
         try {
             const { data } = await firstValueFrom(
                 this.httpService.post(
@@ -322,21 +330,22 @@ export class CanvassService {
                     }),
                 ),
             );
-    
+
             console.log('data', data);
             console.log('data.data.validateEmployeeIds', data.data.validateEmployeeIds)
-    
+
             if (!data || !data.data) {
                 console.log('No data returned');
                 return false;
             }
-    
+
             return data.data.validateEmployeeIds;
-    
+
         } catch (error) {
             console.error('Error querying employees:', error.message);
             return false;
         }
     }
+
 
 }

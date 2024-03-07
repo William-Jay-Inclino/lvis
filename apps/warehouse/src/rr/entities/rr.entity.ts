@@ -10,7 +10,7 @@ export class RR {
 
   @Field()
   po_id: string;
-  
+
   @Field()
   rr_number: string;
 

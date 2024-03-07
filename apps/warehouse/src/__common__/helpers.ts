@@ -11,8 +11,8 @@ export const isValidApprovalStatus = (status: number): boolean => {
         APPROVAL_STATUS.CANCELLED
     ]
 
-    if(approvalStatusArray.includes(status)){
-        return true 
+    if (approvalStatusArray.includes(status)) {
+        return true
     }
 
     return false
@@ -26,33 +26,31 @@ export const isValidItemTransactionType = (type: number): boolean => {
         ITEM_TRANSACTION_TYPE.STOCK_OUT,
     ]
 
-    if(transactionTypeArray.includes(type)) {
-        return true 
+    if (transactionTypeArray.includes(type)) {
+        return true
     }
 
     return false
 
 }
 
-
 export const getLastApprover = (
-    approvers: 
-    RVApprover[] | 
-    MEQSApprover[] | 
-    POApprover[] |
-    RRApprover[] 
-): 
-    RVApprover | 
-    MEQSApprover | 
-    POApprover | 
+    approvers:
+        RVApprover[] |
+        MEQSApprover[] |
+        POApprover[] |
+        RRApprover[]
+):
+    RVApprover |
+    MEQSApprover |
+    POApprover |
     RRApprover => {
     return approvers.reduce((max, current) => (current.order > max.order ? current : max), approvers[0]);
 
 }
 
-
-export function getFullname(firstname: string, middlename: string | null, lastname: string){
-    if(middlename){
+export function getFullname(firstname: string, middlename: string | null, lastname: string) {
+    if (middlename) {
         return lastname + ', ' + firstname + ' ' + convertMiddleNameToInitial(middlename)
     }
     return lastname + ', ' + firstname
@@ -64,4 +62,28 @@ export function convertMiddleNameToInitial(middleName: string) {
     } else {
         return "";
     }
+}
+
+export function getDateRange(dateString: string): { startDate: string, endDate: string } {
+    const requestedDate = new Date(dateString);
+    const startDate = new Date(
+        requestedDate.getFullYear(),
+        requestedDate.getMonth(),
+        requestedDate.getDate(),
+        0,
+        0,
+        0
+    );
+    const endDate = new Date(
+        requestedDate.getFullYear(),
+        requestedDate.getMonth(),
+        requestedDate.getDate(),
+        23,
+        59,
+        59
+    );
+    return {
+        startDate: startDate.toISOString(),
+        endDate: endDate.toISOString(),
+    };
 }

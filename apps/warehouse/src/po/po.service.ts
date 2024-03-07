@@ -10,6 +10,7 @@ import { catchError, firstValueFrom } from 'rxjs';
 import { UpdatePoInput } from './dto/update-po.input';
 import { POsResponse } from './entities/pos-response.entity';
 import * as moment from 'moment';
+import { getDateRange } from '../__common__/helpers';
 
 @Injectable()
 export class PoService {
@@ -59,17 +60,17 @@ export class PoService {
     constructor(
         private readonly prisma: PrismaService,
         private readonly httpService: HttpService,
-    ) {}
+    ) { }
 
-    setAuthUser(authUser: AuthUser){
+    setAuthUser(authUser: AuthUser) {
         this.authUser = authUser
     }
 
     async create(input: CreatePoInput): Promise<PO> {
-        
+
         this.logger.log('create()')
 
-        if( !(await this.canCreate(input)) ) {
+        if (!(await this.canCreate(input))) {
             throw new Error('Failed to create PO. Please try again')
         }
 
@@ -121,7 +122,7 @@ export class PoService {
 
         const existingItem = await this.findOne(id)
 
-        if( !(await this.canUpdate(input, existingItem)) ) {
+        if (!(await this.canUpdate(input, existingItem))) {
             throw new Error('Failed to update PO. Please try again')
         }
 
@@ -153,9 +154,12 @@ export class PoService {
         };
 
         if (date_requested) {
-            const parsedDate = new Date(date_requested); 
+            const { startDate, endDate } = getDateRange(date_requested);
+            console.log('startDate', startDate);
+            console.log('endDate', endDate)
             whereCondition.po_date = {
-                equals: parsedDate,
+                gte: startDate,
+                lte: endDate,
             };
         }
 
@@ -196,11 +200,11 @@ export class PoService {
             where: { id }
         })
 
-        if(!item) {
+        if (!item) {
             throw new NotFoundException('PO not found')
         }
 
-        return item 
+        return item
     }
 
     async findByPoNumber(po_number: string): Promise<PO | null> {
@@ -209,11 +213,11 @@ export class PoService {
             where: { po_number }
         })
 
-        if(!item) {
+        if (!item) {
             throw new NotFoundException('PO not found')
         }
-        
-        return item 
+
+        return item
     }
 
     async findByMeqsNumber(meqs_number: string): Promise<PO | null> {
@@ -228,16 +232,16 @@ export class PoService {
             }
         })
 
-        if(!item) {
+        if (!item) {
             throw new NotFoundException('PO not found')
         }
-        
-        return item 
+
+        return item
     }
 
     async findPoNumbers(poNumber: string): Promise<{ po_number: string; }[]> {
-	
-		const arrayOfPoNumbers = await this.prisma.pO.findMany({
+
+        const arrayOfPoNumbers = await this.prisma.pO.findMany({
             select: {
                 po_number: true
             },
@@ -249,10 +253,10 @@ export class PoService {
                 is_deleted: false
             },
             take: 5,
-		});
-	
-		return arrayOfPoNumbers;
-	}
+        });
+
+        return arrayOfPoNumbers;
+    }
 
     async getStatus(po_id: string): Promise<APPROVAL_STATUS> {
 
@@ -265,13 +269,13 @@ export class PoService {
 
         const hasDisapproved = approvers.find(i => i.status === APPROVAL_STATUS.DISAPPROVED)
 
-        if(hasDisapproved) {
+        if (hasDisapproved) {
             return APPROVAL_STATUS.DISAPPROVED
         }
 
         const hasPending = approvers.find(i => i.status === APPROVAL_STATUS.PENDING)
 
-        if(hasPending) {
+        if (hasPending) {
             return APPROVAL_STATUS.PENDING
         }
 
@@ -281,19 +285,19 @@ export class PoService {
 
     async remove(id: string): Promise<WarehouseRemoveResponse> {
 
-		const existingItem = await this.findOne(id)
+        const existingItem = await this.findOne(id)
 
-		await this.prisma.pO.update( {
-			where: { id },
-			data: { is_deleted: true }
-		} )
+        await this.prisma.pO.update({
+            where: { id },
+            data: { is_deleted: true }
+        })
 
-		return {
-			success: true,
-			msg: "PO successfully deleted"
-		}
+        return {
+            success: true,
+            msg: "PO successfully deleted"
+        }
 
-	}
+    }
 
     async isReferenced(poId: string): Promise<Boolean> {
 
@@ -301,7 +305,7 @@ export class PoService {
             where: { po_id: poId }
         })
 
-        if(rr) return true  
+        if (rr) return true
 
         return false
 
@@ -309,27 +313,27 @@ export class PoService {
 
     private async getLatestPoNumber(): Promise<string> {
         const currentYear = new Date().getFullYear().toString().slice(-2);
-    
+
         const latestItem = await this.prisma.pO.findFirst({
-          where: { po_number: { startsWith: currentYear } },
-          orderBy: { po_number: 'desc' },
+            where: { po_number: { startsWith: currentYear } },
+            orderBy: { po_number: 'desc' },
         });
-    
+
         if (latestItem) {
-          const latestNumericPart = parseInt(latestItem.po_number.slice(-5), 10);
-          const newNumericPart = latestNumericPart + 1;
-          const newRcNumber = `${currentYear}-${newNumericPart.toString().padStart(5, '0')}`;
-          return newRcNumber;
+            const latestNumericPart = parseInt(latestItem.po_number.slice(-5), 10);
+            const newNumericPart = latestNumericPart + 1;
+            const newRcNumber = `${currentYear}-${newNumericPart.toString().padStart(5, '0')}`;
+            return newRcNumber;
         } else {
-          // If no existing rc_number with the current year prefix, start with '00001'
-          return `${currentYear}-00001`;
+            // If no existing rc_number with the current year prefix, start with '00001'
+            return `${currentYear}-00001`;
         }
     }
 
     private async areEmployeesExist(employeeIds: string[], authUser: AuthUser): Promise<boolean> {
 
         this.logger.log('areEmployeesExist', employeeIds);
-    
+
         const query = `
             query {
                 validateEmployeeIds(ids: ${JSON.stringify(employeeIds)})
@@ -337,7 +341,7 @@ export class PoService {
         `;
 
         console.log('query', query)
-    
+
         try {
             const { data } = await firstValueFrom(
                 this.httpService.post(
@@ -355,17 +359,17 @@ export class PoService {
                     }),
                 ),
             );
-    
+
             console.log('data', data);
             console.log('data.data.validateEmployeeIds', data.data.validateEmployeeIds)
-    
+
             if (!data || !data.data) {
                 console.log('No data returned');
                 return false;
             }
-    
+
             return data.data.validateEmployeeIds;
-    
+
         } catch (error) {
             console.error('Error querying employees:', error.message);
             return false;
@@ -385,7 +389,7 @@ export class PoService {
 
         const isValidEmployeeIds = await this.areEmployeesExist(employeeIds, this.authUser)
 
-        if(!isValidEmployeeIds){
+        if (!isValidEmployeeIds) {
             throw new BadRequestException("One or more employee id is invalid")
         }
 
@@ -400,7 +404,7 @@ export class PoService {
         console.log('isNormalUser', isNormalUser)
 
         // validates if there is already an approver who take an action
-        if(isNormalUser) {
+        if (isNormalUser) {
 
             console.log('is normal user')
 
@@ -413,28 +417,28 @@ export class PoService {
             // used to indicate whether there is at least one approver whose status is not pending.
             const isAnyNonPendingApprover = this.isAnyNonPendingApprover(approvers)
 
-            if(isAnyNonPendingApprover) {
+            if (isAnyNonPendingApprover) {
                 throw new BadRequestException(`Unable to update PO. Can only update if all approver's status is pending`)
             }
         }
 
-        if(input.canceller_id) {
+        if (input.canceller_id) {
             const isUserExist = await this.isUserExist(input.canceller_id, this.authUser)
-            if(!isUserExist) {
+            if (!isUserExist) {
                 this.logger.error('canceller_id which also is user_id not found in table users')
                 throw new NotFoundException('Canceller does not exist')
             }
         }
 
-        return true 
+        return true
     }
 
     // used to indicate whether there is at least one approver whose status is not pending.
     private isAnyNonPendingApprover(approvers: POApprover[]): boolean {
 
-        for(let approver of approvers) {
+        for (let approver of approvers) {
 
-            if(approver.status !== APPROVAL_STATUS.PENDING) {
+            if (approver.status !== APPROVAL_STATUS.PENDING) {
 
                 return true
 
@@ -454,7 +458,7 @@ export class PoService {
     }
 
     private async isUserExist(user_id: string, authUser: AuthUser): Promise<boolean> {
-    
+
         this.logger.log('isUserExist', user_id)
 
         const query = `
@@ -466,14 +470,14 @@ export class PoService {
         `;
 
         const { data } = await firstValueFrom(
-            this.httpService.post(process.env.API_GATEWAY_URL, 
-            { query },
-            {
-                headers: {
-                    Authorization: authUser.authorization,
-                    'Content-Type': 'application/json'
+            this.httpService.post(process.env.API_GATEWAY_URL,
+                { query },
+                {
+                    headers: {
+                        Authorization: authUser.authorization,
+                        'Content-Type': 'application/json'
+                    }
                 }
-            }  
             ).pipe(
                 catchError((error) => {
                     throw error
@@ -483,11 +487,11 @@ export class PoService {
 
         console.log('data', data)
 
-        if(!data || !data.data || !data.data.user){
+        if (!data || !data.data || !data.data.user) {
             console.log('User not found')
-            return false 
+            return false
         }
-        return true 
+        return true
 
     }
 
