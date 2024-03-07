@@ -124,68 +124,77 @@ export class RvService {
             is_cancelled: input.canceller_id ? true : existingItem.is_cancelled
         }
 
-
-        // if no supervisor input or same supervisor then normal update
-        if (!input.supervisor_id || (input.supervisor_id === existingItem.supervisor_id)) {
-
-            const updated = await this.prisma.rV.update({
-                data,
-                where: { id },
-                include: this.includedFields
-            })
-
-            this.logger.log('Successfully updated RV')
-
-            return updated
-
-        }
-
-        // if supervisor is updated then delete the existing supervisor and create the new supervisor in rv approver table
-
-        const updateRvQuery = this.prisma.rV.update({
+        const updated = await this.prisma.rV.update({
             data,
             where: { id },
             include: this.includedFields
         })
 
-        const existingRvApprover = await this.prisma.rVApprover.findFirst({
-            where: {
-                rv_id: id,
-                approver_id: existingItem.supervisor_id
-            }
-        })
+        this.logger.log('Successfully updated RV')
 
-        if (!existingRvApprover) {
-            throw new NotFoundException('RV Approver not found')
-        }
+        return updated
 
-        const deleteRvApproverQuery = this.prisma.rVApprover.delete({
-            where: {
-                id: existingRvApprover.id
-            }
-        })
+        // if no supervisor input or same supervisor then normal update
+        // if (!input.supervisor_id || (input.supervisor_id === existingItem.supervisor_id)) {
 
-        const createRvApproverData: Prisma.RVApproverCreateInput = {
-            rv: { connect: { id } },
-            approver_id: input.supervisor_id,
-            status: APPROVAL_STATUS.PENDING,
-            label: existingRvApprover.label,
-            order: existingRvApprover.order
-        }
+        //     const updated = await this.prisma.rV.update({
+        //         data,
+        //         where: { id },
+        //         include: this.includedFields
+        //     })
 
-        const createRvApproverQuery = this.prisma.rVApprover.create({
-            data: createRvApproverData
-        })
+        //     this.logger.log('Successfully updated RV')
 
-        const result = await this.prisma.$transaction([
-            updateRvQuery,
-            deleteRvApproverQuery,
-            createRvApproverQuery
-        ])
+        //     return updated
 
-        this.logger.log('Successfully updated RV, deleted rv approver associated with previous supervisor, added approver referencing new supervisor')
+        // }
 
-        return result[0]
+        // if supervisor is updated then delete the existing supervisor and create the new supervisor in rv approver table
+
+        // const updateRvQuery = this.prisma.rV.update({
+        //     data,
+        //     where: { id },
+        //     include: this.includedFields
+        // })
+
+        // const existingRvApprover = await this.prisma.rVApprover.findFirst({
+        //     where: {
+        //         rv_id: id,
+        //         approver_id: existingItem.supervisor_id
+        //     }
+        // })
+
+        // if (!existingRvApprover) {
+        //     throw new NotFoundException('RV Approver not found')
+        // }
+
+        // const deleteRvApproverQuery = this.prisma.rVApprover.delete({
+        //     where: {
+        //         id: existingRvApprover.id
+        //     }
+        // })
+
+        // const createRvApproverData: Prisma.RVApproverCreateInput = {
+        //     rv: { connect: { id } },
+        //     approver_id: input.supervisor_id,
+        //     status: APPROVAL_STATUS.PENDING,
+        //     label: existingRvApprover.label,
+        //     order: existingRvApprover.order
+        // }
+
+        // const createRvApproverQuery = this.prisma.rVApprover.create({
+        //     data: createRvApproverData
+        // })
+
+        // const result = await this.prisma.$transaction([
+        //     updateRvQuery,
+        //     deleteRvApproverQuery,
+        //     createRvApproverQuery
+        // ])
+
+        // this.logger.log('Successfully updated RV, deleted rv approver associated with previous supervisor, added approver referencing new supervisor')
+
+        // return result[0]
 
     }
 
