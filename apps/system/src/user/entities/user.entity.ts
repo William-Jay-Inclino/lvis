@@ -23,6 +23,6 @@ export class User {
   role: Role;
 
   @Field(() => UserEmployee, { nullable: true })
-  user_employee: UserEmployee;
+  user_employee?: UserEmployee;
 
 }

@@ -35,13 +35,13 @@ export class Canvass {
   // @Field(() => Boolean)
   // is_referenced: boolean;
 
-  @Field( () => JO, { nullable: true })
+  @Field(() => JO, { nullable: true })
   jo?: JO
 
-  @Field( () => RV, { nullable: true })
+  @Field(() => RV, { nullable: true })
   rv?: RV
 
-  @Field( () => SPR, { nullable: true })
+  @Field(() => SPR, { nullable: true })
   spr?: SPR
 
   @Field(() => Date)

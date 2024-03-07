@@ -12,7 +12,7 @@ export class AuthController {
     constructor(
         private readonly authService: AuthService,
         private readonly userService: UserService
-    ) {}
+    ) { }
 
     @UseGuards(LocalAuthGuard)
     @Post('login')
@@ -21,7 +21,7 @@ export class AuthController {
     }
 
     @Post('create-admin')
-    createAdmin(@Body() dto: {password: string}): Promise<User> {
+    createAdmin(@Body() dto: { password: string }): Promise<User> {
 
         const admin = {} as CreateUserInput
         admin.username = 'admin'

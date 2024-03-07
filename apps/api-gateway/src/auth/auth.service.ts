@@ -45,6 +45,7 @@ export class AuthService {
                     username
                     password
                     status
+                    role
                     user_employee {
                         employee {
                             id
