@@ -14,11 +14,6 @@ export class UpdateRvApproverInput extends PartialType(CreateRvApproverInput) {
 
   @Field(() => String, { nullable: true })
   @IsOptional()
-  @IsString()
-  approver_proxy_id?: string;
-
-  @Field( () => String, { nullable: true })
-  @IsOptional()
   @Transform(({ value }) => new Date(value))
   @IsDate()
   date_approval?: string;
@@ -28,7 +23,7 @@ export class UpdateRvApproverInput extends PartialType(CreateRvApproverInput) {
   @IsString()
   notes?: string;
 
-  @Field( () => Int, { nullable: true })
+  @Field(() => Int, { nullable: true })
   @IsOptional()
   @IsEnum(APPROVAL_STATUS)
   status?: APPROVAL_STATUS;
@@ -38,7 +33,7 @@ export class UpdateRvApproverInput extends PartialType(CreateRvApproverInput) {
   @IsString()
   label?: string;
 
-  @Field( () => Int, { nullable: true })
+  @Field(() => Int, { nullable: true })
   @IsOptional()
   @IsInt()
   order?: number;

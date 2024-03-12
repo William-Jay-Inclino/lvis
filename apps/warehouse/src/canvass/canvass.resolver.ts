@@ -72,7 +72,11 @@ export class CanvassResolver {
   }
 
   @Mutation(() => WarehouseRemoveResponse)
-  removeCanvass(@Args('id', { type: () => String }) id: string) {
+  removeCanvass(
+    @Args('id', { type: () => String }) id: string,
+    @CurrentAuthUser() authUser: AuthUser
+  ) {
+    this.canvassService.setAuthUser(authUser)
     return this.canvassService.remove(id);
   }
 

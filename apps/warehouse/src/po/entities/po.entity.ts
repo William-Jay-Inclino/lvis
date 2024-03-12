@@ -1,7 +1,7 @@
-import { ObjectType, Field, Int } from '@nestjs/graphql';
-import { APPROVAL_STATUS } from '../../__common__/types';
+import { ObjectType, Field } from '@nestjs/graphql';
 import { MeqsSupplier } from '../../meqs-supplier/entities/meqs-supplier.entity';
 import { RR } from '../../rr/entities/rr.entity';
+import { POApprover } from '../../po-approver/entities/po-approver.entity';
 
 @ObjectType()
 export class PO {
@@ -18,23 +18,11 @@ export class PO {
   @Field(() => String)
   po_date: string;
 
-  @Field(() => String, {nullable: true})
-  canceller_id: string;
-
-  @Field(() => Date, {nullable: true})
-  date_cancelled: Date | null;
-
-  @Field(() => String, {nullable: true})
+  @Field(() => String, { nullable: true })
   notes: string;
-  
-  @Field(() => Date)
-  created_at: Date;
 
-  @Field(() => Date)
-  updated_at: Date;
-
-  @Field(() => MeqsSupplier)
-  meqs_supplier: MeqsSupplier
+  @Field({ nullable: true })
+  cancelled_by: string | null;
 
   @Field()
   created_by: string;
@@ -43,15 +31,26 @@ export class PO {
   updated_by: string | null;
 
   @Field({ nullable: true })
-  deleted_by: string | null;
+  cancelled_at: string | null;
 
-  @Field(() => Boolean)
-  is_deleted: boolean;
+  @Field(() => Date)
+  created_at: Date;
 
-  @Field(() => Boolean)
-  is_cancelled: boolean;
+  @Field(() => Date)
+  updated_at: Date;
+
+
+
+  // =============== derived / resolvers =============== 
+
+
+  @Field(() => MeqsSupplier)
+  meqs_supplier: MeqsSupplier
 
   @Field(() => RR, { nullable: true })
   rr?: RR;
+
+  @Field(() => [POApprover])
+  po_approvers: POApprover
 
 }

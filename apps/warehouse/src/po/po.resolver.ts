@@ -15,13 +15,13 @@ import { APPROVAL_STATUS } from '../__common__/types';
 import { POApprover } from '../po-approver/entities/po-approver.entity';
 
 @UseGuards(GqlAuthGuard)
-@Resolver( () => PO)
+@Resolver(() => PO)
 export class PoResolver {
 
     constructor(
         private readonly poService: PoService,
         private readonly poApproverService: PoApproverService
-    ) {}
+    ) { }
 
     @Mutation(() => PO)
     async createPo(
@@ -36,63 +36,63 @@ export class PoResolver {
     pos(
         @Args('page') page: number,
         @Args('pageSize') pageSize: number,
-        @Args('date_requested', {nullable: true}) date_requested?: string,
-        @Args('requested_by_id', {nullable: true}) requested_by_id?: string,
+        @Args('date_requested', { nullable: true }) date_requested?: string,
+        @Args('requested_by_id', { nullable: true }) requested_by_id?: string,
     ) {
         return this.poService.findAll(page, pageSize, date_requested, requested_by_id);
     }
 
     @Query(() => [PoNumber])
     po_numbers(
-      @Args('po_number') po_number: string
+        @Args('po_number') po_number: string
     ): Promise<{ po_number: string }[]> {
-      return this.poService.findPoNumbers(po_number);
+        return this.poService.findPoNumbers(po_number);
     }
 
     @Query(() => PO)
     po(
-        @Args('id', {nullable: true}) id?: string | null,
-        @Args('po_number', {nullable: true}) po_number?: string | null,
-        @Args('meqs_number', {nullable: true}) meqs_number?: string | null,
+        @Args('id', { nullable: true }) id?: string | null,
+        @Args('po_number', { nullable: true }) po_number?: string | null,
+        @Args('meqs_number', { nullable: true }) meqs_number?: string | null,
     ) {
-        if(id){
+        if (id) {
             return this.poService.findOne(id);
         }
-        if(po_number){
+        if (po_number) {
             return this.poService.findByPoNumber(po_number)
         }
-        if(meqs_number){
+        if (meqs_number) {
             return this.poService.findByMeqsNumber(meqs_number)
         }
     }
 
     @Mutation(() => PO)
     async updatePo(
-      @Args('id') id: string,
-      @Args('input') updatePoInput: UpdatePoInput,
-      @CurrentAuthUser() authUser: AuthUser
+        @Args('id') id: string,
+        @Args('input') updatePoInput: UpdatePoInput,
+        @CurrentAuthUser() authUser: AuthUser
     ) {
         this.poService.setAuthUser(authUser)
         return await this.poService.update(id, updatePoInput);
     }
 
-    @ResolveField( () => Employee, { nullable: true })
-    canceller(@Parent() po: PO): any {
-        if(!po.canceller_id){
-            return null
-        }
-        return { __typename: 'Employee', id: po.canceller_id }
-    }
+    // @ResolveField( () => Employee, { nullable: true })
+    // canceller(@Parent() po: PO): any {
+    //     if(!po.canceller_id){
+    //         return null
+    //     }
+    //     return { __typename: 'Employee', id: po.canceller_id }
+    // }
 
-    @ResolveField( () => [POApprover])
+    @ResolveField(() => [POApprover])
     po_approvers(@Parent() po: PO): any {
         return this.poApproverService.findByPoId(po.id)
     }
 
-    @ResolveField( () => Int)
+    @ResolveField(() => Int)
     async status(@Parent() po: PO) {
-        
-        if(po.canceller_id) {
+
+        if (po.cancelled_at) {
             return APPROVAL_STATUS.CANCELLED
         }
 
@@ -100,7 +100,7 @@ export class PoResolver {
 
     }
 
-    @ResolveField( () => Boolean)
+    @ResolveField(() => Boolean)
     async is_referenced(@Parent() po: PO) {
         return await this.poService.isReferenced(po.id)
     }

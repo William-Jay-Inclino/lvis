@@ -8,14 +8,20 @@ import { UpdateUnitInput } from './dto/update-unit.input';
 import { WarehouseRemoveResponse } from '../__common__/classes';
 
 import { UnitsResponse } from './entities/units-response.entity'
+import { AuthUser } from '../__common__/auth-user.entity';
+import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
 
 @UseGuards(GqlAuthGuard)
 @Resolver(() => Unit)
 export class UnitResolver {
-  constructor(private readonly unitService: UnitService) {}
+  constructor(private readonly unitService: UnitService) { }
 
   @Mutation(() => Unit)
-  createUnit(@Args('input') createUnitInput: CreateUnitInput) {
+  createUnit(
+    @Args('input') createUnitInput: CreateUnitInput,
+    @CurrentAuthUser() authUser: AuthUser
+  ) {
+    this.unitService.setAuthUser(authUser)
     return this.unitService.create(createUnitInput);
   }
 
@@ -37,13 +43,19 @@ export class UnitResolver {
   @Mutation(() => Unit)
   updateUnit(
     @Args('id') id: string,
-    @Args('input') updateUnitInput: UpdateUnitInput
+    @Args('input') updateUnitInput: UpdateUnitInput,
+    @CurrentAuthUser() authUser: AuthUser
   ) {
+    this.unitService.setAuthUser(authUser)
     return this.unitService.update(id, updateUnitInput);
   }
 
   @Mutation(() => WarehouseRemoveResponse)
-  removeUnit(@Args('id') id: string) {
+  removeUnit(
+    @Args('id') id: string,
+    @CurrentAuthUser() authUser: AuthUser
+  ) {
+    this.unitService.setAuthUser(authUser)
     return this.unitService.remove(id);
   }
 

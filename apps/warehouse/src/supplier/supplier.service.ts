@@ -4,38 +4,45 @@ import { PrismaService } from '../__prisma__/prisma.service';
 import { Prisma, Supplier } from 'apps/warehouse/prisma/generated/client';
 import { UpdateSupplierInput } from './dto/update-supplier.input';
 import { WarehouseRemoveResponse } from '../__common__/classes';
+import { AuthUser } from '../__common__/auth-user.entity';
 
 @Injectable()
 export class SupplierService {
 
-  private readonly logger = new Logger(SupplierService.name);
+	private readonly logger = new Logger(SupplierService.name);
+	private authUser: AuthUser
 
-	constructor(private readonly prisma: PrismaService) {}
+	constructor(private readonly prisma: PrismaService) { }
 
-    async create(input: CreateSupplierInput): Promise<Supplier> {
+	setAuthUser(authUser: AuthUser) {
+		this.authUser = authUser
+	}
 
-        const data: Prisma.SupplierCreateInput = {
-            name: input.name,
-            contact: input.contact,
-			vat_type: input.vat_type
-        }
+	async create(input: CreateSupplierInput): Promise<Supplier> {
 
-        const created = await this.prisma.supplier.create({
-            data
-        })
+		const data: Prisma.SupplierCreateInput = {
+			name: input.name,
+			contact: input.contact,
+			vat_type: input.vat_type,
+			created_by: this.authUser.user.username
+		}
 
-        this.logger.log('Successfully created Supplier')
+		const created = await this.prisma.supplier.create({
+			data
+		})
 
-        return created 
+		this.logger.log('Successfully created Supplier')
 
-    }
+		return created
 
-    async findAll(): Promise<Supplier[]> {
-		return await this.prisma.supplier.findMany( {
+	}
+
+	async findAll(): Promise<Supplier[]> {
+		return await this.prisma.supplier.findMany({
 			where: {
-				is_deleted: false 
+				deleted_at: null
 			}
-		} )
+		})
 	}
 
 	async findOne(id: string): Promise<Supplier | null> {
@@ -46,14 +53,14 @@ export class SupplierService {
 
 		console.log('item', item, id)
 
-		if(!item){
-            throw new NotFoundException('Supplier not found')
-        }
+		if (!item) {
+			throw new NotFoundException('Supplier not found')
+		}
 
-        return item
+		return item
 	}
 
-    async update(id: string, input: UpdateSupplierInput): Promise<Supplier> {
+	async update(id: string, input: UpdateSupplierInput): Promise<Supplier> {
 
 		const existingItem = await this.findOne(id)
 
@@ -61,30 +68,34 @@ export class SupplierService {
 			name: input.name ?? existingItem.name,
 			contact: input.contact ?? existingItem.contact,
 			vat_type: input.vat_type ?? existingItem.vat_type,
+			updated_by: this.authUser.user.username
 		}
 
-		
-		const updated = await this.prisma.supplier.update({ 
+
+		const updated = await this.prisma.supplier.update({
 			data,
 			where: {
 				id
 			}
 		})
-		
+
 		this.logger.log('Successfully updated Supplier')
 
 		return updated
 
 	}
 
-    async remove(id: string): Promise<WarehouseRemoveResponse> {
+	async remove(id: string): Promise<WarehouseRemoveResponse> {
 
 		const existingItem = await this.findOne(id)
 
-		await this.prisma.supplier.update( {
+		await this.prisma.supplier.update({
 			where: { id },
-			data: { is_deleted: true }
-		} )
+			data: {
+				deleted_at: new Date(),
+				deleted_by: this.authUser.user.username
+			}
+		})
 
 		return {
 			success: true,

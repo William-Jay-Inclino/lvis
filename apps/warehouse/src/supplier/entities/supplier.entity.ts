@@ -12,9 +12,18 @@ export class Supplier {
 
   @Field()
   contact: string;
-  
-  @Field(() =>Int)
+
+  @Field(() => Int)
   vat_type: VAT_TYPE;
+
+  @Field()
+  created_by: string;
+
+  @Field({ nullable: true })
+  updated_by: string | null;
+
+  @Field({ nullable: true })
+  deleted_by: string | null;
 
   @Field(() => Date)
   created_at: Date;
@@ -22,7 +31,8 @@ export class Supplier {
   @Field(() => Date)
   updated_at: Date;
 
-  @Field(() => Boolean)
-  is_deleted: boolean;
+  @Field(() => Date, { nullable: true })
+  deleted_at: Date | null;
+
 
 }

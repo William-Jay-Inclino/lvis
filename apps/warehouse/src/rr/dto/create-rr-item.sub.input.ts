@@ -1,60 +1,17 @@
-import { InputType, Int, Field, Float } from '@nestjs/graphql';
-import { IsEnum, IsInt, IsNotEmpty, IsNumber, IsOptional, IsString, Min } from 'class-validator';
-import { ITEM_CLASS, VAT_TYPE } from '../../__common__/types';
+import { InputType, Int, Field } from '@nestjs/graphql';
+import { IsInt, IsNotEmpty, IsString } from 'class-validator';
 
 @InputType()
 export class CreateRRItemSubInput {
 
-    @Field(() => String, {nullable: true})
-    @IsOptional()
-    @IsString()
-    item_id?: string | null;
-
-    @Field(() => String, {nullable: true})
-    @IsOptional()
-    @IsString()
-    item_brand_id?: string | null;
-
-    @Field(() => String, {nullable: true})
-    @IsOptional()
-    @IsString()
-    unit_id?: string | null;
-
-    @Field(() => Int)
+    @Field(() => String)
     @IsNotEmpty()
-    @IsEnum(ITEM_CLASS)
-    item_class: ITEM_CLASS
-
-    @Field(() => Int)
-    @IsNotEmpty()
-    @IsInt()
-    quantity_delivered: number;
+    @IsString()
+    meqs_supplier_item_id: string;
 
     @Field(() => Int)
     @IsNotEmpty()
     @IsInt()
     quantity_accepted: number;
-
-    @Field()
-    @IsNotEmpty()
-    @IsString()
-    description: string;
-
-    @Field(() => Int)
-    @IsNotEmpty()
-    @IsEnum(VAT_TYPE)
-    vat_type: VAT_TYPE
-
-    @Field(() => Float)
-    @IsNotEmpty()
-    @IsNumber()
-    @Min(0.01, { message: 'Gross price must be greater than 0' })
-    gross_price: number
-
-    @Field(() => Float)
-    @IsNotEmpty()
-    @IsNumber()
-    @Min(0.01, { message: 'Net price must be greater than 0' })
-    net_price: number
 
 }

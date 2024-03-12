@@ -1,6 +1,7 @@
 import { ObjectType, Field, Int, ID, Float } from '@nestjs/graphql';
 import { PO } from '../../po/entities/po.entity';
 import { RrItem } from '../../rr-item/entities/rr-item.entity';
+import { RrApprover } from '../../rr-approver/entities/rr-approver.entity';
 
 @ObjectType()
 export class RR {
@@ -21,12 +22,6 @@ export class RR {
   received_by_id: string;
 
   @Field()
-  canceller_id: string;
-
-  @Field(() => Date)
-  date_cancelled: Date;
-
-  @Field()
   invoice_number: string;
 
   @Field({ nullable: true })
@@ -38,20 +33,11 @@ export class RR {
   @Field(() => Float)
   delivery_charge: number;
 
-  @Field(() => Date)
-  created_at: Date;
+  @Field(() => Boolean)
+  is_completed: boolean;
 
-  @Field(() => Date)
-  updated_at: Date;
-
-  @Field(() => PO)
-  po: PO;
-
-  // @Field()
-  // rr_approvers: string;
-
-  @Field(() => [RrItem])
-  rr_items: RrItem[];
+  @Field({ nullable: true })
+  cancelled_by: string | null;
 
   @Field()
   created_by: string;
@@ -60,15 +46,26 @@ export class RR {
   updated_by: string | null;
 
   @Field({ nullable: true })
-  deleted_by: string | null;
+  cancelled_at: string | null;
 
-  @Field(() => Boolean)
-  is_deleted: boolean;
+  @Field(() => Date)
+  created_at: Date;
 
-  @Field(() => Boolean)
-  is_cancelled: boolean;
+  @Field(() => Date)
+  updated_at: Date;
 
-  @Field(() => Boolean)
-  is_completed: boolean;
+
+  // =============== derived / resolvers =============== 
+
+
+  @Field(() => PO)
+  po: PO;
+
+  @Field(() => [RrApprover])
+  rr_approvers: RrApprover[];
+
+  @Field(() => [RrItem])
+  rr_items: RrItem[];
+
 
 }

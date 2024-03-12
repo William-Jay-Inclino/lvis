@@ -4,20 +4,27 @@ import { UpdateMeqsSupplierAttachmentInput } from './dto/update-meqs-supplier-at
 import { PrismaService } from '../__prisma__/prisma.service';
 import { MEQSSupplierAttachment, Prisma } from 'apps/warehouse/prisma/generated/client';
 import { WarehouseRemoveResponse } from '../__common__/classes';
+import { AuthUser } from '../__common__/auth-user.entity';
 
 @Injectable()
 export class MeqsSupplierAttachmentService {
 
     private readonly logger = new Logger(MeqsSupplierAttachmentService.name)
+    private authUser: AuthUser
 
-    constructor(private readonly prisma: PrismaService) {}
+    constructor(private readonly prisma: PrismaService) { }
 
+    setAuthUser(authUser: AuthUser) {
+        this.authUser = authUser
+    }
 
     async create(input: CreateMeqsSupplierAttachmentInput): Promise<MEQSSupplierAttachment> {
 
+
         const data: Prisma.MEQSSupplierAttachmentCreateInput = {
             meqs_supplier: { connect: { id: input.meqs_supplier_id } },
-            src: input.src
+            src: input.src,
+            created_by: this.authUser.user.username
         }
 
         const created = await this.prisma.mEQSSupplierAttachment.create({
@@ -34,25 +41,25 @@ export class MeqsSupplierAttachmentService {
 
     }
 
-    async findAll(): Promise<MEQSSupplierAttachment[]> {
-        return await this.prisma.mEQSSupplierAttachment.findMany({
-            include: {
-                meqs_supplier: true
-            },
-            where: { is_deleted: false }
-        })
-    }
+    // async findAll(): Promise<MEQSSupplierAttachment[]> {
+    //     return await this.prisma.mEQSSupplierAttachment.findMany({
+    //         include: {
+    //             meqs_supplier: true
+    //         },
+    //         where: { is_deleted: false }
+    //     })
+    // }
 
     async findOne(id: string): Promise<MEQSSupplierAttachment | null> {
 
-        const item = await this.prisma.mEQSSupplierAttachment.findUnique( {
+        const item = await this.prisma.mEQSSupplierAttachment.findUnique({
             include: {
                 meqs_supplier: true
             },
             where: { id }
-        } )
+        })
 
-        if(!item){
+        if (!item) {
             throw new NotFoundException('MEQS Supplier Attachment not found')
         }
 
@@ -65,7 +72,8 @@ export class MeqsSupplierAttachmentService {
         const existingItem = await this.findOne(id)
 
         const data: Prisma.MEQSSupplierAttachmentUpdateInput = {
-            src: input.src ?? existingItem.src
+            src: input.src ?? existingItem.src,
+            updated_by: this.authUser.user.username
         }
 
         const updated = await this.prisma.mEQSSupplierAttachment.update({
@@ -84,16 +92,16 @@ export class MeqsSupplierAttachmentService {
 
     async remove(id: string): Promise<WarehouseRemoveResponse> {
 
-		const existingItem = await this.findOne(id)
+        const existingItem = await this.findOne(id)
 
-		await this.prisma.mEQSSupplierAttachment.delete( {
-			where: { id },
-		} )
+        await this.prisma.mEQSSupplierAttachment.delete({
+            where: { id },
+        })
 
-		return {
-			success: true,
-			msg: "MEQS Supplier Attachment successfully deleted"
-		}
+        return {
+            success: true,
+            msg: "MEQS Supplier Attachment successfully deleted"
+        }
 
-	}
+    }
 }

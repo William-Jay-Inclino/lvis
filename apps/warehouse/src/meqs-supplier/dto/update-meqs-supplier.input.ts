@@ -1,7 +1,6 @@
-import { IsInt, IsOptional, IsString } from 'class-validator';
+import { IsOptional, IsString } from 'class-validator';
 import { CreateMeqsSupplierInput } from './create-meqs-supplier.input';
-import { InputType, Field, Int, PartialType } from '@nestjs/graphql';
-import { VAT_TYPE } from '../../__common__/types';
+import { InputType, Field, PartialType } from '@nestjs/graphql';
 
 @InputType()
 export class UpdateMeqsSupplierInput extends PartialType(CreateMeqsSupplierInput) {

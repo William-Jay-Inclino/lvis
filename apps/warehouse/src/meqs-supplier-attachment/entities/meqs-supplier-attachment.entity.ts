@@ -1,4 +1,5 @@
 import { ObjectType, Field, ID } from '@nestjs/graphql';
+import { MeqsSupplier } from '../../meqs-supplier/entities/meqs-supplier.entity';
 
 @ObjectType()
 export class MeqsSupplierAttachment {
@@ -12,10 +13,22 @@ export class MeqsSupplierAttachment {
   @Field(() => String)
   src: string;
 
+  @Field()
+  created_by: string;
+
+  @Field({ nullable: true })
+  updated_by: string | null;
+
   @Field(() => Date)
   created_at: Date;
 
   @Field(() => Date)
   updated_at: Date;
+
+
+  // =============== derived / resolvers =============== 
+
+  @Field(() => MeqsSupplier)
+  meqs_supplier: MeqsSupplier
 
 }

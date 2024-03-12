@@ -12,15 +12,15 @@ export class CreatePoInput {
   meqs_supplier_id: string;
 
   @Field(() => [CreatePoApproverSubInput])
-  @IsNotEmpty({each: true})
+  @IsNotEmpty({ each: true })
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => CreatePoApproverSubInput)
   approvers: CreatePoApproverSubInput[];
 
-  @Field(() => String, { nullable: true })
-  @IsOptional()
+  @Field(() => String)
+  @IsNotEmpty()
   @IsString()
-  notes?: string;
+  notes: string;
 
 }

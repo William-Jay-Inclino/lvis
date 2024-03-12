@@ -16,7 +16,7 @@ export class CreateRrInput {
   @IsString()
   @IsNotEmpty()
   received_by_id: string;
-  
+
   @Field()
   @IsString()
   @IsNotEmpty()
@@ -27,10 +27,9 @@ export class CreateRrInput {
   @IsOptional()
   delivery_number?: string | null;
 
-  @Field({ nullable: true })
+  @Field()
   @IsString()
-  @IsOptional()
-  notes?: string | null;
+  notes: string;
 
   @Field(() => Float)
   @IsNumber()
@@ -39,14 +38,14 @@ export class CreateRrInput {
   delivery_charge: number;
 
   @Field(() => [CreateRrApproverSubInput])
-  @IsNotEmpty({each: true})
+  @IsNotEmpty({ each: true })
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => CreateRrApproverSubInput)
   approvers: CreateRrApproverSubInput[];
 
   @Field(() => [CreateRRItemSubInput])
-  @IsNotEmpty({each: true})
+  @IsNotEmpty({ each: true })
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => CreateRRItemSubInput)

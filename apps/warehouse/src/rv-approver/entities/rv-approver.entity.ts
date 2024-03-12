@@ -10,16 +10,16 @@ export class RVApprover {
     id: string;
 
     @Field(() => String)
-    approver_id: string
+    rv_id: string
 
-    @Field(() => String, { nullable: true })
-    approver_proxy_id: string | null
+    @Field(() => String)
+    approver_id: string
 
     @Field(() => String, { nullable: true })
     date_approval: string | null
 
-    @Field(() => String, { nullable: true })
-    notes: string | null
+    @Field(() => String)
+    notes: string
 
     @Field(() => Int)
     status: APPROVAL_STATUS
@@ -30,11 +30,14 @@ export class RVApprover {
     @Field(() => Int)
     order: number
 
-    @Field(() => String)
-    rv_id: string
+    @Field()
+    created_by: string;
 
-    @Field(() => RV)
-    rv: RV
+    @Field({ nullable: true })
+    updated_by: string | null;
+
+    @Field({ nullable: true })
+    deleted_by: string | null;
 
     @Field(() => Date)
     created_at: Date;
@@ -42,7 +45,15 @@ export class RVApprover {
     @Field(() => Date)
     updated_at: Date;
 
-    @Field(() => Boolean)
-    is_deleted: boolean;
+    @Field(() => Date, { nullable: true })
+    deleted_at: Date | null;
+
+
+
+
+    // =============== derived / resolvers =============== 
+
+    @Field(() => RV)
+    rv: RV
 
 }

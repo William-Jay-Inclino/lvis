@@ -48,10 +48,6 @@ export class RvApproverService {
 
         employeeIds.push(input.approver_id)
 
-        if (input.approver_proxy_id) {
-            employeeIds.push(input.approver_proxy_id)
-        }
-
         if (employeeIds.length > 0) {
             const isValidEmployeeIds = await this.areEmployeesExist(employeeIds, this.authUser)
 
@@ -63,10 +59,11 @@ export class RvApproverService {
         const data: Prisma.RVApproverCreateInput = {
             rv: { connect: { id: input.rv_id } },
             approver_id: input.approver_id,
-            approver_proxy_id: input.approver_proxy_id ?? null,
             label: input.label,
             order: input.order,
-            status: APPROVAL_STATUS.PENDING
+            notes: '',
+            status: APPROVAL_STATUS.PENDING,
+            created_by: this.authUser.user.username
         }
 
         const created = await this.prisma.rVApprover.create({
@@ -77,13 +74,6 @@ export class RvApproverService {
         this.logger.log('Successfully created rVApprover')
 
         return created
-    }
-
-    async findAll(): Promise<RVApprover[]> {
-        return await this.prisma.rVApprover.findMany({
-            include: this.includedFields,
-            where: { is_deleted: false }
-        })
     }
 
     findOne(id: string): Promise<RVApprover | null> {
@@ -112,7 +102,7 @@ export class RvApproverService {
         return await this.prisma.rVApprover.findMany({
             // include: this.includedFields,
             where: {
-                is_deleted: false,
+                deleted_at: null,
                 rv_id: rvId
             },
             orderBy: {
@@ -125,7 +115,7 @@ export class RvApproverService {
         return await this.prisma.rVApprover.findMany({
             include: this.includedFields,
             where: {
-                is_deleted: false,
+                deleted_at: null,
                 rv: {
                     rv_number: rvNumber
                 }
@@ -146,12 +136,12 @@ export class RvApproverService {
 
         const data: Prisma.RVApproverUpdateInput = {
             approver_id: input.approver_id ?? existingItem.approver_id,
-            approver_proxy_id: input.approver_proxy_id ?? existingItem.approver_proxy_id,
             date_approval: input.date_approval ? new Date(input.date_approval) : existingItem.date_approval,
             notes: input.notes ?? existingItem.notes,
             status: input.status ?? existingItem.status,
             label: input.label ?? existingItem.label,
             order: input.order ?? existingItem.order,
+            updated_by: this.authUser.user.username
         }
 
         const updated = await this.prisma.rVApprover.update({
@@ -170,7 +160,10 @@ export class RvApproverService {
 
         await this.prisma.rVApprover.update({
             where: { id },
-            data: { is_deleted: true }
+            data: {
+                deleted_at: new Date(),
+                deleted_by: this.authUser.user.username
+            }
         })
 
         return {
@@ -222,7 +215,7 @@ export class RvApproverService {
             where: {
                 approver_id: employeeId,
                 status: APPROVAL_STATUS.PENDING,
-                is_deleted: false
+                deleted_at: null
             },
             orderBy: {
                 created_at: 'asc'
@@ -301,10 +294,6 @@ export class RvApproverService {
 
         if (input.approver_id) {
             employeeIds.push(input.approver_id)
-        }
-
-        if (input.approver_proxy_id) {
-            employeeIds.push(input.approver_proxy_id)
         }
 
         console.log('employeeIds', employeeIds)

@@ -59,14 +59,16 @@ export class RrService {
         },
         rr_items: {
             include: {
-                item: {
+                meqs_supplier_item: {
                     include: {
-                        item_type: true,
-                        unit: true,
+                        canvass_item: {
+                            include: {
+                                unit: true,
+                                brand: true
+                            }
+                        }
                     }
-                },
-                item_brand: true,
-                unit: true
+                }
             }
         }
     }
@@ -90,6 +92,7 @@ export class RrService {
 
         const rrNumber = await this.getLatestRrNumber()
         const today = moment().format('MM/DD/YYYY')
+        const createdBy = this.authUser.user.username
 
         // add the requisitioner as the 1st approver
         const requested_by_id = await this.getRequestedById(input.po_id)
@@ -101,24 +104,25 @@ export class RrService {
         })
 
         const data: Prisma.RRCreateInput = {
-            created_by: this.authUser.user.username,
+            created_by: createdBy,
             po: { connect: { id: input.po_id } },
             rr_number: rrNumber,
             rr_date: new Date(today),
             received_by_id: input.received_by_id,
             invoice_number: input.invoice_number,
             delivery_number: input.delivery_number ?? undefined,
-            notes: input.notes ?? undefined,
+            notes: input.notes,
             delivery_charge: input.delivery_charge,
             rr_approvers: {
                 create: input.approvers.map(i => {
 
                     const approver: Prisma.RRApproverCreateWithoutRrInput = {
                         approver_id: i.approver_id,
-                        approver_proxy_id: i.approver_proxy_id ?? undefined,
                         label: i.label,
                         order: i.order,
-                        status: APPROVAL_STATUS.PENDING
+                        notes: '',
+                        status: APPROVAL_STATUS.PENDING,
+                        created_by: createdBy
                     }
 
                     return approver
@@ -129,16 +133,9 @@ export class RrService {
                 create: input.rr_items.map(i => {
 
                     const item: Prisma.RRItemCreateWithoutRrInput = {
-                        item: i.item_id ? { connect: { id: i.item_id } } : undefined,
-                        item_brand: i.item_brand_id ? { connect: { id: i.item_brand_id } } : undefined,
-                        unit: i.unit_id ? { connect: { id: i.unit_id } } : undefined,
-                        item_class: i.item_class,
-                        quantity_delivered: i.quantity_delivered,
+                        meqs_supplier_item: { connect: { id: i.meqs_supplier_item_id } },
                         quantity_accepted: i.quantity_accepted,
-                        description: i.description,
-                        vat_type: i.vat_type,
-                        gross_price: i.gross_price,
-                        net_price: i.net_price
+                        created_by: createdBy
                     }
 
                     return item
@@ -259,8 +256,7 @@ export class RrService {
                 rr_number: {
                     contains: rrNumber.trim().toLowerCase(),
                     mode: 'insensitive',
-                },
-                is_deleted: false
+                }
             },
             take: 5,
         });
@@ -273,7 +269,7 @@ export class RrService {
         const approvers = await this.prisma.rRApprover.findMany({
             where: {
                 rr_id,
-                is_deleted: false
+                deleted_at: null
             }
         })
 
@@ -305,13 +301,11 @@ export class RrService {
 
         const data: Prisma.RRUpdateInput = {
             received_by_id: input.received_by_id ?? existingItem.received_by_id,
-            canceller_id: input.canceller_id ?? existingItem.canceller_id,
-            date_cancelled: input.canceller_id ? new Date() : existingItem.date_cancelled,
-            is_cancelled: input.canceller_id ? true : existingItem.is_cancelled,
             invoice_number: input.invoice_number ?? existingItem.invoice_number,
             delivery_number: input.delivery_number ?? existingItem.delivery_number,
             notes: input.notes ?? existingItem.notes,
             delivery_charge: input.delivery_charge ?? existingItem.delivery_charge,
+            updated_by: this.authUser.user.username
         }
 
         const updated = await this.prisma.rR.update({
@@ -326,21 +320,21 @@ export class RrService {
 
     }
 
-    async remove(id: string): Promise<WarehouseRemoveResponse> {
+    // async remove(id: string): Promise<WarehouseRemoveResponse> {
 
-        const existingItem = await this.findOne(id)
+    //     const existingItem = await this.findOne(id)
 
-        await this.prisma.rR.update({
-            where: { id },
-            data: { is_deleted: true }
-        })
+    //     await this.prisma.rR.update({
+    //         where: { id },
+    //         data: { is_deleted: true }
+    //     })
 
-        return {
-            success: true,
-            msg: "RR successfully deleted"
-        }
+    //     return {
+    //         success: true,
+    //         msg: "RR successfully deleted"
+    //     }
 
-    }
+    // }
 
     async isReferenced(poId: string): Promise<Boolean> {
 
@@ -441,7 +435,7 @@ export class RrService {
         const approvers = await this.prisma.pOApprover.findMany({
             where: {
                 po_id: input.po_id,
-                is_deleted: false
+                deleted_at: null
             }
         })
 
@@ -492,14 +486,6 @@ export class RrService {
             employeeIds.push(input.received_by_id)
         }
 
-        if (input.canceller_id) {
-            const isUserExist = await this.isUserExist(input.canceller_id, this.authUser)
-            if (!isUserExist) {
-                this.logger.error('canceller_id which also is user_id not found in table users')
-                throw new NotFoundException('Canceller does not exist')
-            }
-        }
-
         if (employeeIds.length > 0) {
             const isValidEmployeeIds = await this.areEmployeesExist(employeeIds, this.authUser)
 
@@ -533,44 +519,6 @@ export class RrService {
         const isNormalUser = (this.authUser.user.role === Role.USER)
 
         return isNormalUser
-    }
-
-    private async isUserExist(user_id: string, authUser: AuthUser): Promise<boolean> {
-
-        this.logger.log('isUserExist', user_id)
-
-        const query = `
-            query{
-                user(id: "${user_id}") {
-                    id
-                }
-            }
-        `;
-
-        const { data } = await firstValueFrom(
-            this.httpService.post(process.env.API_GATEWAY_URL,
-                { query },
-                {
-                    headers: {
-                        Authorization: authUser.authorization,
-                        'Content-Type': 'application/json'
-                    }
-                }
-            ).pipe(
-                catchError((error) => {
-                    throw error
-                }),
-            ),
-        );
-
-        console.log('data', data)
-
-        if (!data || !data.data || !data.data.user) {
-            console.log('User not found')
-            return false
-        }
-        return true
-
     }
 
     private async getRequestedById(poId: string) {

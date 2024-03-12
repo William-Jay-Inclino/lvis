@@ -11,6 +11,11 @@ export class CreateRvInput {
   @IsString()
   canvass_id: string;
 
+  @Field(() => String, { nullable: true })
+  @IsOptional()
+  @IsString()
+  classification_id: string;
+
   @Field(() => String)
   @IsNotEmpty()
   @IsString()
@@ -19,26 +24,20 @@ export class CreateRvInput {
   @Field(() => String, { nullable: true })
   @IsOptional()
   @IsString()
-  classification_id: string;
-
-  @Field(() => String, {nullable: true})
-  @IsOptional()
-  @IsString()
   work_order_no?: string | null;
 
-  @Field(() => String, {nullable: true})
-  @IsOptional()
-  @IsString()
-  notes?: string | null;
-
-  @Field(() => String, {nullable: true})
+  @Field(() => String, { nullable: true })
   @IsOptional()
   @Transform(({ value }) => new Date(value))
   @IsDate()
   work_order_date?: string | null;
 
+  @Field(() => String)
+  @IsString()
+  notes: string;
+
   @Field(() => [CreateRvApproverSubInput])
-  @IsNotEmpty({each: true})
+  @IsNotEmpty({ each: true })
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => CreateRvApproverSubInput)

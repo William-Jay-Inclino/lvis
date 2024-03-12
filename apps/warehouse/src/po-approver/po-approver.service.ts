@@ -8,7 +8,7 @@ import { AuthUser } from '../__common__/auth-user.entity';
 import { HttpService } from '@nestjs/axios';
 import { catchError, firstValueFrom } from 'rxjs';
 import { WarehouseRemoveResponse } from '../__common__/classes';
-import { getLastApprover, isValidApprovalStatus } from '../__common__/helpers';
+import { isValidApprovalStatus } from '../__common__/helpers';
 import { UpdatePoOrderResponse } from './entities/update-po-order-response.entity';
 
 @Injectable()
@@ -73,10 +73,6 @@ export class PoApproverService {
 
         employeeIds.push(input.approver_id)
 
-        if (input.approver_proxy_id) {
-            employeeIds.push(input.approver_proxy_id)
-        }
-
         if (employeeIds.length > 0) {
             const isValidEmployeeIds = await this.areEmployeesExist(employeeIds, this.authUser)
 
@@ -88,10 +84,11 @@ export class PoApproverService {
         const data: Prisma.POApproverCreateInput = {
             po: { connect: { id: input.po_id } },
             approver_id: input.approver_id,
-            approver_proxy_id: input.approver_proxy_id ?? null,
             label: input.label,
+            notes: '',
             order: input.order,
-            status: APPROVAL_STATUS.PENDING
+            status: APPROVAL_STATUS.PENDING,
+            created_by: this.authUser.user.username
         }
 
         const created = await this.prisma.pOApprover.create({
@@ -104,15 +101,15 @@ export class PoApproverService {
         return created
     }
 
-    async findAll(): Promise<POApprover[]> {
-        return await this.prisma.pOApprover.findMany({
-            include: this.includedFields,
-            where: { is_deleted: false },
-            orderBy: {
-                label: 'asc'
-            }
-        })
-    }
+    // async findAll(): Promise<POApprover[]> {
+    //     return await this.prisma.pOApprover.findMany({
+    //         include: this.includedFields,
+    //         where: { is_deleted: false },
+    //         orderBy: {
+    //             label: 'asc'
+    //         }
+    //     })
+    // }
 
     async findOne(id: string): Promise<POApprover | null> {
 
@@ -134,9 +131,8 @@ export class PoApproverService {
         this.logger.log('findByPoId()', poId)
 
         return await this.prisma.pOApprover.findMany({
-            // include: this.includedFields,
             where: {
-                is_deleted: false,
+                deleted_at: null,
                 po_id: poId
             },
             orderBy: {
@@ -149,7 +145,7 @@ export class PoApproverService {
         return await this.prisma.pOApprover.findMany({
             include: this.includedFields,
             where: {
-                is_deleted: false,
+                deleted_at: null,
                 po: {
                     po_number: poNumber
                 }
@@ -169,12 +165,12 @@ export class PoApproverService {
 
         const data: Prisma.POApproverUpdateInput = {
             approver_id: input.approver_id ?? existingItem.approver_id,
-            approver_proxy_id: input.approver_proxy_id ?? existingItem.approver_proxy_id,
             date_approval: input.date_approval ? new Date(input.date_approval) : existingItem.date_approval,
             notes: input.notes ?? existingItem.notes,
             status: input.status ?? existingItem.status,
             label: input.label ?? existingItem.label,
             order: input.order ?? existingItem.order,
+            updated_by: this.authUser.user.username
         }
 
         const updated = await this.prisma.pOApprover.update({
@@ -193,7 +189,10 @@ export class PoApproverService {
 
         await this.prisma.pOApprover.update({
             where: { id },
-            data: { is_deleted: true }
+            data: {
+                deleted_at: new Date(),
+                deleted_by: this.authUser.user.username
+            }
         })
 
         return {
@@ -245,7 +244,7 @@ export class PoApproverService {
             where: {
                 approver_id: employeeId,
                 status: APPROVAL_STATUS.PENDING,
-                is_deleted: false
+                deleted_at: null
             },
             orderBy: {
                 created_at: 'asc'
@@ -323,10 +322,6 @@ export class PoApproverService {
 
         if (input.approver_id) {
             employeeIds.push(input.approver_id)
-        }
-
-        if (input.approver_proxy_id) {
-            employeeIds.push(input.approver_proxy_id)
         }
 
         if (employeeIds.length > 0) {

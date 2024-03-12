@@ -93,10 +93,6 @@ export class RrApproverService {
 
         employeeIds.push(input.approver_id)
 
-        if (input.approver_proxy_id) {
-            employeeIds.push(input.approver_proxy_id)
-        }
-
         if (employeeIds.length > 0) {
             const isValidEmployeeIds = await this.areEmployeesExist(employeeIds, this.authUser)
 
@@ -108,10 +104,11 @@ export class RrApproverService {
         const data: Prisma.RRApproverCreateInput = {
             rr: { connect: { id: input.rr_id } },
             approver_id: input.approver_id,
-            approver_proxy_id: input.approver_proxy_id ?? null,
             label: input.label,
             order: input.order,
-            status: APPROVAL_STATUS.PENDING
+            status: APPROVAL_STATUS.PENDING,
+            notes: '',
+            created_by: this.authUser.user.username
         }
 
         const created = await this.prisma.rRApprover.create({
@@ -124,12 +121,12 @@ export class RrApproverService {
         return created
     }
 
-    async findAll(): Promise<RRApprover[]> {
-        return await this.prisma.rRApprover.findMany({
-            include: this.includedFields,
-            where: { is_deleted: false },
-        })
-    }
+    // async findAll(): Promise<RRApprover[]> {
+    //     return await this.prisma.rRApprover.findMany({
+    //         include: this.includedFields,
+    //         where: { is_deleted: false },
+    //     })
+    // }
 
     async findOne(id: string): Promise<RRApprover | null> {
 
@@ -153,7 +150,7 @@ export class RrApproverService {
         return await this.prisma.rRApprover.findMany({
             // include: this.includedFields,
             where: {
-                is_deleted: false,
+                deleted_at: null,
                 rr_id: rrId
             },
             orderBy: {
@@ -166,7 +163,7 @@ export class RrApproverService {
         return await this.prisma.rRApprover.findMany({
             include: this.includedFields,
             where: {
-                is_deleted: false,
+                deleted_at: null,
                 rr: {
                     rr_number: rrNumber
                 }
@@ -186,12 +183,12 @@ export class RrApproverService {
 
         const data: Prisma.RRApproverUpdateInput = {
             approver_id: input.approver_id ?? existingItem.approver_id,
-            approver_proxy_id: input.approver_proxy_id ?? existingItem.approver_proxy_id,
             date_approval: input.date_approval ? new Date(input.date_approval) : existingItem.date_approval,
             notes: input.notes ?? existingItem.notes,
             status: input.status ?? existingItem.status,
             label: input.label ?? existingItem.label,
             order: input.order ?? existingItem.order,
+            updated_by: this.authUser.user.username
         }
 
         const updated = await this.prisma.rRApprover.update({
@@ -218,7 +215,10 @@ export class RrApproverService {
 
         await this.prisma.rRApprover.update({
             where: { id },
-            data: { is_deleted: true }
+            data: {
+                deleted_at: new Date(),
+                deleted_by: this.authUser.user.username
+            }
         })
 
         return {
@@ -270,7 +270,7 @@ export class RrApproverService {
             where: {
                 approver_id: employeeId,
                 status: APPROVAL_STATUS.PENDING,
-                is_deleted: false
+                deleted_at: null
             },
             orderBy: {
                 created_at: 'asc'
@@ -347,10 +347,6 @@ export class RrApproverService {
         if (input.approver_id) {
             await this.validateEmployeeExistence(input.approver_id, 'Approver ID');
         }
-
-        if (input.approver_proxy_id) {
-            await this.validateEmployeeExistence(input.approver_proxy_id, 'Approver Proxy ID');
-        }
     }
 
     private async validateEmployeeExistence(employeeId: string, errorMessage: string): Promise<void> {
@@ -359,150 +355,5 @@ export class RrApproverService {
             throw new NotFoundException(`${errorMessage} not valid`);
         }
     }
-
-    // private async updateRRApprover(id: string, data: Prisma.RRApproverUpdateInput): Promise<RRApprover> {
-    //     const updated = await this.prisma.rRApprover.update({
-    //         data,
-    //         where: { id },
-    //         include: this.includedFields,
-    //     });
-    //     this.logger.log('Successfully updated RR Approver');
-    //     return updated;
-    // }
-
-    // private async handleApprovedStatus(id: string, data: Prisma.RRApproverUpdateInput, rrId: string): Promise<RRApprover> {
-    //     const approvers = await this.findByRrId(rrId);
-    //     const lastApprover = getLastApprover(approvers);
-
-    //     if (lastApprover.id !== id) {
-    //         return await this.updateRRApprover(id, data);
-    //     }
-
-    //     /*
-
-    //         if last approver approves:
-
-    //         query 1 = update rr approver data
-    //         query 2 = update rr status to APPROVED
-    //         query 3 = create item transactions for each rr item
-    //         query 4 = update item quantity (add quantity per item transaction)
-
-    //     */
-
-
-    //     const queries = await this.buildQueries(id, data, rrId);
-    //     const result = await this.prisma.$transaction(queries)
-
-    //     this.logger.log('Successfully updated RR Approver, RR status, created item transactions, updated item quantity per transaction');
-
-    //     return result[0];
-    // }
-
-    // // also update rr status to disapproved
-    // private async handleDisapprovedStatus(id: string, data: Prisma.RRApproverUpdateInput, rrId: string): Promise<RRApprover> {
-
-    //     const updateRrApprover = this.prisma.rRApprover.update({
-    //         data,
-    //         where: { id },
-    //         include: this.includedFields,
-    //     }); 
-
-    //     const [updatedRrApprover, updatedPoStatus] = await this.prisma.$transaction([
-    //         updateRrApprover,
-    //         this.prisma.rR.update({
-    //             data: { status: APPROVAL_STATUS.DISAPPROVED },
-    //             where: { id: rrId },
-    //         }),
-    //     ]);
-
-    //     this.logger.log('Successfully updated RR Approver');
-    //     return updatedRrApprover;
-    // }
-
-    // // also update rr status to pending
-    // private async handlePendingStatus(id: string, data: Prisma.RRApproverUpdateInput, rrId: string): Promise<RRApprover> {
-
-    //     const updateRrApprover = this.prisma.rRApprover.update({
-    //         data,
-    //         where: { id },
-    //         include: this.includedFields,
-    //     }); 
-
-    //     const [updatedRrApprover, updatedPoStatus] = await this.prisma.$transaction([
-    //         updateRrApprover,
-    //         this.prisma.rRApprover.update({
-    //             data: { status: APPROVAL_STATUS.PENDING },
-    //             where: { id: rrId },
-    //         }),
-    //     ]);
-
-    //     this.logger.log('Successfully updated RR Approver');
-    //     return updatedRrApprover;
-    // }
-
-    // private async buildQueries(id: string, data: Prisma.RRApproverUpdateInput, rrId: string): Promise<any[]> {
-    //     const queries = [];
-
-    //     const updateRrApproverQuery = this.prisma.rRApprover.update({
-    //         data,
-    //         where: { id },
-    //         include: this.includedFields,
-    //     });
-    //     queries.push(updateRrApproverQuery);
-
-    //     const updateRrStatusQuery = this.prisma.rR.update({
-    //         data: { status: APPROVAL_STATUS.APPROVED },
-    //         where: { id: rrId },
-    //     });
-    //     queries.push(updateRrStatusQuery);
-
-    //     const rrItems = await this.prisma.rRItem.findMany({ where: { rr_id: rrId } });
-
-    //     const itemTransactions: Prisma.ItemTransactionCreateManyInput[] = rrItems.map(i => {
-
-    //         const data: Prisma.ItemTransactionCreateManyInput = {
-    //             item_id: i.item_id,
-    //             rr_item_id: i.id,
-    //             type: ITEM_TRANSACTION_TYPE.STOCK_IN,
-    //             quantity: i.quantity_accepted,
-    //             price: i.net_price,
-    //         }
-
-    //         return data
-
-    //     })
-
-    //     const createItemTransactionsQuery = this.prisma.itemTransaction.createMany({
-    //         data: itemTransactions
-    //     })
-
-    //     queries.push(createItemTransactionsQuery)
-
-    //     const updateItemQuantityQueries = this.prepareUpdateItemQuantityQueries(itemTransactions);
-
-    //     queries.push(updateItemQuantityQueries);
-
-    //     return queries;
-    // }
-
-
-    // private async prepareUpdateItemQuantityQueries(itemTransactions: Prisma.ItemTransactionCreateManyInput[]): Promise<any[]> {
-    //     const queries = itemTransactions.map(async (transaction) => {
-    //         const item = await this.prisma.item.findUnique({ where: { id: transaction.item_id } });
-    //         if (!item) {
-    //             throw new NotFoundException(`Item not found with item_id: ${transaction.item_id}`);
-    //         }
-
-    //         const totalQuantity = item.quantity + transaction.quantity;
-
-    //         return this.prisma.item.update({
-    //             where: { id: item.id },
-    //             data: { quantity: totalQuantity },
-    //         });
-    //     });
-
-    //     return Promise.all(queries);
-    // }
-
 
 }

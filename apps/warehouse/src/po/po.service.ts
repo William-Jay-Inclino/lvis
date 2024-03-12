@@ -76,12 +76,14 @@ export class PoService {
 
         const poNumber = await this.getLatestPoNumber()
         const today = moment().format('MM/DD/YYYY')
+        const createdBy = this.authUser.user.username
 
         console.log('today', today)
 
         const data: Prisma.POCreateInput = {
             created_by: this.authUser.user.username,
             po_number: poNumber,
+            notes: '',
             meqs_supplier: {
                 connect: {
                     id: input.meqs_supplier_id
@@ -93,10 +95,10 @@ export class PoService {
 
                     const approver: Prisma.POApproverCreateWithoutPoInput = {
                         approver_id: i.approver_id,
-                        approver_proxy_id: i.approver_proxy_id ?? undefined,
                         label: i.label,
                         order: i.order,
-                        status: APPROVAL_STATUS.PENDING
+                        status: APPROVAL_STATUS.PENDING,
+                        created_by: createdBy
                     }
 
                     return approver
@@ -128,9 +130,7 @@ export class PoService {
 
         const data: Prisma.POUpdateInput = {
             notes: input.notes ?? existingItem.notes,
-            canceller_id: input.canceller_id ?? existingItem.canceller_id,
-            date_cancelled: input.canceller_id ? new Date() : existingItem.date_cancelled,
-            is_cancelled: input.canceller_id ? true : existingItem.is_cancelled
+            updated_by: this.authUser.user.username
         }
 
         const updated = await this.prisma.pO.update({
@@ -249,8 +249,7 @@ export class PoService {
                 po_number: {
                     contains: poNumber.trim().toLowerCase(),
                     mode: 'insensitive',
-                },
-                is_deleted: false
+                }
             },
             take: 5,
         });
@@ -263,7 +262,7 @@ export class PoService {
         const approvers = await this.prisma.pOApprover.findMany({
             where: {
                 po_id,
-                is_deleted: false
+                deleted_at: null
             }
         })
 
@@ -283,21 +282,21 @@ export class PoService {
 
     }
 
-    async remove(id: string): Promise<WarehouseRemoveResponse> {
+    // async remove(id: string): Promise<WarehouseRemoveResponse> {
 
-        const existingItem = await this.findOne(id)
+    //     const existingItem = await this.findOne(id)
 
-        await this.prisma.pO.update({
-            where: { id },
-            data: { is_deleted: true }
-        })
+    //     await this.prisma.pO.update({
+    //         where: { id },
+    //         data: { is_deleted: true }
+    //     })
 
-        return {
-            success: true,
-            msg: "PO successfully deleted"
-        }
+    //     return {
+    //         success: true,
+    //         msg: "PO successfully deleted"
+    //     }
 
-    }
+    // }
 
     async isReferenced(poId: string): Promise<Boolean> {
 
@@ -380,10 +379,7 @@ export class PoService {
 
         // VALIDATE EMPLOYEE IDS
 
-        const employeeIds: string[] = input.approvers.map(({ approver_id, approver_proxy_id }) => {
-            const ids = [approver_id, approver_proxy_id].filter(id => id !== null && id !== undefined);
-            return ids.join(',');
-        });
+        const employeeIds: string[] = input.approvers.map(({ approver_id }) => approver_id);
 
         this.logger.log('employeeIds', employeeIds)
 
@@ -422,14 +418,6 @@ export class PoService {
             }
         }
 
-        if (input.canceller_id) {
-            const isUserExist = await this.isUserExist(input.canceller_id, this.authUser)
-            if (!isUserExist) {
-                this.logger.error('canceller_id which also is user_id not found in table users')
-                throw new NotFoundException('Canceller does not exist')
-            }
-        }
-
         return true
     }
 
@@ -455,44 +443,6 @@ export class PoService {
         const isNormalUser = (this.authUser.user.role === Role.USER)
 
         return isNormalUser
-    }
-
-    private async isUserExist(user_id: string, authUser: AuthUser): Promise<boolean> {
-
-        this.logger.log('isUserExist', user_id)
-
-        const query = `
-            query{
-                user(id: "${user_id}") {
-                    id
-                }
-            }
-        `;
-
-        const { data } = await firstValueFrom(
-            this.httpService.post(process.env.API_GATEWAY_URL,
-                { query },
-                {
-                    headers: {
-                        Authorization: authUser.authorization,
-                        'Content-Type': 'application/json'
-                    }
-                }
-            ).pipe(
-                catchError((error) => {
-                    throw error
-                }),
-            ),
-        );
-
-        console.log('data', data)
-
-        if (!data || !data.data || !data.data.user) {
-            console.log('User not found')
-            return false
-        }
-        return true
-
     }
 
 }

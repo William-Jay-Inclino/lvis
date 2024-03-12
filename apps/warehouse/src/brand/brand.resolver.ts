@@ -44,7 +44,11 @@ export class BrandResolver {
   }
 
   @Mutation(() => WarehouseRemoveResponse)
-  removeBrand(@Args('id') id: string) {
+  removeBrand(
+    @Args('id') id: string,
+    @CurrentAuthUser() authUser: AuthUser
+  ) {
+    this.brandService.setAuthUser(authUser)
     return this.brandService.remove(id);
   }
 

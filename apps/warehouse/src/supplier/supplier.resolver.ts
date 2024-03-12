@@ -6,14 +6,20 @@ import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from '../__auth__/guards/gql-auth.guard';
 import { UpdateSupplierInput } from './dto/update-supplier.input';
 import { WarehouseRemoveResponse } from '../__common__/classes';
+import { AuthUser } from '../__common__/auth-user.entity';
+import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
 
 @UseGuards(GqlAuthGuard)
 @Resolver(() => Supplier)
 export class SupplierResolver {
-  constructor(private readonly supplierService: SupplierService) {}
+  constructor(private readonly supplierService: SupplierService) { }
 
   @Mutation(() => Supplier)
-  createSupplier(@Args('input') createSupplierInput: CreateSupplierInput) {
+  createSupplier(
+    @Args('input') createSupplierInput: CreateSupplierInput,
+    @CurrentAuthUser() authUser: AuthUser
+  ) {
+    this.supplierService.setAuthUser(authUser)
     return this.supplierService.create(createSupplierInput);
   }
 
@@ -30,13 +36,19 @@ export class SupplierResolver {
   @Mutation(() => Supplier)
   updateSupplier(
     @Args('id') id: string,
-    @Args('input') updateSupplierInput: UpdateSupplierInput
+    @Args('input') updateSupplierInput: UpdateSupplierInput,
+    @CurrentAuthUser() authUser: AuthUser
   ) {
+    this.supplierService.setAuthUser(authUser)
     return this.supplierService.update(id, updateSupplierInput);
   }
 
   @Mutation(() => WarehouseRemoveResponse)
-  removeSupplier(@Args('id') id: string) {
+  removeSupplier(
+    @Args('id') id: string,
+    @CurrentAuthUser() authUser: AuthUser
+  ) {
+    this.supplierService.setAuthUser(authUser)
     return this.supplierService.remove(id);
   }
 

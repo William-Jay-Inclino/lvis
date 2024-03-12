@@ -67,9 +67,11 @@ export class RvService {
         const rvNumber = await this.getLatestRvNumber()
         const today = moment().format('MM/DD/YYYY')
 
+        const createdBy = this.authUser.user.username
+
         // data to be inserted in database
         const data: Prisma.RVCreateInput = {
-            created_by: this.authUser.user.username,
+            created_by: createdBy,
             rv_number: rvNumber,
             date_requested: new Date(today),
             classification_id: input.classification_id ?? null,
@@ -82,10 +84,11 @@ export class RvService {
                 create: input.approvers.map(i => {
                     return {
                         approver_id: i.approver_id,
-                        approver_proxy_id: i.approver_proxy_id ?? undefined,
                         label: i.label,
                         order: i.order,
-                        status: APPROVAL_STATUS.PENDING
+                        notes: '',
+                        status: APPROVAL_STATUS.PENDING,
+                        created_by: createdBy
                     }
                 })
             }
@@ -119,9 +122,6 @@ export class RvService {
             work_order_no: input.work_order_no ?? existingItem.work_order_no,
             notes: input.notes ?? existingItem.notes,
             work_order_date: input.work_order_date ? new Date(input.work_order_date) : existingItem.work_order_date,
-            canceller_id: input.canceller_id ?? existingItem.canceller_id,
-            date_cancelled: input.canceller_id ? new Date() : existingItem.date_cancelled,
-            is_cancelled: input.canceller_id ? true : existingItem.is_cancelled
         }
 
         const updated = await this.prisma.rV.update({
@@ -133,68 +133,6 @@ export class RvService {
         this.logger.log('Successfully updated RV')
 
         return updated
-
-        // if no supervisor input or same supervisor then normal update
-        // if (!input.supervisor_id || (input.supervisor_id === existingItem.supervisor_id)) {
-
-        //     const updated = await this.prisma.rV.update({
-        //         data,
-        //         where: { id },
-        //         include: this.includedFields
-        //     })
-
-        //     this.logger.log('Successfully updated RV')
-
-        //     return updated
-
-        // }
-
-        // if supervisor is updated then delete the existing supervisor and create the new supervisor in rv approver table
-
-        // const updateRvQuery = this.prisma.rV.update({
-        //     data,
-        //     where: { id },
-        //     include: this.includedFields
-        // })
-
-        // const existingRvApprover = await this.prisma.rVApprover.findFirst({
-        //     where: {
-        //         rv_id: id,
-        //         approver_id: existingItem.supervisor_id
-        //     }
-        // })
-
-        // if (!existingRvApprover) {
-        //     throw new NotFoundException('RV Approver not found')
-        // }
-
-        // const deleteRvApproverQuery = this.prisma.rVApprover.delete({
-        //     where: {
-        //         id: existingRvApprover.id
-        //     }
-        // })
-
-        // const createRvApproverData: Prisma.RVApproverCreateInput = {
-        //     rv: { connect: { id } },
-        //     approver_id: input.supervisor_id,
-        //     status: APPROVAL_STATUS.PENDING,
-        //     label: existingRvApprover.label,
-        //     order: existingRvApprover.order
-        // }
-
-        // const createRvApproverQuery = this.prisma.rVApprover.create({
-        //     data: createRvApproverData
-        // })
-
-        // const result = await this.prisma.$transaction([
-        //     updateRvQuery,
-        //     deleteRvApproverQuery,
-        //     createRvApproverQuery
-        // ])
-
-        // this.logger.log('Successfully updated RV, deleted rv approver associated with previous supervisor, added approver referencing new supervisor')
-
-        // return result[0]
 
     }
 
@@ -285,52 +223,6 @@ export class RvService {
         };
     }
 
-    async remove(id: string): Promise<WarehouseRemoveResponse> {
-
-        const existingItem = await this.findOne(id)
-
-        await this.prisma.rV.update({
-            where: { id },
-            data: { is_deleted: true }
-        })
-
-        return {
-            success: true,
-            msg: "RV successfully deleted"
-        }
-
-    }
-
-    async forEmployeeSupervisor(employeeId: string): Promise<RV[]> {
-        return await this.prisma.rV.findMany({
-            where: {
-                supervisor_id: employeeId,
-                is_deleted: false
-            },
-            include: this.includedFields
-        })
-    }
-
-    async forEmployeeCanceller(employeeId: string): Promise<RV[]> {
-        return await this.prisma.rV.findMany({
-            where: {
-                canceller_id: employeeId,
-                is_deleted: false
-            },
-            include: this.includedFields
-        })
-    }
-
-    async forClassification(classificationId: string): Promise<RV[]> {
-        return await this.prisma.rV.findMany({
-            where: {
-                classification_id: classificationId,
-                is_deleted: false
-            },
-            include: this.includedFields
-        })
-    }
-
     async findRvNumbers(rvNumber: string): Promise<{ rv_number: string; }[]> {
 
         const arrayOfRvNumbers = await this.prisma.rV.findMany({
@@ -342,7 +234,6 @@ export class RvService {
                     contains: rvNumber.trim().toLowerCase(),
                     mode: 'insensitive',
                 },
-                is_deleted: false
             },
             take: 5,
         });
@@ -355,7 +246,7 @@ export class RvService {
         const approvers = await this.prisma.rVApprover.findMany({
             where: {
                 rv_id: id,
-                is_deleted: false
+                deleted_at: null
             }
         })
 
@@ -504,10 +395,7 @@ export class RvService {
             }
         }
 
-        const employeeIds: string[] = input.approvers.map(({ approver_id, approver_proxy_id }) => {
-            const ids = [approver_id, approver_proxy_id].filter(id => id !== null && id !== undefined);
-            return ids.join(',');
-        });
+        const employeeIds: string[] = input.approvers.map(({ approver_id }) => approver_id);
 
         this.logger.log('employeeIds', employeeIds)
 
@@ -574,14 +462,6 @@ export class RvService {
             employeeIds.push(input.supervisor_id)
         }
 
-        if (input.canceller_id) {
-            const isUserExist = await this.isUserExist(input.canceller_id, this.authUser)
-            if (!isUserExist) {
-                this.logger.error('canceller_id which also is user_id not found in table users')
-                throw new NotFoundException('Canceller does not exist')
-            }
-        }
-
         if (employeeIds.length > 0) {
 
             const isValidEmployeeIds = await this.areEmployeesExist(employeeIds, this.authUser)
@@ -618,44 +498,6 @@ export class RvService {
         const isNormalUser = (this.authUser.user.role === Role.USER)
 
         return isNormalUser
-    }
-
-    private async isUserExist(user_id: string, authUser: AuthUser): Promise<boolean> {
-
-        this.logger.log('isUserExist', user_id)
-
-        const query = `
-            query{
-                user(id: "${user_id}") {
-                    id
-                }
-            }
-        `;
-
-        const { data } = await firstValueFrom(
-            this.httpService.post(process.env.API_GATEWAY_URL,
-                { query },
-                {
-                    headers: {
-                        Authorization: authUser.authorization,
-                        'Content-Type': 'application/json'
-                    }
-                }
-            ).pipe(
-                catchError((error) => {
-                    throw error
-                }),
-            ),
-        );
-
-        console.log('data', data)
-
-        if (!data || !data.data || !data.data.user) {
-            console.log('User not found')
-            return false
-        }
-        return true
-
     }
 
 }

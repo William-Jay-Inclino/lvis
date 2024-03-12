@@ -4,24 +4,32 @@ import { UpdateMeqsSupplierInput } from './dto/update-meqs-supplier.input';
 import { PrismaService } from '../__prisma__/prisma.service';
 import { MEQSSupplier, Prisma } from 'apps/warehouse/prisma/generated/client';
 import { WarehouseRemoveResponse } from '../__common__/classes';
+import { AuthUser } from '../__common__/auth-user.entity';
 
 @Injectable()
 export class MeqsSupplierService {
 
     private readonly logger = new Logger(MeqsSupplierService.name)
+    private authUser: AuthUser
 
-    constructor(private readonly prisma: PrismaService) {}
+    constructor(private readonly prisma: PrismaService) { }
+    setAuthUser(authUser: AuthUser) {
+        this.authUser = authUser
+    }
 
     async create(input: CreateMeqsSupplierInput): Promise<MEQSSupplier> {
 
-        if(!this.canCreate(input)) {
+        if (!this.canCreate(input)) {
             throw new BadRequestException()
         }
-        
+
+        const createdBy = this.authUser.user.username
+
         const data: Prisma.MEQSSupplierCreateInput = {
             meqs: { connect: { id: input.meqs_id } },
             supplier: { connect: { id: input.supplier_id } },
             payment_terms: input.payment_terms,
+            created_by: createdBy
         }
 
         const created = await this.prisma.mEQSSupplier.create({
@@ -38,29 +46,29 @@ export class MeqsSupplierService {
 
     }
 
-    async findAll(): Promise<MEQSSupplier[]> {
+    // async findAll(): Promise<MEQSSupplier[]> {
 
-        return await this.prisma.mEQSSupplier.findMany( {
-            include: {
-                meqs: true,
-                supplier: true
-            },
-            where: { is_deleted: false }
-        } )
+    //     return await this.prisma.mEQSSupplier.findMany( {
+    //         include: {
+    //             meqs: true,
+    //             supplier: true
+    //         },
+    //         where: { is_deleted: false }
+    //     } )
 
-    }
+    // }
 
     async findOne(id: string): Promise<MEQSSupplier | null> {
 
-        const item = await this.prisma.mEQSSupplier.findUnique( {
+        const item = await this.prisma.mEQSSupplier.findUnique({
             include: {
                 meqs: true,
                 supplier: true
             },
             where: { id }
-        } )
+        })
 
-        if(!item){
+        if (!item) {
             throw new NotFoundException('MEQS Supplier not found')
         }
 
@@ -72,8 +80,11 @@ export class MeqsSupplierService {
 
         const existingItem = await this.findOne(id)
 
+        const updatedBy = this.authUser.user.username
+
         const data: Prisma.MEQSSupplierUpdateInput = {
             payment_terms: input.payment_terms ?? existingItem.payment_terms,
+            updated_by: updatedBy
         }
 
         const updated = await this.prisma.mEQSSupplier.update({
@@ -93,18 +104,18 @@ export class MeqsSupplierService {
 
     async remove(id: string): Promise<WarehouseRemoveResponse> {
 
-		const existingItem = await this.findOne(id)
+        const existingItem = await this.findOne(id)
 
-		await this.prisma.mEQSSupplier.delete( {
-			where: { id },
-		} )
+        await this.prisma.mEQSSupplier.delete({
+            where: { id },
+        })
 
-		return {
-			success: true,
-			msg: "MEQS Supplier successfully deleted"
-		}
+        return {
+            success: true,
+            msg: "MEQS Supplier successfully deleted"
+        }
 
-	}
+    }
 
     async canCreate(input: CreateMeqsSupplierInput): Promise<boolean> {
 
@@ -115,7 +126,7 @@ export class MeqsSupplierService {
             }
         })
 
-        if(existingMeqsSupplier) {
+        if (existingMeqsSupplier) {
             throw new BadRequestException(`Meqs ID: ${input.meqs_id} with Supplier ID: ${input.supplier_id} already referenced`)
         }
 
@@ -129,10 +140,10 @@ export class MeqsSupplierService {
             where: { meqs_supplier_id }
         })
 
-        if(meqs) return true  
+        if (meqs) return true
 
         return false
 
-    } 
+    }
 
 }

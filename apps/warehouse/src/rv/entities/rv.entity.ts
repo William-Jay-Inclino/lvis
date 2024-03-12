@@ -9,22 +9,16 @@ export class RV {
   id: string;
 
   @Field(() => String)
-  canvass_id: string;
+  rv_number: string;
 
-  @Field(() => Canvass)
-  canvass: Canvass;
+  @Field(() => String)
+  canvass_id: string;
 
   @Field(() => String, { nullable: true })
   classification_id: string | null;
 
   @Field(() => String)
   supervisor_id: string;
-
-  @Field(() => String, { nullable: true })
-  canceller_id: string | null;
-
-  @Field(() => String)
-  rv_number: string;
 
   @Field(() => String)
   date_requested: string;
@@ -35,20 +29,14 @@ export class RV {
   @Field(() => String, { nullable: true })
   work_order_date: string;
 
-  @Field(() => String, { nullable: true })
+  @Field(() => Date, { nullable: true })
+  date_cancelled: Date | null;
+
+  @Field(() => String)
   notes: string;
 
-  @Field(() => Boolean)
-  is_cancelled: boolean
-
-  @Field(() => Date)
-  created_at: Date;
-
-  @Field(() => Date)
-  updated_at: Date;
-
-  @Field(() => Boolean)
-  is_deleted: boolean;
+  @Field({ nullable: true })
+  cancelled_by: string | null;
 
   @Field()
   created_by: string;
@@ -57,12 +45,28 @@ export class RV {
   updated_by: string | null;
 
   @Field({ nullable: true })
-  deleted_by: string | null;
+  cancelled_at: string | null;
+
+  @Field(() => Date)
+  created_at: Date;
+
+  @Field(() => Date)
+  updated_at: Date;
+
+
+
+
+  // =============== derived / resolvers ===============
+
+  @Field(() => Canvass)
+  canvass: Canvass;
 
   @Field(() => MEQS, { nullable: true })
   meqs?: MEQS;
 
   @Field(() => [RVApprover])
   rv_approvers: RVApprover[]
+
+
 
 }

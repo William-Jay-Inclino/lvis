@@ -5,18 +5,13 @@ import { Transform } from 'class-transformer';
 
 @InputType()
 export class UpdateRrApproverInput extends PartialType(CreateRrApproverInput) {
-  
+
   @Field(() => String, { nullable: true })
   @IsOptional()
   @IsString()
   approver_id?: string;
 
   @Field(() => String, { nullable: true })
-  @IsOptional()
-  @IsString()
-  approver_proxy_id?: string;
-
-  @Field( () => String, { nullable: true })
   @IsOptional()
   @Transform(({ value }) => new Date(value))
   @IsDate()
@@ -27,7 +22,7 @@ export class UpdateRrApproverInput extends PartialType(CreateRrApproverInput) {
   @IsString()
   notes?: string;
 
-  @Field( () => Int, { nullable: true })
+  @Field(() => Int, { nullable: true })
   @IsOptional()
   @IsInt()
   status?: number;
@@ -37,7 +32,7 @@ export class UpdateRrApproverInput extends PartialType(CreateRrApproverInput) {
   @IsString()
   label?: string;
 
-  @Field( () => Int, { nullable: true })
+  @Field(() => Int, { nullable: true })
   @IsOptional()
   @IsInt()
   order?: number;

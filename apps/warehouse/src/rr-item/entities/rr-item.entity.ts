@@ -4,6 +4,8 @@ import { RR } from '../../rr/entities/rr.entity';
 import { Item } from '../../item/entities/item.entity';
 import { Brand } from '../../brand/entities/brand.entity';
 import { Unit } from '../../unit/entities/unit.entity';
+import { MeqsSupplierItem } from '../../meqs-supplier-item/entities/meqs-supplier-item.entity';
+import { ItemTransaction } from '../../item/entities/item-transaction.entity';
 
 @ObjectType()
 export class RrItem {
@@ -14,49 +16,35 @@ export class RrItem {
   @Field()
   rr_id: string
 
-  @Field(() => RR, { nullable: true })
-  rr: RR
-
-  @Field({ nullable: true })
-  item_id: string | null
-
-  @Field(() => Item, { nullable: true })
-  item: Item
-
-  @Field({ nullable: true })
-  item_brand_id: string | null
-
-  @Field(() => Brand, { nullable: true })
-  item_brand: Brand
-
-  @Field({ nullable: true })
-  unit_id: string | null
-
-  @Field(() => Unit, { nullable: true })
-  unit: Unit
-
-  @Field(() => Int)
-  item_class: ITEM_CLASS
-
-  @Field(() => Int)
-  quantity_delivered: number
+  @Field()
+  meqs_supplier_item_id: string
 
   @Field(() => Int)
   quantity_accepted: number
 
   @Field()
-  description: string
+  created_by: string;
 
-  @Field(() => Int)
-  vat_type: VAT_TYPE
+  @Field({ nullable: true })
+  updated_by: string | null;
 
-  @Field(() => Float)
-  gross_price: number
+  @Field(() => Date)
+  created_at: Date;
 
-  @Field(() => Float)
-  net_price: number
+  @Field(() => Date)
+  updated_at: Date;
 
-  @Field(() => Float)
-  vat_amount: number
+
+
+  // =============== derived / resolvers ===============
+
+  @Field(() => RR)
+  rr: RR
+
+  @Field(() => MeqsSupplierItem)
+  meqs_supplier_item: MeqsSupplierItem
+
+  @Field(() => ItemTransaction)
+  item_transaction: ItemTransaction
 
 }

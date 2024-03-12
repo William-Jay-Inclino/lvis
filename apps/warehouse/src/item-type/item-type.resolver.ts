@@ -40,7 +40,11 @@ export class ItemTypeResolver {
   }
 
   @Mutation(() => ItemType)
-  removeItemType(@Args('id') id: string) {
+  removeItemType(
+    @Args('id') id: string,
+    @CurrentAuthUser() authUser: AuthUser
+  ) {
+    this.itemTypeService.setAuthUser(authUser)
     return this.itemTypeService.remove(id);
   }
 }

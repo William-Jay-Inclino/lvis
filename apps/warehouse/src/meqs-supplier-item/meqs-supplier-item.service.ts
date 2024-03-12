@@ -4,13 +4,19 @@ import { UpdateMeqsSupplierItemInput } from './dto/update-meqs-supplier-item.inp
 import { PrismaService } from '../__prisma__/prisma.service';
 import { MEQSSupplierItem, Prisma } from 'apps/warehouse/prisma/generated/client';
 import { WarehouseRemoveResponse } from '../__common__/classes';
+import { AuthUser } from '../__common__/auth-user.entity';
 
 @Injectable()
 export class MeqsSupplierItemService {
 
 	private readonly logger = new Logger(MeqsSupplierItemService.name)
+	private authUser: AuthUser
 
-	constructor(private readonly prisma: PrismaService) {}
+	constructor(private readonly prisma: PrismaService) { }
+
+	setAuthUser(authUser: AuthUser) {
+		this.authUser = authUser
+	}
 
 	async create(input: CreateMeqsSupplierItemInput): Promise<MEQSSupplierItem> {
 
@@ -19,7 +25,9 @@ export class MeqsSupplierItemService {
 			canvass_item: { connect: { id: input.canvass_item_id } },
 			price: input.price,
 			notes: input.notes ?? null,
-			is_awarded: input.is_awarded
+			is_awarded: input.is_awarded,
+			vat_type: input.vat_type,
+			created_by: this.authUser.user.username
 		}
 
 		const created = await this.prisma.mEQSSupplierItem.create({
@@ -36,17 +44,17 @@ export class MeqsSupplierItemService {
 
 	}
 
-	async findAll(): Promise<MEQSSupplierItem[]> {
-		return await this.prisma.mEQSSupplierItem.findMany({
-			include: {
-				meqs_supplier: true,
-				canvass_item: true
-			},
-			where: {
-				is_deleted: false
-			}
-		})
-	}
+	// async findAll(): Promise<MEQSSupplierItem[]> {
+	// 	return await this.prisma.mEQSSupplierItem.findMany({
+	// 		include: {
+	// 			meqs_supplier: true,
+	// 			canvass_item: true
+	// 		},
+	// 		where: {
+	// 			is_deleted: false
+	// 		}
+	// 	})
+	// }
 
 	async findOne(id: string): Promise<MEQSSupplierItem | null> {
 		const item = await this.prisma.mEQSSupplierItem.findUnique({
@@ -57,31 +65,33 @@ export class MeqsSupplierItemService {
 			where: { id }
 		})
 
-		if(!item){
-            throw new NotFoundException('MEQS Supplier Item not found')
-        }
+		if (!item) {
+			throw new NotFoundException('MEQS Supplier Item not found')
+		}
 
-        return item
+		return item
 	}
 
 	async update(id: string, input: UpdateMeqsSupplierItemInput): Promise<MEQSSupplierItem> {
-		
+
 		const existingItem = await this.findOne(id)
 
 		const data: Prisma.MEQSSupplierItemUpdateInput = {
 			price: input.price ?? existingItem.price,
 			notes: input.notes ?? existingItem.notes,
-			is_awarded: input.is_awarded ?? existingItem.is_awarded
+			is_awarded: input.is_awarded ?? existingItem.is_awarded,
+			vat_type: input.vat_type ?? existingItem.vat_type,
+			updated_by: this.authUser.user.username
 		}
 
-		const updated = await this.prisma.mEQSSupplierItem.update({ 
+		const updated = await this.prisma.mEQSSupplierItem.update({
 			data,
 			where: { id },
 			include: {
 				meqs_supplier: true,
 				canvass_item: true
 			}
-		 })
+		})
 
 		this.logger.log('Successfully updated MEQS Supplier Item')
 
@@ -89,13 +99,13 @@ export class MeqsSupplierItemService {
 
 	}
 
-    async remove(id: string): Promise<WarehouseRemoveResponse> {
+	async remove(id: string): Promise<WarehouseRemoveResponse> {
 
 		const existingItem = await this.findOne(id)
 
-		await this.prisma.mEQSSupplierItem.delete( {
+		await this.prisma.mEQSSupplierItem.delete({
 			where: { id },
-		} )
+		})
 
 		return {
 			success: true,
@@ -103,5 +113,5 @@ export class MeqsSupplierItemService {
 		}
 
 	}
-	
+
 }

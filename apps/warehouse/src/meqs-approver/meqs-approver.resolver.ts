@@ -62,7 +62,11 @@ export class MeqsApproverResolver {
   }
 
   @Mutation(() => WarehouseRemoveResponse)
-  removeMeqsApprover(@Args('id') id: string) {
+  removeMeqsApprover(
+    @Args('id') id: string,
+    @CurrentAuthUser() authUser: AuthUser
+  ) {
+    this.meqsApproverService.setAuthUser(authUser)
     return this.meqsApproverService.remove(id);
   }
 

@@ -21,10 +21,10 @@ export class CreateMeqsSupplierItemInput {
   @Min(0.01, { message: 'Price must be greater than 0' })
   price: number;
 
-  @Field(() => String, { nullable: true })
-  @IsOptional()
+  @Field(() => String)
+  @IsNotEmpty()
   @IsString()
-  notes?: string | null;
+  notes: string
 
   @Field(() => Boolean)
   @IsBoolean()

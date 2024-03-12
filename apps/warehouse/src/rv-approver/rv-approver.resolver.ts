@@ -1,4 +1,4 @@
-import { Resolver, Query, Mutation, Args, ResolveField, Parent, Int } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, ResolveField, Parent } from '@nestjs/graphql';
 import { RvApproverService } from './rv-approver.service';
 import { RVApprover } from './entities/rv-approver.entity';
 import { CreateRvApproverInput } from './dto/create-rv-approver.input';
@@ -9,14 +9,13 @@ import { UseGuards } from '@nestjs/common';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
 import { Employee } from '../__employee__/entities/employee.entity';
-import { RV } from '../rv/entities/rv.entity';
 import { UpdateRVOrderResponse } from './entities/update-rv-order-response.entity';
 import { UpdateRVOrderInput } from './dto/update-rv-order.input'
 
 @UseGuards(GqlAuthGuard)
 @Resolver(() => RVApprover)
 export class RvApproverResolver {
-  constructor(private readonly rvApproverService: RvApproverService) {}
+  constructor(private readonly rvApproverService: RvApproverService) { }
 
   @Mutation(() => RVApprover)
   createRvApprover(
@@ -29,13 +28,13 @@ export class RvApproverResolver {
 
   @Query(() => [RVApprover])
   rv_approvers(
-    @Args('rv_id', {nullable: true}) rv_id?: string,
-    @Args('rv_number', {nullable: true}) rv_number?: string,
+    @Args('rv_id', { nullable: true }) rv_id?: string,
+    @Args('rv_number', { nullable: true }) rv_number?: string,
   ) {
-    if(rv_id){
+    if (rv_id) {
       return this.rvApproverService.findByRvId(rv_id)
     }
-    if(rv_number){
+    if (rv_number) {
       return this.rvApproverService.findByRvNumber(rv_number)
     }
   }
@@ -56,29 +55,24 @@ export class RvApproverResolver {
   }
 
   @Mutation(() => UpdateRVOrderResponse)
-  async updateRVApproverOrder(@Args('inputs', { type: () => [UpdateRVOrderInput] }) inputs: UpdateRVOrderInput[]){
+  async updateRVApproverOrder(@Args('inputs', { type: () => [UpdateRVOrderInput] }) inputs: UpdateRVOrderInput[]) {
 
     return await this.rvApproverService.updateManyOrders(inputs);
 
   }
 
   @Mutation(() => WarehouseRemoveResponse)
-  removeRvApprover(@Args('id') id: string) {
+  removeRvApprover(
+    @Args('id') id: string,
+    @CurrentAuthUser() authUser: AuthUser
+  ) {
+    this.rvApproverService.setAuthUser(authUser)
     return this.rvApproverService.remove(id);
   }
 
-  @ResolveField( () => Employee)
+  @ResolveField(() => Employee)
   approver(@Parent() rvApprover: RVApprover): any {
     return { __typename: 'Employee', id: rvApprover.approver_id }
-  }
-
-  @ResolveField( () => Employee, { nullable: true })
-  approver_proxy(@Parent() rvApprover: RVApprover): any {
-
-    if(!rvApprover.approver_proxy_id){
-      return null
-    }
-    return { __typename: 'Employee', id: rvApprover.approver_proxy_id }
   }
 
 }

@@ -15,7 +15,7 @@ import { POApprover } from './entities/po-approver.entity';
 @UseGuards(GqlAuthGuard)
 @Resolver(() => POApprover)
 export class PoApproverResolver {
-  constructor(private readonly poApproverService: PoApproverService) {}
+  constructor(private readonly poApproverService: PoApproverService) { }
 
   @Mutation(() => POApprover)
   createPoApprover(
@@ -28,13 +28,13 @@ export class PoApproverResolver {
 
   @Query(() => [POApprover])
   po_approvers(
-    @Args('po_id', {nullable: true}) po_id?: string,
-    @Args('po_number', {nullable: true}) po_number?: string,
+    @Args('po_id', { nullable: true }) po_id?: string,
+    @Args('po_number', { nullable: true }) po_number?: string,
   ) {
-    if(po_id){
+    if (po_id) {
       return this.poApproverService.findByPoId(po_id)
     }
-    if(po_number){
+    if (po_number) {
       return this.poApproverService.findByPoNumber(po_number)
     }
   }
@@ -50,34 +50,38 @@ export class PoApproverResolver {
     @Args('input') updatePoApproverInput: UpdatePoApproverInput,
     @CurrentAuthUser() authUser: AuthUser
   ) {
-    this.poApproverService.setAuthUser(authUser)   
+    this.poApproverService.setAuthUser(authUser)
     return this.poApproverService.update(id, updatePoApproverInput);
   }
 
   @Mutation(() => UpdatePoOrderResponse)
-  async updatePOApproverOrder(@Args('inputs', { type: () => [UpdatePoOrderInput] }) inputs: UpdatePoOrderInput[]){
+  async updatePOApproverOrder(@Args('inputs', { type: () => [UpdatePoOrderInput] }) inputs: UpdatePoOrderInput[]) {
 
     return await this.poApproverService.updateManyOrders(inputs);
 
   }
 
   @Mutation(() => WarehouseRemoveResponse)
-  removePoApprover(@Args('id') id: string) {
+  removePoApprover(
+    @Args('id') id: string,
+    @CurrentAuthUser() authUser: AuthUser
+  ) {
+    this.poApproverService.setAuthUser(authUser)
     return this.poApproverService.remove(id);
   }
 
-  @ResolveField( () => Employee)
+  @ResolveField(() => Employee)
   approver(@Parent() poApprover: POApprover): any {
     return { __typename: 'Employee', id: poApprover.approver_id }
   }
 
-  @ResolveField( () => Employee, { nullable: true })
-  approver_proxy(@Parent() poApprover: POApprover): any {
+  // @ResolveField( () => Employee, { nullable: true })
+  // approver_proxy(@Parent() poApprover: POApprover): any {
 
-    if(!poApprover.approver_proxy_id){
-      return null
-    }
-    return { __typename: 'Employee', id: poApprover.approver_proxy_id }
-  }
+  //   if(!poApprover.approver_proxy_id){
+  //     return null
+  //   }
+  //   return { __typename: 'Employee', id: poApprover.approver_proxy_id }
+  // }
 
 }

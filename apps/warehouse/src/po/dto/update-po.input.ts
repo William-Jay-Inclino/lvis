@@ -4,11 +4,6 @@ import { InputType, Field } from '@nestjs/graphql';
 @InputType()
 export class UpdatePoInput {
 
-  @Field(() => String, {nullable: true})
-  @IsString()
-  @IsOptional()
-  canceller_id?: string;
-
   @Field(() => String, { nullable: true })
   @IsOptional()
   @IsString()

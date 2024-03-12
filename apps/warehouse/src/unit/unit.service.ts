@@ -5,38 +5,45 @@ import { Prisma, Unit } from 'apps/warehouse/prisma/generated/client';
 import { UpdateUnitInput } from './dto/update-unit.input';
 import { WarehouseRemoveResponse } from '../__common__/classes';
 import { UnitsResponse } from './entities/units-response.entity';
+import { AuthUser } from '../__common__/auth-user.entity';
 
 @Injectable()
 export class UnitService {
 
-  private readonly logger = new Logger(UnitService.name);
+	private readonly logger = new Logger(UnitService.name);
+	private authUser: AuthUser
 
-	constructor(private readonly prisma: PrismaService) {}
+	constructor(private readonly prisma: PrismaService) { }
 
-    async create(input: CreateUnitInput): Promise<Unit> {
+	setAuthUser(authUser: AuthUser) {
+		this.authUser = authUser
+	}
 
-        const data: Prisma.UnitCreateInput = {
-            name: input.name
-        }
+	async create(input: CreateUnitInput): Promise<Unit> {
 
-        const created = await this.prisma.unit.create({
-            data
-        })
+		const data: Prisma.UnitCreateInput = {
+			name: input.name,
+			created_by: this.authUser.user.username
+		}
 
-        this.logger.log('Successfully created Unit')
+		const created = await this.prisma.unit.create({
+			data
+		})
 
-        return created 
+		this.logger.log('Successfully created Unit')
 
-    }
+		return created
 
-    async findAll(page: number, pageSize: number, searchField?: string, searchValue?: string): Promise<UnitsResponse> {
+	}
+
+	async findAll(page: number, pageSize: number, searchField?: string, searchValue?: string): Promise<UnitsResponse> {
 
 		const skip = (page - 1) * pageSize;
 
 		let whereCondition: any = {
 			is_deleted: false,
 		};
-	  
+
 		if (searchField && searchValue !== undefined) {
 			whereCondition = {
 				[searchField]: {
@@ -48,14 +55,14 @@ export class UnitService {
 
 		console.log('whereCondition', whereCondition)
 
-		const items = await this.prisma.unit.findMany( {
+		const items = await this.prisma.unit.findMany({
 			orderBy: {
 				name: 'asc'
 			},
 			skip,
 			take: pageSize,
 			where: whereCondition
-		} )
+		})
 
 		const totalItems = await this.prisma.unit.count({
 			where: whereCondition
@@ -78,43 +85,47 @@ export class UnitService {
 
 		console.log('item', item, id)
 
-		if(!item){
-            throw new NotFoundException('Unit not found')
-        }
+		if (!item) {
+			throw new NotFoundException('Unit not found')
+		}
 
-        return item
+		return item
 	}
 
-    async update(id: string, input: UpdateUnitInput): Promise<Unit> {
+	async update(id: string, input: UpdateUnitInput): Promise<Unit> {
 
 		const existingItem = await this.findOne(id)
 
 		const data: Prisma.UnitUpdateInput = {
-			name: input.name ?? existingItem.name
+			name: input.name ?? existingItem.name,
+			updated_by: this.authUser.user.username
 		}
 
-		
-		const updated = await this.prisma.unit.update({ 
+
+		const updated = await this.prisma.unit.update({
 			data,
 			where: {
 				id
 			}
 		})
-		
+
 		this.logger.log('Successfully updated Unit')
 
 		return updated
 
 	}
 
-    async remove(id: string): Promise<WarehouseRemoveResponse> {
+	async remove(id: string): Promise<WarehouseRemoveResponse> {
 
 		const existingItem = await this.findOne(id)
 
-		await this.prisma.unit.update( {
+		await this.prisma.unit.update({
 			where: { id },
-			data: { is_deleted: true }
-		} )
+			data: {
+				deleted_at: new Date(),
+				deleted_by: this.authUser.user.username
+			}
+		})
 
 		return {
 			success: true,

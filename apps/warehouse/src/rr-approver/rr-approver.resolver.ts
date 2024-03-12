@@ -1,4 +1,4 @@
-import { Resolver, Query, Mutation, Args, Int, ResolveField, Parent } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, ResolveField, Parent } from '@nestjs/graphql';
 import { RrApproverService } from './rr-approver.service';
 import { RrApprover } from './entities/rr-approver.entity';
 import { CreateRrApproverInput } from './dto/create-rr-approver.input';
@@ -14,21 +14,21 @@ import { WarehouseRemoveResponse } from '../__common__/classes';
 @UseGuards(GqlAuthGuard)
 @Resolver(() => RrApprover)
 export class RrApproverResolver {
-  constructor(private readonly rrApproverService: RrApproverService) {}
+  constructor(private readonly rrApproverService: RrApproverService) { }
 
   @Mutation(() => RrApprover)
   createRrApprover(
     @Args('input') createRrApproverInput: CreateRrApproverInput,
     @CurrentAuthUser() authUser: AuthUser
   ) {
-    this.rrApproverService.setAuthUser(authUser)   
+    this.rrApproverService.setAuthUser(authUser)
     return this.rrApproverService.create(createRrApproverInput);
   }
 
-  @Query(() => [RrApprover])
-  rr_approvers() {
-    return this.rrApproverService.findAll();
-  }
+  // @Query(() => [RrApprover])
+  // rr_approvers() {
+  //   return this.rrApproverService.findAll();
+  // }
 
   @Query(() => RrApprover)
   rr_approver(@Args('id') id: string) {
@@ -41,34 +41,29 @@ export class RrApproverResolver {
     @Args('input') updateRrApproverInput: UpdateRrApproverInput,
     @CurrentAuthUser() authUser: AuthUser
   ) {
-    this.rrApproverService.setAuthUser(authUser)   
+    this.rrApproverService.setAuthUser(authUser)
     return this.rrApproverService.update(id, updateRrApproverInput);
   }
 
   @Mutation(() => UpdateRrOrderResponse)
-  async updateRRApproverOrder(@Args('inputs', { type: () => [UpdateRrOrderInput] }) inputs: UpdateRrOrderInput[]){
+  async updateRRApproverOrder(@Args('inputs', { type: () => [UpdateRrOrderInput] }) inputs: UpdateRrOrderInput[]) {
 
     return await this.rrApproverService.updateManyOrders(inputs);
 
   }
 
   @Mutation(() => WarehouseRemoveResponse)
-  removeRrApprover(@Args('id') id: string) {
+  removeRrApprover(
+    @Args('id') id: string,
+    @CurrentAuthUser() authUser: AuthUser
+  ) {
+    this.rrApproverService.setAuthUser(authUser)
     return this.rrApproverService.remove(id);
   }
 
-  @ResolveField( () => Employee)
+  @ResolveField(() => Employee)
   approver(@Parent() rrApprover: RrApprover): any {
     return { __typename: 'Employee', id: rrApprover.approver_id }
-  }
-
-  @ResolveField( () => Employee, { nullable: true })
-  approver_proxy(@Parent() rrApprover: RrApprover): any {
-
-    if(!rrApprover.approver_proxy_id){
-      return null
-    }
-    return { __typename: 'Employee', id: rrApprover.approver_proxy_id }
   }
 
 

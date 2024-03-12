@@ -4,37 +4,44 @@ import { PrismaService } from '../__prisma__/prisma.service';
 import { Brand, Prisma, Vehicle } from 'apps/warehouse/prisma/generated/client';
 import { UpdateVehicleInput } from './dto/update-vehicle.input';
 import { WarehouseRemoveResponse } from '../__common__/classes';
+import { AuthUser } from '../__common__/auth-user.entity';
 
 @Injectable()
 export class VehicleService {
 
-  private readonly logger = new Logger(VehicleService.name);
+	private readonly logger = new Logger(VehicleService.name);
+	private authUser: AuthUser
 
-	constructor(private readonly prisma: PrismaService) {}
+	constructor(private readonly prisma: PrismaService) { }
 
-    async create(input: CreateVehicleInput): Promise<Vehicle> {
+	setAuthUser(authUser: AuthUser) {
+		this.authUser = authUser
+	}
 
-        const data: Prisma.VehicleCreateInput = {
-            name: input.name,
-            plate_number: input.plate_number,
-        }
+	async create(input: CreateVehicleInput): Promise<Vehicle> {
 
-        const created = await this.prisma.vehicle.create({
-            data
-        })
+		const data: Prisma.VehicleCreateInput = {
+			name: input.name,
+			plate_number: input.plate_number,
+			created_by: this.authUser.user.username
+		}
 
-        this.logger.log('Successfully created Vehicle')
+		const created = await this.prisma.vehicle.create({
+			data
+		})
 
-        return created 
+		this.logger.log('Successfully created Vehicle')
 
-    }
+		return created
 
-    async findAll(): Promise<Vehicle[]> {
-		return await this.prisma.vehicle.findMany( {
+	}
+
+	async findAll(): Promise<Vehicle[]> {
+		return await this.prisma.vehicle.findMany({
 			where: {
-				is_deleted: false 
+				deleted_at: null
 			}
-		} )
+		})
 	}
 
 	async findOne(id: string): Promise<Vehicle | null> {
@@ -45,44 +52,48 @@ export class VehicleService {
 
 		console.log('item', item, id)
 
-		if(!item){
-            throw new NotFoundException('Vehicle not found')
-        }
+		if (!item) {
+			throw new NotFoundException('Vehicle not found')
+		}
 
-        return item
+		return item
 	}
 
-    async update(id: string, input: UpdateVehicleInput): Promise<Vehicle> {
+	async update(id: string, input: UpdateVehicleInput): Promise<Vehicle> {
 
 		const existingItem = await this.findOne(id)
 
 		const data: Prisma.VehicleUpdateInput = {
 			name: input.name ?? existingItem.name,
-			plate_number: input.plate_number ?? existingItem.plate_number
+			plate_number: input.plate_number ?? existingItem.plate_number,
+			updated_by: this.authUser.user.username
 		}
 
-		
-		const updated = await this.prisma.vehicle.update({ 
+
+		const updated = await this.prisma.vehicle.update({
 			data,
 			where: {
 				id
 			}
 		})
-		
+
 		this.logger.log('Successfully updated Vehicle')
 
 		return updated
 
 	}
 
-    async remove(id: string): Promise<WarehouseRemoveResponse> {
+	async remove(id: string): Promise<WarehouseRemoveResponse> {
 
 		const existingItem = await this.findOne(id)
 
-		await this.prisma.vehicle.update( {
+		await this.prisma.vehicle.update({
 			where: { id },
-			data: { is_deleted: true }
-		} )
+			data: {
+				deleted_at: new Date(),
+				deleted_by: this.authUser.user.username
+			}
+		})
 
 		return {
 			success: true,

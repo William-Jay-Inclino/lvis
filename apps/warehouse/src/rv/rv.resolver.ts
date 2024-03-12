@@ -16,13 +16,13 @@ import { RVsResponse } from './entities/rvs-response.entity';
 import { APPROVAL_STATUS } from '../__common__/types';
 
 @UseGuards(GqlAuthGuard)
-@Resolver( () => RV)
+@Resolver(() => RV)
 export class RvResolver {
 
     constructor(
         private readonly rvService: RvService,
         private readonly rvApproverService: RvApproverService
-    ) {}
+    ) { }
 
     @Mutation(() => RV)
     async createRv(
@@ -35,78 +35,70 @@ export class RvResolver {
 
     @Query(() => RVsResponse)
     rvs(
-      @Args('page') page: number,
-      @Args('pageSize') pageSize: number,
-      @Args('date_requested', {nullable: true}) date_requested?: string,
-      @Args('requested_by_id', {nullable: true}) requested_by_id?: string,
+        @Args('page') page: number,
+        @Args('pageSize') pageSize: number,
+        @Args('date_requested', { nullable: true }) date_requested?: string,
+        @Args('requested_by_id', { nullable: true }) requested_by_id?: string,
     ) {
         return this.rvService.findAll(page, pageSize, date_requested, requested_by_id);
     }
 
     @Query(() => [RvNumber])
     rv_numbers(
-      @Args('rv_number') rv_number: string
+        @Args('rv_number') rv_number: string
     ): Promise<{ rv_number: string }[]> {
-      return this.rvService.findRvNumbers(rv_number);
+        return this.rvService.findRvNumbers(rv_number);
     }
 
     @Query(() => RV)
     rv(
-        @Args('id', {nullable: true}) id?: string,
-        @Args('rv_number', {nullable: true}) rv_number?: string,
-        @Args('rc_number', {nullable: true}) rc_number?: string
+        @Args('id', { nullable: true }) id?: string,
+        @Args('rv_number', { nullable: true }) rv_number?: string,
+        @Args('rc_number', { nullable: true }) rc_number?: string
     ) {
-        if(id){
+        if (id) {
             return this.rvService.findOne(id);
         }
-        if(rv_number){
+        if (rv_number) {
             return this.rvService.findByRvNumber(rv_number)
         }
-        if(rc_number){
+        if (rc_number) {
             return this.rvService.findByRcNumber(rc_number)
         }
     }
 
     @Mutation(() => RV)
     async updateRv(
-      @Args('id') id: string,
-      @Args('input') updateRvInput: UpdateRvInput,
-      @CurrentAuthUser() authUser: AuthUser
+        @Args('id') id: string,
+        @Args('input') updateRvInput: UpdateRvInput,
+        @CurrentAuthUser() authUser: AuthUser
     ) {
         this.rvService.setAuthUser(authUser)
         return await this.rvService.update(id, updateRvInput);
     }
 
-    @ResolveField( () => Employee)
+    @ResolveField(() => Employee)
     supervisor(@Parent() rv: RV): any {
         return { __typename: 'Employee', id: rv.supervisor_id }
     }
 
-    @ResolveField( () => Employee, { nullable: true })
-    canceller(@Parent() rv: RV): any {
-        if(!rv.canceller_id){
-            return null
-        }
-        return { __typename: 'Employee', id: rv.canceller_id }
-    }
-
-    @ResolveField( () => Classification, { nullable: true })
+    @ResolveField(() => Classification, { nullable: true })
     classification(@Parent() rv: RV): any {
-        if(!rv.classification_id){
+        if (!rv.classification_id) {
             return null
         }
         return { __typename: 'Classification', id: rv.classification_id }
     }
 
-    @ResolveField( () => [RVApprover])
+    @ResolveField(() => [RVApprover])
     rv_approvers(@Parent() rv: RV): any {
         return this.rvApproverService.findByRvId(rv.id)
     }
-    
-    @ResolveField( () => Int)
+
+    @ResolveField(() => Int)
     async status(@Parent() rv: RV) {
-        
-        if(rv.is_cancelled) {
+
+        if (rv.cancelled_at) {
             return APPROVAL_STATUS.CANCELLED
         }
 
@@ -114,7 +106,7 @@ export class RvResolver {
 
     }
 
-    @ResolveField( () => Boolean)
+    @ResolveField(() => Boolean)
     async is_referenced(@Parent() rv: RV) {
         return await this.rvService.isReferenced(rv.id)
     }
