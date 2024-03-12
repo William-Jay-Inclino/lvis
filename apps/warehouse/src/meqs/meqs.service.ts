@@ -101,15 +101,17 @@ export class MeqsService {
 
         const meqsNumber = await this.getLatestMeqsNumber()
         const today = moment().format('MM/DD/YYYY')
+        const createdBy = this.authUser.user.username
 
         const meqs_approvers: Prisma.MEQSApproverCreateNestedManyWithoutMeqsInput = {
             create: input.approvers.map(i => {
                 return {
                     approver_id: i.approver_id,
-                    approver_proxy_id: i.approver_proxy_id ?? undefined,
                     label: i.label,
                     order: i.order,
-                    status: APPROVAL_STATUS.PENDING
+                    status: APPROVAL_STATUS.PENDING,
+                    created_by: createdBy,
+                    notes: ''
                 }
             })
         }
@@ -120,10 +122,12 @@ export class MeqsService {
                 const supplierInput: Prisma.MEQSSupplierCreateWithoutMeqsInput = {
                     supplier: { connect: { id: supplier.supplier_id } },
                     payment_terms: supplier.payment_terms,
+                    created_by: createdBy,
                     attachments: {
                         create: supplier.attachments.map(attachment => {
                             const attachmentInput: Prisma.MEQSSupplierAttachmentCreateWithoutMeqs_supplierInput = {
-                                src: attachment.src
+                                src: attachment.src,
+                                created_by: createdBy
                             }
                             return attachmentInput
                         })
@@ -136,7 +140,8 @@ export class MeqsService {
                                 notes: item.notes,
                                 vat_type: item.vat_type,
                                 is_awarded: item.is_awarded,
-                                canvass_item: { connect: { id: item.canvass_item_id } }
+                                canvass_item: { connect: { id: item.canvass_item_id } },
+                                created_by: createdBy
                             }
 
                             return itemInput
@@ -187,9 +192,7 @@ export class MeqsService {
 
         const data: Prisma.MEQSUpdateInput = {
             notes: input.notes ?? existingItem.notes,
-            canceller_id: input.canceller_id ?? existingItem.canceller_id,
-            date_cancelled: input.canceller_id ? new Date() : existingItem.date_cancelled,
-            is_cancelled: input.canceller_id ? true : existingItem.is_cancelled
+            updated_by: this.authUser.user.username
         }
 
         console.log('data', data)
@@ -333,7 +336,7 @@ export class MeqsService {
         const approvers = await this.prisma.mEQSApprover.findMany({
             where: {
                 meqs_id: id,
-                is_deleted: false
+                deleted_at: null
             }
         })
 
@@ -363,8 +366,7 @@ export class MeqsService {
                 meqs_number: {
                     contains: searchKeyword.trim().toLowerCase(),
                     mode: 'insensitive',
-                },
-                is_deleted: false
+                }
             },
             take: 5,
         });
@@ -440,11 +442,10 @@ export class MeqsService {
         }
     }
 
-    async forEmployeeCanceller(employeeId: string): Promise<MEQS[]> {
+    async forEmployeeCanceller(username: string): Promise<MEQS[]> {
         return await this.prisma.mEQS.findMany({
             where: {
-                canceller_id: employeeId,
-                is_deleted: false
+                cancelled_by: username
             },
             include: this.includedFields
         })
@@ -480,7 +481,7 @@ export class MeqsService {
             const approvers = await this.prisma.rVApprover.findMany({
                 where: {
                     rv_id: input.rv_id,
-                    is_deleted: false
+                    deleted_at: null
                 }
             })
 
@@ -508,7 +509,7 @@ export class MeqsService {
         }
 
         const employeeIds: string[] = input.approvers.map((input) =>
-            [input.approver_id, input.approver_proxy_id].filter(Boolean).join(',')
+            input.approver_id
         );
 
         this.logger.log('employeeIds', employeeIds)
@@ -559,14 +560,6 @@ export class MeqsService {
             }
         }
 
-        if (input.canceller_id) {
-            const isUserExist = await this.isUserExist(input.canceller_id, this.authUser)
-            if (!isUserExist) {
-                this.logger.error('canceller_id which also is user_id not found in table users')
-                throw new NotFoundException('Canceller does not exist')
-            }
-        }
-
         console.log('can update')
         return true
 
@@ -596,42 +589,42 @@ export class MeqsService {
         return isNormalUser
     }
 
-    private async isUserExist(user_id: string, authUser: AuthUser): Promise<boolean> {
+    // private async isUserExist(user_id: string, authUser: AuthUser): Promise<boolean> {
 
-        this.logger.log('isUserExist', user_id)
+    //     this.logger.log('isUserExist', user_id)
 
-        const query = `
-            query{
-                user(id: "${user_id}") {
-                    id
-                }
-            }
-        `;
+    //     const query = `
+    //         query{
+    //             user(id: "${user_id}") {
+    //                 id
+    //             }
+    //         }
+    //     `;
 
-        const { data } = await firstValueFrom(
-            this.httpService.post(process.env.API_GATEWAY_URL,
-                { query },
-                {
-                    headers: {
-                        Authorization: authUser.authorization,
-                        'Content-Type': 'application/json'
-                    }
-                }
-            ).pipe(
-                catchError((error) => {
-                    throw error
-                }),
-            ),
-        );
+    //     const { data } = await firstValueFrom(
+    //         this.httpService.post(process.env.API_GATEWAY_URL,
+    //             { query },
+    //             {
+    //                 headers: {
+    //                     Authorization: authUser.authorization,
+    //                     'Content-Type': 'application/json'
+    //                 }
+    //             }
+    //         ).pipe(
+    //             catchError((error) => {
+    //                 throw error
+    //             }),
+    //         ),
+    //     );
 
-        console.log('data', data)
+    //     console.log('data', data)
 
-        if (!data || !data.data || !data.data.user) {
-            console.log('User not found')
-            return false
-        }
-        return true
+    //     if (!data || !data.data || !data.data.user) {
+    //         console.log('User not found')
+    //         return false
+    //     }
+    //     return true
 
-    }
+    // }
 
 }

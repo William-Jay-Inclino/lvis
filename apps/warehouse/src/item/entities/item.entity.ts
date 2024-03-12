@@ -1,8 +1,7 @@
-import { ObjectType, Field, Int, ID, Float } from '@nestjs/graphql';
+import { ObjectType, Field, Int, ID } from '@nestjs/graphql';
 import { Unit } from '../../unit/entities/unit.entity';
-import { ItemTransaction } from '../../item-transaction/entities/item-transaction.entity';
 import { ItemType } from '../../item-type/entities/item-type.entity';
-import { RrItem } from '../../rr-item/entities/rr-item.entity';
+import { ItemTransaction } from './item-transaction.entity';
 
 @ObjectType()
 export class Item {
@@ -31,11 +30,28 @@ export class Item {
   @Field(() => Int)
   initial_quantity: number;
 
+  @Field()
+  created_by: string;
+
+  @Field({ nullable: true })
+  updated_by: string | null;
+
+  @Field({ nullable: true })
+  deleted_by: string | null;
+
   @Field(() => Date)
   created_at: Date;
 
   @Field(() => Date)
   updated_at: Date;
+
+  @Field(() => Date, { nullable: true })
+  deleted_at: Date | null;
+
+
+
+  // =============== derived / resolvers =============== 
+
 
   @Field(() => ItemType)
   item_type: ItemType;
@@ -43,10 +59,10 @@ export class Item {
   @Field(() => [ItemTransaction])
   item_transactions: ItemTransaction[];
 
-  @Field(() => [RrItem])
-  rr_items: RrItem[];
-
-  @Field( () => Unit)
+  @Field(() => Unit)
   unit: Unit;
+
+  // @Field(() => [CanvassItem])
+  // canvass_items: CanvassItem[];
 
 }

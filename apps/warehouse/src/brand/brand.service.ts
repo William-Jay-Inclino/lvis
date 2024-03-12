@@ -4,36 +4,45 @@ import { PrismaService } from '../__prisma__/prisma.service';
 import { Brand, Prisma } from 'apps/warehouse/prisma/generated/client';
 import { UpdateBrandInput } from './dto/update-brand.input';
 import { WarehouseRemoveResponse } from '../__common__/classes';
+import { AuthUser } from '../__common__/auth-user.entity';
 
 @Injectable()
 export class BrandService {
 
-  private readonly logger = new Logger(BrandService.name);
+	private readonly logger = new Logger(BrandService.name);
+	private authUser: AuthUser
 
-	constructor(private readonly prisma: PrismaService) {}
+	constructor(private readonly prisma: PrismaService) { }
 
-    async create(input: CreateBrandInput): Promise<Brand> {
+	setAuthUser(authUser: AuthUser) {
+		this.authUser = authUser
+	}
 
-        const data: Prisma.BrandCreateInput = {
-            name: input.name
-        }
+	async create(input: CreateBrandInput): Promise<Brand> {
 
-        const created = await this.prisma.brand.create({
-            data
-        })
+		const createdBy = this.authUser.user.username
 
-        this.logger.log('Successfully created Brand')
+		const data: Prisma.BrandCreateInput = {
+			name: input.name,
+			created_by: createdBy,
+		}
 
-        return created 
+		const created = await this.prisma.brand.create({
+			data
+		})
 
-    }
+		this.logger.log('Successfully created Brand')
 
-    async findAll(): Promise<Brand[]> {
-		return await this.prisma.brand.findMany( {
+		return created
+
+	}
+
+	async findAll(): Promise<Brand[]> {
+		return await this.prisma.brand.findMany({
 			where: {
-				is_deleted: false 
+				deleted_at: null
 			}
-		} )
+		})
 	}
 
 	async findOne(id: string): Promise<Brand | null> {
@@ -44,43 +53,47 @@ export class BrandService {
 
 		console.log('item', item, id)
 
-		if(!item){
-            throw new NotFoundException('Brand not found')
-        }
+		if (!item) {
+			throw new NotFoundException('Brand not found')
+		}
 
-        return item
+		return item
 	}
 
-    async update(id: string, input: UpdateBrandInput): Promise<Brand> {
+	async update(id: string, input: UpdateBrandInput): Promise<Brand> {
 
 		const existingItem = await this.findOne(id)
 
 		const data: Prisma.BrandUpdateInput = {
-			name: input.name ?? existingItem.name
+			name: input.name ?? existingItem.name,
+			updated_by: this.authUser.user.username,
 		}
 
-		
-		const updated = await this.prisma.brand.update({ 
+
+		const updated = await this.prisma.brand.update({
 			data,
 			where: {
 				id
 			}
 		})
-		
+
 		this.logger.log('Successfully updated Brand')
 
 		return updated
 
 	}
 
-    async remove(id: string): Promise<WarehouseRemoveResponse> {
+	async remove(id: string): Promise<WarehouseRemoveResponse> {
 
 		const existingItem = await this.findOne(id)
 
-		await this.prisma.brand.update( {
+		await this.prisma.brand.update({
 			where: { id },
-			data: { is_deleted: true }
-		} )
+			data: {
+				deleted_at: new Date(),
+				deleted_by: this.authUser.user.username
+			}
+		})
 
 		return {
 			success: true,

@@ -306,8 +306,9 @@ model MEQSApprover {
   updated_by String?
   deleted_by String?
 
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+  deleted_at DateTime?
 
   meqs MEQS @relation(fields: [meqs_id], references: [id], onDelete: Cascade)
 
@@ -449,7 +450,7 @@ model Item {
   item_type         ItemType          @relation(fields: [item_type_id], references: [id], onDelete: Restrict)
   item_transactions ItemTransaction[]
   unit              Unit              @relation(fields: [unit_id], references: [id], onDelete: Restrict)
-  canvass_item      CanvassItem[]
+  canvass_items     CanvassItem[]
 
   @@map("item")
 }
@@ -493,7 +494,7 @@ model ItemTransaction {
   item_id    String
   rr_item_id String? @unique
   type       Int
-  quantity   Float
+  quantity   Int
   price      Float
   remarks    String?
   is_initial Boolean @default(false)

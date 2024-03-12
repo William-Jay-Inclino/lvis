@@ -80,10 +80,6 @@ export class MeqsApproverService {
 
         employeeIds.push(input.approver_id)
 
-        if (input.approver_proxy_id) {
-            employeeIds.push(input.approver_proxy_id)
-        }
-
         if (employeeIds.length > 0) {
             const isValidEmployeeIds = await this.areEmployeesExist(employeeIds, this.authUser)
 
@@ -92,13 +88,16 @@ export class MeqsApproverService {
             }
         }
 
+        const createdBy = this.authUser.user.username
+
         const data: Prisma.MEQSApproverCreateInput = {
             meqs: { connect: { id: input.meqs_id } },
             approver_id: input.approver_id,
-            approver_proxy_id: input.approver_proxy_id ?? null,
             label: input.label,
             order: input.order,
-            status: APPROVAL_STATUS.PENDING
+            notes: '',
+            status: APPROVAL_STATUS.PENDING,
+            created_by: createdBy
         }
 
         const created = await this.prisma.mEQSApprover.create({
@@ -111,15 +110,15 @@ export class MeqsApproverService {
         return created
     }
 
-    async findAll(): Promise<MEQSApprover[]> {
-        return await this.prisma.mEQSApprover.findMany({
-            include: this.includedFields,
-            where: { is_deleted: false },
-            orderBy: {
-                order: 'asc'
-            }
-        })
-    }
+    // async findAll(): Promise<MEQSApprover[]> {
+    //     return await this.prisma.mEQSApprover.findMany({
+    //         include: this.includedFields,
+    //         where: { is_deleted: false },
+    //         orderBy: {
+    //             order: 'asc'
+    //         }
+    //     })
+    // }
 
     async findOne(id: string): Promise<MEQSApprover | null> {
 
@@ -143,7 +142,7 @@ export class MeqsApproverService {
         return await this.prisma.mEQSApprover.findMany({
             // include: this.includedFields,
             where: {
-                is_deleted: false,
+                deleted_at: null,
                 meqs_id: meqsId
             },
             orderBy: {
@@ -156,7 +155,7 @@ export class MeqsApproverService {
         return await this.prisma.mEQSApprover.findMany({
             include: this.includedFields,
             where: {
-                is_deleted: false,
+                deleted_at: null,
                 meqs: {
                     meqs_number: meqsNumber
                 }
@@ -174,14 +173,16 @@ export class MeqsApproverService {
 
         await this.validateInput(input)
 
+        const updatedBy = this.authUser.user.username
+
         const data: Prisma.RVApproverUpdateInput = {
             approver_id: input.approver_id ?? existingItem.approver_id,
-            approver_proxy_id: input.approver_proxy_id ?? existingItem.approver_proxy_id,
             date_approval: input.date_approval ? new Date(input.date_approval) : existingItem.date_approval,
             notes: input.notes ?? existingItem.notes,
             status: input.status ?? existingItem.status,
             label: input.label ?? existingItem.label,
             order: input.order ?? existingItem.order,
+            updated_by: updatedBy
         }
 
         const updated = await this.prisma.mEQSApprover.update({
@@ -200,7 +201,10 @@ export class MeqsApproverService {
 
         await this.prisma.mEQSApprover.update({
             where: { id },
-            data: { is_deleted: true }
+            data: {
+                deleted_at: new Date(),
+                deleted_by: this.authUser.user.username
+            }
         })
 
         return {
@@ -298,7 +302,7 @@ export class MeqsApproverService {
             where: {
                 approver_id: employeeId,
                 status: APPROVAL_STATUS.PENDING,
-                is_deleted: false
+                deleted_at: null
             },
             orderBy: {
                 created_at: 'asc'
@@ -330,10 +334,6 @@ export class MeqsApproverService {
 
         if (input.approver_id) {
             employeeIds.push(input.approver_id)
-        }
-
-        if (input.approver_proxy_id) {
-            employeeIds.push(input.approver_proxy_id)
         }
 
         if (employeeIds.length > 0) {

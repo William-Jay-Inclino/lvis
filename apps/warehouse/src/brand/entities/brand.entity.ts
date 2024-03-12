@@ -2,12 +2,15 @@ import { ObjectType, Field, Int } from '@nestjs/graphql';
 
 @ObjectType()
 export class Brand {
-  
+
   @Field(() => String)
   id: string;
 
   @Field(() => String)
   name: string;
+
+  @Field(() => String)
+  created_by: string;
 
   @Field(() => Date)
   created_at: Date;

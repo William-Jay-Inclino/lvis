@@ -15,7 +15,7 @@ import { UpdateMeqsOrderInput } from './dto/update-meqs-order.input';
 @UseGuards(GqlAuthGuard)
 @Resolver(() => MEQSApprover)
 export class MeqsApproverResolver {
-  constructor(private readonly meqsApproverService: MeqsApproverService) {}
+  constructor(private readonly meqsApproverService: MeqsApproverService) { }
 
   @Mutation(() => MEQSApprover)
   createMeqsApprover(
@@ -28,13 +28,13 @@ export class MeqsApproverResolver {
 
   @Query(() => [MEQSApprover])
   meqs_approvers(
-    @Args('meqs_id', {nullable: true}) meqs_id?: string,
-    @Args('meqs_number', {nullable: true}) meqs_number?: string,
+    @Args('meqs_id', { nullable: true }) meqs_id?: string,
+    @Args('meqs_number', { nullable: true }) meqs_number?: string,
   ) {
-    if(meqs_id){
+    if (meqs_id) {
       return this.meqsApproverService.findByMeqsId(meqs_id)
     }
-    if(meqs_number){
+    if (meqs_number) {
       return this.meqsApproverService.findByMeqsNumber(meqs_number)
     }
   }
@@ -50,12 +50,12 @@ export class MeqsApproverResolver {
     @Args('input') updateMeqsApproverInput: UpdateMeqsApproverInput,
     @CurrentAuthUser() authUser: AuthUser
   ) {
-        this.meqsApproverService.setAuthUser(authUser)
-        return this.meqsApproverService.update(id, updateMeqsApproverInput);
+    this.meqsApproverService.setAuthUser(authUser)
+    return this.meqsApproverService.update(id, updateMeqsApproverInput);
   }
 
   @Mutation(() => UpdateMeqsOrderResponse)
-  async updateMEQSApproverOrder(@Args('inputs', { type: () => [UpdateMeqsOrderInput] }) inputs: UpdateMeqsOrderInput[]){
+  async updateMEQSApproverOrder(@Args('inputs', { type: () => [UpdateMeqsOrderInput] }) inputs: UpdateMeqsOrderInput[]) {
 
     return await this.meqsApproverService.updateManyOrders(inputs);
 
@@ -66,18 +66,9 @@ export class MeqsApproverResolver {
     return this.meqsApproverService.remove(id);
   }
 
-  @ResolveField( () => Employee)
+  @ResolveField(() => Employee)
   approver(@Parent() meqsApprover: MEQSApprover): any {
     return { __typename: 'Employee', id: meqsApprover.approver_id }
-  }
-
-  @ResolveField( () => Employee, { nullable: true })
-  approver_proxy(@Parent() meqsApprover: MEQSApprover): any {
-
-    if(!meqsApprover.approver_proxy_id){
-      return null
-    }
-    return { __typename: 'Employee', id: meqsApprover.approver_proxy_id }
   }
 
 }

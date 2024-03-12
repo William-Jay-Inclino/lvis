@@ -26,14 +26,31 @@ export class Canvass {
   @Field(() => String)
   requested_by_id: string;
 
-  @Field(() => Employee)
-  requested_by?: Employee;
+  @Field()
+  created_by: string;
+
+  @Field({ nullable: true })
+  updated_by: string | null;
+
+  @Field({ nullable: true })
+  deleted_by: string | null;
+
+  @Field(() => Date)
+  created_at: Date;
+
+  @Field(() => Date)
+  updated_at: Date;
+
+  @Field(() => Date, { nullable: true })
+  deleted_at: Date | null;
+
+
+
+  // =============== derived / resolvers =============== 
+
 
   @Field(() => [CanvassItem])
   canvass_items: CanvassItem[];
-
-  @Field(() => Boolean)
-  is_deleted: boolean;
 
   @Field(() => JO, { nullable: true })
   jo?: JO
@@ -44,20 +61,8 @@ export class Canvass {
   @Field(() => SPR, { nullable: true })
   spr?: SPR
 
-  @Field(() => Date)
-  created_at: Date;
-
-  @Field(() => Date)
-  updated_at: Date;
-
-  @Field()
-  created_by: string;
-
-  @Field({ nullable: true })
-  updated_by: string | null;
-
-  @Field({ nullable: true })
-  deleted_by: string | null;
+  @Field(() => Employee)
+  requested_by?: Employee;
 
 }
 

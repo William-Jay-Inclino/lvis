@@ -9,20 +9,25 @@ export class CreateCanvassItemInput {
   @IsString()
   canvass_id: string | null;
 
-  @Field(() => String)
-  @IsNotEmpty()
-  @IsString()
-  description: string;
-
-  @Field(() => String, {nullable: true})
+  @Field(() => String, { nullable: true })
   @IsOptional()
   @IsString()
   brand_id?: string | null;
 
-  @Field(() => String, {nullable: true})
-  @IsNotEmpty()
+  @Field(() => String, { nullable: true })
+  @IsOptional()
   @IsString()
   unit_id?: string | null;
+
+  @Field(() => String, { nullable: true })
+  @IsOptional()
+  @IsString()
+  item_id?: string | null;
+
+  @Field(() => String)
+  @IsNotEmpty()
+  @IsString()
+  description: string;
 
   @Field(() => Int)
   @IsNotEmpty()

@@ -1,8 +1,6 @@
-// update-canvass.input.ts
 
 import { InputType, Field, Int } from '@nestjs/graphql';
-import { Transform } from 'class-transformer';
-import { IsBoolean, IsDate, IsInt, IsOptional, IsString } from 'class-validator';
+import { IsOptional, IsString } from 'class-validator';
 
 @InputType()
 export class UpdateCanvassInput {
@@ -21,11 +19,5 @@ export class UpdateCanvassInput {
   @IsOptional()
   @IsString()
   requested_by_id?: string;
-
-  // @Field(() => Boolean, { nullable: true })
-  // @IsOptional()
-  // @IsBoolean()
-  // is_referenced: boolean;
-
 
 }

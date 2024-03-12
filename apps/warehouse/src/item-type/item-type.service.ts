@@ -4,36 +4,43 @@ import { PrismaService } from '../__prisma__/prisma.service';
 import { ItemType, Prisma } from 'apps/warehouse/prisma/generated/client';
 import { UpdateItemTypeInput } from './dto/update-item-type.input';
 import { WarehouseRemoveResponse } from '../__common__/classes';
+import { AuthUser } from '../__common__/auth-user.entity';
 
 @Injectable()
 export class ItemTypeService {
 
-  private readonly logger = new Logger(ItemTypeService.name);
+	private readonly logger = new Logger(ItemTypeService.name);
+	private authUser: AuthUser
 
-	constructor(private readonly prisma: PrismaService) {}
+	constructor(private readonly prisma: PrismaService) { }
 
-    async create(input: CreateItemTypeInput): Promise<ItemType> {
+	setAuthUser(authUser: AuthUser) {
+		this.authUser = authUser
+	}
 
-        const data: Prisma.ItemTypeCreateInput = {
-            name: input.name
-        }
+	async create(input: CreateItemTypeInput): Promise<ItemType> {
 
-        const created = await this.prisma.itemType.create({
-            data
-        })
+		const data: Prisma.ItemTypeCreateInput = {
+			name: input.name,
+			created_by: this.authUser.user.username
+		}
 
-        this.logger.log('Successfully created Item Type')
+		const created = await this.prisma.itemType.create({
+			data
+		})
 
-        return created 
+		this.logger.log('Successfully created Item Type')
 
-    }
+		return created
 
-    async findAll(): Promise<ItemType[]> {
-		return await this.prisma.itemType.findMany( {
+	}
+
+	async findAll(): Promise<ItemType[]> {
+		return await this.prisma.itemType.findMany({
 			where: {
-				is_deleted: false 
+				deleted_at: null
 			}
-		} )
+		})
 	}
 
 	async findOne(id: string): Promise<ItemType | null> {
@@ -42,43 +49,47 @@ export class ItemTypeService {
 			where: { id }
 		})
 
-		if(!item){
-            throw new NotFoundException('Item Type not found')
-        }
+		if (!item) {
+			throw new NotFoundException('Item Type not found')
+		}
 
-        return item
+		return item
 	}
 
-    async update(id: string, input: UpdateItemTypeInput): Promise<ItemType> {
+	async update(id: string, input: UpdateItemTypeInput): Promise<ItemType> {
 
 		const existingItem = await this.findOne(id)
 
 		const data: Prisma.ItemTypeUpdateInput = {
-			name: input.name ?? existingItem.name
+			name: input.name ?? existingItem.name,
+			updated_by: this.authUser.user.username
 		}
 
-		
-		const updated = await this.prisma.itemType.update({ 
+
+		const updated = await this.prisma.itemType.update({
 			data,
 			where: {
 				id
 			}
 		})
-		
+
 		this.logger.log('Successfully updated Item Type')
 
 		return updated
 
 	}
 
-    async remove(id: string): Promise<WarehouseRemoveResponse> {
+	async remove(id: string): Promise<WarehouseRemoveResponse> {
 
 		const existingItem = await this.findOne(id)
 
-		await this.prisma.itemType.update( {
+		await this.prisma.itemType.update({
 			where: { id },
-			data: { is_deleted: true }
-		} )
+			data: {
+				deleted_at: new Date(),
+				deleted_by: this.authUser.user.username
+			}
+		})
 
 		return {
 			success: true,

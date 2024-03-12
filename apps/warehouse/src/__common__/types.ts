@@ -1,36 +1,41 @@
 
 export interface Brand {
-    id: string 
-    name: string 
+    id: string
+    name: string
+    created_by: string
 }
 
 export interface Unit {
-    id: string 
-    name: string 
+    id: string
+    name: string
+    created_by: string
 }
 
 export interface Vehicle {
-    id: string 
-    name: string 
+    id: string
+    name: string
     plate_number: string
+    created_by: string
 }
 
 export interface Supplier {
-    id: string 
-    name: string 
-    contact: string 
+    id: string
+    name: string
+    contact: string
     vat_type: VAT_TYPE
+    created_by: string
 }
 
-export interface Station {
-    id: string 
-    name: string 
-    address: string 
-}
+// export interface Station {
+//     id: string 
+//     name: string 
+//     address: string 
+// }
 
 export interface ItemType {
-    id: string 
-    name: string 
+    id: string
+    name: string
+    created_by: string
 }
 
 export enum APPROVAL_STATUS {

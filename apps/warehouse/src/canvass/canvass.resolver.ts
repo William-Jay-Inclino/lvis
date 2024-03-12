@@ -13,77 +13,77 @@ import { CanvassesResponse } from './entities/canvasses-response.entity';
 import { RcNumber } from './entities/rc-number.entity'
 
 @UseGuards(GqlAuthGuard)
-@Resolver( () => Canvass)
+@Resolver(() => Canvass)
 export class CanvassResolver {
 
-    private readonly logger = new Logger(CanvassResolver.name);
+  private readonly logger = new Logger(CanvassResolver.name);
 
-    constructor(private readonly canvassService: CanvassService) {}
+  constructor(private readonly canvassService: CanvassService) { }
 
-    @Mutation( () => Canvass)
-    
-    async createCanvass(
-        @Args('input') createCanvassInput: CreateCanvassInput, 
-        @CurrentAuthUser() authUser: AuthUser
-    ) {
-        // this.logger.log(authUser)
-        this.canvassService.setAuthUser(authUser)
-        return await this.canvassService.create(createCanvassInput)
-    }
+  @Mutation(() => Canvass)
 
-    @Query(() => CanvassesResponse)
-    canvasses(
-      @Args('page') page: number,
-      @Args('pageSize') pageSize: number,
-      @Args('date_requested', {nullable: true}) date_requested?: string,
-      @Args('requested_by_id', {nullable: true}) requested_by_id?: string,
-    ) {
-        return this.canvassService.findAll(page, pageSize, date_requested, requested_by_id);
-    }
+  async createCanvass(
+    @Args('input') createCanvassInput: CreateCanvassInput,
+    @CurrentAuthUser() authUser: AuthUser
+  ) {
+    // this.logger.log(authUser)
+    this.canvassService.setAuthUser(authUser)
+    return await this.canvassService.create(createCanvassInput)
+  }
 
-    @Query(() => [RcNumber])
-    rc_numbers(
-      @Args('rc_number') rc_number: string
-    ): Promise<{ rc_number: string }[]> {
-      return this.canvassService.findRcNumbers(rc_number);
-    }
+  @Query(() => CanvassesResponse)
+  canvasses(
+    @Args('page') page: number,
+    @Args('pageSize') pageSize: number,
+    @Args('date_requested', { nullable: true }) date_requested?: string,
+    @Args('requested_by_id', { nullable: true }) requested_by_id?: string,
+  ) {
+    return this.canvassService.findAll(page, pageSize, date_requested, requested_by_id);
+  }
 
-    @Query(() => Canvass)
-    canvass(
-      @Args('id', {nullable: true}) id?: string,
-      @Args('rc_number', {nullable: true}) rc_number?: string
-    ) {
-      if(id){
-        return this.canvassService.findOne(id);
-      }
-      if(rc_number){
-        return this.canvassService.findByRcNumber(rc_number)
-      }
-    }
+  @Query(() => [RcNumber])
+  rc_numbers(
+    @Args('rc_number') rc_number: string
+  ): Promise<{ rc_number: string }[]> {
+    return this.canvassService.findRcNumbers(rc_number);
+  }
 
-    @Mutation(() => Canvass)
-    async updateCanvass(
-      @Args('id') id: string,
-      @Args('input') updateCanvassInput: UpdateCanvassInput,
-      @CurrentAuthUser() authUser: AuthUser
-    ) {
-      this.canvassService.setAuthUser(authUser)
-      return await this.canvassService.update(id, updateCanvassInput);
+  @Query(() => Canvass)
+  canvass(
+    @Args('id', { nullable: true }) id?: string,
+    @Args('rc_number', { nullable: true }) rc_number?: string
+  ) {
+    if (id) {
+      return this.canvassService.findOne(id);
     }
-  
-    @Mutation(() => WarehouseRemoveResponse)
-    removeCanvass(@Args('id', { type: () => String }) id: string) {
-      return this.canvassService.remove(id);
+    if (rc_number) {
+      return this.canvassService.findByRcNumber(rc_number)
     }
+  }
 
-    @ResolveField( () => Employee)
-    requested_by(@Parent() canvass: Canvass): any {
-        return { __typename: 'Employee', id: canvass.requested_by_id }
-    }
+  @Mutation(() => Canvass)
+  async updateCanvass(
+    @Args('id') id: string,
+    @Args('input') updateCanvassInput: UpdateCanvassInput,
+    @CurrentAuthUser() authUser: AuthUser
+  ) {
+    this.canvassService.setAuthUser(authUser)
+    return await this.canvassService.update(id, updateCanvassInput);
+  }
 
-    @ResolveField( () => Boolean)
-    async is_referenced(@Parent() canvass: Canvass) {
-        return await this.canvassService.isReferenced(canvass.id)
-    }
-    
+  @Mutation(() => WarehouseRemoveResponse)
+  removeCanvass(@Args('id', { type: () => String }) id: string) {
+    return this.canvassService.remove(id);
+  }
+
+  @ResolveField(() => Employee)
+  requested_by(@Parent() canvass: Canvass): any {
+    return { __typename: 'Employee', id: canvass.requested_by_id }
+  }
+
+  @ResolveField(() => Boolean)
+  async is_referenced(@Parent() canvass: Canvass) {
+    return await this.canvassService.isReferenced(canvass.id)
+  }
+
 }

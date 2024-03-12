@@ -33,11 +33,9 @@ import { PoApproverResolver } from './po-approver/po-approver.resolver';
 import { PoApproverModule } from './po-approver/po-approver.module';
 import { ItemTypeModule } from './item-type/item-type.module';
 import { ItemModule } from './item/item.module';
-import { ItemTransactionModule } from './item-transaction/item-transaction.module';
 import { RrModule } from './rr/rr.module';
 import { RrApproverModule } from './rr-approver/rr-approver.module';
 import { RrItemModule } from './rr-item/rr-item.module';
-import { StationModule } from './station/station.module';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 
 
@@ -73,13 +71,11 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
     VehicleModule,
     ItemTypeModule,
     ItemModule,
-    ItemTransactionModule,
     RrModule,
     RrApproverModule,
     RrItemModule,
-    StationModule
   ],
   controllers: [],
   providers: [RvService, MeqsService, MeqsResolver, PoService, PoResolver, PoApproverResolver],
 })
-export class WarehouseModule {}
+export class WarehouseModule { }

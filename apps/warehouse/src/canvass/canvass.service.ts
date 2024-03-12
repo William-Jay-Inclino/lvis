@@ -66,20 +66,24 @@ export class CanvassService {
         const rcNumber = await this.getLatestRcNumber()
         const today = moment().format('MM/DD/YYYY')
 
+        const createdBy = this.authUser.user.username
+
         const data: Prisma.CanvassCreateInput = {
-            created_by: this.authUser.user.username,
             rc_number: rcNumber,
             date_requested: new Date(today),
             purpose: input.purpose,
             notes: input.notes,
             requested_by_id: input.requested_by_id,
+            created_by: createdBy,
             canvass_items: {
                 create: input.canvass_items.map((item) => {
                     return {
-                        description: item.description,
                         brand: item.brand_id ? { connect: { id: item.brand_id } } : undefined,
                         unit: item.unit_id ? { connect: { id: item.unit_id } } : undefined,
-                        quantity: item.quantity
+                        item: item.item_id ? { connect: { id: item.item_id } } : undefined,
+                        description: item.description,
+                        quantity: item.quantity,
+                        created_by: createdBy
                     }
                 })
             }
@@ -110,10 +114,10 @@ export class CanvassService {
         }
 
         const data: Prisma.CanvassUpdateInput = {
-            updated_by: this.authUser.user.username,
             purpose: input.purpose ?? existingItem.purpose,
             notes: input.notes ?? existingItem.notes,
-            requested_by_id: input.requested_by_id ?? existingItem.requested_by_id
+            requested_by_id: input.requested_by_id ?? existingItem.requested_by_id,
+            updated_by: this.authUser.user.username,
         };
 
         const updated = await this.prisma.canvass.update({
@@ -221,7 +225,7 @@ export class CanvassService {
                     contains: rcNumber.trim().toLowerCase(),
                     mode: 'insensitive',
                 },
-                is_deleted: false
+                deleted_at: null
             },
             take: 5,
         });
@@ -252,7 +256,7 @@ export class CanvassService {
         return await this.prisma.canvass.findMany({
             where: {
                 requested_by_id: employeeId,
-                is_deleted: false
+                deleted_at: null
             }
         })
     }
@@ -264,7 +268,7 @@ export class CanvassService {
         await this.prisma.canvass.update({
             where: { id },
             data: {
-                is_deleted: true,
+                deleted_at: new Date(),
                 deleted_by: this.authUser.user.username
             }
         })
