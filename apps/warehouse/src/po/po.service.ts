@@ -150,7 +150,7 @@ export class PoService {
         const skip = (page - 1) * pageSize;
 
         let whereCondition: any = {
-            is_deleted: false,
+            deleted_at: null
         };
 
         if (date_requested) {

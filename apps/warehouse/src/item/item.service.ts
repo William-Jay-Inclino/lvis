@@ -15,10 +15,8 @@ export class ItemService {
 	private readonly logger = new Logger(ItemService.name);
 	private authUser: AuthUser
 	private includedFields = {
-		item_transactions: true,
 		item_type: true,
-		unit: true,
-		rr_items: true
+		unit: true
 	}
 
 	constructor(
@@ -77,7 +75,7 @@ export class ItemService {
 		const skip = (page - 1) * pageSize;
 
 		let whereCondition: any = {
-			is_deleted: false,
+			deleted_at: null
 		};
 
 		if (name) {
@@ -152,7 +150,22 @@ export class ItemService {
 		this.logger.log('fineOne()', code)
 
 		const item = await this.prisma.item.findUnique({
-			include: this.includedFields,
+			include: {
+				item_transactions: {
+					orderBy: {
+						id: 'desc'
+					},
+					include: {
+						rr_item: {
+							include: {
+								rr: true
+							}
+						}
+					}
+				},
+				item_type: true,
+				unit: true,
+			},
 			where: { code }
 		})
 

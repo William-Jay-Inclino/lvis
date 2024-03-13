@@ -6,7 +6,10 @@ import { UpdateItemInput } from './dto/update-item.input';
 import { ItemsResponse } from './entities/items-response.entity';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
+import { UseGuards } from '@nestjs/common';
+import { GqlAuthGuard } from '../__auth__/guards/gql-auth.guard';
 
+@UseGuards(GqlAuthGuard)
 @Resolver(() => Item)
 export class ItemResolver {
   constructor(private readonly itemService: ItemService) { }

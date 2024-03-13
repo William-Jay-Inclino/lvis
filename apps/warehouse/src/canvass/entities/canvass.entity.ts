@@ -26,6 +26,9 @@ export class Canvass {
   @Field(() => String)
   requested_by_id: string;
 
+
+  // =============== audit fields =============== 
+
   @Field()
   created_by: string;
 
