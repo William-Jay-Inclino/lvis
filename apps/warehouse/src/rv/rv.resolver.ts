@@ -14,6 +14,7 @@ import { RvApproverService } from '../rv-approver/rv-approver.service';
 import { RvNumber } from './entities/rv-number.entity';
 import { RVsResponse } from './entities/rvs-response.entity';
 import { APPROVAL_STATUS } from '../__common__/types';
+import { WarehouseCancelResponse, WarehouseRemoveResponse } from '../__common__/classes';
 
 @UseGuards(GqlAuthGuard)
 @Resolver(() => RV)
@@ -75,6 +76,15 @@ export class RvResolver {
     ) {
         this.rvService.setAuthUser(authUser)
         return await this.rvService.update(id, updateRvInput);
+    }
+
+    @Mutation(() => WarehouseCancelResponse)
+    async cancelRv(
+        @Args('id') id: string,
+        @CurrentAuthUser() authUser: AuthUser
+    ) {
+        this.rvService.setAuthUser(authUser)
+        return await this.rvService.cancel(id);
     }
 
     @ResolveField(() => Employee)

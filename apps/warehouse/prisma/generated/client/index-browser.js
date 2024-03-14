@@ -17,11 +17,11 @@ exports.$Enums = {}
 
 /**
  * Prisma Client JS version: 5.8.1
- * Query Engine version: 5a9203d0590c951969e85a7d07215503f4672eb9
+ * Query Engine version: efd2449663b3d73d637ea1fd226bafbcf45b3102
  */
 Prisma.prismaVersion = {
   client: "5.8.1",
-  engine: "5a9203d0590c951969e85a7d07215503f4672eb9"
+  engine: "efd2449663b3d73d637ea1fd226bafbcf45b3102"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -145,7 +145,6 @@ exports.Prisma.RVScalarFieldEnum = {
   date_requested: 'date_requested',
   work_order_no: 'work_order_no',
   work_order_date: 'work_order_date',
-  date_cancelled: 'date_cancelled',
   notes: 'notes',
   cancelled_by: 'cancelled_by',
   created_by: 'created_by',
@@ -181,7 +180,6 @@ exports.Prisma.JOScalarFieldEnum = {
   classification_id: 'classification_id',
   department_id: 'department_id',
   supervisor_id: 'supervisor_id',
-  date_cancelled: 'date_cancelled',
   notes: 'notes',
   cancelled_by: 'cancelled_by',
   created_by: 'created_by',
@@ -216,7 +214,6 @@ exports.Prisma.SPRScalarFieldEnum = {
   vehicle_id: 'vehicle_id',
   classification_id: 'classification_id',
   supervisor_id: 'supervisor_id',
-  date_cancelled: 'date_cancelled',
   notes: 'notes',
   cancelled_by: 'cancelled_by',
   created_by: 'created_by',

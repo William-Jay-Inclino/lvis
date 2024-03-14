@@ -568,7 +568,7 @@ export namespace Prisma {
 
   /**
    * Prisma Client JS version: 5.8.1
-   * Query Engine version: 5a9203d0590c951969e85a7d07215503f4672eb9
+   * Query Engine version: efd2449663b3d73d637ea1fd226bafbcf45b3102
    */
   export type PrismaVersion = {
     client: string
@@ -5592,7 +5592,6 @@ export namespace Prisma {
     date_requested: Date | null
     work_order_no: string | null
     work_order_date: Date | null
-    date_cancelled: Date | null
     notes: string | null
     cancelled_by: string | null
     created_by: string | null
@@ -5611,7 +5610,6 @@ export namespace Prisma {
     date_requested: Date | null
     work_order_no: string | null
     work_order_date: Date | null
-    date_cancelled: Date | null
     notes: string | null
     cancelled_by: string | null
     created_by: string | null
@@ -5630,7 +5628,6 @@ export namespace Prisma {
     date_requested: number
     work_order_no: number
     work_order_date: number
-    date_cancelled: number
     notes: number
     cancelled_by: number
     created_by: number
@@ -5651,7 +5648,6 @@ export namespace Prisma {
     date_requested?: true
     work_order_no?: true
     work_order_date?: true
-    date_cancelled?: true
     notes?: true
     cancelled_by?: true
     created_by?: true
@@ -5670,7 +5666,6 @@ export namespace Prisma {
     date_requested?: true
     work_order_no?: true
     work_order_date?: true
-    date_cancelled?: true
     notes?: true
     cancelled_by?: true
     created_by?: true
@@ -5689,7 +5684,6 @@ export namespace Prisma {
     date_requested?: true
     work_order_no?: true
     work_order_date?: true
-    date_cancelled?: true
     notes?: true
     cancelled_by?: true
     created_by?: true
@@ -5781,7 +5775,6 @@ export namespace Prisma {
     date_requested: Date
     work_order_no: string | null
     work_order_date: Date | null
-    date_cancelled: Date | null
     notes: string
     cancelled_by: string | null
     created_by: string
@@ -5817,7 +5810,6 @@ export namespace Prisma {
     date_requested?: boolean
     work_order_no?: boolean
     work_order_date?: boolean
-    date_cancelled?: boolean
     notes?: boolean
     cancelled_by?: boolean
     created_by?: boolean
@@ -5840,7 +5832,6 @@ export namespace Prisma {
     date_requested?: boolean
     work_order_no?: boolean
     work_order_date?: boolean
-    date_cancelled?: boolean
     notes?: boolean
     cancelled_by?: boolean
     created_by?: boolean
@@ -5874,7 +5865,6 @@ export namespace Prisma {
       date_requested: Date
       work_order_no: string | null
       work_order_date: Date | null
-      date_cancelled: Date | null
       notes: string
       cancelled_by: string | null
       created_by: string
@@ -6289,7 +6279,6 @@ export namespace Prisma {
     readonly date_requested: FieldRef<"RV", 'DateTime'>
     readonly work_order_no: FieldRef<"RV", 'String'>
     readonly work_order_date: FieldRef<"RV", 'DateTime'>
-    readonly date_cancelled: FieldRef<"RV", 'DateTime'>
     readonly notes: FieldRef<"RV", 'String'>
     readonly cancelled_by: FieldRef<"RV", 'String'>
     readonly created_by: FieldRef<"RV", 'String'>
@@ -7735,7 +7724,6 @@ export namespace Prisma {
     classification_id: string | null
     department_id: string | null
     supervisor_id: string | null
-    date_cancelled: Date | null
     notes: string | null
     cancelled_by: string | null
     created_by: string | null
@@ -7754,7 +7742,6 @@ export namespace Prisma {
     classification_id: string | null
     department_id: string | null
     supervisor_id: string | null
-    date_cancelled: Date | null
     notes: string | null
     cancelled_by: string | null
     created_by: string | null
@@ -7773,7 +7760,6 @@ export namespace Prisma {
     classification_id: number
     department_id: number
     supervisor_id: number
-    date_cancelled: number
     notes: number
     cancelled_by: number
     created_by: number
@@ -7794,7 +7780,6 @@ export namespace Prisma {
     classification_id?: true
     department_id?: true
     supervisor_id?: true
-    date_cancelled?: true
     notes?: true
     cancelled_by?: true
     created_by?: true
@@ -7813,7 +7798,6 @@ export namespace Prisma {
     classification_id?: true
     department_id?: true
     supervisor_id?: true
-    date_cancelled?: true
     notes?: true
     cancelled_by?: true
     created_by?: true
@@ -7832,7 +7816,6 @@ export namespace Prisma {
     classification_id?: true
     department_id?: true
     supervisor_id?: true
-    date_cancelled?: true
     notes?: true
     cancelled_by?: true
     created_by?: true
@@ -7924,7 +7907,6 @@ export namespace Prisma {
     classification_id: string | null
     department_id: string
     supervisor_id: string
-    date_cancelled: Date | null
     notes: string
     cancelled_by: string | null
     created_by: string
@@ -7960,7 +7942,6 @@ export namespace Prisma {
     classification_id?: boolean
     department_id?: boolean
     supervisor_id?: boolean
-    date_cancelled?: boolean
     notes?: boolean
     cancelled_by?: boolean
     created_by?: boolean
@@ -7983,7 +7964,6 @@ export namespace Prisma {
     classification_id?: boolean
     department_id?: boolean
     supervisor_id?: boolean
-    date_cancelled?: boolean
     notes?: boolean
     cancelled_by?: boolean
     created_by?: boolean
@@ -8017,7 +7997,6 @@ export namespace Prisma {
       classification_id: string | null
       department_id: string
       supervisor_id: string
-      date_cancelled: Date | null
       notes: string
       cancelled_by: string | null
       created_by: string
@@ -8432,7 +8411,6 @@ export namespace Prisma {
     readonly classification_id: FieldRef<"JO", 'String'>
     readonly department_id: FieldRef<"JO", 'String'>
     readonly supervisor_id: FieldRef<"JO", 'String'>
-    readonly date_cancelled: FieldRef<"JO", 'DateTime'>
     readonly notes: FieldRef<"JO", 'String'>
     readonly cancelled_by: FieldRef<"JO", 'String'>
     readonly created_by: FieldRef<"JO", 'String'>
@@ -9877,7 +9855,6 @@ export namespace Prisma {
     vehicle_id: string | null
     classification_id: string | null
     supervisor_id: string | null
-    date_cancelled: Date | null
     notes: string | null
     cancelled_by: string | null
     created_by: string | null
@@ -9895,7 +9872,6 @@ export namespace Prisma {
     vehicle_id: string | null
     classification_id: string | null
     supervisor_id: string | null
-    date_cancelled: Date | null
     notes: string | null
     cancelled_by: string | null
     created_by: string | null
@@ -9913,7 +9889,6 @@ export namespace Prisma {
     vehicle_id: number
     classification_id: number
     supervisor_id: number
-    date_cancelled: number
     notes: number
     cancelled_by: number
     created_by: number
@@ -9933,7 +9908,6 @@ export namespace Prisma {
     vehicle_id?: true
     classification_id?: true
     supervisor_id?: true
-    date_cancelled?: true
     notes?: true
     cancelled_by?: true
     created_by?: true
@@ -9951,7 +9925,6 @@ export namespace Prisma {
     vehicle_id?: true
     classification_id?: true
     supervisor_id?: true
-    date_cancelled?: true
     notes?: true
     cancelled_by?: true
     created_by?: true
@@ -9969,7 +9942,6 @@ export namespace Prisma {
     vehicle_id?: true
     classification_id?: true
     supervisor_id?: true
-    date_cancelled?: true
     notes?: true
     cancelled_by?: true
     created_by?: true
@@ -10060,7 +10032,6 @@ export namespace Prisma {
     vehicle_id: string
     classification_id: string | null
     supervisor_id: string
-    date_cancelled: Date | null
     notes: string
     cancelled_by: string | null
     created_by: string
@@ -10095,7 +10066,6 @@ export namespace Prisma {
     vehicle_id?: boolean
     classification_id?: boolean
     supervisor_id?: boolean
-    date_cancelled?: boolean
     notes?: boolean
     cancelled_by?: boolean
     created_by?: boolean
@@ -10118,7 +10088,6 @@ export namespace Prisma {
     vehicle_id?: boolean
     classification_id?: boolean
     supervisor_id?: boolean
-    date_cancelled?: boolean
     notes?: boolean
     cancelled_by?: boolean
     created_by?: boolean
@@ -10153,7 +10122,6 @@ export namespace Prisma {
       vehicle_id: string
       classification_id: string | null
       supervisor_id: string
-      date_cancelled: Date | null
       notes: string
       cancelled_by: string | null
       created_by: string
@@ -10569,7 +10537,6 @@ export namespace Prisma {
     readonly vehicle_id: FieldRef<"SPR", 'String'>
     readonly classification_id: FieldRef<"SPR", 'String'>
     readonly supervisor_id: FieldRef<"SPR", 'String'>
-    readonly date_cancelled: FieldRef<"SPR", 'DateTime'>
     readonly notes: FieldRef<"SPR", 'String'>
     readonly cancelled_by: FieldRef<"SPR", 'String'>
     readonly created_by: FieldRef<"SPR", 'String'>
@@ -29638,7 +29605,6 @@ export namespace Prisma {
     date_requested: 'date_requested',
     work_order_no: 'work_order_no',
     work_order_date: 'work_order_date',
-    date_cancelled: 'date_cancelled',
     notes: 'notes',
     cancelled_by: 'cancelled_by',
     created_by: 'created_by',
@@ -29680,7 +29646,6 @@ export namespace Prisma {
     classification_id: 'classification_id',
     department_id: 'department_id',
     supervisor_id: 'supervisor_id',
-    date_cancelled: 'date_cancelled',
     notes: 'notes',
     cancelled_by: 'cancelled_by',
     created_by: 'created_by',
@@ -29721,7 +29686,6 @@ export namespace Prisma {
     vehicle_id: 'vehicle_id',
     classification_id: 'classification_id',
     supervisor_id: 'supervisor_id',
-    date_cancelled: 'date_cancelled',
     notes: 'notes',
     cancelled_by: 'cancelled_by',
     created_by: 'created_by',
@@ -30342,7 +30306,6 @@ export namespace Prisma {
     date_requested?: DateTimeFilter<"RV"> | Date | string
     work_order_no?: StringNullableFilter<"RV"> | string | null
     work_order_date?: DateTimeNullableFilter<"RV"> | Date | string | null
-    date_cancelled?: DateTimeNullableFilter<"RV"> | Date | string | null
     notes?: StringFilter<"RV"> | string
     cancelled_by?: StringNullableFilter<"RV"> | string | null
     created_by?: StringFilter<"RV"> | string
@@ -30364,7 +30327,6 @@ export namespace Prisma {
     date_requested?: SortOrder
     work_order_no?: SortOrderInput | SortOrder
     work_order_date?: SortOrderInput | SortOrder
-    date_cancelled?: SortOrderInput | SortOrder
     notes?: SortOrder
     cancelled_by?: SortOrderInput | SortOrder
     created_by?: SortOrder
@@ -30389,7 +30351,6 @@ export namespace Prisma {
     date_requested?: DateTimeFilter<"RV"> | Date | string
     work_order_no?: StringNullableFilter<"RV"> | string | null
     work_order_date?: DateTimeNullableFilter<"RV"> | Date | string | null
-    date_cancelled?: DateTimeNullableFilter<"RV"> | Date | string | null
     notes?: StringFilter<"RV"> | string
     cancelled_by?: StringNullableFilter<"RV"> | string | null
     created_by?: StringFilter<"RV"> | string
@@ -30411,7 +30372,6 @@ export namespace Prisma {
     date_requested?: SortOrder
     work_order_no?: SortOrderInput | SortOrder
     work_order_date?: SortOrderInput | SortOrder
-    date_cancelled?: SortOrderInput | SortOrder
     notes?: SortOrder
     cancelled_by?: SortOrderInput | SortOrder
     created_by?: SortOrder
@@ -30436,7 +30396,6 @@ export namespace Prisma {
     date_requested?: DateTimeWithAggregatesFilter<"RV"> | Date | string
     work_order_no?: StringNullableWithAggregatesFilter<"RV"> | string | null
     work_order_date?: DateTimeNullableWithAggregatesFilter<"RV"> | Date | string | null
-    date_cancelled?: DateTimeNullableWithAggregatesFilter<"RV"> | Date | string | null
     notes?: StringWithAggregatesFilter<"RV"> | string
     cancelled_by?: StringNullableWithAggregatesFilter<"RV"> | string | null
     created_by?: StringWithAggregatesFilter<"RV"> | string
@@ -30560,7 +30519,6 @@ export namespace Prisma {
     classification_id?: StringNullableFilter<"JO"> | string | null
     department_id?: StringFilter<"JO"> | string
     supervisor_id?: StringFilter<"JO"> | string
-    date_cancelled?: DateTimeNullableFilter<"JO"> | Date | string | null
     notes?: StringFilter<"JO"> | string
     cancelled_by?: StringNullableFilter<"JO"> | string | null
     created_by?: StringFilter<"JO"> | string
@@ -30582,7 +30540,6 @@ export namespace Prisma {
     classification_id?: SortOrderInput | SortOrder
     department_id?: SortOrder
     supervisor_id?: SortOrder
-    date_cancelled?: SortOrderInput | SortOrder
     notes?: SortOrder
     cancelled_by?: SortOrderInput | SortOrder
     created_by?: SortOrder
@@ -30607,7 +30564,6 @@ export namespace Prisma {
     classification_id?: StringNullableFilter<"JO"> | string | null
     department_id?: StringFilter<"JO"> | string
     supervisor_id?: StringFilter<"JO"> | string
-    date_cancelled?: DateTimeNullableFilter<"JO"> | Date | string | null
     notes?: StringFilter<"JO"> | string
     cancelled_by?: StringNullableFilter<"JO"> | string | null
     created_by?: StringFilter<"JO"> | string
@@ -30629,7 +30585,6 @@ export namespace Prisma {
     classification_id?: SortOrderInput | SortOrder
     department_id?: SortOrder
     supervisor_id?: SortOrder
-    date_cancelled?: SortOrderInput | SortOrder
     notes?: SortOrder
     cancelled_by?: SortOrderInput | SortOrder
     created_by?: SortOrder
@@ -30654,7 +30609,6 @@ export namespace Prisma {
     classification_id?: StringNullableWithAggregatesFilter<"JO"> | string | null
     department_id?: StringWithAggregatesFilter<"JO"> | string
     supervisor_id?: StringWithAggregatesFilter<"JO"> | string
-    date_cancelled?: DateTimeNullableWithAggregatesFilter<"JO"> | Date | string | null
     notes?: StringWithAggregatesFilter<"JO"> | string
     cancelled_by?: StringNullableWithAggregatesFilter<"JO"> | string | null
     created_by?: StringWithAggregatesFilter<"JO"> | string
@@ -30777,7 +30731,6 @@ export namespace Prisma {
     vehicle_id?: StringFilter<"SPR"> | string
     classification_id?: StringNullableFilter<"SPR"> | string | null
     supervisor_id?: StringFilter<"SPR"> | string
-    date_cancelled?: DateTimeNullableFilter<"SPR"> | Date | string | null
     notes?: StringFilter<"SPR"> | string
     cancelled_by?: StringNullableFilter<"SPR"> | string | null
     created_by?: StringFilter<"SPR"> | string
@@ -30799,7 +30752,6 @@ export namespace Prisma {
     vehicle_id?: SortOrder
     classification_id?: SortOrderInput | SortOrder
     supervisor_id?: SortOrder
-    date_cancelled?: SortOrderInput | SortOrder
     notes?: SortOrder
     cancelled_by?: SortOrderInput | SortOrder
     created_by?: SortOrder
@@ -30824,7 +30776,6 @@ export namespace Prisma {
     vehicle_id?: StringFilter<"SPR"> | string
     classification_id?: StringNullableFilter<"SPR"> | string | null
     supervisor_id?: StringFilter<"SPR"> | string
-    date_cancelled?: DateTimeNullableFilter<"SPR"> | Date | string | null
     notes?: StringFilter<"SPR"> | string
     cancelled_by?: StringNullableFilter<"SPR"> | string | null
     created_by?: StringFilter<"SPR"> | string
@@ -30846,7 +30797,6 @@ export namespace Prisma {
     vehicle_id?: SortOrder
     classification_id?: SortOrderInput | SortOrder
     supervisor_id?: SortOrder
-    date_cancelled?: SortOrderInput | SortOrder
     notes?: SortOrder
     cancelled_by?: SortOrderInput | SortOrder
     created_by?: SortOrder
@@ -30870,7 +30820,6 @@ export namespace Prisma {
     vehicle_id?: StringWithAggregatesFilter<"SPR"> | string
     classification_id?: StringNullableWithAggregatesFilter<"SPR"> | string | null
     supervisor_id?: StringWithAggregatesFilter<"SPR"> | string
-    date_cancelled?: DateTimeNullableWithAggregatesFilter<"SPR"> | Date | string | null
     notes?: StringWithAggregatesFilter<"SPR"> | string
     cancelled_by?: StringNullableWithAggregatesFilter<"SPR"> | string | null
     created_by?: StringWithAggregatesFilter<"SPR"> | string
@@ -32706,7 +32655,6 @@ export namespace Prisma {
     date_requested: Date | string
     work_order_no?: string | null
     work_order_date?: Date | string | null
-    date_cancelled?: Date | string | null
     notes: string
     cancelled_by?: string | null
     created_by: string
@@ -32728,7 +32676,6 @@ export namespace Prisma {
     date_requested: Date | string
     work_order_no?: string | null
     work_order_date?: Date | string | null
-    date_cancelled?: Date | string | null
     notes: string
     cancelled_by?: string | null
     created_by: string
@@ -32748,7 +32695,6 @@ export namespace Prisma {
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
     work_order_no?: NullableStringFieldUpdateOperationsInput | string | null
     work_order_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: StringFieldUpdateOperationsInput | string
     cancelled_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_by?: StringFieldUpdateOperationsInput | string
@@ -32770,7 +32716,6 @@ export namespace Prisma {
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
     work_order_no?: NullableStringFieldUpdateOperationsInput | string | null
     work_order_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: StringFieldUpdateOperationsInput | string
     cancelled_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_by?: StringFieldUpdateOperationsInput | string
@@ -32791,7 +32736,6 @@ export namespace Prisma {
     date_requested: Date | string
     work_order_no?: string | null
     work_order_date?: Date | string | null
-    date_cancelled?: Date | string | null
     notes: string
     cancelled_by?: string | null
     created_by: string
@@ -32809,7 +32753,6 @@ export namespace Prisma {
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
     work_order_no?: NullableStringFieldUpdateOperationsInput | string | null
     work_order_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: StringFieldUpdateOperationsInput | string
     cancelled_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_by?: StringFieldUpdateOperationsInput | string
@@ -32828,7 +32771,6 @@ export namespace Prisma {
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
     work_order_no?: NullableStringFieldUpdateOperationsInput | string | null
     work_order_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: StringFieldUpdateOperationsInput | string
     cancelled_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_by?: StringFieldUpdateOperationsInput | string
@@ -32964,7 +32906,6 @@ export namespace Prisma {
     classification_id?: string | null
     department_id: string
     supervisor_id: string
-    date_cancelled?: Date | string | null
     notes: string
     cancelled_by?: string | null
     created_by: string
@@ -32986,7 +32927,6 @@ export namespace Prisma {
     classification_id?: string | null
     department_id: string
     supervisor_id: string
-    date_cancelled?: Date | string | null
     notes: string
     cancelled_by?: string | null
     created_by: string
@@ -33006,7 +32946,6 @@ export namespace Prisma {
     classification_id?: NullableStringFieldUpdateOperationsInput | string | null
     department_id?: StringFieldUpdateOperationsInput | string
     supervisor_id?: StringFieldUpdateOperationsInput | string
-    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: StringFieldUpdateOperationsInput | string
     cancelled_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_by?: StringFieldUpdateOperationsInput | string
@@ -33028,7 +32967,6 @@ export namespace Prisma {
     classification_id?: NullableStringFieldUpdateOperationsInput | string | null
     department_id?: StringFieldUpdateOperationsInput | string
     supervisor_id?: StringFieldUpdateOperationsInput | string
-    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: StringFieldUpdateOperationsInput | string
     cancelled_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_by?: StringFieldUpdateOperationsInput | string
@@ -33049,7 +32987,6 @@ export namespace Prisma {
     classification_id?: string | null
     department_id: string
     supervisor_id: string
-    date_cancelled?: Date | string | null
     notes: string
     cancelled_by?: string | null
     created_by: string
@@ -33067,7 +33004,6 @@ export namespace Prisma {
     classification_id?: NullableStringFieldUpdateOperationsInput | string | null
     department_id?: StringFieldUpdateOperationsInput | string
     supervisor_id?: StringFieldUpdateOperationsInput | string
-    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: StringFieldUpdateOperationsInput | string
     cancelled_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_by?: StringFieldUpdateOperationsInput | string
@@ -33086,7 +33022,6 @@ export namespace Prisma {
     classification_id?: NullableStringFieldUpdateOperationsInput | string | null
     department_id?: StringFieldUpdateOperationsInput | string
     supervisor_id?: StringFieldUpdateOperationsInput | string
-    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: StringFieldUpdateOperationsInput | string
     cancelled_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_by?: StringFieldUpdateOperationsInput | string
@@ -33220,7 +33155,6 @@ export namespace Prisma {
     date_requested: Date | string
     classification_id?: string | null
     supervisor_id: string
-    date_cancelled?: Date | string | null
     notes: string
     cancelled_by?: string | null
     created_by: string
@@ -33242,7 +33176,6 @@ export namespace Prisma {
     vehicle_id: string
     classification_id?: string | null
     supervisor_id: string
-    date_cancelled?: Date | string | null
     notes: string
     cancelled_by?: string | null
     created_by: string
@@ -33260,7 +33193,6 @@ export namespace Prisma {
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
     classification_id?: NullableStringFieldUpdateOperationsInput | string | null
     supervisor_id?: StringFieldUpdateOperationsInput | string
-    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: StringFieldUpdateOperationsInput | string
     cancelled_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_by?: StringFieldUpdateOperationsInput | string
@@ -33282,7 +33214,6 @@ export namespace Prisma {
     vehicle_id?: StringFieldUpdateOperationsInput | string
     classification_id?: NullableStringFieldUpdateOperationsInput | string | null
     supervisor_id?: StringFieldUpdateOperationsInput | string
-    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: StringFieldUpdateOperationsInput | string
     cancelled_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_by?: StringFieldUpdateOperationsInput | string
@@ -33302,7 +33233,6 @@ export namespace Prisma {
     vehicle_id: string
     classification_id?: string | null
     supervisor_id: string
-    date_cancelled?: Date | string | null
     notes: string
     cancelled_by?: string | null
     created_by: string
@@ -33318,7 +33248,6 @@ export namespace Prisma {
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
     classification_id?: NullableStringFieldUpdateOperationsInput | string | null
     supervisor_id?: StringFieldUpdateOperationsInput | string
-    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: StringFieldUpdateOperationsInput | string
     cancelled_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_by?: StringFieldUpdateOperationsInput | string
@@ -33336,7 +33265,6 @@ export namespace Prisma {
     vehicle_id?: StringFieldUpdateOperationsInput | string
     classification_id?: NullableStringFieldUpdateOperationsInput | string | null
     supervisor_id?: StringFieldUpdateOperationsInput | string
-    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: StringFieldUpdateOperationsInput | string
     cancelled_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_by?: StringFieldUpdateOperationsInput | string
@@ -35464,7 +35392,6 @@ export namespace Prisma {
     date_requested?: SortOrder
     work_order_no?: SortOrder
     work_order_date?: SortOrder
-    date_cancelled?: SortOrder
     notes?: SortOrder
     cancelled_by?: SortOrder
     created_by?: SortOrder
@@ -35483,7 +35410,6 @@ export namespace Prisma {
     date_requested?: SortOrder
     work_order_no?: SortOrder
     work_order_date?: SortOrder
-    date_cancelled?: SortOrder
     notes?: SortOrder
     cancelled_by?: SortOrder
     created_by?: SortOrder
@@ -35502,7 +35428,6 @@ export namespace Prisma {
     date_requested?: SortOrder
     work_order_no?: SortOrder
     work_order_date?: SortOrder
-    date_cancelled?: SortOrder
     notes?: SortOrder
     cancelled_by?: SortOrder
     created_by?: SortOrder
@@ -35597,7 +35522,6 @@ export namespace Prisma {
     classification_id?: SortOrder
     department_id?: SortOrder
     supervisor_id?: SortOrder
-    date_cancelled?: SortOrder
     notes?: SortOrder
     cancelled_by?: SortOrder
     created_by?: SortOrder
@@ -35616,7 +35540,6 @@ export namespace Prisma {
     classification_id?: SortOrder
     department_id?: SortOrder
     supervisor_id?: SortOrder
-    date_cancelled?: SortOrder
     notes?: SortOrder
     cancelled_by?: SortOrder
     created_by?: SortOrder
@@ -35635,7 +35558,6 @@ export namespace Prisma {
     classification_id?: SortOrder
     department_id?: SortOrder
     supervisor_id?: SortOrder
-    date_cancelled?: SortOrder
     notes?: SortOrder
     cancelled_by?: SortOrder
     created_by?: SortOrder
@@ -35734,7 +35656,6 @@ export namespace Prisma {
     vehicle_id?: SortOrder
     classification_id?: SortOrder
     supervisor_id?: SortOrder
-    date_cancelled?: SortOrder
     notes?: SortOrder
     cancelled_by?: SortOrder
     created_by?: SortOrder
@@ -35752,7 +35673,6 @@ export namespace Prisma {
     vehicle_id?: SortOrder
     classification_id?: SortOrder
     supervisor_id?: SortOrder
-    date_cancelled?: SortOrder
     notes?: SortOrder
     cancelled_by?: SortOrder
     created_by?: SortOrder
@@ -35770,7 +35690,6 @@ export namespace Prisma {
     vehicle_id?: SortOrder
     classification_id?: SortOrder
     supervisor_id?: SortOrder
-    date_cancelled?: SortOrder
     notes?: SortOrder
     cancelled_by?: SortOrder
     created_by?: SortOrder
@@ -38703,7 +38622,6 @@ export namespace Prisma {
     classification_id?: string | null
     department_id: string
     supervisor_id: string
-    date_cancelled?: Date | string | null
     notes: string
     cancelled_by?: string | null
     created_by: string
@@ -38723,7 +38641,6 @@ export namespace Prisma {
     classification_id?: string | null
     department_id: string
     supervisor_id: string
-    date_cancelled?: Date | string | null
     notes: string
     cancelled_by?: string | null
     created_by: string
@@ -38748,7 +38665,6 @@ export namespace Prisma {
     date_requested: Date | string
     work_order_no?: string | null
     work_order_date?: Date | string | null
-    date_cancelled?: Date | string | null
     notes: string
     cancelled_by?: string | null
     created_by: string
@@ -38768,7 +38684,6 @@ export namespace Prisma {
     date_requested: Date | string
     work_order_no?: string | null
     work_order_date?: Date | string | null
-    date_cancelled?: Date | string | null
     notes: string
     cancelled_by?: string | null
     created_by: string
@@ -38791,7 +38706,6 @@ export namespace Prisma {
     date_requested: Date | string
     classification_id?: string | null
     supervisor_id: string
-    date_cancelled?: Date | string | null
     notes: string
     cancelled_by?: string | null
     created_by: string
@@ -38811,7 +38725,6 @@ export namespace Prisma {
     vehicle_id: string
     classification_id?: string | null
     supervisor_id: string
-    date_cancelled?: Date | string | null
     notes: string
     cancelled_by?: string | null
     created_by: string
@@ -38880,7 +38793,6 @@ export namespace Prisma {
     classification_id?: NullableStringFieldUpdateOperationsInput | string | null
     department_id?: StringFieldUpdateOperationsInput | string
     supervisor_id?: StringFieldUpdateOperationsInput | string
-    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: StringFieldUpdateOperationsInput | string
     cancelled_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_by?: StringFieldUpdateOperationsInput | string
@@ -38900,7 +38812,6 @@ export namespace Prisma {
     classification_id?: NullableStringFieldUpdateOperationsInput | string | null
     department_id?: StringFieldUpdateOperationsInput | string
     supervisor_id?: StringFieldUpdateOperationsInput | string
-    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: StringFieldUpdateOperationsInput | string
     cancelled_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_by?: StringFieldUpdateOperationsInput | string
@@ -38931,7 +38842,6 @@ export namespace Prisma {
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
     work_order_no?: NullableStringFieldUpdateOperationsInput | string | null
     work_order_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: StringFieldUpdateOperationsInput | string
     cancelled_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_by?: StringFieldUpdateOperationsInput | string
@@ -38951,7 +38861,6 @@ export namespace Prisma {
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
     work_order_no?: NullableStringFieldUpdateOperationsInput | string | null
     work_order_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: StringFieldUpdateOperationsInput | string
     cancelled_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_by?: StringFieldUpdateOperationsInput | string
@@ -38980,7 +38889,6 @@ export namespace Prisma {
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
     classification_id?: NullableStringFieldUpdateOperationsInput | string | null
     supervisor_id?: StringFieldUpdateOperationsInput | string
-    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: StringFieldUpdateOperationsInput | string
     cancelled_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_by?: StringFieldUpdateOperationsInput | string
@@ -39000,7 +38908,6 @@ export namespace Prisma {
     vehicle_id?: StringFieldUpdateOperationsInput | string
     classification_id?: NullableStringFieldUpdateOperationsInput | string | null
     supervisor_id?: StringFieldUpdateOperationsInput | string
-    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: StringFieldUpdateOperationsInput | string
     cancelled_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_by?: StringFieldUpdateOperationsInput | string
@@ -39641,7 +39548,6 @@ export namespace Prisma {
     date_requested: Date | string
     work_order_no?: string | null
     work_order_date?: Date | string | null
-    date_cancelled?: Date | string | null
     notes: string
     cancelled_by?: string | null
     created_by: string
@@ -39662,7 +39568,6 @@ export namespace Prisma {
     date_requested: Date | string
     work_order_no?: string | null
     work_order_date?: Date | string | null
-    date_cancelled?: Date | string | null
     notes: string
     cancelled_by?: string | null
     created_by: string
@@ -39697,7 +39602,6 @@ export namespace Prisma {
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
     work_order_no?: NullableStringFieldUpdateOperationsInput | string | null
     work_order_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: StringFieldUpdateOperationsInput | string
     cancelled_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_by?: StringFieldUpdateOperationsInput | string
@@ -39718,7 +39622,6 @@ export namespace Prisma {
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
     work_order_no?: NullableStringFieldUpdateOperationsInput | string | null
     work_order_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: StringFieldUpdateOperationsInput | string
     cancelled_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_by?: StringFieldUpdateOperationsInput | string
@@ -39987,7 +39890,6 @@ export namespace Prisma {
     classification_id?: string | null
     department_id: string
     supervisor_id: string
-    date_cancelled?: Date | string | null
     notes: string
     cancelled_by?: string | null
     created_by: string
@@ -40008,7 +39910,6 @@ export namespace Prisma {
     classification_id?: string | null
     department_id: string
     supervisor_id: string
-    date_cancelled?: Date | string | null
     notes: string
     cancelled_by?: string | null
     created_by: string
@@ -40043,7 +39944,6 @@ export namespace Prisma {
     classification_id?: NullableStringFieldUpdateOperationsInput | string | null
     department_id?: StringFieldUpdateOperationsInput | string
     supervisor_id?: StringFieldUpdateOperationsInput | string
-    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: StringFieldUpdateOperationsInput | string
     cancelled_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_by?: StringFieldUpdateOperationsInput | string
@@ -40064,7 +39964,6 @@ export namespace Prisma {
     classification_id?: NullableStringFieldUpdateOperationsInput | string | null
     department_id?: StringFieldUpdateOperationsInput | string
     supervisor_id?: StringFieldUpdateOperationsInput | string
-    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: StringFieldUpdateOperationsInput | string
     cancelled_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_by?: StringFieldUpdateOperationsInput | string
@@ -40395,7 +40294,6 @@ export namespace Prisma {
     date_requested: Date | string
     classification_id?: string | null
     supervisor_id: string
-    date_cancelled?: Date | string | null
     notes: string
     cancelled_by?: string | null
     created_by: string
@@ -40416,7 +40314,6 @@ export namespace Prisma {
     vehicle_id: string
     classification_id?: string | null
     supervisor_id: string
-    date_cancelled?: Date | string | null
     notes: string
     cancelled_by?: string | null
     created_by: string
@@ -40449,7 +40346,6 @@ export namespace Prisma {
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
     classification_id?: NullableStringFieldUpdateOperationsInput | string | null
     supervisor_id?: StringFieldUpdateOperationsInput | string
-    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: StringFieldUpdateOperationsInput | string
     cancelled_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_by?: StringFieldUpdateOperationsInput | string
@@ -40470,7 +40366,6 @@ export namespace Prisma {
     vehicle_id?: StringFieldUpdateOperationsInput | string
     classification_id?: NullableStringFieldUpdateOperationsInput | string | null
     supervisor_id?: StringFieldUpdateOperationsInput | string
-    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: StringFieldUpdateOperationsInput | string
     cancelled_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_by?: StringFieldUpdateOperationsInput | string
@@ -40489,7 +40384,6 @@ export namespace Prisma {
     classification_id?: string | null
     department_id: string
     supervisor_id: string
-    date_cancelled?: Date | string | null
     notes: string
     cancelled_by?: string | null
     created_by: string
@@ -40510,7 +40404,6 @@ export namespace Prisma {
     classification_id?: string | null
     department_id: string
     supervisor_id: string
-    date_cancelled?: Date | string | null
     notes: string
     cancelled_by?: string | null
     created_by: string
@@ -40534,7 +40427,6 @@ export namespace Prisma {
     date_requested: Date | string
     work_order_no?: string | null
     work_order_date?: Date | string | null
-    date_cancelled?: Date | string | null
     notes: string
     cancelled_by?: string | null
     created_by: string
@@ -40555,7 +40447,6 @@ export namespace Prisma {
     date_requested: Date | string
     work_order_no?: string | null
     work_order_date?: Date | string | null
-    date_cancelled?: Date | string | null
     notes: string
     cancelled_by?: string | null
     created_by: string
@@ -40577,7 +40468,6 @@ export namespace Prisma {
     date_requested: Date | string
     classification_id?: string | null
     supervisor_id: string
-    date_cancelled?: Date | string | null
     notes: string
     cancelled_by?: string | null
     created_by: string
@@ -40598,7 +40488,6 @@ export namespace Prisma {
     vehicle_id: string
     classification_id?: string | null
     supervisor_id: string
-    date_cancelled?: Date | string | null
     notes: string
     cancelled_by?: string | null
     created_by: string
@@ -40711,7 +40600,6 @@ export namespace Prisma {
     classification_id?: NullableStringFieldUpdateOperationsInput | string | null
     department_id?: StringFieldUpdateOperationsInput | string
     supervisor_id?: StringFieldUpdateOperationsInput | string
-    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: StringFieldUpdateOperationsInput | string
     cancelled_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_by?: StringFieldUpdateOperationsInput | string
@@ -40732,7 +40620,6 @@ export namespace Prisma {
     classification_id?: NullableStringFieldUpdateOperationsInput | string | null
     department_id?: StringFieldUpdateOperationsInput | string
     supervisor_id?: StringFieldUpdateOperationsInput | string
-    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: StringFieldUpdateOperationsInput | string
     cancelled_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_by?: StringFieldUpdateOperationsInput | string
@@ -40762,7 +40649,6 @@ export namespace Prisma {
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
     work_order_no?: NullableStringFieldUpdateOperationsInput | string | null
     work_order_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: StringFieldUpdateOperationsInput | string
     cancelled_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_by?: StringFieldUpdateOperationsInput | string
@@ -40783,7 +40669,6 @@ export namespace Prisma {
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
     work_order_no?: NullableStringFieldUpdateOperationsInput | string | null
     work_order_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: StringFieldUpdateOperationsInput | string
     cancelled_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_by?: StringFieldUpdateOperationsInput | string
@@ -40811,7 +40696,6 @@ export namespace Prisma {
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
     classification_id?: NullableStringFieldUpdateOperationsInput | string | null
     supervisor_id?: StringFieldUpdateOperationsInput | string
-    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: StringFieldUpdateOperationsInput | string
     cancelled_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_by?: StringFieldUpdateOperationsInput | string
@@ -40832,7 +40716,6 @@ export namespace Prisma {
     vehicle_id?: StringFieldUpdateOperationsInput | string
     classification_id?: NullableStringFieldUpdateOperationsInput | string | null
     supervisor_id?: StringFieldUpdateOperationsInput | string
-    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: StringFieldUpdateOperationsInput | string
     cancelled_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_by?: StringFieldUpdateOperationsInput | string
@@ -43147,7 +43030,6 @@ export namespace Prisma {
     date_requested: Date | string
     classification_id?: string | null
     supervisor_id: string
-    date_cancelled?: Date | string | null
     notes: string
     cancelled_by?: string | null
     created_by: string
@@ -43167,7 +43049,6 @@ export namespace Prisma {
     canvass_id: string
     classification_id?: string | null
     supervisor_id: string
-    date_cancelled?: Date | string | null
     notes: string
     cancelled_by?: string | null
     created_by: string
@@ -43216,7 +43097,6 @@ export namespace Prisma {
     vehicle_id?: StringFilter<"SPR"> | string
     classification_id?: StringNullableFilter<"SPR"> | string | null
     supervisor_id?: StringFilter<"SPR"> | string
-    date_cancelled?: DateTimeNullableFilter<"SPR"> | Date | string | null
     notes?: StringFilter<"SPR"> | string
     cancelled_by?: StringNullableFilter<"SPR"> | string | null
     created_by?: StringFilter<"SPR"> | string
@@ -44286,7 +44166,6 @@ export namespace Prisma {
     canvass_id: string
     classification_id?: string | null
     supervisor_id: string
-    date_cancelled?: Date | string | null
     notes: string
     cancelled_by?: string | null
     created_by: string
@@ -44302,7 +44181,6 @@ export namespace Prisma {
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
     classification_id?: NullableStringFieldUpdateOperationsInput | string | null
     supervisor_id?: StringFieldUpdateOperationsInput | string
-    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: StringFieldUpdateOperationsInput | string
     cancelled_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_by?: StringFieldUpdateOperationsInput | string
@@ -44322,7 +44200,6 @@ export namespace Prisma {
     canvass_id?: StringFieldUpdateOperationsInput | string
     classification_id?: NullableStringFieldUpdateOperationsInput | string | null
     supervisor_id?: StringFieldUpdateOperationsInput | string
-    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: StringFieldUpdateOperationsInput | string
     cancelled_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_by?: StringFieldUpdateOperationsInput | string
@@ -44341,7 +44218,6 @@ export namespace Prisma {
     canvass_id?: StringFieldUpdateOperationsInput | string
     classification_id?: NullableStringFieldUpdateOperationsInput | string | null
     supervisor_id?: StringFieldUpdateOperationsInput | string
-    date_cancelled?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: StringFieldUpdateOperationsInput | string
     cancelled_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_by?: StringFieldUpdateOperationsInput | string

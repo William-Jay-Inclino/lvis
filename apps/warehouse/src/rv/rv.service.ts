@@ -8,7 +8,7 @@ import { AuthUser } from '../__common__/auth-user.entity';
 import { UpdateRvInput } from './dto/update-rv.input';
 import { catchError, firstValueFrom } from 'rxjs';
 import { HttpService } from '@nestjs/axios';
-import { WarehouseRemoveResponse } from '../__common__/classes';
+import { WarehouseCancelResponse, WarehouseRemoveResponse } from '../__common__/classes';
 import { RVsResponse } from './entities/rvs-response.entity';
 import * as moment from 'moment';
 import { getDateRange } from '../__common__/helpers';
@@ -109,7 +109,13 @@ export class RvService {
 
         this.logger.log('update()')
 
-        const existingItem = await this.findOne(id)
+        const existingItem = await this.prisma.rV.findUnique({
+            where: { id }
+        })
+
+        if (!existingItem) {
+            throw new NotFoundException('RV not found')
+        }
 
         if (!(await this.canUpdate(input, existingItem))) {
             throw new Error('Failed to update RV. Please try again')
@@ -133,6 +139,37 @@ export class RvService {
         this.logger.log('Successfully updated RV')
 
         return updated
+
+    }
+
+    async cancel(id: string): Promise<WarehouseCancelResponse> {
+
+        this.logger.log('cancel()')
+
+        const existingItem = await this.prisma.rV.findUnique({
+            where: { id }
+        })
+
+        if (!existingItem) {
+            throw new NotFoundException('RV not found')
+        }
+
+        const updated = await this.prisma.rV.update({
+            data: {
+                cancelled_at: new Date(),
+                cancelled_by: this.authUser.user.username
+            },
+            where: { id }
+        })
+
+        this.logger.log('Successfully cancelled RV')
+
+        return {
+            success: true,
+            msg: 'Successfully cancelled RV',
+            cancelled_at: updated.cancelled_at,
+            cancelled_by: updated.cancelled_by
+        }
 
     }
 
@@ -182,9 +219,7 @@ export class RvService {
     async findAll(page: number, pageSize: number, date_requested?: string, requested_by_id?: string): Promise<RVsResponse> {
         const skip = (page - 1) * pageSize;
 
-        let whereCondition: any = {
-            deleted_at: null
-        };
+        let whereCondition: any = {};
 
         if (date_requested) {
             const { startDate, endDate } = getDateRange(date_requested);

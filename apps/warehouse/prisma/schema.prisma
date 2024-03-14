@@ -65,7 +65,6 @@ model RV {
   date_requested    DateTime
   work_order_no     String?
   work_order_date   DateTime?
-  date_cancelled    DateTime?
   notes             String
 
   cancelled_by String?
@@ -107,15 +106,14 @@ model RVApprover {
 }
 
 model JO {
-  id                String    @id @default(uuid())
-  jo_number         String    @unique
+  id                String   @id @default(uuid())
+  jo_number         String   @unique
   date_requested    DateTime
-  canvass_id        String    @unique
+  canvass_id        String   @unique
   equipment         String
   classification_id String?
   department_id     String
   supervisor_id     String
-  date_cancelled    DateTime?
   notes             String
 
   cancelled_by String?
@@ -157,14 +155,13 @@ model JOApprover {
 }
 
 model SPR {
-  id                String    @id @default(uuid())
-  spr_number        String    @unique
+  id                String   @id @default(uuid())
+  spr_number        String   @unique
   date_requested    DateTime
-  canvass_id        String    @unique
+  canvass_id        String   @unique
   vehicle_id        String
   classification_id String?
   supervisor_id     String
-  date_cancelled    DateTime?
   notes             String
 
   cancelled_by String?
