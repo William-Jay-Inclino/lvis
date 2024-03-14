@@ -22,7 +22,8 @@ export class CanvassService {
         canvass_items: {
             include: {
                 unit: true,
-                brand: true
+                brand: true,
+                item: true
             }
         },
         rv: {
@@ -91,7 +92,6 @@ export class CanvassService {
 
         const created = await this.prisma.canvass.create({
             data,
-            include: this.includedFields
         })
 
         this.logger.log('Successfully created canvass')
@@ -123,7 +123,6 @@ export class CanvassService {
         const updated = await this.prisma.canvass.update({
             data,
             where: { id },
-            include: this.includedFields,
         });
 
         this.logger.log('Successfully updated canvass');

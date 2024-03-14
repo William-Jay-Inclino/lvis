@@ -24,10 +24,6 @@ export class CanvassItemService {
 
 		this.logger.log('create()')
 
-		if (!input.canvass_id) {
-			throw new BadRequestException("canvass id not found")
-		}
-
 		const createdBy = this.authUser.user.username
 
 		const data: Prisma.CanvassItemCreateInput = {
@@ -64,7 +60,8 @@ export class CanvassItemService {
 				data,
 				include: {
 					unit: true,
-					brand: true
+					brand: true,
+					item: true
 				}
 			})
 
@@ -126,23 +123,12 @@ export class CanvassItemService {
 
 	}
 
-	// async findAll(): Promise<CanvassItem[]> {
-	// 	return await this.prisma.canvassItem.findMany({
-	// 		include: {
-	// 			unit: true,
-	// 			brand: true
-	// 		},
-	// 		where: {
-	// 			de
-	// 		},
-	// 	})
-	// }
-
 	async findOne(id: string): Promise<CanvassItem | null> {
 		const item = await this.prisma.canvassItem.findUnique({
 			include: {
 				unit: true,
-				brand: true
+				brand: true,
+				item: true
 			},
 			where: { id }
 		})
@@ -176,7 +162,8 @@ export class CanvassItemService {
 			},
 			include: {
 				unit: true,
-				brand: true
+				brand: true,
+				item: true
 			}
 		})
 
