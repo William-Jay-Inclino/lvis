@@ -22482,11 +22482,13 @@ export namespace Prisma {
   export type ItemAvgAggregateOutputType = {
     total_quantity: number | null
     initial_quantity: number | null
+    alert_level: number | null
   }
 
   export type ItemSumAggregateOutputType = {
     total_quantity: number | null
     initial_quantity: number | null
+    alert_level: number | null
   }
 
   export type ItemMinAggregateOutputType = {
@@ -22498,6 +22500,7 @@ export namespace Prisma {
     description: string | null
     total_quantity: number | null
     initial_quantity: number | null
+    alert_level: number | null
     created_by: string | null
     updated_by: string | null
     deleted_by: string | null
@@ -22515,6 +22518,7 @@ export namespace Prisma {
     description: string | null
     total_quantity: number | null
     initial_quantity: number | null
+    alert_level: number | null
     created_by: string | null
     updated_by: string | null
     deleted_by: string | null
@@ -22532,6 +22536,7 @@ export namespace Prisma {
     description: number
     total_quantity: number
     initial_quantity: number
+    alert_level: number
     created_by: number
     updated_by: number
     deleted_by: number
@@ -22545,11 +22550,13 @@ export namespace Prisma {
   export type ItemAvgAggregateInputType = {
     total_quantity?: true
     initial_quantity?: true
+    alert_level?: true
   }
 
   export type ItemSumAggregateInputType = {
     total_quantity?: true
     initial_quantity?: true
+    alert_level?: true
   }
 
   export type ItemMinAggregateInputType = {
@@ -22561,6 +22568,7 @@ export namespace Prisma {
     description?: true
     total_quantity?: true
     initial_quantity?: true
+    alert_level?: true
     created_by?: true
     updated_by?: true
     deleted_by?: true
@@ -22578,6 +22586,7 @@ export namespace Prisma {
     description?: true
     total_quantity?: true
     initial_quantity?: true
+    alert_level?: true
     created_by?: true
     updated_by?: true
     deleted_by?: true
@@ -22595,6 +22604,7 @@ export namespace Prisma {
     description?: true
     total_quantity?: true
     initial_quantity?: true
+    alert_level?: true
     created_by?: true
     updated_by?: true
     deleted_by?: true
@@ -22699,6 +22709,7 @@ export namespace Prisma {
     description: string | null
     total_quantity: number
     initial_quantity: number
+    alert_level: number
     created_by: string
     updated_by: string | null
     deleted_by: string | null
@@ -22735,6 +22746,7 @@ export namespace Prisma {
     description?: boolean
     total_quantity?: boolean
     initial_quantity?: boolean
+    alert_level?: boolean
     created_by?: boolean
     updated_by?: boolean
     deleted_by?: boolean
@@ -22757,6 +22769,7 @@ export namespace Prisma {
     description?: boolean
     total_quantity?: boolean
     initial_quantity?: boolean
+    alert_level?: boolean
     created_by?: boolean
     updated_by?: boolean
     deleted_by?: boolean
@@ -22791,6 +22804,7 @@ export namespace Prisma {
       description: string | null
       total_quantity: number
       initial_quantity: number
+      alert_level: number
       created_by: string
       updated_by: string | null
       deleted_by: string | null
@@ -23206,6 +23220,7 @@ export namespace Prisma {
     readonly description: FieldRef<"Item", 'String'>
     readonly total_quantity: FieldRef<"Item", 'Int'>
     readonly initial_quantity: FieldRef<"Item", 'Int'>
+    readonly alert_level: FieldRef<"Item", 'Int'>
     readonly created_by: FieldRef<"Item", 'String'>
     readonly updated_by: FieldRef<"Item", 'String'>
     readonly deleted_by: FieldRef<"Item", 'String'>
@@ -23616,6 +23631,8 @@ export namespace Prisma {
     price: number | null
     remarks: string | null
     is_initial: boolean | null
+    created_at: Date | null
+    created_by: string | null
   }
 
   export type ItemTransactionMaxAggregateOutputType = {
@@ -23627,6 +23644,8 @@ export namespace Prisma {
     price: number | null
     remarks: string | null
     is_initial: boolean | null
+    created_at: Date | null
+    created_by: string | null
   }
 
   export type ItemTransactionCountAggregateOutputType = {
@@ -23638,6 +23657,8 @@ export namespace Prisma {
     price: number
     remarks: number
     is_initial: number
+    created_at: number
+    created_by: number
     _all: number
   }
 
@@ -23665,6 +23686,8 @@ export namespace Prisma {
     price?: true
     remarks?: true
     is_initial?: true
+    created_at?: true
+    created_by?: true
   }
 
   export type ItemTransactionMaxAggregateInputType = {
@@ -23676,6 +23699,8 @@ export namespace Prisma {
     price?: true
     remarks?: true
     is_initial?: true
+    created_at?: true
+    created_by?: true
   }
 
   export type ItemTransactionCountAggregateInputType = {
@@ -23687,6 +23712,8 @@ export namespace Prisma {
     price?: true
     remarks?: true
     is_initial?: true
+    created_at?: true
+    created_by?: true
     _all?: true
   }
 
@@ -23785,6 +23812,8 @@ export namespace Prisma {
     price: number
     remarks: string | null
     is_initial: boolean
+    created_at: Date
+    created_by: string
     _count: ItemTransactionCountAggregateOutputType | null
     _avg: ItemTransactionAvgAggregateOutputType | null
     _sum: ItemTransactionSumAggregateOutputType | null
@@ -23815,6 +23844,8 @@ export namespace Prisma {
     price?: boolean
     remarks?: boolean
     is_initial?: boolean
+    created_at?: boolean
+    created_by?: boolean
     item?: boolean | ItemDefaultArgs<ExtArgs>
     rr_item?: boolean | ItemTransaction$rr_itemArgs<ExtArgs>
   }, ExtArgs["result"]["itemTransaction"]>
@@ -23828,6 +23859,8 @@ export namespace Prisma {
     price?: boolean
     remarks?: boolean
     is_initial?: boolean
+    created_at?: boolean
+    created_by?: boolean
   }
 
   export type ItemTransactionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -23851,6 +23884,8 @@ export namespace Prisma {
       price: number
       remarks: string | null
       is_initial: boolean
+      created_at: Date
+      created_by: string
     }, ExtArgs["result"]["itemTransaction"]>
     composites: {}
   }
@@ -24256,6 +24291,8 @@ export namespace Prisma {
     readonly price: FieldRef<"ItemTransaction", 'Float'>
     readonly remarks: FieldRef<"ItemTransaction", 'String'>
     readonly is_initial: FieldRef<"ItemTransaction", 'Boolean'>
+    readonly created_at: FieldRef<"ItemTransaction", 'DateTime'>
+    readonly created_by: FieldRef<"ItemTransaction", 'String'>
   }
     
 
@@ -29918,6 +29955,7 @@ export namespace Prisma {
     description: 'description',
     total_quantity: 'total_quantity',
     initial_quantity: 'initial_quantity',
+    alert_level: 'alert_level',
     created_by: 'created_by',
     updated_by: 'updated_by',
     deleted_by: 'deleted_by',
@@ -29937,7 +29975,9 @@ export namespace Prisma {
     quantity: 'quantity',
     price: 'price',
     remarks: 'remarks',
-    is_initial: 'is_initial'
+    is_initial: 'is_initial',
+    created_at: 'created_at',
+    created_by: 'created_by'
   };
 
   export type ItemTransactionScalarFieldEnum = (typeof ItemTransactionScalarFieldEnum)[keyof typeof ItemTransactionScalarFieldEnum]
@@ -31899,6 +31939,7 @@ export namespace Prisma {
     description?: StringNullableFilter<"Item"> | string | null
     total_quantity?: IntFilter<"Item"> | number
     initial_quantity?: IntFilter<"Item"> | number
+    alert_level?: IntFilter<"Item"> | number
     created_by?: StringFilter<"Item"> | string
     updated_by?: StringNullableFilter<"Item"> | string | null
     deleted_by?: StringNullableFilter<"Item"> | string | null
@@ -31920,6 +31961,7 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     total_quantity?: SortOrder
     initial_quantity?: SortOrder
+    alert_level?: SortOrder
     created_by?: SortOrder
     updated_by?: SortOrderInput | SortOrder
     deleted_by?: SortOrderInput | SortOrder
@@ -31944,6 +31986,7 @@ export namespace Prisma {
     description?: StringNullableFilter<"Item"> | string | null
     total_quantity?: IntFilter<"Item"> | number
     initial_quantity?: IntFilter<"Item"> | number
+    alert_level?: IntFilter<"Item"> | number
     created_by?: StringFilter<"Item"> | string
     updated_by?: StringNullableFilter<"Item"> | string | null
     deleted_by?: StringNullableFilter<"Item"> | string | null
@@ -31965,6 +32008,7 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     total_quantity?: SortOrder
     initial_quantity?: SortOrder
+    alert_level?: SortOrder
     created_by?: SortOrder
     updated_by?: SortOrderInput | SortOrder
     deleted_by?: SortOrderInput | SortOrder
@@ -31990,6 +32034,7 @@ export namespace Prisma {
     description?: StringNullableWithAggregatesFilter<"Item"> | string | null
     total_quantity?: IntWithAggregatesFilter<"Item"> | number
     initial_quantity?: IntWithAggregatesFilter<"Item"> | number
+    alert_level?: IntWithAggregatesFilter<"Item"> | number
     created_by?: StringWithAggregatesFilter<"Item"> | string
     updated_by?: StringNullableWithAggregatesFilter<"Item"> | string | null
     deleted_by?: StringNullableWithAggregatesFilter<"Item"> | string | null
@@ -32010,6 +32055,8 @@ export namespace Prisma {
     price?: FloatFilter<"ItemTransaction"> | number
     remarks?: StringNullableFilter<"ItemTransaction"> | string | null
     is_initial?: BoolFilter<"ItemTransaction"> | boolean
+    created_at?: DateTimeFilter<"ItemTransaction"> | Date | string
+    created_by?: StringFilter<"ItemTransaction"> | string
     item?: XOR<ItemRelationFilter, ItemWhereInput>
     rr_item?: XOR<RRItemNullableRelationFilter, RRItemWhereInput> | null
   }
@@ -32023,6 +32070,8 @@ export namespace Prisma {
     price?: SortOrder
     remarks?: SortOrderInput | SortOrder
     is_initial?: SortOrder
+    created_at?: SortOrder
+    created_by?: SortOrder
     item?: ItemOrderByWithRelationInput
     rr_item?: RRItemOrderByWithRelationInput
   }
@@ -32039,6 +32088,8 @@ export namespace Prisma {
     price?: FloatFilter<"ItemTransaction"> | number
     remarks?: StringNullableFilter<"ItemTransaction"> | string | null
     is_initial?: BoolFilter<"ItemTransaction"> | boolean
+    created_at?: DateTimeFilter<"ItemTransaction"> | Date | string
+    created_by?: StringFilter<"ItemTransaction"> | string
     item?: XOR<ItemRelationFilter, ItemWhereInput>
     rr_item?: XOR<RRItemNullableRelationFilter, RRItemWhereInput> | null
   }, "id" | "rr_item_id">
@@ -32052,6 +32103,8 @@ export namespace Prisma {
     price?: SortOrder
     remarks?: SortOrderInput | SortOrder
     is_initial?: SortOrder
+    created_at?: SortOrder
+    created_by?: SortOrder
     _count?: ItemTransactionCountOrderByAggregateInput
     _avg?: ItemTransactionAvgOrderByAggregateInput
     _max?: ItemTransactionMaxOrderByAggregateInput
@@ -32071,6 +32124,8 @@ export namespace Prisma {
     price?: FloatWithAggregatesFilter<"ItemTransaction"> | number
     remarks?: StringNullableWithAggregatesFilter<"ItemTransaction"> | string | null
     is_initial?: BoolWithAggregatesFilter<"ItemTransaction"> | boolean
+    created_at?: DateTimeWithAggregatesFilter<"ItemTransaction"> | Date | string
+    created_by?: StringWithAggregatesFilter<"ItemTransaction"> | string
   }
 
   export type ItemTypeWhereInput = {
@@ -34465,6 +34520,7 @@ export namespace Prisma {
     description?: string | null
     total_quantity: number
     initial_quantity: number
+    alert_level?: number
     created_by: string
     updated_by?: string | null
     deleted_by?: string | null
@@ -34486,6 +34542,7 @@ export namespace Prisma {
     description?: string | null
     total_quantity: number
     initial_quantity: number
+    alert_level?: number
     created_by: string
     updated_by?: string | null
     deleted_by?: string | null
@@ -34503,6 +34560,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     total_quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
+    alert_level?: IntFieldUpdateOperationsInput | number
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -34524,6 +34582,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     total_quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
+    alert_level?: IntFieldUpdateOperationsInput | number
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -34543,6 +34602,7 @@ export namespace Prisma {
     description?: string | null
     total_quantity: number
     initial_quantity: number
+    alert_level?: number
     created_by: string
     updated_by?: string | null
     deleted_by?: string | null
@@ -34558,6 +34618,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     total_quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
+    alert_level?: IntFieldUpdateOperationsInput | number
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -34575,6 +34636,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     total_quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
+    alert_level?: IntFieldUpdateOperationsInput | number
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -34589,6 +34651,8 @@ export namespace Prisma {
     price: number
     remarks?: string | null
     is_initial?: boolean
+    created_at?: Date | string
+    created_by?: string
     item: ItemCreateNestedOneWithoutItem_transactionsInput
     rr_item?: RRItemCreateNestedOneWithoutItem_transactionInput
   }
@@ -34602,6 +34666,8 @@ export namespace Prisma {
     price: number
     remarks?: string | null
     is_initial?: boolean
+    created_at?: Date | string
+    created_by?: string
   }
 
   export type ItemTransactionUpdateInput = {
@@ -34610,6 +34676,8 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     is_initial?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_by?: StringFieldUpdateOperationsInput | string
     item?: ItemUpdateOneRequiredWithoutItem_transactionsNestedInput
     rr_item?: RRItemUpdateOneWithoutItem_transactionNestedInput
   }
@@ -34623,6 +34691,8 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     is_initial?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_by?: StringFieldUpdateOperationsInput | string
   }
 
   export type ItemTransactionCreateManyInput = {
@@ -34634,6 +34704,8 @@ export namespace Prisma {
     price: number
     remarks?: string | null
     is_initial?: boolean
+    created_at?: Date | string
+    created_by?: string
   }
 
   export type ItemTransactionUpdateManyMutationInput = {
@@ -34642,6 +34714,8 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     is_initial?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_by?: StringFieldUpdateOperationsInput | string
   }
 
   export type ItemTransactionUncheckedUpdateManyInput = {
@@ -34653,6 +34727,8 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     is_initial?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_by?: StringFieldUpdateOperationsInput | string
   }
 
   export type ItemTypeCreateInput = {
@@ -36468,6 +36544,7 @@ export namespace Prisma {
     description?: SortOrder
     total_quantity?: SortOrder
     initial_quantity?: SortOrder
+    alert_level?: SortOrder
     created_by?: SortOrder
     updated_by?: SortOrder
     deleted_by?: SortOrder
@@ -36479,6 +36556,7 @@ export namespace Prisma {
   export type ItemAvgOrderByAggregateInput = {
     total_quantity?: SortOrder
     initial_quantity?: SortOrder
+    alert_level?: SortOrder
   }
 
   export type ItemMaxOrderByAggregateInput = {
@@ -36490,6 +36568,7 @@ export namespace Prisma {
     description?: SortOrder
     total_quantity?: SortOrder
     initial_quantity?: SortOrder
+    alert_level?: SortOrder
     created_by?: SortOrder
     updated_by?: SortOrder
     deleted_by?: SortOrder
@@ -36507,6 +36586,7 @@ export namespace Prisma {
     description?: SortOrder
     total_quantity?: SortOrder
     initial_quantity?: SortOrder
+    alert_level?: SortOrder
     created_by?: SortOrder
     updated_by?: SortOrder
     deleted_by?: SortOrder
@@ -36518,6 +36598,7 @@ export namespace Prisma {
   export type ItemSumOrderByAggregateInput = {
     total_quantity?: SortOrder
     initial_quantity?: SortOrder
+    alert_level?: SortOrder
   }
 
   export type ItemRelationFilter = {
@@ -36534,6 +36615,8 @@ export namespace Prisma {
     price?: SortOrder
     remarks?: SortOrder
     is_initial?: SortOrder
+    created_at?: SortOrder
+    created_by?: SortOrder
   }
 
   export type ItemTransactionAvgOrderByAggregateInput = {
@@ -36552,6 +36635,8 @@ export namespace Prisma {
     price?: SortOrder
     remarks?: SortOrder
     is_initial?: SortOrder
+    created_at?: SortOrder
+    created_by?: SortOrder
   }
 
   export type ItemTransactionMinOrderByAggregateInput = {
@@ -36563,6 +36648,8 @@ export namespace Prisma {
     price?: SortOrder
     remarks?: SortOrder
     is_initial?: SortOrder
+    created_at?: SortOrder
+    created_by?: SortOrder
   }
 
   export type ItemTransactionSumOrderByAggregateInput = {
@@ -39091,6 +39178,7 @@ export namespace Prisma {
     description?: string | null
     total_quantity: number
     initial_quantity: number
+    alert_level?: number
     created_by: string
     updated_by?: string | null
     deleted_by?: string | null
@@ -39111,6 +39199,7 @@ export namespace Prisma {
     description?: string | null
     total_quantity: number
     initial_quantity: number
+    alert_level?: number
     created_by: string
     updated_by?: string | null
     deleted_by?: string | null
@@ -39291,6 +39380,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     total_quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
+    alert_level?: IntFieldUpdateOperationsInput | number
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -39311,6 +39401,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     total_quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
+    alert_level?: IntFieldUpdateOperationsInput | number
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -42219,6 +42310,8 @@ export namespace Prisma {
     price: number
     remarks?: string | null
     is_initial?: boolean
+    created_at?: Date | string
+    created_by?: string
     item: ItemCreateNestedOneWithoutItem_transactionsInput
   }
 
@@ -42230,6 +42323,8 @@ export namespace Prisma {
     price: number
     remarks?: string | null
     is_initial?: boolean
+    created_at?: Date | string
+    created_by?: string
   }
 
   export type ItemTransactionCreateOrConnectWithoutRr_itemInput = {
@@ -42344,6 +42439,8 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     is_initial?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_by?: StringFieldUpdateOperationsInput | string
     item?: ItemUpdateOneRequiredWithoutItem_transactionsNestedInput
   }
 
@@ -42355,6 +42452,8 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     is_initial?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_by?: StringFieldUpdateOperationsInput | string
   }
 
   export type ItemTypeCreateWithoutItemsInput = {
@@ -42390,6 +42489,8 @@ export namespace Prisma {
     price: number
     remarks?: string | null
     is_initial?: boolean
+    created_at?: Date | string
+    created_by?: string
     rr_item?: RRItemCreateNestedOneWithoutItem_transactionInput
   }
 
@@ -42401,6 +42502,8 @@ export namespace Prisma {
     price: number
     remarks?: string | null
     is_initial?: boolean
+    created_at?: Date | string
+    created_by?: string
   }
 
   export type ItemTransactionCreateOrConnectWithoutItemInput = {
@@ -42541,6 +42644,8 @@ export namespace Prisma {
     price?: FloatFilter<"ItemTransaction"> | number
     remarks?: StringNullableFilter<"ItemTransaction"> | string | null
     is_initial?: BoolFilter<"ItemTransaction"> | boolean
+    created_at?: DateTimeFilter<"ItemTransaction"> | Date | string
+    created_by?: StringFilter<"ItemTransaction"> | string
   }
 
   export type UnitUpsertWithoutItemsInput = {
@@ -42601,6 +42706,7 @@ export namespace Prisma {
     description?: string | null
     total_quantity: number
     initial_quantity: number
+    alert_level?: number
     created_by: string
     updated_by?: string | null
     deleted_by?: string | null
@@ -42621,6 +42727,7 @@ export namespace Prisma {
     description?: string | null
     total_quantity: number
     initial_quantity: number
+    alert_level?: number
     created_by: string
     updated_by?: string | null
     deleted_by?: string | null
@@ -42680,6 +42787,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     total_quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
+    alert_level?: IntFieldUpdateOperationsInput | number
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -42700,6 +42808,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     total_quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
+    alert_level?: IntFieldUpdateOperationsInput | number
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -42749,6 +42858,7 @@ export namespace Prisma {
     description?: string | null
     total_quantity: number
     initial_quantity: number
+    alert_level?: number
     created_by: string
     updated_by?: string | null
     deleted_by?: string | null
@@ -42768,6 +42878,7 @@ export namespace Prisma {
     description?: string | null
     total_quantity: number
     initial_quantity: number
+    alert_level?: number
     created_by: string
     updated_by?: string | null
     deleted_by?: string | null
@@ -42816,6 +42927,7 @@ export namespace Prisma {
     description?: StringNullableFilter<"Item"> | string | null
     total_quantity?: IntFilter<"Item"> | number
     initial_quantity?: IntFilter<"Item"> | number
+    alert_level?: IntFilter<"Item"> | number
     created_by?: StringFilter<"Item"> | string
     updated_by?: StringNullableFilter<"Item"> | string | null
     deleted_by?: StringNullableFilter<"Item"> | string | null
@@ -42921,6 +43033,7 @@ export namespace Prisma {
     description?: string | null
     total_quantity: number
     initial_quantity: number
+    alert_level?: number
     created_by: string
     updated_by?: string | null
     deleted_by?: string | null
@@ -42940,6 +43053,7 @@ export namespace Prisma {
     description?: string | null
     total_quantity: number
     initial_quantity: number
+    alert_level?: number
     created_by: string
     updated_by?: string | null
     deleted_by?: string | null
@@ -43882,6 +43996,8 @@ export namespace Prisma {
     price: number
     remarks?: string | null
     is_initial?: boolean
+    created_at?: Date | string
+    created_by?: string
   }
 
   export type CanvassItemCreateManyItemInput = {
@@ -43903,6 +44019,8 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     is_initial?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_by?: StringFieldUpdateOperationsInput | string
     rr_item?: RRItemUpdateOneWithoutItem_transactionNestedInput
   }
 
@@ -43914,6 +44032,8 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     is_initial?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_by?: StringFieldUpdateOperationsInput | string
   }
 
   export type ItemTransactionUncheckedUpdateManyWithoutItemInput = {
@@ -43924,6 +44044,8 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     remarks?: NullableStringFieldUpdateOperationsInput | string | null
     is_initial?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_by?: StringFieldUpdateOperationsInput | string
   }
 
   export type CanvassItemUpdateWithoutItemInput = {
@@ -43975,6 +44097,7 @@ export namespace Prisma {
     description?: string | null
     total_quantity: number
     initial_quantity: number
+    alert_level?: number
     created_by: string
     updated_by?: string | null
     deleted_by?: string | null
@@ -43990,6 +44113,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     total_quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
+    alert_level?: IntFieldUpdateOperationsInput | number
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -44009,6 +44133,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     total_quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
+    alert_level?: IntFieldUpdateOperationsInput | number
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -44027,6 +44152,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     total_quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
+    alert_level?: IntFieldUpdateOperationsInput | number
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -44102,6 +44228,7 @@ export namespace Prisma {
     description?: string | null
     total_quantity: number
     initial_quantity: number
+    alert_level?: number
     created_by: string
     updated_by?: string | null
     deleted_by?: string | null
@@ -44158,6 +44285,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     total_quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
+    alert_level?: IntFieldUpdateOperationsInput | number
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -44177,6 +44305,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     total_quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
+    alert_level?: IntFieldUpdateOperationsInput | number
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -44195,6 +44324,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     total_quantity?: IntFieldUpdateOperationsInput | number
     initial_quantity?: IntFieldUpdateOperationsInput | number
+    alert_level?: IntFieldUpdateOperationsInput | number
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null

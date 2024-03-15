@@ -435,6 +435,7 @@ model Item {
   description      String?
   total_quantity   Int
   initial_quantity Int
+  alert_level      Int     @default(20)
 
   created_by String
   updated_by String?
@@ -498,6 +499,9 @@ model ItemTransaction {
 
   item    Item    @relation(fields: [item_id], references: [id], onDelete: Cascade)
   rr_item RRItem? @relation(fields: [rr_item_id], references: [id], onDelete: Cascade)
+
+  created_at DateTime @default(now())
+  created_by String   @default("admin")
 
   @@map("item_transaction")
 }

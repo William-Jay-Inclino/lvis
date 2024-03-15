@@ -34,7 +34,7 @@ export class CanvassService {
                             include: {
                                 po: {
                                     include: {
-                                        rr: true
+                                        rrs: true
                                     }
                                 }
                             }

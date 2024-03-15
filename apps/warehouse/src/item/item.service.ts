@@ -36,7 +36,9 @@ export class ItemService {
 			type: ITEM_TRANSACTION_TYPE.STOCK_IN,
 			quantity: input.initial_quantity,
 			price: input.initial_average_price,
-			remarks: 'Initial item transaction'
+			remarks: 'Initial item transaction',
+			created_at: new Date(),
+			created_by: this.authUser.user.username
 		}
 
 		const createdBy = this.authUser.user.username
@@ -91,7 +93,11 @@ export class ItemService {
 		}
 
 		const items = await this.prisma.item.findMany({
-			include: this.includedFields,
+			include: {
+				item_type: true,
+				unit: true,
+				item_transactions: true
+			},
 			where: whereCondition,
 			orderBy: {
 				code: 'asc'

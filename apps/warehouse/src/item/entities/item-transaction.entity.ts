@@ -1,7 +1,6 @@
 import { ObjectType, Field, Int, ID, Float } from '@nestjs/graphql';
-import { Unit } from '../../unit/entities/unit.entity';
-import { ItemType } from '../../item-type/entities/item-type.entity';
 import { ITEM_TRANSACTION_TYPE } from '../../__common__/types';
+import { RrItem } from '../../rr-item/entities/rr-item.entity';
 
 @ObjectType()
 export class ItemTransaction {
@@ -12,8 +11,8 @@ export class ItemTransaction {
     @Field()
     item_id: string;
 
-    @Field()
-    rr_item_id: string;
+    @Field({ nullable: true })
+    rr_item_id: string | null;
 
     @Field(() => Int)
     type: ITEM_TRANSACTION_TYPE;
@@ -30,4 +29,16 @@ export class ItemTransaction {
     @Field(() => Boolean)
     is_initial: boolean;
 
+
+    @Field(() => Date)
+    created_at: Date;
+
+    @Field()
+    created_by: string;
+
+
+    // =============== derived / resolvers =============== 
+
+    @Field(() => RrItem, { nullable: true })
+    rr_item: RrItem | null;
 }

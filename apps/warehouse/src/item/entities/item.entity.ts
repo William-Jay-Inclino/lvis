@@ -30,6 +30,9 @@ export class Item {
   @Field(() => Int)
   initial_quantity: number;
 
+  @Field(() => Int)
+  alert_level: number;
+
   @Field()
   created_by: string;
 
