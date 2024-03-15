@@ -47,8 +47,8 @@ export class PO {
   @Field(() => MeqsSupplier)
   meqs_supplier: MeqsSupplier
 
-  @Field(() => RR, { nullable: true })
-  rr?: RR;
+  @Field(() => [RR])
+  rrs: RR[];
 
   @Field(() => [POApprover])
   po_approvers: POApprover

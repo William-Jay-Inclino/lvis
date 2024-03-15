@@ -37,7 +37,7 @@ export class RvService {
                     include: {
                         po: {
                             include: {
-                                rr: true
+                                rrs: true
                             }
                         }
                     }

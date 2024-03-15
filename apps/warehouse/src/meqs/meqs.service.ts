@@ -64,7 +64,7 @@ export class MeqsService {
             include: {
                 po: {
                     include: {
-                        rr: true
+                        rrs: true
                     }
                 },
                 supplier: true,

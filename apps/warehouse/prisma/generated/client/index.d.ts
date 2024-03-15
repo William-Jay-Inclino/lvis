@@ -3082,10 +3082,12 @@ export namespace Prisma {
    */
 
   export type POCountOutputType = {
+    rrs: number
     po_approvers: number
   }
 
   export type POCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    rrs?: boolean | POCountOutputTypeCountRrsArgs
     po_approvers?: boolean | POCountOutputTypeCountPo_approversArgs
   }
 
@@ -3099,6 +3101,14 @@ export namespace Prisma {
      * Select specific fields to fetch from the POCountOutputType
      */
     select?: POCountOutputTypeSelect<ExtArgs> | null
+  }
+
+
+  /**
+   * POCountOutputType without action
+   */
+  export type POCountOutputTypeCountRrsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RRWhereInput
   }
 
 
@@ -17368,7 +17378,7 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     meqs_supplier?: boolean | MEQSSupplierDefaultArgs<ExtArgs>
-    rr?: boolean | PO$rrArgs<ExtArgs>
+    rrs?: boolean | PO$rrsArgs<ExtArgs>
     po_approvers?: boolean | PO$po_approversArgs<ExtArgs>
     _count?: boolean | POCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["pO"]>
@@ -17389,7 +17399,7 @@ export namespace Prisma {
 
   export type POInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meqs_supplier?: boolean | MEQSSupplierDefaultArgs<ExtArgs>
-    rr?: boolean | PO$rrArgs<ExtArgs>
+    rrs?: boolean | PO$rrsArgs<ExtArgs>
     po_approvers?: boolean | PO$po_approversArgs<ExtArgs>
     _count?: boolean | POCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -17399,7 +17409,7 @@ export namespace Prisma {
     name: "PO"
     objects: {
       meqs_supplier: Prisma.$MEQSSupplierPayload<ExtArgs>
-      rr: Prisma.$RRPayload<ExtArgs> | null
+      rrs: Prisma.$RRPayload<ExtArgs>[]
       po_approvers: Prisma.$POApproverPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -17781,7 +17791,7 @@ export namespace Prisma {
 
     meqs_supplier<T extends MEQSSupplierDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MEQSSupplierDefaultArgs<ExtArgs>>): Prisma__MEQSSupplierClient<$Result.GetResult<Prisma.$MEQSSupplierPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
-    rr<T extends PO$rrArgs<ExtArgs> = {}>(args?: Subset<T, PO$rrArgs<ExtArgs>>): Prisma__RRClient<$Result.GetResult<Prisma.$RRPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+    rrs<T extends PO$rrsArgs<ExtArgs> = {}>(args?: Subset<T, PO$rrsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RRPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     po_approvers<T extends PO$po_approversArgs<ExtArgs> = {}>(args?: Subset<T, PO$po_approversArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$POApproverPayload<ExtArgs>, T, 'findMany'> | Null>;
 
@@ -18136,9 +18146,9 @@ export namespace Prisma {
 
 
   /**
-   * PO.rr
+   * PO.rrs
    */
-  export type PO$rrArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type PO$rrsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the RR
      */
@@ -18148,6 +18158,11 @@ export namespace Prisma {
      */
     include?: RRInclude<ExtArgs> | null
     where?: RRWhereInput
+    orderBy?: RROrderByWithRelationInput | RROrderByWithRelationInput[]
+    cursor?: RRWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RRScalarFieldEnum | RRScalarFieldEnum[]
   }
 
 
@@ -31397,7 +31412,7 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"PO"> | Date | string
     updated_at?: DateTimeFilter<"PO"> | Date | string
     meqs_supplier?: XOR<MEQSSupplierRelationFilter, MEQSSupplierWhereInput>
-    rr?: XOR<RRNullableRelationFilter, RRWhereInput> | null
+    rrs?: RRListRelationFilter
     po_approvers?: POApproverListRelationFilter
   }
 
@@ -31414,7 +31429,7 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     meqs_supplier?: MEQSSupplierOrderByWithRelationInput
-    rr?: RROrderByWithRelationInput
+    rrs?: RROrderByRelationAggregateInput
     po_approvers?: POApproverOrderByRelationAggregateInput
   }
 
@@ -31434,7 +31449,7 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"PO"> | Date | string
     updated_at?: DateTimeFilter<"PO"> | Date | string
     meqs_supplier?: XOR<MEQSSupplierRelationFilter, MEQSSupplierWhereInput>
-    rr?: XOR<RRNullableRelationFilter, RRWhereInput> | null
+    rrs?: RRListRelationFilter
     po_approvers?: POApproverListRelationFilter
   }, "id" | "meqs_supplier_id" | "po_number">
 
@@ -31623,11 +31638,11 @@ export namespace Prisma {
 
   export type RRWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    po_id?: string
     rr_number?: string
     AND?: RRWhereInput | RRWhereInput[]
     OR?: RRWhereInput[]
     NOT?: RRWhereInput | RRWhereInput[]
+    po_id?: StringFilter<"RR"> | string
     rr_date?: DateTimeFilter<"RR"> | Date | string
     received_by_id?: StringFilter<"RR"> | string
     invoice_number?: StringFilter<"RR"> | string
@@ -31644,7 +31659,7 @@ export namespace Prisma {
     po?: XOR<PORelationFilter, POWhereInput>
     rr_approvers?: RRApproverListRelationFilter
     rr_items?: RRItemListRelationFilter
-  }, "id" | "po_id" | "rr_number">
+  }, "id" | "rr_number">
 
   export type RROrderByWithAggregationInput = {
     id?: SortOrder
@@ -33895,7 +33910,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     meqs_supplier: MEQSSupplierCreateNestedOneWithoutPoInput
-    rr?: RRCreateNestedOneWithoutPoInput
+    rrs?: RRCreateNestedManyWithoutPoInput
     po_approvers?: POApproverCreateNestedManyWithoutPoInput
   }
 
@@ -33911,7 +33926,7 @@ export namespace Prisma {
     cancelled_at?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
-    rr?: RRUncheckedCreateNestedOneWithoutPoInput
+    rrs?: RRUncheckedCreateNestedManyWithoutPoInput
     po_approvers?: POApproverUncheckedCreateNestedManyWithoutPoInput
   }
 
@@ -33927,7 +33942,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     meqs_supplier?: MEQSSupplierUpdateOneRequiredWithoutPoNestedInput
-    rr?: RRUpdateOneWithoutPoNestedInput
+    rrs?: RRUpdateManyWithoutPoNestedInput
     po_approvers?: POApproverUpdateManyWithoutPoNestedInput
   }
 
@@ -33943,7 +33958,7 @@ export namespace Prisma {
     cancelled_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    rr?: RRUncheckedUpdateOneWithoutPoNestedInput
+    rrs?: RRUncheckedUpdateManyWithoutPoNestedInput
     po_approvers?: POApproverUncheckedUpdateManyWithoutPoNestedInput
   }
 
@@ -34122,7 +34137,7 @@ export namespace Prisma {
     cancelled_at?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
-    po: POCreateNestedOneWithoutRrInput
+    po: POCreateNestedOneWithoutRrsInput
     rr_approvers?: RRApproverCreateNestedManyWithoutRrInput
     rr_items?: RRItemCreateNestedManyWithoutRrInput
   }
@@ -34164,7 +34179,7 @@ export namespace Prisma {
     cancelled_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    po?: POUpdateOneRequiredWithoutRrNestedInput
+    po?: POUpdateOneRequiredWithoutRrsNestedInput
     rr_approvers?: RRApproverUpdateManyWithoutRrNestedInput
     rr_items?: RRItemUpdateManyWithoutRrNestedInput
   }
@@ -36094,15 +36109,20 @@ export namespace Prisma {
     order?: SortOrder
   }
 
-  export type RRNullableRelationFilter = {
-    is?: RRWhereInput | null
-    isNot?: RRWhereInput | null
+  export type RRListRelationFilter = {
+    every?: RRWhereInput
+    some?: RRWhereInput
+    none?: RRWhereInput
   }
 
   export type POApproverListRelationFilter = {
     every?: POApproverWhereInput
     some?: POApproverWhereInput
     none?: POApproverWhereInput
+  }
+
+  export type RROrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type POApproverOrderByRelationAggregateInput = {
@@ -37722,10 +37742,11 @@ export namespace Prisma {
     connect?: MEQSSupplierWhereUniqueInput
   }
 
-  export type RRCreateNestedOneWithoutPoInput = {
-    create?: XOR<RRCreateWithoutPoInput, RRUncheckedCreateWithoutPoInput>
-    connectOrCreate?: RRCreateOrConnectWithoutPoInput
-    connect?: RRWhereUniqueInput
+  export type RRCreateNestedManyWithoutPoInput = {
+    create?: XOR<RRCreateWithoutPoInput, RRUncheckedCreateWithoutPoInput> | RRCreateWithoutPoInput[] | RRUncheckedCreateWithoutPoInput[]
+    connectOrCreate?: RRCreateOrConnectWithoutPoInput | RRCreateOrConnectWithoutPoInput[]
+    createMany?: RRCreateManyPoInputEnvelope
+    connect?: RRWhereUniqueInput | RRWhereUniqueInput[]
   }
 
   export type POApproverCreateNestedManyWithoutPoInput = {
@@ -37735,10 +37756,11 @@ export namespace Prisma {
     connect?: POApproverWhereUniqueInput | POApproverWhereUniqueInput[]
   }
 
-  export type RRUncheckedCreateNestedOneWithoutPoInput = {
-    create?: XOR<RRCreateWithoutPoInput, RRUncheckedCreateWithoutPoInput>
-    connectOrCreate?: RRCreateOrConnectWithoutPoInput
-    connect?: RRWhereUniqueInput
+  export type RRUncheckedCreateNestedManyWithoutPoInput = {
+    create?: XOR<RRCreateWithoutPoInput, RRUncheckedCreateWithoutPoInput> | RRCreateWithoutPoInput[] | RRUncheckedCreateWithoutPoInput[]
+    connectOrCreate?: RRCreateOrConnectWithoutPoInput | RRCreateOrConnectWithoutPoInput[]
+    createMany?: RRCreateManyPoInputEnvelope
+    connect?: RRWhereUniqueInput | RRWhereUniqueInput[]
   }
 
   export type POApproverUncheckedCreateNestedManyWithoutPoInput = {
@@ -37756,14 +37778,18 @@ export namespace Prisma {
     update?: XOR<XOR<MEQSSupplierUpdateToOneWithWhereWithoutPoInput, MEQSSupplierUpdateWithoutPoInput>, MEQSSupplierUncheckedUpdateWithoutPoInput>
   }
 
-  export type RRUpdateOneWithoutPoNestedInput = {
-    create?: XOR<RRCreateWithoutPoInput, RRUncheckedCreateWithoutPoInput>
-    connectOrCreate?: RRCreateOrConnectWithoutPoInput
-    upsert?: RRUpsertWithoutPoInput
-    disconnect?: RRWhereInput | boolean
-    delete?: RRWhereInput | boolean
-    connect?: RRWhereUniqueInput
-    update?: XOR<XOR<RRUpdateToOneWithWhereWithoutPoInput, RRUpdateWithoutPoInput>, RRUncheckedUpdateWithoutPoInput>
+  export type RRUpdateManyWithoutPoNestedInput = {
+    create?: XOR<RRCreateWithoutPoInput, RRUncheckedCreateWithoutPoInput> | RRCreateWithoutPoInput[] | RRUncheckedCreateWithoutPoInput[]
+    connectOrCreate?: RRCreateOrConnectWithoutPoInput | RRCreateOrConnectWithoutPoInput[]
+    upsert?: RRUpsertWithWhereUniqueWithoutPoInput | RRUpsertWithWhereUniqueWithoutPoInput[]
+    createMany?: RRCreateManyPoInputEnvelope
+    set?: RRWhereUniqueInput | RRWhereUniqueInput[]
+    disconnect?: RRWhereUniqueInput | RRWhereUniqueInput[]
+    delete?: RRWhereUniqueInput | RRWhereUniqueInput[]
+    connect?: RRWhereUniqueInput | RRWhereUniqueInput[]
+    update?: RRUpdateWithWhereUniqueWithoutPoInput | RRUpdateWithWhereUniqueWithoutPoInput[]
+    updateMany?: RRUpdateManyWithWhereWithoutPoInput | RRUpdateManyWithWhereWithoutPoInput[]
+    deleteMany?: RRScalarWhereInput | RRScalarWhereInput[]
   }
 
   export type POApproverUpdateManyWithoutPoNestedInput = {
@@ -37780,14 +37806,18 @@ export namespace Prisma {
     deleteMany?: POApproverScalarWhereInput | POApproverScalarWhereInput[]
   }
 
-  export type RRUncheckedUpdateOneWithoutPoNestedInput = {
-    create?: XOR<RRCreateWithoutPoInput, RRUncheckedCreateWithoutPoInput>
-    connectOrCreate?: RRCreateOrConnectWithoutPoInput
-    upsert?: RRUpsertWithoutPoInput
-    disconnect?: RRWhereInput | boolean
-    delete?: RRWhereInput | boolean
-    connect?: RRWhereUniqueInput
-    update?: XOR<XOR<RRUpdateToOneWithWhereWithoutPoInput, RRUpdateWithoutPoInput>, RRUncheckedUpdateWithoutPoInput>
+  export type RRUncheckedUpdateManyWithoutPoNestedInput = {
+    create?: XOR<RRCreateWithoutPoInput, RRUncheckedCreateWithoutPoInput> | RRCreateWithoutPoInput[] | RRUncheckedCreateWithoutPoInput[]
+    connectOrCreate?: RRCreateOrConnectWithoutPoInput | RRCreateOrConnectWithoutPoInput[]
+    upsert?: RRUpsertWithWhereUniqueWithoutPoInput | RRUpsertWithWhereUniqueWithoutPoInput[]
+    createMany?: RRCreateManyPoInputEnvelope
+    set?: RRWhereUniqueInput | RRWhereUniqueInput[]
+    disconnect?: RRWhereUniqueInput | RRWhereUniqueInput[]
+    delete?: RRWhereUniqueInput | RRWhereUniqueInput[]
+    connect?: RRWhereUniqueInput | RRWhereUniqueInput[]
+    update?: RRUpdateWithWhereUniqueWithoutPoInput | RRUpdateWithWhereUniqueWithoutPoInput[]
+    updateMany?: RRUpdateManyWithWhereWithoutPoInput | RRUpdateManyWithWhereWithoutPoInput[]
+    deleteMany?: RRScalarWhereInput | RRScalarWhereInput[]
   }
 
   export type POApproverUncheckedUpdateManyWithoutPoNestedInput = {
@@ -37818,9 +37848,9 @@ export namespace Prisma {
     update?: XOR<XOR<POUpdateToOneWithWhereWithoutPo_approversInput, POUpdateWithoutPo_approversInput>, POUncheckedUpdateWithoutPo_approversInput>
   }
 
-  export type POCreateNestedOneWithoutRrInput = {
-    create?: XOR<POCreateWithoutRrInput, POUncheckedCreateWithoutRrInput>
-    connectOrCreate?: POCreateOrConnectWithoutRrInput
+  export type POCreateNestedOneWithoutRrsInput = {
+    create?: XOR<POCreateWithoutRrsInput, POUncheckedCreateWithoutRrsInput>
+    connectOrCreate?: POCreateOrConnectWithoutRrsInput
     connect?: POWhereUniqueInput
   }
 
@@ -37852,12 +37882,12 @@ export namespace Prisma {
     connect?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
   }
 
-  export type POUpdateOneRequiredWithoutRrNestedInput = {
-    create?: XOR<POCreateWithoutRrInput, POUncheckedCreateWithoutRrInput>
-    connectOrCreate?: POCreateOrConnectWithoutRrInput
-    upsert?: POUpsertWithoutRrInput
+  export type POUpdateOneRequiredWithoutRrsNestedInput = {
+    create?: XOR<POCreateWithoutRrsInput, POUncheckedCreateWithoutRrsInput>
+    connectOrCreate?: POCreateOrConnectWithoutRrsInput
+    upsert?: POUpsertWithoutRrsInput
     connect?: POWhereUniqueInput
-    update?: XOR<XOR<POUpdateToOneWithWhereWithoutRrInput, POUpdateWithoutRrInput>, POUncheckedUpdateWithoutRrInput>
+    update?: XOR<XOR<POUpdateToOneWithWhereWithoutRrsInput, POUpdateWithoutRrsInput>, POUncheckedUpdateWithoutRrsInput>
   }
 
   export type RRApproverUpdateManyWithoutRrNestedInput = {
@@ -40939,7 +40969,7 @@ export namespace Prisma {
     cancelled_at?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
-    rr?: RRCreateNestedOneWithoutPoInput
+    rrs?: RRCreateNestedManyWithoutPoInput
     po_approvers?: POApproverCreateNestedManyWithoutPoInput
   }
 
@@ -40954,7 +40984,7 @@ export namespace Prisma {
     cancelled_at?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
-    rr?: RRUncheckedCreateNestedOneWithoutPoInput
+    rrs?: RRUncheckedCreateNestedManyWithoutPoInput
     po_approvers?: POApproverUncheckedCreateNestedManyWithoutPoInput
   }
 
@@ -41112,7 +41142,7 @@ export namespace Prisma {
     cancelled_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    rr?: RRUpdateOneWithoutPoNestedInput
+    rrs?: RRUpdateManyWithoutPoNestedInput
     po_approvers?: POApproverUpdateManyWithoutPoNestedInput
   }
 
@@ -41127,7 +41157,7 @@ export namespace Prisma {
     cancelled_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    rr?: RRUncheckedUpdateOneWithoutPoNestedInput
+    rrs?: RRUncheckedUpdateManyWithoutPoNestedInput
     po_approvers?: POApproverUncheckedUpdateManyWithoutPoNestedInput
   }
 
@@ -41559,6 +41589,11 @@ export namespace Prisma {
     create: XOR<RRCreateWithoutPoInput, RRUncheckedCreateWithoutPoInput>
   }
 
+  export type RRCreateManyPoInputEnvelope = {
+    data: RRCreateManyPoInput | RRCreateManyPoInput[]
+    skipDuplicates?: boolean
+  }
+
   export type POApproverCreateWithoutPoInput = {
     id?: string
     approver_id: string
@@ -41638,55 +41673,42 @@ export namespace Prisma {
     meqs_supplier_items?: MEQSSupplierItemUncheckedUpdateManyWithoutMeqs_supplierNestedInput
   }
 
-  export type RRUpsertWithoutPoInput = {
+  export type RRUpsertWithWhereUniqueWithoutPoInput = {
+    where: RRWhereUniqueInput
     update: XOR<RRUpdateWithoutPoInput, RRUncheckedUpdateWithoutPoInput>
     create: XOR<RRCreateWithoutPoInput, RRUncheckedCreateWithoutPoInput>
-    where?: RRWhereInput
   }
 
-  export type RRUpdateToOneWithWhereWithoutPoInput = {
-    where?: RRWhereInput
+  export type RRUpdateWithWhereUniqueWithoutPoInput = {
+    where: RRWhereUniqueInput
     data: XOR<RRUpdateWithoutPoInput, RRUncheckedUpdateWithoutPoInput>
   }
 
-  export type RRUpdateWithoutPoInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    rr_number?: StringFieldUpdateOperationsInput | string
-    rr_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    received_by_id?: StringFieldUpdateOperationsInput | string
-    invoice_number?: StringFieldUpdateOperationsInput | string
-    delivery_number?: NullableStringFieldUpdateOperationsInput | string | null
-    notes?: StringFieldUpdateOperationsInput | string
-    delivery_charge?: FloatFieldUpdateOperationsInput | number
-    is_completed?: BoolFieldUpdateOperationsInput | boolean
-    cancelled_by?: NullableStringFieldUpdateOperationsInput | string | null
-    created_by?: StringFieldUpdateOperationsInput | string
-    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
-    cancelled_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    rr_approvers?: RRApproverUpdateManyWithoutRrNestedInput
-    rr_items?: RRItemUpdateManyWithoutRrNestedInput
+  export type RRUpdateManyWithWhereWithoutPoInput = {
+    where: RRScalarWhereInput
+    data: XOR<RRUpdateManyMutationInput, RRUncheckedUpdateManyWithoutPoInput>
   }
 
-  export type RRUncheckedUpdateWithoutPoInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    rr_number?: StringFieldUpdateOperationsInput | string
-    rr_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    received_by_id?: StringFieldUpdateOperationsInput | string
-    invoice_number?: StringFieldUpdateOperationsInput | string
-    delivery_number?: NullableStringFieldUpdateOperationsInput | string | null
-    notes?: StringFieldUpdateOperationsInput | string
-    delivery_charge?: FloatFieldUpdateOperationsInput | number
-    is_completed?: BoolFieldUpdateOperationsInput | boolean
-    cancelled_by?: NullableStringFieldUpdateOperationsInput | string | null
-    created_by?: StringFieldUpdateOperationsInput | string
-    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
-    cancelled_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    rr_approvers?: RRApproverUncheckedUpdateManyWithoutRrNestedInput
-    rr_items?: RRItemUncheckedUpdateManyWithoutRrNestedInput
+  export type RRScalarWhereInput = {
+    AND?: RRScalarWhereInput | RRScalarWhereInput[]
+    OR?: RRScalarWhereInput[]
+    NOT?: RRScalarWhereInput | RRScalarWhereInput[]
+    id?: StringFilter<"RR"> | string
+    po_id?: StringFilter<"RR"> | string
+    rr_number?: StringFilter<"RR"> | string
+    rr_date?: DateTimeFilter<"RR"> | Date | string
+    received_by_id?: StringFilter<"RR"> | string
+    invoice_number?: StringFilter<"RR"> | string
+    delivery_number?: StringNullableFilter<"RR"> | string | null
+    notes?: StringFilter<"RR"> | string
+    delivery_charge?: FloatFilter<"RR"> | number
+    is_completed?: BoolFilter<"RR"> | boolean
+    cancelled_by?: StringNullableFilter<"RR"> | string | null
+    created_by?: StringFilter<"RR"> | string
+    updated_by?: StringNullableFilter<"RR"> | string | null
+    cancelled_at?: DateTimeNullableFilter<"RR"> | Date | string | null
+    created_at?: DateTimeFilter<"RR"> | Date | string
+    updated_at?: DateTimeFilter<"RR"> | Date | string
   }
 
   export type POApproverUpsertWithWhereUniqueWithoutPoInput = {
@@ -41737,7 +41759,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     meqs_supplier: MEQSSupplierCreateNestedOneWithoutPoInput
-    rr?: RRCreateNestedOneWithoutPoInput
+    rrs?: RRCreateNestedManyWithoutPoInput
   }
 
   export type POUncheckedCreateWithoutPo_approversInput = {
@@ -41752,7 +41774,7 @@ export namespace Prisma {
     cancelled_at?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
-    rr?: RRUncheckedCreateNestedOneWithoutPoInput
+    rrs?: RRUncheckedCreateNestedManyWithoutPoInput
   }
 
   export type POCreateOrConnectWithoutPo_approversInput = {
@@ -41783,7 +41805,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     meqs_supplier?: MEQSSupplierUpdateOneRequiredWithoutPoNestedInput
-    rr?: RRUpdateOneWithoutPoNestedInput
+    rrs?: RRUpdateManyWithoutPoNestedInput
   }
 
   export type POUncheckedUpdateWithoutPo_approversInput = {
@@ -41798,10 +41820,10 @@ export namespace Prisma {
     cancelled_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    rr?: RRUncheckedUpdateOneWithoutPoNestedInput
+    rrs?: RRUncheckedUpdateManyWithoutPoNestedInput
   }
 
-  export type POCreateWithoutRrInput = {
+  export type POCreateWithoutRrsInput = {
     id?: string
     po_number: string
     po_date: Date | string
@@ -41816,7 +41838,7 @@ export namespace Prisma {
     po_approvers?: POApproverCreateNestedManyWithoutPoInput
   }
 
-  export type POUncheckedCreateWithoutRrInput = {
+  export type POUncheckedCreateWithoutRrsInput = {
     id?: string
     meqs_supplier_id: string
     po_number: string
@@ -41831,9 +41853,9 @@ export namespace Prisma {
     po_approvers?: POApproverUncheckedCreateNestedManyWithoutPoInput
   }
 
-  export type POCreateOrConnectWithoutRrInput = {
+  export type POCreateOrConnectWithoutRrsInput = {
     where: POWhereUniqueInput
-    create: XOR<POCreateWithoutRrInput, POUncheckedCreateWithoutRrInput>
+    create: XOR<POCreateWithoutRrsInput, POUncheckedCreateWithoutRrsInput>
   }
 
   export type RRApproverCreateWithoutRrInput = {
@@ -41910,18 +41932,18 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type POUpsertWithoutRrInput = {
-    update: XOR<POUpdateWithoutRrInput, POUncheckedUpdateWithoutRrInput>
-    create: XOR<POCreateWithoutRrInput, POUncheckedCreateWithoutRrInput>
+  export type POUpsertWithoutRrsInput = {
+    update: XOR<POUpdateWithoutRrsInput, POUncheckedUpdateWithoutRrsInput>
+    create: XOR<POCreateWithoutRrsInput, POUncheckedCreateWithoutRrsInput>
     where?: POWhereInput
   }
 
-  export type POUpdateToOneWithWhereWithoutRrInput = {
+  export type POUpdateToOneWithWhereWithoutRrsInput = {
     where?: POWhereInput
-    data: XOR<POUpdateWithoutRrInput, POUncheckedUpdateWithoutRrInput>
+    data: XOR<POUpdateWithoutRrsInput, POUncheckedUpdateWithoutRrsInput>
   }
 
-  export type POUpdateWithoutRrInput = {
+  export type POUpdateWithoutRrsInput = {
     id?: StringFieldUpdateOperationsInput | string
     po_number?: StringFieldUpdateOperationsInput | string
     po_date?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -41936,7 +41958,7 @@ export namespace Prisma {
     po_approvers?: POApproverUpdateManyWithoutPoNestedInput
   }
 
-  export type POUncheckedUpdateWithoutRrInput = {
+  export type POUncheckedUpdateWithoutRrsInput = {
     id?: StringFieldUpdateOperationsInput | string
     meqs_supplier_id?: StringFieldUpdateOperationsInput | string
     po_number?: StringFieldUpdateOperationsInput | string
@@ -42033,7 +42055,7 @@ export namespace Prisma {
     cancelled_at?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
-    po: POCreateNestedOneWithoutRrInput
+    po: POCreateNestedOneWithoutRrsInput
     rr_items?: RRItemCreateNestedManyWithoutRrInput
   }
 
@@ -42089,7 +42111,7 @@ export namespace Prisma {
     cancelled_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    po?: POUpdateOneRequiredWithoutRrNestedInput
+    po?: POUpdateOneRequiredWithoutRrsNestedInput
     rr_items?: RRItemUpdateManyWithoutRrNestedInput
   }
 
@@ -42129,7 +42151,7 @@ export namespace Prisma {
     cancelled_at?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
-    po: POCreateNestedOneWithoutRrInput
+    po: POCreateNestedOneWithoutRrsInput
     rr_approvers?: RRApproverCreateNestedManyWithoutRrInput
   }
 
@@ -42242,7 +42264,7 @@ export namespace Prisma {
     cancelled_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    po?: POUpdateOneRequiredWithoutRrNestedInput
+    po?: POUpdateOneRequiredWithoutRrsNestedInput
     rr_approvers?: RRApproverUpdateManyWithoutRrNestedInput
   }
 
@@ -43606,6 +43628,24 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type RRCreateManyPoInput = {
+    id?: string
+    rr_number: string
+    rr_date: Date | string
+    received_by_id: string
+    invoice_number: string
+    delivery_number?: string | null
+    notes: string
+    delivery_charge: number
+    is_completed?: boolean
+    cancelled_by?: string | null
+    created_by: string
+    updated_by?: string | null
+    cancelled_at?: Date | string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
   export type POApproverCreateManyPoInput = {
     id?: string
     approver_id: string
@@ -43620,6 +43660,64 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     deleted_at?: Date | string | null
+  }
+
+  export type RRUpdateWithoutPoInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    rr_number?: StringFieldUpdateOperationsInput | string
+    rr_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    received_by_id?: StringFieldUpdateOperationsInput | string
+    invoice_number?: StringFieldUpdateOperationsInput | string
+    delivery_number?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: StringFieldUpdateOperationsInput | string
+    delivery_charge?: FloatFieldUpdateOperationsInput | number
+    is_completed?: BoolFieldUpdateOperationsInput | boolean
+    cancelled_by?: NullableStringFieldUpdateOperationsInput | string | null
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    cancelled_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    rr_approvers?: RRApproverUpdateManyWithoutRrNestedInput
+    rr_items?: RRItemUpdateManyWithoutRrNestedInput
+  }
+
+  export type RRUncheckedUpdateWithoutPoInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    rr_number?: StringFieldUpdateOperationsInput | string
+    rr_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    received_by_id?: StringFieldUpdateOperationsInput | string
+    invoice_number?: StringFieldUpdateOperationsInput | string
+    delivery_number?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: StringFieldUpdateOperationsInput | string
+    delivery_charge?: FloatFieldUpdateOperationsInput | number
+    is_completed?: BoolFieldUpdateOperationsInput | boolean
+    cancelled_by?: NullableStringFieldUpdateOperationsInput | string | null
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    cancelled_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    rr_approvers?: RRApproverUncheckedUpdateManyWithoutRrNestedInput
+    rr_items?: RRItemUncheckedUpdateManyWithoutRrNestedInput
+  }
+
+  export type RRUncheckedUpdateManyWithoutPoInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    rr_number?: StringFieldUpdateOperationsInput | string
+    rr_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    received_by_id?: StringFieldUpdateOperationsInput | string
+    invoice_number?: StringFieldUpdateOperationsInput | string
+    delivery_number?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: StringFieldUpdateOperationsInput | string
+    delivery_charge?: FloatFieldUpdateOperationsInput | number
+    is_completed?: BoolFieldUpdateOperationsInput | boolean
+    cancelled_by?: NullableStringFieldUpdateOperationsInput | string | null
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    cancelled_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type POApproverUpdateWithoutPoInput = {

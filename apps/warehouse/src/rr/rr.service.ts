@@ -355,34 +355,6 @@ export class RrService {
 
     }
 
-    // async remove(id: string): Promise<WarehouseRemoveResponse> {
-
-    //     const existingItem = await this.findOne(id)
-
-    //     await this.prisma.rR.update({
-    //         where: { id },
-    //         data: { is_deleted: true }
-    //     })
-
-    //     return {
-    //         success: true,
-    //         msg: "RR successfully deleted"
-    //     }
-
-    // }
-
-    async isReferenced(poId: string): Promise<Boolean> {
-
-        const rr = await this.prisma.rR.findUnique({
-            where: { po_id: poId }
-        })
-
-        if (rr) return true
-
-        return false
-
-    }
-
     private async getLatestRrNumber(): Promise<string> {
         const currentYear = new Date().getFullYear().toString().slice(-2);
 
@@ -454,16 +426,6 @@ export class RrService {
 
         if (!isValidEmployeeIds) {
             throw new BadRequestException("One or more employee id is invalid")
-        }
-
-        const po = await this.prisma.rR.findUnique({
-            where: {
-                po_id: input.po_id
-            }
-        })
-
-        if (po) {
-            throw new BadRequestException('PO already been referenced with ID: ' + input.po_id)
         }
 
         // get all approvers

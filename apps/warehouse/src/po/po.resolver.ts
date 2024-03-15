@@ -102,10 +102,5 @@ export class PoResolver {
 
     }
 
-    @ResolveField(() => Boolean)
-    async is_referenced(@Parent() po: PO) {
-        return await this.poService.isReferenced(po.id)
-    }
-
 
 }

@@ -18,7 +18,7 @@ export class RVApprover {
     @Field(() => String, { nullable: true })
     date_approval: string | null
 
-    @Field(() => String)
+    @Field(() => String, { nullable: true })
     notes: string
 
     @Field(() => Int)

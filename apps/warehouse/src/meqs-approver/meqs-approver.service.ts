@@ -173,11 +173,19 @@ export class MeqsApproverService {
 
         await this.validateInput(input)
 
+        let dateApproval = new Date(input.date_approval)
+
+        if (input.status && input.status === APPROVAL_STATUS.PENDING) {
+            dateApproval = null
+        } else if (!dateApproval) {
+            dateApproval = existingItem.date_approval
+        }
+
         const updatedBy = this.authUser.user.username
 
         const data: Prisma.RVApproverUpdateInput = {
             approver_id: input.approver_id ?? existingItem.approver_id,
-            date_approval: input.date_approval ? new Date(input.date_approval) : existingItem.date_approval,
+            date_approval: dateApproval,
             notes: input.notes ?? existingItem.notes,
             status: input.status ?? existingItem.status,
             label: input.label ?? existingItem.label,

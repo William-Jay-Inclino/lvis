@@ -53,7 +53,7 @@ export class PoService {
                 }
             }
         },
-        rr: true
+        rrs: true
     }
 
 
@@ -98,6 +98,7 @@ export class PoService {
                         label: i.label,
                         order: i.order,
                         status: APPROVAL_STATUS.PENDING,
+                        notes: '',
                         created_by: createdBy
                     }
 
@@ -314,34 +315,6 @@ export class PoService {
         }
 
         return APPROVAL_STATUS.APPROVED
-
-    }
-
-    // async remove(id: string): Promise<WarehouseRemoveResponse> {
-
-    //     const existingItem = await this.findOne(id)
-
-    //     await this.prisma.pO.update({
-    //         where: { id },
-    //         data: { is_deleted: true }
-    //     })
-
-    //     return {
-    //         success: true,
-    //         msg: "PO successfully deleted"
-    //     }
-
-    // }
-
-    async isReferenced(poId: string): Promise<Boolean> {
-
-        const rr = await this.prisma.rR.findUnique({
-            where: { po_id: poId }
-        })
-
-        if (rr) return true
-
-        return false
 
     }
 

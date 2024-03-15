@@ -107,10 +107,5 @@ export class RrResolver {
 
     }
 
-    @ResolveField(() => Boolean)
-    async is_referenced(@Parent() rr: RR) {
-        return await this.rrService.isReferenced(rr.id)
-    }
-
 
 }

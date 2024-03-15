@@ -328,7 +328,7 @@ model PO {
   updated_at   DateTime  @updatedAt
 
   meqs_supplier MEQSSupplier @relation(fields: [meqs_supplier_id], references: [id], onDelete: Restrict)
-  rr            RR?
+  rrs           RR[]
   po_approvers  POApprover[]
 
   @@map("purchase_order")
@@ -359,7 +359,7 @@ model POApprover {
 
 model RR {
   id              String   @id @default(uuid())
-  po_id           String   @unique
+  po_id           String
   rr_number       String   @unique
   rr_date         DateTime
   received_by_id  String
