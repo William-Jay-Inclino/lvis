@@ -13,6 +13,7 @@ import { MeqsApproverService } from '../meqs-approver/meqs-approver.service';
 import { MeqsNumber } from './entities/meqs-number.entity';
 import { MEQSsResponse } from './entities/meqs-response.entity';
 import { APPROVAL_STATUS } from '../__common__/types';
+import { WarehouseCancelResponse } from '../__common__/classes';
 
 @UseGuards(GqlAuthGuard)
 @Resolver(() => MEQS)
@@ -82,6 +83,15 @@ export class MeqsResolver {
     ) {
         this.meqsService.setAuthUser(authUser)
         return await this.meqsService.update(id, updateMeqsInput);
+    }
+
+    @Mutation(() => WarehouseCancelResponse)
+    async cancelMeqs(
+        @Args('id') id: string,
+        @CurrentAuthUser() authUser: AuthUser
+    ) {
+        this.meqsService.setAuthUser(authUser)
+        return await this.meqsService.cancel(id);
     }
 
     @ResolveField(() => [MEQSApprover])

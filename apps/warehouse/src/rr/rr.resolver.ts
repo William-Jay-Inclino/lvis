@@ -13,6 +13,7 @@ import { RrApproverService } from '../rr-approver/rr-approver.service';
 import { RrNumber } from './entities/rr-number.entity';
 import { RRsResponse } from './entities/rr-response.entity';
 import { APPROVAL_STATUS } from '../__common__/types';
+import { WarehouseCancelResponse } from '../__common__/classes';
 
 @UseGuards(GqlAuthGuard)
 @Resolver(() => RR)
@@ -76,13 +77,14 @@ export class RrResolver {
         return await this.rrService.update(id, updateRrInput);
     }
 
-    // @ResolveField( () => Employee, { nullable: true })
-    // canceller(@Parent() rr: RR): any {
-    //     if(rr.cancelled_at){
-    //         return null
-    //     }
-    //     return { __typename: 'Employee', id: rr.canceller_id }
-    // }
+    @Mutation(() => WarehouseCancelResponse)
+    async cancelRr(
+        @Args('id') id: string,
+        @CurrentAuthUser() authUser: AuthUser
+    ) {
+        this.rrService.setAuthUser(authUser)
+        return await this.rrService.cancel(id);
+    }
 
     @ResolveField(() => [RrApprover])
     rr_approvers(@Parent() rr: RR): any {

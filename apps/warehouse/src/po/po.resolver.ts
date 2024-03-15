@@ -13,6 +13,7 @@ import { PoNumber } from './entities/po-number.entity';
 import { POsResponse } from './entities/pos-response.entity';
 import { APPROVAL_STATUS } from '../__common__/types';
 import { POApprover } from '../po-approver/entities/po-approver.entity';
+import { WarehouseCancelResponse } from '../__common__/classes';
 
 @UseGuards(GqlAuthGuard)
 @Resolver(() => PO)
@@ -76,13 +77,14 @@ export class PoResolver {
         return await this.poService.update(id, updatePoInput);
     }
 
-    // @ResolveField( () => Employee, { nullable: true })
-    // canceller(@Parent() po: PO): any {
-    //     if(!po.canceller_id){
-    //         return null
-    //     }
-    //     return { __typename: 'Employee', id: po.canceller_id }
-    // }
+    @Mutation(() => WarehouseCancelResponse)
+    async cancelPo(
+        @Args('id') id: string,
+        @CurrentAuthUser() authUser: AuthUser
+    ) {
+        this.poService.setAuthUser(authUser)
+        return await this.poService.cancel(id);
+    }
 
     @ResolveField(() => [POApprover])
     po_approvers(@Parent() po: PO): any {

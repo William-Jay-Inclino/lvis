@@ -5,7 +5,7 @@ import { AuthUser } from '../__common__/auth-user.entity';
 import { PrismaService } from '../__prisma__/prisma.service';
 import { HttpService } from '@nestjs/axios';
 import { Prisma, RR, RRApprover } from 'apps/warehouse/prisma/generated/client';
-import { WarehouseRemoveResponse } from '../__common__/classes';
+import { WarehouseCancelResponse, WarehouseRemoveResponse } from '../__common__/classes';
 import { catchError, firstValueFrom } from 'rxjs';
 import { APPROVAL_STATUS, Role } from '../__common__/types';
 import { RRsResponse } from './entities/rr-response.entity';
@@ -158,9 +158,7 @@ export class RrService {
 
         const skip = (page - 1) * pageSize;
 
-        let whereCondition: any = {
-            deleted_at: null
-        };
+        let whereCondition: any = {};
 
         if (date_requested) {
             const { startDate, endDate } = getDateRange(date_requested);
@@ -293,7 +291,13 @@ export class RrService {
 
         this.logger.log('update(')
 
-        const existingItem = await this.findOne(id)
+        const existingItem = await this.prisma.rR.findUnique({
+            where: { id }
+        })
+
+        if (!existingItem) {
+            throw new NotFoundException('RR not found')
+        }
 
         if (!(await this.canUpdate(input, existingItem))) {
             throw new Error('Failed to update RR. Please try again')
@@ -317,6 +321,37 @@ export class RrService {
         this.logger.log('Successfully updated rr')
 
         return updated
+
+    }
+
+    async cancel(id: string): Promise<WarehouseCancelResponse> {
+
+        this.logger.log('cancel()')
+
+        const existingItem = await this.prisma.rR.findUnique({
+            where: { id }
+        })
+
+        if (!existingItem) {
+            throw new NotFoundException('RR not found')
+        }
+
+        const updated = await this.prisma.rR.update({
+            data: {
+                cancelled_at: new Date(),
+                cancelled_by: this.authUser.user.username
+            },
+            where: { id }
+        })
+
+        this.logger.log('Successfully cancelled RR')
+
+        return {
+            success: true,
+            msg: 'Successfully cancelled RR',
+            cancelled_at: updated.cancelled_at,
+            cancelled_by: updated.cancelled_by
+        }
 
     }
 

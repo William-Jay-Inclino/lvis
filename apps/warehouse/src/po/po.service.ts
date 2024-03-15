@@ -3,7 +3,7 @@ import { PrismaService } from '../__prisma__/prisma.service';
 import { CreatePoInput } from './dto/create-po.input';
 import { PO, POApprover, Prisma } from 'apps/warehouse/prisma/generated/client';
 import { APPROVAL_STATUS, Role } from '../__common__/types';
-import { WarehouseRemoveResponse } from '../__common__/classes';
+import { WarehouseCancelResponse, WarehouseRemoveResponse } from '../__common__/classes';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { HttpService } from '@nestjs/axios';
 import { catchError, firstValueFrom } from 'rxjs';
@@ -122,7 +122,13 @@ export class PoService {
 
         this.logger.log('update(')
 
-        const existingItem = await this.findOne(id)
+        const existingItem = await this.prisma.pO.findUnique({
+            where: { id }
+        })
+
+        if (!existingItem) {
+            throw new NotFoundException('PO not found')
+        }
 
         if (!(await this.canUpdate(input, existingItem))) {
             throw new Error('Failed to update PO. Please try again')
@@ -145,13 +151,42 @@ export class PoService {
 
     }
 
+    async cancel(id: string): Promise<WarehouseCancelResponse> {
+
+        this.logger.log('cancel()')
+
+        const existingItem = await this.prisma.pO.findUnique({
+            where: { id }
+        })
+
+        if (!existingItem) {
+            throw new NotFoundException('PO not found')
+        }
+
+        const updated = await this.prisma.pO.update({
+            data: {
+                cancelled_at: new Date(),
+                cancelled_by: this.authUser.user.username
+            },
+            where: { id }
+        })
+
+        this.logger.log('Successfully cancelled PO')
+
+        return {
+            success: true,
+            msg: 'Successfully cancelled PO',
+            cancelled_at: updated.cancelled_at,
+            cancelled_by: updated.cancelled_by
+        }
+
+    }
+
     async findAll(page: number, pageSize: number, date_requested?: string, requested_by_id?: string): Promise<POsResponse> {
 
         const skip = (page - 1) * pageSize;
 
-        let whereCondition: any = {
-            deleted_at: null
-        };
+        let whereCondition: any = {};
 
         if (date_requested) {
             const { startDate, endDate } = getDateRange(date_requested);

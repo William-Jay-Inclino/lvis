@@ -10,6 +10,7 @@ import { catchError, firstValueFrom } from 'rxjs';
 import { MEQSsResponse } from './entities/meqs-response.entity';
 import * as moment from 'moment';
 import { getDateRange } from '../__common__/helpers';
+import { WarehouseCancelResponse } from '../__common__/classes';
 
 @Injectable()
 export class MeqsService {
@@ -183,7 +184,13 @@ export class MeqsService {
 
         this.logger.log('update()')
 
-        const existingItem = await this.findOne(id)
+        const existingItem = await this.prisma.mEQS.findUnique({
+            where: { id }
+        })
+
+        if (!existingItem) {
+            throw new NotFoundException('MEQS not found')
+        }
 
         if (!(await this.canUpdate(input, existingItem))) {
             throw new Error('Unable to update MEQS')
@@ -209,13 +216,42 @@ export class MeqsService {
 
     }
 
+    async cancel(id: string): Promise<WarehouseCancelResponse> {
+
+        this.logger.log('cancel()')
+
+        const existingItem = await this.prisma.mEQS.findUnique({
+            where: { id }
+        })
+
+        if (!existingItem) {
+            throw new NotFoundException('MEQS not found')
+        }
+
+        const updated = await this.prisma.mEQS.update({
+            data: {
+                cancelled_at: new Date(),
+                cancelled_by: this.authUser.user.username
+            },
+            where: { id }
+        })
+
+        this.logger.log('Successfully cancelled MEQS')
+
+        return {
+            success: true,
+            msg: 'Successfully cancelled MEQS',
+            cancelled_at: updated.cancelled_at,
+            cancelled_by: updated.cancelled_by
+        }
+
+    }
+
     async findAll(page: number, pageSize: number, date_requested?: string, requested_by_id?: string): Promise<MEQSsResponse> {
 
         const skip = (page - 1) * pageSize;
 
-        let whereCondition: any = {
-            deleted_at: null
-        };
+        let whereCondition: any = {};
 
         if (date_requested) {
             const { startDate, endDate } = getDateRange(date_requested);
