@@ -13,6 +13,9 @@ export class MeqsSupplierAttachment {
   @Field(() => String)
   src: string;
 
+  @Field(() => String)
+  filename: string;
+
   @Field()
   created_by: string;
 
