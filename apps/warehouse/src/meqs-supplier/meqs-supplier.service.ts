@@ -40,6 +40,7 @@ export class MeqsSupplierService {
                 create: input.attachments.map(attachment => {
                     const attachmentInput: Prisma.MEQSSupplierAttachmentCreateWithoutMeqs_supplierInput = {
                         src: attachment.src,
+                        filename: attachment.filename,
                         created_by: createdBy
                     }
                     return attachmentInput
@@ -119,6 +120,7 @@ export class MeqsSupplierService {
                 create: input.attachments.map(attachment => {
                     const attachmentInput: Prisma.MEQSSupplierAttachmentCreateWithoutMeqs_supplierInput = {
                         src: attachment.src,
+                        filename: attachment.filename,
                         created_by: createdBy
                     }
                     return attachmentInput

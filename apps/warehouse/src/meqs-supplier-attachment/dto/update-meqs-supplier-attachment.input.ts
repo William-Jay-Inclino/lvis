@@ -1,13 +1,18 @@
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 import { CreateMeqsSupplierAttachmentInput } from './create-meqs-supplier-attachment.input';
 import { InputType, Field, PartialType } from '@nestjs/graphql';
 
 @InputType()
 export class UpdateMeqsSupplierAttachmentInput extends PartialType(CreateMeqsSupplierAttachmentInput) {
 
-  @Field()
-  @IsNotEmpty()
+  @Field({ nullable: true })
+  @IsOptional()
   @IsString()
-  src: string;
+  src?: string | null;
+
+  @Field({ nullable: true })
+  @IsOptional()
+  @IsString()
+  filename?: string | null;
 
 }

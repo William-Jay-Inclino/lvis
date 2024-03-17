@@ -276,7 +276,8 @@ model MEQSSupplierItem {
 model MEQSSupplierAttachment {
   id               String @id @default(uuid())
   meqs_supplier_id String
-  src              String
+  filename         String @default("test")
+  src              String @unique
 
   created_by String
   updated_by String?

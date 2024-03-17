@@ -15183,6 +15183,7 @@ export namespace Prisma {
   export type MEQSSupplierAttachmentMinAggregateOutputType = {
     id: string | null
     meqs_supplier_id: string | null
+    filename: string | null
     src: string | null
     created_by: string | null
     updated_by: string | null
@@ -15193,6 +15194,7 @@ export namespace Prisma {
   export type MEQSSupplierAttachmentMaxAggregateOutputType = {
     id: string | null
     meqs_supplier_id: string | null
+    filename: string | null
     src: string | null
     created_by: string | null
     updated_by: string | null
@@ -15203,6 +15205,7 @@ export namespace Prisma {
   export type MEQSSupplierAttachmentCountAggregateOutputType = {
     id: number
     meqs_supplier_id: number
+    filename: number
     src: number
     created_by: number
     updated_by: number
@@ -15215,6 +15218,7 @@ export namespace Prisma {
   export type MEQSSupplierAttachmentMinAggregateInputType = {
     id?: true
     meqs_supplier_id?: true
+    filename?: true
     src?: true
     created_by?: true
     updated_by?: true
@@ -15225,6 +15229,7 @@ export namespace Prisma {
   export type MEQSSupplierAttachmentMaxAggregateInputType = {
     id?: true
     meqs_supplier_id?: true
+    filename?: true
     src?: true
     created_by?: true
     updated_by?: true
@@ -15235,6 +15240,7 @@ export namespace Prisma {
   export type MEQSSupplierAttachmentCountAggregateInputType = {
     id?: true
     meqs_supplier_id?: true
+    filename?: true
     src?: true
     created_by?: true
     updated_by?: true
@@ -15318,6 +15324,7 @@ export namespace Prisma {
   export type MEQSSupplierAttachmentGroupByOutputType = {
     id: string
     meqs_supplier_id: string
+    filename: string
     src: string
     created_by: string
     updated_by: string | null
@@ -15345,6 +15352,7 @@ export namespace Prisma {
   export type MEQSSupplierAttachmentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     meqs_supplier_id?: boolean
+    filename?: boolean
     src?: boolean
     created_by?: boolean
     updated_by?: boolean
@@ -15356,6 +15364,7 @@ export namespace Prisma {
   export type MEQSSupplierAttachmentSelectScalar = {
     id?: boolean
     meqs_supplier_id?: boolean
+    filename?: boolean
     src?: boolean
     created_by?: boolean
     updated_by?: boolean
@@ -15376,6 +15385,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       meqs_supplier_id: string
+      filename: string
       src: string
       created_by: string
       updated_by: string | null
@@ -15778,6 +15788,7 @@ export namespace Prisma {
   interface MEQSSupplierAttachmentFieldRefs {
     readonly id: FieldRef<"MEQSSupplierAttachment", 'String'>
     readonly meqs_supplier_id: FieldRef<"MEQSSupplierAttachment", 'String'>
+    readonly filename: FieldRef<"MEQSSupplierAttachment", 'String'>
     readonly src: FieldRef<"MEQSSupplierAttachment", 'String'>
     readonly created_by: FieldRef<"MEQSSupplierAttachment", 'String'>
     readonly updated_by: FieldRef<"MEQSSupplierAttachment", 'String'>
@@ -29823,6 +29834,7 @@ export namespace Prisma {
   export const MEQSSupplierAttachmentScalarFieldEnum: {
     id: 'id',
     meqs_supplier_id: 'meqs_supplier_id',
+    filename: 'filename',
     src: 'src',
     created_by: 'created_by',
     updated_by: 'updated_by',
@@ -31275,6 +31287,7 @@ export namespace Prisma {
     NOT?: MEQSSupplierAttachmentWhereInput | MEQSSupplierAttachmentWhereInput[]
     id?: StringFilter<"MEQSSupplierAttachment"> | string
     meqs_supplier_id?: StringFilter<"MEQSSupplierAttachment"> | string
+    filename?: StringFilter<"MEQSSupplierAttachment"> | string
     src?: StringFilter<"MEQSSupplierAttachment"> | string
     created_by?: StringFilter<"MEQSSupplierAttachment"> | string
     updated_by?: StringNullableFilter<"MEQSSupplierAttachment"> | string | null
@@ -31286,6 +31299,7 @@ export namespace Prisma {
   export type MEQSSupplierAttachmentOrderByWithRelationInput = {
     id?: SortOrder
     meqs_supplier_id?: SortOrder
+    filename?: SortOrder
     src?: SortOrder
     created_by?: SortOrder
     updated_by?: SortOrderInput | SortOrder
@@ -31296,21 +31310,23 @@ export namespace Prisma {
 
   export type MEQSSupplierAttachmentWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    src?: string
     AND?: MEQSSupplierAttachmentWhereInput | MEQSSupplierAttachmentWhereInput[]
     OR?: MEQSSupplierAttachmentWhereInput[]
     NOT?: MEQSSupplierAttachmentWhereInput | MEQSSupplierAttachmentWhereInput[]
     meqs_supplier_id?: StringFilter<"MEQSSupplierAttachment"> | string
-    src?: StringFilter<"MEQSSupplierAttachment"> | string
+    filename?: StringFilter<"MEQSSupplierAttachment"> | string
     created_by?: StringFilter<"MEQSSupplierAttachment"> | string
     updated_by?: StringNullableFilter<"MEQSSupplierAttachment"> | string | null
     created_at?: DateTimeFilter<"MEQSSupplierAttachment"> | Date | string
     updated_at?: DateTimeFilter<"MEQSSupplierAttachment"> | Date | string
     meqs_supplier?: XOR<MEQSSupplierRelationFilter, MEQSSupplierWhereInput>
-  }, "id">
+  }, "id" | "src">
 
   export type MEQSSupplierAttachmentOrderByWithAggregationInput = {
     id?: SortOrder
     meqs_supplier_id?: SortOrder
+    filename?: SortOrder
     src?: SortOrder
     created_by?: SortOrder
     updated_by?: SortOrderInput | SortOrder
@@ -31327,6 +31343,7 @@ export namespace Prisma {
     NOT?: MEQSSupplierAttachmentScalarWhereWithAggregatesInput | MEQSSupplierAttachmentScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"MEQSSupplierAttachment"> | string
     meqs_supplier_id?: StringWithAggregatesFilter<"MEQSSupplierAttachment"> | string
+    filename?: StringWithAggregatesFilter<"MEQSSupplierAttachment"> | string
     src?: StringWithAggregatesFilter<"MEQSSupplierAttachment"> | string
     created_by?: StringWithAggregatesFilter<"MEQSSupplierAttachment"> | string
     updated_by?: StringNullableWithAggregatesFilter<"MEQSSupplierAttachment"> | string | null
@@ -33768,6 +33785,7 @@ export namespace Prisma {
 
   export type MEQSSupplierAttachmentCreateInput = {
     id?: string
+    filename?: string
     src: string
     created_by: string
     updated_by?: string | null
@@ -33779,6 +33797,7 @@ export namespace Prisma {
   export type MEQSSupplierAttachmentUncheckedCreateInput = {
     id?: string
     meqs_supplier_id: string
+    filename?: string
     src: string
     created_by: string
     updated_by?: string | null
@@ -33788,6 +33807,7 @@ export namespace Prisma {
 
   export type MEQSSupplierAttachmentUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    filename?: StringFieldUpdateOperationsInput | string
     src?: StringFieldUpdateOperationsInput | string
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -33799,6 +33819,7 @@ export namespace Prisma {
   export type MEQSSupplierAttachmentUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     meqs_supplier_id?: StringFieldUpdateOperationsInput | string
+    filename?: StringFieldUpdateOperationsInput | string
     src?: StringFieldUpdateOperationsInput | string
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -33809,6 +33830,7 @@ export namespace Prisma {
   export type MEQSSupplierAttachmentCreateManyInput = {
     id?: string
     meqs_supplier_id: string
+    filename?: string
     src: string
     created_by: string
     updated_by?: string | null
@@ -33818,6 +33840,7 @@ export namespace Prisma {
 
   export type MEQSSupplierAttachmentUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    filename?: StringFieldUpdateOperationsInput | string
     src?: StringFieldUpdateOperationsInput | string
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -33828,6 +33851,7 @@ export namespace Prisma {
   export type MEQSSupplierAttachmentUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     meqs_supplier_id?: StringFieldUpdateOperationsInput | string
+    filename?: StringFieldUpdateOperationsInput | string
     src?: StringFieldUpdateOperationsInput | string
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -36097,6 +36121,7 @@ export namespace Prisma {
   export type MEQSSupplierAttachmentCountOrderByAggregateInput = {
     id?: SortOrder
     meqs_supplier_id?: SortOrder
+    filename?: SortOrder
     src?: SortOrder
     created_by?: SortOrder
     updated_by?: SortOrder
@@ -36107,6 +36132,7 @@ export namespace Prisma {
   export type MEQSSupplierAttachmentMaxOrderByAggregateInput = {
     id?: SortOrder
     meqs_supplier_id?: SortOrder
+    filename?: SortOrder
     src?: SortOrder
     created_by?: SortOrder
     updated_by?: SortOrder
@@ -36117,6 +36143,7 @@ export namespace Prisma {
   export type MEQSSupplierAttachmentMinOrderByAggregateInput = {
     id?: SortOrder
     meqs_supplier_id?: SortOrder
+    filename?: SortOrder
     src?: SortOrder
     created_by?: SortOrder
     updated_by?: SortOrder
@@ -40985,6 +41012,7 @@ export namespace Prisma {
 
   export type MEQSSupplierAttachmentCreateWithoutMeqs_supplierInput = {
     id?: string
+    filename?: string
     src: string
     created_by: string
     updated_by?: string | null
@@ -40994,6 +41022,7 @@ export namespace Prisma {
 
   export type MEQSSupplierAttachmentUncheckedCreateWithoutMeqs_supplierInput = {
     id?: string
+    filename?: string
     src: string
     created_by: string
     updated_by?: string | null
@@ -41188,6 +41217,7 @@ export namespace Prisma {
     NOT?: MEQSSupplierAttachmentScalarWhereInput | MEQSSupplierAttachmentScalarWhereInput[]
     id?: StringFilter<"MEQSSupplierAttachment"> | string
     meqs_supplier_id?: StringFilter<"MEQSSupplierAttachment"> | string
+    filename?: StringFilter<"MEQSSupplierAttachment"> | string
     src?: StringFilter<"MEQSSupplierAttachment"> | string
     created_by?: StringFilter<"MEQSSupplierAttachment"> | string
     updated_by?: StringNullableFilter<"MEQSSupplierAttachment"> | string | null
@@ -43654,6 +43684,7 @@ export namespace Prisma {
 
   export type MEQSSupplierAttachmentCreateManyMeqs_supplierInput = {
     id?: string
+    filename?: string
     src: string
     created_by: string
     updated_by?: string | null
@@ -43676,6 +43707,7 @@ export namespace Prisma {
 
   export type MEQSSupplierAttachmentUpdateWithoutMeqs_supplierInput = {
     id?: StringFieldUpdateOperationsInput | string
+    filename?: StringFieldUpdateOperationsInput | string
     src?: StringFieldUpdateOperationsInput | string
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -43685,6 +43717,7 @@ export namespace Prisma {
 
   export type MEQSSupplierAttachmentUncheckedUpdateWithoutMeqs_supplierInput = {
     id?: StringFieldUpdateOperationsInput | string
+    filename?: StringFieldUpdateOperationsInput | string
     src?: StringFieldUpdateOperationsInput | string
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -43694,6 +43727,7 @@ export namespace Prisma {
 
   export type MEQSSupplierAttachmentUncheckedUpdateManyWithoutMeqs_supplierInput = {
     id?: StringFieldUpdateOperationsInput | string
+    filename?: StringFieldUpdateOperationsInput | string
     src?: StringFieldUpdateOperationsInput | string
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null

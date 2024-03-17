@@ -9,4 +9,9 @@ export class CreateMeqsSupplierAttachmentSubInput {
   @IsString()
   src: string;
 
+  @Field()
+  @IsNotEmpty()
+  @IsString()
+  filename: string;
+
 }

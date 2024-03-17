@@ -284,6 +284,7 @@ exports.Prisma.MEQSSupplierItemScalarFieldEnum = {
 exports.Prisma.MEQSSupplierAttachmentScalarFieldEnum = {
   id: 'id',
   meqs_supplier_id: 'meqs_supplier_id',
+  filename: 'filename',
   src: 'src',
   created_by: 'created_by',
   updated_by: 'updated_by',

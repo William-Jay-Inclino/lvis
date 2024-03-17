@@ -14,4 +14,9 @@ export class CreateMeqsSupplierAttachmentInput {
   @IsString()
   src: string;
 
+  @Field()
+  @IsNotEmpty()
+  @IsString()
+  filename: string;
+
 }
