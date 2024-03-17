@@ -1,10 +1,12 @@
-import { InputType, Field, Int } from '@nestjs/graphql';
-import { IsInt, IsNotEmpty, IsString } from 'class-validator';
-import { VAT_TYPE } from '../../__common__/types';
+import { InputType, Field } from '@nestjs/graphql';
+import { IsArray, IsNotEmpty, IsString, ValidateNested } from 'class-validator';
+import { Type } from 'class-transformer';
+import { CreateMeqsSupplierAttachmentSubInput } from '../../meqs/dto/create-meqs-supplier-attachment.sub.input';
+import { CreateMeqsSupplierItemSubInput } from '../../meqs/dto/create-meqs-supplier-item.sub.input';
 
 @InputType()
 export class CreateMeqsSupplierInput {
-  
+
   @Field()
   @IsNotEmpty()
   @IsString()
@@ -19,5 +21,17 @@ export class CreateMeqsSupplierInput {
   @IsNotEmpty()
   @IsString()
   payment_terms: string;
+
+  @Field(() => [CreateMeqsSupplierItemSubInput])
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => CreateMeqsSupplierItemSubInput)
+  meqs_supplier_items: CreateMeqsSupplierItemSubInput[];
+
+  @Field(() => [CreateMeqsSupplierAttachmentSubInput])
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => CreateMeqsSupplierAttachmentSubInput)
+  attachments: CreateMeqsSupplierAttachmentSubInput[];
 
 }

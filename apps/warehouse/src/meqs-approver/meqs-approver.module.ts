@@ -8,4 +8,4 @@ import { HttpModule } from '@nestjs/axios';
   providers: [MeqsApproverResolver, MeqsApproverService],
   exports: [MeqsApproverService]
 })
-export class MeqsApproverModule {}
+export class MeqsApproverModule { }

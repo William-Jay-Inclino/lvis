@@ -1,13 +1,28 @@
-import { IsOptional, IsString } from 'class-validator';
+import { IsArray, IsOptional, IsString, ValidateNested } from 'class-validator';
 import { CreateMeqsSupplierInput } from './create-meqs-supplier.input';
 import { InputType, Field, PartialType } from '@nestjs/graphql';
+import { UpdateMeqsSupplierItemSubInput } from './update-meqs-supplier-item.sub.input';
+import { Type } from 'class-transformer';
+import { UpdateMeqsSupplierAttachmentSubInput } from './update-meqs-supplier-attachment.sub.input';
 
 @InputType()
-export class UpdateMeqsSupplierInput extends PartialType(CreateMeqsSupplierInput) {
+export class UpdateMeqsSupplierInput {
 
   @Field(() => String, { nullable: true })
   @IsOptional()
   @IsString()
-  payment_terms: string;
+  payment_terms?: string | null;
+
+  @Field(() => [UpdateMeqsSupplierItemSubInput], { nullable: true })
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => UpdateMeqsSupplierItemSubInput)
+  meqs_supplier_items?: UpdateMeqsSupplierItemSubInput[] | null;
+
+  @Field(() => [UpdateMeqsSupplierAttachmentSubInput], { nullable: true })
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => UpdateMeqsSupplierAttachmentSubInput)
+  attachments?: UpdateMeqsSupplierAttachmentSubInput[] | null;
 
 }

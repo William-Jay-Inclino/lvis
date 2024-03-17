@@ -1,6 +1,6 @@
 // file-upload.controller.ts
 
-import { Controller, Delete, Get, HttpException, HttpStatus, Logger, Param, Post, Res, UploadedFile, UploadedFiles, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpException, HttpStatus, Logger, Param, Post, Res, UploadedFile, UploadedFiles, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { Express } from 'express';
 import { SingleFileTypeValidationPipe } from './pipes/single-file-type-validation.pipe';
@@ -13,7 +13,7 @@ export class FileUploadController {
 
     private readonly logger = new Logger(FileUploadController.name);
 
-    constructor(private readonly fileUploadService: FileUploadService) {}
+    constructor(private readonly fileUploadService: FileUploadService) { }
 
     @Get('/meqs/:filename')
     async getSingleFileMEQS(@Param('filename') filename: string, @Res() res: Response) {
@@ -72,4 +72,24 @@ export class FileUploadController {
             throw new HttpException({ success: false, data: `Failed to delete single file: ${error.message}` }, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @Delete('/meqs')
+    async deleteMultipleFilesMEQS(@Body() filenames: string[]) {
+        try {
+            const destination = MEQS_UPLOAD_PATH;
+            const deletePromises = filenames.map(filename =>
+                this.fileUploadService.deleteFileLocally(filename, destination)
+            );
+            await Promise.all(deletePromises);
+            this.logger.log('Files deleted:', filenames);
+            return { success: true, data: `Files deleted: ${filenames.join(', ')}` };
+        } catch (error) {
+            this.logger.error('Error deleting files:', error.message);
+            throw new HttpException(
+                { success: false, data: `Failed to delete files: ${error.message}` },
+                HttpStatus.INTERNAL_SERVER_ERROR
+            );
+        }
+    }
+
 }
