@@ -8,6 +8,9 @@ import { WarehouseRemoveResponse } from '../__common__/classes';
 import { ItemsResponse } from './entities/items-response.entity';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { ItemTransaction } from './entities/item-transaction.entity';
+import { RrApproverStatusUpdated } from '../rr-approver/events/rr-approver-status-updated.event';
+import { OnEvent } from '@nestjs/event-emitter';
+import { RrItem } from '../rr-item/entities/rr-item.entity';
 
 @Injectable()
 export class ItemService {
@@ -244,170 +247,183 @@ export class ItemService {
 
 	}
 
-	// private isRrStatusApproved(approvers: RRApprover[]): boolean {
+	private isRrStatusApproved(approvers: RRApprover[]): boolean {
 
-	// 	for(let approver of approvers) {
+		for (let approver of approvers) {
 
-	// 		if(approver.status !== APPROVAL_STATUS.APPROVED) {
-	// 			return false 
-	// 		}
+			if (approver.status !== APPROVAL_STATUS.APPROVED) {
+				return false
+			}
 
-	// 	}
+		}
 
-	// 	return true
+		return true
 
-	// }
+	}
 
-	// private async transactRrItems(rrId: string, rrItems: RRItem[]): Promise<{success: boolean}> {
+	private async transactRrItems(rrId: string, rrItems: RrItem[]): Promise<{ success: boolean }> {
 
-	//     console.log('transactRrItems', rrItems)
+		console.log('transactRrItems', rrItems)
 
-	//     const queries = []
+		const queries = []
 
-	//     // prepare query for item transaction
-	//     const itemTransactions: Prisma.ItemTransactionCreateManyInput[] = []
-
-
-	//     for(let rrItem of rrItems) {
-
-	//         if(!rrItem.item_id) {
-	//             continue
-	//         }
-
-	//         const data: Prisma.ItemTransactionCreateManyInput = {
-	//             item_id: rrItem.item_id,
-	//             rr_item_id: rrItem.id,
-	//             type: ITEM_TRANSACTION_TYPE.STOCK_IN,
-	//             quantity: rrItem.quantity_accepted,
-	//             price: rrItem.gross_price,
-	//             remarks: 'From RR'
-	//         } 
-
-	//         itemTransactions.push(data)
-
-	//     }
-
-	//     const createItemTransactionsQuery = this.prisma.itemTransaction.createMany({
-	//         data: itemTransactions
-	//     })
-
-	//     queries.push(createItemTransactionsQuery)
-
-	//     // prepare queries for updating item quantity based on item_transactions
-	//     for(let transaction of itemTransactions) {
-
-	//         const item = await this.prisma.item.findUnique({ where: { id: transaction.item_id } });
-	//         if (!item) {
-	//             throw new NotFoundException(`Item not found with item_id: ${transaction.item_id}`);
-	//         }
-
-	//         const totalQuantity = item.total_quantity + transaction.quantity;
-
-	//         const updateItemQtyQuery = this.prisma.item.update({
-	//             where: { id: item.id },
-	//             data: { total_quantity: totalQuantity },
-	//         });
-
-	//         queries.push(updateItemQtyQuery)
-
-	//     }
+		// prepare query for item transaction
+		const itemTransactions: Prisma.ItemTransactionCreateManyInput[] = []
 
 
-	//     // set is_completed field in rr table to true 
-	//     const updateRRQuery = this.prisma.rR.update({
-	//         where: {
-	//             id: rrId
-	//         },
-	//         data: {
-	//             is_completed: true
-	//         }
-	//     })
-	//     queries.push(updateRRQuery)
+		for (let rrItem of rrItems) {
 
-	//     console.log('queries', queries)
+			if (!rrItem.meqs_supplier_item.canvass_item.item) {
+				continue
+			}
 
+			const data: Prisma.ItemTransactionCreateManyInput = {
+				item_id: rrItem.meqs_supplier_item.canvass_item.item.id,
+				rr_item_id: rrItem.id,
+				type: ITEM_TRANSACTION_TYPE.STOCK_IN,
+				quantity: rrItem.quantity_accepted,
+				price: rrItem.meqs_supplier_item.price,
+				remarks: 'From RR'
+			}
 
-	//     // EXECUTE QUERIES
-	//     await this.prisma.$transaction(queries)
+			itemTransactions.push(data)
 
-	//     return {
-	//         success: true
-	//     }
+		}
 
-	// }
+		const createItemTransactionsQuery = this.prisma.itemTransaction.createMany({
+			data: itemTransactions
+		})
 
-	// @OnEvent('rr-approver-status.updated')
-	// async handleRrApproverStatusUpdated(payload: RrApproverStatusUpdated) {
+		queries.push(createItemTransactionsQuery)
 
-	//     this.logger.log('=== item-transaction.service.ts ===')
+		// prepare queries for updating item quantity based on item_transactions
+		for (let transaction of itemTransactions) {
 
-	// 	console.log('handleRrApproverStatusUpdated()', payload)
+			const item = await this.prisma.item.findUnique({ where: { id: transaction.item_id } });
+			if (!item) {
+				throw new NotFoundException(`Item not found with item_id: ${transaction.item_id}`);
+			}
 
-	// 	const rrApprover = await this.prisma.rRApprover.findUnique({
-	// 		where: { id: payload.id },
-	// 		include: {
-	// 			rr: {
-	// 				include: {
-	// 					rr_items: true,
-	// 					rr_approvers: {
-	//                         where: {
-	//                             is_deleted: false
-	//                         }
-	//                     }
-	// 				}
-	// 			}
-	// 		}
-	// 	})
+			const totalQuantity = item.total_quantity + transaction.quantity;
 
-	// 	if(!rrApprover) {
-	// 		throw new NotFoundException('rrApprover not found with id: ' + payload.id)
-	// 	}
+			const updateItemQtyQuery = this.prisma.item.update({
+				where: { id: item.id },
+				data: { total_quantity: totalQuantity },
+			});
 
-	// 	if(rrApprover.rr.is_completed) {
-	// 		console.log('RR is already completed. End function')
-	// 		return 
-	// 	}
+			queries.push(updateItemQtyQuery)
 
-	// 	const approvers = rrApprover.rr.rr_approvers
-
-	//     console.log('approvers', approvers)
-
-	// 	const isApproved = this.isRrStatusApproved(approvers)
-
-	// 	if(!isApproved) {
-	// 		console.log('RR status is not approved. End function')
-	// 		return 
-	// 	}
-
-	// 	console.log('Transacting RR items...')
+		}
 
 
-	//     const hasItemToTransact = rrApprover.rr.rr_items.find(i => !!i.item_id)
+		// set is_completed field in rr table to true 
+		const updateRRQuery = this.prisma.rR.update({
+			where: {
+				id: rrId
+			},
+			data: {
+				is_completed: true
+			}
+		})
+		queries.push(updateRRQuery)
 
-	//     // if no items to transact just set the rr to complete
-	//     if(!hasItemToTransact) {
+		console.log('queries', queries)
 
-	//         const updatedRR = await this.prisma.rR.update({
-	//             select: {
-	//                 is_completed: true
-	//             },
-	//             where: { id: rrApprover.rr_id },
-	//             data: {
-	//                 is_completed: true
-	//             }
-	//         })
 
-	//         console.log('RR is_complete', updatedRR.is_completed)
+		// EXECUTE QUERIES
+		await this.prisma.$transaction(queries)
 
-	//         return 
+		return {
+			success: true
+		}
 
-	//     }   
+	}
 
-	//     // add rr items to item_transaction table and update total quantity of item in the item table
-	//     const response = await this.transactRrItems(rrApprover.rr_id, rrApprover.rr.rr_items)
+	@OnEvent('rr-approver-status.updated')
+	async handleRrApproverStatusUpdated(payload: RrApproverStatusUpdated) {
 
-	//     console.log('response', response)
+		this.logger.log('=== item-transaction.service.ts ===')
 
-	// }
+		console.log('handleRrApproverStatusUpdated()', payload)
+
+		const rrApprover = await this.prisma.rRApprover.findUnique({
+			where: { id: payload.id },
+			include: {
+				rr: {
+					include: {
+						rr_items: {
+							include: {
+								meqs_supplier_item: {
+									include: {
+										canvass_item: {
+											include: {
+												item: true
+											}
+										}
+									}
+								}
+							}
+						},
+						rr_approvers: {
+							where: {
+								deleted_at: null
+							}
+						}
+					}
+				}
+			}
+		})
+
+		if (!rrApprover) {
+			throw new NotFoundException('rrApprover not found with id: ' + payload.id)
+		}
+
+		if (rrApprover.rr.is_completed) {
+			console.log('RR is already completed. End function')
+			return
+		}
+
+		const approvers = rrApprover.rr.rr_approvers
+
+		console.log('approvers', approvers)
+
+		const isApproved = this.isRrStatusApproved(approvers)
+
+		if (!isApproved) {
+			console.log('RR status is not approved. End function')
+			return
+		}
+
+		console.log('Transacting RR items...')
+
+
+		// const hasItemToTransact = rrApprover.rr.rr_items.find(i => !!i.item_id)
+
+		// // if no items to transact just set the rr to complete
+		// if(!hasItemToTransact) {
+
+		//     const updatedRR = await this.prisma.rR.update({
+		//         select: {
+		//             is_completed: true
+		//         },
+		//         where: { id: rrApprover.rr_id },
+		//         data: {
+		//             is_completed: true
+		//         }
+		//     })
+
+		//     console.log('RR is_complete', updatedRR.is_completed)
+
+		//     return 
+
+		// }   
+
+		// add rr items to item_transaction table and update total quantity of item in the item table
+		// @ts-ignore
+		const response = await this.transactRrItems(rrApprover.rr_id, rrApprover.rr.rr_items)
+
+		console.log('response', response)
+
+	}
 
 }

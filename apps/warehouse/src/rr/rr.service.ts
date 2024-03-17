@@ -48,7 +48,8 @@ export class RrService {
                                 canvass_item: {
                                     include: {
                                         unit: true,
-                                        brand: true
+                                        brand: true,
+                                        item: true
                                     }
                                 }
                             }
@@ -64,7 +65,8 @@ export class RrService {
                         canvass_item: {
                             include: {
                                 unit: true,
-                                brand: true
+                                brand: true,
+                                item: true
                             }
                         }
                     }
@@ -143,10 +145,7 @@ export class RrService {
             }
         }
 
-        const created = await this.prisma.rR.create({
-            data,
-            include: this.includedFields
-        })
+        const created = await this.prisma.rR.create({ data })
 
         this.logger.log('Successfully created RR')
 
