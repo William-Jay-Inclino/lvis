@@ -5,6 +5,7 @@ import { CreateMeqsSupplierItemInput } from './dto/create-meqs-supplier-item.inp
 import { UpdateMeqsSupplierItemInput } from './dto/update-meqs-supplier-item.input';
 import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
 import { AuthUser } from '../__common__/auth-user.entity';
+import { WarehouseRemoveResponse } from '../__common__/classes';
 
 @Resolver(() => MeqsSupplierItem)
 export class MeqsSupplierItemResolver {
@@ -18,11 +19,6 @@ export class MeqsSupplierItemResolver {
     this.meqsSupplierItemService.setAuthUser(authUser)
     return this.meqsSupplierItemService.create(createMeqsSupplierItemInput);
   }
-
-  // @Query(() => [MeqsSupplierItem])
-  // meqs_supplier_items() {
-  //   return this.meqsSupplierItemService.findAll();
-  // }
 
   @Query(() => MeqsSupplierItem)
   meqs_supplier_item(@Args('id') id: string) {
@@ -47,4 +43,16 @@ export class MeqsSupplierItemResolver {
     this.meqsSupplierItemService.setAuthUser(authUser)
     return this.meqsSupplierItemService.remove(id);
   }
+
+  @Mutation(() => WarehouseRemoveResponse)
+  awardMeqsSupplierItem(
+    @Args('id') id: string,
+    @Args('meqs_supplier_id') meqs_supplier_id: string,
+    @Args('canvass_item_id') canvass_item_id: string,
+    @CurrentAuthUser() authUser: AuthUser
+  ) {
+    this.meqsSupplierItemService.setAuthUser(authUser)
+    return this.meqsSupplierItemService.awardSupplier(id, meqs_supplier_id, canvass_item_id);
+  }
+
 }

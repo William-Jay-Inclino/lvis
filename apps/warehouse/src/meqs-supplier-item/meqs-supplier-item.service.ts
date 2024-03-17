@@ -114,4 +114,49 @@ export class MeqsSupplierItemService {
 
 	}
 
+	async awardSupplier(id: string, meqs_supplier_id: string, canvass_item_id: string): Promise<WarehouseRemoveResponse> {
+
+		const meqsSupplierItem = await this.prisma.mEQSSupplierItem.findUnique({
+			where: { id }
+		})
+
+		if (!meqsSupplierItem) {
+			throw new NotFoundException("MEQS Supplier Item not found with ID of " + id)
+		}
+
+		const updatedBy = this.authUser.user.username
+
+		const unAwardAllSuppliersQuery = this.prisma.mEQSSupplierItem.updateMany({
+			where: {
+				meqs_supplier_id, canvass_item_id
+			},
+			data: {
+				is_awarded: false,
+				updated_by: updatedBy
+			}
+		})
+
+		const awardSupplierQuery = this.prisma.mEQSSupplierItem.update({
+			where: { id },
+			data: {
+				is_awarded: true,
+				updated_by: updatedBy
+			}
+		})
+
+
+		const result = await this.prisma.$transaction([
+			unAwardAllSuppliersQuery,
+			awardSupplierQuery
+		])
+
+		console.log('Successfully unaward other suppliers and award selected supplier')
+
+		return {
+			success: true,
+			msg: 'Successfully unaward other suppliers and award selected supplier'
+		}
+
+	}
+
 }

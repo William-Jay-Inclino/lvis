@@ -163,11 +163,11 @@ export class MeqsSupplierService {
         ])
 
         // @ts-ignore
-        const fileNames = existingItem.attachments.map((i: MeqsSupplierAttachment) => i.src)
+        const filenames = existingItem.attachments.map((i: MeqsSupplierAttachment) => i.src)
 
         // delete files in server
         console.log('deleting actual files in server...')
-        this.deleteFiles(fileNames)
+        this.deleteFiles(filenames)
 
         this.logger.log('Successfully updated MEQS Supplier and associated items and replaced attachments')
 
@@ -219,13 +219,13 @@ export class MeqsSupplierService {
 
     }
 
-    private async deleteFiles(fileNames: string[]) {
+    private async deleteFiles(filenames: string[]) {
 
-        console.log('deleteFiles', fileNames)
+        console.log('deleteFiles', filenames)
 
         const url = process.env.API_URL + '/api/v1/file-upload/warehouse/meqs'
 
-        this.httpService.delete(url, { data: fileNames });
+        this.httpService.delete(url, { data: filenames });
     }
 
 }
