@@ -120,6 +120,7 @@ export class MeqsSupplierService {
         const createdBy = this.authUser.user.username
         const updatedBy = this.authUser.user.username
 
+
         const data: Prisma.MEQSSupplierUpdateInput = {
             payment_terms: input.payment_terms ?? existingItem.payment_terms,
             updated_by: updatedBy
@@ -139,30 +140,8 @@ export class MeqsSupplierService {
             }
         }
 
-        if (input.meqs_supplier_items) {
-            data['meqs_supplier_items'] = {
-                connect: input.meqs_supplier_items.map(supplier => {
+        const queries = []
 
-                    return {
-                        price: supplier.price,
-                        vat_type: supplier.vat_type,
-                        id: supplier.id
-                    }
-
-                })
-            }
-        }
-
-
-        const updateMeqsSupplierQuery = this.prisma.mEQSSupplier.update({
-            data,
-            where: { id },
-            include: {
-                supplier: true,
-                attachments: true,
-                meqs_supplier_items: true
-            }
-        })
 
         const removeMeqsAttachmentsQuery = this.prisma.mEQSSupplierAttachment.deleteMany({
             where: {
@@ -170,21 +149,56 @@ export class MeqsSupplierService {
             }
         })
 
-        const result = await this.prisma.$transaction([
-            updateMeqsSupplierQuery,
-            removeMeqsAttachmentsQuery
-        ])
+        queries.push(removeMeqsAttachmentsQuery)
 
-        // @ts-ignore
-        const filePaths = existingItem.attachments.map((i: MeqsSupplierAttachment) => i.src)
+        if (input.meqs_supplier_items) {
 
-        // delete files in server
-        console.log('deleting actual files in server...')
-        this.deleteFiles(filePaths)
+            for (let item of input.meqs_supplier_items) {
+
+                const query = this.prisma.mEQSSupplierItem.update({
+                    where: {
+                        id: item.id
+                    },
+                    data: {
+                        price: item.price,
+                        vat_type: item.vat_type
+                    }
+                })
+
+                queries.push(query)
+
+            }
+
+        }
+
+        const updateMeqsSupplierQuery = this.prisma.mEQSSupplier.update({
+            data,
+            where: { id },
+            include: {
+                supplier: true,
+                attachments: true,
+                meqs_supplier_items: {
+                    include: {
+                        canvass_item: {
+                            include: {
+                                unit: true,
+                                brand: true,
+                                item: true
+                            }
+                        }
+                    }
+                }
+            }
+        })
+
+        queries.push(updateMeqsSupplierQuery)
+
+        const result = await this.prisma.$transaction(queries)
+
 
         this.logger.log('Successfully updated MEQS Supplier and associated items and replaced attachments')
 
-        return result[0]
+        return result[queries.length - 1]
 
     }
 

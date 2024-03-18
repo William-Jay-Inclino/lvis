@@ -9,12 +9,13 @@ export class FileUploadService {
 
     async getFilePath(filename: string, destination: string): Promise<string> {
         const filePath = path.resolve(UPLOADS_PATH, destination, filename);
-    
+
         // Check if the file exists before attempting to retrieve its path
         if (!fs.existsSync(filePath)) {
-          throw new Error(`File not found: ${filename}`);
+            console.error(`File not found: ${filename}`)
+            //   throw new Error(`File not found: ${filename}`);
         }
-    
+
         return filePath;
     }
 
@@ -52,6 +53,9 @@ export class FileUploadService {
     }
 
     async deleteFileLocally(filename: string, destination: string): Promise<void> {
+
+        if (!filename || filename.trim() === "") return
+
         const filePath = path.join('uploads', destination, filename);
 
         // Check if the file exists before attempting to delete
@@ -59,7 +63,8 @@ export class FileUploadService {
             fs.unlinkSync(filePath);
         } else {
             // Handle file not found scenario
-            throw new Error(`File not found: ${filename}`);
+            console.error(`File not found: ${filename}`)
+            // throw new Error(`File not found: ${filename}`);
         }
     }
 
