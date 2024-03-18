@@ -7,6 +7,7 @@ import { WarehouseRemoveResponse } from '../__common__/classes';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { HttpService } from '@nestjs/axios';
 import { MeqsSupplierAttachment } from '../meqs-supplier-attachment/entities/meqs-supplier-attachment.entity';
+import axios from 'axios';
 
 @Injectable()
 export class MeqsSupplierService {
@@ -68,7 +69,17 @@ export class MeqsSupplierService {
             include: {
                 supplier: true,
                 attachments: true,
-                meqs_supplier_items: true
+                meqs_supplier_items: {
+                    include: {
+                        canvass_item: {
+                            include: {
+                                unit: true,
+                                brand: true,
+                                item: true
+                            }
+                        }
+                    }
+                }
             }
         })
 
@@ -165,11 +176,11 @@ export class MeqsSupplierService {
         ])
 
         // @ts-ignore
-        const filenames = existingItem.attachments.map((i: MeqsSupplierAttachment) => i.src)
+        const filePaths = existingItem.attachments.map((i: MeqsSupplierAttachment) => i.src)
 
         // delete files in server
         console.log('deleting actual files in server...')
-        this.deleteFiles(filenames)
+        this.deleteFiles(filePaths)
 
         this.logger.log('Successfully updated MEQS Supplier and associated items and replaced attachments')
 
@@ -180,6 +191,13 @@ export class MeqsSupplierService {
     async remove(id: string): Promise<WarehouseRemoveResponse> {
 
         const existingItem = await this.findOne(id)
+
+        // @ts-ignore
+        const filePaths = existingItem.attachments.map((i: MeqsSupplierAttachment) => i.src)
+
+        // delete files in server
+        console.log('deleting actual files in server...')
+        this.deleteFiles(filePaths)
 
         await this.prisma.mEQSSupplier.delete({
             where: { id },
@@ -221,13 +239,15 @@ export class MeqsSupplierService {
 
     }
 
-    private async deleteFiles(filenames: string[]) {
+    private async deleteFiles(filePaths: string[]) {
 
-        console.log('deleteFiles', filenames)
+        console.log('deleteFiles', filePaths)
 
         const url = process.env.API_URL + '/api/v1/file-upload/warehouse/meqs'
 
-        this.httpService.delete(url, { data: filenames });
+        console.log('url', url)
+
+        return axios.delete(url, { data: filePaths });
     }
 
 }

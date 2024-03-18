@@ -4,6 +4,7 @@ import { InputType, Field, PartialType } from '@nestjs/graphql';
 import { UpdateMeqsSupplierItemSubInput } from './update-meqs-supplier-item.sub.input';
 import { Type } from 'class-transformer';
 import { UpdateMeqsSupplierAttachmentSubInput } from './update-meqs-supplier-attachment.sub.input';
+import { CreateMeqsSupplierAttachmentSubInput } from '../../meqs/dto/create-meqs-supplier-attachment.sub.input';
 
 @InputType()
 export class UpdateMeqsSupplierInput {
@@ -19,10 +20,10 @@ export class UpdateMeqsSupplierInput {
   @Type(() => UpdateMeqsSupplierItemSubInput)
   meqs_supplier_items?: UpdateMeqsSupplierItemSubInput[] | null;
 
-  @Field(() => [UpdateMeqsSupplierAttachmentSubInput], { nullable: true })
+  @Field(() => [CreateMeqsSupplierAttachmentSubInput])
   @IsArray()
   @ValidateNested({ each: true })
-  @Type(() => UpdateMeqsSupplierAttachmentSubInput)
-  attachments?: UpdateMeqsSupplierAttachmentSubInput[] | null;
+  @Type(() => CreateMeqsSupplierAttachmentSubInput)
+  attachments: CreateMeqsSupplierAttachmentSubInput[];
 
 }

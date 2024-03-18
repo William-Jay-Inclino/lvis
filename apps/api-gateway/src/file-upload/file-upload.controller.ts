@@ -24,7 +24,7 @@ export class FileUploadController {
             (res as any).sendFile(filePath);
         } catch (error) {
             this.logger.error('Error retrieving single file:', error.message);
-            throw new HttpException({ success: false, data: `Failed to retrieve single file: ${error.message}` }, HttpStatus.INTERNAL_SERVER_ERROR);
+            // throw new HttpException({ success: false, data: `Failed to retrieve single file: ${error.message}` }, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -40,7 +40,7 @@ export class FileUploadController {
             return { success: true, data: savedFilePath };
         } catch (error) {
             this.logger.error('Error uploading single file:', error.message);
-            throw new HttpException({ success: false, data: `Failed to upload single file: ${error.message}` }, HttpStatus.INTERNAL_SERVER_ERROR);
+            // throw new HttpException({ success: false, data: `Failed to upload single file: ${error.message}` }, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -56,7 +56,7 @@ export class FileUploadController {
             return { success: true, data: savedFilePaths };
         } catch (error) {
             this.logger.error('Error uploading multiple files:', error.message);
-            throw new HttpException({ success: false, data: `Failed to upload multiple files: ${error.message}` }, HttpStatus.INTERNAL_SERVER_ERROR);
+            // throw new HttpException({ success: false, data: `Failed to upload multiple files: ${error.message}` }, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -69,26 +69,31 @@ export class FileUploadController {
             return { success: true, data: `File deleted: ${filename}` };
         } catch (error) {
             this.logger.error('Error deleting single file:', error.message);
-            throw new HttpException({ success: false, data: `Failed to delete single file: ${error.message}` }, HttpStatus.INTERNAL_SERVER_ERROR);
+            // throw new HttpException({ success: false, data: `Failed to delete single file: ${error.message}` }, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @Delete('/meqs')
-    async deleteMultipleFilesMEQS(@Body() filenames: string[]) {
+    async deleteMultipleFilesMEQS(@Body() filePaths: string[]) {
+
+        console.log('deleteMultipleFilesMEQS', filePaths)
         try {
             const destination = MEQS_UPLOAD_PATH;
-            const deletePromises = filenames.map(filename =>
+            const deletePromises = filePaths.map(filePath => {
+
+                const parts = filePath.split('/');
+                const filename = parts[parts.length - 1];
+
+                console.log('filename to delete', filename)
+
                 this.fileUploadService.deleteFileLocally(filename, destination)
-            );
+
+            });
             await Promise.all(deletePromises);
-            this.logger.log('Files deleted:', filenames);
-            return { success: true, data: `Files deleted: ${filenames.join(', ')}` };
+            this.logger.log('Files deleted:', filePaths);
+            return { success: true, data: `Files deleted: ${filePaths.join(', ')}` };
         } catch (error) {
             this.logger.error('Error deleting files:', error.message);
-            throw new HttpException(
-                { success: false, data: `Failed to delete files: ${error.message}` },
-                HttpStatus.INTERNAL_SERVER_ERROR
-            );
         }
     }
 
