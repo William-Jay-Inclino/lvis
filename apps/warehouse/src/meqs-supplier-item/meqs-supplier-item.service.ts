@@ -116,6 +116,28 @@ export class MeqsSupplierItemService {
 
 	async awardSupplier(id: string, meqs_supplier_id: string, canvass_item_id: string): Promise<WarehouseRemoveResponse> {
 
+
+		const meqsSupplier = await this.prisma.mEQSSupplier.findUnique({
+			where: {
+				id: meqs_supplier_id
+			},
+			select: {
+				meqs: {
+					include: {
+						meqs_suppliers: {
+							include: {
+								meqs_supplier_items: true
+							}
+						}
+					}
+				}
+			}
+		})
+
+		if (!meqsSupplier) {
+			throw new NotFoundException("MEQS Supplier not found with ID of " + meqs_supplier_id)
+		}
+
 		const meqsSupplierItem = await this.prisma.mEQSSupplierItem.findUnique({
 			where: { id }
 		})
@@ -124,17 +146,33 @@ export class MeqsSupplierItemService {
 			throw new NotFoundException("MEQS Supplier Item not found with ID of " + id)
 		}
 
+		const queries = []
+
 		const updatedBy = this.authUser.user.username
 
-		const unAwardAllSuppliersQuery = this.prisma.mEQSSupplierItem.updateMany({
-			where: {
-				meqs_supplier_id, canvass_item_id
-			},
-			data: {
-				is_awarded: false,
-				updated_by: updatedBy
+		const suppliers = meqsSupplier.meqs.meqs_suppliers
+
+		for (let supplier of suppliers) {
+
+			const item = supplier.meqs_supplier_items.find(i => i.canvass_item_id === canvass_item_id)
+
+			if (item) {
+
+				const query = this.prisma.mEQSSupplierItem.update({
+					where: {
+						id: item.id
+					},
+					data: {
+						is_awarded: false,
+						updated_by: updatedBy
+					}
+				})
+
+				queries.push(query)
+
 			}
-		})
+
+		}
 
 		const awardSupplierQuery = this.prisma.mEQSSupplierItem.update({
 			where: { id },
@@ -144,11 +182,11 @@ export class MeqsSupplierItemService {
 			}
 		})
 
+		queries.push(awardSupplierQuery)
 
-		const result = await this.prisma.$transaction([
-			unAwardAllSuppliersQuery,
-			awardSupplierQuery
-		])
+		const result = await this.prisma.$transaction(queries)
+
+		console.log('result', result)
 
 		console.log('Successfully unaward other suppliers and award selected supplier')
 

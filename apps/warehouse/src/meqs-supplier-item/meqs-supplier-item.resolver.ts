@@ -6,7 +6,10 @@ import { UpdateMeqsSupplierItemInput } from './dto/update-meqs-supplier-item.inp
 import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { WarehouseRemoveResponse } from '../__common__/classes';
+import { UseGuards } from '@nestjs/common';
+import { GqlAuthGuard } from '../__auth__/guards/gql-auth.guard';
 
+@UseGuards(GqlAuthGuard)
 @Resolver(() => MeqsSupplierItem)
 export class MeqsSupplierItemResolver {
   constructor(private readonly meqsSupplierItemService: MeqsSupplierItemService) { }
