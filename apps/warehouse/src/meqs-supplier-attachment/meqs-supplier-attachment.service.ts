@@ -5,6 +5,7 @@ import { PrismaService } from '../__prisma__/prisma.service';
 import { MEQSSupplierAttachment, Prisma } from 'apps/warehouse/prisma/generated/client';
 import { WarehouseRemoveResponse } from '../__common__/classes';
 import { AuthUser } from '../__common__/auth-user.entity';
+import axios from 'axios';
 
 @Injectable()
 export class MeqsSupplierAttachmentService {
@@ -41,15 +42,6 @@ export class MeqsSupplierAttachmentService {
 
 
     }
-
-    // async findAll(): Promise<MEQSSupplierAttachment[]> {
-    //     return await this.prisma.mEQSSupplierAttachment.findMany({
-    //         include: {
-    //             meqs_supplier: true
-    //         },
-    //         where: { is_deleted: false }
-    //     })
-    // }
 
     async findOne(id: string): Promise<MEQSSupplierAttachment | null> {
 
@@ -100,10 +92,24 @@ export class MeqsSupplierAttachmentService {
             where: { id },
         })
 
+        this.deleteFiles([existingItem.src])
+
         return {
             success: true,
             msg: "MEQS Supplier Attachment successfully deleted"
         }
 
     }
+
+    private async deleteFiles(filePaths: string[]) {
+
+        console.log('deleteFiles', filePaths)
+
+        const url = process.env.API_URL + '/api/v1/file-upload/warehouse/meqs'
+
+        console.log('url', url)
+
+        return axios.delete(url, { data: filePaths });
+    }
+
 }

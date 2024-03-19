@@ -5,7 +5,11 @@ import { CreateMeqsSupplierAttachmentInput } from './dto/create-meqs-supplier-at
 import { UpdateMeqsSupplierAttachmentInput } from './dto/update-meqs-supplier-attachment.input';
 import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
 import { AuthUser } from '../__common__/auth-user.entity';
+import { GqlAuthGuard } from '../__auth__/guards/gql-auth.guard';
+import { UseGuards } from '@nestjs/common';
+import { WarehouseRemoveResponse } from '../__common__/classes';
 
+@UseGuards(GqlAuthGuard)
 @Resolver(() => MeqsSupplierAttachment)
 export class MeqsSupplierAttachmentResolver {
   constructor(private readonly meqsSupplierAttachmentService: MeqsSupplierAttachmentService) { }
@@ -39,7 +43,7 @@ export class MeqsSupplierAttachmentResolver {
     return this.meqsSupplierAttachmentService.update(id, updateMeqsSupplierAttachmentInput);
   }
 
-  @Mutation(() => MeqsSupplierAttachment)
+  @Mutation(() => WarehouseRemoveResponse)
   removeMeqsSupplierAttachment(
     @Args('id') id: string,
     @CurrentAuthUser() authUser: AuthUser
