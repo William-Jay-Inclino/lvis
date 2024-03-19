@@ -58,4 +58,15 @@ export class MeqsSupplierItemResolver {
     return this.meqsSupplierItemService.awardSupplier(id, meqs_supplier_id, canvass_item_id);
   }
 
+  @Mutation(() => WarehouseRemoveResponse)
+  attachNoteMeqsSupplierItem(
+    @Args('meqs_id') meqs_id: string,
+    @Args('canvass_item_id') canvass_item_id: string,
+    @Args('notes') notes: string,
+    @CurrentAuthUser() authUser: AuthUser
+  ) {
+    this.meqsSupplierItemService.setAuthUser(authUser)
+    return this.meqsSupplierItemService.attachNote(meqs_id, canvass_item_id, notes);
+  }
+
 }

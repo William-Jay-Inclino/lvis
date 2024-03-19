@@ -44,18 +44,6 @@ export class MeqsSupplierItemService {
 
 	}
 
-	// async findAll(): Promise<MEQSSupplierItem[]> {
-	// 	return await this.prisma.mEQSSupplierItem.findMany({
-	// 		include: {
-	// 			meqs_supplier: true,
-	// 			canvass_item: true
-	// 		},
-	// 		where: {
-	// 			is_deleted: false
-	// 		}
-	// 	})
-	// }
-
 	async findOne(id: string): Promise<MEQSSupplierItem | null> {
 		const item = await this.prisma.mEQSSupplierItem.findUnique({
 			include: {
@@ -192,7 +180,68 @@ export class MeqsSupplierItemService {
 
 		return {
 			success: true,
-			msg: 'Successfully unaward other suppliers and award selected supplier'
+			msg: 'Supplier awarded successfully!'
+		}
+
+	}
+
+	async attachNote(meqs_id: string, canvass_item_id: string, notes: string): Promise<WarehouseRemoveResponse> {
+
+
+		const meqs = await this.prisma.mEQS.findUnique({
+			where: {
+				id: meqs_id
+			},
+			select: {
+				meqs_suppliers: {
+					include: {
+						meqs_supplier_items: true
+					}
+				}
+			}
+		})
+
+		if (!meqs) {
+			throw new NotFoundException("MEQS not found with ID of " + meqs_id)
+		}
+
+		const queries = []
+
+		const updatedBy = this.authUser.user.username
+
+		const suppliers = meqs.meqs_suppliers
+
+		for (let supplier of suppliers) {
+
+			const item = supplier.meqs_supplier_items.find(i => i.canvass_item_id === canvass_item_id)
+
+			if (item) {
+
+				const query = this.prisma.mEQSSupplierItem.update({
+					where: {
+						id: item.id
+					},
+					data: {
+						notes,
+						updated_by: updatedBy
+					}
+				})
+
+				queries.push(query)
+
+			}
+
+		}
+
+		const result = await this.prisma.$transaction(queries)
+
+		console.log('result', result)
+
+		console.log('Successfully attach note')
+
+		return {
+			success: true,
+			msg: 'Successfully attached note!'
 		}
 
 	}
