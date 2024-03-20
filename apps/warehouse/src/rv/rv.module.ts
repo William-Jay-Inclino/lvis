@@ -10,4 +10,4 @@ import { CanvassService } from '../canvass/canvass.service';
   providers: [RvResolver, RvService, RvApproverService, CanvassService],
   exports: [RvService]
 })
-export class RvModule {}
+export class RvModule { }

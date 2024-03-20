@@ -14,7 +14,7 @@ import { RvApproverService } from '../rv-approver/rv-approver.service';
 import { RvNumber } from './entities/rv-number.entity';
 import { RVsResponse } from './entities/rvs-response.entity';
 import { APPROVAL_STATUS } from '../__common__/types';
-import { WarehouseCancelResponse, WarehouseRemoveResponse } from '../__common__/classes';
+import { WarehouseCancelResponse } from '../__common__/classes';
 
 @UseGuards(GqlAuthGuard)
 @Resolver(() => RV)

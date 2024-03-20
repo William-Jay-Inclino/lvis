@@ -2,7 +2,7 @@ import { Field, Int, ObjectType } from "@nestjs/graphql";
 
 
 @ObjectType()
-export class RVApproverSetting {
+export class JOApproverSetting {
 
     @Field(() => String)
     id: string;

@@ -30,6 +30,9 @@ export class RVApprover {
     @Field(() => Int)
     order: number
 
+
+    // =============== audit fields =============== 
+
     @Field()
     created_by: string;
 

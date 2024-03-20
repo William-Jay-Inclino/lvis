@@ -37,6 +37,8 @@ import { RrModule } from './rr/rr.module';
 import { RrApproverModule } from './rr-approver/rr-approver.module';
 import { RrItemModule } from './rr-item/rr-item.module';
 import { EventEmitterModule } from '@nestjs/event-emitter';
+import { JoModule } from './jo/jo.module';
+import { JoApproverModule } from './jo-approver/jo-approver.module';
 
 
 @Module({
@@ -74,6 +76,8 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
     RrModule,
     RrApproverModule,
     RrItemModule,
+    JoModule,
+    JoApproverModule,
   ],
   controllers: [],
   providers: [RvService, MeqsService, MeqsResolver, PoService, PoResolver, PoApproverResolver],

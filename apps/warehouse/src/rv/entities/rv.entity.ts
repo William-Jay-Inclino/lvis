@@ -1,7 +1,8 @@
-import { ObjectType, Field, Int, ID } from '@nestjs/graphql';
+import { ObjectType, Field, ID } from '@nestjs/graphql';
 import { Canvass } from '../../canvass/entities/canvass.entity';
 import { MEQS } from '../../meqs/entities/meq.entity';
 import { RVApprover } from '../../rv-approver/entities/rv-approver.entity';
+
 @ObjectType()
 export class RV {
 
@@ -29,11 +30,11 @@ export class RV {
   @Field(() => String, { nullable: true })
   work_order_date: string;
 
-  @Field(() => Date, { nullable: true })
-  date_cancelled: Date | null;
-
   @Field(() => String)
   notes: string;
+
+
+  // =============== audit fields ===============
 
   @Field({ nullable: true })
   cancelled_by: string | null;
