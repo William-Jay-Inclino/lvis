@@ -16,6 +16,7 @@ import { ClassificationModule } from './classification/classification.module';
 import { MeqsApproverSettingModule } from './meqs-approver-setting/meqs-approver-setting.module';
 import { PoApproverSettingModule } from './po-approver-setting/po-approver-setting.module';
 import { RrApproverSettingModule } from './rr-approver-setting/rr-approver-setting.module';
+import { JoApproverSettingModule } from './jo-approver-setting/jo-approver-setting.module';
 
 
 @Module({
@@ -39,9 +40,10 @@ import { RrApproverSettingModule } from './rr-approver-setting/rr-approver-setti
     ClassificationModule,
     MeqsApproverSettingModule,
     PoApproverSettingModule,
-    RrApproverSettingModule
+    RrApproverSettingModule,
+    JoApproverSettingModule,
   ],
   controllers: [],
   providers: [],
 })
-export class SystemModule {}
+export class SystemModule { }
