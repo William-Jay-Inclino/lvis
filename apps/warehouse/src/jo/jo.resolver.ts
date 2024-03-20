@@ -15,6 +15,7 @@ import { JoNumber } from './entities/jo-number.entity';
 import { JOsResponse } from './entities/jos-response.entity';
 import { APPROVAL_STATUS } from '../__common__/types';
 import { WarehouseCancelResponse } from '../__common__/classes';
+import { Department } from '../__department__ /entities/department.entity';
 
 @UseGuards(GqlAuthGuard)
 @Resolver(() => JO)
@@ -98,6 +99,11 @@ export class JoResolver {
             return null
         }
         return { __typename: 'Classification', id: jo.classification_id }
+    }
+
+    @ResolveField(() => Department, { nullable: true })
+    department(@Parent() jo: JO): any {
+        return { __typename: 'Department', id: jo.department_id }
     }
 
     @ResolveField(() => [JOApprover])

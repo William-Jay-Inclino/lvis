@@ -233,9 +233,12 @@ exports.Prisma.ModuleScalarFieldEnum = {
 exports.Prisma.SubModuleScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  deleted_by: 'deleted_by',
   created_at: 'created_at',
   updated_at: 'updated_at',
-  is_deleted: 'is_deleted',
+  deleted_at: 'deleted_at',
   module_id: 'module_id'
 };
 

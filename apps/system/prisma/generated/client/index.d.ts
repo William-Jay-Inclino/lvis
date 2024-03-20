@@ -12257,27 +12257,36 @@ export namespace Prisma {
   export type SubModuleMinAggregateOutputType = {
     id: string | null
     name: string | null
+    created_by: string | null
+    updated_by: string | null
+    deleted_by: string | null
     created_at: Date | null
     updated_at: Date | null
-    is_deleted: boolean | null
+    deleted_at: Date | null
     module_id: string | null
   }
 
   export type SubModuleMaxAggregateOutputType = {
     id: string | null
     name: string | null
+    created_by: string | null
+    updated_by: string | null
+    deleted_by: string | null
     created_at: Date | null
     updated_at: Date | null
-    is_deleted: boolean | null
+    deleted_at: Date | null
     module_id: string | null
   }
 
   export type SubModuleCountAggregateOutputType = {
     id: number
     name: number
+    created_by: number
+    updated_by: number
+    deleted_by: number
     created_at: number
     updated_at: number
-    is_deleted: number
+    deleted_at: number
     module_id: number
     _all: number
   }
@@ -12286,27 +12295,36 @@ export namespace Prisma {
   export type SubModuleMinAggregateInputType = {
     id?: true
     name?: true
+    created_by?: true
+    updated_by?: true
+    deleted_by?: true
     created_at?: true
     updated_at?: true
-    is_deleted?: true
+    deleted_at?: true
     module_id?: true
   }
 
   export type SubModuleMaxAggregateInputType = {
     id?: true
     name?: true
+    created_by?: true
+    updated_by?: true
+    deleted_by?: true
     created_at?: true
     updated_at?: true
-    is_deleted?: true
+    deleted_at?: true
     module_id?: true
   }
 
   export type SubModuleCountAggregateInputType = {
     id?: true
     name?: true
+    created_by?: true
+    updated_by?: true
+    deleted_by?: true
     created_at?: true
     updated_at?: true
-    is_deleted?: true
+    deleted_at?: true
     module_id?: true
     _all?: true
   }
@@ -12386,9 +12404,12 @@ export namespace Prisma {
   export type SubModuleGroupByOutputType = {
     id: string
     name: string
+    created_by: string
+    updated_by: string | null
+    deleted_by: string | null
     created_at: Date
     updated_at: Date
-    is_deleted: boolean
+    deleted_at: Date | null
     module_id: string
     _count: SubModuleCountAggregateOutputType | null
     _min: SubModuleMinAggregateOutputType | null
@@ -12412,9 +12433,12 @@ export namespace Prisma {
   export type SubModuleSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    created_by?: boolean
+    updated_by?: boolean
+    deleted_by?: boolean
     created_at?: boolean
     updated_at?: boolean
-    is_deleted?: boolean
+    deleted_at?: boolean
     module_id?: boolean
     module?: boolean | ModuleDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["subModule"]>
@@ -12422,9 +12446,12 @@ export namespace Prisma {
   export type SubModuleSelectScalar = {
     id?: boolean
     name?: boolean
+    created_by?: boolean
+    updated_by?: boolean
+    deleted_by?: boolean
     created_at?: boolean
     updated_at?: boolean
-    is_deleted?: boolean
+    deleted_at?: boolean
     module_id?: boolean
   }
 
@@ -12441,9 +12468,12 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
+      created_by: string
+      updated_by: string | null
+      deleted_by: string | null
       created_at: Date
       updated_at: Date
-      is_deleted: boolean
+      deleted_at: Date | null
       module_id: string
     }, ExtArgs["result"]["subModule"]>
     composites: {}
@@ -12842,9 +12872,12 @@ export namespace Prisma {
   interface SubModuleFieldRefs {
     readonly id: FieldRef<"SubModule", 'String'>
     readonly name: FieldRef<"SubModule", 'String'>
+    readonly created_by: FieldRef<"SubModule", 'String'>
+    readonly updated_by: FieldRef<"SubModule", 'String'>
+    readonly deleted_by: FieldRef<"SubModule", 'String'>
     readonly created_at: FieldRef<"SubModule", 'DateTime'>
     readonly updated_at: FieldRef<"SubModule", 'DateTime'>
-    readonly is_deleted: FieldRef<"SubModule", 'Boolean'>
+    readonly deleted_at: FieldRef<"SubModule", 'DateTime'>
     readonly module_id: FieldRef<"SubModule", 'String'>
   }
     
@@ -19385,9 +19418,12 @@ export namespace Prisma {
   export const SubModuleScalarFieldEnum: {
     id: 'id',
     name: 'name',
+    created_by: 'created_by',
+    updated_by: 'updated_by',
+    deleted_by: 'deleted_by',
     created_at: 'created_at',
     updated_at: 'updated_at',
-    is_deleted: 'is_deleted',
+    deleted_at: 'deleted_at',
     module_id: 'module_id'
   };
 
@@ -19572,13 +19608,6 @@ export namespace Prisma {
    * Reference to a field of type 'Role[]'
    */
   export type ListEnumRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Role[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'Boolean'
-   */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -20397,9 +20426,12 @@ export namespace Prisma {
     NOT?: SubModuleWhereInput | SubModuleWhereInput[]
     id?: StringFilter<"SubModule"> | string
     name?: StringFilter<"SubModule"> | string
+    created_by?: StringFilter<"SubModule"> | string
+    updated_by?: StringNullableFilter<"SubModule"> | string | null
+    deleted_by?: StringNullableFilter<"SubModule"> | string | null
     created_at?: DateTimeFilter<"SubModule"> | Date | string
     updated_at?: DateTimeFilter<"SubModule"> | Date | string
-    is_deleted?: BoolFilter<"SubModule"> | boolean
+    deleted_at?: DateTimeNullableFilter<"SubModule"> | Date | string | null
     module_id?: StringFilter<"SubModule"> | string
     module?: XOR<ModuleRelationFilter, ModuleWhereInput>
   }
@@ -20407,9 +20439,12 @@ export namespace Prisma {
   export type SubModuleOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrderInput | SortOrder
+    deleted_by?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrderInput | SortOrder
     module_id?: SortOrder
     module?: ModuleOrderByWithRelationInput
   }
@@ -20420,9 +20455,12 @@ export namespace Prisma {
     OR?: SubModuleWhereInput[]
     NOT?: SubModuleWhereInput | SubModuleWhereInput[]
     name?: StringFilter<"SubModule"> | string
+    created_by?: StringFilter<"SubModule"> | string
+    updated_by?: StringNullableFilter<"SubModule"> | string | null
+    deleted_by?: StringNullableFilter<"SubModule"> | string | null
     created_at?: DateTimeFilter<"SubModule"> | Date | string
     updated_at?: DateTimeFilter<"SubModule"> | Date | string
-    is_deleted?: BoolFilter<"SubModule"> | boolean
+    deleted_at?: DateTimeNullableFilter<"SubModule"> | Date | string | null
     module_id?: StringFilter<"SubModule"> | string
     module?: XOR<ModuleRelationFilter, ModuleWhereInput>
   }, "id">
@@ -20430,9 +20468,12 @@ export namespace Prisma {
   export type SubModuleOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrderInput | SortOrder
+    deleted_by?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrderInput | SortOrder
     module_id?: SortOrder
     _count?: SubModuleCountOrderByAggregateInput
     _max?: SubModuleMaxOrderByAggregateInput
@@ -20445,9 +20486,12 @@ export namespace Prisma {
     NOT?: SubModuleScalarWhereWithAggregatesInput | SubModuleScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"SubModule"> | string
     name?: StringWithAggregatesFilter<"SubModule"> | string
+    created_by?: StringWithAggregatesFilter<"SubModule"> | string
+    updated_by?: StringNullableWithAggregatesFilter<"SubModule"> | string | null
+    deleted_by?: StringNullableWithAggregatesFilter<"SubModule"> | string | null
     created_at?: DateTimeWithAggregatesFilter<"SubModule"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"SubModule"> | Date | string
-    is_deleted?: BoolWithAggregatesFilter<"SubModule"> | boolean
+    deleted_at?: DateTimeNullableWithAggregatesFilter<"SubModule"> | Date | string | null
     module_id?: StringWithAggregatesFilter<"SubModule"> | string
   }
 
@@ -21850,62 +21894,83 @@ export namespace Prisma {
   export type SubModuleCreateInput = {
     id?: string
     name: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
     module: ModuleCreateNestedOneWithoutSubmodulesInput
   }
 
   export type SubModuleUncheckedCreateInput = {
     id?: string
     name: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
     module_id: string
   }
 
   export type SubModuleUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     module?: ModuleUpdateOneRequiredWithoutSubmodulesNestedInput
   }
 
   export type SubModuleUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     module_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type SubModuleCreateManyInput = {
     id?: string
     name: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
     module_id: string
   }
 
   export type SubModuleUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type SubModuleUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     module_id?: StringFieldUpdateOperationsInput | string
   }
 
@@ -23107,11 +23172,6 @@ export namespace Prisma {
     feature_id?: SortOrder
   }
 
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
   export type ModuleRelationFilter = {
     is?: ModuleWhereInput
     isNot?: ModuleWhereInput
@@ -23120,36 +23180,37 @@ export namespace Prisma {
   export type SubModuleCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrder
+    deleted_by?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrder
     module_id?: SortOrder
   }
 
   export type SubModuleMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrder
+    deleted_by?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrder
     module_id?: SortOrder
   }
 
   export type SubModuleMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrder
+    deleted_by?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrder
     module_id?: SortOrder
-  }
-
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type JOApproverSettingCountOrderByAggregateInput = {
@@ -23962,10 +24023,6 @@ export namespace Prisma {
     connect?: ModuleWhereUniqueInput
   }
 
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
-  }
-
   export type ModuleUpdateOneRequiredWithoutSubmodulesNestedInput = {
     create?: XOR<ModuleCreateWithoutSubmodulesInput, ModuleUncheckedCreateWithoutSubmodulesInput>
     connectOrCreate?: ModuleCreateOrConnectWithoutSubmodulesInput
@@ -24234,19 +24291,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumRoleFilter<$PrismaModel>
     _max?: NestedEnumRoleFilter<$PrismaModel>
-  }
-
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type DepartmentCreateWithoutDivisionInput = {
@@ -25260,17 +25304,23 @@ export namespace Prisma {
   export type SubModuleCreateWithoutModuleInput = {
     id?: string
     name: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
   }
 
   export type SubModuleUncheckedCreateWithoutModuleInput = {
     id?: string
     name: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
   }
 
   export type SubModuleCreateOrConnectWithoutModuleInput = {
@@ -25340,9 +25390,12 @@ export namespace Prisma {
     NOT?: SubModuleScalarWhereInput | SubModuleScalarWhereInput[]
     id?: StringFilter<"SubModule"> | string
     name?: StringFilter<"SubModule"> | string
+    created_by?: StringFilter<"SubModule"> | string
+    updated_by?: StringNullableFilter<"SubModule"> | string | null
+    deleted_by?: StringNullableFilter<"SubModule"> | string | null
     created_at?: DateTimeFilter<"SubModule"> | Date | string
     updated_at?: DateTimeFilter<"SubModule"> | Date | string
-    is_deleted?: BoolFilter<"SubModule"> | boolean
+    deleted_at?: DateTimeNullableFilter<"SubModule"> | Date | string | null
     module_id?: StringFilter<"SubModule"> | string
   }
 
@@ -26109,33 +26162,45 @@ export namespace Prisma {
   export type SubModuleCreateManyModuleInput = {
     id?: string
     name: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
   }
 
   export type SubModuleUpdateWithoutModuleInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type SubModuleUncheckedUpdateWithoutModuleInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type SubModuleUncheckedUpdateManyWithoutModuleInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
 

@@ -1,4 +1,4 @@
-import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, ResolveReference } from '@nestjs/graphql';
 import { DepartmentService } from './department.service';
 import { Department } from './entities/department.entity';
 import { CreateDepartmentInput } from './dto/create-department.input';
@@ -50,6 +50,12 @@ export class DepartmentResolver {
   ) {
     this.departmentService.setAuthUser(authUser)
     return this.departmentService.remove(id);
+  }
+
+
+  @ResolveReference()
+  async resolveReference(reference: { __typename: string, id: string }): Promise<Department> {
+    return await this.departmentService.findOne(reference.id)
   }
 
 }
