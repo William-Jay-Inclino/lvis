@@ -5,27 +5,34 @@ import { Employee, Prisma } from 'apps/system/prisma/generated/client';
 import { UpdateEmployeeInput } from './dto/update-employee.input';
 import { SystemRemoveResponse } from '../__common__/classes';
 import { EmployeesResponse } from './entities/employees-response.entity';
+import { AuthUser } from '../__common__/auth-user.entity';
 
 @Injectable()
 export class EmployeeService {
 
 	private readonly logger = new Logger(EmployeeService.name);
+	private authUser: AuthUser
 
-	constructor(private readonly prisma: PrismaService) {}
+	constructor(private readonly prisma: PrismaService) { }
+
+	setAuthUser(authUser: AuthUser) {
+		this.authUser = authUser
+	}
 
 	async create(input: CreateEmployeeInput): Promise<Employee> {
 
 		const data: Prisma.EmployeeCreateInput = {
+			created_by: this.authUser.user.username,
 			firstname: input.firstname,
 			middlename: input.middlename,
 			lastname: input.lastname
 		}
 
-		const created = await this.prisma.employee.create( { data } )
+		const created = await this.prisma.employee.create({ data })
 
 		this.logger.log('Successfully created Employee')
 
-		return created 
+		return created
 
 	}
 
@@ -33,40 +40,40 @@ export class EmployeeService {
 		page: number,
 		pageSize: number,
 		searchValue?: string
-	  ): Promise<EmployeesResponse> {
+	): Promise<EmployeesResponse> {
 
 		const skip = (page - 1) * pageSize;
-	  
+
 		let whereCondition: any = {
-		  is_deleted: false,
+			deleted_at: null
 		};
-	  
+
 		if (searchValue !== undefined) {
 			whereCondition = {
-			  OR: [
-				{ lastname: { contains: searchValue.trim(), mode: 'insensitive' } },
-				{ firstname: { contains: searchValue.trim(), mode: 'insensitive' } },
-				{ middlename: { contains: searchValue.trim(), mode: 'insensitive' } },
-			  ],
+				OR: [
+					{ lastname: { contains: searchValue.trim(), mode: 'insensitive' } },
+					{ firstname: { contains: searchValue.trim(), mode: 'insensitive' } },
+					{ middlename: { contains: searchValue.trim(), mode: 'insensitive' } },
+				],
 			};
 		}
-	  
+
 		const items = await this.prisma.employee.findMany({
-		  orderBy: [{ lastname: 'asc' }, { firstname: 'asc' }],
-		  skip,
-		  take: pageSize,
-		  where: whereCondition,
+			orderBy: [{ lastname: 'asc' }, { firstname: 'asc' }],
+			skip,
+			take: pageSize,
+			where: whereCondition,
 		});
-	  
+
 		const totalItems = await this.prisma.employee.count({
-		  where: whereCondition,
+			where: whereCondition,
 		});
-	  
+
 		return {
-		  data: items,
-		  totalItems,
-		  currentPage: page,
-		  totalPages: Math.ceil(totalItems / pageSize),
+			data: items,
+			totalItems,
+			currentPage: page,
+			totalPages: Math.ceil(totalItems / pageSize),
 		};
 	}
 
@@ -80,11 +87,11 @@ export class EmployeeService {
 
 		console.log('item', item, id)
 
-		if(!item){
-            throw new NotFoundException('Employee not found')
-        }
+		if (!item) {
+			throw new NotFoundException('Employee not found')
+		}
 
-        return item
+		return item
 	}
 
 	async update(id: string, input: UpdateEmployeeInput): Promise<Employee> {
@@ -92,19 +99,20 @@ export class EmployeeService {
 		const existingItem = await this.findOne(id)
 
 		const data: Prisma.EmployeeUpdateInput = {
+			updated_by: this.authUser.user.username,
 			firstname: input.firstname ?? existingItem.firstname,
 			middlename: input.middlename ?? existingItem.middlename,
 			lastname: input.lastname ?? existingItem.lastname
 		}
 
-		
-		const updated = await this.prisma.employee.update({ 
+
+		const updated = await this.prisma.employee.update({
 			data,
 			where: {
 				id
 			}
 		})
-		
+
 		this.logger.log('Successfully updated Employee')
 
 		return updated
@@ -115,10 +123,13 @@ export class EmployeeService {
 
 		const existingItem = await this.findOne(id)
 
-		await this.prisma.employee.update( {
+		await this.prisma.employee.update({
 			where: { id },
-			data: { is_deleted: true }
-		} )
+			data: {
+				deleted_at: new Date(),
+				deleted_by: this.authUser.user.username
+			}
+		})
 
 		return {
 			success: true,
@@ -156,31 +167,31 @@ export class EmployeeService {
 	}
 
 	async findEmployeesByName(name: string): Promise<{
-		id: string, 
+		id: string,
 		firstname: string,
 		middlename: string,
 		lastname: string,
-	 }[]> {
-	
+	}[]> {
+
 		const employees = await this.prisma.employee.findMany({
-            select: {
+			select: {
 				id: true,
-                firstname: true,
-                middlename: true,
-                lastname: true
-            },
-            where: {
-				is_deleted: false,
+				firstname: true,
+				middlename: true,
+				lastname: true
+			},
+			where: {
+				deleted_at: null,
 				OR: [
-				  { lastname: { contains: name.trim(), mode: 'insensitive' } },
-				  { firstname: { contains: name.trim(), mode: 'insensitive' } },
-				  { middlename: { contains: name.trim(), mode: 'insensitive' } },
+					{ lastname: { contains: name.trim(), mode: 'insensitive' } },
+					{ firstname: { contains: name.trim(), mode: 'insensitive' } },
+					{ middlename: { contains: name.trim(), mode: 'insensitive' } },
 				],
-			  },
-            take: 5,
+			},
+			take: 5,
 		});
-	
+
 		return employees;
-	} 
+	}
 
 }

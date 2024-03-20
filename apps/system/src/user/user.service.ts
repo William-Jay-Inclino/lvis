@@ -3,11 +3,14 @@ import { CreateUserInput } from './dto/create-user.input';
 import { PrismaService } from '../__prisma__/prisma.service';
 import { UpdateUserInput } from './dto/update-user.input';
 import { Prisma, Role, User } from 'apps/system/prisma/generated/client';
+import { AuthUser } from '../__common__/auth-user.entity';
 
 @Injectable()
 export class UserService {
 
   private readonly logger = new Logger(UserService.name);
+  private authUser: AuthUser
+
   private includedFields = {
     user_employee: {
       include: {
@@ -18,12 +21,17 @@ export class UserService {
 
   constructor(private readonly prisma: PrismaService) { }
 
+  setAuthUser(authUser: AuthUser) {
+    this.authUser = authUser
+  }
+
   async create(input: CreateUserInput): Promise<User> {
 
     const data: Prisma.UserCreateInput = {
       username: input.username,
       password: input.password,
-      role: input.role ?? Role.USER
+      role: input.role ?? Role.USER,
+      created_by: this.authUser.user.username
     }
 
     const created = await this.prisma.user.create({ data })
@@ -36,7 +44,7 @@ export class UserService {
   async findAll(): Promise<User[]> {
     return await this.prisma.user.findMany({
       where: {
-        is_deleted: false
+        deleted_at: null
       },
       include: this.includedFields
     })
@@ -45,7 +53,7 @@ export class UserService {
   async findOne(id: string): Promise<User | null> {
 
     const user = await this.prisma.user.findUnique({
-      where: { id, is_deleted: false },
+      where: { id, deleted_at: null },
       include: this.includedFields
 
     })
@@ -81,6 +89,7 @@ export class UserService {
 
     const data: Prisma.UserUpdateInput = {
       password: input.password ?? existingUser.password,
+      updated_by: this.authUser.user.username
     }
 
     const updated = await this.prisma.user.update({
@@ -103,7 +112,8 @@ export class UserService {
     await this.prisma.user.update({
       where: { id },
       data: {
-        is_deleted: true
+        deleted_at: new Date(),
+        deleted_by: this.authUser.user.username
       }
     })
 

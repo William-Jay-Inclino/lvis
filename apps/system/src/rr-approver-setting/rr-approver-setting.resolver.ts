@@ -4,13 +4,22 @@ import { RrApproverSetting } from './entities/rr-approver-setting.entity';
 import { CreateRrApproverSettingInput } from './dto/create-rr-approver-setting.input';
 import { UpdateRrApproverSettingInput } from './dto/update-rr-approver-setting.input';
 import { SystemRemoveResponse } from '../__common__/classes';
+import { GqlAuthGuard } from '../__auth__/guards/gql-auth.guard';
+import { UseGuards } from '@nestjs/common';
+import { AuthUser } from '../__common__/auth-user.entity';
+import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
 
+@UseGuards(GqlAuthGuard)
 @Resolver(() => RrApproverSetting)
 export class RrApproverSettingResolver {
-  constructor(private readonly rrApproverSettingService: RrApproverSettingService) {}
+  constructor(private readonly rrApproverSettingService: RrApproverSettingService) { }
 
   @Mutation(() => RrApproverSetting)
-  createRrApproverSetting(@Args('input') createRrApproverSettingInput: CreateRrApproverSettingInput) {
+  createRrApproverSetting(
+    @Args('input') createRrApproverSettingInput: CreateRrApproverSettingInput,
+    @CurrentAuthUser() authUser: AuthUser
+  ) {
+    this.rrApproverSettingService.setAuthUser(authUser)
     return this.rrApproverSettingService.create(createRrApproverSettingInput);
   }
 
@@ -27,13 +36,19 @@ export class RrApproverSettingResolver {
   @Mutation(() => RrApproverSetting)
   updateRrApproverSetting(
     @Args('id') id: string,
-    @Args('input') updateRrApproverSettingInput: UpdateRrApproverSettingInput
+    @Args('input') updateRrApproverSettingInput: UpdateRrApproverSettingInput,
+    @CurrentAuthUser() authUser: AuthUser
   ) {
+    this.rrApproverSettingService.setAuthUser(authUser)
     return this.rrApproverSettingService.update(id, updateRrApproverSettingInput);
   }
 
   @Mutation(() => SystemRemoveResponse)
-  removeRrApproverSetting(@Args('id') id: string) {
+  removeRrApproverSetting(
+    @Args('id') id: string,
+    @CurrentAuthUser() authUser: AuthUser
+  ) {
+    this.rrApproverSettingService.setAuthUser(authUser)
     return this.rrApproverSettingService.remove(id);
   }
 }

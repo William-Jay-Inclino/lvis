@@ -20,22 +20,33 @@ model Division {
   code          String     @unique
   name          String
   status        Int        @default(1)
-  created_at    DateTime   @default(now())
-  updated_at    DateTime   @updatedAt
-  is_deleted    Boolean    @default(false)
+
+  created_by String
+  updated_by String?
+  deleted_by String?
+
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+  deleted_at DateTime?
 
   @@map("division")
 }
 
 model Department {
-  id         String     @id @default(uuid())
-  code       String     @unique
-  name       String
-  status     Int        @default(1)
-  created_at DateTime   @default(now())
-  updated_at DateTime   @updatedAt
-  is_deleted Boolean    @default(false)
-  Division   Division[]
+  id     String @id @default(uuid())
+  code   String @unique
+  name   String
+  status Int    @default(1)
+
+  created_by String
+  updated_by String?
+  deleted_by String?
+
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+  deleted_at DateTime?
+
+  Division Division[]
 
   @@map("department")
 }
@@ -53,16 +64,14 @@ model Employee {
   spr_approver_setting  SPRApproverSetting?  @relation("SPRApproverSetting")
   rr_approver_setting   RRApproverSetting?   @relation("RRApproverSetting")
 
-  jo_approver_proxy_setting   JOApproverSetting?   @relation("JOApproverProxySetting")
-  meqs_approver_proxy_setting MEQSApproverSetting? @relation("MEQSApproverProxySetting")
-  po_approver_proxy_setting   POApproverSetting?   @relation("POApproverProxySetting")
-  rv_approver_proxy_setting   RVApproverSetting?   @relation("RVApproverProxySetting")
-  spr_approver_proxy_setting  SPRApproverSetting?  @relation("SPRApproverProxySetting")
-  rr_approver_proxy_setting   RRApproverSetting?   @relation("RRApproverProxySetting")
+  created_by String
+  updated_by String?
+  deleted_by String?
 
-  created_at    DateTime      @default(now())
-  updated_at    DateTime      @updatedAt
-  is_deleted    Boolean       @default(false)
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+  deleted_at DateTime?
+
   user_employee UserEmployee?
 
   @@map("employee")
@@ -72,9 +81,13 @@ model Classification {
   id   String @id @default(uuid())
   name String
 
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-  is_deleted Boolean  @default(false)
+  created_by String
+  updated_by String?
+  deleted_by String?
+
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+  deleted_at DateTime?
 
   @@map("classification")
 }
@@ -87,12 +100,16 @@ model User {
   password String
   status   Int    @default(1)
 
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-  is_deleted Boolean  @default(false)
+  created_by String
+  updated_by String?
+  deleted_by String?
 
-  user_permissions UserPermission[]
-  user_employee    UserEmployee?
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+  deleted_at DateTime?
+
+  // user_permissions UserPermission[]
+  user_employee UserEmployee?
 
   @@map("user")
 }
@@ -104,36 +121,42 @@ model UserEmployee {
   employee_id String   @unique
   employee    Employee @relation(fields: [employee_id], references: [id], onDelete: Cascade)
 
+  created_by String
+  updated_by String?
+
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
-  is_deleted Boolean  @default(false)
 
   @@map("user_employee")
 }
 
-model UserPermission {
-  id String @id @default(uuid())
+// model UserPermission {
+//   id String @id @default(uuid())
 
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-  is_deleted Boolean  @default(false)
+//   created_at DateTime @default(now())
+//   updated_at DateTime @updatedAt
+//   is_deleted Boolean  @default(false)
 
-  user    User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
-  user_id String
+//   user    User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
+//   user_id String
 
-  submodule    SubModule @relation(fields: [submodule_id], references: [id], onDelete: Restrict)
-  submodule_id String
+//   submodule    SubModule @relation(fields: [submodule_id], references: [id], onDelete: Restrict)
+//   submodule_id String
 
-  @@map("user_permission")
-}
+//   @@map("user_permission")
+// }
 
 model Service {
   id   String @id @default(uuid())
   name String
 
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-  is_deleted Boolean  @default(false)
+  created_by String
+  updated_by String?
+  deleted_by String?
+
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+  deleted_at DateTime?
 
   features Feature[] @relation("ServiceToFeature")
 
@@ -144,9 +167,13 @@ model Feature {
   id   String @id @default(uuid())
   name String
 
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-  is_deleted Boolean  @default(false)
+  created_by String
+  updated_by String?
+  deleted_by String?
+
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+  deleted_at DateTime?
 
   service    Service  @relation("ServiceToFeature", fields: [service_id], references: [id], onDelete: Cascade)
   service_id String
@@ -159,9 +186,13 @@ model Module {
   id   String @id @default(uuid())
   name String
 
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-  is_deleted Boolean  @default(false)
+  created_by String
+  updated_by String?
+  deleted_by String?
+
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+  deleted_at DateTime?
 
   feature    Feature @relation("FeatureToModule", fields: [feature_id], references: [id], onDelete: Cascade)
   feature_id String
@@ -182,98 +213,121 @@ model SubModule {
   module    Module @relation("ModuleToSubmodule", fields: [module_id], references: [id], onDelete: Cascade)
   module_id String
 
-  user_permissions UserPermission[]
+  // user_permissions UserPermission[]
 
   @@map("submodule")
 }
 
 model JOApproverSetting {
-  id                String   @id @default(uuid())
-  label             String
-  order             Int      @unique
-  approver_id       String   @unique
-  approver_proxy_id String?  @unique
-  created_at        DateTime @default(now())
-  updated_at        DateTime @updatedAt
-  is_deleted        Boolean  @default(false)
+  id          String @id @default(uuid())
+  label       String
+  order       Int    @unique
+  approver_id String @unique
 
-  approver       Employee  @relation("JOApproverSetting", fields: [approver_id], references: [id], onDelete: Restrict)
-  approver_proxy Employee? @relation("JOApproverProxySetting", fields: [approver_proxy_id], references: [id], onDelete: Restrict)
+  created_by String
+  updated_by String?
+  deleted_by String?
+
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+  deleted_at DateTime?
+
+  approver Employee @relation("JOApproverSetting", fields: [approver_id], references: [id], onDelete: Restrict)
 
   @@map("jo_approver_setting")
 }
 
 model RVApproverSetting {
-  id                String    @id @default(uuid())
-  approver_id       String    @unique
-  approver_proxy_id String?   @unique
-  label             String
-  order             Int       @unique
-  created_at        DateTime  @default(now())
-  updated_at        DateTime  @updatedAt
-  is_deleted        Boolean   @default(false)
-  approver          Employee  @relation("RVApproverSetting", fields: [approver_id], references: [id], onDelete: Restrict)
-  approver_proxy    Employee? @relation("RVApproverProxySetting", fields: [approver_proxy_id], references: [id], onDelete: Restrict)
+  id          String @id @default(uuid())
+  label       String
+  order       Int    @unique
+  approver_id String @unique
+
+  created_by String
+  updated_by String?
+  deleted_by String?
+
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+  deleted_at DateTime?
+
+  approver Employee @relation("RVApproverSetting", fields: [approver_id], references: [id], onDelete: Restrict)
 
   @@map("rv_approver_setting")
 }
 
 model SPRApproverSetting {
-  id                String    @id @default(uuid())
-  approver_id       String    @unique
-  approver_proxy_id String?   @unique
-  label             String
-  order             Int       @unique
-  created_at        DateTime  @default(now())
-  updated_at        DateTime  @updatedAt
-  is_deleted        Boolean   @default(false)
-  approver          Employee  @relation("SPRApproverSetting", fields: [approver_id], references: [id], onDelete: Restrict)
-  approver_proxy    Employee? @relation("SPRApproverProxySetting", fields: [approver_proxy_id], references: [id], onDelete: Restrict)
+  id          String @id @default(uuid())
+  label       String
+  order       Int    @unique
+  approver_id String @unique
+
+  created_by String
+  updated_by String?
+  deleted_by String?
+
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+  deleted_at DateTime?
+
+  approver Employee @relation("SPRApproverSetting", fields: [approver_id], references: [id], onDelete: Restrict)
 
   @@map("spr_approver_setting")
 }
 
 model MEQSApproverSetting {
-  id                String    @id @default(uuid())
-  approver_id       String    @unique
-  approver_proxy_id String?   @unique
-  label             String
-  order             Int       @unique
-  created_at        DateTime  @default(now())
-  updated_at        DateTime  @updatedAt
-  is_deleted        Boolean   @default(false)
-  approver          Employee  @relation("MEQSApproverSetting", fields: [approver_id], references: [id], onDelete: Restrict)
-  approver_proxy    Employee? @relation("MEQSApproverProxySetting", fields: [approver_proxy_id], references: [id], onDelete: Restrict)
+  id          String @id @default(uuid())
+  label       String
+  order       Int    @unique
+  approver_id String @unique
+
+  created_by String
+  updated_by String?
+  deleted_by String?
+
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+  deleted_at DateTime?
+
+  approver Employee @relation("MEQSApproverSetting", fields: [approver_id], references: [id], onDelete: Restrict)
 
   @@map("meqs_approver_setting")
 }
 
 model POApproverSetting {
-  id                String    @id @default(uuid())
-  approver_id       String    @unique
-  approver_proxy_id String?   @unique
-  label             String
-  order             Int       @unique
-  created_at        DateTime  @default(now())
-  updated_at        DateTime  @updatedAt
-  is_deleted        Boolean   @default(false)
-  approver          Employee  @relation("POApproverSetting", fields: [approver_id], references: [id], onDelete: Restrict)
-  approver_proxy    Employee? @relation("POApproverProxySetting", fields: [approver_proxy_id], references: [id], onDelete: Restrict)
+  id          String @id @default(uuid())
+  label       String
+  order       Int    @unique
+  approver_id String @unique
+
+  created_by String
+  updated_by String?
+  deleted_by String?
+
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+  deleted_at DateTime?
+
+  approver Employee @relation("POApproverSetting", fields: [approver_id], references: [id], onDelete: Restrict)
 
   @@map("po_approver_setting")
 }
 
 model RRApproverSetting {
-  id                String    @id @default(uuid())
-  approver_id       String    @unique
-  approver_proxy_id String?   @unique
-  label             String
-  order             Int       @unique
-  created_at        DateTime  @default(now())
-  updated_at        DateTime  @updatedAt
-  is_deleted        Boolean   @default(false)
-  approver          Employee  @relation("RRApproverSetting", fields: [approver_id], references: [id], onDelete: Restrict)
-  approver_proxy    Employee? @relation("RRApproverProxySetting", fields: [approver_proxy_id], references: [id], onDelete: Restrict)
+  id          String @id @default(uuid())
+  label       String
+  order       Int    @unique
+  approver_id String @unique
+
+  created_by String
+  updated_by String?
+  deleted_by String?
+
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+  deleted_at DateTime?
+
+  approver Employee @relation("RRApproverSetting", fields: [approver_id], references: [id], onDelete: Restrict)
 
   @@map("rr_approver_setting")
 }

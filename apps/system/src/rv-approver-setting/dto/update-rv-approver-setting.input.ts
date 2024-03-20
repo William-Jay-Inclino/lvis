@@ -5,7 +5,7 @@ import { InputType, Field, Int, PartialType } from '@nestjs/graphql';
 @InputType()
 export class UpdateRvApproverSettingInput extends PartialType(CreateRvApproverSettingInput) {
 
-  @Field(() => String, {nullable: true})
+  @Field(() => String, { nullable: true })
   @IsOptional()
   @IsString()
   approver_id?: string;
@@ -13,14 +13,9 @@ export class UpdateRvApproverSettingInput extends PartialType(CreateRvApproverSe
   @Field(() => String, { nullable: true })
   @IsOptional()
   @IsString()
-  approver_proxy_id?: string | null
-
-  @Field(() => String, {nullable: true})
-  @IsOptional()
-  @IsString()
   label?: string;
 
-  @Field(() => Int, {nullable: true})
+  @Field(() => Int, { nullable: true })
   @IsOptional()
   @IsInt()
   order?: number;

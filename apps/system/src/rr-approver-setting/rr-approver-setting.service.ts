@@ -4,21 +4,27 @@ import { PrismaService } from '../__prisma__/prisma.service';
 import { UpdateRrApproverSettingInput } from './dto/update-rr-approver-setting.input';
 import { SystemRemoveResponse } from '../__common__/classes';
 import { Prisma, RRApproverSetting } from 'apps/system/prisma/generated/client';
+import { AuthUser } from '../__common__/auth-user.entity';
 
 @Injectable()
 export class RrApproverSettingService {
 
 	private readonly logger = new Logger(RrApproverSettingService.name);
+	private authUser: AuthUser
 
-	constructor(private readonly prisma: PrismaService) {}
+	constructor(private readonly prisma: PrismaService) { }
+
+	setAuthUser(authUser: AuthUser) {
+		this.authUser = authUser
+	}
 
 	async create(input: CreateRrApproverSettingInput): Promise<RRApproverSetting> {
 
 		const data: Prisma.RRApproverSettingCreateInput = {
 			approver: { connect: { id: input.approver_id } },
-			approver_proxy: input.approver_proxy_id ? { connect: { id: input.approver_id } } : undefined,
 			label: input.label,
-			order: input.order
+			order: input.order,
+			created_by: this.authUser.user.username
 		}
 
 		const created = await this.prisma.rRApproverSetting.create({
@@ -34,56 +40,46 @@ export class RrApproverSettingService {
 	}
 
 	async findAll(): Promise<RRApproverSetting[]> {
-		return await this.prisma.rRApproverSetting.findMany( {
-            include: {
-                approver: true
-            },
+		return await this.prisma.rRApproverSetting.findMany({
+			include: {
+				approver: true
+			},
 			where: {
-				is_deleted: false 
+				deleted_at: null
 			},
 			orderBy: {
-                order: 'asc'
-            }
-		} )
+				order: 'asc'
+			}
+		})
 	}
 
 	async findOne(id: string): Promise<RRApproverSetting | null> {
 		const item = await this.prisma.rRApproverSetting.findUnique({
-            include: {
-                approver: true
-            },
+			include: {
+				approver: true
+			},
 			where: { id }
 		})
 
-		if(!item){
-            throw new NotFoundException('rRApproverSetting not found')
-        }
+		if (!item) {
+			throw new NotFoundException('rRApproverSetting not found')
+		}
 
-        return item
+		return item
 	}
 
 	async update(id: string, input: UpdateRrApproverSettingInput): Promise<RRApproverSetting> {
 
 		const existingItem = await this.findOne(id)
 
-		let approver_proxy = undefined
-
-        if(input.approver_proxy_id){
-            approver_proxy = {
-                connect: { id: input.approver_proxy_id }
-            }
-        }else{
-            approver_proxy = existingItem.approver_proxy_id ? { connect: { id: existingItem.approver_proxy_id } } : undefined
-        }
-
 		const data: Prisma.RRApproverSettingUpdateInput = {
 			approver: input.approver_id ? { connect: { id: input.approver_id } } : { connect: { id: existingItem.approver_id } },
-			approver_proxy,
 			label: input.label ?? existingItem.label,
-			order: input.order ?? existingItem.order
+			order: input.order ?? existingItem.order,
+			updated_by: this.authUser.user.username
 		}
 
-		const updated = await this.prisma.rRApproverSetting.update({ 
+		const updated = await this.prisma.rRApproverSetting.update({
 			data,
 			where: {
 				id
@@ -91,7 +87,7 @@ export class RrApproverSettingService {
 			include: {
 				approver: true
 			}
-		 })
+		})
 
 		this.logger.log('Successfully updated rRApproverSetting')
 
@@ -102,10 +98,13 @@ export class RrApproverSettingService {
 
 		const existingItem = await this.findOne(id)
 
-		await this.prisma.rRApproverSetting.update( {
+		await this.prisma.rRApproverSetting.update({
 			where: { id },
-			data: { is_deleted: true }
-		} )
+			data: {
+				deleted_at: new Date(),
+				deleted_by: this.authUser.user.username
+			}
+		})
 
 		return {
 			success: true,

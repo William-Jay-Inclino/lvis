@@ -3,16 +3,11 @@ import { IsInt, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 @InputType()
 export class CreateRrApproverSettingInput {
-  
+
   @Field()
   @IsNotEmpty()
   @IsString()
   approver_id: string;
-
-  @Field(() => String, { nullable: true })
-  @IsOptional()
-  @IsString()
-  approver_proxy_id?: string | null
 
   @Field()
   @IsNotEmpty()

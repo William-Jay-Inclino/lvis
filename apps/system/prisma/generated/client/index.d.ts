@@ -44,11 +44,6 @@ export type User = $Result.DefaultSelection<Prisma.$UserPayload>
  */
 export type UserEmployee = $Result.DefaultSelection<Prisma.$UserEmployeePayload>
 /**
- * Model UserPermission
- * 
- */
-export type UserPermission = $Result.DefaultSelection<Prisma.$UserPermissionPayload>
-/**
  * Model Service
  * 
  */
@@ -299,16 +294,6 @@ export class PrismaClient<
   get userEmployee(): Prisma.UserEmployeeDelegate<ExtArgs>;
 
   /**
-   * `prisma.userPermission`: Exposes CRUD operations for the **UserPermission** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more UserPermissions
-    * const userPermissions = await prisma.userPermission.findMany()
-    * ```
-    */
-  get userPermission(): Prisma.UserPermissionDelegate<ExtArgs>;
-
-  /**
    * `prisma.service`: Exposes CRUD operations for the **Service** model.
     * Example usage:
     * ```ts
@@ -465,7 +450,7 @@ export namespace Prisma {
 
   /**
    * Prisma Client JS version: 5.8.1
-   * Query Engine version: 23fdc5965b1e05fc54e5f26ed3de66776b93de64
+   * Query Engine version: efd2449663b3d73d637ea1fd226bafbcf45b3102
    */
   export type PrismaVersion = {
     client: string
@@ -883,7 +868,6 @@ export namespace Prisma {
     Classification: 'Classification',
     User: 'User',
     UserEmployee: 'UserEmployee',
-    UserPermission: 'UserPermission',
     Service: 'Service',
     Feature: 'Feature',
     Module: 'Module',
@@ -910,7 +894,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'division' | 'department' | 'employee' | 'classification' | 'user' | 'userEmployee' | 'userPermission' | 'service' | 'feature' | 'module' | 'subModule' | 'jOApproverSetting' | 'rVApproverSetting' | 'sPRApproverSetting' | 'mEQSApproverSetting' | 'pOApproverSetting' | 'rRApproverSetting'
+      modelProps: 'division' | 'department' | 'employee' | 'classification' | 'user' | 'userEmployee' | 'service' | 'feature' | 'module' | 'subModule' | 'jOApproverSetting' | 'rVApproverSetting' | 'sPRApproverSetting' | 'mEQSApproverSetting' | 'pOApproverSetting' | 'rRApproverSetting'
       txIsolationLevel: Prisma.TransactionIsolationLevel
     },
     model: {
@@ -1307,72 +1291,6 @@ export namespace Prisma {
           count: {
             args: Prisma.UserEmployeeCountArgs<ExtArgs>,
             result: $Utils.Optional<UserEmployeeCountAggregateOutputType> | number
-          }
-        }
-      }
-      UserPermission: {
-        payload: Prisma.$UserPermissionPayload<ExtArgs>
-        fields: Prisma.UserPermissionFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.UserPermissionFindUniqueArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$UserPermissionPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.UserPermissionFindUniqueOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$UserPermissionPayload>
-          }
-          findFirst: {
-            args: Prisma.UserPermissionFindFirstArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$UserPermissionPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.UserPermissionFindFirstOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$UserPermissionPayload>
-          }
-          findMany: {
-            args: Prisma.UserPermissionFindManyArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$UserPermissionPayload>[]
-          }
-          create: {
-            args: Prisma.UserPermissionCreateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$UserPermissionPayload>
-          }
-          createMany: {
-            args: Prisma.UserPermissionCreateManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
-          }
-          delete: {
-            args: Prisma.UserPermissionDeleteArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$UserPermissionPayload>
-          }
-          update: {
-            args: Prisma.UserPermissionUpdateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$UserPermissionPayload>
-          }
-          deleteMany: {
-            args: Prisma.UserPermissionDeleteManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
-          }
-          updateMany: {
-            args: Prisma.UserPermissionUpdateManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
-          }
-          upsert: {
-            args: Prisma.UserPermissionUpsertArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$UserPermissionPayload>
-          }
-          aggregate: {
-            args: Prisma.UserPermissionAggregateArgs<ExtArgs>,
-            result: $Utils.Optional<AggregateUserPermission>
-          }
-          groupBy: {
-            args: Prisma.UserPermissionGroupByArgs<ExtArgs>,
-            result: $Utils.Optional<UserPermissionGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.UserPermissionCountArgs<ExtArgs>,
-            result: $Utils.Optional<UserPermissionCountAggregateOutputType> | number
           }
         }
       }
@@ -2215,40 +2133,6 @@ export namespace Prisma {
 
 
   /**
-   * Count Type UserCountOutputType
-   */
-
-  export type UserCountOutputType = {
-    user_permissions: number
-  }
-
-  export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user_permissions?: boolean | UserCountOutputTypeCountUser_permissionsArgs
-  }
-
-  // Custom InputTypes
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserCountOutputType
-     */
-    select?: UserCountOutputTypeSelect<ExtArgs> | null
-  }
-
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountUser_permissionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: UserPermissionWhereInput
-  }
-
-
-
-  /**
    * Count Type ServiceCountOutputType
    */
 
@@ -2351,40 +2235,6 @@ export namespace Prisma {
 
 
   /**
-   * Count Type SubModuleCountOutputType
-   */
-
-  export type SubModuleCountOutputType = {
-    user_permissions: number
-  }
-
-  export type SubModuleCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user_permissions?: boolean | SubModuleCountOutputTypeCountUser_permissionsArgs
-  }
-
-  // Custom InputTypes
-
-  /**
-   * SubModuleCountOutputType without action
-   */
-  export type SubModuleCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SubModuleCountOutputType
-     */
-    select?: SubModuleCountOutputTypeSelect<ExtArgs> | null
-  }
-
-
-  /**
-   * SubModuleCountOutputType without action
-   */
-  export type SubModuleCountOutputTypeCountUser_permissionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: UserPermissionWhereInput
-  }
-
-
-
-  /**
    * Models
    */
 
@@ -2414,9 +2264,12 @@ export namespace Prisma {
     code: string | null
     name: string | null
     status: number | null
+    created_by: string | null
+    updated_by: string | null
+    deleted_by: string | null
     created_at: Date | null
     updated_at: Date | null
-    is_deleted: boolean | null
+    deleted_at: Date | null
   }
 
   export type DivisionMaxAggregateOutputType = {
@@ -2425,9 +2278,12 @@ export namespace Prisma {
     code: string | null
     name: string | null
     status: number | null
+    created_by: string | null
+    updated_by: string | null
+    deleted_by: string | null
     created_at: Date | null
     updated_at: Date | null
-    is_deleted: boolean | null
+    deleted_at: Date | null
   }
 
   export type DivisionCountAggregateOutputType = {
@@ -2436,9 +2292,12 @@ export namespace Prisma {
     code: number
     name: number
     status: number
+    created_by: number
+    updated_by: number
+    deleted_by: number
     created_at: number
     updated_at: number
-    is_deleted: number
+    deleted_at: number
     _all: number
   }
 
@@ -2457,9 +2316,12 @@ export namespace Prisma {
     code?: true
     name?: true
     status?: true
+    created_by?: true
+    updated_by?: true
+    deleted_by?: true
     created_at?: true
     updated_at?: true
-    is_deleted?: true
+    deleted_at?: true
   }
 
   export type DivisionMaxAggregateInputType = {
@@ -2468,9 +2330,12 @@ export namespace Prisma {
     code?: true
     name?: true
     status?: true
+    created_by?: true
+    updated_by?: true
+    deleted_by?: true
     created_at?: true
     updated_at?: true
-    is_deleted?: true
+    deleted_at?: true
   }
 
   export type DivisionCountAggregateInputType = {
@@ -2479,9 +2344,12 @@ export namespace Prisma {
     code?: true
     name?: true
     status?: true
+    created_by?: true
+    updated_by?: true
+    deleted_by?: true
     created_at?: true
     updated_at?: true
-    is_deleted?: true
+    deleted_at?: true
     _all?: true
   }
 
@@ -2577,9 +2445,12 @@ export namespace Prisma {
     code: string
     name: string
     status: number
+    created_by: string
+    updated_by: string | null
+    deleted_by: string | null
     created_at: Date
     updated_at: Date
-    is_deleted: boolean
+    deleted_at: Date | null
     _count: DivisionCountAggregateOutputType | null
     _avg: DivisionAvgAggregateOutputType | null
     _sum: DivisionSumAggregateOutputType | null
@@ -2607,9 +2478,12 @@ export namespace Prisma {
     code?: boolean
     name?: boolean
     status?: boolean
+    created_by?: boolean
+    updated_by?: boolean
+    deleted_by?: boolean
     created_at?: boolean
     updated_at?: boolean
-    is_deleted?: boolean
+    deleted_at?: boolean
     department?: boolean | DepartmentDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["division"]>
 
@@ -2619,9 +2493,12 @@ export namespace Prisma {
     code?: boolean
     name?: boolean
     status?: boolean
+    created_by?: boolean
+    updated_by?: boolean
+    deleted_by?: boolean
     created_at?: boolean
     updated_at?: boolean
-    is_deleted?: boolean
+    deleted_at?: boolean
   }
 
   export type DivisionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2640,9 +2517,12 @@ export namespace Prisma {
       code: string
       name: string
       status: number
+      created_by: string
+      updated_by: string | null
+      deleted_by: string | null
       created_at: Date
       updated_at: Date
-      is_deleted: boolean
+      deleted_at: Date | null
     }, ExtArgs["result"]["division"]>
     composites: {}
   }
@@ -3043,9 +2923,12 @@ export namespace Prisma {
     readonly code: FieldRef<"Division", 'String'>
     readonly name: FieldRef<"Division", 'String'>
     readonly status: FieldRef<"Division", 'Int'>
+    readonly created_by: FieldRef<"Division", 'String'>
+    readonly updated_by: FieldRef<"Division", 'String'>
+    readonly deleted_by: FieldRef<"Division", 'String'>
     readonly created_at: FieldRef<"Division", 'DateTime'>
     readonly updated_at: FieldRef<"Division", 'DateTime'>
-    readonly is_deleted: FieldRef<"Division", 'Boolean'>
+    readonly deleted_at: FieldRef<"Division", 'DateTime'>
   }
     
 
@@ -3398,9 +3281,12 @@ export namespace Prisma {
     code: string | null
     name: string | null
     status: number | null
+    created_by: string | null
+    updated_by: string | null
+    deleted_by: string | null
     created_at: Date | null
     updated_at: Date | null
-    is_deleted: boolean | null
+    deleted_at: Date | null
   }
 
   export type DepartmentMaxAggregateOutputType = {
@@ -3408,9 +3294,12 @@ export namespace Prisma {
     code: string | null
     name: string | null
     status: number | null
+    created_by: string | null
+    updated_by: string | null
+    deleted_by: string | null
     created_at: Date | null
     updated_at: Date | null
-    is_deleted: boolean | null
+    deleted_at: Date | null
   }
 
   export type DepartmentCountAggregateOutputType = {
@@ -3418,9 +3307,12 @@ export namespace Prisma {
     code: number
     name: number
     status: number
+    created_by: number
+    updated_by: number
+    deleted_by: number
     created_at: number
     updated_at: number
-    is_deleted: number
+    deleted_at: number
     _all: number
   }
 
@@ -3438,9 +3330,12 @@ export namespace Prisma {
     code?: true
     name?: true
     status?: true
+    created_by?: true
+    updated_by?: true
+    deleted_by?: true
     created_at?: true
     updated_at?: true
-    is_deleted?: true
+    deleted_at?: true
   }
 
   export type DepartmentMaxAggregateInputType = {
@@ -3448,9 +3343,12 @@ export namespace Prisma {
     code?: true
     name?: true
     status?: true
+    created_by?: true
+    updated_by?: true
+    deleted_by?: true
     created_at?: true
     updated_at?: true
-    is_deleted?: true
+    deleted_at?: true
   }
 
   export type DepartmentCountAggregateInputType = {
@@ -3458,9 +3356,12 @@ export namespace Prisma {
     code?: true
     name?: true
     status?: true
+    created_by?: true
+    updated_by?: true
+    deleted_by?: true
     created_at?: true
     updated_at?: true
-    is_deleted?: true
+    deleted_at?: true
     _all?: true
   }
 
@@ -3555,9 +3456,12 @@ export namespace Prisma {
     code: string
     name: string
     status: number
+    created_by: string
+    updated_by: string | null
+    deleted_by: string | null
     created_at: Date
     updated_at: Date
-    is_deleted: boolean
+    deleted_at: Date | null
     _count: DepartmentCountAggregateOutputType | null
     _avg: DepartmentAvgAggregateOutputType | null
     _sum: DepartmentSumAggregateOutputType | null
@@ -3584,9 +3488,12 @@ export namespace Prisma {
     code?: boolean
     name?: boolean
     status?: boolean
+    created_by?: boolean
+    updated_by?: boolean
+    deleted_by?: boolean
     created_at?: boolean
     updated_at?: boolean
-    is_deleted?: boolean
+    deleted_at?: boolean
     Division?: boolean | Department$DivisionArgs<ExtArgs>
     _count?: boolean | DepartmentCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["department"]>
@@ -3596,9 +3503,12 @@ export namespace Prisma {
     code?: boolean
     name?: boolean
     status?: boolean
+    created_by?: boolean
+    updated_by?: boolean
+    deleted_by?: boolean
     created_at?: boolean
     updated_at?: boolean
-    is_deleted?: boolean
+    deleted_at?: boolean
   }
 
   export type DepartmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3617,9 +3527,12 @@ export namespace Prisma {
       code: string
       name: string
       status: number
+      created_by: string
+      updated_by: string | null
+      deleted_by: string | null
       created_at: Date
       updated_at: Date
-      is_deleted: boolean
+      deleted_at: Date | null
     }, ExtArgs["result"]["department"]>
     composites: {}
   }
@@ -4019,9 +3932,12 @@ export namespace Prisma {
     readonly code: FieldRef<"Department", 'String'>
     readonly name: FieldRef<"Department", 'String'>
     readonly status: FieldRef<"Department", 'Int'>
+    readonly created_by: FieldRef<"Department", 'String'>
+    readonly updated_by: FieldRef<"Department", 'String'>
+    readonly deleted_by: FieldRef<"Department", 'String'>
     readonly created_at: FieldRef<"Department", 'DateTime'>
     readonly updated_at: FieldRef<"Department", 'DateTime'>
-    readonly is_deleted: FieldRef<"Department", 'Boolean'>
+    readonly deleted_at: FieldRef<"Department", 'DateTime'>
   }
     
 
@@ -4385,9 +4301,12 @@ export namespace Prisma {
     firstname: string | null
     middlename: string | null
     lastname: string | null
+    created_by: string | null
+    updated_by: string | null
+    deleted_by: string | null
     created_at: Date | null
     updated_at: Date | null
-    is_deleted: boolean | null
+    deleted_at: Date | null
   }
 
   export type EmployeeMaxAggregateOutputType = {
@@ -4395,9 +4314,12 @@ export namespace Prisma {
     firstname: string | null
     middlename: string | null
     lastname: string | null
+    created_by: string | null
+    updated_by: string | null
+    deleted_by: string | null
     created_at: Date | null
     updated_at: Date | null
-    is_deleted: boolean | null
+    deleted_at: Date | null
   }
 
   export type EmployeeCountAggregateOutputType = {
@@ -4405,9 +4327,12 @@ export namespace Prisma {
     firstname: number
     middlename: number
     lastname: number
+    created_by: number
+    updated_by: number
+    deleted_by: number
     created_at: number
     updated_at: number
-    is_deleted: number
+    deleted_at: number
     _all: number
   }
 
@@ -4417,9 +4342,12 @@ export namespace Prisma {
     firstname?: true
     middlename?: true
     lastname?: true
+    created_by?: true
+    updated_by?: true
+    deleted_by?: true
     created_at?: true
     updated_at?: true
-    is_deleted?: true
+    deleted_at?: true
   }
 
   export type EmployeeMaxAggregateInputType = {
@@ -4427,9 +4355,12 @@ export namespace Prisma {
     firstname?: true
     middlename?: true
     lastname?: true
+    created_by?: true
+    updated_by?: true
+    deleted_by?: true
     created_at?: true
     updated_at?: true
-    is_deleted?: true
+    deleted_at?: true
   }
 
   export type EmployeeCountAggregateInputType = {
@@ -4437,9 +4368,12 @@ export namespace Prisma {
     firstname?: true
     middlename?: true
     lastname?: true
+    created_by?: true
+    updated_by?: true
+    deleted_by?: true
     created_at?: true
     updated_at?: true
-    is_deleted?: true
+    deleted_at?: true
     _all?: true
   }
 
@@ -4520,9 +4454,12 @@ export namespace Prisma {
     firstname: string
     middlename: string | null
     lastname: string
+    created_by: string
+    updated_by: string | null
+    deleted_by: string | null
     created_at: Date
     updated_at: Date
-    is_deleted: boolean
+    deleted_at: Date | null
     _count: EmployeeCountAggregateOutputType | null
     _min: EmployeeMinAggregateOutputType | null
     _max: EmployeeMaxAggregateOutputType | null
@@ -4547,21 +4484,18 @@ export namespace Prisma {
     firstname?: boolean
     middlename?: boolean
     lastname?: boolean
+    created_by?: boolean
+    updated_by?: boolean
+    deleted_by?: boolean
     created_at?: boolean
     updated_at?: boolean
-    is_deleted?: boolean
+    deleted_at?: boolean
     jo_approver_setting?: boolean | Employee$jo_approver_settingArgs<ExtArgs>
     meqs_approver_setting?: boolean | Employee$meqs_approver_settingArgs<ExtArgs>
     po_approver_setting?: boolean | Employee$po_approver_settingArgs<ExtArgs>
     rv_approver_setting?: boolean | Employee$rv_approver_settingArgs<ExtArgs>
     spr_approver_setting?: boolean | Employee$spr_approver_settingArgs<ExtArgs>
     rr_approver_setting?: boolean | Employee$rr_approver_settingArgs<ExtArgs>
-    jo_approver_proxy_setting?: boolean | Employee$jo_approver_proxy_settingArgs<ExtArgs>
-    meqs_approver_proxy_setting?: boolean | Employee$meqs_approver_proxy_settingArgs<ExtArgs>
-    po_approver_proxy_setting?: boolean | Employee$po_approver_proxy_settingArgs<ExtArgs>
-    rv_approver_proxy_setting?: boolean | Employee$rv_approver_proxy_settingArgs<ExtArgs>
-    spr_approver_proxy_setting?: boolean | Employee$spr_approver_proxy_settingArgs<ExtArgs>
-    rr_approver_proxy_setting?: boolean | Employee$rr_approver_proxy_settingArgs<ExtArgs>
     user_employee?: boolean | Employee$user_employeeArgs<ExtArgs>
   }, ExtArgs["result"]["employee"]>
 
@@ -4570,9 +4504,12 @@ export namespace Prisma {
     firstname?: boolean
     middlename?: boolean
     lastname?: boolean
+    created_by?: boolean
+    updated_by?: boolean
+    deleted_by?: boolean
     created_at?: boolean
     updated_at?: boolean
-    is_deleted?: boolean
+    deleted_at?: boolean
   }
 
   export type EmployeeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4582,12 +4519,6 @@ export namespace Prisma {
     rv_approver_setting?: boolean | Employee$rv_approver_settingArgs<ExtArgs>
     spr_approver_setting?: boolean | Employee$spr_approver_settingArgs<ExtArgs>
     rr_approver_setting?: boolean | Employee$rr_approver_settingArgs<ExtArgs>
-    jo_approver_proxy_setting?: boolean | Employee$jo_approver_proxy_settingArgs<ExtArgs>
-    meqs_approver_proxy_setting?: boolean | Employee$meqs_approver_proxy_settingArgs<ExtArgs>
-    po_approver_proxy_setting?: boolean | Employee$po_approver_proxy_settingArgs<ExtArgs>
-    rv_approver_proxy_setting?: boolean | Employee$rv_approver_proxy_settingArgs<ExtArgs>
-    spr_approver_proxy_setting?: boolean | Employee$spr_approver_proxy_settingArgs<ExtArgs>
-    rr_approver_proxy_setting?: boolean | Employee$rr_approver_proxy_settingArgs<ExtArgs>
     user_employee?: boolean | Employee$user_employeeArgs<ExtArgs>
   }
 
@@ -4601,12 +4532,6 @@ export namespace Prisma {
       rv_approver_setting: Prisma.$RVApproverSettingPayload<ExtArgs> | null
       spr_approver_setting: Prisma.$SPRApproverSettingPayload<ExtArgs> | null
       rr_approver_setting: Prisma.$RRApproverSettingPayload<ExtArgs> | null
-      jo_approver_proxy_setting: Prisma.$JOApproverSettingPayload<ExtArgs> | null
-      meqs_approver_proxy_setting: Prisma.$MEQSApproverSettingPayload<ExtArgs> | null
-      po_approver_proxy_setting: Prisma.$POApproverSettingPayload<ExtArgs> | null
-      rv_approver_proxy_setting: Prisma.$RVApproverSettingPayload<ExtArgs> | null
-      spr_approver_proxy_setting: Prisma.$SPRApproverSettingPayload<ExtArgs> | null
-      rr_approver_proxy_setting: Prisma.$RRApproverSettingPayload<ExtArgs> | null
       user_employee: Prisma.$UserEmployeePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -4614,9 +4539,12 @@ export namespace Prisma {
       firstname: string
       middlename: string | null
       lastname: string
+      created_by: string
+      updated_by: string | null
+      deleted_by: string | null
       created_at: Date
       updated_at: Date
-      is_deleted: boolean
+      deleted_at: Date | null
     }, ExtArgs["result"]["employee"]>
     composites: {}
   }
@@ -4994,18 +4922,6 @@ export namespace Prisma {
 
     rr_approver_setting<T extends Employee$rr_approver_settingArgs<ExtArgs> = {}>(args?: Subset<T, Employee$rr_approver_settingArgs<ExtArgs>>): Prisma__RRApproverSettingClient<$Result.GetResult<Prisma.$RRApproverSettingPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
 
-    jo_approver_proxy_setting<T extends Employee$jo_approver_proxy_settingArgs<ExtArgs> = {}>(args?: Subset<T, Employee$jo_approver_proxy_settingArgs<ExtArgs>>): Prisma__JOApproverSettingClient<$Result.GetResult<Prisma.$JOApproverSettingPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
-
-    meqs_approver_proxy_setting<T extends Employee$meqs_approver_proxy_settingArgs<ExtArgs> = {}>(args?: Subset<T, Employee$meqs_approver_proxy_settingArgs<ExtArgs>>): Prisma__MEQSApproverSettingClient<$Result.GetResult<Prisma.$MEQSApproverSettingPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
-
-    po_approver_proxy_setting<T extends Employee$po_approver_proxy_settingArgs<ExtArgs> = {}>(args?: Subset<T, Employee$po_approver_proxy_settingArgs<ExtArgs>>): Prisma__POApproverSettingClient<$Result.GetResult<Prisma.$POApproverSettingPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
-
-    rv_approver_proxy_setting<T extends Employee$rv_approver_proxy_settingArgs<ExtArgs> = {}>(args?: Subset<T, Employee$rv_approver_proxy_settingArgs<ExtArgs>>): Prisma__RVApproverSettingClient<$Result.GetResult<Prisma.$RVApproverSettingPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
-
-    spr_approver_proxy_setting<T extends Employee$spr_approver_proxy_settingArgs<ExtArgs> = {}>(args?: Subset<T, Employee$spr_approver_proxy_settingArgs<ExtArgs>>): Prisma__SPRApproverSettingClient<$Result.GetResult<Prisma.$SPRApproverSettingPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
-
-    rr_approver_proxy_setting<T extends Employee$rr_approver_proxy_settingArgs<ExtArgs> = {}>(args?: Subset<T, Employee$rr_approver_proxy_settingArgs<ExtArgs>>): Prisma__RRApproverSettingClient<$Result.GetResult<Prisma.$RRApproverSettingPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
-
     user_employee<T extends Employee$user_employeeArgs<ExtArgs> = {}>(args?: Subset<T, Employee$user_employeeArgs<ExtArgs>>): Prisma__UserEmployeeClient<$Result.GetResult<Prisma.$UserEmployeePayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
 
     /**
@@ -5040,9 +4956,12 @@ export namespace Prisma {
     readonly firstname: FieldRef<"Employee", 'String'>
     readonly middlename: FieldRef<"Employee", 'String'>
     readonly lastname: FieldRef<"Employee", 'String'>
+    readonly created_by: FieldRef<"Employee", 'String'>
+    readonly updated_by: FieldRef<"Employee", 'String'>
+    readonly deleted_by: FieldRef<"Employee", 'String'>
     readonly created_at: FieldRef<"Employee", 'DateTime'>
     readonly updated_at: FieldRef<"Employee", 'DateTime'>
-    readonly is_deleted: FieldRef<"Employee", 'Boolean'>
+    readonly deleted_at: FieldRef<"Employee", 'DateTime'>
   }
     
 
@@ -5451,102 +5370,6 @@ export namespace Prisma {
 
 
   /**
-   * Employee.jo_approver_proxy_setting
-   */
-  export type Employee$jo_approver_proxy_settingArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the JOApproverSetting
-     */
-    select?: JOApproverSettingSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: JOApproverSettingInclude<ExtArgs> | null
-    where?: JOApproverSettingWhereInput
-  }
-
-
-  /**
-   * Employee.meqs_approver_proxy_setting
-   */
-  export type Employee$meqs_approver_proxy_settingArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MEQSApproverSetting
-     */
-    select?: MEQSApproverSettingSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: MEQSApproverSettingInclude<ExtArgs> | null
-    where?: MEQSApproverSettingWhereInput
-  }
-
-
-  /**
-   * Employee.po_approver_proxy_setting
-   */
-  export type Employee$po_approver_proxy_settingArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the POApproverSetting
-     */
-    select?: POApproverSettingSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: POApproverSettingInclude<ExtArgs> | null
-    where?: POApproverSettingWhereInput
-  }
-
-
-  /**
-   * Employee.rv_approver_proxy_setting
-   */
-  export type Employee$rv_approver_proxy_settingArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the RVApproverSetting
-     */
-    select?: RVApproverSettingSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: RVApproverSettingInclude<ExtArgs> | null
-    where?: RVApproverSettingWhereInput
-  }
-
-
-  /**
-   * Employee.spr_approver_proxy_setting
-   */
-  export type Employee$spr_approver_proxy_settingArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SPRApproverSetting
-     */
-    select?: SPRApproverSettingSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: SPRApproverSettingInclude<ExtArgs> | null
-    where?: SPRApproverSettingWhereInput
-  }
-
-
-  /**
-   * Employee.rr_approver_proxy_setting
-   */
-  export type Employee$rr_approver_proxy_settingArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the RRApproverSetting
-     */
-    select?: RRApproverSettingSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: RRApproverSettingInclude<ExtArgs> | null
-    where?: RRApproverSettingWhereInput
-  }
-
-
-  /**
    * Employee.user_employee
    */
   export type Employee$user_employeeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5591,25 +5414,34 @@ export namespace Prisma {
   export type ClassificationMinAggregateOutputType = {
     id: string | null
     name: string | null
+    created_by: string | null
+    updated_by: string | null
+    deleted_by: string | null
     created_at: Date | null
     updated_at: Date | null
-    is_deleted: boolean | null
+    deleted_at: Date | null
   }
 
   export type ClassificationMaxAggregateOutputType = {
     id: string | null
     name: string | null
+    created_by: string | null
+    updated_by: string | null
+    deleted_by: string | null
     created_at: Date | null
     updated_at: Date | null
-    is_deleted: boolean | null
+    deleted_at: Date | null
   }
 
   export type ClassificationCountAggregateOutputType = {
     id: number
     name: number
+    created_by: number
+    updated_by: number
+    deleted_by: number
     created_at: number
     updated_at: number
-    is_deleted: number
+    deleted_at: number
     _all: number
   }
 
@@ -5617,25 +5449,34 @@ export namespace Prisma {
   export type ClassificationMinAggregateInputType = {
     id?: true
     name?: true
+    created_by?: true
+    updated_by?: true
+    deleted_by?: true
     created_at?: true
     updated_at?: true
-    is_deleted?: true
+    deleted_at?: true
   }
 
   export type ClassificationMaxAggregateInputType = {
     id?: true
     name?: true
+    created_by?: true
+    updated_by?: true
+    deleted_by?: true
     created_at?: true
     updated_at?: true
-    is_deleted?: true
+    deleted_at?: true
   }
 
   export type ClassificationCountAggregateInputType = {
     id?: true
     name?: true
+    created_by?: true
+    updated_by?: true
+    deleted_by?: true
     created_at?: true
     updated_at?: true
-    is_deleted?: true
+    deleted_at?: true
     _all?: true
   }
 
@@ -5714,9 +5555,12 @@ export namespace Prisma {
   export type ClassificationGroupByOutputType = {
     id: string
     name: string
+    created_by: string
+    updated_by: string | null
+    deleted_by: string | null
     created_at: Date
     updated_at: Date
-    is_deleted: boolean
+    deleted_at: Date | null
     _count: ClassificationCountAggregateOutputType | null
     _min: ClassificationMinAggregateOutputType | null
     _max: ClassificationMaxAggregateOutputType | null
@@ -5739,17 +5583,23 @@ export namespace Prisma {
   export type ClassificationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    created_by?: boolean
+    updated_by?: boolean
+    deleted_by?: boolean
     created_at?: boolean
     updated_at?: boolean
-    is_deleted?: boolean
+    deleted_at?: boolean
   }, ExtArgs["result"]["classification"]>
 
   export type ClassificationSelectScalar = {
     id?: boolean
     name?: boolean
+    created_by?: boolean
+    updated_by?: boolean
+    deleted_by?: boolean
     created_at?: boolean
     updated_at?: boolean
-    is_deleted?: boolean
+    deleted_at?: boolean
   }
 
 
@@ -5759,9 +5609,12 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
+      created_by: string
+      updated_by: string | null
+      deleted_by: string | null
       created_at: Date
       updated_at: Date
-      is_deleted: boolean
+      deleted_at: Date | null
     }, ExtArgs["result"]["classification"]>
     composites: {}
   }
@@ -6158,9 +6011,12 @@ export namespace Prisma {
   interface ClassificationFieldRefs {
     readonly id: FieldRef<"Classification", 'String'>
     readonly name: FieldRef<"Classification", 'String'>
+    readonly created_by: FieldRef<"Classification", 'String'>
+    readonly updated_by: FieldRef<"Classification", 'String'>
+    readonly deleted_by: FieldRef<"Classification", 'String'>
     readonly created_at: FieldRef<"Classification", 'DateTime'>
     readonly updated_at: FieldRef<"Classification", 'DateTime'>
-    readonly is_deleted: FieldRef<"Classification", 'Boolean'>
+    readonly deleted_at: FieldRef<"Classification", 'DateTime'>
   }
     
 
@@ -6474,9 +6330,12 @@ export namespace Prisma {
     username: string | null
     password: string | null
     status: number | null
+    created_by: string | null
+    updated_by: string | null
+    deleted_by: string | null
     created_at: Date | null
     updated_at: Date | null
-    is_deleted: boolean | null
+    deleted_at: Date | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -6485,9 +6344,12 @@ export namespace Prisma {
     username: string | null
     password: string | null
     status: number | null
+    created_by: string | null
+    updated_by: string | null
+    deleted_by: string | null
     created_at: Date | null
     updated_at: Date | null
-    is_deleted: boolean | null
+    deleted_at: Date | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -6496,9 +6358,12 @@ export namespace Prisma {
     username: number
     password: number
     status: number
+    created_by: number
+    updated_by: number
+    deleted_by: number
     created_at: number
     updated_at: number
-    is_deleted: number
+    deleted_at: number
     _all: number
   }
 
@@ -6517,9 +6382,12 @@ export namespace Prisma {
     username?: true
     password?: true
     status?: true
+    created_by?: true
+    updated_by?: true
+    deleted_by?: true
     created_at?: true
     updated_at?: true
-    is_deleted?: true
+    deleted_at?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -6528,9 +6396,12 @@ export namespace Prisma {
     username?: true
     password?: true
     status?: true
+    created_by?: true
+    updated_by?: true
+    deleted_by?: true
     created_at?: true
     updated_at?: true
-    is_deleted?: true
+    deleted_at?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -6539,9 +6410,12 @@ export namespace Prisma {
     username?: true
     password?: true
     status?: true
+    created_by?: true
+    updated_by?: true
+    deleted_by?: true
     created_at?: true
     updated_at?: true
-    is_deleted?: true
+    deleted_at?: true
     _all?: true
   }
 
@@ -6637,9 +6511,12 @@ export namespace Prisma {
     username: string
     password: string
     status: number
+    created_by: string
+    updated_by: string | null
+    deleted_by: string | null
     created_at: Date
     updated_at: Date
-    is_deleted: boolean
+    deleted_at: Date | null
     _count: UserCountAggregateOutputType | null
     _avg: UserAvgAggregateOutputType | null
     _sum: UserSumAggregateOutputType | null
@@ -6667,12 +6544,13 @@ export namespace Prisma {
     username?: boolean
     password?: boolean
     status?: boolean
+    created_by?: boolean
+    updated_by?: boolean
+    deleted_by?: boolean
     created_at?: boolean
     updated_at?: boolean
-    is_deleted?: boolean
-    user_permissions?: boolean | User$user_permissionsArgs<ExtArgs>
+    deleted_at?: boolean
     user_employee?: boolean | User$user_employeeArgs<ExtArgs>
-    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -6681,22 +6559,22 @@ export namespace Prisma {
     username?: boolean
     password?: boolean
     status?: boolean
+    created_by?: boolean
+    updated_by?: boolean
+    deleted_by?: boolean
     created_at?: boolean
     updated_at?: boolean
-    is_deleted?: boolean
+    deleted_at?: boolean
   }
 
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user_permissions?: boolean | User$user_permissionsArgs<ExtArgs>
     user_employee?: boolean | User$user_employeeArgs<ExtArgs>
-    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
 
 
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
     objects: {
-      user_permissions: Prisma.$UserPermissionPayload<ExtArgs>[]
       user_employee: Prisma.$UserEmployeePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -6705,9 +6583,12 @@ export namespace Prisma {
       username: string
       password: string
       status: number
+      created_by: string
+      updated_by: string | null
+      deleted_by: string | null
       created_at: Date
       updated_at: Date
-      is_deleted: boolean
+      deleted_at: Date | null
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -7073,8 +6954,6 @@ export namespace Prisma {
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
-    user_permissions<T extends User$user_permissionsArgs<ExtArgs> = {}>(args?: Subset<T, User$user_permissionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPermissionPayload<ExtArgs>, T, 'findMany'> | Null>;
-
     user_employee<T extends User$user_employeeArgs<ExtArgs> = {}>(args?: Subset<T, User$user_employeeArgs<ExtArgs>>): Prisma__UserEmployeeClient<$Result.GetResult<Prisma.$UserEmployeePayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
 
     /**
@@ -7110,9 +6989,12 @@ export namespace Prisma {
     readonly username: FieldRef<"User", 'String'>
     readonly password: FieldRef<"User", 'String'>
     readonly status: FieldRef<"User", 'Int'>
+    readonly created_by: FieldRef<"User", 'String'>
+    readonly updated_by: FieldRef<"User", 'String'>
+    readonly deleted_by: FieldRef<"User", 'String'>
     readonly created_at: FieldRef<"User", 'DateTime'>
     readonly updated_at: FieldRef<"User", 'DateTime'>
-    readonly is_deleted: FieldRef<"User", 'Boolean'>
+    readonly deleted_at: FieldRef<"User", 'DateTime'>
   }
     
 
@@ -7425,27 +7307,6 @@ export namespace Prisma {
 
 
   /**
-   * User.user_permissions
-   */
-  export type User$user_permissionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserPermission
-     */
-    select?: UserPermissionSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: UserPermissionInclude<ExtArgs> | null
-    where?: UserPermissionWhereInput
-    orderBy?: UserPermissionOrderByWithRelationInput | UserPermissionOrderByWithRelationInput[]
-    cursor?: UserPermissionWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: UserPermissionScalarFieldEnum | UserPermissionScalarFieldEnum[]
-  }
-
-
-  /**
    * User.user_employee
    */
   export type User$user_employeeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7491,27 +7352,30 @@ export namespace Prisma {
     id: string | null
     user_id: string | null
     employee_id: string | null
+    created_by: string | null
+    updated_by: string | null
     created_at: Date | null
     updated_at: Date | null
-    is_deleted: boolean | null
   }
 
   export type UserEmployeeMaxAggregateOutputType = {
     id: string | null
     user_id: string | null
     employee_id: string | null
+    created_by: string | null
+    updated_by: string | null
     created_at: Date | null
     updated_at: Date | null
-    is_deleted: boolean | null
   }
 
   export type UserEmployeeCountAggregateOutputType = {
     id: number
     user_id: number
     employee_id: number
+    created_by: number
+    updated_by: number
     created_at: number
     updated_at: number
-    is_deleted: number
     _all: number
   }
 
@@ -7520,27 +7384,30 @@ export namespace Prisma {
     id?: true
     user_id?: true
     employee_id?: true
+    created_by?: true
+    updated_by?: true
     created_at?: true
     updated_at?: true
-    is_deleted?: true
   }
 
   export type UserEmployeeMaxAggregateInputType = {
     id?: true
     user_id?: true
     employee_id?: true
+    created_by?: true
+    updated_by?: true
     created_at?: true
     updated_at?: true
-    is_deleted?: true
   }
 
   export type UserEmployeeCountAggregateInputType = {
     id?: true
     user_id?: true
     employee_id?: true
+    created_by?: true
+    updated_by?: true
     created_at?: true
     updated_at?: true
-    is_deleted?: true
     _all?: true
   }
 
@@ -7620,9 +7487,10 @@ export namespace Prisma {
     id: string
     user_id: string
     employee_id: string
+    created_by: string
+    updated_by: string | null
     created_at: Date
     updated_at: Date
-    is_deleted: boolean
     _count: UserEmployeeCountAggregateOutputType | null
     _min: UserEmployeeMinAggregateOutputType | null
     _max: UserEmployeeMaxAggregateOutputType | null
@@ -7646,9 +7514,10 @@ export namespace Prisma {
     id?: boolean
     user_id?: boolean
     employee_id?: boolean
+    created_by?: boolean
+    updated_by?: boolean
     created_at?: boolean
     updated_at?: boolean
-    is_deleted?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     employee?: boolean | EmployeeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["userEmployee"]>
@@ -7657,9 +7526,10 @@ export namespace Prisma {
     id?: boolean
     user_id?: boolean
     employee_id?: boolean
+    created_by?: boolean
+    updated_by?: boolean
     created_at?: boolean
     updated_at?: boolean
-    is_deleted?: boolean
   }
 
   export type UserEmployeeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7678,9 +7548,10 @@ export namespace Prisma {
       id: string
       user_id: string
       employee_id: string
+      created_by: string
+      updated_by: string | null
       created_at: Date
       updated_at: Date
-      is_deleted: boolean
     }, ExtArgs["result"]["userEmployee"]>
     composites: {}
   }
@@ -8081,9 +7952,10 @@ export namespace Prisma {
     readonly id: FieldRef<"UserEmployee", 'String'>
     readonly user_id: FieldRef<"UserEmployee", 'String'>
     readonly employee_id: FieldRef<"UserEmployee", 'String'>
+    readonly created_by: FieldRef<"UserEmployee", 'String'>
+    readonly updated_by: FieldRef<"UserEmployee", 'String'>
     readonly created_at: FieldRef<"UserEmployee", 'DateTime'>
     readonly updated_at: FieldRef<"UserEmployee", 'DateTime'>
-    readonly is_deleted: FieldRef<"UserEmployee", 'Boolean'>
   }
     
 
@@ -8412,940 +8284,6 @@ export namespace Prisma {
 
 
   /**
-   * Model UserPermission
-   */
-
-  export type AggregateUserPermission = {
-    _count: UserPermissionCountAggregateOutputType | null
-    _min: UserPermissionMinAggregateOutputType | null
-    _max: UserPermissionMaxAggregateOutputType | null
-  }
-
-  export type UserPermissionMinAggregateOutputType = {
-    id: string | null
-    created_at: Date | null
-    updated_at: Date | null
-    is_deleted: boolean | null
-    user_id: string | null
-    submodule_id: string | null
-  }
-
-  export type UserPermissionMaxAggregateOutputType = {
-    id: string | null
-    created_at: Date | null
-    updated_at: Date | null
-    is_deleted: boolean | null
-    user_id: string | null
-    submodule_id: string | null
-  }
-
-  export type UserPermissionCountAggregateOutputType = {
-    id: number
-    created_at: number
-    updated_at: number
-    is_deleted: number
-    user_id: number
-    submodule_id: number
-    _all: number
-  }
-
-
-  export type UserPermissionMinAggregateInputType = {
-    id?: true
-    created_at?: true
-    updated_at?: true
-    is_deleted?: true
-    user_id?: true
-    submodule_id?: true
-  }
-
-  export type UserPermissionMaxAggregateInputType = {
-    id?: true
-    created_at?: true
-    updated_at?: true
-    is_deleted?: true
-    user_id?: true
-    submodule_id?: true
-  }
-
-  export type UserPermissionCountAggregateInputType = {
-    id?: true
-    created_at?: true
-    updated_at?: true
-    is_deleted?: true
-    user_id?: true
-    submodule_id?: true
-    _all?: true
-  }
-
-  export type UserPermissionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which UserPermission to aggregate.
-     */
-    where?: UserPermissionWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of UserPermissions to fetch.
-     */
-    orderBy?: UserPermissionOrderByWithRelationInput | UserPermissionOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: UserPermissionWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` UserPermissions from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` UserPermissions.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned UserPermissions
-    **/
-    _count?: true | UserPermissionCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: UserPermissionMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: UserPermissionMaxAggregateInputType
-  }
-
-  export type GetUserPermissionAggregateType<T extends UserPermissionAggregateArgs> = {
-        [P in keyof T & keyof AggregateUserPermission]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateUserPermission[P]>
-      : GetScalarType<T[P], AggregateUserPermission[P]>
-  }
-
-
-
-
-  export type UserPermissionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: UserPermissionWhereInput
-    orderBy?: UserPermissionOrderByWithAggregationInput | UserPermissionOrderByWithAggregationInput[]
-    by: UserPermissionScalarFieldEnum[] | UserPermissionScalarFieldEnum
-    having?: UserPermissionScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: UserPermissionCountAggregateInputType | true
-    _min?: UserPermissionMinAggregateInputType
-    _max?: UserPermissionMaxAggregateInputType
-  }
-
-  export type UserPermissionGroupByOutputType = {
-    id: string
-    created_at: Date
-    updated_at: Date
-    is_deleted: boolean
-    user_id: string
-    submodule_id: string
-    _count: UserPermissionCountAggregateOutputType | null
-    _min: UserPermissionMinAggregateOutputType | null
-    _max: UserPermissionMaxAggregateOutputType | null
-  }
-
-  type GetUserPermissionGroupByPayload<T extends UserPermissionGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<UserPermissionGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof UserPermissionGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], UserPermissionGroupByOutputType[P]>
-            : GetScalarType<T[P], UserPermissionGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type UserPermissionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    created_at?: boolean
-    updated_at?: boolean
-    is_deleted?: boolean
-    user_id?: boolean
-    submodule_id?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    submodule?: boolean | SubModuleDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["userPermission"]>
-
-  export type UserPermissionSelectScalar = {
-    id?: boolean
-    created_at?: boolean
-    updated_at?: boolean
-    is_deleted?: boolean
-    user_id?: boolean
-    submodule_id?: boolean
-  }
-
-  export type UserPermissionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    submodule?: boolean | SubModuleDefaultArgs<ExtArgs>
-  }
-
-
-  export type $UserPermissionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "UserPermission"
-    objects: {
-      user: Prisma.$UserPayload<ExtArgs>
-      submodule: Prisma.$SubModulePayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      created_at: Date
-      updated_at: Date
-      is_deleted: boolean
-      user_id: string
-      submodule_id: string
-    }, ExtArgs["result"]["userPermission"]>
-    composites: {}
-  }
-
-
-  type UserPermissionGetPayload<S extends boolean | null | undefined | UserPermissionDefaultArgs> = $Result.GetResult<Prisma.$UserPermissionPayload, S>
-
-  type UserPermissionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
-    Omit<UserPermissionFindManyArgs, 'select' | 'include' | 'distinct'> & {
-      select?: UserPermissionCountAggregateInputType | true
-    }
-
-  export interface UserPermissionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UserPermission'], meta: { name: 'UserPermission' } }
-    /**
-     * Find zero or one UserPermission that matches the filter.
-     * @param {UserPermissionFindUniqueArgs} args - Arguments to find a UserPermission
-     * @example
-     * // Get one UserPermission
-     * const userPermission = await prisma.userPermission.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findUnique<T extends UserPermissionFindUniqueArgs<ExtArgs>>(
-      args: SelectSubset<T, UserPermissionFindUniqueArgs<ExtArgs>>
-    ): Prisma__UserPermissionClient<$Result.GetResult<Prisma.$UserPermissionPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
-
-    /**
-     * Find one UserPermission that matches the filter or throw an error  with `error.code='P2025'` 
-     *     if no matches were found.
-     * @param {UserPermissionFindUniqueOrThrowArgs} args - Arguments to find a UserPermission
-     * @example
-     * // Get one UserPermission
-     * const userPermission = await prisma.userPermission.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findUniqueOrThrow<T extends UserPermissionFindUniqueOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, UserPermissionFindUniqueOrThrowArgs<ExtArgs>>
-    ): Prisma__UserPermissionClient<$Result.GetResult<Prisma.$UserPermissionPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
-
-    /**
-     * Find the first UserPermission that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserPermissionFindFirstArgs} args - Arguments to find a UserPermission
-     * @example
-     * // Get one UserPermission
-     * const userPermission = await prisma.userPermission.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findFirst<T extends UserPermissionFindFirstArgs<ExtArgs>>(
-      args?: SelectSubset<T, UserPermissionFindFirstArgs<ExtArgs>>
-    ): Prisma__UserPermissionClient<$Result.GetResult<Prisma.$UserPermissionPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
-
-    /**
-     * Find the first UserPermission that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserPermissionFindFirstOrThrowArgs} args - Arguments to find a UserPermission
-     * @example
-     * // Get one UserPermission
-     * const userPermission = await prisma.userPermission.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findFirstOrThrow<T extends UserPermissionFindFirstOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, UserPermissionFindFirstOrThrowArgs<ExtArgs>>
-    ): Prisma__UserPermissionClient<$Result.GetResult<Prisma.$UserPermissionPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
-
-    /**
-     * Find zero or more UserPermissions that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserPermissionFindManyArgs=} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all UserPermissions
-     * const userPermissions = await prisma.userPermission.findMany()
-     * 
-     * // Get first 10 UserPermissions
-     * const userPermissions = await prisma.userPermission.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const userPermissionWithIdOnly = await prisma.userPermission.findMany({ select: { id: true } })
-     * 
-    **/
-    findMany<T extends UserPermissionFindManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, UserPermissionFindManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPermissionPayload<ExtArgs>, T, 'findMany'>>
-
-    /**
-     * Create a UserPermission.
-     * @param {UserPermissionCreateArgs} args - Arguments to create a UserPermission.
-     * @example
-     * // Create one UserPermission
-     * const UserPermission = await prisma.userPermission.create({
-     *   data: {
-     *     // ... data to create a UserPermission
-     *   }
-     * })
-     * 
-    **/
-    create<T extends UserPermissionCreateArgs<ExtArgs>>(
-      args: SelectSubset<T, UserPermissionCreateArgs<ExtArgs>>
-    ): Prisma__UserPermissionClient<$Result.GetResult<Prisma.$UserPermissionPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
-
-    /**
-     * Create many UserPermissions.
-     *     @param {UserPermissionCreateManyArgs} args - Arguments to create many UserPermissions.
-     *     @example
-     *     // Create many UserPermissions
-     *     const userPermission = await prisma.userPermission.createMany({
-     *       data: {
-     *         // ... provide data here
-     *       }
-     *     })
-     *     
-    **/
-    createMany<T extends UserPermissionCreateManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, UserPermissionCreateManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Delete a UserPermission.
-     * @param {UserPermissionDeleteArgs} args - Arguments to delete one UserPermission.
-     * @example
-     * // Delete one UserPermission
-     * const UserPermission = await prisma.userPermission.delete({
-     *   where: {
-     *     // ... filter to delete one UserPermission
-     *   }
-     * })
-     * 
-    **/
-    delete<T extends UserPermissionDeleteArgs<ExtArgs>>(
-      args: SelectSubset<T, UserPermissionDeleteArgs<ExtArgs>>
-    ): Prisma__UserPermissionClient<$Result.GetResult<Prisma.$UserPermissionPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
-
-    /**
-     * Update one UserPermission.
-     * @param {UserPermissionUpdateArgs} args - Arguments to update one UserPermission.
-     * @example
-     * // Update one UserPermission
-     * const userPermission = await prisma.userPermission.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-    **/
-    update<T extends UserPermissionUpdateArgs<ExtArgs>>(
-      args: SelectSubset<T, UserPermissionUpdateArgs<ExtArgs>>
-    ): Prisma__UserPermissionClient<$Result.GetResult<Prisma.$UserPermissionPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
-
-    /**
-     * Delete zero or more UserPermissions.
-     * @param {UserPermissionDeleteManyArgs} args - Arguments to filter UserPermissions to delete.
-     * @example
-     * // Delete a few UserPermissions
-     * const { count } = await prisma.userPermission.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-    **/
-    deleteMany<T extends UserPermissionDeleteManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, UserPermissionDeleteManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more UserPermissions.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserPermissionUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many UserPermissions
-     * const userPermission = await prisma.userPermission.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-    **/
-    updateMany<T extends UserPermissionUpdateManyArgs<ExtArgs>>(
-      args: SelectSubset<T, UserPermissionUpdateManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create or update one UserPermission.
-     * @param {UserPermissionUpsertArgs} args - Arguments to update or create a UserPermission.
-     * @example
-     * // Update or create a UserPermission
-     * const userPermission = await prisma.userPermission.upsert({
-     *   create: {
-     *     // ... data to create a UserPermission
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the UserPermission we want to update
-     *   }
-     * })
-    **/
-    upsert<T extends UserPermissionUpsertArgs<ExtArgs>>(
-      args: SelectSubset<T, UserPermissionUpsertArgs<ExtArgs>>
-    ): Prisma__UserPermissionClient<$Result.GetResult<Prisma.$UserPermissionPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
-
-    /**
-     * Count the number of UserPermissions.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserPermissionCountArgs} args - Arguments to filter UserPermissions to count.
-     * @example
-     * // Count the number of UserPermissions
-     * const count = await prisma.userPermission.count({
-     *   where: {
-     *     // ... the filter for the UserPermissions we want to count
-     *   }
-     * })
-    **/
-    count<T extends UserPermissionCountArgs>(
-      args?: Subset<T, UserPermissionCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], UserPermissionCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a UserPermission.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserPermissionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends UserPermissionAggregateArgs>(args: Subset<T, UserPermissionAggregateArgs>): Prisma.PrismaPromise<GetUserPermissionAggregateType<T>>
-
-    /**
-     * Group by UserPermission.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserPermissionGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends UserPermissionGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: UserPermissionGroupByArgs['orderBy'] }
-        : { orderBy?: UserPermissionGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, UserPermissionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserPermissionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the UserPermission model
-   */
-  readonly fields: UserPermissionFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for UserPermission.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__UserPermissionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: 'PrismaPromise';
-
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
-
-    submodule<T extends SubModuleDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SubModuleDefaultArgs<ExtArgs>>): Prisma__SubModuleClient<$Result.GetResult<Prisma.$SubModulePayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
-
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
-  }
-
-
-
-  /**
-   * Fields of the UserPermission model
-   */ 
-  interface UserPermissionFieldRefs {
-    readonly id: FieldRef<"UserPermission", 'String'>
-    readonly created_at: FieldRef<"UserPermission", 'DateTime'>
-    readonly updated_at: FieldRef<"UserPermission", 'DateTime'>
-    readonly is_deleted: FieldRef<"UserPermission", 'Boolean'>
-    readonly user_id: FieldRef<"UserPermission", 'String'>
-    readonly submodule_id: FieldRef<"UserPermission", 'String'>
-  }
-    
-
-  // Custom InputTypes
-
-  /**
-   * UserPermission findUnique
-   */
-  export type UserPermissionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserPermission
-     */
-    select?: UserPermissionSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: UserPermissionInclude<ExtArgs> | null
-    /**
-     * Filter, which UserPermission to fetch.
-     */
-    where: UserPermissionWhereUniqueInput
-  }
-
-
-  /**
-   * UserPermission findUniqueOrThrow
-   */
-  export type UserPermissionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserPermission
-     */
-    select?: UserPermissionSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: UserPermissionInclude<ExtArgs> | null
-    /**
-     * Filter, which UserPermission to fetch.
-     */
-    where: UserPermissionWhereUniqueInput
-  }
-
-
-  /**
-   * UserPermission findFirst
-   */
-  export type UserPermissionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserPermission
-     */
-    select?: UserPermissionSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: UserPermissionInclude<ExtArgs> | null
-    /**
-     * Filter, which UserPermission to fetch.
-     */
-    where?: UserPermissionWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of UserPermissions to fetch.
-     */
-    orderBy?: UserPermissionOrderByWithRelationInput | UserPermissionOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for UserPermissions.
-     */
-    cursor?: UserPermissionWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` UserPermissions from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` UserPermissions.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of UserPermissions.
-     */
-    distinct?: UserPermissionScalarFieldEnum | UserPermissionScalarFieldEnum[]
-  }
-
-
-  /**
-   * UserPermission findFirstOrThrow
-   */
-  export type UserPermissionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserPermission
-     */
-    select?: UserPermissionSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: UserPermissionInclude<ExtArgs> | null
-    /**
-     * Filter, which UserPermission to fetch.
-     */
-    where?: UserPermissionWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of UserPermissions to fetch.
-     */
-    orderBy?: UserPermissionOrderByWithRelationInput | UserPermissionOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for UserPermissions.
-     */
-    cursor?: UserPermissionWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` UserPermissions from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` UserPermissions.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of UserPermissions.
-     */
-    distinct?: UserPermissionScalarFieldEnum | UserPermissionScalarFieldEnum[]
-  }
-
-
-  /**
-   * UserPermission findMany
-   */
-  export type UserPermissionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserPermission
-     */
-    select?: UserPermissionSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: UserPermissionInclude<ExtArgs> | null
-    /**
-     * Filter, which UserPermissions to fetch.
-     */
-    where?: UserPermissionWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of UserPermissions to fetch.
-     */
-    orderBy?: UserPermissionOrderByWithRelationInput | UserPermissionOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing UserPermissions.
-     */
-    cursor?: UserPermissionWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` UserPermissions from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` UserPermissions.
-     */
-    skip?: number
-    distinct?: UserPermissionScalarFieldEnum | UserPermissionScalarFieldEnum[]
-  }
-
-
-  /**
-   * UserPermission create
-   */
-  export type UserPermissionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserPermission
-     */
-    select?: UserPermissionSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: UserPermissionInclude<ExtArgs> | null
-    /**
-     * The data needed to create a UserPermission.
-     */
-    data: XOR<UserPermissionCreateInput, UserPermissionUncheckedCreateInput>
-  }
-
-
-  /**
-   * UserPermission createMany
-   */
-  export type UserPermissionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many UserPermissions.
-     */
-    data: UserPermissionCreateManyInput | UserPermissionCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-
-  /**
-   * UserPermission update
-   */
-  export type UserPermissionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserPermission
-     */
-    select?: UserPermissionSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: UserPermissionInclude<ExtArgs> | null
-    /**
-     * The data needed to update a UserPermission.
-     */
-    data: XOR<UserPermissionUpdateInput, UserPermissionUncheckedUpdateInput>
-    /**
-     * Choose, which UserPermission to update.
-     */
-    where: UserPermissionWhereUniqueInput
-  }
-
-
-  /**
-   * UserPermission updateMany
-   */
-  export type UserPermissionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update UserPermissions.
-     */
-    data: XOR<UserPermissionUpdateManyMutationInput, UserPermissionUncheckedUpdateManyInput>
-    /**
-     * Filter which UserPermissions to update
-     */
-    where?: UserPermissionWhereInput
-  }
-
-
-  /**
-   * UserPermission upsert
-   */
-  export type UserPermissionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserPermission
-     */
-    select?: UserPermissionSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: UserPermissionInclude<ExtArgs> | null
-    /**
-     * The filter to search for the UserPermission to update in case it exists.
-     */
-    where: UserPermissionWhereUniqueInput
-    /**
-     * In case the UserPermission found by the `where` argument doesn't exist, create a new UserPermission with this data.
-     */
-    create: XOR<UserPermissionCreateInput, UserPermissionUncheckedCreateInput>
-    /**
-     * In case the UserPermission was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<UserPermissionUpdateInput, UserPermissionUncheckedUpdateInput>
-  }
-
-
-  /**
-   * UserPermission delete
-   */
-  export type UserPermissionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserPermission
-     */
-    select?: UserPermissionSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: UserPermissionInclude<ExtArgs> | null
-    /**
-     * Filter which UserPermission to delete.
-     */
-    where: UserPermissionWhereUniqueInput
-  }
-
-
-  /**
-   * UserPermission deleteMany
-   */
-  export type UserPermissionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which UserPermissions to delete
-     */
-    where?: UserPermissionWhereInput
-  }
-
-
-  /**
-   * UserPermission without action
-   */
-  export type UserPermissionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserPermission
-     */
-    select?: UserPermissionSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: UserPermissionInclude<ExtArgs> | null
-  }
-
-
-
-  /**
    * Model Service
    */
 
@@ -9358,25 +8296,34 @@ export namespace Prisma {
   export type ServiceMinAggregateOutputType = {
     id: string | null
     name: string | null
+    created_by: string | null
+    updated_by: string | null
+    deleted_by: string | null
     created_at: Date | null
     updated_at: Date | null
-    is_deleted: boolean | null
+    deleted_at: Date | null
   }
 
   export type ServiceMaxAggregateOutputType = {
     id: string | null
     name: string | null
+    created_by: string | null
+    updated_by: string | null
+    deleted_by: string | null
     created_at: Date | null
     updated_at: Date | null
-    is_deleted: boolean | null
+    deleted_at: Date | null
   }
 
   export type ServiceCountAggregateOutputType = {
     id: number
     name: number
+    created_by: number
+    updated_by: number
+    deleted_by: number
     created_at: number
     updated_at: number
-    is_deleted: number
+    deleted_at: number
     _all: number
   }
 
@@ -9384,25 +8331,34 @@ export namespace Prisma {
   export type ServiceMinAggregateInputType = {
     id?: true
     name?: true
+    created_by?: true
+    updated_by?: true
+    deleted_by?: true
     created_at?: true
     updated_at?: true
-    is_deleted?: true
+    deleted_at?: true
   }
 
   export type ServiceMaxAggregateInputType = {
     id?: true
     name?: true
+    created_by?: true
+    updated_by?: true
+    deleted_by?: true
     created_at?: true
     updated_at?: true
-    is_deleted?: true
+    deleted_at?: true
   }
 
   export type ServiceCountAggregateInputType = {
     id?: true
     name?: true
+    created_by?: true
+    updated_by?: true
+    deleted_by?: true
     created_at?: true
     updated_at?: true
-    is_deleted?: true
+    deleted_at?: true
     _all?: true
   }
 
@@ -9481,9 +8437,12 @@ export namespace Prisma {
   export type ServiceGroupByOutputType = {
     id: string
     name: string
+    created_by: string
+    updated_by: string | null
+    deleted_by: string | null
     created_at: Date
     updated_at: Date
-    is_deleted: boolean
+    deleted_at: Date | null
     _count: ServiceCountAggregateOutputType | null
     _min: ServiceMinAggregateOutputType | null
     _max: ServiceMaxAggregateOutputType | null
@@ -9506,9 +8465,12 @@ export namespace Prisma {
   export type ServiceSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    created_by?: boolean
+    updated_by?: boolean
+    deleted_by?: boolean
     created_at?: boolean
     updated_at?: boolean
-    is_deleted?: boolean
+    deleted_at?: boolean
     features?: boolean | Service$featuresArgs<ExtArgs>
     _count?: boolean | ServiceCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["service"]>
@@ -9516,9 +8478,12 @@ export namespace Prisma {
   export type ServiceSelectScalar = {
     id?: boolean
     name?: boolean
+    created_by?: boolean
+    updated_by?: boolean
+    deleted_by?: boolean
     created_at?: boolean
     updated_at?: boolean
-    is_deleted?: boolean
+    deleted_at?: boolean
   }
 
   export type ServiceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -9535,9 +8500,12 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
+      created_by: string
+      updated_by: string | null
+      deleted_by: string | null
       created_at: Date
       updated_at: Date
-      is_deleted: boolean
+      deleted_at: Date | null
     }, ExtArgs["result"]["service"]>
     composites: {}
   }
@@ -9935,9 +8903,12 @@ export namespace Prisma {
   interface ServiceFieldRefs {
     readonly id: FieldRef<"Service", 'String'>
     readonly name: FieldRef<"Service", 'String'>
+    readonly created_by: FieldRef<"Service", 'String'>
+    readonly updated_by: FieldRef<"Service", 'String'>
+    readonly deleted_by: FieldRef<"Service", 'String'>
     readonly created_at: FieldRef<"Service", 'DateTime'>
     readonly updated_at: FieldRef<"Service", 'DateTime'>
-    readonly is_deleted: FieldRef<"Service", 'Boolean'>
+    readonly deleted_at: FieldRef<"Service", 'DateTime'>
   }
     
 
@@ -10299,27 +9270,36 @@ export namespace Prisma {
   export type FeatureMinAggregateOutputType = {
     id: string | null
     name: string | null
+    created_by: string | null
+    updated_by: string | null
+    deleted_by: string | null
     created_at: Date | null
     updated_at: Date | null
-    is_deleted: boolean | null
+    deleted_at: Date | null
     service_id: string | null
   }
 
   export type FeatureMaxAggregateOutputType = {
     id: string | null
     name: string | null
+    created_by: string | null
+    updated_by: string | null
+    deleted_by: string | null
     created_at: Date | null
     updated_at: Date | null
-    is_deleted: boolean | null
+    deleted_at: Date | null
     service_id: string | null
   }
 
   export type FeatureCountAggregateOutputType = {
     id: number
     name: number
+    created_by: number
+    updated_by: number
+    deleted_by: number
     created_at: number
     updated_at: number
-    is_deleted: number
+    deleted_at: number
     service_id: number
     _all: number
   }
@@ -10328,27 +9308,36 @@ export namespace Prisma {
   export type FeatureMinAggregateInputType = {
     id?: true
     name?: true
+    created_by?: true
+    updated_by?: true
+    deleted_by?: true
     created_at?: true
     updated_at?: true
-    is_deleted?: true
+    deleted_at?: true
     service_id?: true
   }
 
   export type FeatureMaxAggregateInputType = {
     id?: true
     name?: true
+    created_by?: true
+    updated_by?: true
+    deleted_by?: true
     created_at?: true
     updated_at?: true
-    is_deleted?: true
+    deleted_at?: true
     service_id?: true
   }
 
   export type FeatureCountAggregateInputType = {
     id?: true
     name?: true
+    created_by?: true
+    updated_by?: true
+    deleted_by?: true
     created_at?: true
     updated_at?: true
-    is_deleted?: true
+    deleted_at?: true
     service_id?: true
     _all?: true
   }
@@ -10428,9 +9417,12 @@ export namespace Prisma {
   export type FeatureGroupByOutputType = {
     id: string
     name: string
+    created_by: string
+    updated_by: string | null
+    deleted_by: string | null
     created_at: Date
     updated_at: Date
-    is_deleted: boolean
+    deleted_at: Date | null
     service_id: string
     _count: FeatureCountAggregateOutputType | null
     _min: FeatureMinAggregateOutputType | null
@@ -10454,9 +9446,12 @@ export namespace Prisma {
   export type FeatureSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    created_by?: boolean
+    updated_by?: boolean
+    deleted_by?: boolean
     created_at?: boolean
     updated_at?: boolean
-    is_deleted?: boolean
+    deleted_at?: boolean
     service_id?: boolean
     service?: boolean | ServiceDefaultArgs<ExtArgs>
     modules?: boolean | Feature$modulesArgs<ExtArgs>
@@ -10466,9 +9461,12 @@ export namespace Prisma {
   export type FeatureSelectScalar = {
     id?: boolean
     name?: boolean
+    created_by?: boolean
+    updated_by?: boolean
+    deleted_by?: boolean
     created_at?: boolean
     updated_at?: boolean
-    is_deleted?: boolean
+    deleted_at?: boolean
     service_id?: boolean
   }
 
@@ -10488,9 +9486,12 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
+      created_by: string
+      updated_by: string | null
+      deleted_by: string | null
       created_at: Date
       updated_at: Date
-      is_deleted: boolean
+      deleted_at: Date | null
       service_id: string
     }, ExtArgs["result"]["feature"]>
     composites: {}
@@ -10891,9 +9892,12 @@ export namespace Prisma {
   interface FeatureFieldRefs {
     readonly id: FieldRef<"Feature", 'String'>
     readonly name: FieldRef<"Feature", 'String'>
+    readonly created_by: FieldRef<"Feature", 'String'>
+    readonly updated_by: FieldRef<"Feature", 'String'>
+    readonly deleted_by: FieldRef<"Feature", 'String'>
     readonly created_at: FieldRef<"Feature", 'DateTime'>
     readonly updated_at: FieldRef<"Feature", 'DateTime'>
-    readonly is_deleted: FieldRef<"Feature", 'Boolean'>
+    readonly deleted_at: FieldRef<"Feature", 'DateTime'>
     readonly service_id: FieldRef<"Feature", 'String'>
   }
     
@@ -11256,27 +10260,36 @@ export namespace Prisma {
   export type ModuleMinAggregateOutputType = {
     id: string | null
     name: string | null
+    created_by: string | null
+    updated_by: string | null
+    deleted_by: string | null
     created_at: Date | null
     updated_at: Date | null
-    is_deleted: boolean | null
+    deleted_at: Date | null
     feature_id: string | null
   }
 
   export type ModuleMaxAggregateOutputType = {
     id: string | null
     name: string | null
+    created_by: string | null
+    updated_by: string | null
+    deleted_by: string | null
     created_at: Date | null
     updated_at: Date | null
-    is_deleted: boolean | null
+    deleted_at: Date | null
     feature_id: string | null
   }
 
   export type ModuleCountAggregateOutputType = {
     id: number
     name: number
+    created_by: number
+    updated_by: number
+    deleted_by: number
     created_at: number
     updated_at: number
-    is_deleted: number
+    deleted_at: number
     feature_id: number
     _all: number
   }
@@ -11285,27 +10298,36 @@ export namespace Prisma {
   export type ModuleMinAggregateInputType = {
     id?: true
     name?: true
+    created_by?: true
+    updated_by?: true
+    deleted_by?: true
     created_at?: true
     updated_at?: true
-    is_deleted?: true
+    deleted_at?: true
     feature_id?: true
   }
 
   export type ModuleMaxAggregateInputType = {
     id?: true
     name?: true
+    created_by?: true
+    updated_by?: true
+    deleted_by?: true
     created_at?: true
     updated_at?: true
-    is_deleted?: true
+    deleted_at?: true
     feature_id?: true
   }
 
   export type ModuleCountAggregateInputType = {
     id?: true
     name?: true
+    created_by?: true
+    updated_by?: true
+    deleted_by?: true
     created_at?: true
     updated_at?: true
-    is_deleted?: true
+    deleted_at?: true
     feature_id?: true
     _all?: true
   }
@@ -11385,9 +10407,12 @@ export namespace Prisma {
   export type ModuleGroupByOutputType = {
     id: string
     name: string
+    created_by: string
+    updated_by: string | null
+    deleted_by: string | null
     created_at: Date
     updated_at: Date
-    is_deleted: boolean
+    deleted_at: Date | null
     feature_id: string
     _count: ModuleCountAggregateOutputType | null
     _min: ModuleMinAggregateOutputType | null
@@ -11411,9 +10436,12 @@ export namespace Prisma {
   export type ModuleSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    created_by?: boolean
+    updated_by?: boolean
+    deleted_by?: boolean
     created_at?: boolean
     updated_at?: boolean
-    is_deleted?: boolean
+    deleted_at?: boolean
     feature_id?: boolean
     feature?: boolean | FeatureDefaultArgs<ExtArgs>
     submodules?: boolean | Module$submodulesArgs<ExtArgs>
@@ -11423,9 +10451,12 @@ export namespace Prisma {
   export type ModuleSelectScalar = {
     id?: boolean
     name?: boolean
+    created_by?: boolean
+    updated_by?: boolean
+    deleted_by?: boolean
     created_at?: boolean
     updated_at?: boolean
-    is_deleted?: boolean
+    deleted_at?: boolean
     feature_id?: boolean
   }
 
@@ -11445,9 +10476,12 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
+      created_by: string
+      updated_by: string | null
+      deleted_by: string | null
       created_at: Date
       updated_at: Date
-      is_deleted: boolean
+      deleted_at: Date | null
       feature_id: string
     }, ExtArgs["result"]["module"]>
     composites: {}
@@ -11848,9 +10882,12 @@ export namespace Prisma {
   interface ModuleFieldRefs {
     readonly id: FieldRef<"Module", 'String'>
     readonly name: FieldRef<"Module", 'String'>
+    readonly created_by: FieldRef<"Module", 'String'>
+    readonly updated_by: FieldRef<"Module", 'String'>
+    readonly deleted_by: FieldRef<"Module", 'String'>
     readonly created_at: FieldRef<"Module", 'DateTime'>
     readonly updated_at: FieldRef<"Module", 'DateTime'>
-    readonly is_deleted: FieldRef<"Module", 'Boolean'>
+    readonly deleted_at: FieldRef<"Module", 'DateTime'>
     readonly feature_id: FieldRef<"Module", 'String'>
   }
     
@@ -12373,8 +11410,6 @@ export namespace Prisma {
     is_deleted?: boolean
     module_id?: boolean
     module?: boolean | ModuleDefaultArgs<ExtArgs>
-    user_permissions?: boolean | SubModule$user_permissionsArgs<ExtArgs>
-    _count?: boolean | SubModuleCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["subModule"]>
 
   export type SubModuleSelectScalar = {
@@ -12388,8 +11423,6 @@ export namespace Prisma {
 
   export type SubModuleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     module?: boolean | ModuleDefaultArgs<ExtArgs>
-    user_permissions?: boolean | SubModule$user_permissionsArgs<ExtArgs>
-    _count?: boolean | SubModuleCountOutputTypeDefaultArgs<ExtArgs>
   }
 
 
@@ -12397,7 +11430,6 @@ export namespace Prisma {
     name: "SubModule"
     objects: {
       module: Prisma.$ModulePayload<ExtArgs>
-      user_permissions: Prisma.$UserPermissionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -12773,8 +11805,6 @@ export namespace Prisma {
 
     module<T extends ModuleDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ModuleDefaultArgs<ExtArgs>>): Prisma__ModuleClient<$Result.GetResult<Prisma.$ModulePayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
-    user_permissions<T extends SubModule$user_permissionsArgs<ExtArgs> = {}>(args?: Subset<T, SubModule$user_permissionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPermissionPayload<ExtArgs>, T, 'findMany'> | Null>;
-
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -13121,27 +12151,6 @@ export namespace Prisma {
 
 
   /**
-   * SubModule.user_permissions
-   */
-  export type SubModule$user_permissionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UserPermission
-     */
-    select?: UserPermissionSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: UserPermissionInclude<ExtArgs> | null
-    where?: UserPermissionWhereInput
-    orderBy?: UserPermissionOrderByWithRelationInput | UserPermissionOrderByWithRelationInput[]
-    cursor?: UserPermissionWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: UserPermissionScalarFieldEnum | UserPermissionScalarFieldEnum[]
-  }
-
-
-  /**
    * SubModule without action
    */
   export type SubModuleDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -13182,10 +12191,12 @@ export namespace Prisma {
     label: string | null
     order: number | null
     approver_id: string | null
-    approver_proxy_id: string | null
+    created_by: string | null
+    updated_by: string | null
+    deleted_by: string | null
     created_at: Date | null
     updated_at: Date | null
-    is_deleted: boolean | null
+    deleted_at: Date | null
   }
 
   export type JOApproverSettingMaxAggregateOutputType = {
@@ -13193,10 +12204,12 @@ export namespace Prisma {
     label: string | null
     order: number | null
     approver_id: string | null
-    approver_proxy_id: string | null
+    created_by: string | null
+    updated_by: string | null
+    deleted_by: string | null
     created_at: Date | null
     updated_at: Date | null
-    is_deleted: boolean | null
+    deleted_at: Date | null
   }
 
   export type JOApproverSettingCountAggregateOutputType = {
@@ -13204,10 +12217,12 @@ export namespace Prisma {
     label: number
     order: number
     approver_id: number
-    approver_proxy_id: number
+    created_by: number
+    updated_by: number
+    deleted_by: number
     created_at: number
     updated_at: number
-    is_deleted: number
+    deleted_at: number
     _all: number
   }
 
@@ -13225,10 +12240,12 @@ export namespace Prisma {
     label?: true
     order?: true
     approver_id?: true
-    approver_proxy_id?: true
+    created_by?: true
+    updated_by?: true
+    deleted_by?: true
     created_at?: true
     updated_at?: true
-    is_deleted?: true
+    deleted_at?: true
   }
 
   export type JOApproverSettingMaxAggregateInputType = {
@@ -13236,10 +12253,12 @@ export namespace Prisma {
     label?: true
     order?: true
     approver_id?: true
-    approver_proxy_id?: true
+    created_by?: true
+    updated_by?: true
+    deleted_by?: true
     created_at?: true
     updated_at?: true
-    is_deleted?: true
+    deleted_at?: true
   }
 
   export type JOApproverSettingCountAggregateInputType = {
@@ -13247,10 +12266,12 @@ export namespace Prisma {
     label?: true
     order?: true
     approver_id?: true
-    approver_proxy_id?: true
+    created_by?: true
+    updated_by?: true
+    deleted_by?: true
     created_at?: true
     updated_at?: true
-    is_deleted?: true
+    deleted_at?: true
     _all?: true
   }
 
@@ -13345,10 +12366,12 @@ export namespace Prisma {
     label: string
     order: number
     approver_id: string
-    approver_proxy_id: string | null
+    created_by: string
+    updated_by: string | null
+    deleted_by: string | null
     created_at: Date
     updated_at: Date
-    is_deleted: boolean
+    deleted_at: Date | null
     _count: JOApproverSettingCountAggregateOutputType | null
     _avg: JOApproverSettingAvgAggregateOutputType | null
     _sum: JOApproverSettingSumAggregateOutputType | null
@@ -13375,12 +12398,13 @@ export namespace Prisma {
     label?: boolean
     order?: boolean
     approver_id?: boolean
-    approver_proxy_id?: boolean
+    created_by?: boolean
+    updated_by?: boolean
+    deleted_by?: boolean
     created_at?: boolean
     updated_at?: boolean
-    is_deleted?: boolean
+    deleted_at?: boolean
     approver?: boolean | EmployeeDefaultArgs<ExtArgs>
-    approver_proxy?: boolean | JOApproverSetting$approver_proxyArgs<ExtArgs>
   }, ExtArgs["result"]["jOApproverSetting"]>
 
   export type JOApproverSettingSelectScalar = {
@@ -13388,15 +12412,16 @@ export namespace Prisma {
     label?: boolean
     order?: boolean
     approver_id?: boolean
-    approver_proxy_id?: boolean
+    created_by?: boolean
+    updated_by?: boolean
+    deleted_by?: boolean
     created_at?: boolean
     updated_at?: boolean
-    is_deleted?: boolean
+    deleted_at?: boolean
   }
 
   export type JOApproverSettingInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     approver?: boolean | EmployeeDefaultArgs<ExtArgs>
-    approver_proxy?: boolean | JOApproverSetting$approver_proxyArgs<ExtArgs>
   }
 
 
@@ -13404,17 +12429,18 @@ export namespace Prisma {
     name: "JOApproverSetting"
     objects: {
       approver: Prisma.$EmployeePayload<ExtArgs>
-      approver_proxy: Prisma.$EmployeePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       label: string
       order: number
       approver_id: string
-      approver_proxy_id: string | null
+      created_by: string
+      updated_by: string | null
+      deleted_by: string | null
       created_at: Date
       updated_at: Date
-      is_deleted: boolean
+      deleted_at: Date | null
     }, ExtArgs["result"]["jOApproverSetting"]>
     composites: {}
   }
@@ -13782,8 +12808,6 @@ export namespace Prisma {
 
     approver<T extends EmployeeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EmployeeDefaultArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
-    approver_proxy<T extends JOApproverSetting$approver_proxyArgs<ExtArgs> = {}>(args?: Subset<T, JOApproverSetting$approver_proxyArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
-
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -13816,10 +12840,12 @@ export namespace Prisma {
     readonly label: FieldRef<"JOApproverSetting", 'String'>
     readonly order: FieldRef<"JOApproverSetting", 'Int'>
     readonly approver_id: FieldRef<"JOApproverSetting", 'String'>
-    readonly approver_proxy_id: FieldRef<"JOApproverSetting", 'String'>
+    readonly created_by: FieldRef<"JOApproverSetting", 'String'>
+    readonly updated_by: FieldRef<"JOApproverSetting", 'String'>
+    readonly deleted_by: FieldRef<"JOApproverSetting", 'String'>
     readonly created_at: FieldRef<"JOApproverSetting", 'DateTime'>
     readonly updated_at: FieldRef<"JOApproverSetting", 'DateTime'>
-    readonly is_deleted: FieldRef<"JOApproverSetting", 'Boolean'>
+    readonly deleted_at: FieldRef<"JOApproverSetting", 'DateTime'>
   }
     
 
@@ -14132,22 +13158,6 @@ export namespace Prisma {
 
 
   /**
-   * JOApproverSetting.approver_proxy
-   */
-  export type JOApproverSetting$approver_proxyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Employee
-     */
-    select?: EmployeeSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: EmployeeInclude<ExtArgs> | null
-    where?: EmployeeWhereInput
-  }
-
-
-  /**
    * JOApproverSetting without action
    */
   export type JOApproverSettingDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -14185,35 +13195,41 @@ export namespace Prisma {
 
   export type RVApproverSettingMinAggregateOutputType = {
     id: string | null
-    approver_id: string | null
-    approver_proxy_id: string | null
     label: string | null
     order: number | null
+    approver_id: string | null
+    created_by: string | null
+    updated_by: string | null
+    deleted_by: string | null
     created_at: Date | null
     updated_at: Date | null
-    is_deleted: boolean | null
+    deleted_at: Date | null
   }
 
   export type RVApproverSettingMaxAggregateOutputType = {
     id: string | null
-    approver_id: string | null
-    approver_proxy_id: string | null
     label: string | null
     order: number | null
+    approver_id: string | null
+    created_by: string | null
+    updated_by: string | null
+    deleted_by: string | null
     created_at: Date | null
     updated_at: Date | null
-    is_deleted: boolean | null
+    deleted_at: Date | null
   }
 
   export type RVApproverSettingCountAggregateOutputType = {
     id: number
-    approver_id: number
-    approver_proxy_id: number
     label: number
     order: number
+    approver_id: number
+    created_by: number
+    updated_by: number
+    deleted_by: number
     created_at: number
     updated_at: number
-    is_deleted: number
+    deleted_at: number
     _all: number
   }
 
@@ -14228,35 +13244,41 @@ export namespace Prisma {
 
   export type RVApproverSettingMinAggregateInputType = {
     id?: true
-    approver_id?: true
-    approver_proxy_id?: true
     label?: true
     order?: true
+    approver_id?: true
+    created_by?: true
+    updated_by?: true
+    deleted_by?: true
     created_at?: true
     updated_at?: true
-    is_deleted?: true
+    deleted_at?: true
   }
 
   export type RVApproverSettingMaxAggregateInputType = {
     id?: true
-    approver_id?: true
-    approver_proxy_id?: true
     label?: true
     order?: true
+    approver_id?: true
+    created_by?: true
+    updated_by?: true
+    deleted_by?: true
     created_at?: true
     updated_at?: true
-    is_deleted?: true
+    deleted_at?: true
   }
 
   export type RVApproverSettingCountAggregateInputType = {
     id?: true
-    approver_id?: true
-    approver_proxy_id?: true
     label?: true
     order?: true
+    approver_id?: true
+    created_by?: true
+    updated_by?: true
+    deleted_by?: true
     created_at?: true
     updated_at?: true
-    is_deleted?: true
+    deleted_at?: true
     _all?: true
   }
 
@@ -14348,13 +13370,15 @@ export namespace Prisma {
 
   export type RVApproverSettingGroupByOutputType = {
     id: string
-    approver_id: string
-    approver_proxy_id: string | null
     label: string
     order: number
+    approver_id: string
+    created_by: string
+    updated_by: string | null
+    deleted_by: string | null
     created_at: Date
     updated_at: Date
-    is_deleted: boolean
+    deleted_at: Date | null
     _count: RVApproverSettingCountAggregateOutputType | null
     _avg: RVApproverSettingAvgAggregateOutputType | null
     _sum: RVApproverSettingSumAggregateOutputType | null
@@ -14378,31 +13402,33 @@ export namespace Prisma {
 
   export type RVApproverSettingSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    approver_id?: boolean
-    approver_proxy_id?: boolean
     label?: boolean
     order?: boolean
+    approver_id?: boolean
+    created_by?: boolean
+    updated_by?: boolean
+    deleted_by?: boolean
     created_at?: boolean
     updated_at?: boolean
-    is_deleted?: boolean
+    deleted_at?: boolean
     approver?: boolean | EmployeeDefaultArgs<ExtArgs>
-    approver_proxy?: boolean | RVApproverSetting$approver_proxyArgs<ExtArgs>
   }, ExtArgs["result"]["rVApproverSetting"]>
 
   export type RVApproverSettingSelectScalar = {
     id?: boolean
-    approver_id?: boolean
-    approver_proxy_id?: boolean
     label?: boolean
     order?: boolean
+    approver_id?: boolean
+    created_by?: boolean
+    updated_by?: boolean
+    deleted_by?: boolean
     created_at?: boolean
     updated_at?: boolean
-    is_deleted?: boolean
+    deleted_at?: boolean
   }
 
   export type RVApproverSettingInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     approver?: boolean | EmployeeDefaultArgs<ExtArgs>
-    approver_proxy?: boolean | RVApproverSetting$approver_proxyArgs<ExtArgs>
   }
 
 
@@ -14410,17 +13436,18 @@ export namespace Prisma {
     name: "RVApproverSetting"
     objects: {
       approver: Prisma.$EmployeePayload<ExtArgs>
-      approver_proxy: Prisma.$EmployeePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      approver_id: string
-      approver_proxy_id: string | null
       label: string
       order: number
+      approver_id: string
+      created_by: string
+      updated_by: string | null
+      deleted_by: string | null
       created_at: Date
       updated_at: Date
-      is_deleted: boolean
+      deleted_at: Date | null
     }, ExtArgs["result"]["rVApproverSetting"]>
     composites: {}
   }
@@ -14788,8 +13815,6 @@ export namespace Prisma {
 
     approver<T extends EmployeeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EmployeeDefaultArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
-    approver_proxy<T extends RVApproverSetting$approver_proxyArgs<ExtArgs> = {}>(args?: Subset<T, RVApproverSetting$approver_proxyArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
-
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -14819,13 +13844,15 @@ export namespace Prisma {
    */ 
   interface RVApproverSettingFieldRefs {
     readonly id: FieldRef<"RVApproverSetting", 'String'>
-    readonly approver_id: FieldRef<"RVApproverSetting", 'String'>
-    readonly approver_proxy_id: FieldRef<"RVApproverSetting", 'String'>
     readonly label: FieldRef<"RVApproverSetting", 'String'>
     readonly order: FieldRef<"RVApproverSetting", 'Int'>
+    readonly approver_id: FieldRef<"RVApproverSetting", 'String'>
+    readonly created_by: FieldRef<"RVApproverSetting", 'String'>
+    readonly updated_by: FieldRef<"RVApproverSetting", 'String'>
+    readonly deleted_by: FieldRef<"RVApproverSetting", 'String'>
     readonly created_at: FieldRef<"RVApproverSetting", 'DateTime'>
     readonly updated_at: FieldRef<"RVApproverSetting", 'DateTime'>
-    readonly is_deleted: FieldRef<"RVApproverSetting", 'Boolean'>
+    readonly deleted_at: FieldRef<"RVApproverSetting", 'DateTime'>
   }
     
 
@@ -15138,22 +14165,6 @@ export namespace Prisma {
 
 
   /**
-   * RVApproverSetting.approver_proxy
-   */
-  export type RVApproverSetting$approver_proxyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Employee
-     */
-    select?: EmployeeSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: EmployeeInclude<ExtArgs> | null
-    where?: EmployeeWhereInput
-  }
-
-
-  /**
    * RVApproverSetting without action
    */
   export type RVApproverSettingDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -15191,35 +14202,41 @@ export namespace Prisma {
 
   export type SPRApproverSettingMinAggregateOutputType = {
     id: string | null
-    approver_id: string | null
-    approver_proxy_id: string | null
     label: string | null
     order: number | null
+    approver_id: string | null
+    created_by: string | null
+    updated_by: string | null
+    deleted_by: string | null
     created_at: Date | null
     updated_at: Date | null
-    is_deleted: boolean | null
+    deleted_at: Date | null
   }
 
   export type SPRApproverSettingMaxAggregateOutputType = {
     id: string | null
-    approver_id: string | null
-    approver_proxy_id: string | null
     label: string | null
     order: number | null
+    approver_id: string | null
+    created_by: string | null
+    updated_by: string | null
+    deleted_by: string | null
     created_at: Date | null
     updated_at: Date | null
-    is_deleted: boolean | null
+    deleted_at: Date | null
   }
 
   export type SPRApproverSettingCountAggregateOutputType = {
     id: number
-    approver_id: number
-    approver_proxy_id: number
     label: number
     order: number
+    approver_id: number
+    created_by: number
+    updated_by: number
+    deleted_by: number
     created_at: number
     updated_at: number
-    is_deleted: number
+    deleted_at: number
     _all: number
   }
 
@@ -15234,35 +14251,41 @@ export namespace Prisma {
 
   export type SPRApproverSettingMinAggregateInputType = {
     id?: true
-    approver_id?: true
-    approver_proxy_id?: true
     label?: true
     order?: true
+    approver_id?: true
+    created_by?: true
+    updated_by?: true
+    deleted_by?: true
     created_at?: true
     updated_at?: true
-    is_deleted?: true
+    deleted_at?: true
   }
 
   export type SPRApproverSettingMaxAggregateInputType = {
     id?: true
-    approver_id?: true
-    approver_proxy_id?: true
     label?: true
     order?: true
+    approver_id?: true
+    created_by?: true
+    updated_by?: true
+    deleted_by?: true
     created_at?: true
     updated_at?: true
-    is_deleted?: true
+    deleted_at?: true
   }
 
   export type SPRApproverSettingCountAggregateInputType = {
     id?: true
-    approver_id?: true
-    approver_proxy_id?: true
     label?: true
     order?: true
+    approver_id?: true
+    created_by?: true
+    updated_by?: true
+    deleted_by?: true
     created_at?: true
     updated_at?: true
-    is_deleted?: true
+    deleted_at?: true
     _all?: true
   }
 
@@ -15354,13 +14377,15 @@ export namespace Prisma {
 
   export type SPRApproverSettingGroupByOutputType = {
     id: string
-    approver_id: string
-    approver_proxy_id: string | null
     label: string
     order: number
+    approver_id: string
+    created_by: string
+    updated_by: string | null
+    deleted_by: string | null
     created_at: Date
     updated_at: Date
-    is_deleted: boolean
+    deleted_at: Date | null
     _count: SPRApproverSettingCountAggregateOutputType | null
     _avg: SPRApproverSettingAvgAggregateOutputType | null
     _sum: SPRApproverSettingSumAggregateOutputType | null
@@ -15384,31 +14409,33 @@ export namespace Prisma {
 
   export type SPRApproverSettingSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    approver_id?: boolean
-    approver_proxy_id?: boolean
     label?: boolean
     order?: boolean
+    approver_id?: boolean
+    created_by?: boolean
+    updated_by?: boolean
+    deleted_by?: boolean
     created_at?: boolean
     updated_at?: boolean
-    is_deleted?: boolean
+    deleted_at?: boolean
     approver?: boolean | EmployeeDefaultArgs<ExtArgs>
-    approver_proxy?: boolean | SPRApproverSetting$approver_proxyArgs<ExtArgs>
   }, ExtArgs["result"]["sPRApproverSetting"]>
 
   export type SPRApproverSettingSelectScalar = {
     id?: boolean
-    approver_id?: boolean
-    approver_proxy_id?: boolean
     label?: boolean
     order?: boolean
+    approver_id?: boolean
+    created_by?: boolean
+    updated_by?: boolean
+    deleted_by?: boolean
     created_at?: boolean
     updated_at?: boolean
-    is_deleted?: boolean
+    deleted_at?: boolean
   }
 
   export type SPRApproverSettingInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     approver?: boolean | EmployeeDefaultArgs<ExtArgs>
-    approver_proxy?: boolean | SPRApproverSetting$approver_proxyArgs<ExtArgs>
   }
 
 
@@ -15416,17 +14443,18 @@ export namespace Prisma {
     name: "SPRApproverSetting"
     objects: {
       approver: Prisma.$EmployeePayload<ExtArgs>
-      approver_proxy: Prisma.$EmployeePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      approver_id: string
-      approver_proxy_id: string | null
       label: string
       order: number
+      approver_id: string
+      created_by: string
+      updated_by: string | null
+      deleted_by: string | null
       created_at: Date
       updated_at: Date
-      is_deleted: boolean
+      deleted_at: Date | null
     }, ExtArgs["result"]["sPRApproverSetting"]>
     composites: {}
   }
@@ -15794,8 +14822,6 @@ export namespace Prisma {
 
     approver<T extends EmployeeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EmployeeDefaultArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
-    approver_proxy<T extends SPRApproverSetting$approver_proxyArgs<ExtArgs> = {}>(args?: Subset<T, SPRApproverSetting$approver_proxyArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
-
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -15825,13 +14851,15 @@ export namespace Prisma {
    */ 
   interface SPRApproverSettingFieldRefs {
     readonly id: FieldRef<"SPRApproverSetting", 'String'>
-    readonly approver_id: FieldRef<"SPRApproverSetting", 'String'>
-    readonly approver_proxy_id: FieldRef<"SPRApproverSetting", 'String'>
     readonly label: FieldRef<"SPRApproverSetting", 'String'>
     readonly order: FieldRef<"SPRApproverSetting", 'Int'>
+    readonly approver_id: FieldRef<"SPRApproverSetting", 'String'>
+    readonly created_by: FieldRef<"SPRApproverSetting", 'String'>
+    readonly updated_by: FieldRef<"SPRApproverSetting", 'String'>
+    readonly deleted_by: FieldRef<"SPRApproverSetting", 'String'>
     readonly created_at: FieldRef<"SPRApproverSetting", 'DateTime'>
     readonly updated_at: FieldRef<"SPRApproverSetting", 'DateTime'>
-    readonly is_deleted: FieldRef<"SPRApproverSetting", 'Boolean'>
+    readonly deleted_at: FieldRef<"SPRApproverSetting", 'DateTime'>
   }
     
 
@@ -16144,22 +15172,6 @@ export namespace Prisma {
 
 
   /**
-   * SPRApproverSetting.approver_proxy
-   */
-  export type SPRApproverSetting$approver_proxyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Employee
-     */
-    select?: EmployeeSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: EmployeeInclude<ExtArgs> | null
-    where?: EmployeeWhereInput
-  }
-
-
-  /**
    * SPRApproverSetting without action
    */
   export type SPRApproverSettingDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -16197,35 +15209,41 @@ export namespace Prisma {
 
   export type MEQSApproverSettingMinAggregateOutputType = {
     id: string | null
-    approver_id: string | null
-    approver_proxy_id: string | null
     label: string | null
     order: number | null
+    approver_id: string | null
+    created_by: string | null
+    updated_by: string | null
+    deleted_by: string | null
     created_at: Date | null
     updated_at: Date | null
-    is_deleted: boolean | null
+    deleted_at: Date | null
   }
 
   export type MEQSApproverSettingMaxAggregateOutputType = {
     id: string | null
-    approver_id: string | null
-    approver_proxy_id: string | null
     label: string | null
     order: number | null
+    approver_id: string | null
+    created_by: string | null
+    updated_by: string | null
+    deleted_by: string | null
     created_at: Date | null
     updated_at: Date | null
-    is_deleted: boolean | null
+    deleted_at: Date | null
   }
 
   export type MEQSApproverSettingCountAggregateOutputType = {
     id: number
-    approver_id: number
-    approver_proxy_id: number
     label: number
     order: number
+    approver_id: number
+    created_by: number
+    updated_by: number
+    deleted_by: number
     created_at: number
     updated_at: number
-    is_deleted: number
+    deleted_at: number
     _all: number
   }
 
@@ -16240,35 +15258,41 @@ export namespace Prisma {
 
   export type MEQSApproverSettingMinAggregateInputType = {
     id?: true
-    approver_id?: true
-    approver_proxy_id?: true
     label?: true
     order?: true
+    approver_id?: true
+    created_by?: true
+    updated_by?: true
+    deleted_by?: true
     created_at?: true
     updated_at?: true
-    is_deleted?: true
+    deleted_at?: true
   }
 
   export type MEQSApproverSettingMaxAggregateInputType = {
     id?: true
-    approver_id?: true
-    approver_proxy_id?: true
     label?: true
     order?: true
+    approver_id?: true
+    created_by?: true
+    updated_by?: true
+    deleted_by?: true
     created_at?: true
     updated_at?: true
-    is_deleted?: true
+    deleted_at?: true
   }
 
   export type MEQSApproverSettingCountAggregateInputType = {
     id?: true
-    approver_id?: true
-    approver_proxy_id?: true
     label?: true
     order?: true
+    approver_id?: true
+    created_by?: true
+    updated_by?: true
+    deleted_by?: true
     created_at?: true
     updated_at?: true
-    is_deleted?: true
+    deleted_at?: true
     _all?: true
   }
 
@@ -16360,13 +15384,15 @@ export namespace Prisma {
 
   export type MEQSApproverSettingGroupByOutputType = {
     id: string
-    approver_id: string
-    approver_proxy_id: string | null
     label: string
     order: number
+    approver_id: string
+    created_by: string
+    updated_by: string | null
+    deleted_by: string | null
     created_at: Date
     updated_at: Date
-    is_deleted: boolean
+    deleted_at: Date | null
     _count: MEQSApproverSettingCountAggregateOutputType | null
     _avg: MEQSApproverSettingAvgAggregateOutputType | null
     _sum: MEQSApproverSettingSumAggregateOutputType | null
@@ -16390,31 +15416,33 @@ export namespace Prisma {
 
   export type MEQSApproverSettingSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    approver_id?: boolean
-    approver_proxy_id?: boolean
     label?: boolean
     order?: boolean
+    approver_id?: boolean
+    created_by?: boolean
+    updated_by?: boolean
+    deleted_by?: boolean
     created_at?: boolean
     updated_at?: boolean
-    is_deleted?: boolean
+    deleted_at?: boolean
     approver?: boolean | EmployeeDefaultArgs<ExtArgs>
-    approver_proxy?: boolean | MEQSApproverSetting$approver_proxyArgs<ExtArgs>
   }, ExtArgs["result"]["mEQSApproverSetting"]>
 
   export type MEQSApproverSettingSelectScalar = {
     id?: boolean
-    approver_id?: boolean
-    approver_proxy_id?: boolean
     label?: boolean
     order?: boolean
+    approver_id?: boolean
+    created_by?: boolean
+    updated_by?: boolean
+    deleted_by?: boolean
     created_at?: boolean
     updated_at?: boolean
-    is_deleted?: boolean
+    deleted_at?: boolean
   }
 
   export type MEQSApproverSettingInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     approver?: boolean | EmployeeDefaultArgs<ExtArgs>
-    approver_proxy?: boolean | MEQSApproverSetting$approver_proxyArgs<ExtArgs>
   }
 
 
@@ -16422,17 +15450,18 @@ export namespace Prisma {
     name: "MEQSApproverSetting"
     objects: {
       approver: Prisma.$EmployeePayload<ExtArgs>
-      approver_proxy: Prisma.$EmployeePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      approver_id: string
-      approver_proxy_id: string | null
       label: string
       order: number
+      approver_id: string
+      created_by: string
+      updated_by: string | null
+      deleted_by: string | null
       created_at: Date
       updated_at: Date
-      is_deleted: boolean
+      deleted_at: Date | null
     }, ExtArgs["result"]["mEQSApproverSetting"]>
     composites: {}
   }
@@ -16800,8 +15829,6 @@ export namespace Prisma {
 
     approver<T extends EmployeeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EmployeeDefaultArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
-    approver_proxy<T extends MEQSApproverSetting$approver_proxyArgs<ExtArgs> = {}>(args?: Subset<T, MEQSApproverSetting$approver_proxyArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
-
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -16831,13 +15858,15 @@ export namespace Prisma {
    */ 
   interface MEQSApproverSettingFieldRefs {
     readonly id: FieldRef<"MEQSApproverSetting", 'String'>
-    readonly approver_id: FieldRef<"MEQSApproverSetting", 'String'>
-    readonly approver_proxy_id: FieldRef<"MEQSApproverSetting", 'String'>
     readonly label: FieldRef<"MEQSApproverSetting", 'String'>
     readonly order: FieldRef<"MEQSApproverSetting", 'Int'>
+    readonly approver_id: FieldRef<"MEQSApproverSetting", 'String'>
+    readonly created_by: FieldRef<"MEQSApproverSetting", 'String'>
+    readonly updated_by: FieldRef<"MEQSApproverSetting", 'String'>
+    readonly deleted_by: FieldRef<"MEQSApproverSetting", 'String'>
     readonly created_at: FieldRef<"MEQSApproverSetting", 'DateTime'>
     readonly updated_at: FieldRef<"MEQSApproverSetting", 'DateTime'>
-    readonly is_deleted: FieldRef<"MEQSApproverSetting", 'Boolean'>
+    readonly deleted_at: FieldRef<"MEQSApproverSetting", 'DateTime'>
   }
     
 
@@ -17150,22 +16179,6 @@ export namespace Prisma {
 
 
   /**
-   * MEQSApproverSetting.approver_proxy
-   */
-  export type MEQSApproverSetting$approver_proxyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Employee
-     */
-    select?: EmployeeSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: EmployeeInclude<ExtArgs> | null
-    where?: EmployeeWhereInput
-  }
-
-
-  /**
    * MEQSApproverSetting without action
    */
   export type MEQSApproverSettingDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -17203,35 +16216,41 @@ export namespace Prisma {
 
   export type POApproverSettingMinAggregateOutputType = {
     id: string | null
-    approver_id: string | null
-    approver_proxy_id: string | null
     label: string | null
     order: number | null
+    approver_id: string | null
+    created_by: string | null
+    updated_by: string | null
+    deleted_by: string | null
     created_at: Date | null
     updated_at: Date | null
-    is_deleted: boolean | null
+    deleted_at: Date | null
   }
 
   export type POApproverSettingMaxAggregateOutputType = {
     id: string | null
-    approver_id: string | null
-    approver_proxy_id: string | null
     label: string | null
     order: number | null
+    approver_id: string | null
+    created_by: string | null
+    updated_by: string | null
+    deleted_by: string | null
     created_at: Date | null
     updated_at: Date | null
-    is_deleted: boolean | null
+    deleted_at: Date | null
   }
 
   export type POApproverSettingCountAggregateOutputType = {
     id: number
-    approver_id: number
-    approver_proxy_id: number
     label: number
     order: number
+    approver_id: number
+    created_by: number
+    updated_by: number
+    deleted_by: number
     created_at: number
     updated_at: number
-    is_deleted: number
+    deleted_at: number
     _all: number
   }
 
@@ -17246,35 +16265,41 @@ export namespace Prisma {
 
   export type POApproverSettingMinAggregateInputType = {
     id?: true
-    approver_id?: true
-    approver_proxy_id?: true
     label?: true
     order?: true
+    approver_id?: true
+    created_by?: true
+    updated_by?: true
+    deleted_by?: true
     created_at?: true
     updated_at?: true
-    is_deleted?: true
+    deleted_at?: true
   }
 
   export type POApproverSettingMaxAggregateInputType = {
     id?: true
-    approver_id?: true
-    approver_proxy_id?: true
     label?: true
     order?: true
+    approver_id?: true
+    created_by?: true
+    updated_by?: true
+    deleted_by?: true
     created_at?: true
     updated_at?: true
-    is_deleted?: true
+    deleted_at?: true
   }
 
   export type POApproverSettingCountAggregateInputType = {
     id?: true
-    approver_id?: true
-    approver_proxy_id?: true
     label?: true
     order?: true
+    approver_id?: true
+    created_by?: true
+    updated_by?: true
+    deleted_by?: true
     created_at?: true
     updated_at?: true
-    is_deleted?: true
+    deleted_at?: true
     _all?: true
   }
 
@@ -17366,13 +16391,15 @@ export namespace Prisma {
 
   export type POApproverSettingGroupByOutputType = {
     id: string
-    approver_id: string
-    approver_proxy_id: string | null
     label: string
     order: number
+    approver_id: string
+    created_by: string
+    updated_by: string | null
+    deleted_by: string | null
     created_at: Date
     updated_at: Date
-    is_deleted: boolean
+    deleted_at: Date | null
     _count: POApproverSettingCountAggregateOutputType | null
     _avg: POApproverSettingAvgAggregateOutputType | null
     _sum: POApproverSettingSumAggregateOutputType | null
@@ -17396,31 +16423,33 @@ export namespace Prisma {
 
   export type POApproverSettingSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    approver_id?: boolean
-    approver_proxy_id?: boolean
     label?: boolean
     order?: boolean
+    approver_id?: boolean
+    created_by?: boolean
+    updated_by?: boolean
+    deleted_by?: boolean
     created_at?: boolean
     updated_at?: boolean
-    is_deleted?: boolean
+    deleted_at?: boolean
     approver?: boolean | EmployeeDefaultArgs<ExtArgs>
-    approver_proxy?: boolean | POApproverSetting$approver_proxyArgs<ExtArgs>
   }, ExtArgs["result"]["pOApproverSetting"]>
 
   export type POApproverSettingSelectScalar = {
     id?: boolean
-    approver_id?: boolean
-    approver_proxy_id?: boolean
     label?: boolean
     order?: boolean
+    approver_id?: boolean
+    created_by?: boolean
+    updated_by?: boolean
+    deleted_by?: boolean
     created_at?: boolean
     updated_at?: boolean
-    is_deleted?: boolean
+    deleted_at?: boolean
   }
 
   export type POApproverSettingInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     approver?: boolean | EmployeeDefaultArgs<ExtArgs>
-    approver_proxy?: boolean | POApproverSetting$approver_proxyArgs<ExtArgs>
   }
 
 
@@ -17428,17 +16457,18 @@ export namespace Prisma {
     name: "POApproverSetting"
     objects: {
       approver: Prisma.$EmployeePayload<ExtArgs>
-      approver_proxy: Prisma.$EmployeePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      approver_id: string
-      approver_proxy_id: string | null
       label: string
       order: number
+      approver_id: string
+      created_by: string
+      updated_by: string | null
+      deleted_by: string | null
       created_at: Date
       updated_at: Date
-      is_deleted: boolean
+      deleted_at: Date | null
     }, ExtArgs["result"]["pOApproverSetting"]>
     composites: {}
   }
@@ -17806,8 +16836,6 @@ export namespace Prisma {
 
     approver<T extends EmployeeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EmployeeDefaultArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
-    approver_proxy<T extends POApproverSetting$approver_proxyArgs<ExtArgs> = {}>(args?: Subset<T, POApproverSetting$approver_proxyArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
-
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -17837,13 +16865,15 @@ export namespace Prisma {
    */ 
   interface POApproverSettingFieldRefs {
     readonly id: FieldRef<"POApproverSetting", 'String'>
-    readonly approver_id: FieldRef<"POApproverSetting", 'String'>
-    readonly approver_proxy_id: FieldRef<"POApproverSetting", 'String'>
     readonly label: FieldRef<"POApproverSetting", 'String'>
     readonly order: FieldRef<"POApproverSetting", 'Int'>
+    readonly approver_id: FieldRef<"POApproverSetting", 'String'>
+    readonly created_by: FieldRef<"POApproverSetting", 'String'>
+    readonly updated_by: FieldRef<"POApproverSetting", 'String'>
+    readonly deleted_by: FieldRef<"POApproverSetting", 'String'>
     readonly created_at: FieldRef<"POApproverSetting", 'DateTime'>
     readonly updated_at: FieldRef<"POApproverSetting", 'DateTime'>
-    readonly is_deleted: FieldRef<"POApproverSetting", 'Boolean'>
+    readonly deleted_at: FieldRef<"POApproverSetting", 'DateTime'>
   }
     
 
@@ -18156,22 +17186,6 @@ export namespace Prisma {
 
 
   /**
-   * POApproverSetting.approver_proxy
-   */
-  export type POApproverSetting$approver_proxyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Employee
-     */
-    select?: EmployeeSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: EmployeeInclude<ExtArgs> | null
-    where?: EmployeeWhereInput
-  }
-
-
-  /**
    * POApproverSetting without action
    */
   export type POApproverSettingDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -18209,35 +17223,41 @@ export namespace Prisma {
 
   export type RRApproverSettingMinAggregateOutputType = {
     id: string | null
-    approver_id: string | null
-    approver_proxy_id: string | null
     label: string | null
     order: number | null
+    approver_id: string | null
+    created_by: string | null
+    updated_by: string | null
+    deleted_by: string | null
     created_at: Date | null
     updated_at: Date | null
-    is_deleted: boolean | null
+    deleted_at: Date | null
   }
 
   export type RRApproverSettingMaxAggregateOutputType = {
     id: string | null
-    approver_id: string | null
-    approver_proxy_id: string | null
     label: string | null
     order: number | null
+    approver_id: string | null
+    created_by: string | null
+    updated_by: string | null
+    deleted_by: string | null
     created_at: Date | null
     updated_at: Date | null
-    is_deleted: boolean | null
+    deleted_at: Date | null
   }
 
   export type RRApproverSettingCountAggregateOutputType = {
     id: number
-    approver_id: number
-    approver_proxy_id: number
     label: number
     order: number
+    approver_id: number
+    created_by: number
+    updated_by: number
+    deleted_by: number
     created_at: number
     updated_at: number
-    is_deleted: number
+    deleted_at: number
     _all: number
   }
 
@@ -18252,35 +17272,41 @@ export namespace Prisma {
 
   export type RRApproverSettingMinAggregateInputType = {
     id?: true
-    approver_id?: true
-    approver_proxy_id?: true
     label?: true
     order?: true
+    approver_id?: true
+    created_by?: true
+    updated_by?: true
+    deleted_by?: true
     created_at?: true
     updated_at?: true
-    is_deleted?: true
+    deleted_at?: true
   }
 
   export type RRApproverSettingMaxAggregateInputType = {
     id?: true
-    approver_id?: true
-    approver_proxy_id?: true
     label?: true
     order?: true
+    approver_id?: true
+    created_by?: true
+    updated_by?: true
+    deleted_by?: true
     created_at?: true
     updated_at?: true
-    is_deleted?: true
+    deleted_at?: true
   }
 
   export type RRApproverSettingCountAggregateInputType = {
     id?: true
-    approver_id?: true
-    approver_proxy_id?: true
     label?: true
     order?: true
+    approver_id?: true
+    created_by?: true
+    updated_by?: true
+    deleted_by?: true
     created_at?: true
     updated_at?: true
-    is_deleted?: true
+    deleted_at?: true
     _all?: true
   }
 
@@ -18372,13 +17398,15 @@ export namespace Prisma {
 
   export type RRApproverSettingGroupByOutputType = {
     id: string
-    approver_id: string
-    approver_proxy_id: string | null
     label: string
     order: number
+    approver_id: string
+    created_by: string
+    updated_by: string | null
+    deleted_by: string | null
     created_at: Date
     updated_at: Date
-    is_deleted: boolean
+    deleted_at: Date | null
     _count: RRApproverSettingCountAggregateOutputType | null
     _avg: RRApproverSettingAvgAggregateOutputType | null
     _sum: RRApproverSettingSumAggregateOutputType | null
@@ -18402,31 +17430,33 @@ export namespace Prisma {
 
   export type RRApproverSettingSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    approver_id?: boolean
-    approver_proxy_id?: boolean
     label?: boolean
     order?: boolean
+    approver_id?: boolean
+    created_by?: boolean
+    updated_by?: boolean
+    deleted_by?: boolean
     created_at?: boolean
     updated_at?: boolean
-    is_deleted?: boolean
+    deleted_at?: boolean
     approver?: boolean | EmployeeDefaultArgs<ExtArgs>
-    approver_proxy?: boolean | RRApproverSetting$approver_proxyArgs<ExtArgs>
   }, ExtArgs["result"]["rRApproverSetting"]>
 
   export type RRApproverSettingSelectScalar = {
     id?: boolean
-    approver_id?: boolean
-    approver_proxy_id?: boolean
     label?: boolean
     order?: boolean
+    approver_id?: boolean
+    created_by?: boolean
+    updated_by?: boolean
+    deleted_by?: boolean
     created_at?: boolean
     updated_at?: boolean
-    is_deleted?: boolean
+    deleted_at?: boolean
   }
 
   export type RRApproverSettingInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     approver?: boolean | EmployeeDefaultArgs<ExtArgs>
-    approver_proxy?: boolean | RRApproverSetting$approver_proxyArgs<ExtArgs>
   }
 
 
@@ -18434,17 +17464,18 @@ export namespace Prisma {
     name: "RRApproverSetting"
     objects: {
       approver: Prisma.$EmployeePayload<ExtArgs>
-      approver_proxy: Prisma.$EmployeePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      approver_id: string
-      approver_proxy_id: string | null
       label: string
       order: number
+      approver_id: string
+      created_by: string
+      updated_by: string | null
+      deleted_by: string | null
       created_at: Date
       updated_at: Date
-      is_deleted: boolean
+      deleted_at: Date | null
     }, ExtArgs["result"]["rRApproverSetting"]>
     composites: {}
   }
@@ -18812,8 +17843,6 @@ export namespace Prisma {
 
     approver<T extends EmployeeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EmployeeDefaultArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
-    approver_proxy<T extends RRApproverSetting$approver_proxyArgs<ExtArgs> = {}>(args?: Subset<T, RRApproverSetting$approver_proxyArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
-
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -18843,13 +17872,15 @@ export namespace Prisma {
    */ 
   interface RRApproverSettingFieldRefs {
     readonly id: FieldRef<"RRApproverSetting", 'String'>
-    readonly approver_id: FieldRef<"RRApproverSetting", 'String'>
-    readonly approver_proxy_id: FieldRef<"RRApproverSetting", 'String'>
     readonly label: FieldRef<"RRApproverSetting", 'String'>
     readonly order: FieldRef<"RRApproverSetting", 'Int'>
+    readonly approver_id: FieldRef<"RRApproverSetting", 'String'>
+    readonly created_by: FieldRef<"RRApproverSetting", 'String'>
+    readonly updated_by: FieldRef<"RRApproverSetting", 'String'>
+    readonly deleted_by: FieldRef<"RRApproverSetting", 'String'>
     readonly created_at: FieldRef<"RRApproverSetting", 'DateTime'>
     readonly updated_at: FieldRef<"RRApproverSetting", 'DateTime'>
-    readonly is_deleted: FieldRef<"RRApproverSetting", 'Boolean'>
+    readonly deleted_at: FieldRef<"RRApproverSetting", 'DateTime'>
   }
     
 
@@ -19162,22 +18193,6 @@ export namespace Prisma {
 
 
   /**
-   * RRApproverSetting.approver_proxy
-   */
-  export type RRApproverSetting$approver_proxyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Employee
-     */
-    select?: EmployeeSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: EmployeeInclude<ExtArgs> | null
-    where?: EmployeeWhereInput
-  }
-
-
-  /**
    * RRApproverSetting without action
    */
   export type RRApproverSettingDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -19213,9 +18228,12 @@ export namespace Prisma {
     code: 'code',
     name: 'name',
     status: 'status',
+    created_by: 'created_by',
+    updated_by: 'updated_by',
+    deleted_by: 'deleted_by',
     created_at: 'created_at',
     updated_at: 'updated_at',
-    is_deleted: 'is_deleted'
+    deleted_at: 'deleted_at'
   };
 
   export type DivisionScalarFieldEnum = (typeof DivisionScalarFieldEnum)[keyof typeof DivisionScalarFieldEnum]
@@ -19226,9 +18244,12 @@ export namespace Prisma {
     code: 'code',
     name: 'name',
     status: 'status',
+    created_by: 'created_by',
+    updated_by: 'updated_by',
+    deleted_by: 'deleted_by',
     created_at: 'created_at',
     updated_at: 'updated_at',
-    is_deleted: 'is_deleted'
+    deleted_at: 'deleted_at'
   };
 
   export type DepartmentScalarFieldEnum = (typeof DepartmentScalarFieldEnum)[keyof typeof DepartmentScalarFieldEnum]
@@ -19239,9 +18260,12 @@ export namespace Prisma {
     firstname: 'firstname',
     middlename: 'middlename',
     lastname: 'lastname',
+    created_by: 'created_by',
+    updated_by: 'updated_by',
+    deleted_by: 'deleted_by',
     created_at: 'created_at',
     updated_at: 'updated_at',
-    is_deleted: 'is_deleted'
+    deleted_at: 'deleted_at'
   };
 
   export type EmployeeScalarFieldEnum = (typeof EmployeeScalarFieldEnum)[keyof typeof EmployeeScalarFieldEnum]
@@ -19250,9 +18274,12 @@ export namespace Prisma {
   export const ClassificationScalarFieldEnum: {
     id: 'id',
     name: 'name',
+    created_by: 'created_by',
+    updated_by: 'updated_by',
+    deleted_by: 'deleted_by',
     created_at: 'created_at',
     updated_at: 'updated_at',
-    is_deleted: 'is_deleted'
+    deleted_at: 'deleted_at'
   };
 
   export type ClassificationScalarFieldEnum = (typeof ClassificationScalarFieldEnum)[keyof typeof ClassificationScalarFieldEnum]
@@ -19264,9 +18291,12 @@ export namespace Prisma {
     username: 'username',
     password: 'password',
     status: 'status',
+    created_by: 'created_by',
+    updated_by: 'updated_by',
+    deleted_by: 'deleted_by',
     created_at: 'created_at',
     updated_at: 'updated_at',
-    is_deleted: 'is_deleted'
+    deleted_at: 'deleted_at'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -19276,32 +18306,24 @@ export namespace Prisma {
     id: 'id',
     user_id: 'user_id',
     employee_id: 'employee_id',
+    created_by: 'created_by',
+    updated_by: 'updated_by',
     created_at: 'created_at',
-    updated_at: 'updated_at',
-    is_deleted: 'is_deleted'
+    updated_at: 'updated_at'
   };
 
   export type UserEmployeeScalarFieldEnum = (typeof UserEmployeeScalarFieldEnum)[keyof typeof UserEmployeeScalarFieldEnum]
 
 
-  export const UserPermissionScalarFieldEnum: {
-    id: 'id',
-    created_at: 'created_at',
-    updated_at: 'updated_at',
-    is_deleted: 'is_deleted',
-    user_id: 'user_id',
-    submodule_id: 'submodule_id'
-  };
-
-  export type UserPermissionScalarFieldEnum = (typeof UserPermissionScalarFieldEnum)[keyof typeof UserPermissionScalarFieldEnum]
-
-
   export const ServiceScalarFieldEnum: {
     id: 'id',
     name: 'name',
+    created_by: 'created_by',
+    updated_by: 'updated_by',
+    deleted_by: 'deleted_by',
     created_at: 'created_at',
     updated_at: 'updated_at',
-    is_deleted: 'is_deleted'
+    deleted_at: 'deleted_at'
   };
 
   export type ServiceScalarFieldEnum = (typeof ServiceScalarFieldEnum)[keyof typeof ServiceScalarFieldEnum]
@@ -19310,9 +18332,12 @@ export namespace Prisma {
   export const FeatureScalarFieldEnum: {
     id: 'id',
     name: 'name',
+    created_by: 'created_by',
+    updated_by: 'updated_by',
+    deleted_by: 'deleted_by',
     created_at: 'created_at',
     updated_at: 'updated_at',
-    is_deleted: 'is_deleted',
+    deleted_at: 'deleted_at',
     service_id: 'service_id'
   };
 
@@ -19322,9 +18347,12 @@ export namespace Prisma {
   export const ModuleScalarFieldEnum: {
     id: 'id',
     name: 'name',
+    created_by: 'created_by',
+    updated_by: 'updated_by',
+    deleted_by: 'deleted_by',
     created_at: 'created_at',
     updated_at: 'updated_at',
-    is_deleted: 'is_deleted',
+    deleted_at: 'deleted_at',
     feature_id: 'feature_id'
   };
 
@@ -19348,10 +18376,12 @@ export namespace Prisma {
     label: 'label',
     order: 'order',
     approver_id: 'approver_id',
-    approver_proxy_id: 'approver_proxy_id',
+    created_by: 'created_by',
+    updated_by: 'updated_by',
+    deleted_by: 'deleted_by',
     created_at: 'created_at',
     updated_at: 'updated_at',
-    is_deleted: 'is_deleted'
+    deleted_at: 'deleted_at'
   };
 
   export type JOApproverSettingScalarFieldEnum = (typeof JOApproverSettingScalarFieldEnum)[keyof typeof JOApproverSettingScalarFieldEnum]
@@ -19359,13 +18389,15 @@ export namespace Prisma {
 
   export const RVApproverSettingScalarFieldEnum: {
     id: 'id',
-    approver_id: 'approver_id',
-    approver_proxy_id: 'approver_proxy_id',
     label: 'label',
     order: 'order',
+    approver_id: 'approver_id',
+    created_by: 'created_by',
+    updated_by: 'updated_by',
+    deleted_by: 'deleted_by',
     created_at: 'created_at',
     updated_at: 'updated_at',
-    is_deleted: 'is_deleted'
+    deleted_at: 'deleted_at'
   };
 
   export type RVApproverSettingScalarFieldEnum = (typeof RVApproverSettingScalarFieldEnum)[keyof typeof RVApproverSettingScalarFieldEnum]
@@ -19373,13 +18405,15 @@ export namespace Prisma {
 
   export const SPRApproverSettingScalarFieldEnum: {
     id: 'id',
-    approver_id: 'approver_id',
-    approver_proxy_id: 'approver_proxy_id',
     label: 'label',
     order: 'order',
+    approver_id: 'approver_id',
+    created_by: 'created_by',
+    updated_by: 'updated_by',
+    deleted_by: 'deleted_by',
     created_at: 'created_at',
     updated_at: 'updated_at',
-    is_deleted: 'is_deleted'
+    deleted_at: 'deleted_at'
   };
 
   export type SPRApproverSettingScalarFieldEnum = (typeof SPRApproverSettingScalarFieldEnum)[keyof typeof SPRApproverSettingScalarFieldEnum]
@@ -19387,13 +18421,15 @@ export namespace Prisma {
 
   export const MEQSApproverSettingScalarFieldEnum: {
     id: 'id',
-    approver_id: 'approver_id',
-    approver_proxy_id: 'approver_proxy_id',
     label: 'label',
     order: 'order',
+    approver_id: 'approver_id',
+    created_by: 'created_by',
+    updated_by: 'updated_by',
+    deleted_by: 'deleted_by',
     created_at: 'created_at',
     updated_at: 'updated_at',
-    is_deleted: 'is_deleted'
+    deleted_at: 'deleted_at'
   };
 
   export type MEQSApproverSettingScalarFieldEnum = (typeof MEQSApproverSettingScalarFieldEnum)[keyof typeof MEQSApproverSettingScalarFieldEnum]
@@ -19401,13 +18437,15 @@ export namespace Prisma {
 
   export const POApproverSettingScalarFieldEnum: {
     id: 'id',
-    approver_id: 'approver_id',
-    approver_proxy_id: 'approver_proxy_id',
     label: 'label',
     order: 'order',
+    approver_id: 'approver_id',
+    created_by: 'created_by',
+    updated_by: 'updated_by',
+    deleted_by: 'deleted_by',
     created_at: 'created_at',
     updated_at: 'updated_at',
-    is_deleted: 'is_deleted'
+    deleted_at: 'deleted_at'
   };
 
   export type POApproverSettingScalarFieldEnum = (typeof POApproverSettingScalarFieldEnum)[keyof typeof POApproverSettingScalarFieldEnum]
@@ -19415,13 +18453,15 @@ export namespace Prisma {
 
   export const RRApproverSettingScalarFieldEnum: {
     id: 'id',
-    approver_id: 'approver_id',
-    approver_proxy_id: 'approver_proxy_id',
     label: 'label',
     order: 'order',
+    approver_id: 'approver_id',
+    created_by: 'created_by',
+    updated_by: 'updated_by',
+    deleted_by: 'deleted_by',
     created_at: 'created_at',
     updated_at: 'updated_at',
-    is_deleted: 'is_deleted'
+    deleted_at: 'deleted_at'
   };
 
   export type RRApproverSettingScalarFieldEnum = (typeof RRApproverSettingScalarFieldEnum)[keyof typeof RRApproverSettingScalarFieldEnum]
@@ -19499,13 +18539,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Boolean'
-   */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
-    
-
-
-  /**
    * Reference to a field of type 'Role'
    */
   export type EnumRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Role'>
@@ -19516,6 +18549,13 @@ export namespace Prisma {
    * Reference to a field of type 'Role[]'
    */
   export type ListEnumRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Role[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -19545,9 +18585,12 @@ export namespace Prisma {
     code?: StringFilter<"Division"> | string
     name?: StringFilter<"Division"> | string
     status?: IntFilter<"Division"> | number
+    created_by?: StringFilter<"Division"> | string
+    updated_by?: StringNullableFilter<"Division"> | string | null
+    deleted_by?: StringNullableFilter<"Division"> | string | null
     created_at?: DateTimeFilter<"Division"> | Date | string
     updated_at?: DateTimeFilter<"Division"> | Date | string
-    is_deleted?: BoolFilter<"Division"> | boolean
+    deleted_at?: DateTimeNullableFilter<"Division"> | Date | string | null
     department?: XOR<DepartmentRelationFilter, DepartmentWhereInput>
   }
 
@@ -19557,9 +18600,12 @@ export namespace Prisma {
     code?: SortOrder
     name?: SortOrder
     status?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrderInput | SortOrder
+    deleted_by?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrderInput | SortOrder
     department?: DepartmentOrderByWithRelationInput
   }
 
@@ -19572,9 +18618,12 @@ export namespace Prisma {
     department_id?: StringFilter<"Division"> | string
     name?: StringFilter<"Division"> | string
     status?: IntFilter<"Division"> | number
+    created_by?: StringFilter<"Division"> | string
+    updated_by?: StringNullableFilter<"Division"> | string | null
+    deleted_by?: StringNullableFilter<"Division"> | string | null
     created_at?: DateTimeFilter<"Division"> | Date | string
     updated_at?: DateTimeFilter<"Division"> | Date | string
-    is_deleted?: BoolFilter<"Division"> | boolean
+    deleted_at?: DateTimeNullableFilter<"Division"> | Date | string | null
     department?: XOR<DepartmentRelationFilter, DepartmentWhereInput>
   }, "id" | "code">
 
@@ -19584,9 +18633,12 @@ export namespace Prisma {
     code?: SortOrder
     name?: SortOrder
     status?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrderInput | SortOrder
+    deleted_by?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrderInput | SortOrder
     _count?: DivisionCountOrderByAggregateInput
     _avg?: DivisionAvgOrderByAggregateInput
     _max?: DivisionMaxOrderByAggregateInput
@@ -19603,9 +18655,12 @@ export namespace Prisma {
     code?: StringWithAggregatesFilter<"Division"> | string
     name?: StringWithAggregatesFilter<"Division"> | string
     status?: IntWithAggregatesFilter<"Division"> | number
+    created_by?: StringWithAggregatesFilter<"Division"> | string
+    updated_by?: StringNullableWithAggregatesFilter<"Division"> | string | null
+    deleted_by?: StringNullableWithAggregatesFilter<"Division"> | string | null
     created_at?: DateTimeWithAggregatesFilter<"Division"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"Division"> | Date | string
-    is_deleted?: BoolWithAggregatesFilter<"Division"> | boolean
+    deleted_at?: DateTimeNullableWithAggregatesFilter<"Division"> | Date | string | null
   }
 
   export type DepartmentWhereInput = {
@@ -19616,9 +18671,12 @@ export namespace Prisma {
     code?: StringFilter<"Department"> | string
     name?: StringFilter<"Department"> | string
     status?: IntFilter<"Department"> | number
+    created_by?: StringFilter<"Department"> | string
+    updated_by?: StringNullableFilter<"Department"> | string | null
+    deleted_by?: StringNullableFilter<"Department"> | string | null
     created_at?: DateTimeFilter<"Department"> | Date | string
     updated_at?: DateTimeFilter<"Department"> | Date | string
-    is_deleted?: BoolFilter<"Department"> | boolean
+    deleted_at?: DateTimeNullableFilter<"Department"> | Date | string | null
     Division?: DivisionListRelationFilter
   }
 
@@ -19627,9 +18685,12 @@ export namespace Prisma {
     code?: SortOrder
     name?: SortOrder
     status?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrderInput | SortOrder
+    deleted_by?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrderInput | SortOrder
     Division?: DivisionOrderByRelationAggregateInput
   }
 
@@ -19641,9 +18702,12 @@ export namespace Prisma {
     NOT?: DepartmentWhereInput | DepartmentWhereInput[]
     name?: StringFilter<"Department"> | string
     status?: IntFilter<"Department"> | number
+    created_by?: StringFilter<"Department"> | string
+    updated_by?: StringNullableFilter<"Department"> | string | null
+    deleted_by?: StringNullableFilter<"Department"> | string | null
     created_at?: DateTimeFilter<"Department"> | Date | string
     updated_at?: DateTimeFilter<"Department"> | Date | string
-    is_deleted?: BoolFilter<"Department"> | boolean
+    deleted_at?: DateTimeNullableFilter<"Department"> | Date | string | null
     Division?: DivisionListRelationFilter
   }, "id" | "code">
 
@@ -19652,9 +18716,12 @@ export namespace Prisma {
     code?: SortOrder
     name?: SortOrder
     status?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrderInput | SortOrder
+    deleted_by?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrderInput | SortOrder
     _count?: DepartmentCountOrderByAggregateInput
     _avg?: DepartmentAvgOrderByAggregateInput
     _max?: DepartmentMaxOrderByAggregateInput
@@ -19670,9 +18737,12 @@ export namespace Prisma {
     code?: StringWithAggregatesFilter<"Department"> | string
     name?: StringWithAggregatesFilter<"Department"> | string
     status?: IntWithAggregatesFilter<"Department"> | number
+    created_by?: StringWithAggregatesFilter<"Department"> | string
+    updated_by?: StringNullableWithAggregatesFilter<"Department"> | string | null
+    deleted_by?: StringNullableWithAggregatesFilter<"Department"> | string | null
     created_at?: DateTimeWithAggregatesFilter<"Department"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"Department"> | Date | string
-    is_deleted?: BoolWithAggregatesFilter<"Department"> | boolean
+    deleted_at?: DateTimeNullableWithAggregatesFilter<"Department"> | Date | string | null
   }
 
   export type EmployeeWhereInput = {
@@ -19683,21 +18753,18 @@ export namespace Prisma {
     firstname?: StringFilter<"Employee"> | string
     middlename?: StringNullableFilter<"Employee"> | string | null
     lastname?: StringFilter<"Employee"> | string
+    created_by?: StringFilter<"Employee"> | string
+    updated_by?: StringNullableFilter<"Employee"> | string | null
+    deleted_by?: StringNullableFilter<"Employee"> | string | null
     created_at?: DateTimeFilter<"Employee"> | Date | string
     updated_at?: DateTimeFilter<"Employee"> | Date | string
-    is_deleted?: BoolFilter<"Employee"> | boolean
+    deleted_at?: DateTimeNullableFilter<"Employee"> | Date | string | null
     jo_approver_setting?: XOR<JOApproverSettingNullableRelationFilter, JOApproverSettingWhereInput> | null
     meqs_approver_setting?: XOR<MEQSApproverSettingNullableRelationFilter, MEQSApproverSettingWhereInput> | null
     po_approver_setting?: XOR<POApproverSettingNullableRelationFilter, POApproverSettingWhereInput> | null
     rv_approver_setting?: XOR<RVApproverSettingNullableRelationFilter, RVApproverSettingWhereInput> | null
     spr_approver_setting?: XOR<SPRApproverSettingNullableRelationFilter, SPRApproverSettingWhereInput> | null
     rr_approver_setting?: XOR<RRApproverSettingNullableRelationFilter, RRApproverSettingWhereInput> | null
-    jo_approver_proxy_setting?: XOR<JOApproverSettingNullableRelationFilter, JOApproverSettingWhereInput> | null
-    meqs_approver_proxy_setting?: XOR<MEQSApproverSettingNullableRelationFilter, MEQSApproverSettingWhereInput> | null
-    po_approver_proxy_setting?: XOR<POApproverSettingNullableRelationFilter, POApproverSettingWhereInput> | null
-    rv_approver_proxy_setting?: XOR<RVApproverSettingNullableRelationFilter, RVApproverSettingWhereInput> | null
-    spr_approver_proxy_setting?: XOR<SPRApproverSettingNullableRelationFilter, SPRApproverSettingWhereInput> | null
-    rr_approver_proxy_setting?: XOR<RRApproverSettingNullableRelationFilter, RRApproverSettingWhereInput> | null
     user_employee?: XOR<UserEmployeeNullableRelationFilter, UserEmployeeWhereInput> | null
   }
 
@@ -19706,21 +18773,18 @@ export namespace Prisma {
     firstname?: SortOrder
     middlename?: SortOrderInput | SortOrder
     lastname?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrderInput | SortOrder
+    deleted_by?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrderInput | SortOrder
     jo_approver_setting?: JOApproverSettingOrderByWithRelationInput
     meqs_approver_setting?: MEQSApproverSettingOrderByWithRelationInput
     po_approver_setting?: POApproverSettingOrderByWithRelationInput
     rv_approver_setting?: RVApproverSettingOrderByWithRelationInput
     spr_approver_setting?: SPRApproverSettingOrderByWithRelationInput
     rr_approver_setting?: RRApproverSettingOrderByWithRelationInput
-    jo_approver_proxy_setting?: JOApproverSettingOrderByWithRelationInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingOrderByWithRelationInput
-    po_approver_proxy_setting?: POApproverSettingOrderByWithRelationInput
-    rv_approver_proxy_setting?: RVApproverSettingOrderByWithRelationInput
-    spr_approver_proxy_setting?: SPRApproverSettingOrderByWithRelationInput
-    rr_approver_proxy_setting?: RRApproverSettingOrderByWithRelationInput
     user_employee?: UserEmployeeOrderByWithRelationInput
   }
 
@@ -19732,21 +18796,18 @@ export namespace Prisma {
     firstname?: StringFilter<"Employee"> | string
     middlename?: StringNullableFilter<"Employee"> | string | null
     lastname?: StringFilter<"Employee"> | string
+    created_by?: StringFilter<"Employee"> | string
+    updated_by?: StringNullableFilter<"Employee"> | string | null
+    deleted_by?: StringNullableFilter<"Employee"> | string | null
     created_at?: DateTimeFilter<"Employee"> | Date | string
     updated_at?: DateTimeFilter<"Employee"> | Date | string
-    is_deleted?: BoolFilter<"Employee"> | boolean
+    deleted_at?: DateTimeNullableFilter<"Employee"> | Date | string | null
     jo_approver_setting?: XOR<JOApproverSettingNullableRelationFilter, JOApproverSettingWhereInput> | null
     meqs_approver_setting?: XOR<MEQSApproverSettingNullableRelationFilter, MEQSApproverSettingWhereInput> | null
     po_approver_setting?: XOR<POApproverSettingNullableRelationFilter, POApproverSettingWhereInput> | null
     rv_approver_setting?: XOR<RVApproverSettingNullableRelationFilter, RVApproverSettingWhereInput> | null
     spr_approver_setting?: XOR<SPRApproverSettingNullableRelationFilter, SPRApproverSettingWhereInput> | null
     rr_approver_setting?: XOR<RRApproverSettingNullableRelationFilter, RRApproverSettingWhereInput> | null
-    jo_approver_proxy_setting?: XOR<JOApproverSettingNullableRelationFilter, JOApproverSettingWhereInput> | null
-    meqs_approver_proxy_setting?: XOR<MEQSApproverSettingNullableRelationFilter, MEQSApproverSettingWhereInput> | null
-    po_approver_proxy_setting?: XOR<POApproverSettingNullableRelationFilter, POApproverSettingWhereInput> | null
-    rv_approver_proxy_setting?: XOR<RVApproverSettingNullableRelationFilter, RVApproverSettingWhereInput> | null
-    spr_approver_proxy_setting?: XOR<SPRApproverSettingNullableRelationFilter, SPRApproverSettingWhereInput> | null
-    rr_approver_proxy_setting?: XOR<RRApproverSettingNullableRelationFilter, RRApproverSettingWhereInput> | null
     user_employee?: XOR<UserEmployeeNullableRelationFilter, UserEmployeeWhereInput> | null
   }, "id">
 
@@ -19755,9 +18816,12 @@ export namespace Prisma {
     firstname?: SortOrder
     middlename?: SortOrderInput | SortOrder
     lastname?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrderInput | SortOrder
+    deleted_by?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrderInput | SortOrder
     _count?: EmployeeCountOrderByAggregateInput
     _max?: EmployeeMaxOrderByAggregateInput
     _min?: EmployeeMinOrderByAggregateInput
@@ -19771,9 +18835,12 @@ export namespace Prisma {
     firstname?: StringWithAggregatesFilter<"Employee"> | string
     middlename?: StringNullableWithAggregatesFilter<"Employee"> | string | null
     lastname?: StringWithAggregatesFilter<"Employee"> | string
+    created_by?: StringWithAggregatesFilter<"Employee"> | string
+    updated_by?: StringNullableWithAggregatesFilter<"Employee"> | string | null
+    deleted_by?: StringNullableWithAggregatesFilter<"Employee"> | string | null
     created_at?: DateTimeWithAggregatesFilter<"Employee"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"Employee"> | Date | string
-    is_deleted?: BoolWithAggregatesFilter<"Employee"> | boolean
+    deleted_at?: DateTimeNullableWithAggregatesFilter<"Employee"> | Date | string | null
   }
 
   export type ClassificationWhereInput = {
@@ -19782,17 +18849,23 @@ export namespace Prisma {
     NOT?: ClassificationWhereInput | ClassificationWhereInput[]
     id?: StringFilter<"Classification"> | string
     name?: StringFilter<"Classification"> | string
+    created_by?: StringFilter<"Classification"> | string
+    updated_by?: StringNullableFilter<"Classification"> | string | null
+    deleted_by?: StringNullableFilter<"Classification"> | string | null
     created_at?: DateTimeFilter<"Classification"> | Date | string
     updated_at?: DateTimeFilter<"Classification"> | Date | string
-    is_deleted?: BoolFilter<"Classification"> | boolean
+    deleted_at?: DateTimeNullableFilter<"Classification"> | Date | string | null
   }
 
   export type ClassificationOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrderInput | SortOrder
+    deleted_by?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrderInput | SortOrder
   }
 
   export type ClassificationWhereUniqueInput = Prisma.AtLeast<{
@@ -19801,17 +18874,23 @@ export namespace Prisma {
     OR?: ClassificationWhereInput[]
     NOT?: ClassificationWhereInput | ClassificationWhereInput[]
     name?: StringFilter<"Classification"> | string
+    created_by?: StringFilter<"Classification"> | string
+    updated_by?: StringNullableFilter<"Classification"> | string | null
+    deleted_by?: StringNullableFilter<"Classification"> | string | null
     created_at?: DateTimeFilter<"Classification"> | Date | string
     updated_at?: DateTimeFilter<"Classification"> | Date | string
-    is_deleted?: BoolFilter<"Classification"> | boolean
+    deleted_at?: DateTimeNullableFilter<"Classification"> | Date | string | null
   }, "id">
 
   export type ClassificationOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrderInput | SortOrder
+    deleted_by?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrderInput | SortOrder
     _count?: ClassificationCountOrderByAggregateInput
     _max?: ClassificationMaxOrderByAggregateInput
     _min?: ClassificationMinOrderByAggregateInput
@@ -19823,9 +18902,12 @@ export namespace Prisma {
     NOT?: ClassificationScalarWhereWithAggregatesInput | ClassificationScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Classification"> | string
     name?: StringWithAggregatesFilter<"Classification"> | string
+    created_by?: StringWithAggregatesFilter<"Classification"> | string
+    updated_by?: StringNullableWithAggregatesFilter<"Classification"> | string | null
+    deleted_by?: StringNullableWithAggregatesFilter<"Classification"> | string | null
     created_at?: DateTimeWithAggregatesFilter<"Classification"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"Classification"> | Date | string
-    is_deleted?: BoolWithAggregatesFilter<"Classification"> | boolean
+    deleted_at?: DateTimeNullableWithAggregatesFilter<"Classification"> | Date | string | null
   }
 
   export type UserWhereInput = {
@@ -19837,10 +18919,12 @@ export namespace Prisma {
     username?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
     status?: IntFilter<"User"> | number
+    created_by?: StringFilter<"User"> | string
+    updated_by?: StringNullableFilter<"User"> | string | null
+    deleted_by?: StringNullableFilter<"User"> | string | null
     created_at?: DateTimeFilter<"User"> | Date | string
     updated_at?: DateTimeFilter<"User"> | Date | string
-    is_deleted?: BoolFilter<"User"> | boolean
-    user_permissions?: UserPermissionListRelationFilter
+    deleted_at?: DateTimeNullableFilter<"User"> | Date | string | null
     user_employee?: XOR<UserEmployeeNullableRelationFilter, UserEmployeeWhereInput> | null
   }
 
@@ -19850,10 +18934,12 @@ export namespace Prisma {
     username?: SortOrder
     password?: SortOrder
     status?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrderInput | SortOrder
+    deleted_by?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
-    user_permissions?: UserPermissionOrderByRelationAggregateInput
+    deleted_at?: SortOrderInput | SortOrder
     user_employee?: UserEmployeeOrderByWithRelationInput
   }
 
@@ -19866,10 +18952,12 @@ export namespace Prisma {
     role?: EnumRoleFilter<"User"> | $Enums.Role
     password?: StringFilter<"User"> | string
     status?: IntFilter<"User"> | number
+    created_by?: StringFilter<"User"> | string
+    updated_by?: StringNullableFilter<"User"> | string | null
+    deleted_by?: StringNullableFilter<"User"> | string | null
     created_at?: DateTimeFilter<"User"> | Date | string
     updated_at?: DateTimeFilter<"User"> | Date | string
-    is_deleted?: BoolFilter<"User"> | boolean
-    user_permissions?: UserPermissionListRelationFilter
+    deleted_at?: DateTimeNullableFilter<"User"> | Date | string | null
     user_employee?: XOR<UserEmployeeNullableRelationFilter, UserEmployeeWhereInput> | null
   }, "id" | "username">
 
@@ -19879,9 +18967,12 @@ export namespace Prisma {
     username?: SortOrder
     password?: SortOrder
     status?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrderInput | SortOrder
+    deleted_by?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrderInput | SortOrder
     _count?: UserCountOrderByAggregateInput
     _avg?: UserAvgOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
@@ -19898,9 +18989,12 @@ export namespace Prisma {
     username?: StringWithAggregatesFilter<"User"> | string
     password?: StringWithAggregatesFilter<"User"> | string
     status?: IntWithAggregatesFilter<"User"> | number
+    created_by?: StringWithAggregatesFilter<"User"> | string
+    updated_by?: StringNullableWithAggregatesFilter<"User"> | string | null
+    deleted_by?: StringNullableWithAggregatesFilter<"User"> | string | null
     created_at?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"User"> | Date | string
-    is_deleted?: BoolWithAggregatesFilter<"User"> | boolean
+    deleted_at?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   }
 
   export type UserEmployeeWhereInput = {
@@ -19910,9 +19004,10 @@ export namespace Prisma {
     id?: StringFilter<"UserEmployee"> | string
     user_id?: StringFilter<"UserEmployee"> | string
     employee_id?: StringFilter<"UserEmployee"> | string
+    created_by?: StringFilter<"UserEmployee"> | string
+    updated_by?: StringNullableFilter<"UserEmployee"> | string | null
     created_at?: DateTimeFilter<"UserEmployee"> | Date | string
     updated_at?: DateTimeFilter<"UserEmployee"> | Date | string
-    is_deleted?: BoolFilter<"UserEmployee"> | boolean
     user?: XOR<UserRelationFilter, UserWhereInput>
     employee?: XOR<EmployeeRelationFilter, EmployeeWhereInput>
   }
@@ -19921,9 +19016,10 @@ export namespace Prisma {
     id?: SortOrder
     user_id?: SortOrder
     employee_id?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
     user?: UserOrderByWithRelationInput
     employee?: EmployeeOrderByWithRelationInput
   }
@@ -19935,9 +19031,10 @@ export namespace Prisma {
     AND?: UserEmployeeWhereInput | UserEmployeeWhereInput[]
     OR?: UserEmployeeWhereInput[]
     NOT?: UserEmployeeWhereInput | UserEmployeeWhereInput[]
+    created_by?: StringFilter<"UserEmployee"> | string
+    updated_by?: StringNullableFilter<"UserEmployee"> | string | null
     created_at?: DateTimeFilter<"UserEmployee"> | Date | string
     updated_at?: DateTimeFilter<"UserEmployee"> | Date | string
-    is_deleted?: BoolFilter<"UserEmployee"> | boolean
     user?: XOR<UserRelationFilter, UserWhereInput>
     employee?: XOR<EmployeeRelationFilter, EmployeeWhereInput>
   }, "id" | "user_id" | "employee_id">
@@ -19946,9 +19043,10 @@ export namespace Prisma {
     id?: SortOrder
     user_id?: SortOrder
     employee_id?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
     _count?: UserEmployeeCountOrderByAggregateInput
     _max?: UserEmployeeMaxOrderByAggregateInput
     _min?: UserEmployeeMinOrderByAggregateInput
@@ -19961,72 +19059,10 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"UserEmployee"> | string
     user_id?: StringWithAggregatesFilter<"UserEmployee"> | string
     employee_id?: StringWithAggregatesFilter<"UserEmployee"> | string
+    created_by?: StringWithAggregatesFilter<"UserEmployee"> | string
+    updated_by?: StringNullableWithAggregatesFilter<"UserEmployee"> | string | null
     created_at?: DateTimeWithAggregatesFilter<"UserEmployee"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"UserEmployee"> | Date | string
-    is_deleted?: BoolWithAggregatesFilter<"UserEmployee"> | boolean
-  }
-
-  export type UserPermissionWhereInput = {
-    AND?: UserPermissionWhereInput | UserPermissionWhereInput[]
-    OR?: UserPermissionWhereInput[]
-    NOT?: UserPermissionWhereInput | UserPermissionWhereInput[]
-    id?: StringFilter<"UserPermission"> | string
-    created_at?: DateTimeFilter<"UserPermission"> | Date | string
-    updated_at?: DateTimeFilter<"UserPermission"> | Date | string
-    is_deleted?: BoolFilter<"UserPermission"> | boolean
-    user_id?: StringFilter<"UserPermission"> | string
-    submodule_id?: StringFilter<"UserPermission"> | string
-    user?: XOR<UserRelationFilter, UserWhereInput>
-    submodule?: XOR<SubModuleRelationFilter, SubModuleWhereInput>
-  }
-
-  export type UserPermissionOrderByWithRelationInput = {
-    id?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-    is_deleted?: SortOrder
-    user_id?: SortOrder
-    submodule_id?: SortOrder
-    user?: UserOrderByWithRelationInput
-    submodule?: SubModuleOrderByWithRelationInput
-  }
-
-  export type UserPermissionWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: UserPermissionWhereInput | UserPermissionWhereInput[]
-    OR?: UserPermissionWhereInput[]
-    NOT?: UserPermissionWhereInput | UserPermissionWhereInput[]
-    created_at?: DateTimeFilter<"UserPermission"> | Date | string
-    updated_at?: DateTimeFilter<"UserPermission"> | Date | string
-    is_deleted?: BoolFilter<"UserPermission"> | boolean
-    user_id?: StringFilter<"UserPermission"> | string
-    submodule_id?: StringFilter<"UserPermission"> | string
-    user?: XOR<UserRelationFilter, UserWhereInput>
-    submodule?: XOR<SubModuleRelationFilter, SubModuleWhereInput>
-  }, "id">
-
-  export type UserPermissionOrderByWithAggregationInput = {
-    id?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-    is_deleted?: SortOrder
-    user_id?: SortOrder
-    submodule_id?: SortOrder
-    _count?: UserPermissionCountOrderByAggregateInput
-    _max?: UserPermissionMaxOrderByAggregateInput
-    _min?: UserPermissionMinOrderByAggregateInput
-  }
-
-  export type UserPermissionScalarWhereWithAggregatesInput = {
-    AND?: UserPermissionScalarWhereWithAggregatesInput | UserPermissionScalarWhereWithAggregatesInput[]
-    OR?: UserPermissionScalarWhereWithAggregatesInput[]
-    NOT?: UserPermissionScalarWhereWithAggregatesInput | UserPermissionScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"UserPermission"> | string
-    created_at?: DateTimeWithAggregatesFilter<"UserPermission"> | Date | string
-    updated_at?: DateTimeWithAggregatesFilter<"UserPermission"> | Date | string
-    is_deleted?: BoolWithAggregatesFilter<"UserPermission"> | boolean
-    user_id?: StringWithAggregatesFilter<"UserPermission"> | string
-    submodule_id?: StringWithAggregatesFilter<"UserPermission"> | string
   }
 
   export type ServiceWhereInput = {
@@ -20035,18 +19071,24 @@ export namespace Prisma {
     NOT?: ServiceWhereInput | ServiceWhereInput[]
     id?: StringFilter<"Service"> | string
     name?: StringFilter<"Service"> | string
+    created_by?: StringFilter<"Service"> | string
+    updated_by?: StringNullableFilter<"Service"> | string | null
+    deleted_by?: StringNullableFilter<"Service"> | string | null
     created_at?: DateTimeFilter<"Service"> | Date | string
     updated_at?: DateTimeFilter<"Service"> | Date | string
-    is_deleted?: BoolFilter<"Service"> | boolean
+    deleted_at?: DateTimeNullableFilter<"Service"> | Date | string | null
     features?: FeatureListRelationFilter
   }
 
   export type ServiceOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrderInput | SortOrder
+    deleted_by?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrderInput | SortOrder
     features?: FeatureOrderByRelationAggregateInput
   }
 
@@ -20056,18 +19098,24 @@ export namespace Prisma {
     OR?: ServiceWhereInput[]
     NOT?: ServiceWhereInput | ServiceWhereInput[]
     name?: StringFilter<"Service"> | string
+    created_by?: StringFilter<"Service"> | string
+    updated_by?: StringNullableFilter<"Service"> | string | null
+    deleted_by?: StringNullableFilter<"Service"> | string | null
     created_at?: DateTimeFilter<"Service"> | Date | string
     updated_at?: DateTimeFilter<"Service"> | Date | string
-    is_deleted?: BoolFilter<"Service"> | boolean
+    deleted_at?: DateTimeNullableFilter<"Service"> | Date | string | null
     features?: FeatureListRelationFilter
   }, "id">
 
   export type ServiceOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrderInput | SortOrder
+    deleted_by?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrderInput | SortOrder
     _count?: ServiceCountOrderByAggregateInput
     _max?: ServiceMaxOrderByAggregateInput
     _min?: ServiceMinOrderByAggregateInput
@@ -20079,9 +19127,12 @@ export namespace Prisma {
     NOT?: ServiceScalarWhereWithAggregatesInput | ServiceScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Service"> | string
     name?: StringWithAggregatesFilter<"Service"> | string
+    created_by?: StringWithAggregatesFilter<"Service"> | string
+    updated_by?: StringNullableWithAggregatesFilter<"Service"> | string | null
+    deleted_by?: StringNullableWithAggregatesFilter<"Service"> | string | null
     created_at?: DateTimeWithAggregatesFilter<"Service"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"Service"> | Date | string
-    is_deleted?: BoolWithAggregatesFilter<"Service"> | boolean
+    deleted_at?: DateTimeNullableWithAggregatesFilter<"Service"> | Date | string | null
   }
 
   export type FeatureWhereInput = {
@@ -20090,9 +19141,12 @@ export namespace Prisma {
     NOT?: FeatureWhereInput | FeatureWhereInput[]
     id?: StringFilter<"Feature"> | string
     name?: StringFilter<"Feature"> | string
+    created_by?: StringFilter<"Feature"> | string
+    updated_by?: StringNullableFilter<"Feature"> | string | null
+    deleted_by?: StringNullableFilter<"Feature"> | string | null
     created_at?: DateTimeFilter<"Feature"> | Date | string
     updated_at?: DateTimeFilter<"Feature"> | Date | string
-    is_deleted?: BoolFilter<"Feature"> | boolean
+    deleted_at?: DateTimeNullableFilter<"Feature"> | Date | string | null
     service_id?: StringFilter<"Feature"> | string
     service?: XOR<ServiceRelationFilter, ServiceWhereInput>
     modules?: ModuleListRelationFilter
@@ -20101,9 +19155,12 @@ export namespace Prisma {
   export type FeatureOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrderInput | SortOrder
+    deleted_by?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrderInput | SortOrder
     service_id?: SortOrder
     service?: ServiceOrderByWithRelationInput
     modules?: ModuleOrderByRelationAggregateInput
@@ -20115,9 +19172,12 @@ export namespace Prisma {
     OR?: FeatureWhereInput[]
     NOT?: FeatureWhereInput | FeatureWhereInput[]
     name?: StringFilter<"Feature"> | string
+    created_by?: StringFilter<"Feature"> | string
+    updated_by?: StringNullableFilter<"Feature"> | string | null
+    deleted_by?: StringNullableFilter<"Feature"> | string | null
     created_at?: DateTimeFilter<"Feature"> | Date | string
     updated_at?: DateTimeFilter<"Feature"> | Date | string
-    is_deleted?: BoolFilter<"Feature"> | boolean
+    deleted_at?: DateTimeNullableFilter<"Feature"> | Date | string | null
     service_id?: StringFilter<"Feature"> | string
     service?: XOR<ServiceRelationFilter, ServiceWhereInput>
     modules?: ModuleListRelationFilter
@@ -20126,9 +19186,12 @@ export namespace Prisma {
   export type FeatureOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrderInput | SortOrder
+    deleted_by?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrderInput | SortOrder
     service_id?: SortOrder
     _count?: FeatureCountOrderByAggregateInput
     _max?: FeatureMaxOrderByAggregateInput
@@ -20141,9 +19204,12 @@ export namespace Prisma {
     NOT?: FeatureScalarWhereWithAggregatesInput | FeatureScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Feature"> | string
     name?: StringWithAggregatesFilter<"Feature"> | string
+    created_by?: StringWithAggregatesFilter<"Feature"> | string
+    updated_by?: StringNullableWithAggregatesFilter<"Feature"> | string | null
+    deleted_by?: StringNullableWithAggregatesFilter<"Feature"> | string | null
     created_at?: DateTimeWithAggregatesFilter<"Feature"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"Feature"> | Date | string
-    is_deleted?: BoolWithAggregatesFilter<"Feature"> | boolean
+    deleted_at?: DateTimeNullableWithAggregatesFilter<"Feature"> | Date | string | null
     service_id?: StringWithAggregatesFilter<"Feature"> | string
   }
 
@@ -20153,9 +19219,12 @@ export namespace Prisma {
     NOT?: ModuleWhereInput | ModuleWhereInput[]
     id?: StringFilter<"Module"> | string
     name?: StringFilter<"Module"> | string
+    created_by?: StringFilter<"Module"> | string
+    updated_by?: StringNullableFilter<"Module"> | string | null
+    deleted_by?: StringNullableFilter<"Module"> | string | null
     created_at?: DateTimeFilter<"Module"> | Date | string
     updated_at?: DateTimeFilter<"Module"> | Date | string
-    is_deleted?: BoolFilter<"Module"> | boolean
+    deleted_at?: DateTimeNullableFilter<"Module"> | Date | string | null
     feature_id?: StringFilter<"Module"> | string
     feature?: XOR<FeatureRelationFilter, FeatureWhereInput>
     submodules?: SubModuleListRelationFilter
@@ -20164,9 +19233,12 @@ export namespace Prisma {
   export type ModuleOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrderInput | SortOrder
+    deleted_by?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrderInput | SortOrder
     feature_id?: SortOrder
     feature?: FeatureOrderByWithRelationInput
     submodules?: SubModuleOrderByRelationAggregateInput
@@ -20178,9 +19250,12 @@ export namespace Prisma {
     OR?: ModuleWhereInput[]
     NOT?: ModuleWhereInput | ModuleWhereInput[]
     name?: StringFilter<"Module"> | string
+    created_by?: StringFilter<"Module"> | string
+    updated_by?: StringNullableFilter<"Module"> | string | null
+    deleted_by?: StringNullableFilter<"Module"> | string | null
     created_at?: DateTimeFilter<"Module"> | Date | string
     updated_at?: DateTimeFilter<"Module"> | Date | string
-    is_deleted?: BoolFilter<"Module"> | boolean
+    deleted_at?: DateTimeNullableFilter<"Module"> | Date | string | null
     feature_id?: StringFilter<"Module"> | string
     feature?: XOR<FeatureRelationFilter, FeatureWhereInput>
     submodules?: SubModuleListRelationFilter
@@ -20189,9 +19264,12 @@ export namespace Prisma {
   export type ModuleOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrderInput | SortOrder
+    deleted_by?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrderInput | SortOrder
     feature_id?: SortOrder
     _count?: ModuleCountOrderByAggregateInput
     _max?: ModuleMaxOrderByAggregateInput
@@ -20204,9 +19282,12 @@ export namespace Prisma {
     NOT?: ModuleScalarWhereWithAggregatesInput | ModuleScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Module"> | string
     name?: StringWithAggregatesFilter<"Module"> | string
+    created_by?: StringWithAggregatesFilter<"Module"> | string
+    updated_by?: StringNullableWithAggregatesFilter<"Module"> | string | null
+    deleted_by?: StringNullableWithAggregatesFilter<"Module"> | string | null
     created_at?: DateTimeWithAggregatesFilter<"Module"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"Module"> | Date | string
-    is_deleted?: BoolWithAggregatesFilter<"Module"> | boolean
+    deleted_at?: DateTimeNullableWithAggregatesFilter<"Module"> | Date | string | null
     feature_id?: StringWithAggregatesFilter<"Module"> | string
   }
 
@@ -20221,7 +19302,6 @@ export namespace Prisma {
     is_deleted?: BoolFilter<"SubModule"> | boolean
     module_id?: StringFilter<"SubModule"> | string
     module?: XOR<ModuleRelationFilter, ModuleWhereInput>
-    user_permissions?: UserPermissionListRelationFilter
   }
 
   export type SubModuleOrderByWithRelationInput = {
@@ -20232,7 +19312,6 @@ export namespace Prisma {
     is_deleted?: SortOrder
     module_id?: SortOrder
     module?: ModuleOrderByWithRelationInput
-    user_permissions?: UserPermissionOrderByRelationAggregateInput
   }
 
   export type SubModuleWhereUniqueInput = Prisma.AtLeast<{
@@ -20246,7 +19325,6 @@ export namespace Prisma {
     is_deleted?: BoolFilter<"SubModule"> | boolean
     module_id?: StringFilter<"SubModule"> | string
     module?: XOR<ModuleRelationFilter, ModuleWhereInput>
-    user_permissions?: UserPermissionListRelationFilter
   }, "id">
 
   export type SubModuleOrderByWithAggregationInput = {
@@ -20281,12 +19359,13 @@ export namespace Prisma {
     label?: StringFilter<"JOApproverSetting"> | string
     order?: IntFilter<"JOApproverSetting"> | number
     approver_id?: StringFilter<"JOApproverSetting"> | string
-    approver_proxy_id?: StringNullableFilter<"JOApproverSetting"> | string | null
+    created_by?: StringFilter<"JOApproverSetting"> | string
+    updated_by?: StringNullableFilter<"JOApproverSetting"> | string | null
+    deleted_by?: StringNullableFilter<"JOApproverSetting"> | string | null
     created_at?: DateTimeFilter<"JOApproverSetting"> | Date | string
     updated_at?: DateTimeFilter<"JOApproverSetting"> | Date | string
-    is_deleted?: BoolFilter<"JOApproverSetting"> | boolean
+    deleted_at?: DateTimeNullableFilter<"JOApproverSetting"> | Date | string | null
     approver?: XOR<EmployeeRelationFilter, EmployeeWhereInput>
-    approver_proxy?: XOR<EmployeeNullableRelationFilter, EmployeeWhereInput> | null
   }
 
   export type JOApproverSettingOrderByWithRelationInput = {
@@ -20294,39 +19373,43 @@ export namespace Prisma {
     label?: SortOrder
     order?: SortOrder
     approver_id?: SortOrder
-    approver_proxy_id?: SortOrderInput | SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrderInput | SortOrder
+    deleted_by?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrderInput | SortOrder
     approver?: EmployeeOrderByWithRelationInput
-    approver_proxy?: EmployeeOrderByWithRelationInput
   }
 
   export type JOApproverSettingWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     order?: number
     approver_id?: string
-    approver_proxy_id?: string
     AND?: JOApproverSettingWhereInput | JOApproverSettingWhereInput[]
     OR?: JOApproverSettingWhereInput[]
     NOT?: JOApproverSettingWhereInput | JOApproverSettingWhereInput[]
     label?: StringFilter<"JOApproverSetting"> | string
+    created_by?: StringFilter<"JOApproverSetting"> | string
+    updated_by?: StringNullableFilter<"JOApproverSetting"> | string | null
+    deleted_by?: StringNullableFilter<"JOApproverSetting"> | string | null
     created_at?: DateTimeFilter<"JOApproverSetting"> | Date | string
     updated_at?: DateTimeFilter<"JOApproverSetting"> | Date | string
-    is_deleted?: BoolFilter<"JOApproverSetting"> | boolean
+    deleted_at?: DateTimeNullableFilter<"JOApproverSetting"> | Date | string | null
     approver?: XOR<EmployeeRelationFilter, EmployeeWhereInput>
-    approver_proxy?: XOR<EmployeeNullableRelationFilter, EmployeeWhereInput> | null
-  }, "id" | "order" | "approver_id" | "approver_proxy_id">
+  }, "id" | "order" | "approver_id">
 
   export type JOApproverSettingOrderByWithAggregationInput = {
     id?: SortOrder
     label?: SortOrder
     order?: SortOrder
     approver_id?: SortOrder
-    approver_proxy_id?: SortOrderInput | SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrderInput | SortOrder
+    deleted_by?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrderInput | SortOrder
     _count?: JOApproverSettingCountOrderByAggregateInput
     _avg?: JOApproverSettingAvgOrderByAggregateInput
     _max?: JOApproverSettingMaxOrderByAggregateInput
@@ -20342,10 +19425,12 @@ export namespace Prisma {
     label?: StringWithAggregatesFilter<"JOApproverSetting"> | string
     order?: IntWithAggregatesFilter<"JOApproverSetting"> | number
     approver_id?: StringWithAggregatesFilter<"JOApproverSetting"> | string
-    approver_proxy_id?: StringNullableWithAggregatesFilter<"JOApproverSetting"> | string | null
+    created_by?: StringWithAggregatesFilter<"JOApproverSetting"> | string
+    updated_by?: StringNullableWithAggregatesFilter<"JOApproverSetting"> | string | null
+    deleted_by?: StringNullableWithAggregatesFilter<"JOApproverSetting"> | string | null
     created_at?: DateTimeWithAggregatesFilter<"JOApproverSetting"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"JOApproverSetting"> | Date | string
-    is_deleted?: BoolWithAggregatesFilter<"JOApproverSetting"> | boolean
+    deleted_at?: DateTimeNullableWithAggregatesFilter<"JOApproverSetting"> | Date | string | null
   }
 
   export type RVApproverSettingWhereInput = {
@@ -20353,55 +19438,60 @@ export namespace Prisma {
     OR?: RVApproverSettingWhereInput[]
     NOT?: RVApproverSettingWhereInput | RVApproverSettingWhereInput[]
     id?: StringFilter<"RVApproverSetting"> | string
-    approver_id?: StringFilter<"RVApproverSetting"> | string
-    approver_proxy_id?: StringNullableFilter<"RVApproverSetting"> | string | null
     label?: StringFilter<"RVApproverSetting"> | string
     order?: IntFilter<"RVApproverSetting"> | number
+    approver_id?: StringFilter<"RVApproverSetting"> | string
+    created_by?: StringFilter<"RVApproverSetting"> | string
+    updated_by?: StringNullableFilter<"RVApproverSetting"> | string | null
+    deleted_by?: StringNullableFilter<"RVApproverSetting"> | string | null
     created_at?: DateTimeFilter<"RVApproverSetting"> | Date | string
     updated_at?: DateTimeFilter<"RVApproverSetting"> | Date | string
-    is_deleted?: BoolFilter<"RVApproverSetting"> | boolean
+    deleted_at?: DateTimeNullableFilter<"RVApproverSetting"> | Date | string | null
     approver?: XOR<EmployeeRelationFilter, EmployeeWhereInput>
-    approver_proxy?: XOR<EmployeeNullableRelationFilter, EmployeeWhereInput> | null
   }
 
   export type RVApproverSettingOrderByWithRelationInput = {
     id?: SortOrder
-    approver_id?: SortOrder
-    approver_proxy_id?: SortOrderInput | SortOrder
     label?: SortOrder
     order?: SortOrder
+    approver_id?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrderInput | SortOrder
+    deleted_by?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrderInput | SortOrder
     approver?: EmployeeOrderByWithRelationInput
-    approver_proxy?: EmployeeOrderByWithRelationInput
   }
 
   export type RVApproverSettingWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    approver_id?: string
-    approver_proxy_id?: string
     order?: number
+    approver_id?: string
     AND?: RVApproverSettingWhereInput | RVApproverSettingWhereInput[]
     OR?: RVApproverSettingWhereInput[]
     NOT?: RVApproverSettingWhereInput | RVApproverSettingWhereInput[]
     label?: StringFilter<"RVApproverSetting"> | string
+    created_by?: StringFilter<"RVApproverSetting"> | string
+    updated_by?: StringNullableFilter<"RVApproverSetting"> | string | null
+    deleted_by?: StringNullableFilter<"RVApproverSetting"> | string | null
     created_at?: DateTimeFilter<"RVApproverSetting"> | Date | string
     updated_at?: DateTimeFilter<"RVApproverSetting"> | Date | string
-    is_deleted?: BoolFilter<"RVApproverSetting"> | boolean
+    deleted_at?: DateTimeNullableFilter<"RVApproverSetting"> | Date | string | null
     approver?: XOR<EmployeeRelationFilter, EmployeeWhereInput>
-    approver_proxy?: XOR<EmployeeNullableRelationFilter, EmployeeWhereInput> | null
-  }, "id" | "approver_id" | "approver_proxy_id" | "order">
+  }, "id" | "order" | "approver_id">
 
   export type RVApproverSettingOrderByWithAggregationInput = {
     id?: SortOrder
-    approver_id?: SortOrder
-    approver_proxy_id?: SortOrderInput | SortOrder
     label?: SortOrder
     order?: SortOrder
+    approver_id?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrderInput | SortOrder
+    deleted_by?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrderInput | SortOrder
     _count?: RVApproverSettingCountOrderByAggregateInput
     _avg?: RVApproverSettingAvgOrderByAggregateInput
     _max?: RVApproverSettingMaxOrderByAggregateInput
@@ -20414,13 +19504,15 @@ export namespace Prisma {
     OR?: RVApproverSettingScalarWhereWithAggregatesInput[]
     NOT?: RVApproverSettingScalarWhereWithAggregatesInput | RVApproverSettingScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"RVApproverSetting"> | string
-    approver_id?: StringWithAggregatesFilter<"RVApproverSetting"> | string
-    approver_proxy_id?: StringNullableWithAggregatesFilter<"RVApproverSetting"> | string | null
     label?: StringWithAggregatesFilter<"RVApproverSetting"> | string
     order?: IntWithAggregatesFilter<"RVApproverSetting"> | number
+    approver_id?: StringWithAggregatesFilter<"RVApproverSetting"> | string
+    created_by?: StringWithAggregatesFilter<"RVApproverSetting"> | string
+    updated_by?: StringNullableWithAggregatesFilter<"RVApproverSetting"> | string | null
+    deleted_by?: StringNullableWithAggregatesFilter<"RVApproverSetting"> | string | null
     created_at?: DateTimeWithAggregatesFilter<"RVApproverSetting"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"RVApproverSetting"> | Date | string
-    is_deleted?: BoolWithAggregatesFilter<"RVApproverSetting"> | boolean
+    deleted_at?: DateTimeNullableWithAggregatesFilter<"RVApproverSetting"> | Date | string | null
   }
 
   export type SPRApproverSettingWhereInput = {
@@ -20428,55 +19520,60 @@ export namespace Prisma {
     OR?: SPRApproverSettingWhereInput[]
     NOT?: SPRApproverSettingWhereInput | SPRApproverSettingWhereInput[]
     id?: StringFilter<"SPRApproverSetting"> | string
-    approver_id?: StringFilter<"SPRApproverSetting"> | string
-    approver_proxy_id?: StringNullableFilter<"SPRApproverSetting"> | string | null
     label?: StringFilter<"SPRApproverSetting"> | string
     order?: IntFilter<"SPRApproverSetting"> | number
+    approver_id?: StringFilter<"SPRApproverSetting"> | string
+    created_by?: StringFilter<"SPRApproverSetting"> | string
+    updated_by?: StringNullableFilter<"SPRApproverSetting"> | string | null
+    deleted_by?: StringNullableFilter<"SPRApproverSetting"> | string | null
     created_at?: DateTimeFilter<"SPRApproverSetting"> | Date | string
     updated_at?: DateTimeFilter<"SPRApproverSetting"> | Date | string
-    is_deleted?: BoolFilter<"SPRApproverSetting"> | boolean
+    deleted_at?: DateTimeNullableFilter<"SPRApproverSetting"> | Date | string | null
     approver?: XOR<EmployeeRelationFilter, EmployeeWhereInput>
-    approver_proxy?: XOR<EmployeeNullableRelationFilter, EmployeeWhereInput> | null
   }
 
   export type SPRApproverSettingOrderByWithRelationInput = {
     id?: SortOrder
-    approver_id?: SortOrder
-    approver_proxy_id?: SortOrderInput | SortOrder
     label?: SortOrder
     order?: SortOrder
+    approver_id?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrderInput | SortOrder
+    deleted_by?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrderInput | SortOrder
     approver?: EmployeeOrderByWithRelationInput
-    approver_proxy?: EmployeeOrderByWithRelationInput
   }
 
   export type SPRApproverSettingWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    approver_id?: string
-    approver_proxy_id?: string
     order?: number
+    approver_id?: string
     AND?: SPRApproverSettingWhereInput | SPRApproverSettingWhereInput[]
     OR?: SPRApproverSettingWhereInput[]
     NOT?: SPRApproverSettingWhereInput | SPRApproverSettingWhereInput[]
     label?: StringFilter<"SPRApproverSetting"> | string
+    created_by?: StringFilter<"SPRApproverSetting"> | string
+    updated_by?: StringNullableFilter<"SPRApproverSetting"> | string | null
+    deleted_by?: StringNullableFilter<"SPRApproverSetting"> | string | null
     created_at?: DateTimeFilter<"SPRApproverSetting"> | Date | string
     updated_at?: DateTimeFilter<"SPRApproverSetting"> | Date | string
-    is_deleted?: BoolFilter<"SPRApproverSetting"> | boolean
+    deleted_at?: DateTimeNullableFilter<"SPRApproverSetting"> | Date | string | null
     approver?: XOR<EmployeeRelationFilter, EmployeeWhereInput>
-    approver_proxy?: XOR<EmployeeNullableRelationFilter, EmployeeWhereInput> | null
-  }, "id" | "approver_id" | "approver_proxy_id" | "order">
+  }, "id" | "order" | "approver_id">
 
   export type SPRApproverSettingOrderByWithAggregationInput = {
     id?: SortOrder
-    approver_id?: SortOrder
-    approver_proxy_id?: SortOrderInput | SortOrder
     label?: SortOrder
     order?: SortOrder
+    approver_id?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrderInput | SortOrder
+    deleted_by?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrderInput | SortOrder
     _count?: SPRApproverSettingCountOrderByAggregateInput
     _avg?: SPRApproverSettingAvgOrderByAggregateInput
     _max?: SPRApproverSettingMaxOrderByAggregateInput
@@ -20489,13 +19586,15 @@ export namespace Prisma {
     OR?: SPRApproverSettingScalarWhereWithAggregatesInput[]
     NOT?: SPRApproverSettingScalarWhereWithAggregatesInput | SPRApproverSettingScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"SPRApproverSetting"> | string
-    approver_id?: StringWithAggregatesFilter<"SPRApproverSetting"> | string
-    approver_proxy_id?: StringNullableWithAggregatesFilter<"SPRApproverSetting"> | string | null
     label?: StringWithAggregatesFilter<"SPRApproverSetting"> | string
     order?: IntWithAggregatesFilter<"SPRApproverSetting"> | number
+    approver_id?: StringWithAggregatesFilter<"SPRApproverSetting"> | string
+    created_by?: StringWithAggregatesFilter<"SPRApproverSetting"> | string
+    updated_by?: StringNullableWithAggregatesFilter<"SPRApproverSetting"> | string | null
+    deleted_by?: StringNullableWithAggregatesFilter<"SPRApproverSetting"> | string | null
     created_at?: DateTimeWithAggregatesFilter<"SPRApproverSetting"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"SPRApproverSetting"> | Date | string
-    is_deleted?: BoolWithAggregatesFilter<"SPRApproverSetting"> | boolean
+    deleted_at?: DateTimeNullableWithAggregatesFilter<"SPRApproverSetting"> | Date | string | null
   }
 
   export type MEQSApproverSettingWhereInput = {
@@ -20503,55 +19602,60 @@ export namespace Prisma {
     OR?: MEQSApproverSettingWhereInput[]
     NOT?: MEQSApproverSettingWhereInput | MEQSApproverSettingWhereInput[]
     id?: StringFilter<"MEQSApproverSetting"> | string
-    approver_id?: StringFilter<"MEQSApproverSetting"> | string
-    approver_proxy_id?: StringNullableFilter<"MEQSApproverSetting"> | string | null
     label?: StringFilter<"MEQSApproverSetting"> | string
     order?: IntFilter<"MEQSApproverSetting"> | number
+    approver_id?: StringFilter<"MEQSApproverSetting"> | string
+    created_by?: StringFilter<"MEQSApproverSetting"> | string
+    updated_by?: StringNullableFilter<"MEQSApproverSetting"> | string | null
+    deleted_by?: StringNullableFilter<"MEQSApproverSetting"> | string | null
     created_at?: DateTimeFilter<"MEQSApproverSetting"> | Date | string
     updated_at?: DateTimeFilter<"MEQSApproverSetting"> | Date | string
-    is_deleted?: BoolFilter<"MEQSApproverSetting"> | boolean
+    deleted_at?: DateTimeNullableFilter<"MEQSApproverSetting"> | Date | string | null
     approver?: XOR<EmployeeRelationFilter, EmployeeWhereInput>
-    approver_proxy?: XOR<EmployeeNullableRelationFilter, EmployeeWhereInput> | null
   }
 
   export type MEQSApproverSettingOrderByWithRelationInput = {
     id?: SortOrder
-    approver_id?: SortOrder
-    approver_proxy_id?: SortOrderInput | SortOrder
     label?: SortOrder
     order?: SortOrder
+    approver_id?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrderInput | SortOrder
+    deleted_by?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrderInput | SortOrder
     approver?: EmployeeOrderByWithRelationInput
-    approver_proxy?: EmployeeOrderByWithRelationInput
   }
 
   export type MEQSApproverSettingWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    approver_id?: string
-    approver_proxy_id?: string
     order?: number
+    approver_id?: string
     AND?: MEQSApproverSettingWhereInput | MEQSApproverSettingWhereInput[]
     OR?: MEQSApproverSettingWhereInput[]
     NOT?: MEQSApproverSettingWhereInput | MEQSApproverSettingWhereInput[]
     label?: StringFilter<"MEQSApproverSetting"> | string
+    created_by?: StringFilter<"MEQSApproverSetting"> | string
+    updated_by?: StringNullableFilter<"MEQSApproverSetting"> | string | null
+    deleted_by?: StringNullableFilter<"MEQSApproverSetting"> | string | null
     created_at?: DateTimeFilter<"MEQSApproverSetting"> | Date | string
     updated_at?: DateTimeFilter<"MEQSApproverSetting"> | Date | string
-    is_deleted?: BoolFilter<"MEQSApproverSetting"> | boolean
+    deleted_at?: DateTimeNullableFilter<"MEQSApproverSetting"> | Date | string | null
     approver?: XOR<EmployeeRelationFilter, EmployeeWhereInput>
-    approver_proxy?: XOR<EmployeeNullableRelationFilter, EmployeeWhereInput> | null
-  }, "id" | "approver_id" | "approver_proxy_id" | "order">
+  }, "id" | "order" | "approver_id">
 
   export type MEQSApproverSettingOrderByWithAggregationInput = {
     id?: SortOrder
-    approver_id?: SortOrder
-    approver_proxy_id?: SortOrderInput | SortOrder
     label?: SortOrder
     order?: SortOrder
+    approver_id?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrderInput | SortOrder
+    deleted_by?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrderInput | SortOrder
     _count?: MEQSApproverSettingCountOrderByAggregateInput
     _avg?: MEQSApproverSettingAvgOrderByAggregateInput
     _max?: MEQSApproverSettingMaxOrderByAggregateInput
@@ -20564,13 +19668,15 @@ export namespace Prisma {
     OR?: MEQSApproverSettingScalarWhereWithAggregatesInput[]
     NOT?: MEQSApproverSettingScalarWhereWithAggregatesInput | MEQSApproverSettingScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"MEQSApproverSetting"> | string
-    approver_id?: StringWithAggregatesFilter<"MEQSApproverSetting"> | string
-    approver_proxy_id?: StringNullableWithAggregatesFilter<"MEQSApproverSetting"> | string | null
     label?: StringWithAggregatesFilter<"MEQSApproverSetting"> | string
     order?: IntWithAggregatesFilter<"MEQSApproverSetting"> | number
+    approver_id?: StringWithAggregatesFilter<"MEQSApproverSetting"> | string
+    created_by?: StringWithAggregatesFilter<"MEQSApproverSetting"> | string
+    updated_by?: StringNullableWithAggregatesFilter<"MEQSApproverSetting"> | string | null
+    deleted_by?: StringNullableWithAggregatesFilter<"MEQSApproverSetting"> | string | null
     created_at?: DateTimeWithAggregatesFilter<"MEQSApproverSetting"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"MEQSApproverSetting"> | Date | string
-    is_deleted?: BoolWithAggregatesFilter<"MEQSApproverSetting"> | boolean
+    deleted_at?: DateTimeNullableWithAggregatesFilter<"MEQSApproverSetting"> | Date | string | null
   }
 
   export type POApproverSettingWhereInput = {
@@ -20578,55 +19684,60 @@ export namespace Prisma {
     OR?: POApproverSettingWhereInput[]
     NOT?: POApproverSettingWhereInput | POApproverSettingWhereInput[]
     id?: StringFilter<"POApproverSetting"> | string
-    approver_id?: StringFilter<"POApproverSetting"> | string
-    approver_proxy_id?: StringNullableFilter<"POApproverSetting"> | string | null
     label?: StringFilter<"POApproverSetting"> | string
     order?: IntFilter<"POApproverSetting"> | number
+    approver_id?: StringFilter<"POApproverSetting"> | string
+    created_by?: StringFilter<"POApproverSetting"> | string
+    updated_by?: StringNullableFilter<"POApproverSetting"> | string | null
+    deleted_by?: StringNullableFilter<"POApproverSetting"> | string | null
     created_at?: DateTimeFilter<"POApproverSetting"> | Date | string
     updated_at?: DateTimeFilter<"POApproverSetting"> | Date | string
-    is_deleted?: BoolFilter<"POApproverSetting"> | boolean
+    deleted_at?: DateTimeNullableFilter<"POApproverSetting"> | Date | string | null
     approver?: XOR<EmployeeRelationFilter, EmployeeWhereInput>
-    approver_proxy?: XOR<EmployeeNullableRelationFilter, EmployeeWhereInput> | null
   }
 
   export type POApproverSettingOrderByWithRelationInput = {
     id?: SortOrder
-    approver_id?: SortOrder
-    approver_proxy_id?: SortOrderInput | SortOrder
     label?: SortOrder
     order?: SortOrder
+    approver_id?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrderInput | SortOrder
+    deleted_by?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrderInput | SortOrder
     approver?: EmployeeOrderByWithRelationInput
-    approver_proxy?: EmployeeOrderByWithRelationInput
   }
 
   export type POApproverSettingWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    approver_id?: string
-    approver_proxy_id?: string
     order?: number
+    approver_id?: string
     AND?: POApproverSettingWhereInput | POApproverSettingWhereInput[]
     OR?: POApproverSettingWhereInput[]
     NOT?: POApproverSettingWhereInput | POApproverSettingWhereInput[]
     label?: StringFilter<"POApproverSetting"> | string
+    created_by?: StringFilter<"POApproverSetting"> | string
+    updated_by?: StringNullableFilter<"POApproverSetting"> | string | null
+    deleted_by?: StringNullableFilter<"POApproverSetting"> | string | null
     created_at?: DateTimeFilter<"POApproverSetting"> | Date | string
     updated_at?: DateTimeFilter<"POApproverSetting"> | Date | string
-    is_deleted?: BoolFilter<"POApproverSetting"> | boolean
+    deleted_at?: DateTimeNullableFilter<"POApproverSetting"> | Date | string | null
     approver?: XOR<EmployeeRelationFilter, EmployeeWhereInput>
-    approver_proxy?: XOR<EmployeeNullableRelationFilter, EmployeeWhereInput> | null
-  }, "id" | "approver_id" | "approver_proxy_id" | "order">
+  }, "id" | "order" | "approver_id">
 
   export type POApproverSettingOrderByWithAggregationInput = {
     id?: SortOrder
-    approver_id?: SortOrder
-    approver_proxy_id?: SortOrderInput | SortOrder
     label?: SortOrder
     order?: SortOrder
+    approver_id?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrderInput | SortOrder
+    deleted_by?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrderInput | SortOrder
     _count?: POApproverSettingCountOrderByAggregateInput
     _avg?: POApproverSettingAvgOrderByAggregateInput
     _max?: POApproverSettingMaxOrderByAggregateInput
@@ -20639,13 +19750,15 @@ export namespace Prisma {
     OR?: POApproverSettingScalarWhereWithAggregatesInput[]
     NOT?: POApproverSettingScalarWhereWithAggregatesInput | POApproverSettingScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"POApproverSetting"> | string
-    approver_id?: StringWithAggregatesFilter<"POApproverSetting"> | string
-    approver_proxy_id?: StringNullableWithAggregatesFilter<"POApproverSetting"> | string | null
     label?: StringWithAggregatesFilter<"POApproverSetting"> | string
     order?: IntWithAggregatesFilter<"POApproverSetting"> | number
+    approver_id?: StringWithAggregatesFilter<"POApproverSetting"> | string
+    created_by?: StringWithAggregatesFilter<"POApproverSetting"> | string
+    updated_by?: StringNullableWithAggregatesFilter<"POApproverSetting"> | string | null
+    deleted_by?: StringNullableWithAggregatesFilter<"POApproverSetting"> | string | null
     created_at?: DateTimeWithAggregatesFilter<"POApproverSetting"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"POApproverSetting"> | Date | string
-    is_deleted?: BoolWithAggregatesFilter<"POApproverSetting"> | boolean
+    deleted_at?: DateTimeNullableWithAggregatesFilter<"POApproverSetting"> | Date | string | null
   }
 
   export type RRApproverSettingWhereInput = {
@@ -20653,55 +19766,60 @@ export namespace Prisma {
     OR?: RRApproverSettingWhereInput[]
     NOT?: RRApproverSettingWhereInput | RRApproverSettingWhereInput[]
     id?: StringFilter<"RRApproverSetting"> | string
-    approver_id?: StringFilter<"RRApproverSetting"> | string
-    approver_proxy_id?: StringNullableFilter<"RRApproverSetting"> | string | null
     label?: StringFilter<"RRApproverSetting"> | string
     order?: IntFilter<"RRApproverSetting"> | number
+    approver_id?: StringFilter<"RRApproverSetting"> | string
+    created_by?: StringFilter<"RRApproverSetting"> | string
+    updated_by?: StringNullableFilter<"RRApproverSetting"> | string | null
+    deleted_by?: StringNullableFilter<"RRApproverSetting"> | string | null
     created_at?: DateTimeFilter<"RRApproverSetting"> | Date | string
     updated_at?: DateTimeFilter<"RRApproverSetting"> | Date | string
-    is_deleted?: BoolFilter<"RRApproverSetting"> | boolean
+    deleted_at?: DateTimeNullableFilter<"RRApproverSetting"> | Date | string | null
     approver?: XOR<EmployeeRelationFilter, EmployeeWhereInput>
-    approver_proxy?: XOR<EmployeeNullableRelationFilter, EmployeeWhereInput> | null
   }
 
   export type RRApproverSettingOrderByWithRelationInput = {
     id?: SortOrder
-    approver_id?: SortOrder
-    approver_proxy_id?: SortOrderInput | SortOrder
     label?: SortOrder
     order?: SortOrder
+    approver_id?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrderInput | SortOrder
+    deleted_by?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrderInput | SortOrder
     approver?: EmployeeOrderByWithRelationInput
-    approver_proxy?: EmployeeOrderByWithRelationInput
   }
 
   export type RRApproverSettingWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    approver_id?: string
-    approver_proxy_id?: string
     order?: number
+    approver_id?: string
     AND?: RRApproverSettingWhereInput | RRApproverSettingWhereInput[]
     OR?: RRApproverSettingWhereInput[]
     NOT?: RRApproverSettingWhereInput | RRApproverSettingWhereInput[]
     label?: StringFilter<"RRApproverSetting"> | string
+    created_by?: StringFilter<"RRApproverSetting"> | string
+    updated_by?: StringNullableFilter<"RRApproverSetting"> | string | null
+    deleted_by?: StringNullableFilter<"RRApproverSetting"> | string | null
     created_at?: DateTimeFilter<"RRApproverSetting"> | Date | string
     updated_at?: DateTimeFilter<"RRApproverSetting"> | Date | string
-    is_deleted?: BoolFilter<"RRApproverSetting"> | boolean
+    deleted_at?: DateTimeNullableFilter<"RRApproverSetting"> | Date | string | null
     approver?: XOR<EmployeeRelationFilter, EmployeeWhereInput>
-    approver_proxy?: XOR<EmployeeNullableRelationFilter, EmployeeWhereInput> | null
-  }, "id" | "approver_id" | "approver_proxy_id" | "order">
+  }, "id" | "order" | "approver_id">
 
   export type RRApproverSettingOrderByWithAggregationInput = {
     id?: SortOrder
-    approver_id?: SortOrder
-    approver_proxy_id?: SortOrderInput | SortOrder
     label?: SortOrder
     order?: SortOrder
+    approver_id?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrderInput | SortOrder
+    deleted_by?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrderInput | SortOrder
     _count?: RRApproverSettingCountOrderByAggregateInput
     _avg?: RRApproverSettingAvgOrderByAggregateInput
     _max?: RRApproverSettingMaxOrderByAggregateInput
@@ -20714,13 +19832,15 @@ export namespace Prisma {
     OR?: RRApproverSettingScalarWhereWithAggregatesInput[]
     NOT?: RRApproverSettingScalarWhereWithAggregatesInput | RRApproverSettingScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"RRApproverSetting"> | string
-    approver_id?: StringWithAggregatesFilter<"RRApproverSetting"> | string
-    approver_proxy_id?: StringNullableWithAggregatesFilter<"RRApproverSetting"> | string | null
     label?: StringWithAggregatesFilter<"RRApproverSetting"> | string
     order?: IntWithAggregatesFilter<"RRApproverSetting"> | number
+    approver_id?: StringWithAggregatesFilter<"RRApproverSetting"> | string
+    created_by?: StringWithAggregatesFilter<"RRApproverSetting"> | string
+    updated_by?: StringNullableWithAggregatesFilter<"RRApproverSetting"> | string | null
+    deleted_by?: StringNullableWithAggregatesFilter<"RRApproverSetting"> | string | null
     created_at?: DateTimeWithAggregatesFilter<"RRApproverSetting"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"RRApproverSetting"> | Date | string
-    is_deleted?: BoolWithAggregatesFilter<"RRApproverSetting"> | boolean
+    deleted_at?: DateTimeNullableWithAggregatesFilter<"RRApproverSetting"> | Date | string | null
   }
 
   export type DivisionCreateInput = {
@@ -20728,9 +19848,12 @@ export namespace Prisma {
     code: string
     name: string
     status?: number
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
     department: DepartmentCreateNestedOneWithoutDivisionInput
   }
 
@@ -20740,9 +19863,12 @@ export namespace Prisma {
     code: string
     name: string
     status?: number
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
   }
 
   export type DivisionUpdateInput = {
@@ -20750,9 +19876,12 @@ export namespace Prisma {
     code?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     status?: IntFieldUpdateOperationsInput | number
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     department?: DepartmentUpdateOneRequiredWithoutDivisionNestedInput
   }
 
@@ -20762,9 +19891,12 @@ export namespace Prisma {
     code?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     status?: IntFieldUpdateOperationsInput | number
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type DivisionCreateManyInput = {
@@ -20773,9 +19905,12 @@ export namespace Prisma {
     code: string
     name: string
     status?: number
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
   }
 
   export type DivisionUpdateManyMutationInput = {
@@ -20783,9 +19918,12 @@ export namespace Prisma {
     code?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     status?: IntFieldUpdateOperationsInput | number
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type DivisionUncheckedUpdateManyInput = {
@@ -20794,9 +19932,12 @@ export namespace Prisma {
     code?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     status?: IntFieldUpdateOperationsInput | number
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type DepartmentCreateInput = {
@@ -20804,9 +19945,12 @@ export namespace Prisma {
     code: string
     name: string
     status?: number
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
     Division?: DivisionCreateNestedManyWithoutDepartmentInput
   }
 
@@ -20815,9 +19959,12 @@ export namespace Prisma {
     code: string
     name: string
     status?: number
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
     Division?: DivisionUncheckedCreateNestedManyWithoutDepartmentInput
   }
 
@@ -20826,9 +19973,12 @@ export namespace Prisma {
     code?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     status?: IntFieldUpdateOperationsInput | number
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Division?: DivisionUpdateManyWithoutDepartmentNestedInput
   }
 
@@ -20837,9 +19987,12 @@ export namespace Prisma {
     code?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     status?: IntFieldUpdateOperationsInput | number
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     Division?: DivisionUncheckedUpdateManyWithoutDepartmentNestedInput
   }
 
@@ -20848,9 +20001,12 @@ export namespace Prisma {
     code: string
     name: string
     status?: number
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
   }
 
   export type DepartmentUpdateManyMutationInput = {
@@ -20858,9 +20014,12 @@ export namespace Prisma {
     code?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     status?: IntFieldUpdateOperationsInput | number
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type DepartmentUncheckedUpdateManyInput = {
@@ -20868,9 +20027,12 @@ export namespace Prisma {
     code?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     status?: IntFieldUpdateOperationsInput | number
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type EmployeeCreateInput = {
@@ -20878,21 +20040,18 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
     jo_approver_setting?: JOApproverSettingCreateNestedOneWithoutApproverInput
     meqs_approver_setting?: MEQSApproverSettingCreateNestedOneWithoutApproverInput
     po_approver_setting?: POApproverSettingCreateNestedOneWithoutApproverInput
     rv_approver_setting?: RVApproverSettingCreateNestedOneWithoutApproverInput
     spr_approver_setting?: SPRApproverSettingCreateNestedOneWithoutApproverInput
     rr_approver_setting?: RRApproverSettingCreateNestedOneWithoutApproverInput
-    jo_approver_proxy_setting?: JOApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    po_approver_proxy_setting?: POApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    rv_approver_proxy_setting?: RVApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    spr_approver_proxy_setting?: SPRApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    rr_approver_proxy_setting?: RRApproverSettingCreateNestedOneWithoutApprover_proxyInput
     user_employee?: UserEmployeeCreateNestedOneWithoutEmployeeInput
   }
 
@@ -20901,21 +20060,18 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
     jo_approver_setting?: JOApproverSettingUncheckedCreateNestedOneWithoutApproverInput
     meqs_approver_setting?: MEQSApproverSettingUncheckedCreateNestedOneWithoutApproverInput
     po_approver_setting?: POApproverSettingUncheckedCreateNestedOneWithoutApproverInput
     rv_approver_setting?: RVApproverSettingUncheckedCreateNestedOneWithoutApproverInput
     spr_approver_setting?: SPRApproverSettingUncheckedCreateNestedOneWithoutApproverInput
     rr_approver_setting?: RRApproverSettingUncheckedCreateNestedOneWithoutApproverInput
-    jo_approver_proxy_setting?: JOApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    po_approver_proxy_setting?: POApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    rv_approver_proxy_setting?: RVApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    spr_approver_proxy_setting?: SPRApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    rr_approver_proxy_setting?: RRApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
     user_employee?: UserEmployeeUncheckedCreateNestedOneWithoutEmployeeInput
   }
 
@@ -20924,21 +20080,18 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     jo_approver_setting?: JOApproverSettingUpdateOneWithoutApproverNestedInput
     meqs_approver_setting?: MEQSApproverSettingUpdateOneWithoutApproverNestedInput
     po_approver_setting?: POApproverSettingUpdateOneWithoutApproverNestedInput
     rv_approver_setting?: RVApproverSettingUpdateOneWithoutApproverNestedInput
     spr_approver_setting?: SPRApproverSettingUpdateOneWithoutApproverNestedInput
     rr_approver_setting?: RRApproverSettingUpdateOneWithoutApproverNestedInput
-    jo_approver_proxy_setting?: JOApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    po_approver_proxy_setting?: POApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    rv_approver_proxy_setting?: RVApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    spr_approver_proxy_setting?: SPRApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    rr_approver_proxy_setting?: RRApproverSettingUpdateOneWithoutApprover_proxyNestedInput
     user_employee?: UserEmployeeUpdateOneWithoutEmployeeNestedInput
   }
 
@@ -20947,21 +20100,18 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     jo_approver_setting?: JOApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
     meqs_approver_setting?: MEQSApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
     po_approver_setting?: POApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
     rv_approver_setting?: RVApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
     spr_approver_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
     rr_approver_setting?: RRApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
-    jo_approver_proxy_setting?: JOApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    po_approver_proxy_setting?: POApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    rv_approver_proxy_setting?: RVApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    spr_approver_proxy_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    rr_approver_proxy_setting?: RRApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
     user_employee?: UserEmployeeUncheckedUpdateOneWithoutEmployeeNestedInput
   }
 
@@ -20970,9 +20120,12 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
   }
 
   export type EmployeeUpdateManyMutationInput = {
@@ -20980,9 +20133,12 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type EmployeeUncheckedUpdateManyInput = {
@@ -20990,65 +20146,89 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ClassificationCreateInput = {
     id?: string
     name: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
   }
 
   export type ClassificationUncheckedCreateInput = {
     id?: string
     name: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
   }
 
   export type ClassificationUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ClassificationUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ClassificationCreateManyInput = {
     id?: string
     name: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
   }
 
   export type ClassificationUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ClassificationUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type UserCreateInput = {
@@ -21057,10 +20237,12 @@ export namespace Prisma {
     username: string
     password: string
     status?: number
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
-    user_permissions?: UserPermissionCreateNestedManyWithoutUserInput
+    deleted_at?: Date | string | null
     user_employee?: UserEmployeeCreateNestedOneWithoutUserInput
   }
 
@@ -21070,10 +20252,12 @@ export namespace Prisma {
     username: string
     password: string
     status?: number
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
-    user_permissions?: UserPermissionUncheckedCreateNestedManyWithoutUserInput
+    deleted_at?: Date | string | null
     user_employee?: UserEmployeeUncheckedCreateNestedOneWithoutUserInput
   }
 
@@ -21083,10 +20267,12 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     status?: IntFieldUpdateOperationsInput | number
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    user_permissions?: UserPermissionUpdateManyWithoutUserNestedInput
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user_employee?: UserEmployeeUpdateOneWithoutUserNestedInput
   }
 
@@ -21096,10 +20282,12 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     status?: IntFieldUpdateOperationsInput | number
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    user_permissions?: UserPermissionUncheckedUpdateManyWithoutUserNestedInput
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user_employee?: UserEmployeeUncheckedUpdateOneWithoutUserNestedInput
   }
 
@@ -21109,9 +20297,12 @@ export namespace Prisma {
     username: string
     password: string
     status?: number
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
   }
 
   export type UserUpdateManyMutationInput = {
@@ -21120,9 +20311,12 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     status?: IntFieldUpdateOperationsInput | number
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -21131,16 +20325,20 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     status?: IntFieldUpdateOperationsInput | number
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type UserEmployeeCreateInput = {
     id?: string
+    created_by: string
+    updated_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
     user: UserCreateNestedOneWithoutUser_employeeInput
     employee: EmployeeCreateNestedOneWithoutUser_employeeInput
   }
@@ -21149,16 +20347,18 @@ export namespace Prisma {
     id?: string
     user_id: string
     employee_id: string
+    created_by: string
+    updated_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
   }
 
   export type UserEmployeeUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
     user?: UserUpdateOneRequiredWithoutUser_employeeNestedInput
     employee?: EmployeeUpdateOneRequiredWithoutUser_employeeNestedInput
   }
@@ -21167,163 +20367,130 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     user_id?: StringFieldUpdateOperationsInput | string
     employee_id?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type UserEmployeeCreateManyInput = {
     id?: string
     user_id: string
     employee_id: string
+    created_by: string
+    updated_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
   }
 
   export type UserEmployeeUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type UserEmployeeUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     user_id?: StringFieldUpdateOperationsInput | string
     employee_id?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type UserPermissionCreateInput = {
-    id?: string
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-    user: UserCreateNestedOneWithoutUser_permissionsInput
-    submodule: SubModuleCreateNestedOneWithoutUser_permissionsInput
-  }
-
-  export type UserPermissionUncheckedCreateInput = {
-    id?: string
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-    user_id: string
-    submodule_id: string
-  }
-
-  export type UserPermissionUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    user?: UserUpdateOneRequiredWithoutUser_permissionsNestedInput
-    submodule?: SubModuleUpdateOneRequiredWithoutUser_permissionsNestedInput
-  }
-
-  export type UserPermissionUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    user_id?: StringFieldUpdateOperationsInput | string
-    submodule_id?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type UserPermissionCreateManyInput = {
-    id?: string
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-    user_id: string
-    submodule_id: string
-  }
-
-  export type UserPermissionUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type UserPermissionUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    user_id?: StringFieldUpdateOperationsInput | string
-    submodule_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type ServiceCreateInput = {
     id?: string
     name: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
     features?: FeatureCreateNestedManyWithoutServiceInput
   }
 
   export type ServiceUncheckedCreateInput = {
     id?: string
     name: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
     features?: FeatureUncheckedCreateNestedManyWithoutServiceInput
   }
 
   export type ServiceUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     features?: FeatureUpdateManyWithoutServiceNestedInput
   }
 
   export type ServiceUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     features?: FeatureUncheckedUpdateManyWithoutServiceNestedInput
   }
 
   export type ServiceCreateManyInput = {
     id?: string
     name: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
   }
 
   export type ServiceUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ServiceUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type FeatureCreateInput = {
     id?: string
     name: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
     service: ServiceCreateNestedOneWithoutFeaturesInput
     modules?: ModuleCreateNestedManyWithoutFeatureInput
   }
@@ -21331,9 +20498,12 @@ export namespace Prisma {
   export type FeatureUncheckedCreateInput = {
     id?: string
     name: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
     service_id: string
     modules?: ModuleUncheckedCreateNestedManyWithoutFeatureInput
   }
@@ -21341,9 +20511,12 @@ export namespace Prisma {
   export type FeatureUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     service?: ServiceUpdateOneRequiredWithoutFeaturesNestedInput
     modules?: ModuleUpdateManyWithoutFeatureNestedInput
   }
@@ -21351,9 +20524,12 @@ export namespace Prisma {
   export type FeatureUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     service_id?: StringFieldUpdateOperationsInput | string
     modules?: ModuleUncheckedUpdateManyWithoutFeatureNestedInput
   }
@@ -21361,35 +20537,47 @@ export namespace Prisma {
   export type FeatureCreateManyInput = {
     id?: string
     name: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
     service_id: string
   }
 
   export type FeatureUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type FeatureUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     service_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type ModuleCreateInput = {
     id?: string
     name: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
     feature: FeatureCreateNestedOneWithoutModulesInput
     submodules?: SubModuleCreateNestedManyWithoutModuleInput
   }
@@ -21397,9 +20585,12 @@ export namespace Prisma {
   export type ModuleUncheckedCreateInput = {
     id?: string
     name: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
     feature_id: string
     submodules?: SubModuleUncheckedCreateNestedManyWithoutModuleInput
   }
@@ -21407,9 +20598,12 @@ export namespace Prisma {
   export type ModuleUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     feature?: FeatureUpdateOneRequiredWithoutModulesNestedInput
     submodules?: SubModuleUpdateManyWithoutModuleNestedInput
   }
@@ -21417,9 +20611,12 @@ export namespace Prisma {
   export type ModuleUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     feature_id?: StringFieldUpdateOperationsInput | string
     submodules?: SubModuleUncheckedUpdateManyWithoutModuleNestedInput
   }
@@ -21427,26 +20624,35 @@ export namespace Prisma {
   export type ModuleCreateManyInput = {
     id?: string
     name: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
     feature_id: string
   }
 
   export type ModuleUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ModuleUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     feature_id?: StringFieldUpdateOperationsInput | string
   }
 
@@ -21457,7 +20663,6 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     module: ModuleCreateNestedOneWithoutSubmodulesInput
-    user_permissions?: UserPermissionCreateNestedManyWithoutSubmoduleInput
   }
 
   export type SubModuleUncheckedCreateInput = {
@@ -21467,7 +20672,6 @@ export namespace Prisma {
     updated_at?: Date | string
     is_deleted?: boolean
     module_id: string
-    user_permissions?: UserPermissionUncheckedCreateNestedManyWithoutSubmoduleInput
   }
 
   export type SubModuleUpdateInput = {
@@ -21477,7 +20681,6 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     module?: ModuleUpdateOneRequiredWithoutSubmodulesNestedInput
-    user_permissions?: UserPermissionUpdateManyWithoutSubmoduleNestedInput
   }
 
   export type SubModuleUncheckedUpdateInput = {
@@ -21487,7 +20690,6 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
     module_id?: StringFieldUpdateOperationsInput | string
-    user_permissions?: UserPermissionUncheckedUpdateManyWithoutSubmoduleNestedInput
   }
 
   export type SubModuleCreateManyInput = {
@@ -21520,11 +20722,13 @@ export namespace Prisma {
     id?: string
     label: string
     order: number
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
     approver: EmployeeCreateNestedOneWithoutJo_approver_settingInput
-    approver_proxy?: EmployeeCreateNestedOneWithoutJo_approver_proxy_settingInput
   }
 
   export type JOApproverSettingUncheckedCreateInput = {
@@ -21532,21 +20736,25 @@ export namespace Prisma {
     label: string
     order: number
     approver_id: string
-    approver_proxy_id?: string | null
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
   }
 
   export type JOApproverSettingUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approver?: EmployeeUpdateOneRequiredWithoutJo_approver_settingNestedInput
-    approver_proxy?: EmployeeUpdateOneWithoutJo_approver_proxy_settingNestedInput
   }
 
   export type JOApproverSettingUncheckedUpdateInput = {
@@ -21554,10 +20762,12 @@ export namespace Prisma {
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
     approver_id?: StringFieldUpdateOperationsInput | string
-    approver_proxy_id?: NullableStringFieldUpdateOperationsInput | string | null
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type JOApproverSettingCreateManyInput = {
@@ -21565,19 +20775,24 @@ export namespace Prisma {
     label: string
     order: number
     approver_id: string
-    approver_proxy_id?: string | null
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
   }
 
   export type JOApproverSettingUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type JOApproverSettingUncheckedUpdateManyInput = {
@@ -21585,385 +20800,462 @@ export namespace Prisma {
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
     approver_id?: StringFieldUpdateOperationsInput | string
-    approver_proxy_id?: NullableStringFieldUpdateOperationsInput | string | null
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type RVApproverSettingCreateInput = {
     id?: string
     label: string
     order: number
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
     approver: EmployeeCreateNestedOneWithoutRv_approver_settingInput
-    approver_proxy?: EmployeeCreateNestedOneWithoutRv_approver_proxy_settingInput
   }
 
   export type RVApproverSettingUncheckedCreateInput = {
     id?: string
-    approver_id: string
-    approver_proxy_id?: string | null
     label: string
     order: number
+    approver_id: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
   }
 
   export type RVApproverSettingUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approver?: EmployeeUpdateOneRequiredWithoutRv_approver_settingNestedInput
-    approver_proxy?: EmployeeUpdateOneWithoutRv_approver_proxy_settingNestedInput
   }
 
   export type RVApproverSettingUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    approver_id?: StringFieldUpdateOperationsInput | string
-    approver_proxy_id?: NullableStringFieldUpdateOperationsInput | string | null
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    approver_id?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type RVApproverSettingCreateManyInput = {
     id?: string
-    approver_id: string
-    approver_proxy_id?: string | null
     label: string
     order: number
+    approver_id: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
   }
 
   export type RVApproverSettingUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type RVApproverSettingUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    approver_id?: StringFieldUpdateOperationsInput | string
-    approver_proxy_id?: NullableStringFieldUpdateOperationsInput | string | null
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    approver_id?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type SPRApproverSettingCreateInput = {
     id?: string
     label: string
     order: number
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
     approver: EmployeeCreateNestedOneWithoutSpr_approver_settingInput
-    approver_proxy?: EmployeeCreateNestedOneWithoutSpr_approver_proxy_settingInput
   }
 
   export type SPRApproverSettingUncheckedCreateInput = {
     id?: string
-    approver_id: string
-    approver_proxy_id?: string | null
     label: string
     order: number
+    approver_id: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
   }
 
   export type SPRApproverSettingUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approver?: EmployeeUpdateOneRequiredWithoutSpr_approver_settingNestedInput
-    approver_proxy?: EmployeeUpdateOneWithoutSpr_approver_proxy_settingNestedInput
   }
 
   export type SPRApproverSettingUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    approver_id?: StringFieldUpdateOperationsInput | string
-    approver_proxy_id?: NullableStringFieldUpdateOperationsInput | string | null
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    approver_id?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type SPRApproverSettingCreateManyInput = {
     id?: string
-    approver_id: string
-    approver_proxy_id?: string | null
     label: string
     order: number
+    approver_id: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
   }
 
   export type SPRApproverSettingUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type SPRApproverSettingUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    approver_id?: StringFieldUpdateOperationsInput | string
-    approver_proxy_id?: NullableStringFieldUpdateOperationsInput | string | null
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    approver_id?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type MEQSApproverSettingCreateInput = {
     id?: string
     label: string
     order: number
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
     approver: EmployeeCreateNestedOneWithoutMeqs_approver_settingInput
-    approver_proxy?: EmployeeCreateNestedOneWithoutMeqs_approver_proxy_settingInput
   }
 
   export type MEQSApproverSettingUncheckedCreateInput = {
     id?: string
-    approver_id: string
-    approver_proxy_id?: string | null
     label: string
     order: number
+    approver_id: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
   }
 
   export type MEQSApproverSettingUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approver?: EmployeeUpdateOneRequiredWithoutMeqs_approver_settingNestedInput
-    approver_proxy?: EmployeeUpdateOneWithoutMeqs_approver_proxy_settingNestedInput
   }
 
   export type MEQSApproverSettingUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    approver_id?: StringFieldUpdateOperationsInput | string
-    approver_proxy_id?: NullableStringFieldUpdateOperationsInput | string | null
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    approver_id?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type MEQSApproverSettingCreateManyInput = {
     id?: string
-    approver_id: string
-    approver_proxy_id?: string | null
     label: string
     order: number
+    approver_id: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
   }
 
   export type MEQSApproverSettingUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type MEQSApproverSettingUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    approver_id?: StringFieldUpdateOperationsInput | string
-    approver_proxy_id?: NullableStringFieldUpdateOperationsInput | string | null
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    approver_id?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type POApproverSettingCreateInput = {
     id?: string
     label: string
     order: number
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
     approver: EmployeeCreateNestedOneWithoutPo_approver_settingInput
-    approver_proxy?: EmployeeCreateNestedOneWithoutPo_approver_proxy_settingInput
   }
 
   export type POApproverSettingUncheckedCreateInput = {
     id?: string
-    approver_id: string
-    approver_proxy_id?: string | null
     label: string
     order: number
+    approver_id: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
   }
 
   export type POApproverSettingUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approver?: EmployeeUpdateOneRequiredWithoutPo_approver_settingNestedInput
-    approver_proxy?: EmployeeUpdateOneWithoutPo_approver_proxy_settingNestedInput
   }
 
   export type POApproverSettingUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    approver_id?: StringFieldUpdateOperationsInput | string
-    approver_proxy_id?: NullableStringFieldUpdateOperationsInput | string | null
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    approver_id?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type POApproverSettingCreateManyInput = {
     id?: string
-    approver_id: string
-    approver_proxy_id?: string | null
     label: string
     order: number
+    approver_id: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
   }
 
   export type POApproverSettingUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type POApproverSettingUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    approver_id?: StringFieldUpdateOperationsInput | string
-    approver_proxy_id?: NullableStringFieldUpdateOperationsInput | string | null
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    approver_id?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type RRApproverSettingCreateInput = {
     id?: string
     label: string
     order: number
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
     approver: EmployeeCreateNestedOneWithoutRr_approver_settingInput
-    approver_proxy?: EmployeeCreateNestedOneWithoutRr_approver_proxy_settingInput
   }
 
   export type RRApproverSettingUncheckedCreateInput = {
     id?: string
-    approver_id: string
-    approver_proxy_id?: string | null
     label: string
     order: number
+    approver_id: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
   }
 
   export type RRApproverSettingUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     approver?: EmployeeUpdateOneRequiredWithoutRr_approver_settingNestedInput
-    approver_proxy?: EmployeeUpdateOneWithoutRr_approver_proxy_settingNestedInput
   }
 
   export type RRApproverSettingUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    approver_id?: StringFieldUpdateOperationsInput | string
-    approver_proxy_id?: NullableStringFieldUpdateOperationsInput | string | null
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    approver_id?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type RRApproverSettingCreateManyInput = {
     id?: string
-    approver_id: string
-    approver_proxy_id?: string | null
     label: string
     order: number
+    approver_id: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
   }
 
   export type RRApproverSettingUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type RRApproverSettingUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    approver_id?: StringFieldUpdateOperationsInput | string
-    approver_proxy_id?: NullableStringFieldUpdateOperationsInput | string | null
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    approver_id?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -21992,6 +21284,21 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -22003,14 +21310,25 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
   export type DepartmentRelationFilter = {
     is?: DepartmentWhereInput
     isNot?: DepartmentWhereInput
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
   }
 
   export type DivisionCountOrderByAggregateInput = {
@@ -22019,9 +21337,12 @@ export namespace Prisma {
     code?: SortOrder
     name?: SortOrder
     status?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrder
+    deleted_by?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrder
   }
 
   export type DivisionAvgOrderByAggregateInput = {
@@ -22034,9 +21355,12 @@ export namespace Prisma {
     code?: SortOrder
     name?: SortOrder
     status?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrder
+    deleted_by?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrder
   }
 
   export type DivisionMinOrderByAggregateInput = {
@@ -22045,9 +21369,12 @@ export namespace Prisma {
     code?: SortOrder
     name?: SortOrder
     status?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrder
+    deleted_by?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrder
   }
 
   export type DivisionSumOrderByAggregateInput = {
@@ -22088,6 +21415,24 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -22102,12 +21447,18 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type DivisionListRelationFilter = {
@@ -22125,9 +21476,12 @@ export namespace Prisma {
     code?: SortOrder
     name?: SortOrder
     status?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrder
+    deleted_by?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrder
   }
 
   export type DepartmentAvgOrderByAggregateInput = {
@@ -22139,9 +21493,12 @@ export namespace Prisma {
     code?: SortOrder
     name?: SortOrder
     status?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrder
+    deleted_by?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrder
   }
 
   export type DepartmentMinOrderByAggregateInput = {
@@ -22149,28 +21506,16 @@ export namespace Prisma {
     code?: SortOrder
     name?: SortOrder
     status?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrder
+    deleted_by?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrder
   }
 
   export type DepartmentSumOrderByAggregateInput = {
     status?: SortOrder
-  }
-
-  export type StringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type JOApproverSettingNullableRelationFilter = {
@@ -22208,19 +21553,17 @@ export namespace Prisma {
     isNot?: UserEmployeeWhereInput | null
   }
 
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
-  }
-
   export type EmployeeCountOrderByAggregateInput = {
     id?: SortOrder
     firstname?: SortOrder
     middlename?: SortOrder
     lastname?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrder
+    deleted_by?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrder
   }
 
   export type EmployeeMaxOrderByAggregateInput = {
@@ -22228,9 +21571,12 @@ export namespace Prisma {
     firstname?: SortOrder
     middlename?: SortOrder
     lastname?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrder
+    deleted_by?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrder
   }
 
   export type EmployeeMinOrderByAggregateInput = {
@@ -22238,51 +21584,45 @@ export namespace Prisma {
     firstname?: SortOrder
     middlename?: SortOrder
     lastname?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrder
+    deleted_by?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
-  }
-
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
+    deleted_at?: SortOrder
   }
 
   export type ClassificationCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrder
+    deleted_by?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrder
   }
 
   export type ClassificationMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrder
+    deleted_by?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrder
   }
 
   export type ClassificationMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrder
+    deleted_by?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrder
   }
 
   export type EnumRoleFilter<$PrismaModel = never> = {
@@ -22292,25 +21632,18 @@ export namespace Prisma {
     not?: NestedEnumRoleFilter<$PrismaModel> | $Enums.Role
   }
 
-  export type UserPermissionListRelationFilter = {
-    every?: UserPermissionWhereInput
-    some?: UserPermissionWhereInput
-    none?: UserPermissionWhereInput
-  }
-
-  export type UserPermissionOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
   export type UserCountOrderByAggregateInput = {
     id?: SortOrder
     role?: SortOrder
     username?: SortOrder
     password?: SortOrder
     status?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrder
+    deleted_by?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrder
   }
 
   export type UserAvgOrderByAggregateInput = {
@@ -22323,9 +21656,12 @@ export namespace Prisma {
     username?: SortOrder
     password?: SortOrder
     status?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrder
+    deleted_by?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -22334,9 +21670,12 @@ export namespace Prisma {
     username?: SortOrder
     password?: SortOrder
     status?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrder
+    deleted_by?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrder
   }
 
   export type UserSumOrderByAggregateInput = {
@@ -22367,59 +21706,30 @@ export namespace Prisma {
     id?: SortOrder
     user_id?: SortOrder
     employee_id?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
   }
 
   export type UserEmployeeMaxOrderByAggregateInput = {
     id?: SortOrder
     user_id?: SortOrder
     employee_id?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
   }
 
   export type UserEmployeeMinOrderByAggregateInput = {
     id?: SortOrder
     user_id?: SortOrder
     employee_id?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
-  }
-
-  export type SubModuleRelationFilter = {
-    is?: SubModuleWhereInput
-    isNot?: SubModuleWhereInput
-  }
-
-  export type UserPermissionCountOrderByAggregateInput = {
-    id?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-    is_deleted?: SortOrder
-    user_id?: SortOrder
-    submodule_id?: SortOrder
-  }
-
-  export type UserPermissionMaxOrderByAggregateInput = {
-    id?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-    is_deleted?: SortOrder
-    user_id?: SortOrder
-    submodule_id?: SortOrder
-  }
-
-  export type UserPermissionMinOrderByAggregateInput = {
-    id?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-    is_deleted?: SortOrder
-    user_id?: SortOrder
-    submodule_id?: SortOrder
   }
 
   export type FeatureListRelationFilter = {
@@ -22435,25 +21745,34 @@ export namespace Prisma {
   export type ServiceCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrder
+    deleted_by?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrder
   }
 
   export type ServiceMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrder
+    deleted_by?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrder
   }
 
   export type ServiceMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrder
+    deleted_by?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrder
   }
 
   export type ServiceRelationFilter = {
@@ -22474,27 +21793,36 @@ export namespace Prisma {
   export type FeatureCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrder
+    deleted_by?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrder
     service_id?: SortOrder
   }
 
   export type FeatureMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrder
+    deleted_by?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrder
     service_id?: SortOrder
   }
 
   export type FeatureMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrder
+    deleted_by?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrder
     service_id?: SortOrder
   }
 
@@ -22516,28 +21844,42 @@ export namespace Prisma {
   export type ModuleCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrder
+    deleted_by?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrder
     feature_id?: SortOrder
   }
 
   export type ModuleMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrder
+    deleted_by?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrder
     feature_id?: SortOrder
   }
 
   export type ModuleMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrder
+    deleted_by?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrder
     feature_id?: SortOrder
+  }
+
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type ModuleRelationFilter = {
@@ -22572,9 +21914,12 @@ export namespace Prisma {
     module_id?: SortOrder
   }
 
-  export type EmployeeNullableRelationFilter = {
-    is?: EmployeeWhereInput | null
-    isNot?: EmployeeWhereInput | null
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type JOApproverSettingCountOrderByAggregateInput = {
@@ -22582,10 +21927,12 @@ export namespace Prisma {
     label?: SortOrder
     order?: SortOrder
     approver_id?: SortOrder
-    approver_proxy_id?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrder
+    deleted_by?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrder
   }
 
   export type JOApproverSettingAvgOrderByAggregateInput = {
@@ -22597,10 +21944,12 @@ export namespace Prisma {
     label?: SortOrder
     order?: SortOrder
     approver_id?: SortOrder
-    approver_proxy_id?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrder
+    deleted_by?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrder
   }
 
   export type JOApproverSettingMinOrderByAggregateInput = {
@@ -22608,10 +21957,12 @@ export namespace Prisma {
     label?: SortOrder
     order?: SortOrder
     approver_id?: SortOrder
-    approver_proxy_id?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrder
+    deleted_by?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrder
   }
 
   export type JOApproverSettingSumOrderByAggregateInput = {
@@ -22620,13 +21971,15 @@ export namespace Prisma {
 
   export type RVApproverSettingCountOrderByAggregateInput = {
     id?: SortOrder
-    approver_id?: SortOrder
-    approver_proxy_id?: SortOrder
     label?: SortOrder
     order?: SortOrder
+    approver_id?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrder
+    deleted_by?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrder
   }
 
   export type RVApproverSettingAvgOrderByAggregateInput = {
@@ -22635,24 +21988,28 @@ export namespace Prisma {
 
   export type RVApproverSettingMaxOrderByAggregateInput = {
     id?: SortOrder
-    approver_id?: SortOrder
-    approver_proxy_id?: SortOrder
     label?: SortOrder
     order?: SortOrder
+    approver_id?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrder
+    deleted_by?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrder
   }
 
   export type RVApproverSettingMinOrderByAggregateInput = {
     id?: SortOrder
-    approver_id?: SortOrder
-    approver_proxy_id?: SortOrder
     label?: SortOrder
     order?: SortOrder
+    approver_id?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrder
+    deleted_by?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrder
   }
 
   export type RVApproverSettingSumOrderByAggregateInput = {
@@ -22661,13 +22018,15 @@ export namespace Prisma {
 
   export type SPRApproverSettingCountOrderByAggregateInput = {
     id?: SortOrder
-    approver_id?: SortOrder
-    approver_proxy_id?: SortOrder
     label?: SortOrder
     order?: SortOrder
+    approver_id?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrder
+    deleted_by?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrder
   }
 
   export type SPRApproverSettingAvgOrderByAggregateInput = {
@@ -22676,24 +22035,28 @@ export namespace Prisma {
 
   export type SPRApproverSettingMaxOrderByAggregateInput = {
     id?: SortOrder
-    approver_id?: SortOrder
-    approver_proxy_id?: SortOrder
     label?: SortOrder
     order?: SortOrder
+    approver_id?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrder
+    deleted_by?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrder
   }
 
   export type SPRApproverSettingMinOrderByAggregateInput = {
     id?: SortOrder
-    approver_id?: SortOrder
-    approver_proxy_id?: SortOrder
     label?: SortOrder
     order?: SortOrder
+    approver_id?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrder
+    deleted_by?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrder
   }
 
   export type SPRApproverSettingSumOrderByAggregateInput = {
@@ -22702,13 +22065,15 @@ export namespace Prisma {
 
   export type MEQSApproverSettingCountOrderByAggregateInput = {
     id?: SortOrder
-    approver_id?: SortOrder
-    approver_proxy_id?: SortOrder
     label?: SortOrder
     order?: SortOrder
+    approver_id?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrder
+    deleted_by?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrder
   }
 
   export type MEQSApproverSettingAvgOrderByAggregateInput = {
@@ -22717,24 +22082,28 @@ export namespace Prisma {
 
   export type MEQSApproverSettingMaxOrderByAggregateInput = {
     id?: SortOrder
-    approver_id?: SortOrder
-    approver_proxy_id?: SortOrder
     label?: SortOrder
     order?: SortOrder
+    approver_id?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrder
+    deleted_by?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrder
   }
 
   export type MEQSApproverSettingMinOrderByAggregateInput = {
     id?: SortOrder
-    approver_id?: SortOrder
-    approver_proxy_id?: SortOrder
     label?: SortOrder
     order?: SortOrder
+    approver_id?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrder
+    deleted_by?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrder
   }
 
   export type MEQSApproverSettingSumOrderByAggregateInput = {
@@ -22743,13 +22112,15 @@ export namespace Prisma {
 
   export type POApproverSettingCountOrderByAggregateInput = {
     id?: SortOrder
-    approver_id?: SortOrder
-    approver_proxy_id?: SortOrder
     label?: SortOrder
     order?: SortOrder
+    approver_id?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrder
+    deleted_by?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrder
   }
 
   export type POApproverSettingAvgOrderByAggregateInput = {
@@ -22758,24 +22129,28 @@ export namespace Prisma {
 
   export type POApproverSettingMaxOrderByAggregateInput = {
     id?: SortOrder
-    approver_id?: SortOrder
-    approver_proxy_id?: SortOrder
     label?: SortOrder
     order?: SortOrder
+    approver_id?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrder
+    deleted_by?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrder
   }
 
   export type POApproverSettingMinOrderByAggregateInput = {
     id?: SortOrder
-    approver_id?: SortOrder
-    approver_proxy_id?: SortOrder
     label?: SortOrder
     order?: SortOrder
+    approver_id?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrder
+    deleted_by?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrder
   }
 
   export type POApproverSettingSumOrderByAggregateInput = {
@@ -22784,13 +22159,15 @@ export namespace Prisma {
 
   export type RRApproverSettingCountOrderByAggregateInput = {
     id?: SortOrder
-    approver_id?: SortOrder
-    approver_proxy_id?: SortOrder
     label?: SortOrder
     order?: SortOrder
+    approver_id?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrder
+    deleted_by?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrder
   }
 
   export type RRApproverSettingAvgOrderByAggregateInput = {
@@ -22799,24 +22176,28 @@ export namespace Prisma {
 
   export type RRApproverSettingMaxOrderByAggregateInput = {
     id?: SortOrder
-    approver_id?: SortOrder
-    approver_proxy_id?: SortOrder
     label?: SortOrder
     order?: SortOrder
+    approver_id?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrder
+    deleted_by?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrder
   }
 
   export type RRApproverSettingMinOrderByAggregateInput = {
     id?: SortOrder
-    approver_id?: SortOrder
-    approver_proxy_id?: SortOrder
     label?: SortOrder
     order?: SortOrder
+    approver_id?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrder
+    deleted_by?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    is_deleted?: SortOrder
+    deleted_at?: SortOrder
   }
 
   export type RRApproverSettingSumOrderByAggregateInput = {
@@ -22841,12 +22222,16 @@ export namespace Prisma {
     divide?: number
   }
 
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
   }
 
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
   }
 
   export type DepartmentUpdateOneRequiredWithoutDivisionNestedInput = {
@@ -22935,42 +22320,6 @@ export namespace Prisma {
     connect?: RRApproverSettingWhereUniqueInput
   }
 
-  export type JOApproverSettingCreateNestedOneWithoutApprover_proxyInput = {
-    create?: XOR<JOApproverSettingCreateWithoutApprover_proxyInput, JOApproverSettingUncheckedCreateWithoutApprover_proxyInput>
-    connectOrCreate?: JOApproverSettingCreateOrConnectWithoutApprover_proxyInput
-    connect?: JOApproverSettingWhereUniqueInput
-  }
-
-  export type MEQSApproverSettingCreateNestedOneWithoutApprover_proxyInput = {
-    create?: XOR<MEQSApproverSettingCreateWithoutApprover_proxyInput, MEQSApproverSettingUncheckedCreateWithoutApprover_proxyInput>
-    connectOrCreate?: MEQSApproverSettingCreateOrConnectWithoutApprover_proxyInput
-    connect?: MEQSApproverSettingWhereUniqueInput
-  }
-
-  export type POApproverSettingCreateNestedOneWithoutApprover_proxyInput = {
-    create?: XOR<POApproverSettingCreateWithoutApprover_proxyInput, POApproverSettingUncheckedCreateWithoutApprover_proxyInput>
-    connectOrCreate?: POApproverSettingCreateOrConnectWithoutApprover_proxyInput
-    connect?: POApproverSettingWhereUniqueInput
-  }
-
-  export type RVApproverSettingCreateNestedOneWithoutApprover_proxyInput = {
-    create?: XOR<RVApproverSettingCreateWithoutApprover_proxyInput, RVApproverSettingUncheckedCreateWithoutApprover_proxyInput>
-    connectOrCreate?: RVApproverSettingCreateOrConnectWithoutApprover_proxyInput
-    connect?: RVApproverSettingWhereUniqueInput
-  }
-
-  export type SPRApproverSettingCreateNestedOneWithoutApprover_proxyInput = {
-    create?: XOR<SPRApproverSettingCreateWithoutApprover_proxyInput, SPRApproverSettingUncheckedCreateWithoutApprover_proxyInput>
-    connectOrCreate?: SPRApproverSettingCreateOrConnectWithoutApprover_proxyInput
-    connect?: SPRApproverSettingWhereUniqueInput
-  }
-
-  export type RRApproverSettingCreateNestedOneWithoutApprover_proxyInput = {
-    create?: XOR<RRApproverSettingCreateWithoutApprover_proxyInput, RRApproverSettingUncheckedCreateWithoutApprover_proxyInput>
-    connectOrCreate?: RRApproverSettingCreateOrConnectWithoutApprover_proxyInput
-    connect?: RRApproverSettingWhereUniqueInput
-  }
-
   export type UserEmployeeCreateNestedOneWithoutEmployeeInput = {
     create?: XOR<UserEmployeeCreateWithoutEmployeeInput, UserEmployeeUncheckedCreateWithoutEmployeeInput>
     connectOrCreate?: UserEmployeeCreateOrConnectWithoutEmployeeInput
@@ -23013,50 +22362,10 @@ export namespace Prisma {
     connect?: RRApproverSettingWhereUniqueInput
   }
 
-  export type JOApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput = {
-    create?: XOR<JOApproverSettingCreateWithoutApprover_proxyInput, JOApproverSettingUncheckedCreateWithoutApprover_proxyInput>
-    connectOrCreate?: JOApproverSettingCreateOrConnectWithoutApprover_proxyInput
-    connect?: JOApproverSettingWhereUniqueInput
-  }
-
-  export type MEQSApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput = {
-    create?: XOR<MEQSApproverSettingCreateWithoutApprover_proxyInput, MEQSApproverSettingUncheckedCreateWithoutApprover_proxyInput>
-    connectOrCreate?: MEQSApproverSettingCreateOrConnectWithoutApprover_proxyInput
-    connect?: MEQSApproverSettingWhereUniqueInput
-  }
-
-  export type POApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput = {
-    create?: XOR<POApproverSettingCreateWithoutApprover_proxyInput, POApproverSettingUncheckedCreateWithoutApprover_proxyInput>
-    connectOrCreate?: POApproverSettingCreateOrConnectWithoutApprover_proxyInput
-    connect?: POApproverSettingWhereUniqueInput
-  }
-
-  export type RVApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput = {
-    create?: XOR<RVApproverSettingCreateWithoutApprover_proxyInput, RVApproverSettingUncheckedCreateWithoutApprover_proxyInput>
-    connectOrCreate?: RVApproverSettingCreateOrConnectWithoutApprover_proxyInput
-    connect?: RVApproverSettingWhereUniqueInput
-  }
-
-  export type SPRApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput = {
-    create?: XOR<SPRApproverSettingCreateWithoutApprover_proxyInput, SPRApproverSettingUncheckedCreateWithoutApprover_proxyInput>
-    connectOrCreate?: SPRApproverSettingCreateOrConnectWithoutApprover_proxyInput
-    connect?: SPRApproverSettingWhereUniqueInput
-  }
-
-  export type RRApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput = {
-    create?: XOR<RRApproverSettingCreateWithoutApprover_proxyInput, RRApproverSettingUncheckedCreateWithoutApprover_proxyInput>
-    connectOrCreate?: RRApproverSettingCreateOrConnectWithoutApprover_proxyInput
-    connect?: RRApproverSettingWhereUniqueInput
-  }
-
   export type UserEmployeeUncheckedCreateNestedOneWithoutEmployeeInput = {
     create?: XOR<UserEmployeeCreateWithoutEmployeeInput, UserEmployeeUncheckedCreateWithoutEmployeeInput>
     connectOrCreate?: UserEmployeeCreateOrConnectWithoutEmployeeInput
     connect?: UserEmployeeWhereUniqueInput
-  }
-
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
   }
 
   export type JOApproverSettingUpdateOneWithoutApproverNestedInput = {
@@ -23117,66 +22426,6 @@ export namespace Prisma {
     delete?: RRApproverSettingWhereInput | boolean
     connect?: RRApproverSettingWhereUniqueInput
     update?: XOR<XOR<RRApproverSettingUpdateToOneWithWhereWithoutApproverInput, RRApproverSettingUpdateWithoutApproverInput>, RRApproverSettingUncheckedUpdateWithoutApproverInput>
-  }
-
-  export type JOApproverSettingUpdateOneWithoutApprover_proxyNestedInput = {
-    create?: XOR<JOApproverSettingCreateWithoutApprover_proxyInput, JOApproverSettingUncheckedCreateWithoutApprover_proxyInput>
-    connectOrCreate?: JOApproverSettingCreateOrConnectWithoutApprover_proxyInput
-    upsert?: JOApproverSettingUpsertWithoutApprover_proxyInput
-    disconnect?: JOApproverSettingWhereInput | boolean
-    delete?: JOApproverSettingWhereInput | boolean
-    connect?: JOApproverSettingWhereUniqueInput
-    update?: XOR<XOR<JOApproverSettingUpdateToOneWithWhereWithoutApprover_proxyInput, JOApproverSettingUpdateWithoutApprover_proxyInput>, JOApproverSettingUncheckedUpdateWithoutApprover_proxyInput>
-  }
-
-  export type MEQSApproverSettingUpdateOneWithoutApprover_proxyNestedInput = {
-    create?: XOR<MEQSApproverSettingCreateWithoutApprover_proxyInput, MEQSApproverSettingUncheckedCreateWithoutApprover_proxyInput>
-    connectOrCreate?: MEQSApproverSettingCreateOrConnectWithoutApprover_proxyInput
-    upsert?: MEQSApproverSettingUpsertWithoutApprover_proxyInput
-    disconnect?: MEQSApproverSettingWhereInput | boolean
-    delete?: MEQSApproverSettingWhereInput | boolean
-    connect?: MEQSApproverSettingWhereUniqueInput
-    update?: XOR<XOR<MEQSApproverSettingUpdateToOneWithWhereWithoutApprover_proxyInput, MEQSApproverSettingUpdateWithoutApprover_proxyInput>, MEQSApproverSettingUncheckedUpdateWithoutApprover_proxyInput>
-  }
-
-  export type POApproverSettingUpdateOneWithoutApprover_proxyNestedInput = {
-    create?: XOR<POApproverSettingCreateWithoutApprover_proxyInput, POApproverSettingUncheckedCreateWithoutApprover_proxyInput>
-    connectOrCreate?: POApproverSettingCreateOrConnectWithoutApprover_proxyInput
-    upsert?: POApproverSettingUpsertWithoutApprover_proxyInput
-    disconnect?: POApproverSettingWhereInput | boolean
-    delete?: POApproverSettingWhereInput | boolean
-    connect?: POApproverSettingWhereUniqueInput
-    update?: XOR<XOR<POApproverSettingUpdateToOneWithWhereWithoutApprover_proxyInput, POApproverSettingUpdateWithoutApprover_proxyInput>, POApproverSettingUncheckedUpdateWithoutApprover_proxyInput>
-  }
-
-  export type RVApproverSettingUpdateOneWithoutApprover_proxyNestedInput = {
-    create?: XOR<RVApproverSettingCreateWithoutApprover_proxyInput, RVApproverSettingUncheckedCreateWithoutApprover_proxyInput>
-    connectOrCreate?: RVApproverSettingCreateOrConnectWithoutApprover_proxyInput
-    upsert?: RVApproverSettingUpsertWithoutApprover_proxyInput
-    disconnect?: RVApproverSettingWhereInput | boolean
-    delete?: RVApproverSettingWhereInput | boolean
-    connect?: RVApproverSettingWhereUniqueInput
-    update?: XOR<XOR<RVApproverSettingUpdateToOneWithWhereWithoutApprover_proxyInput, RVApproverSettingUpdateWithoutApprover_proxyInput>, RVApproverSettingUncheckedUpdateWithoutApprover_proxyInput>
-  }
-
-  export type SPRApproverSettingUpdateOneWithoutApprover_proxyNestedInput = {
-    create?: XOR<SPRApproverSettingCreateWithoutApprover_proxyInput, SPRApproverSettingUncheckedCreateWithoutApprover_proxyInput>
-    connectOrCreate?: SPRApproverSettingCreateOrConnectWithoutApprover_proxyInput
-    upsert?: SPRApproverSettingUpsertWithoutApprover_proxyInput
-    disconnect?: SPRApproverSettingWhereInput | boolean
-    delete?: SPRApproverSettingWhereInput | boolean
-    connect?: SPRApproverSettingWhereUniqueInput
-    update?: XOR<XOR<SPRApproverSettingUpdateToOneWithWhereWithoutApprover_proxyInput, SPRApproverSettingUpdateWithoutApprover_proxyInput>, SPRApproverSettingUncheckedUpdateWithoutApprover_proxyInput>
-  }
-
-  export type RRApproverSettingUpdateOneWithoutApprover_proxyNestedInput = {
-    create?: XOR<RRApproverSettingCreateWithoutApprover_proxyInput, RRApproverSettingUncheckedCreateWithoutApprover_proxyInput>
-    connectOrCreate?: RRApproverSettingCreateOrConnectWithoutApprover_proxyInput
-    upsert?: RRApproverSettingUpsertWithoutApprover_proxyInput
-    disconnect?: RRApproverSettingWhereInput | boolean
-    delete?: RRApproverSettingWhereInput | boolean
-    connect?: RRApproverSettingWhereUniqueInput
-    update?: XOR<XOR<RRApproverSettingUpdateToOneWithWhereWithoutApprover_proxyInput, RRApproverSettingUpdateWithoutApprover_proxyInput>, RRApproverSettingUncheckedUpdateWithoutApprover_proxyInput>
   }
 
   export type UserEmployeeUpdateOneWithoutEmployeeNestedInput = {
@@ -23249,66 +22498,6 @@ export namespace Prisma {
     update?: XOR<XOR<RRApproverSettingUpdateToOneWithWhereWithoutApproverInput, RRApproverSettingUpdateWithoutApproverInput>, RRApproverSettingUncheckedUpdateWithoutApproverInput>
   }
 
-  export type JOApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput = {
-    create?: XOR<JOApproverSettingCreateWithoutApprover_proxyInput, JOApproverSettingUncheckedCreateWithoutApprover_proxyInput>
-    connectOrCreate?: JOApproverSettingCreateOrConnectWithoutApprover_proxyInput
-    upsert?: JOApproverSettingUpsertWithoutApprover_proxyInput
-    disconnect?: JOApproverSettingWhereInput | boolean
-    delete?: JOApproverSettingWhereInput | boolean
-    connect?: JOApproverSettingWhereUniqueInput
-    update?: XOR<XOR<JOApproverSettingUpdateToOneWithWhereWithoutApprover_proxyInput, JOApproverSettingUpdateWithoutApprover_proxyInput>, JOApproverSettingUncheckedUpdateWithoutApprover_proxyInput>
-  }
-
-  export type MEQSApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput = {
-    create?: XOR<MEQSApproverSettingCreateWithoutApprover_proxyInput, MEQSApproverSettingUncheckedCreateWithoutApprover_proxyInput>
-    connectOrCreate?: MEQSApproverSettingCreateOrConnectWithoutApprover_proxyInput
-    upsert?: MEQSApproverSettingUpsertWithoutApprover_proxyInput
-    disconnect?: MEQSApproverSettingWhereInput | boolean
-    delete?: MEQSApproverSettingWhereInput | boolean
-    connect?: MEQSApproverSettingWhereUniqueInput
-    update?: XOR<XOR<MEQSApproverSettingUpdateToOneWithWhereWithoutApprover_proxyInput, MEQSApproverSettingUpdateWithoutApprover_proxyInput>, MEQSApproverSettingUncheckedUpdateWithoutApprover_proxyInput>
-  }
-
-  export type POApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput = {
-    create?: XOR<POApproverSettingCreateWithoutApprover_proxyInput, POApproverSettingUncheckedCreateWithoutApprover_proxyInput>
-    connectOrCreate?: POApproverSettingCreateOrConnectWithoutApprover_proxyInput
-    upsert?: POApproverSettingUpsertWithoutApprover_proxyInput
-    disconnect?: POApproverSettingWhereInput | boolean
-    delete?: POApproverSettingWhereInput | boolean
-    connect?: POApproverSettingWhereUniqueInput
-    update?: XOR<XOR<POApproverSettingUpdateToOneWithWhereWithoutApprover_proxyInput, POApproverSettingUpdateWithoutApprover_proxyInput>, POApproverSettingUncheckedUpdateWithoutApprover_proxyInput>
-  }
-
-  export type RVApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput = {
-    create?: XOR<RVApproverSettingCreateWithoutApprover_proxyInput, RVApproverSettingUncheckedCreateWithoutApprover_proxyInput>
-    connectOrCreate?: RVApproverSettingCreateOrConnectWithoutApprover_proxyInput
-    upsert?: RVApproverSettingUpsertWithoutApprover_proxyInput
-    disconnect?: RVApproverSettingWhereInput | boolean
-    delete?: RVApproverSettingWhereInput | boolean
-    connect?: RVApproverSettingWhereUniqueInput
-    update?: XOR<XOR<RVApproverSettingUpdateToOneWithWhereWithoutApprover_proxyInput, RVApproverSettingUpdateWithoutApprover_proxyInput>, RVApproverSettingUncheckedUpdateWithoutApprover_proxyInput>
-  }
-
-  export type SPRApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput = {
-    create?: XOR<SPRApproverSettingCreateWithoutApprover_proxyInput, SPRApproverSettingUncheckedCreateWithoutApprover_proxyInput>
-    connectOrCreate?: SPRApproverSettingCreateOrConnectWithoutApprover_proxyInput
-    upsert?: SPRApproverSettingUpsertWithoutApprover_proxyInput
-    disconnect?: SPRApproverSettingWhereInput | boolean
-    delete?: SPRApproverSettingWhereInput | boolean
-    connect?: SPRApproverSettingWhereUniqueInput
-    update?: XOR<XOR<SPRApproverSettingUpdateToOneWithWhereWithoutApprover_proxyInput, SPRApproverSettingUpdateWithoutApprover_proxyInput>, SPRApproverSettingUncheckedUpdateWithoutApprover_proxyInput>
-  }
-
-  export type RRApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput = {
-    create?: XOR<RRApproverSettingCreateWithoutApprover_proxyInput, RRApproverSettingUncheckedCreateWithoutApprover_proxyInput>
-    connectOrCreate?: RRApproverSettingCreateOrConnectWithoutApprover_proxyInput
-    upsert?: RRApproverSettingUpsertWithoutApprover_proxyInput
-    disconnect?: RRApproverSettingWhereInput | boolean
-    delete?: RRApproverSettingWhereInput | boolean
-    connect?: RRApproverSettingWhereUniqueInput
-    update?: XOR<XOR<RRApproverSettingUpdateToOneWithWhereWithoutApprover_proxyInput, RRApproverSettingUpdateWithoutApprover_proxyInput>, RRApproverSettingUncheckedUpdateWithoutApprover_proxyInput>
-  }
-
   export type UserEmployeeUncheckedUpdateOneWithoutEmployeeNestedInput = {
     create?: XOR<UserEmployeeCreateWithoutEmployeeInput, UserEmployeeUncheckedCreateWithoutEmployeeInput>
     connectOrCreate?: UserEmployeeCreateOrConnectWithoutEmployeeInput
@@ -23319,24 +22508,10 @@ export namespace Prisma {
     update?: XOR<XOR<UserEmployeeUpdateToOneWithWhereWithoutEmployeeInput, UserEmployeeUpdateWithoutEmployeeInput>, UserEmployeeUncheckedUpdateWithoutEmployeeInput>
   }
 
-  export type UserPermissionCreateNestedManyWithoutUserInput = {
-    create?: XOR<UserPermissionCreateWithoutUserInput, UserPermissionUncheckedCreateWithoutUserInput> | UserPermissionCreateWithoutUserInput[] | UserPermissionUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: UserPermissionCreateOrConnectWithoutUserInput | UserPermissionCreateOrConnectWithoutUserInput[]
-    createMany?: UserPermissionCreateManyUserInputEnvelope
-    connect?: UserPermissionWhereUniqueInput | UserPermissionWhereUniqueInput[]
-  }
-
   export type UserEmployeeCreateNestedOneWithoutUserInput = {
     create?: XOR<UserEmployeeCreateWithoutUserInput, UserEmployeeUncheckedCreateWithoutUserInput>
     connectOrCreate?: UserEmployeeCreateOrConnectWithoutUserInput
     connect?: UserEmployeeWhereUniqueInput
-  }
-
-  export type UserPermissionUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<UserPermissionCreateWithoutUserInput, UserPermissionUncheckedCreateWithoutUserInput> | UserPermissionCreateWithoutUserInput[] | UserPermissionUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: UserPermissionCreateOrConnectWithoutUserInput | UserPermissionCreateOrConnectWithoutUserInput[]
-    createMany?: UserPermissionCreateManyUserInputEnvelope
-    connect?: UserPermissionWhereUniqueInput | UserPermissionWhereUniqueInput[]
   }
 
   export type UserEmployeeUncheckedCreateNestedOneWithoutUserInput = {
@@ -23349,20 +22524,6 @@ export namespace Prisma {
     set?: $Enums.Role
   }
 
-  export type UserPermissionUpdateManyWithoutUserNestedInput = {
-    create?: XOR<UserPermissionCreateWithoutUserInput, UserPermissionUncheckedCreateWithoutUserInput> | UserPermissionCreateWithoutUserInput[] | UserPermissionUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: UserPermissionCreateOrConnectWithoutUserInput | UserPermissionCreateOrConnectWithoutUserInput[]
-    upsert?: UserPermissionUpsertWithWhereUniqueWithoutUserInput | UserPermissionUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: UserPermissionCreateManyUserInputEnvelope
-    set?: UserPermissionWhereUniqueInput | UserPermissionWhereUniqueInput[]
-    disconnect?: UserPermissionWhereUniqueInput | UserPermissionWhereUniqueInput[]
-    delete?: UserPermissionWhereUniqueInput | UserPermissionWhereUniqueInput[]
-    connect?: UserPermissionWhereUniqueInput | UserPermissionWhereUniqueInput[]
-    update?: UserPermissionUpdateWithWhereUniqueWithoutUserInput | UserPermissionUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: UserPermissionUpdateManyWithWhereWithoutUserInput | UserPermissionUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: UserPermissionScalarWhereInput | UserPermissionScalarWhereInput[]
-  }
-
   export type UserEmployeeUpdateOneWithoutUserNestedInput = {
     create?: XOR<UserEmployeeCreateWithoutUserInput, UserEmployeeUncheckedCreateWithoutUserInput>
     connectOrCreate?: UserEmployeeCreateOrConnectWithoutUserInput
@@ -23371,20 +22532,6 @@ export namespace Prisma {
     delete?: UserEmployeeWhereInput | boolean
     connect?: UserEmployeeWhereUniqueInput
     update?: XOR<XOR<UserEmployeeUpdateToOneWithWhereWithoutUserInput, UserEmployeeUpdateWithoutUserInput>, UserEmployeeUncheckedUpdateWithoutUserInput>
-  }
-
-  export type UserPermissionUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<UserPermissionCreateWithoutUserInput, UserPermissionUncheckedCreateWithoutUserInput> | UserPermissionCreateWithoutUserInput[] | UserPermissionUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: UserPermissionCreateOrConnectWithoutUserInput | UserPermissionCreateOrConnectWithoutUserInput[]
-    upsert?: UserPermissionUpsertWithWhereUniqueWithoutUserInput | UserPermissionUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: UserPermissionCreateManyUserInputEnvelope
-    set?: UserPermissionWhereUniqueInput | UserPermissionWhereUniqueInput[]
-    disconnect?: UserPermissionWhereUniqueInput | UserPermissionWhereUniqueInput[]
-    delete?: UserPermissionWhereUniqueInput | UserPermissionWhereUniqueInput[]
-    connect?: UserPermissionWhereUniqueInput | UserPermissionWhereUniqueInput[]
-    update?: UserPermissionUpdateWithWhereUniqueWithoutUserInput | UserPermissionUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: UserPermissionUpdateManyWithWhereWithoutUserInput | UserPermissionUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: UserPermissionScalarWhereInput | UserPermissionScalarWhereInput[]
   }
 
   export type UserEmployeeUncheckedUpdateOneWithoutUserNestedInput = {
@@ -23423,34 +22570,6 @@ export namespace Prisma {
     upsert?: EmployeeUpsertWithoutUser_employeeInput
     connect?: EmployeeWhereUniqueInput
     update?: XOR<XOR<EmployeeUpdateToOneWithWhereWithoutUser_employeeInput, EmployeeUpdateWithoutUser_employeeInput>, EmployeeUncheckedUpdateWithoutUser_employeeInput>
-  }
-
-  export type UserCreateNestedOneWithoutUser_permissionsInput = {
-    create?: XOR<UserCreateWithoutUser_permissionsInput, UserUncheckedCreateWithoutUser_permissionsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutUser_permissionsInput
-    connect?: UserWhereUniqueInput
-  }
-
-  export type SubModuleCreateNestedOneWithoutUser_permissionsInput = {
-    create?: XOR<SubModuleCreateWithoutUser_permissionsInput, SubModuleUncheckedCreateWithoutUser_permissionsInput>
-    connectOrCreate?: SubModuleCreateOrConnectWithoutUser_permissionsInput
-    connect?: SubModuleWhereUniqueInput
-  }
-
-  export type UserUpdateOneRequiredWithoutUser_permissionsNestedInput = {
-    create?: XOR<UserCreateWithoutUser_permissionsInput, UserUncheckedCreateWithoutUser_permissionsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutUser_permissionsInput
-    upsert?: UserUpsertWithoutUser_permissionsInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutUser_permissionsInput, UserUpdateWithoutUser_permissionsInput>, UserUncheckedUpdateWithoutUser_permissionsInput>
-  }
-
-  export type SubModuleUpdateOneRequiredWithoutUser_permissionsNestedInput = {
-    create?: XOR<SubModuleCreateWithoutUser_permissionsInput, SubModuleUncheckedCreateWithoutUser_permissionsInput>
-    connectOrCreate?: SubModuleCreateOrConnectWithoutUser_permissionsInput
-    upsert?: SubModuleUpsertWithoutUser_permissionsInput
-    connect?: SubModuleWhereUniqueInput
-    update?: XOR<XOR<SubModuleUpdateToOneWithWhereWithoutUser_permissionsInput, SubModuleUpdateWithoutUser_permissionsInput>, SubModuleUncheckedUpdateWithoutUser_permissionsInput>
   }
 
   export type FeatureCreateNestedManyWithoutServiceInput = {
@@ -23613,18 +22732,8 @@ export namespace Prisma {
     connect?: ModuleWhereUniqueInput
   }
 
-  export type UserPermissionCreateNestedManyWithoutSubmoduleInput = {
-    create?: XOR<UserPermissionCreateWithoutSubmoduleInput, UserPermissionUncheckedCreateWithoutSubmoduleInput> | UserPermissionCreateWithoutSubmoduleInput[] | UserPermissionUncheckedCreateWithoutSubmoduleInput[]
-    connectOrCreate?: UserPermissionCreateOrConnectWithoutSubmoduleInput | UserPermissionCreateOrConnectWithoutSubmoduleInput[]
-    createMany?: UserPermissionCreateManySubmoduleInputEnvelope
-    connect?: UserPermissionWhereUniqueInput | UserPermissionWhereUniqueInput[]
-  }
-
-  export type UserPermissionUncheckedCreateNestedManyWithoutSubmoduleInput = {
-    create?: XOR<UserPermissionCreateWithoutSubmoduleInput, UserPermissionUncheckedCreateWithoutSubmoduleInput> | UserPermissionCreateWithoutSubmoduleInput[] | UserPermissionUncheckedCreateWithoutSubmoduleInput[]
-    connectOrCreate?: UserPermissionCreateOrConnectWithoutSubmoduleInput | UserPermissionCreateOrConnectWithoutSubmoduleInput[]
-    createMany?: UserPermissionCreateManySubmoduleInputEnvelope
-    connect?: UserPermissionWhereUniqueInput | UserPermissionWhereUniqueInput[]
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
   }
 
   export type ModuleUpdateOneRequiredWithoutSubmodulesNestedInput = {
@@ -23635,43 +22744,9 @@ export namespace Prisma {
     update?: XOR<XOR<ModuleUpdateToOneWithWhereWithoutSubmodulesInput, ModuleUpdateWithoutSubmodulesInput>, ModuleUncheckedUpdateWithoutSubmodulesInput>
   }
 
-  export type UserPermissionUpdateManyWithoutSubmoduleNestedInput = {
-    create?: XOR<UserPermissionCreateWithoutSubmoduleInput, UserPermissionUncheckedCreateWithoutSubmoduleInput> | UserPermissionCreateWithoutSubmoduleInput[] | UserPermissionUncheckedCreateWithoutSubmoduleInput[]
-    connectOrCreate?: UserPermissionCreateOrConnectWithoutSubmoduleInput | UserPermissionCreateOrConnectWithoutSubmoduleInput[]
-    upsert?: UserPermissionUpsertWithWhereUniqueWithoutSubmoduleInput | UserPermissionUpsertWithWhereUniqueWithoutSubmoduleInput[]
-    createMany?: UserPermissionCreateManySubmoduleInputEnvelope
-    set?: UserPermissionWhereUniqueInput | UserPermissionWhereUniqueInput[]
-    disconnect?: UserPermissionWhereUniqueInput | UserPermissionWhereUniqueInput[]
-    delete?: UserPermissionWhereUniqueInput | UserPermissionWhereUniqueInput[]
-    connect?: UserPermissionWhereUniqueInput | UserPermissionWhereUniqueInput[]
-    update?: UserPermissionUpdateWithWhereUniqueWithoutSubmoduleInput | UserPermissionUpdateWithWhereUniqueWithoutSubmoduleInput[]
-    updateMany?: UserPermissionUpdateManyWithWhereWithoutSubmoduleInput | UserPermissionUpdateManyWithWhereWithoutSubmoduleInput[]
-    deleteMany?: UserPermissionScalarWhereInput | UserPermissionScalarWhereInput[]
-  }
-
-  export type UserPermissionUncheckedUpdateManyWithoutSubmoduleNestedInput = {
-    create?: XOR<UserPermissionCreateWithoutSubmoduleInput, UserPermissionUncheckedCreateWithoutSubmoduleInput> | UserPermissionCreateWithoutSubmoduleInput[] | UserPermissionUncheckedCreateWithoutSubmoduleInput[]
-    connectOrCreate?: UserPermissionCreateOrConnectWithoutSubmoduleInput | UserPermissionCreateOrConnectWithoutSubmoduleInput[]
-    upsert?: UserPermissionUpsertWithWhereUniqueWithoutSubmoduleInput | UserPermissionUpsertWithWhereUniqueWithoutSubmoduleInput[]
-    createMany?: UserPermissionCreateManySubmoduleInputEnvelope
-    set?: UserPermissionWhereUniqueInput | UserPermissionWhereUniqueInput[]
-    disconnect?: UserPermissionWhereUniqueInput | UserPermissionWhereUniqueInput[]
-    delete?: UserPermissionWhereUniqueInput | UserPermissionWhereUniqueInput[]
-    connect?: UserPermissionWhereUniqueInput | UserPermissionWhereUniqueInput[]
-    update?: UserPermissionUpdateWithWhereUniqueWithoutSubmoduleInput | UserPermissionUpdateWithWhereUniqueWithoutSubmoduleInput[]
-    updateMany?: UserPermissionUpdateManyWithWhereWithoutSubmoduleInput | UserPermissionUpdateManyWithWhereWithoutSubmoduleInput[]
-    deleteMany?: UserPermissionScalarWhereInput | UserPermissionScalarWhereInput[]
-  }
-
   export type EmployeeCreateNestedOneWithoutJo_approver_settingInput = {
     create?: XOR<EmployeeCreateWithoutJo_approver_settingInput, EmployeeUncheckedCreateWithoutJo_approver_settingInput>
     connectOrCreate?: EmployeeCreateOrConnectWithoutJo_approver_settingInput
-    connect?: EmployeeWhereUniqueInput
-  }
-
-  export type EmployeeCreateNestedOneWithoutJo_approver_proxy_settingInput = {
-    create?: XOR<EmployeeCreateWithoutJo_approver_proxy_settingInput, EmployeeUncheckedCreateWithoutJo_approver_proxy_settingInput>
-    connectOrCreate?: EmployeeCreateOrConnectWithoutJo_approver_proxy_settingInput
     connect?: EmployeeWhereUniqueInput
   }
 
@@ -23683,25 +22758,9 @@ export namespace Prisma {
     update?: XOR<XOR<EmployeeUpdateToOneWithWhereWithoutJo_approver_settingInput, EmployeeUpdateWithoutJo_approver_settingInput>, EmployeeUncheckedUpdateWithoutJo_approver_settingInput>
   }
 
-  export type EmployeeUpdateOneWithoutJo_approver_proxy_settingNestedInput = {
-    create?: XOR<EmployeeCreateWithoutJo_approver_proxy_settingInput, EmployeeUncheckedCreateWithoutJo_approver_proxy_settingInput>
-    connectOrCreate?: EmployeeCreateOrConnectWithoutJo_approver_proxy_settingInput
-    upsert?: EmployeeUpsertWithoutJo_approver_proxy_settingInput
-    disconnect?: EmployeeWhereInput | boolean
-    delete?: EmployeeWhereInput | boolean
-    connect?: EmployeeWhereUniqueInput
-    update?: XOR<XOR<EmployeeUpdateToOneWithWhereWithoutJo_approver_proxy_settingInput, EmployeeUpdateWithoutJo_approver_proxy_settingInput>, EmployeeUncheckedUpdateWithoutJo_approver_proxy_settingInput>
-  }
-
   export type EmployeeCreateNestedOneWithoutRv_approver_settingInput = {
     create?: XOR<EmployeeCreateWithoutRv_approver_settingInput, EmployeeUncheckedCreateWithoutRv_approver_settingInput>
     connectOrCreate?: EmployeeCreateOrConnectWithoutRv_approver_settingInput
-    connect?: EmployeeWhereUniqueInput
-  }
-
-  export type EmployeeCreateNestedOneWithoutRv_approver_proxy_settingInput = {
-    create?: XOR<EmployeeCreateWithoutRv_approver_proxy_settingInput, EmployeeUncheckedCreateWithoutRv_approver_proxy_settingInput>
-    connectOrCreate?: EmployeeCreateOrConnectWithoutRv_approver_proxy_settingInput
     connect?: EmployeeWhereUniqueInput
   }
 
@@ -23713,25 +22772,9 @@ export namespace Prisma {
     update?: XOR<XOR<EmployeeUpdateToOneWithWhereWithoutRv_approver_settingInput, EmployeeUpdateWithoutRv_approver_settingInput>, EmployeeUncheckedUpdateWithoutRv_approver_settingInput>
   }
 
-  export type EmployeeUpdateOneWithoutRv_approver_proxy_settingNestedInput = {
-    create?: XOR<EmployeeCreateWithoutRv_approver_proxy_settingInput, EmployeeUncheckedCreateWithoutRv_approver_proxy_settingInput>
-    connectOrCreate?: EmployeeCreateOrConnectWithoutRv_approver_proxy_settingInput
-    upsert?: EmployeeUpsertWithoutRv_approver_proxy_settingInput
-    disconnect?: EmployeeWhereInput | boolean
-    delete?: EmployeeWhereInput | boolean
-    connect?: EmployeeWhereUniqueInput
-    update?: XOR<XOR<EmployeeUpdateToOneWithWhereWithoutRv_approver_proxy_settingInput, EmployeeUpdateWithoutRv_approver_proxy_settingInput>, EmployeeUncheckedUpdateWithoutRv_approver_proxy_settingInput>
-  }
-
   export type EmployeeCreateNestedOneWithoutSpr_approver_settingInput = {
     create?: XOR<EmployeeCreateWithoutSpr_approver_settingInput, EmployeeUncheckedCreateWithoutSpr_approver_settingInput>
     connectOrCreate?: EmployeeCreateOrConnectWithoutSpr_approver_settingInput
-    connect?: EmployeeWhereUniqueInput
-  }
-
-  export type EmployeeCreateNestedOneWithoutSpr_approver_proxy_settingInput = {
-    create?: XOR<EmployeeCreateWithoutSpr_approver_proxy_settingInput, EmployeeUncheckedCreateWithoutSpr_approver_proxy_settingInput>
-    connectOrCreate?: EmployeeCreateOrConnectWithoutSpr_approver_proxy_settingInput
     connect?: EmployeeWhereUniqueInput
   }
 
@@ -23743,25 +22786,9 @@ export namespace Prisma {
     update?: XOR<XOR<EmployeeUpdateToOneWithWhereWithoutSpr_approver_settingInput, EmployeeUpdateWithoutSpr_approver_settingInput>, EmployeeUncheckedUpdateWithoutSpr_approver_settingInput>
   }
 
-  export type EmployeeUpdateOneWithoutSpr_approver_proxy_settingNestedInput = {
-    create?: XOR<EmployeeCreateWithoutSpr_approver_proxy_settingInput, EmployeeUncheckedCreateWithoutSpr_approver_proxy_settingInput>
-    connectOrCreate?: EmployeeCreateOrConnectWithoutSpr_approver_proxy_settingInput
-    upsert?: EmployeeUpsertWithoutSpr_approver_proxy_settingInput
-    disconnect?: EmployeeWhereInput | boolean
-    delete?: EmployeeWhereInput | boolean
-    connect?: EmployeeWhereUniqueInput
-    update?: XOR<XOR<EmployeeUpdateToOneWithWhereWithoutSpr_approver_proxy_settingInput, EmployeeUpdateWithoutSpr_approver_proxy_settingInput>, EmployeeUncheckedUpdateWithoutSpr_approver_proxy_settingInput>
-  }
-
   export type EmployeeCreateNestedOneWithoutMeqs_approver_settingInput = {
     create?: XOR<EmployeeCreateWithoutMeqs_approver_settingInput, EmployeeUncheckedCreateWithoutMeqs_approver_settingInput>
     connectOrCreate?: EmployeeCreateOrConnectWithoutMeqs_approver_settingInput
-    connect?: EmployeeWhereUniqueInput
-  }
-
-  export type EmployeeCreateNestedOneWithoutMeqs_approver_proxy_settingInput = {
-    create?: XOR<EmployeeCreateWithoutMeqs_approver_proxy_settingInput, EmployeeUncheckedCreateWithoutMeqs_approver_proxy_settingInput>
-    connectOrCreate?: EmployeeCreateOrConnectWithoutMeqs_approver_proxy_settingInput
     connect?: EmployeeWhereUniqueInput
   }
 
@@ -23773,25 +22800,9 @@ export namespace Prisma {
     update?: XOR<XOR<EmployeeUpdateToOneWithWhereWithoutMeqs_approver_settingInput, EmployeeUpdateWithoutMeqs_approver_settingInput>, EmployeeUncheckedUpdateWithoutMeqs_approver_settingInput>
   }
 
-  export type EmployeeUpdateOneWithoutMeqs_approver_proxy_settingNestedInput = {
-    create?: XOR<EmployeeCreateWithoutMeqs_approver_proxy_settingInput, EmployeeUncheckedCreateWithoutMeqs_approver_proxy_settingInput>
-    connectOrCreate?: EmployeeCreateOrConnectWithoutMeqs_approver_proxy_settingInput
-    upsert?: EmployeeUpsertWithoutMeqs_approver_proxy_settingInput
-    disconnect?: EmployeeWhereInput | boolean
-    delete?: EmployeeWhereInput | boolean
-    connect?: EmployeeWhereUniqueInput
-    update?: XOR<XOR<EmployeeUpdateToOneWithWhereWithoutMeqs_approver_proxy_settingInput, EmployeeUpdateWithoutMeqs_approver_proxy_settingInput>, EmployeeUncheckedUpdateWithoutMeqs_approver_proxy_settingInput>
-  }
-
   export type EmployeeCreateNestedOneWithoutPo_approver_settingInput = {
     create?: XOR<EmployeeCreateWithoutPo_approver_settingInput, EmployeeUncheckedCreateWithoutPo_approver_settingInput>
     connectOrCreate?: EmployeeCreateOrConnectWithoutPo_approver_settingInput
-    connect?: EmployeeWhereUniqueInput
-  }
-
-  export type EmployeeCreateNestedOneWithoutPo_approver_proxy_settingInput = {
-    create?: XOR<EmployeeCreateWithoutPo_approver_proxy_settingInput, EmployeeUncheckedCreateWithoutPo_approver_proxy_settingInput>
-    connectOrCreate?: EmployeeCreateOrConnectWithoutPo_approver_proxy_settingInput
     connect?: EmployeeWhereUniqueInput
   }
 
@@ -23803,25 +22814,9 @@ export namespace Prisma {
     update?: XOR<XOR<EmployeeUpdateToOneWithWhereWithoutPo_approver_settingInput, EmployeeUpdateWithoutPo_approver_settingInput>, EmployeeUncheckedUpdateWithoutPo_approver_settingInput>
   }
 
-  export type EmployeeUpdateOneWithoutPo_approver_proxy_settingNestedInput = {
-    create?: XOR<EmployeeCreateWithoutPo_approver_proxy_settingInput, EmployeeUncheckedCreateWithoutPo_approver_proxy_settingInput>
-    connectOrCreate?: EmployeeCreateOrConnectWithoutPo_approver_proxy_settingInput
-    upsert?: EmployeeUpsertWithoutPo_approver_proxy_settingInput
-    disconnect?: EmployeeWhereInput | boolean
-    delete?: EmployeeWhereInput | boolean
-    connect?: EmployeeWhereUniqueInput
-    update?: XOR<XOR<EmployeeUpdateToOneWithWhereWithoutPo_approver_proxy_settingInput, EmployeeUpdateWithoutPo_approver_proxy_settingInput>, EmployeeUncheckedUpdateWithoutPo_approver_proxy_settingInput>
-  }
-
   export type EmployeeCreateNestedOneWithoutRr_approver_settingInput = {
     create?: XOR<EmployeeCreateWithoutRr_approver_settingInput, EmployeeUncheckedCreateWithoutRr_approver_settingInput>
     connectOrCreate?: EmployeeCreateOrConnectWithoutRr_approver_settingInput
-    connect?: EmployeeWhereUniqueInput
-  }
-
-  export type EmployeeCreateNestedOneWithoutRr_approver_proxy_settingInput = {
-    create?: XOR<EmployeeCreateWithoutRr_approver_proxy_settingInput, EmployeeUncheckedCreateWithoutRr_approver_proxy_settingInput>
-    connectOrCreate?: EmployeeCreateOrConnectWithoutRr_approver_proxy_settingInput
     connect?: EmployeeWhereUniqueInput
   }
 
@@ -23831,16 +22826,6 @@ export namespace Prisma {
     upsert?: EmployeeUpsertWithoutRr_approver_settingInput
     connect?: EmployeeWhereUniqueInput
     update?: XOR<XOR<EmployeeUpdateToOneWithWhereWithoutRr_approver_settingInput, EmployeeUpdateWithoutRr_approver_settingInput>, EmployeeUncheckedUpdateWithoutRr_approver_settingInput>
-  }
-
-  export type EmployeeUpdateOneWithoutRr_approver_proxy_settingNestedInput = {
-    create?: XOR<EmployeeCreateWithoutRr_approver_proxy_settingInput, EmployeeUncheckedCreateWithoutRr_approver_proxy_settingInput>
-    connectOrCreate?: EmployeeCreateOrConnectWithoutRr_approver_proxy_settingInput
-    upsert?: EmployeeUpsertWithoutRr_approver_proxy_settingInput
-    disconnect?: EmployeeWhereInput | boolean
-    delete?: EmployeeWhereInput | boolean
-    connect?: EmployeeWhereUniqueInput
-    update?: XOR<XOR<EmployeeUpdateToOneWithWhereWithoutRr_approver_proxy_settingInput, EmployeeUpdateWithoutRr_approver_proxy_settingInput>, EmployeeUncheckedUpdateWithoutRr_approver_proxy_settingInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -23868,6 +22853,20 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -23879,9 +22878,15 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
@@ -23928,42 +22933,6 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
-  }
-
-  export type NestedStringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -23992,6 +22961,34 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
   export type NestedEnumRoleFilter<$PrismaModel = never> = {
     equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
     in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
@@ -24009,14 +23006,30 @@ export namespace Prisma {
     _max?: NestedEnumRoleFilter<$PrismaModel>
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type DepartmentCreateWithoutDivisionInput = {
     id?: string
     code: string
     name: string
     status?: number
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
   }
 
   export type DepartmentUncheckedCreateWithoutDivisionInput = {
@@ -24024,9 +23037,12 @@ export namespace Prisma {
     code: string
     name: string
     status?: number
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
   }
 
   export type DepartmentCreateOrConnectWithoutDivisionInput = {
@@ -24050,9 +23066,12 @@ export namespace Prisma {
     code?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     status?: IntFieldUpdateOperationsInput | number
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type DepartmentUncheckedUpdateWithoutDivisionInput = {
@@ -24060,9 +23079,12 @@ export namespace Prisma {
     code?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     status?: IntFieldUpdateOperationsInput | number
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type DivisionCreateWithoutDepartmentInput = {
@@ -24070,9 +23092,12 @@ export namespace Prisma {
     code: string
     name: string
     status?: number
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
   }
 
   export type DivisionUncheckedCreateWithoutDepartmentInput = {
@@ -24080,9 +23105,12 @@ export namespace Prisma {
     code: string
     name: string
     status?: number
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
   }
 
   export type DivisionCreateOrConnectWithoutDepartmentInput = {
@@ -24120,29 +23148,36 @@ export namespace Prisma {
     code?: StringFilter<"Division"> | string
     name?: StringFilter<"Division"> | string
     status?: IntFilter<"Division"> | number
+    created_by?: StringFilter<"Division"> | string
+    updated_by?: StringNullableFilter<"Division"> | string | null
+    deleted_by?: StringNullableFilter<"Division"> | string | null
     created_at?: DateTimeFilter<"Division"> | Date | string
     updated_at?: DateTimeFilter<"Division"> | Date | string
-    is_deleted?: BoolFilter<"Division"> | boolean
+    deleted_at?: DateTimeNullableFilter<"Division"> | Date | string | null
   }
 
   export type JOApproverSettingCreateWithoutApproverInput = {
     id?: string
     label: string
     order: number
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
-    approver_proxy?: EmployeeCreateNestedOneWithoutJo_approver_proxy_settingInput
+    deleted_at?: Date | string | null
   }
 
   export type JOApproverSettingUncheckedCreateWithoutApproverInput = {
     id?: string
     label: string
     order: number
-    approver_proxy_id?: string | null
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
   }
 
   export type JOApproverSettingCreateOrConnectWithoutApproverInput = {
@@ -24154,20 +23189,24 @@ export namespace Prisma {
     id?: string
     label: string
     order: number
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
-    approver_proxy?: EmployeeCreateNestedOneWithoutMeqs_approver_proxy_settingInput
+    deleted_at?: Date | string | null
   }
 
   export type MEQSApproverSettingUncheckedCreateWithoutApproverInput = {
     id?: string
-    approver_proxy_id?: string | null
     label: string
     order: number
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
   }
 
   export type MEQSApproverSettingCreateOrConnectWithoutApproverInput = {
@@ -24179,20 +23218,24 @@ export namespace Prisma {
     id?: string
     label: string
     order: number
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
-    approver_proxy?: EmployeeCreateNestedOneWithoutPo_approver_proxy_settingInput
+    deleted_at?: Date | string | null
   }
 
   export type POApproverSettingUncheckedCreateWithoutApproverInput = {
     id?: string
-    approver_proxy_id?: string | null
     label: string
     order: number
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
   }
 
   export type POApproverSettingCreateOrConnectWithoutApproverInput = {
@@ -24204,20 +23247,24 @@ export namespace Prisma {
     id?: string
     label: string
     order: number
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
-    approver_proxy?: EmployeeCreateNestedOneWithoutRv_approver_proxy_settingInput
+    deleted_at?: Date | string | null
   }
 
   export type RVApproverSettingUncheckedCreateWithoutApproverInput = {
     id?: string
-    approver_proxy_id?: string | null
     label: string
     order: number
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
   }
 
   export type RVApproverSettingCreateOrConnectWithoutApproverInput = {
@@ -24229,20 +23276,24 @@ export namespace Prisma {
     id?: string
     label: string
     order: number
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
-    approver_proxy?: EmployeeCreateNestedOneWithoutSpr_approver_proxy_settingInput
+    deleted_at?: Date | string | null
   }
 
   export type SPRApproverSettingUncheckedCreateWithoutApproverInput = {
     id?: string
-    approver_proxy_id?: string | null
     label: string
     order: number
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
   }
 
   export type SPRApproverSettingCreateOrConnectWithoutApproverInput = {
@@ -24254,20 +23305,24 @@ export namespace Prisma {
     id?: string
     label: string
     order: number
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
-    approver_proxy?: EmployeeCreateNestedOneWithoutRr_approver_proxy_settingInput
+    deleted_at?: Date | string | null
   }
 
   export type RRApproverSettingUncheckedCreateWithoutApproverInput = {
     id?: string
-    approver_proxy_id?: string | null
     label: string
     order: number
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
   }
 
   export type RRApproverSettingCreateOrConnectWithoutApproverInput = {
@@ -24275,170 +23330,22 @@ export namespace Prisma {
     create: XOR<RRApproverSettingCreateWithoutApproverInput, RRApproverSettingUncheckedCreateWithoutApproverInput>
   }
 
-  export type JOApproverSettingCreateWithoutApprover_proxyInput = {
-    id?: string
-    label: string
-    order: number
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-    approver: EmployeeCreateNestedOneWithoutJo_approver_settingInput
-  }
-
-  export type JOApproverSettingUncheckedCreateWithoutApprover_proxyInput = {
-    id?: string
-    label: string
-    order: number
-    approver_id: string
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-  }
-
-  export type JOApproverSettingCreateOrConnectWithoutApprover_proxyInput = {
-    where: JOApproverSettingWhereUniqueInput
-    create: XOR<JOApproverSettingCreateWithoutApprover_proxyInput, JOApproverSettingUncheckedCreateWithoutApprover_proxyInput>
-  }
-
-  export type MEQSApproverSettingCreateWithoutApprover_proxyInput = {
-    id?: string
-    label: string
-    order: number
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-    approver: EmployeeCreateNestedOneWithoutMeqs_approver_settingInput
-  }
-
-  export type MEQSApproverSettingUncheckedCreateWithoutApprover_proxyInput = {
-    id?: string
-    approver_id: string
-    label: string
-    order: number
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-  }
-
-  export type MEQSApproverSettingCreateOrConnectWithoutApprover_proxyInput = {
-    where: MEQSApproverSettingWhereUniqueInput
-    create: XOR<MEQSApproverSettingCreateWithoutApprover_proxyInput, MEQSApproverSettingUncheckedCreateWithoutApprover_proxyInput>
-  }
-
-  export type POApproverSettingCreateWithoutApprover_proxyInput = {
-    id?: string
-    label: string
-    order: number
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-    approver: EmployeeCreateNestedOneWithoutPo_approver_settingInput
-  }
-
-  export type POApproverSettingUncheckedCreateWithoutApprover_proxyInput = {
-    id?: string
-    approver_id: string
-    label: string
-    order: number
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-  }
-
-  export type POApproverSettingCreateOrConnectWithoutApprover_proxyInput = {
-    where: POApproverSettingWhereUniqueInput
-    create: XOR<POApproverSettingCreateWithoutApprover_proxyInput, POApproverSettingUncheckedCreateWithoutApprover_proxyInput>
-  }
-
-  export type RVApproverSettingCreateWithoutApprover_proxyInput = {
-    id?: string
-    label: string
-    order: number
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-    approver: EmployeeCreateNestedOneWithoutRv_approver_settingInput
-  }
-
-  export type RVApproverSettingUncheckedCreateWithoutApprover_proxyInput = {
-    id?: string
-    approver_id: string
-    label: string
-    order: number
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-  }
-
-  export type RVApproverSettingCreateOrConnectWithoutApprover_proxyInput = {
-    where: RVApproverSettingWhereUniqueInput
-    create: XOR<RVApproverSettingCreateWithoutApprover_proxyInput, RVApproverSettingUncheckedCreateWithoutApprover_proxyInput>
-  }
-
-  export type SPRApproverSettingCreateWithoutApprover_proxyInput = {
-    id?: string
-    label: string
-    order: number
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-    approver: EmployeeCreateNestedOneWithoutSpr_approver_settingInput
-  }
-
-  export type SPRApproverSettingUncheckedCreateWithoutApprover_proxyInput = {
-    id?: string
-    approver_id: string
-    label: string
-    order: number
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-  }
-
-  export type SPRApproverSettingCreateOrConnectWithoutApprover_proxyInput = {
-    where: SPRApproverSettingWhereUniqueInput
-    create: XOR<SPRApproverSettingCreateWithoutApprover_proxyInput, SPRApproverSettingUncheckedCreateWithoutApprover_proxyInput>
-  }
-
-  export type RRApproverSettingCreateWithoutApprover_proxyInput = {
-    id?: string
-    label: string
-    order: number
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-    approver: EmployeeCreateNestedOneWithoutRr_approver_settingInput
-  }
-
-  export type RRApproverSettingUncheckedCreateWithoutApprover_proxyInput = {
-    id?: string
-    approver_id: string
-    label: string
-    order: number
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-  }
-
-  export type RRApproverSettingCreateOrConnectWithoutApprover_proxyInput = {
-    where: RRApproverSettingWhereUniqueInput
-    create: XOR<RRApproverSettingCreateWithoutApprover_proxyInput, RRApproverSettingUncheckedCreateWithoutApprover_proxyInput>
-  }
-
   export type UserEmployeeCreateWithoutEmployeeInput = {
     id?: string
+    created_by: string
+    updated_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
     user: UserCreateNestedOneWithoutUser_employeeInput
   }
 
   export type UserEmployeeUncheckedCreateWithoutEmployeeInput = {
     id?: string
     user_id: string
+    created_by: string
+    updated_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
   }
 
   export type UserEmployeeCreateOrConnectWithoutEmployeeInput = {
@@ -24461,20 +23368,24 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    approver_proxy?: EmployeeUpdateOneWithoutJo_approver_proxy_settingNestedInput
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type JOApproverSettingUncheckedUpdateWithoutApproverInput = {
     id?: StringFieldUpdateOperationsInput | string
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
-    approver_proxy_id?: NullableStringFieldUpdateOperationsInput | string | null
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type MEQSApproverSettingUpsertWithoutApproverInput = {
@@ -24492,20 +23403,24 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    approver_proxy?: EmployeeUpdateOneWithoutMeqs_approver_proxy_settingNestedInput
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type MEQSApproverSettingUncheckedUpdateWithoutApproverInput = {
     id?: StringFieldUpdateOperationsInput | string
-    approver_proxy_id?: NullableStringFieldUpdateOperationsInput | string | null
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type POApproverSettingUpsertWithoutApproverInput = {
@@ -24523,20 +23438,24 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    approver_proxy?: EmployeeUpdateOneWithoutPo_approver_proxy_settingNestedInput
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type POApproverSettingUncheckedUpdateWithoutApproverInput = {
     id?: StringFieldUpdateOperationsInput | string
-    approver_proxy_id?: NullableStringFieldUpdateOperationsInput | string | null
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type RVApproverSettingUpsertWithoutApproverInput = {
@@ -24554,20 +23473,24 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    approver_proxy?: EmployeeUpdateOneWithoutRv_approver_proxy_settingNestedInput
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type RVApproverSettingUncheckedUpdateWithoutApproverInput = {
     id?: StringFieldUpdateOperationsInput | string
-    approver_proxy_id?: NullableStringFieldUpdateOperationsInput | string | null
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type SPRApproverSettingUpsertWithoutApproverInput = {
@@ -24585,20 +23508,24 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    approver_proxy?: EmployeeUpdateOneWithoutSpr_approver_proxy_settingNestedInput
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type SPRApproverSettingUncheckedUpdateWithoutApproverInput = {
     id?: StringFieldUpdateOperationsInput | string
-    approver_proxy_id?: NullableStringFieldUpdateOperationsInput | string | null
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type RRApproverSettingUpsertWithoutApproverInput = {
@@ -24616,206 +23543,24 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    approver_proxy?: EmployeeUpdateOneWithoutRr_approver_proxy_settingNestedInput
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type RRApproverSettingUncheckedUpdateWithoutApproverInput = {
     id?: StringFieldUpdateOperationsInput | string
-    approver_proxy_id?: NullableStringFieldUpdateOperationsInput | string | null
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type JOApproverSettingUpsertWithoutApprover_proxyInput = {
-    update: XOR<JOApproverSettingUpdateWithoutApprover_proxyInput, JOApproverSettingUncheckedUpdateWithoutApprover_proxyInput>
-    create: XOR<JOApproverSettingCreateWithoutApprover_proxyInput, JOApproverSettingUncheckedCreateWithoutApprover_proxyInput>
-    where?: JOApproverSettingWhereInput
-  }
-
-  export type JOApproverSettingUpdateToOneWithWhereWithoutApprover_proxyInput = {
-    where?: JOApproverSettingWhereInput
-    data: XOR<JOApproverSettingUpdateWithoutApprover_proxyInput, JOApproverSettingUncheckedUpdateWithoutApprover_proxyInput>
-  }
-
-  export type JOApproverSettingUpdateWithoutApprover_proxyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    label?: StringFieldUpdateOperationsInput | string
-    order?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    approver?: EmployeeUpdateOneRequiredWithoutJo_approver_settingNestedInput
-  }
-
-  export type JOApproverSettingUncheckedUpdateWithoutApprover_proxyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    label?: StringFieldUpdateOperationsInput | string
-    order?: IntFieldUpdateOperationsInput | number
-    approver_id?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type MEQSApproverSettingUpsertWithoutApprover_proxyInput = {
-    update: XOR<MEQSApproverSettingUpdateWithoutApprover_proxyInput, MEQSApproverSettingUncheckedUpdateWithoutApprover_proxyInput>
-    create: XOR<MEQSApproverSettingCreateWithoutApprover_proxyInput, MEQSApproverSettingUncheckedCreateWithoutApprover_proxyInput>
-    where?: MEQSApproverSettingWhereInput
-  }
-
-  export type MEQSApproverSettingUpdateToOneWithWhereWithoutApprover_proxyInput = {
-    where?: MEQSApproverSettingWhereInput
-    data: XOR<MEQSApproverSettingUpdateWithoutApprover_proxyInput, MEQSApproverSettingUncheckedUpdateWithoutApprover_proxyInput>
-  }
-
-  export type MEQSApproverSettingUpdateWithoutApprover_proxyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    label?: StringFieldUpdateOperationsInput | string
-    order?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    approver?: EmployeeUpdateOneRequiredWithoutMeqs_approver_settingNestedInput
-  }
-
-  export type MEQSApproverSettingUncheckedUpdateWithoutApprover_proxyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    approver_id?: StringFieldUpdateOperationsInput | string
-    label?: StringFieldUpdateOperationsInput | string
-    order?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type POApproverSettingUpsertWithoutApprover_proxyInput = {
-    update: XOR<POApproverSettingUpdateWithoutApprover_proxyInput, POApproverSettingUncheckedUpdateWithoutApprover_proxyInput>
-    create: XOR<POApproverSettingCreateWithoutApprover_proxyInput, POApproverSettingUncheckedCreateWithoutApprover_proxyInput>
-    where?: POApproverSettingWhereInput
-  }
-
-  export type POApproverSettingUpdateToOneWithWhereWithoutApprover_proxyInput = {
-    where?: POApproverSettingWhereInput
-    data: XOR<POApproverSettingUpdateWithoutApprover_proxyInput, POApproverSettingUncheckedUpdateWithoutApprover_proxyInput>
-  }
-
-  export type POApproverSettingUpdateWithoutApprover_proxyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    label?: StringFieldUpdateOperationsInput | string
-    order?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    approver?: EmployeeUpdateOneRequiredWithoutPo_approver_settingNestedInput
-  }
-
-  export type POApproverSettingUncheckedUpdateWithoutApprover_proxyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    approver_id?: StringFieldUpdateOperationsInput | string
-    label?: StringFieldUpdateOperationsInput | string
-    order?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type RVApproverSettingUpsertWithoutApprover_proxyInput = {
-    update: XOR<RVApproverSettingUpdateWithoutApprover_proxyInput, RVApproverSettingUncheckedUpdateWithoutApprover_proxyInput>
-    create: XOR<RVApproverSettingCreateWithoutApprover_proxyInput, RVApproverSettingUncheckedCreateWithoutApprover_proxyInput>
-    where?: RVApproverSettingWhereInput
-  }
-
-  export type RVApproverSettingUpdateToOneWithWhereWithoutApprover_proxyInput = {
-    where?: RVApproverSettingWhereInput
-    data: XOR<RVApproverSettingUpdateWithoutApprover_proxyInput, RVApproverSettingUncheckedUpdateWithoutApprover_proxyInput>
-  }
-
-  export type RVApproverSettingUpdateWithoutApprover_proxyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    label?: StringFieldUpdateOperationsInput | string
-    order?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    approver?: EmployeeUpdateOneRequiredWithoutRv_approver_settingNestedInput
-  }
-
-  export type RVApproverSettingUncheckedUpdateWithoutApprover_proxyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    approver_id?: StringFieldUpdateOperationsInput | string
-    label?: StringFieldUpdateOperationsInput | string
-    order?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type SPRApproverSettingUpsertWithoutApprover_proxyInput = {
-    update: XOR<SPRApproverSettingUpdateWithoutApprover_proxyInput, SPRApproverSettingUncheckedUpdateWithoutApprover_proxyInput>
-    create: XOR<SPRApproverSettingCreateWithoutApprover_proxyInput, SPRApproverSettingUncheckedCreateWithoutApprover_proxyInput>
-    where?: SPRApproverSettingWhereInput
-  }
-
-  export type SPRApproverSettingUpdateToOneWithWhereWithoutApprover_proxyInput = {
-    where?: SPRApproverSettingWhereInput
-    data: XOR<SPRApproverSettingUpdateWithoutApprover_proxyInput, SPRApproverSettingUncheckedUpdateWithoutApprover_proxyInput>
-  }
-
-  export type SPRApproverSettingUpdateWithoutApprover_proxyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    label?: StringFieldUpdateOperationsInput | string
-    order?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    approver?: EmployeeUpdateOneRequiredWithoutSpr_approver_settingNestedInput
-  }
-
-  export type SPRApproverSettingUncheckedUpdateWithoutApprover_proxyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    approver_id?: StringFieldUpdateOperationsInput | string
-    label?: StringFieldUpdateOperationsInput | string
-    order?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type RRApproverSettingUpsertWithoutApprover_proxyInput = {
-    update: XOR<RRApproverSettingUpdateWithoutApprover_proxyInput, RRApproverSettingUncheckedUpdateWithoutApprover_proxyInput>
-    create: XOR<RRApproverSettingCreateWithoutApprover_proxyInput, RRApproverSettingUncheckedCreateWithoutApprover_proxyInput>
-    where?: RRApproverSettingWhereInput
-  }
-
-  export type RRApproverSettingUpdateToOneWithWhereWithoutApprover_proxyInput = {
-    where?: RRApproverSettingWhereInput
-    data: XOR<RRApproverSettingUpdateWithoutApprover_proxyInput, RRApproverSettingUncheckedUpdateWithoutApprover_proxyInput>
-  }
-
-  export type RRApproverSettingUpdateWithoutApprover_proxyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    label?: StringFieldUpdateOperationsInput | string
-    order?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    approver?: EmployeeUpdateOneRequiredWithoutRr_approver_settingNestedInput
-  }
-
-  export type RRApproverSettingUncheckedUpdateWithoutApprover_proxyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    approver_id?: StringFieldUpdateOperationsInput | string
-    label?: StringFieldUpdateOperationsInput | string
-    order?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type UserEmployeeUpsertWithoutEmployeeInput = {
@@ -24831,93 +23576,43 @@ export namespace Prisma {
 
   export type UserEmployeeUpdateWithoutEmployeeInput = {
     id?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
     user?: UserUpdateOneRequiredWithoutUser_employeeNestedInput
   }
 
   export type UserEmployeeUncheckedUpdateWithoutEmployeeInput = {
     id?: StringFieldUpdateOperationsInput | string
     user_id?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type UserPermissionCreateWithoutUserInput = {
-    id?: string
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-    submodule: SubModuleCreateNestedOneWithoutUser_permissionsInput
-  }
-
-  export type UserPermissionUncheckedCreateWithoutUserInput = {
-    id?: string
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-    submodule_id: string
-  }
-
-  export type UserPermissionCreateOrConnectWithoutUserInput = {
-    where: UserPermissionWhereUniqueInput
-    create: XOR<UserPermissionCreateWithoutUserInput, UserPermissionUncheckedCreateWithoutUserInput>
-  }
-
-  export type UserPermissionCreateManyUserInputEnvelope = {
-    data: UserPermissionCreateManyUserInput | UserPermissionCreateManyUserInput[]
-    skipDuplicates?: boolean
   }
 
   export type UserEmployeeCreateWithoutUserInput = {
     id?: string
+    created_by: string
+    updated_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
     employee: EmployeeCreateNestedOneWithoutUser_employeeInput
   }
 
   export type UserEmployeeUncheckedCreateWithoutUserInput = {
     id?: string
     employee_id: string
+    created_by: string
+    updated_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
   }
 
   export type UserEmployeeCreateOrConnectWithoutUserInput = {
     where: UserEmployeeWhereUniqueInput
     create: XOR<UserEmployeeCreateWithoutUserInput, UserEmployeeUncheckedCreateWithoutUserInput>
-  }
-
-  export type UserPermissionUpsertWithWhereUniqueWithoutUserInput = {
-    where: UserPermissionWhereUniqueInput
-    update: XOR<UserPermissionUpdateWithoutUserInput, UserPermissionUncheckedUpdateWithoutUserInput>
-    create: XOR<UserPermissionCreateWithoutUserInput, UserPermissionUncheckedCreateWithoutUserInput>
-  }
-
-  export type UserPermissionUpdateWithWhereUniqueWithoutUserInput = {
-    where: UserPermissionWhereUniqueInput
-    data: XOR<UserPermissionUpdateWithoutUserInput, UserPermissionUncheckedUpdateWithoutUserInput>
-  }
-
-  export type UserPermissionUpdateManyWithWhereWithoutUserInput = {
-    where: UserPermissionScalarWhereInput
-    data: XOR<UserPermissionUpdateManyMutationInput, UserPermissionUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type UserPermissionScalarWhereInput = {
-    AND?: UserPermissionScalarWhereInput | UserPermissionScalarWhereInput[]
-    OR?: UserPermissionScalarWhereInput[]
-    NOT?: UserPermissionScalarWhereInput | UserPermissionScalarWhereInput[]
-    id?: StringFilter<"UserPermission"> | string
-    created_at?: DateTimeFilter<"UserPermission"> | Date | string
-    updated_at?: DateTimeFilter<"UserPermission"> | Date | string
-    is_deleted?: BoolFilter<"UserPermission"> | boolean
-    user_id?: StringFilter<"UserPermission"> | string
-    submodule_id?: StringFilter<"UserPermission"> | string
   }
 
   export type UserEmployeeUpsertWithoutUserInput = {
@@ -24933,18 +23628,20 @@ export namespace Prisma {
 
   export type UserEmployeeUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
     employee?: EmployeeUpdateOneRequiredWithoutUser_employeeNestedInput
   }
 
   export type UserEmployeeUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     employee_id?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type UserCreateWithoutUser_employeeInput = {
@@ -24953,10 +23650,12 @@ export namespace Prisma {
     username: string
     password: string
     status?: number
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
-    user_permissions?: UserPermissionCreateNestedManyWithoutUserInput
+    deleted_at?: Date | string | null
   }
 
   export type UserUncheckedCreateWithoutUser_employeeInput = {
@@ -24965,10 +23664,12 @@ export namespace Prisma {
     username: string
     password: string
     status?: number
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
-    user_permissions?: UserPermissionUncheckedCreateNestedManyWithoutUserInput
+    deleted_at?: Date | string | null
   }
 
   export type UserCreateOrConnectWithoutUser_employeeInput = {
@@ -24981,21 +23682,18 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
     jo_approver_setting?: JOApproverSettingCreateNestedOneWithoutApproverInput
     meqs_approver_setting?: MEQSApproverSettingCreateNestedOneWithoutApproverInput
     po_approver_setting?: POApproverSettingCreateNestedOneWithoutApproverInput
     rv_approver_setting?: RVApproverSettingCreateNestedOneWithoutApproverInput
     spr_approver_setting?: SPRApproverSettingCreateNestedOneWithoutApproverInput
     rr_approver_setting?: RRApproverSettingCreateNestedOneWithoutApproverInput
-    jo_approver_proxy_setting?: JOApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    po_approver_proxy_setting?: POApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    rv_approver_proxy_setting?: RVApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    spr_approver_proxy_setting?: SPRApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    rr_approver_proxy_setting?: RRApproverSettingCreateNestedOneWithoutApprover_proxyInput
   }
 
   export type EmployeeUncheckedCreateWithoutUser_employeeInput = {
@@ -25003,21 +23701,18 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
     jo_approver_setting?: JOApproverSettingUncheckedCreateNestedOneWithoutApproverInput
     meqs_approver_setting?: MEQSApproverSettingUncheckedCreateNestedOneWithoutApproverInput
     po_approver_setting?: POApproverSettingUncheckedCreateNestedOneWithoutApproverInput
     rv_approver_setting?: RVApproverSettingUncheckedCreateNestedOneWithoutApproverInput
     spr_approver_setting?: SPRApproverSettingUncheckedCreateNestedOneWithoutApproverInput
     rr_approver_setting?: RRApproverSettingUncheckedCreateNestedOneWithoutApproverInput
-    jo_approver_proxy_setting?: JOApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    po_approver_proxy_setting?: POApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    rv_approver_proxy_setting?: RVApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    spr_approver_proxy_setting?: SPRApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    rr_approver_proxy_setting?: RRApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
   }
 
   export type EmployeeCreateOrConnectWithoutUser_employeeInput = {
@@ -25042,10 +23737,12 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     status?: IntFieldUpdateOperationsInput | number
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    user_permissions?: UserPermissionUpdateManyWithoutUserNestedInput
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type UserUncheckedUpdateWithoutUser_employeeInput = {
@@ -25054,10 +23751,12 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     status?: IntFieldUpdateOperationsInput | number
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    user_permissions?: UserPermissionUncheckedUpdateManyWithoutUserNestedInput
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type EmployeeUpsertWithoutUser_employeeInput = {
@@ -25076,21 +23775,18 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     jo_approver_setting?: JOApproverSettingUpdateOneWithoutApproverNestedInput
     meqs_approver_setting?: MEQSApproverSettingUpdateOneWithoutApproverNestedInput
     po_approver_setting?: POApproverSettingUpdateOneWithoutApproverNestedInput
     rv_approver_setting?: RVApproverSettingUpdateOneWithoutApproverNestedInput
     spr_approver_setting?: SPRApproverSettingUpdateOneWithoutApproverNestedInput
     rr_approver_setting?: RRApproverSettingUpdateOneWithoutApproverNestedInput
-    jo_approver_proxy_setting?: JOApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    po_approver_proxy_setting?: POApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    rv_approver_proxy_setting?: RVApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    spr_approver_proxy_setting?: SPRApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    rr_approver_proxy_setting?: RRApproverSettingUpdateOneWithoutApprover_proxyNestedInput
   }
 
   export type EmployeeUncheckedUpdateWithoutUser_employeeInput = {
@@ -25098,154 +23794,41 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     jo_approver_setting?: JOApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
     meqs_approver_setting?: MEQSApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
     po_approver_setting?: POApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
     rv_approver_setting?: RVApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
     spr_approver_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
     rr_approver_setting?: RRApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
-    jo_approver_proxy_setting?: JOApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    po_approver_proxy_setting?: POApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    rv_approver_proxy_setting?: RVApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    spr_approver_proxy_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    rr_approver_proxy_setting?: RRApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-  }
-
-  export type UserCreateWithoutUser_permissionsInput = {
-    id?: string
-    role?: $Enums.Role
-    username: string
-    password: string
-    status?: number
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-    user_employee?: UserEmployeeCreateNestedOneWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutUser_permissionsInput = {
-    id?: string
-    role?: $Enums.Role
-    username: string
-    password: string
-    status?: number
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-    user_employee?: UserEmployeeUncheckedCreateNestedOneWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutUser_permissionsInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutUser_permissionsInput, UserUncheckedCreateWithoutUser_permissionsInput>
-  }
-
-  export type SubModuleCreateWithoutUser_permissionsInput = {
-    id?: string
-    name: string
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-    module: ModuleCreateNestedOneWithoutSubmodulesInput
-  }
-
-  export type SubModuleUncheckedCreateWithoutUser_permissionsInput = {
-    id?: string
-    name: string
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-    module_id: string
-  }
-
-  export type SubModuleCreateOrConnectWithoutUser_permissionsInput = {
-    where: SubModuleWhereUniqueInput
-    create: XOR<SubModuleCreateWithoutUser_permissionsInput, SubModuleUncheckedCreateWithoutUser_permissionsInput>
-  }
-
-  export type UserUpsertWithoutUser_permissionsInput = {
-    update: XOR<UserUpdateWithoutUser_permissionsInput, UserUncheckedUpdateWithoutUser_permissionsInput>
-    create: XOR<UserCreateWithoutUser_permissionsInput, UserUncheckedCreateWithoutUser_permissionsInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutUser_permissionsInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutUser_permissionsInput, UserUncheckedUpdateWithoutUser_permissionsInput>
-  }
-
-  export type UserUpdateWithoutUser_permissionsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
-    username?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    status?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    user_employee?: UserEmployeeUpdateOneWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutUser_permissionsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
-    username?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    status?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    user_employee?: UserEmployeeUncheckedUpdateOneWithoutUserNestedInput
-  }
-
-  export type SubModuleUpsertWithoutUser_permissionsInput = {
-    update: XOR<SubModuleUpdateWithoutUser_permissionsInput, SubModuleUncheckedUpdateWithoutUser_permissionsInput>
-    create: XOR<SubModuleCreateWithoutUser_permissionsInput, SubModuleUncheckedCreateWithoutUser_permissionsInput>
-    where?: SubModuleWhereInput
-  }
-
-  export type SubModuleUpdateToOneWithWhereWithoutUser_permissionsInput = {
-    where?: SubModuleWhereInput
-    data: XOR<SubModuleUpdateWithoutUser_permissionsInput, SubModuleUncheckedUpdateWithoutUser_permissionsInput>
-  }
-
-  export type SubModuleUpdateWithoutUser_permissionsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    module?: ModuleUpdateOneRequiredWithoutSubmodulesNestedInput
-  }
-
-  export type SubModuleUncheckedUpdateWithoutUser_permissionsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    module_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type FeatureCreateWithoutServiceInput = {
     id?: string
     name: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
     modules?: ModuleCreateNestedManyWithoutFeatureInput
   }
 
   export type FeatureUncheckedCreateWithoutServiceInput = {
     id?: string
     name: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
     modules?: ModuleUncheckedCreateNestedManyWithoutFeatureInput
   }
 
@@ -25281,26 +23864,35 @@ export namespace Prisma {
     NOT?: FeatureScalarWhereInput | FeatureScalarWhereInput[]
     id?: StringFilter<"Feature"> | string
     name?: StringFilter<"Feature"> | string
+    created_by?: StringFilter<"Feature"> | string
+    updated_by?: StringNullableFilter<"Feature"> | string | null
+    deleted_by?: StringNullableFilter<"Feature"> | string | null
     created_at?: DateTimeFilter<"Feature"> | Date | string
     updated_at?: DateTimeFilter<"Feature"> | Date | string
-    is_deleted?: BoolFilter<"Feature"> | boolean
+    deleted_at?: DateTimeNullableFilter<"Feature"> | Date | string | null
     service_id?: StringFilter<"Feature"> | string
   }
 
   export type ServiceCreateWithoutFeaturesInput = {
     id?: string
     name: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
   }
 
   export type ServiceUncheckedCreateWithoutFeaturesInput = {
     id?: string
     name: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
   }
 
   export type ServiceCreateOrConnectWithoutFeaturesInput = {
@@ -25311,18 +23903,24 @@ export namespace Prisma {
   export type ModuleCreateWithoutFeatureInput = {
     id?: string
     name: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
     submodules?: SubModuleCreateNestedManyWithoutModuleInput
   }
 
   export type ModuleUncheckedCreateWithoutFeatureInput = {
     id?: string
     name: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
     submodules?: SubModuleUncheckedCreateNestedManyWithoutModuleInput
   }
 
@@ -25350,17 +23948,23 @@ export namespace Prisma {
   export type ServiceUpdateWithoutFeaturesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ServiceUncheckedUpdateWithoutFeaturesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ModuleUpsertWithWhereUniqueWithoutFeatureInput = {
@@ -25385,27 +23989,36 @@ export namespace Prisma {
     NOT?: ModuleScalarWhereInput | ModuleScalarWhereInput[]
     id?: StringFilter<"Module"> | string
     name?: StringFilter<"Module"> | string
+    created_by?: StringFilter<"Module"> | string
+    updated_by?: StringNullableFilter<"Module"> | string | null
+    deleted_by?: StringNullableFilter<"Module"> | string | null
     created_at?: DateTimeFilter<"Module"> | Date | string
     updated_at?: DateTimeFilter<"Module"> | Date | string
-    is_deleted?: BoolFilter<"Module"> | boolean
+    deleted_at?: DateTimeNullableFilter<"Module"> | Date | string | null
     feature_id?: StringFilter<"Module"> | string
   }
 
   export type FeatureCreateWithoutModulesInput = {
     id?: string
     name: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
     service: ServiceCreateNestedOneWithoutFeaturesInput
   }
 
   export type FeatureUncheckedCreateWithoutModulesInput = {
     id?: string
     name: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
     service_id: string
   }
 
@@ -25420,7 +24033,6 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    user_permissions?: UserPermissionCreateNestedManyWithoutSubmoduleInput
   }
 
   export type SubModuleUncheckedCreateWithoutModuleInput = {
@@ -25429,7 +24041,6 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     is_deleted?: boolean
-    user_permissions?: UserPermissionUncheckedCreateNestedManyWithoutSubmoduleInput
   }
 
   export type SubModuleCreateOrConnectWithoutModuleInput = {
@@ -25456,18 +24067,24 @@ export namespace Prisma {
   export type FeatureUpdateWithoutModulesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     service?: ServiceUpdateOneRequiredWithoutFeaturesNestedInput
   }
 
   export type FeatureUncheckedUpdateWithoutModulesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     service_id?: StringFieldUpdateOperationsInput | string
   }
 
@@ -25502,50 +24119,30 @@ export namespace Prisma {
   export type ModuleCreateWithoutSubmodulesInput = {
     id?: string
     name: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
     feature: FeatureCreateNestedOneWithoutModulesInput
   }
 
   export type ModuleUncheckedCreateWithoutSubmodulesInput = {
     id?: string
     name: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
     feature_id: string
   }
 
   export type ModuleCreateOrConnectWithoutSubmodulesInput = {
     where: ModuleWhereUniqueInput
     create: XOR<ModuleCreateWithoutSubmodulesInput, ModuleUncheckedCreateWithoutSubmodulesInput>
-  }
-
-  export type UserPermissionCreateWithoutSubmoduleInput = {
-    id?: string
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-    user: UserCreateNestedOneWithoutUser_permissionsInput
-  }
-
-  export type UserPermissionUncheckedCreateWithoutSubmoduleInput = {
-    id?: string
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-    user_id: string
-  }
-
-  export type UserPermissionCreateOrConnectWithoutSubmoduleInput = {
-    where: UserPermissionWhereUniqueInput
-    create: XOR<UserPermissionCreateWithoutSubmoduleInput, UserPermissionUncheckedCreateWithoutSubmoduleInput>
-  }
-
-  export type UserPermissionCreateManySubmoduleInputEnvelope = {
-    data: UserPermissionCreateManySubmoduleInput | UserPermissionCreateManySubmoduleInput[]
-    skipDuplicates?: boolean
   }
 
   export type ModuleUpsertWithoutSubmodulesInput = {
@@ -25562,35 +24159,25 @@ export namespace Prisma {
   export type ModuleUpdateWithoutSubmodulesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     feature?: FeatureUpdateOneRequiredWithoutModulesNestedInput
   }
 
   export type ModuleUncheckedUpdateWithoutSubmodulesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     feature_id?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type UserPermissionUpsertWithWhereUniqueWithoutSubmoduleInput = {
-    where: UserPermissionWhereUniqueInput
-    update: XOR<UserPermissionUpdateWithoutSubmoduleInput, UserPermissionUncheckedUpdateWithoutSubmoduleInput>
-    create: XOR<UserPermissionCreateWithoutSubmoduleInput, UserPermissionUncheckedCreateWithoutSubmoduleInput>
-  }
-
-  export type UserPermissionUpdateWithWhereUniqueWithoutSubmoduleInput = {
-    where: UserPermissionWhereUniqueInput
-    data: XOR<UserPermissionUpdateWithoutSubmoduleInput, UserPermissionUncheckedUpdateWithoutSubmoduleInput>
-  }
-
-  export type UserPermissionUpdateManyWithWhereWithoutSubmoduleInput = {
-    where: UserPermissionScalarWhereInput
-    data: XOR<UserPermissionUpdateManyMutationInput, UserPermissionUncheckedUpdateManyWithoutSubmoduleInput>
   }
 
   export type EmployeeCreateWithoutJo_approver_settingInput = {
@@ -25598,20 +24185,17 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
     meqs_approver_setting?: MEQSApproverSettingCreateNestedOneWithoutApproverInput
     po_approver_setting?: POApproverSettingCreateNestedOneWithoutApproverInput
     rv_approver_setting?: RVApproverSettingCreateNestedOneWithoutApproverInput
     spr_approver_setting?: SPRApproverSettingCreateNestedOneWithoutApproverInput
     rr_approver_setting?: RRApproverSettingCreateNestedOneWithoutApproverInput
-    jo_approver_proxy_setting?: JOApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    po_approver_proxy_setting?: POApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    rv_approver_proxy_setting?: RVApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    spr_approver_proxy_setting?: SPRApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    rr_approver_proxy_setting?: RRApproverSettingCreateNestedOneWithoutApprover_proxyInput
     user_employee?: UserEmployeeCreateNestedOneWithoutEmployeeInput
   }
 
@@ -25620,75 +24204,23 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
     meqs_approver_setting?: MEQSApproverSettingUncheckedCreateNestedOneWithoutApproverInput
     po_approver_setting?: POApproverSettingUncheckedCreateNestedOneWithoutApproverInput
     rv_approver_setting?: RVApproverSettingUncheckedCreateNestedOneWithoutApproverInput
     spr_approver_setting?: SPRApproverSettingUncheckedCreateNestedOneWithoutApproverInput
     rr_approver_setting?: RRApproverSettingUncheckedCreateNestedOneWithoutApproverInput
-    jo_approver_proxy_setting?: JOApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    po_approver_proxy_setting?: POApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    rv_approver_proxy_setting?: RVApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    spr_approver_proxy_setting?: SPRApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    rr_approver_proxy_setting?: RRApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
     user_employee?: UserEmployeeUncheckedCreateNestedOneWithoutEmployeeInput
   }
 
   export type EmployeeCreateOrConnectWithoutJo_approver_settingInput = {
     where: EmployeeWhereUniqueInput
     create: XOR<EmployeeCreateWithoutJo_approver_settingInput, EmployeeUncheckedCreateWithoutJo_approver_settingInput>
-  }
-
-  export type EmployeeCreateWithoutJo_approver_proxy_settingInput = {
-    id?: string
-    firstname: string
-    middlename?: string | null
-    lastname: string
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-    jo_approver_setting?: JOApproverSettingCreateNestedOneWithoutApproverInput
-    meqs_approver_setting?: MEQSApproverSettingCreateNestedOneWithoutApproverInput
-    po_approver_setting?: POApproverSettingCreateNestedOneWithoutApproverInput
-    rv_approver_setting?: RVApproverSettingCreateNestedOneWithoutApproverInput
-    spr_approver_setting?: SPRApproverSettingCreateNestedOneWithoutApproverInput
-    rr_approver_setting?: RRApproverSettingCreateNestedOneWithoutApproverInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    po_approver_proxy_setting?: POApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    rv_approver_proxy_setting?: RVApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    spr_approver_proxy_setting?: SPRApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    rr_approver_proxy_setting?: RRApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    user_employee?: UserEmployeeCreateNestedOneWithoutEmployeeInput
-  }
-
-  export type EmployeeUncheckedCreateWithoutJo_approver_proxy_settingInput = {
-    id?: string
-    firstname: string
-    middlename?: string | null
-    lastname: string
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-    jo_approver_setting?: JOApproverSettingUncheckedCreateNestedOneWithoutApproverInput
-    meqs_approver_setting?: MEQSApproverSettingUncheckedCreateNestedOneWithoutApproverInput
-    po_approver_setting?: POApproverSettingUncheckedCreateNestedOneWithoutApproverInput
-    rv_approver_setting?: RVApproverSettingUncheckedCreateNestedOneWithoutApproverInput
-    spr_approver_setting?: SPRApproverSettingUncheckedCreateNestedOneWithoutApproverInput
-    rr_approver_setting?: RRApproverSettingUncheckedCreateNestedOneWithoutApproverInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    po_approver_proxy_setting?: POApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    rv_approver_proxy_setting?: RVApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    spr_approver_proxy_setting?: SPRApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    rr_approver_proxy_setting?: RRApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    user_employee?: UserEmployeeUncheckedCreateNestedOneWithoutEmployeeInput
-  }
-
-  export type EmployeeCreateOrConnectWithoutJo_approver_proxy_settingInput = {
-    where: EmployeeWhereUniqueInput
-    create: XOR<EmployeeCreateWithoutJo_approver_proxy_settingInput, EmployeeUncheckedCreateWithoutJo_approver_proxy_settingInput>
   }
 
   export type EmployeeUpsertWithoutJo_approver_settingInput = {
@@ -25707,20 +24239,17 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     meqs_approver_setting?: MEQSApproverSettingUpdateOneWithoutApproverNestedInput
     po_approver_setting?: POApproverSettingUpdateOneWithoutApproverNestedInput
     rv_approver_setting?: RVApproverSettingUpdateOneWithoutApproverNestedInput
     spr_approver_setting?: SPRApproverSettingUpdateOneWithoutApproverNestedInput
     rr_approver_setting?: RRApproverSettingUpdateOneWithoutApproverNestedInput
-    jo_approver_proxy_setting?: JOApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    po_approver_proxy_setting?: POApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    rv_approver_proxy_setting?: RVApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    spr_approver_proxy_setting?: SPRApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    rr_approver_proxy_setting?: RRApproverSettingUpdateOneWithoutApprover_proxyNestedInput
     user_employee?: UserEmployeeUpdateOneWithoutEmployeeNestedInput
   }
 
@@ -25729,75 +24258,17 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     meqs_approver_setting?: MEQSApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
     po_approver_setting?: POApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
     rv_approver_setting?: RVApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
     spr_approver_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
     rr_approver_setting?: RRApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
-    jo_approver_proxy_setting?: JOApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    po_approver_proxy_setting?: POApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    rv_approver_proxy_setting?: RVApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    spr_approver_proxy_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    rr_approver_proxy_setting?: RRApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    user_employee?: UserEmployeeUncheckedUpdateOneWithoutEmployeeNestedInput
-  }
-
-  export type EmployeeUpsertWithoutJo_approver_proxy_settingInput = {
-    update: XOR<EmployeeUpdateWithoutJo_approver_proxy_settingInput, EmployeeUncheckedUpdateWithoutJo_approver_proxy_settingInput>
-    create: XOR<EmployeeCreateWithoutJo_approver_proxy_settingInput, EmployeeUncheckedCreateWithoutJo_approver_proxy_settingInput>
-    where?: EmployeeWhereInput
-  }
-
-  export type EmployeeUpdateToOneWithWhereWithoutJo_approver_proxy_settingInput = {
-    where?: EmployeeWhereInput
-    data: XOR<EmployeeUpdateWithoutJo_approver_proxy_settingInput, EmployeeUncheckedUpdateWithoutJo_approver_proxy_settingInput>
-  }
-
-  export type EmployeeUpdateWithoutJo_approver_proxy_settingInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    firstname?: StringFieldUpdateOperationsInput | string
-    middlename?: NullableStringFieldUpdateOperationsInput | string | null
-    lastname?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    jo_approver_setting?: JOApproverSettingUpdateOneWithoutApproverNestedInput
-    meqs_approver_setting?: MEQSApproverSettingUpdateOneWithoutApproverNestedInput
-    po_approver_setting?: POApproverSettingUpdateOneWithoutApproverNestedInput
-    rv_approver_setting?: RVApproverSettingUpdateOneWithoutApproverNestedInput
-    spr_approver_setting?: SPRApproverSettingUpdateOneWithoutApproverNestedInput
-    rr_approver_setting?: RRApproverSettingUpdateOneWithoutApproverNestedInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    po_approver_proxy_setting?: POApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    rv_approver_proxy_setting?: RVApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    spr_approver_proxy_setting?: SPRApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    rr_approver_proxy_setting?: RRApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    user_employee?: UserEmployeeUpdateOneWithoutEmployeeNestedInput
-  }
-
-  export type EmployeeUncheckedUpdateWithoutJo_approver_proxy_settingInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    firstname?: StringFieldUpdateOperationsInput | string
-    middlename?: NullableStringFieldUpdateOperationsInput | string | null
-    lastname?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    jo_approver_setting?: JOApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
-    meqs_approver_setting?: MEQSApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
-    po_approver_setting?: POApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
-    rv_approver_setting?: RVApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
-    spr_approver_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
-    rr_approver_setting?: RRApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    po_approver_proxy_setting?: POApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    rv_approver_proxy_setting?: RVApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    spr_approver_proxy_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    rr_approver_proxy_setting?: RRApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
     user_employee?: UserEmployeeUncheckedUpdateOneWithoutEmployeeNestedInput
   }
 
@@ -25806,20 +24277,17 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
     jo_approver_setting?: JOApproverSettingCreateNestedOneWithoutApproverInput
     meqs_approver_setting?: MEQSApproverSettingCreateNestedOneWithoutApproverInput
     po_approver_setting?: POApproverSettingCreateNestedOneWithoutApproverInput
     spr_approver_setting?: SPRApproverSettingCreateNestedOneWithoutApproverInput
     rr_approver_setting?: RRApproverSettingCreateNestedOneWithoutApproverInput
-    jo_approver_proxy_setting?: JOApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    po_approver_proxy_setting?: POApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    rv_approver_proxy_setting?: RVApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    spr_approver_proxy_setting?: SPRApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    rr_approver_proxy_setting?: RRApproverSettingCreateNestedOneWithoutApprover_proxyInput
     user_employee?: UserEmployeeCreateNestedOneWithoutEmployeeInput
   }
 
@@ -25828,75 +24296,23 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
     jo_approver_setting?: JOApproverSettingUncheckedCreateNestedOneWithoutApproverInput
     meqs_approver_setting?: MEQSApproverSettingUncheckedCreateNestedOneWithoutApproverInput
     po_approver_setting?: POApproverSettingUncheckedCreateNestedOneWithoutApproverInput
     spr_approver_setting?: SPRApproverSettingUncheckedCreateNestedOneWithoutApproverInput
     rr_approver_setting?: RRApproverSettingUncheckedCreateNestedOneWithoutApproverInput
-    jo_approver_proxy_setting?: JOApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    po_approver_proxy_setting?: POApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    rv_approver_proxy_setting?: RVApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    spr_approver_proxy_setting?: SPRApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    rr_approver_proxy_setting?: RRApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
     user_employee?: UserEmployeeUncheckedCreateNestedOneWithoutEmployeeInput
   }
 
   export type EmployeeCreateOrConnectWithoutRv_approver_settingInput = {
     where: EmployeeWhereUniqueInput
     create: XOR<EmployeeCreateWithoutRv_approver_settingInput, EmployeeUncheckedCreateWithoutRv_approver_settingInput>
-  }
-
-  export type EmployeeCreateWithoutRv_approver_proxy_settingInput = {
-    id?: string
-    firstname: string
-    middlename?: string | null
-    lastname: string
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-    jo_approver_setting?: JOApproverSettingCreateNestedOneWithoutApproverInput
-    meqs_approver_setting?: MEQSApproverSettingCreateNestedOneWithoutApproverInput
-    po_approver_setting?: POApproverSettingCreateNestedOneWithoutApproverInput
-    rv_approver_setting?: RVApproverSettingCreateNestedOneWithoutApproverInput
-    spr_approver_setting?: SPRApproverSettingCreateNestedOneWithoutApproverInput
-    rr_approver_setting?: RRApproverSettingCreateNestedOneWithoutApproverInput
-    jo_approver_proxy_setting?: JOApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    po_approver_proxy_setting?: POApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    spr_approver_proxy_setting?: SPRApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    rr_approver_proxy_setting?: RRApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    user_employee?: UserEmployeeCreateNestedOneWithoutEmployeeInput
-  }
-
-  export type EmployeeUncheckedCreateWithoutRv_approver_proxy_settingInput = {
-    id?: string
-    firstname: string
-    middlename?: string | null
-    lastname: string
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-    jo_approver_setting?: JOApproverSettingUncheckedCreateNestedOneWithoutApproverInput
-    meqs_approver_setting?: MEQSApproverSettingUncheckedCreateNestedOneWithoutApproverInput
-    po_approver_setting?: POApproverSettingUncheckedCreateNestedOneWithoutApproverInput
-    rv_approver_setting?: RVApproverSettingUncheckedCreateNestedOneWithoutApproverInput
-    spr_approver_setting?: SPRApproverSettingUncheckedCreateNestedOneWithoutApproverInput
-    rr_approver_setting?: RRApproverSettingUncheckedCreateNestedOneWithoutApproverInput
-    jo_approver_proxy_setting?: JOApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    po_approver_proxy_setting?: POApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    spr_approver_proxy_setting?: SPRApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    rr_approver_proxy_setting?: RRApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    user_employee?: UserEmployeeUncheckedCreateNestedOneWithoutEmployeeInput
-  }
-
-  export type EmployeeCreateOrConnectWithoutRv_approver_proxy_settingInput = {
-    where: EmployeeWhereUniqueInput
-    create: XOR<EmployeeCreateWithoutRv_approver_proxy_settingInput, EmployeeUncheckedCreateWithoutRv_approver_proxy_settingInput>
   }
 
   export type EmployeeUpsertWithoutRv_approver_settingInput = {
@@ -25915,20 +24331,17 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     jo_approver_setting?: JOApproverSettingUpdateOneWithoutApproverNestedInput
     meqs_approver_setting?: MEQSApproverSettingUpdateOneWithoutApproverNestedInput
     po_approver_setting?: POApproverSettingUpdateOneWithoutApproverNestedInput
     spr_approver_setting?: SPRApproverSettingUpdateOneWithoutApproverNestedInput
     rr_approver_setting?: RRApproverSettingUpdateOneWithoutApproverNestedInput
-    jo_approver_proxy_setting?: JOApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    po_approver_proxy_setting?: POApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    rv_approver_proxy_setting?: RVApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    spr_approver_proxy_setting?: SPRApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    rr_approver_proxy_setting?: RRApproverSettingUpdateOneWithoutApprover_proxyNestedInput
     user_employee?: UserEmployeeUpdateOneWithoutEmployeeNestedInput
   }
 
@@ -25937,75 +24350,17 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     jo_approver_setting?: JOApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
     meqs_approver_setting?: MEQSApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
     po_approver_setting?: POApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
     spr_approver_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
     rr_approver_setting?: RRApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
-    jo_approver_proxy_setting?: JOApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    po_approver_proxy_setting?: POApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    rv_approver_proxy_setting?: RVApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    spr_approver_proxy_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    rr_approver_proxy_setting?: RRApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    user_employee?: UserEmployeeUncheckedUpdateOneWithoutEmployeeNestedInput
-  }
-
-  export type EmployeeUpsertWithoutRv_approver_proxy_settingInput = {
-    update: XOR<EmployeeUpdateWithoutRv_approver_proxy_settingInput, EmployeeUncheckedUpdateWithoutRv_approver_proxy_settingInput>
-    create: XOR<EmployeeCreateWithoutRv_approver_proxy_settingInput, EmployeeUncheckedCreateWithoutRv_approver_proxy_settingInput>
-    where?: EmployeeWhereInput
-  }
-
-  export type EmployeeUpdateToOneWithWhereWithoutRv_approver_proxy_settingInput = {
-    where?: EmployeeWhereInput
-    data: XOR<EmployeeUpdateWithoutRv_approver_proxy_settingInput, EmployeeUncheckedUpdateWithoutRv_approver_proxy_settingInput>
-  }
-
-  export type EmployeeUpdateWithoutRv_approver_proxy_settingInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    firstname?: StringFieldUpdateOperationsInput | string
-    middlename?: NullableStringFieldUpdateOperationsInput | string | null
-    lastname?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    jo_approver_setting?: JOApproverSettingUpdateOneWithoutApproverNestedInput
-    meqs_approver_setting?: MEQSApproverSettingUpdateOneWithoutApproverNestedInput
-    po_approver_setting?: POApproverSettingUpdateOneWithoutApproverNestedInput
-    rv_approver_setting?: RVApproverSettingUpdateOneWithoutApproverNestedInput
-    spr_approver_setting?: SPRApproverSettingUpdateOneWithoutApproverNestedInput
-    rr_approver_setting?: RRApproverSettingUpdateOneWithoutApproverNestedInput
-    jo_approver_proxy_setting?: JOApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    po_approver_proxy_setting?: POApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    spr_approver_proxy_setting?: SPRApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    rr_approver_proxy_setting?: RRApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    user_employee?: UserEmployeeUpdateOneWithoutEmployeeNestedInput
-  }
-
-  export type EmployeeUncheckedUpdateWithoutRv_approver_proxy_settingInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    firstname?: StringFieldUpdateOperationsInput | string
-    middlename?: NullableStringFieldUpdateOperationsInput | string | null
-    lastname?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    jo_approver_setting?: JOApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
-    meqs_approver_setting?: MEQSApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
-    po_approver_setting?: POApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
-    rv_approver_setting?: RVApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
-    spr_approver_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
-    rr_approver_setting?: RRApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
-    jo_approver_proxy_setting?: JOApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    po_approver_proxy_setting?: POApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    spr_approver_proxy_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    rr_approver_proxy_setting?: RRApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
     user_employee?: UserEmployeeUncheckedUpdateOneWithoutEmployeeNestedInput
   }
 
@@ -26014,20 +24369,17 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
     jo_approver_setting?: JOApproverSettingCreateNestedOneWithoutApproverInput
     meqs_approver_setting?: MEQSApproverSettingCreateNestedOneWithoutApproverInput
     po_approver_setting?: POApproverSettingCreateNestedOneWithoutApproverInput
     rv_approver_setting?: RVApproverSettingCreateNestedOneWithoutApproverInput
     rr_approver_setting?: RRApproverSettingCreateNestedOneWithoutApproverInput
-    jo_approver_proxy_setting?: JOApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    po_approver_proxy_setting?: POApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    rv_approver_proxy_setting?: RVApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    spr_approver_proxy_setting?: SPRApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    rr_approver_proxy_setting?: RRApproverSettingCreateNestedOneWithoutApprover_proxyInput
     user_employee?: UserEmployeeCreateNestedOneWithoutEmployeeInput
   }
 
@@ -26036,75 +24388,23 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
     jo_approver_setting?: JOApproverSettingUncheckedCreateNestedOneWithoutApproverInput
     meqs_approver_setting?: MEQSApproverSettingUncheckedCreateNestedOneWithoutApproverInput
     po_approver_setting?: POApproverSettingUncheckedCreateNestedOneWithoutApproverInput
     rv_approver_setting?: RVApproverSettingUncheckedCreateNestedOneWithoutApproverInput
     rr_approver_setting?: RRApproverSettingUncheckedCreateNestedOneWithoutApproverInput
-    jo_approver_proxy_setting?: JOApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    po_approver_proxy_setting?: POApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    rv_approver_proxy_setting?: RVApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    spr_approver_proxy_setting?: SPRApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    rr_approver_proxy_setting?: RRApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
     user_employee?: UserEmployeeUncheckedCreateNestedOneWithoutEmployeeInput
   }
 
   export type EmployeeCreateOrConnectWithoutSpr_approver_settingInput = {
     where: EmployeeWhereUniqueInput
     create: XOR<EmployeeCreateWithoutSpr_approver_settingInput, EmployeeUncheckedCreateWithoutSpr_approver_settingInput>
-  }
-
-  export type EmployeeCreateWithoutSpr_approver_proxy_settingInput = {
-    id?: string
-    firstname: string
-    middlename?: string | null
-    lastname: string
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-    jo_approver_setting?: JOApproverSettingCreateNestedOneWithoutApproverInput
-    meqs_approver_setting?: MEQSApproverSettingCreateNestedOneWithoutApproverInput
-    po_approver_setting?: POApproverSettingCreateNestedOneWithoutApproverInput
-    rv_approver_setting?: RVApproverSettingCreateNestedOneWithoutApproverInput
-    spr_approver_setting?: SPRApproverSettingCreateNestedOneWithoutApproverInput
-    rr_approver_setting?: RRApproverSettingCreateNestedOneWithoutApproverInput
-    jo_approver_proxy_setting?: JOApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    po_approver_proxy_setting?: POApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    rv_approver_proxy_setting?: RVApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    rr_approver_proxy_setting?: RRApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    user_employee?: UserEmployeeCreateNestedOneWithoutEmployeeInput
-  }
-
-  export type EmployeeUncheckedCreateWithoutSpr_approver_proxy_settingInput = {
-    id?: string
-    firstname: string
-    middlename?: string | null
-    lastname: string
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-    jo_approver_setting?: JOApproverSettingUncheckedCreateNestedOneWithoutApproverInput
-    meqs_approver_setting?: MEQSApproverSettingUncheckedCreateNestedOneWithoutApproverInput
-    po_approver_setting?: POApproverSettingUncheckedCreateNestedOneWithoutApproverInput
-    rv_approver_setting?: RVApproverSettingUncheckedCreateNestedOneWithoutApproverInput
-    spr_approver_setting?: SPRApproverSettingUncheckedCreateNestedOneWithoutApproverInput
-    rr_approver_setting?: RRApproverSettingUncheckedCreateNestedOneWithoutApproverInput
-    jo_approver_proxy_setting?: JOApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    po_approver_proxy_setting?: POApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    rv_approver_proxy_setting?: RVApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    rr_approver_proxy_setting?: RRApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    user_employee?: UserEmployeeUncheckedCreateNestedOneWithoutEmployeeInput
-  }
-
-  export type EmployeeCreateOrConnectWithoutSpr_approver_proxy_settingInput = {
-    where: EmployeeWhereUniqueInput
-    create: XOR<EmployeeCreateWithoutSpr_approver_proxy_settingInput, EmployeeUncheckedCreateWithoutSpr_approver_proxy_settingInput>
   }
 
   export type EmployeeUpsertWithoutSpr_approver_settingInput = {
@@ -26123,20 +24423,17 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     jo_approver_setting?: JOApproverSettingUpdateOneWithoutApproverNestedInput
     meqs_approver_setting?: MEQSApproverSettingUpdateOneWithoutApproverNestedInput
     po_approver_setting?: POApproverSettingUpdateOneWithoutApproverNestedInput
     rv_approver_setting?: RVApproverSettingUpdateOneWithoutApproverNestedInput
     rr_approver_setting?: RRApproverSettingUpdateOneWithoutApproverNestedInput
-    jo_approver_proxy_setting?: JOApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    po_approver_proxy_setting?: POApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    rv_approver_proxy_setting?: RVApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    spr_approver_proxy_setting?: SPRApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    rr_approver_proxy_setting?: RRApproverSettingUpdateOneWithoutApprover_proxyNestedInput
     user_employee?: UserEmployeeUpdateOneWithoutEmployeeNestedInput
   }
 
@@ -26145,75 +24442,17 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     jo_approver_setting?: JOApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
     meqs_approver_setting?: MEQSApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
     po_approver_setting?: POApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
     rv_approver_setting?: RVApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
     rr_approver_setting?: RRApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
-    jo_approver_proxy_setting?: JOApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    po_approver_proxy_setting?: POApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    rv_approver_proxy_setting?: RVApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    spr_approver_proxy_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    rr_approver_proxy_setting?: RRApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    user_employee?: UserEmployeeUncheckedUpdateOneWithoutEmployeeNestedInput
-  }
-
-  export type EmployeeUpsertWithoutSpr_approver_proxy_settingInput = {
-    update: XOR<EmployeeUpdateWithoutSpr_approver_proxy_settingInput, EmployeeUncheckedUpdateWithoutSpr_approver_proxy_settingInput>
-    create: XOR<EmployeeCreateWithoutSpr_approver_proxy_settingInput, EmployeeUncheckedCreateWithoutSpr_approver_proxy_settingInput>
-    where?: EmployeeWhereInput
-  }
-
-  export type EmployeeUpdateToOneWithWhereWithoutSpr_approver_proxy_settingInput = {
-    where?: EmployeeWhereInput
-    data: XOR<EmployeeUpdateWithoutSpr_approver_proxy_settingInput, EmployeeUncheckedUpdateWithoutSpr_approver_proxy_settingInput>
-  }
-
-  export type EmployeeUpdateWithoutSpr_approver_proxy_settingInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    firstname?: StringFieldUpdateOperationsInput | string
-    middlename?: NullableStringFieldUpdateOperationsInput | string | null
-    lastname?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    jo_approver_setting?: JOApproverSettingUpdateOneWithoutApproverNestedInput
-    meqs_approver_setting?: MEQSApproverSettingUpdateOneWithoutApproverNestedInput
-    po_approver_setting?: POApproverSettingUpdateOneWithoutApproverNestedInput
-    rv_approver_setting?: RVApproverSettingUpdateOneWithoutApproverNestedInput
-    spr_approver_setting?: SPRApproverSettingUpdateOneWithoutApproverNestedInput
-    rr_approver_setting?: RRApproverSettingUpdateOneWithoutApproverNestedInput
-    jo_approver_proxy_setting?: JOApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    po_approver_proxy_setting?: POApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    rv_approver_proxy_setting?: RVApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    rr_approver_proxy_setting?: RRApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    user_employee?: UserEmployeeUpdateOneWithoutEmployeeNestedInput
-  }
-
-  export type EmployeeUncheckedUpdateWithoutSpr_approver_proxy_settingInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    firstname?: StringFieldUpdateOperationsInput | string
-    middlename?: NullableStringFieldUpdateOperationsInput | string | null
-    lastname?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    jo_approver_setting?: JOApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
-    meqs_approver_setting?: MEQSApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
-    po_approver_setting?: POApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
-    rv_approver_setting?: RVApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
-    spr_approver_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
-    rr_approver_setting?: RRApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
-    jo_approver_proxy_setting?: JOApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    po_approver_proxy_setting?: POApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    rv_approver_proxy_setting?: RVApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    rr_approver_proxy_setting?: RRApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
     user_employee?: UserEmployeeUncheckedUpdateOneWithoutEmployeeNestedInput
   }
 
@@ -26222,20 +24461,17 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
     jo_approver_setting?: JOApproverSettingCreateNestedOneWithoutApproverInput
     po_approver_setting?: POApproverSettingCreateNestedOneWithoutApproverInput
     rv_approver_setting?: RVApproverSettingCreateNestedOneWithoutApproverInput
     spr_approver_setting?: SPRApproverSettingCreateNestedOneWithoutApproverInput
     rr_approver_setting?: RRApproverSettingCreateNestedOneWithoutApproverInput
-    jo_approver_proxy_setting?: JOApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    po_approver_proxy_setting?: POApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    rv_approver_proxy_setting?: RVApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    spr_approver_proxy_setting?: SPRApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    rr_approver_proxy_setting?: RRApproverSettingCreateNestedOneWithoutApprover_proxyInput
     user_employee?: UserEmployeeCreateNestedOneWithoutEmployeeInput
   }
 
@@ -26244,75 +24480,23 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
     jo_approver_setting?: JOApproverSettingUncheckedCreateNestedOneWithoutApproverInput
     po_approver_setting?: POApproverSettingUncheckedCreateNestedOneWithoutApproverInput
     rv_approver_setting?: RVApproverSettingUncheckedCreateNestedOneWithoutApproverInput
     spr_approver_setting?: SPRApproverSettingUncheckedCreateNestedOneWithoutApproverInput
     rr_approver_setting?: RRApproverSettingUncheckedCreateNestedOneWithoutApproverInput
-    jo_approver_proxy_setting?: JOApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    po_approver_proxy_setting?: POApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    rv_approver_proxy_setting?: RVApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    spr_approver_proxy_setting?: SPRApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    rr_approver_proxy_setting?: RRApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
     user_employee?: UserEmployeeUncheckedCreateNestedOneWithoutEmployeeInput
   }
 
   export type EmployeeCreateOrConnectWithoutMeqs_approver_settingInput = {
     where: EmployeeWhereUniqueInput
     create: XOR<EmployeeCreateWithoutMeqs_approver_settingInput, EmployeeUncheckedCreateWithoutMeqs_approver_settingInput>
-  }
-
-  export type EmployeeCreateWithoutMeqs_approver_proxy_settingInput = {
-    id?: string
-    firstname: string
-    middlename?: string | null
-    lastname: string
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-    jo_approver_setting?: JOApproverSettingCreateNestedOneWithoutApproverInput
-    meqs_approver_setting?: MEQSApproverSettingCreateNestedOneWithoutApproverInput
-    po_approver_setting?: POApproverSettingCreateNestedOneWithoutApproverInput
-    rv_approver_setting?: RVApproverSettingCreateNestedOneWithoutApproverInput
-    spr_approver_setting?: SPRApproverSettingCreateNestedOneWithoutApproverInput
-    rr_approver_setting?: RRApproverSettingCreateNestedOneWithoutApproverInput
-    jo_approver_proxy_setting?: JOApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    po_approver_proxy_setting?: POApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    rv_approver_proxy_setting?: RVApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    spr_approver_proxy_setting?: SPRApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    rr_approver_proxy_setting?: RRApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    user_employee?: UserEmployeeCreateNestedOneWithoutEmployeeInput
-  }
-
-  export type EmployeeUncheckedCreateWithoutMeqs_approver_proxy_settingInput = {
-    id?: string
-    firstname: string
-    middlename?: string | null
-    lastname: string
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-    jo_approver_setting?: JOApproverSettingUncheckedCreateNestedOneWithoutApproverInput
-    meqs_approver_setting?: MEQSApproverSettingUncheckedCreateNestedOneWithoutApproverInput
-    po_approver_setting?: POApproverSettingUncheckedCreateNestedOneWithoutApproverInput
-    rv_approver_setting?: RVApproverSettingUncheckedCreateNestedOneWithoutApproverInput
-    spr_approver_setting?: SPRApproverSettingUncheckedCreateNestedOneWithoutApproverInput
-    rr_approver_setting?: RRApproverSettingUncheckedCreateNestedOneWithoutApproverInput
-    jo_approver_proxy_setting?: JOApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    po_approver_proxy_setting?: POApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    rv_approver_proxy_setting?: RVApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    spr_approver_proxy_setting?: SPRApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    rr_approver_proxy_setting?: RRApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    user_employee?: UserEmployeeUncheckedCreateNestedOneWithoutEmployeeInput
-  }
-
-  export type EmployeeCreateOrConnectWithoutMeqs_approver_proxy_settingInput = {
-    where: EmployeeWhereUniqueInput
-    create: XOR<EmployeeCreateWithoutMeqs_approver_proxy_settingInput, EmployeeUncheckedCreateWithoutMeqs_approver_proxy_settingInput>
   }
 
   export type EmployeeUpsertWithoutMeqs_approver_settingInput = {
@@ -26331,20 +24515,17 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     jo_approver_setting?: JOApproverSettingUpdateOneWithoutApproverNestedInput
     po_approver_setting?: POApproverSettingUpdateOneWithoutApproverNestedInput
     rv_approver_setting?: RVApproverSettingUpdateOneWithoutApproverNestedInput
     spr_approver_setting?: SPRApproverSettingUpdateOneWithoutApproverNestedInput
     rr_approver_setting?: RRApproverSettingUpdateOneWithoutApproverNestedInput
-    jo_approver_proxy_setting?: JOApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    po_approver_proxy_setting?: POApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    rv_approver_proxy_setting?: RVApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    spr_approver_proxy_setting?: SPRApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    rr_approver_proxy_setting?: RRApproverSettingUpdateOneWithoutApprover_proxyNestedInput
     user_employee?: UserEmployeeUpdateOneWithoutEmployeeNestedInput
   }
 
@@ -26353,75 +24534,17 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     jo_approver_setting?: JOApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
     po_approver_setting?: POApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
     rv_approver_setting?: RVApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
     spr_approver_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
     rr_approver_setting?: RRApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
-    jo_approver_proxy_setting?: JOApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    po_approver_proxy_setting?: POApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    rv_approver_proxy_setting?: RVApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    spr_approver_proxy_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    rr_approver_proxy_setting?: RRApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    user_employee?: UserEmployeeUncheckedUpdateOneWithoutEmployeeNestedInput
-  }
-
-  export type EmployeeUpsertWithoutMeqs_approver_proxy_settingInput = {
-    update: XOR<EmployeeUpdateWithoutMeqs_approver_proxy_settingInput, EmployeeUncheckedUpdateWithoutMeqs_approver_proxy_settingInput>
-    create: XOR<EmployeeCreateWithoutMeqs_approver_proxy_settingInput, EmployeeUncheckedCreateWithoutMeqs_approver_proxy_settingInput>
-    where?: EmployeeWhereInput
-  }
-
-  export type EmployeeUpdateToOneWithWhereWithoutMeqs_approver_proxy_settingInput = {
-    where?: EmployeeWhereInput
-    data: XOR<EmployeeUpdateWithoutMeqs_approver_proxy_settingInput, EmployeeUncheckedUpdateWithoutMeqs_approver_proxy_settingInput>
-  }
-
-  export type EmployeeUpdateWithoutMeqs_approver_proxy_settingInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    firstname?: StringFieldUpdateOperationsInput | string
-    middlename?: NullableStringFieldUpdateOperationsInput | string | null
-    lastname?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    jo_approver_setting?: JOApproverSettingUpdateOneWithoutApproverNestedInput
-    meqs_approver_setting?: MEQSApproverSettingUpdateOneWithoutApproverNestedInput
-    po_approver_setting?: POApproverSettingUpdateOneWithoutApproverNestedInput
-    rv_approver_setting?: RVApproverSettingUpdateOneWithoutApproverNestedInput
-    spr_approver_setting?: SPRApproverSettingUpdateOneWithoutApproverNestedInput
-    rr_approver_setting?: RRApproverSettingUpdateOneWithoutApproverNestedInput
-    jo_approver_proxy_setting?: JOApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    po_approver_proxy_setting?: POApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    rv_approver_proxy_setting?: RVApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    spr_approver_proxy_setting?: SPRApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    rr_approver_proxy_setting?: RRApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    user_employee?: UserEmployeeUpdateOneWithoutEmployeeNestedInput
-  }
-
-  export type EmployeeUncheckedUpdateWithoutMeqs_approver_proxy_settingInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    firstname?: StringFieldUpdateOperationsInput | string
-    middlename?: NullableStringFieldUpdateOperationsInput | string | null
-    lastname?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    jo_approver_setting?: JOApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
-    meqs_approver_setting?: MEQSApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
-    po_approver_setting?: POApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
-    rv_approver_setting?: RVApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
-    spr_approver_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
-    rr_approver_setting?: RRApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
-    jo_approver_proxy_setting?: JOApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    po_approver_proxy_setting?: POApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    rv_approver_proxy_setting?: RVApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    spr_approver_proxy_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    rr_approver_proxy_setting?: RRApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
     user_employee?: UserEmployeeUncheckedUpdateOneWithoutEmployeeNestedInput
   }
 
@@ -26430,20 +24553,17 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
     jo_approver_setting?: JOApproverSettingCreateNestedOneWithoutApproverInput
     meqs_approver_setting?: MEQSApproverSettingCreateNestedOneWithoutApproverInput
     rv_approver_setting?: RVApproverSettingCreateNestedOneWithoutApproverInput
     spr_approver_setting?: SPRApproverSettingCreateNestedOneWithoutApproverInput
     rr_approver_setting?: RRApproverSettingCreateNestedOneWithoutApproverInput
-    jo_approver_proxy_setting?: JOApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    po_approver_proxy_setting?: POApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    rv_approver_proxy_setting?: RVApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    spr_approver_proxy_setting?: SPRApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    rr_approver_proxy_setting?: RRApproverSettingCreateNestedOneWithoutApprover_proxyInput
     user_employee?: UserEmployeeCreateNestedOneWithoutEmployeeInput
   }
 
@@ -26452,75 +24572,23 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
     jo_approver_setting?: JOApproverSettingUncheckedCreateNestedOneWithoutApproverInput
     meqs_approver_setting?: MEQSApproverSettingUncheckedCreateNestedOneWithoutApproverInput
     rv_approver_setting?: RVApproverSettingUncheckedCreateNestedOneWithoutApproverInput
     spr_approver_setting?: SPRApproverSettingUncheckedCreateNestedOneWithoutApproverInput
     rr_approver_setting?: RRApproverSettingUncheckedCreateNestedOneWithoutApproverInput
-    jo_approver_proxy_setting?: JOApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    po_approver_proxy_setting?: POApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    rv_approver_proxy_setting?: RVApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    spr_approver_proxy_setting?: SPRApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    rr_approver_proxy_setting?: RRApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
     user_employee?: UserEmployeeUncheckedCreateNestedOneWithoutEmployeeInput
   }
 
   export type EmployeeCreateOrConnectWithoutPo_approver_settingInput = {
     where: EmployeeWhereUniqueInput
     create: XOR<EmployeeCreateWithoutPo_approver_settingInput, EmployeeUncheckedCreateWithoutPo_approver_settingInput>
-  }
-
-  export type EmployeeCreateWithoutPo_approver_proxy_settingInput = {
-    id?: string
-    firstname: string
-    middlename?: string | null
-    lastname: string
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-    jo_approver_setting?: JOApproverSettingCreateNestedOneWithoutApproverInput
-    meqs_approver_setting?: MEQSApproverSettingCreateNestedOneWithoutApproverInput
-    po_approver_setting?: POApproverSettingCreateNestedOneWithoutApproverInput
-    rv_approver_setting?: RVApproverSettingCreateNestedOneWithoutApproverInput
-    spr_approver_setting?: SPRApproverSettingCreateNestedOneWithoutApproverInput
-    rr_approver_setting?: RRApproverSettingCreateNestedOneWithoutApproverInput
-    jo_approver_proxy_setting?: JOApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    rv_approver_proxy_setting?: RVApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    spr_approver_proxy_setting?: SPRApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    rr_approver_proxy_setting?: RRApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    user_employee?: UserEmployeeCreateNestedOneWithoutEmployeeInput
-  }
-
-  export type EmployeeUncheckedCreateWithoutPo_approver_proxy_settingInput = {
-    id?: string
-    firstname: string
-    middlename?: string | null
-    lastname: string
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-    jo_approver_setting?: JOApproverSettingUncheckedCreateNestedOneWithoutApproverInput
-    meqs_approver_setting?: MEQSApproverSettingUncheckedCreateNestedOneWithoutApproverInput
-    po_approver_setting?: POApproverSettingUncheckedCreateNestedOneWithoutApproverInput
-    rv_approver_setting?: RVApproverSettingUncheckedCreateNestedOneWithoutApproverInput
-    spr_approver_setting?: SPRApproverSettingUncheckedCreateNestedOneWithoutApproverInput
-    rr_approver_setting?: RRApproverSettingUncheckedCreateNestedOneWithoutApproverInput
-    jo_approver_proxy_setting?: JOApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    rv_approver_proxy_setting?: RVApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    spr_approver_proxy_setting?: SPRApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    rr_approver_proxy_setting?: RRApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    user_employee?: UserEmployeeUncheckedCreateNestedOneWithoutEmployeeInput
-  }
-
-  export type EmployeeCreateOrConnectWithoutPo_approver_proxy_settingInput = {
-    where: EmployeeWhereUniqueInput
-    create: XOR<EmployeeCreateWithoutPo_approver_proxy_settingInput, EmployeeUncheckedCreateWithoutPo_approver_proxy_settingInput>
   }
 
   export type EmployeeUpsertWithoutPo_approver_settingInput = {
@@ -26539,20 +24607,17 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     jo_approver_setting?: JOApproverSettingUpdateOneWithoutApproverNestedInput
     meqs_approver_setting?: MEQSApproverSettingUpdateOneWithoutApproverNestedInput
     rv_approver_setting?: RVApproverSettingUpdateOneWithoutApproverNestedInput
     spr_approver_setting?: SPRApproverSettingUpdateOneWithoutApproverNestedInput
     rr_approver_setting?: RRApproverSettingUpdateOneWithoutApproverNestedInput
-    jo_approver_proxy_setting?: JOApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    po_approver_proxy_setting?: POApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    rv_approver_proxy_setting?: RVApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    spr_approver_proxy_setting?: SPRApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    rr_approver_proxy_setting?: RRApproverSettingUpdateOneWithoutApprover_proxyNestedInput
     user_employee?: UserEmployeeUpdateOneWithoutEmployeeNestedInput
   }
 
@@ -26561,75 +24626,17 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     jo_approver_setting?: JOApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
     meqs_approver_setting?: MEQSApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
     rv_approver_setting?: RVApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
     spr_approver_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
     rr_approver_setting?: RRApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
-    jo_approver_proxy_setting?: JOApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    po_approver_proxy_setting?: POApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    rv_approver_proxy_setting?: RVApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    spr_approver_proxy_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    rr_approver_proxy_setting?: RRApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    user_employee?: UserEmployeeUncheckedUpdateOneWithoutEmployeeNestedInput
-  }
-
-  export type EmployeeUpsertWithoutPo_approver_proxy_settingInput = {
-    update: XOR<EmployeeUpdateWithoutPo_approver_proxy_settingInput, EmployeeUncheckedUpdateWithoutPo_approver_proxy_settingInput>
-    create: XOR<EmployeeCreateWithoutPo_approver_proxy_settingInput, EmployeeUncheckedCreateWithoutPo_approver_proxy_settingInput>
-    where?: EmployeeWhereInput
-  }
-
-  export type EmployeeUpdateToOneWithWhereWithoutPo_approver_proxy_settingInput = {
-    where?: EmployeeWhereInput
-    data: XOR<EmployeeUpdateWithoutPo_approver_proxy_settingInput, EmployeeUncheckedUpdateWithoutPo_approver_proxy_settingInput>
-  }
-
-  export type EmployeeUpdateWithoutPo_approver_proxy_settingInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    firstname?: StringFieldUpdateOperationsInput | string
-    middlename?: NullableStringFieldUpdateOperationsInput | string | null
-    lastname?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    jo_approver_setting?: JOApproverSettingUpdateOneWithoutApproverNestedInput
-    meqs_approver_setting?: MEQSApproverSettingUpdateOneWithoutApproverNestedInput
-    po_approver_setting?: POApproverSettingUpdateOneWithoutApproverNestedInput
-    rv_approver_setting?: RVApproverSettingUpdateOneWithoutApproverNestedInput
-    spr_approver_setting?: SPRApproverSettingUpdateOneWithoutApproverNestedInput
-    rr_approver_setting?: RRApproverSettingUpdateOneWithoutApproverNestedInput
-    jo_approver_proxy_setting?: JOApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    rv_approver_proxy_setting?: RVApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    spr_approver_proxy_setting?: SPRApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    rr_approver_proxy_setting?: RRApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    user_employee?: UserEmployeeUpdateOneWithoutEmployeeNestedInput
-  }
-
-  export type EmployeeUncheckedUpdateWithoutPo_approver_proxy_settingInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    firstname?: StringFieldUpdateOperationsInput | string
-    middlename?: NullableStringFieldUpdateOperationsInput | string | null
-    lastname?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    jo_approver_setting?: JOApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
-    meqs_approver_setting?: MEQSApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
-    po_approver_setting?: POApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
-    rv_approver_setting?: RVApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
-    spr_approver_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
-    rr_approver_setting?: RRApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
-    jo_approver_proxy_setting?: JOApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    rv_approver_proxy_setting?: RVApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    spr_approver_proxy_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    rr_approver_proxy_setting?: RRApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
     user_employee?: UserEmployeeUncheckedUpdateOneWithoutEmployeeNestedInput
   }
 
@@ -26638,20 +24645,17 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
     jo_approver_setting?: JOApproverSettingCreateNestedOneWithoutApproverInput
     meqs_approver_setting?: MEQSApproverSettingCreateNestedOneWithoutApproverInput
     po_approver_setting?: POApproverSettingCreateNestedOneWithoutApproverInput
     rv_approver_setting?: RVApproverSettingCreateNestedOneWithoutApproverInput
     spr_approver_setting?: SPRApproverSettingCreateNestedOneWithoutApproverInput
-    jo_approver_proxy_setting?: JOApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    po_approver_proxy_setting?: POApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    rv_approver_proxy_setting?: RVApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    spr_approver_proxy_setting?: SPRApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    rr_approver_proxy_setting?: RRApproverSettingCreateNestedOneWithoutApprover_proxyInput
     user_employee?: UserEmployeeCreateNestedOneWithoutEmployeeInput
   }
 
@@ -26660,75 +24664,23 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
     jo_approver_setting?: JOApproverSettingUncheckedCreateNestedOneWithoutApproverInput
     meqs_approver_setting?: MEQSApproverSettingUncheckedCreateNestedOneWithoutApproverInput
     po_approver_setting?: POApproverSettingUncheckedCreateNestedOneWithoutApproverInput
     rv_approver_setting?: RVApproverSettingUncheckedCreateNestedOneWithoutApproverInput
     spr_approver_setting?: SPRApproverSettingUncheckedCreateNestedOneWithoutApproverInput
-    jo_approver_proxy_setting?: JOApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    po_approver_proxy_setting?: POApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    rv_approver_proxy_setting?: RVApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    spr_approver_proxy_setting?: SPRApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    rr_approver_proxy_setting?: RRApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
     user_employee?: UserEmployeeUncheckedCreateNestedOneWithoutEmployeeInput
   }
 
   export type EmployeeCreateOrConnectWithoutRr_approver_settingInput = {
     where: EmployeeWhereUniqueInput
     create: XOR<EmployeeCreateWithoutRr_approver_settingInput, EmployeeUncheckedCreateWithoutRr_approver_settingInput>
-  }
-
-  export type EmployeeCreateWithoutRr_approver_proxy_settingInput = {
-    id?: string
-    firstname: string
-    middlename?: string | null
-    lastname: string
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-    jo_approver_setting?: JOApproverSettingCreateNestedOneWithoutApproverInput
-    meqs_approver_setting?: MEQSApproverSettingCreateNestedOneWithoutApproverInput
-    po_approver_setting?: POApproverSettingCreateNestedOneWithoutApproverInput
-    rv_approver_setting?: RVApproverSettingCreateNestedOneWithoutApproverInput
-    spr_approver_setting?: SPRApproverSettingCreateNestedOneWithoutApproverInput
-    rr_approver_setting?: RRApproverSettingCreateNestedOneWithoutApproverInput
-    jo_approver_proxy_setting?: JOApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    po_approver_proxy_setting?: POApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    rv_approver_proxy_setting?: RVApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    spr_approver_proxy_setting?: SPRApproverSettingCreateNestedOneWithoutApprover_proxyInput
-    user_employee?: UserEmployeeCreateNestedOneWithoutEmployeeInput
-  }
-
-  export type EmployeeUncheckedCreateWithoutRr_approver_proxy_settingInput = {
-    id?: string
-    firstname: string
-    middlename?: string | null
-    lastname: string
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-    jo_approver_setting?: JOApproverSettingUncheckedCreateNestedOneWithoutApproverInput
-    meqs_approver_setting?: MEQSApproverSettingUncheckedCreateNestedOneWithoutApproverInput
-    po_approver_setting?: POApproverSettingUncheckedCreateNestedOneWithoutApproverInput
-    rv_approver_setting?: RVApproverSettingUncheckedCreateNestedOneWithoutApproverInput
-    spr_approver_setting?: SPRApproverSettingUncheckedCreateNestedOneWithoutApproverInput
-    rr_approver_setting?: RRApproverSettingUncheckedCreateNestedOneWithoutApproverInput
-    jo_approver_proxy_setting?: JOApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    po_approver_proxy_setting?: POApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    rv_approver_proxy_setting?: RVApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    spr_approver_proxy_setting?: SPRApproverSettingUncheckedCreateNestedOneWithoutApprover_proxyInput
-    user_employee?: UserEmployeeUncheckedCreateNestedOneWithoutEmployeeInput
-  }
-
-  export type EmployeeCreateOrConnectWithoutRr_approver_proxy_settingInput = {
-    where: EmployeeWhereUniqueInput
-    create: XOR<EmployeeCreateWithoutRr_approver_proxy_settingInput, EmployeeUncheckedCreateWithoutRr_approver_proxy_settingInput>
   }
 
   export type EmployeeUpsertWithoutRr_approver_settingInput = {
@@ -26747,20 +24699,17 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     jo_approver_setting?: JOApproverSettingUpdateOneWithoutApproverNestedInput
     meqs_approver_setting?: MEQSApproverSettingUpdateOneWithoutApproverNestedInput
     po_approver_setting?: POApproverSettingUpdateOneWithoutApproverNestedInput
     rv_approver_setting?: RVApproverSettingUpdateOneWithoutApproverNestedInput
     spr_approver_setting?: SPRApproverSettingUpdateOneWithoutApproverNestedInput
-    jo_approver_proxy_setting?: JOApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    po_approver_proxy_setting?: POApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    rv_approver_proxy_setting?: RVApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    spr_approver_proxy_setting?: SPRApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    rr_approver_proxy_setting?: RRApproverSettingUpdateOneWithoutApprover_proxyNestedInput
     user_employee?: UserEmployeeUpdateOneWithoutEmployeeNestedInput
   }
 
@@ -26769,75 +24718,17 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     jo_approver_setting?: JOApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
     meqs_approver_setting?: MEQSApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
     po_approver_setting?: POApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
     rv_approver_setting?: RVApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
     spr_approver_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
-    jo_approver_proxy_setting?: JOApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    po_approver_proxy_setting?: POApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    rv_approver_proxy_setting?: RVApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    spr_approver_proxy_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    rr_approver_proxy_setting?: RRApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    user_employee?: UserEmployeeUncheckedUpdateOneWithoutEmployeeNestedInput
-  }
-
-  export type EmployeeUpsertWithoutRr_approver_proxy_settingInput = {
-    update: XOR<EmployeeUpdateWithoutRr_approver_proxy_settingInput, EmployeeUncheckedUpdateWithoutRr_approver_proxy_settingInput>
-    create: XOR<EmployeeCreateWithoutRr_approver_proxy_settingInput, EmployeeUncheckedCreateWithoutRr_approver_proxy_settingInput>
-    where?: EmployeeWhereInput
-  }
-
-  export type EmployeeUpdateToOneWithWhereWithoutRr_approver_proxy_settingInput = {
-    where?: EmployeeWhereInput
-    data: XOR<EmployeeUpdateWithoutRr_approver_proxy_settingInput, EmployeeUncheckedUpdateWithoutRr_approver_proxy_settingInput>
-  }
-
-  export type EmployeeUpdateWithoutRr_approver_proxy_settingInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    firstname?: StringFieldUpdateOperationsInput | string
-    middlename?: NullableStringFieldUpdateOperationsInput | string | null
-    lastname?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    jo_approver_setting?: JOApproverSettingUpdateOneWithoutApproverNestedInput
-    meqs_approver_setting?: MEQSApproverSettingUpdateOneWithoutApproverNestedInput
-    po_approver_setting?: POApproverSettingUpdateOneWithoutApproverNestedInput
-    rv_approver_setting?: RVApproverSettingUpdateOneWithoutApproverNestedInput
-    spr_approver_setting?: SPRApproverSettingUpdateOneWithoutApproverNestedInput
-    rr_approver_setting?: RRApproverSettingUpdateOneWithoutApproverNestedInput
-    jo_approver_proxy_setting?: JOApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    po_approver_proxy_setting?: POApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    rv_approver_proxy_setting?: RVApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    spr_approver_proxy_setting?: SPRApproverSettingUpdateOneWithoutApprover_proxyNestedInput
-    user_employee?: UserEmployeeUpdateOneWithoutEmployeeNestedInput
-  }
-
-  export type EmployeeUncheckedUpdateWithoutRr_approver_proxy_settingInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    firstname?: StringFieldUpdateOperationsInput | string
-    middlename?: NullableStringFieldUpdateOperationsInput | string | null
-    lastname?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    jo_approver_setting?: JOApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
-    meqs_approver_setting?: MEQSApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
-    po_approver_setting?: POApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
-    rv_approver_setting?: RVApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
-    spr_approver_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
-    rr_approver_setting?: RRApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
-    jo_approver_proxy_setting?: JOApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    meqs_approver_proxy_setting?: MEQSApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    po_approver_proxy_setting?: POApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    rv_approver_proxy_setting?: RVApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
-    spr_approver_proxy_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApprover_proxyNestedInput
     user_employee?: UserEmployeeUncheckedUpdateOneWithoutEmployeeNestedInput
   }
 
@@ -26846,9 +24737,12 @@ export namespace Prisma {
     code: string
     name: string
     status?: number
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
   }
 
   export type DivisionUpdateWithoutDepartmentInput = {
@@ -26856,9 +24750,12 @@ export namespace Prisma {
     code?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     status?: IntFieldUpdateOperationsInput | number
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type DivisionUncheckedUpdateWithoutDepartmentInput = {
@@ -26866,9 +24763,12 @@ export namespace Prisma {
     code?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     status?: IntFieldUpdateOperationsInput | number
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type DivisionUncheckedUpdateManyWithoutDepartmentInput = {
@@ -26876,109 +24776,104 @@ export namespace Prisma {
     code?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     status?: IntFieldUpdateOperationsInput | number
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type UserPermissionCreateManyUserInput = {
-    id?: string
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-    submodule_id: string
-  }
-
-  export type UserPermissionUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    submodule?: SubModuleUpdateOneRequiredWithoutUser_permissionsNestedInput
-  }
-
-  export type UserPermissionUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    submodule_id?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type UserPermissionUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    submodule_id?: StringFieldUpdateOperationsInput | string
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type FeatureCreateManyServiceInput = {
     id?: string
     name: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
   }
 
   export type FeatureUpdateWithoutServiceInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     modules?: ModuleUpdateManyWithoutFeatureNestedInput
   }
 
   export type FeatureUncheckedUpdateWithoutServiceInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     modules?: ModuleUncheckedUpdateManyWithoutFeatureNestedInput
   }
 
   export type FeatureUncheckedUpdateManyWithoutServiceInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ModuleCreateManyFeatureInput = {
     id?: string
     name: string
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    is_deleted?: boolean
+    deleted_at?: Date | string | null
   }
 
   export type ModuleUpdateWithoutFeatureInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     submodules?: SubModuleUpdateManyWithoutModuleNestedInput
   }
 
   export type ModuleUncheckedUpdateWithoutFeatureInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     submodules?: SubModuleUncheckedUpdateManyWithoutModuleNestedInput
   }
 
   export type ModuleUncheckedUpdateManyWithoutFeatureInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type SubModuleCreateManyModuleInput = {
@@ -26995,7 +24890,6 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    user_permissions?: UserPermissionUpdateManyWithoutSubmoduleNestedInput
   }
 
   export type SubModuleUncheckedUpdateWithoutModuleInput = {
@@ -27004,7 +24898,6 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    user_permissions?: UserPermissionUncheckedUpdateManyWithoutSubmoduleNestedInput
   }
 
   export type SubModuleUncheckedUpdateManyWithoutModuleInput = {
@@ -27013,38 +24906,6 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_deleted?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type UserPermissionCreateManySubmoduleInput = {
-    id?: string
-    created_at?: Date | string
-    updated_at?: Date | string
-    is_deleted?: boolean
-    user_id: string
-  }
-
-  export type UserPermissionUpdateWithoutSubmoduleInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    user?: UserUpdateOneRequiredWithoutUser_permissionsNestedInput
-  }
-
-  export type UserPermissionUncheckedUpdateWithoutSubmoduleInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    user_id?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type UserPermissionUncheckedUpdateManyWithoutSubmoduleInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    is_deleted?: BoolFieldUpdateOperationsInput | boolean
-    user_id?: StringFieldUpdateOperationsInput | string
   }
 
 
@@ -27057,10 +24918,6 @@ export namespace Prisma {
      */
     export type DepartmentCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = DepartmentCountOutputTypeDefaultArgs<ExtArgs>
     /**
-     * @deprecated Use UserCountOutputTypeDefaultArgs instead
-     */
-    export type UserCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UserCountOutputTypeDefaultArgs<ExtArgs>
-    /**
      * @deprecated Use ServiceCountOutputTypeDefaultArgs instead
      */
     export type ServiceCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ServiceCountOutputTypeDefaultArgs<ExtArgs>
@@ -27072,10 +24929,6 @@ export namespace Prisma {
      * @deprecated Use ModuleCountOutputTypeDefaultArgs instead
      */
     export type ModuleCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ModuleCountOutputTypeDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use SubModuleCountOutputTypeDefaultArgs instead
-     */
-    export type SubModuleCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = SubModuleCountOutputTypeDefaultArgs<ExtArgs>
     /**
      * @deprecated Use DivisionDefaultArgs instead
      */
@@ -27100,10 +24953,6 @@ export namespace Prisma {
      * @deprecated Use UserEmployeeDefaultArgs instead
      */
     export type UserEmployeeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UserEmployeeDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use UserPermissionDefaultArgs instead
-     */
-    export type UserPermissionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UserPermissionDefaultArgs<ExtArgs>
     /**
      * @deprecated Use ServiceDefaultArgs instead
      */

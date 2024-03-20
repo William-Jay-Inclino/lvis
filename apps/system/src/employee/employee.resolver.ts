@@ -7,14 +7,20 @@ import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from '../__auth__/guards/gql-auth.guard';
 import { SystemRemoveResponse } from '../__common__/classes';
 import { EmployeesResponse } from './entities/employees-response.entity';
+import { AuthUser } from '../__common__/auth-user.entity';
+import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
 
 @UseGuards(GqlAuthGuard)
 @Resolver(() => Employee)
 export class EmployeeResolver {
-  constructor(private readonly employeeService: EmployeeService) {}
+  constructor(private readonly employeeService: EmployeeService) { }
 
   @Mutation(() => Employee)
-  createEmployee(@Args('input') createEmployeeInput: CreateEmployeeInput) {
+  createEmployee(
+    @Args('input') createEmployeeInput: CreateEmployeeInput,
+    @CurrentAuthUser() authUser: AuthUser
+  ) {
+    this.employeeService.setAuthUser(authUser)
     return this.employeeService.create(createEmployeeInput);
   }
 
@@ -42,13 +48,19 @@ export class EmployeeResolver {
   @Mutation(() => Employee)
   updateEmployee(
     @Args('id') id: string,
-    @Args('input') updateEmployeeInput: UpdateEmployeeInput
+    @Args('input') updateEmployeeInput: UpdateEmployeeInput,
+    @CurrentAuthUser() authUser: AuthUser
   ) {
+    this.employeeService.setAuthUser(authUser)
     return this.employeeService.update(id, updateEmployeeInput);
   }
 
   @Mutation(() => SystemRemoveResponse)
-  removeEmployee(@Args('id') id: string) {
+  removeEmployee(
+    @Args('id') id: string,
+    @CurrentAuthUser() authUser: AuthUser
+  ) {
+    this.employeeService.setAuthUser(authUser)
     return this.employeeService.remove(id);
   }
 
@@ -57,11 +69,11 @@ export class EmployeeResolver {
 
     console.log('reference', reference)
 
-    if(reference.__typename === 'Employee'){
+    if (reference.__typename === 'Employee') {
       return await this.employeeService.findOne(reference.id)
     }
 
-    if(reference.__typename === 'Employees'){
+    if (reference.__typename === 'Employees') {
       return await this.employeeService.findByIds(reference.ids)
     }
 

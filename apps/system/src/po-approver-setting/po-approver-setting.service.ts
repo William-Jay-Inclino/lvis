@@ -4,21 +4,27 @@ import { PrismaService } from '../__prisma__/prisma.service';
 import { UpdatePoApproverSettingInput } from './dto/update-po-approver-setting.input';
 import { SystemRemoveResponse } from '../__common__/classes';
 import { Prisma, POApproverSetting } from 'apps/system/prisma/generated/client';
+import { AuthUser } from '../__common__/auth-user.entity';
 
 @Injectable()
 export class PoApproverSettingService {
 
 	private readonly logger = new Logger(PoApproverSettingService.name);
+	private authUser: AuthUser
 
-	constructor(private readonly prisma: PrismaService) {}
+	constructor(private readonly prisma: PrismaService) { }
+
+	setAuthUser(authUser: AuthUser) {
+		this.authUser = authUser
+	}
 
 	async create(input: CreatePoApproverSettingInput): Promise<POApproverSetting> {
 
 		const data: Prisma.POApproverSettingCreateInput = {
 			approver: { connect: { id: input.approver_id } },
-			approver_proxy: input.approver_proxy_id ? { connect: { id: input.approver_id } } : undefined,
 			label: input.label,
-			order: input.order
+			order: input.order,
+			created_by: this.authUser.user.username
 		}
 
 		const created = await this.prisma.pOApproverSetting.create({
@@ -34,56 +40,46 @@ export class PoApproverSettingService {
 	}
 
 	async findAll(): Promise<POApproverSetting[]> {
-		return await this.prisma.pOApproverSetting.findMany( {
-            include: {
-                approver: true
-            },
+		return await this.prisma.pOApproverSetting.findMany({
+			include: {
+				approver: true
+			},
 			where: {
-				is_deleted: false 
+				deleted_at: null
 			},
 			orderBy: {
-                order: 'asc'
-            }
-		} )
+				order: 'asc'
+			}
+		})
 	}
 
 	async findOne(id: string): Promise<POApproverSetting | null> {
 		const item = await this.prisma.pOApproverSetting.findUnique({
-            include: {
-                approver: true
-            },
+			include: {
+				approver: true
+			},
 			where: { id }
 		})
 
-		if(!item){
-            throw new NotFoundException('pOApproverSetting not found')
-        }
+		if (!item) {
+			throw new NotFoundException('pOApproverSetting not found')
+		}
 
-        return item
+		return item
 	}
 
 	async update(id: string, input: UpdatePoApproverSettingInput): Promise<POApproverSetting> {
 
 		const existingItem = await this.findOne(id)
 
-		let approver_proxy = undefined
-
-        if(input.approver_proxy_id){
-            approver_proxy = {
-                connect: { id: input.approver_proxy_id }
-            }
-        }else{
-            approver_proxy = existingItem.approver_proxy_id ? { connect: { id: existingItem.approver_proxy_id } } : undefined
-        }
-
 		const data: Prisma.POApproverSettingUpdateInput = {
 			approver: input.approver_id ? { connect: { id: input.approver_id } } : { connect: { id: existingItem.approver_id } },
-			approver_proxy,
 			label: input.label ?? existingItem.label,
-			order: input.order ?? existingItem.order
+			order: input.order ?? existingItem.order,
+			updated_by: this.authUser.user.username
 		}
 
-		const updated = await this.prisma.pOApproverSetting.update({ 
+		const updated = await this.prisma.pOApproverSetting.update({
 			data,
 			where: {
 				id
@@ -91,7 +87,7 @@ export class PoApproverSettingService {
 			include: {
 				approver: true
 			}
-		 })
+		})
 
 		this.logger.log('Successfully updated pOApproverSetting')
 
@@ -102,10 +98,13 @@ export class PoApproverSettingService {
 
 		const existingItem = await this.findOne(id)
 
-		await this.prisma.pOApproverSetting.update( {
+		await this.prisma.pOApproverSetting.update({
 			where: { id },
-			data: { is_deleted: true }
-		} )
+			data: {
+				deleted_at: new Date(),
+				deleted_by: this.authUser.user.username
+			}
+		})
 
 		return {
 			success: true,

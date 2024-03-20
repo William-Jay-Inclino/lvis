@@ -17,11 +17,11 @@ exports.$Enums = {}
 
 /**
  * Prisma Client JS version: 5.8.1
- * Query Engine version: 23fdc5965b1e05fc54e5f26ed3de66776b93de64
+ * Query Engine version: efd2449663b3d73d637ea1fd226bafbcf45b3102
  */
 Prisma.prismaVersion = {
   client: "5.8.1",
-  engine: "23fdc5965b1e05fc54e5f26ed3de66776b93de64"
+  engine: "efd2449663b3d73d637ea1fd226bafbcf45b3102"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -113,9 +113,12 @@ exports.Prisma.DivisionScalarFieldEnum = {
   code: 'code',
   name: 'name',
   status: 'status',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  deleted_by: 'deleted_by',
   created_at: 'created_at',
   updated_at: 'updated_at',
-  is_deleted: 'is_deleted'
+  deleted_at: 'deleted_at'
 };
 
 exports.Prisma.DepartmentScalarFieldEnum = {
@@ -123,9 +126,12 @@ exports.Prisma.DepartmentScalarFieldEnum = {
   code: 'code',
   name: 'name',
   status: 'status',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  deleted_by: 'deleted_by',
   created_at: 'created_at',
   updated_at: 'updated_at',
-  is_deleted: 'is_deleted'
+  deleted_at: 'deleted_at'
 };
 
 exports.Prisma.EmployeeScalarFieldEnum = {
@@ -133,17 +139,23 @@ exports.Prisma.EmployeeScalarFieldEnum = {
   firstname: 'firstname',
   middlename: 'middlename',
   lastname: 'lastname',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  deleted_by: 'deleted_by',
   created_at: 'created_at',
   updated_at: 'updated_at',
-  is_deleted: 'is_deleted'
+  deleted_at: 'deleted_at'
 };
 
 exports.Prisma.ClassificationScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  deleted_by: 'deleted_by',
   created_at: 'created_at',
   updated_at: 'updated_at',
-  is_deleted: 'is_deleted'
+  deleted_at: 'deleted_at'
 };
 
 exports.Prisma.UserScalarFieldEnum = {
@@ -152,52 +164,56 @@ exports.Prisma.UserScalarFieldEnum = {
   username: 'username',
   password: 'password',
   status: 'status',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  deleted_by: 'deleted_by',
   created_at: 'created_at',
   updated_at: 'updated_at',
-  is_deleted: 'is_deleted'
+  deleted_at: 'deleted_at'
 };
 
 exports.Prisma.UserEmployeeScalarFieldEnum = {
   id: 'id',
   user_id: 'user_id',
   employee_id: 'employee_id',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
   created_at: 'created_at',
-  updated_at: 'updated_at',
-  is_deleted: 'is_deleted'
-};
-
-exports.Prisma.UserPermissionScalarFieldEnum = {
-  id: 'id',
-  created_at: 'created_at',
-  updated_at: 'updated_at',
-  is_deleted: 'is_deleted',
-  user_id: 'user_id',
-  submodule_id: 'submodule_id'
+  updated_at: 'updated_at'
 };
 
 exports.Prisma.ServiceScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  deleted_by: 'deleted_by',
   created_at: 'created_at',
   updated_at: 'updated_at',
-  is_deleted: 'is_deleted'
+  deleted_at: 'deleted_at'
 };
 
 exports.Prisma.FeatureScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  deleted_by: 'deleted_by',
   created_at: 'created_at',
   updated_at: 'updated_at',
-  is_deleted: 'is_deleted',
+  deleted_at: 'deleted_at',
   service_id: 'service_id'
 };
 
 exports.Prisma.ModuleScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  deleted_by: 'deleted_by',
   created_at: 'created_at',
   updated_at: 'updated_at',
-  is_deleted: 'is_deleted',
+  deleted_at: 'deleted_at',
   feature_id: 'feature_id'
 };
 
@@ -215,65 +231,77 @@ exports.Prisma.JOApproverSettingScalarFieldEnum = {
   label: 'label',
   order: 'order',
   approver_id: 'approver_id',
-  approver_proxy_id: 'approver_proxy_id',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  deleted_by: 'deleted_by',
   created_at: 'created_at',
   updated_at: 'updated_at',
-  is_deleted: 'is_deleted'
+  deleted_at: 'deleted_at'
 };
 
 exports.Prisma.RVApproverSettingScalarFieldEnum = {
   id: 'id',
-  approver_id: 'approver_id',
-  approver_proxy_id: 'approver_proxy_id',
   label: 'label',
   order: 'order',
+  approver_id: 'approver_id',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  deleted_by: 'deleted_by',
   created_at: 'created_at',
   updated_at: 'updated_at',
-  is_deleted: 'is_deleted'
+  deleted_at: 'deleted_at'
 };
 
 exports.Prisma.SPRApproverSettingScalarFieldEnum = {
   id: 'id',
-  approver_id: 'approver_id',
-  approver_proxy_id: 'approver_proxy_id',
   label: 'label',
   order: 'order',
+  approver_id: 'approver_id',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  deleted_by: 'deleted_by',
   created_at: 'created_at',
   updated_at: 'updated_at',
-  is_deleted: 'is_deleted'
+  deleted_at: 'deleted_at'
 };
 
 exports.Prisma.MEQSApproverSettingScalarFieldEnum = {
   id: 'id',
-  approver_id: 'approver_id',
-  approver_proxy_id: 'approver_proxy_id',
   label: 'label',
   order: 'order',
+  approver_id: 'approver_id',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  deleted_by: 'deleted_by',
   created_at: 'created_at',
   updated_at: 'updated_at',
-  is_deleted: 'is_deleted'
+  deleted_at: 'deleted_at'
 };
 
 exports.Prisma.POApproverSettingScalarFieldEnum = {
   id: 'id',
-  approver_id: 'approver_id',
-  approver_proxy_id: 'approver_proxy_id',
   label: 'label',
   order: 'order',
+  approver_id: 'approver_id',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  deleted_by: 'deleted_by',
   created_at: 'created_at',
   updated_at: 'updated_at',
-  is_deleted: 'is_deleted'
+  deleted_at: 'deleted_at'
 };
 
 exports.Prisma.RRApproverSettingScalarFieldEnum = {
   id: 'id',
-  approver_id: 'approver_id',
-  approver_proxy_id: 'approver_proxy_id',
   label: 'label',
   order: 'order',
+  approver_id: 'approver_id',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  deleted_by: 'deleted_by',
   created_at: 'created_at',
   updated_at: 'updated_at',
-  is_deleted: 'is_deleted'
+  deleted_at: 'deleted_at'
 };
 
 exports.Prisma.SortOrder = {
@@ -302,7 +330,6 @@ exports.Prisma.ModelName = {
   Classification: 'Classification',
   User: 'User',
   UserEmployee: 'UserEmployee',
-  UserPermission: 'UserPermission',
   Service: 'Service',
   Feature: 'Feature',
   Module: 'Module',

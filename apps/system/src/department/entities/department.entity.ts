@@ -15,7 +15,7 @@ export class Department {
 
   @Field(() => Int)
   status: number;
-  
+
   @Field(() => [Employee])
   employees?: Employee[];
 }
