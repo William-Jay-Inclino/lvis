@@ -134,6 +134,19 @@ exports.Prisma.DepartmentScalarFieldEnum = {
   deleted_at: 'deleted_at'
 };
 
+exports.Prisma.AccountScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  name: 'name',
+  description: 'description',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  deleted_by: 'deleted_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  deleted_at: 'deleted_at'
+};
+
 exports.Prisma.EmployeeScalarFieldEnum = {
   id: 'id',
   firstname: 'firstname',
@@ -326,6 +339,7 @@ exports.Role = exports.$Enums.Role = {
 exports.Prisma.ModelName = {
   Division: 'Division',
   Department: 'Department',
+  Account: 'Account',
   Employee: 'Employee',
   Classification: 'Classification',
   User: 'User',

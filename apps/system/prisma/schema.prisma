@@ -51,6 +51,23 @@ model Department {
   @@map("department")
 }
 
+model Account {
+  id          String @id @default(uuid())
+  code        String @unique
+  name        String
+  description String
+
+  created_by String
+  updated_by String?
+  deleted_by String?
+
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+  deleted_at DateTime?
+
+  @@map("account")
+}
+
 model Employee {
   id         String  @id @default(uuid())
   firstname  String

@@ -18,6 +18,7 @@ import { PoApproverSettingModule } from './po-approver-setting/po-approver-setti
 import { RrApproverSettingModule } from './rr-approver-setting/rr-approver-setting.module';
 import { JoApproverSettingModule } from './jo-approver-setting/jo-approver-setting.module';
 import { SprApproverSettingModule } from './spr-approver-setting/spr-approver-setting.module';
+import { AccountModule } from './account/account.module';
 
 
 @Module({
@@ -44,6 +45,7 @@ import { SprApproverSettingModule } from './spr-approver-setting/spr-approver-se
     RrApproverSettingModule,
     JoApproverSettingModule,
     SprApproverSettingModule,
+    AccountModule,
   ],
   controllers: [],
   providers: [],

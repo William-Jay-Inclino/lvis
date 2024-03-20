@@ -17,6 +17,15 @@ export interface User {
     password: string
     status: UserStatus
     role: Role
+    created_by: string
+}
+
+export interface Employee {
+    id: string
+    firstname: string
+    middlename: string
+    lastname: string
+    created_by: string
 }
 
 export interface Division {
@@ -25,40 +34,63 @@ export interface Division {
     code: string
     name: string
     status: number
+    created_by: string
+}
+
+export interface Department {
+    id: string
+    code: string
+    name: string
+    status: number
+    created_by: string
+}
+
+export interface Account {
+    id: string
+    code: string
+    name: string
+    description: string
+    created_by: string
 }
 
 export interface Service {
     id: string
     name: string
+    created_by: string
 }
 
 export interface Feature {
     id: string
     name: string
     service_id: string
+    created_by: string
 }
 
 export interface Module {
     id: string
     name: string
     feature_id: string
+    created_by: string
 }
 
 export interface SubModule {
     id: string
     name: string
     module_id: string
+    created_by: string
 }
 
 export interface Classification {
     id: string
     name: string
+    created_by: string
 }
 
 export interface UserEmployee {
     id: string
     user_id: string
     employee_id: string
+    created_by: string
 }
 
 export interface JOApproverSetting {
@@ -66,6 +98,7 @@ export interface JOApproverSetting {
     approver_id: string
     label: string
     order: number
+    created_by: string
 }
 
 export interface RVApproverSetting {
@@ -73,6 +106,7 @@ export interface RVApproverSetting {
     approver_id: string
     label: string
     order: number
+    created_by: string
 }
 
 export interface SPRApproverSetting {
@@ -80,6 +114,7 @@ export interface SPRApproverSetting {
     approver_id: string
     label: string
     order: number
+    created_by: string
 }
 
 export interface MEQSApproverSetting {
@@ -87,6 +122,7 @@ export interface MEQSApproverSetting {
     approver_id: string
     label: string
     order: number
+    created_by: string
 }
 
 export interface POApproverSetting {
@@ -94,6 +130,7 @@ export interface POApproverSetting {
     approver_id: string
     label: string
     order: number
+    created_by: string
 }
 
 export interface RRApproverSetting {
@@ -101,4 +138,5 @@ export interface RRApproverSetting {
     approver_id: string
     label: string
     order: number
+    created_by: string
 }
