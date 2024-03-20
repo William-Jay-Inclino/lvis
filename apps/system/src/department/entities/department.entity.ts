@@ -1,5 +1,4 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
-import { Employee } from '../../employee/entities/employee.entity';
 
 @ObjectType()
 export class Department {
@@ -16,6 +15,25 @@ export class Department {
   @Field(() => Int)
   status: number;
 
-  @Field(() => [Employee])
-  employees?: Employee[];
+
+
+  // audit fields
+
+  @Field()
+  created_by: string;
+
+  @Field({ nullable: true })
+  updated_by: string | null;
+
+  @Field({ nullable: true })
+  deleted_by: string | null;
+
+  @Field(() => Date)
+  created_at: Date;
+
+  @Field(() => Date)
+  updated_at: Date;
+
+  @Field(() => Date, { nullable: true })
+  deleted_at: Date | null;
 }

@@ -16,6 +16,10 @@ export class Supplier {
   @Field(() => Int)
   vat_type: VAT_TYPE;
 
+
+
+  // audit fields
+
   @Field()
   created_by: string;
 

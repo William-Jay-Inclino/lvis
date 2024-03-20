@@ -1,15 +1,25 @@
-import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { DepartmentService } from './department.service';
 import { Department } from './entities/department.entity';
 import { CreateDepartmentInput } from './dto/create-department.input';
-// import { UpdateDepartmentInput } from './dto/update-department.input';
+import { UseGuards } from '@nestjs/common';
+import { GqlAuthGuard } from '../__auth__/guards/gql-auth.guard';
+import { UpdateDepartmentInput } from './dto/update-department.input';
+import { SystemRemoveResponse } from '../__common__/classes';
+import { AuthUser } from '../__common__/auth-user.entity';
+import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
 
+@UseGuards(GqlAuthGuard)
 @Resolver(() => Department)
 export class DepartmentResolver {
-  constructor(private readonly departmentService: DepartmentService) {}
+  constructor(private readonly departmentService: DepartmentService) { }
 
   @Mutation(() => Department)
-  createDepartment(@Args('input') createDepartmentInput: CreateDepartmentInput) {
+  createDepartment(
+    @Args('input') createDepartmentInput: CreateDepartmentInput,
+    @CurrentAuthUser() authUser: AuthUser
+  ) {
+    this.departmentService.setAuthUser(authUser)
     return this.departmentService.create(createDepartmentInput);
   }
 
@@ -22,4 +32,24 @@ export class DepartmentResolver {
   department(@Args('id') id: string) {
     return this.departmentService.findOne(id);
   }
+
+  @Mutation(() => Department)
+  updateDepartment(
+    @Args('id') id: string,
+    @Args('input') updateDepartmentInput: UpdateDepartmentInput,
+    @CurrentAuthUser() authUser: AuthUser
+  ) {
+    this.departmentService.setAuthUser(authUser)
+    return this.departmentService.update(id, updateDepartmentInput);
+  }
+
+  @Mutation(() => SystemRemoveResponse)
+  removeDepartment(
+    @Args('id') id: string,
+    @CurrentAuthUser() authUser: AuthUser
+  ) {
+    this.departmentService.setAuthUser(authUser)
+    return this.departmentService.remove(id);
+  }
+
 }

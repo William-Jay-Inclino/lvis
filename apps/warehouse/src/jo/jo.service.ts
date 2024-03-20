@@ -375,6 +375,46 @@ export class JoService {
 
     }
 
+    private async isDepartmentExist(department_id: string, authUser: AuthUser): Promise<boolean> {
+
+        this.logger.log('isDepartmentExist', department_id)
+
+        const query = `
+            query{
+                department(id: "${department_id}") {
+                    id
+                }
+            }
+        `;
+
+        const { data } = await firstValueFrom(
+            this.httpService.post(process.env.API_GATEWAY_URL,
+                { query },
+                {
+                    headers: {
+                        Authorization: authUser.authorization,
+                        'Content-Type': 'application/json'
+                    }
+                }
+            ).pipe(
+                catchError((error) => {
+                    throw error
+                }),
+            ),
+        );
+
+        console.log('data', data)
+
+        if (!data || !data.data || !data.data.department) {
+            console.log('department not found')
+            return false
+        }
+        const department = data.data.department
+        console.log('department', department)
+        return true
+
+    }
+
     private async areEmployeesExist(employeeIds: string[], authUser: AuthUser): Promise<boolean> {
 
         this.logger.log('areEmployeesExist', employeeIds);
@@ -428,6 +468,14 @@ export class JoService {
 
             if (!isValidClassificationId) {
                 throw new NotFoundException('Classification ID not valid')
+            }
+        }
+
+        if (input.department_id) {
+            const isValidDepartmentId = await this.isDepartmentExist(input.department_id, this.authUser)
+
+            if (!isValidDepartmentId) {
+                throw new NotFoundException('Department ID not valid')
             }
         }
 
@@ -489,6 +537,14 @@ export class JoService {
 
             if (!isValidClassificationId) {
                 throw new NotFoundException('Classification ID not valid')
+            }
+        }
+
+        if (input.department_id) {
+            const isValidDepartmentId = await this.isDepartmentExist(input.department_id, this.authUser)
+
+            if (!isValidDepartmentId) {
+                throw new NotFoundException('Department ID not valid')
             }
         }
 
