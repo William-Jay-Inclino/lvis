@@ -17,6 +17,7 @@ import { MeqsApproverSettingModule } from './meqs-approver-setting/meqs-approver
 import { PoApproverSettingModule } from './po-approver-setting/po-approver-setting.module';
 import { RrApproverSettingModule } from './rr-approver-setting/rr-approver-setting.module';
 import { JoApproverSettingModule } from './jo-approver-setting/jo-approver-setting.module';
+import { SprApproverSettingModule } from './spr-approver-setting/spr-approver-setting.module';
 
 
 @Module({
@@ -42,6 +43,7 @@ import { JoApproverSettingModule } from './jo-approver-setting/jo-approver-setti
     PoApproverSettingModule,
     RrApproverSettingModule,
     JoApproverSettingModule,
+    SprApproverSettingModule,
   ],
   controllers: [],
   providers: [],
