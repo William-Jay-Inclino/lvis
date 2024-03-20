@@ -1,22 +1,22 @@
 import { BadRequestException, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { CanvassService } from '../canvass/canvass.service';
 import { PrismaService } from '../__prisma__/prisma.service';
-import { Prisma, RV, RVApprover } from 'apps/warehouse/prisma/generated/client';
-import { CreateRvInput } from './dto/create-rv.input';
+import { Prisma, SPR, SPRApprover } from 'apps/warehouse/prisma/generated/client';
+import { CreateSprInput } from './dto/create-spr.input';
 import { APPROVAL_STATUS, Role } from '../__common__/types';
 import { AuthUser } from '../__common__/auth-user.entity';
-import { UpdateRvInput } from './dto/update-rv.input';
+import { UpdateSprInput } from './dto/update-spr.input';
 import { catchError, firstValueFrom } from 'rxjs';
 import { HttpService } from '@nestjs/axios';
 import { WarehouseCancelResponse } from '../__common__/classes';
-import { RVsResponse } from './entities/rvs-response.entity';
+import { SPRsResponse } from './entities/sprs-response.entity';
 import * as moment from 'moment';
 import { getDateRange } from '../__common__/helpers';
 
 @Injectable()
-export class RvService {
+export class SprService {
 
-    private readonly logger = new Logger(RvService.name);
+    private readonly logger = new Logger(SprService.name);
     private authUser: AuthUser
 
     // fields that are included when returning a data from db
@@ -56,31 +56,30 @@ export class RvService {
         this.authUser = authUser
     }
 
-    async create(input: CreateRvInput): Promise<RV> {
+    async create(input: CreateSprInput): Promise<SPR> {
 
         this.logger.log('create()')
 
         if (!(await this.canCreate(input))) {
-            throw new Error('Failed to create RV. Please try again')
+            throw new Error('Failed to create SPR. Please try again')
         }
 
-        const rvNumber = await this.getLatestRvNumber()
+        const sprNumber = await this.getLatestSprNumber()
         const today = moment().format('MM/DD/YYYY')
 
         const createdBy = this.authUser.user.username
 
         // data to be inserted in database
-        const data: Prisma.RVCreateInput = {
+        const data: Prisma.SPRCreateInput = {
             created_by: createdBy,
-            rv_number: rvNumber,
+            spr_number: sprNumber,
             date_requested: new Date(today),
-            classification_id: input.classification_id ?? null,
-            work_order_no: input.work_order_no ?? null,
-            notes: input.notes ?? null,
-            work_order_date: new Date(input.work_order_date) ?? null,
-            supervisor_id: input.supervisor_id,
             canvass: { connect: { id: input.canvass_id } },
-            rv_approvers: {
+            vehicle: { connect: { id: input.vehicle_id } },
+            classification_id: input.classification_id ?? null,
+            supervisor_id: input.supervisor_id,
+            notes: input.notes ?? null,
+            spr_approvers: {
                 create: input.approvers.map(i => {
                     return {
                         approver_id: i.approver_id,
@@ -94,49 +93,48 @@ export class RvService {
             }
         }
 
-        const created = await this.prisma.rV.create({
+        const created = await this.prisma.sPR.create({
             data,
             include: this.includedFields
         })
 
-        this.logger.log('Successfully created RV')
+        this.logger.log('Successfully created SPR')
 
         return created
 
     }
 
-    async update(id: string, input: UpdateRvInput): Promise<RV> {
+    async update(id: string, input: UpdateSprInput): Promise<SPR> {
 
         this.logger.log('update()')
 
-        const existingItem = await this.prisma.rV.findUnique({
+        const existingItem = await this.prisma.sPR.findUnique({
             where: { id }
         })
 
         if (!existingItem) {
-            throw new NotFoundException('RV not found')
+            throw new NotFoundException('SPR not found')
         }
 
         if (!(await this.canUpdate(input, existingItem))) {
-            throw new Error('Failed to update RV. Please try again')
+            throw new Error('Failed to update SPR. Please try again')
         }
 
-        const data: Prisma.RVUpdateInput = {
+        const data: Prisma.SPRUpdateInput = {
             updated_by: this.authUser.user.username,
-            supervisor_id: input.supervisor_id ?? existingItem.supervisor_id,
+            vehicle: input.vehicle_id ? { connect: { id: input.vehicle_id } } : { connect: { id: existingItem.vehicle_id } },
             classification_id: input.classification_id ?? existingItem.classification_id,
-            work_order_no: input.work_order_no ?? existingItem.work_order_no,
+            supervisor_id: input.supervisor_id ?? existingItem.supervisor_id,
             notes: input.notes ?? existingItem.notes,
-            work_order_date: input.work_order_date ? new Date(input.work_order_date) : existingItem.work_order_date,
         }
 
-        const updated = await this.prisma.rV.update({
+        const updated = await this.prisma.sPR.update({
             data,
             where: { id },
             include: this.includedFields
         })
 
-        this.logger.log('Successfully updated RV')
+        this.logger.log('Successfully updated SPR')
 
         return updated
 
@@ -146,15 +144,15 @@ export class RvService {
 
         this.logger.log('cancel()')
 
-        const existingItem = await this.prisma.rV.findUnique({
+        const existingItem = await this.prisma.sPR.findUnique({
             where: { id }
         })
 
         if (!existingItem) {
-            throw new NotFoundException('RV not found')
+            throw new NotFoundException('SPR not found')
         }
 
-        const updated = await this.prisma.rV.update({
+        const updated = await this.prisma.sPR.update({
             data: {
                 cancelled_at: new Date(),
                 cancelled_by: this.authUser.user.username
@@ -162,32 +160,32 @@ export class RvService {
             where: { id }
         })
 
-        this.logger.log('Successfully cancelled RV')
+        this.logger.log('Successfully cancelled SPR')
 
         return {
             success: true,
-            msg: 'Successfully cancelled RV',
+            msg: 'Successfully cancelled SPR',
             cancelled_at: updated.cancelled_at,
             cancelled_by: updated.cancelled_by
         }
 
     }
 
-    async findOne(id: string): Promise<RV | null> {
-        const item = await this.prisma.rV.findUnique({
+    async findOne(id: string): Promise<SPR | null> {
+        const item = await this.prisma.sPR.findUnique({
             include: this.includedFields,
             where: { id }
         })
 
         if (!item) {
-            throw new NotFoundException('RV not found')
+            throw new NotFoundException('SPR not found')
         }
 
         return item
     }
 
-    async findByRcNumber(rc_number: string): Promise<RV | null> {
-        const item = await this.prisma.rV.findFirst({
+    async findByRcNumber(rc_number: string): Promise<SPR | null> {
+        const item = await this.prisma.sPR.findFirst({
             include: this.includedFields,
             where: {
                 canvass: {
@@ -197,26 +195,26 @@ export class RvService {
         })
 
         if (!item) {
-            throw new NotFoundException('RV not found')
+            throw new NotFoundException('SPR not found')
         }
 
         return item
     }
 
-    async findByRvNumber(rv_number: string): Promise<RV | null> {
-        const item = await this.prisma.rV.findUnique({
+    async findBySprNumber(spr_number: string): Promise<SPR | null> {
+        const item = await this.prisma.sPR.findUnique({
             include: this.includedFields,
-            where: { rv_number }
+            where: { spr_number }
         })
 
         if (!item) {
-            throw new NotFoundException('RV not found')
+            throw new NotFoundException('SPR not found')
         }
 
         return item
     }
 
-    async findAll(page: number, pageSize: number, date_requested?: string, requested_by_id?: string): Promise<RVsResponse> {
+    async findAll(page: number, pageSize: number, date_requested?: string, requested_by_id?: string): Promise<SPRsResponse> {
         const skip = (page - 1) * pageSize;
 
         let whereCondition: any = {};
@@ -236,17 +234,17 @@ export class RvService {
             whereCondition = { canvass: { requested_by_id: requested_by_id } }
         }
 
-        const items = await this.prisma.rV.findMany({
+        const items = await this.prisma.sPR.findMany({
             include: this.includedFields,
             where: whereCondition,
             orderBy: {
-                rv_number: 'desc'
+                spr_number: 'desc'
             },
             skip,
             take: pageSize,
         });
 
-        const totalItems = await this.prisma.rV.count({
+        const totalItems = await this.prisma.sPR.count({
             where: whereCondition,
         });
 
@@ -258,29 +256,29 @@ export class RvService {
         };
     }
 
-    async findRvNumbers(rvNumber: string): Promise<{ rv_number: string; }[]> {
+    async findSprNumbers(sprNumber: string): Promise<{ spr_number: string; }[]> {
 
-        const arrayOfRvNumbers = await this.prisma.rV.findMany({
+        const arrayOfSprNumbers = await this.prisma.sPR.findMany({
             select: {
-                rv_number: true
+                spr_number: true
             },
             where: {
-                rv_number: {
-                    contains: rvNumber.trim().toLowerCase(),
+                spr_number: {
+                    contains: sprNumber.trim().toLowerCase(),
                     mode: 'insensitive',
                 },
             },
             take: 5,
         });
 
-        return arrayOfRvNumbers;
+        return arrayOfSprNumbers;
     }
 
     async getStatus(id: string): Promise<APPROVAL_STATUS> {
 
-        const approvers = await this.prisma.rVApprover.findMany({
+        const approvers = await this.prisma.sPRApprover.findMany({
             where: {
-                rv_id: id,
+                spr_id: id,
                 deleted_at: null
             }
         })
@@ -301,10 +299,10 @@ export class RvService {
 
     }
 
-    async isReferenced(rvId: string): Promise<Boolean> {
+    async isReferenced(sprId: string): Promise<Boolean> {
 
         const meqs = await this.prisma.mEQS.findUnique({
-            where: { rv_id: rvId }
+            where: { spr_id: sprId }
         })
 
         if (meqs) return true
@@ -313,16 +311,16 @@ export class RvService {
 
     }
 
-    private async getLatestRvNumber(): Promise<string> {
+    private async getLatestSprNumber(): Promise<string> {
         const currentYear = new Date().getFullYear().toString().slice(-2);
 
-        const latestItem = await this.prisma.rV.findFirst({
-            where: { rv_number: { startsWith: currentYear } },
-            orderBy: { rv_number: 'desc' },
+        const latestItem = await this.prisma.sPR.findFirst({
+            where: { spr_number: { startsWith: currentYear } },
+            orderBy: { spr_number: 'desc' },
         });
 
         if (latestItem) {
-            const latestNumericPart = parseInt(latestItem.rv_number.slice(-5), 10);
+            const latestNumericPart = parseInt(latestItem.spr_number.slice(-5), 10);
             const newNumericPart = latestNumericPart + 1;
             const newRcNumber = `${currentYear}-${newNumericPart.toString().padStart(5, '0')}`;
             return newRcNumber;
@@ -420,7 +418,7 @@ export class RvService {
         }
     }
 
-    private async canCreate(input: CreateRvInput): Promise<boolean> {
+    private async canCreate(input: CreateSprInput): Promise<boolean> {
 
         if (input.classification_id) {
             const isValidClassificationId = await this.isClassificationExist(input.classification_id, this.authUser)
@@ -458,7 +456,7 @@ export class RvService {
 
     }
 
-    private async canUpdate(input: UpdateRvInput, existingItem: RV): Promise<boolean> {
+    private async canUpdate(input: UpdateSprInput, existingItem: SPR): Promise<boolean> {
 
         const isNormalUser = this.isNormalUser()
 
@@ -469,9 +467,9 @@ export class RvService {
 
             console.log('is normal user')
 
-            const approvers = await this.prisma.rVApprover.findMany({
+            const approvers = await this.prisma.sPRApprover.findMany({
                 where: {
-                    rv_id: existingItem.id
+                    spr_id: existingItem.id
                 }
             })
 
@@ -479,7 +477,7 @@ export class RvService {
             const isAnyNonPendingApprover = this.isAnyNonPendingApprover(approvers)
 
             if (isAnyNonPendingApprover) {
-                throw new BadRequestException(`Unable to update RV. Can only update if all approver's status is pending`)
+                throw new BadRequestException(`Unable to update SPR. Can only update if all approver's status is pending`)
             }
         }
 
@@ -512,7 +510,7 @@ export class RvService {
     }
 
     // used to indicate whether there is at least one approver whose status is not pending.
-    private isAnyNonPendingApprover(approvers: RVApprover[]): boolean {
+    private isAnyNonPendingApprover(approvers: SPRApprover[]): boolean {
 
         for (let approver of approvers) {
 
