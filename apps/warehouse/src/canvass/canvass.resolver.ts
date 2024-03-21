@@ -90,4 +90,9 @@ export class CanvassResolver {
     return await this.canvassService.isReferenced(canvass.id)
   }
 
+  @ResolveField(() => Boolean)
+  async is_reference_in_rr(@Parent() canvass: Canvass) {
+    return await this.canvassService.isReferencedInRR(canvass.id)
+  }
+
 }

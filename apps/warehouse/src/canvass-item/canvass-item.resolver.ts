@@ -1,4 +1,4 @@
-import { Resolver, Query, Mutation, Args, Int, ResolveReference } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, Int, ResolveReference, ResolveField, Parent } from '@nestjs/graphql';
 import { CanvassItemService } from './canvass-item.service';
 import { CanvassItem } from './entities/canvass-item.entity';
 import { CreateCanvassItemInput } from './dto/create-canvass-item.input';
@@ -23,11 +23,6 @@ export class CanvassItemResolver {
     return this.canvassItemService.create(createCanvassItemInput);
   }
 
-  // @Query(() => [CanvassItem])
-  // canvass_items() {
-  //   return this.canvassItemService.findAll();
-  // }
-
   @Query(() => CanvassItem)
   canvass_item(@Args('id') id: string) {
     return this.canvassItemService.findOne(id);
@@ -47,4 +42,10 @@ export class CanvassItemResolver {
   removeCanvassItem(@Args('id', { type: () => String }) id: string) {
     return this.canvassItemService.remove(id);
   }
+
+  // @ResolveField(() => Boolean)
+  // async is_reference_in_rr(@Parent() canvassItem: CanvassItem) {
+  //   return await this.canvassItemService.isReferenceInRR(canvassItem.id)
+  // }
+
 }

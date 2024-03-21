@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { CreateCanvassItemInput } from './dto/create-canvass-item.input';
 import { PrismaService } from '../__prisma__/prisma.service';
 import { CanvassItem, Prisma } from 'apps/warehouse/prisma/generated/client';
@@ -186,5 +186,22 @@ export class CanvassItemService {
 		}
 
 	}
+
+	// async isReferenceInRR(id: string): Promise<boolean> {
+
+	// 	const rrItem = await this.prisma.rRItem.findFirst({
+	// 		select: {
+	// 			id: true
+	// 		},
+	// 		where: {
+	// 			meqs_supplier_item: {
+	// 				canvass_item_id: id
+	// 			}
+	// 		}
+	// 	})
+
+	// 	return !!rrItem
+
+	// }
 
 }
