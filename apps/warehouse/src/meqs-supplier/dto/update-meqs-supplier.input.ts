@@ -20,10 +20,10 @@ export class UpdateMeqsSupplierInput {
   @Type(() => UpdateMeqsSupplierItemSubInput)
   meqs_supplier_items?: UpdateMeqsSupplierItemSubInput[] | null;
 
-  @Field(() => [CreateMeqsSupplierAttachmentSubInput])
-  @IsArray()
-  @ValidateNested({ each: true })
-  @Type(() => CreateMeqsSupplierAttachmentSubInput)
-  attachments: CreateMeqsSupplierAttachmentSubInput[];
+  // @Field(() => [CreateMeqsSupplierAttachmentSubInput])
+  // @IsArray()
+  // @ValidateNested({ each: true })
+  // @Type(() => CreateMeqsSupplierAttachmentSubInput)
+  // attachments: CreateMeqsSupplierAttachmentSubInput[];
 
 }

@@ -124,16 +124,16 @@ export class MeqsService {
                     supplier: { connect: { id: supplier.supplier_id } },
                     payment_terms: supplier.payment_terms,
                     created_by: createdBy,
-                    attachments: {
-                        create: supplier.attachments.map(attachment => {
-                            const attachmentInput: Prisma.MEQSSupplierAttachmentCreateWithoutMeqs_supplierInput = {
-                                src: attachment.src,
-                                filename: attachment.filename,
-                                created_by: createdBy
-                            }
-                            return attachmentInput
-                        })
-                    },
+                    // attachments: {
+                    //     create: supplier.attachments.map(attachment => {
+                    //         const attachmentInput: Prisma.MEQSSupplierAttachmentCreateWithoutMeqs_supplierInput = {
+                    //             src: attachment.src,
+                    //             filename: attachment.filename,
+                    //             created_by: createdBy
+                    //         }
+                    //         return attachmentInput
+                    //     })
+                    // },
                     meqs_supplier_items: {
                         create: supplier.meqs_supplier_items.map(item => {
 

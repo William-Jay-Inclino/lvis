@@ -521,17 +521,47 @@ export class RrService {
 
         const canvass = await this.prisma.canvass.findFirst({
             where: {
-                rv: {
-                    meqs: {
-                        meqs_suppliers: {
-                            some: {
-                                po: {
-                                    id: poId
+                OR: [
+                    {
+                        rv: {
+                            meqs: {
+                                meqs_suppliers: {
+                                    some: {
+                                        po: {
+                                            id: poId
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    {
+                        jo: {
+                            meqs: {
+                                meqs_suppliers: {
+                                    some: {
+                                        po: {
+                                            id: poId
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    {
+                        spr: {
+                            meqs: {
+                                meqs_suppliers: {
+                                    some: {
+                                        po: {
+                                            id: poId
+                                        }
+                                    }
                                 }
                             }
                         }
                     }
-                }
+                ]
             },
             select: {
                 requested_by_id: true

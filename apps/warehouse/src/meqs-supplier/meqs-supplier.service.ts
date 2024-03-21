@@ -37,16 +37,16 @@ export class MeqsSupplierService {
             supplier: { connect: { id: input.supplier_id } },
             payment_terms: input.payment_terms,
             created_by: createdBy,
-            attachments: {
-                create: input.attachments.map(attachment => {
-                    const attachmentInput: Prisma.MEQSSupplierAttachmentCreateWithoutMeqs_supplierInput = {
-                        src: attachment.src,
-                        filename: attachment.filename,
-                        created_by: createdBy
-                    }
-                    return attachmentInput
-                })
-            },
+            // attachments: {
+            //     create: input.attachments.map(attachment => {
+            //         const attachmentInput: Prisma.MEQSSupplierAttachmentCreateWithoutMeqs_supplierInput = {
+            //             src: attachment.src,
+            //             filename: attachment.filename,
+            //             created_by: createdBy
+            //         }
+            //         return attachmentInput
+            //     })
+            // },
             meqs_supplier_items: {
                 create: input.meqs_supplier_items.map(item => {
 
@@ -117,7 +117,6 @@ export class MeqsSupplierService {
 
         const existingItem = await this.findOne(id)
 
-        const createdBy = this.authUser.user.username
         const updatedBy = this.authUser.user.username
 
 
@@ -127,29 +126,29 @@ export class MeqsSupplierService {
         }
 
         // create new attachments since we use remove and create technique
-        if (input.attachments) {
-            data['attachments'] = {
-                create: input.attachments.map(attachment => {
-                    const attachmentInput: Prisma.MEQSSupplierAttachmentCreateWithoutMeqs_supplierInput = {
-                        src: attachment.src,
-                        filename: attachment.filename,
-                        created_by: createdBy
-                    }
-                    return attachmentInput
-                })
-            }
-        }
+        // if (input.attachments) {
+        //     data['attachments'] = {
+        //         create: input.attachments.map(attachment => {
+        //             const attachmentInput: Prisma.MEQSSupplierAttachmentCreateWithoutMeqs_supplierInput = {
+        //                 src: attachment.src,
+        //                 filename: attachment.filename,
+        //                 created_by: createdBy
+        //             }
+        //             return attachmentInput
+        //         })
+        //     }
+        // }
 
         const queries = []
 
 
-        const removeMeqsAttachmentsQuery = this.prisma.mEQSSupplierAttachment.deleteMany({
-            where: {
-                meqs_supplier_id: id
-            }
-        })
+        // const removeMeqsAttachmentsQuery = this.prisma.mEQSSupplierAttachment.deleteMany({
+        //     where: {
+        //         meqs_supplier_id: id
+        //     }
+        // })
 
-        queries.push(removeMeqsAttachmentsQuery)
+        // queries.push(removeMeqsAttachmentsQuery)
 
         if (input.meqs_supplier_items) {
 
