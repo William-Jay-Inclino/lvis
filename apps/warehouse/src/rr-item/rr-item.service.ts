@@ -105,19 +105,19 @@ export class RrItemService {
 					quantity_accepted: input.quantity_accepted,
 					updated_by: this.authUser.user.username
 				},
-				include: {
-					meqs_supplier_item: {
-						include: {
-							canvass_item: {
-								include: {
-									item: true,
-									brand: true,
-									unit: true
-								}
-							}
-						}
-					}
-				}
+				// include: {
+				// 	meqs_supplier_item: {
+				// 		include: {
+				// 			canvass_item: {
+				// 				include: {
+				// 					item: true,
+				// 					brand: true,
+				// 					unit: true
+				// 				}
+				// 			}
+				// 		}
+				// 	}
+				// }
 			})
 
 			queries.push(updateRrItemQuery)
@@ -128,10 +128,12 @@ export class RrItemService {
 
 		console.log(`RR Items successfully updated it's quantity accepted`)
 
+		console.log('result', result)
+
 		return {
 			success: true,
 			msg: 'RR Items updated!',
-			data: result
+			// data: result
 		}
 
 	}
