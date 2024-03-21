@@ -488,6 +488,28 @@ export class MeqsService {
         })
     }
 
+    async isRrCompleted(meqsId: string): Promise<boolean> {
+
+        const rr = await this.prisma.rR.findFirst({
+            select: {
+                id: true,
+                is_completed: true
+            },
+            where: {
+                po: {
+                    meqs_supplier: {
+                        meqs_id: meqsId
+                    }
+                }
+            }
+        })
+
+        if (!rr) return false
+
+        return rr.is_completed
+
+    }
+
     private async canReference(input: CreateMeqsInput): Promise<{ succes: boolean, msg: string }> {
 
 
