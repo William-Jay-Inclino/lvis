@@ -6,6 +6,8 @@ import { AuthUser } from '../__common__/auth-user.entity';
 import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
 import { GqlAuthGuard } from '../__auth__/guards/gql-auth.guard';
 import { UseGuards } from '@nestjs/common';
+import { UpdateRrItemsInput } from './dto/update-rr-items.input';
+import { UpdateRrItemsResponse } from './entities/update-rr-items-response';
 @UseGuards(GqlAuthGuard)
 @Resolver(() => RrItem)
 export class RrItemResolver {
@@ -34,4 +36,14 @@ export class RrItemResolver {
     this.rrItemService.setAuthUser(authUser)
     return this.rrItemService.update(id, updateRrItemInput);
   }
+
+  @Mutation(() => UpdateRrItemsResponse)
+  updateRrItems(
+    @Args({ name: 'inputs', type: () => [UpdateRrItemsInput] }) inputs: UpdateRrItemsInput[],
+    @CurrentAuthUser() authUser: AuthUser
+  ) {
+    this.rrItemService.setAuthUser(authUser)
+    return this.rrItemService.updateMultiple(inputs);
+  }
+
 }

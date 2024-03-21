@@ -4,6 +4,8 @@ import { PrismaService } from '../__prisma__/prisma.service';
 import { Prisma, RRApprover, RRItem } from 'apps/warehouse/prisma/generated/client';
 import { APPROVAL_STATUS, Role } from '../__common__/types';
 import { AuthUser } from '../__common__/auth-user.entity';
+import { UpdateRrItemsInput } from './dto/update-rr-items.input';
+import { UpdateRrItemsResponse } from './entities/update-rr-items-response';
 
 @Injectable()
 export class RrItemService {
@@ -87,6 +89,53 @@ export class RrItemService {
 
 	}
 
+	async updateMultiple(inputs: UpdateRrItemsInput[]): Promise<UpdateRrItemsResponse> {
+
+		this.logger.log('updateMultiple', inputs)
+
+		const queries = []
+
+		for (let input of inputs) {
+
+			const updateRrItemQuery = this.prisma.rRItem.update({
+				where: {
+					id: input.id
+				},
+				data: {
+					quantity_accepted: input.quantity_accepted,
+					updated_by: this.authUser.user.username
+				},
+				include: {
+					meqs_supplier_item: {
+						include: {
+							canvass_item: {
+								include: {
+									item: true,
+									brand: true,
+									unit: true
+								}
+							}
+						}
+					}
+				}
+			})
+
+			queries.push(updateRrItemQuery)
+
+		}
+
+		const result = await this.prisma.$transaction(queries)
+
+		console.log(`RR Items successfully updated it's quantity accepted`)
+
+		return {
+			success: true,
+			msg: 'RR Items updated!',
+			data: result
+		}
+
+	}
+
 	private async canUpdate(input: UpdateRrItemInput, existingItem: RRItem): Promise<boolean> {
 
 		const rr = await this.prisma.rR.findUnique({
@@ -125,7 +174,6 @@ export class RrItemService {
 		return true
 
 	}
-
 	// used to indicate whether there is at least one approver whose status is not pending.
 	private isAnyNonPendingApprover(approvers: RRApprover[]): boolean {
 

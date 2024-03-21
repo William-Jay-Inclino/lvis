@@ -32,6 +32,7 @@ export class CreateItemInput {
   @Field(() => Int)
   @IsNotEmpty()
   @IsInt()
+  @Min(0)
   initial_quantity: number
 
   @Field(() => Float)
