@@ -43,7 +43,8 @@ export class SprService {
                     }
                 }
             }
-        }
+        },
+        vehicle: true
     }
 
     constructor(

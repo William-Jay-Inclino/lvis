@@ -1,5 +1,4 @@
 import { ObjectType, Field, ID } from '@nestjs/graphql';
-import { SPR } from '../../spr/entities/spr.entity';
 
 @ObjectType()
 export class Vehicle {

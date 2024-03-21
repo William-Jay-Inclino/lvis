@@ -42,6 +42,40 @@ export class CanvassService {
                     }
                 }
             }
+        },
+        jo: {
+            include: {
+                meqs: {
+                    include: {
+                        meqs_suppliers: {
+                            include: {
+                                po: {
+                                    include: {
+                                        rrs: true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        spr: {
+            include: {
+                meqs: {
+                    include: {
+                        meqs_suppliers: {
+                            include: {
+                                po: {
+                                    include: {
+                                        rrs: true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 
