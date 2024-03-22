@@ -48,7 +48,7 @@ export class EmployeeService {
 			deleted_at: null
 		};
 
-		if (searchValue !== undefined) {
+		if (!!searchValue) {
 			whereCondition = {
 				OR: [
 					{ lastname: { contains: searchValue.trim(), mode: 'insensitive' } },

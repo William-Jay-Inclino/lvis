@@ -7,6 +7,7 @@ import { GqlAuthGuard } from '../__auth__/guards/gql-auth.guard';
 import { UseGuards } from '@nestjs/common';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
+import { SystemRemoveResponse } from '../__common__/classes';
 
 @UseGuards(GqlAuthGuard)
 @Resolver(() => Classification)
@@ -42,7 +43,7 @@ export class ClassificationResolver {
     return this.classificationService.update(id, updateClassificationInput);
   }
 
-  @Mutation(() => Classification)
+  @Mutation(() => SystemRemoveResponse)
   removeClassification(
     @Args('id') id: string,
     @CurrentAuthUser() authUser: AuthUser

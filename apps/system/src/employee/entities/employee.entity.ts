@@ -10,7 +10,7 @@ export class Employee {
   @Field(() => String)
   firstname: string;
 
-  @Field(() => String, {nullable: true})
+  @Field(() => String, { nullable: true })
   middlename?: string | null;
 
   @Field(() => String)

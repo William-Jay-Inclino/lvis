@@ -5,11 +5,11 @@ import * as data from './mock-data';
 @Injectable()
 export class SeederService {
 
-    constructor(private readonly prisma: PrismaService) {}
+    constructor(private readonly prisma: PrismaService) { }
 
     async seedData() {
         console.log('Seeding data...');
-    
+
         try {
             await this.prisma.$transaction([
                 this.seedService(),
@@ -18,6 +18,7 @@ export class SeederService {
                 this.seedSubModule(),
                 this.seedDepartment(),
                 this.seedClassification(),
+                this.seedAccount(),
                 this.seedEmployee(),
                 this.seedJOApproverSetting(),
                 this.seedRVApproverSetting(),
@@ -29,11 +30,11 @@ export class SeederService {
                 this.seedUserEmployeeTable(),
             ]
             );
-            
+
             console.log('Seeding done')
-          } catch (error) {
+        } catch (error) {
             console.error('Transaction failed. Rolling back...', error);
-          }
+        }
     }
 
     seedService(): any {
@@ -41,16 +42,16 @@ export class SeederService {
         try {
             return this.prisma.service.createMany({ data: data.services })
         } catch (error) {
-            console.error(error)            
+            console.error(error)
         }
     }
-    
+
     seedFeature() {
         console.log('seeding feature table...')
         try {
             return this.prisma.feature.createMany({ data: data.features })
         } catch (error) {
-            console.error(error)            
+            console.error(error)
         }
     }
 
@@ -59,7 +60,7 @@ export class SeederService {
         try {
             return this.prisma.module.createMany({ data: data.modules })
         } catch (error) {
-            console.error(error)           
+            console.error(error)
         }
     }
 
@@ -68,7 +69,7 @@ export class SeederService {
         try {
             return this.prisma.subModule.createMany({ data: data.subModules })
         } catch (error) {
-            console.error(error)           
+            console.error(error)
         }
     }
 
@@ -80,7 +81,7 @@ export class SeederService {
                 data: data.departments
             })
         } catch (error) {
-            console.error(error)  
+            console.error(error)
         }
 
     }
@@ -93,7 +94,21 @@ export class SeederService {
                 data: data.classifications
             })
         } catch (error) {
-            console.error(error)  
+            console.error(error)
+        }
+
+
+    }
+
+    seedAccount() {
+        console.log('seeding account table...')
+
+        try {
+            return this.prisma.account.createMany({
+                data: data.accounts
+            })
+        } catch (error) {
+            console.error(error)
         }
 
 
@@ -107,7 +122,7 @@ export class SeederService {
                 data: data.employees
             })
         } catch (error) {
-            console.error(error)  
+            console.error(error)
         }
 
 
@@ -121,7 +136,7 @@ export class SeederService {
                 data: data.jo_default_approvers,
             })
         } catch (error) {
-            console.error(error)  
+            console.error(error)
         }
 
 
@@ -135,7 +150,7 @@ export class SeederService {
                 data: data.rv_default_approvers,
             })
         } catch (error) {
-            console.error(error)  
+            console.error(error)
         }
 
 
@@ -149,7 +164,7 @@ export class SeederService {
                 data: data.spr_default_approvers,
             })
         } catch (error) {
-            console.error(error)  
+            console.error(error)
         }
 
 
@@ -163,7 +178,7 @@ export class SeederService {
                 data: data.meqs_default_approvers,
             })
         } catch (error) {
-            console.error(error)  
+            console.error(error)
         }
 
 
@@ -177,7 +192,7 @@ export class SeederService {
                 data: data.po_default_approvers,
             })
         } catch (error) {
-            console.error(error)  
+            console.error(error)
         }
 
     }
@@ -190,7 +205,7 @@ export class SeederService {
                 data: data.rr_default_approvers,
             })
         } catch (error) {
-            console.error(error)  
+            console.error(error)
         }
 
     }
@@ -203,7 +218,7 @@ export class SeederService {
                 data: data.users,
             })
         } catch (error) {
-            console.error(error)  
+            console.error(error)
         }
 
     }
@@ -216,7 +231,7 @@ export class SeederService {
                 data: data.userEmployees,
             })
         } catch (error) {
-            console.error(error)  
+            console.error(error)
         }
 
     }

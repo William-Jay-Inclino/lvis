@@ -1,4 +1,5 @@
 import { ObjectType, Field, Int, ID, Directive } from '@nestjs/graphql';
+import { DepartmentStatus } from '../../__common__/types';
 
 @ObjectType()
 @Directive('@key(fields: "id")')
@@ -14,7 +15,7 @@ export class Department {
   name: string;
 
   @Field(() => Int)
-  status: number;
+  status: DepartmentStatus;
 
 
 

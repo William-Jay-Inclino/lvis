@@ -25,14 +25,9 @@ export class UnitResolver {
     return this.unitService.create(createUnitInput);
   }
 
-  @Query(() => UnitsResponse)
-  units(
-    @Args('page') page?: number,
-    @Args('pageSize') pageSize?: number,
-    @Args('searchField', { nullable: true }) searchField?: string,
-    @Args('searchValue', { nullable: true }) searchValue?: string,
-  ) {
-    return this.unitService.findAll(page, pageSize, searchField, searchValue);
+  @Query(() => [Unit])
+  units() {
+    return this.unitService.findAll();
   }
 
   @Query(() => Unit)
