@@ -5,7 +5,11 @@ import { CreateItemTypeInput } from './dto/create-item-type.input';
 import { UpdateItemTypeInput } from './dto/update-item-type.input';
 import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
 import { AuthUser } from '../__common__/auth-user.entity';
+import { UseGuards } from '@nestjs/common';
+import { GqlAuthGuard } from '../__auth__/guards/gql-auth.guard';
+import { WarehouseRemoveResponse } from '../__common__/classes';
 
+@UseGuards(GqlAuthGuard)
 @Resolver(() => ItemType)
 export class ItemTypeResolver {
   constructor(private readonly itemTypeService: ItemTypeService) { }
@@ -39,7 +43,7 @@ export class ItemTypeResolver {
     return this.itemTypeService.update(id, updateItemTypeInput);
   }
 
-  @Mutation(() => ItemType)
+  @Mutation(() => WarehouseRemoveResponse)
   removeItemType(
     @Args('id') id: string,
     @CurrentAuthUser() authUser: AuthUser

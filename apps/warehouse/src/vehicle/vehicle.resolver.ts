@@ -6,7 +6,10 @@ import { UpdateVehicleInput } from './dto/update-vehicle.input';
 import { WarehouseRemoveResponse } from '../__common__/classes';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
+import { UseGuards } from '@nestjs/common';
+import { GqlAuthGuard } from '../__auth__/guards/gql-auth.guard';
 
+@UseGuards(GqlAuthGuard)
 @Resolver(() => Vehicle)
 export class VehicleResolver {
   constructor(private readonly vehicleService: VehicleService) { }
