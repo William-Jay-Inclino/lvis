@@ -3,11 +3,13 @@ import { RvApproverSettingService } from './rv-approver-setting.service';
 import { RvApproverSetting } from './entities/rv-approver-setting.entity';
 import { CreateRvApproverSettingInput } from './dto/create-rv-approver-setting.input';
 import { UpdateRvApproverSettingInput } from './dto/update-rv-approver-setting.input';
-import { SystemRemoveResponse } from '../__common__/classes';
+import { ApproverSettingRemoveResponse, SystemRemoveResponse } from '../__common__/classes';
 import { GqlAuthGuard } from '../__auth__/guards/gql-auth.guard';
 import { UseGuards } from '@nestjs/common';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
+import { UpdateRvSettingOrderResponse } from './entities/update-rv-setting-order-response.entity';
+import { UpdateRVSettingOrderInput } from './dto/update-rv-setting-order.input';
 
 @UseGuards(GqlAuthGuard)
 @Resolver(() => RvApproverSetting)
@@ -43,7 +45,12 @@ export class RvApproverSettingResolver {
     return this.rvApproverSettingService.update(id, updateRvApproverSettingInput);
   }
 
-  @Mutation(() => SystemRemoveResponse)
+  @Mutation(() => UpdateRvSettingOrderResponse)
+  async updateRVApproverSettingOrder(@Args('inputs', { type: () => [UpdateRVSettingOrderInput] }) inputs: UpdateRVSettingOrderInput[]) {
+    return await this.rvApproverSettingService.updateManyOrders(inputs);
+  }
+
+  @Mutation(() => ApproverSettingRemoveResponse)
   removeRvApproverSetting(
     @Args('id') id: string,
     @CurrentAuthUser() authUser: AuthUser

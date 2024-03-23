@@ -3,11 +3,13 @@ import { SprApproverSettingService } from './spr-approver-setting.service';
 import { SprApproverSetting } from './entities/spr-approver-setting.entity';
 import { CreateSprApproverSettingInput } from './dto/create-spr-approver-setting.input';
 import { UpdateSprApproverSettingInput } from './dto/update-spr-approver-setting.input';
-import { SystemRemoveResponse } from '../__common__/classes';
+import { ApproverSettingRemoveResponse, SystemRemoveResponse } from '../__common__/classes';
 import { GqlAuthGuard } from '../__auth__/guards/gql-auth.guard';
 import { UseGuards } from '@nestjs/common';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
+import { UpdateSprSettingOrderResponse } from './entities/update-spr-setting-order-response.entity';
+import { UpdateSPRSettingOrderInput } from './dto/update-spr-setting-order.input';
 
 @UseGuards(GqlAuthGuard)
 @Resolver(() => SprApproverSetting)
@@ -43,7 +45,12 @@ export class SprApproverSettingResolver {
     return this.sprApproverSettingService.update(id, updateSprApproverSettingInput);
   }
 
-  @Mutation(() => SystemRemoveResponse)
+  @Mutation(() => UpdateSprSettingOrderResponse)
+  async updateSPRApproverSettingOrder(@Args('inputs', { type: () => [UpdateSPRSettingOrderInput] }) inputs: UpdateSPRSettingOrderInput[]) {
+    return await this.sprApproverSettingService.updateManyOrders(inputs);
+  }
+
+  @Mutation(() => ApproverSettingRemoveResponse)
   removeSprApproverSetting(
     @Args('id') id: string,
     @CurrentAuthUser() authUser: AuthUser

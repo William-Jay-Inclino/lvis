@@ -3,11 +3,13 @@ import { PoApproverSettingService } from './po-approver-setting.service';
 import { PoApproverSetting } from './entities/po-approver-setting.entity';
 import { CreatePoApproverSettingInput } from './dto/create-po-approver-setting.input';
 import { UpdatePoApproverSettingInput } from './dto/update-po-approver-setting.input';
-import { SystemRemoveResponse } from '../__common__/classes';
+import { ApproverSettingRemoveResponse, SystemRemoveResponse } from '../__common__/classes';
 import { GqlAuthGuard } from '../__auth__/guards/gql-auth.guard';
 import { UseGuards } from '@nestjs/common';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
+import { UpdatePoSettingOrderResponse } from './entities/update-po-setting-order-response.entity';
+import { UpdatePOSettingOrderInput } from './dto/update-po-setting-order.input';
 
 @UseGuards(GqlAuthGuard)
 @Resolver(() => PoApproverSetting)
@@ -43,7 +45,12 @@ export class PoApproverSettingResolver {
     return this.poApproverSettingService.update(id, updatePoApproverSettingInput);
   }
 
-  @Mutation(() => SystemRemoveResponse)
+  @Mutation(() => UpdatePoSettingOrderResponse)
+  async updatePoApproverSettingOrder(@Args('inputs', { type: () => [UpdatePOSettingOrderInput] }) inputs: UpdatePOSettingOrderInput[]) {
+    return await this.poApproverSettingService.updateManyOrders(inputs);
+  }
+
+  @Mutation(() => ApproverSettingRemoveResponse)
   removePoApproverSetting(
     @Args('id') id: string,
     @CurrentAuthUser() authUser: AuthUser

@@ -249,10 +249,8 @@ exports.Prisma.JOApproverSettingScalarFieldEnum = {
   approver_id: 'approver_id',
   created_by: 'created_by',
   updated_by: 'updated_by',
-  deleted_by: 'deleted_by',
   created_at: 'created_at',
-  updated_at: 'updated_at',
-  deleted_at: 'deleted_at'
+  updated_at: 'updated_at'
 };
 
 exports.Prisma.RVApproverSettingScalarFieldEnum = {
@@ -262,10 +260,8 @@ exports.Prisma.RVApproverSettingScalarFieldEnum = {
   approver_id: 'approver_id',
   created_by: 'created_by',
   updated_by: 'updated_by',
-  deleted_by: 'deleted_by',
   created_at: 'created_at',
-  updated_at: 'updated_at',
-  deleted_at: 'deleted_at'
+  updated_at: 'updated_at'
 };
 
 exports.Prisma.SPRApproverSettingScalarFieldEnum = {
@@ -275,10 +271,8 @@ exports.Prisma.SPRApproverSettingScalarFieldEnum = {
   approver_id: 'approver_id',
   created_by: 'created_by',
   updated_by: 'updated_by',
-  deleted_by: 'deleted_by',
   created_at: 'created_at',
-  updated_at: 'updated_at',
-  deleted_at: 'deleted_at'
+  updated_at: 'updated_at'
 };
 
 exports.Prisma.MEQSApproverSettingScalarFieldEnum = {
@@ -288,10 +282,8 @@ exports.Prisma.MEQSApproverSettingScalarFieldEnum = {
   approver_id: 'approver_id',
   created_by: 'created_by',
   updated_by: 'updated_by',
-  deleted_by: 'deleted_by',
   created_at: 'created_at',
-  updated_at: 'updated_at',
-  deleted_at: 'deleted_at'
+  updated_at: 'updated_at'
 };
 
 exports.Prisma.POApproverSettingScalarFieldEnum = {
@@ -301,10 +293,8 @@ exports.Prisma.POApproverSettingScalarFieldEnum = {
   approver_id: 'approver_id',
   created_by: 'created_by',
   updated_by: 'updated_by',
-  deleted_by: 'deleted_by',
   created_at: 'created_at',
-  updated_at: 'updated_at',
-  deleted_at: 'deleted_at'
+  updated_at: 'updated_at'
 };
 
 exports.Prisma.RRApproverSettingScalarFieldEnum = {
@@ -314,10 +304,8 @@ exports.Prisma.RRApproverSettingScalarFieldEnum = {
   approver_id: 'approver_id',
   created_by: 'created_by',
   updated_by: 'updated_by',
-  deleted_by: 'deleted_by',
   created_at: 'created_at',
-  updated_at: 'updated_at',
-  deleted_at: 'deleted_at'
+  updated_at: 'updated_at'
 };
 
 exports.Prisma.SortOrder = {

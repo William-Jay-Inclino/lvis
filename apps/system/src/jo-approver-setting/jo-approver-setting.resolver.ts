@@ -3,11 +3,13 @@ import { JoApproverSettingService } from './jo-approver-setting.service';
 import { JoApproverSetting } from './entities/jo-approver-setting.entity';
 import { CreateJoApproverSettingInput } from './dto/create-jo-approver-setting.input';
 import { UpdateJoApproverSettingInput } from './dto/update-jo-approver-setting.input';
-import { SystemRemoveResponse } from '../__common__/classes';
+import { ApproverSettingRemoveResponse, SystemRemoveResponse } from '../__common__/classes';
 import { GqlAuthGuard } from '../__auth__/guards/gql-auth.guard';
 import { UseGuards } from '@nestjs/common';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
+import { UpdateJoSettingOrderResponse } from './entities/update-jo-setting-order-response.entity';
+import { UpdateJOSettingOrderInput } from './dto/update-jo-setting-order.input';
 
 @UseGuards(GqlAuthGuard)
 @Resolver(() => JoApproverSetting)
@@ -43,7 +45,12 @@ export class JoApproverSettingResolver {
     return this.joApproverSettingService.update(id, updateJoApproverSettingInput);
   }
 
-  @Mutation(() => SystemRemoveResponse)
+  @Mutation(() => UpdateJoSettingOrderResponse)
+  async updateJOApproverSettingOrder(@Args('inputs', { type: () => [UpdateJOSettingOrderInput] }) inputs: UpdateJOSettingOrderInput[]) {
+    return await this.joApproverSettingService.updateManyOrders(inputs);
+  }
+
+  @Mutation(() => ApproverSettingRemoveResponse)
   removeJoApproverSetting(
     @Args('id') id: string,
     @CurrentAuthUser() authUser: AuthUser

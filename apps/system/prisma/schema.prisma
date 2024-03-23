@@ -247,11 +247,9 @@ model JOApproverSetting {
 
   created_by String
   updated_by String?
-  deleted_by String?
 
-  created_at DateTime  @default(now())
-  updated_at DateTime  @updatedAt
-  deleted_at DateTime?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
   approver Employee @relation("JOApproverSetting", fields: [approver_id], references: [id], onDelete: Restrict)
 
@@ -266,11 +264,9 @@ model RVApproverSetting {
 
   created_by String
   updated_by String?
-  deleted_by String?
 
-  created_at DateTime  @default(now())
-  updated_at DateTime  @updatedAt
-  deleted_at DateTime?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
   approver Employee @relation("RVApproverSetting", fields: [approver_id], references: [id], onDelete: Restrict)
 
@@ -285,11 +281,9 @@ model SPRApproverSetting {
 
   created_by String
   updated_by String?
-  deleted_by String?
 
-  created_at DateTime  @default(now())
-  updated_at DateTime  @updatedAt
-  deleted_at DateTime?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
   approver Employee @relation("SPRApproverSetting", fields: [approver_id], references: [id], onDelete: Restrict)
 
@@ -304,11 +298,9 @@ model MEQSApproverSetting {
 
   created_by String
   updated_by String?
-  deleted_by String?
 
-  created_at DateTime  @default(now())
-  updated_at DateTime  @updatedAt
-  deleted_at DateTime?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
   approver Employee @relation("MEQSApproverSetting", fields: [approver_id], references: [id], onDelete: Restrict)
 
@@ -323,11 +315,9 @@ model POApproverSetting {
 
   created_by String
   updated_by String?
-  deleted_by String?
 
-  created_at DateTime  @default(now())
-  updated_at DateTime  @updatedAt
-  deleted_at DateTime?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
   approver Employee @relation("POApproverSetting", fields: [approver_id], references: [id], onDelete: Restrict)
 
@@ -342,11 +332,9 @@ model RRApproverSetting {
 
   created_by String
   updated_by String?
-  deleted_by String?
 
-  created_at DateTime  @default(now())
-  updated_at DateTime  @updatedAt
-  deleted_at DateTime?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
   approver Employee @relation("RRApproverSetting", fields: [approver_id], references: [id], onDelete: Restrict)
 

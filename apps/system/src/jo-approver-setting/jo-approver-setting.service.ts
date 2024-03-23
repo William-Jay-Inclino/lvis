@@ -2,9 +2,10 @@ import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { CreateJoApproverSettingInput } from './dto/create-jo-approver-setting.input';
 import { PrismaService } from '../__prisma__/prisma.service';
 import { UpdateJoApproverSettingInput } from './dto/update-jo-approver-setting.input';
-import { SystemRemoveResponse } from '../__common__/classes';
+import { ApproverSettingRemoveResponse, SystemRemoveResponse } from '../__common__/classes';
 import { JOApproverSetting, Prisma } from 'apps/system/prisma/generated/client';
 import { AuthUser } from '../__common__/auth-user.entity';
+import { UpdateJoSettingOrderResponse } from './entities/update-jo-setting-order-response.entity';
 
 @Injectable()
 export class JoApproverSettingService {
@@ -43,9 +44,6 @@ export class JoApproverSettingService {
     return await this.prisma.jOApproverSetting.findMany({
       include: {
         approver: true
-      },
-      where: {
-        deleted_at: null
       },
       orderBy: {
         order: 'asc'
@@ -94,22 +92,158 @@ export class JoApproverSettingService {
     return updated
   }
 
-  async remove(id: string): Promise<SystemRemoveResponse> {
+  // after removing the order is altered. Needs to reorder accordingly
+  async remove(id: string): Promise<ApproverSettingRemoveResponse> {
 
     const existingItem = await this.findOne(id)
 
-    await this.prisma.jOApproverSetting.update({
-      where: { id },
-      data: {
-        deleted_at: new Date(),
-        deleted_by: this.authUser.user.username
-      }
+    const queries = []
+
+    // need to set first approver orders to negative unique values since order column has unique constraint
+    const setTemporaryApproverOrdersQueries = await this.getQueries_for_setTemporaryApproverOrders()
+
+    queries.push(...setTemporaryApproverOrdersQueries)
+
+    // update approver orders 
+    const reOrderApproversQueries = await this.getQueries_for_reOrderApprovers(id)
+
+    queries.push(...reOrderApproversQueries)
+
+    const removeApproverQuery = this.prisma.jOApproverSetting.delete({
+      where: { id }
     })
+
+    queries.push(removeApproverQuery)
+
+    const result = await this.prisma.$transaction(queries)
+
+    console.log('result', result)
+
+    const approvers = await this.findAll()
 
     return {
       success: true,
-      msg: "jOApproverSetting successfully deleted"
+      msg: "jOApproverSetting successfully deleted",
+      // @ts-ignore
+      approvers
     }
+
+  }
+
+  // need to set first approver orders to negative unique values since order column has unique constraint
+  async updateManyOrders(inputs: { id: string; order: number }[]): Promise<UpdateJoSettingOrderResponse> {
+    try {
+
+      const queries = []
+
+      const setTemporaryApproverOrdersQueries = await this.getQueries_for_setTemporaryApproverOrders()
+
+      queries.push(...setTemporaryApproverOrdersQueries)
+
+      for (let input of inputs) {
+
+        // increment order since default order 1 is the immediate supervisor
+        const order = input.order + 1
+
+        const updateQuery = this.prisma.jOApproverSetting.update({
+          where: { id: input.id },
+          data: { order },
+          select: {
+            id: true
+          }
+        })
+
+        queries.push(updateQuery)
+
+      }
+
+      const result = await this.prisma.$transaction(queries)
+
+      console.log('result', result)
+
+      const approvers = await this.findAll()
+
+      return {
+        success: true,
+        approvers: approvers
+      };
+    } catch (error) {
+      this.logger.error(error);
+      return { success: false, approvers: [] };
+    }
+  }
+
+  private async getQueries_for_setTemporaryApproverOrders(): Promise<string[]> {
+    console.log('setTemporaryApproverOrders')
+
+    const approvers = await this.findAll()
+
+    const queries = []
+
+    let order = -1
+
+    for (let approver of approvers) {
+
+      console.log('order', order)
+
+      const query = this.prisma.jOApproverSetting.update({
+        where: { id: approver.id },
+        data: {
+          order: order--
+        }
+      })
+
+      queries.push(query)
+
+    }
+
+    return queries
+
+  }
+
+  /* 
+    To reorder the order field in the approvers array so that it is incrementing without skipping numbers, 
+      you can sort the array based on the order field and then update the order values sequentially.
+
+    Starting order is 2 since order 1 will be the immediate supervisor 
+  */
+  private async getQueries_for_reOrderApprovers(idRemoved: string): Promise<string[]> {
+
+    console.log('getQueries_for_reOrderApprovers()', idRemoved)
+
+    const queries = []
+
+    const approvers = await this.prisma.jOApproverSetting.findMany({
+      where: {
+        id: {
+          not: idRemoved
+        }
+      }
+    })
+
+    approvers.sort((a, b) => a.order - b.order);
+
+    let currentOrder = 2;
+
+    approvers.forEach((app) => {
+      app.order = currentOrder;
+      currentOrder++;
+    });
+
+    for (let approver of approvers) {
+
+      const query = this.prisma.jOApproverSetting.update({
+        where: { id: approver.id },
+        data: {
+          order: approver.order
+        }
+      })
+
+      queries.push(query)
+
+    }
+
+    return queries
 
   }
 
