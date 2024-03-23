@@ -142,12 +142,9 @@ export class RrApproverSettingService {
 
 			for (let input of inputs) {
 
-				// increment order since default order 1 is the immediate supervisor
-				const order = input.order + 1
-
 				const updateQuery = this.prisma.rRApproverSetting.update({
 					where: { id: input.id },
-					data: { order },
+					data: { order: input.order },
 					select: {
 						id: true
 					}
@@ -223,7 +220,7 @@ export class RrApproverSettingService {
 
 		approvers.sort((a, b) => a.order - b.order);
 
-		let currentOrder = 2;
+		let currentOrder = 1;
 
 		approvers.forEach((app) => {
 			app.order = currentOrder;

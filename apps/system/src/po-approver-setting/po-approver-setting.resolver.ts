@@ -46,7 +46,7 @@ export class PoApproverSettingResolver {
   }
 
   @Mutation(() => UpdatePoSettingOrderResponse)
-  async updatePoApproverSettingOrder(@Args('inputs', { type: () => [UpdatePOSettingOrderInput] }) inputs: UpdatePOSettingOrderInput[]) {
+  async updatePOApproverSettingOrder(@Args('inputs', { type: () => [UpdatePOSettingOrderInput] }) inputs: UpdatePOSettingOrderInput[]) {
     return await this.poApproverSettingService.updateManyOrders(inputs);
   }
 

@@ -142,12 +142,9 @@ export class MeqsApproverSettingService {
 
 			for (let input of inputs) {
 
-				// increment order since default order 1 is the immediate supervisor
-				const order = input.order + 1
-
 				const updateQuery = this.prisma.mEQSApproverSetting.update({
 					where: { id: input.id },
-					data: { order },
+					data: { order: input.order },
 					select: {
 						id: true
 					}
@@ -205,7 +202,6 @@ export class MeqsApproverSettingService {
 		To reorder the order field in the approvers array so that it is incrementing without skipping numbers, 
 		  you can sort the array based on the order field and then update the order values sequentially.
 
-		Starting order is 2 since order 1 will be the immediate supervisor 
 	*/
 	private async getQueries_for_reOrderApprovers(idRemoved: string): Promise<string[]> {
 
@@ -223,7 +219,7 @@ export class MeqsApproverSettingService {
 
 		approvers.sort((a, b) => a.order - b.order);
 
-		let currentOrder = 2;
+		let currentOrder = 1;
 
 		approvers.forEach((app) => {
 			app.order = currentOrder;
