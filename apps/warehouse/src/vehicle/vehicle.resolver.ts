@@ -8,6 +8,9 @@ import { AuthUser } from '../__common__/auth-user.entity';
 import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
 import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from '../__auth__/guards/gql-auth.guard';
+import { AccessGuard } from '../__auth__/guards/access.guard';
+import { CheckAccess } from '../__auth__/check-access.decorator';
+import { MODULES, RESOLVERS } from '../__common__/types';
 
 @UseGuards(GqlAuthGuard)
 @Resolver(() => Vehicle)
@@ -15,6 +18,8 @@ export class VehicleResolver {
   constructor(private readonly vehicleService: VehicleService) { }
 
   @Mutation(() => Vehicle)
+  @UseGuards(AccessGuard)
+  @CheckAccess(MODULES.VEHICLE, RESOLVERS.createVehicle)
   createVehicle(
     @Args('input') createVehicleInput: CreateVehicleInput,
     @CurrentAuthUser() authUser: AuthUser
@@ -24,16 +29,22 @@ export class VehicleResolver {
   }
 
   @Query(() => [Vehicle])
+  @UseGuards(AccessGuard)
+  @CheckAccess(MODULES.VEHICLE, RESOLVERS.vehicles)
   vehicles() {
     return this.vehicleService.findAll();
   }
 
   @Query(() => Vehicle)
+  @UseGuards(AccessGuard)
+  @CheckAccess(MODULES.VEHICLE, RESOLVERS.vehicle)
   vehicle(@Args('id') id: string) {
     return this.vehicleService.findOne(id);
   }
 
   @Mutation(() => Vehicle)
+  @UseGuards(AccessGuard)
+  @CheckAccess(MODULES.VEHICLE, RESOLVERS.updateVehicle)
   updateVehicle(
     @Args('id') id: string,
     @Args('input') updateVehicleInput: UpdateVehicleInput,
@@ -44,6 +55,8 @@ export class VehicleResolver {
   }
 
   @Mutation(() => WarehouseRemoveResponse)
+  @UseGuards(AccessGuard)
+  @CheckAccess(MODULES.VEHICLE, RESOLVERS.removeVehicle)
   removeVehicle(
     @Args('id') id: string,
     @CurrentAuthUser() authUser: AuthUser

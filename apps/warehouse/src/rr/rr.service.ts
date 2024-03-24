@@ -1,16 +1,16 @@
-import { BadRequestException, Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { BadRequestException, ForbiddenException, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { CreateRrInput } from './dto/create-rr.input';
 import { UpdateRrInput } from './dto/update-rr.input';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { PrismaService } from '../__prisma__/prisma.service';
 import { HttpService } from '@nestjs/axios';
 import { Prisma, RR, RRApprover } from 'apps/warehouse/prisma/generated/client';
-import { WarehouseCancelResponse, WarehouseRemoveResponse } from '../__common__/classes';
+import { WarehouseCancelResponse } from '../__common__/classes';
 import { catchError, firstValueFrom } from 'rxjs';
 import { APPROVAL_STATUS, Role } from '../__common__/types';
 import { RRsResponse } from './entities/rr-response.entity';
 import * as moment from 'moment';
-import { getDateRange } from '../__common__/helpers';
+import { getDateRange, isAdmin, isNormalUser } from '../__common__/helpers';
 
 @Injectable()
 export class RrService {
@@ -298,6 +298,10 @@ export class RrService {
             throw new NotFoundException('RR not found')
         }
 
+        if (!this.canAccess(existingItem)) {
+            throw new ForbiddenException('Only Admin and Owner can update this record!')
+        }
+
         if (!(await this.canUpdate(input, existingItem))) {
             throw new Error('Failed to update RR. Please try again')
         }
@@ -333,6 +337,10 @@ export class RrService {
 
         if (!existingItem) {
             throw new NotFoundException('RR not found')
+        }
+
+        if (!this.canAccess(existingItem)) {
+            throw new ForbiddenException('Only Admin and Owner can cancel this record!')
         }
 
         const updated = await this.prisma.rR.update({
@@ -452,13 +460,8 @@ export class RrService {
 
     private async canUpdate(input: UpdateRrInput, existingItem: RR): Promise<boolean> {
 
-
-        const isNormalUser = this.isNormalUser()
-
-        console.log('isNormalUser', isNormalUser)
-
         // validates if there is already an approver who take an action
-        if (isNormalUser) {
+        if (isNormalUser(this.authUser)) {
 
             console.log('is normal user')
 
@@ -508,13 +511,6 @@ export class RrService {
 
         return false
 
-    }
-
-    private isNormalUser(): boolean {
-
-        const isNormalUser = (this.authUser.user.role === Role.USER)
-
-        return isNormalUser
     }
 
     private async getRequestedById(poId: string) {
@@ -573,6 +569,18 @@ export class RrService {
         }
 
         return canvass.requested_by_id;
+
+    }
+
+    private canAccess(item: RR): boolean {
+
+        if (isAdmin(this.authUser)) return true
+
+        const isOwner = item.created_by === this.authUser.user.username
+
+        if (isOwner) return true
+
+        return false
 
     }
 

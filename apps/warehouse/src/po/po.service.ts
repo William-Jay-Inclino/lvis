@@ -1,16 +1,16 @@
-import { BadRequestException, Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { BadRequestException, ForbiddenException, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../__prisma__/prisma.service';
 import { CreatePoInput } from './dto/create-po.input';
 import { PO, POApprover, Prisma } from 'apps/warehouse/prisma/generated/client';
 import { APPROVAL_STATUS, Role } from '../__common__/types';
-import { WarehouseCancelResponse, WarehouseRemoveResponse } from '../__common__/classes';
+import { WarehouseCancelResponse } from '../__common__/classes';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { HttpService } from '@nestjs/axios';
 import { catchError, firstValueFrom } from 'rxjs';
 import { UpdatePoInput } from './dto/update-po.input';
 import { POsResponse } from './entities/pos-response.entity';
 import * as moment from 'moment';
-import { getDateRange } from '../__common__/helpers';
+import { getDateRange, isAdmin, isNormalUser } from '../__common__/helpers';
 
 @Injectable()
 export class PoService {
@@ -132,6 +132,10 @@ export class PoService {
             throw new NotFoundException('PO not found')
         }
 
+        if (!this.canAccess(existingItem)) {
+            throw new ForbiddenException('Only Admin and Owner can update this record!')
+        }
+
         if (!(await this.canUpdate(input, existingItem))) {
             throw new Error('Failed to update PO. Please try again')
         }
@@ -163,6 +167,10 @@ export class PoService {
 
         if (!existingItem) {
             throw new NotFoundException('PO not found')
+        }
+
+        if (!this.canAccess(existingItem)) {
+            throw new ForbiddenException('Only Admin and Owner can cancel this record!')
         }
 
         const updated = await this.prisma.pO.update({
@@ -404,12 +412,8 @@ export class PoService {
 
     private async canUpdate(input: UpdatePoInput, existingItem: PO): Promise<boolean> {
 
-        const isNormalUser = this.isNormalUser()
-
-        console.log('isNormalUser', isNormalUser)
-
         // validates if there is already an approver who take an action
-        if (isNormalUser) {
+        if (isNormalUser(this.authUser)) {
 
             console.log('is normal user')
 
@@ -447,11 +451,16 @@ export class PoService {
 
     }
 
-    private isNormalUser(): boolean {
+    private canAccess(item: PO): boolean {
 
-        const isNormalUser = (this.authUser.user.role === Role.USER)
+        if (isAdmin(this.authUser)) return true
 
-        return isNormalUser
+        const isOwner = item.created_by === this.authUser.user.username
+
+        if (isOwner) return true
+
+        return false
+
     }
 
 }

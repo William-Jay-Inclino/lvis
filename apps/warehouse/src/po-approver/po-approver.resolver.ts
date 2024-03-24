@@ -4,13 +4,14 @@ import { CreatePoApproverInput } from './dto/create-po-approver.input';
 import { UpdatePoApproverInput } from './dto/update-po-approver.input';
 import { WarehouseRemoveResponse } from '../__common__/classes';
 import { GqlAuthGuard } from '../__auth__/guards/gql-auth.guard';
-import { UseGuards } from '@nestjs/common';
+import { ForbiddenException, UseGuards } from '@nestjs/common';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
 import { Employee } from '../__employee__/entities/employee.entity';
 import { UpdatePoOrderResponse } from './entities/update-po-order-response.entity';
 import { UpdatePoOrderInput } from './dto/update-po-order.input';
 import { POApprover } from './entities/po-approver.entity';
+import { isAdmin } from '../__common__/helpers';
 
 @UseGuards(GqlAuthGuard)
 @Resolver(() => POApprover)
@@ -22,6 +23,11 @@ export class PoApproverResolver {
     @Args('input') createPoApproverInput: CreatePoApproverInput,
     @CurrentAuthUser() authUser: AuthUser
   ) {
+
+    if (!isAdmin(authUser)) {
+      throw new ForbiddenException('Only Admin can create PO Approver')
+    }
+
     this.poApproverService.setAuthUser(authUser)
     return this.poApproverService.create(createPoApproverInput);
   }
@@ -50,12 +56,24 @@ export class PoApproverResolver {
     @Args('input') updatePoApproverInput: UpdatePoApproverInput,
     @CurrentAuthUser() authUser: AuthUser
   ) {
+
+    if (!isAdmin(authUser)) {
+      throw new ForbiddenException('Only Admin can update PO Approver')
+    }
+
     this.poApproverService.setAuthUser(authUser)
     return this.poApproverService.update(id, updatePoApproverInput);
   }
 
   @Mutation(() => UpdatePoOrderResponse)
-  async updatePOApproverOrder(@Args('inputs', { type: () => [UpdatePoOrderInput] }) inputs: UpdatePoOrderInput[]) {
+  async updatePOApproverOrder(
+    @Args('inputs', { type: () => [UpdatePoOrderInput] }) inputs: UpdatePoOrderInput[],
+    @CurrentAuthUser() authUser: AuthUser
+  ) {
+
+    if (!isAdmin(authUser)) {
+      throw new ForbiddenException('Only Admin can update PO Approver Order')
+    }
 
     return await this.poApproverService.updateManyOrders(inputs);
 
@@ -66,6 +84,11 @@ export class PoApproverResolver {
     @Args('id') id: string,
     @CurrentAuthUser() authUser: AuthUser
   ) {
+
+    if (!isAdmin(authUser)) {
+      throw new ForbiddenException('Only Admin can remove PO Approver')
+    }
+
     this.poApproverService.setAuthUser(authUser)
     return this.poApproverService.remove(id);
   }

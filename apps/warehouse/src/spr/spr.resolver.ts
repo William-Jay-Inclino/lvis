@@ -13,8 +13,10 @@ import { SPRApprover } from '../spr-approver/entities/spr-approver.entity';
 import { SprApproverService } from '../spr-approver/spr-approver.service';
 import { SprNumber } from './entities/spr-number.entity';
 import { SPRsResponse } from './entities/sprs-response.entity';
-import { APPROVAL_STATUS } from '../__common__/types';
+import { APPROVAL_STATUS, MODULES, RESOLVERS } from '../__common__/types';
 import { WarehouseCancelResponse } from '../__common__/classes';
+import { AccessGuard } from '../__auth__/guards/access.guard';
+import { CheckAccess } from '../__auth__/check-access.decorator';
 
 @UseGuards(GqlAuthGuard)
 @Resolver(() => SPR)
@@ -26,6 +28,8 @@ export class SprResolver {
     ) { }
 
     @Mutation(() => SPR)
+    @UseGuards(AccessGuard)
+    @CheckAccess(MODULES.SPR, RESOLVERS.createSpr)
     async createSpr(
         @Args('input') createSprInput: CreateSprInput,
         @CurrentAuthUser() authUser: AuthUser
@@ -35,6 +39,8 @@ export class SprResolver {
     }
 
     @Query(() => SPRsResponse)
+    @UseGuards(AccessGuard)
+    @CheckAccess(MODULES.SPR, RESOLVERS.sprs)
     sprs(
         @Args('page') page: number,
         @Args('pageSize') pageSize: number,
@@ -45,6 +51,8 @@ export class SprResolver {
     }
 
     @Query(() => [SprNumber])
+    @UseGuards(AccessGuard)
+    @CheckAccess(MODULES.SPR, RESOLVERS.spr_numbers)
     spr_numbers(
         @Args('spr_number') spr_number: string
     ): Promise<{ spr_number: string }[]> {
@@ -52,6 +60,8 @@ export class SprResolver {
     }
 
     @Query(() => SPR)
+    @UseGuards(AccessGuard)
+    @CheckAccess(MODULES.SPR, RESOLVERS.spr)
     spr(
         @Args('id', { nullable: true }) id?: string,
         @Args('spr_number', { nullable: true }) spr_number?: string,

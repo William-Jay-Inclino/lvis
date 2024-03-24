@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { BadRequestException, ForbiddenException, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { CanvassService } from '../canvass/canvass.service';
 import { PrismaService } from '../__prisma__/prisma.service';
 import { Prisma, SPR, SPRApprover } from 'apps/warehouse/prisma/generated/client';
@@ -11,7 +11,7 @@ import { HttpService } from '@nestjs/axios';
 import { WarehouseCancelResponse } from '../__common__/classes';
 import { SPRsResponse } from './entities/sprs-response.entity';
 import * as moment from 'moment';
-import { getDateRange } from '../__common__/helpers';
+import { getDateRange, isAdmin, isNormalUser } from '../__common__/helpers';
 
 @Injectable()
 export class SprService {
@@ -117,6 +117,10 @@ export class SprService {
             throw new NotFoundException('SPR not found')
         }
 
+        if (!this.canAccess(existingItem)) {
+            throw new ForbiddenException('Only Admin and Owner can update this record!')
+        }
+
         if (!(await this.canUpdate(input, existingItem))) {
             throw new Error('Failed to update SPR. Please try again')
         }
@@ -151,6 +155,10 @@ export class SprService {
 
         if (!existingItem) {
             throw new NotFoundException('SPR not found')
+        }
+
+        if (!this.canAccess(existingItem)) {
+            throw new ForbiddenException('Only Admin and Owner can cancel this record!')
         }
 
         const updated = await this.prisma.sPR.update({
@@ -459,12 +467,8 @@ export class SprService {
 
     private async canUpdate(input: UpdateSprInput, existingItem: SPR): Promise<boolean> {
 
-        const isNormalUser = this.isNormalUser()
-
-        console.log('isNormalUser', isNormalUser)
-
         // validates if there is already an approver who take an action
-        if (isNormalUser) {
+        if (isNormalUser(this.authUser)) {
 
             console.log('is normal user')
 
@@ -527,11 +531,16 @@ export class SprService {
 
     }
 
-    private isNormalUser(): boolean {
+    private canAccess(item: SPR): boolean {
 
-        const isNormalUser = (this.authUser.user.role === Role.USER)
+        if (isAdmin(this.authUser)) return true
 
-        return isNormalUser
+        const isOwner = item.created_by === this.authUser.user.username
+
+        if (isOwner) return true
+
+        return false
+
     }
 
 }

@@ -1,15 +1,15 @@
-import { BadRequestException, Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { BadRequestException, ForbiddenException, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { PrismaService } from '../__prisma__/prisma.service';
 import { HttpService } from '@nestjs/axios';
 import { CreateMeqsInput } from './dto/create-meqs.input';
-import { JOApprover, MEQS, MEQSApprover, Prisma, RVApprover, SPRApprover } from 'apps/warehouse/prisma/generated/client';
+import { JOApprover, MEQS, MEQSApprover, Prisma } from 'apps/warehouse/prisma/generated/client';
 import { APPROVAL_STATUS, Role } from '../__common__/types';
 import { UpdateMeqsInput } from './dto/update-meqs.input';
 import { catchError, firstValueFrom } from 'rxjs';
 import { MEQSsResponse } from './entities/meqs-response.entity';
 import * as moment from 'moment';
-import { getDateRange } from '../__common__/helpers';
+import { getDateRange, isAdmin, isNormalUser } from '../__common__/helpers';
 import { WarehouseCancelResponse } from '../__common__/classes';
 
 @Injectable()
@@ -193,6 +193,10 @@ export class MeqsService {
             throw new NotFoundException('MEQS not found')
         }
 
+        if (!this.canAccess(existingItem)) {
+            throw new ForbiddenException('Only Admin and Owner can update this record!')
+        }
+
         if (!(await this.canUpdate(input, existingItem))) {
             throw new Error('Unable to update MEQS')
         }
@@ -227,6 +231,10 @@ export class MeqsService {
 
         if (!existingItem) {
             throw new NotFoundException('MEQS not found')
+        }
+
+        if (!this.canAccess(existingItem)) {
+            throw new ForbiddenException('Only Admin and Owner can cancel this record!')
         }
 
         const updated = await this.prisma.mEQS.update({
@@ -595,13 +603,8 @@ export class MeqsService {
         console.log('canUpdate()')
         console.log('authUser', this.authUser)
 
-
-        const isNormalUser = this.isNormalUser()
-
-        console.log('isNormalUser', isNormalUser)
-
         // validates if there is already an approver who take an action
-        if (isNormalUser) {
+        if (isNormalUser(this.authUser)) {
 
             console.log('is normal user')
 
@@ -641,49 +644,16 @@ export class MeqsService {
 
     }
 
-    private isNormalUser(): boolean {
+    private canAccess(item: MEQS): boolean {
 
-        const isNormalUser = (this.authUser.user.role === Role.USER)
+        if (isAdmin(this.authUser)) return true
 
-        return isNormalUser
+        const isOwner = item.created_by === this.authUser.user.username
+
+        if (isOwner) return true
+
+        return false
+
     }
-
-    // private async isUserExist(user_id: string, authUser: AuthUser): Promise<boolean> {
-
-    //     this.logger.log('isUserExist', user_id)
-
-    //     const query = `
-    //         query{
-    //             user(id: "${user_id}") {
-    //                 id
-    //             }
-    //         }
-    //     `;
-
-    //     const { data } = await firstValueFrom(
-    //         this.httpService.post(process.env.API_GATEWAY_URL,
-    //             { query },
-    //             {
-    //                 headers: {
-    //                     Authorization: authUser.authorization,
-    //                     'Content-Type': 'application/json'
-    //                 }
-    //             }
-    //         ).pipe(
-    //             catchError((error) => {
-    //                 throw error
-    //             }),
-    //         ),
-    //     );
-
-    //     console.log('data', data)
-
-    //     if (!data || !data.data || !data.data.user) {
-    //         console.log('User not found')
-    //         return false
-    //     }
-    //     return true
-
-    // }
 
 }

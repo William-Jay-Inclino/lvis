@@ -1,4 +1,4 @@
-import { Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { ForbiddenException, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { CreateCanvassItemInput } from './dto/create-canvass-item.input';
 import { PrismaService } from '../__prisma__/prisma.service';
 import { CanvassItem, Prisma } from 'apps/warehouse/prisma/generated/client';
@@ -7,6 +7,7 @@ import { WarehouseRemoveResponse } from '../__common__/classes';
 import { VAT_TYPE } from '../__common__/types';
 import { MeqsSupplierItem } from '../meqs-supplier-item/entities/meqs-supplier-item.entity';
 import { AuthUser } from '../__common__/auth-user.entity';
+import { isAdmin } from '../__common__/helpers';
 
 @Injectable()
 export class CanvassItemService {
@@ -24,6 +25,10 @@ export class CanvassItemService {
 
 		this.logger.log('create()')
 
+		if (!this.canAccess(input.canvass_id)) {
+			throw new ForbiddenException('Only Admin and Owner can create canvass item!')
+		}
+
 		const createdBy = this.authUser.user.username
 
 		const data: Prisma.CanvassItemCreateInput = {
@@ -35,7 +40,6 @@ export class CanvassItemService {
 			quantity: input.quantity,
 			created_by: createdBy
 		}
-
 
 		const meqsSuppliers = await this.prisma.mEQSSupplier.findMany({
 			where: {
@@ -144,6 +148,10 @@ export class CanvassItemService {
 
 		const existingItem = await this.findOne(id)
 
+		if (!this.canAccess(existingItem.canvass_id)) {
+			throw new ForbiddenException('Only Admin and Owner can update canvass item!')
+		}
+
 		const updatedBy = this.authUser.user.username
 
 		const data: Prisma.CanvassItemUpdateInput = {
@@ -176,6 +184,10 @@ export class CanvassItemService {
 
 		const existingItem = await this.findOne(id)
 
+		if (!this.canAccess(existingItem.canvass_id)) {
+			throw new ForbiddenException('Only Admin and Owner can remove canvass item!')
+		}
+
 		await this.prisma.canvassItem.delete({
 			where: { id }
 		})
@@ -184,6 +196,26 @@ export class CanvassItemService {
 			success: true,
 			msg: "Canvass Item successfully deleted"
 		}
+
+	}
+
+	private async canAccess(canvass_id: string): Promise<boolean> {
+
+		if (isAdmin(this.authUser)) return true
+
+		const canvass = await this.prisma.canvass.findUnique({
+			where: { id: canvass_id }
+		})
+
+		if (!canvass) {
+			throw new NotFoundException('Canvass not found with id of ' + canvass_id)
+		}
+
+		const isOwner = canvass.created_by === this.authUser.user.username
+
+		if (isOwner) return true
+
+		return false
 
 	}
 

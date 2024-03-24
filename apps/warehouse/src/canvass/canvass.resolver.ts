@@ -25,7 +25,6 @@ export class CanvassResolver {
   constructor(private readonly canvassService: CanvassService) { }
 
   @Mutation(() => Canvass)
-
   @UseGuards(AccessGuard)
   @CheckAccess(MODULES.CANVASS, RESOLVERS.createCanvass)
   async createCanvass(
@@ -37,6 +36,8 @@ export class CanvassResolver {
   }
 
   @Query(() => CanvassesResponse)
+  @UseGuards(AccessGuard)
+  @CheckAccess(MODULES.CANVASS, RESOLVERS.canvasses)
   canvasses(
     @Args('page') page: number,
     @Args('pageSize') pageSize: number,
@@ -47,6 +48,8 @@ export class CanvassResolver {
   }
 
   @Query(() => [RcNumber])
+  @UseGuards(AccessGuard)
+  @CheckAccess(MODULES.CANVASS, RESOLVERS.rc_numbers)
   rc_numbers(
     @Args('rc_number') rc_number: string
   ): Promise<{ rc_number: string }[]> {
@@ -54,6 +57,8 @@ export class CanvassResolver {
   }
 
   @Query(() => Canvass)
+  @UseGuards(AccessGuard)
+  @CheckAccess(MODULES.CANVASS, RESOLVERS.canvass)
   canvass(
     @Args('id', { nullable: true }) id?: string,
     @Args('rc_number', { nullable: true }) rc_number?: string

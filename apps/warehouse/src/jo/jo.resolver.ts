@@ -13,9 +13,11 @@ import { JOApprover } from '../jo-approver/entities/jo-approver.entity';
 import { JoApproverService } from '../jo-approver/jo-approver.service';
 import { JoNumber } from './entities/jo-number.entity';
 import { JOsResponse } from './entities/jos-response.entity';
-import { APPROVAL_STATUS } from '../__common__/types';
+import { APPROVAL_STATUS, MODULES, RESOLVERS } from '../__common__/types';
 import { WarehouseCancelResponse } from '../__common__/classes';
 import { Department } from '../__department__ /entities/department.entity';
+import { AccessGuard } from '../__auth__/guards/access.guard';
+import { CheckAccess } from '../__auth__/check-access.decorator';
 
 @UseGuards(GqlAuthGuard)
 @Resolver(() => JO)
@@ -27,6 +29,8 @@ export class JoResolver {
     ) { }
 
     @Mutation(() => JO)
+    @UseGuards(AccessGuard)
+    @CheckAccess(MODULES.JO, RESOLVERS.createJo)
     async createJo(
         @Args('input') createJoInput: CreateJoInput,
         @CurrentAuthUser() authUser: AuthUser
@@ -36,6 +40,8 @@ export class JoResolver {
     }
 
     @Query(() => JOsResponse)
+    @UseGuards(AccessGuard)
+    @CheckAccess(MODULES.JO, RESOLVERS.jos)
     jos(
         @Args('page') page: number,
         @Args('pageSize') pageSize: number,
@@ -46,6 +52,8 @@ export class JoResolver {
     }
 
     @Query(() => [JoNumber])
+    @UseGuards(AccessGuard)
+    @CheckAccess(MODULES.JO, RESOLVERS.jo_numbers)
     jo_numbers(
         @Args('jo_number') jo_number: string
     ): Promise<{ jo_number: string }[]> {
@@ -53,6 +61,8 @@ export class JoResolver {
     }
 
     @Query(() => JO)
+    @UseGuards(AccessGuard)
+    @CheckAccess(MODULES.JO, RESOLVERS.jo)
     jo(
         @Args('id', { nullable: true }) id?: string,
         @Args('jo_number', { nullable: true }) jo_number?: string,

@@ -12,8 +12,10 @@ import { MEQSApprover } from '../meqs-approver/entities/meqs-approver.entity';
 import { MeqsApproverService } from '../meqs-approver/meqs-approver.service';
 import { MeqsNumber } from './entities/meqs-number.entity';
 import { MEQSsResponse } from './entities/meqs-response.entity';
-import { APPROVAL_STATUS } from '../__common__/types';
+import { APPROVAL_STATUS, MODULES, RESOLVERS } from '../__common__/types';
 import { WarehouseCancelResponse } from '../__common__/classes';
+import { AccessGuard } from '../__auth__/guards/access.guard';
+import { CheckAccess } from '../__auth__/check-access.decorator';
 
 @UseGuards(GqlAuthGuard)
 @Resolver(() => MEQS)
@@ -25,6 +27,8 @@ export class MeqsResolver {
     ) { }
 
     @Mutation(() => MEQS)
+    @UseGuards(AccessGuard)
+    @CheckAccess(MODULES.MEQS, RESOLVERS.createMeqs)
     async createMeqs(
         @Args('input') createMeqsInput: CreateMeqsInput,
         @CurrentAuthUser() authUser: AuthUser
@@ -34,6 +38,8 @@ export class MeqsResolver {
     }
 
     @Query(() => MEQSsResponse)
+    @UseGuards(AccessGuard)
+    @CheckAccess(MODULES.MEQS, RESOLVERS.meqs)
     meqs(
         @Args('page') page: number,
         @Args('pageSize') pageSize: number,
@@ -44,6 +50,8 @@ export class MeqsResolver {
     }
 
     @Query(() => [MeqsNumber])
+    @UseGuards(AccessGuard)
+    @CheckAccess(MODULES.MEQS, RESOLVERS.meqs_numbers)
     meqs_numbers(
         @Args('meqs_number') meqs_number: string
     ): Promise<{ meqs_number: string }[]> {
@@ -51,6 +59,8 @@ export class MeqsResolver {
     }
 
     @Query(() => MEQS)
+    @UseGuards(AccessGuard)
+    @CheckAccess(MODULES.MEQS, RESOLVERS.meq)
     meq(
         @Args('id', { nullable: true }) id?: string,
         @Args('meqs_number', { nullable: true }) meqs_number?: string,

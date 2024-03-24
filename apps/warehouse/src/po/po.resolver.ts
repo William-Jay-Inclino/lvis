@@ -11,9 +11,11 @@ import { UseGuards } from '@nestjs/common';
 import { PoApproverService } from '../po-approver/po-approver.service';
 import { PoNumber } from './entities/po-number.entity';
 import { POsResponse } from './entities/pos-response.entity';
-import { APPROVAL_STATUS } from '../__common__/types';
+import { APPROVAL_STATUS, MODULES, RESOLVERS } from '../__common__/types';
 import { POApprover } from '../po-approver/entities/po-approver.entity';
 import { WarehouseCancelResponse } from '../__common__/classes';
+import { AccessGuard } from '../__auth__/guards/access.guard';
+import { CheckAccess } from '../__auth__/check-access.decorator';
 
 @UseGuards(GqlAuthGuard)
 @Resolver(() => PO)
@@ -25,6 +27,8 @@ export class PoResolver {
     ) { }
 
     @Mutation(() => PO)
+    @UseGuards(AccessGuard)
+    @CheckAccess(MODULES.PO, RESOLVERS.createPo)
     async createPo(
         @Args('input') createPoInput: CreatePoInput,
         @CurrentAuthUser() authUser: AuthUser
@@ -34,6 +38,8 @@ export class PoResolver {
     }
 
     @Query(() => POsResponse)
+    @UseGuards(AccessGuard)
+    @CheckAccess(MODULES.PO, RESOLVERS.pos)
     pos(
         @Args('page') page: number,
         @Args('pageSize') pageSize: number,
@@ -44,6 +50,8 @@ export class PoResolver {
     }
 
     @Query(() => [PoNumber])
+    @UseGuards(AccessGuard)
+    @CheckAccess(MODULES.PO, RESOLVERS.po_numbers)
     po_numbers(
         @Args('po_number') po_number: string
     ): Promise<{ po_number: string }[]> {
@@ -51,6 +59,8 @@ export class PoResolver {
     }
 
     @Query(() => PO)
+    @UseGuards(AccessGuard)
+    @CheckAccess(MODULES.PO, RESOLVERS.po)
     po(
         @Args('id', { nullable: true }) id?: string | null,
         @Args('po_number', { nullable: true }) po_number?: string | null,

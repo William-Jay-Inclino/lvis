@@ -5,12 +5,13 @@ import { CreateRrApproverInput } from './dto/create-rr-approver.input';
 import { UpdateRrApproverInput } from './dto/update-rr-approver.input';
 import { Employee } from '../__employee__/entities/employee.entity';
 import { GqlAuthGuard } from '../__auth__/guards/gql-auth.guard';
-import { UseGuards } from '@nestjs/common';
+import { ForbiddenException, UseGuards } from '@nestjs/common';
 import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { UpdateRrOrderResponse } from './entities/update-rr-order-response.entity';
 import { UpdateRrOrderInput } from './dto/update-rr-order.input';
 import { WarehouseRemoveResponse } from '../__common__/classes';
+import { isAdmin } from '../__common__/helpers';
 @UseGuards(GqlAuthGuard)
 @Resolver(() => RrApprover)
 export class RrApproverResolver {
@@ -21,6 +22,11 @@ export class RrApproverResolver {
     @Args('input') createRrApproverInput: CreateRrApproverInput,
     @CurrentAuthUser() authUser: AuthUser
   ) {
+
+    if (!isAdmin(authUser)) {
+      throw new ForbiddenException('Only Admin can create RR Approver')
+    }
+
     this.rrApproverService.setAuthUser(authUser)
     return this.rrApproverService.create(createRrApproverInput);
   }
@@ -49,12 +55,24 @@ export class RrApproverResolver {
     @Args('input') updateRrApproverInput: UpdateRrApproverInput,
     @CurrentAuthUser() authUser: AuthUser
   ) {
+
+    if (!isAdmin(authUser)) {
+      throw new ForbiddenException('Only Admin can update RR Approver')
+    }
+
     this.rrApproverService.setAuthUser(authUser)
     return this.rrApproverService.update(id, updateRrApproverInput);
   }
 
   @Mutation(() => UpdateRrOrderResponse)
-  async updateRRApproverOrder(@Args('inputs', { type: () => [UpdateRrOrderInput] }) inputs: UpdateRrOrderInput[]) {
+  async updateRRApproverOrder(
+    @Args('inputs', { type: () => [UpdateRrOrderInput] }) inputs: UpdateRrOrderInput[],
+    @CurrentAuthUser() authUser: AuthUser
+  ) {
+
+    if (!isAdmin(authUser)) {
+      throw new ForbiddenException('Only Admin can update RR Approver Order')
+    }
 
     return await this.rrApproverService.updateManyOrders(inputs);
 
@@ -65,6 +83,11 @@ export class RrApproverResolver {
     @Args('id') id: string,
     @CurrentAuthUser() authUser: AuthUser
   ) {
+
+    if (!isAdmin(authUser)) {
+      throw new ForbiddenException('Only Admin can remove RR Approver')
+    }
+
     this.rrApproverService.setAuthUser(authUser)
     return this.rrApproverService.remove(id);
   }

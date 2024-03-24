@@ -1,4 +1,4 @@
-import { Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { ForbiddenException, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../__prisma__/prisma.service';
 import { CreateCanvassInput } from './dto/create-canvass.input';
 import { Canvass, Prisma } from 'apps/warehouse/prisma/generated/client';
@@ -11,7 +11,7 @@ import { CanvassesResponse } from './entities/canvasses-response.entity';
 import { Employee } from '../__employee__/entities/employee.entity';
 import { FindOneResponse } from './entities/types';
 import * as moment from 'moment';
-import { getDateRange } from '../__common__/helpers';
+import { getDateRange, isAdmin } from '../__common__/helpers';
 
 @Injectable()
 export class CanvassService {
@@ -138,6 +138,10 @@ export class CanvassService {
         this.logger.log('update()', input);
 
         const existingItem = await this.findOne(id);
+
+        if (!this.canAccess(existingItem)) {
+            throw new ForbiddenException('Only Admin and Owner can update this record!')
+        }
 
         if (input.requested_by_id) {
             const isValidRequestedById = await this.areEmployeesExist([input.requested_by_id], this.authUser);
@@ -298,6 +302,10 @@ export class CanvassService {
 
         const existingItem = await this.findOne(id)
 
+        if (!this.canAccess(existingItem)) {
+            throw new ForbiddenException('Only Admin and Owner can remove this record!')
+        }
+
         await this.prisma.canvass.update({
             where: { id },
             data: {
@@ -421,5 +429,16 @@ export class CanvassService {
         }
     }
 
+    private canAccess(item: Canvass): boolean {
+
+        if (isAdmin(this.authUser)) return true
+
+        const isOwner = item.created_by === this.authUser.user.username
+
+        if (isOwner) return true
+
+        return false
+
+    }
 
 }

@@ -5,12 +5,13 @@ import { CreateRvApproverInput } from './dto/create-rv-approver.input';
 import { UpdateRvApproverInput } from './dto/update-rv-approver.input';
 import { WarehouseRemoveResponse } from '../__common__/classes';
 import { GqlAuthGuard } from '../__auth__/guards/gql-auth.guard';
-import { UseGuards } from '@nestjs/common';
+import { ForbiddenException, UseGuards } from '@nestjs/common';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
 import { Employee } from '../__employee__/entities/employee.entity';
 import { UpdateRVOrderResponse } from './entities/update-rv-order-response.entity';
 import { UpdateRVOrderInput } from './dto/update-rv-order.input'
+import { isAdmin } from '../__common__/helpers';
 
 @UseGuards(GqlAuthGuard)
 @Resolver(() => RVApprover)
@@ -22,6 +23,11 @@ export class RvApproverResolver {
     @Args('input') createRvApproverInput: CreateRvApproverInput,
     @CurrentAuthUser() authUser: AuthUser
   ) {
+
+    if (!isAdmin(authUser)) {
+      throw new ForbiddenException('Only Admin can create RV Approver')
+    }
+
     this.rvApproverService.setAuthUser(authUser)
     return this.rvApproverService.create(createRvApproverInput);
   }
@@ -50,12 +56,24 @@ export class RvApproverResolver {
     @Args('input') updateRvApproverInput: UpdateRvApproverInput,
     @CurrentAuthUser() authUser: AuthUser
   ) {
+
+    if (!isAdmin(authUser)) {
+      throw new ForbiddenException('Only Admin can update RV Approver')
+    }
+
     this.rvApproverService.setAuthUser(authUser)
     return this.rvApproverService.update(id, updateRvApproverInput);
   }
 
   @Mutation(() => UpdateRVOrderResponse)
-  async updateRVApproverOrder(@Args('inputs', { type: () => [UpdateRVOrderInput] }) inputs: UpdateRVOrderInput[]) {
+  async updateRVApproverOrder(
+    @Args('inputs', { type: () => [UpdateRVOrderInput] }) inputs: UpdateRVOrderInput[],
+    @CurrentAuthUser() authUser: AuthUser
+  ) {
+
+    if (!isAdmin(authUser)) {
+      throw new ForbiddenException('Only Admin can update RV Approver Order')
+    }
 
     return await this.rvApproverService.updateManyOrders(inputs);
 
@@ -66,6 +84,11 @@ export class RvApproverResolver {
     @Args('id') id: string,
     @CurrentAuthUser() authUser: AuthUser
   ) {
+
+    if (!isAdmin(authUser)) {
+      throw new ForbiddenException('Only Admin can remove RV Approver')
+    }
+
     this.rvApproverService.setAuthUser(authUser)
     return this.rvApproverService.remove(id);
   }

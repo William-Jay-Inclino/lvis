@@ -8,6 +8,9 @@ import { UpdateBrandInput } from './dto/update-brand.input';
 import { WarehouseRemoveResponse } from '../__common__/classes';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
+import { AccessGuard } from '../__auth__/guards/access.guard';
+import { CheckAccess } from '../__auth__/check-access.decorator';
+import { MODULES, RESOLVERS } from '../__common__/types';
 
 @UseGuards(GqlAuthGuard)
 @Resolver(() => Brand)
@@ -15,6 +18,8 @@ export class BrandResolver {
   constructor(private readonly brandService: BrandService) { }
 
   @Mutation(() => Brand)
+  @UseGuards(AccessGuard)
+  @CheckAccess(MODULES.ITEM_BRAND, RESOLVERS.createBrand)
   createBrand(
     @Args('input') createBrandInput: CreateBrandInput,
     @CurrentAuthUser() authUser: AuthUser
@@ -24,16 +29,22 @@ export class BrandResolver {
   }
 
   @Query(() => [Brand])
+  @UseGuards(AccessGuard)
+  @CheckAccess(MODULES.ITEM_BRAND, RESOLVERS.brands)
   brands() {
     return this.brandService.findAll();
   }
 
   @Query(() => Brand)
+  @UseGuards(AccessGuard)
+  @CheckAccess(MODULES.ITEM_BRAND, RESOLVERS.brand)
   brand(@Args('id') id: string) {
     return this.brandService.findOne(id);
   }
 
   @Mutation(() => Brand)
+  @UseGuards(AccessGuard)
+  @CheckAccess(MODULES.ITEM_BRAND, RESOLVERS.updateBrand)
   updateBrand(
     @Args('id') id: string,
     @Args('input') updateBrandInput: UpdateBrandInput,
@@ -44,6 +55,8 @@ export class BrandResolver {
   }
 
   @Mutation(() => WarehouseRemoveResponse)
+  @UseGuards(AccessGuard)
+  @CheckAccess(MODULES.ITEM_BRAND, RESOLVERS.removeBrand)
   removeBrand(
     @Args('id') id: string,
     @CurrentAuthUser() authUser: AuthUser

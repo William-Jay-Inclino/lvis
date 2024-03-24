@@ -5,12 +5,13 @@ import { CreateMeqsApproverInput } from './dto/create-meqs-approver.input';
 import { UpdateMeqsApproverInput } from './dto/update-meqs-approver.input';
 import { WarehouseRemoveResponse } from '../__common__/classes';
 import { GqlAuthGuard } from '../__auth__/guards/gql-auth.guard';
-import { UseGuards } from '@nestjs/common';
+import { ForbiddenException, UseGuards } from '@nestjs/common';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
 import { Employee } from '../__employee__/entities/employee.entity';
 import { UpdateMeqsOrderResponse } from './entities/update-meqs-order-response.entity';
 import { UpdateMeqsOrderInput } from './dto/update-meqs-order.input';
+import { isAdmin } from '../__common__/helpers';
 
 @UseGuards(GqlAuthGuard)
 @Resolver(() => MEQSApprover)
@@ -22,6 +23,11 @@ export class MeqsApproverResolver {
     @Args('input') createMeqsApproverInput: CreateMeqsApproverInput,
     @CurrentAuthUser() authUser: AuthUser
   ) {
+
+    if (!isAdmin(authUser)) {
+      throw new ForbiddenException('Only Admin can create MEQS Approver')
+    }
+
     this.meqsApproverService.setAuthUser(authUser)
     return this.meqsApproverService.create(createMeqsApproverInput);
   }
@@ -50,12 +56,24 @@ export class MeqsApproverResolver {
     @Args('input') updateMeqsApproverInput: UpdateMeqsApproverInput,
     @CurrentAuthUser() authUser: AuthUser
   ) {
+
+    if (!isAdmin(authUser)) {
+      throw new ForbiddenException('Only Admin can update MEQS Approver')
+    }
+
     this.meqsApproverService.setAuthUser(authUser)
     return this.meqsApproverService.update(id, updateMeqsApproverInput);
   }
 
   @Mutation(() => UpdateMeqsOrderResponse)
-  async updateMEQSApproverOrder(@Args('inputs', { type: () => [UpdateMeqsOrderInput] }) inputs: UpdateMeqsOrderInput[]) {
+  async updateMEQSApproverOrder(
+    @Args('inputs', { type: () => [UpdateMeqsOrderInput] }) inputs: UpdateMeqsOrderInput[],
+    @CurrentAuthUser() authUser: AuthUser
+  ) {
+
+    if (!isAdmin(authUser)) {
+      throw new ForbiddenException('Only Admin can update MEQS Approver Order')
+    }
 
     return await this.meqsApproverService.updateManyOrders(inputs);
 
@@ -66,6 +84,11 @@ export class MeqsApproverResolver {
     @Args('id') id: string,
     @CurrentAuthUser() authUser: AuthUser
   ) {
+
+    if (!isAdmin(authUser)) {
+      throw new ForbiddenException('Only Admin can remove MEQS Approver')
+    }
+
     this.meqsApproverService.setAuthUser(authUser)
     return this.meqsApproverService.remove(id);
   }

@@ -8,6 +8,9 @@ import { UpdateSupplierInput } from './dto/update-supplier.input';
 import { WarehouseRemoveResponse } from '../__common__/classes';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
+import { AccessGuard } from '../__auth__/guards/access.guard';
+import { MODULES, RESOLVERS } from '../__common__/types';
+import { CheckAccess } from '../__auth__/check-access.decorator';
 
 @UseGuards(GqlAuthGuard)
 @Resolver(() => Supplier)
@@ -15,6 +18,8 @@ export class SupplierResolver {
   constructor(private readonly supplierService: SupplierService) { }
 
   @Mutation(() => Supplier)
+  @UseGuards(AccessGuard)
+  @CheckAccess(MODULES.SUPPLIER, RESOLVERS.createSupplier)
   createSupplier(
     @Args('input') createSupplierInput: CreateSupplierInput,
     @CurrentAuthUser() authUser: AuthUser
@@ -24,16 +29,22 @@ export class SupplierResolver {
   }
 
   @Query(() => [Supplier])
+  @UseGuards(AccessGuard)
+  @CheckAccess(MODULES.SUPPLIER, RESOLVERS.suppliers)
   suppliers() {
     return this.supplierService.findAll();
   }
 
   @Query(() => Supplier)
+  @UseGuards(AccessGuard)
+  @CheckAccess(MODULES.SUPPLIER, RESOLVERS.supplier)
   supplier(@Args('id') id: string) {
     return this.supplierService.findOne(id);
   }
 
   @Mutation(() => Supplier)
+  @UseGuards(AccessGuard)
+  @CheckAccess(MODULES.SUPPLIER, RESOLVERS.updateSupplier)
   updateSupplier(
     @Args('id') id: string,
     @Args('input') updateSupplierInput: UpdateSupplierInput,
@@ -44,6 +55,8 @@ export class SupplierResolver {
   }
 
   @Mutation(() => WarehouseRemoveResponse)
+  @UseGuards(AccessGuard)
+  @CheckAccess(MODULES.SUPPLIER, RESOLVERS.removeSupplier)
   removeSupplier(
     @Args('id') id: string,
     @CurrentAuthUser() authUser: AuthUser
