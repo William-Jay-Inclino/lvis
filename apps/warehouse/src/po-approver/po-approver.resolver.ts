@@ -75,13 +75,4 @@ export class PoApproverResolver {
     return { __typename: 'Employee', id: poApprover.approver_id }
   }
 
-  // @ResolveField( () => Employee, { nullable: true })
-  // approver_proxy(@Parent() poApprover: POApprover): any {
-
-  //   if(!poApprover.approver_proxy_id){
-  //     return null
-  //   }
-  //   return { __typename: 'Employee', id: poApprover.approver_proxy_id }
-  // }
-
 }

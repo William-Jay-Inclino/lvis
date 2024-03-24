@@ -25,10 +25,18 @@ export class RrApproverResolver {
     return this.rrApproverService.create(createRrApproverInput);
   }
 
-  // @Query(() => [RrApprover])
-  // rr_approvers() {
-  //   return this.rrApproverService.findAll();
-  // }
+  @Query(() => [RrApprover])
+  rr_approvers(
+    @Args('rr_id', { nullable: true }) rr_id?: string,
+    @Args('rr_number', { nullable: true }) rr_number?: string,
+  ) {
+    if (rr_id) {
+      return this.rrApproverService.findByRrId(rr_id)
+    }
+    if (rr_number) {
+      return this.rrApproverService.findByRrNumber(rr_number)
+    }
+  }
 
   @Query(() => RrApprover)
   rr_approver(@Args('id') id: string) {

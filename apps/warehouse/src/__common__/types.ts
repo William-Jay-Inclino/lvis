@@ -73,17 +73,44 @@ export enum Role {
 }
 
 export enum MODULES {
+
+    // ========= PURCHASING ========= 
     CANVASS = 'CANVASS',
+    CANVASS_ITEM = 'CANVASS_ITEM',
     RV = 'RV',
+    RV_APPROVER = 'RV_APPROVER',
     SPR = 'SPR',
+    SPR_APPROVER = 'SPR_APPROVER',
     JO = 'JO',
+    JO_APPROVER = 'JO_APPROVER',
     MEQS = 'MEQS',
+    MEQS_APPROVER = 'MEQS_APPROVER',
+    MEQS_SUPPLIER = 'MEQS_SUPPLIER',
+    MEQS_SUPPLIER_ITEM = 'MEQS_SUPPLIER_ITEM',
+    MEQS_SUPPLIER_ATTACHMENT = 'MEQS_SUPPLIER_ATTACHMENT',
     PO = 'PO',
+    PO_APPROVER = 'PO_APPROVER',
     RR = 'RR',
+    RR_APPROVER = 'RR_APPROVER',
+    RR_ITEM = 'RR_ITEM',
+
+
+    // ========= DATA MANAGEMENT ========= 
+    SUPPLIER = 'SUPPLIER',
+    UNIT = 'UNIT',
+    VEHICLE = 'VEHICLE',
+
+
+    // ========= STOCK INVENTORY ========= 
+    ITEM = 'ITEM',
+    ITEM_TYPE = 'ITEM_TYPE',
+    ITEM_BRAND = 'ITEM_BRAND',
+
 }
 
 
 export enum RESOLVERS {
+
     // ========= CANVASS ========= 
     createCanvass = 'createCanvass',
     canvasses = 'canvasses',
@@ -100,4 +127,98 @@ export enum RESOLVERS {
     rv = 'rv',
     updateRv = 'updateRv',
     cancelRv = 'cancelRv',
+
+    // ========= SPR ========= 
+    createSpr = 'createSpr',
+    sprs = 'sprs',
+    spr_numbers = 'spr_numbers',
+    spr = 'spr',
+    updateSpr = 'updateSpr',
+    cancelSpr = 'cancelSpr',
+
+
+    // ========= JO ========= 
+    createJo = 'createJo',
+    jos = 'jos',
+    jo_numbers = 'jo_numbers',
+    jo = 'jo',
+    updateJo = 'updateJo',
+    cancelJo = 'cancelJo',
+
+
+    // ========= MEQS ========= 
+    createMeqs = 'createMeqs',
+    meqs = 'meqs',
+    meqs_numbers = 'meqs_numbers',
+    meq = 'meq',
+    updateMeqs = 'updateMeqs',
+    cancelMeqs = 'cancelMeqs',
+
+
+    // ========= PO ========= 
+    createPo = 'createPo',
+    pos = 'pos',
+    po_numbers = 'po_numbers',
+    po = 'po',
+    updatePo = 'updatePo',
+    cancelPo = 'cancelPo',
+
+
+    // ========= RR ========= 
+    createRr = 'createRr',
+    rrs = 'rrs',
+    rr_numbers = 'rr_numbers',
+    rr = 'rr',
+    updateRr = 'updateRr',
+    cancelRr = 'cancelRr',
+
+
+    // ========= SUPPLIER ========= 
+    createSupplier = 'createSupplier',
+    suppliers = 'suppliers',
+    supplier = 'supplier',
+    updateSupplier = 'updateSupplier',
+    removeSupplier = 'removeSupplier',
+
+
+    // ========= UNIT ========= 
+    createUnit = 'createUnit',
+    units = 'units',
+    unit = 'unit',
+    updateUnit = 'updateUnit',
+    removeUnit = 'removeUnit',
+
+
+    // ========= VEHICLE ========= 
+    createVehicle = 'createVehicle',
+    vehicles = 'vehicles',
+    vehicle = 'vehicle',
+    updateVehicle = 'updateVehicle',
+    removeVehicle = 'removeVehicle',
+
+
+    // ========= ITEM ========= 
+    createItem = 'createItem',
+    items = 'items',
+    item = 'item',
+    updateItem = 'updateItem',
+    removeItem = 'removeItem',
+
+
+    // ========= ITEM TYPE ========= 
+    createItemType = 'createItemType',
+    item_types = 'item_types',
+    item_type = 'item_type',
+    updateItemType = 'updateItemType',
+    removeItemType = 'removeItemType',
+
+
+    // ========= ITEM BRAND ========= 
+    createBrand = 'createBrand',
+    brands = 'brands',
+    brand = 'brand',
+    updateBrand = 'updateBrand',
+    removeBrand = 'removeBrand',
+
+
 }
