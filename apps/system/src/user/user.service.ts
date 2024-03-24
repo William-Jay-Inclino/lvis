@@ -71,15 +71,20 @@ export class UserService {
   }
 
   async findByUserName(username: string): Promise<User | null> {
+    console.log('findByUserName()')
     const user = await this.prisma.user.findUnique({
       where: { username },
       include: this.includedFields
 
     })
 
+    console.log('user', user)
+
     if (!user) {
       return null
     }
+
+    user.permissions = JSON.stringify(user.permissions)
 
     return user
 

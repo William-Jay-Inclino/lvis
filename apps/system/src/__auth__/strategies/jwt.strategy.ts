@@ -1,6 +1,6 @@
-import { Injectable, Logger, NotFoundException, UnauthorizedException } from '@nestjs/common'
+import { Injectable, Logger, UnauthorizedException } from '@nestjs/common'
 import { PassportStrategy } from '@nestjs/passport';
-import { User } from 'apps/system/src/user/entities/user.entity';
+import { User } from 'apps/system/prisma/generated/client';
 import { UserService } from 'apps/system/src/user/user.service';
 import { ExtractJwt, Strategy } from "passport-jwt";
 

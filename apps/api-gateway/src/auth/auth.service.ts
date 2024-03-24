@@ -46,6 +46,7 @@ export class AuthService {
                     password
                     status
                     role
+                    permissions
                     user_employee {
                         employee {
                             id

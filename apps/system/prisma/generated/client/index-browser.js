@@ -177,6 +177,7 @@ exports.Prisma.UserScalarFieldEnum = {
   username: 'username',
   password: 'password',
   status: 'status',
+  permissions: 'permissions',
   created_by: 'created_by',
   updated_by: 'updated_by',
   deleted_by: 'deleted_by',
@@ -193,53 +194,6 @@ exports.Prisma.UserEmployeeScalarFieldEnum = {
   updated_by: 'updated_by',
   created_at: 'created_at',
   updated_at: 'updated_at'
-};
-
-exports.Prisma.ServiceScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  created_by: 'created_by',
-  updated_by: 'updated_by',
-  deleted_by: 'deleted_by',
-  created_at: 'created_at',
-  updated_at: 'updated_at',
-  deleted_at: 'deleted_at'
-};
-
-exports.Prisma.FeatureScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  created_by: 'created_by',
-  updated_by: 'updated_by',
-  deleted_by: 'deleted_by',
-  created_at: 'created_at',
-  updated_at: 'updated_at',
-  deleted_at: 'deleted_at',
-  service_id: 'service_id'
-};
-
-exports.Prisma.ModuleScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  created_by: 'created_by',
-  updated_by: 'updated_by',
-  deleted_by: 'deleted_by',
-  created_at: 'created_at',
-  updated_at: 'updated_at',
-  deleted_at: 'deleted_at',
-  feature_id: 'feature_id'
-};
-
-exports.Prisma.SubModuleScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  created_by: 'created_by',
-  updated_by: 'updated_by',
-  deleted_by: 'deleted_by',
-  created_at: 'created_at',
-  updated_at: 'updated_at',
-  deleted_at: 'deleted_at',
-  module_id: 'module_id'
 };
 
 exports.Prisma.JOApproverSettingScalarFieldEnum = {
@@ -313,6 +267,11 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
+};
+
 exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
@@ -321,6 +280,12 @@ exports.Prisma.QueryMode = {
 exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
+};
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
 };
 exports.Role = exports.$Enums.Role = {
   USER: 'USER',
@@ -335,10 +300,6 @@ exports.Prisma.ModelName = {
   Classification: 'Classification',
   User: 'User',
   UserEmployee: 'UserEmployee',
-  Service: 'Service',
-  Feature: 'Feature',
-  Module: 'Module',
-  SubModule: 'SubModule',
   JOApproverSetting: 'JOApproverSetting',
   RVApproverSetting: 'RVApproverSetting',
   SPRApproverSetting: 'SPRApproverSetting',

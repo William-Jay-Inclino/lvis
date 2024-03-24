@@ -25,4 +25,7 @@ export class User {
   @Field(() => UserEmployee, { nullable: true })
   user_employee?: UserEmployee;
 
+  @Field({ nullable: true })
+  permissions?: string
+
 }

@@ -12,10 +12,10 @@ export class SeederService {
 
         try {
             await this.prisma.$transaction([
-                this.seedService(),
-                this.seedFeature(),
-                this.seedModule(),
-                this.seedSubModule(),
+                // this.seedService(),
+                // this.seedFeature(),
+                // this.seedModule(),
+                // this.seedSubModule(),
                 this.seedDepartment(),
                 this.seedClassification(),
                 this.seedAccount(),
@@ -37,41 +37,41 @@ export class SeederService {
         }
     }
 
-    seedService(): any {
-        console.log('seeding service table...')
-        try {
-            return this.prisma.service.createMany({ data: data.services })
-        } catch (error) {
-            console.error(error)
-        }
-    }
+    // seedService(): any {
+    //     console.log('seeding service table...')
+    //     try {
+    //         return this.prisma.service.createMany({ data: data.services })
+    //     } catch (error) {
+    //         console.error(error)
+    //     }
+    // }
 
-    seedFeature() {
-        console.log('seeding feature table...')
-        try {
-            return this.prisma.feature.createMany({ data: data.features })
-        } catch (error) {
-            console.error(error)
-        }
-    }
+    // seedFeature() {
+    //     console.log('seeding feature table...')
+    //     try {
+    //         return this.prisma.feature.createMany({ data: data.features })
+    //     } catch (error) {
+    //         console.error(error)
+    //     }
+    // }
 
-    seedModule() {
-        console.log('seeding module table...')
-        try {
-            return this.prisma.module.createMany({ data: data.modules })
-        } catch (error) {
-            console.error(error)
-        }
-    }
+    // seedModule() {
+    //     console.log('seeding module table...')
+    //     try {
+    //         return this.prisma.module.createMany({ data: data.modules })
+    //     } catch (error) {
+    //         console.error(error)
+    //     }
+    // }
 
-    seedSubModule() {
-        console.log('seeding submodule table...')
-        try {
-            return this.prisma.subModule.createMany({ data: data.subModules })
-        } catch (error) {
-            console.error(error)
-        }
-    }
+    // seedSubModule() {
+    //     console.log('seeding submodule table...')
+    //     try {
+    //         return this.prisma.subModule.createMany({ data: data.subModules })
+    //     } catch (error) {
+    //         console.error(error)
+    //     }
+    // }
 
     seedDepartment() {
         console.log('seeding department table...')

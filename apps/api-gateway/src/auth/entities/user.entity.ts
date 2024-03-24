@@ -7,6 +7,7 @@ export class User {
   role: ROLE
   password: string
   user_employee?: UserEmployee
+  permissions?: string
 }
 
 export class UserEmployee {

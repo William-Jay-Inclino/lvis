@@ -113,9 +113,10 @@ model User {
   id   String @id @default(uuid())
   role Role   @default(USER)
 
-  username String @unique
-  password String
-  status   Int    @default(1)
+  username    String @unique
+  password    String
+  status      Int    @default(1)
+  permissions Json?
 
   created_by String
   updated_by String?
@@ -163,81 +164,81 @@ model UserEmployee {
 //   @@map("user_permission")
 // }
 
-model Service {
-  id   String @id @default(uuid())
-  name String
+// model Service {
+//   id   String @id @default(uuid())
+//   name String
 
-  created_by String
-  updated_by String?
-  deleted_by String?
+//   created_by String
+//   updated_by String?
+//   deleted_by String?
 
-  created_at DateTime  @default(now())
-  updated_at DateTime  @updatedAt
-  deleted_at DateTime?
+//   created_at DateTime  @default(now())
+//   updated_at DateTime  @updatedAt
+//   deleted_at DateTime?
 
-  features Feature[] @relation("ServiceToFeature")
+//   features Feature[] @relation("ServiceToFeature")
 
-  @@map("service")
-}
+//   @@map("service")
+// }
 
-model Feature {
-  id   String @id @default(uuid())
-  name String
+// model Feature {
+//   id   String @id @default(uuid())
+//   name String
 
-  created_by String
-  updated_by String?
-  deleted_by String?
+//   created_by String
+//   updated_by String?
+//   deleted_by String?
 
-  created_at DateTime  @default(now())
-  updated_at DateTime  @updatedAt
-  deleted_at DateTime?
+//   created_at DateTime  @default(now())
+//   updated_at DateTime  @updatedAt
+//   deleted_at DateTime?
 
-  service    Service  @relation("ServiceToFeature", fields: [service_id], references: [id], onDelete: Cascade)
-  service_id String
-  modules    Module[] @relation("FeatureToModule")
+//   service    Service  @relation("ServiceToFeature", fields: [service_id], references: [id], onDelete: Cascade)
+//   service_id String
+//   modules    Module[] @relation("FeatureToModule")
 
-  @@map("feature")
-}
+//   @@map("feature")
+// }
 
-model Module {
-  id   String @id @default(uuid())
-  name String
+// model Module {
+//   id   String @id @default(uuid())
+//   name String
 
-  created_by String
-  updated_by String?
-  deleted_by String?
+//   created_by String
+//   updated_by String?
+//   deleted_by String?
 
-  created_at DateTime  @default(now())
-  updated_at DateTime  @updatedAt
-  deleted_at DateTime?
+//   created_at DateTime  @default(now())
+//   updated_at DateTime  @updatedAt
+//   deleted_at DateTime?
 
-  feature    Feature @relation("FeatureToModule", fields: [feature_id], references: [id], onDelete: Cascade)
-  feature_id String
+//   feature    Feature @relation("FeatureToModule", fields: [feature_id], references: [id], onDelete: Cascade)
+//   feature_id String
 
-  submodules SubModule[] @relation("ModuleToSubmodule")
+//   submodules SubModule[] @relation("ModuleToSubmodule")
 
-  @@map("module")
-}
+//   @@map("module")
+// }
 
-model SubModule {
-  id   String @id @default(uuid())
-  name String
+// model SubModule {
+//   id   String @id @default(uuid())
+//   name String
 
-  created_by String
-  updated_by String?
-  deleted_by String?
+//   created_by String
+//   updated_by String?
+//   deleted_by String?
 
-  created_at DateTime  @default(now())
-  updated_at DateTime  @updatedAt
-  deleted_at DateTime?
+//   created_at DateTime  @default(now())
+//   updated_at DateTime  @updatedAt
+//   deleted_at DateTime?
 
-  module    Module @relation("ModuleToSubmodule", fields: [module_id], references: [id], onDelete: Cascade)
-  module_id String
+//   module    Module @relation("ModuleToSubmodule", fields: [module_id], references: [id], onDelete: Cascade)
+//   module_id String
 
-  // user_permissions UserPermission[]
+//   // user_permissions UserPermission[]
 
-  @@map("submodule")
-}
+//   @@map("submodule")
+// }
 
 model JOApproverSetting {
   id          String @id @default(uuid())
