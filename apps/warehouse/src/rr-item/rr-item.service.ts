@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { BadRequestException, ForbiddenException, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { UpdateRrItemInput } from './dto/update-rr-item.input';
 import { PrismaService } from '../__prisma__/prisma.service';
 import { Prisma, RRApprover, RRItem } from 'apps/warehouse/prisma/generated/client';
@@ -6,6 +6,7 @@ import { APPROVAL_STATUS, Role } from '../__common__/types';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { UpdateRrItemsInput } from './dto/update-rr-items.input';
 import { UpdateRrItemsResponse } from './entities/update-rr-items-response';
+import { isAdmin, isNormalUser } from '../__common__/helpers';
 
 @Injectable()
 export class RrItemService {
@@ -67,6 +68,10 @@ export class RrItemService {
 
 		const existingItem = await this.findOne(id)
 
+		if (!this.canAccess(existingItem.rr_id)) {
+			throw new ForbiddenException('Only Admin and Owner can remove canvass item!')
+		}
+
 		if (!(await this.canUpdate(input, existingItem))) {
 			throw new Error('Failed to update RR Item. Please try again')
 		}
@@ -93,7 +98,25 @@ export class RrItemService {
 
 		this.logger.log('updateMultiple', inputs)
 
+		const firstInput = inputs[0]
+
+		const rrItem = await this.prisma.rRItem.findUnique({
+			where: { id: firstInput.id },
+			select: {
+				rr: true
+			}
+		})
+
+		if (!rrItem) {
+			throw new NotFoundException('rrItem not found with ID of ' + firstInput.id)
+		}
+
+		if (rrItem.rr.created_by !== this.authUser.user.username) {
+			throw new ForbiddenException('Only Admin and Owner can update multiple rr items!')
+		}
+
 		const queries = []
+
 
 		for (let input of inputs) {
 
@@ -105,19 +128,6 @@ export class RrItemService {
 					quantity_accepted: input.quantity_accepted,
 					updated_by: this.authUser.user.username
 				},
-				// include: {
-				// 	meqs_supplier_item: {
-				// 		include: {
-				// 			canvass_item: {
-				// 				include: {
-				// 					item: true,
-				// 					brand: true,
-				// 					unit: true
-				// 				}
-				// 			}
-				// 		}
-				// 	}
-				// }
 			})
 
 			queries.push(updateRrItemQuery)
@@ -150,12 +160,8 @@ export class RrItemService {
 			throw new NotFoundException('RR not found with ID: ' + existingItem.rr_id)
 		}
 
-		const isNormalUser = this.isNormalUser()
-
-		console.log('isNormalUser', isNormalUser)
-
 		// validates if there is already an approver who take an action
-		if (isNormalUser) {
+		if (isNormalUser(this.authUser)) {
 
 			console.log('is normal user')
 
@@ -193,11 +199,24 @@ export class RrItemService {
 
 	}
 
-	private isNormalUser(): boolean {
+	private async canAccess(rr_id: string): Promise<boolean> {
 
-		const isNormalUser = (this.authUser.user.role === Role.USER)
+		if (isAdmin(this.authUser)) return true
 
-		return isNormalUser
+		const rr = await this.prisma.rR.findUnique({
+			where: { id: rr_id }
+		})
+
+		if (!rr) {
+			throw new NotFoundException('RR not found with id of ' + rr_id)
+		}
+
+		const isOwner = rr.created_by === this.authUser.user.username
+
+		if (isOwner) return true
+
+		return false
+
 	}
 
 }

@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { BadRequestException, ForbiddenException, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { CreateMeqsSupplierInput } from './dto/create-meqs-supplier.input';
 import { UpdateMeqsSupplierInput } from './dto/update-meqs-supplier.input';
 import { PrismaService } from '../__prisma__/prisma.service';
@@ -8,6 +8,7 @@ import { AuthUser } from '../__common__/auth-user.entity';
 import { HttpService } from '@nestjs/axios';
 import { MeqsSupplierAttachment } from '../meqs-supplier-attachment/entities/meqs-supplier-attachment.entity';
 import axios from 'axios';
+import { isAdmin } from '../__common__/helpers';
 
 @Injectable()
 export class MeqsSupplierService {
@@ -25,6 +26,10 @@ export class MeqsSupplierService {
     }
 
     async create(input: CreateMeqsSupplierInput): Promise<MEQSSupplier> {
+
+        if (!this.canAccess(input.meqs_id)) {
+            throw new ForbiddenException('Only Admin and Owner can create meqs supplier!')
+        }
 
         if (!this.canCreate(input)) {
             throw new BadRequestException()
@@ -117,6 +122,10 @@ export class MeqsSupplierService {
 
         const existingItem = await this.findOne(id)
 
+        if (!this.canAccess(existingItem.meqs_id)) {
+            throw new ForbiddenException('Only Admin and Owner can update meqs supplier!')
+        }
+
         const updatedBy = this.authUser.user.username
 
 
@@ -125,30 +134,7 @@ export class MeqsSupplierService {
             updated_by: updatedBy
         }
 
-        // create new attachments since we use remove and create technique
-        // if (input.attachments) {
-        //     data['attachments'] = {
-        //         create: input.attachments.map(attachment => {
-        //             const attachmentInput: Prisma.MEQSSupplierAttachmentCreateWithoutMeqs_supplierInput = {
-        //                 src: attachment.src,
-        //                 filename: attachment.filename,
-        //                 created_by: createdBy
-        //             }
-        //             return attachmentInput
-        //         })
-        //     }
-        // }
-
         const queries = []
-
-
-        // const removeMeqsAttachmentsQuery = this.prisma.mEQSSupplierAttachment.deleteMany({
-        //     where: {
-        //         meqs_supplier_id: id
-        //     }
-        // })
-
-        // queries.push(removeMeqsAttachmentsQuery)
 
         if (input.meqs_supplier_items) {
 
@@ -204,6 +190,10 @@ export class MeqsSupplierService {
     async remove(id: string): Promise<WarehouseRemoveResponse> {
 
         const existingItem = await this.findOne(id)
+
+        if (!this.canAccess(existingItem.meqs_id)) {
+            throw new ForbiddenException('Only Admin and Owner can remove meqs supplier!')
+        }
 
         // @ts-ignore
         const filePaths = existingItem.attachments.map((i: MeqsSupplierAttachment) => i.src)
@@ -261,6 +251,26 @@ export class MeqsSupplierService {
         console.log('url', url)
 
         return axios.delete(url, { data: filePaths });
+    }
+
+    private async canAccess(meqs_id: string): Promise<boolean> {
+
+        if (isAdmin(this.authUser)) return true
+
+        const meqs = await this.prisma.mEQS.findUnique({
+            where: { id: meqs_id }
+        })
+
+        if (!meqs) {
+            throw new NotFoundException('MEQS not found with id of ' + meqs_id)
+        }
+
+        const isOwner = meqs.created_by === this.authUser.user.username
+
+        if (isOwner) return true
+
+        return false
+
     }
 
 }
