@@ -32,6 +32,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
                     username
                     role
                     status
+                    permissions
                 }
             }
         `;
@@ -39,16 +40,16 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
         console.log('query', query)
 
         const { data } = await firstValueFrom(
-            this.httpService.post(process.env.API_GATEWAY_URL, { query } ).pipe(
-              catchError((error) => {
-                throw error
-              }),
+            this.httpService.post(process.env.API_GATEWAY_URL, { query }).pipe(
+                catchError((error) => {
+                    throw error
+                }),
             ),
         );
 
         console.log('data', data)
 
-        if(!data || !data.data || !data.data.validateUserId){
+        if (!data || !data.data || !data.data.validateUserId) {
             throw new UnauthorizedException("Unauthorized User")
         }
 

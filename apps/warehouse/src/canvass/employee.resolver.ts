@@ -5,9 +5,9 @@ import { Canvass } from './entities/canvass.entity';
 
 @Resolver(() => Employee)
 export class EmployeeResolver {
-    constructor(private readonly canvassService: CanvassService) {}
+    constructor(private readonly canvassService: CanvassService) { }
 
-    @ResolveField( () => [Canvass])
+    @ResolveField(() => [Canvass])
     canvasses(@Parent() employee: Employee) {
         return this.canvassService.forEmployee(employee.id)
     }

@@ -71,3 +71,33 @@ export enum Role {
     USER = 'USER',
     ADMIN = 'ADMIN'
 }
+
+export enum MODULES {
+    CANVASS = 'CANVASS',
+    RV = 'RV',
+    SPR = 'SPR',
+    JO = 'JO',
+    MEQS = 'MEQS',
+    PO = 'PO',
+    RR = 'RR',
+}
+
+
+export enum RESOLVERS {
+    // ========= CANVASS ========= 
+    createCanvass = 'createCanvass',
+    canvasses = 'canvasses',
+    rc_numbers = 'rc_numbers',
+    canvass = 'canvass',
+    updateCanvass = 'updateCanvass',
+    removeCanvass = 'removeCanvass',
+
+
+    // ========= RV ========= 
+    createRv = 'createRv',
+    rvs = 'rvs',
+    rv_numbers = 'rv_numbers',
+    rv = 'rv',
+    updateRv = 'updateRv',
+    cancelRv = 'cancelRv',
+}

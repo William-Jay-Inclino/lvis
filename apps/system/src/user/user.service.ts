@@ -66,6 +66,8 @@ export class UserService {
       return null
     }
 
+    user.permissions = JSON.stringify(user.permissions)
+
     return user
 
   }

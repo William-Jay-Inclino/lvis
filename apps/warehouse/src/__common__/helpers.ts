@@ -1,5 +1,6 @@
-import { MEQSApprover, POApprover, RRApprover, RVApprover } from "apps/warehouse/prisma/generated/client"
-import { APPROVAL_STATUS, ITEM_TRANSACTION_TYPE } from "./types"
+import { AuthUser } from "./auth-user.entity"
+import { APPROVAL_STATUS, ITEM_TRANSACTION_TYPE, MODULES, RESOLVERS, Role } from "./types"
+import { User, UserPermissions } from "./user.entity"
 
 
 export const isValidApprovalStatus = (status: number): boolean => {
@@ -31,21 +32,6 @@ export const isValidItemTransactionType = (type: number): boolean => {
     }
 
     return false
-
-}
-
-export const getLastApprover = (
-    approvers:
-        RVApprover[] |
-        MEQSApprover[] |
-        POApprover[] |
-        RRApprover[]
-):
-    RVApprover |
-    MEQSApprover |
-    POApprover |
-    RRApprover => {
-    return approvers.reduce((max, current) => (current.order > max.order ? current : max), approvers[0]);
 
 }
 
@@ -87,3 +73,70 @@ export function getDateRange(dateString: string): { startDate: string, endDate: 
         endDate: endDate.toISOString(),
     };
 }
+
+
+
+
+export function canAccess(user: User, module: MODULES, resolver: RESOLVERS): boolean {
+
+    console.log('canAccess()', user)
+    console.log('module', module)
+    console.log('resolver', resolver)
+
+    if (user.role === Role.ADMIN) {
+        console.log('user is admin')
+        return true
+    }
+
+    console.log('user is normal user')
+
+    if (!user.permissions) {
+        console.log('no user.permissions')
+        return false;
+    }
+
+    // @ts-ignore
+    const permissions = JSON.parse(user.permissions) as UserPermissions
+
+    console.log('permissions', permissions)
+
+    if (!permissions) {
+        console.log('No permissions Object')
+        return
+    }
+
+    if (!permissions.warehouse) {
+        console.log('no permissions.warehouse')
+        return false
+    }
+
+    const warehousePermissions = permissions.warehouse;
+
+    const accessMap = {
+        [MODULES.CANVASS]: {
+            [RESOLVERS.createCanvass]: warehousePermissions.canManageCanvass?.create ?? false,
+            [RESOLVERS.canvasses]: warehousePermissions.canManageCanvass?.search ?? false,
+            [RESOLVERS.rc_numbers]: warehousePermissions.canManageCanvass?.search ?? false,
+            [RESOLVERS.canvass]: warehousePermissions.canManageCanvass?.viewDetails ?? false,
+        },
+        [MODULES.RV]: {
+            [RESOLVERS.createRv]: warehousePermissions.canManageRV?.create ?? false,
+            [RESOLVERS.rvs]: warehousePermissions.canManageRV?.search ?? false,
+            [RESOLVERS.rv_numbers]: warehousePermissions.canManageRV?.search ?? false,
+            [RESOLVERS.rv]: warehousePermissions.canManageRV?.viewDetails ?? false,
+        },
+    };
+
+    return accessMap[module]?.[resolver] ?? false;
+}
+
+
+
+export function isAdmin(authUser: AuthUser): boolean {
+    return (authUser.user.role === Role.ADMIN)
+}
+
+export function isNormalUser(authUser: AuthUser): boolean {
+    return (authUser.user.role === Role.USER)
+}
+

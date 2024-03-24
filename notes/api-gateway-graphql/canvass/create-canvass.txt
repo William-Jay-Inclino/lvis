@@ -1,7 +1,6 @@
 mutation {
   createCanvass(
     input: {
-      date_requested: "2024-01-01"
       purpose: "canvass purpose"
       notes: "canvass notes"
       requested_by_id: "b5b76264-37bc-4587-a09c-b55b6c1b0639"

@@ -16,14 +16,14 @@ import { CreateRrApproverInput } from './dto/create-rr-approver.input';
 import { UpdateRrApproverInput } from './dto/update-rr-approver.input';
 import { PrismaService } from '../__prisma__/prisma.service';
 import { Prisma, RRApprover } from 'apps/warehouse/prisma/generated/client';
-import { APPROVAL_STATUS, ITEM_TRANSACTION_TYPE } from '../__common__/types';
+import { APPROVAL_STATUS } from '../__common__/types';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { HttpService } from '@nestjs/axios';
 import { catchError, firstValueFrom } from 'rxjs';
 import { WarehouseRemoveResponse } from '../__common__/classes';
-import { getLastApprover, isValidApprovalStatus } from '../__common__/helpers';
+import { isValidApprovalStatus } from '../__common__/helpers';
 import { UpdateRrOrderResponse } from './entities/update-rr-order-response.entity';
-import { EventEmitter2, OnEvent } from '@nestjs/event-emitter';
+import { EventEmitter2 } from '@nestjs/event-emitter';
 import { RrApproverStatusUpdated } from './events/rr-approver-status-updated.event';
 
 @Injectable()

@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { BadRequestException, ForbiddenException, Injectable, Logger, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { CanvassService } from '../canvass/canvass.service';
 import { PrismaService } from '../__prisma__/prisma.service';
 import { Prisma, RV, RVApprover } from 'apps/warehouse/prisma/generated/client';
@@ -11,7 +11,7 @@ import { HttpService } from '@nestjs/axios';
 import { WarehouseCancelResponse } from '../__common__/classes';
 import { RVsResponse } from './entities/rvs-response.entity';
 import * as moment from 'moment';
-import { getDateRange } from '../__common__/helpers';
+import { getDateRange, isAdmin, isNormalUser } from '../__common__/helpers';
 
 @Injectable()
 export class RvService {
@@ -117,6 +117,10 @@ export class RvService {
             throw new NotFoundException('RV not found')
         }
 
+        if (!this.canAccess(existingItem)) {
+            throw new ForbiddenException('Only Admin and Owner can update this record!')
+        }
+
         if (!(await this.canUpdate(input, existingItem))) {
             throw new Error('Failed to update RV. Please try again')
         }
@@ -152,6 +156,10 @@ export class RvService {
 
         if (!existingItem) {
             throw new NotFoundException('RV not found')
+        }
+
+        if (!this.canAccess(existingItem)) {
+            throw new ForbiddenException('Only Admin and Owner can cancel this record!')
         }
 
         const updated = await this.prisma.rV.update({
@@ -460,12 +468,8 @@ export class RvService {
 
     private async canUpdate(input: UpdateRvInput, existingItem: RV): Promise<boolean> {
 
-        const isNormalUser = this.isNormalUser()
-
-        console.log('isNormalUser', isNormalUser)
-
         // validates if there is already an approver who take an action
-        if (isNormalUser) {
+        if (isNormalUser(this.authUser)) {
 
             console.log('is normal user')
 
@@ -511,6 +515,18 @@ export class RvService {
 
     }
 
+    private canAccess(item: RV): boolean {
+
+        if (isAdmin(this.authUser)) return true
+
+        const isOwner = item.created_by === this.authUser.user.username
+
+        if (isOwner) return true
+
+        return false
+
+    }
+
     // used to indicate whether there is at least one approver whose status is not pending.
     private isAnyNonPendingApprover(approvers: RVApprover[]): boolean {
 
@@ -528,11 +544,6 @@ export class RvService {
 
     }
 
-    private isNormalUser(): boolean {
 
-        const isNormalUser = (this.authUser.user.role === Role.USER)
-
-        return isNormalUser
-    }
 
 }
