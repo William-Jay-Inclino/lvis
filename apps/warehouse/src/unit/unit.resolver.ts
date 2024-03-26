@@ -31,15 +31,11 @@ export class UnitResolver {
   }
 
   @Query(() => [Unit])
-  @UseGuards(AccessGuard)
-  @CheckAccess(MODULES.UNIT, RESOLVERS.units)
   units() {
     return this.unitService.findAll();
   }
 
   @Query(() => Unit)
-  @UseGuards(AccessGuard)
-  @CheckAccess(MODULES.UNIT, RESOLVERS.unit)
   unit(@Args('id') id: string) {
     return this.unitService.findOne(id);
   }

@@ -39,8 +39,6 @@ export class SprResolver {
     }
 
     @Query(() => SPRsResponse)
-    @UseGuards(AccessGuard)
-    @CheckAccess(MODULES.SPR, RESOLVERS.sprs)
     sprs(
         @Args('page') page: number,
         @Args('pageSize') pageSize: number,
@@ -51,8 +49,6 @@ export class SprResolver {
     }
 
     @Query(() => [SprNumber])
-    @UseGuards(AccessGuard)
-    @CheckAccess(MODULES.SPR, RESOLVERS.spr_numbers)
     spr_numbers(
         @Args('spr_number') spr_number: string
     ): Promise<{ spr_number: string }[]> {
@@ -60,8 +56,6 @@ export class SprResolver {
     }
 
     @Query(() => SPR)
-    @UseGuards(AccessGuard)
-    @CheckAccess(MODULES.SPR, RESOLVERS.spr)
     spr(
         @Args('id', { nullable: true }) id?: string,
         @Args('spr_number', { nullable: true }) spr_number?: string,

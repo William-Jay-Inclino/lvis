@@ -8,6 +8,9 @@ import { UpdateAccountInput } from './dto/update-account.input';
 import { SystemRemoveResponse } from '../__common__/classes';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
+import { AccessGuard } from '../__auth__/guards/access.guard';
+import { CheckAccess } from '../__auth__/check-access.decorator';
+import { MODULES, RESOLVERS } from '../__common__/types';
 
 @UseGuards(GqlAuthGuard)
 @Resolver(() => Account)
@@ -15,6 +18,8 @@ export class AccountResolver {
   constructor(private readonly accountService: AccountService) { }
 
   @Mutation(() => Account)
+  @UseGuards(AccessGuard)
+  @CheckAccess(MODULES.ACCOUNT, RESOLVERS.createAccount)
   createAccount(
     @Args('input') createAccountInput: CreateAccountInput,
     @CurrentAuthUser() authUser: AuthUser
@@ -34,6 +39,8 @@ export class AccountResolver {
   }
 
   @Mutation(() => Account)
+  @UseGuards(AccessGuard)
+  @CheckAccess(MODULES.ACCOUNT, RESOLVERS.updateAccount)
   updateAccount(
     @Args('id') id: string,
     @Args('input') updateAccountInput: UpdateAccountInput,
@@ -44,6 +51,8 @@ export class AccountResolver {
   }
 
   @Mutation(() => SystemRemoveResponse)
+  @UseGuards(AccessGuard)
+  @CheckAccess(MODULES.ACCOUNT, RESOLVERS.removeAccount)
   removeAccount(
     @Args('id') id: string,
     @CurrentAuthUser() authUser: AuthUser

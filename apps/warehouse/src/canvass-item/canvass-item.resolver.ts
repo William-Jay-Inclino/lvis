@@ -43,9 +43,4 @@ export class CanvassItemResolver {
     return this.canvassItemService.remove(id);
   }
 
-  // @ResolveField(() => Boolean)
-  // async is_reference_in_rr(@Parent() canvassItem: CanvassItem) {
-  //   return await this.canvassItemService.isReferenceInRR(canvassItem.id)
-  // }
-
 }

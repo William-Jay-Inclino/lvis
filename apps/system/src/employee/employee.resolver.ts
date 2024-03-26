@@ -1,4 +1,4 @@
-import { Resolver, Query, Mutation, Args, Int, ResolveReference } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, ResolveReference } from '@nestjs/graphql';
 import { EmployeeService } from './employee.service';
 import { Employee } from './entities/employee.entity';
 import { CreateEmployeeInput } from './dto/create-employee.input';
@@ -9,6 +9,9 @@ import { SystemRemoveResponse } from '../__common__/classes';
 import { EmployeesResponse } from './entities/employees-response.entity';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
+import { AccessGuard } from '../__auth__/guards/access.guard';
+import { MODULES, RESOLVERS } from '../__common__/types';
+import { CheckAccess } from '../__auth__/check-access.decorator';
 
 @UseGuards(GqlAuthGuard)
 @Resolver(() => Employee)
@@ -16,6 +19,8 @@ export class EmployeeResolver {
   constructor(private readonly employeeService: EmployeeService) { }
 
   @Mutation(() => Employee)
+  @UseGuards(AccessGuard)
+  @CheckAccess(MODULES.EMPLOYEE, RESOLVERS.createDepartment)
   createEmployee(
     @Args('input') createEmployeeInput: CreateEmployeeInput,
     @CurrentAuthUser() authUser: AuthUser
@@ -46,6 +51,8 @@ export class EmployeeResolver {
   }
 
   @Mutation(() => Employee)
+  @UseGuards(AccessGuard)
+  @CheckAccess(MODULES.EMPLOYEE, RESOLVERS.updateEmployee)
   updateEmployee(
     @Args('id') id: string,
     @Args('input') updateEmployeeInput: UpdateEmployeeInput,
@@ -56,6 +63,8 @@ export class EmployeeResolver {
   }
 
   @Mutation(() => SystemRemoveResponse)
+  @UseGuards(AccessGuard)
+  @CheckAccess(MODULES.EMPLOYEE, RESOLVERS.removeEmployee)
   removeEmployee(
     @Args('id') id: string,
     @CurrentAuthUser() authUser: AuthUser

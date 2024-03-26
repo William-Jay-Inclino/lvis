@@ -215,6 +215,7 @@ export class SeederService {
 
         try {
             return this.prisma.user.createMany({
+                // @ts-ignore
                 data: data.users,
             })
         } catch (error) {

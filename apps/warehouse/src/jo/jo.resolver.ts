@@ -40,8 +40,6 @@ export class JoResolver {
     }
 
     @Query(() => JOsResponse)
-    @UseGuards(AccessGuard)
-    @CheckAccess(MODULES.JO, RESOLVERS.jos)
     jos(
         @Args('page') page: number,
         @Args('pageSize') pageSize: number,
@@ -52,8 +50,6 @@ export class JoResolver {
     }
 
     @Query(() => [JoNumber])
-    @UseGuards(AccessGuard)
-    @CheckAccess(MODULES.JO, RESOLVERS.jo_numbers)
     jo_numbers(
         @Args('jo_number') jo_number: string
     ): Promise<{ jo_number: string }[]> {
@@ -61,8 +57,6 @@ export class JoResolver {
     }
 
     @Query(() => JO)
-    @UseGuards(AccessGuard)
-    @CheckAccess(MODULES.JO, RESOLVERS.jo)
     jo(
         @Args('id', { nullable: true }) id?: string,
         @Args('jo_number', { nullable: true }) jo_number?: string,

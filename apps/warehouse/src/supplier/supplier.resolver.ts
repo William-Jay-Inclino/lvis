@@ -29,15 +29,11 @@ export class SupplierResolver {
   }
 
   @Query(() => [Supplier])
-  @UseGuards(AccessGuard)
-  @CheckAccess(MODULES.SUPPLIER, RESOLVERS.suppliers)
   suppliers() {
     return this.supplierService.findAll();
   }
 
   @Query(() => Supplier)
-  @UseGuards(AccessGuard)
-  @CheckAccess(MODULES.SUPPLIER, RESOLVERS.supplier)
   supplier(@Args('id') id: string) {
     return this.supplierService.findOne(id);
   }

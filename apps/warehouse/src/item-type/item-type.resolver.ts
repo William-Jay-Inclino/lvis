@@ -29,15 +29,11 @@ export class ItemTypeResolver {
   }
 
   @Query(() => [ItemType])
-  @UseGuards(AccessGuard)
-  @CheckAccess(MODULES.ITEM_TYPE, RESOLVERS.item_types)
   item_types() {
     return this.itemTypeService.findAll();
   }
 
   @Query(() => ItemType)
-  @UseGuards(AccessGuard)
-  @CheckAccess(MODULES.ITEM_TYPE, RESOLVERS.item_type)
   item_type(@Args('id') id: string) {
     return this.itemTypeService.findOne(id);
   }

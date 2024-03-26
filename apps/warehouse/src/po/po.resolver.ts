@@ -38,8 +38,6 @@ export class PoResolver {
     }
 
     @Query(() => POsResponse)
-    @UseGuards(AccessGuard)
-    @CheckAccess(MODULES.PO, RESOLVERS.pos)
     pos(
         @Args('page') page: number,
         @Args('pageSize') pageSize: number,
@@ -50,8 +48,6 @@ export class PoResolver {
     }
 
     @Query(() => [PoNumber])
-    @UseGuards(AccessGuard)
-    @CheckAccess(MODULES.PO, RESOLVERS.po_numbers)
     po_numbers(
         @Args('po_number') po_number: string
     ): Promise<{ po_number: string }[]> {
@@ -59,8 +55,6 @@ export class PoResolver {
     }
 
     @Query(() => PO)
-    @UseGuards(AccessGuard)
-    @CheckAccess(MODULES.PO, RESOLVERS.po)
     po(
         @Args('id', { nullable: true }) id?: string | null,
         @Args('po_number', { nullable: true }) po_number?: string | null,

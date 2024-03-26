@@ -29,15 +29,11 @@ export class VehicleResolver {
   }
 
   @Query(() => [Vehicle])
-  @UseGuards(AccessGuard)
-  @CheckAccess(MODULES.VEHICLE, RESOLVERS.vehicles)
   vehicles() {
     return this.vehicleService.findAll();
   }
 
   @Query(() => Vehicle)
-  @UseGuards(AccessGuard)
-  @CheckAccess(MODULES.VEHICLE, RESOLVERS.vehicle)
   vehicle(@Args('id') id: string) {
     return this.vehicleService.findOne(id);
   }

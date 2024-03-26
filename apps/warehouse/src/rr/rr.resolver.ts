@@ -12,8 +12,10 @@ import { RrApprover } from '../rr-approver/entities/rr-approver.entity';
 import { RrApproverService } from '../rr-approver/rr-approver.service';
 import { RrNumber } from './entities/rr-number.entity';
 import { RRsResponse } from './entities/rr-response.entity';
-import { APPROVAL_STATUS } from '../__common__/types';
+import { APPROVAL_STATUS, MODULES, RESOLVERS } from '../__common__/types';
 import { WarehouseCancelResponse } from '../__common__/classes';
+import { AccessGuard } from '../__auth__/guards/access.guard';
+import { CheckAccess } from '../__auth__/check-access.decorator';
 
 @UseGuards(GqlAuthGuard)
 @Resolver(() => RR)
@@ -25,6 +27,8 @@ export class RrResolver {
     ) { }
 
     @Mutation(() => RR)
+    @UseGuards(AccessGuard)
+    @CheckAccess(MODULES.RR, RESOLVERS.createRr)
     async createRr(
         @Args('input') createRrInput: CreateRrInput,
         @CurrentAuthUser() authUser: AuthUser

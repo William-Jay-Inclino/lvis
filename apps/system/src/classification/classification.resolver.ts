@@ -8,6 +8,9 @@ import { UseGuards } from '@nestjs/common';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
 import { SystemRemoveResponse } from '../__common__/classes';
+import { AccessGuard } from '../__auth__/guards/access.guard';
+import { CheckAccess } from '../__auth__/check-access.decorator';
+import { MODULES, RESOLVERS } from '../__common__/types';
 
 @UseGuards(GqlAuthGuard)
 @Resolver(() => Classification)
@@ -15,6 +18,8 @@ export class ClassificationResolver {
   constructor(private readonly classificationService: ClassificationService) { }
 
   @Mutation(() => Classification)
+  @UseGuards(AccessGuard)
+  @CheckAccess(MODULES.CLASSIFICATION, RESOLVERS.createClassification)
   createClassification(
     @Args('input') createClassificationInput: CreateClassificationInput,
     @CurrentAuthUser() authUser: AuthUser
@@ -34,6 +39,8 @@ export class ClassificationResolver {
   }
 
   @Mutation(() => Classification)
+  @UseGuards(AccessGuard)
+  @CheckAccess(MODULES.CLASSIFICATION, RESOLVERS.updateClassification)
   updateClassification(
     @Args('id') id: string,
     @Args('input') updateClassificationInput: UpdateClassificationInput,
@@ -44,6 +51,8 @@ export class ClassificationResolver {
   }
 
   @Mutation(() => SystemRemoveResponse)
+  @UseGuards(AccessGuard)
+  @CheckAccess(MODULES.CLASSIFICATION, RESOLVERS.removeClassification)
   removeClassification(
     @Args('id') id: string,
     @CurrentAuthUser() authUser: AuthUser

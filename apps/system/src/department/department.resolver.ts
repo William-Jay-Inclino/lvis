@@ -8,6 +8,9 @@ import { UpdateDepartmentInput } from './dto/update-department.input';
 import { SystemRemoveResponse } from '../__common__/classes';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
+import { AccessGuard } from '../__auth__/guards/access.guard';
+import { MODULES, RESOLVERS } from '../__common__/types';
+import { CheckAccess } from '../__auth__/check-access.decorator';
 
 @UseGuards(GqlAuthGuard)
 @Resolver(() => Department)
@@ -15,6 +18,8 @@ export class DepartmentResolver {
   constructor(private readonly departmentService: DepartmentService) { }
 
   @Mutation(() => Department)
+  @UseGuards(AccessGuard)
+  @CheckAccess(MODULES.DEPARTMENT, RESOLVERS.createDepartment)
   createDepartment(
     @Args('input') createDepartmentInput: CreateDepartmentInput,
     @CurrentAuthUser() authUser: AuthUser
@@ -34,6 +39,8 @@ export class DepartmentResolver {
   }
 
   @Mutation(() => Department)
+  @UseGuards(AccessGuard)
+  @CheckAccess(MODULES.DEPARTMENT, RESOLVERS.updateDepartment)
   updateDepartment(
     @Args('id') id: string,
     @Args('input') updateDepartmentInput: UpdateDepartmentInput,
@@ -44,6 +51,8 @@ export class DepartmentResolver {
   }
 
   @Mutation(() => SystemRemoveResponse)
+  @UseGuards(AccessGuard)
+  @CheckAccess(MODULES.DEPARTMENT, RESOLVERS.removeDepartment)
   removeDepartment(
     @Args('id') id: string,
     @CurrentAuthUser() authUser: AuthUser

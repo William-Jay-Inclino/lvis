@@ -13,8 +13,10 @@ import { RVApprover } from '../rv-approver/entities/rv-approver.entity';
 import { RvApproverService } from '../rv-approver/rv-approver.service';
 import { RvNumber } from './entities/rv-number.entity';
 import { RVsResponse } from './entities/rvs-response.entity';
-import { APPROVAL_STATUS } from '../__common__/types';
+import { APPROVAL_STATUS, MODULES, RESOLVERS } from '../__common__/types';
 import { WarehouseCancelResponse } from '../__common__/classes';
+import { AccessGuard } from '../__auth__/guards/access.guard';
+import { CheckAccess } from '../__auth__/check-access.decorator';
 
 @UseGuards(GqlAuthGuard)
 @Resolver(() => RV)
@@ -26,6 +28,8 @@ export class RvResolver {
     ) { }
 
     @Mutation(() => RV)
+    @UseGuards(AccessGuard)
+    @CheckAccess(MODULES.RV, RESOLVERS.createRv)
     async createRv(
         @Args('input') createRvInput: CreateRvInput,
         @CurrentAuthUser() authUser: AuthUser

@@ -29,8 +29,6 @@ export class ItemResolver {
   }
 
   @Query(() => ItemsResponse)
-  @UseGuards(AccessGuard)
-  @CheckAccess(MODULES.ITEM, RESOLVERS.items)
   items(
     @Args('page') page: number,
     @Args('pageSize') pageSize: number,
@@ -41,8 +39,6 @@ export class ItemResolver {
   }
 
   @Query(() => Item)
-  @UseGuards(AccessGuard)
-  @CheckAccess(MODULES.ITEM, RESOLVERS.item)
   item(
     @Args('id', { nullable: true }) id?: string,
     @Args('code', { nullable: true }) code?: string,

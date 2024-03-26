@@ -38,8 +38,6 @@ export class MeqsResolver {
     }
 
     @Query(() => MEQSsResponse)
-    @UseGuards(AccessGuard)
-    @CheckAccess(MODULES.MEQS, RESOLVERS.meqs)
     meqs(
         @Args('page') page: number,
         @Args('pageSize') pageSize: number,
@@ -50,8 +48,6 @@ export class MeqsResolver {
     }
 
     @Query(() => [MeqsNumber])
-    @UseGuards(AccessGuard)
-    @CheckAccess(MODULES.MEQS, RESOLVERS.meqs_numbers)
     meqs_numbers(
         @Args('meqs_number') meqs_number: string
     ): Promise<{ meqs_number: string }[]> {
@@ -59,8 +55,6 @@ export class MeqsResolver {
     }
 
     @Query(() => MEQS)
-    @UseGuards(AccessGuard)
-    @CheckAccess(MODULES.MEQS, RESOLVERS.meq)
     meq(
         @Args('id', { nullable: true }) id?: string,
         @Args('meqs_number', { nullable: true }) meqs_number?: string,
