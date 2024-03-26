@@ -29,15 +29,11 @@ export class BrandResolver {
   }
 
   @Query(() => [Brand])
-  @UseGuards(AccessGuard)
-  @CheckAccess(MODULES.ITEM_BRAND, RESOLVERS.brands)
   brands() {
     return this.brandService.findAll();
   }
 
   @Query(() => Brand)
-  @UseGuards(AccessGuard)
-  @CheckAccess(MODULES.ITEM_BRAND, RESOLVERS.brand)
   brand(@Args('id') id: string) {
     return this.brandService.findOne(id);
   }
