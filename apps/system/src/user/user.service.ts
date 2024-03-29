@@ -41,6 +41,17 @@ export class UserService {
       created_by
     }
 
+    if (input.employee_id) {
+      data.user_employee = {
+        create: {
+          created_by,
+          employee: {
+            connect: { id: input.employee_id }
+          }
+        }
+      }
+    }
+
     const created = await this.prisma.user.create({ data })
 
     this.logger.log('Successfully created User')
@@ -61,13 +72,7 @@ export class UserService {
     };
 
     if (!!searchValue) {
-      whereCondition = {
-        OR: [
-          { lastname: { contains: searchValue.trim(), mode: 'insensitive' } },
-          { firstname: { contains: searchValue.trim(), mode: 'insensitive' } },
-          { middlename: { contains: searchValue.trim(), mode: 'insensitive' } },
-        ],
-      };
+      whereCondition = { username: { contains: searchValue.trim(), mode: 'insensitive' } }
     }
 
     const items = await this.prisma.user.findMany({

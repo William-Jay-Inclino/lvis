@@ -10,6 +10,9 @@ export class User {
   @Field()
   id: string;
 
+  @Field({ nullable: true })
+  employee_id?: string | null;
+
   @Field()
   username: string;
 
@@ -31,10 +34,35 @@ export class User {
   @Field(() => Role)
   role: Role;
 
-  @Field(() => UserEmployee, { nullable: true })
-  user_employee?: UserEmployee;
-
   @Field({ nullable: true })
   permissions?: string
 
+
+
+  // =============== audit fields =============== 
+
+  @Field()
+  created_by: string;
+
+  @Field({ nullable: true })
+  updated_by: string | null;
+
+  @Field({ nullable: true })
+  deleted_by: string | null;
+
+  @Field(() => Date)
+  created_at: Date;
+
+  @Field(() => Date)
+  updated_at: Date;
+
+  @Field(() => Date, { nullable: true })
+  deleted_at: Date | null;
+
+
+
+  // =============== derived / resolvers =============== 
+
+  @Field(() => UserEmployee, { nullable: true })
+  user_employee?: UserEmployee;
 }

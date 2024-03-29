@@ -10,6 +10,11 @@ registerEnumType(Role, {
 @InputType()
 export class CreateUserInput {
 
+  @Field(() => String, { nullable: true })
+  @IsOptional()
+  @IsString()
+  employee_id?: string | null;
+
   @Field()
   @IsNotEmpty()
   @IsString()

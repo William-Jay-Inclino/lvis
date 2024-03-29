@@ -7,6 +7,7 @@ import { Logger, NotFoundException, UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from '../__auth__/guards/gql-auth.guard';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
+import { UsersResponse } from './entities/users-response.entity';
 
 
 @Resolver(() => User)
@@ -37,10 +38,13 @@ export class UserResolver {
   }
 
   @UseGuards(GqlAuthGuard)
-  @Query(() => [User])
-  users(@CurrentAuthUser() user: User) {
-    console.log('users: current-user', user)
-    return this.userService.findAll();
+  @Query(() => UsersResponse)
+  users(
+    @Args('page') page?: number,
+    @Args('pageSize') pageSize?: number,
+    @Args('searchValue', { nullable: true }) searchValue?: string,
+  ) {
+    return this.userService.findAll(page, pageSize, searchValue);
   }
 
   @UseGuards(GqlAuthGuard)
