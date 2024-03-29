@@ -59,6 +59,9 @@ export class EmployeeService {
 		}
 
 		const items = await this.prisma.employee.findMany({
+			include: {
+				user_employee: true
+			},
 			orderBy: [{ lastname: 'asc' }, { firstname: 'asc' }],
 			skip,
 			take: pageSize,
