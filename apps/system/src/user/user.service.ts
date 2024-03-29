@@ -4,6 +4,7 @@ import { PrismaService } from '../__prisma__/prisma.service';
 import { UpdateUserInput } from './dto/update-user.input';
 import { Prisma, Role, User } from 'apps/system/prisma/generated/client';
 import { AuthUser } from '../__common__/auth-user.entity';
+import { UsersResponse } from './entities/users-response.entity';
 
 @Injectable()
 export class UserService {
@@ -32,7 +33,11 @@ export class UserService {
     const data: Prisma.UserCreateInput = {
       username: input.username,
       password: input.password,
+      firstname: input.firstname,
+      middlename: input.middlename,
+      lastname: input.lastname,
       role: input.role ?? Role.USER,
+      permissions: input.permissions,
       created_by
     }
 
@@ -43,13 +48,45 @@ export class UserService {
     return created
   }
 
-  async findAll(): Promise<User[]> {
-    return await this.prisma.user.findMany({
-      where: {
-        deleted_at: null
-      },
-      include: this.includedFields
-    })
+  async findAll(
+    page: number,
+    pageSize: number,
+    searchValue?: string
+  ): Promise<UsersResponse> {
+
+    const skip = (page - 1) * pageSize;
+
+    let whereCondition: any = {
+      deleted_at: null
+    };
+
+    if (!!searchValue) {
+      whereCondition = {
+        OR: [
+          { lastname: { contains: searchValue.trim(), mode: 'insensitive' } },
+          { firstname: { contains: searchValue.trim(), mode: 'insensitive' } },
+          { middlename: { contains: searchValue.trim(), mode: 'insensitive' } },
+        ],
+      };
+    }
+
+    const items = await this.prisma.user.findMany({
+      orderBy: [{ lastname: 'asc' }, { firstname: 'asc' }],
+      skip,
+      take: pageSize,
+      where: whereCondition,
+    });
+
+    const totalItems = await this.prisma.user.count({
+      where: whereCondition,
+    });
+
+    return {
+      data: items,
+      totalItems,
+      currentPage: page,
+      totalPages: Math.ceil(totalItems / pageSize),
+    };
   }
 
   async findOne(id: string): Promise<User | null> {
@@ -97,8 +134,14 @@ export class UserService {
     const existingUser = await this.findOne(id)
 
     const data: Prisma.UserUpdateInput = {
+      updated_by: this.authUser.user.username,
       password: input.password ?? existingUser.password,
-      updated_by: this.authUser.user.username
+      firstname: input.firstname ?? existingUser.firstname,
+      middlename: input.middlename ?? existingUser.middlename,
+      lastname: input.lastname ?? existingUser.lastname,
+      role: input.role ?? existingUser.role,
+      status: input.status ?? existingUser.status,
+      permissions: input.permissions ?? existingUser.permissions,
     }
 
     const updated = await this.prisma.user.update({

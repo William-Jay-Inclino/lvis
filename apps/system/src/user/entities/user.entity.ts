@@ -16,6 +16,15 @@ export class User {
   @Field({ nullable: true })
   password: string;
 
+  @Field()
+  firstname: string;
+
+  @Field({ nullable: true })
+  middlename: string;
+
+  @Field()
+  lastname: string;
+
   @Field(() => Int)
   status: UserStatus;
 

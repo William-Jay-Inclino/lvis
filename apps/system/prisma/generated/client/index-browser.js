@@ -173,10 +173,13 @@ exports.Prisma.ClassificationScalarFieldEnum = {
 
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
-  role: 'role',
   username: 'username',
   password: 'password',
+  firstname: 'firstname',
+  middlename: 'middlename',
+  lastname: 'lastname',
   status: 'status',
+  role: 'role',
   permissions: 'permissions',
   created_by: 'created_by',
   updated_by: 'updated_by',

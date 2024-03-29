@@ -110,12 +110,14 @@ model Classification {
 }
 
 model User {
-  id   String @id @default(uuid())
-  role Role   @default(USER)
-
-  username    String @unique
+  id          String  @id @default(uuid())
+  username    String  @unique
   password    String
-  status      Int    @default(1)
+  firstname   String  @default("")
+  middlename  String?
+  lastname    String  @default("")
+  status      Int     @default(1)
+  role        Role    @default(USER)
   permissions Json?
 
   created_by String

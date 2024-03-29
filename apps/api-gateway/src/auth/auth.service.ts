@@ -1,8 +1,9 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { User } from './entities/user.entity';
 import { HttpService } from '@nestjs/axios';
 import { catchError, firstValueFrom } from 'rxjs';
 import { JwtService } from '@nestjs/jwt';
+import { USER_STATUS } from '../__common__/types';
 
 @Injectable()
 export class AuthService {
@@ -21,6 +22,16 @@ export class AuthService {
         console.log('user', user)
 
         if (user && user.password === password) {
+
+            if (user.status === USER_STATUS.INACTIVE) {
+                throw new UnauthorizedException('User is Inactive')
+            }
+
+            if (user.deleted_at) {
+                console.log('User is deleted at: ', user.deleted_at)
+                throw new NotFoundException('User not found')
+            }
+
             return user
         }
 
@@ -37,7 +48,7 @@ export class AuthService {
         };
     }
 
-    private async findByUserName(username): Promise<User> {
+    private async findByUserName(username: string): Promise<User> {
         const query = `
             query{
                 getUserByUserName(username: "${username}") {
@@ -47,6 +58,7 @@ export class AuthService {
                     status
                     role
                     permissions
+                    deleted_at
                     user_employee {
                         employee {
                             id
