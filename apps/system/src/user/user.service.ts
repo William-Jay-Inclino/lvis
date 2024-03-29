@@ -166,7 +166,7 @@ export class UserService {
 
     await this.findOne(id)
 
-    await this.prisma.user.update({
+    const query1 = this.prisma.user.update({
       where: { id },
       data: {
         deleted_at: new Date(),
@@ -174,7 +174,34 @@ export class UserService {
       }
     })
 
+    const query2 = this.prisma.userEmployee.delete({
+      where: {
+        user_id: id
+      }
+    })
+
+    const result = await this.prisma.$transaction([query1, query2])
+
+    console.log('result', result)
+
     return true
+
+  }
+
+  async isUsernameExist(username: string): Promise<boolean> {
+
+    const user = await this.prisma.user.findUnique({
+      where: { username },
+      select: {
+        id: true
+      }
+    })
+
+    if (user) {
+      return true
+    }
+
+    return false
 
   }
 

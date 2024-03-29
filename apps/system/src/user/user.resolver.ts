@@ -90,6 +90,13 @@ export class UserResolver {
     return this.userService.remove(id);
   }
 
+  @Query(() => Boolean)
+  isUsernameExist(
+    @Args('username') username: string
+  ) {
+    return this.userService.isUsernameExist(username);
+  }
+
 
   @ResolveReference()
   async resolveReference(reference: { __typename: string, id?: string, username?: string }) {
