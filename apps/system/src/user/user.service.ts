@@ -152,6 +152,8 @@ export class UserService {
 
   async update(id: string, input: UpdateUserInput): Promise<User> {
 
+    console.log('update()', input)
+
     const existingUser = await this.findOne(id)
 
     const data: Prisma.UserUpdateInput = {
@@ -162,7 +164,10 @@ export class UserService {
       lastname: input.lastname ?? existingUser.lastname,
       role: input.role ?? existingUser.role,
       status: input.status ?? existingUser.status,
-      permissions: input.permissions ? JSON.parse(input.permissions) : existingUser.permissions,
+    }
+
+    if (input.permissions) {
+      data.permissions = JSON.parse(input.permissions)
     }
 
     const updated = await this.prisma.user.update({
