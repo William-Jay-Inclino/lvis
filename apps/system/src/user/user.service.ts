@@ -74,7 +74,10 @@ export class UserService {
     const skip = (page - 1) * pageSize;
 
     let whereCondition: any = {
-      deleted_at: null
+      deleted_at: null,
+      username: {
+        not: 'admin'
+      }
     };
 
     if (!!searchValue) {
@@ -91,6 +94,13 @@ export class UserService {
     const totalItems = await this.prisma.user.count({
       where: whereCondition,
     });
+
+
+    // remove user with username of admin
+    const indx = items.findIndex(i => i.username === 'admin')
+    if (indx !== -1) {
+      items.splice(indx, 1)
+    }
 
     return {
       data: items,
