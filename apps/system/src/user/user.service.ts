@@ -85,6 +85,7 @@ export class UserService {
     }
 
     const items = await this.prisma.user.findMany({
+      include: this.includedFields,
       orderBy: [{ lastname: 'asc' }, { firstname: 'asc' }],
       skip,
       take: pageSize,
