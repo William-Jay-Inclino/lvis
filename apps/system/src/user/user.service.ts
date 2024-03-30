@@ -5,6 +5,7 @@ import { UpdateUserInput } from './dto/update-user.input';
 import { Prisma, Role, User } from 'apps/system/prisma/generated/client';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { UsersResponse } from './entities/users-response.entity';
+import { SystemRemoveResponse } from '../__common__/classes';
 
 @Injectable()
 export class UserService {
@@ -167,9 +168,39 @@ export class UserService {
 
   }
 
-  async remove(id: string): Promise<boolean> {
+  async remove(id: string): Promise<SystemRemoveResponse> {
 
-    await this.findOne(id)
+    console.log('remove()', id)
+
+    const user = await this.prisma.user.findUnique({
+      where: { id },
+      select: {
+        id: true,
+        user_employee: true
+      }
+    })
+
+    // if user is not employee
+    if (!user.user_employee) {
+
+      const result = await this.prisma.user.update({
+        where: { id },
+        data: {
+          deleted_at: new Date(),
+          deleted_by: this.authUser.user.username
+        }
+      })
+
+      console.log('result', result)
+
+      return {
+        success: true,
+        msg: "User successfully deleted"
+      }
+
+    }
+
+    // if user is employee then delete record in user_employee table
 
     const query1 = this.prisma.user.update({
       where: { id },
@@ -189,7 +220,10 @@ export class UserService {
 
     console.log('result', result)
 
-    return true
+    return {
+      success: true,
+      msg: "User successfully deleted"
+    }
 
   }
 

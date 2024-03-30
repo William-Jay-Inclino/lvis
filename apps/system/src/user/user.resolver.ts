@@ -8,6 +8,7 @@ import { GqlAuthGuard } from '../__auth__/guards/gql-auth.guard';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
 import { UsersResponse } from './entities/users-response.entity';
+import { SystemRemoveResponse } from '../__common__/classes';
 
 
 @Resolver(() => User)
@@ -76,7 +77,7 @@ export class UserResolver {
   }
 
   @UseGuards(GqlAuthGuard)
-  @Mutation(() => Boolean)
+  @Mutation(() => SystemRemoveResponse)
   removeUser(
     @Args('id') id: string,
     @CurrentAuthUser() authUser: AuthUser
