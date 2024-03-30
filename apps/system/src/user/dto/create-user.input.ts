@@ -1,6 +1,7 @@
 import { InputType, Field, registerEnumType } from '@nestjs/graphql';
 import { Role } from 'apps/system/prisma/generated/client';
 import { IsJSON, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { UserPermissionsInput } from './create-user-permissions.input';
 
 registerEnumType(Role, {
   name: 'Role',
@@ -44,10 +45,8 @@ export class CreateUserInput {
   @IsOptional()
   role?: Role | null
 
-  @Field(() => String, { nullable: true })
+  @Field({ nullable: true })
   @IsOptional()
-  @IsString()
-  @IsJSON()
   permissions?: string;
 
 }

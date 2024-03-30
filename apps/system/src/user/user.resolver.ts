@@ -51,12 +51,7 @@ export class UserResolver {
   @Query(() => User)
   async user(@CurrentAuthUser() user: User, @Args('id') id: string) {
     console.log('user: current-user', user)
-    const userFound = await this.userService.findOne(id);
-    console.log('userFound', userFound)
-    if (!userFound) {
-      throw new NotFoundException("User not found")
-    }
-    return userFound
+    return await this.userService.findOne(id);
   }
 
   // @UseGuards(GqlAuthGuard)

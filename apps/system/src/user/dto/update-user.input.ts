@@ -2,6 +2,7 @@ import { IsJSON, IsOptional, IsString } from 'class-validator';
 import { CreateUserInput } from './create-user.input';
 import { InputType, Field, PartialType, Int } from '@nestjs/graphql';
 import { Role } from 'apps/system/prisma/generated/client';
+import { UserPermissionsInput } from './create-user-permissions.input';
 
 @InputType()
 export class UpdateUserInput extends PartialType(CreateUserInput) {
@@ -34,10 +35,8 @@ export class UpdateUserInput extends PartialType(CreateUserInput) {
   @IsOptional()
   status?: number;
 
-  @Field(() => String, { nullable: true })
+  @Field({ nullable: true })
   @IsOptional()
-  @IsString()
-  @IsJSON()
   permissions?: string;
 
 }

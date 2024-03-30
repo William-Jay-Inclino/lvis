@@ -37,8 +37,13 @@ export class UserService {
       middlename: input.middlename,
       lastname: input.lastname,
       role: input.role ?? Role.USER,
-      permissions: input.permissions,
       created_by
+    }
+
+    if (input.permissions) {
+      data.permissions = JSON.parse(input.permissions)
+      // data.permissions = input.permissions
+      // data.permissions = JSON.stringify(input.permissions)
     }
 
     if (input.employee_id) {
@@ -146,7 +151,7 @@ export class UserService {
       lastname: input.lastname ?? existingUser.lastname,
       role: input.role ?? existingUser.role,
       status: input.status ?? existingUser.status,
-      permissions: input.permissions ?? existingUser.permissions,
+      permissions: input.permissions ? JSON.parse(input.permissions) : existingUser.permissions,
     }
 
     const updated = await this.prisma.user.update({
