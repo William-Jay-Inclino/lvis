@@ -232,10 +232,13 @@ export class RvApproverService {
                 rv: {
                     include: {
                         rv_approvers: {
+                            where: {
+                                deleted_at: null
+                            },
                             orderBy: {
                                 order: 'asc'
                             }
-                        }
+                        },
                     }
                 }
             }

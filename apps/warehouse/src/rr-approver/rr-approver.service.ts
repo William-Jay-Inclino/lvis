@@ -287,6 +287,9 @@ export class RrApproverService {
                 rr: {
                     include: {
                         rr_approvers: {
+                            where: {
+                                deleted_at: null
+                            },
                             orderBy: {
                                 order: 'asc'
                             }

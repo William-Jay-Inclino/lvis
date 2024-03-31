@@ -319,6 +319,9 @@ export class MeqsApproverService {
                 meqs: {
                     include: {
                         meqs_approvers: {
+                            where: {
+                                deleted_at: null
+                            },
                             orderBy: {
                                 order: 'asc'
                             }

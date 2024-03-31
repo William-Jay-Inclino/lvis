@@ -232,6 +232,9 @@ export class SprApproverService {
         spr: {
           include: {
             spr_approvers: {
+              where: {
+                deleted_at: null
+              },
               orderBy: {
                 order: 'asc'
               }

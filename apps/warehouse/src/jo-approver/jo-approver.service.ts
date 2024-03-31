@@ -231,6 +231,9 @@ export class JoApproverService {
         jo: {
           include: {
             jo_approvers: {
+              where: {
+                deleted_at: null
+              },
               orderBy: {
                 order: 'asc'
               }

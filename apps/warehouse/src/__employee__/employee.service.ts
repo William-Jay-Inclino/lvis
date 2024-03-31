@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { APPROVAL_STATUS } from "../__common__/types";
 import { PENDING_APPROVAL_TYPE, PendingApproval } from "./entities/pending-approval.entity";
-import { MEQSApprover, POApprover, RRApprover, RVApprover } from "apps/warehouse/prisma/generated/client";
+import { JOApprover, MEQSApprover, POApprover, RRApprover, RVApprover, SPRApprover } from "apps/warehouse/prisma/generated/client";
 
 
 @Injectable()
@@ -11,22 +11,26 @@ export class EmployeeService {
 
     getAllPendingApprovals(payload: {
         rvApprovals: RVApprover[],
+        sprApprovals: SPRApprover[],
+        joApprovals: JOApprover[],
         meqsApprovals: MEQSApprover[],
         poApprovals: POApprover[],
         rrApprovals: RRApprover[]
     }) {
 
 
-        const { rvApprovals, meqsApprovals, poApprovals, rrApprovals } = payload
+        const { rvApprovals, sprApprovals, joApprovals, meqsApprovals, poApprovals, rrApprovals } = payload
 
         // get all pendings
         const rvPendings = this.getFilteredRvPendings(rvApprovals)
+        const sprPendings = this.getFilteredSprPendings(sprApprovals)
+        const joPendings = this.getFilteredJoPendings(joApprovals)
         const meqsPendings = this.getFilteredMeqsPendings(meqsApprovals)
         const poPendings = this.getFilteredPoPendings(poApprovals)
         const rrPendings = this.getFilteredRrPendings(rrApprovals)
 
         // merge all
-        const mergeAllPendings = [...rvPendings, ...meqsPendings, ...poPendings, ...rrPendings]
+        const mergeAllPendings = [...rvPendings, ...sprPendings, ...joPendings, ...meqsPendings, ...poPendings, ...rrPendings]
 
         // sort by the oldest record
         const sortPendingsByOldest = mergeAllPendings.sort((a, b) => new Date(a.transaction_date).getTime() - new Date(b.transaction_date).getTime())
@@ -77,6 +81,100 @@ export class EmployeeService {
                     reference_id: approval.rv.id,
                     // @ts-ignore
                     transaction_date: approval.rv.created_at
+                })
+            }
+
+        }
+
+        return pendings
+
+    }
+
+    getFilteredSprPendings(sprApprovals: SPRApprover[]): PendingApproval[] {
+
+        console.log('getFilteredSprPendings', sprApprovals)
+
+        const pendings: PendingApproval[] = []
+
+        for (let approval of sprApprovals) {
+
+            // @ts-ignore
+            const thisApproverIndx = approval.spr.spr_approvers.findIndex((i: SPRApprover) => i.approver_id === approval.approver_id)
+
+            console.log('thisApproverIndx', thisApproverIndx)
+
+            // @ts-ignore
+            console.log('approval.spr.spr_approvers', approval.spr.spr_approvers[thisApproverIndx])
+
+            if (!thisApproverIndx) {
+                console.error('thisApproverIndx not found', thisApproverIndx)
+            }
+
+            console.log('thisApproverIndx - 1', thisApproverIndx - 1)
+            // ang ge sundan nga approver
+            // @ts-ignore 
+            const leadApprover = approval.spr.spr_approvers[thisApproverIndx - 1]
+
+            console.log('leadApprover', leadApprover)
+
+            // if walay nag una nga approver OR naka approve na ang nag una 
+            if (!leadApprover || leadApprover.status === APPROVAL_STATUS.APPROVED) {
+                pendings.push({
+                    id: approval.id,
+                    type: PENDING_APPROVAL_TYPE.SPR,
+                    // @ts-ignore
+                    description: `SPR no. ${approval.spr.spr_number}`,
+                    // @ts-ignore
+                    reference_id: approval.spr.id,
+                    // @ts-ignore
+                    transaction_date: approval.spr.created_at
+                })
+            }
+
+        }
+
+        return pendings
+
+    }
+
+    getFilteredJoPendings(joApprovals: JOApprover[]): PendingApproval[] {
+
+        console.log('getFilteredJoPendings', joApprovals)
+
+        const pendings: PendingApproval[] = []
+
+        for (let approval of joApprovals) {
+
+            // @ts-ignore
+            const thisApproverIndx = approval.jo.jo_approvers.findIndex((i: JOApprover) => i.approver_id === approval.approver_id)
+
+            console.log('thisApproverIndx', thisApproverIndx)
+
+            // @ts-ignore
+            console.log('approval.jo.jo_approvers', approval.jo.jo_approvers[thisApproverIndx])
+
+            if (!thisApproverIndx) {
+                console.error('thisApproverIndx not found', thisApproverIndx)
+            }
+
+            console.log('thisApproverIndx - 1', thisApproverIndx - 1)
+            // ang ge sundan nga approver
+            // @ts-ignore 
+            const leadApprover = approval.jo.jo_approvers[thisApproverIndx - 1]
+
+            console.log('leadApprover', leadApprover)
+
+            // if walay nag una nga approver OR naka approve na ang nag una 
+            if (!leadApprover || leadApprover.status === APPROVAL_STATUS.APPROVED) {
+                pendings.push({
+                    id: approval.id,
+                    type: PENDING_APPROVAL_TYPE.JO,
+                    // @ts-ignore
+                    description: `JO no. ${approval.jo.jo_number}`,
+                    // @ts-ignore
+                    reference_id: approval.jo.id,
+                    // @ts-ignore
+                    transaction_date: approval.jo.created_at
                 })
             }
 

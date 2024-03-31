@@ -261,6 +261,9 @@ export class PoApproverService {
                 po: {
                     include: {
                         po_approvers: {
+                            where: {
+                                deleted_at: null
+                            },
                             orderBy: {
                                 order: 'asc'
                             }

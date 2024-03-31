@@ -2,6 +2,8 @@ import { Field, ObjectType, registerEnumType } from "@nestjs/graphql";
 
 export enum PENDING_APPROVAL_TYPE {
     RV = 'RV',
+    SPR = 'SPR',
+    JO = 'JO',
     MEQS = 'MEQS',
     PO = 'PO',
     RR = 'RR'
