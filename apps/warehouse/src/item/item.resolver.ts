@@ -11,6 +11,7 @@ import { GqlAuthGuard } from '../__auth__/guards/gql-auth.guard';
 import { AccessGuard } from '../__auth__/guards/access.guard';
 import { CheckAccess } from '../__auth__/check-access.decorator';
 import { MODULES, RESOLVERS } from '../__common__/types';
+import { WarehouseRemoveResponse } from '../__common__/classes';
 
 @UseGuards(GqlAuthGuard)
 @Resolver(() => Item)
@@ -63,7 +64,7 @@ export class ItemResolver {
     return this.itemService.update(id, updateItemInput);
   }
 
-  @Mutation(() => Item)
+  @Mutation(() => WarehouseRemoveResponse)
   @UseGuards(AccessGuard)
   @CheckAccess(MODULES.ITEM, RESOLVERS.removeItem)
   removeItem(

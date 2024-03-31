@@ -1,4 +1,4 @@
-import { Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { ConflictException, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { CreateItemInput } from './dto/create-item.input';
 import { UpdateItemInput } from './dto/update-item.input';
 import { PrismaService } from '../__prisma__/prisma.service';
@@ -34,6 +34,16 @@ export class ItemService {
 
 		this.logger.log('create()', input)
 
+		// Check if the code already exists
+		const existingItem = await this.prisma.item.findUnique({
+			where: {
+				code: input.code,
+			},
+		})
+
+		if (existingItem) {
+			throw new ConflictException('Item code must be unique. A different item with the same code already exists.');
+		}
 
 		const item_transaction: Prisma.ItemTransactionCreateWithoutItemInput = {
 			type: ITEM_TRANSACTION_TYPE.STOCK_IN,
@@ -190,6 +200,19 @@ export class ItemService {
 	async update(id: string, input: UpdateItemInput): Promise<Item> {
 
 		const existingItem = await this.findOne(id)
+
+		// Check if the code is being updated and if it already exists for another item
+		if (input.code && input.code !== existingItem.code) {
+			const existingCodeItem = await this.prisma.item.findUnique({
+				where: {
+					code: input.code,
+				},
+			})
+
+			if (existingCodeItem) {
+				throw new ConflictException('Item code must be unique. A different item with the same code already exists.');
+			}
+		}
 
 		const updatedBy = this.authUser.user.username
 
