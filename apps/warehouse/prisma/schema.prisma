@@ -317,6 +317,7 @@ model PO {
   id               String   @id @default(uuid())
   meqs_supplier_id String   @unique
   po_number        String   @unique
+  fund_source_id   String?
   po_date          DateTime
   notes            String
 

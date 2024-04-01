@@ -1,4 +1,4 @@
-import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, ResolveReference } from '@nestjs/graphql';
 import { AccountService } from './account.service';
 import { Account } from './entities/account.entity';
 import { CreateAccountInput } from './dto/create-account.input';
@@ -59,6 +59,11 @@ export class AccountResolver {
   ) {
     this.accountService.setAuthUser(authUser)
     return this.accountService.remove(id);
+  }
+
+  @ResolveReference()
+  async resolveReference(reference: { __typename: string, id: string }): Promise<Account> {
+    return await this.accountService.findOne(reference.id)
   }
 
 }

@@ -83,6 +83,7 @@ export class PoService {
 
         const data: Prisma.POCreateInput = {
             created_by: this.authUser.user.username,
+            fund_source_id: input.fund_source_id ?? null,
             po_number: poNumber,
             notes: '',
             meqs_supplier: {
@@ -142,6 +143,7 @@ export class PoService {
 
         const data: Prisma.POUpdateInput = {
             notes: input.notes ?? existingItem.notes,
+            fund_source_id: input.fund_source_id ?? existingItem.fund_source_id,
             updated_by: this.authUser.user.username
         }
 
@@ -394,6 +396,14 @@ export class PoService {
 
     private async canCreate(input: CreatePoInput): Promise<boolean> {
 
+        if (input.fund_source_id) {
+            const isValidFundSourceId = await this.isFundSourceExist(input.fund_source_id, this.authUser)
+
+            if (!isValidFundSourceId) {
+                throw new NotFoundException('Fund Source ID not valid')
+            }
+        }
+
         // VALIDATE EMPLOYEE IDS
 
         const employeeIds: string[] = input.approvers.map(({ approver_id }) => approver_id);
@@ -431,6 +441,14 @@ export class PoService {
             }
         }
 
+        if (input.fund_source_id) {
+            const isValidFundSourceId = await this.isFundSourceExist(input.fund_source_id, this.authUser)
+
+            if (!isValidFundSourceId) {
+                throw new NotFoundException('Fund Source ID not valid')
+            }
+        }
+
         return true
     }
 
@@ -460,6 +478,46 @@ export class PoService {
         if (isOwner) return true
 
         return false
+
+    }
+
+    private async isFundSourceExist(fund_source_id: string, authUser: AuthUser): Promise<boolean> {
+
+        this.logger.log('isFundSourceExist', fund_source_id)
+
+        const query = `
+            query{
+                account(id: "${fund_source_id}") {
+                    id
+                }
+            }
+        `;
+
+        const { data } = await firstValueFrom(
+            this.httpService.post(process.env.API_GATEWAY_URL,
+                { query },
+                {
+                    headers: {
+                        Authorization: authUser.authorization,
+                        'Content-Type': 'application/json'
+                    }
+                }
+            ).pipe(
+                catchError((error) => {
+                    throw error
+                }),
+            ),
+        );
+
+        console.log('data', data)
+
+        if (!data || !data.data || !data.data.account) {
+            console.log('account not found')
+            return false
+        }
+        const account = data.data.account
+        console.log('account', account)
+        return true
 
     }
 

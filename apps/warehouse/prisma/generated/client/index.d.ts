@@ -17190,6 +17190,7 @@ export namespace Prisma {
     id: string | null
     meqs_supplier_id: string | null
     po_number: string | null
+    fund_source_id: string | null
     po_date: Date | null
     notes: string | null
     cancelled_by: string | null
@@ -17204,6 +17205,7 @@ export namespace Prisma {
     id: string | null
     meqs_supplier_id: string | null
     po_number: string | null
+    fund_source_id: string | null
     po_date: Date | null
     notes: string | null
     cancelled_by: string | null
@@ -17218,6 +17220,7 @@ export namespace Prisma {
     id: number
     meqs_supplier_id: number
     po_number: number
+    fund_source_id: number
     po_date: number
     notes: number
     cancelled_by: number
@@ -17234,6 +17237,7 @@ export namespace Prisma {
     id?: true
     meqs_supplier_id?: true
     po_number?: true
+    fund_source_id?: true
     po_date?: true
     notes?: true
     cancelled_by?: true
@@ -17248,6 +17252,7 @@ export namespace Prisma {
     id?: true
     meqs_supplier_id?: true
     po_number?: true
+    fund_source_id?: true
     po_date?: true
     notes?: true
     cancelled_by?: true
@@ -17262,6 +17267,7 @@ export namespace Prisma {
     id?: true
     meqs_supplier_id?: true
     po_number?: true
+    fund_source_id?: true
     po_date?: true
     notes?: true
     cancelled_by?: true
@@ -17349,6 +17355,7 @@ export namespace Prisma {
     id: string
     meqs_supplier_id: string
     po_number: string
+    fund_source_id: string | null
     po_date: Date
     notes: string
     cancelled_by: string | null
@@ -17380,6 +17387,7 @@ export namespace Prisma {
     id?: boolean
     meqs_supplier_id?: boolean
     po_number?: boolean
+    fund_source_id?: boolean
     po_date?: boolean
     notes?: boolean
     cancelled_by?: boolean
@@ -17398,6 +17406,7 @@ export namespace Prisma {
     id?: boolean
     meqs_supplier_id?: boolean
     po_number?: boolean
+    fund_source_id?: boolean
     po_date?: boolean
     notes?: boolean
     cancelled_by?: boolean
@@ -17427,6 +17436,7 @@ export namespace Prisma {
       id: string
       meqs_supplier_id: string
       po_number: string
+      fund_source_id: string | null
       po_date: Date
       notes: string
       cancelled_by: string | null
@@ -17837,6 +17847,7 @@ export namespace Prisma {
     readonly id: FieldRef<"PO", 'String'>
     readonly meqs_supplier_id: FieldRef<"PO", 'String'>
     readonly po_number: FieldRef<"PO", 'String'>
+    readonly fund_source_id: FieldRef<"PO", 'String'>
     readonly po_date: FieldRef<"PO", 'DateTime'>
     readonly notes: FieldRef<"PO", 'String'>
     readonly cancelled_by: FieldRef<"PO", 'String'>
@@ -29869,6 +29880,7 @@ export namespace Prisma {
     id: 'id',
     meqs_supplier_id: 'meqs_supplier_id',
     po_number: 'po_number',
+    fund_source_id: 'fund_source_id',
     po_date: 'po_date',
     notes: 'notes',
     cancelled_by: 'cancelled_by',
@@ -31460,6 +31472,7 @@ export namespace Prisma {
     id?: StringFilter<"PO"> | string
     meqs_supplier_id?: StringFilter<"PO"> | string
     po_number?: StringFilter<"PO"> | string
+    fund_source_id?: StringNullableFilter<"PO"> | string | null
     po_date?: DateTimeFilter<"PO"> | Date | string
     notes?: StringFilter<"PO"> | string
     cancelled_by?: StringNullableFilter<"PO"> | string | null
@@ -31477,6 +31490,7 @@ export namespace Prisma {
     id?: SortOrder
     meqs_supplier_id?: SortOrder
     po_number?: SortOrder
+    fund_source_id?: SortOrderInput | SortOrder
     po_date?: SortOrder
     notes?: SortOrder
     cancelled_by?: SortOrderInput | SortOrder
@@ -31497,6 +31511,7 @@ export namespace Prisma {
     AND?: POWhereInput | POWhereInput[]
     OR?: POWhereInput[]
     NOT?: POWhereInput | POWhereInput[]
+    fund_source_id?: StringNullableFilter<"PO"> | string | null
     po_date?: DateTimeFilter<"PO"> | Date | string
     notes?: StringFilter<"PO"> | string
     cancelled_by?: StringNullableFilter<"PO"> | string | null
@@ -31514,6 +31529,7 @@ export namespace Prisma {
     id?: SortOrder
     meqs_supplier_id?: SortOrder
     po_number?: SortOrder
+    fund_source_id?: SortOrderInput | SortOrder
     po_date?: SortOrder
     notes?: SortOrder
     cancelled_by?: SortOrderInput | SortOrder
@@ -31534,6 +31550,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"PO"> | string
     meqs_supplier_id?: StringWithAggregatesFilter<"PO"> | string
     po_number?: StringWithAggregatesFilter<"PO"> | string
+    fund_source_id?: StringNullableWithAggregatesFilter<"PO"> | string | null
     po_date?: DateTimeWithAggregatesFilter<"PO"> | Date | string
     notes?: StringWithAggregatesFilter<"PO"> | string
     cancelled_by?: StringNullableWithAggregatesFilter<"PO"> | string | null
@@ -33980,6 +33997,7 @@ export namespace Prisma {
   export type POCreateInput = {
     id?: string
     po_number: string
+    fund_source_id?: string | null
     po_date: Date | string
     notes: string
     cancelled_by?: string | null
@@ -33997,6 +34015,7 @@ export namespace Prisma {
     id?: string
     meqs_supplier_id: string
     po_number: string
+    fund_source_id?: string | null
     po_date: Date | string
     notes: string
     cancelled_by?: string | null
@@ -34012,6 +34031,7 @@ export namespace Prisma {
   export type POUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     po_number?: StringFieldUpdateOperationsInput | string
+    fund_source_id?: NullableStringFieldUpdateOperationsInput | string | null
     po_date?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: StringFieldUpdateOperationsInput | string
     cancelled_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -34029,6 +34049,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     meqs_supplier_id?: StringFieldUpdateOperationsInput | string
     po_number?: StringFieldUpdateOperationsInput | string
+    fund_source_id?: NullableStringFieldUpdateOperationsInput | string | null
     po_date?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: StringFieldUpdateOperationsInput | string
     cancelled_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -34045,6 +34066,7 @@ export namespace Prisma {
     id?: string
     meqs_supplier_id: string
     po_number: string
+    fund_source_id?: string | null
     po_date: Date | string
     notes: string
     cancelled_by?: string | null
@@ -34058,6 +34080,7 @@ export namespace Prisma {
   export type POUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     po_number?: StringFieldUpdateOperationsInput | string
+    fund_source_id?: NullableStringFieldUpdateOperationsInput | string | null
     po_date?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: StringFieldUpdateOperationsInput | string
     cancelled_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -34072,6 +34095,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     meqs_supplier_id?: StringFieldUpdateOperationsInput | string
     po_number?: StringFieldUpdateOperationsInput | string
+    fund_source_id?: NullableStringFieldUpdateOperationsInput | string | null
     po_date?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: StringFieldUpdateOperationsInput | string
     cancelled_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -36236,6 +36260,7 @@ export namespace Prisma {
     id?: SortOrder
     meqs_supplier_id?: SortOrder
     po_number?: SortOrder
+    fund_source_id?: SortOrder
     po_date?: SortOrder
     notes?: SortOrder
     cancelled_by?: SortOrder
@@ -36250,6 +36275,7 @@ export namespace Prisma {
     id?: SortOrder
     meqs_supplier_id?: SortOrder
     po_number?: SortOrder
+    fund_source_id?: SortOrder
     po_date?: SortOrder
     notes?: SortOrder
     cancelled_by?: SortOrder
@@ -36264,6 +36290,7 @@ export namespace Prisma {
     id?: SortOrder
     meqs_supplier_id?: SortOrder
     po_number?: SortOrder
+    fund_source_id?: SortOrder
     po_date?: SortOrder
     notes?: SortOrder
     cancelled_by?: SortOrder
@@ -41081,6 +41108,7 @@ export namespace Prisma {
   export type POCreateWithoutMeqs_supplierInput = {
     id?: string
     po_number: string
+    fund_source_id?: string | null
     po_date: Date | string
     notes: string
     cancelled_by?: string | null
@@ -41096,6 +41124,7 @@ export namespace Prisma {
   export type POUncheckedCreateWithoutMeqs_supplierInput = {
     id?: string
     po_number: string
+    fund_source_id?: string | null
     po_date: Date | string
     notes: string
     cancelled_by?: string | null
@@ -41255,6 +41284,7 @@ export namespace Prisma {
   export type POUpdateWithoutMeqs_supplierInput = {
     id?: StringFieldUpdateOperationsInput | string
     po_number?: StringFieldUpdateOperationsInput | string
+    fund_source_id?: NullableStringFieldUpdateOperationsInput | string | null
     po_date?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: StringFieldUpdateOperationsInput | string
     cancelled_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -41270,6 +41300,7 @@ export namespace Prisma {
   export type POUncheckedUpdateWithoutMeqs_supplierInput = {
     id?: StringFieldUpdateOperationsInput | string
     po_number?: StringFieldUpdateOperationsInput | string
+    fund_source_id?: NullableStringFieldUpdateOperationsInput | string | null
     po_date?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: StringFieldUpdateOperationsInput | string
     cancelled_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -41871,6 +41902,7 @@ export namespace Prisma {
   export type POCreateWithoutPo_approversInput = {
     id?: string
     po_number: string
+    fund_source_id?: string | null
     po_date: Date | string
     notes: string
     cancelled_by?: string | null
@@ -41887,6 +41919,7 @@ export namespace Prisma {
     id?: string
     meqs_supplier_id: string
     po_number: string
+    fund_source_id?: string | null
     po_date: Date | string
     notes: string
     cancelled_by?: string | null
@@ -41917,6 +41950,7 @@ export namespace Prisma {
   export type POUpdateWithoutPo_approversInput = {
     id?: StringFieldUpdateOperationsInput | string
     po_number?: StringFieldUpdateOperationsInput | string
+    fund_source_id?: NullableStringFieldUpdateOperationsInput | string | null
     po_date?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: StringFieldUpdateOperationsInput | string
     cancelled_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -41933,6 +41967,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     meqs_supplier_id?: StringFieldUpdateOperationsInput | string
     po_number?: StringFieldUpdateOperationsInput | string
+    fund_source_id?: NullableStringFieldUpdateOperationsInput | string | null
     po_date?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: StringFieldUpdateOperationsInput | string
     cancelled_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -41947,6 +41982,7 @@ export namespace Prisma {
   export type POCreateWithoutRrsInput = {
     id?: string
     po_number: string
+    fund_source_id?: string | null
     po_date: Date | string
     notes: string
     cancelled_by?: string | null
@@ -41963,6 +41999,7 @@ export namespace Prisma {
     id?: string
     meqs_supplier_id: string
     po_number: string
+    fund_source_id?: string | null
     po_date: Date | string
     notes: string
     cancelled_by?: string | null
@@ -42067,6 +42104,7 @@ export namespace Prisma {
   export type POUpdateWithoutRrsInput = {
     id?: StringFieldUpdateOperationsInput | string
     po_number?: StringFieldUpdateOperationsInput | string
+    fund_source_id?: NullableStringFieldUpdateOperationsInput | string | null
     po_date?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: StringFieldUpdateOperationsInput | string
     cancelled_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -42083,6 +42121,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     meqs_supplier_id?: StringFieldUpdateOperationsInput | string
     po_number?: StringFieldUpdateOperationsInput | string
+    fund_source_id?: NullableStringFieldUpdateOperationsInput | string | null
     po_date?: DateTimeFieldUpdateOperationsInput | Date | string
     notes?: StringFieldUpdateOperationsInput | string
     cancelled_by?: NullableStringFieldUpdateOperationsInput | string | null

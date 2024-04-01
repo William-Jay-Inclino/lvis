@@ -105,7 +105,9 @@ export class EmployeeService {
 			updated_by: this.authUser.user.username,
 			firstname: input.firstname ?? existingItem.firstname,
 			middlename: input.middlename ?? existingItem.middlename,
-			lastname: input.lastname ?? existingItem.lastname
+			lastname: input.lastname ?? existingItem.lastname,
+			is_budget_officer: input.is_budget_officer ?? existingItem.is_budget_officer,
+			is_finance_manager: input.is_finance_manager ?? existingItem.is_finance_manager,
 		}
 
 
@@ -263,6 +265,32 @@ export class EmployeeService {
 
 		// not an approver
 		return false
+
+	}
+
+	async findAllBudgetOfficers(): Promise<Employee[]> {
+
+		const budgetOfficers = await this.prisma.employee.findMany({
+			where: {
+				deleted_at: null,
+				is_budget_officer: true
+			}
+		})
+
+		return budgetOfficers
+
+	}
+
+	async findAllFinanceManagers(): Promise<Employee[]> {
+
+		const budgetOfficers = await this.prisma.employee.findMany({
+			where: {
+				deleted_at: null,
+				is_finance_manager: true
+			}
+		})
+
+		return budgetOfficers
 
 	}
 

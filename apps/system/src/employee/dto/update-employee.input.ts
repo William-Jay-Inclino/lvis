@@ -1,4 +1,4 @@
-import { IsOptional, IsString } from 'class-validator';
+import { IsBoolean, IsOptional, IsString } from 'class-validator';
 import { CreateEmployeeInput } from './create-employee.input';
 import { InputType, Field, Int, PartialType } from '@nestjs/graphql';
 
@@ -19,5 +19,15 @@ export class UpdateEmployeeInput extends PartialType(CreateEmployeeInput) {
   @IsOptional()
   @IsString()
   lastname?: string;
+
+  @Field(() => Boolean, { nullable: true })
+  @IsOptional()
+  @IsBoolean()
+  is_budget_officer?: boolean;
+
+  @Field(() => Boolean, { nullable: true })
+  @IsOptional()
+  @IsBoolean()
+  is_finance_manager?: boolean;
 
 }

@@ -20,7 +20,7 @@ export class EmployeeResolver {
 
   @Mutation(() => Employee)
   @UseGuards(AccessGuard)
-  @CheckAccess(MODULES.EMPLOYEE, RESOLVERS.createDepartment)
+  @CheckAccess(MODULES.EMPLOYEE, RESOLVERS.createEmployee)
   createEmployee(
     @Args('input') createEmployeeInput: CreateEmployeeInput,
     @CurrentAuthUser() authUser: AuthUser
@@ -36,6 +36,16 @@ export class EmployeeResolver {
     @Args('searchValue', { nullable: true }) searchValue?: string,
   ) {
     return this.employeeService.findAll(page, pageSize, searchValue);
+  }
+
+  @Query(() => [Employee])
+  budget_officers() {
+    return this.employeeService.findAllBudgetOfficers();
+  }
+
+  @Query(() => [Employee])
+  finance_managers() {
+    return this.employeeService.findAllFinanceManagers();
   }
 
   @Query(() => [Employee])

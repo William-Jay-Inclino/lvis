@@ -9,4 +9,9 @@ export class UpdatePoInput {
   @IsString()
   notes?: string;
 
+  @Field(() => String, { nullable: true })
+  @IsOptional()
+  @IsString()
+  fund_source_id?: string | null;
+
 }

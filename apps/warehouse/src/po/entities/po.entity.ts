@@ -12,6 +12,9 @@ export class PO {
   @Field(() => String)
   meqs_supplier_id: string;
 
+  @Field(() => String, { nullable: true })
+  fund_source_id: string | null;
+
   @Field(() => String)
   po_number: string;
 

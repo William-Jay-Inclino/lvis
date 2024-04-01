@@ -4878,6 +4878,8 @@ export namespace Prisma {
     firstname: string | null
     middlename: string | null
     lastname: string | null
+    is_budget_officer: boolean | null
+    is_finance_manager: boolean | null
     created_by: string | null
     updated_by: string | null
     deleted_by: string | null
@@ -4891,6 +4893,8 @@ export namespace Prisma {
     firstname: string | null
     middlename: string | null
     lastname: string | null
+    is_budget_officer: boolean | null
+    is_finance_manager: boolean | null
     created_by: string | null
     updated_by: string | null
     deleted_by: string | null
@@ -4904,6 +4908,8 @@ export namespace Prisma {
     firstname: number
     middlename: number
     lastname: number
+    is_budget_officer: number
+    is_finance_manager: number
     created_by: number
     updated_by: number
     deleted_by: number
@@ -4919,6 +4925,8 @@ export namespace Prisma {
     firstname?: true
     middlename?: true
     lastname?: true
+    is_budget_officer?: true
+    is_finance_manager?: true
     created_by?: true
     updated_by?: true
     deleted_by?: true
@@ -4932,6 +4940,8 @@ export namespace Prisma {
     firstname?: true
     middlename?: true
     lastname?: true
+    is_budget_officer?: true
+    is_finance_manager?: true
     created_by?: true
     updated_by?: true
     deleted_by?: true
@@ -4945,6 +4955,8 @@ export namespace Prisma {
     firstname?: true
     middlename?: true
     lastname?: true
+    is_budget_officer?: true
+    is_finance_manager?: true
     created_by?: true
     updated_by?: true
     deleted_by?: true
@@ -5031,6 +5043,8 @@ export namespace Prisma {
     firstname: string
     middlename: string | null
     lastname: string
+    is_budget_officer: boolean
+    is_finance_manager: boolean
     created_by: string
     updated_by: string | null
     deleted_by: string | null
@@ -5061,6 +5075,8 @@ export namespace Prisma {
     firstname?: boolean
     middlename?: boolean
     lastname?: boolean
+    is_budget_officer?: boolean
+    is_finance_manager?: boolean
     created_by?: boolean
     updated_by?: boolean
     deleted_by?: boolean
@@ -5081,6 +5097,8 @@ export namespace Prisma {
     firstname?: boolean
     middlename?: boolean
     lastname?: boolean
+    is_budget_officer?: boolean
+    is_finance_manager?: boolean
     created_by?: boolean
     updated_by?: boolean
     deleted_by?: boolean
@@ -5116,6 +5134,8 @@ export namespace Prisma {
       firstname: string
       middlename: string | null
       lastname: string
+      is_budget_officer: boolean
+      is_finance_manager: boolean
       created_by: string
       updated_by: string | null
       deleted_by: string | null
@@ -5533,6 +5553,8 @@ export namespace Prisma {
     readonly firstname: FieldRef<"Employee", 'String'>
     readonly middlename: FieldRef<"Employee", 'String'>
     readonly lastname: FieldRef<"Employee", 'String'>
+    readonly is_budget_officer: FieldRef<"Employee", 'Boolean'>
+    readonly is_finance_manager: FieldRef<"Employee", 'Boolean'>
     readonly created_by: FieldRef<"Employee", 'String'>
     readonly updated_by: FieldRef<"Employee", 'String'>
     readonly deleted_by: FieldRef<"Employee", 'String'>
@@ -14878,6 +14900,8 @@ export namespace Prisma {
     firstname: 'firstname',
     middlename: 'middlename',
     lastname: 'lastname',
+    is_budget_officer: 'is_budget_officer',
+    is_finance_manager: 'is_finance_manager',
     created_by: 'created_by',
     updated_by: 'updated_by',
     deleted_by: 'deleted_by',
@@ -15106,6 +15130,13 @@ export namespace Prisma {
    * Reference to a field of type 'DateTime[]'
    */
   export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -15401,6 +15432,8 @@ export namespace Prisma {
     firstname?: StringFilter<"Employee"> | string
     middlename?: StringNullableFilter<"Employee"> | string | null
     lastname?: StringFilter<"Employee"> | string
+    is_budget_officer?: BoolFilter<"Employee"> | boolean
+    is_finance_manager?: BoolFilter<"Employee"> | boolean
     created_by?: StringFilter<"Employee"> | string
     updated_by?: StringNullableFilter<"Employee"> | string | null
     deleted_by?: StringNullableFilter<"Employee"> | string | null
@@ -15421,6 +15454,8 @@ export namespace Prisma {
     firstname?: SortOrder
     middlename?: SortOrderInput | SortOrder
     lastname?: SortOrder
+    is_budget_officer?: SortOrder
+    is_finance_manager?: SortOrder
     created_by?: SortOrder
     updated_by?: SortOrderInput | SortOrder
     deleted_by?: SortOrderInput | SortOrder
@@ -15444,6 +15479,8 @@ export namespace Prisma {
     firstname?: StringFilter<"Employee"> | string
     middlename?: StringNullableFilter<"Employee"> | string | null
     lastname?: StringFilter<"Employee"> | string
+    is_budget_officer?: BoolFilter<"Employee"> | boolean
+    is_finance_manager?: BoolFilter<"Employee"> | boolean
     created_by?: StringFilter<"Employee"> | string
     updated_by?: StringNullableFilter<"Employee"> | string | null
     deleted_by?: StringNullableFilter<"Employee"> | string | null
@@ -15464,6 +15501,8 @@ export namespace Prisma {
     firstname?: SortOrder
     middlename?: SortOrderInput | SortOrder
     lastname?: SortOrder
+    is_budget_officer?: SortOrder
+    is_finance_manager?: SortOrder
     created_by?: SortOrder
     updated_by?: SortOrderInput | SortOrder
     deleted_by?: SortOrderInput | SortOrder
@@ -15483,6 +15522,8 @@ export namespace Prisma {
     firstname?: StringWithAggregatesFilter<"Employee"> | string
     middlename?: StringNullableWithAggregatesFilter<"Employee"> | string | null
     lastname?: StringWithAggregatesFilter<"Employee"> | string
+    is_budget_officer?: BoolWithAggregatesFilter<"Employee"> | boolean
+    is_finance_manager?: BoolWithAggregatesFilter<"Employee"> | boolean
     created_by?: StringWithAggregatesFilter<"Employee"> | string
     updated_by?: StringNullableWithAggregatesFilter<"Employee"> | string | null
     deleted_by?: StringNullableWithAggregatesFilter<"Employee"> | string | null
@@ -16453,6 +16494,8 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
+    is_budget_officer?: boolean
+    is_finance_manager?: boolean
     created_by: string
     updated_by?: string | null
     deleted_by?: string | null
@@ -16473,6 +16516,8 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
+    is_budget_officer?: boolean
+    is_finance_manager?: boolean
     created_by: string
     updated_by?: string | null
     deleted_by?: string | null
@@ -16493,6 +16538,8 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
+    is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16513,6 +16560,8 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
+    is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16533,6 +16582,8 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
+    is_budget_officer?: boolean
+    is_finance_manager?: boolean
     created_by: string
     updated_by?: string | null
     deleted_by?: string | null
@@ -16546,6 +16597,8 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
+    is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16559,6 +16612,8 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
+    is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -17597,6 +17652,11 @@ export namespace Prisma {
     deleted_at?: SortOrder
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type JOApproverSettingNullableRelationFilter = {
     is?: JOApproverSettingWhereInput | null
     isNot?: JOApproverSettingWhereInput | null
@@ -17637,6 +17697,8 @@ export namespace Prisma {
     firstname?: SortOrder
     middlename?: SortOrder
     lastname?: SortOrder
+    is_budget_officer?: SortOrder
+    is_finance_manager?: SortOrder
     created_by?: SortOrder
     updated_by?: SortOrder
     deleted_by?: SortOrder
@@ -17650,6 +17712,8 @@ export namespace Prisma {
     firstname?: SortOrder
     middlename?: SortOrder
     lastname?: SortOrder
+    is_budget_officer?: SortOrder
+    is_finance_manager?: SortOrder
     created_by?: SortOrder
     updated_by?: SortOrder
     deleted_by?: SortOrder
@@ -17663,12 +17727,22 @@ export namespace Prisma {
     firstname?: SortOrder
     middlename?: SortOrder
     lastname?: SortOrder
+    is_budget_officer?: SortOrder
+    is_finance_manager?: SortOrder
     created_by?: SortOrder
     updated_by?: SortOrder
     deleted_by?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     deleted_at?: SortOrder
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type ClassificationCountOrderByAggregateInput = {
@@ -18278,6 +18352,10 @@ export namespace Prisma {
     connect?: UserEmployeeWhereUniqueInput
   }
 
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
   export type JOApproverSettingUpdateOneWithoutApproverNestedInput = {
     create?: XOR<JOApproverSettingCreateWithoutApproverInput, JOApproverSettingUncheckedCreateWithoutApproverInput>
     connectOrCreate?: JOApproverSettingCreateOrConnectWithoutApproverInput
@@ -18725,6 +18803,19 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type NestedEnumRoleFilter<$PrismaModel = never> = {
@@ -19389,6 +19480,8 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
+    is_budget_officer?: boolean
+    is_finance_manager?: boolean
     created_by: string
     updated_by?: string | null
     deleted_by?: string | null
@@ -19408,6 +19501,8 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
+    is_budget_officer?: boolean
+    is_finance_manager?: boolean
     created_by: string
     updated_by?: string | null
     deleted_by?: string | null
@@ -19490,6 +19585,8 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
+    is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19509,6 +19606,8 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
+    is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19528,6 +19627,8 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
+    is_budget_officer?: boolean
+    is_finance_manager?: boolean
     created_by: string
     updated_by?: string | null
     deleted_by?: string | null
@@ -19547,6 +19648,8 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
+    is_budget_officer?: boolean
+    is_finance_manager?: boolean
     created_by: string
     updated_by?: string | null
     deleted_by?: string | null
@@ -19582,6 +19685,8 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
+    is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19601,6 +19706,8 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
+    is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19620,6 +19727,8 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
+    is_budget_officer?: boolean
+    is_finance_manager?: boolean
     created_by: string
     updated_by?: string | null
     deleted_by?: string | null
@@ -19639,6 +19748,8 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
+    is_budget_officer?: boolean
+    is_finance_manager?: boolean
     created_by: string
     updated_by?: string | null
     deleted_by?: string | null
@@ -19674,6 +19785,8 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
+    is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19693,6 +19806,8 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
+    is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19712,6 +19827,8 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
+    is_budget_officer?: boolean
+    is_finance_manager?: boolean
     created_by: string
     updated_by?: string | null
     deleted_by?: string | null
@@ -19731,6 +19848,8 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
+    is_budget_officer?: boolean
+    is_finance_manager?: boolean
     created_by: string
     updated_by?: string | null
     deleted_by?: string | null
@@ -19766,6 +19885,8 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
+    is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19785,6 +19906,8 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
+    is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19804,6 +19927,8 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
+    is_budget_officer?: boolean
+    is_finance_manager?: boolean
     created_by: string
     updated_by?: string | null
     deleted_by?: string | null
@@ -19823,6 +19948,8 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
+    is_budget_officer?: boolean
+    is_finance_manager?: boolean
     created_by: string
     updated_by?: string | null
     deleted_by?: string | null
@@ -19858,6 +19985,8 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
+    is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19877,6 +20006,8 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
+    is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19896,6 +20027,8 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
+    is_budget_officer?: boolean
+    is_finance_manager?: boolean
     created_by: string
     updated_by?: string | null
     deleted_by?: string | null
@@ -19915,6 +20048,8 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
+    is_budget_officer?: boolean
+    is_finance_manager?: boolean
     created_by: string
     updated_by?: string | null
     deleted_by?: string | null
@@ -19950,6 +20085,8 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
+    is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19969,6 +20106,8 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
+    is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19988,6 +20127,8 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
+    is_budget_officer?: boolean
+    is_finance_manager?: boolean
     created_by: string
     updated_by?: string | null
     deleted_by?: string | null
@@ -20007,6 +20148,8 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
+    is_budget_officer?: boolean
+    is_finance_manager?: boolean
     created_by: string
     updated_by?: string | null
     deleted_by?: string | null
@@ -20042,6 +20185,8 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
+    is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20061,6 +20206,8 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
+    is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null

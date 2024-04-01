@@ -74,6 +74,9 @@ model Employee {
   middlename String?
   lastname   String
 
+  is_budget_officer  Boolean @default(false)
+  is_finance_manager Boolean @default(false)
+
   jo_approver_setting   JOApproverSetting?   @relation("JOApproverSetting")
   meqs_approver_setting MEQSApproverSetting? @relation("MEQSApproverSetting")
   po_approver_setting   POApproverSetting?   @relation("POApproverSetting")
@@ -149,98 +152,6 @@ model UserEmployee {
 
   @@map("user_employee")
 }
-
-// model UserPermission {
-//   id String @id @default(uuid())
-
-//   created_at DateTime @default(now())
-//   updated_at DateTime @updatedAt
-//   is_deleted Boolean  @default(false)
-
-//   user    User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
-//   user_id String
-
-//   submodule    SubModule @relation(fields: [submodule_id], references: [id], onDelete: Restrict)
-//   submodule_id String
-
-//   @@map("user_permission")
-// }
-
-// model Service {
-//   id   String @id @default(uuid())
-//   name String
-
-//   created_by String
-//   updated_by String?
-//   deleted_by String?
-
-//   created_at DateTime  @default(now())
-//   updated_at DateTime  @updatedAt
-//   deleted_at DateTime?
-
-//   features Feature[] @relation("ServiceToFeature")
-
-//   @@map("service")
-// }
-
-// model Feature {
-//   id   String @id @default(uuid())
-//   name String
-
-//   created_by String
-//   updated_by String?
-//   deleted_by String?
-
-//   created_at DateTime  @default(now())
-//   updated_at DateTime  @updatedAt
-//   deleted_at DateTime?
-
-//   service    Service  @relation("ServiceToFeature", fields: [service_id], references: [id], onDelete: Cascade)
-//   service_id String
-//   modules    Module[] @relation("FeatureToModule")
-
-//   @@map("feature")
-// }
-
-// model Module {
-//   id   String @id @default(uuid())
-//   name String
-
-//   created_by String
-//   updated_by String?
-//   deleted_by String?
-
-//   created_at DateTime  @default(now())
-//   updated_at DateTime  @updatedAt
-//   deleted_at DateTime?
-
-//   feature    Feature @relation("FeatureToModule", fields: [feature_id], references: [id], onDelete: Cascade)
-//   feature_id String
-
-//   submodules SubModule[] @relation("ModuleToSubmodule")
-
-//   @@map("module")
-// }
-
-// model SubModule {
-//   id   String @id @default(uuid())
-//   name String
-
-//   created_by String
-//   updated_by String?
-//   deleted_by String?
-
-//   created_at DateTime  @default(now())
-//   updated_at DateTime  @updatedAt
-//   deleted_at DateTime?
-
-//   module    Module @relation("ModuleToSubmodule", fields: [module_id], references: [id], onDelete: Cascade)
-//   module_id String
-
-//   // user_permissions UserPermission[]
-
-//   @@map("submodule")
-// }
 
 model JOApproverSetting {
   id          String @id @default(uuid())

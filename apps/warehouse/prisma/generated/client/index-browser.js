@@ -313,6 +313,7 @@ exports.Prisma.POScalarFieldEnum = {
   id: 'id',
   meqs_supplier_id: 'meqs_supplier_id',
   po_number: 'po_number',
+  fund_source_id: 'fund_source_id',
   po_date: 'po_date',
   notes: 'notes',
   cancelled_by: 'cancelled_by',

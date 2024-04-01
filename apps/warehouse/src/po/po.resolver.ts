@@ -16,6 +16,7 @@ import { POApprover } from '../po-approver/entities/po-approver.entity';
 import { WarehouseCancelResponse } from '../__common__/classes';
 import { AccessGuard } from '../__auth__/guards/access.guard';
 import { CheckAccess } from '../__auth__/check-access.decorator';
+import { Account } from '../__account__ /entities/account.entity';
 
 @UseGuards(GqlAuthGuard)
 @Resolver(() => PO)
@@ -104,6 +105,17 @@ export class PoResolver {
 
         return await this.poService.getStatus(po.id)
 
+    }
+
+    @ResolveField(() => Account, { nullable: true })
+    fund_source(@Parent() po: PO): any {
+
+        console.log('fund_source()')
+        if (!po.fund_source_id) {
+            return null
+        }
+
+        return { __typename: 'Account', id: po.fund_source_id }
     }
 
 

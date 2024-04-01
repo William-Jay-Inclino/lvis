@@ -11,6 +11,11 @@ export class CreatePoInput {
   @IsString()
   meqs_supplier_id: string;
 
+  @Field(() => String, { nullable: true })
+  @IsOptional()
+  @IsString()
+  fund_source_id?: string | null;
+
   @Field(() => [CreatePoApproverSubInput])
   @IsNotEmpty({ each: true })
   @IsArray()

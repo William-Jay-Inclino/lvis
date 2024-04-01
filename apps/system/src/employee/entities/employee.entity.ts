@@ -17,6 +17,12 @@ export class Employee {
   @Field(() => String)
   lastname: string;
 
+  @Field(() => Boolean)
+  is_budget_officer: boolean;
+
+  @Field(() => Boolean)
+  is_finance_manager: boolean;
+
 
 
   // =============== audit fields =============== 
