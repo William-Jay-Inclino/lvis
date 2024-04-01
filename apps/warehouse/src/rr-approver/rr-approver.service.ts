@@ -179,7 +179,13 @@ export class RrApproverService {
 
         const existingItem = await this.findOne(id)
 
-        const isApprover = this.authUser.user.user_employee.id === existingItem.approver_id
+        let isApprover = false
+
+        if (this.authUser.user.user_employee && this.authUser.user.user_employee.employee) {
+            isApprover = this.authUser.user.user_employee.employee.id === existingItem.approver_id
+        }
+
+        console.log('isApprover', isApprover)
 
         if (!isAdmin(this.authUser) && !isApprover) {
             throw new ForbiddenException('Only Admin and Approver can update')
