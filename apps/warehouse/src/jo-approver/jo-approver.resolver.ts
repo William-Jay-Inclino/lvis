@@ -56,11 +56,6 @@ export class JoApproverResolver {
     @Args('input') updateJoApproverInput: UpdateJoApproverInput,
     @CurrentAuthUser() authUser: AuthUser
   ) {
-
-    if (!isAdmin(authUser)) {
-      throw new ForbiddenException('Only Admin can update JO Approver')
-    }
-
     this.joApproverService.setAuthUser(authUser)
     return this.joApproverService.update(id, updateJoApproverInput);
   }

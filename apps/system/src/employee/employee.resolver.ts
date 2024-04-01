@@ -1,4 +1,4 @@
-import { Resolver, Query, Mutation, Args, ResolveReference, ResolveField, Parent } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, ResolveReference } from '@nestjs/graphql';
 import { EmployeeService } from './employee.service';
 import { Employee } from './entities/employee.entity';
 import { CreateEmployeeInput } from './dto/create-employee.input';
@@ -103,10 +103,10 @@ export class EmployeeResolver {
     return this.employeeService.validateEmployeeIds(ids);
   }
 
-  @ResolveField(() => Boolean)
-  is_approver(@Parent() employee: Employee) {
-    console.log('is_approver', employee)
-    return this.employeeService.isApprover(employee.id)
-  }
+  // @ResolveField(() => Boolean)
+  // is_approver(@Parent() employee: Employee) {
+  //   console.log('is_approver', employee)
+  //   return this.employeeService.isApprover(employee.id)
+  // }
 
 }

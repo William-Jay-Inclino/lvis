@@ -199,74 +199,74 @@ export class EmployeeService {
 		return employees;
 	}
 
-	async isApprover(id: string): Promise<boolean> {
+	// async isApprover(id: string): Promise<boolean> {
 
-		console.log('isApprover', id)
+	// 	console.log('isApprover', id)
 
-		// is approver in JO
-		const joApprover = await this.prisma.jOApproverSetting.findUnique({
-			where: {
-				approver_id: id
-			}
-		})
+	// 	// is approver in JO
+	// 	const joApprover = await this.prisma.jOApproverSetting.findUnique({
+	// 		where: {
+	// 			approver_id: id
+	// 		}
+	// 	})
 
-		if (joApprover) return true
-
-
-		// is approver in RV
-		const rvApprover = await this.prisma.rVApproverSetting.findUnique({
-			where: {
-				approver_id: id
-			}
-		})
-
-		if (rvApprover) return true
+	// 	if (joApprover) return true
 
 
-		// is approver in SPR
-		const sprApprover = await this.prisma.sPRApproverSetting.findUnique({
-			where: {
-				approver_id: id
-			}
-		})
+	// 	// is approver in RV
+	// 	const rvApprover = await this.prisma.rVApproverSetting.findUnique({
+	// 		where: {
+	// 			approver_id: id
+	// 		}
+	// 	})
 
-		if (sprApprover) return true
-
-
-		// is approver in MEQS
-		const meqsApprover = await this.prisma.mEQSApproverSetting.findUnique({
-			where: {
-				approver_id: id
-			}
-		})
-
-		if (meqsApprover) return true
+	// 	if (rvApprover) return true
 
 
-		// is approver in PO
-		const poApprover = await this.prisma.pOApproverSetting.findUnique({
-			where: {
-				approver_id: id
-			}
-		})
+	// 	// is approver in SPR
+	// 	const sprApprover = await this.prisma.sPRApproverSetting.findUnique({
+	// 		where: {
+	// 			approver_id: id
+	// 		}
+	// 	})
 
-		if (poApprover) return true
-
-
-		// is approver in RR
-		const rrApprover = await this.prisma.rRApproverSetting.findUnique({
-			where: {
-				approver_id: id
-			}
-		})
-
-		if (rrApprover) return true
+	// 	if (sprApprover) return true
 
 
-		// not an approver
-		return false
+	// 	// is approver in MEQS
+	// 	const meqsApprover = await this.prisma.mEQSApproverSetting.findUnique({
+	// 		where: {
+	// 			approver_id: id
+	// 		}
+	// 	})
 
-	}
+	// 	if (meqsApprover) return true
+
+
+	// 	// is approver in PO
+	// 	const poApprover = await this.prisma.pOApproverSetting.findUnique({
+	// 		where: {
+	// 			approver_id: id
+	// 		}
+	// 	})
+
+	// 	if (poApprover) return true
+
+
+	// 	// is approver in RR
+	// 	const rrApprover = await this.prisma.rRApproverSetting.findUnique({
+	// 		where: {
+	// 			approver_id: id
+	// 		}
+	// 	})
+
+	// 	if (rrApprover) return true
+
+
+	// 	// not an approver
+	// 	return false
+
+	// }
 
 	async findAllBudgetOfficers(): Promise<Employee[]> {
 

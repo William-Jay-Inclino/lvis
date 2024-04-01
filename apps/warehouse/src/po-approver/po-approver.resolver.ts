@@ -56,11 +56,6 @@ export class PoApproverResolver {
     @Args('input') updatePoApproverInput: UpdatePoApproverInput,
     @CurrentAuthUser() authUser: AuthUser
   ) {
-
-    if (!isAdmin(authUser)) {
-      throw new ForbiddenException('Only Admin can update PO Approver')
-    }
-
     this.poApproverService.setAuthUser(authUser)
     return this.poApproverService.update(id, updatePoApproverInput);
   }

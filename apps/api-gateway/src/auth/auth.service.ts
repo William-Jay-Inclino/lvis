@@ -62,7 +62,6 @@ export class AuthService {
                     user_employee {
                         employee {
                             id
-                            is_approver
                             total_pending_approvals
                         }
                     }

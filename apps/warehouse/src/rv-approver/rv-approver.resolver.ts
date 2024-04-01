@@ -56,11 +56,6 @@ export class RvApproverResolver {
     @Args('input') updateRvApproverInput: UpdateRvApproverInput,
     @CurrentAuthUser() authUser: AuthUser
   ) {
-
-    if (!isAdmin(authUser)) {
-      throw new ForbiddenException('Only Admin can update RV Approver')
-    }
-
     this.rvApproverService.setAuthUser(authUser)
     return this.rvApproverService.update(id, updateRvApproverInput);
   }

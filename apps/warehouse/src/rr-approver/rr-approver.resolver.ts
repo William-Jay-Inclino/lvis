@@ -55,11 +55,6 @@ export class RrApproverResolver {
     @Args('input') updateRrApproverInput: UpdateRrApproverInput,
     @CurrentAuthUser() authUser: AuthUser
   ) {
-
-    if (!isAdmin(authUser)) {
-      throw new ForbiddenException('Only Admin can update RR Approver')
-    }
-
     this.rrApproverService.setAuthUser(authUser)
     return this.rrApproverService.update(id, updateRrApproverInput);
   }

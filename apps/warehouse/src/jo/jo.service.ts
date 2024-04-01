@@ -117,8 +117,8 @@ export class JoService {
             throw new NotFoundException('JO not found')
         }
 
-        if (!this.canAccess(existingItem)) {
-            throw new ForbiddenException('Only Admin and Owner can update this record!')
+        if (!this.canAccess(existingItem, input)) {
+            throw new ForbiddenException('Only Admin, Owner, and Budget Officer (classification only) can update this record!')
         }
 
         if (!(await this.canUpdate(input, existingItem))) {
@@ -590,13 +590,33 @@ export class JoService {
 
     }
 
-    private canAccess(item: JO): boolean {
+    private canAccess(item: JO, input?: UpdateJoInput): boolean {
 
         if (isAdmin(this.authUser)) return true
 
         const isOwner = item.created_by === this.authUser.user.username
 
         if (isOwner) return true
+
+        // if no input meaning called in cancel function
+        if (!input) {
+            return false
+        }
+
+        // called in update function 
+
+        const isBudgetOfficer = this.authUser.user.user_employee.employee.is_budget_officer
+
+        // budget officer can only update classification
+        if (isBudgetOfficer) {
+
+            if (input.department_id || input.equipment || input.notes || input.supervisor_id) {
+                throw new ForbiddenException('Budget officer can only update classification field')
+            }
+
+            return true
+
+        }
 
         return false
 

@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { BadRequestException, ForbiddenException, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { CreateJoApproverInput } from './dto/create-jo-approver.input';
 import { UpdateJoApproverInput } from './dto/update-jo-approver.input';
 import { PrismaService } from '../__prisma__/prisma.service';
@@ -8,7 +8,7 @@ import { AuthUser } from '../__common__/auth-user.entity';
 import { HttpService } from '@nestjs/axios';
 import { catchError, firstValueFrom } from 'rxjs';
 import { WarehouseRemoveResponse } from '../__common__/classes';
-import { isValidApprovalStatus } from '../__common__/helpers';
+import { isAdmin, isValidApprovalStatus } from '../__common__/helpers';
 import { UpdateJOOrderResponse } from './entities/update-jo-order-response.entity';
 
 @Injectable()
@@ -130,6 +130,12 @@ export class JoApproverService {
 
 
     const existingItem = await this.findOne(id)
+
+    const isApprover = this.authUser.user.user_employee.id === existingItem.approver_id
+
+    if (!isAdmin(this.authUser) && !isApprover) {
+      throw new ForbiddenException('Only Admin and Approver can update')
+    }
 
     await this.validateInput(input)
 

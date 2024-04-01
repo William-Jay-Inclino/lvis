@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { BadRequestException, ForbiddenException, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { CreateMeqsApproverInput } from './dto/create-meqs-approver.input';
 import { UpdateMeqsApproverInput } from './dto/update-meqs-approver.input';
 import { PrismaService } from '../__prisma__/prisma.service';
@@ -8,7 +8,7 @@ import { AuthUser } from '../__common__/auth-user.entity';
 import { HttpService } from '@nestjs/axios';
 import { catchError, firstValueFrom } from 'rxjs';
 import { WarehouseRemoveResponse } from '../__common__/classes';
-import { isValidApprovalStatus } from '../__common__/helpers';
+import { isAdmin, isValidApprovalStatus } from '../__common__/helpers';
 import { UpdateMeqsOrderResponse } from './entities/update-meqs-order-response.entity';
 
 @Injectable()
@@ -170,6 +170,12 @@ export class MeqsApproverService {
         this.logger.log('update()')
 
         const existingItem = await this.findOne(id)
+
+        const isApprover = this.authUser.user.user_employee.id === existingItem.approver_id
+
+        if (!isAdmin(this.authUser) && !isApprover) {
+            throw new ForbiddenException('Only Admin and Approver can update')
+        }
 
         await this.validateInput(input)
 

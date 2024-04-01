@@ -7,9 +7,24 @@ export class User {
     role: Role
     password: string;
     permissions?: UserPermissions
+
+    user_employee: UserEmployee
 }
 
+export interface UserEmployee {
+    id: string
+    user: User,
+    employee: Employee
+}
 
+export interface Employee {
+    id: string
+    firstname: string
+    middlename: string
+    lastname: string
+    is_budget_officer: boolean
+    is_finance_manager: boolean
+}
 
 export interface SystemPermissions {
 

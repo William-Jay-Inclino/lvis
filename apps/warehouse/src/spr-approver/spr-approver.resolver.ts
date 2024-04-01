@@ -56,11 +56,6 @@ export class SprApproverResolver {
     @Args('input') updateSprApproverInput: UpdateSprApproverInput,
     @CurrentAuthUser() authUser: AuthUser
   ) {
-
-    if (!isAdmin(authUser)) {
-      throw new ForbiddenException('Only Admin can update SPR Approver')
-    }
-
     this.sprApproverService.setAuthUser(authUser)
     return this.sprApproverService.update(id, updateSprApproverInput);
   }

@@ -33,6 +33,13 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
                     role
                     status
                     permissions
+                    user_employee {
+                        employee {
+                            id 
+                            is_budget_officer
+                            is_finance_manager
+                        }
+                    }
                 }
             }
         `;

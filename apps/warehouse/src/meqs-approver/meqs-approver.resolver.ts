@@ -56,11 +56,6 @@ export class MeqsApproverResolver {
     @Args('input') updateMeqsApproverInput: UpdateMeqsApproverInput,
     @CurrentAuthUser() authUser: AuthUser
   ) {
-
-    if (!isAdmin(authUser)) {
-      throw new ForbiddenException('Only Admin can update MEQS Approver')
-    }
-
     this.meqsApproverService.setAuthUser(authUser)
     return this.meqsApproverService.update(id, updateMeqsApproverInput);
   }
