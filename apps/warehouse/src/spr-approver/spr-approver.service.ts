@@ -149,7 +149,7 @@ export class SprApproverService {
 
     await this.validateInput(input)
 
-    let dateApproval = new Date(input.date_approval)
+    let dateApproval = isAdmin(this.authUser) ? new Date(input.date_approval) : new Date()
 
     if (input.status && input.status === APPROVAL_STATUS.PENDING) {
       dateApproval = null
