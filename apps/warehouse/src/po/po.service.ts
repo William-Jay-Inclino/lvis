@@ -3,7 +3,7 @@ import { PrismaService } from '../__prisma__/prisma.service';
 import { CreatePoInput } from './dto/create-po.input';
 import { PO, POApprover, Prisma } from 'apps/warehouse/prisma/generated/client';
 import { APPROVAL_STATUS, Role } from '../__common__/types';
-import { WarehouseCancelResponse } from '../__common__/classes';
+import { WarehouseCancelResponse, WarehouseRemoveResponse } from '../__common__/classes';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { HttpService } from '@nestjs/axios';
 import { catchError, firstValueFrom } from 'rxjs';
@@ -11,6 +11,7 @@ import { UpdatePoInput } from './dto/update-po.input';
 import { POsResponse } from './entities/pos-response.entity';
 import * as moment from 'moment';
 import { getDateRange, isAdmin, isNormalUser } from '../__common__/helpers';
+import { UpdatePoByFinanceManagerInput } from './dto/update-po-by-finance-manager.input';
 
 @Injectable()
 export class PoService {
@@ -326,6 +327,82 @@ export class PoService {
         }
 
         return APPROVAL_STATUS.APPROVED
+
+    }
+
+    async updateFundSourceByFinanceManager(poId: string, payload: UpdatePoByFinanceManagerInput): Promise<WarehouseRemoveResponse> {
+
+        console.log('updateFundSourceByFinanceManager()', poId, payload)
+
+        if (!this.authUser.user.user_employee) {
+            throw new BadRequestException('this.authUser.user.user_employee is undefined')
+        }
+
+        if (!this.authUser.user.user_employee.employee.is_finance_manager) {
+            throw new ForbiddenException('Only finance manager can update')
+        }
+
+        const { fund_source_id, notes, status } = payload
+
+        const item = await this.prisma.pO.findUnique({
+            where: { id: poId }
+        })
+
+        if (!item) {
+            throw new NotFoundException('PO not found with ID ' + poId)
+        }
+
+        const isValidFundSourceId = await this.isFundSourceExist(fund_source_id, this.authUser)
+
+        if (!isValidFundSourceId) {
+            throw new NotFoundException('Fund Source ID not valid')
+        }
+
+        const queries = []
+
+        const updatePoFundSourceIdQuery = this.prisma.pO.update({
+            where: { id: poId },
+            data: {
+                fund_source_id
+            }
+        })
+
+        queries.push(updatePoFundSourceIdQuery)
+
+        const approver_id = this.authUser.user.user_employee.employee.id
+
+        const poApprover = await this.prisma.pOApprover.findFirst({
+            where: {
+                po_id: poId,
+                approver_id
+            }
+        })
+
+        if (!poApprover) {
+            throw new NotFoundException(`PO Approver not found with po_id of ${poId} and approver_id of ${approver_id} `)
+        }
+
+        const updatePoApproverQuery = this.prisma.pOApprover.update({
+            where: { id: poApprover.id },
+            data: {
+                notes,
+                status,
+                date_approval: new Date(),
+                updated_by: this.authUser.user.username
+            }
+        })
+
+        queries.push(updatePoApproverQuery)
+
+        const result = await this.prisma.$transaction(queries)
+
+        console.log('result', result)
+        console.log('Successfully updated po Fund Source and po approver')
+
+        return {
+            success: true,
+            msg: 'Successfully updated po fund source and po approver'
+        }
 
     }
 

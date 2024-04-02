@@ -8,10 +8,11 @@ import { AuthUser } from '../__common__/auth-user.entity';
 import { UpdateSprInput } from './dto/update-spr.input';
 import { catchError, firstValueFrom } from 'rxjs';
 import { HttpService } from '@nestjs/axios';
-import { WarehouseCancelResponse } from '../__common__/classes';
+import { WarehouseCancelResponse, WarehouseRemoveResponse } from '../__common__/classes';
 import { SPRsResponse } from './entities/sprs-response.entity';
 import * as moment from 'moment';
 import { getDateRange, isAdmin, isNormalUser } from '../__common__/helpers';
+import { UpdateSprByBudgetOfficerInput } from './dto/update-spr-by-budget-officer.input';
 
 @Injectable()
 export class SprService {
@@ -117,8 +118,8 @@ export class SprService {
             throw new NotFoundException('SPR not found')
         }
 
-        if (!this.canAccess(existingItem, input)) {
-            throw new ForbiddenException('Only Admin, Owner, and Budget Officer (classification only) can update this record!')
+        if (!this.canAccess(existingItem)) {
+            throw new ForbiddenException('Only Admin and Owner can update this record!')
         }
 
         if (!(await this.canUpdate(input, existingItem))) {
@@ -317,6 +318,82 @@ export class SprService {
         if (meqs) return true
 
         return false
+
+    }
+
+    async updateClassificationByBudgetOfficer(sprId: string, payload: UpdateSprByBudgetOfficerInput): Promise<WarehouseRemoveResponse> {
+
+        console.log('updateClassificationByBudgetOfficer()', sprId, payload)
+
+        if (!this.authUser.user.user_employee) {
+            throw new BadRequestException('this.authUser.user.user_employee is undefined')
+        }
+
+        if (!this.authUser.user.user_employee.employee.is_budget_officer) {
+            throw new ForbiddenException('Only budget officer can update')
+        }
+
+        const { classification_id, notes, status } = payload
+
+        const item = await this.prisma.sPR.findUnique({
+            where: { id: sprId }
+        })
+
+        if (!item) {
+            throw new NotFoundException('SPR not found with ID ' + sprId)
+        }
+
+        const isValidClassificationId = await this.isClassificationExist(classification_id, this.authUser)
+
+        if (!isValidClassificationId) {
+            throw new NotFoundException('Classification ID not valid')
+        }
+
+        const queries = []
+
+        const updateSprClassificationIdQuery = this.prisma.sPR.update({
+            where: { id: sprId },
+            data: {
+                classification_id
+            }
+        })
+
+        queries.push(updateSprClassificationIdQuery)
+
+        const approver_id = this.authUser.user.user_employee.employee.id
+
+        const sprApprover = await this.prisma.sPRApprover.findFirst({
+            where: {
+                spr_id: sprId,
+                approver_id
+            }
+        })
+
+        if (!sprApprover) {
+            throw new NotFoundException(`SPR Approver not found with spr_id of ${sprId} and approver_id of ${approver_id} `)
+        }
+
+        const updateSprApproverQuery = this.prisma.sPRApprover.update({
+            where: { id: sprApprover.id },
+            data: {
+                notes,
+                status,
+                date_approval: new Date(),
+                updated_by: this.authUser.user.username
+            }
+        })
+
+        queries.push(updateSprApproverQuery)
+
+        const result = await this.prisma.$transaction(queries)
+
+        console.log('result', result)
+        console.log('Successfully updated spr classification and spr approver')
+
+        return {
+            success: true,
+            msg: 'Successfully updated spr classification and spr approver'
+        }
 
     }
 
@@ -531,33 +608,13 @@ export class SprService {
 
     }
 
-    private canAccess(item: SPR, input?: UpdateSprInput): boolean {
+    private canAccess(item: SPR): boolean {
 
         if (isAdmin(this.authUser)) return true
 
         const isOwner = item.created_by === this.authUser.user.username
 
         if (isOwner) return true
-
-        // if no input meaning called in cancel function
-        if (!input) {
-            return false
-        }
-
-        // called in update function 
-
-        const isBudgetOfficer = this.authUser.user.user_employee.employee.is_budget_officer
-
-        // budget officer can only update classification
-        if (isBudgetOfficer) {
-
-            if (input.notes || input.supervisor_id || input.vehicle_id) {
-                throw new ForbiddenException('Budget officer can only update classification field')
-            }
-
-            return true
-
-        }
 
         return false
 

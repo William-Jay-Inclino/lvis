@@ -8,10 +8,11 @@ import { AuthUser } from '../__common__/auth-user.entity';
 import { UpdateRvInput } from './dto/update-rv.input';
 import { catchError, firstValueFrom } from 'rxjs';
 import { HttpService } from '@nestjs/axios';
-import { WarehouseCancelResponse } from '../__common__/classes';
+import { WarehouseCancelResponse, WarehouseRemoveResponse } from '../__common__/classes';
 import { RVsResponse } from './entities/rvs-response.entity';
 import * as moment from 'moment';
 import { getDateRange, isAdmin, isNormalUser } from '../__common__/helpers';
+import { UpdateRvByBudgetOfficerInput } from './dto/update-rv-by-budget-officer.input';
 
 @Injectable()
 export class RvService {
@@ -117,8 +118,8 @@ export class RvService {
             throw new NotFoundException('RV not found')
         }
 
-        if (!this.canAccess(existingItem, input)) {
-            throw new ForbiddenException('Only Admin, Owner, and Budget Officer (classification only) can update this record!')
+        if (!this.canAccess(existingItem)) {
+            throw new ForbiddenException('Only Admin and Owner can update this record!')
         }
 
         if (!(await this.canUpdate(input, existingItem))) {
@@ -321,6 +322,82 @@ export class RvService {
 
     }
 
+    async updateClassificationByBudgetOfficer(rvId: string, payload: UpdateRvByBudgetOfficerInput): Promise<WarehouseRemoveResponse> {
+
+        console.log('updateClassificationByBudgetOfficer()', rvId, payload)
+
+        if (!this.authUser.user.user_employee) {
+            throw new BadRequestException('this.authUser.user.user_employee is undefined')
+        }
+
+        if (!this.authUser.user.user_employee.employee.is_budget_officer) {
+            throw new ForbiddenException('Only budget officer can update')
+        }
+
+        const { classification_id, notes, status } = payload
+
+        const item = await this.prisma.rV.findUnique({
+            where: { id: rvId }
+        })
+
+        if (!item) {
+            throw new NotFoundException('RV not found with ID ' + rvId)
+        }
+
+        const isValidClassificationId = await this.isClassificationExist(classification_id, this.authUser)
+
+        if (!isValidClassificationId) {
+            throw new NotFoundException('Classification ID not valid')
+        }
+
+        const queries = []
+
+        const updateRvClassificationIdQuery = this.prisma.rV.update({
+            where: { id: rvId },
+            data: {
+                classification_id
+            }
+        })
+
+        queries.push(updateRvClassificationIdQuery)
+
+        const approver_id = this.authUser.user.user_employee.employee.id
+
+        const rvApprover = await this.prisma.rVApprover.findFirst({
+            where: {
+                rv_id: rvId,
+                approver_id
+            }
+        })
+
+        if (!rvApprover) {
+            throw new NotFoundException(`RV Approver not found with rv_id of ${rvId} and approver_id of ${approver_id} `)
+        }
+
+        const updateRvApproverQuery = this.prisma.rVApprover.update({
+            where: { id: rvApprover.id },
+            data: {
+                notes,
+                status,
+                date_approval: new Date(),
+                updated_by: this.authUser.user.username
+            }
+        })
+
+        queries.push(updateRvApproverQuery)
+
+        const result = await this.prisma.$transaction(queries)
+
+        console.log('result', result)
+        console.log('Successfully updated rv classification and rv approver')
+
+        return {
+            success: true,
+            msg: 'Successfully updated rv classification and rv approver'
+        }
+
+    }
+
     private async getLatestRvNumber(): Promise<string> {
         const currentYear = new Date().getFullYear().toString().slice(-2);
 
@@ -515,33 +592,13 @@ export class RvService {
 
     }
 
-    private canAccess(item: RV, input?: UpdateRvInput): boolean {
+    private canAccess(item: RV): boolean {
 
         if (isAdmin(this.authUser)) return true
 
         const isOwner = item.created_by === this.authUser.user.username
 
         if (isOwner) return true
-
-        // if no input meaning called in cancel function
-        if (!input) {
-            return false
-        }
-
-        // called in update function 
-
-        const isBudgetOfficer = this.authUser.user.user_employee.employee.is_budget_officer
-
-        // budget officer can only update classification
-        if (isBudgetOfficer) {
-
-            if (input.notes || input.supervisor_id || input.work_order_date || input.work_order_no) {
-                throw new ForbiddenException('Budget officer can only update classification field')
-            }
-
-            return true
-
-        }
 
         return false
 

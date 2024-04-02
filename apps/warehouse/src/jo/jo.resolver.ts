@@ -14,10 +14,11 @@ import { JoApproverService } from '../jo-approver/jo-approver.service';
 import { JoNumber } from './entities/jo-number.entity';
 import { JOsResponse } from './entities/jos-response.entity';
 import { APPROVAL_STATUS, MODULES, RESOLVERS } from '../__common__/types';
-import { WarehouseCancelResponse } from '../__common__/classes';
+import { WarehouseCancelResponse, WarehouseRemoveResponse } from '../__common__/classes';
 import { Department } from '../__department__ /entities/department.entity';
 import { AccessGuard } from '../__auth__/guards/access.guard';
 import { CheckAccess } from '../__auth__/check-access.decorator';
+import { UpdateJoByBudgetOfficerInput } from './dto/update-jo-by-budget-officer.input';
 
 @UseGuards(GqlAuthGuard)
 @Resolver(() => JO)
@@ -81,6 +82,16 @@ export class JoResolver {
     ) {
         this.joService.setAuthUser(authUser)
         return await this.joService.update(id, updateJoInput);
+    }
+
+    @Mutation(() => WarehouseRemoveResponse)
+    async update_jo_classification_and_jo_approver(
+        @Args('id') id: string,
+        @Args('input') input: UpdateJoByBudgetOfficerInput,
+        @CurrentAuthUser() authUser: AuthUser
+    ) {
+        this.joService.setAuthUser(authUser)
+        return await this.joService.updateClassificationByBudgetOfficer(id, input);
     }
 
     @Mutation(() => WarehouseCancelResponse)

@@ -13,10 +13,11 @@ import { PoNumber } from './entities/po-number.entity';
 import { POsResponse } from './entities/pos-response.entity';
 import { APPROVAL_STATUS, MODULES, RESOLVERS } from '../__common__/types';
 import { POApprover } from '../po-approver/entities/po-approver.entity';
-import { WarehouseCancelResponse } from '../__common__/classes';
+import { WarehouseCancelResponse, WarehouseRemoveResponse } from '../__common__/classes';
 import { AccessGuard } from '../__auth__/guards/access.guard';
 import { CheckAccess } from '../__auth__/check-access.decorator';
 import { Account } from '../__account__ /entities/account.entity';
+import { UpdatePoByFinanceManagerInput } from './dto/update-po-by-finance-manager.input';
 
 @UseGuards(GqlAuthGuard)
 @Resolver(() => PO)
@@ -80,6 +81,16 @@ export class PoResolver {
     ) {
         this.poService.setAuthUser(authUser)
         return await this.poService.update(id, updatePoInput);
+    }
+
+    @Mutation(() => WarehouseRemoveResponse)
+    async update_po_fund_source_and_po_approver(
+        @Args('id') id: string,
+        @Args('input') input: UpdatePoByFinanceManagerInput,
+        @CurrentAuthUser() authUser: AuthUser
+    ) {
+        this.poService.setAuthUser(authUser)
+        return await this.poService.updateFundSourceByFinanceManager(id, input);
     }
 
     @Mutation(() => WarehouseCancelResponse)

@@ -62,6 +62,8 @@ export class AuthService {
                     user_employee {
                         employee {
                             id
+                            is_budget_officer
+                            is_finance_manager
                             total_pending_approvals
                         }
                     }

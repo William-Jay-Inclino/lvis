@@ -14,9 +14,10 @@ import { RvApproverService } from '../rv-approver/rv-approver.service';
 import { RvNumber } from './entities/rv-number.entity';
 import { RVsResponse } from './entities/rvs-response.entity';
 import { APPROVAL_STATUS, MODULES, RESOLVERS } from '../__common__/types';
-import { WarehouseCancelResponse } from '../__common__/classes';
+import { WarehouseCancelResponse, WarehouseRemoveResponse } from '../__common__/classes';
 import { AccessGuard } from '../__auth__/guards/access.guard';
 import { CheckAccess } from '../__auth__/check-access.decorator';
+import { UpdateRvByBudgetOfficerInput } from './dto/update-rv-by-budget-officer.input';
 
 @UseGuards(GqlAuthGuard)
 @Resolver(() => RV)
@@ -80,6 +81,16 @@ export class RvResolver {
     ) {
         this.rvService.setAuthUser(authUser)
         return await this.rvService.update(id, updateRvInput);
+    }
+
+    @Mutation(() => WarehouseRemoveResponse)
+    async update_rv_classification_and_rv_approver(
+        @Args('id') id: string,
+        @Args('input') input: UpdateRvByBudgetOfficerInput,
+        @CurrentAuthUser() authUser: AuthUser
+    ) {
+        this.rvService.setAuthUser(authUser)
+        return await this.rvService.updateClassificationByBudgetOfficer(id, input);
     }
 
     @Mutation(() => WarehouseCancelResponse)

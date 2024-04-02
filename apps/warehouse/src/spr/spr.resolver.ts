@@ -14,9 +14,10 @@ import { SprApproverService } from '../spr-approver/spr-approver.service';
 import { SprNumber } from './entities/spr-number.entity';
 import { SPRsResponse } from './entities/sprs-response.entity';
 import { APPROVAL_STATUS, MODULES, RESOLVERS } from '../__common__/types';
-import { WarehouseCancelResponse } from '../__common__/classes';
+import { WarehouseCancelResponse, WarehouseRemoveResponse } from '../__common__/classes';
 import { AccessGuard } from '../__auth__/guards/access.guard';
 import { CheckAccess } from '../__auth__/check-access.decorator';
+import { UpdateSprByBudgetOfficerInput } from './dto/update-spr-by-budget-officer.input';
 
 @UseGuards(GqlAuthGuard)
 @Resolver(() => SPR)
@@ -80,6 +81,16 @@ export class SprResolver {
     ) {
         this.sprService.setAuthUser(authUser)
         return await this.sprService.update(id, updateSprInput);
+    }
+
+    @Mutation(() => WarehouseRemoveResponse)
+    async update_spr_classification_and_spr_approver(
+        @Args('id') id: string,
+        @Args('input') input: UpdateSprByBudgetOfficerInput,
+        @CurrentAuthUser() authUser: AuthUser
+    ) {
+        this.sprService.setAuthUser(authUser)
+        return await this.sprService.updateClassificationByBudgetOfficer(id, input);
     }
 
     @Mutation(() => WarehouseCancelResponse)
