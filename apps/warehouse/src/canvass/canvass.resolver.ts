@@ -20,8 +20,6 @@ import { AccessGuard } from '../__auth__/guards/access.guard';
 @Resolver(() => Canvass)
 export class CanvassResolver {
 
-  private readonly logger = new Logger(CanvassResolver.name);
-
   constructor(private readonly canvassService: CanvassService) { }
 
   @Mutation(() => Canvass)
@@ -87,6 +85,15 @@ export class CanvassResolver {
   @ResolveField(() => Employee)
   requested_by(@Parent() canvass: Canvass): any {
     return { __typename: 'Employee', id: canvass.requested_by_id }
+  }
+
+  @ResolveField(() => Boolean)
+  can_update(
+    @Parent() canvass: Canvass,
+    @CurrentAuthUser() authUser: AuthUser
+  ) {
+    this.canvassService.setAuthUser(authUser)
+    return this.canvassService.canUpdate(canvass.id)
   }
 
   @ResolveField(() => Boolean)

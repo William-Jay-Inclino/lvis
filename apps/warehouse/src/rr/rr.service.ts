@@ -362,6 +362,38 @@ export class RrService {
 
     }
 
+    async canUpdateForm(rrId: string): Promise<Boolean> {
+
+        if (isAdmin(this.authUser)) {
+            return true
+        }
+
+        const rr = await this.prisma.rR.findUnique({
+            where: {
+                id: rrId
+            },
+            select: {
+                created_by: true,
+                rr_approvers: true
+            }
+        })
+
+        const isOwner = rr.created_by === this.authUser.user.username
+
+        if (!isOwner) {
+            return false
+        }
+
+        const hasApproval = rr.rr_approvers.find(i => i.status !== APPROVAL_STATUS.PENDING)
+
+        if (hasApproval) {
+            return false
+        }
+
+        return true
+
+    }
+
     private async getLatestRrNumber(): Promise<string> {
         const currentYear = new Date().getFullYear().toString().slice(-2);
 

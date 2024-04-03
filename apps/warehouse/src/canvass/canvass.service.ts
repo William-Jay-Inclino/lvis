@@ -8,10 +8,10 @@ import { WarehouseRemoveResponse } from '../__common__/classes';
 import { catchError, firstValueFrom } from 'rxjs';
 import { HttpService } from '@nestjs/axios';
 import { CanvassesResponse } from './entities/canvasses-response.entity';
-import { Employee } from '../__employee__/entities/employee.entity';
 import { FindOneResponse } from './entities/types';
 import * as moment from 'moment';
 import { getDateRange, isAdmin } from '../__common__/helpers';
+import { APPROVAL_STATUS } from '../__common__/types';
 
 @Injectable()
 export class CanvassService {
@@ -139,8 +139,8 @@ export class CanvassService {
 
         const existingItem = await this.findOne(id);
 
-        if (!this.canAccess(existingItem)) {
-            throw new ForbiddenException('Only Admin and Owner can update this record!')
+        if (!(await this.canUpdate(existingItem.id))) {
+            throw new ForbiddenException('Only Admin and Owner can update this record. Cannot also update if rv/spr/jo has approval for owners only!')
         }
 
         if (input.requested_by_id) {
@@ -380,6 +380,75 @@ export class CanvassService {
         })
 
         return !!rr
+
+    }
+
+    // cannot update if not owner
+    // can only update canvass if admin AND if either rvApprovers, sprApprovers, or rvApprovers all pending 
+    async canUpdate(canvassId: string): Promise<Boolean> {
+
+        if (isAdmin(this.authUser)) {
+            return true
+        }
+
+        const canvass = await this.prisma.canvass.findUnique({
+            where: { id: canvassId },
+            select: {
+                created_by: true,
+                rv: {
+                    select: {
+                        rv_approvers: true
+                    }
+                },
+                spr: {
+                    select: {
+                        spr_approvers: true
+                    }
+                },
+                jo: {
+                    select: {
+                        jo_approvers: true
+                    }
+                }
+            }
+        })
+
+        if (!canvass) {
+            throw new NotFoundException('Canvass not found with id of ' + canvassId)
+        }
+
+        const isOwner = canvass.created_by === this.authUser.user.username
+
+        if (!isOwner) {
+            return false
+        }
+
+        if (canvass.rv) {
+            const hasApproverAction = canvass.rv.rv_approvers.find(i => i.status !== APPROVAL_STATUS.PENDING)
+
+            if (hasApproverAction) {
+                return false
+            }
+        }
+
+        if (canvass.spr) {
+            const hasApproverAction = canvass.spr.spr_approvers.find(i => i.status !== APPROVAL_STATUS.PENDING)
+
+            if (hasApproverAction) {
+                return false
+            }
+        }
+
+        if (canvass.jo) {
+            const hasApproverAction = canvass.jo.jo_approvers.find(i => i.status !== APPROVAL_STATUS.PENDING)
+
+            if (hasApproverAction) {
+                return false
+            }
+        }
+
+
+        return true
 
     }
 

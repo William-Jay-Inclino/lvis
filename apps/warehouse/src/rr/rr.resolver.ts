@@ -111,5 +111,14 @@ export class RrResolver {
 
     }
 
+    @ResolveField(() => Boolean)
+    can_update(
+        @Parent() rr: RR,
+        @CurrentAuthUser() authUser: AuthUser
+    ) {
+        this.rrService.setAuthUser(authUser)
+        return this.rrService.canUpdateForm(rr.id)
+    }
+
 
 }

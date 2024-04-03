@@ -1,9 +1,9 @@
-import { BadRequestException, ForbiddenException, Injectable, Logger, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, ForbiddenException, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { CanvassService } from '../canvass/canvass.service';
 import { PrismaService } from '../__prisma__/prisma.service';
 import { Prisma, RV, RVApprover } from 'apps/warehouse/prisma/generated/client';
 import { CreateRvInput } from './dto/create-rv.input';
-import { APPROVAL_STATUS, Role } from '../__common__/types';
+import { APPROVAL_STATUS } from '../__common__/types';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { UpdateRvInput } from './dto/update-rv.input';
 import { catchError, firstValueFrom } from 'rxjs';
@@ -395,6 +395,38 @@ export class RvService {
             success: true,
             msg: 'Successfully updated rv classification and rv approver'
         }
+
+    }
+
+    async canUpdateForm(rvId: string): Promise<Boolean> {
+
+        if (isAdmin(this.authUser)) {
+            return true
+        }
+
+        const rv = await this.prisma.rV.findUnique({
+            where: {
+                id: rvId
+            },
+            select: {
+                created_by: true,
+                rv_approvers: true
+            }
+        })
+
+        const isOwner = rv.created_by === this.authUser.user.username
+
+        if (!isOwner) {
+            return false
+        }
+
+        const hasApproval = rv.rv_approvers.find(i => i.status !== APPROVAL_STATUS.PENDING)
+
+        if (hasApproval) {
+            return false
+        }
+
+        return true
 
     }
 

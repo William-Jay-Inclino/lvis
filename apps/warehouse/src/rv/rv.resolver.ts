@@ -136,4 +136,13 @@ export class RvResolver {
         return await this.rvService.isReferenced(rv.id)
     }
 
+    @ResolveField(() => Boolean)
+    can_update(
+        @Parent() rv: RV,
+        @CurrentAuthUser() authUser: AuthUser
+    ) {
+        this.rvService.setAuthUser(authUser)
+        return this.rvService.canUpdateForm(rv.id)
+    }
+
 }

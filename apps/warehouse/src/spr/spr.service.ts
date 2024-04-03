@@ -397,6 +397,38 @@ export class SprService {
 
     }
 
+    async canUpdateForm(sprId: string): Promise<Boolean> {
+
+        if (isAdmin(this.authUser)) {
+            return true
+        }
+
+        const spr = await this.prisma.sPR.findUnique({
+            where: {
+                id: sprId
+            },
+            select: {
+                created_by: true,
+                spr_approvers: true
+            }
+        })
+
+        const isOwner = spr.created_by === this.authUser.user.username
+
+        if (!isOwner) {
+            return false
+        }
+
+        const hasApproval = spr.spr_approvers.find(i => i.status !== APPROVAL_STATUS.PENDING)
+
+        if (hasApproval) {
+            return false
+        }
+
+        return true
+
+    }
+
     private async getLatestSprNumber(): Promise<string> {
         const currentYear = new Date().getFullYear().toString().slice(-2);
 

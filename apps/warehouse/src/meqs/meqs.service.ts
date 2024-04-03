@@ -419,6 +419,69 @@ export class MeqsService {
         return arrayOfMeqsNumbers;
     }
 
+    async forEmployeeCanceller(username: string): Promise<MEQS[]> {
+        return await this.prisma.mEQS.findMany({
+            where: {
+                cancelled_by: username
+            },
+            include: this.includedFields
+        })
+    }
+
+    async isRrCompleted(meqsId: string): Promise<boolean> {
+
+        const rr = await this.prisma.rR.findFirst({
+            select: {
+                id: true,
+                is_completed: true
+            },
+            where: {
+                po: {
+                    meqs_supplier: {
+                        meqs_id: meqsId
+                    }
+                }
+            }
+        })
+
+        if (!rr) return false
+
+        return rr.is_completed
+
+    }
+
+    async canUpdateForm(meqsId: string): Promise<Boolean> {
+
+        if (isAdmin(this.authUser)) {
+            return true
+        }
+
+        const meqs = await this.prisma.mEQS.findUnique({
+            where: {
+                id: meqsId
+            },
+            select: {
+                created_by: true,
+                meqs_approvers: true
+            }
+        })
+
+        const isOwner = meqs.created_by === this.authUser.user.username
+
+        if (!isOwner) {
+            return false
+        }
+
+        const hasApproval = meqs.meqs_approvers.find(i => i.status !== APPROVAL_STATUS.PENDING)
+
+        if (hasApproval) {
+            return false
+        }
+
+        return true
+
+    }
+
     private async getLatestMeqsNumber(): Promise<string> {
         const currentYear = new Date().getFullYear().toString().slice(-2);
 
@@ -485,37 +548,6 @@ export class MeqsService {
             console.error('Error querying employees:', error.message);
             return false;
         }
-    }
-
-    async forEmployeeCanceller(username: string): Promise<MEQS[]> {
-        return await this.prisma.mEQS.findMany({
-            where: {
-                cancelled_by: username
-            },
-            include: this.includedFields
-        })
-    }
-
-    async isRrCompleted(meqsId: string): Promise<boolean> {
-
-        const rr = await this.prisma.rR.findFirst({
-            select: {
-                id: true,
-                is_completed: true
-            },
-            where: {
-                po: {
-                    meqs_supplier: {
-                        meqs_id: meqsId
-                    }
-                }
-            }
-        })
-
-        if (!rr) return false
-
-        return rr.is_completed
-
     }
 
     private async canReference(input: CreateMeqsInput): Promise<{ succes: boolean, msg: string }> {

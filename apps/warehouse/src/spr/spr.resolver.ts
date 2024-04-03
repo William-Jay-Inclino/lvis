@@ -136,4 +136,13 @@ export class SprResolver {
         return await this.sprService.isReferenced(spr.id)
     }
 
+    @ResolveField(() => Boolean)
+    can_update(
+        @Parent() spr: SPR,
+        @CurrentAuthUser() authUser: AuthUser
+    ) {
+        this.sprService.setAuthUser(authUser)
+        return this.sprService.canUpdateForm(spr.id)
+    }
+
 }

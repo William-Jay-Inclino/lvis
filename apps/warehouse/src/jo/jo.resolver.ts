@@ -142,4 +142,13 @@ export class JoResolver {
         return await this.joService.isReferenced(jo.id)
     }
 
+    @ResolveField(() => Boolean)
+    can_update(
+        @Parent() jo: JO,
+        @CurrentAuthUser() authUser: AuthUser
+    ) {
+        this.joService.setAuthUser(authUser)
+        return this.joService.canUpdateForm(jo.id)
+    }
+
 }

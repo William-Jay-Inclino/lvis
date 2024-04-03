@@ -119,4 +119,13 @@ export class MeqsResolver {
         return await this.meqsService.isRrCompleted(meqs.id)
     }
 
+    @ResolveField(() => Boolean)
+    can_update(
+        @Parent() meqs: MEQS,
+        @CurrentAuthUser() authUser: AuthUser
+    ) {
+        this.meqsService.setAuthUser(authUser)
+        return this.meqsService.canUpdateForm(meqs.id)
+    }
+
 }

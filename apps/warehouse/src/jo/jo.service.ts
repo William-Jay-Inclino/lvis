@@ -399,6 +399,38 @@ export class JoService {
 
     }
 
+    async canUpdateForm(joId: string): Promise<Boolean> {
+
+        if (isAdmin(this.authUser)) {
+            return true
+        }
+
+        const jo = await this.prisma.jO.findUnique({
+            where: {
+                id: joId
+            },
+            select: {
+                created_by: true,
+                jo_approvers: true
+            }
+        })
+
+        const isOwner = jo.created_by === this.authUser.user.username
+
+        if (!isOwner) {
+            return false
+        }
+
+        const hasApproval = jo.jo_approvers.find(i => i.status !== APPROVAL_STATUS.PENDING)
+
+        if (hasApproval) {
+            return false
+        }
+
+        return true
+
+    }
+
     private async getLatestJoNumber(): Promise<string> {
         const currentYear = new Date().getFullYear().toString().slice(-2);
 

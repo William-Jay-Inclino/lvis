@@ -406,6 +406,38 @@ export class PoService {
 
     }
 
+    async canUpdateForm(poId: string): Promise<Boolean> {
+
+        if (isAdmin(this.authUser)) {
+            return true
+        }
+
+        const po = await this.prisma.pO.findUnique({
+            where: {
+                id: poId
+            },
+            select: {
+                created_by: true,
+                po_approvers: true
+            }
+        })
+
+        const isOwner = po.created_by === this.authUser.user.username
+
+        if (!isOwner) {
+            return false
+        }
+
+        const hasApproval = po.po_approvers.find(i => i.status !== APPROVAL_STATUS.PENDING)
+
+        if (hasApproval) {
+            return false
+        }
+
+        return true
+
+    }
+
     private async getLatestPoNumber(): Promise<string> {
         const currentYear = new Date().getFullYear().toString().slice(-2);
 

@@ -129,5 +129,13 @@ export class PoResolver {
         return { __typename: 'Account', id: po.fund_source_id }
     }
 
+    @ResolveField(() => Boolean)
+    can_update(
+        @Parent() po: PO,
+        @CurrentAuthUser() authUser: AuthUser
+    ) {
+        this.poService.setAuthUser(authUser)
+        return this.poService.canUpdateForm(po.id)
+    }
 
 }
