@@ -21,10 +21,14 @@ export class JoApproverSettingService {
 
   async create(input: CreateJoApproverSettingInput): Promise<JOApproverSetting> {
 
+    const approvers = await this.findAll()
+    const totalApprovers = approvers.length
+    const order = totalApprovers === 0 ? 2 : input.order
+
     const data: Prisma.JOApproverSettingCreateInput = {
       approver: { connect: { id: input.approver_id } },
       label: input.label,
-      order: input.order,
+      order,
       created_by: this.authUser.user.username
     }
 

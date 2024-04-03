@@ -1,0 +1,38 @@
+
+termninal:
+
+0. CONFIGURE ENV FILE
+- Update env variables specially the ip address
+
+
+1. RUN DOCKER CONTAINER FOR POSTGRES DB
+
+-inside docker folder directory run: 
+docker-compose up -d system-db warehouse-db
+
+
+2. MIGRATE DATABASE
+
+- inside apps/system run:
+pnpm run migrate:dev
+
+-inside apps/warehouse run:
+pnpm run migrate:dev
+
+
+3. BUILD APPLICATION: 
+- run:
+pnpm run build
+
+
+4. RUN SERVICES: 
+- run: 
+node dist/apps/system/main
+node dist/apps/warehouse/main
+node dist/apps/api-gateway/main
+
+
+5. CREATE ADMIN 
+
+- run: 
+curl -X POST -H "Content-Type: application/json" -d '{"password": "admin123"}' http://localhost:4001/auth/create-admin

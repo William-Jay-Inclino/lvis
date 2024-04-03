@@ -2,7 +2,7 @@ import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { CreateRrApproverSettingInput } from './dto/create-rr-approver-setting.input';
 import { PrismaService } from '../__prisma__/prisma.service';
 import { UpdateRrApproverSettingInput } from './dto/update-rr-approver-setting.input';
-import { ApproverSettingRemoveResponse, SystemRemoveResponse } from '../__common__/classes';
+import { ApproverSettingRemoveResponse } from '../__common__/classes';
 import { Prisma, RRApproverSetting } from 'apps/system/prisma/generated/client';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { UpdateRrSettingOrderResponse } from './entities/update-rr-setting-order-response.entity';
@@ -21,10 +21,14 @@ export class RrApproverSettingService {
 
 	async create(input: CreateRrApproverSettingInput): Promise<RRApproverSetting> {
 
+		const approvers = await this.findAll()
+		const totalApprovers = approvers.length
+		const order = totalApprovers === 0 ? 1 : input.order
+
 		const data: Prisma.RRApproverSettingCreateInput = {
 			approver: { connect: { id: input.approver_id } },
 			label: input.label,
-			order: input.order,
+			order,
 			created_by: this.authUser.user.username
 		}
 

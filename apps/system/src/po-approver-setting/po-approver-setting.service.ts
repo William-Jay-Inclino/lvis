@@ -21,10 +21,14 @@ export class PoApproverSettingService {
 
 	async create(input: CreatePoApproverSettingInput): Promise<POApproverSetting> {
 
+		const approvers = await this.findAll()
+		const totalApprovers = approvers.length
+		const order = totalApprovers === 0 ? 1 : input.order
+
 		const data: Prisma.POApproverSettingCreateInput = {
 			approver: { connect: { id: input.approver_id } },
 			label: input.label,
-			order: input.order,
+			order,
 			created_by: this.authUser.user.username
 		}
 

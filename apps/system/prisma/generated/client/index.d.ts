@@ -405,7 +405,7 @@ export namespace Prisma {
 
   /**
    * Prisma Client JS version: 5.8.1
-   * Query Engine version: efd2449663b3d73d637ea1fd226bafbcf45b3102
+   * Query Engine version: 473ed3124229e22d881cb7addf559799debae1ab
    */
   export type PrismaVersion = {
     client: string

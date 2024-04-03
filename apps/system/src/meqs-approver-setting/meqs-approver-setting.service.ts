@@ -21,10 +21,14 @@ export class MeqsApproverSettingService {
 
 	async create(input: CreateMeqsApproverSettingInput): Promise<MEQSApproverSetting> {
 
+		const approvers = await this.findAll()
+		const totalApprovers = approvers.length
+		const order = totalApprovers === 0 ? 1 : input.order
+
 		const data: Prisma.MEQSApproverSettingCreateInput = {
 			approver: { connect: { id: input.approver_id } },
 			label: input.label,
-			order: input.order,
+			order,
 			created_by: this.authUser.user.username
 		}
 
