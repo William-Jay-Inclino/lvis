@@ -23,7 +23,7 @@ export class RrApproverSettingService {
 
 		const approvers = await this.findAll()
 		const totalApprovers = approvers.length
-		const order = totalApprovers === 0 ? 1 : input.order
+		const order = totalApprovers === 0 ? 2 : input.order
 
 		const data: Prisma.RRApproverSettingCreateInput = {
 			approver: { connect: { id: input.approver_id } },
