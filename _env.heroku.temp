@@ -1,0 +1,16 @@
+
+NODE_ENV=production
+
+API_GATEWAY_PORT=4000
+SYSTEM_PORT=4001
+WAREHOUSE_PORT=4002
+
+API_GATEWAY_URL=https://lvis-8bb8b0ff8d83.herokuapp.com/graphql
+SYSTEM_URL=https://lvis-8bb8b0ff8d83.herokuapp.com/graphql
+WAREHOUSE_URL=https://lvis-8bb8b0ff8d83.herokuapp.com/graphql
+
+JWT_SECRET_KEY="1<3L3y3c0"
+
+
+SYSTEM_DATABASE_URL="postgresql://jay:jay123@localhost:5435/lvis_system_db?schema=public"
+WAREHOUSE_DATABASE_URL="postgresql://jay:jay123@localhost:5437/lvis_warehouse_db?schema=public"
