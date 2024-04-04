@@ -53,4 +53,7 @@ to seed the database: read database-seeder.txt located in:
 curl -X POST -H "Content-Type: application/json" -d '{"password": "admin123"}' http://localhost:4001/auth/create-admin
 
 
+Note: front end must be setup to proceed
 10. Open browser and go to: http://localhost:3000/login
+
+
