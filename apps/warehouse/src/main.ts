@@ -13,6 +13,7 @@ async function bootstrap() {
   }
 
   const app = await NestFactory.create(WarehouseModule);
+  app.enableCors();
 
   const port = process.env.WAREHOUSE_PORT || 3000;
 
