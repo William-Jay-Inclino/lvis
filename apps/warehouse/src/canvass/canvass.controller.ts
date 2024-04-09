@@ -1,4 +1,4 @@
-import { Controller, Get, Req, Res } from '@nestjs/common';
+import { Controller, Get, Param, Req, Res } from '@nestjs/common';
 import { CanvassService } from './canvass.service';
 import { CanvassPdfService } from './canvass.pdf.service';
 
@@ -11,10 +11,11 @@ export class CanvassController {
     ) { }
 
 
-    @Get('pdf')
-    async generatePdf(@Req() req: Request, @Res() res: Response) {
-        const canvass = await this.canvassService.findOne('519db4a1-9e24-4abb-9b05-fcbb421b9387')
-        const pdfBuffer = await this.canvassPdfService.generatePdf()
+    @Get('pdf/:id')
+    async generatePdf(@Param('id') id: string, @Res() res: Response) {
+        console.log('id', id)
+        const canvass = await this.canvassService.findOne(id)
+        const pdfBuffer = await this.canvassPdfService.generatePdf(canvass)
 
         // Set response headers
         // @ts-ignore
