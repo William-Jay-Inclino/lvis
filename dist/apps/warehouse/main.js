@@ -3524,6 +3524,8 @@ let CanvassPdfService = class CanvassPdfService {
                 <h2 style="font-size: 10pt; font-weight: bold;">OFFICIAL CANVASS SHEET</h1>
 
           </div>
+
+          
         `;
         await page.setContent(content);
         const pdfBuffer = await page.pdf();
