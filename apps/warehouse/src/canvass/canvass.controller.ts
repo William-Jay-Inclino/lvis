@@ -15,6 +15,7 @@ export class CanvassController {
     async generatePdf(@Param('id') id: string, @Res() res: Response) {
         console.log('id', id)
         const canvass = await this.canvassService.findOne(id)
+        // @ts-ignore
         const pdfBuffer = await this.canvassPdfService.generatePdf(canvass)
 
         // Set response headers

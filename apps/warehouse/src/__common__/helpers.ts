@@ -1,3 +1,4 @@
+import * as moment from 'moment';
 import { AuthUser } from "./auth-user.entity"
 import { APPROVAL_STATUS, ITEM_TRANSACTION_TYPE, MODULES, RESOLVERS, Role } from "./types"
 import { User, UserPermissions } from "./user.entity"
@@ -215,3 +216,19 @@ export function isNormalUser(authUser: AuthUser): boolean {
     return (authUser.user.role === Role.USER)
 }
 
+export function formatDate(d: any) {
+
+    console.log('d', d)
+
+    if (!d) {
+        return ""
+    }
+
+    let date = d;
+    if (!isNaN(d)) {
+        date = Number(d) < 10000000000 ? Number(d) * 1000 : Number(d);
+    }
+
+    // return moment(date).format('YYYY-MM-DD');
+    return moment(date).format('DD MMM YYYY');
+}
