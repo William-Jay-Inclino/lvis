@@ -3391,6 +3391,63 @@ exports.CanvassItem = CanvassItem = __decorate([
 
 /***/ }),
 
+/***/ "./apps/warehouse/src/canvass/canvass.controller.ts":
+/*!**********************************************************!*\
+  !*** ./apps/warehouse/src/canvass/canvass.controller.ts ***!
+  \**********************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+var _a, _b, _c;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.CanvassController = void 0;
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const canvass_service_1 = __webpack_require__(/*! ./canvass.service */ "./apps/warehouse/src/canvass/canvass.service.ts");
+const canvass_pdf_service_1 = __webpack_require__(/*! ./canvass.pdf.service */ "./apps/warehouse/src/canvass/canvass.pdf.service.ts");
+let CanvassController = class CanvassController {
+    constructor(canvassService, canvassPdfService) {
+        this.canvassService = canvassService;
+        this.canvassPdfService = canvassPdfService;
+    }
+    async generatePdf(id, res) {
+        console.log('id', id);
+        const canvass = await this.canvassService.findOne(id);
+        const pdfBuffer = await this.canvassPdfService.generatePdf(canvass);
+        res.setHeader('Content-Type', 'application/pdf');
+        res.setHeader('Content-Disposition', 'inline; filename="example.pdf"');
+        res.send(pdfBuffer);
+    }
+};
+exports.CanvassController = CanvassController;
+__decorate([
+    (0, common_1.Get)('pdf/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Res)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, typeof (_c = typeof Response !== "undefined" && Response) === "function" ? _c : Object]),
+    __metadata("design:returntype", Promise)
+], CanvassController.prototype, "generatePdf", null);
+exports.CanvassController = CanvassController = __decorate([
+    (0, common_1.Controller)('canvass'),
+    __metadata("design:paramtypes", [typeof (_a = typeof canvass_service_1.CanvassService !== "undefined" && canvass_service_1.CanvassService) === "function" ? _a : Object, typeof (_b = typeof canvass_pdf_service_1.CanvassPdfService !== "undefined" && canvass_pdf_service_1.CanvassPdfService) === "function" ? _b : Object])
+], CanvassController);
+
+
+/***/ }),
+
 /***/ "./apps/warehouse/src/canvass/canvass.module.ts":
 /*!******************************************************!*\
   !*** ./apps/warehouse/src/canvass/canvass.module.ts ***!
@@ -3411,16 +3468,73 @@ const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
 const canvass_service_1 = __webpack_require__(/*! ./canvass.service */ "./apps/warehouse/src/canvass/canvass.service.ts");
 const canvass_resolver_1 = __webpack_require__(/*! ./canvass.resolver */ "./apps/warehouse/src/canvass/canvass.resolver.ts");
 const axios_1 = __webpack_require__(/*! @nestjs/axios */ "@nestjs/axios");
+const canvass_controller_1 = __webpack_require__(/*! ./canvass.controller */ "./apps/warehouse/src/canvass/canvass.controller.ts");
+const canvass_pdf_service_1 = __webpack_require__(/*! ./canvass.pdf.service */ "./apps/warehouse/src/canvass/canvass.pdf.service.ts");
 let CanvassModule = class CanvassModule {
 };
 exports.CanvassModule = CanvassModule;
 exports.CanvassModule = CanvassModule = __decorate([
     (0, common_1.Module)({
         imports: [axios_1.HttpModule],
-        providers: [canvass_service_1.CanvassService, canvass_resolver_1.CanvassResolver],
-        exports: [canvass_service_1.CanvassService]
+        providers: [canvass_service_1.CanvassService, canvass_pdf_service_1.CanvassPdfService, canvass_resolver_1.CanvassResolver],
+        exports: [canvass_service_1.CanvassService],
+        controllers: [canvass_controller_1.CanvassController]
     })
 ], CanvassModule);
+
+
+/***/ }),
+
+/***/ "./apps/warehouse/src/canvass/canvass.pdf.service.ts":
+/*!***********************************************************!*\
+  !*** ./apps/warehouse/src/canvass/canvass.pdf.service.ts ***!
+  \***********************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.CanvassPdfService = void 0;
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const puppeteer_1 = __webpack_require__(/*! puppeteer */ "puppeteer");
+let CanvassPdfService = class CanvassPdfService {
+    async generatePdf(canvass) {
+        const browser = await puppeteer_1.default.launch();
+        const page = await browser.newPage();
+        const content = `
+          <div style="text-align: center;">
+
+                <h1 style="font-size: 10pt; font-weight: bold;">LEYTE V ELECTRIC COOPERATIVE, INC.</h1>
+
+                <div style="font-size: 8pt">
+                    <span>Brgy. San Pablo, Ormoc City, Leyte</span>
+                    <br />
+                    <span>VAT REG. TIN 001-383-331-000</span>
+                </div>
+
+                <br />
+                <br />
+
+                <h2 style="font-size: 10pt; font-weight: bold;">OFFICIAL CANVASS SHEET</h1>
+
+          </div>
+        `;
+        await page.setContent(content);
+        const pdfBuffer = await page.pdf();
+        await browser.close();
+        return pdfBuffer;
+    }
+};
+exports.CanvassPdfService = CanvassPdfService;
+exports.CanvassPdfService = CanvassPdfService = __decorate([
+    (0, common_1.Injectable)()
+], CanvassPdfService);
 
 
 /***/ }),
@@ -20998,6 +21112,17 @@ module.exports = require("passport-jwt");
 
 /***/ }),
 
+/***/ "puppeteer":
+/*!****************************!*\
+  !*** external "puppeteer" ***!
+  \****************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("puppeteer");
+
+/***/ }),
+
 /***/ "rxjs":
 /*!***********************!*\
   !*** external "rxjs" ***!
@@ -21171,6 +21296,7 @@ async function bootstrap() {
         process.exit(1);
     }
     const app = await core_1.NestFactory.create(warehouse_module_1.WarehouseModule);
+    app.enableCors();
     const port = process.env.WAREHOUSE_PORT || 3000;
     await app.listen(port, async () => {
         console.log(`Running API in NODE ${process.env.NODE_ENV} on ${await app.getUrl()}`);
