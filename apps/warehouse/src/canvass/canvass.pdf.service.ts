@@ -28,14 +28,15 @@ export class CanvassPdfService {
         const page = await browser.newPage();
 
         const requisitioner = await this.getEmployee(canvass.requested_by_id, this.authUser)
+        const notedBy = await this.getGM(this.authUser)
 
         // temp
-        const notedBy = {
-            firsname: "Jannie Ann",
-            middlename: null,
-            lastname: "Dayandayan",
-            position: 'General Manager'
-        }
+        // const notedBy = {
+        //     firsname: "Jannie Ann",
+        //     middlename: null,
+        //     lastname: "Dayandayan",
+        //     position: 'General Manager'
+        // }
 
         // Set content of the PDF
         const content = `
@@ -187,7 +188,12 @@ export class CanvassPdfService {
                                 <td></td>
                                 <td style="text-align: center; border-bottom: 1px solid black">
                                     <div style="margin-top: 20px; ">
-                                        <b> ${ notedBy.firsname + ' ' + notedBy.lastname } </b>
+                                    <b> 
+                                    ${
+                                        // @ts-ignore
+                                        notedBy.firstname + ' ' + notedBy.lastname
+                                    } 
+                                </b>
                                     </div>
                                 </td>
                             </tr>
@@ -333,6 +339,57 @@ export class CanvassPdfService {
 
         } catch (error) {
             console.error('Error getting employee:', error.message);
+            return undefined;
+        }
+    }
+
+    private async getGM(authUser: AuthUser): Promise<Employee | undefined> {
+
+
+        const query = `
+            query {
+                general_manager {
+                    id 
+                    firstname 
+                    middlename 
+                    lastname
+                    position
+                }
+            }
+        `;
+
+        console.log('query', query)
+
+        try {
+            const { data } = await firstValueFrom(
+                this.httpService.post(
+                    process.env.API_GATEWAY_URL,
+                    { query },
+                    {
+                        headers: {
+                            Authorization: authUser.authorization,
+                            'Content-Type': 'application/json',
+                        },
+                    }
+                ).pipe(
+                    catchError((error) => {
+                        throw error;
+                    }),
+                ),
+            );
+
+            console.log('data', data);
+            console.log('data.data.general_manager', data.data.general_manager)
+
+            if (!data || !data.data) {
+                console.log('No data returned');
+                return undefined;
+            }
+
+            return data.data.general_manager;
+
+        } catch (error) {
+            console.error('Error getting general_manager:', error.message);
             return undefined;
         }
     }

@@ -25,7 +25,8 @@ export class EmployeeService {
 			created_by: this.authUser.user.username,
 			firstname: input.firstname,
 			middlename: input.middlename,
-			lastname: input.lastname
+			lastname: input.lastname,
+			position: input.position
 		}
 
 		const created = await this.prisma.employee.create({ data })
@@ -106,6 +107,7 @@ export class EmployeeService {
 			firstname: input.firstname ?? existingItem.firstname,
 			middlename: input.middlename ?? existingItem.middlename,
 			lastname: input.lastname ?? existingItem.lastname,
+			position: input.position ?? existingItem.position,
 			is_budget_officer: input.is_budget_officer ?? existingItem.is_budget_officer,
 			is_finance_manager: input.is_finance_manager ?? existingItem.is_finance_manager,
 		}
@@ -198,75 +200,6 @@ export class EmployeeService {
 
 		return employees;
 	}
-
-	// async isApprover(id: string): Promise<boolean> {
-
-	// 	console.log('isApprover', id)
-
-	// 	// is approver in JO
-	// 	const joApprover = await this.prisma.jOApproverSetting.findUnique({
-	// 		where: {
-	// 			approver_id: id
-	// 		}
-	// 	})
-
-	// 	if (joApprover) return true
-
-
-	// 	// is approver in RV
-	// 	const rvApprover = await this.prisma.rVApproverSetting.findUnique({
-	// 		where: {
-	// 			approver_id: id
-	// 		}
-	// 	})
-
-	// 	if (rvApprover) return true
-
-
-	// 	// is approver in SPR
-	// 	const sprApprover = await this.prisma.sPRApproverSetting.findUnique({
-	// 		where: {
-	// 			approver_id: id
-	// 		}
-	// 	})
-
-	// 	if (sprApprover) return true
-
-
-	// 	// is approver in MEQS
-	// 	const meqsApprover = await this.prisma.mEQSApproverSetting.findUnique({
-	// 		where: {
-	// 			approver_id: id
-	// 		}
-	// 	})
-
-	// 	if (meqsApprover) return true
-
-
-	// 	// is approver in PO
-	// 	const poApprover = await this.prisma.pOApproverSetting.findUnique({
-	// 		where: {
-	// 			approver_id: id
-	// 		}
-	// 	})
-
-	// 	if (poApprover) return true
-
-
-	// 	// is approver in RR
-	// 	const rrApprover = await this.prisma.rRApproverSetting.findUnique({
-	// 		where: {
-	// 			approver_id: id
-	// 		}
-	// 	})
-
-	// 	if (rrApprover) return true
-
-
-	// 	// not an approver
-	// 	return false
-
-	// }
 
 	async findAllBudgetOfficers(): Promise<Employee[]> {
 

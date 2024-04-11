@@ -14937,19 +14937,24 @@ export namespace Prisma {
 
   export type SettingMinAggregateOutputType = {
     id: string | null
+    key: string | null
+    value: string | null
     created_at: Date | null
     updated_at: Date | null
   }
 
   export type SettingMaxAggregateOutputType = {
     id: string | null
+    key: string | null
+    value: string | null
     created_at: Date | null
     updated_at: Date | null
   }
 
   export type SettingCountAggregateOutputType = {
     id: number
-    name: number
+    key: number
+    value: number
     created_at: number
     updated_at: number
     _all: number
@@ -14958,19 +14963,24 @@ export namespace Prisma {
 
   export type SettingMinAggregateInputType = {
     id?: true
+    key?: true
+    value?: true
     created_at?: true
     updated_at?: true
   }
 
   export type SettingMaxAggregateInputType = {
     id?: true
+    key?: true
+    value?: true
     created_at?: true
     updated_at?: true
   }
 
   export type SettingCountAggregateInputType = {
     id?: true
-    name?: true
+    key?: true
+    value?: true
     created_at?: true
     updated_at?: true
     _all?: true
@@ -15050,7 +15060,8 @@ export namespace Prisma {
 
   export type SettingGroupByOutputType = {
     id: string
-    name: JsonValue | null
+    key: string
+    value: string
     created_at: Date
     updated_at: Date
     _count: SettingCountAggregateOutputType | null
@@ -15074,14 +15085,16 @@ export namespace Prisma {
 
   export type SettingSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    name?: boolean
+    key?: boolean
+    value?: boolean
     created_at?: boolean
     updated_at?: boolean
   }, ExtArgs["result"]["setting"]>
 
   export type SettingSelectScalar = {
     id?: boolean
-    name?: boolean
+    key?: boolean
+    value?: boolean
     created_at?: boolean
     updated_at?: boolean
   }
@@ -15092,7 +15105,8 @@ export namespace Prisma {
     objects: {}
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      name: Prisma.JsonValue | null
+      key: string
+      value: string
       created_at: Date
       updated_at: Date
     }, ExtArgs["result"]["setting"]>
@@ -15490,7 +15504,8 @@ export namespace Prisma {
    */ 
   interface SettingFieldRefs {
     readonly id: FieldRef<"Setting", 'String'>
-    readonly name: FieldRef<"Setting", 'Json'>
+    readonly key: FieldRef<"Setting", 'String'>
+    readonly value: FieldRef<"Setting", 'String'>
     readonly created_at: FieldRef<"Setting", 'DateTime'>
     readonly updated_at: FieldRef<"Setting", 'DateTime'>
   }
@@ -15996,7 +16011,8 @@ export namespace Prisma {
 
   export const SettingScalarFieldEnum: {
     id: 'id',
-    name: 'name',
+    key: 'key',
+    value: 'value',
     created_at: 'created_at',
     updated_at: 'updated_at'
   };
@@ -17175,31 +17191,35 @@ export namespace Prisma {
     OR?: SettingWhereInput[]
     NOT?: SettingWhereInput | SettingWhereInput[]
     id?: StringFilter<"Setting"> | string
-    name?: JsonNullableFilter<"Setting">
+    key?: StringFilter<"Setting"> | string
+    value?: StringFilter<"Setting"> | string
     created_at?: DateTimeFilter<"Setting"> | Date | string
     updated_at?: DateTimeFilter<"Setting"> | Date | string
   }
 
   export type SettingOrderByWithRelationInput = {
     id?: SortOrder
-    name?: SortOrderInput | SortOrder
+    key?: SortOrder
+    value?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
 
   export type SettingWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    key?: string
     AND?: SettingWhereInput | SettingWhereInput[]
     OR?: SettingWhereInput[]
     NOT?: SettingWhereInput | SettingWhereInput[]
-    name?: JsonNullableFilter<"Setting">
+    value?: StringFilter<"Setting"> | string
     created_at?: DateTimeFilter<"Setting"> | Date | string
     updated_at?: DateTimeFilter<"Setting"> | Date | string
-  }, "id">
+  }, "id" | "key">
 
   export type SettingOrderByWithAggregationInput = {
     id?: SortOrder
-    name?: SortOrderInput | SortOrder
+    key?: SortOrder
+    value?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     _count?: SettingCountOrderByAggregateInput
@@ -17212,7 +17232,8 @@ export namespace Prisma {
     OR?: SettingScalarWhereWithAggregatesInput[]
     NOT?: SettingScalarWhereWithAggregatesInput | SettingScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Setting"> | string
-    name?: JsonNullableWithAggregatesFilter<"Setting">
+    key?: StringWithAggregatesFilter<"Setting"> | string
+    value?: StringWithAggregatesFilter<"Setting"> | string
     created_at?: DateTimeWithAggregatesFilter<"Setting"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"Setting"> | Date | string
   }
@@ -18373,49 +18394,56 @@ export namespace Prisma {
 
   export type SettingCreateInput = {
     id?: string
-    name?: NullableJsonNullValueInput | InputJsonValue
+    key: string
+    value: string
     created_at?: Date | string
     updated_at?: Date | string
   }
 
   export type SettingUncheckedCreateInput = {
     id?: string
-    name?: NullableJsonNullValueInput | InputJsonValue
+    key: string
+    value: string
     created_at?: Date | string
     updated_at?: Date | string
   }
 
   export type SettingUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: NullableJsonNullValueInput | InputJsonValue
+    key?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SettingUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: NullableJsonNullValueInput | InputJsonValue
+    key?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SettingCreateManyInput = {
     id?: string
-    name?: NullableJsonNullValueInput | InputJsonValue
+    key: string
+    value: string
     created_at?: Date | string
     updated_at?: Date | string
   }
 
   export type SettingUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: NullableJsonNullValueInput | InputJsonValue
+    key?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SettingUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: NullableJsonNullValueInput | InputJsonValue
+    key?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -19260,19 +19288,24 @@ export namespace Prisma {
 
   export type SettingCountOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
+    key?: SortOrder
+    value?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
 
   export type SettingMaxOrderByAggregateInput = {
     id?: SortOrder
+    key?: SortOrder
+    value?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
 
   export type SettingMinOrderByAggregateInput = {
     id?: SortOrder
+    key?: SortOrder
+    value?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }

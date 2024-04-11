@@ -16,7 +16,6 @@ export class SeederService {
                 // this.seedFeature(),
                 // this.seedModule(),
                 // this.seedSubModule(),
-                this.seedSettingTable(),
                 this.seedDepartment(),
                 this.seedClassification(),
                 this.seedAccount(),
@@ -29,6 +28,7 @@ export class SeederService {
                 this.seedRRApproverSetting(),
                 this.seedUserTable(),
                 this.seedUserEmployeeTable(),
+                this.seedSettingTable(),
             ]
             );
 
@@ -208,12 +208,8 @@ export class SeederService {
         try {
             return this.prisma.setting.createMany({
                 data: {
-                    name: {
-                        'noted_by': {
-                            'name': 'Jannie Ann Dayandayan',
-                            'label': 'General Manager'
-                        }
-                    }
+                    key: 'general_manager',
+                    value: data.employees[3].id
                 }
             })
         } catch (error) {

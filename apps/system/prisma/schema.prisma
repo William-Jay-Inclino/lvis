@@ -258,7 +258,8 @@ model RRApproverSetting {
 
 model Setting {
   id String @id @default(uuid())
-  name Json?
+  key String @unique
+  value String 
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
