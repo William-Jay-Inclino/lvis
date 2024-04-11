@@ -1,16 +1,16 @@
 import { Controller, Get, Param, Res, UseGuards } from '@nestjs/common';
-import { CanvassPdfService } from './canvass.pdf.service';
+import { MeqsPdfService } from './meqs.pdf.service';
 import { JwtAuthGuard } from '../__auth__/guards/jwt-auth.guard';
 import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
 import { AuthUser } from '../__common__/auth-user.entity';
 
 
-@UseGuards(JwtAuthGuard)
-@Controller('canvass')
-export class CanvassController {
+// @UseGuards(JwtAuthGuard)
+@Controller('meqs')
+export class MeqsController {
 
     constructor(
-        private readonly canvassPdfService: CanvassPdfService
+        private readonly meqsPdfService: MeqsPdfService
     ) { }
 
 
@@ -24,11 +24,11 @@ export class CanvassController {
         // @ts-ignore
         console.log('authUser', authUser);
 
-        this.canvassPdfService.setAuthUser(authUser)
+        this.meqsPdfService.setAuthUser(authUser)
 
-        const canvass = await this.canvassPdfService.findCanvass(id)
+        const meqs = await this.meqsPdfService.findMeqs(id)
         // @ts-ignore
-        const pdfBuffer = await this.canvassPdfService.generatePdf(canvass)
+        const pdfBuffer = await this.meqsPdfService.generatePdf(meqs)
 
         // Set response headers
         // @ts-ignore

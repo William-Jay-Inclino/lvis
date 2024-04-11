@@ -196,11 +196,15 @@ export class MeqsSupplierService {
         }
 
         // @ts-ignore
-        const filePaths = existingItem.attachments.map((i: MeqsSupplierAttachment) => i.src)
+        if(existingItem.attachments && existingItem.attachments.length > 0) {
+            // @ts-ignore
+            const filePaths = existingItem.attachments.map((i: MeqsSupplierAttachment) => i.src)
+    
+            // delete files in server
+            console.log('deleting actual files in server...')
+            this.deleteFiles(filePaths)
+        }
 
-        // delete files in server
-        console.log('deleting actual files in server...')
-        this.deleteFiles(filePaths)
 
         await this.prisma.mEQSSupplier.delete({
             where: { id },

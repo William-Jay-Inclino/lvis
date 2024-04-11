@@ -1,6 +1,6 @@
 // pdf.service.ts
 
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import puppeteer from 'puppeteer';
 import { formatDate } from '../__common__/helpers';
 import { Canvass } from './entities/canvass.entity';
@@ -9,6 +9,7 @@ import { AuthUser } from '../__common__/auth-user.entity';
 import { catchError, firstValueFrom } from 'rxjs';
 import { HttpService } from '@nestjs/axios';
 import { Employee } from '../__employee__/entities/employee.entity';
+import { PrismaService } from '../__prisma__/prisma.service';
 
 @Injectable()
 export class CanvassPdfService {
@@ -16,6 +17,7 @@ export class CanvassPdfService {
     private authUser: AuthUser
 
     constructor(
+        private readonly prisma: PrismaService,
         private readonly httpService: HttpService,
     ) { }
 
@@ -70,7 +72,7 @@ export class CanvassPdfService {
                     <div>
                         <table style="font-size: 10pt">
                             <tr>
-                                <td>Purpose: ${canvass.purpose.toUpperCase()}</td>
+                                <td>Purpose: ${canvass.purpose}</td>
                             </tr>     
                             <tr>
                                 <td>Listed below are the list of Item/s needed:</td>
@@ -110,7 +112,7 @@ export class CanvassPdfService {
                         ${canvass.canvass_items.map((item, index) => `
                         <tr>
                             <td align="center">${index + 1}</td>
-                            <td align="center">${item.description}</td>
+                            <td>${item.description}</td>
                             <td align="center">${item.unit ? item.unit.name : 'N/A'}</td>
                             <td align="center">${item.quantity}</td>
                         </tr>
@@ -290,6 +292,30 @@ export class CanvassPdfService {
         return pdfBuffer;
     }
     
+    async findCanvass(id: string) {
+
+        const item = await this.prisma.canvass.findUnique({
+            include: {
+                canvass_items: {
+                    include: {
+                        unit: true,
+                        brand: true,
+                        item: true
+                    }
+                },
+            },
+            where: { id }
+        })
+
+        if (!item) {
+            throw new NotFoundException('Canvass not found')
+        }
+
+        return item
+
+    }
+
+
     private async getEmployee(employeeId: string, authUser: AuthUser): Promise<Employee | undefined> {
 
 

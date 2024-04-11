@@ -74,7 +74,7 @@ export class SprPdfService {
                                 <td>Vehicle: ${spr.vehicle.name}</td>
                             </tr>  
                             <tr>
-                                <td>Purpose: ${spr.canvass.purpose.toUpperCase()}</td>
+                                <td>Purpose: ${spr.canvass.purpose}</td>
                             </tr>     
                             <tr>
                                 <td>Listed below are the list of Item/s needed:</td>
@@ -120,7 +120,7 @@ export class SprPdfService {
                         ${spr.canvass.canvass_items.map((item, index) => `
                         <tr>
                             <td align="center">${index + 1}</td>
-                            <td align="center">${item.description}</td>
+                            <td>${item.description}</td>
                             <td align="center">${item.unit ? item.unit.name : 'N/A'}</td>
                             <td align="center">${item.quantity}</td>
                         </tr>

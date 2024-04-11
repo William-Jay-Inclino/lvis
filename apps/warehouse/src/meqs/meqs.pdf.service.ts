@@ -8,11 +8,12 @@ import { AuthUser } from '../__common__/auth-user.entity';
 import { catchError, firstValueFrom } from 'rxjs';
 import { HttpService } from '@nestjs/axios';
 import { Employee } from '../__employee__/entities/employee.entity';
-import { RV } from './entities/rv.entity';
+import { MEQS } from './entities/meq.entity';
 import { PrismaService } from '../__prisma__/prisma.service';
+import { CanvassItem } from '../canvass-item/entities/canvass-item.entity';
 
 @Injectable()
-export class RvPdfService {
+export class MeqsPdfService {
 
     private authUser: AuthUser
 
@@ -25,23 +26,42 @@ export class RvPdfService {
         this.authUser = authUser
     }
 
-    async generatePdf(rv: RV) {
+    async generatePdf(meqs: MEQS) {
         const browser = await puppeteer.launch();
         const page = await browser.newPage();
 
-        const approvers = await Promise.all(rv.rv_approvers.map(async (i) => {
-            i.approver = await this.getEmployee(i.approver_id, this.authUser);
-            return i;
-        }));
+        let purpose, refNumber, refType, canvassItems: CanvassItem[]
 
-        const requisitioner = await this.getEmployee(rv.canvass.requested_by_id, this.authUser)
+        if(meqs.rv) {
+            purpose = meqs.rv.canvass.purpose
+            refNumber = meqs.rv.rv_number
+            refType = 'RV'
+            canvassItems = meqs.rv.canvass.canvass_items
+        } else if(meqs.spr) {
+            purpose = meqs.spr.canvass.purpose
+            refNumber = meqs.spr.spr_number
+            refType = 'SPR'
+            canvassItems = meqs.spr.canvass.canvass_items
+        } else {
+            purpose = meqs.jo.canvass.purpose
+            refNumber = meqs.jo.jo_number
+            refType = 'JO'
+            canvassItems = meqs.jo.canvass.canvass_items
+        }
+
+        // const approvers = await Promise.all(rv.rv_approvers.map(async (i) => {
+        //     i.approver = await this.getEmployee(i.approver_id, this.authUser);
+        //     return i;
+        // }));
+
+        // const requisitioner = await this.getEmployee(rv.canvass.requested_by_id, this.authUser)
 
         // Set content of the PDF
         const content = `
 
         <div style="display: flex; flex-direction: column;">
 
-            <div style="padding-left: 25px; padding-right: 25px; font-size: 10pt; flex-grow: 1; min-height: 55vh;">
+            <div style="padding-left: 25px; padding-right: 25px; font-size: 10pt; flex-grow: 1; min-height: 60vh;">
         
                 <div style="text-align: center; margin-top: 35px">
         
@@ -56,7 +76,7 @@ export class RvPdfService {
                     <br />
                     <br />
         
-                    <h2 style="font-size: 11pt; font-weight: bold;">REQUISITION VOUCHER</h1>
+                    <h2 style="font-size: 11pt; font-weight: bold;">MATERIALS / EQUIPMENT QUOTATION SUMMARY</h1>
         
         
                 </div>
@@ -68,35 +88,30 @@ export class RvPdfService {
                     <div>
                         <table style="font-size: 10pt">
                             <tr>
-                                <td> &nbsp; </td>
+                                <td>Date Prepared: </td>
+                                <td style="border-bottom: 1px solid black;">
+                                    ${formatDate(meqs.meqs_date)}
+                                </td>
                             </tr>
                             <tr>
-                                <td>Purpose: ${rv.canvass.purpose}</td>
+                                <td>Purpose:</td>
+                                <td> ${ purpose } </td>
                             </tr>     
-                            <tr>
-                                <td>Listed below are the list of Item/s needed:</td>
-                            </tr>
                         </table>
                     </div>
 
                     <div>
                         <table style="font-size: 10pt">
                             <tr>
-                                <td>Date: </td>
+                                <td> MEQS No.: </td>
                                 <td style="border-bottom: 1px solid black;">
-                                    ${formatDate(rv.date_requested)}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td> RV No.: </td>
-                                <td style="border-bottom: 1px solid black;">
-                                    ${rv.rv_number}
+                                    ${meqs.meqs_number}
                                 </td>
                             </tr>   
                             <tr>
-                                <td> RC No.: </td>
+                                <td> ${ refType + ' No.:' } </td>
                                 <td style="border-bottom: 1px solid black;">
-                                    ${rv.canvass.rc_number}
+                                    ${ refNumber }
                                 </td>
                             </tr>  
                         </table>
@@ -107,90 +122,41 @@ export class RvPdfService {
                 <br />
 
                 <table style="width: 100%; border-collapse: collapse;">
-                    <thead style="font-size: 10pt;">
-                        <th style="border: 1px solid black;"> NO. </th>
-                        <th style="border: 1px solid black;"> DESCRIPTION AND SPECIFICATIONS </th>
+                    <thead style="font-size: 9pt;">
+                        <th style="border: 1px solid black;"> MATERIALS / EQUIPMENT DESCRIPTION </th>
                         <th style="border: 1px solid black;"> UNIT </th>
                         <th style="border: 1px solid black;"> QTY. </th>
+
+                        ${meqs.meqs_suppliers.map((item, index) => `
+                        <th align="center" style="border: 1px solid black; width: 10%;">
+                            ${ item.supplier.name.toUpperCase() }
+                        </th>
+                        `).join('')}
+
                     </thead>
                     <tbody style="font-size: 10pt;">
-                        ${rv.canvass.canvass_items.map((item, index) => `
+
+                        ${canvassItems.map((item, index) => `
                         <tr>
-                            <td align="center">${index + 1}</td>
-                            <td>${item.description}</td>
+                            <td>
+                                ${index + 1}. ${item.description}
+                            </td>
                             <td align="center">${item.unit ? item.unit.name : 'N/A'}</td>
                             <td align="center">${item.quantity}</td>
                         </tr>
                     `).join('')}
+
                     </tbody>
                 </table>
         
             </div>
         
-            <div style="padding-left: 25px; padding-right: 25px; font-size: 10pt; padding-top: 50px; min-height: 37vh; display: flex; justify-content: center;">
+            <div style="padding-left: 25px; padding-right: 25px; font-size: 10pt; padding-top: 50px; min-height: 30vh; display: flex; justify-content: center;">
 
-                <div style="display: flex; flex-wrap: wrap;">
-
-                    <div style="padding: 10px; width: 40%">
-                        <table border="0" style="width: 100%">
-                            <tr>
-                                <td style="text-align: center; font-size: 10pt;"> ${formatDate(rv.date_requested)} </td>
-                            </tr>
-                            <tr>
-                                <th style="text-align: center;">
-                                    <u>
-                                    ${
-                                        // @ts-ignore
-                                        requisitioner.firstname + ' ' + requisitioner.lastname
-                                    } 
-                                    </u>
-                                </th>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center">
-                                ${
-                                    // @ts-ignore
-                                    requisitioner.position || ''
-                                } 
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="font-size: 10pt; text-align: center;"> Requisitioner </td>
-                            </tr>
-                        </table>
-                    </div>
-
-                    ${approvers.map((item, index) => `
-                    
-                    <div style="padding: 10px; width: 40%">
-                        <table border="0" style="width: 100%">
-                            <tr>
-                                <td style="text-align: center; font-size: 10pt;"> ${formatDate(item.date_approval)} </td>
-                            </tr>
-                            <tr>
-                                <th style="text-align: center">
-                                    <u>
-                                    ${
-                                        // @ts-ignore
-                                        item.approver.firstname + ' ' + item.approver.lastname
-                                    }
-                                    </u>
-                                </th>
-                            </tr>
-                            <tr>
-                                <td style="text-align: center">
-                                    ${ item.label }
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-
-                `).join('')}
+                
             
 
                     
-            
-                </div>
             
             </div>
         
@@ -213,7 +179,10 @@ export class RvPdfService {
         await page.setContent(content);
 
         // Generate PDF
-        const pdfBuffer = await page.pdf();
+        const pdfBuffer = await page.pdf({
+            format: 'A4',
+            landscape: true
+        });
 
         await browser.close();
 
@@ -271,20 +240,67 @@ export class RvPdfService {
         }
     }
 
-    async findRv(id: string) {
-        const item = await this.prisma.rV.findUnique({
+    async findMeqs(id: string) {
+        const item = await this.prisma.mEQS.findUnique({
             include: {
-                canvass: {
+                rv: {
                     include: {
-                        canvass_items: {
+                        canvass: {
                             include: {
-                                unit: true,
-                                brand: true
+                                canvass_items: {
+                                    include: {
+                                        brand: true,
+                                        unit: true
+                                    }
+                                }
                             }
                         }
                     }
                 },
-                rv_approvers: {
+                spr: {
+                    include: {
+                        canvass: {
+                            include: {
+                                canvass_items: {
+                                    include: {
+                                        brand: true,
+                                        unit: true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                jo: {
+                    include: {
+                        canvass: {
+                            include: {
+                                canvass_items: {
+                                    include: {
+                                        brand: true,
+                                        unit: true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                meqs_suppliers: {
+                    include: {
+                        supplier: true,
+                        meqs_supplier_items: {
+                            include: {
+                                canvass_item: {
+                                    include: {
+                                        brand: true,
+                                        unit: true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                meqs_approvers: {
                     orderBy: {
                         order: 'asc'
                     }
@@ -294,7 +310,7 @@ export class RvPdfService {
         })
 
         if (!item) {
-            throw new NotFoundException('RV not found')
+            throw new NotFoundException('MEQS not found')
         }
 
         return item

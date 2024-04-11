@@ -3442,25 +3442,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-var _a, _b, _c, _d;
+var _a, _b, _c;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.CanvassController = void 0;
 const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
-const canvass_service_1 = __webpack_require__(/*! ./canvass.service */ "./apps/warehouse/src/canvass/canvass.service.ts");
 const canvass_pdf_service_1 = __webpack_require__(/*! ./canvass.pdf.service */ "./apps/warehouse/src/canvass/canvass.pdf.service.ts");
 const jwt_auth_guard_1 = __webpack_require__(/*! ../__auth__/guards/jwt-auth.guard */ "./apps/warehouse/src/__auth__/guards/jwt-auth.guard.ts");
 const current_auth_user_decorator_1 = __webpack_require__(/*! ../__auth__/current-auth-user.decorator */ "./apps/warehouse/src/__auth__/current-auth-user.decorator.ts");
 const auth_user_entity_1 = __webpack_require__(/*! ../__common__/auth-user.entity */ "./apps/warehouse/src/__common__/auth-user.entity.ts");
 let CanvassController = class CanvassController {
-    constructor(canvassService, canvassPdfService) {
-        this.canvassService = canvassService;
+    constructor(canvassPdfService) {
         this.canvassPdfService = canvassPdfService;
     }
     async generatePdf(id, res, authUser) {
         console.log('id', id);
         console.log('authUser', authUser);
         this.canvassPdfService.setAuthUser(authUser);
-        const canvass = await this.canvassService.findOne(id);
+        const canvass = await this.canvassPdfService.findCanvass(id);
         const pdfBuffer = await this.canvassPdfService.generatePdf(canvass);
         res.setHeader('Content-Type', 'application/pdf');
         res.setHeader('Content-Disposition', 'inline; filename="example.pdf"');
@@ -3474,13 +3472,13 @@ __decorate([
     __param(1, (0, common_1.Res)()),
     __param(2, (0, current_auth_user_decorator_1.CurrentAuthUser)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, typeof (_c = typeof Response !== "undefined" && Response) === "function" ? _c : Object, typeof (_d = typeof auth_user_entity_1.AuthUser !== "undefined" && auth_user_entity_1.AuthUser) === "function" ? _d : Object]),
+    __metadata("design:paramtypes", [String, typeof (_b = typeof Response !== "undefined" && Response) === "function" ? _b : Object, typeof (_c = typeof auth_user_entity_1.AuthUser !== "undefined" && auth_user_entity_1.AuthUser) === "function" ? _c : Object]),
     __metadata("design:returntype", Promise)
 ], CanvassController.prototype, "generatePdf", null);
 exports.CanvassController = CanvassController = __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Controller)('canvass'),
-    __metadata("design:paramtypes", [typeof (_a = typeof canvass_service_1.CanvassService !== "undefined" && canvass_service_1.CanvassService) === "function" ? _a : Object, typeof (_b = typeof canvass_pdf_service_1.CanvassPdfService !== "undefined" && canvass_pdf_service_1.CanvassPdfService) === "function" ? _b : Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof canvass_pdf_service_1.CanvassPdfService !== "undefined" && canvass_pdf_service_1.CanvassPdfService) === "function" ? _a : Object])
 ], CanvassController);
 
 
@@ -3540,7 +3538,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var _a;
+var _a, _b;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.CanvassPdfService = void 0;
 const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
@@ -3549,8 +3547,10 @@ const helpers_1 = __webpack_require__(/*! ../__common__/helpers */ "./apps/wareh
 const moment = __webpack_require__(/*! moment */ "moment");
 const rxjs_1 = __webpack_require__(/*! rxjs */ "rxjs");
 const axios_1 = __webpack_require__(/*! @nestjs/axios */ "@nestjs/axios");
+const prisma_service_1 = __webpack_require__(/*! ../__prisma__/prisma.service */ "./apps/warehouse/src/__prisma__/prisma.service.ts");
 let CanvassPdfService = class CanvassPdfService {
-    constructor(httpService) {
+    constructor(prisma, httpService) {
+        this.prisma = prisma;
         this.httpService = httpService;
     }
     setAuthUser(authUser) {
@@ -3592,7 +3592,7 @@ let CanvassPdfService = class CanvassPdfService {
                     <div>
                         <table style="font-size: 10pt">
                             <tr>
-                                <td>Purpose: ${canvass.purpose.toUpperCase()}</td>
+                                <td>Purpose: ${canvass.purpose}</td>
                             </tr>     
                             <tr>
                                 <td>Listed below are the list of Item/s needed:</td>
@@ -3632,7 +3632,7 @@ let CanvassPdfService = class CanvassPdfService {
                         ${canvass.canvass_items.map((item, index) => `
                         <tr>
                             <td align="center">${index + 1}</td>
-                            <td align="center">${item.description}</td>
+                            <td>${item.description}</td>
                             <td align="center">${item.unit ? item.unit.name : 'N/A'}</td>
                             <td align="center">${item.quantity}</td>
                         </tr>
@@ -3797,6 +3797,24 @@ let CanvassPdfService = class CanvassPdfService {
         await browser.close();
         return pdfBuffer;
     }
+    async findCanvass(id) {
+        const item = await this.prisma.canvass.findUnique({
+            include: {
+                canvass_items: {
+                    include: {
+                        unit: true,
+                        brand: true,
+                        item: true
+                    }
+                },
+            },
+            where: { id }
+        });
+        if (!item) {
+            throw new common_1.NotFoundException('Canvass not found');
+        }
+        return item;
+    }
     async getEmployee(employeeId, authUser) {
         const query = `
             query {
@@ -3871,7 +3889,7 @@ let CanvassPdfService = class CanvassPdfService {
 exports.CanvassPdfService = CanvassPdfService;
 exports.CanvassPdfService = CanvassPdfService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [typeof (_a = typeof axios_1.HttpService !== "undefined" && axios_1.HttpService) === "function" ? _a : Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof prisma_service_1.PrismaService !== "undefined" && prisma_service_1.PrismaService) === "function" ? _a : Object, typeof (_b = typeof axios_1.HttpService !== "undefined" && axios_1.HttpService) === "function" ? _b : Object])
 ], CanvassPdfService);
 
 
@@ -7480,7 +7498,7 @@ let JoPdfService = class JoPdfService {
                                 <td>Equipment: ${jo.equipment}</td>
                             </tr>  
                             <tr>
-                                <td>Purpose: ${jo.canvass.purpose.toUpperCase()}</td>
+                                <td>Purpose: ${jo.canvass.purpose}</td>
                             </tr>     
                             <tr>
                                 <td>Listed below are the list of Item/s needed:</td>
@@ -7526,7 +7544,7 @@ let JoPdfService = class JoPdfService {
                         ${jo.canvass.canvass_items.map((item, index) => `
                         <tr>
                             <td align="center">${index + 1}</td>
-                            <td align="center">${item.description}</td>
+                            <td>${item.description}</td>
                             <td align="center">${item.unit ? item.unit.name : 'N/A'}</td>
                             <td align="center">${item.quantity}</td>
                         </tr>
@@ -10855,9 +10873,11 @@ let MeqsSupplierService = MeqsSupplierService_1 = class MeqsSupplierService {
         if (!this.canAccess(existingItem.meqs_id)) {
             throw new common_1.ForbiddenException('Only Admin and Owner can remove meqs supplier!');
         }
-        const filePaths = existingItem.attachments.map((i) => i.src);
-        console.log('deleting actual files in server...');
-        this.deleteFiles(filePaths);
+        if (existingItem.attachments && existingItem.attachments.length > 0) {
+            const filePaths = existingItem.attachments.map((i) => i.src);
+            console.log('deleting actual files in server...');
+            this.deleteFiles(filePaths);
+        }
         await this.prisma.mEQSSupplier.delete({
             where: { id },
         });
@@ -11429,6 +11449,66 @@ exports.MEQSsResponse = MEQSsResponse = __decorate([
 
 /***/ }),
 
+/***/ "./apps/warehouse/src/meqs/meqs.controller.ts":
+/*!****************************************************!*\
+  !*** ./apps/warehouse/src/meqs/meqs.controller.ts ***!
+  \****************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+var _a, _b, _c;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.MeqsController = void 0;
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const meqs_pdf_service_1 = __webpack_require__(/*! ./meqs.pdf.service */ "./apps/warehouse/src/meqs/meqs.pdf.service.ts");
+const current_auth_user_decorator_1 = __webpack_require__(/*! ../__auth__/current-auth-user.decorator */ "./apps/warehouse/src/__auth__/current-auth-user.decorator.ts");
+const auth_user_entity_1 = __webpack_require__(/*! ../__common__/auth-user.entity */ "./apps/warehouse/src/__common__/auth-user.entity.ts");
+let MeqsController = class MeqsController {
+    constructor(meqsPdfService) {
+        this.meqsPdfService = meqsPdfService;
+    }
+    async generatePdf(id, res, authUser) {
+        console.log('id', id);
+        console.log('authUser', authUser);
+        this.meqsPdfService.setAuthUser(authUser);
+        const meqs = await this.meqsPdfService.findMeqs(id);
+        const pdfBuffer = await this.meqsPdfService.generatePdf(meqs);
+        res.setHeader('Content-Type', 'application/pdf');
+        res.setHeader('Content-Disposition', 'inline; filename="example.pdf"');
+        res.send(pdfBuffer);
+    }
+};
+exports.MeqsController = MeqsController;
+__decorate([
+    (0, common_1.Get)('pdf/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Res)()),
+    __param(2, (0, current_auth_user_decorator_1.CurrentAuthUser)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, typeof (_b = typeof Response !== "undefined" && Response) === "function" ? _b : Object, typeof (_c = typeof auth_user_entity_1.AuthUser !== "undefined" && auth_user_entity_1.AuthUser) === "function" ? _c : Object]),
+    __metadata("design:returntype", Promise)
+], MeqsController.prototype, "generatePdf", null);
+exports.MeqsController = MeqsController = __decorate([
+    (0, common_1.Controller)('meqs'),
+    __metadata("design:paramtypes", [typeof (_a = typeof meqs_pdf_service_1.MeqsPdfService !== "undefined" && meqs_pdf_service_1.MeqsPdfService) === "function" ? _a : Object])
+], MeqsController);
+
+
+/***/ }),
+
 /***/ "./apps/warehouse/src/meqs/meqs.module.ts":
 /*!************************************************!*\
   !*** ./apps/warehouse/src/meqs/meqs.module.ts ***!
@@ -11450,15 +11530,319 @@ const meqs_resolver_1 = __webpack_require__(/*! ./meqs.resolver */ "./apps/wareh
 const meqs_service_1 = __webpack_require__(/*! ./meqs.service */ "./apps/warehouse/src/meqs/meqs.service.ts");
 const axios_1 = __webpack_require__(/*! @nestjs/axios */ "@nestjs/axios");
 const meqs_approver_service_1 = __webpack_require__(/*! ../meqs-approver/meqs-approver.service */ "./apps/warehouse/src/meqs-approver/meqs-approver.service.ts");
+const meqs_controller_1 = __webpack_require__(/*! ./meqs.controller */ "./apps/warehouse/src/meqs/meqs.controller.ts");
+const meqs_pdf_service_1 = __webpack_require__(/*! ./meqs.pdf.service */ "./apps/warehouse/src/meqs/meqs.pdf.service.ts");
 let MeqsModule = class MeqsModule {
 };
 exports.MeqsModule = MeqsModule;
 exports.MeqsModule = MeqsModule = __decorate([
     (0, common_1.Module)({
         imports: [axios_1.HttpModule],
-        providers: [meqs_resolver_1.MeqsResolver, meqs_service_1.MeqsService, meqs_approver_service_1.MeqsApproverService],
+        providers: [meqs_resolver_1.MeqsResolver, meqs_service_1.MeqsService, meqs_pdf_service_1.MeqsPdfService, meqs_approver_service_1.MeqsApproverService],
+        controllers: [meqs_controller_1.MeqsController],
     })
 ], MeqsModule);
+
+
+/***/ }),
+
+/***/ "./apps/warehouse/src/meqs/meqs.pdf.service.ts":
+/*!*****************************************************!*\
+  !*** ./apps/warehouse/src/meqs/meqs.pdf.service.ts ***!
+  \*****************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var _a, _b;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.MeqsPdfService = void 0;
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const puppeteer_1 = __webpack_require__(/*! puppeteer */ "puppeteer");
+const helpers_1 = __webpack_require__(/*! ../__common__/helpers */ "./apps/warehouse/src/__common__/helpers.ts");
+const moment = __webpack_require__(/*! moment */ "moment");
+const rxjs_1 = __webpack_require__(/*! rxjs */ "rxjs");
+const axios_1 = __webpack_require__(/*! @nestjs/axios */ "@nestjs/axios");
+const prisma_service_1 = __webpack_require__(/*! ../__prisma__/prisma.service */ "./apps/warehouse/src/__prisma__/prisma.service.ts");
+let MeqsPdfService = class MeqsPdfService {
+    constructor(prisma, httpService) {
+        this.prisma = prisma;
+        this.httpService = httpService;
+    }
+    setAuthUser(authUser) {
+        this.authUser = authUser;
+    }
+    async generatePdf(meqs) {
+        const browser = await puppeteer_1.default.launch();
+        const page = await browser.newPage();
+        let purpose, refNumber, refType, canvassItems;
+        if (meqs.rv) {
+            purpose = meqs.rv.canvass.purpose;
+            refNumber = meqs.rv.rv_number;
+            refType = 'RV';
+            canvassItems = meqs.rv.canvass.canvass_items;
+        }
+        else if (meqs.spr) {
+            purpose = meqs.spr.canvass.purpose;
+            refNumber = meqs.spr.spr_number;
+            refType = 'SPR';
+            canvassItems = meqs.spr.canvass.canvass_items;
+        }
+        else {
+            purpose = meqs.jo.canvass.purpose;
+            refNumber = meqs.jo.jo_number;
+            refType = 'JO';
+            canvassItems = meqs.jo.canvass.canvass_items;
+        }
+        const content = `
+
+        <div style="display: flex; flex-direction: column;">
+
+            <div style="padding-left: 25px; padding-right: 25px; font-size: 10pt; flex-grow: 1; min-height: 60vh;">
+        
+                <div style="text-align: center; margin-top: 35px">
+        
+                    <h1 style="font-size: 11pt; font-weight: bold;">LEYTE V ELECTRIC COOPERATIVE, INC.</h1>
+        
+                    <div style="font-size: 9pt">
+                        <span>Brgy. San Pablo, Ormoc City, Leyte</span>
+                        <br />
+                        <span>VAT REG. TIN 001-383-331-000</span>
+                    </div>
+        
+                    <br />
+                    <br />
+        
+                    <h2 style="font-size: 11pt; font-weight: bold;">MATERIALS / EQUIPMENT QUOTATION SUMMARY</h1>
+        
+        
+                </div>
+
+                <br />
+
+                <div style="display: flex; justify-content: space-between;">
+
+                    <div>
+                        <table style="font-size: 10pt">
+                            <tr>
+                                <td>Date Prepared: </td>
+                                <td style="border-bottom: 1px solid black;">
+                                    ${(0, helpers_1.formatDate)(meqs.meqs_date)}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Purpose:</td>
+                                <td> ${purpose} </td>
+                            </tr>     
+                        </table>
+                    </div>
+
+                    <div>
+                        <table style="font-size: 10pt">
+                            <tr>
+                                <td> MEQS No.: </td>
+                                <td style="border-bottom: 1px solid black;">
+                                    ${meqs.meqs_number}
+                                </td>
+                            </tr>   
+                            <tr>
+                                <td> ${refType + ' No.:'} </td>
+                                <td style="border-bottom: 1px solid black;">
+                                    ${refNumber}
+                                </td>
+                            </tr>  
+                        </table>
+                    </div>
+                
+                </div>
+
+                <br />
+
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead style="font-size: 9pt;">
+                        <th style="border: 1px solid black;"> MATERIALS / EQUIPMENT DESCRIPTION </th>
+                        <th style="border: 1px solid black;"> UNIT </th>
+                        <th style="border: 1px solid black;"> QTY. </th>
+
+                        ${meqs.meqs_suppliers.map((item, index) => `
+                        <th align="center" style="border: 1px solid black; width: 10%;">
+                            ${item.supplier.name.toUpperCase()}
+                        </th>
+                        `).join('')}
+
+                    </thead>
+                    <tbody style="font-size: 10pt;">
+
+                        ${canvassItems.map((item, index) => `
+                        <tr>
+                            <td>
+                                ${index + 1}. ${item.description}
+                            </td>
+                            <td align="center">${item.unit ? item.unit.name : 'N/A'}</td>
+                            <td align="center">${item.quantity}</td>
+                        </tr>
+                    `).join('')}
+
+                    </tbody>
+                </table>
+        
+            </div>
+        
+            <div style="padding-left: 25px; padding-right: 25px; font-size: 10pt; padding-top: 50px; min-height: 30vh; display: flex; justify-content: center;">
+
+                
+            
+
+                    
+            
+            </div>
+        
+        
+        
+
+            <div style="display: flex; justify-content: space-between; font-size: 9pt">
+                <div>
+                    Note: This is a system generated report
+                </div>
+                <div>
+                    Date & Time Generated: ${moment(new Date()).format('MMMM D, YYYY - dddd h:mm:ss a')}
+                </div>
+            </div>
+        
+        </div>
+          
+        `;
+        await page.setContent(content);
+        const pdfBuffer = await page.pdf({
+            format: 'A4',
+            landscape: true
+        });
+        await browser.close();
+        return pdfBuffer;
+    }
+    async getEmployee(employeeId, authUser) {
+        const query = `
+            query {
+                employee(id: "${employeeId}") {
+                    id 
+                    firstname 
+                    middlename 
+                    lastname
+                    position
+                }
+            }
+        `;
+        console.log('query', query);
+        try {
+            const { data } = await (0, rxjs_1.firstValueFrom)(this.httpService.post(process.env.API_GATEWAY_URL, { query }, {
+                headers: {
+                    Authorization: authUser.authorization,
+                    'Content-Type': 'application/json',
+                },
+            }).pipe((0, rxjs_1.catchError)((error) => {
+                throw error;
+            })));
+            console.log('data', data);
+            console.log('data.data.employee', data.data.employee);
+            if (!data || !data.data) {
+                console.log('No data returned');
+                return undefined;
+            }
+            return data.data.employee;
+        }
+        catch (error) {
+            console.error('Error getting employee:', error.message);
+            return undefined;
+        }
+    }
+    async findMeqs(id) {
+        const item = await this.prisma.mEQS.findUnique({
+            include: {
+                rv: {
+                    include: {
+                        canvass: {
+                            include: {
+                                canvass_items: {
+                                    include: {
+                                        brand: true,
+                                        unit: true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                spr: {
+                    include: {
+                        canvass: {
+                            include: {
+                                canvass_items: {
+                                    include: {
+                                        brand: true,
+                                        unit: true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                jo: {
+                    include: {
+                        canvass: {
+                            include: {
+                                canvass_items: {
+                                    include: {
+                                        brand: true,
+                                        unit: true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                meqs_suppliers: {
+                    include: {
+                        supplier: true,
+                        meqs_supplier_items: {
+                            include: {
+                                canvass_item: {
+                                    include: {
+                                        brand: true,
+                                        unit: true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                meqs_approvers: {
+                    orderBy: {
+                        order: 'asc'
+                    }
+                }
+            },
+            where: { id }
+        });
+        if (!item) {
+            throw new common_1.NotFoundException('MEQS not found');
+        }
+        return item;
+    }
+};
+exports.MeqsPdfService = MeqsPdfService;
+exports.MeqsPdfService = MeqsPdfService = __decorate([
+    (0, common_1.Injectable)(),
+    __metadata("design:paramtypes", [typeof (_a = typeof prisma_service_1.PrismaService !== "undefined" && prisma_service_1.PrismaService) === "function" ? _a : Object, typeof (_b = typeof axios_1.HttpService !== "undefined" && axios_1.HttpService) === "function" ? _b : Object])
+], MeqsPdfService);
 
 
 /***/ }),
@@ -17869,7 +18253,7 @@ let RvPdfService = class RvPdfService {
                                 <td> &nbsp; </td>
                             </tr>
                             <tr>
-                                <td>Purpose: ${rv.canvass.purpose.toUpperCase()}</td>
+                                <td>Purpose: ${rv.canvass.purpose}</td>
                             </tr>     
                             <tr>
                                 <td>Listed below are the list of Item/s needed:</td>
@@ -17915,7 +18299,7 @@ let RvPdfService = class RvPdfService {
                         ${rv.canvass.canvass_items.map((item, index) => `
                         <tr>
                             <td align="center">${index + 1}</td>
-                            <td align="center">${item.description}</td>
+                            <td>${item.description}</td>
                             <td align="center">${item.unit ? item.unit.name : 'N/A'}</td>
                             <td align="center">${item.quantity}</td>
                         </tr>
@@ -20147,7 +20531,7 @@ let SprPdfService = class SprPdfService {
                                 <td>Vehicle: ${spr.vehicle.name}</td>
                             </tr>  
                             <tr>
-                                <td>Purpose: ${spr.canvass.purpose.toUpperCase()}</td>
+                                <td>Purpose: ${spr.canvass.purpose}</td>
                             </tr>     
                             <tr>
                                 <td>Listed below are the list of Item/s needed:</td>
@@ -20193,7 +20577,7 @@ let SprPdfService = class SprPdfService {
                         ${spr.canvass.canvass_items.map((item, index) => `
                         <tr>
                             <td align="center">${index + 1}</td>
-                            <td align="center">${item.description}</td>
+                            <td>${item.description}</td>
                             <td align="center">${item.unit ? item.unit.name : 'N/A'}</td>
                             <td align="center">${item.quantity}</td>
                         </tr>

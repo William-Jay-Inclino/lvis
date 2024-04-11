@@ -78,7 +78,7 @@ export class JoPdfService {
                                 <td>Equipment: ${jo.equipment}</td>
                             </tr>  
                             <tr>
-                                <td>Purpose: ${jo.canvass.purpose.toUpperCase()}</td>
+                                <td>Purpose: ${jo.canvass.purpose}</td>
                             </tr>     
                             <tr>
                                 <td>Listed below are the list of Item/s needed:</td>
@@ -124,7 +124,7 @@ export class JoPdfService {
                         ${jo.canvass.canvass_items.map((item, index) => `
                         <tr>
                             <td align="center">${index + 1}</td>
-                            <td align="center">${item.description}</td>
+                            <td>${item.description}</td>
                             <td align="center">${item.unit ? item.unit.name : 'N/A'}</td>
                             <td align="center">${item.quantity}</td>
                         </tr>
