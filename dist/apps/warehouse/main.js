@@ -6296,12 +6296,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var _a, _b, _c, _d, _e;
+var _a, _b, _c, _d, _e, _f;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.JOApprover = void 0;
 const graphql_1 = __webpack_require__(/*! @nestjs/graphql */ "@nestjs/graphql");
 const jo_entity_1 = __webpack_require__(/*! ../../jo/entities/jo.entity */ "./apps/warehouse/src/jo/entities/jo.entity.ts");
 const types_1 = __webpack_require__(/*! ../../__common__/types */ "./apps/warehouse/src/__common__/types.ts");
+const employee_entity_1 = __webpack_require__(/*! ../../__employee__/entities/employee.entity */ "./apps/warehouse/src/__employee__/entities/employee.entity.ts");
 let JOApprover = class JOApprover {
 };
 exports.JOApprover = JOApprover;
@@ -6365,6 +6366,10 @@ __decorate([
     (0, graphql_1.Field)(() => jo_entity_1.JO),
     __metadata("design:type", typeof (_e = typeof jo_entity_1.JO !== "undefined" && jo_entity_1.JO) === "function" ? _e : Object)
 ], JOApprover.prototype, "jo", void 0);
+__decorate([
+    (0, graphql_1.Field)(() => employee_entity_1.Employee, { nullable: true }),
+    __metadata("design:type", typeof (_f = typeof employee_entity_1.Employee !== "undefined" && employee_entity_1.Employee) === "function" ? _f : Object)
+], JOApprover.prototype, "approver", void 0);
 exports.JOApprover = JOApprover = __decorate([
     (0, graphql_1.ObjectType)()
 ], JOApprover);
@@ -7291,6 +7296,68 @@ exports.JOsResponse = JOsResponse = __decorate([
 
 /***/ }),
 
+/***/ "./apps/warehouse/src/jo/jo.controller.ts":
+/*!************************************************!*\
+  !*** ./apps/warehouse/src/jo/jo.controller.ts ***!
+  \************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+var _a, _b, _c;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.JoController = void 0;
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const jo_pdf_service_1 = __webpack_require__(/*! ./jo.pdf.service */ "./apps/warehouse/src/jo/jo.pdf.service.ts");
+const jwt_auth_guard_1 = __webpack_require__(/*! ../__auth__/guards/jwt-auth.guard */ "./apps/warehouse/src/__auth__/guards/jwt-auth.guard.ts");
+const current_auth_user_decorator_1 = __webpack_require__(/*! ../__auth__/current-auth-user.decorator */ "./apps/warehouse/src/__auth__/current-auth-user.decorator.ts");
+const auth_user_entity_1 = __webpack_require__(/*! ../__common__/auth-user.entity */ "./apps/warehouse/src/__common__/auth-user.entity.ts");
+let JoController = class JoController {
+    constructor(joPdfService) {
+        this.joPdfService = joPdfService;
+    }
+    async generatePdf(id, res, authUser) {
+        console.log('id', id);
+        console.log('authUser', authUser);
+        this.joPdfService.setAuthUser(authUser);
+        const jo = await this.joPdfService.findJo(id);
+        const pdfBuffer = await this.joPdfService.generatePdf(jo);
+        res.setHeader('Content-Type', 'application/pdf');
+        res.setHeader('Content-Disposition', 'inline; filename="example.pdf"');
+        res.send(pdfBuffer);
+    }
+};
+exports.JoController = JoController;
+__decorate([
+    (0, common_1.Get)('pdf/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Res)()),
+    __param(2, (0, current_auth_user_decorator_1.CurrentAuthUser)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, typeof (_b = typeof Response !== "undefined" && Response) === "function" ? _b : Object, typeof (_c = typeof auth_user_entity_1.AuthUser !== "undefined" && auth_user_entity_1.AuthUser) === "function" ? _c : Object]),
+    __metadata("design:returntype", Promise)
+], JoController.prototype, "generatePdf", null);
+exports.JoController = JoController = __decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    (0, common_1.Controller)('jo'),
+    __metadata("design:paramtypes", [typeof (_a = typeof jo_pdf_service_1.JoPdfService !== "undefined" && jo_pdf_service_1.JoPdfService) === "function" ? _a : Object])
+], JoController);
+
+
+/***/ }),
+
 /***/ "./apps/warehouse/src/jo/jo.module.ts":
 /*!********************************************!*\
   !*** ./apps/warehouse/src/jo/jo.module.ts ***!
@@ -7313,16 +7380,341 @@ const jo_resolver_1 = __webpack_require__(/*! ./jo.resolver */ "./apps/warehouse
 const axios_1 = __webpack_require__(/*! @nestjs/axios */ "@nestjs/axios");
 const canvass_service_1 = __webpack_require__(/*! ../canvass/canvass.service */ "./apps/warehouse/src/canvass/canvass.service.ts");
 const jo_approver_service_1 = __webpack_require__(/*! ../jo-approver/jo-approver.service */ "./apps/warehouse/src/jo-approver/jo-approver.service.ts");
+const jo_controller_1 = __webpack_require__(/*! ./jo.controller */ "./apps/warehouse/src/jo/jo.controller.ts");
+const jo_pdf_service_1 = __webpack_require__(/*! ./jo.pdf.service */ "./apps/warehouse/src/jo/jo.pdf.service.ts");
 let JoModule = class JoModule {
 };
 exports.JoModule = JoModule;
 exports.JoModule = JoModule = __decorate([
     (0, common_1.Module)({
         imports: [axios_1.HttpModule],
-        providers: [jo_service_1.JoService, jo_resolver_1.JoResolver, jo_approver_service_1.JoApproverService, canvass_service_1.CanvassService],
-        exports: [jo_service_1.JoService]
+        providers: [jo_service_1.JoService, jo_resolver_1.JoResolver, jo_pdf_service_1.JoPdfService, jo_approver_service_1.JoApproverService, canvass_service_1.CanvassService],
+        exports: [jo_service_1.JoService],
+        controllers: [jo_controller_1.JoController]
     })
 ], JoModule);
+
+
+/***/ }),
+
+/***/ "./apps/warehouse/src/jo/jo.pdf.service.ts":
+/*!*************************************************!*\
+  !*** ./apps/warehouse/src/jo/jo.pdf.service.ts ***!
+  \*************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var _a, _b;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.JoPdfService = void 0;
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const puppeteer_1 = __webpack_require__(/*! puppeteer */ "puppeteer");
+const helpers_1 = __webpack_require__(/*! ../__common__/helpers */ "./apps/warehouse/src/__common__/helpers.ts");
+const moment = __webpack_require__(/*! moment */ "moment");
+const rxjs_1 = __webpack_require__(/*! rxjs */ "rxjs");
+const axios_1 = __webpack_require__(/*! @nestjs/axios */ "@nestjs/axios");
+const prisma_service_1 = __webpack_require__(/*! ../__prisma__/prisma.service */ "./apps/warehouse/src/__prisma__/prisma.service.ts");
+let JoPdfService = class JoPdfService {
+    constructor(prisma, httpService) {
+        this.prisma = prisma;
+        this.httpService = httpService;
+    }
+    setAuthUser(authUser) {
+        this.authUser = authUser;
+    }
+    async generatePdf(jo) {
+        console.log('generatePdf()');
+        console.log('jo', jo);
+        const browser = await puppeteer_1.default.launch();
+        const page = await browser.newPage();
+        const approvers = await Promise.all(jo.jo_approvers.map(async (i) => {
+            i.approver = await this.getEmployee(i.approver_id, this.authUser);
+            return i;
+        }));
+        const department = await this.getDepartment(jo.department_id, this.authUser);
+        const requisitioner = await this.getEmployee(jo.canvass.requested_by_id, this.authUser);
+        const content = `
+
+        <div style="display: flex; flex-direction: column;">
+
+            <div style="padding-left: 25px; padding-right: 25px; font-size: 10pt; flex-grow: 1; min-height: 55vh;">
+        
+                <div style="text-align: center; margin-top: 35px">
+        
+                    <h1 style="font-size: 11pt; font-weight: bold;">LEYTE V ELECTRIC COOPERATIVE, INC.</h1>
+        
+                    <div style="font-size: 9pt">
+                        <span>Brgy. San Pablo, Ormoc City, Leyte</span>
+                        <br />
+                        <span>VAT REG. TIN 001-383-331-000</span>
+                    </div>
+        
+                    <br />
+                    <br />
+        
+                    <h2 style="font-size: 11pt; font-weight: bold;">JOB ORDER REQUEST</h1>
+        
+        
+                </div>
+
+                <br />
+
+                <div style="display: flex; justify-content: space-between;">
+
+                    <div>
+                        <table style="font-size: 10pt">
+                            <tr>
+                                <td>Department: ${department.name}</td>
+                            </tr>  
+                            <tr>
+                                <td>Equipment: ${jo.equipment}</td>
+                            </tr>  
+                            <tr>
+                                <td>Purpose: ${jo.canvass.purpose.toUpperCase()}</td>
+                            </tr>     
+                            <tr>
+                                <td>Listed below are the list of Item/s needed:</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div>
+                        <table style="font-size: 10pt">
+                            <tr>
+                                <td>Date: </td>
+                                <td style="border-bottom: 1px solid black;">
+                                    ${(0, helpers_1.formatDate)(jo.date_requested)}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td> JO No.: </td>
+                                <td style="border-bottom: 1px solid black;">
+                                    ${jo.jo_number}
+                                </td>
+                            </tr>    
+                            <tr>
+                                <td> RC No.: </td>
+                                <td style="border-bottom: 1px solid black;">
+                                    ${jo.canvass.rc_number}
+                                </td>
+                            </tr>  
+                        </table>
+                    </div>
+                
+                </div>
+
+                <br />
+
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead style="font-size: 10pt;">
+                        <th style="border: 1px solid black;"> NO. </th>
+                        <th style="border: 1px solid black;"> DESCRIPTION AND SPECIFICATIONS </th>
+                        <th style="border: 1px solid black;"> UNIT </th>
+                        <th style="border: 1px solid black;"> QTY. </th>
+                    </thead>
+                    <tbody style="font-size: 10pt;">
+                        ${jo.canvass.canvass_items.map((item, index) => `
+                        <tr>
+                            <td align="center">${index + 1}</td>
+                            <td align="center">${item.description}</td>
+                            <td align="center">${item.unit ? item.unit.name : 'N/A'}</td>
+                            <td align="center">${item.quantity}</td>
+                        </tr>
+                    `).join('')}
+                    </tbody>
+                </table>
+        
+            </div>
+        
+            <div style="padding-left: 25px; padding-right: 25px; font-size: 10pt; padding-top: 50px; min-height: 37vh; display: flex; justify-content: center;">
+
+                <div style="display: flex; flex-wrap: wrap;">
+
+                    <div style="padding: 10px; width: 40%">
+                        <table border="0" style="width: 100%">
+                            <tr>
+                                <td style="text-align: center; font-size: 10pt;"> ${(0, helpers_1.formatDate)(jo.date_requested)} </td>
+                            </tr>
+                            <tr>
+                                <th style="text-align: center;">
+                                    <u>
+                                    ${requisitioner.firstname + ' ' + requisitioner.lastname} 
+                                    </u>
+                                </th>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center">
+                                ${requisitioner.position || ''} 
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-size: 10pt; text-align: center;"> Requisitioner </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    ${approvers.map((item, index) => `
+                    
+                    <div style="padding: 10px; width: 40%">
+                        <table border="0" style="width: 100%">
+                            <tr>
+                                <td style="text-align: center; font-size: 10pt;"> 
+                                    ${item.date_approval ? (0, helpers_1.formatDate)(item.date_approval) : '&nbsp;'} 
+                                </td>
+                            </tr>
+                            <tr>
+                                <th style="text-align: center">
+                                    <u>
+                                    ${item.approver.firstname + ' ' + item.approver.lastname}
+                                    </u>
+                                </th>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center">
+                                    ${item.label}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                `).join('')}
+            
+
+                    
+            
+                </div>
+            
+            </div>
+        
+        
+        
+
+            <div style="display: flex; justify-content: space-between; font-size: 9pt">
+                <div>
+                    Note: This is a system generated report
+                </div>
+                <div>
+                    Date & Time Generated: ${moment(new Date()).format('MMMM D, YYYY - dddd h:mm:ss a')}
+                </div>
+            </div>
+        
+        </div>
+          
+        `;
+        await page.setContent(content);
+        const pdfBuffer = await page.pdf();
+        await browser.close();
+        return pdfBuffer;
+    }
+    async getEmployee(employeeId, authUser) {
+        const query = `
+            query {
+                employee(id: "${employeeId}") {
+                    id 
+                    firstname 
+                    middlename 
+                    lastname
+                    position
+                }
+            }
+        `;
+        console.log('query', query);
+        try {
+            const { data } = await (0, rxjs_1.firstValueFrom)(this.httpService.post(process.env.API_GATEWAY_URL, { query }, {
+                headers: {
+                    Authorization: authUser.authorization,
+                    'Content-Type': 'application/json',
+                },
+            }).pipe((0, rxjs_1.catchError)((error) => {
+                throw error;
+            })));
+            console.log('data', data);
+            console.log('data.data.employee', data.data.employee);
+            if (!data || !data.data) {
+                console.log('No data returned');
+                return undefined;
+            }
+            return data.data.employee;
+        }
+        catch (error) {
+            console.error('Error getting employee:', error.message);
+            return undefined;
+        }
+    }
+    async getDepartment(departmentId, authUser) {
+        const query = `
+            query {
+                department(id: "${departmentId}") {
+                    id 
+                    name
+                }
+            }
+        `;
+        console.log('query', query);
+        try {
+            const { data } = await (0, rxjs_1.firstValueFrom)(this.httpService.post(process.env.API_GATEWAY_URL, { query }, {
+                headers: {
+                    Authorization: authUser.authorization,
+                    'Content-Type': 'application/json',
+                },
+            }).pipe((0, rxjs_1.catchError)((error) => {
+                throw error;
+            })));
+            console.log('data', data);
+            console.log('data.data.department', data.data.department);
+            if (!data || !data.data) {
+                console.log('No data returned');
+                return undefined;
+            }
+            return data.data.department;
+        }
+        catch (error) {
+            console.error('Error getting department:', error.message);
+            return undefined;
+        }
+    }
+    async findJo(id) {
+        const item = await this.prisma.jO.findUnique({
+            include: {
+                canvass: {
+                    include: {
+                        canvass_items: {
+                            include: {
+                                unit: true,
+                                brand: true
+                            }
+                        }
+                    }
+                },
+                jo_approvers: {
+                    orderBy: {
+                        order: 'asc'
+                    }
+                }
+            },
+            where: { id }
+        });
+        if (!item) {
+            throw new common_1.NotFoundException('SPR not found');
+        }
+        return item;
+    }
+};
+exports.JoPdfService = JoPdfService;
+exports.JoPdfService = JoPdfService = __decorate([
+    (0, common_1.Injectable)(),
+    __metadata("design:paramtypes", [typeof (_a = typeof prisma_service_1.PrismaService !== "undefined" && prisma_service_1.PrismaService) === "function" ? _a : Object, typeof (_b = typeof axios_1.HttpService !== "undefined" && axios_1.HttpService) === "function" ? _b : Object])
+], JoPdfService);
 
 
 /***/ }),
@@ -16296,12 +16688,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var _a, _b, _c, _d, _e;
+var _a, _b, _c, _d, _e, _f;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.RVApprover = void 0;
 const graphql_1 = __webpack_require__(/*! @nestjs/graphql */ "@nestjs/graphql");
 const rv_entity_1 = __webpack_require__(/*! ../../rv/entities/rv.entity */ "./apps/warehouse/src/rv/entities/rv.entity.ts");
 const types_1 = __webpack_require__(/*! ../../__common__/types */ "./apps/warehouse/src/__common__/types.ts");
+const employee_entity_1 = __webpack_require__(/*! ../../__employee__/entities/employee.entity */ "./apps/warehouse/src/__employee__/entities/employee.entity.ts");
 let RVApprover = class RVApprover {
 };
 exports.RVApprover = RVApprover;
@@ -16365,6 +16758,10 @@ __decorate([
     (0, graphql_1.Field)(() => rv_entity_1.RV),
     __metadata("design:type", typeof (_e = typeof rv_entity_1.RV !== "undefined" && rv_entity_1.RV) === "function" ? _e : Object)
 ], RVApprover.prototype, "rv", void 0);
+__decorate([
+    (0, graphql_1.Field)(() => employee_entity_1.Employee, { nullable: true }),
+    __metadata("design:type", typeof (_f = typeof employee_entity_1.Employee !== "undefined" && employee_entity_1.Employee) === "function" ? _f : Object)
+], RVApprover.prototype, "approver", void 0);
 exports.RVApprover = RVApprover = __decorate([
     (0, graphql_1.ObjectType)()
 ], RVApprover);
@@ -17314,24 +17711,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-var _a, _b, _c, _d;
+var _a, _b, _c;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.RvController = void 0;
 const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
-const rv_service_1 = __webpack_require__(/*! ./rv.service */ "./apps/warehouse/src/rv/rv.service.ts");
 const rv_pdf_service_1 = __webpack_require__(/*! ./rv.pdf.service */ "./apps/warehouse/src/rv/rv.pdf.service.ts");
+const jwt_auth_guard_1 = __webpack_require__(/*! ../__auth__/guards/jwt-auth.guard */ "./apps/warehouse/src/__auth__/guards/jwt-auth.guard.ts");
 const current_auth_user_decorator_1 = __webpack_require__(/*! ../__auth__/current-auth-user.decorator */ "./apps/warehouse/src/__auth__/current-auth-user.decorator.ts");
 const auth_user_entity_1 = __webpack_require__(/*! ../__common__/auth-user.entity */ "./apps/warehouse/src/__common__/auth-user.entity.ts");
 let RvController = class RvController {
-    constructor(rvService, rvPdfService) {
-        this.rvService = rvService;
+    constructor(rvPdfService) {
         this.rvPdfService = rvPdfService;
     }
     async generatePdf(id, res, authUser) {
         console.log('id', id);
         console.log('authUser', authUser);
         this.rvPdfService.setAuthUser(authUser);
-        const rv = await this.rvService.findOne(id);
+        const rv = await this.rvPdfService.findRv(id);
         const pdfBuffer = await this.rvPdfService.generatePdf(rv);
         res.setHeader('Content-Type', 'application/pdf');
         res.setHeader('Content-Disposition', 'inline; filename="example.pdf"');
@@ -17345,12 +17741,13 @@ __decorate([
     __param(1, (0, common_1.Res)()),
     __param(2, (0, current_auth_user_decorator_1.CurrentAuthUser)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, typeof (_c = typeof Response !== "undefined" && Response) === "function" ? _c : Object, typeof (_d = typeof auth_user_entity_1.AuthUser !== "undefined" && auth_user_entity_1.AuthUser) === "function" ? _d : Object]),
+    __metadata("design:paramtypes", [String, typeof (_b = typeof Response !== "undefined" && Response) === "function" ? _b : Object, typeof (_c = typeof auth_user_entity_1.AuthUser !== "undefined" && auth_user_entity_1.AuthUser) === "function" ? _c : Object]),
     __metadata("design:returntype", Promise)
 ], RvController.prototype, "generatePdf", null);
 exports.RvController = RvController = __decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Controller)('rv'),
-    __metadata("design:paramtypes", [typeof (_a = typeof rv_service_1.RvService !== "undefined" && rv_service_1.RvService) === "function" ? _a : Object, typeof (_b = typeof rv_pdf_service_1.RvPdfService !== "undefined" && rv_pdf_service_1.RvPdfService) === "function" ? _b : Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof rv_pdf_service_1.RvPdfService !== "undefined" && rv_pdf_service_1.RvPdfService) === "function" ? _a : Object])
 ], RvController);
 
 
@@ -17412,7 +17809,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var _a;
+var _a, _b;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.RvPdfService = void 0;
 const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
@@ -17421,8 +17818,10 @@ const helpers_1 = __webpack_require__(/*! ../__common__/helpers */ "./apps/wareh
 const moment = __webpack_require__(/*! moment */ "moment");
 const rxjs_1 = __webpack_require__(/*! rxjs */ "rxjs");
 const axios_1 = __webpack_require__(/*! @nestjs/axios */ "@nestjs/axios");
+const prisma_service_1 = __webpack_require__(/*! ../__prisma__/prisma.service */ "./apps/warehouse/src/__prisma__/prisma.service.ts");
 let RvPdfService = class RvPdfService {
-    constructor(httpService) {
+    constructor(prisma, httpService) {
+        this.prisma = prisma;
         this.httpService = httpService;
     }
     setAuthUser(authUser) {
@@ -17431,11 +17830,16 @@ let RvPdfService = class RvPdfService {
     async generatePdf(rv) {
         const browser = await puppeteer_1.default.launch();
         const page = await browser.newPage();
+        const approvers = await Promise.all(rv.rv_approvers.map(async (i) => {
+            i.approver = await this.getEmployee(i.approver_id, this.authUser);
+            return i;
+        }));
+        const requisitioner = await this.getEmployee(rv.canvass.requested_by_id, this.authUser);
         const content = `
 
         <div style="display: flex; flex-direction: column;">
 
-            <div style="padding-left: 25px; padding-right: 25px; font-size: 10pt; flex-grow: 1; min-height: 60vh;">
+            <div style="padding-left: 25px; padding-right: 25px; font-size: 10pt; flex-grow: 1; min-height: 55vh;">
         
                 <div style="text-align: center; margin-top: 35px">
         
@@ -17462,11 +17866,11 @@ let RvPdfService = class RvPdfService {
                     <div>
                         <table style="font-size: 10pt">
                             <tr>
+                                <td> &nbsp; </td>
+                            </tr>
+                            <tr>
                                 <td>Purpose: ${rv.canvass.purpose.toUpperCase()}</td>
                             </tr>     
-                            <tr>
-                                <td>Notes: ${rv.notes} </td>
-                            </tr>   
                             <tr>
                                 <td>Listed below are the list of Item/s needed:</td>
                             </tr>
@@ -17486,11 +17890,11 @@ let RvPdfService = class RvPdfService {
                                 <td style="border-bottom: 1px solid black;">
                                     ${rv.rv_number}
                                 </td>
-                            </tr>     
+                            </tr>   
                             <tr>
-                                <td> Requisitioner: </td>
+                                <td> RC No.: </td>
                                 <td style="border-bottom: 1px solid black;">
-                                    Joshua Tayag
+                                    ${rv.canvass.rc_number}
                                 </td>
                             </tr>  
                         </table>
@@ -17521,37 +17925,58 @@ let RvPdfService = class RvPdfService {
         
             </div>
         
-            <div style="padding-left: 25px; padding-right: 25px; font-size: 10pt; padding-top: 50px; min-height: 32vh; display: flex; justify-content: center;">
+            <div style="padding-left: 25px; padding-right: 25px; font-size: 10pt; padding-top: 50px; min-height: 37vh; display: flex; justify-content: center;">
 
                 <div style="display: flex; flex-wrap: wrap;">
-            
-                    <div style="padding: 10px;">
-                        <table border="1">
+
+                    <div style="padding: 10px; width: 40%">
+                        <table border="0" style="width: 100%">
                             <tr>
-                                <th> RICAFLOR SUAN </th>
+                                <td style="text-align: center; font-size: 10pt;"> ${(0, helpers_1.formatDate)(rv.date_requested)} </td>
                             </tr>
                             <tr>
-                                <td> Rate Analyst </td>
+                                <th style="text-align: center;">
+                                    <u>
+                                    ${requisitioner.firstname + ' ' + requisitioner.lastname} 
+                                    </u>
+                                </th>
                             </tr>
                             <tr>
-                                <td> ${(0, helpers_1.formatDate)(rv.date_requested)} </td>
+                                <td style="text-align: center">
+                                ${requisitioner.position || ''} 
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-size: 10pt; text-align: center;"> Requisitioner </td>
                             </tr>
                         </table>
                     </div>
 
-                    <div style="padding: 10px;">
-                        <table border="1">
+                    ${approvers.map((item, index) => `
+                    
+                    <div style="padding: 10px; width: 40%">
+                        <table border="0" style="width: 100%">
                             <tr>
-                                <th> RICAFLOR SUAN </th>
+                                <td style="text-align: center; font-size: 10pt;"> ${(0, helpers_1.formatDate)(item.date_approval)} </td>
                             </tr>
                             <tr>
-                                <td> Rate Analyst </td>
+                                <th style="text-align: center">
+                                    <u>
+                                    ${item.approver.firstname + ' ' + item.approver.lastname}
+                                    </u>
+                                </th>
                             </tr>
                             <tr>
-                                <td> ${(0, helpers_1.formatDate)(rv.date_requested)} </td>
+                                <td style="text-align: center">
+                                    ${item.label}
+                                </td>
                             </tr>
                         </table>
                     </div>
+
+                `).join('')}
+            
+
                     
             
                 </div>
@@ -17613,11 +18038,37 @@ let RvPdfService = class RvPdfService {
             return undefined;
         }
     }
+    async findRv(id) {
+        const item = await this.prisma.rV.findUnique({
+            include: {
+                canvass: {
+                    include: {
+                        canvass_items: {
+                            include: {
+                                unit: true,
+                                brand: true
+                            }
+                        }
+                    }
+                },
+                rv_approvers: {
+                    orderBy: {
+                        order: 'asc'
+                    }
+                }
+            },
+            where: { id }
+        });
+        if (!item) {
+            throw new common_1.NotFoundException('RV not found');
+        }
+        return item;
+    }
 };
 exports.RvPdfService = RvPdfService;
 exports.RvPdfService = RvPdfService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [typeof (_a = typeof axios_1.HttpService !== "undefined" && axios_1.HttpService) === "function" ? _a : Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof prisma_service_1.PrismaService !== "undefined" && prisma_service_1.PrismaService) === "function" ? _a : Object, typeof (_b = typeof axios_1.HttpService !== "undefined" && axios_1.HttpService) === "function" ? _b : Object])
 ], RvPdfService);
 
 
@@ -18525,12 +18976,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var _a, _b, _c, _d, _e;
+var _a, _b, _c, _d, _e, _f;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.SPRApprover = void 0;
 const graphql_1 = __webpack_require__(/*! @nestjs/graphql */ "@nestjs/graphql");
 const types_1 = __webpack_require__(/*! ../../__common__/types */ "./apps/warehouse/src/__common__/types.ts");
 const spr_entity_1 = __webpack_require__(/*! ../../spr/entities/spr.entity */ "./apps/warehouse/src/spr/entities/spr.entity.ts");
+const employee_entity_1 = __webpack_require__(/*! ../../__employee__/entities/employee.entity */ "./apps/warehouse/src/__employee__/entities/employee.entity.ts");
 let SPRApprover = class SPRApprover {
 };
 exports.SPRApprover = SPRApprover;
@@ -18594,6 +19046,10 @@ __decorate([
     (0, graphql_1.Field)(() => spr_entity_1.SPR),
     __metadata("design:type", typeof (_e = typeof spr_entity_1.SPR !== "undefined" && spr_entity_1.SPR) === "function" ? _e : Object)
 ], SPRApprover.prototype, "spr", void 0);
+__decorate([
+    (0, graphql_1.Field)(() => employee_entity_1.Employee, { nullable: true }),
+    __metadata("design:type", typeof (_f = typeof employee_entity_1.Employee !== "undefined" && employee_entity_1.Employee) === "function" ? _f : Object)
+], SPRApprover.prototype, "approver", void 0);
 exports.SPRApprover = SPRApprover = __decorate([
     (0, graphql_1.ObjectType)()
 ], SPRApprover);
@@ -19380,8 +19836,8 @@ exports.SPR = void 0;
 const graphql_1 = __webpack_require__(/*! @nestjs/graphql */ "@nestjs/graphql");
 const canvass_entity_1 = __webpack_require__(/*! ../../canvass/entities/canvass.entity */ "./apps/warehouse/src/canvass/entities/canvass.entity.ts");
 const meq_entity_1 = __webpack_require__(/*! ../../meqs/entities/meq.entity */ "./apps/warehouse/src/meqs/entities/meq.entity.ts");
-const rv_approver_entity_1 = __webpack_require__(/*! ../../rv-approver/entities/rv-approver.entity */ "./apps/warehouse/src/rv-approver/entities/rv-approver.entity.ts");
 const vehicle_entity_1 = __webpack_require__(/*! ../../vehicle/entities/vehicle.entity */ "./apps/warehouse/src/vehicle/entities/vehicle.entity.ts");
+const spr_approver_entity_1 = __webpack_require__(/*! ../../spr-approver/entities/spr-approver.entity */ "./apps/warehouse/src/spr-approver/entities/spr-approver.entity.ts");
 let SPR = class SPR {
 };
 exports.SPR = SPR;
@@ -19454,9 +19910,9 @@ __decorate([
     __metadata("design:type", typeof (_e = typeof meq_entity_1.MEQS !== "undefined" && meq_entity_1.MEQS) === "function" ? _e : Object)
 ], SPR.prototype, "meqs", void 0);
 __decorate([
-    (0, graphql_1.Field)(() => [rv_approver_entity_1.RVApprover]),
+    (0, graphql_1.Field)(() => [spr_approver_entity_1.SPRApprover]),
     __metadata("design:type", Array)
-], SPR.prototype, "rv_approvers", void 0);
+], SPR.prototype, "spr_approvers", void 0);
 exports.SPR = SPR = __decorate([
     (0, graphql_1.ObjectType)()
 ], SPR);
@@ -19511,6 +19967,68 @@ exports.SPRsResponse = SPRsResponse = __decorate([
 
 /***/ }),
 
+/***/ "./apps/warehouse/src/spr/spr.controller.ts":
+/*!**************************************************!*\
+  !*** ./apps/warehouse/src/spr/spr.controller.ts ***!
+  \**************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+var _a, _b, _c;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.SprController = void 0;
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const spr_pdf_service_1 = __webpack_require__(/*! ./spr.pdf.service */ "./apps/warehouse/src/spr/spr.pdf.service.ts");
+const jwt_auth_guard_1 = __webpack_require__(/*! ../__auth__/guards/jwt-auth.guard */ "./apps/warehouse/src/__auth__/guards/jwt-auth.guard.ts");
+const current_auth_user_decorator_1 = __webpack_require__(/*! ../__auth__/current-auth-user.decorator */ "./apps/warehouse/src/__auth__/current-auth-user.decorator.ts");
+const auth_user_entity_1 = __webpack_require__(/*! ../__common__/auth-user.entity */ "./apps/warehouse/src/__common__/auth-user.entity.ts");
+let SprController = class SprController {
+    constructor(sprPdfService) {
+        this.sprPdfService = sprPdfService;
+    }
+    async generatePdf(id, res, authUser) {
+        console.log('id', id);
+        console.log('authUser', authUser);
+        this.sprPdfService.setAuthUser(authUser);
+        const spr = await this.sprPdfService.findSpr(id);
+        const pdfBuffer = await this.sprPdfService.generatePdf(spr);
+        res.setHeader('Content-Type', 'application/pdf');
+        res.setHeader('Content-Disposition', 'inline; filename="example.pdf"');
+        res.send(pdfBuffer);
+    }
+};
+exports.SprController = SprController;
+__decorate([
+    (0, common_1.Get)('pdf/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Res)()),
+    __param(2, (0, current_auth_user_decorator_1.CurrentAuthUser)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, typeof (_b = typeof Response !== "undefined" && Response) === "function" ? _b : Object, typeof (_c = typeof auth_user_entity_1.AuthUser !== "undefined" && auth_user_entity_1.AuthUser) === "function" ? _c : Object]),
+    __metadata("design:returntype", Promise)
+], SprController.prototype, "generatePdf", null);
+exports.SprController = SprController = __decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    (0, common_1.Controller)('spr'),
+    __metadata("design:paramtypes", [typeof (_a = typeof spr_pdf_service_1.SprPdfService !== "undefined" && spr_pdf_service_1.SprPdfService) === "function" ? _a : Object])
+], SprController);
+
+
+/***/ }),
+
 /***/ "./apps/warehouse/src/spr/spr.module.ts":
 /*!**********************************************!*\
   !*** ./apps/warehouse/src/spr/spr.module.ts ***!
@@ -19533,16 +20051,306 @@ const spr_resolver_1 = __webpack_require__(/*! ./spr.resolver */ "./apps/warehou
 const axios_1 = __webpack_require__(/*! @nestjs/axios */ "@nestjs/axios");
 const canvass_service_1 = __webpack_require__(/*! ../canvass/canvass.service */ "./apps/warehouse/src/canvass/canvass.service.ts");
 const spr_approver_service_1 = __webpack_require__(/*! ../spr-approver/spr-approver.service */ "./apps/warehouse/src/spr-approver/spr-approver.service.ts");
+const spr_controller_1 = __webpack_require__(/*! ./spr.controller */ "./apps/warehouse/src/spr/spr.controller.ts");
+const spr_pdf_service_1 = __webpack_require__(/*! ./spr.pdf.service */ "./apps/warehouse/src/spr/spr.pdf.service.ts");
 let SprModule = class SprModule {
 };
 exports.SprModule = SprModule;
 exports.SprModule = SprModule = __decorate([
     (0, common_1.Module)({
         imports: [axios_1.HttpModule],
-        providers: [spr_service_1.SprService, spr_resolver_1.SprResolver, spr_approver_service_1.SprApproverService, canvass_service_1.CanvassService],
-        exports: [spr_service_1.SprService]
+        providers: [spr_service_1.SprService, spr_resolver_1.SprResolver, spr_pdf_service_1.SprPdfService, spr_approver_service_1.SprApproverService, canvass_service_1.CanvassService],
+        exports: [spr_service_1.SprService],
+        controllers: [spr_controller_1.SprController]
     })
 ], SprModule);
+
+
+/***/ }),
+
+/***/ "./apps/warehouse/src/spr/spr.pdf.service.ts":
+/*!***************************************************!*\
+  !*** ./apps/warehouse/src/spr/spr.pdf.service.ts ***!
+  \***************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var _a, _b;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.SprPdfService = void 0;
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const puppeteer_1 = __webpack_require__(/*! puppeteer */ "puppeteer");
+const helpers_1 = __webpack_require__(/*! ../__common__/helpers */ "./apps/warehouse/src/__common__/helpers.ts");
+const moment = __webpack_require__(/*! moment */ "moment");
+const rxjs_1 = __webpack_require__(/*! rxjs */ "rxjs");
+const axios_1 = __webpack_require__(/*! @nestjs/axios */ "@nestjs/axios");
+const prisma_service_1 = __webpack_require__(/*! ../__prisma__/prisma.service */ "./apps/warehouse/src/__prisma__/prisma.service.ts");
+let SprPdfService = class SprPdfService {
+    constructor(prisma, httpService) {
+        this.prisma = prisma;
+        this.httpService = httpService;
+    }
+    setAuthUser(authUser) {
+        this.authUser = authUser;
+    }
+    async generatePdf(spr) {
+        console.log('generatePdf()');
+        console.log('spr', spr);
+        const browser = await puppeteer_1.default.launch();
+        const page = await browser.newPage();
+        const approvers = await Promise.all(spr.spr_approvers.map(async (i) => {
+            i.approver = await this.getEmployee(i.approver_id, this.authUser);
+            return i;
+        }));
+        const requisitioner = await this.getEmployee(spr.canvass.requested_by_id, this.authUser);
+        const content = `
+
+        <div style="display: flex; flex-direction: column;">
+
+            <div style="padding-left: 25px; padding-right: 25px; font-size: 10pt; flex-grow: 1; min-height: 55vh;">
+        
+                <div style="text-align: center; margin-top: 35px">
+        
+                    <h1 style="font-size: 11pt; font-weight: bold;">LEYTE V ELECTRIC COOPERATIVE, INC.</h1>
+        
+                    <div style="font-size: 9pt">
+                        <span>Brgy. San Pablo, Ormoc City, Leyte</span>
+                        <br />
+                        <span>VAT REG. TIN 001-383-331-000</span>
+                    </div>
+        
+                    <br />
+                    <br />
+        
+                    <h2 style="font-size: 11pt; font-weight: bold;">SPARE PARTS REQUEST</h1>
+        
+        
+                </div>
+
+                <br />
+
+                <div style="display: flex; justify-content: space-between;">
+
+                    <div>
+                        <table style="font-size: 10pt">
+                            <tr>
+                                <td>Vehicle: ${spr.vehicle.name}</td>
+                            </tr>  
+                            <tr>
+                                <td>Purpose: ${spr.canvass.purpose.toUpperCase()}</td>
+                            </tr>     
+                            <tr>
+                                <td>Listed below are the list of Item/s needed:</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div>
+                        <table style="font-size: 10pt">
+                            <tr>
+                                <td>Date: </td>
+                                <td style="border-bottom: 1px solid black;">
+                                    ${(0, helpers_1.formatDate)(spr.date_requested)}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td> SPR No.: </td>
+                                <td style="border-bottom: 1px solid black;">
+                                    ${spr.spr_number}
+                                </td>
+                            </tr>    
+                            <tr>
+                                <td> RC No.: </td>
+                                <td style="border-bottom: 1px solid black;">
+                                    ${spr.canvass.rc_number}
+                                </td>
+                            </tr>  
+                        </table>
+                    </div>
+                
+                </div>
+
+                <br />
+
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead style="font-size: 10pt;">
+                        <th style="border: 1px solid black;"> NO. </th>
+                        <th style="border: 1px solid black;"> DESCRIPTION AND SPECIFICATIONS </th>
+                        <th style="border: 1px solid black;"> UNIT </th>
+                        <th style="border: 1px solid black;"> QTY. </th>
+                    </thead>
+                    <tbody style="font-size: 10pt;">
+                        ${spr.canvass.canvass_items.map((item, index) => `
+                        <tr>
+                            <td align="center">${index + 1}</td>
+                            <td align="center">${item.description}</td>
+                            <td align="center">${item.unit ? item.unit.name : 'N/A'}</td>
+                            <td align="center">${item.quantity}</td>
+                        </tr>
+                    `).join('')}
+                    </tbody>
+                </table>
+        
+            </div>
+        
+            <div style="padding-left: 25px; padding-right: 25px; font-size: 10pt; padding-top: 50px; min-height: 37vh; display: flex; justify-content: center;">
+
+                <div style="display: flex; flex-wrap: wrap;">
+
+                    <div style="padding: 10px; width: 40%">
+                        <table border="0" style="width: 100%">
+                            <tr>
+                                <td style="text-align: center; font-size: 10pt;"> ${(0, helpers_1.formatDate)(spr.date_requested)} </td>
+                            </tr>
+                            <tr>
+                                <th style="text-align: center;">
+                                    <u>
+                                    ${requisitioner.firstname + ' ' + requisitioner.lastname} 
+                                    </u>
+                                </th>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center">
+                                ${requisitioner.position || ''} 
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-size: 10pt; text-align: center;"> Requisitioner </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    ${approvers.map((item, index) => `
+                    
+                    <div style="padding: 10px; width: 40%">
+                        <table border="0" style="width: 100%">
+                            <tr>
+                                <td style="text-align: center; font-size: 10pt;"> 
+                                    ${item.date_approval ? (0, helpers_1.formatDate)(item.date_approval) : '&nbsp;'} 
+                                </td>
+                            </tr>
+                            <tr>
+                                <th style="text-align: center">
+                                    <u>
+                                    ${item.approver.firstname + ' ' + item.approver.lastname}
+                                    </u>
+                                </th>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center">
+                                    ${item.label}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                `).join('')}
+            
+
+                    
+            
+                </div>
+            
+            </div>
+        
+        
+        
+
+            <div style="display: flex; justify-content: space-between; font-size: 9pt">
+                <div>
+                    Note: This is a system generated report
+                </div>
+                <div>
+                    Date & Time Generated: ${moment(new Date()).format('MMMM D, YYYY - dddd h:mm:ss a')}
+                </div>
+            </div>
+        
+        </div>
+          
+        `;
+        await page.setContent(content);
+        const pdfBuffer = await page.pdf();
+        await browser.close();
+        return pdfBuffer;
+    }
+    async getEmployee(employeeId, authUser) {
+        const query = `
+            query {
+                employee(id: "${employeeId}") {
+                    id 
+                    firstname 
+                    middlename 
+                    lastname
+                    position
+                }
+            }
+        `;
+        console.log('query', query);
+        try {
+            const { data } = await (0, rxjs_1.firstValueFrom)(this.httpService.post(process.env.API_GATEWAY_URL, { query }, {
+                headers: {
+                    Authorization: authUser.authorization,
+                    'Content-Type': 'application/json',
+                },
+            }).pipe((0, rxjs_1.catchError)((error) => {
+                throw error;
+            })));
+            console.log('data', data);
+            console.log('data.data.employee', data.data.employee);
+            if (!data || !data.data) {
+                console.log('No data returned');
+                return undefined;
+            }
+            return data.data.employee;
+        }
+        catch (error) {
+            console.error('Error getting employee:', error.message);
+            return undefined;
+        }
+    }
+    async findSpr(id) {
+        const item = await this.prisma.sPR.findUnique({
+            include: {
+                vehicle: true,
+                canvass: {
+                    include: {
+                        canvass_items: {
+                            include: {
+                                unit: true,
+                                brand: true
+                            }
+                        }
+                    }
+                },
+                spr_approvers: {
+                    orderBy: {
+                        order: 'asc'
+                    }
+                }
+            },
+            where: { id }
+        });
+        if (!item) {
+            throw new common_1.NotFoundException('SPR not found');
+        }
+        return item;
+    }
+};
+exports.SprPdfService = SprPdfService;
+exports.SprPdfService = SprPdfService = __decorate([
+    (0, common_1.Injectable)(),
+    __metadata("design:paramtypes", [typeof (_a = typeof prisma_service_1.PrismaService !== "undefined" && prisma_service_1.PrismaService) === "function" ? _a : Object, typeof (_b = typeof axios_1.HttpService !== "undefined" && axios_1.HttpService) === "function" ? _b : Object])
+], SprPdfService);
 
 
 /***/ }),

@@ -1,8 +1,8 @@
 import { ObjectType, Field, ID } from '@nestjs/graphql';
 import { Canvass } from '../../canvass/entities/canvass.entity';
 import { MEQS } from '../../meqs/entities/meq.entity';
-import { RVApprover } from '../../rv-approver/entities/rv-approver.entity';
 import { Vehicle } from '../../vehicle/entities/vehicle.entity';
+import { SPRApprover } from '../../spr-approver/entities/spr-approver.entity';
 
 @ObjectType()
 export class SPR {
@@ -67,8 +67,8 @@ export class SPR {
   @Field(() => MEQS, { nullable: true })
   meqs?: MEQS;
 
-  @Field(() => [RVApprover])
-  rv_approvers: RVApprover[]
+  @Field(() => [SPRApprover])
+  spr_approvers: SPRApprover[]
 
 
 

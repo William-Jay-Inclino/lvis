@@ -8,11 +8,11 @@ import { AuthUser } from '../__common__/auth-user.entity';
 import { catchError, firstValueFrom } from 'rxjs';
 import { HttpService } from '@nestjs/axios';
 import { Employee } from '../__employee__/entities/employee.entity';
-import { RV } from './entities/rv.entity';
+import { SPR } from './entities/spr.entity';
 import { PrismaService } from '../__prisma__/prisma.service';
 
 @Injectable()
-export class RvPdfService {
+export class SprPdfService {
 
     private authUser: AuthUser
 
@@ -25,16 +25,19 @@ export class RvPdfService {
         this.authUser = authUser
     }
 
-    async generatePdf(rv: RV) {
+    async generatePdf(spr: SPR) {
+        console.log('generatePdf()');
+        console.log('spr', spr);
+
         const browser = await puppeteer.launch();
         const page = await browser.newPage();
 
-        const approvers = await Promise.all(rv.rv_approvers.map(async (i) => {
+        const approvers = await Promise.all(spr.spr_approvers.map(async (i) => {
             i.approver = await this.getEmployee(i.approver_id, this.authUser);
             return i;
         }));
 
-        const requisitioner = await this.getEmployee(rv.canvass.requested_by_id, this.authUser)
+        const requisitioner = await this.getEmployee(spr.canvass.requested_by_id, this.authUser)
 
         // Set content of the PDF
         const content = `
@@ -56,7 +59,7 @@ export class RvPdfService {
                     <br />
                     <br />
         
-                    <h2 style="font-size: 11pt; font-weight: bold;">REQUISITION VOUCHER</h1>
+                    <h2 style="font-size: 11pt; font-weight: bold;">SPARE PARTS REQUEST</h1>
         
         
                 </div>
@@ -68,10 +71,10 @@ export class RvPdfService {
                     <div>
                         <table style="font-size: 10pt">
                             <tr>
-                                <td> &nbsp; </td>
-                            </tr>
+                                <td>Vehicle: ${spr.vehicle.name}</td>
+                            </tr>  
                             <tr>
-                                <td>Purpose: ${rv.canvass.purpose.toUpperCase()}</td>
+                                <td>Purpose: ${spr.canvass.purpose.toUpperCase()}</td>
                             </tr>     
                             <tr>
                                 <td>Listed below are the list of Item/s needed:</td>
@@ -84,19 +87,19 @@ export class RvPdfService {
                             <tr>
                                 <td>Date: </td>
                                 <td style="border-bottom: 1px solid black;">
-                                    ${formatDate(rv.date_requested)}
+                                    ${formatDate(spr.date_requested)}
                                 </td>
                             </tr>
                             <tr>
-                                <td> RV No.: </td>
+                                <td> SPR No.: </td>
                                 <td style="border-bottom: 1px solid black;">
-                                    ${rv.rv_number}
+                                    ${spr.spr_number}
                                 </td>
-                            </tr>   
+                            </tr>    
                             <tr>
                                 <td> RC No.: </td>
                                 <td style="border-bottom: 1px solid black;">
-                                    ${rv.canvass.rc_number}
+                                    ${spr.canvass.rc_number}
                                 </td>
                             </tr>  
                         </table>
@@ -114,7 +117,7 @@ export class RvPdfService {
                         <th style="border: 1px solid black;"> QTY. </th>
                     </thead>
                     <tbody style="font-size: 10pt;">
-                        ${rv.canvass.canvass_items.map((item, index) => `
+                        ${spr.canvass.canvass_items.map((item, index) => `
                         <tr>
                             <td align="center">${index + 1}</td>
                             <td align="center">${item.description}</td>
@@ -134,7 +137,7 @@ export class RvPdfService {
                     <div style="padding: 10px; width: 40%">
                         <table border="0" style="width: 100%">
                             <tr>
-                                <td style="text-align: center; font-size: 10pt;"> ${formatDate(rv.date_requested)} </td>
+                                <td style="text-align: center; font-size: 10pt;"> ${formatDate(spr.date_requested)} </td>
                             </tr>
                             <tr>
                                 <th style="text-align: center;">
@@ -165,7 +168,9 @@ export class RvPdfService {
                     <div style="padding: 10px; width: 40%">
                         <table border="0" style="width: 100%">
                             <tr>
-                                <td style="text-align: center; font-size: 10pt;"> ${formatDate(item.date_approval)} </td>
+                                <td style="text-align: center; font-size: 10pt;"> 
+                                    ${ item.date_approval ? formatDate(item.date_approval) : '&nbsp;' } 
+                                </td>
                             </tr>
                             <tr>
                                 <th style="text-align: center">
@@ -271,9 +276,10 @@ export class RvPdfService {
         }
     }
 
-    async findRv(id: string) {
-        const item = await this.prisma.rV.findUnique({
+    async findSpr(id: string) {
+        const item = await this.prisma.sPR.findUnique({
             include: {
+                vehicle: true,
                 canvass: {
                     include: {
                         canvass_items: {
@@ -284,7 +290,7 @@ export class RvPdfService {
                         }
                     }
                 },
-                rv_approvers: {
+                spr_approvers: {
                     orderBy: {
                         order: 'asc'
                     }
@@ -294,7 +300,7 @@ export class RvPdfService {
         })
 
         if (!item) {
-            throw new NotFoundException('RV not found')
+            throw new NotFoundException('SPR not found')
         }
 
         return item

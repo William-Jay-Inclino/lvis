@@ -1,16 +1,16 @@
 import { Controller, Get, Param, Res, UseGuards } from '@nestjs/common';
-import { RvPdfService } from './rv.pdf.service';
+import { SprPdfService } from './spr.pdf.service';
 import { JwtAuthGuard } from '../__auth__/guards/jwt-auth.guard';
 import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
 import { AuthUser } from '../__common__/auth-user.entity';
 
 
 @UseGuards(JwtAuthGuard)
-@Controller('rv')
-export class RvController {
+@Controller('spr')
+export class SprController {
 
     constructor(
-        private readonly rvPdfService: RvPdfService
+        private readonly sprPdfService: SprPdfService
     ) { }
 
 
@@ -24,11 +24,11 @@ export class RvController {
         // @ts-ignore
         console.log('authUser', authUser);
 
-        this.rvPdfService.setAuthUser(authUser)
+        this.sprPdfService.setAuthUser(authUser)
 
-        const rv = await this.rvPdfService.findRv(id)
+        const spr = await this.sprPdfService.findSpr(id)
         // @ts-ignore
-        const pdfBuffer = await this.rvPdfService.generatePdf(rv)
+        const pdfBuffer = await this.sprPdfService.generatePdf(spr)
 
         // Set response headers
         // @ts-ignore

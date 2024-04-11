@@ -70,5 +70,4 @@ export class JO {
   jo_approvers: JOApprover[]
 
 
-
 }

@@ -8,11 +8,11 @@ import { AuthUser } from '../__common__/auth-user.entity';
 import { catchError, firstValueFrom } from 'rxjs';
 import { HttpService } from '@nestjs/axios';
 import { Employee } from '../__employee__/entities/employee.entity';
-import { RV } from './entities/rv.entity';
 import { PrismaService } from '../__prisma__/prisma.service';
+import { JO } from './entities/jo.entity';
 
 @Injectable()
-export class RvPdfService {
+export class JoPdfService {
 
     private authUser: AuthUser
 
@@ -25,16 +25,20 @@ export class RvPdfService {
         this.authUser = authUser
     }
 
-    async generatePdf(rv: RV) {
+    async generatePdf(jo: JO) {
+        console.log('generatePdf()');
+        console.log('jo', jo);
+
         const browser = await puppeteer.launch();
         const page = await browser.newPage();
 
-        const approvers = await Promise.all(rv.rv_approvers.map(async (i) => {
+        const approvers = await Promise.all(jo.jo_approvers.map(async (i) => {
             i.approver = await this.getEmployee(i.approver_id, this.authUser);
             return i;
         }));
 
-        const requisitioner = await this.getEmployee(rv.canvass.requested_by_id, this.authUser)
+        const department = await this.getDepartment(jo.department_id, this.authUser)
+        const requisitioner = await this.getEmployee(jo.canvass.requested_by_id, this.authUser)
 
         // Set content of the PDF
         const content = `
@@ -56,7 +60,7 @@ export class RvPdfService {
                     <br />
                     <br />
         
-                    <h2 style="font-size: 11pt; font-weight: bold;">REQUISITION VOUCHER</h1>
+                    <h2 style="font-size: 11pt; font-weight: bold;">JOB ORDER REQUEST</h1>
         
         
                 </div>
@@ -68,10 +72,13 @@ export class RvPdfService {
                     <div>
                         <table style="font-size: 10pt">
                             <tr>
-                                <td> &nbsp; </td>
-                            </tr>
+                                <td>Department: ${department.name}</td>
+                            </tr>  
                             <tr>
-                                <td>Purpose: ${rv.canvass.purpose.toUpperCase()}</td>
+                                <td>Equipment: ${jo.equipment}</td>
+                            </tr>  
+                            <tr>
+                                <td>Purpose: ${jo.canvass.purpose.toUpperCase()}</td>
                             </tr>     
                             <tr>
                                 <td>Listed below are the list of Item/s needed:</td>
@@ -84,19 +91,19 @@ export class RvPdfService {
                             <tr>
                                 <td>Date: </td>
                                 <td style="border-bottom: 1px solid black;">
-                                    ${formatDate(rv.date_requested)}
+                                    ${formatDate(jo.date_requested)}
                                 </td>
                             </tr>
                             <tr>
-                                <td> RV No.: </td>
+                                <td> JO No.: </td>
                                 <td style="border-bottom: 1px solid black;">
-                                    ${rv.rv_number}
+                                    ${jo.jo_number}
                                 </td>
-                            </tr>   
+                            </tr>    
                             <tr>
                                 <td> RC No.: </td>
                                 <td style="border-bottom: 1px solid black;">
-                                    ${rv.canvass.rc_number}
+                                    ${jo.canvass.rc_number}
                                 </td>
                             </tr>  
                         </table>
@@ -114,7 +121,7 @@ export class RvPdfService {
                         <th style="border: 1px solid black;"> QTY. </th>
                     </thead>
                     <tbody style="font-size: 10pt;">
-                        ${rv.canvass.canvass_items.map((item, index) => `
+                        ${jo.canvass.canvass_items.map((item, index) => `
                         <tr>
                             <td align="center">${index + 1}</td>
                             <td align="center">${item.description}</td>
@@ -134,7 +141,7 @@ export class RvPdfService {
                     <div style="padding: 10px; width: 40%">
                         <table border="0" style="width: 100%">
                             <tr>
-                                <td style="text-align: center; font-size: 10pt;"> ${formatDate(rv.date_requested)} </td>
+                                <td style="text-align: center; font-size: 10pt;"> ${formatDate(jo.date_requested)} </td>
                             </tr>
                             <tr>
                                 <th style="text-align: center;">
@@ -165,7 +172,9 @@ export class RvPdfService {
                     <div style="padding: 10px; width: 40%">
                         <table border="0" style="width: 100%">
                             <tr>
-                                <td style="text-align: center; font-size: 10pt;"> ${formatDate(item.date_approval)} </td>
+                                <td style="text-align: center; font-size: 10pt;"> 
+                                    ${ item.date_approval ? formatDate(item.date_approval) : '&nbsp;' } 
+                                </td>
                             </tr>
                             <tr>
                                 <th style="text-align: center">
@@ -271,8 +280,55 @@ export class RvPdfService {
         }
     }
 
-    async findRv(id: string) {
-        const item = await this.prisma.rV.findUnique({
+    private async getDepartment(departmentId: string, authUser: AuthUser) {
+
+        const query = `
+            query {
+                department(id: "${ departmentId }") {
+                    id 
+                    name
+                }
+            }
+        `;
+
+        console.log('query', query)
+
+        try {
+            const { data } = await firstValueFrom(
+                this.httpService.post(
+                    process.env.API_GATEWAY_URL,
+                    { query },
+                    {
+                        headers: {
+                            Authorization: authUser.authorization,
+                            'Content-Type': 'application/json',
+                        },
+                    }
+                ).pipe(
+                    catchError((error) => {
+                        throw error;
+                    }),
+                ),
+            );
+
+            console.log('data', data);
+            console.log('data.data.department', data.data.department)
+
+            if (!data || !data.data) {
+                console.log('No data returned');
+                return undefined;
+            }
+
+            return data.data.department;
+
+        } catch (error) {
+            console.error('Error getting department:', error.message);
+            return undefined;
+        }
+    }
+
+    async findJo(id: string) {
+        const item = await this.prisma.jO.findUnique({
             include: {
                 canvass: {
                     include: {
@@ -284,7 +340,7 @@ export class RvPdfService {
                         }
                     }
                 },
-                rv_approvers: {
+                jo_approvers: {
                     orderBy: {
                         order: 'asc'
                     }
@@ -294,7 +350,7 @@ export class RvPdfService {
         })
 
         if (!item) {
-            throw new NotFoundException('RV not found')
+            throw new NotFoundException('SPR not found')
         }
 
         return item

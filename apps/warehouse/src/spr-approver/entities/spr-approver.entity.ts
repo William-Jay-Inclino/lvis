@@ -1,6 +1,7 @@
 import { Field, Int, ObjectType } from "@nestjs/graphql";
 import { APPROVAL_STATUS } from "../../__common__/types";
 import { SPR } from "../../spr/entities/spr.entity";
+import { Employee } from "../../__employee__/entities/employee.entity";
 
 
 @ObjectType()
@@ -58,5 +59,8 @@ export class SPRApprover {
 
   @Field(() => SPR)
   spr: SPR
+
+  @Field(() => Employee, { nullable: true })
+  approver?: Employee | null
 
 }
