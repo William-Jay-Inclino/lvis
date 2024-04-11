@@ -8,7 +8,7 @@ export const CurrentAuthUser = createParamDecorator(
             const req = context.switchToHttp().getRequest()
 
             return {
-                authorization: req.authorization,
+                authorization: req.headers.authorization,
                 user: req.user
             }
 

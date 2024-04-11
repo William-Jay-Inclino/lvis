@@ -152,6 +152,7 @@ exports.Prisma.EmployeeScalarFieldEnum = {
   firstname: 'firstname',
   middlename: 'middlename',
   lastname: 'lastname',
+  position: 'position',
   is_budget_officer: 'is_budget_officer',
   is_finance_manager: 'is_finance_manager',
   created_by: 'created_by',
@@ -267,6 +268,13 @@ exports.Prisma.RRApproverSettingScalarFieldEnum = {
   updated_at: 'updated_at'
 };
 
+exports.Prisma.SettingScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -310,7 +318,8 @@ exports.Prisma.ModelName = {
   SPRApproverSetting: 'SPRApproverSetting',
   MEQSApproverSetting: 'MEQSApproverSetting',
   POApproverSetting: 'POApproverSetting',
-  RRApproverSetting: 'RRApproverSetting'
+  RRApproverSetting: 'RRApproverSetting',
+  Setting: 'Setting'
 };
 
 /**

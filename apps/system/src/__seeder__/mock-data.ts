@@ -334,7 +334,8 @@ export const employees: Employee[] = [
         firstname: 'Jannie Ann',
         middlename: null,
         lastname: 'Dayandayan',
-        created_by: 'admin'
+        created_by: 'admin',
+        position: 'General Manager'
     },
     // 1st CPC Member = 4
     {

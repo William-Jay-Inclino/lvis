@@ -230,5 +230,5 @@ export function formatDate(d: any) {
     }
 
     // return moment(date).format('YYYY-MM-DD');
-    return moment(date).format('DD MMM YYYY');
+    return moment(date).format('M/D/YY');
 }

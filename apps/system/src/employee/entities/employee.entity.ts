@@ -17,6 +17,9 @@ export class Employee {
   @Field(() => String)
   lastname: string;
 
+  @Field(() => String, { nullable: true })
+  position: string | null;
+
   @Field(() => Boolean)
   is_budget_officer: boolean;
 

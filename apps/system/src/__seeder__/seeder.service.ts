@@ -16,6 +16,7 @@ export class SeederService {
                 // this.seedFeature(),
                 // this.seedModule(),
                 // this.seedSubModule(),
+                this.seedSettingTable(),
                 this.seedDepartment(),
                 this.seedClassification(),
                 this.seedAccount(),
@@ -36,42 +37,6 @@ export class SeederService {
             console.error('Transaction failed. Rolling back...', error);
         }
     }
-
-    // seedService(): any {
-    //     console.log('seeding service table...')
-    //     try {
-    //         return this.prisma.service.createMany({ data: data.services })
-    //     } catch (error) {
-    //         console.error(error)
-    //     }
-    // }
-
-    // seedFeature() {
-    //     console.log('seeding feature table...')
-    //     try {
-    //         return this.prisma.feature.createMany({ data: data.features })
-    //     } catch (error) {
-    //         console.error(error)
-    //     }
-    // }
-
-    // seedModule() {
-    //     console.log('seeding module table...')
-    //     try {
-    //         return this.prisma.module.createMany({ data: data.modules })
-    //     } catch (error) {
-    //         console.error(error)
-    //     }
-    // }
-
-    // seedSubModule() {
-    //     console.log('seeding submodule table...')
-    //     try {
-    //         return this.prisma.subModule.createMany({ data: data.subModules })
-    //     } catch (error) {
-    //         console.error(error)
-    //     }
-    // }
 
     seedDepartment() {
         console.log('seeding department table...')
@@ -230,6 +195,26 @@ export class SeederService {
         try {
             return this.prisma.userEmployee.createMany({
                 data: data.userEmployees,
+            })
+        } catch (error) {
+            console.error(error)
+        }
+
+    }
+
+    seedSettingTable() {
+        console.log('seeding setting table....');
+
+        try {
+            return this.prisma.setting.createMany({
+                data: {
+                    name: {
+                        'noted_by': {
+                            'name': 'Jannie Ann Dayandayan',
+                            'label': 'General Manager'
+                        }
+                    }
+                }
             })
         } catch (error) {
             console.error(error)

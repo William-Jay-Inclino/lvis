@@ -4,22 +4,47 @@ import { Injectable } from '@nestjs/common';
 import puppeteer from 'puppeteer';
 import { formatDate } from '../__common__/helpers';
 import { Canvass } from './entities/canvass.entity';
+import * as moment from 'moment';
+import { AuthUser } from '../__common__/auth-user.entity';
+import { catchError, firstValueFrom } from 'rxjs';
+import { HttpService } from '@nestjs/axios';
+import { Employee } from '../__employee__/entities/employee.entity';
 
 @Injectable()
 export class CanvassPdfService {
+
+    private authUser: AuthUser
+
+    constructor(
+        private readonly httpService: HttpService,
+    ) { }
+
+    setAuthUser(authUser: AuthUser) {
+        this.authUser = authUser
+    }
 
     async generatePdf(canvass: Canvass) {
         const browser = await puppeteer.launch();
         const page = await browser.newPage();
 
+        const requisitioner = await this.getEmployee(canvass.requested_by_id, this.authUser)
+
+        // temp
+        const notedBy = {
+            firsname: "Jannie Ann",
+            middlename: null,
+            lastname: "Dayandayan",
+            position: 'General Manager'
+        }
+
         // Set content of the PDF
         const content = `
 
-        <div style="display: flex; flex-direction: column; min-height: 70vh;">
+        <div style="display: flex; flex-direction: column;">
 
-            <div style="padding-left: 25px; padding-right: 25px; font-size: 10pt; flex-grow: 1;">
+            <div style="padding-left: 25px; padding-right: 25px; font-size: 10pt; flex-grow: 1; min-height: 60vh;">
         
-                <div style="text-align: center; margin-top: 45px">
+                <div style="text-align: center; margin-top: 35px">
         
                     <h1 style="font-size: 11pt; font-weight: bold;">LEYTE V ELECTRIC COOPERATIVE, INC.</h1>
         
@@ -34,33 +59,43 @@ export class CanvassPdfService {
         
                     <h2 style="font-size: 11pt; font-weight: bold;">OFFICIAL CANVASS SHEET</h1>
         
-                    <br />
         
                 </div>
-        
-        
+
+                <br />
+
                 <div style="display: flex; justify-content: space-between;">
-                    <span>
-                        Date: <u>${formatDate(canvass.date_requested)}</u>
-                    </span>
-                    <span>
-                        RC #: <u>${canvass.rc_number}</u>
-                    </span>
+
+                    <div>
+                        <table style="font-size: 10pt">
+                            <tr>
+                                <td>Listed below are the list of Item/s needed:</td>
+                            </tr>
+                            <tr>
+                                <td>Purpose: ${canvass.purpose.toUpperCase()}</td>
+                            </tr>     
+                        </table>
+                    </div>
+
+                    <div>
+                        <table style="font-size: 10pt">
+                            <tr>
+                                <td>Date: </td>
+                                <td style="border-bottom: 1px solid black;">
+                                    ${formatDate(canvass.date_requested)}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td> RC #: </td>
+                                <td style="border-bottom: 1px solid black;">
+                                    ${canvass.rc_number}
+                                </td>
+                            </tr>     
+                        </table>
+                    </div>
+                
                 </div>
-        
-                <br />
-                <br />
-        
-                <div>
-                    Listed below are the list of Item/s needed:
-                </div>
-        
-                <br />
-        
-                <div>
-                    Purpose: ${canvass.purpose}
-                </div>
-        
+
                 <br />
         
                 <table style="width: 100%; border-collapse: collapse;">
@@ -76,7 +111,7 @@ export class CanvassPdfService {
                         <tr>
                             <td align="center">${index + 1}</td>
                             <td align="center">${item.description}</td>
-                            <td align="center">${item.unit ? item.unit.name : ''}</td>
+                            <td align="center">${item.unit ? item.unit.name : 'N/A'}</td>
                             <td align="center">${item.quantity}</td>
                             <td></td>
                         </tr>
@@ -86,7 +121,7 @@ export class CanvassPdfService {
         
             </div>
         
-            <div style="padding-left: 25px; padding-right: 25px; font-size: 10pt; padding-top: 50px">
+            <div style="padding-left: 25px; padding-right: 25px; font-size: 10pt; padding-top: 50px; min-height: 32vh;">
 
                 <div style="display: flex; justify-content: space-between;">
                 
@@ -98,7 +133,7 @@ export class CanvassPdfService {
                         <span>
                             VAT Inclusive: <input type="checkbox" style="transform: scale(2);"/>
                         </span>
-                        <span style="margin-left: 50px">
+                        <span style="margin-left: 50px; margin-right: 10px;">
                             VAT Exclusive: <input type="checkbox" style="transform: scale(2);"/>
                         </span>
                     </div>
@@ -120,7 +155,12 @@ export class CanvassPdfService {
                                 <td></td>
                                 <td style="text-align: center; border-bottom: 1px solid black">
                                     <div style="margin-top: 20px; ">
-                                        <b>temp full name</b>
+                                        <b> 
+                                            ${
+                                                // @ts-ignore
+                                                requisitioner.firstname + ' ' + requisitioner.lastname
+                                            } 
+                                        </b>
                                     </div>
                                 </td>
                             </tr>
@@ -128,7 +168,10 @@ export class CanvassPdfService {
                                 <td></td>
                                 <td style="text-align: center">
                                     <div>
-                                        Junior Computer Technician
+                                        ${
+                                            // @ts-ignore
+                                            requisitioner.position || ''
+                                        } 
                                     </div>
                                 </td>
                             </tr>
@@ -144,7 +187,7 @@ export class CanvassPdfService {
                                 <td></td>
                                 <td style="text-align: center; border-bottom: 1px solid black">
                                     <div style="margin-top: 20px; ">
-                                        <b>temp full name</b>
+                                        <b> ${ notedBy.firsname + ' ' + notedBy.lastname } </b>
                                     </div>
                                 </td>
                             </tr>
@@ -160,17 +203,76 @@ export class CanvassPdfService {
                     </div>
                 </div>
 
+                <br />
+                <br />
 
+                <div style="text-align: center;">
+                    <table border="0" style="width: 75%; margin: 0 auto;">
+                        <tr>
+                            <td style="width: 20%; margin-bottom: 10px;">
+                                <div style="display: flex; justify-content: space-between; ">
+                                    <span>Supplier</span>
+                                    <span>:</span>
+                                </div>
+                            </td>
+                            <td style="border-bottom: 1px solid black; margin-bottom: 10px;"></td>
+                        </tr>
+                        <tr>
+                            <td style="margin-bottom: 10px;">
+                                <div style="display: flex; justify-content: space-between; ">
+                                    <span>TIN No.</span>
+                                    <span>:</span>
+                                </div>
+                            </td>
+                            <td style="border-bottom: 1px solid black"></td>
+                        </tr>
+                        <tr>
+                            <td style="margin-bottom: 10px;">
+                                <div style="display: flex; justify-content: space-between; ">
+                                    <span>Address</span>
+                                    <span>:</span>
+                                </div>
+                            </td>
+                            <td style="border-bottom: 1px solid black; margin-bottom: 10px;"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style="display: flex; justify-content: space-between; ">
+                                    <span>Telephone</span>
+                                    <span>:</span>
+                                </div>
+                            </td>
+                            <td style="border-bottom: 1px solid black"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style="display: flex; justify-content: space-between; ">
+                                    <span>Signature Over Printed Name</span>
+                                    <span>
+                                        <br />
+                                        :
+                                    </span>
+                                </div>
+                            </td>
+                            <td style="border-bottom: 1px solid black"></td>
+                        </tr>
+                    </table>
+                </div>
+            
             
 
             </div>
+
+            <div style="display: flex; justify-content: space-between; font-size: 9pt">
+                <div>
+                    Note: This is a system generated report
+                </div>
+                <div>
+                    Date & Time Generated: ${ moment(new Date()).format('MMMM D, YYYY - dddd h:mm:ss a') }
+                </div>
+            </div>
         
         </div>
-    
-            
-
-
-
           
         `;
 
@@ -182,6 +284,57 @@ export class CanvassPdfService {
         await browser.close();
 
         return pdfBuffer;
+    }
+    
+    private async getEmployee(employeeId: string, authUser: AuthUser): Promise<Employee | undefined> {
+
+
+        const query = `
+            query {
+                employee(id: "${ employeeId }") {
+                    id 
+                    firstname 
+                    middlename 
+                    lastname
+                    position
+                }
+            }
+        `;
+
+        console.log('query', query)
+
+        try {
+            const { data } = await firstValueFrom(
+                this.httpService.post(
+                    process.env.API_GATEWAY_URL,
+                    { query },
+                    {
+                        headers: {
+                            Authorization: authUser.authorization,
+                            'Content-Type': 'application/json',
+                        },
+                    }
+                ).pipe(
+                    catchError((error) => {
+                        throw error;
+                    }),
+                ),
+            );
+
+            console.log('data', data);
+            console.log('data.data.employee', data.data.employee)
+
+            if (!data || !data.data) {
+                console.log('No data returned');
+                return undefined;
+            }
+
+            return data.data.employee;
+
+        } catch (error) {
+            console.error('Error getting employee:', error.message);
+            return undefined;
+        }
     }
 
 }

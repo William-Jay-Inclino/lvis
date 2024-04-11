@@ -78,6 +78,11 @@ export type POApproverSetting = $Result.DefaultSelection<Prisma.$POApproverSetti
  * 
  */
 export type RRApproverSetting = $Result.DefaultSelection<Prisma.$RRApproverSettingPayload>
+/**
+ * Model Setting
+ * 
+ */
+export type Setting = $Result.DefaultSelection<Prisma.$SettingPayload>
 
 /**
  * Enums
@@ -347,6 +352,16 @@ export class PrismaClient<
     * ```
     */
   get rRApproverSetting(): Prisma.RRApproverSettingDelegate<ExtArgs>;
+
+  /**
+   * `prisma.setting`: Exposes CRUD operations for the **Setting** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Settings
+    * const settings = await prisma.setting.findMany()
+    * ```
+    */
+  get setting(): Prisma.SettingDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -829,7 +844,8 @@ export namespace Prisma {
     SPRApproverSetting: 'SPRApproverSetting',
     MEQSApproverSetting: 'MEQSApproverSetting',
     POApproverSetting: 'POApproverSetting',
-    RRApproverSetting: 'RRApproverSetting'
+    RRApproverSetting: 'RRApproverSetting',
+    Setting: 'Setting'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -846,7 +862,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'division' | 'department' | 'account' | 'employee' | 'classification' | 'user' | 'userEmployee' | 'jOApproverSetting' | 'rVApproverSetting' | 'sPRApproverSetting' | 'mEQSApproverSetting' | 'pOApproverSetting' | 'rRApproverSetting'
+      modelProps: 'division' | 'department' | 'account' | 'employee' | 'classification' | 'user' | 'userEmployee' | 'jOApproverSetting' | 'rVApproverSetting' | 'sPRApproverSetting' | 'mEQSApproverSetting' | 'pOApproverSetting' | 'rRApproverSetting' | 'setting'
       txIsolationLevel: Prisma.TransactionIsolationLevel
     },
     model: {
@@ -1705,6 +1721,72 @@ export namespace Prisma {
           count: {
             args: Prisma.RRApproverSettingCountArgs<ExtArgs>,
             result: $Utils.Optional<RRApproverSettingCountAggregateOutputType> | number
+          }
+        }
+      }
+      Setting: {
+        payload: Prisma.$SettingPayload<ExtArgs>
+        fields: Prisma.SettingFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SettingFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$SettingPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SettingFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$SettingPayload>
+          }
+          findFirst: {
+            args: Prisma.SettingFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$SettingPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SettingFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$SettingPayload>
+          }
+          findMany: {
+            args: Prisma.SettingFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$SettingPayload>[]
+          }
+          create: {
+            args: Prisma.SettingCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$SettingPayload>
+          }
+          createMany: {
+            args: Prisma.SettingCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.SettingDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$SettingPayload>
+          }
+          update: {
+            args: Prisma.SettingUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$SettingPayload>
+          }
+          deleteMany: {
+            args: Prisma.SettingDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SettingUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.SettingUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$SettingPayload>
+          }
+          aggregate: {
+            args: Prisma.SettingAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateSetting>
+          }
+          groupBy: {
+            args: Prisma.SettingGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<SettingGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SettingCountArgs<ExtArgs>,
+            result: $Utils.Optional<SettingCountAggregateOutputType> | number
           }
         }
       }
@@ -4878,6 +4960,7 @@ export namespace Prisma {
     firstname: string | null
     middlename: string | null
     lastname: string | null
+    position: string | null
     is_budget_officer: boolean | null
     is_finance_manager: boolean | null
     created_by: string | null
@@ -4893,6 +4976,7 @@ export namespace Prisma {
     firstname: string | null
     middlename: string | null
     lastname: string | null
+    position: string | null
     is_budget_officer: boolean | null
     is_finance_manager: boolean | null
     created_by: string | null
@@ -4908,6 +4992,7 @@ export namespace Prisma {
     firstname: number
     middlename: number
     lastname: number
+    position: number
     is_budget_officer: number
     is_finance_manager: number
     created_by: number
@@ -4925,6 +5010,7 @@ export namespace Prisma {
     firstname?: true
     middlename?: true
     lastname?: true
+    position?: true
     is_budget_officer?: true
     is_finance_manager?: true
     created_by?: true
@@ -4940,6 +5026,7 @@ export namespace Prisma {
     firstname?: true
     middlename?: true
     lastname?: true
+    position?: true
     is_budget_officer?: true
     is_finance_manager?: true
     created_by?: true
@@ -4955,6 +5042,7 @@ export namespace Prisma {
     firstname?: true
     middlename?: true
     lastname?: true
+    position?: true
     is_budget_officer?: true
     is_finance_manager?: true
     created_by?: true
@@ -5043,6 +5131,7 @@ export namespace Prisma {
     firstname: string
     middlename: string | null
     lastname: string
+    position: string | null
     is_budget_officer: boolean
     is_finance_manager: boolean
     created_by: string
@@ -5075,6 +5164,7 @@ export namespace Prisma {
     firstname?: boolean
     middlename?: boolean
     lastname?: boolean
+    position?: boolean
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by?: boolean
@@ -5097,6 +5187,7 @@ export namespace Prisma {
     firstname?: boolean
     middlename?: boolean
     lastname?: boolean
+    position?: boolean
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by?: boolean
@@ -5134,6 +5225,7 @@ export namespace Prisma {
       firstname: string
       middlename: string | null
       lastname: string
+      position: string | null
       is_budget_officer: boolean
       is_finance_manager: boolean
       created_by: string
@@ -5553,6 +5645,7 @@ export namespace Prisma {
     readonly firstname: FieldRef<"Employee", 'String'>
     readonly middlename: FieldRef<"Employee", 'String'>
     readonly lastname: FieldRef<"Employee", 'String'>
+    readonly position: FieldRef<"Employee", 'String'>
     readonly is_budget_officer: FieldRef<"Employee", 'Boolean'>
     readonly is_finance_manager: FieldRef<"Employee", 'Boolean'>
     readonly created_by: FieldRef<"Employee", 'String'>
@@ -14833,6 +14926,861 @@ export namespace Prisma {
 
 
   /**
+   * Model Setting
+   */
+
+  export type AggregateSetting = {
+    _count: SettingCountAggregateOutputType | null
+    _min: SettingMinAggregateOutputType | null
+    _max: SettingMaxAggregateOutputType | null
+  }
+
+  export type SettingMinAggregateOutputType = {
+    id: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type SettingMaxAggregateOutputType = {
+    id: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type SettingCountAggregateOutputType = {
+    id: number
+    name: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type SettingMinAggregateInputType = {
+    id?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type SettingMaxAggregateInputType = {
+    id?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type SettingCountAggregateInputType = {
+    id?: true
+    name?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type SettingAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Setting to aggregate.
+     */
+    where?: SettingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Settings to fetch.
+     */
+    orderBy?: SettingOrderByWithRelationInput | SettingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SettingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Settings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Settings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Settings
+    **/
+    _count?: true | SettingCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SettingMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SettingMaxAggregateInputType
+  }
+
+  export type GetSettingAggregateType<T extends SettingAggregateArgs> = {
+        [P in keyof T & keyof AggregateSetting]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSetting[P]>
+      : GetScalarType<T[P], AggregateSetting[P]>
+  }
+
+
+
+
+  export type SettingGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SettingWhereInput
+    orderBy?: SettingOrderByWithAggregationInput | SettingOrderByWithAggregationInput[]
+    by: SettingScalarFieldEnum[] | SettingScalarFieldEnum
+    having?: SettingScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SettingCountAggregateInputType | true
+    _min?: SettingMinAggregateInputType
+    _max?: SettingMaxAggregateInputType
+  }
+
+  export type SettingGroupByOutputType = {
+    id: string
+    name: JsonValue | null
+    created_at: Date
+    updated_at: Date
+    _count: SettingCountAggregateOutputType | null
+    _min: SettingMinAggregateOutputType | null
+    _max: SettingMaxAggregateOutputType | null
+  }
+
+  type GetSettingGroupByPayload<T extends SettingGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SettingGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SettingGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SettingGroupByOutputType[P]>
+            : GetScalarType<T[P], SettingGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SettingSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }, ExtArgs["result"]["setting"]>
+
+  export type SettingSelectScalar = {
+    id?: boolean
+    name?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+
+  export type $SettingPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Setting"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: Prisma.JsonValue | null
+      created_at: Date
+      updated_at: Date
+    }, ExtArgs["result"]["setting"]>
+    composites: {}
+  }
+
+
+  type SettingGetPayload<S extends boolean | null | undefined | SettingDefaultArgs> = $Result.GetResult<Prisma.$SettingPayload, S>
+
+  type SettingCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<SettingFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: SettingCountAggregateInputType | true
+    }
+
+  export interface SettingDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Setting'], meta: { name: 'Setting' } }
+    /**
+     * Find zero or one Setting that matches the filter.
+     * @param {SettingFindUniqueArgs} args - Arguments to find a Setting
+     * @example
+     * // Get one Setting
+     * const setting = await prisma.setting.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends SettingFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, SettingFindUniqueArgs<ExtArgs>>
+    ): Prisma__SettingClient<$Result.GetResult<Prisma.$SettingPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one Setting that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {SettingFindUniqueOrThrowArgs} args - Arguments to find a Setting
+     * @example
+     * // Get one Setting
+     * const setting = await prisma.setting.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends SettingFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, SettingFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__SettingClient<$Result.GetResult<Prisma.$SettingPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first Setting that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SettingFindFirstArgs} args - Arguments to find a Setting
+     * @example
+     * // Get one Setting
+     * const setting = await prisma.setting.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends SettingFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, SettingFindFirstArgs<ExtArgs>>
+    ): Prisma__SettingClient<$Result.GetResult<Prisma.$SettingPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first Setting that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SettingFindFirstOrThrowArgs} args - Arguments to find a Setting
+     * @example
+     * // Get one Setting
+     * const setting = await prisma.setting.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends SettingFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, SettingFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__SettingClient<$Result.GetResult<Prisma.$SettingPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more Settings that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SettingFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Settings
+     * const settings = await prisma.setting.findMany()
+     * 
+     * // Get first 10 Settings
+     * const settings = await prisma.setting.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const settingWithIdOnly = await prisma.setting.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends SettingFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, SettingFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SettingPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a Setting.
+     * @param {SettingCreateArgs} args - Arguments to create a Setting.
+     * @example
+     * // Create one Setting
+     * const Setting = await prisma.setting.create({
+     *   data: {
+     *     // ... data to create a Setting
+     *   }
+     * })
+     * 
+    **/
+    create<T extends SettingCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, SettingCreateArgs<ExtArgs>>
+    ): Prisma__SettingClient<$Result.GetResult<Prisma.$SettingPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many Settings.
+     *     @param {SettingCreateManyArgs} args - Arguments to create many Settings.
+     *     @example
+     *     // Create many Settings
+     *     const setting = await prisma.setting.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends SettingCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, SettingCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Setting.
+     * @param {SettingDeleteArgs} args - Arguments to delete one Setting.
+     * @example
+     * // Delete one Setting
+     * const Setting = await prisma.setting.delete({
+     *   where: {
+     *     // ... filter to delete one Setting
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends SettingDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, SettingDeleteArgs<ExtArgs>>
+    ): Prisma__SettingClient<$Result.GetResult<Prisma.$SettingPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one Setting.
+     * @param {SettingUpdateArgs} args - Arguments to update one Setting.
+     * @example
+     * // Update one Setting
+     * const setting = await prisma.setting.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends SettingUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, SettingUpdateArgs<ExtArgs>>
+    ): Prisma__SettingClient<$Result.GetResult<Prisma.$SettingPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more Settings.
+     * @param {SettingDeleteManyArgs} args - Arguments to filter Settings to delete.
+     * @example
+     * // Delete a few Settings
+     * const { count } = await prisma.setting.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends SettingDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, SettingDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Settings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SettingUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Settings
+     * const setting = await prisma.setting.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends SettingUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, SettingUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Setting.
+     * @param {SettingUpsertArgs} args - Arguments to update or create a Setting.
+     * @example
+     * // Update or create a Setting
+     * const setting = await prisma.setting.upsert({
+     *   create: {
+     *     // ... data to create a Setting
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Setting we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends SettingUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, SettingUpsertArgs<ExtArgs>>
+    ): Prisma__SettingClient<$Result.GetResult<Prisma.$SettingPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of Settings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SettingCountArgs} args - Arguments to filter Settings to count.
+     * @example
+     * // Count the number of Settings
+     * const count = await prisma.setting.count({
+     *   where: {
+     *     // ... the filter for the Settings we want to count
+     *   }
+     * })
+    **/
+    count<T extends SettingCountArgs>(
+      args?: Subset<T, SettingCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SettingCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Setting.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SettingAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SettingAggregateArgs>(args: Subset<T, SettingAggregateArgs>): Prisma.PrismaPromise<GetSettingAggregateType<T>>
+
+    /**
+     * Group by Setting.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SettingGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SettingGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SettingGroupByArgs['orderBy'] }
+        : { orderBy?: SettingGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SettingGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSettingGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Setting model
+   */
+  readonly fields: SettingFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Setting.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SettingClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the Setting model
+   */ 
+  interface SettingFieldRefs {
+    readonly id: FieldRef<"Setting", 'String'>
+    readonly name: FieldRef<"Setting", 'Json'>
+    readonly created_at: FieldRef<"Setting", 'DateTime'>
+    readonly updated_at: FieldRef<"Setting", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * Setting findUnique
+   */
+  export type SettingFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Setting
+     */
+    select?: SettingSelect<ExtArgs> | null
+    /**
+     * Filter, which Setting to fetch.
+     */
+    where: SettingWhereUniqueInput
+  }
+
+
+  /**
+   * Setting findUniqueOrThrow
+   */
+  export type SettingFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Setting
+     */
+    select?: SettingSelect<ExtArgs> | null
+    /**
+     * Filter, which Setting to fetch.
+     */
+    where: SettingWhereUniqueInput
+  }
+
+
+  /**
+   * Setting findFirst
+   */
+  export type SettingFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Setting
+     */
+    select?: SettingSelect<ExtArgs> | null
+    /**
+     * Filter, which Setting to fetch.
+     */
+    where?: SettingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Settings to fetch.
+     */
+    orderBy?: SettingOrderByWithRelationInput | SettingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Settings.
+     */
+    cursor?: SettingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Settings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Settings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Settings.
+     */
+    distinct?: SettingScalarFieldEnum | SettingScalarFieldEnum[]
+  }
+
+
+  /**
+   * Setting findFirstOrThrow
+   */
+  export type SettingFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Setting
+     */
+    select?: SettingSelect<ExtArgs> | null
+    /**
+     * Filter, which Setting to fetch.
+     */
+    where?: SettingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Settings to fetch.
+     */
+    orderBy?: SettingOrderByWithRelationInput | SettingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Settings.
+     */
+    cursor?: SettingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Settings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Settings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Settings.
+     */
+    distinct?: SettingScalarFieldEnum | SettingScalarFieldEnum[]
+  }
+
+
+  /**
+   * Setting findMany
+   */
+  export type SettingFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Setting
+     */
+    select?: SettingSelect<ExtArgs> | null
+    /**
+     * Filter, which Settings to fetch.
+     */
+    where?: SettingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Settings to fetch.
+     */
+    orderBy?: SettingOrderByWithRelationInput | SettingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Settings.
+     */
+    cursor?: SettingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Settings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Settings.
+     */
+    skip?: number
+    distinct?: SettingScalarFieldEnum | SettingScalarFieldEnum[]
+  }
+
+
+  /**
+   * Setting create
+   */
+  export type SettingCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Setting
+     */
+    select?: SettingSelect<ExtArgs> | null
+    /**
+     * The data needed to create a Setting.
+     */
+    data: XOR<SettingCreateInput, SettingUncheckedCreateInput>
+  }
+
+
+  /**
+   * Setting createMany
+   */
+  export type SettingCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Settings.
+     */
+    data: SettingCreateManyInput | SettingCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * Setting update
+   */
+  export type SettingUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Setting
+     */
+    select?: SettingSelect<ExtArgs> | null
+    /**
+     * The data needed to update a Setting.
+     */
+    data: XOR<SettingUpdateInput, SettingUncheckedUpdateInput>
+    /**
+     * Choose, which Setting to update.
+     */
+    where: SettingWhereUniqueInput
+  }
+
+
+  /**
+   * Setting updateMany
+   */
+  export type SettingUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Settings.
+     */
+    data: XOR<SettingUpdateManyMutationInput, SettingUncheckedUpdateManyInput>
+    /**
+     * Filter which Settings to update
+     */
+    where?: SettingWhereInput
+  }
+
+
+  /**
+   * Setting upsert
+   */
+  export type SettingUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Setting
+     */
+    select?: SettingSelect<ExtArgs> | null
+    /**
+     * The filter to search for the Setting to update in case it exists.
+     */
+    where: SettingWhereUniqueInput
+    /**
+     * In case the Setting found by the `where` argument doesn't exist, create a new Setting with this data.
+     */
+    create: XOR<SettingCreateInput, SettingUncheckedCreateInput>
+    /**
+     * In case the Setting was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SettingUpdateInput, SettingUncheckedUpdateInput>
+  }
+
+
+  /**
+   * Setting delete
+   */
+  export type SettingDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Setting
+     */
+    select?: SettingSelect<ExtArgs> | null
+    /**
+     * Filter which Setting to delete.
+     */
+    where: SettingWhereUniqueInput
+  }
+
+
+  /**
+   * Setting deleteMany
+   */
+  export type SettingDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Settings to delete
+     */
+    where?: SettingWhereInput
+  }
+
+
+  /**
+   * Setting without action
+   */
+  export type SettingDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Setting
+     */
+    select?: SettingSelect<ExtArgs> | null
+  }
+
+
+
+  /**
    * Enums
    */
 
@@ -14900,6 +15848,7 @@ export namespace Prisma {
     firstname: 'firstname',
     middlename: 'middlename',
     lastname: 'lastname',
+    position: 'position',
     is_budget_officer: 'is_budget_officer',
     is_finance_manager: 'is_finance_manager',
     created_by: 'created_by',
@@ -15043,6 +15992,16 @@ export namespace Prisma {
   };
 
   export type RRApproverSettingScalarFieldEnum = (typeof RRApproverSettingScalarFieldEnum)[keyof typeof RRApproverSettingScalarFieldEnum]
+
+
+  export const SettingScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type SettingScalarFieldEnum = (typeof SettingScalarFieldEnum)[keyof typeof SettingScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -15432,6 +16391,7 @@ export namespace Prisma {
     firstname?: StringFilter<"Employee"> | string
     middlename?: StringNullableFilter<"Employee"> | string | null
     lastname?: StringFilter<"Employee"> | string
+    position?: StringNullableFilter<"Employee"> | string | null
     is_budget_officer?: BoolFilter<"Employee"> | boolean
     is_finance_manager?: BoolFilter<"Employee"> | boolean
     created_by?: StringFilter<"Employee"> | string
@@ -15454,6 +16414,7 @@ export namespace Prisma {
     firstname?: SortOrder
     middlename?: SortOrderInput | SortOrder
     lastname?: SortOrder
+    position?: SortOrderInput | SortOrder
     is_budget_officer?: SortOrder
     is_finance_manager?: SortOrder
     created_by?: SortOrder
@@ -15479,6 +16440,7 @@ export namespace Prisma {
     firstname?: StringFilter<"Employee"> | string
     middlename?: StringNullableFilter<"Employee"> | string | null
     lastname?: StringFilter<"Employee"> | string
+    position?: StringNullableFilter<"Employee"> | string | null
     is_budget_officer?: BoolFilter<"Employee"> | boolean
     is_finance_manager?: BoolFilter<"Employee"> | boolean
     created_by?: StringFilter<"Employee"> | string
@@ -15501,6 +16463,7 @@ export namespace Prisma {
     firstname?: SortOrder
     middlename?: SortOrderInput | SortOrder
     lastname?: SortOrder
+    position?: SortOrderInput | SortOrder
     is_budget_officer?: SortOrder
     is_finance_manager?: SortOrder
     created_by?: SortOrder
@@ -15522,6 +16485,7 @@ export namespace Prisma {
     firstname?: StringWithAggregatesFilter<"Employee"> | string
     middlename?: StringNullableWithAggregatesFilter<"Employee"> | string | null
     lastname?: StringWithAggregatesFilter<"Employee"> | string
+    position?: StringNullableWithAggregatesFilter<"Employee"> | string | null
     is_budget_officer?: BoolWithAggregatesFilter<"Employee"> | boolean
     is_finance_manager?: BoolWithAggregatesFilter<"Employee"> | boolean
     created_by?: StringWithAggregatesFilter<"Employee"> | string
@@ -16206,6 +17170,53 @@ export namespace Prisma {
     updated_at?: DateTimeWithAggregatesFilter<"RRApproverSetting"> | Date | string
   }
 
+  export type SettingWhereInput = {
+    AND?: SettingWhereInput | SettingWhereInput[]
+    OR?: SettingWhereInput[]
+    NOT?: SettingWhereInput | SettingWhereInput[]
+    id?: StringFilter<"Setting"> | string
+    name?: JsonNullableFilter<"Setting">
+    created_at?: DateTimeFilter<"Setting"> | Date | string
+    updated_at?: DateTimeFilter<"Setting"> | Date | string
+  }
+
+  export type SettingOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type SettingWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: SettingWhereInput | SettingWhereInput[]
+    OR?: SettingWhereInput[]
+    NOT?: SettingWhereInput | SettingWhereInput[]
+    name?: JsonNullableFilter<"Setting">
+    created_at?: DateTimeFilter<"Setting"> | Date | string
+    updated_at?: DateTimeFilter<"Setting"> | Date | string
+  }, "id">
+
+  export type SettingOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    _count?: SettingCountOrderByAggregateInput
+    _max?: SettingMaxOrderByAggregateInput
+    _min?: SettingMinOrderByAggregateInput
+  }
+
+  export type SettingScalarWhereWithAggregatesInput = {
+    AND?: SettingScalarWhereWithAggregatesInput | SettingScalarWhereWithAggregatesInput[]
+    OR?: SettingScalarWhereWithAggregatesInput[]
+    NOT?: SettingScalarWhereWithAggregatesInput | SettingScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Setting"> | string
+    name?: JsonNullableWithAggregatesFilter<"Setting">
+    created_at?: DateTimeWithAggregatesFilter<"Setting"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"Setting"> | Date | string
+  }
+
   export type DivisionCreateInput = {
     id?: string
     code: string
@@ -16494,6 +17505,7 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
+    position?: string | null
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by: string
@@ -16516,6 +17528,7 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
+    position?: string | null
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by: string
@@ -16538,6 +17551,7 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    position?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
@@ -16560,6 +17574,7 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    position?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
@@ -16582,6 +17597,7 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
+    position?: string | null
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by: string
@@ -16597,6 +17613,7 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    position?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
@@ -16612,6 +17629,7 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    position?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
@@ -17353,6 +18371,55 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type SettingCreateInput = {
+    id?: string
+    name?: NullableJsonNullValueInput | InputJsonValue
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type SettingUncheckedCreateInput = {
+    id?: string
+    name?: NullableJsonNullValueInput | InputJsonValue
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type SettingUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableJsonNullValueInput | InputJsonValue
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SettingUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableJsonNullValueInput | InputJsonValue
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SettingCreateManyInput = {
+    id?: string
+    name?: NullableJsonNullValueInput | InputJsonValue
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type SettingUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableJsonNullValueInput | InputJsonValue
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SettingUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableJsonNullValueInput | InputJsonValue
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -17697,6 +18764,7 @@ export namespace Prisma {
     firstname?: SortOrder
     middlename?: SortOrder
     lastname?: SortOrder
+    position?: SortOrder
     is_budget_officer?: SortOrder
     is_finance_manager?: SortOrder
     created_by?: SortOrder
@@ -17712,6 +18780,7 @@ export namespace Prisma {
     firstname?: SortOrder
     middlename?: SortOrder
     lastname?: SortOrder
+    position?: SortOrder
     is_budget_officer?: SortOrder
     is_finance_manager?: SortOrder
     created_by?: SortOrder
@@ -17727,6 +18796,7 @@ export namespace Prisma {
     firstname?: SortOrder
     middlename?: SortOrder
     lastname?: SortOrder
+    position?: SortOrder
     is_budget_officer?: SortOrder
     is_finance_manager?: SortOrder
     created_by?: SortOrder
@@ -18186,6 +19256,25 @@ export namespace Prisma {
 
   export type RRApproverSettingSumOrderByAggregateInput = {
     order?: SortOrder
+  }
+
+  export type SettingCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type SettingMaxOrderByAggregateInput = {
+    id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type SettingMinOrderByAggregateInput = {
+    id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
   }
 
   export type DepartmentCreateNestedOneWithoutDivisionInput = {
@@ -19480,6 +20569,7 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
+    position?: string | null
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by: string
@@ -19501,6 +20591,7 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
+    position?: string | null
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by: string
@@ -19585,6 +20676,7 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    position?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
@@ -19606,6 +20698,7 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    position?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
@@ -19627,6 +20720,7 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
+    position?: string | null
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by: string
@@ -19648,6 +20742,7 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
+    position?: string | null
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by: string
@@ -19685,6 +20780,7 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    position?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
@@ -19706,6 +20802,7 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    position?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
@@ -19727,6 +20824,7 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
+    position?: string | null
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by: string
@@ -19748,6 +20846,7 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
+    position?: string | null
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by: string
@@ -19785,6 +20884,7 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    position?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
@@ -19806,6 +20906,7 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    position?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
@@ -19827,6 +20928,7 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
+    position?: string | null
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by: string
@@ -19848,6 +20950,7 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
+    position?: string | null
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by: string
@@ -19885,6 +20988,7 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    position?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
@@ -19906,6 +21010,7 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    position?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
@@ -19927,6 +21032,7 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
+    position?: string | null
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by: string
@@ -19948,6 +21054,7 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
+    position?: string | null
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by: string
@@ -19985,6 +21092,7 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    position?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
@@ -20006,6 +21114,7 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    position?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
@@ -20027,6 +21136,7 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
+    position?: string | null
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by: string
@@ -20048,6 +21158,7 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
+    position?: string | null
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by: string
@@ -20085,6 +21196,7 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    position?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
@@ -20106,6 +21218,7 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    position?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
@@ -20127,6 +21240,7 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
+    position?: string | null
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by: string
@@ -20148,6 +21262,7 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
+    position?: string | null
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by: string
@@ -20185,6 +21300,7 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    position?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
@@ -20206,6 +21322,7 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
+    position?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
@@ -20335,6 +21452,10 @@ export namespace Prisma {
      * @deprecated Use RRApproverSettingDefaultArgs instead
      */
     export type RRApproverSettingArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = RRApproverSettingDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use SettingDefaultArgs instead
+     */
+    export type SettingArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = SettingDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany

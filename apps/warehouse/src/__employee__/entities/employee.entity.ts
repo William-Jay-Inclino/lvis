@@ -12,6 +12,18 @@ export class Employee {
   @Field(() => ID)
   id: string;
 
+  // @Field()
+  // firstname: string;
+
+  // @Field({ nullable: true })
+  // middlename: string | null;
+
+  // @Field()
+  // lastname: string;
+
+  // @Field({ nullable: true })
+  // position: string | null;
+
   @Field(() => [RVApprover])
   rv_pending_approvals: RVApprover[]
 

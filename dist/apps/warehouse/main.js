@@ -876,7 +876,7 @@ exports.CurrentAuthUser = (0, common_1.createParamDecorator)((_data, context) =>
     if (context.getType() === 'http') {
         const req = context.switchToHttp().getRequest();
         return {
-            authorization: req.authorization,
+            authorization: req.headers.authorization,
             user: req.user
         };
     }
@@ -964,6 +964,24 @@ class GqlAuthGuard extends (0, passport_1.AuthGuard)('jwt') {
     }
 }
 exports.GqlAuthGuard = GqlAuthGuard;
+
+
+/***/ }),
+
+/***/ "./apps/warehouse/src/__auth__/guards/jwt-auth.guard.ts":
+/*!**************************************************************!*\
+  !*** ./apps/warehouse/src/__auth__/guards/jwt-auth.guard.ts ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.JwtAuthGuard = void 0;
+const passport_1 = __webpack_require__(/*! @nestjs/passport */ "@nestjs/passport");
+class JwtAuthGuard extends (0, passport_1.AuthGuard)('jwt') {
+}
+exports.JwtAuthGuard = JwtAuthGuard;
 
 
 /***/ }),
@@ -1392,7 +1410,7 @@ function formatDate(d) {
     if (!isNaN(d)) {
         date = Number(d) < 10000000000 ? Number(d) * 1000 : Number(d);
     }
-    return moment(date).format('DD MMM YYYY');
+    return moment(date).format('M/D/YY');
 }
 exports.formatDate = formatDate;
 
@@ -3424,19 +3442,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-var _a, _b, _c;
+var _a, _b, _c, _d;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.CanvassController = void 0;
 const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
 const canvass_service_1 = __webpack_require__(/*! ./canvass.service */ "./apps/warehouse/src/canvass/canvass.service.ts");
 const canvass_pdf_service_1 = __webpack_require__(/*! ./canvass.pdf.service */ "./apps/warehouse/src/canvass/canvass.pdf.service.ts");
+const jwt_auth_guard_1 = __webpack_require__(/*! ../__auth__/guards/jwt-auth.guard */ "./apps/warehouse/src/__auth__/guards/jwt-auth.guard.ts");
+const current_auth_user_decorator_1 = __webpack_require__(/*! ../__auth__/current-auth-user.decorator */ "./apps/warehouse/src/__auth__/current-auth-user.decorator.ts");
+const auth_user_entity_1 = __webpack_require__(/*! ../__common__/auth-user.entity */ "./apps/warehouse/src/__common__/auth-user.entity.ts");
 let CanvassController = class CanvassController {
     constructor(canvassService, canvassPdfService) {
         this.canvassService = canvassService;
         this.canvassPdfService = canvassPdfService;
     }
-    async generatePdf(id, res) {
+    async generatePdf(id, res, authUser) {
         console.log('id', id);
+        console.log('authUser', authUser);
+        this.canvassPdfService.setAuthUser(authUser);
         const canvass = await this.canvassService.findOne(id);
         const pdfBuffer = await this.canvassPdfService.generatePdf(canvass);
         res.setHeader('Content-Type', 'application/pdf');
@@ -3449,11 +3472,13 @@ __decorate([
     (0, common_1.Get)('pdf/:id'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Res)()),
+    __param(2, (0, current_auth_user_decorator_1.CurrentAuthUser)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, typeof (_c = typeof Response !== "undefined" && Response) === "function" ? _c : Object]),
+    __metadata("design:paramtypes", [String, typeof (_c = typeof Response !== "undefined" && Response) === "function" ? _c : Object, typeof (_d = typeof auth_user_entity_1.AuthUser !== "undefined" && auth_user_entity_1.AuthUser) === "function" ? _d : Object]),
     __metadata("design:returntype", Promise)
 ], CanvassController.prototype, "generatePdf", null);
 exports.CanvassController = CanvassController = __decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Controller)('canvass'),
     __metadata("design:paramtypes", [typeof (_a = typeof canvass_service_1.CanvassService !== "undefined" && canvass_service_1.CanvassService) === "function" ? _a : Object, typeof (_b = typeof canvass_pdf_service_1.CanvassPdfService !== "undefined" && canvass_pdf_service_1.CanvassPdfService) === "function" ? _b : Object])
 ], CanvassController);
@@ -3512,22 +3537,42 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.CanvassPdfService = void 0;
 const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
 const puppeteer_1 = __webpack_require__(/*! puppeteer */ "puppeteer");
 const helpers_1 = __webpack_require__(/*! ../__common__/helpers */ "./apps/warehouse/src/__common__/helpers.ts");
+const moment = __webpack_require__(/*! moment */ "moment");
+const rxjs_1 = __webpack_require__(/*! rxjs */ "rxjs");
+const axios_1 = __webpack_require__(/*! @nestjs/axios */ "@nestjs/axios");
 let CanvassPdfService = class CanvassPdfService {
+    constructor(httpService) {
+        this.httpService = httpService;
+    }
+    setAuthUser(authUser) {
+        this.authUser = authUser;
+    }
     async generatePdf(canvass) {
         const browser = await puppeteer_1.default.launch();
         const page = await browser.newPage();
+        const requisitioner = await this.getEmployee(canvass.requested_by_id, this.authUser);
+        const notedBy = {
+            firsname: "Jannie Ann",
+            middlename: null,
+            lastname: "Dayandayan",
+            position: 'General Manager'
+        };
         const content = `
 
-        <div style="display: flex; flex-direction: column; min-height: 70vh;">
+        <div style="display: flex; flex-direction: column;">
 
-            <div style="padding-left: 25px; padding-right: 25px; font-size: 10pt; flex-grow: 1;">
+            <div style="padding-left: 25px; padding-right: 25px; font-size: 10pt; flex-grow: 1; min-height: 60vh;">
         
-                <div style="text-align: center; margin-top: 45px">
+                <div style="text-align: center; margin-top: 35px">
         
                     <h1 style="font-size: 11pt; font-weight: bold;">LEYTE V ELECTRIC COOPERATIVE, INC.</h1>
         
@@ -3542,33 +3587,43 @@ let CanvassPdfService = class CanvassPdfService {
         
                     <h2 style="font-size: 11pt; font-weight: bold;">OFFICIAL CANVASS SHEET</h1>
         
-                    <br />
         
                 </div>
-        
-        
+
+                <br />
+
                 <div style="display: flex; justify-content: space-between;">
-                    <span>
-                        Date: <u>${(0, helpers_1.formatDate)(canvass.date_requested)}</u>
-                    </span>
-                    <span>
-                        RC #: <u>${canvass.rc_number}</u>
-                    </span>
+
+                    <div>
+                        <table style="font-size: 10pt">
+                            <tr>
+                                <td>Listed below are the list of Item/s needed:</td>
+                            </tr>
+                            <tr>
+                                <td>Purpose: ${canvass.purpose.toUpperCase()}</td>
+                            </tr>     
+                        </table>
+                    </div>
+
+                    <div>
+                        <table style="font-size: 10pt">
+                            <tr>
+                                <td>Date: </td>
+                                <td style="border-bottom: 1px solid black;">
+                                    ${(0, helpers_1.formatDate)(canvass.date_requested)}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td> RC #: </td>
+                                <td style="border-bottom: 1px solid black;">
+                                    ${canvass.rc_number}
+                                </td>
+                            </tr>     
+                        </table>
+                    </div>
+                
                 </div>
-        
-                <br />
-                <br />
-        
-                <div>
-                    Listed below are the list of Item/s needed:
-                </div>
-        
-                <br />
-        
-                <div>
-                    Purpose: ${canvass.purpose}
-                </div>
-        
+
                 <br />
         
                 <table style="width: 100%; border-collapse: collapse;">
@@ -3584,7 +3639,7 @@ let CanvassPdfService = class CanvassPdfService {
                         <tr>
                             <td align="center">${index + 1}</td>
                             <td align="center">${item.description}</td>
-                            <td align="center">${item.unit ? item.unit.name : ''}</td>
+                            <td align="center">${item.unit ? item.unit.name : 'N/A'}</td>
                             <td align="center">${item.quantity}</td>
                             <td></td>
                         </tr>
@@ -3594,7 +3649,7 @@ let CanvassPdfService = class CanvassPdfService {
         
             </div>
         
-            <div style="padding-left: 25px; padding-right: 25px; font-size: 10pt; padding-top: 50px">
+            <div style="padding-left: 25px; padding-right: 25px; font-size: 10pt; padding-top: 50px; min-height: 32vh;">
 
                 <div style="display: flex; justify-content: space-between;">
                 
@@ -3606,7 +3661,7 @@ let CanvassPdfService = class CanvassPdfService {
                         <span>
                             VAT Inclusive: <input type="checkbox" style="transform: scale(2);"/>
                         </span>
-                        <span style="margin-left: 50px">
+                        <span style="margin-left: 50px; margin-right: 10px;">
                             VAT Exclusive: <input type="checkbox" style="transform: scale(2);"/>
                         </span>
                     </div>
@@ -3628,7 +3683,9 @@ let CanvassPdfService = class CanvassPdfService {
                                 <td></td>
                                 <td style="text-align: center; border-bottom: 1px solid black">
                                     <div style="margin-top: 20px; ">
-                                        <b>temp full name</b>
+                                        <b> 
+                                            ${requisitioner.firstname + ' ' + requisitioner.lastname} 
+                                        </b>
                                     </div>
                                 </td>
                             </tr>
@@ -3636,7 +3693,7 @@ let CanvassPdfService = class CanvassPdfService {
                                 <td></td>
                                 <td style="text-align: center">
                                     <div>
-                                        Junior Computer Technician
+                                        ${requisitioner.position || ''} 
                                     </div>
                                 </td>
                             </tr>
@@ -3652,7 +3709,7 @@ let CanvassPdfService = class CanvassPdfService {
                                 <td></td>
                                 <td style="text-align: center; border-bottom: 1px solid black">
                                     <div style="margin-top: 20px; ">
-                                        <b>temp full name</b>
+                                        <b> ${notedBy.firsname + ' ' + notedBy.lastname} </b>
                                     </div>
                                 </td>
                             </tr>
@@ -3668,17 +3725,76 @@ let CanvassPdfService = class CanvassPdfService {
                     </div>
                 </div>
 
+                <br />
+                <br />
 
+                <div style="text-align: center;">
+                    <table border="0" style="width: 75%; margin: 0 auto;">
+                        <tr>
+                            <td style="width: 20%; margin-bottom: 10px;">
+                                <div style="display: flex; justify-content: space-between; ">
+                                    <span>Supplier</span>
+                                    <span>:</span>
+                                </div>
+                            </td>
+                            <td style="border-bottom: 1px solid black; margin-bottom: 10px;"></td>
+                        </tr>
+                        <tr>
+                            <td style="margin-bottom: 10px;">
+                                <div style="display: flex; justify-content: space-between; ">
+                                    <span>TIN No.</span>
+                                    <span>:</span>
+                                </div>
+                            </td>
+                            <td style="border-bottom: 1px solid black"></td>
+                        </tr>
+                        <tr>
+                            <td style="margin-bottom: 10px;">
+                                <div style="display: flex; justify-content: space-between; ">
+                                    <span>Address</span>
+                                    <span>:</span>
+                                </div>
+                            </td>
+                            <td style="border-bottom: 1px solid black; margin-bottom: 10px;"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style="display: flex; justify-content: space-between; ">
+                                    <span>Telephone</span>
+                                    <span>:</span>
+                                </div>
+                            </td>
+                            <td style="border-bottom: 1px solid black"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style="display: flex; justify-content: space-between; ">
+                                    <span>Signature Over Printed Name</span>
+                                    <span>
+                                        <br />
+                                        :
+                                    </span>
+                                </div>
+                            </td>
+                            <td style="border-bottom: 1px solid black"></td>
+                        </tr>
+                    </table>
+                </div>
+            
             
 
             </div>
+
+            <div style="display: flex; justify-content: space-between; font-size: 9pt">
+                <div>
+                    Note: This is a system generated report
+                </div>
+                <div>
+                    Date & Time Generated: ${moment(new Date()).format('MMMM D, YYYY - dddd h:mm:ss a')}
+                </div>
+            </div>
         
         </div>
-    
-            
-
-
-
           
         `;
         await page.setContent(content);
@@ -3686,10 +3802,46 @@ let CanvassPdfService = class CanvassPdfService {
         await browser.close();
         return pdfBuffer;
     }
+    async getEmployee(employeeId, authUser) {
+        const query = `
+            query {
+                employee(id: "${employeeId}") {
+                    id 
+                    firstname 
+                    middlename 
+                    lastname
+                    position
+                }
+            }
+        `;
+        console.log('query', query);
+        try {
+            const { data } = await (0, rxjs_1.firstValueFrom)(this.httpService.post(process.env.API_GATEWAY_URL, { query }, {
+                headers: {
+                    Authorization: authUser.authorization,
+                    'Content-Type': 'application/json',
+                },
+            }).pipe((0, rxjs_1.catchError)((error) => {
+                throw error;
+            })));
+            console.log('data', data);
+            console.log('data.data.employee', data.data.employee);
+            if (!data || !data.data) {
+                console.log('No data returned');
+                return undefined;
+            }
+            return data.data.employee;
+        }
+        catch (error) {
+            console.error('Error getting employee:', error.message);
+            return undefined;
+        }
+    }
 };
 exports.CanvassPdfService = CanvassPdfService;
 exports.CanvassPdfService = CanvassPdfService = __decorate([
-    (0, common_1.Injectable)()
+    (0, common_1.Injectable)(),
+    __metadata("design:paramtypes", [typeof (_a = typeof axios_1.HttpService !== "undefined" && axios_1.HttpService) === "function" ? _a : Object])
 ], CanvassPdfService);
 
 

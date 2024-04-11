@@ -146,6 +146,7 @@ export interface Employee {
     firstname: string
     middlename: string
     lastname: string
+    position?: string
     created_by: string
 }
 
