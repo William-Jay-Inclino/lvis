@@ -70,11 +70,11 @@ export class CanvassPdfService {
                     <div>
                         <table style="font-size: 10pt">
                             <tr>
-                                <td>Listed below are the list of Item/s needed:</td>
-                            </tr>
-                            <tr>
                                 <td>Purpose: ${canvass.purpose.toUpperCase()}</td>
                             </tr>     
+                            <tr>
+                                <td>Listed below are the list of Item/s needed:</td>
+                            </tr>
                         </table>
                     </div>
 
@@ -87,7 +87,7 @@ export class CanvassPdfService {
                                 </td>
                             </tr>
                             <tr>
-                                <td> RC #: </td>
+                                <td> RC No.: </td>
                                 <td style="border-bottom: 1px solid black;">
                                     ${canvass.rc_number}
                                 </td>
@@ -105,7 +105,6 @@ export class CanvassPdfService {
                         <th style="border: 1px solid black;"> ITEM DESCRIPTION AND SPECIFICATIONS </th>
                         <th style="border: 1px solid black;"> UNIT </th>
                         <th style="border: 1px solid black;"> QTY. </th>
-                        <th style="border: 1px solid black;"> UNIT COST </th>
                     </thead>
                     <tbody style="font-size: 10pt;">
                         ${canvass.canvass_items.map((item, index) => `
@@ -114,7 +113,6 @@ export class CanvassPdfService {
                             <td align="center">${item.description}</td>
                             <td align="center">${item.unit ? item.unit.name : 'N/A'}</td>
                             <td align="center">${item.quantity}</td>
-                            <td></td>
                         </tr>
                     `).join('')}
                     </tbody>

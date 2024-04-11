@@ -3592,11 +3592,11 @@ let CanvassPdfService = class CanvassPdfService {
                     <div>
                         <table style="font-size: 10pt">
                             <tr>
-                                <td>Listed below are the list of Item/s needed:</td>
-                            </tr>
-                            <tr>
                                 <td>Purpose: ${canvass.purpose.toUpperCase()}</td>
                             </tr>     
+                            <tr>
+                                <td>Listed below are the list of Item/s needed:</td>
+                            </tr>
                         </table>
                     </div>
 
@@ -3609,7 +3609,7 @@ let CanvassPdfService = class CanvassPdfService {
                                 </td>
                             </tr>
                             <tr>
-                                <td> RC #: </td>
+                                <td> RC No.: </td>
                                 <td style="border-bottom: 1px solid black;">
                                     ${canvass.rc_number}
                                 </td>
@@ -3627,7 +3627,6 @@ let CanvassPdfService = class CanvassPdfService {
                         <th style="border: 1px solid black;"> ITEM DESCRIPTION AND SPECIFICATIONS </th>
                         <th style="border: 1px solid black;"> UNIT </th>
                         <th style="border: 1px solid black;"> QTY. </th>
-                        <th style="border: 1px solid black;"> UNIT COST </th>
                     </thead>
                     <tbody style="font-size: 10pt;">
                         ${canvass.canvass_items.map((item, index) => `
@@ -3636,7 +3635,6 @@ let CanvassPdfService = class CanvassPdfService {
                             <td align="center">${item.description}</td>
                             <td align="center">${item.unit ? item.unit.name : 'N/A'}</td>
                             <td align="center">${item.quantity}</td>
-                            <td></td>
                         </tr>
                     `).join('')}
                     </tbody>
@@ -17296,6 +17294,68 @@ exports.RVsResponse = RVsResponse = __decorate([
 
 /***/ }),
 
+/***/ "./apps/warehouse/src/rv/rv.controller.ts":
+/*!************************************************!*\
+  !*** ./apps/warehouse/src/rv/rv.controller.ts ***!
+  \************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+var _a, _b, _c, _d;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.RvController = void 0;
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const rv_service_1 = __webpack_require__(/*! ./rv.service */ "./apps/warehouse/src/rv/rv.service.ts");
+const rv_pdf_service_1 = __webpack_require__(/*! ./rv.pdf.service */ "./apps/warehouse/src/rv/rv.pdf.service.ts");
+const current_auth_user_decorator_1 = __webpack_require__(/*! ../__auth__/current-auth-user.decorator */ "./apps/warehouse/src/__auth__/current-auth-user.decorator.ts");
+const auth_user_entity_1 = __webpack_require__(/*! ../__common__/auth-user.entity */ "./apps/warehouse/src/__common__/auth-user.entity.ts");
+let RvController = class RvController {
+    constructor(rvService, rvPdfService) {
+        this.rvService = rvService;
+        this.rvPdfService = rvPdfService;
+    }
+    async generatePdf(id, res, authUser) {
+        console.log('id', id);
+        console.log('authUser', authUser);
+        this.rvPdfService.setAuthUser(authUser);
+        const rv = await this.rvService.findOne(id);
+        const pdfBuffer = await this.rvPdfService.generatePdf(rv);
+        res.setHeader('Content-Type', 'application/pdf');
+        res.setHeader('Content-Disposition', 'inline; filename="example.pdf"');
+        res.send(pdfBuffer);
+    }
+};
+exports.RvController = RvController;
+__decorate([
+    (0, common_1.Get)('pdf/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Res)()),
+    __param(2, (0, current_auth_user_decorator_1.CurrentAuthUser)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, typeof (_c = typeof Response !== "undefined" && Response) === "function" ? _c : Object, typeof (_d = typeof auth_user_entity_1.AuthUser !== "undefined" && auth_user_entity_1.AuthUser) === "function" ? _d : Object]),
+    __metadata("design:returntype", Promise)
+], RvController.prototype, "generatePdf", null);
+exports.RvController = RvController = __decorate([
+    (0, common_1.Controller)('rv'),
+    __metadata("design:paramtypes", [typeof (_a = typeof rv_service_1.RvService !== "undefined" && rv_service_1.RvService) === "function" ? _a : Object, typeof (_b = typeof rv_pdf_service_1.RvPdfService !== "undefined" && rv_pdf_service_1.RvPdfService) === "function" ? _b : Object])
+], RvController);
+
+
+/***/ }),
+
 /***/ "./apps/warehouse/src/rv/rv.module.ts":
 /*!********************************************!*\
   !*** ./apps/warehouse/src/rv/rv.module.ts ***!
@@ -17318,16 +17378,247 @@ const rv_service_1 = __webpack_require__(/*! ./rv.service */ "./apps/warehouse/s
 const axios_1 = __webpack_require__(/*! @nestjs/axios */ "@nestjs/axios");
 const rv_approver_service_1 = __webpack_require__(/*! ../rv-approver/rv-approver.service */ "./apps/warehouse/src/rv-approver/rv-approver.service.ts");
 const canvass_service_1 = __webpack_require__(/*! ../canvass/canvass.service */ "./apps/warehouse/src/canvass/canvass.service.ts");
+const rv_controller_1 = __webpack_require__(/*! ./rv.controller */ "./apps/warehouse/src/rv/rv.controller.ts");
+const rv_pdf_service_1 = __webpack_require__(/*! ./rv.pdf.service */ "./apps/warehouse/src/rv/rv.pdf.service.ts");
 let RvModule = class RvModule {
 };
 exports.RvModule = RvModule;
 exports.RvModule = RvModule = __decorate([
     (0, common_1.Module)({
         imports: [axios_1.HttpModule],
-        providers: [rv_resolver_1.RvResolver, rv_service_1.RvService, rv_approver_service_1.RvApproverService, canvass_service_1.CanvassService],
-        exports: [rv_service_1.RvService]
+        providers: [rv_resolver_1.RvResolver, rv_service_1.RvService, rv_pdf_service_1.RvPdfService, rv_approver_service_1.RvApproverService, canvass_service_1.CanvassService],
+        exports: [rv_service_1.RvService],
+        controllers: [rv_controller_1.RvController]
     })
 ], RvModule);
+
+
+/***/ }),
+
+/***/ "./apps/warehouse/src/rv/rv.pdf.service.ts":
+/*!*************************************************!*\
+  !*** ./apps/warehouse/src/rv/rv.pdf.service.ts ***!
+  \*************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var _a;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.RvPdfService = void 0;
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const puppeteer_1 = __webpack_require__(/*! puppeteer */ "puppeteer");
+const helpers_1 = __webpack_require__(/*! ../__common__/helpers */ "./apps/warehouse/src/__common__/helpers.ts");
+const moment = __webpack_require__(/*! moment */ "moment");
+const rxjs_1 = __webpack_require__(/*! rxjs */ "rxjs");
+const axios_1 = __webpack_require__(/*! @nestjs/axios */ "@nestjs/axios");
+let RvPdfService = class RvPdfService {
+    constructor(httpService) {
+        this.httpService = httpService;
+    }
+    setAuthUser(authUser) {
+        this.authUser = authUser;
+    }
+    async generatePdf(rv) {
+        const browser = await puppeteer_1.default.launch();
+        const page = await browser.newPage();
+        const content = `
+
+        <div style="display: flex; flex-direction: column;">
+
+            <div style="padding-left: 25px; padding-right: 25px; font-size: 10pt; flex-grow: 1; min-height: 60vh;">
+        
+                <div style="text-align: center; margin-top: 35px">
+        
+                    <h1 style="font-size: 11pt; font-weight: bold;">LEYTE V ELECTRIC COOPERATIVE, INC.</h1>
+        
+                    <div style="font-size: 9pt">
+                        <span>Brgy. San Pablo, Ormoc City, Leyte</span>
+                        <br />
+                        <span>VAT REG. TIN 001-383-331-000</span>
+                    </div>
+        
+                    <br />
+                    <br />
+        
+                    <h2 style="font-size: 11pt; font-weight: bold;">REQUISITION VOUCHER</h1>
+        
+        
+                </div>
+
+                <br />
+
+                <div style="display: flex; justify-content: space-between;">
+
+                    <div>
+                        <table style="font-size: 10pt">
+                            <tr>
+                                <td>Purpose: ${rv.canvass.purpose.toUpperCase()}</td>
+                            </tr>     
+                            <tr>
+                                <td>Notes: ${rv.notes} </td>
+                            </tr>   
+                            <tr>
+                                <td>Listed below are the list of Item/s needed:</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div>
+                        <table style="font-size: 10pt">
+                            <tr>
+                                <td>Date: </td>
+                                <td style="border-bottom: 1px solid black;">
+                                    ${(0, helpers_1.formatDate)(rv.date_requested)}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td> RV No.: </td>
+                                <td style="border-bottom: 1px solid black;">
+                                    ${rv.rv_number}
+                                </td>
+                            </tr>     
+                            <tr>
+                                <td> Requisitioner: </td>
+                                <td style="border-bottom: 1px solid black;">
+                                    Joshua Tayag
+                                </td>
+                            </tr>  
+                        </table>
+                    </div>
+                
+                </div>
+
+                <br />
+
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead style="font-size: 10pt;">
+                        <th style="border: 1px solid black;"> NO. </th>
+                        <th style="border: 1px solid black;"> DESCRIPTION AND SPECIFICATIONS </th>
+                        <th style="border: 1px solid black;"> UNIT </th>
+                        <th style="border: 1px solid black;"> QTY. </th>
+                    </thead>
+                    <tbody style="font-size: 10pt;">
+                        ${rv.canvass.canvass_items.map((item, index) => `
+                        <tr>
+                            <td align="center">${index + 1}</td>
+                            <td align="center">${item.description}</td>
+                            <td align="center">${item.unit ? item.unit.name : 'N/A'}</td>
+                            <td align="center">${item.quantity}</td>
+                        </tr>
+                    `).join('')}
+                    </tbody>
+                </table>
+        
+            </div>
+        
+            <div style="padding-left: 25px; padding-right: 25px; font-size: 10pt; padding-top: 50px; min-height: 32vh; display: flex; justify-content: center;">
+
+                <div style="display: flex; flex-wrap: wrap;">
+            
+                    <div style="padding: 10px;">
+                        <table border="1">
+                            <tr>
+                                <th> RICAFLOR SUAN </th>
+                            </tr>
+                            <tr>
+                                <td> Rate Analyst </td>
+                            </tr>
+                            <tr>
+                                <td> ${(0, helpers_1.formatDate)(rv.date_requested)} </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div style="padding: 10px;">
+                        <table border="1">
+                            <tr>
+                                <th> RICAFLOR SUAN </th>
+                            </tr>
+                            <tr>
+                                <td> Rate Analyst </td>
+                            </tr>
+                            <tr>
+                                <td> ${(0, helpers_1.formatDate)(rv.date_requested)} </td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+            
+                </div>
+            
+            </div>
+        
+        
+        
+
+            <div style="display: flex; justify-content: space-between; font-size: 9pt">
+                <div>
+                    Note: This is a system generated report
+                </div>
+                <div>
+                    Date & Time Generated: ${moment(new Date()).format('MMMM D, YYYY - dddd h:mm:ss a')}
+                </div>
+            </div>
+        
+        </div>
+          
+        `;
+        await page.setContent(content);
+        const pdfBuffer = await page.pdf();
+        await browser.close();
+        return pdfBuffer;
+    }
+    async getEmployee(employeeId, authUser) {
+        const query = `
+            query {
+                employee(id: "${employeeId}") {
+                    id 
+                    firstname 
+                    middlename 
+                    lastname
+                    position
+                }
+            }
+        `;
+        console.log('query', query);
+        try {
+            const { data } = await (0, rxjs_1.firstValueFrom)(this.httpService.post(process.env.API_GATEWAY_URL, { query }, {
+                headers: {
+                    Authorization: authUser.authorization,
+                    'Content-Type': 'application/json',
+                },
+            }).pipe((0, rxjs_1.catchError)((error) => {
+                throw error;
+            })));
+            console.log('data', data);
+            console.log('data.data.employee', data.data.employee);
+            if (!data || !data.data) {
+                console.log('No data returned');
+                return undefined;
+            }
+            return data.data.employee;
+        }
+        catch (error) {
+            console.error('Error getting employee:', error.message);
+            return undefined;
+        }
+    }
+};
+exports.RvPdfService = RvPdfService;
+exports.RvPdfService = RvPdfService = __decorate([
+    (0, common_1.Injectable)(),
+    __metadata("design:paramtypes", [typeof (_a = typeof axios_1.HttpService !== "undefined" && axios_1.HttpService) === "function" ? _a : Object])
+], RvPdfService);
 
 
 /***/ }),
