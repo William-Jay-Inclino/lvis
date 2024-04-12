@@ -75,6 +75,9 @@ export function getDateRange(dateString: string): { startDate: string, endDate: 
     };
 }
 
+export function formatToPhpCurrency(number: number) {
+    return number.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
 
 // In PURCHASING SERVICE you can only update/cancel if you are the owner or admin
 // In DATA MANAGEMENT anyone can CRUD if permitted

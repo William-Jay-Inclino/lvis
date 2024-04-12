@@ -1260,7 +1260,7 @@ exports.WarehouseCancelResponse = WarehouseCancelResponse = __decorate([
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.formatDate = exports.isNormalUser = exports.isAdmin = exports.canAccess = exports.getDateRange = exports.convertMiddleNameToInitial = exports.getFullname = exports.isValidItemTransactionType = exports.isValidApprovalStatus = void 0;
+exports.formatDate = exports.isNormalUser = exports.isAdmin = exports.canAccess = exports.formatToPhpCurrency = exports.getDateRange = exports.convertMiddleNameToInitial = exports.getFullname = exports.isValidItemTransactionType = exports.isValidApprovalStatus = void 0;
 const moment = __webpack_require__(/*! moment */ "moment");
 const types_1 = __webpack_require__(/*! ./types */ "./apps/warehouse/src/__common__/types.ts");
 const isValidApprovalStatus = (status) => {
@@ -1313,6 +1313,10 @@ function getDateRange(dateString) {
     };
 }
 exports.getDateRange = getDateRange;
+function formatToPhpCurrency(number) {
+    return number.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+exports.formatToPhpCurrency = formatToPhpCurrency;
 function canAccess(user, module, resolver) {
     console.log('canAccess()', user);
     console.log('module', module);
@@ -11584,30 +11588,38 @@ let MeqsPdfService = class MeqsPdfService {
     async generatePdf(meqs) {
         const browser = await puppeteer_1.default.launch();
         const page = await browser.newPage();
-        let purpose, refNumber, refType, canvassItems;
+        let purpose, refNumber, refType, requested_by_id, canvassItems;
         if (meqs.rv) {
             purpose = meqs.rv.canvass.purpose;
+            requested_by_id = meqs.rv.canvass.requested_by_id;
             refNumber = meqs.rv.rv_number;
             refType = 'RV';
             canvassItems = meqs.rv.canvass.canvass_items;
         }
         else if (meqs.spr) {
             purpose = meqs.spr.canvass.purpose;
+            requested_by_id = meqs.spr.canvass.requested_by_id;
             refNumber = meqs.spr.spr_number;
             refType = 'SPR';
             canvassItems = meqs.spr.canvass.canvass_items;
         }
         else {
             purpose = meqs.jo.canvass.purpose;
+            requested_by_id = meqs.jo.canvass.requested_by_id;
             refNumber = meqs.jo.jo_number;
             refType = 'JO';
             canvassItems = meqs.jo.canvass.canvass_items;
         }
+        const approvers = await Promise.all(meqs.meqs_approvers.map(async (i) => {
+            i.approver = await this.getEmployee(i.approver_id, this.authUser);
+            return i;
+        }));
+        const requisitioner = await this.getEmployee(requested_by_id, this.authUser);
         const content = `
 
         <div style="display: flex; flex-direction: column;">
 
-            <div style="padding-left: 25px; padding-right: 25px; font-size: 10pt; flex-grow: 1; min-height: 60vh;">
+            <div style="padding-left: 25px; padding-right: 25px; font-size: 10pt; flex-grow: 1; min-height: 70vh;">
         
                 <div style="text-align: center; margin-top: 35px">
         
@@ -11634,20 +11646,30 @@ let MeqsPdfService = class MeqsPdfService {
                     <div>
                         <table style="font-size: 10pt">
                             <tr>
-                                <td>Date Prepared: </td>
-                                <td style="border-bottom: 1px solid black;">
-                                    ${(0, helpers_1.formatDate)(meqs.meqs_date)}
+                                <td>Requisitioner: </td>
+                                <td>
+                                    ${requisitioner.firstname + ' ' + requisitioner.lastname} 
                                 </td>
                             </tr>
                             <tr>
                                 <td>Purpose:</td>
                                 <td> ${purpose} </td>
-                            </tr>     
+                            </tr>
+                            <tr>
+                                <td>Remarks:</td>
+                                <td> ${meqs.notes} </td>
+                            </tr>    
                         </table>
                     </div>
 
                     <div>
                         <table style="font-size: 10pt">
+                            <tr>
+                                <td>Date Prepared: </td>
+                                <td style="border-bottom: 1px solid black;">
+                                    ${(0, helpers_1.formatDate)(meqs.meqs_date)}
+                                </td>
+                            </tr>
                             <tr>
                                 <td> MEQS No.: </td>
                                 <td style="border-bottom: 1px solid black;">
@@ -11667,8 +11689,9 @@ let MeqsPdfService = class MeqsPdfService {
 
                 <br />
 
-                <table style="width: 100%; border-collapse: collapse;">
-                    <thead style="font-size: 9pt;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 9pt;">
+                    <caption style="text-align: left;"> Note: The underlined price in the 'Supplier' column indicates the awarded supplier </caption>
+                    <thead>
                         <th style="border: 1px solid black;"> MATERIALS / EQUIPMENT DESCRIPTION </th>
                         <th style="border: 1px solid black;"> UNIT </th>
                         <th style="border: 1px solid black;"> QTY. </th>
@@ -11680,28 +11703,74 @@ let MeqsPdfService = class MeqsPdfService {
                         `).join('')}
 
                     </thead>
-                    <tbody style="font-size: 10pt;">
 
-                        ${canvassItems.map((item, index) => `
-                        <tr>
-                            <td>
-                                ${index + 1}. ${item.description}
-                            </td>
-                            <td align="center">${item.unit ? item.unit.name : 'N/A'}</td>
-                            <td align="center">${item.quantity}</td>
-                        </tr>
-                    `).join('')}
+                    <tbody>
+                        ${canvassItems.map((canvassItem, index) => {
+            const tdElements = meqs.meqs_suppliers.map(supplier => {
+                for (let supplierItem of supplier.meqs_supplier_items) {
+                    if (supplierItem.canvass_item_id === canvassItem.id) {
+                        if (supplierItem.is_awarded) {
+                            return `<td align="center" style="border-bottom: 1px dashed black"><b>${(0, helpers_1.formatToPhpCurrency)(supplierItem.price)}</b></td>`;
+                        }
+                        else {
+                            return `<td align="center">${(0, helpers_1.formatToPhpCurrency)(supplierItem.price)}</td>`;
+                        }
+                    }
+                }
+                return `<td align="center"></td>`;
+            }).join('');
+            return `
+                            <tr>
+                                <td>
+                                    ${index + 1}. ${canvassItem.description}
+                                </td>
+                                <td align="center">${canvassItem.unit ? canvassItem.unit.name : 'N/A'}</td>
+                                <td align="center">${canvassItem.quantity}</td>
+                                ${tdElements}
+                            </tr>`;
+        }).join('')}
 
                     </tbody>
+                
                 </table>
         
             </div>
         
-            <div style="padding-left: 25px; padding-right: 25px; font-size: 10pt; padding-top: 50px; min-height: 30vh; display: flex; justify-content: center;">
-
+            <div style="padding-left: 25px; padding-right: 25px; font-size: 10pt; padding-top: 50px; min-height: 20vh;">
                 
-            
+                <div style="text-align: center;"> COOP PROCUREMENT COMMITTEE: </div>
 
+                <br />
+
+                <div style="display: flex; justify-content: center;">
+                
+                    ${approvers.map((item, index) => `
+                        
+                        <div style="padding: 10px; margin-right: 30px;">
+                            <table border="0" style="width: 100%">
+                                <tr>
+                                    <td style="text-align: center; font-size: 10pt;"> 
+                                        ${item.date_approval ? (0, helpers_1.formatDate)(item.date_approval) : '&nbsp;'} 
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th style="text-align: center">
+                                        <u>
+                                        ${item.approver.firstname + ' ' + item.approver.lastname}
+                                        </u>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center">
+                                        ${item.label}
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                    `).join('')}
+
+                </div>
                     
             
             </div>
