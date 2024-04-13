@@ -54,6 +54,6 @@ export class PO {
   rrs: RR[];
 
   @Field(() => [POApprover])
-  po_approvers: POApprover
+  po_approvers: POApprover[]
 
 }
