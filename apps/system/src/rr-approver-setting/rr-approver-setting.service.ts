@@ -206,7 +206,7 @@ export class RrApproverSettingService {
 		To reorder the order field in the approvers array so that it is incrementing without skipping numbers, 
 		  you can sort the array based on the order field and then update the order values sequentially.
 
-		Starting order is 2 since order 1 will be the immediate supervisor 
+		Starting order is 3 since order 1 will be Received by and 2 is confirmed by
 	*/
 	private async getQueries_for_reOrderApprovers(idRemoved: string): Promise<string[]> {
 
@@ -224,7 +224,7 @@ export class RrApproverSettingService {
 
 		approvers.sort((a, b) => a.order - b.order);
 
-		let currentOrder = 1;
+		let currentOrder = 3;
 
 		approvers.forEach((app) => {
 			app.order = currentOrder;

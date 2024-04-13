@@ -16853,6 +16853,66 @@ exports.RR = RR = __decorate([
 
 /***/ }),
 
+/***/ "./apps/warehouse/src/rr/rr.controller.ts":
+/*!************************************************!*\
+  !*** ./apps/warehouse/src/rr/rr.controller.ts ***!
+  \************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+var _a, _b, _c;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.RrController = void 0;
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const rr_pdf_service_1 = __webpack_require__(/*! ./rr.pdf.service */ "./apps/warehouse/src/rr/rr.pdf.service.ts");
+const current_auth_user_decorator_1 = __webpack_require__(/*! ../__auth__/current-auth-user.decorator */ "./apps/warehouse/src/__auth__/current-auth-user.decorator.ts");
+const auth_user_entity_1 = __webpack_require__(/*! ../__common__/auth-user.entity */ "./apps/warehouse/src/__common__/auth-user.entity.ts");
+let RrController = class RrController {
+    constructor(rrPdfService) {
+        this.rrPdfService = rrPdfService;
+    }
+    async generatePdf(id, res, authUser) {
+        console.log('id', id);
+        console.log('authUser', authUser);
+        this.rrPdfService.setAuthUser(authUser);
+        const rr = await this.rrPdfService.findRr(id);
+        const pdfBuffer = await this.rrPdfService.generatePdf(rr);
+        res.setHeader('Content-Type', 'application/pdf');
+        res.setHeader('Content-Disposition', 'inline; filename="example.pdf"');
+        res.send(pdfBuffer);
+    }
+};
+exports.RrController = RrController;
+__decorate([
+    (0, common_1.Get)('pdf/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Res)()),
+    __param(2, (0, current_auth_user_decorator_1.CurrentAuthUser)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, typeof (_b = typeof Response !== "undefined" && Response) === "function" ? _b : Object, typeof (_c = typeof auth_user_entity_1.AuthUser !== "undefined" && auth_user_entity_1.AuthUser) === "function" ? _c : Object]),
+    __metadata("design:returntype", Promise)
+], RrController.prototype, "generatePdf", null);
+exports.RrController = RrController = __decorate([
+    (0, common_1.Controller)('rr'),
+    __metadata("design:paramtypes", [typeof (_a = typeof rr_pdf_service_1.RrPdfService !== "undefined" && rr_pdf_service_1.RrPdfService) === "function" ? _a : Object])
+], RrController);
+
+
+/***/ }),
+
 /***/ "./apps/warehouse/src/rr/rr.module.ts":
 /*!********************************************!*\
   !*** ./apps/warehouse/src/rr/rr.module.ts ***!
@@ -16874,16 +16934,298 @@ const rr_service_1 = __webpack_require__(/*! ./rr.service */ "./apps/warehouse/s
 const rr_resolver_1 = __webpack_require__(/*! ./rr.resolver */ "./apps/warehouse/src/rr/rr.resolver.ts");
 const axios_1 = __webpack_require__(/*! @nestjs/axios */ "@nestjs/axios");
 const rr_approver_service_1 = __webpack_require__(/*! ../rr-approver/rr-approver.service */ "./apps/warehouse/src/rr-approver/rr-approver.service.ts");
+const rr_controller_1 = __webpack_require__(/*! ./rr.controller */ "./apps/warehouse/src/rr/rr.controller.ts");
+const rr_pdf_service_1 = __webpack_require__(/*! ./rr.pdf.service */ "./apps/warehouse/src/rr/rr.pdf.service.ts");
 let RrModule = class RrModule {
 };
 exports.RrModule = RrModule;
 exports.RrModule = RrModule = __decorate([
     (0, common_1.Module)({
         imports: [axios_1.HttpModule],
-        providers: [rr_resolver_1.RrResolver, rr_service_1.RrService, rr_approver_service_1.RrApproverService],
-        exports: [rr_service_1.RrService]
+        providers: [rr_resolver_1.RrResolver, rr_service_1.RrService, rr_pdf_service_1.RrPdfService, rr_approver_service_1.RrApproverService],
+        exports: [rr_service_1.RrService],
+        controllers: [rr_controller_1.RrController]
     })
 ], RrModule);
+
+
+/***/ }),
+
+/***/ "./apps/warehouse/src/rr/rr.pdf.service.ts":
+/*!*************************************************!*\
+  !*** ./apps/warehouse/src/rr/rr.pdf.service.ts ***!
+  \*************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var _a, _b;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.RrPdfService = void 0;
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const puppeteer_1 = __webpack_require__(/*! puppeteer */ "puppeteer");
+const helpers_1 = __webpack_require__(/*! ../__common__/helpers */ "./apps/warehouse/src/__common__/helpers.ts");
+const moment = __webpack_require__(/*! moment */ "moment");
+const rxjs_1 = __webpack_require__(/*! rxjs */ "rxjs");
+const axios_1 = __webpack_require__(/*! @nestjs/axios */ "@nestjs/axios");
+const prisma_service_1 = __webpack_require__(/*! ../__prisma__/prisma.service */ "./apps/warehouse/src/__prisma__/prisma.service.ts");
+let RrPdfService = class RrPdfService {
+    constructor(prisma, httpService) {
+        this.prisma = prisma;
+        this.httpService = httpService;
+    }
+    setAuthUser(authUser) {
+        this.authUser = authUser;
+    }
+    async generatePdf(rr) {
+        const browser = await puppeteer_1.default.launch();
+        const page = await browser.newPage();
+        const content = `
+
+        <div style="display: flex; flex-direction: column;">
+
+            <div style="padding-left: 25px; padding-right: 25px; font-size: 10pt; flex-grow: 1; min-height: 70vh;">
+        
+                <div style="text-align: center; margin-top: 35px">
+        
+                    <h1 style="font-size: 11pt; font-weight: bold;">LEYTE V ELECTRIC COOPERATIVE, INC.</h1>
+        
+                    <div style="font-size: 9pt">
+                        <span>Brgy. San Pablo, Ormoc City, Leyte</span>
+                        <br />
+                        <span>VAT REG. TIN 001-383-331-000</span>
+                    </div>
+        
+                    <br />
+        
+                    <div style="font-size: 14pt; font-weight: bold;"> RECEIVING REPORT </div>
+
+                    <div style="display: flex; justify-content: end;">
+                        <table style="font-size: 10pt;">
+                            <tr>
+                                <td> RR No.: </td>
+                                <td style="border-bottom: 1px solid black;"> ${rr.rr_number} </td>
+                            </tr>
+                            <tr>
+                                <td> Date: </td>
+                                <td style="border-bottom: 1px solid black;"> ${(0, helpers_1.formatDate)(rr.rr_date)} </td>
+                            </tr>
+                        </table>
+                    </div>
+        
+                </div>
+
+                <table border="1" style="width: 100%; font-size: 10pt; border-collapse: collapse; border-color: black; margin-top: 10px;">
+                    <tr>
+                        <td rowspan="4" style="width: 50%; vertical-align: top;">
+                            <div style="display: flex; justify-content: space-between; padding-left: 10px; padding-right: 10px;">
+                                <div> Supplier: </div>
+                                <div>
+                                    Tin #: 209-609-185-00054
+                                </div>
+                            </div>
+
+                            <div style="text-align: center;">
+                                <div style="font-size: 11pt; font-weight: bold;">
+                                    ${rr.po.meqs_supplier.supplier.name.toUpperCase()}
+                                </div>
+                                <div>
+                                    REAL ST., ORMOC CITY
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <table style="font-size: 10pt; width: 100%;">
+                                <tr>
+                                    <td style="width: 50%;"> PO No.: </td>
+                                    <td> Date: </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <table style="font-size: 10pt; width: 100%;">
+                                <tr>
+                                    <td style="width: 50%;"> RR No.: </td>
+                                    <td> Date: </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <table style="font-size: 10pt; width: 100%;">
+                                <tr>
+                                    <td style="width: 50%;"> Invoice No.: </td>
+                                    <td> Date: </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="padding: 5px;">
+                            Delivery Report: ${rr.notes}
+                        </td>
+                    </tr>
+                </table>
+
+        
+            </div>
+        
+            <div style="padding-left: 25px; padding-right: 25px; font-size: 10pt; padding-top: 50px; min-height: 20vh;">
+                
+
+                    
+            
+            </div>
+        
+        
+        
+
+            <div style="display: flex; justify-content: space-between; font-size: 9pt">
+                <div>
+                    Note: This is a system generated report
+                </div>
+                <div>
+                    Date & Time Generated: ${moment(new Date()).format('MMMM D, YYYY - dddd h:mm:ss a')}
+                </div>
+            </div>
+        
+        </div>
+          
+        `;
+        await page.setContent(content);
+        const pdfBuffer = await page.pdf({
+            format: 'A4',
+            landscape: true
+        });
+        await browser.close();
+        return pdfBuffer;
+    }
+    async getEmployee(employeeId, authUser) {
+        const query = `
+            query {
+                employee(id: "${employeeId}") {
+                    id 
+                    firstname 
+                    middlename 
+                    lastname
+                    position
+                }
+            }
+        `;
+        console.log('query', query);
+        try {
+            const { data } = await (0, rxjs_1.firstValueFrom)(this.httpService.post(process.env.API_GATEWAY_URL, { query }, {
+                headers: {
+                    Authorization: authUser.authorization,
+                    'Content-Type': 'application/json',
+                },
+            }).pipe((0, rxjs_1.catchError)((error) => {
+                throw error;
+            })));
+            console.log('data', data);
+            console.log('data.data.employee', data.data.employee);
+            if (!data || !data.data) {
+                console.log('No data returned');
+                return undefined;
+            }
+            return data.data.employee;
+        }
+        catch (error) {
+            console.error('Error getting employee:', error.message);
+            return undefined;
+        }
+    }
+    async findRr(id) {
+        const item = await this.prisma.rR.findUnique({
+            include: {
+                po: {
+                    include: {
+                        meqs_supplier: {
+                            include: {
+                                meqs: {
+                                    include: {
+                                        rv: {
+                                            include: {
+                                                canvass: true
+                                            }
+                                        },
+                                        spr: {
+                                            include: {
+                                                canvass: true
+                                            }
+                                        },
+                                        jo: {
+                                            include: {
+                                                canvass: true
+                                            }
+                                        }
+                                    }
+                                },
+                                supplier: true,
+                                attachments: true,
+                                meqs_supplier_items: {
+                                    include: {
+                                        canvass_item: {
+                                            include: {
+                                                unit: true,
+                                                brand: true,
+                                                item: true
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                    }
+                },
+                rr_items: {
+                    include: {
+                        meqs_supplier_item: {
+                            include: {
+                                canvass_item: {
+                                    include: {
+                                        unit: true,
+                                        brand: true,
+                                        item: true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                rr_approvers: {
+                    orderBy: {
+                        order: 'asc'
+                    }
+                }
+            },
+            where: { id }
+        });
+        if (!item) {
+            throw new common_1.NotFoundException('RR not found');
+        }
+        return item;
+    }
+};
+exports.RrPdfService = RrPdfService;
+exports.RrPdfService = RrPdfService = __decorate([
+    (0, common_1.Injectable)(),
+    __metadata("design:paramtypes", [typeof (_a = typeof prisma_service_1.PrismaService !== "undefined" && prisma_service_1.PrismaService) === "function" ? _a : Object, typeof (_b = typeof axios_1.HttpService !== "undefined" && axios_1.HttpService) === "function" ? _b : Object])
+], RrPdfService);
 
 
 /***/ }),
@@ -17176,9 +17518,14 @@ let RrService = RrService_1 = class RrService {
         const createdBy = this.authUser.user.username;
         const requested_by_id = await this.getRequestedById(input.po_id);
         input.approvers.push({
+            approver_id: input.received_by_id,
+            label: 'Received By',
+            order: 1
+        });
+        input.approvers.push({
             approver_id: requested_by_id,
             label: 'Confirmed By',
-            order: 1
+            order: 2
         });
         const data = {
             created_by: createdBy,

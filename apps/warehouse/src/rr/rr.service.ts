@@ -100,10 +100,17 @@ export class RrService {
         const requested_by_id = await this.getRequestedById(input.po_id)
 
         input.approvers.push({
-            approver_id: requested_by_id,
-            label: 'Confirmed By',
+            approver_id: input.received_by_id,
+            label: 'Received By',
             order: 1
         })
+
+        input.approvers.push({
+            approver_id: requested_by_id,
+            label: 'Confirmed By',
+            order: 2
+        })
+
 
         const data: Prisma.RRCreateInput = {
             created_by: createdBy,

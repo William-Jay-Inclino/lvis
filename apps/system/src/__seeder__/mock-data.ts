@@ -794,14 +794,14 @@ export const po_default_approvers: POApproverSetting[] = [
     {
         id: faker.string.uuid(),
         approver_id: employees[1].id,
-        label: 'Budget Approved By',
+        label: 'Budget By',
         order: 1,
         created_by: 'admin'
     },
     {
         id: faker.string.uuid(),
         approver_id: employees[8].id,
-        label: 'Checked By Finance Mngr',
+        label: 'Finance By',
         order: 2,
         created_by: 'admin'
     },
@@ -826,14 +826,14 @@ export const rr_default_approvers: RRApproverSetting[] = [
         id: faker.string.uuid(),
         approver_id: employees[2].id,
         label: 'Audited By',
-        order: 2,
+        order: 3,
         created_by: 'admin'
     },
     {
         id: faker.string.uuid(),
         approver_id: employees[3].id,
         label: 'Approved By',
-        order: 3,
+        order: 4,
         created_by: 'admin'
     },
 ]

@@ -2110,14 +2110,14 @@ exports.po_default_approvers = [
     {
         id: faker_1.faker.string.uuid(),
         approver_id: exports.employees[1].id,
-        label: 'Budget Approved By',
+        label: 'Budget By',
         order: 1,
         created_by: 'admin'
     },
     {
         id: faker_1.faker.string.uuid(),
         approver_id: exports.employees[8].id,
-        label: 'Checked By Finance Mngr',
+        label: 'Finance By',
         order: 2,
         created_by: 'admin'
     },
@@ -2141,14 +2141,14 @@ exports.rr_default_approvers = [
         id: faker_1.faker.string.uuid(),
         approver_id: exports.employees[2].id,
         label: 'Audited By',
-        order: 2,
+        order: 3,
         created_by: 'admin'
     },
     {
         id: faker_1.faker.string.uuid(),
         approver_id: exports.employees[3].id,
         label: 'Approved By',
-        order: 3,
+        order: 4,
         created_by: 'admin'
     },
 ];
@@ -6544,7 +6544,7 @@ let RrApproverSettingService = RrApproverSettingService_1 = class RrApproverSett
             }
         });
         approvers.sort((a, b) => a.order - b.order);
-        let currentOrder = 1;
+        let currentOrder = 3;
         approvers.forEach((app) => {
             app.order = currentOrder;
             currentOrder++;
