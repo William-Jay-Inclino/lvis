@@ -434,6 +434,8 @@ exports.Prisma.SupplierScalarFieldEnum = {
   id: 'id',
   name: 'name',
   contact: 'contact',
+  tin_no: 'tin_no',
+  address: 'address',
   vat_type: 'vat_type',
   created_by: 'created_by',
   updated_by: 'updated_by',

@@ -22,6 +22,8 @@ export interface Supplier {
     id: string
     name: string
     contact: string
+    tin_no: string
+    address: string
     vat_type: VAT_TYPE
     created_by: string
 }

@@ -23,6 +23,8 @@ export class SupplierService {
 		const data: Prisma.SupplierCreateInput = {
 			name: input.name,
 			contact: input.contact,
+			tin_no: input.tin_no,
+			address: input.address,
 			vat_type: input.vat_type,
 			created_by: this.authUser.user.username
 		}
@@ -67,6 +69,8 @@ export class SupplierService {
 		const data: Prisma.SupplierUpdateInput = {
 			name: input.name ?? existingItem.name,
 			contact: input.contact ?? existingItem.contact,
+			tin_no: input.contact ?? existingItem.tin_no,
+			address: input.contact ?? existingItem.address,
 			vat_type: input.vat_type ?? existingItem.vat_type,
 			updated_by: this.authUser.user.username
 		}

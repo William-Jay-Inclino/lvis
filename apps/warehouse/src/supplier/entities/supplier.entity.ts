@@ -13,6 +13,12 @@ export class Supplier {
   @Field()
   contact: string;
 
+  @Field()
+  tin_no: string;
+
+  @Field()
+  address: string;
+
   @Field(() => Int)
   vat_type: VAT_TYPE;
 

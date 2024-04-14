@@ -529,6 +529,8 @@ model Supplier {
   id       String @id @default(uuid())
   name     String
   contact  String
+  tin_no  String @default("")
+  address  String @default("")
   vat_type Int    @default(1)
 
   created_by String

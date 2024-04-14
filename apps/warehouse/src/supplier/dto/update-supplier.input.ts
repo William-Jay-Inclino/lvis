@@ -16,6 +16,16 @@ export class UpdateSupplierInput extends PartialType(CreateSupplierInput) {
   @IsString()
   contact?: string | null;
 
+  @Field(() => String, { nullable: true })
+  @IsOptional()
+  @IsString()
+  tin_no?: string | null;
+
+  @Field(() => String, { nullable: true })
+  @IsOptional()
+  @IsString()
+  address?: string | null;
+
   @Field(() => Int, { nullable: true })
   @IsOptional()
   @IsInt()

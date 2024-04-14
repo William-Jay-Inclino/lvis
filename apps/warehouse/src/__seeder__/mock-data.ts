@@ -6,6 +6,8 @@ export const suppliers: Supplier[] = [
         id: faker.string.uuid(),
         name: 'Robinson',
         contact: '+639000000000',
+        tin_no: '209-609-185-00054',
+        address: 'Brgy. Cogon, Ormoc City, Leyte',
         vat_type: VAT_TYPE.NONE,
         created_by: 'admin'
 
@@ -14,6 +16,8 @@ export const suppliers: Supplier[] = [
         id: faker.string.uuid(),
         name: 'SM',
         contact: '+639000000000',
+        tin_no: '209-609-185-00054',
+        address: 'REAL ST., ORMOC CITY',
         vat_type: VAT_TYPE.INC,
         created_by: 'admin'
     },
@@ -21,6 +25,8 @@ export const suppliers: Supplier[] = [
         id: faker.string.uuid(),
         name: 'Puregold',
         contact: '+639000000000',
+        tin_no: '209-609-185-00054',
+        address: 'REAL ST., ORMOC CITY',
         vat_type: VAT_TYPE.EXC,
         created_by: 'admin'
     }
