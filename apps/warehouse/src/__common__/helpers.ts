@@ -1,7 +1,8 @@
 import * as moment from 'moment';
 import { AuthUser } from "./auth-user.entity"
-import { APPROVAL_STATUS, ITEM_TRANSACTION_TYPE, MODULES, RESOLVERS, Role } from "./types"
+import { APPROVAL_STATUS, ITEM_TRANSACTION_TYPE, MODULES, RESOLVERS, Role, VAT_TYPE } from "./types"
 import { User, UserPermissions } from "./user.entity"
+import { VAT_RATE } from './config';
 
 
 export const isValidApprovalStatus = (status: number): boolean => {
@@ -234,4 +235,20 @@ export function formatDate(d: any) {
 
     // return moment(date).format('YYYY-MM-DD');
     return moment(date).format('M/D/YY');
+}
+
+export function getVatAmount(price: number, vat_type: VAT_TYPE) {
+
+    if (!price) return 0
+
+    if (vat_type === VAT_TYPE.EXC) {
+        return price * VAT_RATE
+    }
+
+    if (vat_type === VAT_TYPE.INC) {
+        return (price * VAT_RATE) / (1 + VAT_RATE);
+    }
+
+    return 0
+
 }
