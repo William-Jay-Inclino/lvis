@@ -35,4 +35,9 @@ export class UpdateEmployeeInput extends PartialType(CreateEmployeeInput) {
   @IsBoolean()
   is_finance_manager?: boolean;
 
+  @Field(() => String, { nullable: true })
+  @IsOptional()
+  @IsString()
+  signature_src?: string;
+
 }

@@ -4961,6 +4961,7 @@ export namespace Prisma {
     middlename: string | null
     lastname: string | null
     position: string | null
+    signature_src: string | null
     is_budget_officer: boolean | null
     is_finance_manager: boolean | null
     created_by: string | null
@@ -4977,6 +4978,7 @@ export namespace Prisma {
     middlename: string | null
     lastname: string | null
     position: string | null
+    signature_src: string | null
     is_budget_officer: boolean | null
     is_finance_manager: boolean | null
     created_by: string | null
@@ -4993,6 +4995,7 @@ export namespace Prisma {
     middlename: number
     lastname: number
     position: number
+    signature_src: number
     is_budget_officer: number
     is_finance_manager: number
     created_by: number
@@ -5011,6 +5014,7 @@ export namespace Prisma {
     middlename?: true
     lastname?: true
     position?: true
+    signature_src?: true
     is_budget_officer?: true
     is_finance_manager?: true
     created_by?: true
@@ -5027,6 +5031,7 @@ export namespace Prisma {
     middlename?: true
     lastname?: true
     position?: true
+    signature_src?: true
     is_budget_officer?: true
     is_finance_manager?: true
     created_by?: true
@@ -5043,6 +5048,7 @@ export namespace Prisma {
     middlename?: true
     lastname?: true
     position?: true
+    signature_src?: true
     is_budget_officer?: true
     is_finance_manager?: true
     created_by?: true
@@ -5132,6 +5138,7 @@ export namespace Prisma {
     middlename: string | null
     lastname: string
     position: string | null
+    signature_src: string | null
     is_budget_officer: boolean
     is_finance_manager: boolean
     created_by: string
@@ -5165,6 +5172,7 @@ export namespace Prisma {
     middlename?: boolean
     lastname?: boolean
     position?: boolean
+    signature_src?: boolean
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by?: boolean
@@ -5188,6 +5196,7 @@ export namespace Prisma {
     middlename?: boolean
     lastname?: boolean
     position?: boolean
+    signature_src?: boolean
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by?: boolean
@@ -5226,6 +5235,7 @@ export namespace Prisma {
       middlename: string | null
       lastname: string
       position: string | null
+      signature_src: string | null
       is_budget_officer: boolean
       is_finance_manager: boolean
       created_by: string
@@ -5646,6 +5656,7 @@ export namespace Prisma {
     readonly middlename: FieldRef<"Employee", 'String'>
     readonly lastname: FieldRef<"Employee", 'String'>
     readonly position: FieldRef<"Employee", 'String'>
+    readonly signature_src: FieldRef<"Employee", 'String'>
     readonly is_budget_officer: FieldRef<"Employee", 'Boolean'>
     readonly is_finance_manager: FieldRef<"Employee", 'Boolean'>
     readonly created_by: FieldRef<"Employee", 'String'>
@@ -15864,6 +15875,7 @@ export namespace Prisma {
     middlename: 'middlename',
     lastname: 'lastname',
     position: 'position',
+    signature_src: 'signature_src',
     is_budget_officer: 'is_budget_officer',
     is_finance_manager: 'is_finance_manager',
     created_by: 'created_by',
@@ -16408,6 +16420,7 @@ export namespace Prisma {
     middlename?: StringNullableFilter<"Employee"> | string | null
     lastname?: StringFilter<"Employee"> | string
     position?: StringNullableFilter<"Employee"> | string | null
+    signature_src?: StringNullableFilter<"Employee"> | string | null
     is_budget_officer?: BoolFilter<"Employee"> | boolean
     is_finance_manager?: BoolFilter<"Employee"> | boolean
     created_by?: StringFilter<"Employee"> | string
@@ -16431,6 +16444,7 @@ export namespace Prisma {
     middlename?: SortOrderInput | SortOrder
     lastname?: SortOrder
     position?: SortOrderInput | SortOrder
+    signature_src?: SortOrderInput | SortOrder
     is_budget_officer?: SortOrder
     is_finance_manager?: SortOrder
     created_by?: SortOrder
@@ -16457,6 +16471,7 @@ export namespace Prisma {
     middlename?: StringNullableFilter<"Employee"> | string | null
     lastname?: StringFilter<"Employee"> | string
     position?: StringNullableFilter<"Employee"> | string | null
+    signature_src?: StringNullableFilter<"Employee"> | string | null
     is_budget_officer?: BoolFilter<"Employee"> | boolean
     is_finance_manager?: BoolFilter<"Employee"> | boolean
     created_by?: StringFilter<"Employee"> | string
@@ -16480,6 +16495,7 @@ export namespace Prisma {
     middlename?: SortOrderInput | SortOrder
     lastname?: SortOrder
     position?: SortOrderInput | SortOrder
+    signature_src?: SortOrderInput | SortOrder
     is_budget_officer?: SortOrder
     is_finance_manager?: SortOrder
     created_by?: SortOrder
@@ -16502,6 +16518,7 @@ export namespace Prisma {
     middlename?: StringNullableWithAggregatesFilter<"Employee"> | string | null
     lastname?: StringWithAggregatesFilter<"Employee"> | string
     position?: StringNullableWithAggregatesFilter<"Employee"> | string | null
+    signature_src?: StringNullableWithAggregatesFilter<"Employee"> | string | null
     is_budget_officer?: BoolWithAggregatesFilter<"Employee"> | boolean
     is_finance_manager?: BoolWithAggregatesFilter<"Employee"> | boolean
     created_by?: StringWithAggregatesFilter<"Employee"> | string
@@ -17527,6 +17544,7 @@ export namespace Prisma {
     middlename?: string | null
     lastname: string
     position?: string | null
+    signature_src?: string | null
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by: string
@@ -17550,6 +17568,7 @@ export namespace Prisma {
     middlename?: string | null
     lastname: string
     position?: string | null
+    signature_src?: string | null
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by: string
@@ -17573,6 +17592,7 @@ export namespace Prisma {
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
     position?: NullableStringFieldUpdateOperationsInput | string | null
+    signature_src?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
@@ -17596,6 +17616,7 @@ export namespace Prisma {
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
     position?: NullableStringFieldUpdateOperationsInput | string | null
+    signature_src?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
@@ -17619,6 +17640,7 @@ export namespace Prisma {
     middlename?: string | null
     lastname: string
     position?: string | null
+    signature_src?: string | null
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by: string
@@ -17635,6 +17657,7 @@ export namespace Prisma {
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
     position?: NullableStringFieldUpdateOperationsInput | string | null
+    signature_src?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
@@ -17651,6 +17674,7 @@ export namespace Prisma {
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
     position?: NullableStringFieldUpdateOperationsInput | string | null
+    signature_src?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
@@ -18793,6 +18817,7 @@ export namespace Prisma {
     middlename?: SortOrder
     lastname?: SortOrder
     position?: SortOrder
+    signature_src?: SortOrder
     is_budget_officer?: SortOrder
     is_finance_manager?: SortOrder
     created_by?: SortOrder
@@ -18809,6 +18834,7 @@ export namespace Prisma {
     middlename?: SortOrder
     lastname?: SortOrder
     position?: SortOrder
+    signature_src?: SortOrder
     is_budget_officer?: SortOrder
     is_finance_manager?: SortOrder
     created_by?: SortOrder
@@ -18825,6 +18851,7 @@ export namespace Prisma {
     middlename?: SortOrder
     lastname?: SortOrder
     position?: SortOrder
+    signature_src?: SortOrder
     is_budget_officer?: SortOrder
     is_finance_manager?: SortOrder
     created_by?: SortOrder
@@ -20603,6 +20630,7 @@ export namespace Prisma {
     middlename?: string | null
     lastname: string
     position?: string | null
+    signature_src?: string | null
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by: string
@@ -20625,6 +20653,7 @@ export namespace Prisma {
     middlename?: string | null
     lastname: string
     position?: string | null
+    signature_src?: string | null
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by: string
@@ -20710,6 +20739,7 @@ export namespace Prisma {
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
     position?: NullableStringFieldUpdateOperationsInput | string | null
+    signature_src?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
@@ -20732,6 +20762,7 @@ export namespace Prisma {
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
     position?: NullableStringFieldUpdateOperationsInput | string | null
+    signature_src?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
@@ -20754,6 +20785,7 @@ export namespace Prisma {
     middlename?: string | null
     lastname: string
     position?: string | null
+    signature_src?: string | null
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by: string
@@ -20776,6 +20808,7 @@ export namespace Prisma {
     middlename?: string | null
     lastname: string
     position?: string | null
+    signature_src?: string | null
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by: string
@@ -20814,6 +20847,7 @@ export namespace Prisma {
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
     position?: NullableStringFieldUpdateOperationsInput | string | null
+    signature_src?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
@@ -20836,6 +20870,7 @@ export namespace Prisma {
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
     position?: NullableStringFieldUpdateOperationsInput | string | null
+    signature_src?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
@@ -20858,6 +20893,7 @@ export namespace Prisma {
     middlename?: string | null
     lastname: string
     position?: string | null
+    signature_src?: string | null
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by: string
@@ -20880,6 +20916,7 @@ export namespace Prisma {
     middlename?: string | null
     lastname: string
     position?: string | null
+    signature_src?: string | null
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by: string
@@ -20918,6 +20955,7 @@ export namespace Prisma {
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
     position?: NullableStringFieldUpdateOperationsInput | string | null
+    signature_src?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
@@ -20940,6 +20978,7 @@ export namespace Prisma {
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
     position?: NullableStringFieldUpdateOperationsInput | string | null
+    signature_src?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
@@ -20962,6 +21001,7 @@ export namespace Prisma {
     middlename?: string | null
     lastname: string
     position?: string | null
+    signature_src?: string | null
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by: string
@@ -20984,6 +21024,7 @@ export namespace Prisma {
     middlename?: string | null
     lastname: string
     position?: string | null
+    signature_src?: string | null
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by: string
@@ -21022,6 +21063,7 @@ export namespace Prisma {
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
     position?: NullableStringFieldUpdateOperationsInput | string | null
+    signature_src?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
@@ -21044,6 +21086,7 @@ export namespace Prisma {
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
     position?: NullableStringFieldUpdateOperationsInput | string | null
+    signature_src?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
@@ -21066,6 +21109,7 @@ export namespace Prisma {
     middlename?: string | null
     lastname: string
     position?: string | null
+    signature_src?: string | null
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by: string
@@ -21088,6 +21132,7 @@ export namespace Prisma {
     middlename?: string | null
     lastname: string
     position?: string | null
+    signature_src?: string | null
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by: string
@@ -21126,6 +21171,7 @@ export namespace Prisma {
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
     position?: NullableStringFieldUpdateOperationsInput | string | null
+    signature_src?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
@@ -21148,6 +21194,7 @@ export namespace Prisma {
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
     position?: NullableStringFieldUpdateOperationsInput | string | null
+    signature_src?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
@@ -21170,6 +21217,7 @@ export namespace Prisma {
     middlename?: string | null
     lastname: string
     position?: string | null
+    signature_src?: string | null
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by: string
@@ -21192,6 +21240,7 @@ export namespace Prisma {
     middlename?: string | null
     lastname: string
     position?: string | null
+    signature_src?: string | null
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by: string
@@ -21230,6 +21279,7 @@ export namespace Prisma {
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
     position?: NullableStringFieldUpdateOperationsInput | string | null
+    signature_src?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
@@ -21252,6 +21302,7 @@ export namespace Prisma {
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
     position?: NullableStringFieldUpdateOperationsInput | string | null
+    signature_src?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
@@ -21274,6 +21325,7 @@ export namespace Prisma {
     middlename?: string | null
     lastname: string
     position?: string | null
+    signature_src?: string | null
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by: string
@@ -21296,6 +21348,7 @@ export namespace Prisma {
     middlename?: string | null
     lastname: string
     position?: string | null
+    signature_src?: string | null
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by: string
@@ -21334,6 +21387,7 @@ export namespace Prisma {
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
     position?: NullableStringFieldUpdateOperationsInput | string | null
+    signature_src?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
@@ -21356,6 +21410,7 @@ export namespace Prisma {
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
     position?: NullableStringFieldUpdateOperationsInput | string | null
+    signature_src?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string

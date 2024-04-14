@@ -74,6 +74,7 @@ model Employee {
   middlename String?
   lastname   String
   position String?
+  signature_src String?
 
   is_budget_officer  Boolean @default(false)
   is_finance_manager Boolean @default(false)

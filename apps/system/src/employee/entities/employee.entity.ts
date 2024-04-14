@@ -26,7 +26,8 @@ export class Employee {
   @Field(() => Boolean)
   is_finance_manager: boolean;
 
-
+  @Field(() => String, { nullable: true })
+  signature_src?: string | null;
 
   // =============== audit fields =============== 
 

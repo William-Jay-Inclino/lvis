@@ -5,7 +5,8 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { IntrospectAndCompose, RemoteGraphQLDataSource } from '@apollo/gateway';
 import { verify } from 'jsonwebtoken'
 import { AuthModule } from './auth/auth.module';
-import { FileUploadModule } from './file-upload/file-upload.module';
+import { FileUploadModule } from './file-upload-warehouse/file-upload.module';
+import { FileUploadSystemModule } from './file-upload-system/file-upload-system.module';
 
 const getToken = (authToken: string) => {
 
@@ -93,8 +94,8 @@ function handleAuth({ req }) {
     }),
 
     AuthModule,
-
     FileUploadModule,
+    FileUploadSystemModule,
   ],
   controllers: [],
   providers: [],

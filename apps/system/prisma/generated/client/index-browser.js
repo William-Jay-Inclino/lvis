@@ -153,6 +153,7 @@ exports.Prisma.EmployeeScalarFieldEnum = {
   middlename: 'middlename',
   lastname: 'lastname',
   position: 'position',
+  signature_src: 'signature_src',
   is_budget_officer: 'is_budget_officer',
   is_finance_manager: 'is_finance_manager',
   created_by: 'created_by',

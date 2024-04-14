@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import * as fs from 'fs';
 import * as path from 'path';
-import { Express } from 'express';
 import { UPLOADS_PATH } from '../__common__/config';
 
 @Injectable()

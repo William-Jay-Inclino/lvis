@@ -6,6 +6,7 @@ import { UpdateEmployeeInput } from './dto/update-employee.input';
 import { SystemRemoveResponse } from '../__common__/classes';
 import { EmployeesResponse } from './entities/employees-response.entity';
 import { AuthUser } from '../__common__/auth-user.entity';
+import axios from 'axios';
 
 @Injectable()
 export class EmployeeService {
@@ -26,7 +27,8 @@ export class EmployeeService {
 			firstname: input.firstname,
 			middlename: input.middlename,
 			lastname: input.lastname,
-			position: input.position
+			position: input.position,
+			signature_src: input.signature_src,
 		}
 
 		const created = await this.prisma.employee.create({ data })
@@ -108,6 +110,7 @@ export class EmployeeService {
 			middlename: input.middlename ?? existingItem.middlename,
 			lastname: input.lastname ?? existingItem.lastname,
 			position: input.position ?? existingItem.position,
+			signature_src: input.signature_src ?? existingItem.signature_src,
 			is_budget_officer: input.is_budget_officer ?? existingItem.is_budget_officer,
 			is_finance_manager: input.is_finance_manager ?? existingItem.is_finance_manager,
 		}
@@ -119,6 +122,11 @@ export class EmployeeService {
 				id
 			}
 		})
+
+		if(!!input.signature_src) {
+			this.deleteFiles([existingItem.signature_src])
+			console.log('previous file deleted');
+		}
 
 		this.logger.log('Successfully updated Employee')
 
@@ -226,5 +234,16 @@ export class EmployeeService {
 		return budgetOfficers
 
 	}
+
+    private async deleteFiles(filePaths: string[]) {
+
+        console.log('deleteFiles', filePaths)
+
+        const url = process.env.API_URL + '/api/v1/file-upload/system/employee'
+
+        console.log('url', url)
+
+        return axios.delete(url, { data: filePaths });
+    }
 
 }

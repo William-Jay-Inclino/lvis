@@ -24,4 +24,9 @@ export class CreateEmployeeInput {
   @IsString()
   position?: string;
 
+  @Field(() => String, {nullable: true})
+  @IsOptional()
+  @IsString()
+  signature_src?: string;
+
 }
