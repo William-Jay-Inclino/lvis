@@ -3677,10 +3677,10 @@ let CanvassPdfService = class CanvassPdfService {
         
                 <div style="text-align: center; margin-top: 35px">
         
-                <div style="display: flex; align-items: center; justify-content: center;">
-                    <img src="data:image/jpeg;base64,${logo}" alt="Logo" style="height: 50px; width: 50px; margin-right: 10px;">
-                    <h1 style="font-size: 11pt; font-weight: bold; display: inline;">LEYTE V ELECTRIC COOPERATIVE, INC.</h1>
-                </div>
+                    <div style="display: flex; align-items: center; justify-content: center;">
+                        <img src="data:image/jpeg;base64,${logo}" alt="Logo" style="height: 50px; width: 50px; margin-right: 10px;">
+                        <h1 style="font-size: 11pt; font-weight: bold; display: inline;">LEYTE V ELECTRIC COOPERATIVE, INC.</h1>
+                    </div>
         
                     <div style="font-size: 9pt">
                         <span>Brgy. San Pablo, Ormoc City, Leyte</span>
@@ -3691,11 +3691,9 @@ let CanvassPdfService = class CanvassPdfService {
                     <br />
                     <br />
         
-                    <h2 style="font-size: 11pt; font-weight: bold;">OFFICIAL CANVASS SHEET</h1>
+                    <div style="font-size: 11pt; font-weight: bold;">OFFICIAL CANVASS SHEET</div>
 
                 </div>
-
-                <br />
 
                 <div style="display: flex; justify-content: space-between;">
 
@@ -3713,7 +3711,7 @@ let CanvassPdfService = class CanvassPdfService {
                     <div>
                         <table style="font-size: 10pt">
                             <tr>
-                                <td> RC NO.: </td>
+                                <td> RC No.: </td>
                                 <td style="border-bottom: 1px solid black;">
                                     ${canvass.rc_number}
                                 </td>
@@ -3754,7 +3752,7 @@ let CanvassPdfService = class CanvassPdfService {
         
             </div>
         
-            <div style="padding-left: 25px; padding-right: 25px; font-size: 10pt; padding-top: 50px; min-height: 32vh;">
+            <div style="padding-left: 25px; padding-right: 25px; font-size: 10pt; padding-top: 70px; min-height: 32vh;">
 
                 <div style="display: flex; justify-content: space-between;">
                 
