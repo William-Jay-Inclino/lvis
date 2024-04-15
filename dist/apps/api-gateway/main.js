@@ -1,51 +1,14 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
-/******/ 	var __webpack_modules__ = ({
+/******/ 	var __webpack_modules__ = ([
+/* 0 */,
+/* 1 */
+/***/ ((module) => {
 
-/***/ "./apps/api-gateway/src/__common__/config.ts":
-/*!***************************************************!*\
-  !*** ./apps/api-gateway/src/__common__/config.ts ***!
-  \***************************************************/
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.EMPLOYEE_UPLOAD_PATH = exports.MEQS_UPLOAD_PATH = exports.UPLOADS_PATH = exports.MAX_FILE_SIZE = void 0;
-exports.MAX_FILE_SIZE = 5 * 1024 * 1024;
-exports.UPLOADS_PATH = 'uploads';
-exports.MEQS_UPLOAD_PATH = 'warehouse/meqs';
-exports.EMPLOYEE_UPLOAD_PATH = 'system/employee';
-
+module.exports = require("@nestjs/core");
 
 /***/ }),
-
-/***/ "./apps/api-gateway/src/__common__/types.ts":
-/*!**************************************************!*\
-  !*** ./apps/api-gateway/src/__common__/types.ts ***!
-  \**************************************************/
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ROLE = exports.USER_STATUS = void 0;
-var USER_STATUS;
-(function (USER_STATUS) {
-    USER_STATUS[USER_STATUS["ACTIVE"] = 1] = "ACTIVE";
-    USER_STATUS[USER_STATUS["INACTIVE"] = 2] = "INACTIVE";
-})(USER_STATUS || (exports.USER_STATUS = USER_STATUS = {}));
-var ROLE;
-(function (ROLE) {
-    ROLE["USER"] = "USER";
-    ROLE["ADMIN"] = "ADMIN";
-})(ROLE || (exports.ROLE = ROLE = {}));
-
-
-/***/ }),
-
-/***/ "./apps/api-gateway/src/app.module.ts":
-/*!********************************************!*\
-  !*** ./apps/api-gateway/src/app.module.ts ***!
-  \********************************************/
+/* 2 */
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -57,15 +20,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.AppModule = void 0;
-const apollo_1 = __webpack_require__(/*! @nestjs/apollo */ "@nestjs/apollo");
-const config_1 = __webpack_require__(/*! @nestjs/config */ "@nestjs/config");
-const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
-const graphql_1 = __webpack_require__(/*! @nestjs/graphql */ "@nestjs/graphql");
-const gateway_1 = __webpack_require__(/*! @apollo/gateway */ "@apollo/gateway");
-const jsonwebtoken_1 = __webpack_require__(/*! jsonwebtoken */ "jsonwebtoken");
-const auth_module_1 = __webpack_require__(/*! ./auth/auth.module */ "./apps/api-gateway/src/auth/auth.module.ts");
-const file_upload_module_1 = __webpack_require__(/*! ./file-upload-warehouse/file-upload.module */ "./apps/api-gateway/src/file-upload-warehouse/file-upload.module.ts");
-const file_upload_system_module_1 = __webpack_require__(/*! ./file-upload-system/file-upload-system.module */ "./apps/api-gateway/src/file-upload-system/file-upload-system.module.ts");
+const apollo_1 = __webpack_require__(3);
+const config_1 = __webpack_require__(4);
+const common_1 = __webpack_require__(5);
+const graphql_1 = __webpack_require__(6);
+const gateway_1 = __webpack_require__(7);
+const jsonwebtoken_1 = __webpack_require__(8);
+const auth_module_1 = __webpack_require__(9);
+const file_upload_module_1 = __webpack_require__(21);
+const file_upload_system_module_1 = __webpack_require__(31);
 const getToken = (authToken) => {
     const match = authToken.match(/^Bearer (.*)$/);
     if (!match || match.length > 2) {
@@ -145,11 +108,86 @@ exports.AppModule = AppModule = __decorate([
 
 
 /***/ }),
+/* 3 */
+/***/ ((module) => {
 
-/***/ "./apps/api-gateway/src/auth/auth.controller.ts":
-/*!******************************************************!*\
-  !*** ./apps/api-gateway/src/auth/auth.controller.ts ***!
-  \******************************************************/
+module.exports = require("@nestjs/apollo");
+
+/***/ }),
+/* 4 */
+/***/ ((module) => {
+
+module.exports = require("@nestjs/config");
+
+/***/ }),
+/* 5 */
+/***/ ((module) => {
+
+module.exports = require("@nestjs/common");
+
+/***/ }),
+/* 6 */
+/***/ ((module) => {
+
+module.exports = require("@nestjs/graphql");
+
+/***/ }),
+/* 7 */
+/***/ ((module) => {
+
+module.exports = require("@apollo/gateway");
+
+/***/ }),
+/* 8 */
+/***/ ((module) => {
+
+module.exports = require("jsonwebtoken");
+
+/***/ }),
+/* 9 */
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.AuthModule = void 0;
+const common_1 = __webpack_require__(5);
+const auth_controller_1 = __webpack_require__(10);
+const auth_service_1 = __webpack_require__(12);
+const axios_1 = __webpack_require__(13);
+const jwt_1 = __webpack_require__(15);
+const local_strategy_1 = __webpack_require__(19);
+const passport_1 = __webpack_require__(18);
+const config_1 = __webpack_require__(4);
+let AuthModule = class AuthModule {
+};
+exports.AuthModule = AuthModule;
+exports.AuthModule = AuthModule = __decorate([
+    (0, common_1.Module)({
+        imports: [
+            config_1.ConfigModule.forRoot({
+                isGlobal: true,
+            }),
+            passport_1.PassportModule.register({ defaultStrategy: 'jwt' }),
+            jwt_1.JwtModule.register({
+                secret: process.env.JWT_SECRET_KEY,
+                signOptions: { expiresIn: '10h' }
+            }),
+            axios_1.HttpModule,
+        ],
+        controllers: [auth_controller_1.AuthController],
+        providers: [auth_service_1.AuthService, local_strategy_1.LocalStrategy]
+    })
+], AuthModule);
+
+
+/***/ }),
+/* 10 */
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -168,10 +206,10 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 var _a, _b, _c, _d;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.AuthController = void 0;
-const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
-const express_1 = __webpack_require__(/*! express */ "express");
-const auth_service_1 = __webpack_require__(/*! ./auth.service */ "./apps/api-gateway/src/auth/auth.service.ts");
-const local_auth_guard_1 = __webpack_require__(/*! ./guards/local-auth.guard */ "./apps/api-gateway/src/auth/guards/local-auth.guard.ts");
+const common_1 = __webpack_require__(5);
+const express_1 = __webpack_require__(11);
+const auth_service_1 = __webpack_require__(12);
+const local_auth_guard_1 = __webpack_require__(17);
 let AuthController = class AuthController {
     constructor(authService) {
         this.authService = authService;
@@ -217,58 +255,13 @@ exports.AuthController = AuthController = __decorate([
 
 
 /***/ }),
+/* 11 */
+/***/ ((module) => {
 
-/***/ "./apps/api-gateway/src/auth/auth.module.ts":
-/*!**************************************************!*\
-  !*** ./apps/api-gateway/src/auth/auth.module.ts ***!
-  \**************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.AuthModule = void 0;
-const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
-const auth_controller_1 = __webpack_require__(/*! ./auth.controller */ "./apps/api-gateway/src/auth/auth.controller.ts");
-const auth_service_1 = __webpack_require__(/*! ./auth.service */ "./apps/api-gateway/src/auth/auth.service.ts");
-const axios_1 = __webpack_require__(/*! @nestjs/axios */ "@nestjs/axios");
-const jwt_1 = __webpack_require__(/*! @nestjs/jwt */ "@nestjs/jwt");
-const local_strategy_1 = __webpack_require__(/*! ./strategies/local.strategy */ "./apps/api-gateway/src/auth/strategies/local.strategy.ts");
-const passport_1 = __webpack_require__(/*! @nestjs/passport */ "@nestjs/passport");
-const config_1 = __webpack_require__(/*! @nestjs/config */ "@nestjs/config");
-let AuthModule = class AuthModule {
-};
-exports.AuthModule = AuthModule;
-exports.AuthModule = AuthModule = __decorate([
-    (0, common_1.Module)({
-        imports: [
-            config_1.ConfigModule.forRoot({
-                isGlobal: true,
-            }),
-            passport_1.PassportModule.register({ defaultStrategy: 'jwt' }),
-            jwt_1.JwtModule.register({
-                secret: process.env.JWT_SECRET_KEY,
-                signOptions: { expiresIn: '10h' }
-            }),
-            axios_1.HttpModule,
-        ],
-        controllers: [auth_controller_1.AuthController],
-        providers: [auth_service_1.AuthService, local_strategy_1.LocalStrategy]
-    })
-], AuthModule);
-
+module.exports = require("express");
 
 /***/ }),
-
-/***/ "./apps/api-gateway/src/auth/auth.service.ts":
-/*!***************************************************!*\
-  !*** ./apps/api-gateway/src/auth/auth.service.ts ***!
-  \***************************************************/
+/* 12 */
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -284,11 +277,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var _a, _b;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.AuthService = void 0;
-const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
-const axios_1 = __webpack_require__(/*! @nestjs/axios */ "@nestjs/axios");
-const rxjs_1 = __webpack_require__(/*! rxjs */ "rxjs");
-const jwt_1 = __webpack_require__(/*! @nestjs/jwt */ "@nestjs/jwt");
-const types_1 = __webpack_require__(/*! ../__common__/types */ "./apps/api-gateway/src/__common__/types.ts");
+const common_1 = __webpack_require__(5);
+const axios_1 = __webpack_require__(13);
+const rxjs_1 = __webpack_require__(14);
+const jwt_1 = __webpack_require__(15);
+const types_1 = __webpack_require__(16);
 let AuthService = class AuthService {
     constructor(jwtService, httpService) {
         this.jwtService = jwtService;
@@ -360,28 +353,63 @@ exports.AuthService = AuthService = __decorate([
 
 
 /***/ }),
+/* 13 */
+/***/ ((module) => {
 
-/***/ "./apps/api-gateway/src/auth/guards/local-auth.guard.ts":
-/*!**************************************************************!*\
-  !*** ./apps/api-gateway/src/auth/guards/local-auth.guard.ts ***!
-  \**************************************************************/
+module.exports = require("@nestjs/axios");
+
+/***/ }),
+/* 14 */
+/***/ ((module) => {
+
+module.exports = require("rxjs");
+
+/***/ }),
+/* 15 */
+/***/ ((module) => {
+
+module.exports = require("@nestjs/jwt");
+
+/***/ }),
+/* 16 */
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ROLE = exports.USER_STATUS = void 0;
+var USER_STATUS;
+(function (USER_STATUS) {
+    USER_STATUS[USER_STATUS["ACTIVE"] = 1] = "ACTIVE";
+    USER_STATUS[USER_STATUS["INACTIVE"] = 2] = "INACTIVE";
+})(USER_STATUS || (exports.USER_STATUS = USER_STATUS = {}));
+var ROLE;
+(function (ROLE) {
+    ROLE["USER"] = "USER";
+    ROLE["ADMIN"] = "ADMIN";
+})(ROLE || (exports.ROLE = ROLE = {}));
+
+
+/***/ }),
+/* 17 */
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.LocalAuthGuard = void 0;
-const passport_1 = __webpack_require__(/*! @nestjs/passport */ "@nestjs/passport");
+const passport_1 = __webpack_require__(18);
 class LocalAuthGuard extends (0, passport_1.AuthGuard)('local') {
 }
 exports.LocalAuthGuard = LocalAuthGuard;
 
 
 /***/ }),
+/* 18 */
+/***/ ((module) => {
 
-/***/ "./apps/api-gateway/src/auth/strategies/local.strategy.ts":
-/*!****************************************************************!*\
-  !*** ./apps/api-gateway/src/auth/strategies/local.strategy.ts ***!
-  \****************************************************************/
+module.exports = require("@nestjs/passport");
+
+/***/ }),
+/* 19 */
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -397,10 +425,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.LocalStrategy = void 0;
-const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
-const passport_1 = __webpack_require__(/*! @nestjs/passport */ "@nestjs/passport");
-const passport_local_1 = __webpack_require__(/*! passport-local */ "passport-local");
-const auth_service_1 = __webpack_require__(/*! ../auth.service */ "./apps/api-gateway/src/auth/auth.service.ts");
+const common_1 = __webpack_require__(5);
+const passport_1 = __webpack_require__(18);
+const passport_local_1 = __webpack_require__(20);
+const auth_service_1 = __webpack_require__(12);
 let LocalStrategy = class LocalStrategy extends (0, passport_1.PassportStrategy)(passport_local_1.Strategy) {
     constructor(authService) {
         super();
@@ -423,135 +451,13 @@ exports.LocalStrategy = LocalStrategy = __decorate([
 
 
 /***/ }),
+/* 20 */
+/***/ ((module) => {
 
-/***/ "./apps/api-gateway/src/file-upload-system/file-upload-system.controller.ts":
-/*!**********************************************************************************!*\
-  !*** ./apps/api-gateway/src/file-upload-system/file-upload-system.controller.ts ***!
-  \**********************************************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
-var FileUploadSystemController_1;
-var _a, _b, _c, _d;
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.FileUploadSystemController = void 0;
-const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
-const platform_express_1 = __webpack_require__(/*! @nestjs/platform-express */ "@nestjs/platform-express");
-const express_1 = __webpack_require__(/*! express */ "express");
-const single_file_type_validation_pipe_1 = __webpack_require__(/*! ./pipes/single-file-type-validation.pipe */ "./apps/api-gateway/src/file-upload-system/pipes/single-file-type-validation.pipe.ts");
-const config_1 = __webpack_require__(/*! ../__common__/config */ "./apps/api-gateway/src/__common__/config.ts");
-const file_upload_system_service_1 = __webpack_require__(/*! ./file-upload-system.service */ "./apps/api-gateway/src/file-upload-system/file-upload-system.service.ts");
-let FileUploadSystemController = FileUploadSystemController_1 = class FileUploadSystemController {
-    constructor(fileUploadService) {
-        this.fileUploadService = fileUploadService;
-        this.logger = new common_1.Logger(FileUploadSystemController_1.name);
-    }
-    async getSingleFileEmployee(filename, res) {
-        try {
-            const destination = config_1.EMPLOYEE_UPLOAD_PATH;
-            const filePath = await this.fileUploadService.getFilePath(filename, destination);
-            res.sendFile(filePath);
-        }
-        catch (error) {
-            this.logger.error('Error retrieving single file:', error.message);
-        }
-    }
-    async uploadSingleFileEmployee(file) {
-        try {
-            const destination = config_1.EMPLOYEE_UPLOAD_PATH;
-            const savedFilePath = await this.fileUploadService.saveFileLocally(file, destination);
-            this.logger.log('File saved at:', savedFilePath);
-            return { success: true, data: savedFilePath };
-        }
-        catch (error) {
-            this.logger.error('Error uploading single file:', error.message);
-        }
-    }
-    async deleteSingleFileEmployee(filename) {
-        try {
-            const destination = config_1.EMPLOYEE_UPLOAD_PATH;
-            await this.fileUploadService.deleteFileLocally(filename, destination);
-            this.logger.log('File deleted:', filename);
-            return { success: true, data: `File deleted: ${filename}` };
-        }
-        catch (error) {
-            this.logger.error('Error deleting single file:', error.message);
-        }
-    }
-    async deleteMultipleFilesEmployee(filePaths) {
-        console.log('deleteMultipleFilesEmployee', filePaths);
-        try {
-            const destination = config_1.EMPLOYEE_UPLOAD_PATH;
-            const deletePromises = filePaths.map(filePath => {
-                const parts = filePath.split('/');
-                const filename = parts[parts.length - 1];
-                console.log('filename to delete', filename);
-                this.fileUploadService.deleteFileLocally(filename, destination);
-            });
-            await Promise.all(deletePromises);
-            this.logger.log('Files deleted:', filePaths);
-            return { success: true, data: `Files deleted: ${filePaths.join(', ')}` };
-        }
-        catch (error) {
-            this.logger.error('Error deleting files:', error.message);
-        }
-    }
-};
-exports.FileUploadSystemController = FileUploadSystemController;
-__decorate([
-    (0, common_1.Get)('/employee/:filename'),
-    __param(0, (0, common_1.Param)('filename')),
-    __param(1, (0, common_1.Res)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, typeof (_b = typeof Response !== "undefined" && Response) === "function" ? _b : Object]),
-    __metadata("design:returntype", Promise)
-], FileUploadSystemController.prototype, "getSingleFileEmployee", null);
-__decorate([
-    (0, common_1.Post)('/employee/single'),
-    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('file')),
-    __param(0, (0, common_1.UploadedFile)(new single_file_type_validation_pipe_1.SingleFileTypeValidationPipe(config_1.MAX_FILE_SIZE))),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [typeof (_d = typeof express_1.Express !== "undefined" && (_c = express_1.Express.Multer) !== void 0 && _c.File) === "function" ? _d : Object]),
-    __metadata("design:returntype", Promise)
-], FileUploadSystemController.prototype, "uploadSingleFileEmployee", null);
-__decorate([
-    (0, common_1.Delete)('/employee/:filename'),
-    __param(0, (0, common_1.Param)('filename')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", Promise)
-], FileUploadSystemController.prototype, "deleteSingleFileEmployee", null);
-__decorate([
-    (0, common_1.Delete)('/employee'),
-    __param(0, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Array]),
-    __metadata("design:returntype", Promise)
-], FileUploadSystemController.prototype, "deleteMultipleFilesEmployee", null);
-exports.FileUploadSystemController = FileUploadSystemController = FileUploadSystemController_1 = __decorate([
-    (0, common_1.Controller)('/api/v1/file-upload/system'),
-    __metadata("design:paramtypes", [typeof (_a = typeof file_upload_system_service_1.FileUploadSystemService !== "undefined" && file_upload_system_service_1.FileUploadSystemService) === "function" ? _a : Object])
-], FileUploadSystemController);
-
+module.exports = require("passport-local");
 
 /***/ }),
-
-/***/ "./apps/api-gateway/src/file-upload-system/file-upload-system.module.ts":
-/*!******************************************************************************!*\
-  !*** ./apps/api-gateway/src/file-upload-system/file-upload-system.module.ts ***!
-  \******************************************************************************/
+/* 21 */
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -562,27 +468,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.FileUploadSystemModule = void 0;
-const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
-const file_upload_system_service_1 = __webpack_require__(/*! ./file-upload-system.service */ "./apps/api-gateway/src/file-upload-system/file-upload-system.service.ts");
-const file_upload_system_controller_1 = __webpack_require__(/*! ./file-upload-system.controller */ "./apps/api-gateway/src/file-upload-system/file-upload-system.controller.ts");
-let FileUploadSystemModule = class FileUploadSystemModule {
+exports.FileUploadModule = void 0;
+const common_1 = __webpack_require__(5);
+const file_upload_service_1 = __webpack_require__(22);
+const file_upload_controller_1 = __webpack_require__(26);
+let FileUploadModule = class FileUploadModule {
 };
-exports.FileUploadSystemModule = FileUploadSystemModule;
-exports.FileUploadSystemModule = FileUploadSystemModule = __decorate([
+exports.FileUploadModule = FileUploadModule;
+exports.FileUploadModule = FileUploadModule = __decorate([
     (0, common_1.Module)({
-        providers: [file_upload_system_service_1.FileUploadSystemService],
-        controllers: [file_upload_system_controller_1.FileUploadSystemController]
+        providers: [file_upload_service_1.FileUploadService],
+        controllers: [file_upload_controller_1.FileUploadController]
     })
-], FileUploadSystemModule);
+], FileUploadModule);
 
 
 /***/ }),
-
-/***/ "./apps/api-gateway/src/file-upload-system/file-upload-system.service.ts":
-/*!*******************************************************************************!*\
-  !*** ./apps/api-gateway/src/file-upload-system/file-upload-system.service.ts ***!
-  \*******************************************************************************/
+/* 22 */
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -593,12 +495,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.FileUploadSystemService = void 0;
-const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
-const fs = __webpack_require__(/*! fs */ "fs");
-const path = __webpack_require__(/*! path */ "path");
-const config_1 = __webpack_require__(/*! ../__common__/config */ "./apps/api-gateway/src/__common__/config.ts");
-let FileUploadSystemService = class FileUploadSystemService {
+exports.FileUploadService = void 0;
+const common_1 = __webpack_require__(5);
+const fs = __webpack_require__(23);
+const path = __webpack_require__(24);
+const config_1 = __webpack_require__(25);
+let FileUploadService = class FileUploadService {
     async getFilePath(filename, destination) {
         const filePath = path.resolve(config_1.UPLOADS_PATH, destination, filename);
         if (!fs.existsSync(filePath)) {
@@ -641,63 +543,39 @@ let FileUploadSystemService = class FileUploadSystemService {
         }
     }
 };
-exports.FileUploadSystemService = FileUploadSystemService;
-exports.FileUploadSystemService = FileUploadSystemService = __decorate([
+exports.FileUploadService = FileUploadService;
+exports.FileUploadService = FileUploadService = __decorate([
     (0, common_1.Injectable)()
-], FileUploadSystemService);
+], FileUploadService);
 
 
 /***/ }),
+/* 23 */
+/***/ ((module) => {
 
-/***/ "./apps/api-gateway/src/file-upload-system/pipes/single-file-type-validation.pipe.ts":
-/*!*******************************************************************************************!*\
-  !*** ./apps/api-gateway/src/file-upload-system/pipes/single-file-type-validation.pipe.ts ***!
-  \*******************************************************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+module.exports = require("fs");
+
+/***/ }),
+/* 24 */
+/***/ ((module) => {
+
+module.exports = require("path");
+
+/***/ }),
+/* 25 */
+/***/ ((__unused_webpack_module, exports) => {
 
 
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.SingleFileTypeValidationPipe = void 0;
-const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
-const file_type_1 = __webpack_require__(/*! file-type */ "file-type");
-let SingleFileTypeValidationPipe = class SingleFileTypeValidationPipe {
-    constructor(maxSizeInBytes) {
-        this.maxSizeInBytes = maxSizeInBytes;
-    }
-    async transform(value) {
-        const { mime } = await (0, file_type_1.fromBuffer)(value.buffer);
-        const MIME_TYPES = ["image/jpeg", "image/png", "image/jpg"];
-        if (!MIME_TYPES.includes(mime)) {
-            throw new common_1.BadRequestException("The image should be either jpeg, jpg, or png.");
-        }
-        if (value.size > this.maxSizeInBytes) {
-            throw new common_1.BadRequestException(`File size exceeds the maximum limit of ${this.maxSizeInBytes / (1024 * 1024)} MB.`);
-        }
-        return value;
-    }
-};
-exports.SingleFileTypeValidationPipe = SingleFileTypeValidationPipe;
-exports.SingleFileTypeValidationPipe = SingleFileTypeValidationPipe = __decorate([
-    (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [Number])
-], SingleFileTypeValidationPipe);
+exports.EMPLOYEE_UPLOAD_PATH = exports.MEQS_UPLOAD_PATH = exports.UPLOADS_PATH = exports.MAX_FILE_SIZE = void 0;
+exports.MAX_FILE_SIZE = 5 * 1024 * 1024;
+exports.UPLOADS_PATH = 'uploads';
+exports.MEQS_UPLOAD_PATH = 'warehouse/meqs';
+exports.EMPLOYEE_UPLOAD_PATH = 'system/employee';
 
 
 /***/ }),
-
-/***/ "./apps/api-gateway/src/file-upload-warehouse/file-upload.controller.ts":
-/*!******************************************************************************!*\
-  !*** ./apps/api-gateway/src/file-upload-warehouse/file-upload.controller.ts ***!
-  \******************************************************************************/
+/* 26 */
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -717,13 +595,13 @@ var FileUploadController_1;
 var _a, _b, _c, _d;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.FileUploadController = void 0;
-const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
-const platform_express_1 = __webpack_require__(/*! @nestjs/platform-express */ "@nestjs/platform-express");
-const express_1 = __webpack_require__(/*! express */ "express");
-const single_file_type_validation_pipe_1 = __webpack_require__(/*! ./pipes/single-file-type-validation.pipe */ "./apps/api-gateway/src/file-upload-warehouse/pipes/single-file-type-validation.pipe.ts");
-const multiple_file_type_validation_pipe_1 = __webpack_require__(/*! ./pipes/multiple-file-type-validation.pipe */ "./apps/api-gateway/src/file-upload-warehouse/pipes/multiple-file-type-validation.pipe.ts");
-const config_1 = __webpack_require__(/*! ../__common__/config */ "./apps/api-gateway/src/__common__/config.ts");
-const file_upload_service_1 = __webpack_require__(/*! ./file-upload.service */ "./apps/api-gateway/src/file-upload-warehouse/file-upload.service.ts");
+const common_1 = __webpack_require__(5);
+const platform_express_1 = __webpack_require__(27);
+const express_1 = __webpack_require__(11);
+const single_file_type_validation_pipe_1 = __webpack_require__(28);
+const multiple_file_type_validation_pipe_1 = __webpack_require__(30);
+const config_1 = __webpack_require__(25);
+const file_upload_service_1 = __webpack_require__(22);
 let FileUploadController = FileUploadController_1 = class FileUploadController {
     constructor(fileUploadService) {
         this.fileUploadService = fileUploadService;
@@ -837,11 +715,13 @@ exports.FileUploadController = FileUploadController = FileUploadController_1 = _
 
 
 /***/ }),
+/* 27 */
+/***/ ((module) => {
 
-/***/ "./apps/api-gateway/src/file-upload-warehouse/file-upload.module.ts":
-/*!**************************************************************************!*\
-  !*** ./apps/api-gateway/src/file-upload-warehouse/file-upload.module.ts ***!
-  \**************************************************************************/
+module.exports = require("@nestjs/platform-express");
+
+/***/ }),
+/* 28 */
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -851,28 +731,90 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.FileUploadModule = void 0;
-const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
-const file_upload_service_1 = __webpack_require__(/*! ./file-upload.service */ "./apps/api-gateway/src/file-upload-warehouse/file-upload.service.ts");
-const file_upload_controller_1 = __webpack_require__(/*! ./file-upload.controller */ "./apps/api-gateway/src/file-upload-warehouse/file-upload.controller.ts");
-let FileUploadModule = class FileUploadModule {
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-exports.FileUploadModule = FileUploadModule;
-exports.FileUploadModule = FileUploadModule = __decorate([
-    (0, common_1.Module)({
-        providers: [file_upload_service_1.FileUploadService],
-        controllers: [file_upload_controller_1.FileUploadController]
-    })
-], FileUploadModule);
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.SingleFileTypeValidationPipe = void 0;
+const common_1 = __webpack_require__(5);
+const file_type_1 = __webpack_require__(29);
+let SingleFileTypeValidationPipe = class SingleFileTypeValidationPipe {
+    constructor(maxSizeInBytes) {
+        this.maxSizeInBytes = maxSizeInBytes;
+    }
+    async transform(value) {
+        const { mime } = await (0, file_type_1.fromBuffer)(value.buffer);
+        const MIME_TYPES = ["image/jpeg", "image/png", "image/jpg"];
+        if (!MIME_TYPES.includes(mime)) {
+            throw new common_1.BadRequestException("The image should be either jpeg, jpg, or png.");
+        }
+        if (value.size > this.maxSizeInBytes) {
+            throw new common_1.BadRequestException(`File size exceeds the maximum limit of ${this.maxSizeInBytes / (1024 * 1024)} MB.`);
+        }
+        return value;
+    }
+};
+exports.SingleFileTypeValidationPipe = SingleFileTypeValidationPipe;
+exports.SingleFileTypeValidationPipe = SingleFileTypeValidationPipe = __decorate([
+    (0, common_1.Injectable)(),
+    __metadata("design:paramtypes", [Number])
+], SingleFileTypeValidationPipe);
 
 
 /***/ }),
+/* 29 */
+/***/ ((module) => {
 
-/***/ "./apps/api-gateway/src/file-upload-warehouse/file-upload.service.ts":
-/*!***************************************************************************!*\
-  !*** ./apps/api-gateway/src/file-upload-warehouse/file-upload.service.ts ***!
-  \***************************************************************************/
+module.exports = require("file-type");
+
+/***/ }),
+/* 30 */
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.MultipleFileTypeValidationPipe = void 0;
+const common_1 = __webpack_require__(5);
+const file_type_1 = __webpack_require__(29);
+let MultipleFileTypeValidationPipe = class MultipleFileTypeValidationPipe {
+    constructor(maxSizeInBytes) {
+        this.maxSizeInBytes = maxSizeInBytes;
+    }
+    async transform(files) {
+        for (const file of files) {
+            await this.validateFile(file);
+        }
+        return files;
+    }
+    async validateFile(file) {
+        const { mime } = await (0, file_type_1.fromBuffer)(file.buffer);
+        const MIME_TYPES = ["image/jpeg", "image/png", "image/jpg"];
+        if (!MIME_TYPES.includes(mime)) {
+            throw new common_1.BadRequestException(`File "${file.originalname}" should be either jpeg, jpg, or png.`);
+        }
+        if (file.size > this.maxSizeInBytes) {
+            throw new common_1.BadRequestException(`File "${file.originalname}" size exceeds the maximum limit of ${this.maxSizeInBytes} kb.`);
+        }
+    }
+};
+exports.MultipleFileTypeValidationPipe = MultipleFileTypeValidationPipe;
+exports.MultipleFileTypeValidationPipe = MultipleFileTypeValidationPipe = __decorate([
+    (0, common_1.Injectable)(),
+    __metadata("design:paramtypes", [Number])
+], MultipleFileTypeValidationPipe);
+
+
+/***/ }),
+/* 31 */
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -883,12 +825,39 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.FileUploadService = void 0;
-const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
-const fs = __webpack_require__(/*! fs */ "fs");
-const path = __webpack_require__(/*! path */ "path");
-const config_1 = __webpack_require__(/*! ../__common__/config */ "./apps/api-gateway/src/__common__/config.ts");
-let FileUploadService = class FileUploadService {
+exports.FileUploadSystemModule = void 0;
+const common_1 = __webpack_require__(5);
+const file_upload_system_service_1 = __webpack_require__(32);
+const file_upload_system_controller_1 = __webpack_require__(33);
+let FileUploadSystemModule = class FileUploadSystemModule {
+};
+exports.FileUploadSystemModule = FileUploadSystemModule;
+exports.FileUploadSystemModule = FileUploadSystemModule = __decorate([
+    (0, common_1.Module)({
+        providers: [file_upload_system_service_1.FileUploadSystemService],
+        controllers: [file_upload_system_controller_1.FileUploadSystemController]
+    })
+], FileUploadSystemModule);
+
+
+/***/ }),
+/* 32 */
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.FileUploadSystemService = void 0;
+const common_1 = __webpack_require__(5);
+const fs = __webpack_require__(23);
+const path = __webpack_require__(24);
+const config_1 = __webpack_require__(25);
+let FileUploadSystemService = class FileUploadSystemService {
     async getFilePath(filename, destination) {
         const filePath = path.resolve(config_1.UPLOADS_PATH, destination, filename);
         if (!fs.existsSync(filePath)) {
@@ -931,18 +900,14 @@ let FileUploadService = class FileUploadService {
         }
     }
 };
-exports.FileUploadService = FileUploadService;
-exports.FileUploadService = FileUploadService = __decorate([
+exports.FileUploadSystemService = FileUploadSystemService;
+exports.FileUploadSystemService = FileUploadSystemService = __decorate([
     (0, common_1.Injectable)()
-], FileUploadService);
+], FileUploadSystemService);
 
 
 /***/ }),
-
-/***/ "./apps/api-gateway/src/file-upload-warehouse/pipes/multiple-file-type-validation.pipe.ts":
-/*!************************************************************************************************!*\
-  !*** ./apps/api-gateway/src/file-upload-warehouse/pipes/multiple-file-type-validation.pipe.ts ***!
-  \************************************************************************************************/
+/* 33 */
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -955,44 +920,114 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+var FileUploadSystemController_1;
+var _a, _b, _c, _d;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.MultipleFileTypeValidationPipe = void 0;
-const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
-const file_type_1 = __webpack_require__(/*! file-type */ "file-type");
-let MultipleFileTypeValidationPipe = class MultipleFileTypeValidationPipe {
-    constructor(maxSizeInBytes) {
-        this.maxSizeInBytes = maxSizeInBytes;
+exports.FileUploadSystemController = void 0;
+const common_1 = __webpack_require__(5);
+const platform_express_1 = __webpack_require__(27);
+const express_1 = __webpack_require__(11);
+const single_file_type_validation_pipe_1 = __webpack_require__(34);
+const config_1 = __webpack_require__(25);
+const file_upload_system_service_1 = __webpack_require__(32);
+let FileUploadSystemController = FileUploadSystemController_1 = class FileUploadSystemController {
+    constructor(fileUploadService) {
+        this.fileUploadService = fileUploadService;
+        this.logger = new common_1.Logger(FileUploadSystemController_1.name);
     }
-    async transform(files) {
-        for (const file of files) {
-            await this.validateFile(file);
+    async getSingleFileEmployee(filename, res) {
+        try {
+            const destination = config_1.EMPLOYEE_UPLOAD_PATH;
+            const filePath = await this.fileUploadService.getFilePath(filename, destination);
+            res.sendFile(filePath);
         }
-        return files;
+        catch (error) {
+            this.logger.error('Error retrieving single file:', error.message);
+        }
     }
-    async validateFile(file) {
-        const { mime } = await (0, file_type_1.fromBuffer)(file.buffer);
-        const MIME_TYPES = ["image/jpeg", "image/png", "image/jpg"];
-        if (!MIME_TYPES.includes(mime)) {
-            throw new common_1.BadRequestException(`File "${file.originalname}" should be either jpeg, jpg, or png.`);
+    async uploadSingleFileEmployee(file) {
+        try {
+            const destination = config_1.EMPLOYEE_UPLOAD_PATH;
+            const savedFilePath = await this.fileUploadService.saveFileLocally(file, destination);
+            this.logger.log('File saved at:', savedFilePath);
+            return { success: true, data: savedFilePath };
         }
-        if (file.size > this.maxSizeInBytes) {
-            throw new common_1.BadRequestException(`File "${file.originalname}" size exceeds the maximum limit of ${this.maxSizeInBytes} kb.`);
+        catch (error) {
+            this.logger.error('Error uploading single file:', error.message);
+        }
+    }
+    async deleteSingleFileEmployee(filename) {
+        try {
+            const destination = config_1.EMPLOYEE_UPLOAD_PATH;
+            await this.fileUploadService.deleteFileLocally(filename, destination);
+            this.logger.log('File deleted:', filename);
+            return { success: true, data: `File deleted: ${filename}` };
+        }
+        catch (error) {
+            this.logger.error('Error deleting single file:', error.message);
+        }
+    }
+    async deleteMultipleFilesEmployee(filePaths) {
+        console.log('deleteMultipleFilesEmployee', filePaths);
+        try {
+            const destination = config_1.EMPLOYEE_UPLOAD_PATH;
+            const deletePromises = filePaths.map(filePath => {
+                const parts = filePath.split('/');
+                const filename = parts[parts.length - 1];
+                console.log('filename to delete', filename);
+                this.fileUploadService.deleteFileLocally(filename, destination);
+            });
+            await Promise.all(deletePromises);
+            this.logger.log('Files deleted:', filePaths);
+            return { success: true, data: `Files deleted: ${filePaths.join(', ')}` };
+        }
+        catch (error) {
+            this.logger.error('Error deleting files:', error.message);
         }
     }
 };
-exports.MultipleFileTypeValidationPipe = MultipleFileTypeValidationPipe;
-exports.MultipleFileTypeValidationPipe = MultipleFileTypeValidationPipe = __decorate([
-    (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [Number])
-], MultipleFileTypeValidationPipe);
+exports.FileUploadSystemController = FileUploadSystemController;
+__decorate([
+    (0, common_1.Get)('/employee/:filename'),
+    __param(0, (0, common_1.Param)('filename')),
+    __param(1, (0, common_1.Res)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, typeof (_b = typeof Response !== "undefined" && Response) === "function" ? _b : Object]),
+    __metadata("design:returntype", Promise)
+], FileUploadSystemController.prototype, "getSingleFileEmployee", null);
+__decorate([
+    (0, common_1.Post)('/employee/single'),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('file')),
+    __param(0, (0, common_1.UploadedFile)(new single_file_type_validation_pipe_1.SingleFileTypeValidationPipe(config_1.MAX_FILE_SIZE))),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [typeof (_d = typeof express_1.Express !== "undefined" && (_c = express_1.Express.Multer) !== void 0 && _c.File) === "function" ? _d : Object]),
+    __metadata("design:returntype", Promise)
+], FileUploadSystemController.prototype, "uploadSingleFileEmployee", null);
+__decorate([
+    (0, common_1.Delete)('/employee/:filename'),
+    __param(0, (0, common_1.Param)('filename')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], FileUploadSystemController.prototype, "deleteSingleFileEmployee", null);
+__decorate([
+    (0, common_1.Delete)('/employee'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Array]),
+    __metadata("design:returntype", Promise)
+], FileUploadSystemController.prototype, "deleteMultipleFilesEmployee", null);
+exports.FileUploadSystemController = FileUploadSystemController = FileUploadSystemController_1 = __decorate([
+    (0, common_1.Controller)('/api/v1/file-upload/system'),
+    __metadata("design:paramtypes", [typeof (_a = typeof file_upload_system_service_1.FileUploadSystemService !== "undefined" && file_upload_system_service_1.FileUploadSystemService) === "function" ? _a : Object])
+], FileUploadSystemController);
 
 
 /***/ }),
-
-/***/ "./apps/api-gateway/src/file-upload-warehouse/pipes/single-file-type-validation.pipe.ts":
-/*!**********************************************************************************************!*\
-  !*** ./apps/api-gateway/src/file-upload-warehouse/pipes/single-file-type-validation.pipe.ts ***!
-  \**********************************************************************************************/
+/* 34 */
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
@@ -1007,8 +1042,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.SingleFileTypeValidationPipe = void 0;
-const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
-const file_type_1 = __webpack_require__(/*! file-type */ "file-type");
+const common_1 = __webpack_require__(5);
+const file_type_1 = __webpack_require__(29);
 let SingleFileTypeValidationPipe = class SingleFileTypeValidationPipe {
     constructor(maxSizeInBytes) {
         this.maxSizeInBytes = maxSizeInBytes;
@@ -1033,188 +1068,13 @@ exports.SingleFileTypeValidationPipe = SingleFileTypeValidationPipe = __decorate
 
 
 /***/ }),
-
-/***/ "@apollo/gateway":
-/*!**********************************!*\
-  !*** external "@apollo/gateway" ***!
-  \**********************************/
-/***/ ((module) => {
-
-module.exports = require("@apollo/gateway");
-
-/***/ }),
-
-/***/ "@nestjs/apollo":
-/*!*********************************!*\
-  !*** external "@nestjs/apollo" ***!
-  \*********************************/
-/***/ ((module) => {
-
-module.exports = require("@nestjs/apollo");
-
-/***/ }),
-
-/***/ "@nestjs/axios":
-/*!********************************!*\
-  !*** external "@nestjs/axios" ***!
-  \********************************/
-/***/ ((module) => {
-
-module.exports = require("@nestjs/axios");
-
-/***/ }),
-
-/***/ "@nestjs/common":
-/*!*********************************!*\
-  !*** external "@nestjs/common" ***!
-  \*********************************/
-/***/ ((module) => {
-
-module.exports = require("@nestjs/common");
-
-/***/ }),
-
-/***/ "@nestjs/config":
-/*!*********************************!*\
-  !*** external "@nestjs/config" ***!
-  \*********************************/
-/***/ ((module) => {
-
-module.exports = require("@nestjs/config");
-
-/***/ }),
-
-/***/ "@nestjs/core":
-/*!*******************************!*\
-  !*** external "@nestjs/core" ***!
-  \*******************************/
-/***/ ((module) => {
-
-module.exports = require("@nestjs/core");
-
-/***/ }),
-
-/***/ "@nestjs/graphql":
-/*!**********************************!*\
-  !*** external "@nestjs/graphql" ***!
-  \**********************************/
-/***/ ((module) => {
-
-module.exports = require("@nestjs/graphql");
-
-/***/ }),
-
-/***/ "@nestjs/jwt":
-/*!******************************!*\
-  !*** external "@nestjs/jwt" ***!
-  \******************************/
-/***/ ((module) => {
-
-module.exports = require("@nestjs/jwt");
-
-/***/ }),
-
-/***/ "@nestjs/passport":
-/*!***********************************!*\
-  !*** external "@nestjs/passport" ***!
-  \***********************************/
-/***/ ((module) => {
-
-module.exports = require("@nestjs/passport");
-
-/***/ }),
-
-/***/ "@nestjs/platform-express":
-/*!*******************************************!*\
-  !*** external "@nestjs/platform-express" ***!
-  \*******************************************/
-/***/ ((module) => {
-
-module.exports = require("@nestjs/platform-express");
-
-/***/ }),
-
-/***/ "dotenv":
-/*!*************************!*\
-  !*** external "dotenv" ***!
-  \*************************/
+/* 35 */
 /***/ ((module) => {
 
 module.exports = require("dotenv");
 
-/***/ }),
-
-/***/ "express":
-/*!**************************!*\
-  !*** external "express" ***!
-  \**************************/
-/***/ ((module) => {
-
-module.exports = require("express");
-
-/***/ }),
-
-/***/ "file-type":
-/*!****************************!*\
-  !*** external "file-type" ***!
-  \****************************/
-/***/ ((module) => {
-
-module.exports = require("file-type");
-
-/***/ }),
-
-/***/ "jsonwebtoken":
-/*!*******************************!*\
-  !*** external "jsonwebtoken" ***!
-  \*******************************/
-/***/ ((module) => {
-
-module.exports = require("jsonwebtoken");
-
-/***/ }),
-
-/***/ "passport-local":
-/*!*********************************!*\
-  !*** external "passport-local" ***!
-  \*********************************/
-/***/ ((module) => {
-
-module.exports = require("passport-local");
-
-/***/ }),
-
-/***/ "rxjs":
-/*!***********************!*\
-  !*** external "rxjs" ***!
-  \***********************/
-/***/ ((module) => {
-
-module.exports = require("rxjs");
-
-/***/ }),
-
-/***/ "fs":
-/*!*********************!*\
-  !*** external "fs" ***!
-  \*********************/
-/***/ ((module) => {
-
-module.exports = require("fs");
-
-/***/ }),
-
-/***/ "path":
-/*!***********************!*\
-  !*** external "path" ***!
-  \***********************/
-/***/ ((module) => {
-
-module.exports = require("path");
-
 /***/ })
-
-/******/ 	});
+/******/ 	]);
 /************************************************************************/
 /******/ 	// The module cache
 /******/ 	var __webpack_module_cache__ = {};
@@ -1245,14 +1105,11 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
 var exports = __webpack_exports__;
-/*!**************************************!*\
-  !*** ./apps/api-gateway/src/main.ts ***!
-  \**************************************/
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const core_1 = __webpack_require__(/*! @nestjs/core */ "@nestjs/core");
-const app_module_1 = __webpack_require__(/*! ./app.module */ "./apps/api-gateway/src/app.module.ts");
-const dotenv_1 = __webpack_require__(/*! dotenv */ "dotenv");
+const core_1 = __webpack_require__(1);
+const app_module_1 = __webpack_require__(2);
+const dotenv_1 = __webpack_require__(35);
 async function bootstrap() {
     try {
         (0, dotenv_1.config)();

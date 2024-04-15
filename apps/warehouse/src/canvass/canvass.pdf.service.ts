@@ -27,8 +27,8 @@ export class CanvassPdfService {
         this.authUser = authUser
     }
 
-    getImageAsBase64(): string {
-        const imagePath = path.resolve('assets', 'lvis-watermark-v2.png');
+    getImageAsBase64(filename: string): string {
+        const imagePath = path.resolve('assets', filename);
         const imageBuffer = readFileSync(imagePath);
         const base64Image = imageBuffer.toString('base64');
         return base64Image;
@@ -37,6 +37,9 @@ export class CanvassPdfService {
     async generatePdf(canvass: Canvass) {
         const browser = await puppeteer.launch();
         const page = await browser.newPage();
+
+        const watermark = this.getImageAsBase64('lvis-watermark-v2.png')
+        const logo = this.getImageAsBase64('leyeco-logo.png')
 
         const requisitioner = await this.getEmployee(canvass.requested_by_id, this.authUser)
         const notedBy = await this.getGM(this.authUser)
@@ -57,13 +60,14 @@ export class CanvassPdfService {
                 width: 70%;
                 height: 70%;
                 z-index: -1;
-                background-image: url('data:image/jpeg;base64,${this.getImageAsBase64()}');
+                background-image: url('data:image/jpeg;base64,${watermark}');
                 background-repeat: no-repeat;
                 background-position: center;
                 background-size: contain;
             }
             .content {
                 display: flex; flex-direction: column;
+                padding-left: 25px; padding-right: 25px; font-size: 10pt; 
             }
         </style>
 
@@ -72,11 +76,14 @@ export class CanvassPdfService {
 
         <div class="content">
 
-            <div style="padding-left: 25px; padding-right: 25px; font-size: 10pt; flex-grow: 1; min-height: 60vh;">
+            <div style="flex-grow: 1; min-height: 60vh;">
         
                 <div style="text-align: center; margin-top: 35px">
         
-                    <h1 style="font-size: 11pt; font-weight: bold;">LEYTE V ELECTRIC COOPERATIVE, INC.</h1>
+                <div style="display: flex; align-items: center; justify-content: center;">
+                    <img src="data:image/jpeg;base64,${logo}" alt="Logo" style="height: 50px; width: 50px; margin-right: 10px;">
+                    <h1 style="font-size: 11pt; font-weight: bold; display: inline;">LEYTE V ELECTRIC COOPERATIVE, INC.</h1>
+                </div>
         
                     <div style="font-size: 9pt">
                         <span>Brgy. San Pablo, Ormoc City, Leyte</span>
@@ -137,118 +144,6 @@ export class CanvassPdfService {
                     </thead>
                     <tbody style="font-size: 10pt; border: 1px solid black;">
                         ${canvass.canvass_items.map((item, index) => `
-                        <tr style="border: 1px solid black;">
-                            <td align="center">${index + 1}</td>
-                            <td>${item.description}</td>
-                            <td align="center">${item.unit ? item.unit.name : 'N/A'}</td>
-                            <td align="center">${item.quantity}</td>
-                        </tr>
-                    `).join('')}
-                    ${canvass.canvass_items.map((item, index) => `
-                        <tr style="border: 1px solid black;">
-                            <td align="center">${index + 1}</td>
-                            <td>${item.description}</td>
-                            <td align="center">${item.unit ? item.unit.name : 'N/A'}</td>
-                            <td align="center">${item.quantity}</td>
-                        </tr>
-                    `).join('')}
-                    ${canvass.canvass_items.map((item, index) => `
-                        <tr style="border: 1px solid black;">
-                            <td align="center">${index + 1}</td>
-                            <td>${item.description}</td>
-                            <td align="center">${item.unit ? item.unit.name : 'N/A'}</td>
-                            <td align="center">${item.quantity}</td>
-                        </tr>
-                    `).join('')}
-                    ${canvass.canvass_items.map((item, index) => `
-                        <tr style="border: 1px solid black;">
-                            <td align="center">${index + 1}</td>
-                            <td>${item.description}</td>
-                            <td align="center">${item.unit ? item.unit.name : 'N/A'}</td>
-                            <td align="center">${item.quantity}</td>
-                        </tr>
-                    `).join('')}
-                    ${canvass.canvass_items.map((item, index) => `
-                        <tr style="border: 1px solid black;">
-                            <td align="center">${index + 1}</td>
-                            <td>${item.description}</td>
-                            <td align="center">${item.unit ? item.unit.name : 'N/A'}</td>
-                            <td align="center">${item.quantity}</td>
-                        </tr>
-                    `).join('')}
-                    ${canvass.canvass_items.map((item, index) => `
-                        <tr style="border: 1px solid black;">
-                            <td align="center">${index + 1}</td>
-                            <td>${item.description}</td>
-                            <td align="center">${item.unit ? item.unit.name : 'N/A'}</td>
-                            <td align="center">${item.quantity}</td>
-                        </tr>
-                    `).join('')}
-                    ${canvass.canvass_items.map((item, index) => `
-                        <tr style="border: 1px solid black;">
-                            <td align="center">${index + 1}</td>
-                            <td>${item.description}</td>
-                            <td align="center">${item.unit ? item.unit.name : 'N/A'}</td>
-                            <td align="center">${item.quantity}</td>
-                        </tr>
-                    `).join('')}
-                    ${canvass.canvass_items.map((item, index) => `
-                        <tr style="border: 1px solid black;">
-                            <td align="center">${index + 1}</td>
-                            <td>${item.description}</td>
-                            <td align="center">${item.unit ? item.unit.name : 'N/A'}</td>
-                            <td align="center">${item.quantity}</td>
-                        </tr>
-                    `).join('')}
-                    ${canvass.canvass_items.map((item, index) => `
-                        <tr style="border: 1px solid black;">
-                            <td align="center">${index + 1}</td>
-                            <td>${item.description}</td>
-                            <td align="center">${item.unit ? item.unit.name : 'N/A'}</td>
-                            <td align="center">${item.quantity}</td>
-                        </tr>
-                    `).join('')}
-                    ${canvass.canvass_items.map((item, index) => `
-                        <tr style="border: 1px solid black;">
-                            <td align="center">${index + 1}</td>
-                            <td>${item.description}</td>
-                            <td align="center">${item.unit ? item.unit.name : 'N/A'}</td>
-                            <td align="center">${item.quantity}</td>
-                        </tr>
-                    `).join('')}
-                    ${canvass.canvass_items.map((item, index) => `
-                        <tr style="border: 1px solid black;">
-                            <td align="center">${index + 1}</td>
-                            <td>${item.description}</td>
-                            <td align="center">${item.unit ? item.unit.name : 'N/A'}</td>
-                            <td align="center">${item.quantity}</td>
-                        </tr>
-                    `).join('')}
-                    ${canvass.canvass_items.map((item, index) => `
-                        <tr style="border: 1px solid black;">
-                            <td align="center">${index + 1}</td>
-                            <td>${item.description}</td>
-                            <td align="center">${item.unit ? item.unit.name : 'N/A'}</td>
-                            <td align="center">${item.quantity}</td>
-                        </tr>
-                    `).join('')}
-                    ${canvass.canvass_items.map((item, index) => `
-                        <tr style="border: 1px solid black;">
-                            <td align="center">${index + 1}</td>
-                            <td>${item.description}</td>
-                            <td align="center">${item.unit ? item.unit.name : 'N/A'}</td>
-                            <td align="center">${item.quantity}</td>
-                        </tr>
-                    `).join('')}
-                    ${canvass.canvass_items.map((item, index) => `
-                        <tr style="border: 1px solid black;">
-                            <td align="center">${index + 1}</td>
-                            <td>${item.description}</td>
-                            <td align="center">${item.unit ? item.unit.name : 'N/A'}</td>
-                            <td align="center">${item.quantity}</td>
-                        </tr>
-                    `).join('')}
-                    ${canvass.canvass_items.map((item, index) => `
                         <tr style="border: 1px solid black;">
                             <td align="center">${index + 1}</td>
                             <td>${item.description}</td>
@@ -407,19 +302,9 @@ export class CanvassPdfService {
                         </tr>
                     </table>
                 </div>
-            
-            
 
             </div>
 
-            <div style="display: flex; justify-content: space-between; font-size: 9pt">
-                <div>
-                    Note: This is a system generated report
-                </div>
-                <div>
-                    Date & Time Generated: ${ moment(new Date()).format('MMMM D, YYYY - dddd h:mm:ss a') }
-                </div>
-            </div>
         
         </div>
 
@@ -427,8 +312,24 @@ export class CanvassPdfService {
 
         await page.setContent(content);
         
-        // Generate PDF
-        const pdfBuffer = await page.pdf({ printBackground: true });
+        const pdfBuffer = await page.pdf({
+            printBackground: true,
+            format: 'A4',
+            displayHeaderFooter: true,
+            headerTemplate: ``,
+            footerTemplate: `
+            <div style="border-top: solid 1px #bbb; width: 100%; font-size: 9px;
+                padding: 5px 5px 0; color: #bbb; position: relative;">
+                <div style="position: absolute; left: 5px; top: 5px;">
+                    Note: This is a system generated report printed by ${this.authUser.user.username} | 
+                    Date & Time Generated: <span class="date"></span>
+                </div>
+                <div style="position: absolute; right: 5px; top: 5px;"><span class="pageNumber"></span>/<span class="totalPages"></span></div>
+            </div>
+          `,
+            // this is needed to prevent content from being placed over the footer
+            margin: { bottom: '70px' },
+          });
 
         await browser.close();
 
