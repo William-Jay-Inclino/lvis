@@ -10,6 +10,8 @@ import { catchError, firstValueFrom } from 'rxjs';
 import { HttpService } from '@nestjs/axios';
 import { Employee } from '../__employee__/entities/employee.entity';
 import { PrismaService } from '../__prisma__/prisma.service';
+import * as path from 'path';
+import { readFileSync } from 'fs';
 
 @Injectable()
 export class CanvassPdfService {
@@ -25,6 +27,13 @@ export class CanvassPdfService {
         this.authUser = authUser
     }
 
+    getImageAsBase64(): string {
+        const imagePath = path.resolve('assets', '1.png');
+        const imageBuffer = readFileSync(imagePath);
+        const base64Image = imageBuffer.toString('base64');
+        return base64Image;
+    }
+
     async generatePdf(canvass: Canvass) {
         const browser = await puppeteer.launch();
         const page = await browser.newPage();
@@ -32,16 +41,27 @@ export class CanvassPdfService {
         const requisitioner = await this.getEmployee(canvass.requested_by_id, this.authUser)
         const notedBy = await this.getGM(this.authUser)
 
-        // temp
-        // const notedBy = {
-        //     firsname: "Jannie Ann",
-        //     middlename: null,
-        //     lastname: "Dayandayan",
-        //     position: 'General Manager'
-        // }
+        const backgroundImageStyle = `
+            background-image: url('data:image/jpeg;base64,${this.getImageAsBase64()}');
+            background-repeat: no-repeat;
+            background-size: cover; /* or 'contain' */
+        `;
 
         // Set content of the PDF
         const content = `
+
+
+        <style>
+            body {
+                background-image: url('data:image/jpeg;base64,${this.getImageAsBase64()}');
+                background-repeat: no-repeat;
+                background-size: cover; /* or 'contain' */
+            }
+        </style>
+
+        <div>
+
+
 
         <div style="display: flex; flex-direction: column;">
 
@@ -61,8 +81,7 @@ export class CanvassPdfService {
                     <br />
         
                     <h2 style="font-size: 11pt; font-weight: bold;">OFFICIAL CANVASS SHEET</h1>
-        
-        
+
                 </div>
 
                 <br />
@@ -83,17 +102,17 @@ export class CanvassPdfService {
                     <div>
                         <table style="font-size: 10pt">
                             <tr>
+                                <td> RC NO.: </td>
+                                <td style="border-bottom: 1px solid black;">
+                                    ${canvass.rc_number}
+                                </td>
+                            </tr>     
+                            <tr>
                                 <td>Date: </td>
                                 <td style="border-bottom: 1px solid black;">
                                     ${formatDate(canvass.date_requested)}
                                 </td>
                             </tr>
-                            <tr>
-                                <td> RC No.: </td>
-                                <td style="border-bottom: 1px solid black;">
-                                    ${canvass.rc_number}
-                                </td>
-                            </tr>     
                         </table>
                     </div>
                 
@@ -107,10 +126,11 @@ export class CanvassPdfService {
                         <th style="border: 1px solid black;"> ITEM DESCRIPTION AND SPECIFICATIONS </th>
                         <th style="border: 1px solid black;"> UNIT </th>
                         <th style="border: 1px solid black;"> QTY. </th>
+                        <th style="border: 1px solid black;"> UNIT COST </th>
                     </thead>
-                    <tbody style="font-size: 10pt;">
+                    <tbody style="font-size: 10pt; border: 1px solid black;">
                         ${canvass.canvass_items.map((item, index) => `
-                        <tr>
+                        <tr style="border: 1px solid black;">
                             <td align="center">${index + 1}</td>
                             <td>${item.description}</td>
                             <td align="center">${item.unit ? item.unit.name : 'N/A'}</td>
@@ -132,9 +152,12 @@ export class CanvassPdfService {
 
                     <div>
                         <span>
+                            None VAT: <input type="checkbox" style="transform: scale(2);"/>
+                        </span>
+                        <span style="margin-left: 25px;">
                             VAT Inclusive: <input type="checkbox" style="transform: scale(2);"/>
                         </span>
-                        <span style="margin-left: 50px; margin-right: 10px;">
+                        <span style="margin-left: 25px;">
                             VAT Exclusive: <input type="checkbox" style="transform: scale(2);"/>
                         </span>
                     </div>
@@ -279,13 +302,16 @@ export class CanvassPdfService {
             </div>
         
         </div>
-          
+
+
+
+        </div>
         `;
 
         await page.setContent(content);
-
+        
         // Generate PDF
-        const pdfBuffer = await page.pdf();
+        const pdfBuffer = await page.pdf({ printBackground: true });
 
         await browser.close();
 

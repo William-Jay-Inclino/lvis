@@ -4085,7 +4085,7 @@ let EmployeeService = EmployeeService_1 = class EmployeeService {
                 id
             }
         });
-        if (!!input.signature_src) {
+        if (!!input.signature_src && !!existingItem.signature_src && existingItem.signature_src.trim() !== '') {
             this.deleteFiles([existingItem.signature_src]);
             console.log('previous file deleted');
         }

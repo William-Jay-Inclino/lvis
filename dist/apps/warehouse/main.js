@@ -3620,6 +3620,8 @@ const moment = __webpack_require__(/*! moment */ "moment");
 const rxjs_1 = __webpack_require__(/*! rxjs */ "rxjs");
 const axios_1 = __webpack_require__(/*! @nestjs/axios */ "@nestjs/axios");
 const prisma_service_1 = __webpack_require__(/*! ../__prisma__/prisma.service */ "./apps/warehouse/src/__prisma__/prisma.service.ts");
+const path = __webpack_require__(/*! path */ "path");
+const fs_1 = __webpack_require__(/*! fs */ "fs");
 let CanvassPdfService = class CanvassPdfService {
     constructor(prisma, httpService) {
         this.prisma = prisma;
@@ -3628,12 +3630,36 @@ let CanvassPdfService = class CanvassPdfService {
     setAuthUser(authUser) {
         this.authUser = authUser;
     }
+    getImageAsBase64() {
+        const imagePath = path.resolve('assets', '1.png');
+        const imageBuffer = (0, fs_1.readFileSync)(imagePath);
+        const base64Image = imageBuffer.toString('base64');
+        return base64Image;
+    }
     async generatePdf(canvass) {
         const browser = await puppeteer_1.default.launch();
         const page = await browser.newPage();
         const requisitioner = await this.getEmployee(canvass.requested_by_id, this.authUser);
         const notedBy = await this.getGM(this.authUser);
+        const backgroundImageStyle = `
+            background-image: url('data:image/jpeg;base64,${this.getImageAsBase64()}');
+            background-repeat: no-repeat;
+            background-size: cover; /* or 'contain' */
+        `;
         const content = `
+
+
+        <style>
+            body {
+                background-image: url('data:image/jpeg;base64,${this.getImageAsBase64()}');
+                background-repeat: no-repeat;
+                background-size: cover; /* or 'contain' */
+            }
+        </style>
+
+        <div>
+
+
 
         <div style="display: flex; flex-direction: column;">
 
@@ -3653,8 +3679,7 @@ let CanvassPdfService = class CanvassPdfService {
                     <br />
         
                     <h2 style="font-size: 11pt; font-weight: bold;">OFFICIAL CANVASS SHEET</h1>
-        
-        
+
                 </div>
 
                 <br />
@@ -3675,17 +3700,17 @@ let CanvassPdfService = class CanvassPdfService {
                     <div>
                         <table style="font-size: 10pt">
                             <tr>
+                                <td> RC NO.: </td>
+                                <td style="border-bottom: 1px solid black;">
+                                    ${canvass.rc_number}
+                                </td>
+                            </tr>     
+                            <tr>
                                 <td>Date: </td>
                                 <td style="border-bottom: 1px solid black;">
                                     ${(0, helpers_1.formatDate)(canvass.date_requested)}
                                 </td>
                             </tr>
-                            <tr>
-                                <td> RC No.: </td>
-                                <td style="border-bottom: 1px solid black;">
-                                    ${canvass.rc_number}
-                                </td>
-                            </tr>     
                         </table>
                     </div>
                 
@@ -3699,10 +3724,11 @@ let CanvassPdfService = class CanvassPdfService {
                         <th style="border: 1px solid black;"> ITEM DESCRIPTION AND SPECIFICATIONS </th>
                         <th style="border: 1px solid black;"> UNIT </th>
                         <th style="border: 1px solid black;"> QTY. </th>
+                        <th style="border: 1px solid black;"> UNIT COST </th>
                     </thead>
-                    <tbody style="font-size: 10pt;">
+                    <tbody style="font-size: 10pt; border: 1px solid black;">
                         ${canvass.canvass_items.map((item, index) => `
-                        <tr>
+                        <tr style="border: 1px solid black;">
                             <td align="center">${index + 1}</td>
                             <td>${item.description}</td>
                             <td align="center">${item.unit ? item.unit.name : 'N/A'}</td>
@@ -3724,9 +3750,12 @@ let CanvassPdfService = class CanvassPdfService {
 
                     <div>
                         <span>
+                            None VAT: <input type="checkbox" style="transform: scale(2);"/>
+                        </span>
+                        <span style="margin-left: 25px;">
                             VAT Inclusive: <input type="checkbox" style="transform: scale(2);"/>
                         </span>
-                        <span style="margin-left: 50px; margin-right: 10px;">
+                        <span style="margin-left: 25px;">
                             VAT Exclusive: <input type="checkbox" style="transform: scale(2);"/>
                         </span>
                     </div>
@@ -3862,10 +3891,13 @@ let CanvassPdfService = class CanvassPdfService {
             </div>
         
         </div>
-          
+
+
+
+        </div>
         `;
         await page.setContent(content);
-        const pdfBuffer = await page.pdf();
+        const pdfBuffer = await page.pdf({ printBackground: true });
         await browser.close();
         return pdfBuffer;
     }
