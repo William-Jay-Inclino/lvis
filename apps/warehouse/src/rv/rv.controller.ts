@@ -1,8 +1,10 @@
-import { Controller, Get, Param, Res, UseGuards } from '@nestjs/common';
+import { Controller, Get, Param, Res, UnauthorizedException, UseGuards } from '@nestjs/common';
 import { RvPdfService } from './rv.pdf.service';
 import { JwtAuthGuard } from '../__auth__/guards/jwt-auth.guard';
 import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
 import { AuthUser } from '../__common__/auth-user.entity';
+import { RvService } from './rv.service';
+import { APPROVAL_STATUS } from '../__common__/types';
 
 
 @UseGuards(JwtAuthGuard)
@@ -10,7 +12,8 @@ import { AuthUser } from '../__common__/auth-user.entity';
 export class RvController {
 
     constructor(
-        private readonly rvPdfService: RvPdfService
+        private readonly rvPdfService: RvPdfService,
+        private readonly rvService: RvService,
     ) { }
 
 
@@ -25,6 +28,14 @@ export class RvController {
         console.log('authUser', authUser);
 
         this.rvPdfService.setAuthUser(authUser)
+
+        const status = await this.rvService.getStatus(id)
+
+        console.log('status', status);
+
+        if(status !== APPROVAL_STATUS.APPROVED) {
+            throw new UnauthorizedException('Cannot generate pdf. Status is not approvedf')
+        }
 
         const rv = await this.rvPdfService.findRv(id)
         // @ts-ignore

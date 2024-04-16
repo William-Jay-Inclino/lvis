@@ -1,8 +1,10 @@
-import { Controller, Get, Param, Res, UseGuards } from '@nestjs/common';
+import { Controller, Get, Param, Res, UnauthorizedException, UseGuards } from '@nestjs/common';
 import { MeqsPdfService } from './meqs.pdf.service';
 import { JwtAuthGuard } from '../__auth__/guards/jwt-auth.guard';
 import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
 import { AuthUser } from '../__common__/auth-user.entity';
+import { MeqsService } from './meqs.service';
+import { APPROVAL_STATUS } from '../__common__/types';
 
 
 @UseGuards(JwtAuthGuard)
@@ -10,7 +12,8 @@ import { AuthUser } from '../__common__/auth-user.entity';
 export class MeqsController {
 
     constructor(
-        private readonly meqsPdfService: MeqsPdfService
+        private readonly meqsPdfService: MeqsPdfService,
+        private readonly meqsService: MeqsService,
     ) { }
 
 
@@ -25,6 +28,14 @@ export class MeqsController {
         console.log('authUser', authUser);
 
         this.meqsPdfService.setAuthUser(authUser)
+
+        const status = await this.meqsService.getStatus(id)
+
+        console.log('status', status);
+
+        if(status !== APPROVAL_STATUS.APPROVED) {
+            throw new UnauthorizedException('Cannot generate pdf. Status is not approvedf')
+        }
 
         const meqs = await this.meqsPdfService.findMeqs(id)
         // @ts-ignore

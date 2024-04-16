@@ -1,8 +1,10 @@
-import { Controller, Get, Param, Res, UseGuards } from '@nestjs/common';
+import { Controller, Get, Param, Res, UnauthorizedException, UseGuards } from '@nestjs/common';
 import { SprPdfService } from './spr.pdf.service';
 import { JwtAuthGuard } from '../__auth__/guards/jwt-auth.guard';
 import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
 import { AuthUser } from '../__common__/auth-user.entity';
+import { SprService } from './spr.service';
+import { APPROVAL_STATUS } from '../__common__/types';
 
 
 @UseGuards(JwtAuthGuard)
@@ -10,7 +12,8 @@ import { AuthUser } from '../__common__/auth-user.entity';
 export class SprController {
 
     constructor(
-        private readonly sprPdfService: SprPdfService
+        private readonly sprPdfService: SprPdfService,
+        private readonly sprService: SprService,
     ) { }
 
 
@@ -25,6 +28,14 @@ export class SprController {
         console.log('authUser', authUser);
 
         this.sprPdfService.setAuthUser(authUser)
+
+        const status = await this.sprService.getStatus(id)
+
+        console.log('status', status);
+
+        if(status !== APPROVAL_STATUS.APPROVED) {
+            throw new UnauthorizedException('Cannot generate pdf. Status is not approvedf')
+        }
 
         const spr = await this.sprPdfService.findSpr(id)
         // @ts-ignore

@@ -1,8 +1,10 @@
-import { Controller, Get, Param, Res, UseGuards } from '@nestjs/common';
+import { Controller, Get, Param, Res, UnauthorizedException, UseGuards } from '@nestjs/common';
 import { JoPdfService } from './jo.pdf.service';
 import { JwtAuthGuard } from '../__auth__/guards/jwt-auth.guard';
 import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
 import { AuthUser } from '../__common__/auth-user.entity';
+import { JoService } from './jo.service';
+import { APPROVAL_STATUS } from '../__common__/types';
 
 
 @UseGuards(JwtAuthGuard)
@@ -10,7 +12,8 @@ import { AuthUser } from '../__common__/auth-user.entity';
 export class JoController {
 
     constructor(
-        private readonly joPdfService: JoPdfService
+        private readonly joPdfService: JoPdfService,
+        private readonly joService: JoService,
     ) { }
 
 
@@ -25,6 +28,14 @@ export class JoController {
         console.log('authUser', authUser);
 
         this.joPdfService.setAuthUser(authUser)
+
+        const status = await this.joService.getStatus(id)
+
+        console.log('status', status);
+
+        if(status !== APPROVAL_STATUS.APPROVED) {
+            throw new UnauthorizedException('Cannot generate pdf. Status is not approvedf')
+        }
 
         const jo = await this.joPdfService.findJo(id)
         // @ts-ignore

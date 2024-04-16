@@ -7455,7 +7455,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-var _a, _b, _c;
+var _a, _b, _c, _d;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.JoController = void 0;
 const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
@@ -7463,14 +7463,22 @@ const jo_pdf_service_1 = __webpack_require__(/*! ./jo.pdf.service */ "./apps/war
 const jwt_auth_guard_1 = __webpack_require__(/*! ../__auth__/guards/jwt-auth.guard */ "./apps/warehouse/src/__auth__/guards/jwt-auth.guard.ts");
 const current_auth_user_decorator_1 = __webpack_require__(/*! ../__auth__/current-auth-user.decorator */ "./apps/warehouse/src/__auth__/current-auth-user.decorator.ts");
 const auth_user_entity_1 = __webpack_require__(/*! ../__common__/auth-user.entity */ "./apps/warehouse/src/__common__/auth-user.entity.ts");
+const jo_service_1 = __webpack_require__(/*! ./jo.service */ "./apps/warehouse/src/jo/jo.service.ts");
+const types_1 = __webpack_require__(/*! ../__common__/types */ "./apps/warehouse/src/__common__/types.ts");
 let JoController = class JoController {
-    constructor(joPdfService) {
+    constructor(joPdfService, joService) {
         this.joPdfService = joPdfService;
+        this.joService = joService;
     }
     async generatePdf(id, res, authUser) {
         console.log('id', id);
         console.log('authUser', authUser);
         this.joPdfService.setAuthUser(authUser);
+        const status = await this.joService.getStatus(id);
+        console.log('status', status);
+        if (status !== types_1.APPROVAL_STATUS.APPROVED) {
+            throw new common_1.UnauthorizedException('Cannot generate pdf. Status is not approvedf');
+        }
         const jo = await this.joPdfService.findJo(id);
         const pdfBuffer = await this.joPdfService.generatePdf(jo);
         res.setHeader('Content-Type', 'application/pdf');
@@ -7485,13 +7493,13 @@ __decorate([
     __param(1, (0, common_1.Res)()),
     __param(2, (0, current_auth_user_decorator_1.CurrentAuthUser)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, typeof (_b = typeof Response !== "undefined" && Response) === "function" ? _b : Object, typeof (_c = typeof auth_user_entity_1.AuthUser !== "undefined" && auth_user_entity_1.AuthUser) === "function" ? _c : Object]),
+    __metadata("design:paramtypes", [String, typeof (_c = typeof Response !== "undefined" && Response) === "function" ? _c : Object, typeof (_d = typeof auth_user_entity_1.AuthUser !== "undefined" && auth_user_entity_1.AuthUser) === "function" ? _d : Object]),
     __metadata("design:returntype", Promise)
 ], JoController.prototype, "generatePdf", null);
 exports.JoController = JoController = __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Controller)('jo'),
-    __metadata("design:paramtypes", [typeof (_a = typeof jo_pdf_service_1.JoPdfService !== "undefined" && jo_pdf_service_1.JoPdfService) === "function" ? _a : Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof jo_pdf_service_1.JoPdfService !== "undefined" && jo_pdf_service_1.JoPdfService) === "function" ? _a : Object, typeof (_b = typeof jo_service_1.JoService !== "undefined" && jo_service_1.JoService) === "function" ? _b : Object])
 ], JoController);
 
 
@@ -11670,7 +11678,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-var _a, _b, _c;
+var _a, _b, _c, _d;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.MeqsController = void 0;
 const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
@@ -11678,14 +11686,22 @@ const meqs_pdf_service_1 = __webpack_require__(/*! ./meqs.pdf.service */ "./apps
 const jwt_auth_guard_1 = __webpack_require__(/*! ../__auth__/guards/jwt-auth.guard */ "./apps/warehouse/src/__auth__/guards/jwt-auth.guard.ts");
 const current_auth_user_decorator_1 = __webpack_require__(/*! ../__auth__/current-auth-user.decorator */ "./apps/warehouse/src/__auth__/current-auth-user.decorator.ts");
 const auth_user_entity_1 = __webpack_require__(/*! ../__common__/auth-user.entity */ "./apps/warehouse/src/__common__/auth-user.entity.ts");
+const meqs_service_1 = __webpack_require__(/*! ./meqs.service */ "./apps/warehouse/src/meqs/meqs.service.ts");
+const types_1 = __webpack_require__(/*! ../__common__/types */ "./apps/warehouse/src/__common__/types.ts");
 let MeqsController = class MeqsController {
-    constructor(meqsPdfService) {
+    constructor(meqsPdfService, meqsService) {
         this.meqsPdfService = meqsPdfService;
+        this.meqsService = meqsService;
     }
     async generatePdf(id, res, authUser) {
         console.log('id', id);
         console.log('authUser', authUser);
         this.meqsPdfService.setAuthUser(authUser);
+        const status = await this.meqsService.getStatus(id);
+        console.log('status', status);
+        if (status !== types_1.APPROVAL_STATUS.APPROVED) {
+            throw new common_1.UnauthorizedException('Cannot generate pdf. Status is not approvedf');
+        }
         const meqs = await this.meqsPdfService.findMeqs(id);
         const pdfBuffer = await this.meqsPdfService.generatePdf(meqs);
         res.setHeader('Content-Type', 'application/pdf');
@@ -11700,13 +11716,13 @@ __decorate([
     __param(1, (0, common_1.Res)()),
     __param(2, (0, current_auth_user_decorator_1.CurrentAuthUser)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, typeof (_b = typeof Response !== "undefined" && Response) === "function" ? _b : Object, typeof (_c = typeof auth_user_entity_1.AuthUser !== "undefined" && auth_user_entity_1.AuthUser) === "function" ? _c : Object]),
+    __metadata("design:paramtypes", [String, typeof (_c = typeof Response !== "undefined" && Response) === "function" ? _c : Object, typeof (_d = typeof auth_user_entity_1.AuthUser !== "undefined" && auth_user_entity_1.AuthUser) === "function" ? _d : Object]),
     __metadata("design:returntype", Promise)
 ], MeqsController.prototype, "generatePdf", null);
 exports.MeqsController = MeqsController = __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Controller)('meqs'),
-    __metadata("design:paramtypes", [typeof (_a = typeof meqs_pdf_service_1.MeqsPdfService !== "undefined" && meqs_pdf_service_1.MeqsPdfService) === "function" ? _a : Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof meqs_pdf_service_1.MeqsPdfService !== "undefined" && meqs_pdf_service_1.MeqsPdfService) === "function" ? _a : Object, typeof (_b = typeof meqs_service_1.MeqsService !== "undefined" && meqs_service_1.MeqsService) === "function" ? _b : Object])
 ], MeqsController);
 
 
@@ -14051,7 +14067,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-var _a, _b, _c;
+var _a, _b, _c, _d;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.PoController = void 0;
 const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
@@ -14059,14 +14075,22 @@ const po_pdf_service_1 = __webpack_require__(/*! ./po.pdf.service */ "./apps/war
 const jwt_auth_guard_1 = __webpack_require__(/*! ../__auth__/guards/jwt-auth.guard */ "./apps/warehouse/src/__auth__/guards/jwt-auth.guard.ts");
 const current_auth_user_decorator_1 = __webpack_require__(/*! ../__auth__/current-auth-user.decorator */ "./apps/warehouse/src/__auth__/current-auth-user.decorator.ts");
 const auth_user_entity_1 = __webpack_require__(/*! ../__common__/auth-user.entity */ "./apps/warehouse/src/__common__/auth-user.entity.ts");
+const po_service_1 = __webpack_require__(/*! ./po.service */ "./apps/warehouse/src/po/po.service.ts");
+const types_1 = __webpack_require__(/*! ../__common__/types */ "./apps/warehouse/src/__common__/types.ts");
 let PoController = class PoController {
-    constructor(poPdfService) {
+    constructor(poPdfService, poService) {
         this.poPdfService = poPdfService;
+        this.poService = poService;
     }
     async generatePdf(id, res, authUser) {
         console.log('id', id);
         console.log('authUser', authUser);
         this.poPdfService.setAuthUser(authUser);
+        const status = await this.poService.getStatus(id);
+        console.log('status', status);
+        if (status !== types_1.APPROVAL_STATUS.APPROVED) {
+            throw new common_1.UnauthorizedException('Cannot generate pdf. Status is not approvedf');
+        }
         const po = await this.poPdfService.findPo(id);
         const pdfBuffer = await this.poPdfService.generatePdf(po);
         res.setHeader('Content-Type', 'application/pdf');
@@ -14081,13 +14105,13 @@ __decorate([
     __param(1, (0, common_1.Res)()),
     __param(2, (0, current_auth_user_decorator_1.CurrentAuthUser)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, typeof (_b = typeof Response !== "undefined" && Response) === "function" ? _b : Object, typeof (_c = typeof auth_user_entity_1.AuthUser !== "undefined" && auth_user_entity_1.AuthUser) === "function" ? _c : Object]),
+    __metadata("design:paramtypes", [String, typeof (_c = typeof Response !== "undefined" && Response) === "function" ? _c : Object, typeof (_d = typeof auth_user_entity_1.AuthUser !== "undefined" && auth_user_entity_1.AuthUser) === "function" ? _d : Object]),
     __metadata("design:returntype", Promise)
 ], PoController.prototype, "generatePdf", null);
 exports.PoController = PoController = __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Controller)('po'),
-    __metadata("design:paramtypes", [typeof (_a = typeof po_pdf_service_1.PoPdfService !== "undefined" && po_pdf_service_1.PoPdfService) === "function" ? _a : Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof po_pdf_service_1.PoPdfService !== "undefined" && po_pdf_service_1.PoPdfService) === "function" ? _a : Object, typeof (_b = typeof po_service_1.PoService !== "undefined" && po_service_1.PoService) === "function" ? _b : Object])
 ], PoController);
 
 
@@ -17128,7 +17152,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-var _a, _b, _c;
+var _a, _b, _c, _d;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.RrController = void 0;
 const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
@@ -17136,14 +17160,22 @@ const rr_pdf_service_1 = __webpack_require__(/*! ./rr.pdf.service */ "./apps/war
 const jwt_auth_guard_1 = __webpack_require__(/*! ../__auth__/guards/jwt-auth.guard */ "./apps/warehouse/src/__auth__/guards/jwt-auth.guard.ts");
 const current_auth_user_decorator_1 = __webpack_require__(/*! ../__auth__/current-auth-user.decorator */ "./apps/warehouse/src/__auth__/current-auth-user.decorator.ts");
 const auth_user_entity_1 = __webpack_require__(/*! ../__common__/auth-user.entity */ "./apps/warehouse/src/__common__/auth-user.entity.ts");
+const rr_service_1 = __webpack_require__(/*! ./rr.service */ "./apps/warehouse/src/rr/rr.service.ts");
+const types_1 = __webpack_require__(/*! ../__common__/types */ "./apps/warehouse/src/__common__/types.ts");
 let RrController = class RrController {
-    constructor(rrPdfService) {
+    constructor(rrPdfService, rrService) {
         this.rrPdfService = rrPdfService;
+        this.rrService = rrService;
     }
     async generatePdf(id, res, authUser) {
         console.log('id', id);
         console.log('authUser', authUser);
         this.rrPdfService.setAuthUser(authUser);
+        const status = await this.rrService.getStatus(id);
+        console.log('status', status);
+        if (status !== types_1.APPROVAL_STATUS.APPROVED) {
+            throw new common_1.UnauthorizedException('Cannot generate pdf. Status is not approvedf');
+        }
         const rr = await this.rrPdfService.findRr(id);
         const pdfBuffer = await this.rrPdfService.generatePdf(rr);
         res.setHeader('Content-Type', 'application/pdf');
@@ -17158,13 +17190,13 @@ __decorate([
     __param(1, (0, common_1.Res)()),
     __param(2, (0, current_auth_user_decorator_1.CurrentAuthUser)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, typeof (_b = typeof Response !== "undefined" && Response) === "function" ? _b : Object, typeof (_c = typeof auth_user_entity_1.AuthUser !== "undefined" && auth_user_entity_1.AuthUser) === "function" ? _c : Object]),
+    __metadata("design:paramtypes", [String, typeof (_c = typeof Response !== "undefined" && Response) === "function" ? _c : Object, typeof (_d = typeof auth_user_entity_1.AuthUser !== "undefined" && auth_user_entity_1.AuthUser) === "function" ? _d : Object]),
     __metadata("design:returntype", Promise)
 ], RrController.prototype, "generatePdf", null);
 exports.RrController = RrController = __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Controller)('rr'),
-    __metadata("design:paramtypes", [typeof (_a = typeof rr_pdf_service_1.RrPdfService !== "undefined" && rr_pdf_service_1.RrPdfService) === "function" ? _a : Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof rr_pdf_service_1.RrPdfService !== "undefined" && rr_pdf_service_1.RrPdfService) === "function" ? _a : Object, typeof (_b = typeof rr_service_1.RrService !== "undefined" && rr_service_1.RrService) === "function" ? _b : Object])
 ], RrController);
 
 
@@ -17231,15 +17263,16 @@ exports.RrPdfService = void 0;
 const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
 const puppeteer_1 = __webpack_require__(/*! puppeteer */ "puppeteer");
 const helpers_1 = __webpack_require__(/*! ../__common__/helpers */ "./apps/warehouse/src/__common__/helpers.ts");
-const moment = __webpack_require__(/*! moment */ "moment");
 const rxjs_1 = __webpack_require__(/*! rxjs */ "rxjs");
 const axios_1 = __webpack_require__(/*! @nestjs/axios */ "@nestjs/axios");
 const prisma_service_1 = __webpack_require__(/*! ../__prisma__/prisma.service */ "./apps/warehouse/src/__prisma__/prisma.service.ts");
 const types_1 = __webpack_require__(/*! ../__common__/types */ "./apps/warehouse/src/__common__/types.ts");
+const config_1 = __webpack_require__(/*! ../__common__/config */ "./apps/warehouse/src/__common__/config.ts");
 let RrPdfService = class RrPdfService {
     constructor(prisma, httpService) {
         this.prisma = prisma;
         this.httpService = httpService;
+        this.API_FILE_ENDPOINT = process.env.API_URL + '/api/v1/file-upload';
     }
     setAuthUser(authUser) {
         this.authUser = authUser;
@@ -17247,14 +17280,26 @@ let RrPdfService = class RrPdfService {
     async generatePdf(rr) {
         const browser = await puppeteer_1.default.launch();
         const page = await browser.newPage();
+        const watermark = (0, helpers_1.getImageAsBase64)('lvis-watermark-v2.png');
+        const logo = (0, helpers_1.getImageAsBase64)('leyeco-logo.png');
         const totalCost = rr.rr_items.reduce((acc, item) => acc + (item.meqs_supplier_item.price * item.quantity_accepted), 0);
         const totalUnitCost = rr.rr_items.reduce((acc, item) => acc + (item.meqs_supplier_item.price), 0);
         const totalVat = rr.rr_items.reduce((acc, item) => acc + ((0, helpers_1.getVatAmount)(item.meqs_supplier_item.price, item.meqs_supplier_item.vat_type)), 0);
         const { totalVatInc, totalVatExc } = this.getTotalVat(rr.rr_items);
-        const poApprovers = await Promise.all(rr.po.po_approvers.map(async (i) => {
-            i.approver = await this.getEmployee(i.approver_id, this.authUser);
-            return i;
-        }));
+        let requested_by_id, purpose;
+        if (rr.po.meqs_supplier.meqs.rv) {
+            requested_by_id = rr.po.meqs_supplier.meqs.rv.canvass.requested_by_id;
+            purpose = rr.po.meqs_supplier.meqs.rv.canvass.purpose;
+        }
+        else if (rr.po.meqs_supplier.meqs.spr) {
+            requested_by_id = rr.po.meqs_supplier.meqs.spr.canvass.requested_by_id;
+            purpose = rr.po.meqs_supplier.meqs.spr.canvass.purpose;
+        }
+        else {
+            requested_by_id = rr.po.meqs_supplier.meqs.jo.canvass.requested_by_id;
+            purpose = rr.po.meqs_supplier.meqs.jo.canvass.purpose;
+        }
+        const requisitioner = await this.getEmployee(requested_by_id, this.authUser);
         const rrApprovers = await Promise.all(rr.rr_approvers.map(async (i) => {
             i.approver = await this.getEmployee(i.approver_id, this.authUser);
             return i;
@@ -17277,13 +17322,44 @@ let RrPdfService = class RrPdfService {
         }
         const content = `
 
-        <div style="display: flex; flex-direction: column;">
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+            }
+            .watermark {
+                position: fixed;
+                top: 63%;
+                left: 58%;
+                transform: translate(-50%, -50%);
+                width: 70%;
+                height: 70%;
+                z-index: -1;
+                background-image: url('data:image/jpeg;base64,${watermark}');
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: contain;
+            }
+            .content {
+                display: flex; flex-direction: column;
+                padding-left: 25px; padding-right: 25px; font-size: 10pt; 
+            }
+        </style>
 
-            <div style="padding-left: 25px; padding-right: 25px; font-size: 10pt; flex-grow: 1; min-height: 70vh;">
+        
+        <div class="watermark"></div>
+
+
+        <div class="content">
+
+            <div style="flex-grow: 1; min-height: 70vh;">
         
                 <div style="text-align: center; margin-top: 35px">
         
-                    <div style="font-size: 11pt; font-weight: bold;">LEYTE V ELECTRIC COOPERATIVE, INC.</div>
+                <div style="display: flex; align-items: center; justify-content: center;">
+                    <img src="data:image/jpeg;base64,${logo}" alt="Logo" style="height: 50px; width: 50px; margin-right: 10px;">
+                    <h1 style="font-size: 11pt; font-weight: bold; display: inline;">LEYTE V ELECTRIC COOPERATIVE, INC.</h1>
+                </div>
         
                     <div style="font-size: 9pt">
                         <span>Brgy. San Pablo, Ormoc City, Leyte</span>
@@ -17312,11 +17388,11 @@ let RrPdfService = class RrPdfService {
 
                 <table border="1" style="width: 100%; font-size: 10pt; border-collapse: collapse; border-color: black; margin-top: 10px;">
                     <tr>
-                        <td rowspan="4" style="width: 50%; vertical-align: top;">
+                        <td rowspan="5" style="width: 50%; vertical-align: top;">
                             <div style="display: flex; justify-content: space-between; padding-left: 10px; padding-right: 10px;">
                                 <div> Supplier: </div>
                                 <div>
-                                    Tin #: 209-609-185-00054
+                                    Tin #: ${rr.po.meqs_supplier.supplier.tin_no.trim() !== '' ? rr.po.meqs_supplier.supplier.tin_no : 'N/A'}
                                 </div>
                             </div>
 
@@ -17325,44 +17401,22 @@ let RrPdfService = class RrPdfService {
                                     ${rr.po.meqs_supplier.supplier.name.toUpperCase()}
                                 </div>
                                 <div>
-                                    REAL ST., ORMOC CITY
+                                ${rr.po.meqs_supplier.supplier.address.toUpperCase()}
                                 </div>
                             </div>
                         </td>
                     </tr>
                     <tr>
-                        <td>
-                            <table style="font-size: 10pt; width: 100%;">
-                                <tr>
-                                    <td style="width: 50%;"> PO No.: ${rr.po.po_number} </td>
-                                    <td> Date: ${(0, helpers_1.formatDate)(rr.po.po_date)} </td>
-                                </tr>
-                            </table>
-                        </td>
+                        <td> Purpose: ${purpose}</td>
                     </tr>
                     <tr>
-                        <td>
-                            <table style="font-size: 10pt; width: 100%;">
-                                <tr>
-                                    <td style="width: 50%;"> ${refType} No.: ${refNumber} </td>
-                                    <td> Date: ${(0, helpers_1.formatDate)(refDate)}</td>
-                                </tr>
-                            </table>
-                        </td>
+                        <td> Requisitioner: ${requisitioner.firstname + ' ' + requisitioner.lastname}</td>
                     </tr>
                     <tr>
-                        <td>
-                            <table style="font-size: 10pt; width: 100%;">
-                                <tr>
-                                    <td style="width: 50%;"> Invoice No.: ${rr.invoice_number}</td>
-                                </tr>
-                            </table>
-                        </td>
+                        <td> Invoice No.: ${rr.invoice_number}</td>
                     </tr>
                     <tr>
-                        <td colspan="2" style="padding: 5px;">
-                            Delivery Report: ${rr.notes}
-                        </td>
+                        <td> Delivery Report: ${rr.notes} </td>
                     </tr>
                 </table>
 
@@ -17452,25 +17506,28 @@ let RrPdfService = class RrPdfService {
         
             </div>
         
-            <div style="padding-left: 25px; padding-right: 25px; font-size: 10pt; padding-top: 50px; min-height: 20vh;">
+            <div style="padding-left: 25px; padding-right: 25px; font-size: 10pt; padding-top: 70px; min-height: 15vh;">
                 
                 <div style="display: flex; justify-content: center;">
                     
                      ${rrApprovers.map((item, index) => `
                     
-                     <div style="padding: 10px; margin-right: 70px;">
-                        <table font-size: 11pt;">
+                     <div style="padding: 10px;">
+                        <table border="0" style="font-size: 11pt; width: 210px;">
                             <tr>
                                 <td style="font-size: 10pt; text-align: left;"> ${item.label}: </td>
                             </tr>
                             <tr>
                                 <td style="font-size: 10pt; text-align: left;"> 
-                                    ${item.date_approval ? (0, helpers_1.formatDate)(item.date_approval) : '&nbsp;'} 
+                                    ${item.date_approval ? (0, helpers_1.formatDate)(item.date_approval, true) : '&nbsp;'} 
                                 </td>
                             </tr>
                             <tr>
-                                <th style="text-align: center; padding-top: 20px; border-bottom: 1px solid black">
-                                    ${(item.approver.firstname + ' ' + item.approver.lastname)}
+                                <th style="text-align: center; position: relative;">
+                                    <u style="position: relative; z-index: 1; margin-bottom: 10px;">
+                                        ${item.approver.firstname + ' ' + item.approver.lastname}
+                                    </u>
+                                    <img style="width: 100px; height: 100px; position: absolute; top: -60px; left: 50%; transform: translateX(-50%); z-index: 2;" src="${this.getUploadsPath(item.approver.signature_src)}" />
                                 </th>
                             </tr>
                             <tr>
@@ -17489,25 +17546,27 @@ let RrPdfService = class RrPdfService {
             
             </div>
         
-        
-        
-
-            <div style="display: flex; justify-content: space-between; font-size: 9pt">
-                <div>
-                    Note: This is a system generated report printed by ${this.authUser.user.username}
-                </div>
-                <div>
-                    Date & Time Generated: ${moment(new Date()).format('MMMM D, YYYY - dddd h:mm:ss a')}
-                </div>
-            </div>
-        
         </div>
           
         `;
         await page.setContent(content);
         const pdfBuffer = await page.pdf({
+            landscape: true,
+            printBackground: true,
             format: 'A4',
-            landscape: true
+            displayHeaderFooter: true,
+            headerTemplate: ``,
+            footerTemplate: `
+            <div style="border-top: solid 1px #bbb; width: 100%; font-size: 9px;
+                padding: 5px 5px 0; color: #bbb; position: relative;">
+                <div style="position: absolute; left: 5px; top: 5px;">
+                    Note: This is a system generated report printed by ${this.authUser.user.username} | 
+                    Date & Time Generated: <span class="date"></span>
+                </div>
+                <div style="position: absolute; right: 5px; top: 5px;"><span class="pageNumber"></span>/<span class="totalPages"></span></div>
+            </div>
+          `,
+            margin: { bottom: '70px' },
         });
         await browser.close();
         return pdfBuffer;
@@ -17523,6 +17582,7 @@ let RrPdfService = class RrPdfService {
                     position
                     is_budget_officer
                     is_finance_manager
+                    signature_src
                 }
             }
         `;
@@ -17644,6 +17704,14 @@ let RrPdfService = class RrPdfService {
             totalVatInc,
             totalVatExc
         };
+    }
+    getUploadsPath(src) {
+        if (!src || src.trim() === '')
+            return;
+        const path = src.replace(config_1.UPLOADS_PATH, '');
+        console.log('PATH', path);
+        const uploadsPath = this.API_FILE_ENDPOINT + path;
+        return uploadsPath;
     }
 };
 exports.RrPdfService = RrPdfService;
@@ -19547,7 +19615,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-var _a, _b, _c;
+var _a, _b, _c, _d;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.RvController = void 0;
 const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
@@ -19555,14 +19623,22 @@ const rv_pdf_service_1 = __webpack_require__(/*! ./rv.pdf.service */ "./apps/war
 const jwt_auth_guard_1 = __webpack_require__(/*! ../__auth__/guards/jwt-auth.guard */ "./apps/warehouse/src/__auth__/guards/jwt-auth.guard.ts");
 const current_auth_user_decorator_1 = __webpack_require__(/*! ../__auth__/current-auth-user.decorator */ "./apps/warehouse/src/__auth__/current-auth-user.decorator.ts");
 const auth_user_entity_1 = __webpack_require__(/*! ../__common__/auth-user.entity */ "./apps/warehouse/src/__common__/auth-user.entity.ts");
+const rv_service_1 = __webpack_require__(/*! ./rv.service */ "./apps/warehouse/src/rv/rv.service.ts");
+const types_1 = __webpack_require__(/*! ../__common__/types */ "./apps/warehouse/src/__common__/types.ts");
 let RvController = class RvController {
-    constructor(rvPdfService) {
+    constructor(rvPdfService, rvService) {
         this.rvPdfService = rvPdfService;
+        this.rvService = rvService;
     }
     async generatePdf(id, res, authUser) {
         console.log('id', id);
         console.log('authUser', authUser);
         this.rvPdfService.setAuthUser(authUser);
+        const status = await this.rvService.getStatus(id);
+        console.log('status', status);
+        if (status !== types_1.APPROVAL_STATUS.APPROVED) {
+            throw new common_1.UnauthorizedException('Cannot generate pdf. Status is not approvedf');
+        }
         const rv = await this.rvPdfService.findRv(id);
         const pdfBuffer = await this.rvPdfService.generatePdf(rv);
         res.setHeader('Content-Type', 'application/pdf');
@@ -19577,13 +19653,13 @@ __decorate([
     __param(1, (0, common_1.Res)()),
     __param(2, (0, current_auth_user_decorator_1.CurrentAuthUser)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, typeof (_b = typeof Response !== "undefined" && Response) === "function" ? _b : Object, typeof (_c = typeof auth_user_entity_1.AuthUser !== "undefined" && auth_user_entity_1.AuthUser) === "function" ? _c : Object]),
+    __metadata("design:paramtypes", [String, typeof (_c = typeof Response !== "undefined" && Response) === "function" ? _c : Object, typeof (_d = typeof auth_user_entity_1.AuthUser !== "undefined" && auth_user_entity_1.AuthUser) === "function" ? _d : Object]),
     __metadata("design:returntype", Promise)
 ], RvController.prototype, "generatePdf", null);
 exports.RvController = RvController = __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Controller)('rv'),
-    __metadata("design:paramtypes", [typeof (_a = typeof rv_pdf_service_1.RvPdfService !== "undefined" && rv_pdf_service_1.RvPdfService) === "function" ? _a : Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof rv_pdf_service_1.RvPdfService !== "undefined" && rv_pdf_service_1.RvPdfService) === "function" ? _a : Object, typeof (_b = typeof rv_service_1.RvService !== "undefined" && rv_service_1.RvService) === "function" ? _b : Object])
 ], RvController);
 
 
@@ -21903,7 +21979,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-var _a, _b, _c;
+var _a, _b, _c, _d;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.SprController = void 0;
 const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
@@ -21911,14 +21987,22 @@ const spr_pdf_service_1 = __webpack_require__(/*! ./spr.pdf.service */ "./apps/w
 const jwt_auth_guard_1 = __webpack_require__(/*! ../__auth__/guards/jwt-auth.guard */ "./apps/warehouse/src/__auth__/guards/jwt-auth.guard.ts");
 const current_auth_user_decorator_1 = __webpack_require__(/*! ../__auth__/current-auth-user.decorator */ "./apps/warehouse/src/__auth__/current-auth-user.decorator.ts");
 const auth_user_entity_1 = __webpack_require__(/*! ../__common__/auth-user.entity */ "./apps/warehouse/src/__common__/auth-user.entity.ts");
+const spr_service_1 = __webpack_require__(/*! ./spr.service */ "./apps/warehouse/src/spr/spr.service.ts");
+const types_1 = __webpack_require__(/*! ../__common__/types */ "./apps/warehouse/src/__common__/types.ts");
 let SprController = class SprController {
-    constructor(sprPdfService) {
+    constructor(sprPdfService, sprService) {
         this.sprPdfService = sprPdfService;
+        this.sprService = sprService;
     }
     async generatePdf(id, res, authUser) {
         console.log('id', id);
         console.log('authUser', authUser);
         this.sprPdfService.setAuthUser(authUser);
+        const status = await this.sprService.getStatus(id);
+        console.log('status', status);
+        if (status !== types_1.APPROVAL_STATUS.APPROVED) {
+            throw new common_1.UnauthorizedException('Cannot generate pdf. Status is not approvedf');
+        }
         const spr = await this.sprPdfService.findSpr(id);
         const pdfBuffer = await this.sprPdfService.generatePdf(spr);
         res.setHeader('Content-Type', 'application/pdf');
@@ -21933,13 +22017,13 @@ __decorate([
     __param(1, (0, common_1.Res)()),
     __param(2, (0, current_auth_user_decorator_1.CurrentAuthUser)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, typeof (_b = typeof Response !== "undefined" && Response) === "function" ? _b : Object, typeof (_c = typeof auth_user_entity_1.AuthUser !== "undefined" && auth_user_entity_1.AuthUser) === "function" ? _c : Object]),
+    __metadata("design:paramtypes", [String, typeof (_c = typeof Response !== "undefined" && Response) === "function" ? _c : Object, typeof (_d = typeof auth_user_entity_1.AuthUser !== "undefined" && auth_user_entity_1.AuthUser) === "function" ? _d : Object]),
     __metadata("design:returntype", Promise)
 ], SprController.prototype, "generatePdf", null);
 exports.SprController = SprController = __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Controller)('spr'),
-    __metadata("design:paramtypes", [typeof (_a = typeof spr_pdf_service_1.SprPdfService !== "undefined" && spr_pdf_service_1.SprPdfService) === "function" ? _a : Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof spr_pdf_service_1.SprPdfService !== "undefined" && spr_pdf_service_1.SprPdfService) === "function" ? _a : Object, typeof (_b = typeof spr_service_1.SprService !== "undefined" && spr_service_1.SprService) === "function" ? _b : Object])
 ], SprController);
 
 
