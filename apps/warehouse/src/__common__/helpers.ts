@@ -3,7 +3,8 @@ import { AuthUser } from "./auth-user.entity"
 import { APPROVAL_STATUS, ITEM_TRANSACTION_TYPE, MODULES, RESOLVERS, Role, VAT_TYPE } from "./types"
 import { User, UserPermissions } from "./user.entity"
 import { VAT_RATE } from './config';
-
+import * as path from 'path';
+import { readFileSync } from 'fs';
 
 export const isValidApprovalStatus = (status: number): boolean => {
 
@@ -220,7 +221,7 @@ export function isNormalUser(authUser: AuthUser): boolean {
     return (authUser.user.role === Role.USER)
 }
 
-export function formatDate(d: any) {
+export function formatDate(d: any, hasTime?: boolean) {
 
     console.log('d', d)
 
@@ -233,8 +234,7 @@ export function formatDate(d: any) {
         date = Number(d) < 10000000000 ? Number(d) * 1000 : Number(d);
     }
 
-    // return moment(date).format('YYYY-MM-DD');
-    return moment(date).format('M/D/YY');
+    return !!hasTime ? moment(date).format('M/D/YY h:mm A') : moment(date).format('M/D/YY')
 }
 
 export function getVatAmount(price: number, vat_type: VAT_TYPE) {
@@ -251,4 +251,12 @@ export function getVatAmount(price: number, vat_type: VAT_TYPE) {
 
     return 0
 
+}
+
+
+export function getImageAsBase64(filename: string): string {
+    const imagePath = path.resolve('assets', filename);
+    const imageBuffer = readFileSync(imagePath);
+    const base64Image = imageBuffer.toString('base64');
+    return base64Image;
 }

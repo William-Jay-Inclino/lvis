@@ -2,7 +2,7 @@
 
 import { Injectable, NotFoundException } from '@nestjs/common';
 import puppeteer from 'puppeteer';
-import { formatDate, formatToPhpCurrency } from '../__common__/helpers';
+import { formatDate, formatToPhpCurrency, getImageAsBase64 } from '../__common__/helpers';
 import * as moment from 'moment';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { catchError, firstValueFrom } from 'rxjs';
@@ -18,6 +18,8 @@ import { VAT_TYPE } from '../__common__/types';
 export class PoPdfService {
 
     private authUser: AuthUser
+    private API_FILE_ENDPOINT = process.env.API_URL + '/api/v1/file-upload'
+
 
     constructor(
         private readonly prisma: PrismaService,
@@ -31,6 +33,9 @@ export class PoPdfService {
     async generatePdf(po: PO) {
         const browser = await puppeteer.launch();
         const page = await browser.newPage();
+
+        const watermark = getImageAsBase64('lvis-watermark-v2.png')
+        const logo = getImageAsBase64('leyeco-logo.png')
 
         const totalPrice = po.meqs_supplier.meqs_supplier_items.reduce((acc, item) => acc + (item.price * Number(item.canvass_item.quantity)), 0);
 
@@ -70,13 +75,42 @@ export class PoPdfService {
         // Set content of the PDF
         const content = `
 
-        <div style="display: flex; flex-direction: column;">
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+            }
+            .watermark {
+                position: fixed;
+                top: 50%;
+                left: 60%;
+                transform: translate(-50%, -50%);
+                width: 70%;
+                height: 70%;
+                z-index: -1;
+                background-image: url('data:image/jpeg;base64,${watermark}');
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: contain;
+            }
+            .content {
+                display: flex; flex-direction: column;
+                padding-left: 25px; padding-right: 25px; font-size: 10pt; 
+            }
+        </style>
 
-            <div style="padding-left: 25px; padding-right: 25px; font-size: 10pt; flex-grow: 1; min-height: 60vh;">
+        <div class="watermark"></div>
+
+        <div class="content">
+
+            <div style="flex-grow: 1; min-height: 60vh;">
         
                 <div style="text-align: center; margin-top: 35px">
         
-                    <div style="font-size: 11pt; font-weight: bold;">LEYTE V ELECTRIC COOPERATIVE, INC.</div>
+                    <div style="display: flex; align-items: center; justify-content: center;">
+                        <img src="data:image/jpeg;base64,${logo}" alt="Logo" style="height: 50px; width: 50px; margin-right: 10px;">
+                        <h1 style="font-size: 11pt; font-weight: bold; display: inline;">LEYTE V ELECTRIC COOPERATIVE, INC.</h1>
+                    </div>
         
                     <div style="font-size: 9pt">
                         <span>Brgy. San Pablo, Ormoc City, Leyte</span>
@@ -349,26 +383,30 @@ export class PoPdfService {
                 
             </div>
         
-        
-        
-
-            <div style="display: flex; justify-content: space-between; font-size: 9pt">
-                <div>
-                    Note: This is a system generated report printed by ${ this.authUser.user.username }
-                </div>
-                <div>
-                    Date & Time Generated: ${ moment(new Date()).format('MMMM D, YYYY - dddd h:mm:ss a') }
-                </div>
-            </div>
-        
         </div>
           
         `;
 
         await page.setContent(content);
 
-        // Generate PDF
-        const pdfBuffer = await page.pdf();
+        const pdfBuffer = await page.pdf({
+            printBackground: true,
+            format: 'A4',
+            displayHeaderFooter: true,
+            headerTemplate: ``,
+            footerTemplate: `
+            <div style="border-top: solid 1px #bbb; width: 100%; font-size: 9px;
+                padding: 5px 5px 0; color: #bbb; position: relative;">
+                <div style="position: absolute; left: 5px; top: 5px;">
+                    Note: This is a system generated report printed by ${this.authUser.user.username} | 
+                    Date & Time Generated: <span class="date"></span>
+                </div>
+                <div style="position: absolute; right: 5px; top: 5px;"><span class="pageNumber"></span>/<span class="totalPages"></span></div>
+            </div>
+          `,
+            // this is needed to prevent content from being placed over the footer
+            margin: { bottom: '70px' },
+        });
 
         await browser.close();
 

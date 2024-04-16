@@ -2,7 +2,7 @@
 
 import { Injectable, NotFoundException } from '@nestjs/common';
 import puppeteer from 'puppeteer';
-import { formatDate } from '../__common__/helpers';
+import { formatDate, getImageAsBase64 } from '../__common__/helpers';
 import { Canvass } from './entities/canvass.entity';
 import * as moment from 'moment';
 import { AuthUser } from '../__common__/auth-user.entity';
@@ -10,8 +10,6 @@ import { catchError, firstValueFrom } from 'rxjs';
 import { HttpService } from '@nestjs/axios';
 import { Employee } from '../__employee__/entities/employee.entity';
 import { PrismaService } from '../__prisma__/prisma.service';
-import * as path from 'path';
-import { readFileSync } from 'fs';
 
 @Injectable()
 export class CanvassPdfService {
@@ -27,19 +25,12 @@ export class CanvassPdfService {
         this.authUser = authUser
     }
 
-    getImageAsBase64(filename: string): string {
-        const imagePath = path.resolve('assets', filename);
-        const imageBuffer = readFileSync(imagePath);
-        const base64Image = imageBuffer.toString('base64');
-        return base64Image;
-    }
-
     async generatePdf(canvass: Canvass) {
         const browser = await puppeteer.launch();
         const page = await browser.newPage();
 
-        const watermark = this.getImageAsBase64('lvis-watermark-v2.png')
-        const logo = this.getImageAsBase64('leyeco-logo.png')
+        const watermark = getImageAsBase64('lvis-watermark-v2.png')
+        const logo = getImageAsBase64('leyeco-logo.png')
 
         const requisitioner = await this.getEmployee(canvass.requested_by_id, this.authUser)
         const notedBy = await this.getGM(this.authUser)
