@@ -14159,6 +14159,7 @@ const axios_1 = __webpack_require__(/*! @nestjs/axios */ "@nestjs/axios");
 const prisma_service_1 = __webpack_require__(/*! ../__prisma__/prisma.service */ "./apps/warehouse/src/__prisma__/prisma.service.ts");
 const constants_1 = __webpack_require__(/*! ../__common__/constants */ "./apps/warehouse/src/__common__/constants.ts");
 const types_1 = __webpack_require__(/*! ../__common__/types */ "./apps/warehouse/src/__common__/types.ts");
+const config_1 = __webpack_require__(/*! ../__common__/config */ "./apps/warehouse/src/__common__/config.ts");
 let PoPdfService = class PoPdfService {
     constructor(prisma, httpService) {
         this.prisma = prisma;
@@ -14233,7 +14234,7 @@ let PoPdfService = class PoPdfService {
 
         <div class="content">
 
-            <div style="flex-grow: 1; min-height: 60vh;">
+            <div style="flex-grow: 1; min-height: 65vh;">
         
                 <div style="text-align: center; margin-top: 35px">
         
@@ -14274,7 +14275,7 @@ let PoPdfService = class PoPdfService {
                             <div style="display: flex; justify-content: space-between; padding-left: 10px; padding-right: 10px;">
                                 <div> Supplier: </div>
                                 <div>
-                                    Tin #: 209-609-185-00054
+                                    Tin #: ${po.meqs_supplier.supplier.tin_no.trim() !== '' ? po.meqs_supplier.supplier.tin_no : 'N/A'}
                                 </div>
                             </div>
 
@@ -14285,7 +14286,7 @@ let PoPdfService = class PoPdfService {
                                     ${po.meqs_supplier.supplier.name.toUpperCase()}
                                 </div>
                                 <div>
-                                    REAL ST., ORMOC CITY
+                                    ${po.meqs_supplier.supplier.address.toUpperCase()}
                                 </div>
                             </div>
                         </td>
@@ -14392,57 +14393,51 @@ let PoPdfService = class PoPdfService {
                     </tbody>
                 </table>
 
+                <br />
+
+                <table style="font-size: 10pt;">
+                    <tr>
+                        <td> Classification: </td>
+                        <td> <b>${classification.name}</b> </td>
+                    </tr>
+                    <tr>
+                        <td> Fund Source: </td>
+                        <td> <b>${fundSource.name}</b> </td>
+                    </tr>
+                </table>
+
             </div>
 
 
-            <div style="padding-left: 25px; padding-right: 25px; font-size: 10pt; padding-top: 50px; min-height: 32vh;">
+            <div style="padding-left: 25px; padding-right: 25px; font-size: 10pt; padding-top: 70px; min-height: 20vh;">
 
                 <div style="display: flex; justify-content: center;">
 
                     ${approvers.map((item, index) => `
                         
-                        <div style="padding: 10px; margin-right: 30px;">
-                            <table border="0" style="width: 100%; font-size: 11pt;">
+                        <div style="padding: 10px;">
+                            <table border="0" style="width: 220px; font-size: 11pt;">
                                 <tr>
                                     <td style="font-size: 10pt;"> ${item.label}: </td>
-                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td style="font-size: 10pt;"> 
-                                        ${item.date_approval ? (0, helpers_1.formatDate)(item.date_approval) : '&nbsp;'} 
+                                        ${item.date_approval ? (0, helpers_1.formatDate)(item.date_approval, true) : '&nbsp;'} 
                                     </td>
-                                    <td></td>
                                 </tr>
                                 <tr>
-                                    <th></th>
-                                    <th style="text-align: center">
-                                        <u>
-                                        ${(item.approver.firstname + ' ' + item.approver.lastname)}
+                                    <th style="text-align: center; position: relative;">
+                                        <u style="position: relative; z-index: 1; margin-bottom: 10px;">
+                                            ${item.approver.firstname + ' ' + item.approver.lastname}
                                         </u>
+                                        <img style="width: 100px; height: 100px; position: absolute; top: -60px; left: 50%; transform: translateX(-50%); z-index: 2;" src="${this.getUploadsPath(item.approver.signature_src)}" />
                                     </th>
                                 </tr>
                                 <tr>
-                                    <td></td>
                                     <td style="text-align: center">
                                         ${item.approver.position}
                                     </td>
                                 </tr>
-
-                                ${!!item.approver.is_budget_officer ? `
-                                <tr>
-                                    <td colspan="2" style="font-size: 10pt;">
-                                        Classification: ${classification.name}
-                                    </td>
-                                </tr>
-                            ` : ''}
-
-                                ${!!item.approver.is_finance_manager ? `
-                                <tr>
-                                    <td colspan="2" style="font-size: 10pt;">
-                                        Fund Source: ${fundSource.name}
-                                    </td>
-                                </tr>
-                            ` : ''}
                             
                             </table>
                         </div>
@@ -14465,13 +14460,16 @@ let PoPdfService = class PoPdfService {
                             ORDER ISSUED AND AUTHORIZED:
                         </div>
                         <div style="text-align: right; margin-right: 20px;">
-                            ${(0, helpers_1.formatDate)(generalManager.date_approval)}
+                            ${(0, helpers_1.formatDate)(generalManager.date_approval, true)}
                         </div>
                         <br />
-                        <div style="font-size: 11pt;">
-                            By: <b><u>  
-                                    ${(generalManager.approver.firstname + ' ' + generalManager.approver.lastname)} 
-                                </u></b>
+                        <div style="text-align: center; position: relative; font-size: 11pt">
+                            <u style="position: relative; z-index: 1; margin-bottom: 10px;"> 
+                                <b>
+                                ${generalManager.approver.firstname + ' ' + generalManager.approver.lastname}
+                                </b>
+                            </u>
+                            <img style="width: 100px; height: 100px; position: absolute; top: -50px; left: 50%; transform: translateX(-50%); z-index: 2;" src="${this.getUploadsPath(generalManager.approver.signature_src)}" />
                         </div>
                         <div>
                                     ${generalManager.approver.position}
@@ -14532,6 +14530,7 @@ let PoPdfService = class PoPdfService {
                     position
                     is_budget_officer
                     is_finance_manager
+                    signature_src
                 }
             }
         `;
@@ -14621,6 +14620,14 @@ let PoPdfService = class PoPdfService {
             console.error('Error getting fund source:', error.message);
             return undefined;
         }
+    }
+    getUploadsPath(src) {
+        if (!src || src.trim() === '')
+            return;
+        const path = src.replace(config_1.UPLOADS_PATH, '');
+        console.log('PATH', path);
+        const uploadsPath = this.API_FILE_ENDPOINT + path;
+        return uploadsPath;
     }
     async findPo(id) {
         const item = await this.prisma.pO.findUnique({
