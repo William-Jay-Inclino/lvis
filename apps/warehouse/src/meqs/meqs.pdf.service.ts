@@ -100,7 +100,7 @@ export class MeqsPdfService {
 
         <div class="content">
 
-            <div style="flex-grow: 1; min-height: 75vh;">
+            <div style="flex-grow: 1; min-height: 72vh;">
         
                 <div style="text-align: center; margin-top: 35px">
                 
@@ -235,7 +235,7 @@ export class MeqsPdfService {
         
             </div>
         
-            <div style="padding-left: 25px; padding-right: 25px; font-size: 10pt; padding-top: 50px; min-height: 15vh;">
+            <div style="padding-left: 25px; padding-right: 25px; font-size: 10pt; padding-top: 50px; min-height: 18vh;">
                 
                 <div style="text-align: center; margin-bottom: 10px;"> <b>COOP PROCUREMENT COMMITTEE: </b></div>
 
@@ -277,7 +277,10 @@ export class MeqsPdfService {
                     `).join('')}
 
                 </div>
-                    
+                
+                <div style="font-size: 8pt; margin-top: 10px;"> 
+                    ${ refType } No.: ${ refNumber } 
+                </div>
             
             </div>
         

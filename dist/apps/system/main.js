@@ -2005,21 +2005,21 @@ exports.jo_default_approvers = [
     {
         id: faker_1.faker.string.uuid(),
         approver_id: exports.employees[1].id,
-        label: 'Budget Officer',
+        label: 'Budget By:',
         order: 2,
         created_by: 'admin'
     },
     {
         id: faker_1.faker.string.uuid(),
         approver_id: exports.employees[2].id,
-        label: 'Audit',
+        label: 'Pre-Audit By:',
         order: 3,
         created_by: 'admin'
     },
     {
         id: faker_1.faker.string.uuid(),
         approver_id: exports.employees[3].id,
-        label: 'GM / OIC',
+        label: 'Approved By:',
         order: 4,
         created_by: 'admin'
     },
@@ -2028,21 +2028,21 @@ exports.rv_default_approvers = [
     {
         id: faker_1.faker.string.uuid(),
         approver_id: exports.employees[1].id,
-        label: 'Budget Officer',
+        label: 'Budget By:',
         order: 2,
         created_by: 'admin'
     },
     {
         id: faker_1.faker.string.uuid(),
         approver_id: exports.employees[2].id,
-        label: 'Audit',
+        label: 'Pre-Audit',
         order: 3,
         created_by: 'admin'
     },
     {
         id: faker_1.faker.string.uuid(),
         approver_id: exports.employees[3].id,
-        label: 'GM / OIC',
+        label: 'Approved By:',
         order: 4,
         created_by: 'admin'
     },
@@ -2051,21 +2051,21 @@ exports.spr_default_approvers = [
     {
         id: faker_1.faker.string.uuid(),
         approver_id: exports.employees[1].id,
-        label: 'Budget Officer',
+        label: 'Budget By:',
         order: 2,
         created_by: 'admin'
     },
     {
         id: faker_1.faker.string.uuid(),
         approver_id: exports.employees[2].id,
-        label: 'Audit',
+        label: 'Pre-Audit',
         order: 3,
         created_by: 'admin'
     },
     {
         id: faker_1.faker.string.uuid(),
         approver_id: exports.employees[3].id,
-        label: 'GM / OIC',
+        label: 'Approved By:',
         order: 4,
         created_by: 'admin'
     },
@@ -2111,28 +2111,28 @@ exports.po_default_approvers = [
     {
         id: faker_1.faker.string.uuid(),
         approver_id: exports.employees[1].id,
-        label: 'Budget By',
+        label: 'Budget By:',
         order: 1,
         created_by: 'admin'
     },
     {
         id: faker_1.faker.string.uuid(),
         approver_id: exports.employees[8].id,
-        label: 'Finance By',
+        label: 'Finance By:',
         order: 2,
         created_by: 'admin'
     },
     {
         id: faker_1.faker.string.uuid(),
         approver_id: exports.employees[2].id,
-        label: 'Audited By',
+        label: 'Audited By:',
         order: 3,
         created_by: 'admin'
     },
     {
         id: faker_1.faker.string.uuid(),
         approver_id: exports.employees[3].id,
-        label: 'GM / OIC',
+        label: 'Approved By:',
         order: 4,
         created_by: 'admin'
     },
@@ -2141,14 +2141,14 @@ exports.rr_default_approvers = [
     {
         id: faker_1.faker.string.uuid(),
         approver_id: exports.employees[2].id,
-        label: 'Audited By',
+        label: 'Audited By:',
         order: 3,
         created_by: 'admin'
     },
     {
         id: faker_1.faker.string.uuid(),
         approver_id: exports.employees[3].id,
-        label: 'Approved By',
+        label: 'Approved By:',
         order: 4,
         created_by: 'admin'
     },

@@ -7724,10 +7724,6 @@ let JoPdfService = class JoPdfService {
                         <td> Division: </td>
                         <td> <b>${department.name} </b> </td>
                     </tr>
-                    <tr>
-                        <td> Classification: </td>
-                        <td> <b>${classification.name}</b> </td>
-                    </tr>
                 </table>
         
             </div>
@@ -7737,12 +7733,15 @@ let JoPdfService = class JoPdfService {
                 <div style="display: flex; flex-wrap: wrap;">
 
                     <div style="padding: 10px; width: 40%">
-                        <table border="0" style="width: 100%">
+                        <table border="0" style="width: 100%; font-size: 10pt;">
                             <tr>
-                                <td style="font-size: 10pt;"> ${(0, helpers_1.formatDate)(jo.date_requested)} </td>
+                                <td> Requested By: </td>
                             </tr>
                             <tr>
-                                <th style="text-align: center; position: relative;">
+                                <td> ${(0, helpers_1.formatDate)(jo.date_requested)} </td>
+                            </tr>
+                            <tr>
+                                <th style="text-align: center; position: relative; font-size: 12pt;">
                                     <u style="position: relative; z-index: 1; margin-bottom: 10px;">${requisitioner.firstname + ' ' + requisitioner.lastname}</u>
 
                                     <img style="width: 100px; height: 100px; position: absolute; top: -50px; left: 50%; transform: translateX(-50%); z-index: 2;" src="${this.getUploadsPath(requisitioner.signature_src)}" />
@@ -7753,21 +7752,21 @@ let JoPdfService = class JoPdfService {
                                 ${requisitioner.position || ''} 
                                 </td>
                             </tr>
-                            <tr>
-                                <td style="font-size: 10pt; text-align: center;"> Requisitioner </td>
-                            </tr>
                         </table>
                     </div>
 
                     ${approvers.map((item, index) => `
                     
                         <div style="padding: 10px; width: 40%">
-                            <table border="0" style="width: 100%">
+                            <table border="0" style="width: 100%; font-size: 10pt;">
                                 <tr>
-                                    <td style="font-size: 10pt;"> ${(0, helpers_1.formatDate)(item.date_approval, true)} </td>
+                                    <td> ${item.label} </td>
                                 </tr>
                                 <tr>
-                                    <th style="text-align: center; position: relative;">
+                                    <td> ${(0, helpers_1.formatDate)(item.date_approval, true)} </td>
+                                </tr>
+                                <tr>
+                                    <th style="text-align: center; position: relative; font-size: 12pt;">
                                         <u style="position: relative; z-index: 1; margin-bottom: 10px;">
                                             ${item.approver.firstname + ' ' + item.approver.lastname}
                                         </u>
@@ -7776,9 +7775,10 @@ let JoPdfService = class JoPdfService {
                                 </tr>
                                 <tr>
                                     <td style="text-align: center">
-                                        ${item.label}
+                                        ${item.approver.position}
                                     </td>
                                 </tr>
+                                ${item.approver.is_budget_officer ? `<tr> <td> Classification: ${classification.name} </td> </tr>` : '<tr> <td></td> </tr>'}
                             </table>
                         </div>
 
@@ -7825,6 +7825,7 @@ let JoPdfService = class JoPdfService {
                     lastname
                     position
                     signature_src
+                    is_budget_officer
                 }
             }
         `;
@@ -11880,7 +11881,7 @@ let MeqsPdfService = class MeqsPdfService {
 
         <div class="content">
 
-            <div style="flex-grow: 1; min-height: 75vh;">
+            <div style="flex-grow: 1; min-height: 72vh;">
         
                 <div style="text-align: center; margin-top: 35px">
                 
@@ -12009,7 +12010,7 @@ let MeqsPdfService = class MeqsPdfService {
         
             </div>
         
-            <div style="padding-left: 25px; padding-right: 25px; font-size: 10pt; padding-top: 50px; min-height: 15vh;">
+            <div style="padding-left: 25px; padding-right: 25px; font-size: 10pt; padding-top: 50px; min-height: 18vh;">
                 
                 <div style="text-align: center; margin-bottom: 10px;"> <b>COOP PROCUREMENT COMMITTEE: </b></div>
 
@@ -12045,7 +12046,10 @@ let MeqsPdfService = class MeqsPdfService {
                     `).join('')}
 
                 </div>
-                    
+                
+                <div style="font-size: 8pt; margin-top: 10px;"> 
+                    ${refType} No.: ${refNumber} 
+                </div>
             
             </div>
         
@@ -20035,13 +20039,6 @@ let RvPdfService = class RvPdfService {
                 </table>
 
                 <br />
-
-                <table style="font-size: 10pt;">
-                    <tr>
-                        <td> Classification: </td>
-                        <td> <b>${classification.name}</b> </td>
-                    </tr>
-                </table>
         
             </div>
         
@@ -20050,12 +20047,15 @@ let RvPdfService = class RvPdfService {
                 <div style="display: flex; flex-wrap: wrap;">
 
                     <div style="padding: 10px; width: 40%">
-                        <table border="0" style="width: 100%">
+                        <table border="0" style="width: 100%; font-size: 10pt;">
                             <tr>
-                                <td style="font-size: 10pt;"> ${(0, helpers_1.formatDate)(rv.date_requested)} </td>
+                                <td> Requested By: </td>
                             </tr>
                             <tr>
-                                <th style="text-align: center; position: relative;">
+                                <td> ${(0, helpers_1.formatDate)(rv.date_requested)} </td>
+                            </tr>
+                            <tr>
+                                <th style="text-align: center; position: relative; font-size: 12pt;">
                                     <u style="position: relative; z-index: 1; margin-bottom: 10px;">${requisitioner.firstname + ' ' + requisitioner.lastname}</u>
                                     <img style="width: 100px; height: 100px; position: absolute; top: -50px; left: 50%; transform: translateX(-50%); z-index: 2;" src="${this.getUploadsPath(requisitioner.signature_src)}" />
                                 </th>
@@ -20065,21 +20065,21 @@ let RvPdfService = class RvPdfService {
                                 ${requisitioner.position || ''} 
                                 </td>
                             </tr>
-                            <tr>
-                                <td style="font-size: 10pt; text-align: center;"> Requisitioner </td>
-                            </tr>
                         </table>
                     </div>
 
                     ${approvers.map((item, index) => `
                     
                         <div style="padding: 10px; width: 40%">
-                            <table border="0" style="width: 100%">
+                            <table border="0" style="width: 100%; font-size: 10pt;">
                                 <tr>
-                                    <td style="font-size: 10pt;"> ${(0, helpers_1.formatDate)(item.date_approval, true)} </td>
+                                    <td> ${item.label} </td>
                                 </tr>
                                 <tr>
-                                    <th style="text-align: center; position: relative;">
+                                    <td> ${(0, helpers_1.formatDate)(item.date_approval, true)} </td>
+                                </tr>
+                                <tr>
+                                    <th style="text-align: center; position: relative; font-size: 12pt;">
                                         <u style="position: relative; z-index: 1; margin-bottom: 10px;">
                                             ${item.approver.firstname + ' ' + item.approver.lastname}
                                         </u>
@@ -20088,9 +20088,10 @@ let RvPdfService = class RvPdfService {
                                 </tr>
                                 <tr>
                                     <td style="text-align: center">
-                                        ${item.label}
+                                        ${item.approver.position}
                                     </td>
                                 </tr>
+                                ${item.approver.is_budget_officer ? `<tr> <td> Classification: ${classification.name} </td> </tr>` : '<tr> <td></td> </tr>'}
                             </table>
                         </div>
 
@@ -20138,6 +20139,7 @@ let RvPdfService = class RvPdfService {
                     lastname
                     position
                     signature_src
+                    is_budget_officer
                 }
             }
         `;
@@ -22411,10 +22413,6 @@ let SprPdfService = class SprPdfService {
                         <td> Vehicle: </td>
                         <td> <b>${spr.vehicle.name}</b> </td>
                     </tr>
-                    <tr>
-                        <td> Classification: </td>
-                        <td> <b>${classification.name}</b> </td>
-                    </tr>
                 </table>
         
             </div>
@@ -22424,12 +22422,15 @@ let SprPdfService = class SprPdfService {
                 <div style="display: flex; flex-wrap: wrap;">
 
                     <div style="padding: 10px; width: 40%">
-                        <table border="0" style="width: 100%">
+                        <table border="0" style="width: 100%; font-size: 10pt;">
                             <tr>
-                                <td style="font-size: 10pt;"> ${(0, helpers_1.formatDate)(spr.date_requested)} </td>
+                                <td> Requested By: </td>
                             </tr>
                             <tr>
-                                <th style="text-align: center; position: relative;">
+                                <td> ${(0, helpers_1.formatDate)(spr.date_requested)} </td>
+                            </tr>
+                            <tr>
+                                <th style="text-align: center; position: relative; font-size: 12pt;">
                                     <u style="position: relative; z-index: 1; margin-bottom: 10px;">${requisitioner.firstname + ' ' + requisitioner.lastname}</u>
                                     <img style="width: 100px; height: 100px; position: absolute; top: -50px; left: 50%; transform: translateX(-50%); z-index: 2;" src="${this.getUploadsPath(requisitioner.signature_src)}" />
                                 </th>
@@ -22439,21 +22440,21 @@ let SprPdfService = class SprPdfService {
                                 ${requisitioner.position || ''} 
                                 </td>
                             </tr>
-                            <tr>
-                                <td style="font-size: 10pt; text-align: center;"> Requisitioner </td>
-                            </tr>
                         </table>
                     </div>
 
                     ${approvers.map((item, index) => `
                     
                         <div style="padding: 10px; width: 40%">
-                            <table border="0" style="width: 100%">
+                            <table border="0" style="width: 100%; font-size: 10pt;">
                                 <tr>
-                                    <td style="font-size: 10pt;"> ${(0, helpers_1.formatDate)(item.date_approval, true)} </td>
+                                    <td> ${item.label} </td>
                                 </tr>
                                 <tr>
-                                    <th style="text-align: center; position: relative;">
+                                    <td> ${(0, helpers_1.formatDate)(item.date_approval, true)} </td>
+                                </tr>
+                                <tr>
+                                    <th style="text-align: center; position: relative; font-size: 12pt;">
                                         <u style="position: relative; z-index: 1; margin-bottom: 10px;">
                                             ${item.approver.firstname + ' ' + item.approver.lastname}
                                         </u>
@@ -22462,9 +22463,10 @@ let SprPdfService = class SprPdfService {
                                 </tr>
                                 <tr>
                                     <td style="text-align: center">
-                                        ${item.label}
+                                        ${item.approver.position}
                                     </td>
                                 </tr>
+                                ${item.approver.is_budget_officer ? `<tr> <td> Classification: ${classification.name} </td> </tr>` : '<tr> <td></td> </tr>'}
                             </table>
                         </div>
 
@@ -22508,6 +22510,7 @@ let SprPdfService = class SprPdfService {
                     lastname
                     position
                     signature_src
+                    is_budget_officer
                 }
             }
         `;

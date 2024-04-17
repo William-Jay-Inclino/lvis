@@ -169,10 +169,6 @@ export class SprPdfService {
                         <td> Vehicle: </td>
                         <td> <b>${ spr.vehicle.name }</b> </td>
                     </tr>
-                    <tr>
-                        <td> Classification: </td>
-                        <td> <b>${ classification.name }</b> </td>
-                    </tr>
                 </table>
         
             </div>
@@ -182,12 +178,15 @@ export class SprPdfService {
                 <div style="display: flex; flex-wrap: wrap;">
 
                     <div style="padding: 10px; width: 40%">
-                        <table border="0" style="width: 100%">
+                        <table border="0" style="width: 100%; font-size: 10pt;">
                             <tr>
-                                <td style="font-size: 10pt;"> ${formatDate(spr.date_requested)} </td>
+                                <td> Requested By: </td>
                             </tr>
                             <tr>
-                                <th style="text-align: center; position: relative;">
+                                <td> ${formatDate(spr.date_requested)} </td>
+                            </tr>
+                            <tr>
+                                <th style="text-align: center; position: relative; font-size: 12pt;">
                                     <u style="position: relative; z-index: 1; margin-bottom: 10px;">${ requisitioner.firstname + ' ' + requisitioner.lastname }</u>
                                     <img style="width: 100px; height: 100px; position: absolute; top: -50px; left: 50%; transform: translateX(-50%); z-index: 2;" src="${ this.getUploadsPath(requisitioner.signature_src) }" />
                                 </th>
@@ -200,21 +199,21 @@ export class SprPdfService {
                                 } 
                                 </td>
                             </tr>
-                            <tr>
-                                <td style="font-size: 10pt; text-align: center;"> Requisitioner </td>
-                            </tr>
                         </table>
                     </div>
 
                     ${approvers.map((item, index) => `
                     
                         <div style="padding: 10px; width: 40%">
-                            <table border="0" style="width: 100%">
+                            <table border="0" style="width: 100%; font-size: 10pt;">
                                 <tr>
-                                    <td style="font-size: 10pt;"> ${formatDate(item.date_approval, true)} </td>
+                                    <td> ${ item.label } </td>
                                 </tr>
                                 <tr>
-                                    <th style="text-align: center; position: relative;">
+                                    <td> ${formatDate(item.date_approval, true)} </td>
+                                </tr>
+                                <tr>
+                                    <th style="text-align: center; position: relative; font-size: 12pt;">
                                         <u style="position: relative; z-index: 1; margin-bottom: 10px;">
                                             ${
                                                 // @ts-ignore
@@ -229,9 +228,16 @@ export class SprPdfService {
                                 </tr>
                                 <tr>
                                     <td style="text-align: center">
-                                        ${ item.label }
+                                        ${
+                                            // @ts-ignore
+                                            item.approver.position
+                                        }
                                     </td>
                                 </tr>
+                                ${
+                                    // @ts-ignore 
+                                    item.approver.is_budget_officer ? `<tr> <td> Classification: ${ classification.name } </td> </tr>` : '<tr> <td></td> </tr>'
+                                }
                             </table>
                         </div>
 
@@ -283,6 +289,7 @@ export class SprPdfService {
                     lastname
                     position
                     signature_src
+                    is_budget_officer
                 }
             }
         `;
