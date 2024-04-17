@@ -1352,7 +1352,7 @@ exports.PrismaService = PrismaService = __decorate([
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.rr_default_approvers = exports.po_default_approvers = exports.meqs_default_approvers = exports.spr_default_approvers = exports.rv_default_approvers = exports.jo_default_approvers = exports.userEmployees = exports.users = exports.employees = exports.subModules = exports.modules = exports.features = exports.services = exports.classifications = exports.departments = exports.empId1 = exports.accounts = void 0;
+exports.rr_default_approvers = exports.po_default_approvers = exports.meqs_default_approvers = exports.spr_default_approvers = exports.rv_default_approvers = exports.jo_default_approvers = exports.userEmployees = exports.users = exports.employees = exports.classifications = exports.departments = exports.empId1 = exports.accounts = void 0;
 const faker_1 = __webpack_require__(/*! @faker-js/faker */ "@faker-js/faker");
 const types_1 = __webpack_require__(/*! ../__common__/types */ "./apps/system/src/__common__/types.ts");
 const client_1 = __webpack_require__(/*! apps/system/prisma/generated/client */ "./apps/system/prisma/generated/client/index.js");
@@ -1420,223 +1420,6 @@ exports.classifications = [
         created_by: 'admin'
     }
 ];
-exports.services = [
-    {
-        id: faker_1.faker.string.uuid(),
-        name: 'System',
-        created_by: 'admin'
-    },
-    {
-        id: faker_1.faker.string.uuid(),
-        name: 'Warehouse',
-        created_by: 'admin'
-    },
-    {
-        id: faker_1.faker.string.uuid(),
-        name: 'Powerserve',
-        created_by: 'admin'
-    },
-    {
-        id: faker_1.faker.string.uuid(),
-        name: 'PMS & Housewiring',
-        created_by: 'admin'
-    },
-    {
-        id: faker_1.faker.string.uuid(),
-        name: 'Powerbill',
-        created_by: 'admin'
-    },
-    {
-        id: faker_1.faker.string.uuid(),
-        name: 'Payment',
-        created_by: 'admin'
-    },
-    {
-        id: faker_1.faker.string.uuid(),
-        name: 'Accounting',
-        created_by: 'admin'
-    },
-];
-exports.features = [
-    {
-        id: faker_1.faker.string.uuid(),
-        name: 'Data Management',
-        service_id: exports.services[1].id,
-        created_by: 'admin'
-    },
-    {
-        id: faker_1.faker.string.uuid(),
-        name: 'Purchasing',
-        service_id: exports.services[1].id,
-        created_by: 'admin'
-    },
-    {
-        id: faker_1.faker.string.uuid(),
-        name: 'Warehousing',
-        service_id: exports.services[1].id,
-        created_by: 'admin'
-    },
-    {
-        id: faker_1.faker.string.uuid(),
-        name: 'Motorpool',
-        service_id: exports.services[1].id,
-        created_by: 'admin'
-    },
-    {
-        id: faker_1.faker.string.uuid(),
-        name: 'Project',
-        service_id: exports.services[1].id,
-        created_by: 'admin'
-    },
-    {
-        id: faker_1.faker.string.uuid(),
-        name: 'Reports',
-        service_id: exports.services[1].id,
-        created_by: 'admin'
-    },
-    {
-        id: faker_1.faker.string.uuid(),
-        name: 'Security',
-        service_id: exports.services[0].id,
-        created_by: 'admin'
-    },
-    {
-        id: faker_1.faker.string.uuid(),
-        name: 'Data Management',
-        service_id: exports.services[0].id,
-        created_by: 'admin'
-    },
-    {
-        id: faker_1.faker.string.uuid(),
-        name: 'Settings',
-        service_id: exports.services[0].id,
-        created_by: 'admin'
-    }
-];
-exports.modules = [
-    {
-        id: faker_1.faker.string.uuid(),
-        name: 'Canvass',
-        feature_id: exports.features[1].id,
-        created_by: 'admin'
-    },
-    {
-        id: faker_1.faker.string.uuid(),
-        name: 'JO',
-        feature_id: exports.features[1].id,
-        created_by: 'admin'
-    },
-    {
-        id: faker_1.faker.string.uuid(),
-        name: 'SPR',
-        feature_id: exports.features[1].id,
-        created_by: 'admin'
-    },
-    {
-        id: faker_1.faker.string.uuid(),
-        name: 'RV',
-        feature_id: exports.features[1].id,
-        created_by: 'admin'
-    },
-    {
-        id: faker_1.faker.string.uuid(),
-        name: 'MEQS',
-        feature_id: exports.features[1].id,
-        created_by: 'admin'
-    },
-    {
-        id: faker_1.faker.string.uuid(),
-        name: 'PO',
-        feature_id: exports.features[1].id,
-        created_by: 'admin'
-    },
-    {
-        id: faker_1.faker.string.uuid(),
-        name: 'RR',
-        feature_id: exports.features[1].id,
-        created_by: 'admin'
-    },
-    {
-        id: faker_1.faker.string.uuid(),
-        name: 'Item Brand',
-        feature_id: exports.features[0].id,
-        created_by: 'admin'
-    },
-    {
-        id: faker_1.faker.string.uuid(),
-        name: 'Supplier',
-        feature_id: exports.features[0].id,
-        created_by: 'admin'
-    },
-    {
-        id: faker_1.faker.string.uuid(),
-        name: 'Vehicle',
-        feature_id: exports.features[0].id,
-        created_by: 'admin'
-    },
-    {
-        id: faker_1.faker.string.uuid(),
-        name: 'Unit',
-        feature_id: exports.features[0].id,
-        created_by: 'admin'
-    },
-    {
-        id: faker_1.faker.string.uuid(),
-        name: 'UAC',
-        feature_id: exports.features[6].id,
-        created_by: 'admin'
-    },
-    {
-        id: faker_1.faker.string.uuid(),
-        name: 'Activity log',
-        feature_id: exports.features[6].id,
-        created_by: 'admin'
-    },
-    {
-        id: faker_1.faker.string.uuid(),
-        name: 'Employee',
-        feature_id: exports.features[7].id,
-        created_by: 'admin'
-    },
-    {
-        id: faker_1.faker.string.uuid(),
-        name: 'Department',
-        feature_id: exports.features[7].id,
-        created_by: 'admin'
-    },
-    {
-        id: faker_1.faker.string.uuid(),
-        name: 'Division',
-        feature_id: exports.features[7].id,
-        created_by: 'admin'
-    },
-    {
-        id: faker_1.faker.string.uuid(),
-        name: 'Classification',
-        feature_id: exports.features[7].id,
-        created_by: 'admin'
-    },
-    {
-        id: faker_1.faker.string.uuid(),
-        name: 'Purchasing',
-        feature_id: exports.features[8].id,
-        created_by: 'admin'
-    }
-];
-const subModules = [];
-exports.subModules = subModules;
-const crud = ['create', 'read', 'update', 'delete'];
-for (let module of exports.modules) {
-    for (let i of crud) {
-        const x = {
-            id: faker_1.faker.string.uuid(),
-            name: i,
-            module_id: module.id,
-            created_by: 'admin'
-        };
-        subModules.push(x);
-    }
-}
 exports.employees = [
     {
         id: faker_1.faker.string.uuid(),
@@ -1650,14 +1433,16 @@ exports.employees = [
         firstname: 'Suan',
         middlename: null,
         lastname: 'Ricaflor',
-        created_by: 'admin'
+        created_by: 'admin',
+        position: 'Budget Officer'
     },
     {
         id: faker_1.faker.string.uuid(),
         firstname: 'Marlon',
         middlename: null,
         lastname: 'Sanico',
-        created_by: 'admin'
+        created_by: 'admin',
+        position: 'Financial Auditor'
     },
     {
         id: faker_1.faker.string.uuid(),
@@ -1700,35 +1485,40 @@ exports.employees = [
         firstname: 'Frances Paula',
         middlename: null,
         lastname: 'Lumacang',
-        created_by: 'admin'
+        created_by: 'admin',
+        position: 'Finance Manager'
     },
     {
         id: faker_1.faker.string.uuid(),
         firstname: 'William Jay',
         middlename: 'Intales',
         lastname: 'Inclino',
-        created_by: 'admin'
+        created_by: 'admin',
+        position: 'Senior Software Developer'
     },
     {
         id: faker_1.faker.string.uuid(),
         firstname: 'Joshua',
         middlename: 'X',
         lastname: 'Tayag',
-        created_by: 'admin'
+        created_by: 'admin',
+        position: 'Programmer'
     },
     {
         id: faker_1.faker.string.uuid(),
         firstname: 'Jessa',
         middlename: 'X',
         lastname: 'Pelones',
-        created_by: 'admin'
+        created_by: 'admin',
+        position: 'Junior Computer Technician'
     },
     {
         id: faker_1.faker.string.uuid(),
         firstname: 'Joseph Ken',
         middlename: 'X',
         lastname: 'Estrera',
-        created_by: 'admin'
+        created_by: 'admin',
+        position: 'HR Head'
     },
     {
         id: faker_1.faker.string.uuid(),
@@ -1742,7 +1532,8 @@ exports.employees = [
         firstname: 'Hannah Grace',
         middlename: 'Bioco',
         lastname: 'Tudio',
-        created_by: 'admin'
+        created_by: 'admin',
+        position: 'Junior Auditor'
     },
     {
         id: faker_1.faker.string.uuid(),
