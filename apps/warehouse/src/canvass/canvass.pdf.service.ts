@@ -123,25 +123,31 @@ export class CanvassPdfService {
 
                 <br />
         
-                <table style="width: 100%; border-collapse: collapse;">
-                    <thead style="font-size: 10pt;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 10pt;">
+                    <thead>
                         <th style="border: 1px solid black;"> NO. </th>
                         <th style="border: 1px solid black;"> ITEM DESCRIPTION AND SPECIFICATIONS </th>
                         <th style="border: 1px solid black;"> UNIT </th>
                         <th style="border: 1px solid black;"> QTY. </th>
                         <th style="border: 1px solid black;"> UNIT COST </th>
                     </thead>
-                    <tbody style="font-size: 10pt; border: 1px solid black;">
+                    <tbody style="border: 1px solid black;">
                         ${canvass.canvass_items.map((item, index) => `
-                        <tr style="border: 1px solid black;">
+                        <tr style="font-size: 10pt;" style="border: 1px solid black;">
                             <td align="center">${index + 1}</td>
                             <td>${item.description}</td>
                             <td align="center">${item.unit ? item.unit.name : 'N/A'}</td>
                             <td align="center">${item.quantity}</td>
                         </tr>
                     `).join('')}
-                    
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="5" style="text-align: center; padding: 10px;">
+                                X------------------------NOTHING FOLLOWS------------------------X
+                            </td>
+                        </tr>
+                    </tfoot>
                 </table>
         
             </div>

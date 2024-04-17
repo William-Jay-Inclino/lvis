@@ -41,26 +41,29 @@ export class RrPdfService {
         const totalVat = rr.rr_items.reduce((acc, item) => acc + (getVatAmount(item.meqs_supplier_item.price, item.meqs_supplier_item.vat_type)), 0);
         const { totalVatInc, totalVatExc } = this.getTotalVat(rr.rr_items)
 
-        let requested_by_id, purpose
+        let requested_by_id, purpose, classification_id
 
         if(rr.po.meqs_supplier.meqs.rv) {
             requested_by_id = rr.po.meqs_supplier.meqs.rv.canvass.requested_by_id
             purpose = rr.po.meqs_supplier.meqs.rv.canvass.purpose
+            classification_id = rr.po.meqs_supplier.meqs.rv.classification_id
         } else if(rr.po.meqs_supplier.meqs.spr) {
             requested_by_id = rr.po.meqs_supplier.meqs.spr.canvass.requested_by_id
             purpose = rr.po.meqs_supplier.meqs.spr.canvass.purpose
+            classification_id = rr.po.meqs_supplier.meqs.spr.classification_id
         } else {
+            classification_id = rr.po.meqs_supplier.meqs.jo.classification_id
             requested_by_id = rr.po.meqs_supplier.meqs.jo.canvass.requested_by_id
             purpose = rr.po.meqs_supplier.meqs.jo.canvass.purpose
         }
 
         const requisitioner = await this.getEmployee(requested_by_id, this.authUser)
 
-        // const poApprovers = await Promise.all(rr.po.po_approvers.map(async (i) => {
-        //     // @ts-ignore
-        //     i.approver = await this.getEmployee(i.approver_id, this.authUser);
-        //     return i;
-        // }));
+        const poApprovers = await Promise.all(rr.po.po_approvers.map(async (i) => {
+            // @ts-ignore
+            i.approver = await this.getEmployee(i.approver_id, this.authUser);
+            return i;
+        }));
 
         const rrApprovers = await Promise.all(rr.rr_approvers.map(async (i) => {
             // @ts-ignore
@@ -68,21 +71,27 @@ export class RrPdfService {
             return i;
         }));
 
-        let refType, refNumber, refDate
+        let refType, refNumber, refDate, rc_number
 
         if(rr.po.meqs_supplier.meqs.rv) {
             refType = 'RV'
             refNumber = rr.po.meqs_supplier.meqs.rv.rv_number
             refDate = rr.po.meqs_supplier.meqs.rv.date_requested
+            rc_number = rr.po.meqs_supplier.meqs.rv.canvass.rc_number
         } else if(rr.po.meqs_supplier.meqs.spr) {
             refType = 'SPR'
             refNumber = rr.po.meqs_supplier.meqs.spr.spr_number
             refDate = rr.po.meqs_supplier.meqs.spr.date_requested
+            rc_number = rr.po.meqs_supplier.meqs.spr.canvass.rc_number
         } else {
             refType = 'JO'
             refNumber = rr.po.meqs_supplier.meqs.jo.jo_number
             refDate = rr.po.meqs_supplier.meqs.jo.date_requested
+            rc_number = rr.po.meqs_supplier.meqs.jo.canvass.rc_number
         }
+
+        const classification = await this.getClassification(classification_id, this.authUser)
+        const fundSource = await this.getFundSource(rr.po.fund_source_id, this.authUser)
 
         // Set content of the PDF
         const content = `
@@ -117,7 +126,7 @@ export class RrPdfService {
 
         <div class="content">
 
-            <div style="flex-grow: 1; min-height: 70vh;">
+            <div style="flex-grow: 1; min-height: 58vh;">
         
                 <div style="text-align: center; margin-top: 35px">
         
@@ -185,7 +194,7 @@ export class RrPdfService {
                     </tr>
                 </table>
 
-                <table style="width: 100%; border-collapse: collapse; margin-top: 10px;" border="1">
+                <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
                     <thead style="font-size: 10pt;">
                         <tr>
                             <th style="border: 1px solid black;"> Code </th>
@@ -196,7 +205,7 @@ export class RrPdfService {
                             <th colspan="4" style="border: 1px solid black; text-align: center;"> Gross Amount </th>
                             <th style="border: 1px solid black;"> Total Cost </th>
                         </tr>
-                        <tr>
+                        <tr style="border: 1px solid black;">
                             <th></th>
                             <th></th>
                             <th></th>
@@ -213,7 +222,7 @@ export class RrPdfService {
                     <tbody style="font-size: 9pt;">
 
                         ${rr.rr_items.map((item, index) => `
-                        <tr>
+                        <tr style="border: 1px solid black;">
                             <td align="center">${ item.meqs_supplier_item.canvass_item.item ? item.meqs_supplier_item.canvass_item.item.code : 'N/A' }</td>
                             <td>${item.meqs_supplier_item.canvass_item.description}</td>
                             <td align="center">${item.meqs_supplier_item.canvass_item.unit ? item.meqs_supplier_item.canvass_item.unit.name : 'N/A'}</td>
@@ -274,8 +283,69 @@ export class RrPdfService {
         
             </div>
         
-            <div style="padding-left: 25px; padding-right: 25px; font-size: 10pt; padding-top: 70px; min-height: 15vh;">
+            <div style="padding-left: 25px; padding-right: 25px; font-size: 10pt; padding-top: 50px; min-height: 35vh;">
                 
+                <div style="display: flex; justify-content: center;">
+                        
+                        ${poApprovers.map((item, index) => `
+
+                            ${  
+                                // @ts-ignore 
+                                item.approver.is_budget_officer || item.approver.is_finance_manager ? `
+                                    <div style="padding: 10px;">
+                                        <table border="0" style="font-size: 11pt; width: 400px;">
+                                            <tr>
+                                                <td style="font-size: 10pt; text-align: left; white-space: nowrap;"> ${ item.label }: </td>
+                                                ${ 
+                                                    // @ts-ignore 
+                                                    item.approver.is_budget_officer ? `<td> Classification: ${ classification.name } </td>` : '<td></td>'
+                                                }
+                                                ${ 
+                                                    // @ts-ignore 
+                                                    item.approver.is_finance_manager ? `<td> Fund Available: ${ fundSource.name } </td>` : '<td></td>'
+                                                }
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="font-size: 10pt; text-align: left; white-space: nowrap;"> 
+                                                    ${ item.date_approval ? formatDate(item.date_approval, true) : '&nbsp;' } 
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th style="text-align: center; position: relative; white-space: nowrap;">
+                                                    <u style="position: relative; z-index: 1; margin-bottom: 10px;">
+                                                        ${
+                                                            // @ts-ignore
+                                                            item.approver.firstname + ' ' + item.approver.lastname
+                                                        }
+                                                    </u>
+                                                    <img style="width: 100px; height: 100px; position: absolute; top: -60px; left: 50%; transform: translateX(-50%); z-index: 2;" src="${ 
+                                                        // @ts-ignore
+                                                        this.getUploadsPath(item.approver.signature_src)
+                                                    }" />
+                                                </th>
+                                                <th></th>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center;  white-space: nowrap;">
+                                                    ${
+                                                        // @ts-ignore 
+                                                        item.approver.position || ''
+                                                    }
+                                                </td>
+                                                <td></td>
+                                            </tr>
+                                        
+                                        </table>
+                                    </div>
+                                `
+                                : ''
+                            }
+
+
+                    `).join('')}
+
+                </div>
+
                 <div style="display: flex; justify-content: center;">
                     
                      ${rrApprovers.map((item, index) => `
@@ -318,6 +388,11 @@ export class RrPdfService {
     
                     `).join('')}
 
+                </div>
+
+                <div style="font-size: 8pt; margin-top: 10px;"> 
+                    <div> PO No.: ${ rr.po.po_number } &nbsp;&nbsp;&nbsp;&nbsp; MEQS No.: ${ rr.po.meqs_supplier.meqs.meqs_number }  </div>
+                    <div> ${ refType } No.: ${ refNumber } &nbsp;&nbsp;&nbsp;&nbsp; RC No.: ${ rc_number }  </div>
                 </div>
                     
             
@@ -525,6 +600,102 @@ export class RrPdfService {
     
         const uploadsPath = this.API_FILE_ENDPOINT + path
         return uploadsPath
+    }
+
+    private async getClassification(classificationId: string, authUser: AuthUser) {
+
+
+        const query = `
+            query {
+                classification(id: "${ classificationId }") {
+                    id 
+                    name
+                }
+            }
+        `;
+
+        console.log('query', query)
+
+        try {
+            const { data } = await firstValueFrom(
+                this.httpService.post(
+                    process.env.API_GATEWAY_URL,
+                    { query },
+                    {
+                        headers: {
+                            Authorization: authUser.authorization,
+                            'Content-Type': 'application/json',
+                        },
+                    }
+                ).pipe(
+                    catchError((error) => {
+                        throw error;
+                    }),
+                ),
+            );
+
+            console.log('data', data);
+            console.log('data.data.classification', data.data.classification)
+
+            if (!data || !data.data) {
+                console.log('No data returned');
+                return undefined;
+            }
+
+            return data.data.classification;
+
+        } catch (error) {
+            console.error('Error getting classification:', error.message);
+            return undefined;
+        }
+    }
+
+    private async getFundSource(fundSourceId: string, authUser: AuthUser) {
+
+
+        const query = `
+            query {
+                account(id: "${ fundSourceId }") {
+                    id 
+                    name
+                }
+            }
+        `;
+
+        console.log('query', query)
+
+        try {
+            const { data } = await firstValueFrom(
+                this.httpService.post(
+                    process.env.API_GATEWAY_URL,
+                    { query },
+                    {
+                        headers: {
+                            Authorization: authUser.authorization,
+                            'Content-Type': 'application/json',
+                        },
+                    }
+                ).pipe(
+                    catchError((error) => {
+                        throw error;
+                    }),
+                ),
+            );
+
+            console.log('data', data);
+            console.log('data.data.account', data.data.account)
+
+            if (!data || !data.data) {
+                console.log('No data returned');
+                return undefined;
+            }
+
+            return data.data.account;
+
+        } catch (error) {
+            console.error('Error getting fund source:', error.message);
+            return undefined;
+        }
     }
 
 

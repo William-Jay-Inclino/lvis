@@ -234,7 +234,7 @@ export function formatDate(d: any, hasTime?: boolean) {
         date = Number(d) < 10000000000 ? Number(d) * 1000 : Number(d);
     }
 
-    return !!hasTime ? moment(date).format('M/D/YY h:mm A') : moment(date).format('M/D/YY')
+    return !!hasTime ? moment(date).format('MMM DD YYYY h:mm A') : moment(date).format('MMM DD YYYY')
 }
 
 export function getVatAmount(price: number, vat_type: VAT_TYPE) {

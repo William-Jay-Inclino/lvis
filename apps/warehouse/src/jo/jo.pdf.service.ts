@@ -135,14 +135,14 @@ export class JoPdfService {
 
                 <br />
 
-                <table style="width: 100%; border-collapse: collapse;">
-                    <thead style="font-size: 10pt;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 10pt;">
+                    <thead>
                         <th style="border: 1px solid black;"> NO. </th>
                         <th style="border: 1px solid black;"> DESCRIPTION AND SPECIFICATIONS </th>
                         <th style="border: 1px solid black;"> UNIT </th>
                         <th style="border: 1px solid black;"> QTY. </th>
                     </thead>
-                    <tbody style="font-size: 10pt;">
+                    <tbody>
                         ${jo.canvass.canvass_items.map((item, index) => `
                         <tr style="border: 1px solid black;">
                             <td align="center">${index + 1}</td>
@@ -152,6 +152,13 @@ export class JoPdfService {
                         </tr>
                     `).join('')}
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4" style="text-align: center; padding: 10px;">
+                                X------------------------NOTHING FOLLOWS------------------------X
+                            </td>
+                        </tr>
+                    </tfoot>
                 </table>
 
                 <br />

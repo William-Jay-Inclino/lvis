@@ -1467,7 +1467,7 @@ function formatDate(d, hasTime) {
     if (!isNaN(d)) {
         date = Number(d) < 10000000000 ? Number(d) * 1000 : Number(d);
     }
-    return !!hasTime ? moment(date).format('M/D/YY h:mm A') : moment(date).format('M/D/YY');
+    return !!hasTime ? moment(date).format('MMM DD YYYY h:mm A') : moment(date).format('MMM DD YYYY');
 }
 exports.formatDate = formatDate;
 function getVatAmount(price, vat_type) {
@@ -3731,25 +3731,31 @@ let CanvassPdfService = class CanvassPdfService {
 
                 <br />
         
-                <table style="width: 100%; border-collapse: collapse;">
-                    <thead style="font-size: 10pt;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 10pt;">
+                    <thead>
                         <th style="border: 1px solid black;"> NO. </th>
                         <th style="border: 1px solid black;"> ITEM DESCRIPTION AND SPECIFICATIONS </th>
                         <th style="border: 1px solid black;"> UNIT </th>
                         <th style="border: 1px solid black;"> QTY. </th>
                         <th style="border: 1px solid black;"> UNIT COST </th>
                     </thead>
-                    <tbody style="font-size: 10pt; border: 1px solid black;">
+                    <tbody style="border: 1px solid black;">
                         ${canvass.canvass_items.map((item, index) => `
-                        <tr style="border: 1px solid black;">
+                        <tr style="font-size: 10pt;" style="border: 1px solid black;">
                             <td align="center">${index + 1}</td>
                             <td>${item.description}</td>
                             <td align="center">${item.unit ? item.unit.name : 'N/A'}</td>
                             <td align="center">${item.quantity}</td>
                         </tr>
                     `).join('')}
-                    
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="5" style="text-align: center; padding: 10px;">
+                                X------------------------NOTHING FOLLOWS------------------------X
+                            </td>
+                        </tr>
+                    </tfoot>
                 </table>
         
             </div>
@@ -7681,14 +7687,14 @@ let JoPdfService = class JoPdfService {
 
                 <br />
 
-                <table style="width: 100%; border-collapse: collapse;">
-                    <thead style="font-size: 10pt;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 10pt;">
+                    <thead>
                         <th style="border: 1px solid black;"> NO. </th>
                         <th style="border: 1px solid black;"> DESCRIPTION AND SPECIFICATIONS </th>
                         <th style="border: 1px solid black;"> UNIT </th>
                         <th style="border: 1px solid black;"> QTY. </th>
                     </thead>
-                    <tbody style="font-size: 10pt;">
+                    <tbody>
                         ${jo.canvass.canvass_items.map((item, index) => `
                         <tr style="border: 1px solid black;">
                             <td align="center">${index + 1}</td>
@@ -7698,6 +7704,13 @@ let JoPdfService = class JoPdfService {
                         </tr>
                     `).join('')}
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4" style="text-align: center; padding: 10px;">
+                                X------------------------NOTHING FOLLOWS------------------------X
+                            </td>
+                        </tr>
+                    </tfoot>
                 </table>
 
                 <br />
@@ -11806,15 +11819,17 @@ let MeqsPdfService = class MeqsPdfService {
         const page = await browser.newPage();
         const watermark = (0, helpers_1.getImageAsBase64)('lvis-watermark-v2.png');
         const logo = (0, helpers_1.getImageAsBase64)('leyeco-logo.png');
-        let purpose, refNumber, refType, requested_by_id, canvassItems;
+        let purpose, refNumber, refType, requisitioner_notes, requested_by_id, canvassItems;
         if (meqs.rv) {
             purpose = meqs.rv.canvass.purpose;
+            requisitioner_notes = meqs.rv.canvass.notes;
             requested_by_id = meqs.rv.canvass.requested_by_id;
             refNumber = meqs.rv.rv_number;
             refType = 'RV';
             canvassItems = meqs.rv.canvass.canvass_items;
         }
         else if (meqs.spr) {
+            requisitioner_notes = meqs.spr.canvass.notes;
             purpose = meqs.spr.canvass.purpose;
             requested_by_id = meqs.spr.canvass.requested_by_id;
             refNumber = meqs.spr.spr_number;
@@ -11822,6 +11837,7 @@ let MeqsPdfService = class MeqsPdfService {
             canvassItems = meqs.spr.canvass.canvass_items;
         }
         else {
+            requisitioner_notes = meqs.jo.canvass.notes;
             purpose = meqs.jo.canvass.purpose;
             requested_by_id = meqs.jo.canvass.requested_by_id;
             refNumber = meqs.jo.jo_number;
@@ -11890,15 +11906,14 @@ let MeqsPdfService = class MeqsPdfService {
 
                     <div>
                         <table style="font-size: 10pt">
-
                             <tr>
                                 <td>Purpose:</td>
                                 <td> ${purpose} </td>
-                            </tr>
+                            </tr>  
                             <tr>
-                                <td>Remarks:</td>
-                                <td> ${meqs.notes} </td>
-                            </tr>    
+                                <td>Requisitioner Notes: </td>
+                                <td> ${requisitioner_notes} </td>
+                            </tr> 
                         </table>
                     </div>
 
@@ -11965,6 +11980,14 @@ let MeqsPdfService = class MeqsPdfService {
         }).join('')}
 
                     </tbody>
+
+                    <tfoot>
+                        <tr>
+                            <td colspan="${3 + meqs.meqs_suppliers.length}" style="text-align: center; padding: 10px;">
+                                X------------------------NOTHING FOLLOWS------------------------X
+                            </td>
+                        </tr>
+                    </tfoot>
                 
                 </table>
 
@@ -11972,10 +11995,14 @@ let MeqsPdfService = class MeqsPdfService {
 
                 <table style="font-size: 10pt;">
                     <tr>
-                        <td>Requisitioner: </td>
-                        <td> <b>
+                        <td>${meqs.notes}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Requisitioner: 
+                            <b>
                             ${requisitioner.firstname + ' ' + requisitioner.lastname} 
-                            </b>
+                            </b> 
                         </td>
                     </tr>
                 </table>
@@ -14204,13 +14231,14 @@ let PoPdfService = class PoPdfService {
             return i;
         }));
         const generalManager = approvers.pop();
-        let requisitioner, classification_id, refType, refNumber, refDate;
+        let requisitioner, classification_id, refType, refNumber, refDate, rc_number;
         if (po.meqs_supplier.meqs.rv) {
             requisitioner = await this.getEmployee(po.meqs_supplier.meqs.rv.canvass.requested_by_id, this.authUser);
             classification_id = po.meqs_supplier.meqs.rv.classification_id;
             refType = 'RV';
             refNumber = po.meqs_supplier.meqs.rv.rv_number;
             refDate = po.meqs_supplier.meqs.rv.date_requested;
+            rc_number = po.meqs_supplier.meqs.rv.canvass.rc_number;
         }
         else if (po.meqs_supplier.meqs.spr) {
             requisitioner = await this.getEmployee(po.meqs_supplier.meqs.spr.canvass.requested_by_id, this.authUser);
@@ -14218,6 +14246,7 @@ let PoPdfService = class PoPdfService {
             refType = 'SPR';
             refNumber = po.meqs_supplier.meqs.spr.spr_number;
             refDate = po.meqs_supplier.meqs.spr.date_requested;
+            rc_number = po.meqs_supplier.meqs.spr.canvass.rc_number;
         }
         else {
             requisitioner = await this.getEmployee(po.meqs_supplier.meqs.jo.canvass.requested_by_id, this.authUser);
@@ -14225,6 +14254,7 @@ let PoPdfService = class PoPdfService {
             refType = 'JO';
             refNumber = po.meqs_supplier.meqs.jo.jo_number;
             refDate = po.meqs_supplier.meqs.jo.date_requested;
+            rc_number = po.meqs_supplier.meqs.jo.canvass.rc_number;
         }
         const classification = await this.getClassification(classification_id, this.authUser);
         const fundSource = await this.getFundSource(po.fund_source_id, this.authUser);
@@ -14385,8 +14415,8 @@ let PoPdfService = class PoPdfService {
                     quotation. </i> 
                 </div>  
 
-                <table style="width: 100%; border-collapse: collapse; margin-top: 10px;" border="1">
-                    <thead style="font-size: 10pt;">
+                <table style="width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 10pt;">
+                    <thead>
                         <th style="border: 1px solid black;"> NO. </th>
                         <th style="border: 1px solid black;"> DESCRIPTION </th>
                         <th style="border: 1px solid black;"> UNIT </th>
@@ -14395,9 +14425,9 @@ let PoPdfService = class PoPdfService {
                         <th style="border: 1px solid black;"> UNIT PRICE </th>
                         <th style="border: 1px solid black;"> TOTAL PRICE </th>
                     </thead>
-                    <tbody style="font-size: 10pt;">
+                    <tbody>
                         ${po.meqs_supplier.meqs_supplier_items.map((item, index) => `
-                        <tr>
+                        <tr style="border: 1px solid black;">
                             <td align="center">${index + 1}</td>
                             <td>${item.canvass_item.description}</td>
                             <td align="center">${item.canvass_item.unit ? item.canvass_item.unit.name : 'N/A'}</td>
@@ -14408,13 +14438,20 @@ let PoPdfService = class PoPdfService {
                         </tr>
                     `).join('')}
 
-                        <tr>
+                        <tr style="border: 1px solid black;">
                             <th colspan="5"></th>
                             <th style="text-align: center;">TOTAL:</th>
                             <td align="center"><b> ${(0, helpers_1.formatToPhpCurrency)(totalPrice)} </b> </td>
                         </tr>
 
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="7" style="text-align: center; padding: 10px;">
+                                X------------------------NOTHING FOLLOWS------------------------X
+                            </td>
+                        </tr>
+                    </tfoot>
                 </table>
 
                 <br />
@@ -14462,6 +14499,8 @@ let PoPdfService = class PoPdfService {
                                         ${item.approver.position}
                                     </td>
                                 </tr>
+                                ${item.approver.is_budget_officer ? `<tr style="font-size: 9pt;"> <td> Classification: ${classification.name}  </td> </tr>` : '<tr><td></td></tr>'}
+                                ${item.approver.is_finance_manager ? `<tr style="font-size: 9pt;"> <td> Fund Available: ${fundSource.name}  </td> </tr>` : '<tr><td></td></tr>'}
                             
                             </table>
                         </div>
@@ -14471,51 +14510,55 @@ let PoPdfService = class PoPdfService {
                 </div>
 
                 <br />
-                <br />
 
                 <table border="1" style="border-collapse: collapse; border-color: black; width: 100%; font-size: 10pt;">
-                <tr>
-                    <td style="padding: 5px;"> <b> DELIVERY DATE:</b> </td>
-                    <td style="padding: 5px;"> <b> SHIPPING INSTRUCTION </b> </td>
-                </tr>
-                <tr>
-                   <td style="text-align: center; padding: 10px; width: 50%">
-                        <div>
-                            ORDER ISSUED AND AUTHORIZED:
-                        </div>
-                        <div style="text-align: right; margin-right: 20px;">
-                            ${(0, helpers_1.formatDate)(generalManager.date_approval, true)}
-                        </div>
-                        <br />
-                        <div style="text-align: center; position: relative; font-size: 11pt">
-                            <u style="position: relative; z-index: 1; margin-bottom: 10px;"> 
-                                <b>
-                                ${generalManager.approver.firstname + ' ' + generalManager.approver.lastname}
-                                </b>
-                            </u>
-                            <img style="width: 100px; height: 100px; position: absolute; top: -50px; left: 50%; transform: translateX(-50%); z-index: 2;" src="${this.getUploadsPath(generalManager.approver.signature_src)}" />
-                        </div>
-                        <div>
-                                    ${generalManager.approver.position}
-                        </div>
-                   </td> 
-                   <td style="text-align: center; padding: 10px; width: 50%">
-                        <div>
-                            ORDER ISSUED AND AUTHORIZED:
-                        </div>
-                        <div style="text-align: center; font-size: 11pt;">
-                            <b> ${po.meqs_supplier.supplier.name} </b>
-                        </div>
-                        <br />
-                        <div style="font-size: 11pt;">
-                           By: <b>____________________________________ </b>
-                        </div>
-                        <div>
-                            Manager/Representative
-                        </div>
-                   </td> 
-                </tr>
-            </table>
+                    <tr>
+                        <td style="padding: 5px;"> <b> DELIVERY DATE:</b> </td>
+                        <td style="padding: 5px;"> <b> SHIPPING INSTRUCTION </b> </td>
+                    </tr>
+                    <tr>
+                    <td style="text-align: center; padding: 10px; width: 50%">
+                            <div>
+                                ORDER ISSUED AND AUTHORIZED:
+                            </div>
+                            <div style="text-align: right; margin-right: 20px;">
+                                ${(0, helpers_1.formatDate)(generalManager.date_approval, true)}
+                            </div>
+                            <br />
+                            <div style="text-align: center; position: relative; font-size: 11pt">
+                                <u style="position: relative; z-index: 1; margin-bottom: 10px;"> 
+                                    <b>
+                                    ${generalManager.approver.firstname + ' ' + generalManager.approver.lastname}
+                                    </b>
+                                </u>
+                                <img style="width: 100px; height: 100px; position: absolute; top: -50px; left: 50%; transform: translateX(-50%); z-index: 2;" src="${this.getUploadsPath(generalManager.approver.signature_src)}" />
+                            </div>
+                            <div>
+                                        ${generalManager.approver.position}
+                            </div>
+                    </td> 
+                    <td style="text-align: center; padding: 10px; width: 50%">
+                            <div>
+                                ORDER ISSUED AND AUTHORIZED:
+                            </div>
+                            <div style="text-align: center; font-size: 11pt;">
+                                <b> ${po.meqs_supplier.supplier.name} </b>
+                            </div>
+                            <br />
+                            <div style="font-size: 11pt;">
+                            By: <b>____________________________________ </b>
+                            </div>
+                            <div>
+                                Manager/Representative
+                            </div>
+                    </td> 
+                    </tr>
+                </table>
+
+                <div style="font-size: 8pt; margin-top: 10px;"> 
+                    RC No.: ${rc_number} &nbsp;&nbsp;&nbsp;&nbsp; 
+                    MEQS No.: ${po.meqs_supplier.meqs.meqs_number} 
+                </div>
                 
             </div>
         
@@ -17286,40 +17329,52 @@ let RrPdfService = class RrPdfService {
         const totalUnitCost = rr.rr_items.reduce((acc, item) => acc + (item.meqs_supplier_item.price), 0);
         const totalVat = rr.rr_items.reduce((acc, item) => acc + ((0, helpers_1.getVatAmount)(item.meqs_supplier_item.price, item.meqs_supplier_item.vat_type)), 0);
         const { totalVatInc, totalVatExc } = this.getTotalVat(rr.rr_items);
-        let requested_by_id, purpose;
+        let requested_by_id, purpose, classification_id;
         if (rr.po.meqs_supplier.meqs.rv) {
             requested_by_id = rr.po.meqs_supplier.meqs.rv.canvass.requested_by_id;
             purpose = rr.po.meqs_supplier.meqs.rv.canvass.purpose;
+            classification_id = rr.po.meqs_supplier.meqs.rv.classification_id;
         }
         else if (rr.po.meqs_supplier.meqs.spr) {
             requested_by_id = rr.po.meqs_supplier.meqs.spr.canvass.requested_by_id;
             purpose = rr.po.meqs_supplier.meqs.spr.canvass.purpose;
+            classification_id = rr.po.meqs_supplier.meqs.spr.classification_id;
         }
         else {
+            classification_id = rr.po.meqs_supplier.meqs.jo.classification_id;
             requested_by_id = rr.po.meqs_supplier.meqs.jo.canvass.requested_by_id;
             purpose = rr.po.meqs_supplier.meqs.jo.canvass.purpose;
         }
         const requisitioner = await this.getEmployee(requested_by_id, this.authUser);
+        const poApprovers = await Promise.all(rr.po.po_approvers.map(async (i) => {
+            i.approver = await this.getEmployee(i.approver_id, this.authUser);
+            return i;
+        }));
         const rrApprovers = await Promise.all(rr.rr_approvers.map(async (i) => {
             i.approver = await this.getEmployee(i.approver_id, this.authUser);
             return i;
         }));
-        let refType, refNumber, refDate;
+        let refType, refNumber, refDate, rc_number;
         if (rr.po.meqs_supplier.meqs.rv) {
             refType = 'RV';
             refNumber = rr.po.meqs_supplier.meqs.rv.rv_number;
             refDate = rr.po.meqs_supplier.meqs.rv.date_requested;
+            rc_number = rr.po.meqs_supplier.meqs.rv.canvass.rc_number;
         }
         else if (rr.po.meqs_supplier.meqs.spr) {
             refType = 'SPR';
             refNumber = rr.po.meqs_supplier.meqs.spr.spr_number;
             refDate = rr.po.meqs_supplier.meqs.spr.date_requested;
+            rc_number = rr.po.meqs_supplier.meqs.spr.canvass.rc_number;
         }
         else {
             refType = 'JO';
             refNumber = rr.po.meqs_supplier.meqs.jo.jo_number;
             refDate = rr.po.meqs_supplier.meqs.jo.date_requested;
+            rc_number = rr.po.meqs_supplier.meqs.jo.canvass.rc_number;
         }
+        const classification = await this.getClassification(classification_id, this.authUser);
+        const fundSource = await this.getFundSource(rr.po.fund_source_id, this.authUser);
         const content = `
 
         <style>
@@ -17352,7 +17407,7 @@ let RrPdfService = class RrPdfService {
 
         <div class="content">
 
-            <div style="flex-grow: 1; min-height: 70vh;">
+            <div style="flex-grow: 1; min-height: 58vh;">
         
                 <div style="text-align: center; margin-top: 35px">
         
@@ -17420,7 +17475,7 @@ let RrPdfService = class RrPdfService {
                     </tr>
                 </table>
 
-                <table style="width: 100%; border-collapse: collapse; margin-top: 10px;" border="1">
+                <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
                     <thead style="font-size: 10pt;">
                         <tr>
                             <th style="border: 1px solid black;"> Code </th>
@@ -17431,7 +17486,7 @@ let RrPdfService = class RrPdfService {
                             <th colspan="4" style="border: 1px solid black; text-align: center;"> Gross Amount </th>
                             <th style="border: 1px solid black;"> Total Cost </th>
                         </tr>
-                        <tr>
+                        <tr style="border: 1px solid black;">
                             <th></th>
                             <th></th>
                             <th></th>
@@ -17448,7 +17503,7 @@ let RrPdfService = class RrPdfService {
                     <tbody style="font-size: 9pt;">
 
                         ${rr.rr_items.map((item, index) => `
-                        <tr>
+                        <tr style="border: 1px solid black;">
                             <td align="center">${item.meqs_supplier_item.canvass_item.item ? item.meqs_supplier_item.canvass_item.item.code : 'N/A'}</td>
                             <td>${item.meqs_supplier_item.canvass_item.description}</td>
                             <td align="center">${item.meqs_supplier_item.canvass_item.unit ? item.meqs_supplier_item.canvass_item.unit.name : 'N/A'}</td>
@@ -17506,8 +17561,51 @@ let RrPdfService = class RrPdfService {
         
             </div>
         
-            <div style="padding-left: 25px; padding-right: 25px; font-size: 10pt; padding-top: 70px; min-height: 15vh;">
+            <div style="padding-left: 25px; padding-right: 25px; font-size: 10pt; padding-top: 50px; min-height: 35vh;">
                 
+                <div style="display: flex; justify-content: center;">
+                        
+                        ${poApprovers.map((item, index) => `
+
+                            ${item.approver.is_budget_officer || item.approver.is_finance_manager ? `
+                                    <div style="padding: 10px;">
+                                        <table border="0" style="font-size: 11pt; width: 400px;">
+                                            <tr>
+                                                <td style="font-size: 10pt; text-align: left; white-space: nowrap;"> ${item.label}: </td>
+                                                ${item.approver.is_budget_officer ? `<td> Classification: ${classification.name} </td>` : '<td></td>'}
+                                                ${item.approver.is_finance_manager ? `<td> Fund Available: ${fundSource.name} </td>` : '<td></td>'}
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="font-size: 10pt; text-align: left; white-space: nowrap;"> 
+                                                    ${item.date_approval ? (0, helpers_1.formatDate)(item.date_approval, true) : '&nbsp;'} 
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th style="text-align: center; position: relative; white-space: nowrap;">
+                                                    <u style="position: relative; z-index: 1; margin-bottom: 10px;">
+                                                        ${item.approver.firstname + ' ' + item.approver.lastname}
+                                                    </u>
+                                                    <img style="width: 100px; height: 100px; position: absolute; top: -60px; left: 50%; transform: translateX(-50%); z-index: 2;" src="${this.getUploadsPath(item.approver.signature_src)}" />
+                                                </th>
+                                                <th></th>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center;  white-space: nowrap;">
+                                                    ${item.approver.position || ''}
+                                                </td>
+                                                <td></td>
+                                            </tr>
+                                        
+                                        </table>
+                                    </div>
+                                `
+            : ''}
+
+
+                    `).join('')}
+
+                </div>
+
                 <div style="display: flex; justify-content: center;">
                     
                      ${rrApprovers.map((item, index) => `
@@ -17541,6 +17639,11 @@ let RrPdfService = class RrPdfService {
     
                     `).join('')}
 
+                </div>
+
+                <div style="font-size: 8pt; margin-top: 10px;"> 
+                    <div> PO No.: ${rr.po.po_number} &nbsp;&nbsp;&nbsp;&nbsp; MEQS No.: ${rr.po.meqs_supplier.meqs.meqs_number}  </div>
+                    <div> ${refType} No.: ${refNumber} &nbsp;&nbsp;&nbsp;&nbsp; RC No.: ${rc_number}  </div>
                 </div>
                     
             
@@ -17712,6 +17815,70 @@ let RrPdfService = class RrPdfService {
         console.log('PATH', path);
         const uploadsPath = this.API_FILE_ENDPOINT + path;
         return uploadsPath;
+    }
+    async getClassification(classificationId, authUser) {
+        const query = `
+            query {
+                classification(id: "${classificationId}") {
+                    id 
+                    name
+                }
+            }
+        `;
+        console.log('query', query);
+        try {
+            const { data } = await (0, rxjs_1.firstValueFrom)(this.httpService.post(process.env.API_GATEWAY_URL, { query }, {
+                headers: {
+                    Authorization: authUser.authorization,
+                    'Content-Type': 'application/json',
+                },
+            }).pipe((0, rxjs_1.catchError)((error) => {
+                throw error;
+            })));
+            console.log('data', data);
+            console.log('data.data.classification', data.data.classification);
+            if (!data || !data.data) {
+                console.log('No data returned');
+                return undefined;
+            }
+            return data.data.classification;
+        }
+        catch (error) {
+            console.error('Error getting classification:', error.message);
+            return undefined;
+        }
+    }
+    async getFundSource(fundSourceId, authUser) {
+        const query = `
+            query {
+                account(id: "${fundSourceId}") {
+                    id 
+                    name
+                }
+            }
+        `;
+        console.log('query', query);
+        try {
+            const { data } = await (0, rxjs_1.firstValueFrom)(this.httpService.post(process.env.API_GATEWAY_URL, { query }, {
+                headers: {
+                    Authorization: authUser.authorization,
+                    'Content-Type': 'application/json',
+                },
+            }).pipe((0, rxjs_1.catchError)((error) => {
+                throw error;
+            })));
+            console.log('data', data);
+            console.log('data.data.account', data.data.account);
+            if (!data || !data.data) {
+                console.log('No data returned');
+                return undefined;
+            }
+            return data.data.account;
+        }
+        catch (error) {
+            console.error('Error getting fund source:', error.message);
+            return undefined;
+        }
     }
 };
 exports.RrPdfService = RrPdfService;
@@ -19841,14 +20008,14 @@ let RvPdfService = class RvPdfService {
 
                 <br />
 
-                <table style="width: 100%; border-collapse: collapse;">
-                    <thead style="font-size: 10pt;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 10pt;">
+                    <thead>
                         <th style="border: 1px solid black;"> NO. </th>
                         <th style="border: 1px solid black;"> DESCRIPTION AND SPECIFICATIONS </th>
                         <th style="border: 1px solid black;"> UNIT </th>
                         <th style="border: 1px solid black;"> QTY. </th>
                     </thead>
-                    <tbody style="font-size: 10pt;">
+                    <tbody>
                         ${rv.canvass.canvass_items.map((item, index) => `
                         <tr style="border: 1px solid black;">
                             <td align="center">${index + 1}</td>
@@ -19858,6 +20025,13 @@ let RvPdfService = class RvPdfService {
                         </tr>
                     `).join('')}
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4" style="text-align: center; padding: 10px;">
+                                X------------------------NOTHING FOLLOWS------------------------X
+                            </td>
+                        </tr>
+                    </tfoot>
                 </table>
 
                 <br />
@@ -22204,14 +22378,14 @@ let SprPdfService = class SprPdfService {
 
                 <br />
 
-                <table style="width: 100%; border-collapse: collapse;">
-                    <thead style="font-size: 10pt;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 10pt;">
+                    <thead>
                         <th style="border: 1px solid black;"> NO. </th>
                         <th style="border: 1px solid black;"> DESCRIPTION AND SPECIFICATIONS </th>
                         <th style="border: 1px solid black;"> UNIT </th>
                         <th style="border: 1px solid black;"> QTY. </th>
                     </thead>
-                    <tbody style="font-size: 10pt;">
+                    <tbody>
                         ${spr.canvass.canvass_items.map((item, index) => `
                         <tr style="border: 1px solid black;">
                             <td align="center">${index + 1}</td>
@@ -22221,6 +22395,13 @@ let SprPdfService = class SprPdfService {
                         </tr>
                     `).join('')}
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4" style="text-align: center; padding: 10px;">
+                                X------------------------NOTHING FOLLOWS------------------------X
+                            </td>
+                        </tr>
+                    </tfoot>
                 </table>
 
                 <br />

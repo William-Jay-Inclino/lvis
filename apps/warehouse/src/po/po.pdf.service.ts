@@ -48,7 +48,7 @@ export class PoPdfService {
 
         const generalManager = approvers.pop()
 
-        let requisitioner, classification_id, refType, refNumber, refDate
+        let requisitioner, classification_id, refType, refNumber, refDate, rc_number
 
         if(po.meqs_supplier.meqs.rv) {
             requisitioner = await this.getEmployee(po.meqs_supplier.meqs.rv.canvass.requested_by_id, this.authUser)
@@ -56,18 +56,21 @@ export class PoPdfService {
             refType = 'RV'
             refNumber = po.meqs_supplier.meqs.rv.rv_number
             refDate = po.meqs_supplier.meqs.rv.date_requested
+            rc_number = po.meqs_supplier.meqs.rv.canvass.rc_number
         } else if(po.meqs_supplier.meqs.spr) {
             requisitioner = await this.getEmployee(po.meqs_supplier.meqs.spr.canvass.requested_by_id, this.authUser)
             classification_id = po.meqs_supplier.meqs.spr.classification_id
             refType = 'SPR'
             refNumber = po.meqs_supplier.meqs.spr.spr_number
             refDate = po.meqs_supplier.meqs.spr.date_requested
+            rc_number = po.meqs_supplier.meqs.spr.canvass.rc_number
         } else {
             requisitioner = await this.getEmployee(po.meqs_supplier.meqs.jo.canvass.requested_by_id, this.authUser)
             classification_id = po.meqs_supplier.meqs.jo.classification_id
             refType = 'JO'
             refNumber = po.meqs_supplier.meqs.jo.jo_number
             refDate = po.meqs_supplier.meqs.jo.date_requested
+            rc_number = po.meqs_supplier.meqs.jo.canvass.rc_number
         }
 
         const classification = await this.getClassification(classification_id, this.authUser)
@@ -231,8 +234,8 @@ export class PoPdfService {
                     quotation. </i> 
                 </div>  
 
-                <table style="width: 100%; border-collapse: collapse; margin-top: 10px;" border="1">
-                    <thead style="font-size: 10pt;">
+                <table style="width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 10pt;">
+                    <thead>
                         <th style="border: 1px solid black;"> NO. </th>
                         <th style="border: 1px solid black;"> DESCRIPTION </th>
                         <th style="border: 1px solid black;"> UNIT </th>
@@ -241,9 +244,9 @@ export class PoPdfService {
                         <th style="border: 1px solid black;"> UNIT PRICE </th>
                         <th style="border: 1px solid black;"> TOTAL PRICE </th>
                     </thead>
-                    <tbody style="font-size: 10pt;">
+                    <tbody>
                         ${po.meqs_supplier.meqs_supplier_items.map((item, index) => `
-                        <tr>
+                        <tr style="border: 1px solid black;">
                             <td align="center">${index + 1}</td>
                             <td>${item.canvass_item.description}</td>
                             <td align="center">${item.canvass_item.unit ? item.canvass_item.unit.name : 'N/A'}</td>
@@ -254,13 +257,20 @@ export class PoPdfService {
                         </tr>
                     `).join('')}
 
-                        <tr>
+                        <tr style="border: 1px solid black;">
                             <th colspan="5"></th>
                             <th style="text-align: center;">TOTAL:</th>
                             <td align="center"><b> ${ formatToPhpCurrency(totalPrice) } </b> </td>
                         </tr>
 
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="7" style="text-align: center; padding: 10px;">
+                                X------------------------NOTHING FOLLOWS------------------------X
+                            </td>
+                        </tr>
+                    </tfoot>
                 </table>
 
                 <br />
@@ -317,6 +327,14 @@ export class PoPdfService {
                                         }
                                     </td>
                                 </tr>
+                                ${
+                                    // @ts-ignore
+                                    item.approver.is_budget_officer ? `<tr style="font-size: 9pt;"> <td> Classification: ${ classification.name }  </td> </tr>` : '<tr><td></td></tr>'
+                                }
+                                ${
+                                    // @ts-ignore
+                                    item.approver.is_finance_manager ? `<tr style="font-size: 9pt;"> <td> Fund Available: ${ fundSource.name }  </td> </tr>` : '<tr><td></td></tr>'
+                                }
                             
                             </table>
                         </div>
@@ -326,60 +344,64 @@ export class PoPdfService {
                 </div>
 
                 <br />
-                <br />
 
                 <table border="1" style="border-collapse: collapse; border-color: black; width: 100%; font-size: 10pt;">
-                <tr>
-                    <td style="padding: 5px;"> <b> DELIVERY DATE:</b> </td>
-                    <td style="padding: 5px;"> <b> SHIPPING INSTRUCTION </b> </td>
-                </tr>
-                <tr>
-                   <td style="text-align: center; padding: 10px; width: 50%">
-                        <div>
-                            ORDER ISSUED AND AUTHORIZED:
-                        </div>
-                        <div style="text-align: right; margin-right: 20px;">
-                            ${ formatDate(generalManager.date_approval, true) }
-                        </div>
-                        <br />
-                        <div style="text-align: center; position: relative; font-size: 11pt">
-                            <u style="position: relative; z-index: 1; margin-bottom: 10px;"> 
-                                <b>
-                                ${
-                                    // @ts-ignore
-                                    generalManager.approver.firstname + ' ' + generalManager.approver.lastname
-                                }
-                                </b>
-                            </u>
-                            <img style="width: 100px; height: 100px; position: absolute; top: -50px; left: 50%; transform: translateX(-50%); z-index: 2;" src="${
-                                // @ts-ignore
-                                this.getUploadsPath(generalManager.approver.signature_src)
-                            }" />
-                        </div>
-                        <div>
+                    <tr>
+                        <td style="padding: 5px;"> <b> DELIVERY DATE:</b> </td>
+                        <td style="padding: 5px;"> <b> SHIPPING INSTRUCTION </b> </td>
+                    </tr>
+                    <tr>
+                    <td style="text-align: center; padding: 10px; width: 50%">
+                            <div>
+                                ORDER ISSUED AND AUTHORIZED:
+                            </div>
+                            <div style="text-align: right; margin-right: 20px;">
+                                ${ formatDate(generalManager.date_approval, true) }
+                            </div>
+                            <br />
+                            <div style="text-align: center; position: relative; font-size: 11pt">
+                                <u style="position: relative; z-index: 1; margin-bottom: 10px;"> 
+                                    <b>
                                     ${
-                                        // @ts-ignore 
-                                        generalManager.approver.position
+                                        // @ts-ignore
+                                        generalManager.approver.firstname + ' ' + generalManager.approver.lastname
                                     }
-                        </div>
-                   </td> 
-                   <td style="text-align: center; padding: 10px; width: 50%">
-                        <div>
-                            ORDER ISSUED AND AUTHORIZED:
-                        </div>
-                        <div style="text-align: center; font-size: 11pt;">
-                            <b> ${ po.meqs_supplier.supplier.name } </b>
-                        </div>
-                        <br />
-                        <div style="font-size: 11pt;">
-                           By: <b>____________________________________ </b>
-                        </div>
-                        <div>
-                            Manager/Representative
-                        </div>
-                   </td> 
-                </tr>
-            </table>
+                                    </b>
+                                </u>
+                                <img style="width: 100px; height: 100px; position: absolute; top: -50px; left: 50%; transform: translateX(-50%); z-index: 2;" src="${
+                                    // @ts-ignore
+                                    this.getUploadsPath(generalManager.approver.signature_src)
+                                }" />
+                            </div>
+                            <div>
+                                        ${
+                                            // @ts-ignore 
+                                            generalManager.approver.position
+                                        }
+                            </div>
+                    </td> 
+                    <td style="text-align: center; padding: 10px; width: 50%">
+                            <div>
+                                ORDER ISSUED AND AUTHORIZED:
+                            </div>
+                            <div style="text-align: center; font-size: 11pt;">
+                                <b> ${ po.meqs_supplier.supplier.name } </b>
+                            </div>
+                            <br />
+                            <div style="font-size: 11pt;">
+                            By: <b>____________________________________ </b>
+                            </div>
+                            <div>
+                                Manager/Representative
+                            </div>
+                    </td> 
+                    </tr>
+                </table>
+
+                <div style="font-size: 8pt; margin-top: 10px;"> 
+                    RC No.: ${rc_number} &nbsp;&nbsp;&nbsp;&nbsp; 
+                    MEQS No.: ${ po.meqs_supplier.meqs.meqs_number } 
+                </div>
                 
             </div>
         

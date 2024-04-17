@@ -35,21 +35,24 @@ export class MeqsPdfService {
         const watermark = getImageAsBase64('lvis-watermark-v2.png')
         const logo = getImageAsBase64('leyeco-logo.png')
 
-        let purpose, refNumber, refType, requested_by_id, canvassItems: CanvassItem[]
+        let purpose, refNumber, refType, requisitioner_notes, requested_by_id, canvassItems: CanvassItem[]
 
         if(meqs.rv) {
             purpose = meqs.rv.canvass.purpose
+            requisitioner_notes = meqs.rv.canvass.notes
             requested_by_id = meqs.rv.canvass.requested_by_id
             refNumber = meqs.rv.rv_number
             refType = 'RV'
             canvassItems = meqs.rv.canvass.canvass_items
         } else if(meqs.spr) {
+            requisitioner_notes = meqs.spr.canvass.notes
             purpose = meqs.spr.canvass.purpose
             requested_by_id = meqs.spr.canvass.requested_by_id
             refNumber = meqs.spr.spr_number
             refType = 'SPR'
             canvassItems = meqs.spr.canvass.canvass_items
         } else {
+            requisitioner_notes = meqs.jo.canvass.notes
             purpose = meqs.jo.canvass.purpose
             requested_by_id = meqs.jo.canvass.requested_by_id
             refNumber = meqs.jo.jo_number
@@ -123,15 +126,14 @@ export class MeqsPdfService {
 
                     <div>
                         <table style="font-size: 10pt">
-
                             <tr>
                                 <td>Purpose:</td>
                                 <td> ${ purpose } </td>
-                            </tr>
+                            </tr>  
                             <tr>
-                                <td>Remarks:</td>
-                                <td> ${ meqs.notes } </td>
-                            </tr>    
+                                <td>Requisitioner Notes: </td>
+                                <td> ${ requisitioner_notes } </td>
+                            </tr> 
                         </table>
                     </div>
 
@@ -201,6 +203,14 @@ export class MeqsPdfService {
                         }).join('')}
 
                     </tbody>
+
+                    <tfoot>
+                        <tr>
+                            <td colspan="${ 3 + meqs.meqs_suppliers.length }" style="text-align: center; padding: 10px;">
+                                X------------------------NOTHING FOLLOWS------------------------X
+                            </td>
+                        </tr>
+                    </tfoot>
                 
                 </table>
 
@@ -208,13 +218,17 @@ export class MeqsPdfService {
 
                 <table style="font-size: 10pt;">
                     <tr>
-                        <td>Requisitioner: </td>
-                        <td> <b>
+                        <td>${ meqs.notes }</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Requisitioner: 
+                            <b>
                             ${
                                 // @ts-ignore
                                 requisitioner.firstname + ' ' + requisitioner.lastname
                             } 
-                            </b>
+                            </b> 
                         </td>
                     </tr>
                 </table>
