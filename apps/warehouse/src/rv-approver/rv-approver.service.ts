@@ -148,7 +148,8 @@ export class RvApproverService {
 
         // if admin get date approval from client else get date approval in server 
 
-        let dateApproval = isAdmin(this.authUser) ? new Date(input.date_approval) : new Date()
+        let dateApproval = isAdmin(this.authUser) ? (input.date_approval ? new Date(input.date_approval) : new Date()) : new Date()
+        console.log('dateApproval', dateApproval);
 
         if (input.status && input.status === APPROVAL_STATUS.PENDING) {
             dateApproval = null

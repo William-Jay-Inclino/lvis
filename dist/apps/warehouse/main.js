@@ -6867,7 +6867,7 @@ let JoApproverService = JoApproverService_1 = class JoApproverService {
             throw new common_1.ForbiddenException('Only Admin and Approver can update');
         }
         await this.validateInput(input);
-        let dateApproval = (0, helpers_1.isAdmin)(this.authUser) ? new Date(input.date_approval) : new Date();
+        let dateApproval = (0, helpers_1.isAdmin)(this.authUser) ? (input.date_approval ? new Date(input.date_approval) : new Date()) : new Date();
         if (input.status && input.status === types_1.APPROVAL_STATUS.PENDING) {
             dateApproval = null;
         }
@@ -9362,7 +9362,7 @@ let MeqsApproverService = MeqsApproverService_1 = class MeqsApproverService {
             throw new common_1.ForbiddenException('Only Admin and Approver can update');
         }
         await this.validateInput(input);
-        let dateApproval = (0, helpers_1.isAdmin)(this.authUser) ? new Date(input.date_approval) : new Date();
+        let dateApproval = (0, helpers_1.isAdmin)(this.authUser) ? (input.date_approval ? new Date(input.date_approval) : new Date()) : new Date();
         if (input.status && input.status === types_1.APPROVAL_STATUS.PENDING) {
             dateApproval = null;
         }
@@ -13553,7 +13553,7 @@ let PoApproverService = PoApproverService_1 = class PoApproverService {
             throw new common_1.ForbiddenException('Only Admin and Approver can update');
         }
         await this.validateInput(input);
-        let dateApproval = (0, helpers_1.isAdmin)(this.authUser) ? new Date(input.date_approval) : new Date();
+        let dateApproval = (0, helpers_1.isAdmin)(this.authUser) ? (input.date_approval ? new Date(input.date_approval) : new Date()) : new Date();
         if (input.status && input.status === types_1.APPROVAL_STATUS.PENDING) {
             dateApproval = null;
         }
@@ -16102,7 +16102,7 @@ let RrApproverService = RrApproverService_1 = class RrApproverService {
             throw new common_1.ForbiddenException('Only Admin and Approver can update');
         }
         await this.validateInput(input);
-        let dateApproval = (0, helpers_1.isAdmin)(this.authUser) ? new Date(input.date_approval) : new Date();
+        let dateApproval = (0, helpers_1.isAdmin)(this.authUser) ? (input.date_approval ? new Date(input.date_approval) : new Date()) : new Date();
         if (input.status && input.status === types_1.APPROVAL_STATUS.PENDING) {
             dateApproval = null;
         }
@@ -19189,7 +19189,8 @@ let RvApproverService = RvApproverService_1 = class RvApproverService {
             throw new common_1.ForbiddenException('Only Admin and Approver can update');
         }
         await this.validateInput(input);
-        let dateApproval = (0, helpers_1.isAdmin)(this.authUser) ? new Date(input.date_approval) : new Date();
+        let dateApproval = (0, helpers_1.isAdmin)(this.authUser) ? (input.date_approval ? new Date(input.date_approval) : new Date()) : new Date();
+        console.log('dateApproval', dateApproval);
         if (input.status && input.status === types_1.APPROVAL_STATUS.PENDING) {
             dateApproval = null;
         }
@@ -21572,7 +21573,7 @@ let SprApproverService = SprApproverService_1 = class SprApproverService {
             throw new common_1.ForbiddenException('Only Admin and Approver can update');
         }
         await this.validateInput(input);
-        let dateApproval = (0, helpers_1.isAdmin)(this.authUser) ? new Date(input.date_approval) : new Date();
+        let dateApproval = (0, helpers_1.isAdmin)(this.authUser) ? (input.date_approval ? new Date(input.date_approval) : new Date()) : new Date();
         if (input.status && input.status === types_1.APPROVAL_STATUS.PENDING) {
             dateApproval = null;
         }

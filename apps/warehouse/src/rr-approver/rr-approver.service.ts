@@ -193,7 +193,7 @@ export class RrApproverService {
 
         await this.validateInput(input)
 
-        let dateApproval = isAdmin(this.authUser) ? new Date(input.date_approval) : new Date()
+        let dateApproval = isAdmin(this.authUser) ? (input.date_approval ? new Date(input.date_approval) : new Date()) : new Date()
 
         if (input.status && input.status === APPROVAL_STATUS.PENDING) {
             dateApproval = null
