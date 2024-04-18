@@ -723,7 +723,7 @@ export const rv_default_approvers: RVApproverSetting[] = [
     {
         id: faker.string.uuid(),
         approver_id: employees[2].id,
-        label: 'Pre-Audit',
+        label: 'Pre-Audit By:',
         order: 3,
         created_by: 'admin'
     },
@@ -747,7 +747,7 @@ export const spr_default_approvers: SPRApproverSetting[] = [
     {
         id: faker.string.uuid(),
         approver_id: employees[2].id,
-        label: 'Pre-Audit',
+        label: 'Pre-Audit By:',
         order: 3,
         created_by: 'admin'
     },
