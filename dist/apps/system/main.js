@@ -1826,7 +1826,7 @@ exports.rv_default_approvers = [
     {
         id: faker_1.faker.string.uuid(),
         approver_id: exports.employees[2].id,
-        label: 'Pre-Audit',
+        label: 'Pre-Audit By:',
         order: 3,
         created_by: 'admin'
     },
@@ -1849,7 +1849,7 @@ exports.spr_default_approvers = [
     {
         id: faker_1.faker.string.uuid(),
         approver_id: exports.employees[2].id,
-        label: 'Pre-Audit',
+        label: 'Pre-Audit By:',
         order: 3,
         created_by: 'admin'
     },
