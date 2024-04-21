@@ -209,7 +209,68 @@ export class RrService {
 
     async findOne(id: string): Promise<RR | null> {
         const item = await this.prisma.rR.findUnique({
-            include: this.includedFields,
+            include: {
+                po: {
+                    include: {
+                        meqs_supplier: {
+                            include: {
+                                meqs: {
+                                    include: {
+                                        rv: {
+                                            include: {
+                                                canvass: true
+                                            }
+                                        },
+                                        spr: {
+                                            include: {
+                                                canvass: true
+                                            }
+                                        },
+                                        jo: {
+                                            include: {
+                                                canvass: true
+                                            }
+                                        }
+                                    }
+                                },
+                                supplier: true,
+                                attachments: true,
+                                meqs_supplier_items: {
+                                    include: {
+                                        canvass_item: {
+                                            include: {
+                                                unit: true,
+                                                brand: true,
+                                                item: true
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                    }
+                },
+                rr_items: {
+                    include: {
+                        meqs_supplier_item: {
+                            include: {
+                                canvass_item: {
+                                    include: {
+                                        unit: true,
+                                        brand: true,
+                                        item: true
+                                    }
+                                }
+                            }
+                        },
+                        item_transaction: {
+                            select: {
+                                item_id: true
+                            }
+                        }
+                    }
+                }
+            },
             where: { id }
         })
 

@@ -44,7 +44,7 @@ export class RrItem {
   @Field(() => MeqsSupplierItem)
   meqs_supplier_item: MeqsSupplierItem
 
-  @Field(() => ItemTransaction)
+  @Field(() => ItemTransaction, { nullable: true })
   item_transaction: ItemTransaction
 
 }

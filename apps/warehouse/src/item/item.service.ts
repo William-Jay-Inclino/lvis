@@ -422,6 +422,9 @@ export class ItemService {
 		console.log('Transacting RR items...')
 
 
+		// throw new Error('Something bad happened')
+
+
 		// const hasItemToTransact = rrApprover.rr.rr_items.find(i => !!i.item_id)
 
 		// // if no items to transact just set the rr to complete

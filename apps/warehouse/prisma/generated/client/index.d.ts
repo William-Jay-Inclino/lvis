@@ -3078,6 +3078,40 @@ export namespace Prisma {
 
 
   /**
+   * Count Type MEQSSupplierItemCountOutputType
+   */
+
+  export type MEQSSupplierItemCountOutputType = {
+    rr_items: number
+  }
+
+  export type MEQSSupplierItemCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    rr_items?: boolean | MEQSSupplierItemCountOutputTypeCountRr_itemsArgs
+  }
+
+  // Custom InputTypes
+
+  /**
+   * MEQSSupplierItemCountOutputType without action
+   */
+  export type MEQSSupplierItemCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MEQSSupplierItemCountOutputType
+     */
+    select?: MEQSSupplierItemCountOutputTypeSelect<ExtArgs> | null
+  }
+
+
+  /**
+   * MEQSSupplierItemCountOutputType without action
+   */
+  export type MEQSSupplierItemCountOutputTypeCountRr_itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RRItemWhereInput
+  }
+
+
+
+  /**
    * Count Type POCountOutputType
    */
 
@@ -14374,7 +14408,8 @@ export namespace Prisma {
     updated_at?: boolean
     canvass_item?: boolean | CanvassItemDefaultArgs<ExtArgs>
     meqs_supplier?: boolean | MEQSSupplierDefaultArgs<ExtArgs>
-    rr_item?: boolean | MEQSSupplierItem$rr_itemArgs<ExtArgs>
+    rr_items?: boolean | MEQSSupplierItem$rr_itemsArgs<ExtArgs>
+    _count?: boolean | MEQSSupplierItemCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["mEQSSupplierItem"]>
 
   export type MEQSSupplierItemSelectScalar = {
@@ -14394,7 +14429,8 @@ export namespace Prisma {
   export type MEQSSupplierItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     canvass_item?: boolean | CanvassItemDefaultArgs<ExtArgs>
     meqs_supplier?: boolean | MEQSSupplierDefaultArgs<ExtArgs>
-    rr_item?: boolean | MEQSSupplierItem$rr_itemArgs<ExtArgs>
+    rr_items?: boolean | MEQSSupplierItem$rr_itemsArgs<ExtArgs>
+    _count?: boolean | MEQSSupplierItemCountOutputTypeDefaultArgs<ExtArgs>
   }
 
 
@@ -14403,7 +14439,7 @@ export namespace Prisma {
     objects: {
       canvass_item: Prisma.$CanvassItemPayload<ExtArgs>
       meqs_supplier: Prisma.$MEQSSupplierPayload<ExtArgs>
-      rr_item: Prisma.$RRItemPayload<ExtArgs> | null
+      rr_items: Prisma.$RRItemPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -14786,7 +14822,7 @@ export namespace Prisma {
 
     meqs_supplier<T extends MEQSSupplierDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MEQSSupplierDefaultArgs<ExtArgs>>): Prisma__MEQSSupplierClient<$Result.GetResult<Prisma.$MEQSSupplierPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
-    rr_item<T extends MEQSSupplierItem$rr_itemArgs<ExtArgs> = {}>(args?: Subset<T, MEQSSupplierItem$rr_itemArgs<ExtArgs>>): Prisma__RRItemClient<$Result.GetResult<Prisma.$RRItemPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+    rr_items<T extends MEQSSupplierItem$rr_itemsArgs<ExtArgs> = {}>(args?: Subset<T, MEQSSupplierItem$rr_itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RRItemPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -15139,9 +15175,9 @@ export namespace Prisma {
 
 
   /**
-   * MEQSSupplierItem.rr_item
+   * MEQSSupplierItem.rr_items
    */
-  export type MEQSSupplierItem$rr_itemArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MEQSSupplierItem$rr_itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the RRItem
      */
@@ -15151,6 +15187,11 @@ export namespace Prisma {
      */
     include?: RRItemInclude<ExtArgs> | null
     where?: RRItemWhereInput
+    orderBy?: RRItemOrderByWithRelationInput | RRItemOrderByWithRelationInput[]
+    cursor?: RRItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RRItemScalarFieldEnum | RRItemScalarFieldEnum[]
   }
 
 
@@ -21648,7 +21689,7 @@ export namespace Prisma {
   export type RRItemGroupByOutputType = {
     id: string
     rr_id: string
-    meqs_supplier_item_id: string | null
+    meqs_supplier_item_id: string
     quantity_accepted: number
     created_by: string
     updated_by: string | null
@@ -21685,8 +21726,8 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     rr?: boolean | RRDefaultArgs<ExtArgs>
-    meqs_supplier_item?: boolean | RRItem$meqs_supplier_itemArgs<ExtArgs>
     item_transaction?: boolean | RRItem$item_transactionArgs<ExtArgs>
+    meqs_supplier_item?: boolean | MEQSSupplierItemDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["rRItem"]>
 
   export type RRItemSelectScalar = {
@@ -21702,8 +21743,8 @@ export namespace Prisma {
 
   export type RRItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     rr?: boolean | RRDefaultArgs<ExtArgs>
-    meqs_supplier_item?: boolean | RRItem$meqs_supplier_itemArgs<ExtArgs>
     item_transaction?: boolean | RRItem$item_transactionArgs<ExtArgs>
+    meqs_supplier_item?: boolean | MEQSSupplierItemDefaultArgs<ExtArgs>
   }
 
 
@@ -21711,13 +21752,13 @@ export namespace Prisma {
     name: "RRItem"
     objects: {
       rr: Prisma.$RRPayload<ExtArgs>
-      meqs_supplier_item: Prisma.$MEQSSupplierItemPayload<ExtArgs> | null
       item_transaction: Prisma.$ItemTransactionPayload<ExtArgs> | null
+      meqs_supplier_item: Prisma.$MEQSSupplierItemPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       rr_id: string
-      meqs_supplier_item_id: string | null
+      meqs_supplier_item_id: string
       quantity_accepted: number
       created_by: string
       updated_by: string | null
@@ -22090,9 +22131,9 @@ export namespace Prisma {
 
     rr<T extends RRDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RRDefaultArgs<ExtArgs>>): Prisma__RRClient<$Result.GetResult<Prisma.$RRPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
-    meqs_supplier_item<T extends RRItem$meqs_supplier_itemArgs<ExtArgs> = {}>(args?: Subset<T, RRItem$meqs_supplier_itemArgs<ExtArgs>>): Prisma__MEQSSupplierItemClient<$Result.GetResult<Prisma.$MEQSSupplierItemPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
-
     item_transaction<T extends RRItem$item_transactionArgs<ExtArgs> = {}>(args?: Subset<T, RRItem$item_transactionArgs<ExtArgs>>): Prisma__ItemTransactionClient<$Result.GetResult<Prisma.$ItemTransactionPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+
+    meqs_supplier_item<T extends MEQSSupplierItemDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MEQSSupplierItemDefaultArgs<ExtArgs>>): Prisma__MEQSSupplierItemClient<$Result.GetResult<Prisma.$MEQSSupplierItemPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -22438,22 +22479,6 @@ export namespace Prisma {
      * Filter which RRItems to delete
      */
     where?: RRItemWhereInput
-  }
-
-
-  /**
-   * RRItem.meqs_supplier_item
-   */
-  export type RRItem$meqs_supplier_itemArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MEQSSupplierItem
-     */
-    select?: MEQSSupplierItemSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: MEQSSupplierItemInclude<ExtArgs> | null
-    where?: MEQSSupplierItemWhereInput
   }
 
 
@@ -31241,7 +31266,7 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"MEQSSupplierItem"> | Date | string
     canvass_item?: XOR<CanvassItemRelationFilter, CanvassItemWhereInput>
     meqs_supplier?: XOR<MEQSSupplierRelationFilter, MEQSSupplierWhereInput>
-    rr_item?: XOR<RRItemNullableRelationFilter, RRItemWhereInput> | null
+    rr_items?: RRItemListRelationFilter
   }
 
   export type MEQSSupplierItemOrderByWithRelationInput = {
@@ -31258,7 +31283,7 @@ export namespace Prisma {
     updated_at?: SortOrder
     canvass_item?: CanvassItemOrderByWithRelationInput
     meqs_supplier?: MEQSSupplierOrderByWithRelationInput
-    rr_item?: RRItemOrderByWithRelationInput
+    rr_items?: RRItemOrderByRelationAggregateInput
   }
 
   export type MEQSSupplierItemWhereUniqueInput = Prisma.AtLeast<{
@@ -31278,7 +31303,7 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"MEQSSupplierItem"> | Date | string
     canvass_item?: XOR<CanvassItemRelationFilter, CanvassItemWhereInput>
     meqs_supplier?: XOR<MEQSSupplierRelationFilter, MEQSSupplierWhereInput>
-    rr_item?: XOR<RRItemNullableRelationFilter, RRItemWhereInput> | null
+    rr_items?: RRItemListRelationFilter
   }, "id">
 
   export type MEQSSupplierItemOrderByWithAggregationInput = {
@@ -31913,52 +31938,52 @@ export namespace Prisma {
     NOT?: RRItemWhereInput | RRItemWhereInput[]
     id?: StringFilter<"RRItem"> | string
     rr_id?: StringFilter<"RRItem"> | string
-    meqs_supplier_item_id?: StringNullableFilter<"RRItem"> | string | null
+    meqs_supplier_item_id?: StringFilter<"RRItem"> | string
     quantity_accepted?: IntFilter<"RRItem"> | number
     created_by?: StringFilter<"RRItem"> | string
     updated_by?: StringNullableFilter<"RRItem"> | string | null
     created_at?: DateTimeFilter<"RRItem"> | Date | string
     updated_at?: DateTimeFilter<"RRItem"> | Date | string
     rr?: XOR<RRRelationFilter, RRWhereInput>
-    meqs_supplier_item?: XOR<MEQSSupplierItemNullableRelationFilter, MEQSSupplierItemWhereInput> | null
     item_transaction?: XOR<ItemTransactionNullableRelationFilter, ItemTransactionWhereInput> | null
+    meqs_supplier_item?: XOR<MEQSSupplierItemRelationFilter, MEQSSupplierItemWhereInput>
   }
 
   export type RRItemOrderByWithRelationInput = {
     id?: SortOrder
     rr_id?: SortOrder
-    meqs_supplier_item_id?: SortOrderInput | SortOrder
+    meqs_supplier_item_id?: SortOrder
     quantity_accepted?: SortOrder
     created_by?: SortOrder
     updated_by?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     rr?: RROrderByWithRelationInput
-    meqs_supplier_item?: MEQSSupplierItemOrderByWithRelationInput
     item_transaction?: ItemTransactionOrderByWithRelationInput
+    meqs_supplier_item?: MEQSSupplierItemOrderByWithRelationInput
   }
 
   export type RRItemWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    meqs_supplier_item_id?: string
     AND?: RRItemWhereInput | RRItemWhereInput[]
     OR?: RRItemWhereInput[]
     NOT?: RRItemWhereInput | RRItemWhereInput[]
     rr_id?: StringFilter<"RRItem"> | string
+    meqs_supplier_item_id?: StringFilter<"RRItem"> | string
     quantity_accepted?: IntFilter<"RRItem"> | number
     created_by?: StringFilter<"RRItem"> | string
     updated_by?: StringNullableFilter<"RRItem"> | string | null
     created_at?: DateTimeFilter<"RRItem"> | Date | string
     updated_at?: DateTimeFilter<"RRItem"> | Date | string
     rr?: XOR<RRRelationFilter, RRWhereInput>
-    meqs_supplier_item?: XOR<MEQSSupplierItemNullableRelationFilter, MEQSSupplierItemWhereInput> | null
     item_transaction?: XOR<ItemTransactionNullableRelationFilter, ItemTransactionWhereInput> | null
-  }, "id" | "meqs_supplier_item_id">
+    meqs_supplier_item?: XOR<MEQSSupplierItemRelationFilter, MEQSSupplierItemWhereInput>
+  }, "id">
 
   export type RRItemOrderByWithAggregationInput = {
     id?: SortOrder
     rr_id?: SortOrder
-    meqs_supplier_item_id?: SortOrderInput | SortOrder
+    meqs_supplier_item_id?: SortOrder
     quantity_accepted?: SortOrder
     created_by?: SortOrder
     updated_by?: SortOrderInput | SortOrder
@@ -31977,7 +32002,7 @@ export namespace Prisma {
     NOT?: RRItemScalarWhereWithAggregatesInput | RRItemScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"RRItem"> | string
     rr_id?: StringWithAggregatesFilter<"RRItem"> | string
-    meqs_supplier_item_id?: StringNullableWithAggregatesFilter<"RRItem"> | string | null
+    meqs_supplier_item_id?: StringWithAggregatesFilter<"RRItem"> | string
     quantity_accepted?: IntWithAggregatesFilter<"RRItem"> | number
     created_by?: StringWithAggregatesFilter<"RRItem"> | string
     updated_by?: StringNullableWithAggregatesFilter<"RRItem"> | string | null
@@ -33746,7 +33771,7 @@ export namespace Prisma {
     updated_at?: Date | string
     canvass_item: CanvassItemCreateNestedOneWithoutMeqs_supplier_itemsInput
     meqs_supplier: MEQSSupplierCreateNestedOneWithoutMeqs_supplier_itemsInput
-    rr_item?: RRItemCreateNestedOneWithoutMeqs_supplier_itemInput
+    rr_items?: RRItemCreateNestedManyWithoutMeqs_supplier_itemInput
   }
 
   export type MEQSSupplierItemUncheckedCreateInput = {
@@ -33761,7 +33786,7 @@ export namespace Prisma {
     updated_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    rr_item?: RRItemUncheckedCreateNestedOneWithoutMeqs_supplier_itemInput
+    rr_items?: RRItemUncheckedCreateNestedManyWithoutMeqs_supplier_itemInput
   }
 
   export type MEQSSupplierItemUpdateInput = {
@@ -33776,7 +33801,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     canvass_item?: CanvassItemUpdateOneRequiredWithoutMeqs_supplier_itemsNestedInput
     meqs_supplier?: MEQSSupplierUpdateOneRequiredWithoutMeqs_supplier_itemsNestedInput
-    rr_item?: RRItemUpdateOneWithoutMeqs_supplier_itemNestedInput
+    rr_items?: RRItemUpdateManyWithoutMeqs_supplier_itemNestedInput
   }
 
   export type MEQSSupplierItemUncheckedUpdateInput = {
@@ -33791,7 +33816,7 @@ export namespace Prisma {
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    rr_item?: RRItemUncheckedUpdateOneWithoutMeqs_supplier_itemNestedInput
+    rr_items?: RRItemUncheckedUpdateManyWithoutMeqs_supplier_itemNestedInput
   }
 
   export type MEQSSupplierItemCreateManyInput = {
@@ -34524,14 +34549,14 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     rr: RRCreateNestedOneWithoutRr_itemsInput
-    meqs_supplier_item?: MEQSSupplierItemCreateNestedOneWithoutRr_itemInput
     item_transaction?: ItemTransactionCreateNestedOneWithoutRr_itemInput
+    meqs_supplier_item: MEQSSupplierItemCreateNestedOneWithoutRr_itemsInput
   }
 
   export type RRItemUncheckedCreateInput = {
     id?: string
     rr_id: string
-    meqs_supplier_item_id?: string | null
+    meqs_supplier_item_id: string
     quantity_accepted: number
     created_by: string
     updated_by?: string | null
@@ -34548,14 +34573,14 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     rr?: RRUpdateOneRequiredWithoutRr_itemsNestedInput
-    meqs_supplier_item?: MEQSSupplierItemUpdateOneWithoutRr_itemNestedInput
     item_transaction?: ItemTransactionUpdateOneWithoutRr_itemNestedInput
+    meqs_supplier_item?: MEQSSupplierItemUpdateOneRequiredWithoutRr_itemsNestedInput
   }
 
   export type RRItemUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     rr_id?: StringFieldUpdateOperationsInput | string
-    meqs_supplier_item_id?: NullableStringFieldUpdateOperationsInput | string | null
+    meqs_supplier_item_id?: StringFieldUpdateOperationsInput | string
     quantity_accepted?: IntFieldUpdateOperationsInput | number
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -34567,7 +34592,7 @@ export namespace Prisma {
   export type RRItemCreateManyInput = {
     id?: string
     rr_id: string
-    meqs_supplier_item_id?: string | null
+    meqs_supplier_item_id: string
     quantity_accepted: number
     created_by: string
     updated_by?: string | null
@@ -34587,7 +34612,7 @@ export namespace Prisma {
   export type RRItemUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     rr_id?: StringFieldUpdateOperationsInput | string
-    meqs_supplier_item_id?: NullableStringFieldUpdateOperationsInput | string | null
+    meqs_supplier_item_id?: StringFieldUpdateOperationsInput | string
     quantity_accepted?: IntFieldUpdateOperationsInput | number
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -36109,9 +36134,14 @@ export namespace Prisma {
     isNot?: MEQSSupplierWhereInput
   }
 
-  export type RRItemNullableRelationFilter = {
-    is?: RRItemWhereInput | null
-    isNot?: RRItemWhereInput | null
+  export type RRItemListRelationFilter = {
+    every?: RRItemWhereInput
+    some?: RRItemWhereInput
+    none?: RRItemWhereInput
+  }
+
+  export type RRItemOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type MEQSSupplierItemCountOrderByAggregateInput = {
@@ -36421,17 +36451,7 @@ export namespace Prisma {
     none?: RRApproverWhereInput
   }
 
-  export type RRItemListRelationFilter = {
-    every?: RRItemWhereInput
-    some?: RRItemWhereInput
-    none?: RRItemWhereInput
-  }
-
   export type RRApproverOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type RRItemOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -36566,14 +36586,14 @@ export namespace Prisma {
     order?: SortOrder
   }
 
-  export type MEQSSupplierItemNullableRelationFilter = {
-    is?: MEQSSupplierItemWhereInput | null
-    isNot?: MEQSSupplierItemWhereInput | null
-  }
-
   export type ItemTransactionNullableRelationFilter = {
     is?: ItemTransactionWhereInput | null
     isNot?: ItemTransactionWhereInput | null
+  }
+
+  export type MEQSSupplierItemRelationFilter = {
+    is?: MEQSSupplierItemWhereInput
+    isNot?: MEQSSupplierItemWhereInput
   }
 
   export type RRItemCountOrderByAggregateInput = {
@@ -36706,6 +36726,11 @@ export namespace Prisma {
   export type ItemRelationFilter = {
     is?: ItemWhereInput
     isNot?: ItemWhereInput
+  }
+
+  export type RRItemNullableRelationFilter = {
+    is?: RRItemWhereInput | null
+    isNot?: RRItemWhereInput | null
   }
 
   export type ItemTransactionCountOrderByAggregateInput = {
@@ -37843,16 +37868,18 @@ export namespace Prisma {
     connect?: MEQSSupplierWhereUniqueInput
   }
 
-  export type RRItemCreateNestedOneWithoutMeqs_supplier_itemInput = {
-    create?: XOR<RRItemCreateWithoutMeqs_supplier_itemInput, RRItemUncheckedCreateWithoutMeqs_supplier_itemInput>
-    connectOrCreate?: RRItemCreateOrConnectWithoutMeqs_supplier_itemInput
-    connect?: RRItemWhereUniqueInput
+  export type RRItemCreateNestedManyWithoutMeqs_supplier_itemInput = {
+    create?: XOR<RRItemCreateWithoutMeqs_supplier_itemInput, RRItemUncheckedCreateWithoutMeqs_supplier_itemInput> | RRItemCreateWithoutMeqs_supplier_itemInput[] | RRItemUncheckedCreateWithoutMeqs_supplier_itemInput[]
+    connectOrCreate?: RRItemCreateOrConnectWithoutMeqs_supplier_itemInput | RRItemCreateOrConnectWithoutMeqs_supplier_itemInput[]
+    createMany?: RRItemCreateManyMeqs_supplier_itemInputEnvelope
+    connect?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
   }
 
-  export type RRItemUncheckedCreateNestedOneWithoutMeqs_supplier_itemInput = {
-    create?: XOR<RRItemCreateWithoutMeqs_supplier_itemInput, RRItemUncheckedCreateWithoutMeqs_supplier_itemInput>
-    connectOrCreate?: RRItemCreateOrConnectWithoutMeqs_supplier_itemInput
-    connect?: RRItemWhereUniqueInput
+  export type RRItemUncheckedCreateNestedManyWithoutMeqs_supplier_itemInput = {
+    create?: XOR<RRItemCreateWithoutMeqs_supplier_itemInput, RRItemUncheckedCreateWithoutMeqs_supplier_itemInput> | RRItemCreateWithoutMeqs_supplier_itemInput[] | RRItemUncheckedCreateWithoutMeqs_supplier_itemInput[]
+    connectOrCreate?: RRItemCreateOrConnectWithoutMeqs_supplier_itemInput | RRItemCreateOrConnectWithoutMeqs_supplier_itemInput[]
+    createMany?: RRItemCreateManyMeqs_supplier_itemInputEnvelope
+    connect?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
   }
 
   export type FloatFieldUpdateOperationsInput = {
@@ -37883,24 +37910,32 @@ export namespace Prisma {
     update?: XOR<XOR<MEQSSupplierUpdateToOneWithWhereWithoutMeqs_supplier_itemsInput, MEQSSupplierUpdateWithoutMeqs_supplier_itemsInput>, MEQSSupplierUncheckedUpdateWithoutMeqs_supplier_itemsInput>
   }
 
-  export type RRItemUpdateOneWithoutMeqs_supplier_itemNestedInput = {
-    create?: XOR<RRItemCreateWithoutMeqs_supplier_itemInput, RRItemUncheckedCreateWithoutMeqs_supplier_itemInput>
-    connectOrCreate?: RRItemCreateOrConnectWithoutMeqs_supplier_itemInput
-    upsert?: RRItemUpsertWithoutMeqs_supplier_itemInput
-    disconnect?: RRItemWhereInput | boolean
-    delete?: RRItemWhereInput | boolean
-    connect?: RRItemWhereUniqueInput
-    update?: XOR<XOR<RRItemUpdateToOneWithWhereWithoutMeqs_supplier_itemInput, RRItemUpdateWithoutMeqs_supplier_itemInput>, RRItemUncheckedUpdateWithoutMeqs_supplier_itemInput>
+  export type RRItemUpdateManyWithoutMeqs_supplier_itemNestedInput = {
+    create?: XOR<RRItemCreateWithoutMeqs_supplier_itemInput, RRItemUncheckedCreateWithoutMeqs_supplier_itemInput> | RRItemCreateWithoutMeqs_supplier_itemInput[] | RRItemUncheckedCreateWithoutMeqs_supplier_itemInput[]
+    connectOrCreate?: RRItemCreateOrConnectWithoutMeqs_supplier_itemInput | RRItemCreateOrConnectWithoutMeqs_supplier_itemInput[]
+    upsert?: RRItemUpsertWithWhereUniqueWithoutMeqs_supplier_itemInput | RRItemUpsertWithWhereUniqueWithoutMeqs_supplier_itemInput[]
+    createMany?: RRItemCreateManyMeqs_supplier_itemInputEnvelope
+    set?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
+    disconnect?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
+    delete?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
+    connect?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
+    update?: RRItemUpdateWithWhereUniqueWithoutMeqs_supplier_itemInput | RRItemUpdateWithWhereUniqueWithoutMeqs_supplier_itemInput[]
+    updateMany?: RRItemUpdateManyWithWhereWithoutMeqs_supplier_itemInput | RRItemUpdateManyWithWhereWithoutMeqs_supplier_itemInput[]
+    deleteMany?: RRItemScalarWhereInput | RRItemScalarWhereInput[]
   }
 
-  export type RRItemUncheckedUpdateOneWithoutMeqs_supplier_itemNestedInput = {
-    create?: XOR<RRItemCreateWithoutMeqs_supplier_itemInput, RRItemUncheckedCreateWithoutMeqs_supplier_itemInput>
-    connectOrCreate?: RRItemCreateOrConnectWithoutMeqs_supplier_itemInput
-    upsert?: RRItemUpsertWithoutMeqs_supplier_itemInput
-    disconnect?: RRItemWhereInput | boolean
-    delete?: RRItemWhereInput | boolean
-    connect?: RRItemWhereUniqueInput
-    update?: XOR<XOR<RRItemUpdateToOneWithWhereWithoutMeqs_supplier_itemInput, RRItemUpdateWithoutMeqs_supplier_itemInput>, RRItemUncheckedUpdateWithoutMeqs_supplier_itemInput>
+  export type RRItemUncheckedUpdateManyWithoutMeqs_supplier_itemNestedInput = {
+    create?: XOR<RRItemCreateWithoutMeqs_supplier_itemInput, RRItemUncheckedCreateWithoutMeqs_supplier_itemInput> | RRItemCreateWithoutMeqs_supplier_itemInput[] | RRItemUncheckedCreateWithoutMeqs_supplier_itemInput[]
+    connectOrCreate?: RRItemCreateOrConnectWithoutMeqs_supplier_itemInput | RRItemCreateOrConnectWithoutMeqs_supplier_itemInput[]
+    upsert?: RRItemUpsertWithWhereUniqueWithoutMeqs_supplier_itemInput | RRItemUpsertWithWhereUniqueWithoutMeqs_supplier_itemInput[]
+    createMany?: RRItemCreateManyMeqs_supplier_itemInputEnvelope
+    set?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
+    disconnect?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
+    delete?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
+    connect?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
+    update?: RRItemUpdateWithWhereUniqueWithoutMeqs_supplier_itemInput | RRItemUpdateWithWhereUniqueWithoutMeqs_supplier_itemInput[]
+    updateMany?: RRItemUpdateManyWithWhereWithoutMeqs_supplier_itemInput | RRItemUpdateManyWithWhereWithoutMeqs_supplier_itemInput[]
+    deleteMany?: RRItemScalarWhereInput | RRItemScalarWhereInput[]
   }
 
   export type MEQSSupplierCreateNestedOneWithoutAttachmentsInput = {
@@ -38161,16 +38196,16 @@ export namespace Prisma {
     connect?: RRWhereUniqueInput
   }
 
-  export type MEQSSupplierItemCreateNestedOneWithoutRr_itemInput = {
-    create?: XOR<MEQSSupplierItemCreateWithoutRr_itemInput, MEQSSupplierItemUncheckedCreateWithoutRr_itemInput>
-    connectOrCreate?: MEQSSupplierItemCreateOrConnectWithoutRr_itemInput
-    connect?: MEQSSupplierItemWhereUniqueInput
-  }
-
   export type ItemTransactionCreateNestedOneWithoutRr_itemInput = {
     create?: XOR<ItemTransactionCreateWithoutRr_itemInput, ItemTransactionUncheckedCreateWithoutRr_itemInput>
     connectOrCreate?: ItemTransactionCreateOrConnectWithoutRr_itemInput
     connect?: ItemTransactionWhereUniqueInput
+  }
+
+  export type MEQSSupplierItemCreateNestedOneWithoutRr_itemsInput = {
+    create?: XOR<MEQSSupplierItemCreateWithoutRr_itemsInput, MEQSSupplierItemUncheckedCreateWithoutRr_itemsInput>
+    connectOrCreate?: MEQSSupplierItemCreateOrConnectWithoutRr_itemsInput
+    connect?: MEQSSupplierItemWhereUniqueInput
   }
 
   export type ItemTransactionUncheckedCreateNestedOneWithoutRr_itemInput = {
@@ -38187,16 +38222,6 @@ export namespace Prisma {
     update?: XOR<XOR<RRUpdateToOneWithWhereWithoutRr_itemsInput, RRUpdateWithoutRr_itemsInput>, RRUncheckedUpdateWithoutRr_itemsInput>
   }
 
-  export type MEQSSupplierItemUpdateOneWithoutRr_itemNestedInput = {
-    create?: XOR<MEQSSupplierItemCreateWithoutRr_itemInput, MEQSSupplierItemUncheckedCreateWithoutRr_itemInput>
-    connectOrCreate?: MEQSSupplierItemCreateOrConnectWithoutRr_itemInput
-    upsert?: MEQSSupplierItemUpsertWithoutRr_itemInput
-    disconnect?: MEQSSupplierItemWhereInput | boolean
-    delete?: MEQSSupplierItemWhereInput | boolean
-    connect?: MEQSSupplierItemWhereUniqueInput
-    update?: XOR<XOR<MEQSSupplierItemUpdateToOneWithWhereWithoutRr_itemInput, MEQSSupplierItemUpdateWithoutRr_itemInput>, MEQSSupplierItemUncheckedUpdateWithoutRr_itemInput>
-  }
-
   export type ItemTransactionUpdateOneWithoutRr_itemNestedInput = {
     create?: XOR<ItemTransactionCreateWithoutRr_itemInput, ItemTransactionUncheckedCreateWithoutRr_itemInput>
     connectOrCreate?: ItemTransactionCreateOrConnectWithoutRr_itemInput
@@ -38205,6 +38230,14 @@ export namespace Prisma {
     delete?: ItemTransactionWhereInput | boolean
     connect?: ItemTransactionWhereUniqueInput
     update?: XOR<XOR<ItemTransactionUpdateToOneWithWhereWithoutRr_itemInput, ItemTransactionUpdateWithoutRr_itemInput>, ItemTransactionUncheckedUpdateWithoutRr_itemInput>
+  }
+
+  export type MEQSSupplierItemUpdateOneRequiredWithoutRr_itemsNestedInput = {
+    create?: XOR<MEQSSupplierItemCreateWithoutRr_itemsInput, MEQSSupplierItemUncheckedCreateWithoutRr_itemsInput>
+    connectOrCreate?: MEQSSupplierItemCreateOrConnectWithoutRr_itemsInput
+    upsert?: MEQSSupplierItemUpsertWithoutRr_itemsInput
+    connect?: MEQSSupplierItemWhereUniqueInput
+    update?: XOR<XOR<MEQSSupplierItemUpdateToOneWithWhereWithoutRr_itemsInput, MEQSSupplierItemUpdateWithoutRr_itemsInput>, MEQSSupplierItemUncheckedUpdateWithoutRr_itemsInput>
   }
 
   export type ItemTransactionUncheckedUpdateOneWithoutRr_itemNestedInput = {
@@ -39155,7 +39188,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     meqs_supplier: MEQSSupplierCreateNestedOneWithoutMeqs_supplier_itemsInput
-    rr_item?: RRItemCreateNestedOneWithoutMeqs_supplier_itemInput
+    rr_items?: RRItemCreateNestedManyWithoutMeqs_supplier_itemInput
   }
 
   export type MEQSSupplierItemUncheckedCreateWithoutCanvass_itemInput = {
@@ -39169,7 +39202,7 @@ export namespace Prisma {
     updated_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    rr_item?: RRItemUncheckedCreateNestedOneWithoutMeqs_supplier_itemInput
+    rr_items?: RRItemUncheckedCreateNestedManyWithoutMeqs_supplier_itemInput
   }
 
   export type MEQSSupplierItemCreateOrConnectWithoutCanvass_itemInput = {
@@ -41136,7 +41169,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     canvass_item: CanvassItemCreateNestedOneWithoutMeqs_supplier_itemsInput
-    rr_item?: RRItemCreateNestedOneWithoutMeqs_supplier_itemInput
+    rr_items?: RRItemCreateNestedManyWithoutMeqs_supplier_itemInput
   }
 
   export type MEQSSupplierItemUncheckedCreateWithoutMeqs_supplierInput = {
@@ -41150,7 +41183,7 @@ export namespace Prisma {
     updated_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    rr_item?: RRItemUncheckedCreateNestedOneWithoutMeqs_supplier_itemInput
+    rr_items?: RRItemUncheckedCreateNestedManyWithoutMeqs_supplier_itemInput
   }
 
   export type MEQSSupplierItemCreateOrConnectWithoutMeqs_supplierInput = {
@@ -41466,6 +41499,11 @@ export namespace Prisma {
     create: XOR<RRItemCreateWithoutMeqs_supplier_itemInput, RRItemUncheckedCreateWithoutMeqs_supplier_itemInput>
   }
 
+  export type RRItemCreateManyMeqs_supplier_itemInputEnvelope = {
+    data: RRItemCreateManyMeqs_supplier_itemInput | RRItemCreateManyMeqs_supplier_itemInput[]
+    skipDuplicates?: boolean
+  }
+
   export type CanvassItemUpsertWithoutMeqs_supplier_itemsInput = {
     update: XOR<CanvassItemUpdateWithoutMeqs_supplier_itemsInput, CanvassItemUncheckedUpdateWithoutMeqs_supplier_itemsInput>
     create: XOR<CanvassItemCreateWithoutMeqs_supplier_itemsInput, CanvassItemUncheckedCreateWithoutMeqs_supplier_itemsInput>
@@ -41542,37 +41580,34 @@ export namespace Prisma {
     po?: POUncheckedUpdateOneWithoutMeqs_supplierNestedInput
   }
 
-  export type RRItemUpsertWithoutMeqs_supplier_itemInput = {
+  export type RRItemUpsertWithWhereUniqueWithoutMeqs_supplier_itemInput = {
+    where: RRItemWhereUniqueInput
     update: XOR<RRItemUpdateWithoutMeqs_supplier_itemInput, RRItemUncheckedUpdateWithoutMeqs_supplier_itemInput>
     create: XOR<RRItemCreateWithoutMeqs_supplier_itemInput, RRItemUncheckedCreateWithoutMeqs_supplier_itemInput>
-    where?: RRItemWhereInput
   }
 
-  export type RRItemUpdateToOneWithWhereWithoutMeqs_supplier_itemInput = {
-    where?: RRItemWhereInput
+  export type RRItemUpdateWithWhereUniqueWithoutMeqs_supplier_itemInput = {
+    where: RRItemWhereUniqueInput
     data: XOR<RRItemUpdateWithoutMeqs_supplier_itemInput, RRItemUncheckedUpdateWithoutMeqs_supplier_itemInput>
   }
 
-  export type RRItemUpdateWithoutMeqs_supplier_itemInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    quantity_accepted?: IntFieldUpdateOperationsInput | number
-    created_by?: StringFieldUpdateOperationsInput | string
-    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    rr?: RRUpdateOneRequiredWithoutRr_itemsNestedInput
-    item_transaction?: ItemTransactionUpdateOneWithoutRr_itemNestedInput
+  export type RRItemUpdateManyWithWhereWithoutMeqs_supplier_itemInput = {
+    where: RRItemScalarWhereInput
+    data: XOR<RRItemUpdateManyMutationInput, RRItemUncheckedUpdateManyWithoutMeqs_supplier_itemInput>
   }
 
-  export type RRItemUncheckedUpdateWithoutMeqs_supplier_itemInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    rr_id?: StringFieldUpdateOperationsInput | string
-    quantity_accepted?: IntFieldUpdateOperationsInput | number
-    created_by?: StringFieldUpdateOperationsInput | string
-    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    item_transaction?: ItemTransactionUncheckedUpdateOneWithoutRr_itemNestedInput
+  export type RRItemScalarWhereInput = {
+    AND?: RRItemScalarWhereInput | RRItemScalarWhereInput[]
+    OR?: RRItemScalarWhereInput[]
+    NOT?: RRItemScalarWhereInput | RRItemScalarWhereInput[]
+    id?: StringFilter<"RRItem"> | string
+    rr_id?: StringFilter<"RRItem"> | string
+    meqs_supplier_item_id?: StringFilter<"RRItem"> | string
+    quantity_accepted?: IntFilter<"RRItem"> | number
+    created_by?: StringFilter<"RRItem"> | string
+    updated_by?: StringNullableFilter<"RRItem"> | string | null
+    created_at?: DateTimeFilter<"RRItem"> | Date | string
+    updated_at?: DateTimeFilter<"RRItem"> | Date | string
   }
 
   export type MEQSSupplierCreateWithoutAttachmentsInput = {
@@ -42127,13 +42162,13 @@ export namespace Prisma {
     updated_by?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    meqs_supplier_item?: MEQSSupplierItemCreateNestedOneWithoutRr_itemInput
     item_transaction?: ItemTransactionCreateNestedOneWithoutRr_itemInput
+    meqs_supplier_item: MEQSSupplierItemCreateNestedOneWithoutRr_itemsInput
   }
 
   export type RRItemUncheckedCreateWithoutRrInput = {
     id?: string
-    meqs_supplier_item_id?: string | null
+    meqs_supplier_item_id: string
     quantity_accepted: number
     created_by: string
     updated_by?: string | null
@@ -42245,20 +42280,6 @@ export namespace Prisma {
   export type RRItemUpdateManyWithWhereWithoutRrInput = {
     where: RRItemScalarWhereInput
     data: XOR<RRItemUpdateManyMutationInput, RRItemUncheckedUpdateManyWithoutRrInput>
-  }
-
-  export type RRItemScalarWhereInput = {
-    AND?: RRItemScalarWhereInput | RRItemScalarWhereInput[]
-    OR?: RRItemScalarWhereInput[]
-    NOT?: RRItemScalarWhereInput | RRItemScalarWhereInput[]
-    id?: StringFilter<"RRItem"> | string
-    rr_id?: StringFilter<"RRItem"> | string
-    meqs_supplier_item_id?: StringNullableFilter<"RRItem"> | string | null
-    quantity_accepted?: IntFilter<"RRItem"> | number
-    created_by?: StringFilter<"RRItem"> | string
-    updated_by?: StringNullableFilter<"RRItem"> | string | null
-    created_at?: DateTimeFilter<"RRItem"> | Date | string
-    updated_at?: DateTimeFilter<"RRItem"> | Date | string
   }
 
   export type RRCreateWithoutRr_approversInput = {
@@ -42402,39 +42423,6 @@ export namespace Prisma {
     create: XOR<RRCreateWithoutRr_itemsInput, RRUncheckedCreateWithoutRr_itemsInput>
   }
 
-  export type MEQSSupplierItemCreateWithoutRr_itemInput = {
-    id?: string
-    price: number
-    notes: string
-    is_awarded?: boolean
-    vat_type?: number
-    created_by: string
-    updated_by?: string | null
-    created_at?: Date | string
-    updated_at?: Date | string
-    canvass_item: CanvassItemCreateNestedOneWithoutMeqs_supplier_itemsInput
-    meqs_supplier: MEQSSupplierCreateNestedOneWithoutMeqs_supplier_itemsInput
-  }
-
-  export type MEQSSupplierItemUncheckedCreateWithoutRr_itemInput = {
-    id?: string
-    meqs_supplier_id: string
-    canvass_item_id: string
-    price: number
-    notes: string
-    is_awarded?: boolean
-    vat_type?: number
-    created_by: string
-    updated_by?: string | null
-    created_at?: Date | string
-    updated_at?: Date | string
-  }
-
-  export type MEQSSupplierItemCreateOrConnectWithoutRr_itemInput = {
-    where: MEQSSupplierItemWhereUniqueInput
-    create: XOR<MEQSSupplierItemCreateWithoutRr_itemInput, MEQSSupplierItemUncheckedCreateWithoutRr_itemInput>
-  }
-
   export type ItemTransactionCreateWithoutRr_itemInput = {
     type: number
     quantity: number
@@ -42461,6 +42449,39 @@ export namespace Prisma {
   export type ItemTransactionCreateOrConnectWithoutRr_itemInput = {
     where: ItemTransactionWhereUniqueInput
     create: XOR<ItemTransactionCreateWithoutRr_itemInput, ItemTransactionUncheckedCreateWithoutRr_itemInput>
+  }
+
+  export type MEQSSupplierItemCreateWithoutRr_itemsInput = {
+    id?: string
+    price: number
+    notes: string
+    is_awarded?: boolean
+    vat_type?: number
+    created_by: string
+    updated_by?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    canvass_item: CanvassItemCreateNestedOneWithoutMeqs_supplier_itemsInput
+    meqs_supplier: MEQSSupplierCreateNestedOneWithoutMeqs_supplier_itemsInput
+  }
+
+  export type MEQSSupplierItemUncheckedCreateWithoutRr_itemsInput = {
+    id?: string
+    meqs_supplier_id: string
+    canvass_item_id: string
+    price: number
+    notes: string
+    is_awarded?: boolean
+    vat_type?: number
+    created_by: string
+    updated_by?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type MEQSSupplierItemCreateOrConnectWithoutRr_itemsInput = {
+    where: MEQSSupplierItemWhereUniqueInput
+    create: XOR<MEQSSupplierItemCreateWithoutRr_itemsInput, MEQSSupplierItemUncheckedCreateWithoutRr_itemsInput>
   }
 
   export type RRUpsertWithoutRr_itemsInput = {
@@ -42514,45 +42535,6 @@ export namespace Prisma {
     rr_approvers?: RRApproverUncheckedUpdateManyWithoutRrNestedInput
   }
 
-  export type MEQSSupplierItemUpsertWithoutRr_itemInput = {
-    update: XOR<MEQSSupplierItemUpdateWithoutRr_itemInput, MEQSSupplierItemUncheckedUpdateWithoutRr_itemInput>
-    create: XOR<MEQSSupplierItemCreateWithoutRr_itemInput, MEQSSupplierItemUncheckedCreateWithoutRr_itemInput>
-    where?: MEQSSupplierItemWhereInput
-  }
-
-  export type MEQSSupplierItemUpdateToOneWithWhereWithoutRr_itemInput = {
-    where?: MEQSSupplierItemWhereInput
-    data: XOR<MEQSSupplierItemUpdateWithoutRr_itemInput, MEQSSupplierItemUncheckedUpdateWithoutRr_itemInput>
-  }
-
-  export type MEQSSupplierItemUpdateWithoutRr_itemInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
-    notes?: StringFieldUpdateOperationsInput | string
-    is_awarded?: BoolFieldUpdateOperationsInput | boolean
-    vat_type?: IntFieldUpdateOperationsInput | number
-    created_by?: StringFieldUpdateOperationsInput | string
-    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    canvass_item?: CanvassItemUpdateOneRequiredWithoutMeqs_supplier_itemsNestedInput
-    meqs_supplier?: MEQSSupplierUpdateOneRequiredWithoutMeqs_supplier_itemsNestedInput
-  }
-
-  export type MEQSSupplierItemUncheckedUpdateWithoutRr_itemInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    meqs_supplier_id?: StringFieldUpdateOperationsInput | string
-    canvass_item_id?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
-    notes?: StringFieldUpdateOperationsInput | string
-    is_awarded?: BoolFieldUpdateOperationsInput | boolean
-    vat_type?: IntFieldUpdateOperationsInput | number
-    created_by?: StringFieldUpdateOperationsInput | string
-    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
   export type ItemTransactionUpsertWithoutRr_itemInput = {
     update: XOR<ItemTransactionUpdateWithoutRr_itemInput, ItemTransactionUncheckedUpdateWithoutRr_itemInput>
     create: XOR<ItemTransactionCreateWithoutRr_itemInput, ItemTransactionUncheckedCreateWithoutRr_itemInput>
@@ -42585,6 +42567,45 @@ export namespace Prisma {
     is_initial?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     created_by?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type MEQSSupplierItemUpsertWithoutRr_itemsInput = {
+    update: XOR<MEQSSupplierItemUpdateWithoutRr_itemsInput, MEQSSupplierItemUncheckedUpdateWithoutRr_itemsInput>
+    create: XOR<MEQSSupplierItemCreateWithoutRr_itemsInput, MEQSSupplierItemUncheckedCreateWithoutRr_itemsInput>
+    where?: MEQSSupplierItemWhereInput
+  }
+
+  export type MEQSSupplierItemUpdateToOneWithWhereWithoutRr_itemsInput = {
+    where?: MEQSSupplierItemWhereInput
+    data: XOR<MEQSSupplierItemUpdateWithoutRr_itemsInput, MEQSSupplierItemUncheckedUpdateWithoutRr_itemsInput>
+  }
+
+  export type MEQSSupplierItemUpdateWithoutRr_itemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    price?: FloatFieldUpdateOperationsInput | number
+    notes?: StringFieldUpdateOperationsInput | string
+    is_awarded?: BoolFieldUpdateOperationsInput | boolean
+    vat_type?: IntFieldUpdateOperationsInput | number
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    canvass_item?: CanvassItemUpdateOneRequiredWithoutMeqs_supplier_itemsNestedInput
+    meqs_supplier?: MEQSSupplierUpdateOneRequiredWithoutMeqs_supplier_itemsNestedInput
+  }
+
+  export type MEQSSupplierItemUncheckedUpdateWithoutRr_itemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    meqs_supplier_id?: StringFieldUpdateOperationsInput | string
+    canvass_item_id?: StringFieldUpdateOperationsInput | string
+    price?: FloatFieldUpdateOperationsInput | number
+    notes?: StringFieldUpdateOperationsInput | string
+    is_awarded?: BoolFieldUpdateOperationsInput | boolean
+    vat_type?: IntFieldUpdateOperationsInput | number
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ItemTypeCreateWithoutItemsInput = {
@@ -42881,13 +42902,13 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     rr: RRCreateNestedOneWithoutRr_itemsInput
-    meqs_supplier_item?: MEQSSupplierItemCreateNestedOneWithoutRr_itemInput
+    meqs_supplier_item: MEQSSupplierItemCreateNestedOneWithoutRr_itemsInput
   }
 
   export type RRItemUncheckedCreateWithoutItem_transactionInput = {
     id?: string
     rr_id: string
-    meqs_supplier_item_id?: string | null
+    meqs_supplier_item_id: string
     quantity_accepted: number
     created_by: string
     updated_by?: string | null
@@ -42968,13 +42989,13 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     rr?: RRUpdateOneRequiredWithoutRr_itemsNestedInput
-    meqs_supplier_item?: MEQSSupplierItemUpdateOneWithoutRr_itemNestedInput
+    meqs_supplier_item?: MEQSSupplierItemUpdateOneRequiredWithoutRr_itemsNestedInput
   }
 
   export type RRItemUncheckedUpdateWithoutItem_transactionInput = {
     id?: StringFieldUpdateOperationsInput | string
     rr_id?: StringFieldUpdateOperationsInput | string
-    meqs_supplier_item_id?: NullableStringFieldUpdateOperationsInput | string | null
+    meqs_supplier_item_id?: StringFieldUpdateOperationsInput | string
     quantity_accepted?: IntFieldUpdateOperationsInput | number
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -43451,7 +43472,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     meqs_supplier?: MEQSSupplierUpdateOneRequiredWithoutMeqs_supplier_itemsNestedInput
-    rr_item?: RRItemUpdateOneWithoutMeqs_supplier_itemNestedInput
+    rr_items?: RRItemUpdateManyWithoutMeqs_supplier_itemNestedInput
   }
 
   export type MEQSSupplierItemUncheckedUpdateWithoutCanvass_itemInput = {
@@ -43465,7 +43486,7 @@ export namespace Prisma {
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    rr_item?: RRItemUncheckedUpdateOneWithoutMeqs_supplier_itemNestedInput
+    rr_items?: RRItemUncheckedUpdateManyWithoutMeqs_supplier_itemNestedInput
   }
 
   export type MEQSSupplierItemUncheckedUpdateManyWithoutCanvass_itemInput = {
@@ -43847,7 +43868,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     canvass_item?: CanvassItemUpdateOneRequiredWithoutMeqs_supplier_itemsNestedInput
-    rr_item?: RRItemUpdateOneWithoutMeqs_supplier_itemNestedInput
+    rr_items?: RRItemUpdateManyWithoutMeqs_supplier_itemNestedInput
   }
 
   export type MEQSSupplierItemUncheckedUpdateWithoutMeqs_supplierInput = {
@@ -43861,7 +43882,7 @@ export namespace Prisma {
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    rr_item?: RRItemUncheckedUpdateOneWithoutMeqs_supplier_itemNestedInput
+    rr_items?: RRItemUncheckedUpdateManyWithoutMeqs_supplier_itemNestedInput
   }
 
   export type MEQSSupplierItemUncheckedUpdateManyWithoutMeqs_supplierInput = {
@@ -43871,6 +43892,48 @@ export namespace Prisma {
     notes?: StringFieldUpdateOperationsInput | string
     is_awarded?: BoolFieldUpdateOperationsInput | boolean
     vat_type?: IntFieldUpdateOperationsInput | number
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RRItemCreateManyMeqs_supplier_itemInput = {
+    id?: string
+    rr_id: string
+    quantity_accepted: number
+    created_by: string
+    updated_by?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type RRItemUpdateWithoutMeqs_supplier_itemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    quantity_accepted?: IntFieldUpdateOperationsInput | number
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    rr?: RRUpdateOneRequiredWithoutRr_itemsNestedInput
+    item_transaction?: ItemTransactionUpdateOneWithoutRr_itemNestedInput
+  }
+
+  export type RRItemUncheckedUpdateWithoutMeqs_supplier_itemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    rr_id?: StringFieldUpdateOperationsInput | string
+    quantity_accepted?: IntFieldUpdateOperationsInput | number
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    item_transaction?: ItemTransactionUncheckedUpdateOneWithoutRr_itemNestedInput
+  }
+
+  export type RRItemUncheckedUpdateManyWithoutMeqs_supplier_itemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    rr_id?: StringFieldUpdateOperationsInput | string
+    quantity_accepted?: IntFieldUpdateOperationsInput | number
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -44035,7 +44098,7 @@ export namespace Prisma {
 
   export type RRItemCreateManyRrInput = {
     id?: string
-    meqs_supplier_item_id?: string | null
+    meqs_supplier_item_id: string
     quantity_accepted: number
     created_by: string
     updated_by?: string | null
@@ -44098,13 +44161,13 @@ export namespace Prisma {
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    meqs_supplier_item?: MEQSSupplierItemUpdateOneWithoutRr_itemNestedInput
     item_transaction?: ItemTransactionUpdateOneWithoutRr_itemNestedInput
+    meqs_supplier_item?: MEQSSupplierItemUpdateOneRequiredWithoutRr_itemsNestedInput
   }
 
   export type RRItemUncheckedUpdateWithoutRrInput = {
     id?: StringFieldUpdateOperationsInput | string
-    meqs_supplier_item_id?: NullableStringFieldUpdateOperationsInput | string | null
+    meqs_supplier_item_id?: StringFieldUpdateOperationsInput | string
     quantity_accepted?: IntFieldUpdateOperationsInput | number
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -44115,7 +44178,7 @@ export namespace Prisma {
 
   export type RRItemUncheckedUpdateManyWithoutRrInput = {
     id?: StringFieldUpdateOperationsInput | string
-    meqs_supplier_item_id?: NullableStringFieldUpdateOperationsInput | string | null
+    meqs_supplier_item_id?: StringFieldUpdateOperationsInput | string
     quantity_accepted?: IntFieldUpdateOperationsInput | number
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -44623,6 +44686,10 @@ export namespace Prisma {
      * @deprecated Use MEQSSupplierCountOutputTypeDefaultArgs instead
      */
     export type MEQSSupplierCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = MEQSSupplierCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use MEQSSupplierItemCountOutputTypeDefaultArgs instead
+     */
+    export type MEQSSupplierItemCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = MEQSSupplierItemCountOutputTypeDefaultArgs<ExtArgs>
     /**
      * @deprecated Use POCountOutputTypeDefaultArgs instead
      */

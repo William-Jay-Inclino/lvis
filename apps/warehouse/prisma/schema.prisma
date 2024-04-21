@@ -268,7 +268,8 @@ model MEQSSupplierItem {
 
   canvass_item  CanvassItem  @relation(fields: [canvass_item_id], references: [id], onDelete: Cascade)
   meqs_supplier MEQSSupplier @relation(fields: [meqs_supplier_id], references: [id], onDelete: Cascade)
-  rr_item       RRItem?
+
+  rr_items       RRItem[]  
 
   @@map("meqs_supplier_item")
 }
@@ -412,7 +413,7 @@ model RRApprover {
 model RRItem {
   id                    String  @id @default(uuid())
   rr_id                 String
-  meqs_supplier_item_id String? @unique
+  meqs_supplier_item_id String
   quantity_accepted     Int
 
   created_by String
@@ -422,8 +423,9 @@ model RRItem {
   updated_at DateTime @updatedAt
 
   rr                 RR                @relation(fields: [rr_id], references: [id], onDelete: Cascade)
-  meqs_supplier_item MEQSSupplierItem? @relation(fields: [meqs_supplier_item_id], references: [id], onDelete: Cascade)
   item_transaction   ItemTransaction?
+
+  meqs_supplier_item MEQSSupplierItem @relation(fields: [meqs_supplier_item_id], references: [id], onDelete: Restrict)
 
   @@map("rr_item")
 }
