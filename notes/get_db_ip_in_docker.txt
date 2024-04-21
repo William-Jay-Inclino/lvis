@@ -1,0 +1,1 @@
+sudo docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' docker-system-db-1
