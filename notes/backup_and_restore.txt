@@ -1,0 +1,92 @@
+
+In order to backup and restore use pgAdmin
+
+
+
+Backup first
+
+lvis-system > Databases > lvis_system_db 
+1. Right click on lvis_system_db then click backup 
+2. Enter filename preferably lvis_system_db_backup_apr_22_2024.sql (change the date)
+3. Format: Custom 
+4. Compression Ratio: Empty
+5. Encoding: UTF8
+6. Role name: jay 
+
+Data options tab 
+1. Data: enabled
+
+Objects Tab: Select all 
+
+click backup 
+
+Default storage of the backup is in /var/lib/pgadmin/storage/wjay.inclino_gmail.com/
+It can also be viewed in the processes view details after backup
+
+
+To Restore:
+
+1. Truncate all tables
+- go to Query tool (right click on lvis_system_db then click query tool)
+
+Run this command (this will truncate all tables): 
+
+DO
+$$ DECLARE
+   r RECORD;
+BEGIN
+   FOR r IN (SELECT tablename FROM pg_tables WHERE schemaname = 'public') LOOP
+      EXECUTE 'TRUNCATE TABLE ' || quote_ident(r.tablename) || ' CASCADE';
+   END LOOP;
+END $$;
+
+
+2. After successfull truncate. Right Click on lvis_system_db and click Restore 
+3. Format: Custom or tar 
+4. Filename: Select the filename to restore
+5. Role name: jay 
+
+
+Data options tab: 
+Data: enabled 
+
+
+Query options: 
+
+Clean before restore: enabled 
+Single transaction: enabled 
+
+
+Click restore
+
+
+
+Done
+
+
+
+
+SCHEDULE DAILY BACKUPS 
+
+go inside the postgres docker container and install pgagent 
+
+sudo docker ps                        
+CONTAINER ID   IMAGE         COMMAND                  CREATED        STATUS       PORTS                                       NAMES
+6d4f113951ed   postgres:16   "docker-entrypoint.s…"   23 hours ago   Up 4 hours   0.0.0.0:5437->5432/tcp, :::5437->5432/tcp   docker-warehouse-db-1
+fecd208dd140   postgres:16   "docker-entrypoint.s…"   4 days ago     Up 4 hours   0.0.0.0:5436->5432/tcp, :::5436->5432/tcp   docker-system-test-db-1
+c1fb49f3d594   postgres:16   "docker-entrypoint.s…"   4 days ago     Up 4 hours   0.0.0.0:5435->5432/tcp, :::5435->5432/tcp   docker-system-db-1
+61c2e57efb98   postgres:16   "docker-entrypoint.s…"   4 days ago     Up 4 hours   0.0.0.0:5438->5432/tcp, :::5438->5432/tcp   docker-warehouse-test-db-1
+               
+ [~]
+ jay  sudo docker exec -it c1fb49f3d594 bash
+
+ apt install pgagent
+
+
+
+open pgAdmin and go to query tool under the database and run 
+
+CREATE EXTENSION pgagent;
+
+
+Under extensions node you should see pgagent. If not right click on the extensions node and click refresh
