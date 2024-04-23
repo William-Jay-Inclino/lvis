@@ -62,31 +62,3 @@ Click restore
 
 
 Done
-
-
-
-
-SCHEDULE DAILY BACKUPS 
-
-go inside the postgres docker container and install pgagent 
-
-sudo docker ps                        
-CONTAINER ID   IMAGE         COMMAND                  CREATED        STATUS       PORTS                                       NAMES
-6d4f113951ed   postgres:16   "docker-entrypoint.s…"   23 hours ago   Up 4 hours   0.0.0.0:5437->5432/tcp, :::5437->5432/tcp   docker-warehouse-db-1
-fecd208dd140   postgres:16   "docker-entrypoint.s…"   4 days ago     Up 4 hours   0.0.0.0:5436->5432/tcp, :::5436->5432/tcp   docker-system-test-db-1
-c1fb49f3d594   postgres:16   "docker-entrypoint.s…"   4 days ago     Up 4 hours   0.0.0.0:5435->5432/tcp, :::5435->5432/tcp   docker-system-db-1
-61c2e57efb98   postgres:16   "docker-entrypoint.s…"   4 days ago     Up 4 hours   0.0.0.0:5438->5432/tcp, :::5438->5432/tcp   docker-warehouse-test-db-1
-               
- [~]
- jay  sudo docker exec -it c1fb49f3d594 bash
-
- apt install pgagent
-
-
-
-open pgAdmin and go to query tool under the database and run 
-
-CREATE EXTENSION pgagent;
-
-
-Under extensions node you should see pgagent. If not right click on the extensions node and click refresh
