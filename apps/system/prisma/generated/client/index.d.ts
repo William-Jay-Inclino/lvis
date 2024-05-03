@@ -420,7 +420,7 @@ export namespace Prisma {
 
   /**
    * Prisma Client JS version: 5.8.1
-   * Query Engine version: 473ed3124229e22d881cb7addf559799debae1ab
+   * Query Engine version: b9a39a7ee606c28e3455d0fd60e78c3ba82b1a2b
    */
   export type PrismaVersion = {
     client: string
