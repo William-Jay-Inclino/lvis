@@ -6937,7 +6937,10 @@ let JoApproverService = JoApproverService_1 = class JoApproverService {
             where: {
                 approver_id: employeeId,
                 status: types_1.APPROVAL_STATUS.PENDING,
-                deleted_at: null
+                deleted_at: null,
+                jo: {
+                    cancelled_at: null
+                }
             },
             orderBy: {
                 created_at: 'asc'
@@ -9461,7 +9464,10 @@ let MeqsApproverService = MeqsApproverService_1 = class MeqsApproverService {
             where: {
                 approver_id: employeeId,
                 status: types_1.APPROVAL_STATUS.PENDING,
-                deleted_at: null
+                deleted_at: null,
+                meqs: {
+                    cancelled_at: null
+                }
             },
             orderBy: {
                 created_at: 'asc'
@@ -13621,7 +13627,10 @@ let PoApproverService = PoApproverService_1 = class PoApproverService {
             where: {
                 approver_id: employeeId,
                 status: types_1.APPROVAL_STATUS.PENDING,
-                deleted_at: null
+                deleted_at: null,
+                po: {
+                    cancelled_at: null
+                }
             },
             orderBy: {
                 created_at: 'asc'
@@ -16175,7 +16184,10 @@ let RrApproverService = RrApproverService_1 = class RrApproverService {
             where: {
                 approver_id: employeeId,
                 status: types_1.APPROVAL_STATUS.PENDING,
-                deleted_at: null
+                deleted_at: null,
+                rr: {
+                    cancelled_at: null
+                }
             },
             orderBy: {
                 created_at: 'asc'
@@ -19319,7 +19331,10 @@ let RvApproverService = RvApproverService_1 = class RvApproverService {
             where: {
                 approver_id: employeeId,
                 status: types_1.APPROVAL_STATUS.PENDING,
-                deleted_at: null
+                deleted_at: null,
+                rv: {
+                    cancelled_at: null
+                }
             },
             orderBy: {
                 created_at: 'asc'
@@ -21701,7 +21716,10 @@ let SprApproverService = SprApproverService_1 = class SprApproverService {
             where: {
                 approver_id: employeeId,
                 status: types_1.APPROVAL_STATUS.PENDING,
-                deleted_at: null
+                deleted_at: null,
+                spr: {
+                    cancelled_at: null
+                }
             },
             orderBy: {
                 created_at: 'asc'

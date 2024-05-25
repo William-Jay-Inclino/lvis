@@ -233,7 +233,10 @@ export class JoApproverService {
       where: {
         approver_id: employeeId,
         status: APPROVAL_STATUS.PENDING,
-        deleted_at: null
+        deleted_at: null,
+        jo: {
+          cancelled_at: null
+        }
       },
       orderBy: {
         created_at: 'asc'

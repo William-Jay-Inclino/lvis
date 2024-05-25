@@ -238,7 +238,10 @@ export class RvApproverService {
             where: {
                 approver_id: employeeId,
                 status: APPROVAL_STATUS.PENDING,
-                deleted_at: null
+                deleted_at: null,
+                rv: {
+                    cancelled_at: null
+                }
             },
             orderBy: {
                 created_at: 'asc'

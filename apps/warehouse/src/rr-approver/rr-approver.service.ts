@@ -290,7 +290,10 @@ export class RrApproverService {
             where: {
                 approver_id: employeeId,
                 status: APPROVAL_STATUS.PENDING,
-                deleted_at: null
+                deleted_at: null,
+                rr: {
+                    cancelled_at: null
+                }
             },
             orderBy: {
                 created_at: 'asc'
