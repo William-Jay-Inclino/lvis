@@ -181,9 +181,9 @@ export class MeqsPdfService {
                                     if (supplierItem.canvass_item_id === canvassItem.id) {
 
                                         if(supplierItem.is_awarded) {
-                                            return `<td align="center"><b>${formatToPhpCurrency(supplierItem.price)} &#9733;</b></td>`;
+                                            return `<td align="center"><b>${(supplierItem.price !== -1) ? formatToPhpCurrency(supplierItem.price) : 'N/A'} &#9733;</b></td>`;
                                         }else {
-                                            return `<td align="center">${formatToPhpCurrency(supplierItem.price)}</td>`;
+                                            return `<td align="center">${(supplierItem.price !== -1) ? formatToPhpCurrency(supplierItem.price) : 'N/A'}</td>`;
                                         }
 
                                     }

@@ -171,7 +171,7 @@ export class RvPdfService {
                                 <td> Requested By: </td>
                             </tr>
                             <tr>
-                                <td> ${formatDate(rv.date_requested)} </td>
+                                <td> ${formatDate(rv.date_requested, true)} </td>
                             </tr>
                             <tr>
                                 <th style="text-align: center; position: relative; font-size: 12pt;">

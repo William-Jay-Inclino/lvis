@@ -66,7 +66,7 @@ export class RvService {
         }
 
         const rvNumber = await this.getLatestRvNumber()
-        const today = moment().format('MM/DD/YYYY')
+        // const today = moment().format('MM/DD/YYYY')
 
         const createdBy = this.authUser.user.username
 
@@ -74,7 +74,7 @@ export class RvService {
         const data: Prisma.RVCreateInput = {
             created_by: createdBy,
             rv_number: rvNumber,
-            date_requested: new Date(today),
+            date_requested: new Date(),
             classification_id: input.classification_id ?? null,
             work_order_no: input.work_order_no ?? null,
             notes: input.notes ?? null,
@@ -99,6 +99,8 @@ export class RvService {
             data,
             include: this.includedFields
         })
+
+        console.log('created', created);
 
         this.logger.log('Successfully created RV')
 

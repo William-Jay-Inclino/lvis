@@ -183,7 +183,7 @@ export class SprPdfService {
                                 <td> Requested By: </td>
                             </tr>
                             <tr>
-                                <td> ${formatDate(spr.date_requested)} </td>
+                                <td> ${formatDate(spr.date_requested, true)} </td>
                             </tr>
                             <tr>
                                 <th style="text-align: center; position: relative; font-size: 12pt;">

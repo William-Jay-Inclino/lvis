@@ -66,7 +66,7 @@ export class JoService {
         }
 
         const joNumber = await this.getLatestJoNumber()
-        const today = moment().format('MM/DD/YYYY')
+        // const today = moment().format('MM/DD/YYYY')
 
         const createdBy = this.authUser.user.username
 
@@ -74,7 +74,7 @@ export class JoService {
         const data: Prisma.JOCreateInput = {
             created_by: createdBy,
             jo_number: joNumber,
-            date_requested: new Date(today),
+            date_requested: new Date(),
             classification_id: input.classification_id ?? null,
             equipment: input.equipment ?? null,
             department_id: input.department_id ?? null,

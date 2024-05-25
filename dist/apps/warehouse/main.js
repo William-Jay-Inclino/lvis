@@ -41,11 +41,11 @@ exports.$Enums = {}
 
 /**
  * Prisma Client JS version: 5.8.1
- * Query Engine version: 473ed3124229e22d881cb7addf559799debae1ab
+ * Query Engine version: b9a39a7ee606c28e3455d0fd60e78c3ba82b1a2b
  */
 Prisma.prismaVersion = {
   client: "5.8.1",
-  engine: "473ed3124229e22d881cb7addf559799debae1ab"
+  engine: "b9a39a7ee606c28e3455d0fd60e78c3ba82b1a2b"
 }
 
 Prisma.PrismaClientKnownRequestError = PrismaClientKnownRequestError;
@@ -545,7 +545,7 @@ const config = {
   },
   "relativePath": "../..",
   "clientVersion": "5.8.1",
-  "engineVersion": "473ed3124229e22d881cb7addf559799debae1ab",
+  "engineVersion": "b9a39a7ee606c28e3455d0fd60e78c3ba82b1a2b",
   "datasourceNames": [
     "db"
   ],
@@ -7738,7 +7738,7 @@ let JoPdfService = class JoPdfService {
                                 <td> Requested By: </td>
                             </tr>
                             <tr>
-                                <td> ${(0, helpers_1.formatDate)(jo.date_requested)} </td>
+                                <td> ${(0, helpers_1.formatDate)(jo.date_requested, true)} </td>
                             </tr>
                             <tr>
                                 <th style="text-align: center; position: relative; font-size: 12pt;">
@@ -8219,7 +8219,6 @@ const prisma_service_1 = __webpack_require__(/*! ../__prisma__/prisma.service */
 const types_1 = __webpack_require__(/*! ../__common__/types */ "./apps/warehouse/src/__common__/types.ts");
 const rxjs_1 = __webpack_require__(/*! rxjs */ "rxjs");
 const axios_1 = __webpack_require__(/*! @nestjs/axios */ "@nestjs/axios");
-const moment = __webpack_require__(/*! moment */ "moment");
 const helpers_1 = __webpack_require__(/*! ../__common__/helpers */ "./apps/warehouse/src/__common__/helpers.ts");
 let JoService = class JoService {
     constructor(prisma, httpService, canvassService) {
@@ -8262,12 +8261,11 @@ let JoService = class JoService {
             throw new Error('Failed to create JO. Please try again');
         }
         const joNumber = await this.getLatestJoNumber();
-        const today = moment().format('MM/DD/YYYY');
         const createdBy = this.authUser.user.username;
         const data = {
             created_by: createdBy,
             jo_number: joNumber,
-            date_requested: new Date(today),
+            date_requested: new Date(),
             classification_id: input.classification_id ?? null,
             equipment: input.equipment ?? null,
             department_id: input.department_id ?? null,
@@ -11960,10 +11958,10 @@ let MeqsPdfService = class MeqsPdfService {
                 for (let supplierItem of supplier.meqs_supplier_items) {
                     if (supplierItem.canvass_item_id === canvassItem.id) {
                         if (supplierItem.is_awarded) {
-                            return `<td align="center"><b>${(0, helpers_1.formatToPhpCurrency)(supplierItem.price)} &#9733;</b></td>`;
+                            return `<td align="center"><b>${(supplierItem.price !== -1) ? (0, helpers_1.formatToPhpCurrency)(supplierItem.price) : 'N/A'} &#9733;</b></td>`;
                         }
                         else {
-                            return `<td align="center">${(0, helpers_1.formatToPhpCurrency)(supplierItem.price)}</td>`;
+                            return `<td align="center">${(supplierItem.price !== -1) ? (0, helpers_1.formatToPhpCurrency)(supplierItem.price) : 'N/A'}</td>`;
                         }
                     }
                 }
@@ -20114,7 +20112,7 @@ let RvPdfService = class RvPdfService {
                                 <td> Requested By: </td>
                             </tr>
                             <tr>
-                                <td> ${(0, helpers_1.formatDate)(rv.date_requested)} </td>
+                                <td> ${(0, helpers_1.formatDate)(rv.date_requested, true)} </td>
                             </tr>
                             <tr>
                                 <th style="text-align: center; position: relative; font-size: 12pt;">
@@ -20553,7 +20551,6 @@ const prisma_service_1 = __webpack_require__(/*! ../__prisma__/prisma.service */
 const types_1 = __webpack_require__(/*! ../__common__/types */ "./apps/warehouse/src/__common__/types.ts");
 const rxjs_1 = __webpack_require__(/*! rxjs */ "rxjs");
 const axios_1 = __webpack_require__(/*! @nestjs/axios */ "@nestjs/axios");
-const moment = __webpack_require__(/*! moment */ "moment");
 const helpers_1 = __webpack_require__(/*! ../__common__/helpers */ "./apps/warehouse/src/__common__/helpers.ts");
 let RvService = RvService_1 = class RvService {
     constructor(prisma, httpService, canvassService) {
@@ -20596,12 +20593,11 @@ let RvService = RvService_1 = class RvService {
             throw new Error('Failed to create RV. Please try again');
         }
         const rvNumber = await this.getLatestRvNumber();
-        const today = moment().format('MM/DD/YYYY');
         const createdBy = this.authUser.user.username;
         const data = {
             created_by: createdBy,
             rv_number: rvNumber,
-            date_requested: new Date(today),
+            date_requested: new Date(),
             classification_id: input.classification_id ?? null,
             work_order_no: input.work_order_no ?? null,
             notes: input.notes ?? null,
@@ -20625,6 +20621,7 @@ let RvService = RvService_1 = class RvService {
             data,
             include: this.includedFields
         });
+        console.log('created', created);
         this.logger.log('Successfully created RV');
         return created;
     }
@@ -22489,7 +22486,7 @@ let SprPdfService = class SprPdfService {
                                 <td> Requested By: </td>
                             </tr>
                             <tr>
-                                <td> ${(0, helpers_1.formatDate)(spr.date_requested)} </td>
+                                <td> ${(0, helpers_1.formatDate)(spr.date_requested, true)} </td>
                             </tr>
                             <tr>
                                 <th style="text-align: center; position: relative; font-size: 12pt;">
@@ -22925,7 +22922,6 @@ const prisma_service_1 = __webpack_require__(/*! ../__prisma__/prisma.service */
 const types_1 = __webpack_require__(/*! ../__common__/types */ "./apps/warehouse/src/__common__/types.ts");
 const rxjs_1 = __webpack_require__(/*! rxjs */ "rxjs");
 const axios_1 = __webpack_require__(/*! @nestjs/axios */ "@nestjs/axios");
-const moment = __webpack_require__(/*! moment */ "moment");
 const helpers_1 = __webpack_require__(/*! ../__common__/helpers */ "./apps/warehouse/src/__common__/helpers.ts");
 let SprService = SprService_1 = class SprService {
     constructor(prisma, httpService, canvassService) {
@@ -22969,12 +22965,11 @@ let SprService = SprService_1 = class SprService {
             throw new Error('Failed to create SPR. Please try again');
         }
         const sprNumber = await this.getLatestSprNumber();
-        const today = moment().format('MM/DD/YYYY');
         const createdBy = this.authUser.user.username;
         const data = {
             created_by: createdBy,
             spr_number: sprNumber,
-            date_requested: new Date(today),
+            date_requested: new Date(),
             canvass: { connect: { id: input.canvass_id } },
             vehicle: { connect: { id: input.vehicle_id } },
             classification_id: input.classification_id ?? null,

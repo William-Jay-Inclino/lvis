@@ -67,7 +67,7 @@ export class SprService {
         }
 
         const sprNumber = await this.getLatestSprNumber()
-        const today = moment().format('MM/DD/YYYY')
+        // const today = moment().format('MM/DD/YYYY')
 
         const createdBy = this.authUser.user.username
 
@@ -75,7 +75,7 @@ export class SprService {
         const data: Prisma.SPRCreateInput = {
             created_by: createdBy,
             spr_number: sprNumber,
-            date_requested: new Date(today),
+            date_requested: new Date(),
             canvass: { connect: { id: input.canvass_id } },
             vehicle: { connect: { id: input.vehicle_id } },
             classification_id: input.classification_id ?? null,
