@@ -187,6 +187,8 @@ export class MeqsApproverService {
 
         let dateApproval = isAdmin(this.authUser) ? (input.date_approval ? new Date(input.date_approval) : new Date()) : new Date()
 
+        console.log('dateApproval', dateApproval);
+
         if (input.status && input.status === APPROVAL_STATUS.PENDING) {
             dateApproval = null
         } else if (!dateApproval) {
@@ -211,6 +213,8 @@ export class MeqsApproverService {
             include: this.includedFields,
         });
         this.logger.log('Successfully updated MEQS Approver');
+
+        console.log('updated', updated);
         return updated;
 
     }
