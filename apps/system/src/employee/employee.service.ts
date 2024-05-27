@@ -154,20 +154,22 @@ export class EmployeeService {
 	}
 
 	async validateEmployeeIds(ids: string[]): Promise<boolean> {
-
-		const exisitingIds = await this.prisma.employee.findMany({
+		// Remove duplicates from the ids array
+		const uniqueIds = Array.from(new Set(ids));
+	
+		const existingIds = await this.prisma.employee.findMany({
 			where: {
-				id: { in: ids }
+				id: { in: uniqueIds }
 			},
 			select: { id: true }
-		})
-
-		console.log('exisitingIds', exisitingIds)
-		console.log('ids', ids)
-
-		return exisitingIds.length === ids.length
-
+		});
+	
+		console.log('existingIds', existingIds);
+		console.log('uniqueIds', uniqueIds);
+	
+		return existingIds.length === uniqueIds.length;
 	}
+	
 
 	async findByIds(ids: string[]): Promise<Employee[]> {
 
