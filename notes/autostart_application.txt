@@ -1,0 +1,88 @@
+To automate the restart of your processes when the server restarts, you can use a process manager like PM2. PM2 is a popular tool for managing and monitoring Node.js applications. It allows you to keep your applications running continuously, even after server reboots.
+
+Here's how you can set up PM2 to manage your three NestJS processes:
+
+
+1. Install PM2 Globally:
+npm install -g pm2
+
+
+2. Create PM2 Configuration File:
+Create a ecosystem.config.js file in the root of your project. This file will define the configuration for your processes.
+
+
+module.exports = {
+    apps: [
+        {
+            name: 'system',
+            script: './scripts/start_system.sh',
+            cwd: __dirname, // Set the correct path
+            wait_ready: true, // Wait for the ready signal
+            listen_timeout: 10000, // 10 seconds to wait for the ready signal
+        },
+        {
+            name: 'warehouse',
+            script: './scripts/start_warehouse.sh',
+            cwd: __dirname, // Set the correct path
+            wait_ready: true, // Wait for the ready signal
+            listen_timeout: 10000, // 10 seconds to wait for the ready signal
+        },
+        {
+            name: 'api-gateway',
+            script: './scripts/start_api_gateway.sh',
+            cwd: __dirname, // Set the correct path
+            wait_ready: true, // Wait for the ready signal
+            listen_timeout: 10000, // 10 seconds to wait for the ready signal
+            env: {
+                PM2_SERVE_WAIT: 'system,warehouse' // Ensure it starts after system and warehouse
+            }
+        }
+    ]
+};
+
+
+
+
+
+3. Start Your Applications with PM2:
+pm2 start ecosystem.config.js
+
+
+4. Save the PM2 Process List:
+pm2 save
+
+
+5. Enable PM2 Startup Script:
+Generate and configure a startup script to run PM2 and your applications on server boot.
+pm2 startup
+
+
+
+
+====================================================================
+
+
+
+
+If you want to disable PM2 from starting your applications on boot, you can use the following commands to remove the PM2 startup scripts and stop the processes.
+
+1. Remove PM2 Startup Scripts:
+To disable PM2 startup scripts, use the unstartup command. This will remove the startup configuration for PM2.
+
+pm2 unstartup
+
+
+
+2. Stop and Delete PM2 Processes:
+To stop and delete all PM2 managed processes, use the following commands:
+pm2 stop all
+pm2 delete all
+
+
+
+
+
+============================================================================
+
+Check PM2 Status:
+pm2 status
