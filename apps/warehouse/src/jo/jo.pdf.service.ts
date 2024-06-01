@@ -269,8 +269,8 @@ export class JoPdfService {
             <div style="border-top: solid 1px #bbb; width: 100%; font-size: 9px;
                 padding: 5px 5px 0; color: #bbb; position: relative;">
                 <div style="position: absolute; left: 5px; top: 5px;">
-                    Note: This is a system generated report printed by ${this.authUser.user.username} | 
-                    Date & Time Generated: <span class="date"></span>
+                    Note: System generated report | Created by: <b>${ jo.created_by }</b> | Printed by: <b>${this.authUser.user.username}</b> | 
+                    Date & Time: <b><span class="date"></span></b>
                 </div>
                 <div style="position: absolute; right: 5px; top: 5px;"><span class="pageNumber"></span>/<span class="totalPages"></span></div>
             </div>
