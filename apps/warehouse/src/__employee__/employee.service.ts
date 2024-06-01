@@ -39,10 +39,7 @@ export class EmployeeService {
 
     }
 
-
-    // only add pendings if the leadApprover's status is approved
-    // ex: if this approver order is 2 then the lead approver which the order value is 1 needs to be approve first
-
+    // only add pendings if ang mga nag una nga approvers are approved
     getFilteredRvPendings(rvApprovals: RVApprover[]): PendingApproval[] {
 
         console.log('getFilteredRvPendings', rvApprovals)
@@ -51,27 +48,30 @@ export class EmployeeService {
 
         for (let approval of rvApprovals) {
 
+            // get the index of the current approver
             // @ts-ignore
-            const thisApproverIndx = approval.rv.rv_approvers.findIndex((i: RVApprover) => i.approver_id === approval.approver_id)
+            const thisApproverIndx = approval.rv.rv_approvers.findIndex((i: RVApprover) => i.approver_id === approval.approver_id && i.order === approval.order);
 
-            console.log('thisApproverIndx', thisApproverIndx)
+            console.log('thisApproverIndx', thisApproverIndx);
 
-            // @ts-ignore
-            console.log('approval.rv.rv_approvers', approval.rv.rv_approvers[thisApproverIndx])
-
-            if (!thisApproverIndx) {
-                console.error('thisApproverIndx not found', thisApproverIndx)
+            if(thisApproverIndx === -1) {
+                console.error('thisApproverIndx not found / approver not found in rv_approvers')
+                continue
             }
 
-            console.log('thisApproverIndx - 1', thisApproverIndx - 1)
-            // ang ge sundan nga approver
-            // @ts-ignore 
-            const leadApprover = approval.rv.rv_approvers[thisApproverIndx - 1]
+            // get all nag una nga approvers
+            // @ts-ignore
+            const preRequisiteApprovers: RVApprover[] = approval.rv.rv_approvers.slice(0, thisApproverIndx)
 
-            console.log('leadApprover', leadApprover)
+            console.log('preRequisiteApprovers', preRequisiteApprovers);
 
-            // if walay nag una nga approver OR naka approve na ang nag una 
-            if (!leadApprover || leadApprover.status === APPROVAL_STATUS.APPROVED) {
+            // check if all prerequisite approvers are approved
+            const areAllApproved = !preRequisiteApprovers.find(i => i.status !== APPROVAL_STATUS.APPROVED)
+
+            console.log('areAllApproved', areAllApproved);
+
+            if(areAllApproved) {
+
                 pendings.push({
                     id: approval.id,
                     type: PENDING_APPROVAL_TYPE.RV,
@@ -82,9 +82,11 @@ export class EmployeeService {
                     // @ts-ignore
                     transaction_date: approval.rv.created_at
                 })
+
             }
 
         }
+
 
         return pendings
 
@@ -98,27 +100,30 @@ export class EmployeeService {
 
         for (let approval of sprApprovals) {
 
+            // get the index of the current approver
             // @ts-ignore
-            const thisApproverIndx = approval.spr.spr_approvers.findIndex((i: SPRApprover) => i.approver_id === approval.approver_id)
+            const thisApproverIndx = approval.spr.spr_approvers.findIndex((i: SPRApprover) => i.approver_id === approval.approver_id && i.order === approval.order);
 
-            console.log('thisApproverIndx', thisApproverIndx)
+            console.log('thisApproverIndx', thisApproverIndx);
 
-            // @ts-ignore
-            console.log('approval.spr.spr_approvers', approval.spr.spr_approvers[thisApproverIndx])
-
-            if (!thisApproverIndx) {
-                console.error('thisApproverIndx not found', thisApproverIndx)
+            if(thisApproverIndx === -1) {
+                console.error('thisApproverIndx not found / approver not found in spr_approvers')
+                continue
             }
 
-            console.log('thisApproverIndx - 1', thisApproverIndx - 1)
-            // ang ge sundan nga approver
-            // @ts-ignore 
-            const leadApprover = approval.spr.spr_approvers[thisApproverIndx - 1]
+            // get all nag una nga approvers
+            // @ts-ignore
+            const preRequisiteApprovers: SPRApprover[] = approval.spr.spr_approvers.slice(0, thisApproverIndx)
 
-            console.log('leadApprover', leadApprover)
+            console.log('preRequisiteApprovers', preRequisiteApprovers);
 
-            // if walay nag una nga approver OR naka approve na ang nag una 
-            if (!leadApprover || leadApprover.status === APPROVAL_STATUS.APPROVED) {
+            // check if all prerequisite approvers are approved
+            const areAllApproved = !preRequisiteApprovers.find(i => i.status !== APPROVAL_STATUS.APPROVED)
+
+            console.log('areAllApproved', areAllApproved);
+
+            if(areAllApproved) {
+
                 pendings.push({
                     id: approval.id,
                     type: PENDING_APPROVAL_TYPE.SPR,
@@ -129,6 +134,7 @@ export class EmployeeService {
                     // @ts-ignore
                     transaction_date: approval.spr.created_at
                 })
+
             }
 
         }
@@ -145,27 +151,30 @@ export class EmployeeService {
 
         for (let approval of joApprovals) {
 
+            // get the index of the current approver
             // @ts-ignore
-            const thisApproverIndx = approval.jo.jo_approvers.findIndex((i: JOApprover) => i.approver_id === approval.approver_id)
+            const thisApproverIndx = approval.jo.jo_approvers.findIndex((i: JOApprover) => i.approver_id === approval.approver_id && i.order === approval.order);
 
-            console.log('thisApproverIndx', thisApproverIndx)
+            console.log('thisApproverIndx', thisApproverIndx);
 
-            // @ts-ignore
-            console.log('approval.jo.jo_approvers', approval.jo.jo_approvers[thisApproverIndx])
-
-            if (!thisApproverIndx) {
-                console.error('thisApproverIndx not found', thisApproverIndx)
+            if(thisApproverIndx === -1) {
+                console.error('thisApproverIndx not found / approver not found in jo_approvers')
+                continue
             }
 
-            console.log('thisApproverIndx - 1', thisApproverIndx - 1)
-            // ang ge sundan nga approver
-            // @ts-ignore 
-            const leadApprover = approval.jo.jo_approvers[thisApproverIndx - 1]
+            // get all nag una nga approvers
+            // @ts-ignore
+            const preRequisiteApprovers: JOApprover[] = approval.jo.jo_approvers.slice(0, thisApproverIndx)
 
-            console.log('leadApprover', leadApprover)
+            console.log('preRequisiteApprovers', preRequisiteApprovers);
 
-            // if walay nag una nga approver OR naka approve na ang nag una 
-            if (!leadApprover || leadApprover.status === APPROVAL_STATUS.APPROVED) {
+            // check if all prerequisite approvers are approved
+            const areAllApproved = !preRequisiteApprovers.find(i => i.status !== APPROVAL_STATUS.APPROVED)
+
+            console.log('areAllApproved', areAllApproved);
+
+            if(areAllApproved) {
+
                 pendings.push({
                     id: approval.id,
                     type: PENDING_APPROVAL_TYPE.JO,
@@ -176,6 +185,7 @@ export class EmployeeService {
                     // @ts-ignore
                     transaction_date: approval.jo.created_at
                 })
+
             }
 
         }
@@ -192,19 +202,30 @@ export class EmployeeService {
 
         for (let approval of meqsApprovals) {
 
+            // get the index of the current approver
             // @ts-ignore
-            const thisApproverIndx = approval.meqs.meqs_approvers.findIndex((i: MEQSApprover) => i.approver_id === approval.approver_id)
+            const thisApproverIndx = approval.meqs.meqs_approvers.findIndex((i: MEQSApprover) => i.approver_id === approval.approver_id && i.order === approval.order);
 
-            if (!thisApproverIndx) {
-                console.error('thisApproverIndx not found', thisApproverIndx)
+            console.log('thisApproverIndx', thisApproverIndx);
+
+            if(thisApproverIndx === -1) {
+                console.error('thisApproverIndx not found / approver not found in meqs_approvers')
+                continue
             }
 
-            // ang ge sundan nga approver
-            // @ts-ignore 
-            const leadApprover = approval.meqs.meqs_approvers[thisApproverIndx - 1]
+            // get all nag una nga approvers
+            // @ts-ignore
+            const preRequisiteApprovers: MEQSApprover[] = approval.meqs.meqs_approvers.slice(0, thisApproverIndx)
 
-            // if walay nag una nga approver OR naka approve na ang nag una 
-            if (!leadApprover || leadApprover.status === APPROVAL_STATUS.APPROVED) {
+            console.log('preRequisiteApprovers', preRequisiteApprovers);
+
+            // check if all prerequisite approvers are approved
+            const areAllApproved = !preRequisiteApprovers.find(i => i.status !== APPROVAL_STATUS.APPROVED)
+
+            console.log('areAllApproved', areAllApproved);
+
+            if(areAllApproved) {
+
                 pendings.push({
                     id: approval.id,
                     type: PENDING_APPROVAL_TYPE.MEQS,
@@ -215,6 +236,7 @@ export class EmployeeService {
                     // @ts-ignore
                     transaction_date: approval.meqs.created_at
                 })
+
             }
 
         }
@@ -231,19 +253,30 @@ export class EmployeeService {
 
         for (let approval of poApprovals) {
 
+            // get the index of the current approver
             // @ts-ignore
-            const thisApproverIndx = approval.po.po_approvers.findIndex((i: POApprover) => i.approver_id === approval.approver_id)
+            const thisApproverIndx = approval.po.po_approvers.findIndex((i: POApprover) => i.approver_id === approval.approver_id && i.order === approval.order);
 
-            if (!thisApproverIndx) {
-                console.error('thisApproverIndx not found', thisApproverIndx)
+            console.log('thisApproverIndx', thisApproverIndx);
+
+            if(thisApproverIndx === -1) {
+                console.error('thisApproverIndx not found / approver not found in po_approvers')
+                continue
             }
 
-            // ang ge sundan nga approver
-            // @ts-ignore 
-            const leadApprover = approval.po.po_approvers[thisApproverIndx - 1]
+            // get all nag una nga approvers
+            // @ts-ignore
+            const preRequisiteApprovers: POApprover[] = approval.po.po_approvers.slice(0, thisApproverIndx)
 
-            // if walay nag una nga approver OR naka approve na ang nag una 
-            if (!leadApprover || leadApprover.status === APPROVAL_STATUS.APPROVED) {
+            console.log('preRequisiteApprovers', preRequisiteApprovers);
+
+            // check if all prerequisite approvers are approved
+            const areAllApproved = !preRequisiteApprovers.find(i => i.status !== APPROVAL_STATUS.APPROVED)
+
+            console.log('areAllApproved', areAllApproved);
+
+            if(areAllApproved) {
+
                 pendings.push({
                     id: approval.id,
                     type: PENDING_APPROVAL_TYPE.PO,
@@ -254,6 +287,7 @@ export class EmployeeService {
                     // @ts-ignore
                     transaction_date: approval.po.created_at
                 })
+
             }
 
         }
@@ -270,19 +304,30 @@ export class EmployeeService {
 
         for (let approval of rrApprovals) {
 
+            // get the index of the current approver
             // @ts-ignore
-            const thisApproverIndx = approval.rr.rr_approvers.findIndex((i: RRApprover) => i.approver_id === approval.approver_id)
+            const thisApproverIndx = approval.rr.rr_approvers.findIndex((i: RRApprover) => i.approver_id === approval.approver_id && i.order === approval.order);
 
-            if (!thisApproverIndx) {
-                console.error('thisApproverIndx not found', thisApproverIndx)
+            console.log('thisApproverIndx', thisApproverIndx);
+
+            if(thisApproverIndx === -1) {
+                console.error('thisApproverIndx not found / approver not found in rr_approvers')
+                continue
             }
 
-            // ang ge sundan nga approver
-            // @ts-ignore 
-            const leadApprover = approval.rr.rr_approvers[thisApproverIndx - 1]
+            // get all nag una nga approvers
+            // @ts-ignore
+            const preRequisiteApprovers: RRApprover[] = approval.rr.rr_approvers.slice(0, thisApproverIndx)
 
-            // if walay nag una nga approver OR naka approve na ang nag una 
-            if (!leadApprover || leadApprover.status === APPROVAL_STATUS.APPROVED) {
+            console.log('preRequisiteApprovers', preRequisiteApprovers);
+
+            // check if all prerequisite approvers are approved
+            const areAllApproved = !preRequisiteApprovers.find(i => i.status !== APPROVAL_STATUS.APPROVED)
+
+            console.log('areAllApproved', areAllApproved);
+
+            if(areAllApproved) {
+
                 pendings.push({
                     id: approval.id,
                     type: PENDING_APPROVAL_TYPE.RR,
@@ -293,6 +338,7 @@ export class EmployeeService {
                     // @ts-ignore
                     transaction_date: approval.rr.created_at
                 })
+
             }
 
         }
