@@ -13,6 +13,9 @@ async function bootstrap() {
   }
 
   const app = await NestFactory.create(AppModule);
+
+  app.setGlobalPrefix('/lvis/api');
+
   app.enableCors();
 
   const port = process.env.API_GATEWAY_PORT || 3000;
