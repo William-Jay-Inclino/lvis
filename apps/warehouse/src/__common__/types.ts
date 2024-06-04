@@ -24,7 +24,8 @@ export interface Supplier {
     contact: string
     tin_no: string
     address: string
-    vat_type: VAT_TYPE
+    // vat_type: VAT_TYPE
+    is_vat_registered: boolean
     created_by: string
 }
 
@@ -56,7 +57,8 @@ export enum REQUEST_TYPE {
 export enum VAT_TYPE {
     NONE = 1,
     INC = 2,
-    EXC = 3
+    EXC = 3,
+    EXEMPT = 4
 }
 
 export enum ITEM_TRANSACTION_TYPE {

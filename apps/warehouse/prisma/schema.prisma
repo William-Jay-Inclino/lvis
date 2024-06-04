@@ -533,7 +533,8 @@ model Supplier {
   contact  String
   tin_no  String @default("")
   address  String @default("")
-  vat_type Int    @default(1)
+  // vat_type Int    @default(1)
+  is_vat_registered Boolean @default(false)
 
   created_by String
   updated_by String?

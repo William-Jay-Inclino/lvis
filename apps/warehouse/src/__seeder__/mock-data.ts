@@ -8,8 +8,8 @@ export const suppliers: Supplier[] = [
         contact: '+639000000000',
         tin_no: '209-609-185-00054',
         address: 'Brgy. Cogon, Ormoc City, Leyte',
-        vat_type: VAT_TYPE.NONE,
-        created_by: 'admin'
+        created_by: 'admin',
+        is_vat_registered: true,
 
     },
     {
@@ -18,7 +18,7 @@ export const suppliers: Supplier[] = [
         contact: '+639000000000',
         tin_no: '209-609-185-00054',
         address: 'REAL ST., ORMOC CITY',
-        vat_type: VAT_TYPE.INC,
+        is_vat_registered: true,
         created_by: 'admin'
     },
     {
@@ -27,7 +27,16 @@ export const suppliers: Supplier[] = [
         contact: '+639000000000',
         tin_no: '209-609-185-00054',
         address: 'REAL ST., ORMOC CITY',
-        vat_type: VAT_TYPE.EXC,
+        is_vat_registered: true,
+        created_by: 'admin'
+    },
+    {
+        id: faker.string.uuid(),
+        name: 'PC Tools',
+        contact: '+639000000000',
+        tin_no: '209-609-185-00054',
+        address: 'REAL ST., ORMOC CITY',
+        is_vat_registered: false,
         created_by: 'admin'
     }
 ]

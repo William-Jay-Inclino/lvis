@@ -4,9 +4,9 @@ Note: make sure all services is running in the correct port: 4001 & 4002
 
 to seed data in system service: run this in the terminal
 
-curl -X POST http://localhost:4001/seeder/seed-database
+curl -X POST http://localhost:4001/lvis/system-api/seeder/seed-database
 
 
 to seed data in warehouse service: run this in the terminal 
 
-curl -X POST http://localhost:4002/seeder/seed-database
+curl -X POST http://localhost:4002/lvis/warehouse-api/seeder/seed-database

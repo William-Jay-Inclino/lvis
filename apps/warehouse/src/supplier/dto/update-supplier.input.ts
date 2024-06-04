@@ -1,4 +1,4 @@
-import { IsInt, IsOptional, IsString } from 'class-validator';
+import { IsBoolean, IsInt, IsOptional, IsString } from 'class-validator';
 import { CreateSupplierInput } from './create-supplier.input';
 import { InputType, Field, PartialType, Int } from '@nestjs/graphql';
 import { VAT_TYPE } from '../../__common__/types';
@@ -26,9 +26,9 @@ export class UpdateSupplierInput extends PartialType(CreateSupplierInput) {
   @IsString()
   address?: string | null;
 
-  @Field(() => Int, { nullable: true })
+  @Field(() => Boolean, { nullable: true })
   @IsOptional()
-  @IsInt()
-  vat_type: VAT_TYPE;
+  @IsBoolean()
+  is_vat_registered: boolean;
 
 }

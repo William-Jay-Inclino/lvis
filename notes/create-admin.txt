@@ -1,1 +1,1 @@
-curl -X POST -H "Content-Type: application/json" -d '{"password": "admin123"}' http://localhost:4001/auth/create-admin
+curl -X POST -H "Content-Type: application/json" -d '{"password": "admin123"}' http://localhost:4001/lvis/system-api/auth/create-admin
