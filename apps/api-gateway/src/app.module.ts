@@ -65,6 +65,7 @@ function handleAuth({ req }) {
       driver: ApolloGatewayDriver,
       server: {
         // cors: true,
+        path: '/lvis/graphql',
         context: handleAuth
       },
       gateway: {

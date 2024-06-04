@@ -15,6 +15,8 @@ async function bootstrap() {
 
   const app = await NestFactory.create(SystemModule);
 
+  app.setGlobalPrefix('/lvis/system-api');
+
   const port = process.env.SYSTEM_PORT || 3000;
 
   await app.listen(port, async () => {
