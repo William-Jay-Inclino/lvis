@@ -198,13 +198,13 @@ export class PoPdfService {
                                         VAT INC:
                                     </td>
                                     <td>
-                                        <input type="checkbox" ${ po.meqs_supplier.supplier.vat_type === VAT_TYPE.INC ? 'checked' : '' } style="transform: scale(1.5);"/>
+                                        <input type="checkbox" style="transform: scale(1.5);"/>
                                     </td>
                                     <td>
                                         Non VAT: 
                                     </td>
                                     <td>
-                                        <input type="checkbox" ${ po.meqs_supplier.supplier.vat_type === VAT_TYPE.NONE ? 'checked' : '' } style="transform: scale(1.5);"/>
+                                        <input type="checkbox" style="transform: scale(1.5);"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -212,7 +212,7 @@ export class PoPdfService {
                                         VAT EXC: 
                                     </td>
                                     <td>
-                                        <input type="checkbox" ${ po.meqs_supplier.supplier.vat_type === VAT_TYPE.EXC ? 'checked' : '' } style="transform: scale(1.5);"/>
+                                        <input type="checkbox" style="transform: scale(1.5);"/>
                                     </td>
                                 </tr>
                             </table>
