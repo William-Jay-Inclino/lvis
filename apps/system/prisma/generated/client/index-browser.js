@@ -17,11 +17,11 @@ exports.$Enums = {}
 
 /**
  * Prisma Client JS version: 5.8.1
- * Query Engine version: e9771e62de70f79a5e1c604a2d7c8e2a0a874b48
+ * Query Engine version: 12e25d8d06f6ea5a0252864dd9a03b1bb51f3022
  */
 Prisma.prismaVersion = {
   client: "5.8.1",
-  engine: "e9771e62de70f79a5e1c604a2d7c8e2a0a874b48"
+  engine: "12e25d8d06f6ea5a0252864dd9a03b1bb51f3022"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -152,8 +152,8 @@ exports.Prisma.EmployeeScalarFieldEnum = {
   firstname: 'firstname',
   middlename: 'middlename',
   lastname: 'lastname',
-  position: 'position',
   signature_src: 'signature_src',
+  position_id: 'position_id',
   is_budget_officer: 'is_budget_officer',
   is_finance_manager: 'is_finance_manager',
   created_by: 'created_by',
@@ -167,6 +167,18 @@ exports.Prisma.EmployeeScalarFieldEnum = {
 exports.Prisma.ClassificationScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  deleted_by: 'deleted_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  deleted_at: 'deleted_at'
+};
+
+exports.Prisma.PositionScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  permissions: 'permissions',
   created_by: 'created_by',
   updated_by: 'updated_by',
   deleted_by: 'deleted_by',
@@ -313,6 +325,7 @@ exports.Prisma.ModelName = {
   Account: 'Account',
   Employee: 'Employee',
   Classification: 'Classification',
+  Position: 'Position',
   User: 'User',
   UserEmployee: 'UserEmployee',
   JOApproverSetting: 'JOApproverSetting',

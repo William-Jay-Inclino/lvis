@@ -39,6 +39,11 @@ export type Employee = $Result.DefaultSelection<Prisma.$EmployeePayload>
  */
 export type Classification = $Result.DefaultSelection<Prisma.$ClassificationPayload>
 /**
+ * Model Position
+ * 
+ */
+export type Position = $Result.DefaultSelection<Prisma.$PositionPayload>
+/**
  * Model User
  * 
  */
@@ -274,6 +279,16 @@ export class PrismaClient<
   get classification(): Prisma.ClassificationDelegate<ExtArgs>;
 
   /**
+   * `prisma.position`: Exposes CRUD operations for the **Position** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Positions
+    * const positions = await prisma.position.findMany()
+    * ```
+    */
+  get position(): Prisma.PositionDelegate<ExtArgs>;
+
+  /**
    * `prisma.user`: Exposes CRUD operations for the **User** model.
     * Example usage:
     * ```ts
@@ -420,7 +435,7 @@ export namespace Prisma {
 
   /**
    * Prisma Client JS version: 5.8.1
-   * Query Engine version: e9771e62de70f79a5e1c604a2d7c8e2a0a874b48
+   * Query Engine version: 12e25d8d06f6ea5a0252864dd9a03b1bb51f3022
    */
   export type PrismaVersion = {
     client: string
@@ -837,6 +852,7 @@ export namespace Prisma {
     Account: 'Account',
     Employee: 'Employee',
     Classification: 'Classification',
+    Position: 'Position',
     User: 'User',
     UserEmployee: 'UserEmployee',
     JOApproverSetting: 'JOApproverSetting',
@@ -862,7 +878,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'division' | 'department' | 'account' | 'employee' | 'classification' | 'user' | 'userEmployee' | 'jOApproverSetting' | 'rVApproverSetting' | 'sPRApproverSetting' | 'mEQSApproverSetting' | 'pOApproverSetting' | 'rRApproverSetting' | 'setting'
+      modelProps: 'division' | 'department' | 'account' | 'employee' | 'classification' | 'position' | 'user' | 'userEmployee' | 'jOApproverSetting' | 'rVApproverSetting' | 'sPRApproverSetting' | 'mEQSApproverSetting' | 'pOApproverSetting' | 'rRApproverSetting' | 'setting'
       txIsolationLevel: Prisma.TransactionIsolationLevel
     },
     model: {
@@ -1193,6 +1209,72 @@ export namespace Prisma {
           count: {
             args: Prisma.ClassificationCountArgs<ExtArgs>,
             result: $Utils.Optional<ClassificationCountAggregateOutputType> | number
+          }
+        }
+      }
+      Position: {
+        payload: Prisma.$PositionPayload<ExtArgs>
+        fields: Prisma.PositionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PositionFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$PositionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PositionFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$PositionPayload>
+          }
+          findFirst: {
+            args: Prisma.PositionFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$PositionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PositionFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$PositionPayload>
+          }
+          findMany: {
+            args: Prisma.PositionFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$PositionPayload>[]
+          }
+          create: {
+            args: Prisma.PositionCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$PositionPayload>
+          }
+          createMany: {
+            args: Prisma.PositionCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.PositionDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$PositionPayload>
+          }
+          update: {
+            args: Prisma.PositionUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$PositionPayload>
+          }
+          deleteMany: {
+            args: Prisma.PositionDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PositionUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.PositionUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$PositionPayload>
+          }
+          aggregate: {
+            args: Prisma.PositionAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregatePosition>
+          }
+          groupBy: {
+            args: Prisma.PositionGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<PositionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PositionCountArgs<ExtArgs>,
+            result: $Utils.Optional<PositionCountAggregateOutputType> | number
           }
         }
       }
@@ -1964,6 +2046,40 @@ export namespace Prisma {
    */
   export type DepartmentCountOutputTypeCountDivisionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: DivisionWhereInput
+  }
+
+
+
+  /**
+   * Count Type PositionCountOutputType
+   */
+
+  export type PositionCountOutputType = {
+    employees: number
+  }
+
+  export type PositionCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    employees?: boolean | PositionCountOutputTypeCountEmployeesArgs
+  }
+
+  // Custom InputTypes
+
+  /**
+   * PositionCountOutputType without action
+   */
+  export type PositionCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PositionCountOutputType
+     */
+    select?: PositionCountOutputTypeSelect<ExtArgs> | null
+  }
+
+
+  /**
+   * PositionCountOutputType without action
+   */
+  export type PositionCountOutputTypeCountEmployeesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EmployeeWhereInput
   }
 
 
@@ -4960,8 +5076,8 @@ export namespace Prisma {
     firstname: string | null
     middlename: string | null
     lastname: string | null
-    position: string | null
     signature_src: string | null
+    position_id: string | null
     is_budget_officer: boolean | null
     is_finance_manager: boolean | null
     created_by: string | null
@@ -4977,8 +5093,8 @@ export namespace Prisma {
     firstname: string | null
     middlename: string | null
     lastname: string | null
-    position: string | null
     signature_src: string | null
+    position_id: string | null
     is_budget_officer: boolean | null
     is_finance_manager: boolean | null
     created_by: string | null
@@ -4994,8 +5110,8 @@ export namespace Prisma {
     firstname: number
     middlename: number
     lastname: number
-    position: number
     signature_src: number
+    position_id: number
     is_budget_officer: number
     is_finance_manager: number
     created_by: number
@@ -5013,8 +5129,8 @@ export namespace Prisma {
     firstname?: true
     middlename?: true
     lastname?: true
-    position?: true
     signature_src?: true
+    position_id?: true
     is_budget_officer?: true
     is_finance_manager?: true
     created_by?: true
@@ -5030,8 +5146,8 @@ export namespace Prisma {
     firstname?: true
     middlename?: true
     lastname?: true
-    position?: true
     signature_src?: true
+    position_id?: true
     is_budget_officer?: true
     is_finance_manager?: true
     created_by?: true
@@ -5047,8 +5163,8 @@ export namespace Prisma {
     firstname?: true
     middlename?: true
     lastname?: true
-    position?: true
     signature_src?: true
+    position_id?: true
     is_budget_officer?: true
     is_finance_manager?: true
     created_by?: true
@@ -5137,8 +5253,8 @@ export namespace Prisma {
     firstname: string
     middlename: string | null
     lastname: string
-    position: string | null
     signature_src: string | null
+    position_id: string | null
     is_budget_officer: boolean
     is_finance_manager: boolean
     created_by: string
@@ -5171,8 +5287,8 @@ export namespace Prisma {
     firstname?: boolean
     middlename?: boolean
     lastname?: boolean
-    position?: boolean
     signature_src?: boolean
+    position_id?: boolean
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by?: boolean
@@ -5181,6 +5297,7 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     deleted_at?: boolean
+    position?: boolean | Employee$positionArgs<ExtArgs>
     jo_approver_setting?: boolean | Employee$jo_approver_settingArgs<ExtArgs>
     meqs_approver_setting?: boolean | Employee$meqs_approver_settingArgs<ExtArgs>
     po_approver_setting?: boolean | Employee$po_approver_settingArgs<ExtArgs>
@@ -5195,8 +5312,8 @@ export namespace Prisma {
     firstname?: boolean
     middlename?: boolean
     lastname?: boolean
-    position?: boolean
     signature_src?: boolean
+    position_id?: boolean
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by?: boolean
@@ -5208,6 +5325,7 @@ export namespace Prisma {
   }
 
   export type EmployeeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    position?: boolean | Employee$positionArgs<ExtArgs>
     jo_approver_setting?: boolean | Employee$jo_approver_settingArgs<ExtArgs>
     meqs_approver_setting?: boolean | Employee$meqs_approver_settingArgs<ExtArgs>
     po_approver_setting?: boolean | Employee$po_approver_settingArgs<ExtArgs>
@@ -5221,6 +5339,7 @@ export namespace Prisma {
   export type $EmployeePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Employee"
     objects: {
+      position: Prisma.$PositionPayload<ExtArgs> | null
       jo_approver_setting: Prisma.$JOApproverSettingPayload<ExtArgs> | null
       meqs_approver_setting: Prisma.$MEQSApproverSettingPayload<ExtArgs> | null
       po_approver_setting: Prisma.$POApproverSettingPayload<ExtArgs> | null
@@ -5234,8 +5353,8 @@ export namespace Prisma {
       firstname: string
       middlename: string | null
       lastname: string
-      position: string | null
       signature_src: string | null
+      position_id: string | null
       is_budget_officer: boolean
       is_finance_manager: boolean
       created_by: string
@@ -5609,6 +5728,8 @@ export namespace Prisma {
   export interface Prisma__EmployeeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
+    position<T extends Employee$positionArgs<ExtArgs> = {}>(args?: Subset<T, Employee$positionArgs<ExtArgs>>): Prisma__PositionClient<$Result.GetResult<Prisma.$PositionPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+
     jo_approver_setting<T extends Employee$jo_approver_settingArgs<ExtArgs> = {}>(args?: Subset<T, Employee$jo_approver_settingArgs<ExtArgs>>): Prisma__JOApproverSettingClient<$Result.GetResult<Prisma.$JOApproverSettingPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
 
     meqs_approver_setting<T extends Employee$meqs_approver_settingArgs<ExtArgs> = {}>(args?: Subset<T, Employee$meqs_approver_settingArgs<ExtArgs>>): Prisma__MEQSApproverSettingClient<$Result.GetResult<Prisma.$MEQSApproverSettingPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
@@ -5655,8 +5776,8 @@ export namespace Prisma {
     readonly firstname: FieldRef<"Employee", 'String'>
     readonly middlename: FieldRef<"Employee", 'String'>
     readonly lastname: FieldRef<"Employee", 'String'>
-    readonly position: FieldRef<"Employee", 'String'>
     readonly signature_src: FieldRef<"Employee", 'String'>
+    readonly position_id: FieldRef<"Employee", 'String'>
     readonly is_budget_officer: FieldRef<"Employee", 'Boolean'>
     readonly is_finance_manager: FieldRef<"Employee", 'Boolean'>
     readonly created_by: FieldRef<"Employee", 'String'>
@@ -5973,6 +6094,22 @@ export namespace Prisma {
      * Filter which Employees to delete
      */
     where?: EmployeeWhereInput
+  }
+
+
+  /**
+   * Employee.position
+   */
+  export type Employee$positionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Position
+     */
+    select?: PositionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: PositionInclude<ExtArgs> | null
+    where?: PositionWhereInput
   }
 
 
@@ -7003,6 +7140,987 @@ export namespace Prisma {
      * Select specific fields to fetch from the Classification
      */
     select?: ClassificationSelect<ExtArgs> | null
+  }
+
+
+
+  /**
+   * Model Position
+   */
+
+  export type AggregatePosition = {
+    _count: PositionCountAggregateOutputType | null
+    _min: PositionMinAggregateOutputType | null
+    _max: PositionMaxAggregateOutputType | null
+  }
+
+  export type PositionMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    created_by: string | null
+    updated_by: string | null
+    deleted_by: string | null
+    created_at: Date | null
+    updated_at: Date | null
+    deleted_at: Date | null
+  }
+
+  export type PositionMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    created_by: string | null
+    updated_by: string | null
+    deleted_by: string | null
+    created_at: Date | null
+    updated_at: Date | null
+    deleted_at: Date | null
+  }
+
+  export type PositionCountAggregateOutputType = {
+    id: number
+    name: number
+    permissions: number
+    created_by: number
+    updated_by: number
+    deleted_by: number
+    created_at: number
+    updated_at: number
+    deleted_at: number
+    _all: number
+  }
+
+
+  export type PositionMinAggregateInputType = {
+    id?: true
+    name?: true
+    created_by?: true
+    updated_by?: true
+    deleted_by?: true
+    created_at?: true
+    updated_at?: true
+    deleted_at?: true
+  }
+
+  export type PositionMaxAggregateInputType = {
+    id?: true
+    name?: true
+    created_by?: true
+    updated_by?: true
+    deleted_by?: true
+    created_at?: true
+    updated_at?: true
+    deleted_at?: true
+  }
+
+  export type PositionCountAggregateInputType = {
+    id?: true
+    name?: true
+    permissions?: true
+    created_by?: true
+    updated_by?: true
+    deleted_by?: true
+    created_at?: true
+    updated_at?: true
+    deleted_at?: true
+    _all?: true
+  }
+
+  export type PositionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Position to aggregate.
+     */
+    where?: PositionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Positions to fetch.
+     */
+    orderBy?: PositionOrderByWithRelationInput | PositionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PositionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Positions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Positions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Positions
+    **/
+    _count?: true | PositionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PositionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PositionMaxAggregateInputType
+  }
+
+  export type GetPositionAggregateType<T extends PositionAggregateArgs> = {
+        [P in keyof T & keyof AggregatePosition]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePosition[P]>
+      : GetScalarType<T[P], AggregatePosition[P]>
+  }
+
+
+
+
+  export type PositionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PositionWhereInput
+    orderBy?: PositionOrderByWithAggregationInput | PositionOrderByWithAggregationInput[]
+    by: PositionScalarFieldEnum[] | PositionScalarFieldEnum
+    having?: PositionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PositionCountAggregateInputType | true
+    _min?: PositionMinAggregateInputType
+    _max?: PositionMaxAggregateInputType
+  }
+
+  export type PositionGroupByOutputType = {
+    id: string
+    name: string
+    permissions: JsonValue | null
+    created_by: string
+    updated_by: string | null
+    deleted_by: string | null
+    created_at: Date
+    updated_at: Date
+    deleted_at: Date | null
+    _count: PositionCountAggregateOutputType | null
+    _min: PositionMinAggregateOutputType | null
+    _max: PositionMaxAggregateOutputType | null
+  }
+
+  type GetPositionGroupByPayload<T extends PositionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PositionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PositionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PositionGroupByOutputType[P]>
+            : GetScalarType<T[P], PositionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PositionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    permissions?: boolean
+    created_by?: boolean
+    updated_by?: boolean
+    deleted_by?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    deleted_at?: boolean
+    employees?: boolean | Position$employeesArgs<ExtArgs>
+    _count?: boolean | PositionCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["position"]>
+
+  export type PositionSelectScalar = {
+    id?: boolean
+    name?: boolean
+    permissions?: boolean
+    created_by?: boolean
+    updated_by?: boolean
+    deleted_by?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    deleted_at?: boolean
+  }
+
+  export type PositionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    employees?: boolean | Position$employeesArgs<ExtArgs>
+    _count?: boolean | PositionCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+
+  export type $PositionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Position"
+    objects: {
+      employees: Prisma.$EmployeePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      permissions: Prisma.JsonValue | null
+      created_by: string
+      updated_by: string | null
+      deleted_by: string | null
+      created_at: Date
+      updated_at: Date
+      deleted_at: Date | null
+    }, ExtArgs["result"]["position"]>
+    composites: {}
+  }
+
+
+  type PositionGetPayload<S extends boolean | null | undefined | PositionDefaultArgs> = $Result.GetResult<Prisma.$PositionPayload, S>
+
+  type PositionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<PositionFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: PositionCountAggregateInputType | true
+    }
+
+  export interface PositionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Position'], meta: { name: 'Position' } }
+    /**
+     * Find zero or one Position that matches the filter.
+     * @param {PositionFindUniqueArgs} args - Arguments to find a Position
+     * @example
+     * // Get one Position
+     * const position = await prisma.position.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends PositionFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, PositionFindUniqueArgs<ExtArgs>>
+    ): Prisma__PositionClient<$Result.GetResult<Prisma.$PositionPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one Position that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {PositionFindUniqueOrThrowArgs} args - Arguments to find a Position
+     * @example
+     * // Get one Position
+     * const position = await prisma.position.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends PositionFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, PositionFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__PositionClient<$Result.GetResult<Prisma.$PositionPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first Position that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PositionFindFirstArgs} args - Arguments to find a Position
+     * @example
+     * // Get one Position
+     * const position = await prisma.position.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends PositionFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, PositionFindFirstArgs<ExtArgs>>
+    ): Prisma__PositionClient<$Result.GetResult<Prisma.$PositionPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first Position that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PositionFindFirstOrThrowArgs} args - Arguments to find a Position
+     * @example
+     * // Get one Position
+     * const position = await prisma.position.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends PositionFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, PositionFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__PositionClient<$Result.GetResult<Prisma.$PositionPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more Positions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PositionFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Positions
+     * const positions = await prisma.position.findMany()
+     * 
+     * // Get first 10 Positions
+     * const positions = await prisma.position.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const positionWithIdOnly = await prisma.position.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends PositionFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, PositionFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PositionPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a Position.
+     * @param {PositionCreateArgs} args - Arguments to create a Position.
+     * @example
+     * // Create one Position
+     * const Position = await prisma.position.create({
+     *   data: {
+     *     // ... data to create a Position
+     *   }
+     * })
+     * 
+    **/
+    create<T extends PositionCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, PositionCreateArgs<ExtArgs>>
+    ): Prisma__PositionClient<$Result.GetResult<Prisma.$PositionPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many Positions.
+     *     @param {PositionCreateManyArgs} args - Arguments to create many Positions.
+     *     @example
+     *     // Create many Positions
+     *     const position = await prisma.position.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends PositionCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, PositionCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Position.
+     * @param {PositionDeleteArgs} args - Arguments to delete one Position.
+     * @example
+     * // Delete one Position
+     * const Position = await prisma.position.delete({
+     *   where: {
+     *     // ... filter to delete one Position
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends PositionDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, PositionDeleteArgs<ExtArgs>>
+    ): Prisma__PositionClient<$Result.GetResult<Prisma.$PositionPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one Position.
+     * @param {PositionUpdateArgs} args - Arguments to update one Position.
+     * @example
+     * // Update one Position
+     * const position = await prisma.position.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends PositionUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, PositionUpdateArgs<ExtArgs>>
+    ): Prisma__PositionClient<$Result.GetResult<Prisma.$PositionPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more Positions.
+     * @param {PositionDeleteManyArgs} args - Arguments to filter Positions to delete.
+     * @example
+     * // Delete a few Positions
+     * const { count } = await prisma.position.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends PositionDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, PositionDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Positions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PositionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Positions
+     * const position = await prisma.position.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends PositionUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, PositionUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Position.
+     * @param {PositionUpsertArgs} args - Arguments to update or create a Position.
+     * @example
+     * // Update or create a Position
+     * const position = await prisma.position.upsert({
+     *   create: {
+     *     // ... data to create a Position
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Position we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends PositionUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, PositionUpsertArgs<ExtArgs>>
+    ): Prisma__PositionClient<$Result.GetResult<Prisma.$PositionPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of Positions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PositionCountArgs} args - Arguments to filter Positions to count.
+     * @example
+     * // Count the number of Positions
+     * const count = await prisma.position.count({
+     *   where: {
+     *     // ... the filter for the Positions we want to count
+     *   }
+     * })
+    **/
+    count<T extends PositionCountArgs>(
+      args?: Subset<T, PositionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PositionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Position.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PositionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PositionAggregateArgs>(args: Subset<T, PositionAggregateArgs>): Prisma.PrismaPromise<GetPositionAggregateType<T>>
+
+    /**
+     * Group by Position.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PositionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PositionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PositionGroupByArgs['orderBy'] }
+        : { orderBy?: PositionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PositionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPositionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Position model
+   */
+  readonly fields: PositionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Position.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PositionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+    employees<T extends Position$employeesArgs<ExtArgs> = {}>(args?: Subset<T, Position$employeesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the Position model
+   */ 
+  interface PositionFieldRefs {
+    readonly id: FieldRef<"Position", 'String'>
+    readonly name: FieldRef<"Position", 'String'>
+    readonly permissions: FieldRef<"Position", 'Json'>
+    readonly created_by: FieldRef<"Position", 'String'>
+    readonly updated_by: FieldRef<"Position", 'String'>
+    readonly deleted_by: FieldRef<"Position", 'String'>
+    readonly created_at: FieldRef<"Position", 'DateTime'>
+    readonly updated_at: FieldRef<"Position", 'DateTime'>
+    readonly deleted_at: FieldRef<"Position", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * Position findUnique
+   */
+  export type PositionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Position
+     */
+    select?: PositionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: PositionInclude<ExtArgs> | null
+    /**
+     * Filter, which Position to fetch.
+     */
+    where: PositionWhereUniqueInput
+  }
+
+
+  /**
+   * Position findUniqueOrThrow
+   */
+  export type PositionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Position
+     */
+    select?: PositionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: PositionInclude<ExtArgs> | null
+    /**
+     * Filter, which Position to fetch.
+     */
+    where: PositionWhereUniqueInput
+  }
+
+
+  /**
+   * Position findFirst
+   */
+  export type PositionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Position
+     */
+    select?: PositionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: PositionInclude<ExtArgs> | null
+    /**
+     * Filter, which Position to fetch.
+     */
+    where?: PositionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Positions to fetch.
+     */
+    orderBy?: PositionOrderByWithRelationInput | PositionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Positions.
+     */
+    cursor?: PositionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Positions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Positions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Positions.
+     */
+    distinct?: PositionScalarFieldEnum | PositionScalarFieldEnum[]
+  }
+
+
+  /**
+   * Position findFirstOrThrow
+   */
+  export type PositionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Position
+     */
+    select?: PositionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: PositionInclude<ExtArgs> | null
+    /**
+     * Filter, which Position to fetch.
+     */
+    where?: PositionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Positions to fetch.
+     */
+    orderBy?: PositionOrderByWithRelationInput | PositionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Positions.
+     */
+    cursor?: PositionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Positions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Positions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Positions.
+     */
+    distinct?: PositionScalarFieldEnum | PositionScalarFieldEnum[]
+  }
+
+
+  /**
+   * Position findMany
+   */
+  export type PositionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Position
+     */
+    select?: PositionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: PositionInclude<ExtArgs> | null
+    /**
+     * Filter, which Positions to fetch.
+     */
+    where?: PositionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Positions to fetch.
+     */
+    orderBy?: PositionOrderByWithRelationInput | PositionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Positions.
+     */
+    cursor?: PositionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Positions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Positions.
+     */
+    skip?: number
+    distinct?: PositionScalarFieldEnum | PositionScalarFieldEnum[]
+  }
+
+
+  /**
+   * Position create
+   */
+  export type PositionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Position
+     */
+    select?: PositionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: PositionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Position.
+     */
+    data: XOR<PositionCreateInput, PositionUncheckedCreateInput>
+  }
+
+
+  /**
+   * Position createMany
+   */
+  export type PositionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Positions.
+     */
+    data: PositionCreateManyInput | PositionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * Position update
+   */
+  export type PositionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Position
+     */
+    select?: PositionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: PositionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Position.
+     */
+    data: XOR<PositionUpdateInput, PositionUncheckedUpdateInput>
+    /**
+     * Choose, which Position to update.
+     */
+    where: PositionWhereUniqueInput
+  }
+
+
+  /**
+   * Position updateMany
+   */
+  export type PositionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Positions.
+     */
+    data: XOR<PositionUpdateManyMutationInput, PositionUncheckedUpdateManyInput>
+    /**
+     * Filter which Positions to update
+     */
+    where?: PositionWhereInput
+  }
+
+
+  /**
+   * Position upsert
+   */
+  export type PositionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Position
+     */
+    select?: PositionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: PositionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Position to update in case it exists.
+     */
+    where: PositionWhereUniqueInput
+    /**
+     * In case the Position found by the `where` argument doesn't exist, create a new Position with this data.
+     */
+    create: XOR<PositionCreateInput, PositionUncheckedCreateInput>
+    /**
+     * In case the Position was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PositionUpdateInput, PositionUncheckedUpdateInput>
+  }
+
+
+  /**
+   * Position delete
+   */
+  export type PositionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Position
+     */
+    select?: PositionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: PositionInclude<ExtArgs> | null
+    /**
+     * Filter which Position to delete.
+     */
+    where: PositionWhereUniqueInput
+  }
+
+
+  /**
+   * Position deleteMany
+   */
+  export type PositionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Positions to delete
+     */
+    where?: PositionWhereInput
+  }
+
+
+  /**
+   * Position.employees
+   */
+  export type Position$employeesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Employee
+     */
+    select?: EmployeeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: EmployeeInclude<ExtArgs> | null
+    where?: EmployeeWhereInput
+    orderBy?: EmployeeOrderByWithRelationInput | EmployeeOrderByWithRelationInput[]
+    cursor?: EmployeeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EmployeeScalarFieldEnum | EmployeeScalarFieldEnum[]
+  }
+
+
+  /**
+   * Position without action
+   */
+  export type PositionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Position
+     */
+    select?: PositionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: PositionInclude<ExtArgs> | null
   }
 
 
@@ -15874,8 +16992,8 @@ export namespace Prisma {
     firstname: 'firstname',
     middlename: 'middlename',
     lastname: 'lastname',
-    position: 'position',
     signature_src: 'signature_src',
+    position_id: 'position_id',
     is_budget_officer: 'is_budget_officer',
     is_finance_manager: 'is_finance_manager',
     created_by: 'created_by',
@@ -15901,6 +17019,21 @@ export namespace Prisma {
   };
 
   export type ClassificationScalarFieldEnum = (typeof ClassificationScalarFieldEnum)[keyof typeof ClassificationScalarFieldEnum]
+
+
+  export const PositionScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    permissions: 'permissions',
+    created_by: 'created_by',
+    updated_by: 'updated_by',
+    deleted_by: 'deleted_by',
+    created_at: 'created_at',
+    updated_at: 'updated_at',
+    deleted_at: 'deleted_at'
+  };
+
+  export type PositionScalarFieldEnum = (typeof PositionScalarFieldEnum)[keyof typeof PositionScalarFieldEnum]
 
 
   export const UserScalarFieldEnum: {
@@ -16128,6 +17261,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Json'
+   */
+  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+  /**
    * Reference to a field of type 'Role'
    */
   export type EnumRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Role'>
@@ -16138,13 +17278,6 @@ export namespace Prisma {
    * Reference to a field of type 'Role[]'
    */
   export type ListEnumRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Role[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'Json'
-   */
-  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
     
 
 
@@ -16419,8 +17552,8 @@ export namespace Prisma {
     firstname?: StringFilter<"Employee"> | string
     middlename?: StringNullableFilter<"Employee"> | string | null
     lastname?: StringFilter<"Employee"> | string
-    position?: StringNullableFilter<"Employee"> | string | null
     signature_src?: StringNullableFilter<"Employee"> | string | null
+    position_id?: StringNullableFilter<"Employee"> | string | null
     is_budget_officer?: BoolFilter<"Employee"> | boolean
     is_finance_manager?: BoolFilter<"Employee"> | boolean
     created_by?: StringFilter<"Employee"> | string
@@ -16429,6 +17562,7 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"Employee"> | Date | string
     updated_at?: DateTimeFilter<"Employee"> | Date | string
     deleted_at?: DateTimeNullableFilter<"Employee"> | Date | string | null
+    position?: XOR<PositionNullableRelationFilter, PositionWhereInput> | null
     jo_approver_setting?: XOR<JOApproverSettingNullableRelationFilter, JOApproverSettingWhereInput> | null
     meqs_approver_setting?: XOR<MEQSApproverSettingNullableRelationFilter, MEQSApproverSettingWhereInput> | null
     po_approver_setting?: XOR<POApproverSettingNullableRelationFilter, POApproverSettingWhereInput> | null
@@ -16443,8 +17577,8 @@ export namespace Prisma {
     firstname?: SortOrder
     middlename?: SortOrderInput | SortOrder
     lastname?: SortOrder
-    position?: SortOrderInput | SortOrder
     signature_src?: SortOrderInput | SortOrder
+    position_id?: SortOrderInput | SortOrder
     is_budget_officer?: SortOrder
     is_finance_manager?: SortOrder
     created_by?: SortOrder
@@ -16453,6 +17587,7 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     deleted_at?: SortOrderInput | SortOrder
+    position?: PositionOrderByWithRelationInput
     jo_approver_setting?: JOApproverSettingOrderByWithRelationInput
     meqs_approver_setting?: MEQSApproverSettingOrderByWithRelationInput
     po_approver_setting?: POApproverSettingOrderByWithRelationInput
@@ -16470,8 +17605,8 @@ export namespace Prisma {
     firstname?: StringFilter<"Employee"> | string
     middlename?: StringNullableFilter<"Employee"> | string | null
     lastname?: StringFilter<"Employee"> | string
-    position?: StringNullableFilter<"Employee"> | string | null
     signature_src?: StringNullableFilter<"Employee"> | string | null
+    position_id?: StringNullableFilter<"Employee"> | string | null
     is_budget_officer?: BoolFilter<"Employee"> | boolean
     is_finance_manager?: BoolFilter<"Employee"> | boolean
     created_by?: StringFilter<"Employee"> | string
@@ -16480,6 +17615,7 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"Employee"> | Date | string
     updated_at?: DateTimeFilter<"Employee"> | Date | string
     deleted_at?: DateTimeNullableFilter<"Employee"> | Date | string | null
+    position?: XOR<PositionNullableRelationFilter, PositionWhereInput> | null
     jo_approver_setting?: XOR<JOApproverSettingNullableRelationFilter, JOApproverSettingWhereInput> | null
     meqs_approver_setting?: XOR<MEQSApproverSettingNullableRelationFilter, MEQSApproverSettingWhereInput> | null
     po_approver_setting?: XOR<POApproverSettingNullableRelationFilter, POApproverSettingWhereInput> | null
@@ -16494,8 +17630,8 @@ export namespace Prisma {
     firstname?: SortOrder
     middlename?: SortOrderInput | SortOrder
     lastname?: SortOrder
-    position?: SortOrderInput | SortOrder
     signature_src?: SortOrderInput | SortOrder
+    position_id?: SortOrderInput | SortOrder
     is_budget_officer?: SortOrder
     is_finance_manager?: SortOrder
     created_by?: SortOrder
@@ -16517,8 +17653,8 @@ export namespace Prisma {
     firstname?: StringWithAggregatesFilter<"Employee"> | string
     middlename?: StringNullableWithAggregatesFilter<"Employee"> | string | null
     lastname?: StringWithAggregatesFilter<"Employee"> | string
-    position?: StringNullableWithAggregatesFilter<"Employee"> | string | null
     signature_src?: StringNullableWithAggregatesFilter<"Employee"> | string | null
+    position_id?: StringNullableWithAggregatesFilter<"Employee"> | string | null
     is_budget_officer?: BoolWithAggregatesFilter<"Employee"> | boolean
     is_finance_manager?: BoolWithAggregatesFilter<"Employee"> | boolean
     created_by?: StringWithAggregatesFilter<"Employee"> | string
@@ -16594,6 +17730,81 @@ export namespace Prisma {
     created_at?: DateTimeWithAggregatesFilter<"Classification"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"Classification"> | Date | string
     deleted_at?: DateTimeNullableWithAggregatesFilter<"Classification"> | Date | string | null
+  }
+
+  export type PositionWhereInput = {
+    AND?: PositionWhereInput | PositionWhereInput[]
+    OR?: PositionWhereInput[]
+    NOT?: PositionWhereInput | PositionWhereInput[]
+    id?: StringFilter<"Position"> | string
+    name?: StringFilter<"Position"> | string
+    permissions?: JsonNullableFilter<"Position">
+    created_by?: StringFilter<"Position"> | string
+    updated_by?: StringNullableFilter<"Position"> | string | null
+    deleted_by?: StringNullableFilter<"Position"> | string | null
+    created_at?: DateTimeFilter<"Position"> | Date | string
+    updated_at?: DateTimeFilter<"Position"> | Date | string
+    deleted_at?: DateTimeNullableFilter<"Position"> | Date | string | null
+    employees?: EmployeeListRelationFilter
+  }
+
+  export type PositionOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    permissions?: SortOrderInput | SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrderInput | SortOrder
+    deleted_by?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    deleted_at?: SortOrderInput | SortOrder
+    employees?: EmployeeOrderByRelationAggregateInput
+  }
+
+  export type PositionWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: PositionWhereInput | PositionWhereInput[]
+    OR?: PositionWhereInput[]
+    NOT?: PositionWhereInput | PositionWhereInput[]
+    name?: StringFilter<"Position"> | string
+    permissions?: JsonNullableFilter<"Position">
+    created_by?: StringFilter<"Position"> | string
+    updated_by?: StringNullableFilter<"Position"> | string | null
+    deleted_by?: StringNullableFilter<"Position"> | string | null
+    created_at?: DateTimeFilter<"Position"> | Date | string
+    updated_at?: DateTimeFilter<"Position"> | Date | string
+    deleted_at?: DateTimeNullableFilter<"Position"> | Date | string | null
+    employees?: EmployeeListRelationFilter
+  }, "id">
+
+  export type PositionOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    permissions?: SortOrderInput | SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrderInput | SortOrder
+    deleted_by?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    deleted_at?: SortOrderInput | SortOrder
+    _count?: PositionCountOrderByAggregateInput
+    _max?: PositionMaxOrderByAggregateInput
+    _min?: PositionMinOrderByAggregateInput
+  }
+
+  export type PositionScalarWhereWithAggregatesInput = {
+    AND?: PositionScalarWhereWithAggregatesInput | PositionScalarWhereWithAggregatesInput[]
+    OR?: PositionScalarWhereWithAggregatesInput[]
+    NOT?: PositionScalarWhereWithAggregatesInput | PositionScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Position"> | string
+    name?: StringWithAggregatesFilter<"Position"> | string
+    permissions?: JsonNullableWithAggregatesFilter<"Position">
+    created_by?: StringWithAggregatesFilter<"Position"> | string
+    updated_by?: StringNullableWithAggregatesFilter<"Position"> | string | null
+    deleted_by?: StringNullableWithAggregatesFilter<"Position"> | string | null
+    created_at?: DateTimeWithAggregatesFilter<"Position"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"Position"> | Date | string
+    deleted_at?: DateTimeNullableWithAggregatesFilter<"Position"> | Date | string | null
   }
 
   export type UserWhereInput = {
@@ -17543,7 +18754,6 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
-    position?: string | null
     signature_src?: string | null
     is_budget_officer?: boolean
     is_finance_manager?: boolean
@@ -17553,6 +18763,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     deleted_at?: Date | string | null
+    position?: PositionCreateNestedOneWithoutEmployeesInput
     jo_approver_setting?: JOApproverSettingCreateNestedOneWithoutApproverInput
     meqs_approver_setting?: MEQSApproverSettingCreateNestedOneWithoutApproverInput
     po_approver_setting?: POApproverSettingCreateNestedOneWithoutApproverInput
@@ -17567,8 +18778,8 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
-    position?: string | null
     signature_src?: string | null
+    position_id?: string | null
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by: string
@@ -17591,7 +18802,6 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     signature_src?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
@@ -17601,6 +18811,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    position?: PositionUpdateOneWithoutEmployeesNestedInput
     jo_approver_setting?: JOApproverSettingUpdateOneWithoutApproverNestedInput
     meqs_approver_setting?: MEQSApproverSettingUpdateOneWithoutApproverNestedInput
     po_approver_setting?: POApproverSettingUpdateOneWithoutApproverNestedInput
@@ -17615,8 +18826,8 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     signature_src?: NullableStringFieldUpdateOperationsInput | string | null
+    position_id?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
@@ -17639,8 +18850,8 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
-    position?: string | null
     signature_src?: string | null
+    position_id?: string | null
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by: string
@@ -17656,7 +18867,6 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     signature_src?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
@@ -17673,8 +18883,8 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     signature_src?: NullableStringFieldUpdateOperationsInput | string | null
+    position_id?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
@@ -17754,6 +18964,94 @@ export namespace Prisma {
   export type ClassificationUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type PositionCreateInput = {
+    id?: string
+    name: string
+    permissions?: NullableJsonNullValueInput | InputJsonValue
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    deleted_at?: Date | string | null
+    employees?: EmployeeCreateNestedManyWithoutPositionInput
+  }
+
+  export type PositionUncheckedCreateInput = {
+    id?: string
+    name: string
+    permissions?: NullableJsonNullValueInput | InputJsonValue
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    deleted_at?: Date | string | null
+    employees?: EmployeeUncheckedCreateNestedManyWithoutPositionInput
+  }
+
+  export type PositionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    permissions?: NullableJsonNullValueInput | InputJsonValue
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    employees?: EmployeeUpdateManyWithoutPositionNestedInput
+  }
+
+  export type PositionUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    permissions?: NullableJsonNullValueInput | InputJsonValue
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    employees?: EmployeeUncheckedUpdateManyWithoutPositionNestedInput
+  }
+
+  export type PositionCreateManyInput = {
+    id?: string
+    name: string
+    permissions?: NullableJsonNullValueInput | InputJsonValue
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    deleted_at?: Date | string | null
+  }
+
+  export type PositionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    permissions?: NullableJsonNullValueInput | InputJsonValue
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type PositionUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    permissions?: NullableJsonNullValueInput | InputJsonValue
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18776,6 +20074,11 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
+  export type PositionNullableRelationFilter = {
+    is?: PositionWhereInput | null
+    isNot?: PositionWhereInput | null
+  }
+
   export type JOApproverSettingNullableRelationFilter = {
     is?: JOApproverSettingWhereInput | null
     isNot?: JOApproverSettingWhereInput | null
@@ -18816,8 +20119,8 @@ export namespace Prisma {
     firstname?: SortOrder
     middlename?: SortOrder
     lastname?: SortOrder
-    position?: SortOrder
     signature_src?: SortOrder
+    position_id?: SortOrder
     is_budget_officer?: SortOrder
     is_finance_manager?: SortOrder
     created_by?: SortOrder
@@ -18833,8 +20136,8 @@ export namespace Prisma {
     firstname?: SortOrder
     middlename?: SortOrder
     lastname?: SortOrder
-    position?: SortOrder
     signature_src?: SortOrder
+    position_id?: SortOrder
     is_budget_officer?: SortOrder
     is_finance_manager?: SortOrder
     created_by?: SortOrder
@@ -18850,8 +20153,8 @@ export namespace Prisma {
     firstname?: SortOrder
     middlename?: SortOrder
     lastname?: SortOrder
-    position?: SortOrder
     signature_src?: SortOrder
+    position_id?: SortOrder
     is_budget_officer?: SortOrder
     is_finance_manager?: SortOrder
     created_by?: SortOrder
@@ -18902,13 +20205,6 @@ export namespace Prisma {
     updated_at?: SortOrder
     deleted_at?: SortOrder
   }
-
-  export type EnumRoleFilter<$PrismaModel = never> = {
-    equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
-    in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
-    notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
-    not?: NestedEnumRoleFilter<$PrismaModel> | $Enums.Role
-  }
   export type JsonNullableFilter<$PrismaModel = never> = 
     | PatchUndefined<
         Either<Required<JsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>,
@@ -18930,6 +20226,82 @@ export namespace Prisma {
     gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type EmployeeListRelationFilter = {
+    every?: EmployeeWhereInput
+    some?: EmployeeWhereInput
+    none?: EmployeeWhereInput
+  }
+
+  export type EmployeeOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PositionCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    permissions?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrder
+    deleted_by?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    deleted_at?: SortOrder
+  }
+
+  export type PositionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrder
+    deleted_by?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    deleted_at?: SortOrder
+  }
+
+  export type PositionMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    created_by?: SortOrder
+    updated_by?: SortOrder
+    deleted_by?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    deleted_at?: SortOrder
+  }
+  export type JsonNullableWithAggregatesFilter<$PrismaModel = never> = 
+    | PatchUndefined<
+        Either<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedJsonNullableFilter<$PrismaModel>
+    _max?: NestedJsonNullableFilter<$PrismaModel>
+  }
+
+  export type EnumRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoleFilter<$PrismaModel> | $Enums.Role
   }
 
   export type UserCountOrderByAggregateInput = {
@@ -19000,31 +20372,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumRoleFilter<$PrismaModel>
     _max?: NestedEnumRoleFilter<$PrismaModel>
-  }
-  export type JsonNullableWithAggregatesFilter<$PrismaModel = never> = 
-    | PatchUndefined<
-        Either<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
-        Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>
-      >
-    | OptionalFlat<Omit<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
-
-  export type JsonNullableWithAggregatesFilterBase<$PrismaModel = never> = {
-    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    path?: string[]
-    string_contains?: string | StringFieldRefInput<$PrismaModel>
-    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
-    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
-    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedJsonNullableFilter<$PrismaModel>
-    _max?: NestedJsonNullableFilter<$PrismaModel>
   }
 
   export type UserRelationFilter = {
@@ -19417,6 +20764,12 @@ export namespace Prisma {
     deleteMany?: DivisionScalarWhereInput | DivisionScalarWhereInput[]
   }
 
+  export type PositionCreateNestedOneWithoutEmployeesInput = {
+    create?: XOR<PositionCreateWithoutEmployeesInput, PositionUncheckedCreateWithoutEmployeesInput>
+    connectOrCreate?: PositionCreateOrConnectWithoutEmployeesInput
+    connect?: PositionWhereUniqueInput
+  }
+
   export type JOApproverSettingCreateNestedOneWithoutApproverInput = {
     create?: XOR<JOApproverSettingCreateWithoutApproverInput, JOApproverSettingUncheckedCreateWithoutApproverInput>
     connectOrCreate?: JOApproverSettingCreateOrConnectWithoutApproverInput
@@ -19503,6 +20856,16 @@ export namespace Prisma {
 
   export type BoolFieldUpdateOperationsInput = {
     set?: boolean
+  }
+
+  export type PositionUpdateOneWithoutEmployeesNestedInput = {
+    create?: XOR<PositionCreateWithoutEmployeesInput, PositionUncheckedCreateWithoutEmployeesInput>
+    connectOrCreate?: PositionCreateOrConnectWithoutEmployeesInput
+    upsert?: PositionUpsertWithoutEmployeesInput
+    disconnect?: PositionWhereInput | boolean
+    delete?: PositionWhereInput | boolean
+    connect?: PositionWhereUniqueInput
+    update?: XOR<XOR<PositionUpdateToOneWithWhereWithoutEmployeesInput, PositionUpdateWithoutEmployeesInput>, PositionUncheckedUpdateWithoutEmployeesInput>
   }
 
   export type JOApproverSettingUpdateOneWithoutApproverNestedInput = {
@@ -19643,6 +21006,48 @@ export namespace Prisma {
     delete?: UserEmployeeWhereInput | boolean
     connect?: UserEmployeeWhereUniqueInput
     update?: XOR<XOR<UserEmployeeUpdateToOneWithWhereWithoutEmployeeInput, UserEmployeeUpdateWithoutEmployeeInput>, UserEmployeeUncheckedUpdateWithoutEmployeeInput>
+  }
+
+  export type EmployeeCreateNestedManyWithoutPositionInput = {
+    create?: XOR<EmployeeCreateWithoutPositionInput, EmployeeUncheckedCreateWithoutPositionInput> | EmployeeCreateWithoutPositionInput[] | EmployeeUncheckedCreateWithoutPositionInput[]
+    connectOrCreate?: EmployeeCreateOrConnectWithoutPositionInput | EmployeeCreateOrConnectWithoutPositionInput[]
+    createMany?: EmployeeCreateManyPositionInputEnvelope
+    connect?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
+  }
+
+  export type EmployeeUncheckedCreateNestedManyWithoutPositionInput = {
+    create?: XOR<EmployeeCreateWithoutPositionInput, EmployeeUncheckedCreateWithoutPositionInput> | EmployeeCreateWithoutPositionInput[] | EmployeeUncheckedCreateWithoutPositionInput[]
+    connectOrCreate?: EmployeeCreateOrConnectWithoutPositionInput | EmployeeCreateOrConnectWithoutPositionInput[]
+    createMany?: EmployeeCreateManyPositionInputEnvelope
+    connect?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
+  }
+
+  export type EmployeeUpdateManyWithoutPositionNestedInput = {
+    create?: XOR<EmployeeCreateWithoutPositionInput, EmployeeUncheckedCreateWithoutPositionInput> | EmployeeCreateWithoutPositionInput[] | EmployeeUncheckedCreateWithoutPositionInput[]
+    connectOrCreate?: EmployeeCreateOrConnectWithoutPositionInput | EmployeeCreateOrConnectWithoutPositionInput[]
+    upsert?: EmployeeUpsertWithWhereUniqueWithoutPositionInput | EmployeeUpsertWithWhereUniqueWithoutPositionInput[]
+    createMany?: EmployeeCreateManyPositionInputEnvelope
+    set?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
+    disconnect?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
+    delete?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
+    connect?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
+    update?: EmployeeUpdateWithWhereUniqueWithoutPositionInput | EmployeeUpdateWithWhereUniqueWithoutPositionInput[]
+    updateMany?: EmployeeUpdateManyWithWhereWithoutPositionInput | EmployeeUpdateManyWithWhereWithoutPositionInput[]
+    deleteMany?: EmployeeScalarWhereInput | EmployeeScalarWhereInput[]
+  }
+
+  export type EmployeeUncheckedUpdateManyWithoutPositionNestedInput = {
+    create?: XOR<EmployeeCreateWithoutPositionInput, EmployeeUncheckedCreateWithoutPositionInput> | EmployeeCreateWithoutPositionInput[] | EmployeeUncheckedCreateWithoutPositionInput[]
+    connectOrCreate?: EmployeeCreateOrConnectWithoutPositionInput | EmployeeCreateOrConnectWithoutPositionInput[]
+    upsert?: EmployeeUpsertWithWhereUniqueWithoutPositionInput | EmployeeUpsertWithWhereUniqueWithoutPositionInput[]
+    createMany?: EmployeeCreateManyPositionInputEnvelope
+    set?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
+    disconnect?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
+    delete?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
+    connect?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
+    update?: EmployeeUpdateWithWhereUniqueWithoutPositionInput | EmployeeUpdateWithWhereUniqueWithoutPositionInput[]
+    updateMany?: EmployeeUpdateManyWithWhereWithoutPositionInput | EmployeeUpdateManyWithWhereWithoutPositionInput[]
+    deleteMany?: EmployeeScalarWhereInput | EmployeeScalarWhereInput[]
   }
 
   export type UserEmployeeCreateNestedOneWithoutUserInput = {
@@ -19966,23 +21371,6 @@ export namespace Prisma {
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
   }
-
-  export type NestedEnumRoleFilter<$PrismaModel = never> = {
-    equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
-    in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
-    notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
-    not?: NestedEnumRoleFilter<$PrismaModel> | $Enums.Role
-  }
-
-  export type NestedEnumRoleWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
-    in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
-    notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
-    not?: NestedEnumRoleWithAggregatesFilter<$PrismaModel> | $Enums.Role
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumRoleFilter<$PrismaModel>
-    _max?: NestedEnumRoleFilter<$PrismaModel>
-  }
   export type NestedJsonNullableFilter<$PrismaModel = never> = 
     | PatchUndefined<
         Either<Required<NestedJsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>,
@@ -20004,6 +21392,23 @@ export namespace Prisma {
     gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type NestedEnumRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoleFilter<$PrismaModel> | $Enums.Role
+  }
+
+  export type NestedEnumRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumRoleWithAggregatesFilter<$PrismaModel> | $Enums.Role
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumRoleFilter<$PrismaModel>
+    _max?: NestedEnumRoleFilter<$PrismaModel>
   }
 
   export type DepartmentCreateWithoutDivisionInput = {
@@ -20141,6 +21546,35 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"Division"> | Date | string
     updated_at?: DateTimeFilter<"Division"> | Date | string
     deleted_at?: DateTimeNullableFilter<"Division"> | Date | string | null
+  }
+
+  export type PositionCreateWithoutEmployeesInput = {
+    id?: string
+    name: string
+    permissions?: NullableJsonNullValueInput | InputJsonValue
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    deleted_at?: Date | string | null
+  }
+
+  export type PositionUncheckedCreateWithoutEmployeesInput = {
+    id?: string
+    name: string
+    permissions?: NullableJsonNullValueInput | InputJsonValue
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    deleted_at?: Date | string | null
+  }
+
+  export type PositionCreateOrConnectWithoutEmployeesInput = {
+    where: PositionWhereUniqueInput
+    create: XOR<PositionCreateWithoutEmployeesInput, PositionUncheckedCreateWithoutEmployeesInput>
   }
 
   export type JOApproverSettingCreateWithoutApproverInput = {
@@ -20314,6 +21748,41 @@ export namespace Prisma {
   export type UserEmployeeCreateOrConnectWithoutEmployeeInput = {
     where: UserEmployeeWhereUniqueInput
     create: XOR<UserEmployeeCreateWithoutEmployeeInput, UserEmployeeUncheckedCreateWithoutEmployeeInput>
+  }
+
+  export type PositionUpsertWithoutEmployeesInput = {
+    update: XOR<PositionUpdateWithoutEmployeesInput, PositionUncheckedUpdateWithoutEmployeesInput>
+    create: XOR<PositionCreateWithoutEmployeesInput, PositionUncheckedCreateWithoutEmployeesInput>
+    where?: PositionWhereInput
+  }
+
+  export type PositionUpdateToOneWithWhereWithoutEmployeesInput = {
+    where?: PositionWhereInput
+    data: XOR<PositionUpdateWithoutEmployeesInput, PositionUncheckedUpdateWithoutEmployeesInput>
+  }
+
+  export type PositionUpdateWithoutEmployeesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    permissions?: NullableJsonNullValueInput | InputJsonValue
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type PositionUncheckedUpdateWithoutEmployeesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    permissions?: NullableJsonNullValueInput | InputJsonValue
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type JOApproverSettingUpsertWithoutApproverInput = {
@@ -20531,6 +22000,98 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type EmployeeCreateWithoutPositionInput = {
+    id?: string
+    firstname: string
+    middlename?: string | null
+    lastname: string
+    signature_src?: string | null
+    is_budget_officer?: boolean
+    is_finance_manager?: boolean
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    deleted_at?: Date | string | null
+    jo_approver_setting?: JOApproverSettingCreateNestedOneWithoutApproverInput
+    meqs_approver_setting?: MEQSApproverSettingCreateNestedOneWithoutApproverInput
+    po_approver_setting?: POApproverSettingCreateNestedOneWithoutApproverInput
+    rv_approver_setting?: RVApproverSettingCreateNestedOneWithoutApproverInput
+    spr_approver_setting?: SPRApproverSettingCreateNestedOneWithoutApproverInput
+    rr_approver_setting?: RRApproverSettingCreateNestedOneWithoutApproverInput
+    user_employee?: UserEmployeeCreateNestedOneWithoutEmployeeInput
+  }
+
+  export type EmployeeUncheckedCreateWithoutPositionInput = {
+    id?: string
+    firstname: string
+    middlename?: string | null
+    lastname: string
+    signature_src?: string | null
+    is_budget_officer?: boolean
+    is_finance_manager?: boolean
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    deleted_at?: Date | string | null
+    jo_approver_setting?: JOApproverSettingUncheckedCreateNestedOneWithoutApproverInput
+    meqs_approver_setting?: MEQSApproverSettingUncheckedCreateNestedOneWithoutApproverInput
+    po_approver_setting?: POApproverSettingUncheckedCreateNestedOneWithoutApproverInput
+    rv_approver_setting?: RVApproverSettingUncheckedCreateNestedOneWithoutApproverInput
+    spr_approver_setting?: SPRApproverSettingUncheckedCreateNestedOneWithoutApproverInput
+    rr_approver_setting?: RRApproverSettingUncheckedCreateNestedOneWithoutApproverInput
+    user_employee?: UserEmployeeUncheckedCreateNestedOneWithoutEmployeeInput
+  }
+
+  export type EmployeeCreateOrConnectWithoutPositionInput = {
+    where: EmployeeWhereUniqueInput
+    create: XOR<EmployeeCreateWithoutPositionInput, EmployeeUncheckedCreateWithoutPositionInput>
+  }
+
+  export type EmployeeCreateManyPositionInputEnvelope = {
+    data: EmployeeCreateManyPositionInput | EmployeeCreateManyPositionInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EmployeeUpsertWithWhereUniqueWithoutPositionInput = {
+    where: EmployeeWhereUniqueInput
+    update: XOR<EmployeeUpdateWithoutPositionInput, EmployeeUncheckedUpdateWithoutPositionInput>
+    create: XOR<EmployeeCreateWithoutPositionInput, EmployeeUncheckedCreateWithoutPositionInput>
+  }
+
+  export type EmployeeUpdateWithWhereUniqueWithoutPositionInput = {
+    where: EmployeeWhereUniqueInput
+    data: XOR<EmployeeUpdateWithoutPositionInput, EmployeeUncheckedUpdateWithoutPositionInput>
+  }
+
+  export type EmployeeUpdateManyWithWhereWithoutPositionInput = {
+    where: EmployeeScalarWhereInput
+    data: XOR<EmployeeUpdateManyMutationInput, EmployeeUncheckedUpdateManyWithoutPositionInput>
+  }
+
+  export type EmployeeScalarWhereInput = {
+    AND?: EmployeeScalarWhereInput | EmployeeScalarWhereInput[]
+    OR?: EmployeeScalarWhereInput[]
+    NOT?: EmployeeScalarWhereInput | EmployeeScalarWhereInput[]
+    id?: StringFilter<"Employee"> | string
+    firstname?: StringFilter<"Employee"> | string
+    middlename?: StringNullableFilter<"Employee"> | string | null
+    lastname?: StringFilter<"Employee"> | string
+    signature_src?: StringNullableFilter<"Employee"> | string | null
+    position_id?: StringNullableFilter<"Employee"> | string | null
+    is_budget_officer?: BoolFilter<"Employee"> | boolean
+    is_finance_manager?: BoolFilter<"Employee"> | boolean
+    created_by?: StringFilter<"Employee"> | string
+    updated_by?: StringNullableFilter<"Employee"> | string | null
+    deleted_by?: StringNullableFilter<"Employee"> | string | null
+    created_at?: DateTimeFilter<"Employee"> | Date | string
+    updated_at?: DateTimeFilter<"Employee"> | Date | string
+    deleted_at?: DateTimeNullableFilter<"Employee"> | Date | string | null
+  }
+
   export type UserEmployeeCreateWithoutUserInput = {
     id?: string
     created_by: string
@@ -20629,7 +22190,6 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
-    position?: string | null
     signature_src?: string | null
     is_budget_officer?: boolean
     is_finance_manager?: boolean
@@ -20639,6 +22199,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     deleted_at?: Date | string | null
+    position?: PositionCreateNestedOneWithoutEmployeesInput
     jo_approver_setting?: JOApproverSettingCreateNestedOneWithoutApproverInput
     meqs_approver_setting?: MEQSApproverSettingCreateNestedOneWithoutApproverInput
     po_approver_setting?: POApproverSettingCreateNestedOneWithoutApproverInput
@@ -20652,8 +22213,8 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
-    position?: string | null
     signature_src?: string | null
+    position_id?: string | null
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by: string
@@ -20738,7 +22299,6 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     signature_src?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
@@ -20748,6 +22308,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    position?: PositionUpdateOneWithoutEmployeesNestedInput
     jo_approver_setting?: JOApproverSettingUpdateOneWithoutApproverNestedInput
     meqs_approver_setting?: MEQSApproverSettingUpdateOneWithoutApproverNestedInput
     po_approver_setting?: POApproverSettingUpdateOneWithoutApproverNestedInput
@@ -20761,8 +22322,8 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     signature_src?: NullableStringFieldUpdateOperationsInput | string | null
+    position_id?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
@@ -20784,7 +22345,6 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
-    position?: string | null
     signature_src?: string | null
     is_budget_officer?: boolean
     is_finance_manager?: boolean
@@ -20794,6 +22354,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     deleted_at?: Date | string | null
+    position?: PositionCreateNestedOneWithoutEmployeesInput
     meqs_approver_setting?: MEQSApproverSettingCreateNestedOneWithoutApproverInput
     po_approver_setting?: POApproverSettingCreateNestedOneWithoutApproverInput
     rv_approver_setting?: RVApproverSettingCreateNestedOneWithoutApproverInput
@@ -20807,8 +22368,8 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
-    position?: string | null
     signature_src?: string | null
+    position_id?: string | null
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by: string
@@ -20846,7 +22407,6 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     signature_src?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
@@ -20856,6 +22416,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    position?: PositionUpdateOneWithoutEmployeesNestedInput
     meqs_approver_setting?: MEQSApproverSettingUpdateOneWithoutApproverNestedInput
     po_approver_setting?: POApproverSettingUpdateOneWithoutApproverNestedInput
     rv_approver_setting?: RVApproverSettingUpdateOneWithoutApproverNestedInput
@@ -20869,8 +22430,8 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     signature_src?: NullableStringFieldUpdateOperationsInput | string | null
+    position_id?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
@@ -20892,7 +22453,6 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
-    position?: string | null
     signature_src?: string | null
     is_budget_officer?: boolean
     is_finance_manager?: boolean
@@ -20902,6 +22462,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     deleted_at?: Date | string | null
+    position?: PositionCreateNestedOneWithoutEmployeesInput
     jo_approver_setting?: JOApproverSettingCreateNestedOneWithoutApproverInput
     meqs_approver_setting?: MEQSApproverSettingCreateNestedOneWithoutApproverInput
     po_approver_setting?: POApproverSettingCreateNestedOneWithoutApproverInput
@@ -20915,8 +22476,8 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
-    position?: string | null
     signature_src?: string | null
+    position_id?: string | null
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by: string
@@ -20954,7 +22515,6 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     signature_src?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
@@ -20964,6 +22524,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    position?: PositionUpdateOneWithoutEmployeesNestedInput
     jo_approver_setting?: JOApproverSettingUpdateOneWithoutApproverNestedInput
     meqs_approver_setting?: MEQSApproverSettingUpdateOneWithoutApproverNestedInput
     po_approver_setting?: POApproverSettingUpdateOneWithoutApproverNestedInput
@@ -20977,8 +22538,8 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     signature_src?: NullableStringFieldUpdateOperationsInput | string | null
+    position_id?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
@@ -21000,7 +22561,6 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
-    position?: string | null
     signature_src?: string | null
     is_budget_officer?: boolean
     is_finance_manager?: boolean
@@ -21010,6 +22570,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     deleted_at?: Date | string | null
+    position?: PositionCreateNestedOneWithoutEmployeesInput
     jo_approver_setting?: JOApproverSettingCreateNestedOneWithoutApproverInput
     meqs_approver_setting?: MEQSApproverSettingCreateNestedOneWithoutApproverInput
     po_approver_setting?: POApproverSettingCreateNestedOneWithoutApproverInput
@@ -21023,8 +22584,8 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
-    position?: string | null
     signature_src?: string | null
+    position_id?: string | null
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by: string
@@ -21062,7 +22623,6 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     signature_src?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
@@ -21072,6 +22632,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    position?: PositionUpdateOneWithoutEmployeesNestedInput
     jo_approver_setting?: JOApproverSettingUpdateOneWithoutApproverNestedInput
     meqs_approver_setting?: MEQSApproverSettingUpdateOneWithoutApproverNestedInput
     po_approver_setting?: POApproverSettingUpdateOneWithoutApproverNestedInput
@@ -21085,8 +22646,8 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     signature_src?: NullableStringFieldUpdateOperationsInput | string | null
+    position_id?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
@@ -21108,7 +22669,6 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
-    position?: string | null
     signature_src?: string | null
     is_budget_officer?: boolean
     is_finance_manager?: boolean
@@ -21118,6 +22678,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     deleted_at?: Date | string | null
+    position?: PositionCreateNestedOneWithoutEmployeesInput
     jo_approver_setting?: JOApproverSettingCreateNestedOneWithoutApproverInput
     po_approver_setting?: POApproverSettingCreateNestedOneWithoutApproverInput
     rv_approver_setting?: RVApproverSettingCreateNestedOneWithoutApproverInput
@@ -21131,8 +22692,8 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
-    position?: string | null
     signature_src?: string | null
+    position_id?: string | null
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by: string
@@ -21170,7 +22731,6 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     signature_src?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
@@ -21180,6 +22740,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    position?: PositionUpdateOneWithoutEmployeesNestedInput
     jo_approver_setting?: JOApproverSettingUpdateOneWithoutApproverNestedInput
     po_approver_setting?: POApproverSettingUpdateOneWithoutApproverNestedInput
     rv_approver_setting?: RVApproverSettingUpdateOneWithoutApproverNestedInput
@@ -21193,8 +22754,8 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     signature_src?: NullableStringFieldUpdateOperationsInput | string | null
+    position_id?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
@@ -21216,7 +22777,6 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
-    position?: string | null
     signature_src?: string | null
     is_budget_officer?: boolean
     is_finance_manager?: boolean
@@ -21226,6 +22786,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     deleted_at?: Date | string | null
+    position?: PositionCreateNestedOneWithoutEmployeesInput
     jo_approver_setting?: JOApproverSettingCreateNestedOneWithoutApproverInput
     meqs_approver_setting?: MEQSApproverSettingCreateNestedOneWithoutApproverInput
     rv_approver_setting?: RVApproverSettingCreateNestedOneWithoutApproverInput
@@ -21239,8 +22800,8 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
-    position?: string | null
     signature_src?: string | null
+    position_id?: string | null
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by: string
@@ -21278,7 +22839,6 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     signature_src?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
@@ -21288,6 +22848,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    position?: PositionUpdateOneWithoutEmployeesNestedInput
     jo_approver_setting?: JOApproverSettingUpdateOneWithoutApproverNestedInput
     meqs_approver_setting?: MEQSApproverSettingUpdateOneWithoutApproverNestedInput
     rv_approver_setting?: RVApproverSettingUpdateOneWithoutApproverNestedInput
@@ -21301,8 +22862,8 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     signature_src?: NullableStringFieldUpdateOperationsInput | string | null
+    position_id?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
@@ -21324,7 +22885,6 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
-    position?: string | null
     signature_src?: string | null
     is_budget_officer?: boolean
     is_finance_manager?: boolean
@@ -21334,6 +22894,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     deleted_at?: Date | string | null
+    position?: PositionCreateNestedOneWithoutEmployeesInput
     jo_approver_setting?: JOApproverSettingCreateNestedOneWithoutApproverInput
     meqs_approver_setting?: MEQSApproverSettingCreateNestedOneWithoutApproverInput
     po_approver_setting?: POApproverSettingCreateNestedOneWithoutApproverInput
@@ -21347,8 +22908,8 @@ export namespace Prisma {
     firstname: string
     middlename?: string | null
     lastname: string
-    position?: string | null
     signature_src?: string | null
+    position_id?: string | null
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by: string
@@ -21386,7 +22947,6 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     signature_src?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
@@ -21396,6 +22956,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    position?: PositionUpdateOneWithoutEmployeesNestedInput
     jo_approver_setting?: JOApproverSettingUpdateOneWithoutApproverNestedInput
     meqs_approver_setting?: MEQSApproverSettingUpdateOneWithoutApproverNestedInput
     po_approver_setting?: POApproverSettingUpdateOneWithoutApproverNestedInput
@@ -21409,8 +22970,8 @@ export namespace Prisma {
     firstname?: StringFieldUpdateOperationsInput | string
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
-    position?: NullableStringFieldUpdateOperationsInput | string | null
     signature_src?: NullableStringFieldUpdateOperationsInput | string | null
+    position_id?: NullableStringFieldUpdateOperationsInput | string | null
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
@@ -21479,6 +23040,84 @@ export namespace Prisma {
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
+  export type EmployeeCreateManyPositionInput = {
+    id?: string
+    firstname: string
+    middlename?: string | null
+    lastname: string
+    signature_src?: string | null
+    is_budget_officer?: boolean
+    is_finance_manager?: boolean
+    created_by: string
+    updated_by?: string | null
+    deleted_by?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    deleted_at?: Date | string | null
+  }
+
+  export type EmployeeUpdateWithoutPositionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstname?: StringFieldUpdateOperationsInput | string
+    middlename?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname?: StringFieldUpdateOperationsInput | string
+    signature_src?: NullableStringFieldUpdateOperationsInput | string | null
+    is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
+    is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    jo_approver_setting?: JOApproverSettingUpdateOneWithoutApproverNestedInput
+    meqs_approver_setting?: MEQSApproverSettingUpdateOneWithoutApproverNestedInput
+    po_approver_setting?: POApproverSettingUpdateOneWithoutApproverNestedInput
+    rv_approver_setting?: RVApproverSettingUpdateOneWithoutApproverNestedInput
+    spr_approver_setting?: SPRApproverSettingUpdateOneWithoutApproverNestedInput
+    rr_approver_setting?: RRApproverSettingUpdateOneWithoutApproverNestedInput
+    user_employee?: UserEmployeeUpdateOneWithoutEmployeeNestedInput
+  }
+
+  export type EmployeeUncheckedUpdateWithoutPositionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstname?: StringFieldUpdateOperationsInput | string
+    middlename?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname?: StringFieldUpdateOperationsInput | string
+    signature_src?: NullableStringFieldUpdateOperationsInput | string | null
+    is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
+    is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    jo_approver_setting?: JOApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
+    meqs_approver_setting?: MEQSApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
+    po_approver_setting?: POApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
+    rv_approver_setting?: RVApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
+    spr_approver_setting?: SPRApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
+    rr_approver_setting?: RRApproverSettingUncheckedUpdateOneWithoutApproverNestedInput
+    user_employee?: UserEmployeeUncheckedUpdateOneWithoutEmployeeNestedInput
+  }
+
+  export type EmployeeUncheckedUpdateManyWithoutPositionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstname?: StringFieldUpdateOperationsInput | string
+    middlename?: NullableStringFieldUpdateOperationsInput | string | null
+    lastname?: StringFieldUpdateOperationsInput | string
+    signature_src?: NullableStringFieldUpdateOperationsInput | string | null
+    is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
+    is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
+    created_by?: StringFieldUpdateOperationsInput | string
+    updated_by?: NullableStringFieldUpdateOperationsInput | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
 
 
   /**
@@ -21488,6 +23127,10 @@ export namespace Prisma {
      * @deprecated Use DepartmentCountOutputTypeDefaultArgs instead
      */
     export type DepartmentCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = DepartmentCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use PositionCountOutputTypeDefaultArgs instead
+     */
+    export type PositionCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = PositionCountOutputTypeDefaultArgs<ExtArgs>
     /**
      * @deprecated Use DivisionDefaultArgs instead
      */
@@ -21508,6 +23151,10 @@ export namespace Prisma {
      * @deprecated Use ClassificationDefaultArgs instead
      */
     export type ClassificationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ClassificationDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use PositionDefaultArgs instead
+     */
+    export type PositionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = PositionDefaultArgs<ExtArgs>
     /**
      * @deprecated Use UserDefaultArgs instead
      */

@@ -43,8 +43,6 @@ export class UserService {
 
     if (input.permissions) {
       data.permissions = JSON.parse(input.permissions)
-      // data.permissions = input.permissions
-      // data.permissions = JSON.stringify(input.permissions)
     }
 
     if (input.employee_id) {

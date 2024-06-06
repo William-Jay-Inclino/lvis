@@ -146,6 +146,7 @@ export interface Employee {
     firstname: string
     middlename: string
     lastname: string
+    position_id?: string
     position?: string
     created_by: string
 }
@@ -208,6 +209,12 @@ export interface Classification {
     created_by: string
 }
 
+export interface Position {
+    id: string
+    name: string
+    created_by: string
+}
+
 export interface UserEmployee {
     id: string
     user_id: string
@@ -262,8 +269,6 @@ export interface RRApproverSetting {
     order: number
     created_by: string
 }
-
-
 
 export enum MODULES {
 

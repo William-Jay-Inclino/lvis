@@ -20,6 +20,7 @@ import { JoApproverSettingModule } from './jo-approver-setting/jo-approver-setti
 import { SprApproverSettingModule } from './spr-approver-setting/spr-approver-setting.module';
 import { AccountModule } from './account/account.module';
 import { SettingModule } from './setting/setting.module';
+import { PositionModule } from './position/position.module';
 
 
 @Module({
@@ -48,6 +49,7 @@ import { SettingModule } from './setting/setting.module';
     SprApproverSettingModule,
     AccountModule,
     SettingModule,
+    PositionModule,
   ],
   controllers: [],
   providers: [],

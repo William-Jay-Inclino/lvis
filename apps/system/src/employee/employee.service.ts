@@ -27,7 +27,7 @@ export class EmployeeService {
 			firstname: input.firstname,
 			middlename: input.middlename,
 			lastname: input.lastname,
-			position: input.position,
+			position: input.position_id ? { connect: { id: input.position_id } } : undefined,
 			signature_src: input.signature_src,
 		}
 
@@ -109,7 +109,9 @@ export class EmployeeService {
 			firstname: input.firstname ?? existingItem.firstname,
 			middlename: input.middlename ?? existingItem.middlename,
 			lastname: input.lastname ?? existingItem.lastname,
-			position: input.position ?? existingItem.position,
+			position: input.position_id !== undefined 
+              ? (input.position_id === null ? { disconnect: true } : { connect: { id: input.position_id } })
+              : undefined,
 			signature_src: input.signature_src ?? existingItem.signature_src,
 			is_budget_officer: input.is_budget_officer ?? existingItem.is_budget_officer,
 			is_finance_manager: input.is_finance_manager ?? existingItem.is_finance_manager,

@@ -22,7 +22,7 @@ export class CreateEmployeeInput {
   @Field(() => String, {nullable: true})
   @IsOptional()
   @IsString()
-  position?: string;
+  position_id?: string;
 
   @Field(() => String, {nullable: true})
   @IsOptional()

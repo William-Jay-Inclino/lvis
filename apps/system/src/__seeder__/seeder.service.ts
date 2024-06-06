@@ -19,6 +19,7 @@ export class SeederService {
                 this.seedDepartment(),
                 this.seedClassification(),
                 this.seedAccount(),
+                this.seedPosition(),
                 this.seedEmployee(),
                 this.seedJOApproverSetting(),
                 this.seedRVApproverSetting(),
@@ -57,6 +58,20 @@ export class SeederService {
         try {
             return this.prisma.classification.createMany({
                 data: data.classifications
+            })
+        } catch (error) {
+            console.error(error)
+        }
+
+
+    }
+
+    seedPosition() {
+        console.log('seeding position table...')
+
+        try {
+            return this.prisma.position.createMany({
+                data: data.positions
             })
         } catch (error) {
             console.error(error)
