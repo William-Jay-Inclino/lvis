@@ -32,18 +32,27 @@ export class PositionService {
 		const created = await this.prisma.position.create({ data })
 
 		this.logger.log('Successfully created Position')
+		
+		if(created.permissions) {
+			created.permissions = JSON.stringify(created.permissions)
+		}
 
 		return created
 	}
 
 	async findAll(): Promise<Position[]> {
-		return await this.prisma.position.findMany({
+		const items = await this.prisma.position.findMany({
 			where: {
 				deleted_at: null
 			},
 			orderBy: {
 				name: 'asc'
 			}
+		})
+
+		return items.map(i => {
+			i.permissions = !!i.permissions ? JSON.stringify(i.permissions) : null
+			return i
 		})
 	}
 
@@ -54,6 +63,10 @@ export class PositionService {
 
 		if (!item) {
 			throw new NotFoundException('Position not found')
+		}
+
+		if(item.permissions) {
+			item.permissions = JSON.stringify(item.permissions)
 		}
 
 		return item
@@ -80,6 +93,10 @@ export class PositionService {
 		})
 
 		this.logger.log('Successfully updated Position')
+
+		if(updated.permissions) {
+			updated.permissions = JSON.stringify(updated.permissions)
+		}
 
 		return updated
 	}
