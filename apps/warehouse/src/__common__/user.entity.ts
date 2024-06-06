@@ -62,7 +62,8 @@ export interface WarehousePermissions {
     canManageCanvass?: {
         create?: boolean,
         search?: boolean,
-        viewDetails?: boolean
+        viewDetails?: boolean,
+        print?: boolean,
     },
     canManageCanvassItem?: {
         create?: boolean,
@@ -73,6 +74,7 @@ export interface WarehousePermissions {
         create?: boolean,
         search?: boolean,
         viewDetails?: boolean
+        print?: boolean,
     },
     canManageRVApprover?: {
         create?: boolean,
@@ -83,6 +85,7 @@ export interface WarehousePermissions {
         create?: boolean,
         search?: boolean,
         viewDetails?: boolean
+        print?: boolean,
     },
     canManageSPRApprover?: {
         create?: boolean,
@@ -93,6 +96,7 @@ export interface WarehousePermissions {
         create?: boolean,
         search?: boolean,
         viewDetails?: boolean
+        print?: boolean,
     },
     canManageJOApprover?: {
         create?: boolean,
@@ -103,6 +107,7 @@ export interface WarehousePermissions {
         create?: boolean,
         search?: boolean,
         viewDetails?: boolean
+        print?: boolean,
     },
     canManageMEQSApprover?: {
         create?: boolean,
@@ -128,6 +133,7 @@ export interface WarehousePermissions {
         create?: boolean,
         search?: boolean,
         viewDetails?: boolean
+        print?: boolean,
     },
     canManagePOApprover?: {
         create?: boolean,
@@ -138,6 +144,7 @@ export interface WarehousePermissions {
         create?: boolean,
         search?: boolean,
         viewDetails?: boolean
+        print?: boolean,
     },
     canManageRRApprover?: {
         create?: boolean,

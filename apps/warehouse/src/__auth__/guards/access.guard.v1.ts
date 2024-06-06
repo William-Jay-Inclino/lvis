@@ -20,14 +20,8 @@ export class AccessGuard extends AuthGuard('jwt') implements CanActivate {
             return true;
         }
 
-        let authUser: User;
-        if (context.getType().toString() === 'graphql') {
-            const ctx = GqlExecutionContext.create(context);
-            authUser = ctx.getContext().req.user;
-        } else {
-            const request = context.switchToHttp().getRequest();
-            authUser = request.user;
-        }
+        const ctx = GqlExecutionContext.create(context);
+        const authUser: User = ctx.getContext().req.user;
 
         if (!canAccess(authUser, access.module, access.resolver)) {
             throw new ForbiddenException('You do not have permission to perform this action');

@@ -5,7 +5,9 @@ import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { PoService } from './po.service';
 import { APPROVAL_STATUS } from '../__common__/types';
-
+import { MODULES, RESOLVERS } from '../__common__/types';
+import { AccessGuard } from '../__auth__/guards/access.guard';
+import { CheckAccess } from '../__auth__/check-access.decorator';
 
 @UseGuards(JwtAuthGuard)
 @Controller('po')
@@ -18,6 +20,8 @@ export class PoController {
 
 
     @Get('pdf/:id')
+    @UseGuards(AccessGuard)
+    @CheckAccess(MODULES.PO, RESOLVERS.printPo)
     async generatePdf(
         @Param('id') id: string, 
         @Res() res: Response,

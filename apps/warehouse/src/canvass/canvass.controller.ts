@@ -3,7 +3,9 @@ import { CanvassPdfService } from './canvass.pdf.service';
 import { JwtAuthGuard } from '../__auth__/guards/jwt-auth.guard';
 import { CurrentAuthUser } from '../__auth__/current-auth-user.decorator';
 import { AuthUser } from '../__common__/auth-user.entity';
-
+import { MODULES, RESOLVERS } from '../__common__/types';
+import { AccessGuard } from '../__auth__/guards/access.guard';
+import { CheckAccess } from '../__auth__/check-access.decorator';
 
 @UseGuards(JwtAuthGuard)
 @Controller('canvass')
@@ -15,6 +17,8 @@ export class CanvassController {
 
 
     @Get('pdf/:id')
+    @UseGuards(AccessGuard)
+    @CheckAccess(MODULES.CANVASS, RESOLVERS.printCanvass)
     async generatePdf(
         @Param('id') id: string, 
         @Res() res: Response,

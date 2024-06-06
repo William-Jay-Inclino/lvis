@@ -122,6 +122,7 @@ export enum RESOLVERS {
     canvass = 'canvass',
     updateCanvass = 'updateCanvass',
     removeCanvass = 'removeCanvass',
+    printCanvass = 'printCanvass',
 
 
     // ========= RV ========= 
@@ -131,6 +132,7 @@ export enum RESOLVERS {
     rv = 'rv',
     updateRv = 'updateRv',
     cancelRv = 'cancelRv',
+    printRv = 'printRv',
 
     // ========= SPR ========= 
     createSpr = 'createSpr',
@@ -139,6 +141,7 @@ export enum RESOLVERS {
     spr = 'spr',
     updateSpr = 'updateSpr',
     cancelSpr = 'cancelSpr',
+    printSpr = 'printSpr',
 
 
     // ========= JO ========= 
@@ -148,6 +151,7 @@ export enum RESOLVERS {
     jo = 'jo',
     updateJo = 'updateJo',
     cancelJo = 'cancelJo',
+    printJo = 'printJo',
 
 
     // ========= MEQS ========= 
@@ -157,6 +161,7 @@ export enum RESOLVERS {
     meq = 'meq',
     updateMeqs = 'updateMeqs',
     cancelMeqs = 'cancelMeqs',
+    printMeqs = 'printMeqs',
 
 
     // ========= PO ========= 
@@ -166,6 +171,7 @@ export enum RESOLVERS {
     po = 'po',
     updatePo = 'updatePo',
     cancelPo = 'cancelPo',
+    printPo = 'printPo',
 
 
     // ========= RR ========= 
@@ -175,6 +181,7 @@ export enum RESOLVERS {
     rr = 'rr',
     updateRr = 'updateRr',
     cancelRr = 'cancelRr',
+    printRr = 'printRr',
 
 
     // ========= SUPPLIER ========= 
