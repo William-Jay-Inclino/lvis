@@ -230,8 +230,8 @@ export class RrPdfService {
                             <td align="center">${ item.quantity_accepted }</td>
                             <td align="center">${formatToPhpCurrency(item.meqs_supplier_item.price)}</td>
                             <td align="center"> 
-                                ${ item.meqs_supplier_item.vat_type === VAT_TYPE.NONE ? 
-                                    formatToPhpCurrency(item.meqs_supplier_item.price - getVatAmount(item.meqs_supplier_item.price, item.meqs_supplier_item.vat_type)) 
+                                ${ item.meqs_supplier_item.vat_type === VAT_TYPE.NONE || item.meqs_supplier_item.vat_type === VAT_TYPE.EXEMPT ? 
+                                    formatToPhpCurrency(item.meqs_supplier_item.price) 
                                     : '0.00'
                                 } 
                             </td>
@@ -243,7 +243,7 @@ export class RrPdfService {
                             </td>
                             <td align="center"> 
                                 ${ item.meqs_supplier_item.vat_type === VAT_TYPE.EXC ? 
-                                    formatToPhpCurrency(item.meqs_supplier_item.price - getVatAmount(item.meqs_supplier_item.price, item.meqs_supplier_item.vat_type)) 
+                                    formatToPhpCurrency(item.meqs_supplier_item.price + getVatAmount(item.meqs_supplier_item.price, item.meqs_supplier_item.vat_type)) 
                                     : '0.00'
                                 } 
                             </td>
