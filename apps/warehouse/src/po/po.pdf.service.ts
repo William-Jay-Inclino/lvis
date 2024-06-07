@@ -323,7 +323,7 @@ export class PoPdfService {
                                     <td style="text-align: center">
                                         ${
                                             // @ts-ignore 
-                                            item.approver.position
+                                            item.approver.position.name
                                         }
                                     </td>
                                 </tr>
@@ -376,7 +376,7 @@ export class PoPdfService {
                             <div>
                                         ${
                                             // @ts-ignore 
-                                            generalManager.approver.position
+                                            generalManager.approver.position.name
                                         }
                             </div>
                     </td> 
@@ -445,7 +445,10 @@ export class PoPdfService {
                     firstname 
                     middlename 
                     lastname
-                    position
+                    position {
+                        id 
+                        name
+                    }
                     is_budget_officer
                     is_finance_manager
                     signature_src

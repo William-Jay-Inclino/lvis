@@ -329,7 +329,7 @@ export class RrPdfService {
                                                 <td style="text-align: center;  white-space: nowrap;">
                                                     ${
                                                         // @ts-ignore 
-                                                        item.approver.position || ''
+                                                        item.approver.position.name
                                                     }
                                                 </td>
                                                 <td></td>
@@ -378,7 +378,7 @@ export class RrPdfService {
                                 <td style="text-align: center">
                                     ${
                                         // @ts-ignore 
-                                        item.approver.position || ''
+                                        item.approver.position.name
                                     }
                                 </td>
                             </tr>
@@ -439,7 +439,10 @@ export class RrPdfService {
                     firstname 
                     middlename 
                     lastname
-                    position
+                    position {
+                        id 
+                        name
+                    }
                     is_budget_officer
                     is_finance_manager
                     signature_src
@@ -573,7 +576,7 @@ export class RrPdfService {
             const amount = item.meqs_supplier_item.price - vatAmount
 
             if(item.meqs_supplier_item.vat_type === VAT_TYPE.INC) {
-                totalVatInc += amount
+                totalVatInc -= amount
                 continue
             }
 

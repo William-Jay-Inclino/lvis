@@ -204,7 +204,7 @@ export class CanvassPdfService {
                                     <div>
                                         ${
                                             // @ts-ignore
-                                            requisitioner.position || ''
+                                            requisitioner.position ? requisitioner.position.name : ''
                                         } 
                                     </div>
                                 </td>
@@ -234,7 +234,10 @@ export class CanvassPdfService {
                                 <td></td>
                                 <td style="text-align: center">
                                     <div>
-                                        General Manager
+                                    ${
+                                        // @ts-ignore
+                                        notedBy.position ? notedBy.position.name : ''
+                                    } 
                                     </div>
                                 </td>
                             </tr>
@@ -365,7 +368,10 @@ export class CanvassPdfService {
                     firstname 
                     middlename 
                     lastname
-                    position
+                    position {
+                        id 
+                        name
+                    }
                 }
             }
         `;
@@ -416,7 +422,10 @@ export class CanvassPdfService {
                     firstname 
                     middlename 
                     lastname
-                    position
+                    position {
+                        id 
+                        name
+                    }
                 }
             }
         `;
