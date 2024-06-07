@@ -16,7 +16,11 @@ export class UserService {
   private includedFields = {
     user_employee: {
       include: {
-        employee: true
+        employee: {
+          include: {
+            position: true
+          }
+        }
       }
     }
   }
