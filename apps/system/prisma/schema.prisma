@@ -74,12 +74,12 @@ model Employee {
   middlename String?
   lastname   String
   signature_src String?
-  position_id  String?
+  position_id  String
 
   is_budget_officer  Boolean @default(false)
   is_finance_manager Boolean @default(false)
 
-  position    Position?  @relation(fields: [position_id], references: [id], onDelete: Restrict)
+  position    Position  @relation(fields: [position_id], references: [id], onDelete: Restrict)
 
   jo_approver_setting   JOApproverSetting?   @relation("JOApproverSetting")
   meqs_approver_setting MEQSApproverSetting? @relation("MEQSApproverSetting")

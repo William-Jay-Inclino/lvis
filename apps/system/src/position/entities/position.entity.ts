@@ -11,6 +11,6 @@ export class Position {
   name: string;
 
   @Field({ nullable: true })
-  permissions?: string
+  permissions?: string | null 
 
 }

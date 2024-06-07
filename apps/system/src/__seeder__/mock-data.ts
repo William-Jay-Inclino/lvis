@@ -101,7 +101,12 @@ export const positions: Position[] = [
         id: faker.string.uuid(), // 5
         name: 'HR',
         created_by: 'admin'
-    }
+    },
+    {
+        id: faker.string.uuid(), // 6
+        name: 'TBA',
+        created_by: 'admin'
+    },
 ]
 
 // export const services: Service[] = [
@@ -344,7 +349,7 @@ export const employees: Employee[] = [
         middlename: 'Lourdes',
         lastname: 'Pastor',
         created_by: 'admin',
-        position_id: undefined,
+        position_id: positions[6].id,
     },
     // Budget Officer = 1
     {
@@ -379,7 +384,7 @@ export const employees: Employee[] = [
         firstname: 'Jhun Rey',
         middlename: null,
         lastname: 'Nahine',
-        position_id: undefined,
+        position_id: positions[6].id,
         created_by: 'admin'
     },
     // 2nd CPC Member = 5
@@ -388,7 +393,7 @@ export const employees: Employee[] = [
         firstname: 'Gretchen',
         middlename: null,
         lastname: 'Tagalog',
-        position_id: undefined,
+        position_id: positions[6].id,
         created_by: 'admin'
     },
     // Witness = 6
@@ -397,7 +402,7 @@ export const employees: Employee[] = [
         firstname: 'Dionic',
         middlename: null,
         lastname: 'De La Pena',
-        position_id: undefined,
+        position_id: positions[6].id,
         created_by: 'admin'
     },
     // CPC Chairman = 7
@@ -406,7 +411,7 @@ export const employees: Employee[] = [
         firstname: 'Anthony',
         middlename: null,
         lastname: 'Cecilio',
-        position_id: undefined,
+        position_id: positions[6].id,
         created_by: 'admin'
     },
     // Finance Manager = 8
@@ -455,7 +460,7 @@ export const employees: Employee[] = [
         firstname: 'Jared',
         middlename: 'X',
         lastname: 'Singcol',
-        position_id: undefined,
+        position_id: positions[6].id,
         created_by: 'admin'
     },
     {
@@ -479,7 +484,7 @@ export const employees: Employee[] = [
         firstname: 'Roger',
         middlename: '',
         lastname: 'Laurente',
-        position_id: undefined,
+        position_id: positions[6].id,
         created_by: 'admin'
     },
     {

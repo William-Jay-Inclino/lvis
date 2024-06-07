@@ -5254,7 +5254,7 @@ export namespace Prisma {
     middlename: string | null
     lastname: string
     signature_src: string | null
-    position_id: string | null
+    position_id: string
     is_budget_officer: boolean
     is_finance_manager: boolean
     created_by: string
@@ -5297,7 +5297,7 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     deleted_at?: boolean
-    position?: boolean | Employee$positionArgs<ExtArgs>
+    position?: boolean | PositionDefaultArgs<ExtArgs>
     jo_approver_setting?: boolean | Employee$jo_approver_settingArgs<ExtArgs>
     meqs_approver_setting?: boolean | Employee$meqs_approver_settingArgs<ExtArgs>
     po_approver_setting?: boolean | Employee$po_approver_settingArgs<ExtArgs>
@@ -5325,7 +5325,7 @@ export namespace Prisma {
   }
 
   export type EmployeeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    position?: boolean | Employee$positionArgs<ExtArgs>
+    position?: boolean | PositionDefaultArgs<ExtArgs>
     jo_approver_setting?: boolean | Employee$jo_approver_settingArgs<ExtArgs>
     meqs_approver_setting?: boolean | Employee$meqs_approver_settingArgs<ExtArgs>
     po_approver_setting?: boolean | Employee$po_approver_settingArgs<ExtArgs>
@@ -5339,7 +5339,7 @@ export namespace Prisma {
   export type $EmployeePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Employee"
     objects: {
-      position: Prisma.$PositionPayload<ExtArgs> | null
+      position: Prisma.$PositionPayload<ExtArgs>
       jo_approver_setting: Prisma.$JOApproverSettingPayload<ExtArgs> | null
       meqs_approver_setting: Prisma.$MEQSApproverSettingPayload<ExtArgs> | null
       po_approver_setting: Prisma.$POApproverSettingPayload<ExtArgs> | null
@@ -5354,7 +5354,7 @@ export namespace Prisma {
       middlename: string | null
       lastname: string
       signature_src: string | null
-      position_id: string | null
+      position_id: string
       is_budget_officer: boolean
       is_finance_manager: boolean
       created_by: string
@@ -5728,7 +5728,7 @@ export namespace Prisma {
   export interface Prisma__EmployeeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
-    position<T extends Employee$positionArgs<ExtArgs> = {}>(args?: Subset<T, Employee$positionArgs<ExtArgs>>): Prisma__PositionClient<$Result.GetResult<Prisma.$PositionPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+    position<T extends PositionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PositionDefaultArgs<ExtArgs>>): Prisma__PositionClient<$Result.GetResult<Prisma.$PositionPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
     jo_approver_setting<T extends Employee$jo_approver_settingArgs<ExtArgs> = {}>(args?: Subset<T, Employee$jo_approver_settingArgs<ExtArgs>>): Prisma__JOApproverSettingClient<$Result.GetResult<Prisma.$JOApproverSettingPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
 
@@ -6094,22 +6094,6 @@ export namespace Prisma {
      * Filter which Employees to delete
      */
     where?: EmployeeWhereInput
-  }
-
-
-  /**
-   * Employee.position
-   */
-  export type Employee$positionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Position
-     */
-    select?: PositionSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: PositionInclude<ExtArgs> | null
-    where?: PositionWhereInput
   }
 
 
@@ -17553,7 +17537,7 @@ export namespace Prisma {
     middlename?: StringNullableFilter<"Employee"> | string | null
     lastname?: StringFilter<"Employee"> | string
     signature_src?: StringNullableFilter<"Employee"> | string | null
-    position_id?: StringNullableFilter<"Employee"> | string | null
+    position_id?: StringFilter<"Employee"> | string
     is_budget_officer?: BoolFilter<"Employee"> | boolean
     is_finance_manager?: BoolFilter<"Employee"> | boolean
     created_by?: StringFilter<"Employee"> | string
@@ -17562,7 +17546,7 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"Employee"> | Date | string
     updated_at?: DateTimeFilter<"Employee"> | Date | string
     deleted_at?: DateTimeNullableFilter<"Employee"> | Date | string | null
-    position?: XOR<PositionNullableRelationFilter, PositionWhereInput> | null
+    position?: XOR<PositionRelationFilter, PositionWhereInput>
     jo_approver_setting?: XOR<JOApproverSettingNullableRelationFilter, JOApproverSettingWhereInput> | null
     meqs_approver_setting?: XOR<MEQSApproverSettingNullableRelationFilter, MEQSApproverSettingWhereInput> | null
     po_approver_setting?: XOR<POApproverSettingNullableRelationFilter, POApproverSettingWhereInput> | null
@@ -17578,7 +17562,7 @@ export namespace Prisma {
     middlename?: SortOrderInput | SortOrder
     lastname?: SortOrder
     signature_src?: SortOrderInput | SortOrder
-    position_id?: SortOrderInput | SortOrder
+    position_id?: SortOrder
     is_budget_officer?: SortOrder
     is_finance_manager?: SortOrder
     created_by?: SortOrder
@@ -17606,7 +17590,7 @@ export namespace Prisma {
     middlename?: StringNullableFilter<"Employee"> | string | null
     lastname?: StringFilter<"Employee"> | string
     signature_src?: StringNullableFilter<"Employee"> | string | null
-    position_id?: StringNullableFilter<"Employee"> | string | null
+    position_id?: StringFilter<"Employee"> | string
     is_budget_officer?: BoolFilter<"Employee"> | boolean
     is_finance_manager?: BoolFilter<"Employee"> | boolean
     created_by?: StringFilter<"Employee"> | string
@@ -17615,7 +17599,7 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"Employee"> | Date | string
     updated_at?: DateTimeFilter<"Employee"> | Date | string
     deleted_at?: DateTimeNullableFilter<"Employee"> | Date | string | null
-    position?: XOR<PositionNullableRelationFilter, PositionWhereInput> | null
+    position?: XOR<PositionRelationFilter, PositionWhereInput>
     jo_approver_setting?: XOR<JOApproverSettingNullableRelationFilter, JOApproverSettingWhereInput> | null
     meqs_approver_setting?: XOR<MEQSApproverSettingNullableRelationFilter, MEQSApproverSettingWhereInput> | null
     po_approver_setting?: XOR<POApproverSettingNullableRelationFilter, POApproverSettingWhereInput> | null
@@ -17631,7 +17615,7 @@ export namespace Prisma {
     middlename?: SortOrderInput | SortOrder
     lastname?: SortOrder
     signature_src?: SortOrderInput | SortOrder
-    position_id?: SortOrderInput | SortOrder
+    position_id?: SortOrder
     is_budget_officer?: SortOrder
     is_finance_manager?: SortOrder
     created_by?: SortOrder
@@ -17654,7 +17638,7 @@ export namespace Prisma {
     middlename?: StringNullableWithAggregatesFilter<"Employee"> | string | null
     lastname?: StringWithAggregatesFilter<"Employee"> | string
     signature_src?: StringNullableWithAggregatesFilter<"Employee"> | string | null
-    position_id?: StringNullableWithAggregatesFilter<"Employee"> | string | null
+    position_id?: StringWithAggregatesFilter<"Employee"> | string
     is_budget_officer?: BoolWithAggregatesFilter<"Employee"> | boolean
     is_finance_manager?: BoolWithAggregatesFilter<"Employee"> | boolean
     created_by?: StringWithAggregatesFilter<"Employee"> | string
@@ -18763,7 +18747,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     deleted_at?: Date | string | null
-    position?: PositionCreateNestedOneWithoutEmployeesInput
+    position: PositionCreateNestedOneWithoutEmployeesInput
     jo_approver_setting?: JOApproverSettingCreateNestedOneWithoutApproverInput
     meqs_approver_setting?: MEQSApproverSettingCreateNestedOneWithoutApproverInput
     po_approver_setting?: POApproverSettingCreateNestedOneWithoutApproverInput
@@ -18779,7 +18763,7 @@ export namespace Prisma {
     middlename?: string | null
     lastname: string
     signature_src?: string | null
-    position_id?: string | null
+    position_id: string
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by: string
@@ -18811,7 +18795,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    position?: PositionUpdateOneWithoutEmployeesNestedInput
+    position?: PositionUpdateOneRequiredWithoutEmployeesNestedInput
     jo_approver_setting?: JOApproverSettingUpdateOneWithoutApproverNestedInput
     meqs_approver_setting?: MEQSApproverSettingUpdateOneWithoutApproverNestedInput
     po_approver_setting?: POApproverSettingUpdateOneWithoutApproverNestedInput
@@ -18827,7 +18811,7 @@ export namespace Prisma {
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
     signature_src?: NullableStringFieldUpdateOperationsInput | string | null
-    position_id?: NullableStringFieldUpdateOperationsInput | string | null
+    position_id?: StringFieldUpdateOperationsInput | string
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
@@ -18851,7 +18835,7 @@ export namespace Prisma {
     middlename?: string | null
     lastname: string
     signature_src?: string | null
-    position_id?: string | null
+    position_id: string
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by: string
@@ -18884,7 +18868,7 @@ export namespace Prisma {
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
     signature_src?: NullableStringFieldUpdateOperationsInput | string | null
-    position_id?: NullableStringFieldUpdateOperationsInput | string | null
+    position_id?: StringFieldUpdateOperationsInput | string
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
@@ -20074,9 +20058,9 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
-  export type PositionNullableRelationFilter = {
-    is?: PositionWhereInput | null
-    isNot?: PositionWhereInput | null
+  export type PositionRelationFilter = {
+    is?: PositionWhereInput
+    isNot?: PositionWhereInput
   }
 
   export type JOApproverSettingNullableRelationFilter = {
@@ -20858,12 +20842,10 @@ export namespace Prisma {
     set?: boolean
   }
 
-  export type PositionUpdateOneWithoutEmployeesNestedInput = {
+  export type PositionUpdateOneRequiredWithoutEmployeesNestedInput = {
     create?: XOR<PositionCreateWithoutEmployeesInput, PositionUncheckedCreateWithoutEmployeesInput>
     connectOrCreate?: PositionCreateOrConnectWithoutEmployeesInput
     upsert?: PositionUpsertWithoutEmployeesInput
-    disconnect?: PositionWhereInput | boolean
-    delete?: PositionWhereInput | boolean
     connect?: PositionWhereUniqueInput
     update?: XOR<XOR<PositionUpdateToOneWithWhereWithoutEmployeesInput, PositionUpdateWithoutEmployeesInput>, PositionUncheckedUpdateWithoutEmployeesInput>
   }
@@ -22081,7 +22063,7 @@ export namespace Prisma {
     middlename?: StringNullableFilter<"Employee"> | string | null
     lastname?: StringFilter<"Employee"> | string
     signature_src?: StringNullableFilter<"Employee"> | string | null
-    position_id?: StringNullableFilter<"Employee"> | string | null
+    position_id?: StringFilter<"Employee"> | string
     is_budget_officer?: BoolFilter<"Employee"> | boolean
     is_finance_manager?: BoolFilter<"Employee"> | boolean
     created_by?: StringFilter<"Employee"> | string
@@ -22199,7 +22181,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     deleted_at?: Date | string | null
-    position?: PositionCreateNestedOneWithoutEmployeesInput
+    position: PositionCreateNestedOneWithoutEmployeesInput
     jo_approver_setting?: JOApproverSettingCreateNestedOneWithoutApproverInput
     meqs_approver_setting?: MEQSApproverSettingCreateNestedOneWithoutApproverInput
     po_approver_setting?: POApproverSettingCreateNestedOneWithoutApproverInput
@@ -22214,7 +22196,7 @@ export namespace Prisma {
     middlename?: string | null
     lastname: string
     signature_src?: string | null
-    position_id?: string | null
+    position_id: string
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by: string
@@ -22308,7 +22290,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    position?: PositionUpdateOneWithoutEmployeesNestedInput
+    position?: PositionUpdateOneRequiredWithoutEmployeesNestedInput
     jo_approver_setting?: JOApproverSettingUpdateOneWithoutApproverNestedInput
     meqs_approver_setting?: MEQSApproverSettingUpdateOneWithoutApproverNestedInput
     po_approver_setting?: POApproverSettingUpdateOneWithoutApproverNestedInput
@@ -22323,7 +22305,7 @@ export namespace Prisma {
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
     signature_src?: NullableStringFieldUpdateOperationsInput | string | null
-    position_id?: NullableStringFieldUpdateOperationsInput | string | null
+    position_id?: StringFieldUpdateOperationsInput | string
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
@@ -22354,7 +22336,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     deleted_at?: Date | string | null
-    position?: PositionCreateNestedOneWithoutEmployeesInput
+    position: PositionCreateNestedOneWithoutEmployeesInput
     meqs_approver_setting?: MEQSApproverSettingCreateNestedOneWithoutApproverInput
     po_approver_setting?: POApproverSettingCreateNestedOneWithoutApproverInput
     rv_approver_setting?: RVApproverSettingCreateNestedOneWithoutApproverInput
@@ -22369,7 +22351,7 @@ export namespace Prisma {
     middlename?: string | null
     lastname: string
     signature_src?: string | null
-    position_id?: string | null
+    position_id: string
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by: string
@@ -22416,7 +22398,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    position?: PositionUpdateOneWithoutEmployeesNestedInput
+    position?: PositionUpdateOneRequiredWithoutEmployeesNestedInput
     meqs_approver_setting?: MEQSApproverSettingUpdateOneWithoutApproverNestedInput
     po_approver_setting?: POApproverSettingUpdateOneWithoutApproverNestedInput
     rv_approver_setting?: RVApproverSettingUpdateOneWithoutApproverNestedInput
@@ -22431,7 +22413,7 @@ export namespace Prisma {
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
     signature_src?: NullableStringFieldUpdateOperationsInput | string | null
-    position_id?: NullableStringFieldUpdateOperationsInput | string | null
+    position_id?: StringFieldUpdateOperationsInput | string
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
@@ -22462,7 +22444,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     deleted_at?: Date | string | null
-    position?: PositionCreateNestedOneWithoutEmployeesInput
+    position: PositionCreateNestedOneWithoutEmployeesInput
     jo_approver_setting?: JOApproverSettingCreateNestedOneWithoutApproverInput
     meqs_approver_setting?: MEQSApproverSettingCreateNestedOneWithoutApproverInput
     po_approver_setting?: POApproverSettingCreateNestedOneWithoutApproverInput
@@ -22477,7 +22459,7 @@ export namespace Prisma {
     middlename?: string | null
     lastname: string
     signature_src?: string | null
-    position_id?: string | null
+    position_id: string
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by: string
@@ -22524,7 +22506,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    position?: PositionUpdateOneWithoutEmployeesNestedInput
+    position?: PositionUpdateOneRequiredWithoutEmployeesNestedInput
     jo_approver_setting?: JOApproverSettingUpdateOneWithoutApproverNestedInput
     meqs_approver_setting?: MEQSApproverSettingUpdateOneWithoutApproverNestedInput
     po_approver_setting?: POApproverSettingUpdateOneWithoutApproverNestedInput
@@ -22539,7 +22521,7 @@ export namespace Prisma {
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
     signature_src?: NullableStringFieldUpdateOperationsInput | string | null
-    position_id?: NullableStringFieldUpdateOperationsInput | string | null
+    position_id?: StringFieldUpdateOperationsInput | string
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
@@ -22570,7 +22552,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     deleted_at?: Date | string | null
-    position?: PositionCreateNestedOneWithoutEmployeesInput
+    position: PositionCreateNestedOneWithoutEmployeesInput
     jo_approver_setting?: JOApproverSettingCreateNestedOneWithoutApproverInput
     meqs_approver_setting?: MEQSApproverSettingCreateNestedOneWithoutApproverInput
     po_approver_setting?: POApproverSettingCreateNestedOneWithoutApproverInput
@@ -22585,7 +22567,7 @@ export namespace Prisma {
     middlename?: string | null
     lastname: string
     signature_src?: string | null
-    position_id?: string | null
+    position_id: string
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by: string
@@ -22632,7 +22614,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    position?: PositionUpdateOneWithoutEmployeesNestedInput
+    position?: PositionUpdateOneRequiredWithoutEmployeesNestedInput
     jo_approver_setting?: JOApproverSettingUpdateOneWithoutApproverNestedInput
     meqs_approver_setting?: MEQSApproverSettingUpdateOneWithoutApproverNestedInput
     po_approver_setting?: POApproverSettingUpdateOneWithoutApproverNestedInput
@@ -22647,7 +22629,7 @@ export namespace Prisma {
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
     signature_src?: NullableStringFieldUpdateOperationsInput | string | null
-    position_id?: NullableStringFieldUpdateOperationsInput | string | null
+    position_id?: StringFieldUpdateOperationsInput | string
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
@@ -22678,7 +22660,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     deleted_at?: Date | string | null
-    position?: PositionCreateNestedOneWithoutEmployeesInput
+    position: PositionCreateNestedOneWithoutEmployeesInput
     jo_approver_setting?: JOApproverSettingCreateNestedOneWithoutApproverInput
     po_approver_setting?: POApproverSettingCreateNestedOneWithoutApproverInput
     rv_approver_setting?: RVApproverSettingCreateNestedOneWithoutApproverInput
@@ -22693,7 +22675,7 @@ export namespace Prisma {
     middlename?: string | null
     lastname: string
     signature_src?: string | null
-    position_id?: string | null
+    position_id: string
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by: string
@@ -22740,7 +22722,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    position?: PositionUpdateOneWithoutEmployeesNestedInput
+    position?: PositionUpdateOneRequiredWithoutEmployeesNestedInput
     jo_approver_setting?: JOApproverSettingUpdateOneWithoutApproverNestedInput
     po_approver_setting?: POApproverSettingUpdateOneWithoutApproverNestedInput
     rv_approver_setting?: RVApproverSettingUpdateOneWithoutApproverNestedInput
@@ -22755,7 +22737,7 @@ export namespace Prisma {
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
     signature_src?: NullableStringFieldUpdateOperationsInput | string | null
-    position_id?: NullableStringFieldUpdateOperationsInput | string | null
+    position_id?: StringFieldUpdateOperationsInput | string
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
@@ -22786,7 +22768,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     deleted_at?: Date | string | null
-    position?: PositionCreateNestedOneWithoutEmployeesInput
+    position: PositionCreateNestedOneWithoutEmployeesInput
     jo_approver_setting?: JOApproverSettingCreateNestedOneWithoutApproverInput
     meqs_approver_setting?: MEQSApproverSettingCreateNestedOneWithoutApproverInput
     rv_approver_setting?: RVApproverSettingCreateNestedOneWithoutApproverInput
@@ -22801,7 +22783,7 @@ export namespace Prisma {
     middlename?: string | null
     lastname: string
     signature_src?: string | null
-    position_id?: string | null
+    position_id: string
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by: string
@@ -22848,7 +22830,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    position?: PositionUpdateOneWithoutEmployeesNestedInput
+    position?: PositionUpdateOneRequiredWithoutEmployeesNestedInput
     jo_approver_setting?: JOApproverSettingUpdateOneWithoutApproverNestedInput
     meqs_approver_setting?: MEQSApproverSettingUpdateOneWithoutApproverNestedInput
     rv_approver_setting?: RVApproverSettingUpdateOneWithoutApproverNestedInput
@@ -22863,7 +22845,7 @@ export namespace Prisma {
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
     signature_src?: NullableStringFieldUpdateOperationsInput | string | null
-    position_id?: NullableStringFieldUpdateOperationsInput | string | null
+    position_id?: StringFieldUpdateOperationsInput | string
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
@@ -22894,7 +22876,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     deleted_at?: Date | string | null
-    position?: PositionCreateNestedOneWithoutEmployeesInput
+    position: PositionCreateNestedOneWithoutEmployeesInput
     jo_approver_setting?: JOApproverSettingCreateNestedOneWithoutApproverInput
     meqs_approver_setting?: MEQSApproverSettingCreateNestedOneWithoutApproverInput
     po_approver_setting?: POApproverSettingCreateNestedOneWithoutApproverInput
@@ -22909,7 +22891,7 @@ export namespace Prisma {
     middlename?: string | null
     lastname: string
     signature_src?: string | null
-    position_id?: string | null
+    position_id: string
     is_budget_officer?: boolean
     is_finance_manager?: boolean
     created_by: string
@@ -22956,7 +22938,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    position?: PositionUpdateOneWithoutEmployeesNestedInput
+    position?: PositionUpdateOneRequiredWithoutEmployeesNestedInput
     jo_approver_setting?: JOApproverSettingUpdateOneWithoutApproverNestedInput
     meqs_approver_setting?: MEQSApproverSettingUpdateOneWithoutApproverNestedInput
     po_approver_setting?: POApproverSettingUpdateOneWithoutApproverNestedInput
@@ -22971,7 +22953,7 @@ export namespace Prisma {
     middlename?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: StringFieldUpdateOperationsInput | string
     signature_src?: NullableStringFieldUpdateOperationsInput | string | null
-    position_id?: NullableStringFieldUpdateOperationsInput | string | null
+    position_id?: StringFieldUpdateOperationsInput | string
     is_budget_officer?: BoolFieldUpdateOperationsInput | boolean
     is_finance_manager?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string

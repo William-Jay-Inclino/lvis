@@ -27,13 +27,20 @@ export class EmployeeService {
 			firstname: input.firstname,
 			middlename: input.middlename,
 			lastname: input.lastname,
-			position: input.position_id ? { connect: { id: input.position_id } } : undefined,
+			position: { connect: { id: input.position_id } },
 			signature_src: input.signature_src,
 		}
 
-		const created = await this.prisma.employee.create({ data })
+		const created = await this.prisma.employee.create({
+			data,
+			include: {
+				position: true
+			}
+		})
 
 		this.logger.log('Successfully created Employee')
+
+		created.position.permissions = !!created.position.permissions ? JSON.stringify(created.position.permissions) : null
 
 		return created
 
@@ -63,7 +70,8 @@ export class EmployeeService {
 
 		const items = await this.prisma.employee.findMany({
 			include: {
-				user_employee: true
+				user_employee: true,
+				position: true
 			},
 			orderBy: [{ lastname: 'asc' }, { firstname: 'asc' }],
 			skip,
@@ -75,8 +83,13 @@ export class EmployeeService {
 			where: whereCondition,
 		});
 
+		const employees = items.map(i => {
+			i.position.permissions = !!i.position.permissions ? JSON.stringify(i.position.permissions) : null
+			return i
+		})
+
 		return {
-			data: items,
+			data: employees,
 			totalItems,
 			currentPage: page,
 			totalPages: Math.ceil(totalItems / pageSize),
@@ -88,7 +101,10 @@ export class EmployeeService {
 		this.logger.log('findOne', id)
 
 		const item = await this.prisma.employee.findUnique({
-			where: { id }
+			where: { id },
+			include: {
+				position: true
+			}
 		})
 
 		console.log('item', item, id)
@@ -96,6 +112,8 @@ export class EmployeeService {
 		if (!item) {
 			throw new NotFoundException('Employee not found')
 		}
+
+		item.position.permissions = !!item.position.permissions ? JSON.stringify(item.position.permissions) : null
 
 		return item
 	}
@@ -109,9 +127,7 @@ export class EmployeeService {
 			firstname: input.firstname ?? existingItem.firstname,
 			middlename: input.middlename ?? existingItem.middlename,
 			lastname: input.lastname ?? existingItem.lastname,
-			position: input.position_id !== undefined 
-              ? (input.position_id === null ? { disconnect: true } : { connect: { id: input.position_id } })
-              : undefined,
+			position: input.position_id ? { connect: { id: input.position_id } } : { connect: { id: existingItem.position_id } },
 			signature_src: input.signature_src ?? existingItem.signature_src,
 			is_budget_officer: input.is_budget_officer ?? existingItem.is_budget_officer,
 			is_finance_manager: input.is_finance_manager ?? existingItem.is_finance_manager,
@@ -122,6 +138,9 @@ export class EmployeeService {
 			data,
 			where: {
 				id
+			},
+			include: {
+				position: true
 			}
 		})
 
@@ -131,6 +150,8 @@ export class EmployeeService {
 		}
 
 		this.logger.log('Successfully updated Employee')
+
+		updated.position.permissions = !!updated.position.permissions ? JSON.stringify(updated.position.permissions) : null
 
 		return updated
 
@@ -197,7 +218,7 @@ export class EmployeeService {
 				id: true,
 				firstname: true,
 				middlename: true,
-				lastname: true
+				lastname: true,
 			},
 			where: {
 				deleted_at: null,

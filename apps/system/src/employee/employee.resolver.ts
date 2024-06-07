@@ -84,7 +84,7 @@ export class EmployeeResolver {
   }
 
   @ResolveReference()
-  async resolveReference(reference: { __typename: string, id?: string, ids?: string[] }): Promise<Employee | Employee[]> {
+  async resolveReference(reference: { __typename: string, id?: string, ids?: string[] }) {
 
     console.log('reference', reference)
 

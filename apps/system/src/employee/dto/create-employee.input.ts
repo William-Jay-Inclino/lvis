@@ -19,8 +19,8 @@ export class CreateEmployeeInput {
   @IsString()
   lastname: string;
 
-  @Field(() => String, {nullable: true})
-  @IsOptional()
+  @Field(() => String)
+  @IsNotEmpty()
   @IsString()
   position_id?: string;
 
