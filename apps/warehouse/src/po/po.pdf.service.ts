@@ -264,14 +264,11 @@ export class PoPdfService {
                         </tr>
 
                     </tbody>
-                    <tfoot>
-                        <tr>
-                            <td colspan="7" style="text-align: center; padding: 10px;">
-                                X------------------------NOTHING FOLLOWS------------------------X
-                            </td>
-                        </tr>
-                    </tfoot>
                 </table>
+                
+                <div style="text-align: center; padding-top: 10px;">
+                    X------------------------NOTHING FOLLOWS------------------------X
+                </div>
 
                 <br />
 

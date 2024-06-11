@@ -153,15 +153,12 @@ export class SprPdfService {
                         </tr>
                     `).join('')}
                     </tbody>
-                    <tfoot>
-                        <tr>
-                            <td colspan="4" style="text-align: center; padding: 10px;">
-                                X------------------------NOTHING FOLLOWS------------------------X
-                            </td>
-                        </tr>
-                    </tfoot>
                 </table>
 
+                <div style="text-align: center; padding-top: 10px;">
+                    X------------------------NOTHING FOLLOWS------------------------X
+                </div>
+                
                 <br />
 
                 <table style="font-size: 10pt;">

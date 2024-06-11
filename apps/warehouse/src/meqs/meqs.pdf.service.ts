@@ -203,16 +203,12 @@ export class MeqsPdfService {
                         }).join('')}
 
                     </tbody>
-
-                    <tfoot>
-                        <tr>
-                            <td colspan="${ 3 + meqs.meqs_suppliers.length }" style="text-align: center; padding: 10px;">
-                                X------------------------NOTHING FOLLOWS------------------------X
-                            </td>
-                        </tr>
-                    </tfoot>
                 
                 </table>
+
+                <div style="text-align: center; padding-top: 10px;">
+                    X------------------------NOTHING FOLLOWS------------------------X
+                </div>
 
                 <br />
 
