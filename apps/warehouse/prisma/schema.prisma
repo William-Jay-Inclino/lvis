@@ -26,7 +26,7 @@ model Canvass {
 
   canvass_items CanvassItem[]
   jo            JO?
-  rv            RV?
+  rvs            RV[]
   spr           SPR?
 
   @@map("canvass")
