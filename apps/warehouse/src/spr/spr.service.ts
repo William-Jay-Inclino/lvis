@@ -3,14 +3,13 @@ import { CanvassService } from '../canvass/canvass.service';
 import { PrismaService } from '../__prisma__/prisma.service';
 import { Prisma, SPR, SPRApprover } from 'apps/warehouse/prisma/generated/client';
 import { CreateSprInput } from './dto/create-spr.input';
-import { APPROVAL_STATUS, Role } from '../__common__/types';
+import { APPROVAL_STATUS } from '../__common__/types';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { UpdateSprInput } from './dto/update-spr.input';
 import { catchError, firstValueFrom } from 'rxjs';
 import { HttpService } from '@nestjs/axios';
 import { WarehouseCancelResponse, WarehouseRemoveResponse } from '../__common__/classes';
 import { SPRsResponse } from './entities/sprs-response.entity';
-import * as moment from 'moment';
 import { getDateRange, isAdmin, isNormalUser } from '../__common__/helpers';
 import { UpdateSprByBudgetOfficerInput } from './dto/update-spr-by-budget-officer.input';
 
@@ -151,11 +150,18 @@ export class SprService {
         this.logger.log('cancel()')
 
         const existingItem = await this.prisma.sPR.findUnique({
-            where: { id }
+            where: { id },
+            include: {
+                canvass: true
+            }
         })
 
         if (!existingItem) {
             throw new NotFoundException('SPR not found')
+        }
+
+        if (!existingItem.canvass) {
+            throw new Error('SPR is not associated with a Canvass');
         }
 
         if (!this.canAccess(existingItem)) {
@@ -165,7 +171,10 @@ export class SprService {
         const updated = await this.prisma.sPR.update({
             data: {
                 cancelled_at: new Date(),
-                cancelled_by: this.authUser.user.username
+                cancelled_by: this.authUser.user.username,
+                canvass: {
+                    disconnect: true
+                }
             },
             where: { id }
         })
@@ -240,8 +249,16 @@ export class SprService {
             };
         }
 
+        // if (requested_by_id) {
+        //     whereCondition = { canvass: { requested_by_id: requested_by_id } }
+        // }
+
         if (requested_by_id) {
-            whereCondition = { canvass: { requested_by_id: requested_by_id } }
+            whereCondition = { ...whereCondition, canvass: { requested_by_id: requested_by_id } }
+        }
+        
+        whereCondition.cancelled_at = {
+            equals: null,
         }
 
         const items = await this.prisma.sPR.findMany({

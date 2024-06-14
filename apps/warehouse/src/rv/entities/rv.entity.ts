@@ -12,8 +12,8 @@ export class RV {
   @Field(() => String)
   rv_number: string;
 
-  @Field(() => String)
-  canvass_id: string;
+  @Field(() => String, { nullable: true })
+  canvass_id?: string | null;
 
   @Field(() => String, { nullable: true })
   classification_id: string | null;
@@ -59,8 +59,8 @@ export class RV {
 
   // =============== derived / resolvers ===============
 
-  @Field(() => Canvass)
-  canvass: Canvass;
+  @Field(() => Canvass, { nullable: true })
+  canvass?: Canvass | null;
 
   @Field(() => MEQS, { nullable: true })
   meqs?: MEQS;

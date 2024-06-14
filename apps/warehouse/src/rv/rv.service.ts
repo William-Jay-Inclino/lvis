@@ -10,7 +10,6 @@ import { catchError, firstValueFrom } from 'rxjs';
 import { HttpService } from '@nestjs/axios';
 import { WarehouseCancelResponse, WarehouseRemoveResponse } from '../__common__/classes';
 import { RVsResponse } from './entities/rvs-response.entity';
-import * as moment from 'moment';
 import { getDateRange, isAdmin, isNormalUser } from '../__common__/helpers';
 import { UpdateRvByBudgetOfficerInput } from './dto/update-rv-by-budget-officer.input';
 
@@ -156,11 +155,18 @@ export class RvService {
         this.logger.log('cancel()')
 
         const existingItem = await this.prisma.rV.findUnique({
-            where: { id }
+            where: { id },
+            include: {
+                canvass: true
+            }
         })
 
         if (!existingItem) {
             throw new NotFoundException('RV not found')
+        }
+
+        if (!existingItem.canvass) {
+            throw new Error('RV is not associated with a Canvass');
         }
 
         if (!this.canAccess(existingItem)) {
@@ -170,7 +176,10 @@ export class RvService {
         const updated = await this.prisma.rV.update({
             data: {
                 cancelled_at: new Date(),
-                cancelled_by: this.authUser.user.username
+                cancelled_by: this.authUser.user.username,
+                canvass: {
+                    disconnect: true
+                }
             },
             where: { id }
         })
@@ -230,6 +239,7 @@ export class RvService {
     }
 
     async findAll(page: number, pageSize: number, date_requested?: string, requested_by_id?: string): Promise<RVsResponse> {
+        console.log('rv: findAll');
         const skip = (page - 1) * pageSize;
 
         let whereCondition: any = {};
@@ -243,10 +253,19 @@ export class RvService {
                 gte: startDate,
                 lte: endDate,
             };
+
         }
 
+        // if (requested_by_id) {
+        //     whereCondition = { canvass: { requested_by_id: requested_by_id } }
+        // }
+
         if (requested_by_id) {
-            whereCondition = { canvass: { requested_by_id: requested_by_id } }
+            whereCondition = { ...whereCondition, canvass: { requested_by_id: requested_by_id } }
+        }
+        
+        whereCondition.cancelled_at = {
+            equals: null,
         }
 
         const items = await this.prisma.rV.findMany({

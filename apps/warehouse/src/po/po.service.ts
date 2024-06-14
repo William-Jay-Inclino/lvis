@@ -2,7 +2,7 @@ import { BadRequestException, ForbiddenException, Injectable, Logger, NotFoundEx
 import { PrismaService } from '../__prisma__/prisma.service';
 import { CreatePoInput } from './dto/create-po.input';
 import { PO, POApprover, Prisma } from 'apps/warehouse/prisma/generated/client';
-import { APPROVAL_STATUS, Role } from '../__common__/types';
+import { APPROVAL_STATUS } from '../__common__/types';
 import { WarehouseCancelResponse, WarehouseRemoveResponse } from '../__common__/classes';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { HttpService } from '@nestjs/axios';
@@ -165,11 +165,18 @@ export class PoService {
         this.logger.log('cancel()')
 
         const existingItem = await this.prisma.pO.findUnique({
-            where: { id }
+            where: { id },
+            include: {
+                meqs_supplier: true
+            }
         })
 
         if (!existingItem) {
             throw new NotFoundException('PO not found')
+        }
+
+        if(!existingItem.meqs_supplier) {
+            throw new Error('PO is not associated with MEQS supplier');
         }
 
         if (!this.canAccess(existingItem)) {
@@ -179,7 +186,10 @@ export class PoService {
         const updated = await this.prisma.pO.update({
             data: {
                 cancelled_at: new Date(),
-                cancelled_by: this.authUser.user.username
+                cancelled_by: this.authUser.user.username,
+                meqs_supplier: {
+                    disconnect: true
+                }
             },
             where: { id }
         })
@@ -218,6 +228,10 @@ export class PoService {
                 { meqs_supplier: { meqs: { spr: { canvass: { requested_by_id: requested_by_id } } } } }
             ];
         }
+
+        whereCondition.cancelled_at = {
+            equals: null,
+        };
 
         const items = await this.prisma.pO.findMany({
             include: this.includedFields,

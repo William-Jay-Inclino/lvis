@@ -5813,7 +5813,7 @@ export namespace Prisma {
   export type RVGroupByOutputType = {
     id: string
     rv_number: string
-    canvass_id: string
+    canvass_id: string | null
     classification_id: string | null
     supervisor_id: string
     date_requested: Date
@@ -5861,7 +5861,7 @@ export namespace Prisma {
     cancelled_at?: boolean
     created_at?: boolean
     updated_at?: boolean
-    canvass?: boolean | CanvassDefaultArgs<ExtArgs>
+    canvass?: boolean | RV$canvassArgs<ExtArgs>
     meqs?: boolean | RV$meqsArgs<ExtArgs>
     rv_approvers?: boolean | RV$rv_approversArgs<ExtArgs>
     _count?: boolean | RVCountOutputTypeDefaultArgs<ExtArgs>
@@ -5886,7 +5886,7 @@ export namespace Prisma {
   }
 
   export type RVInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    canvass?: boolean | CanvassDefaultArgs<ExtArgs>
+    canvass?: boolean | RV$canvassArgs<ExtArgs>
     meqs?: boolean | RV$meqsArgs<ExtArgs>
     rv_approvers?: boolean | RV$rv_approversArgs<ExtArgs>
     _count?: boolean | RVCountOutputTypeDefaultArgs<ExtArgs>
@@ -5896,14 +5896,14 @@ export namespace Prisma {
   export type $RVPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "RV"
     objects: {
-      canvass: Prisma.$CanvassPayload<ExtArgs>
+      canvass: Prisma.$CanvassPayload<ExtArgs> | null
       meqs: Prisma.$MEQSPayload<ExtArgs> | null
       rv_approvers: Prisma.$RVApproverPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       rv_number: string
-      canvass_id: string
+      canvass_id: string | null
       classification_id: string | null
       supervisor_id: string
       date_requested: Date
@@ -6281,7 +6281,7 @@ export namespace Prisma {
   export interface Prisma__RVClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
-    canvass<T extends CanvassDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CanvassDefaultArgs<ExtArgs>>): Prisma__CanvassClient<$Result.GetResult<Prisma.$CanvassPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+    canvass<T extends RV$canvassArgs<ExtArgs> = {}>(args?: Subset<T, RV$canvassArgs<ExtArgs>>): Prisma__CanvassClient<$Result.GetResult<Prisma.$CanvassPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
 
     meqs<T extends RV$meqsArgs<ExtArgs> = {}>(args?: Subset<T, RV$meqsArgs<ExtArgs>>): Prisma__MEQSClient<$Result.GetResult<Prisma.$MEQSPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
 
@@ -6638,6 +6638,22 @@ export namespace Prisma {
      * Filter which RVS to delete
      */
     where?: RVWhereInput
+  }
+
+
+  /**
+   * RV.canvass
+   */
+  export type RV$canvassArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Canvass
+     */
+    select?: CanvassSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: CanvassInclude<ExtArgs> | null
+    where?: CanvassWhereInput
   }
 
 
@@ -7946,7 +7962,7 @@ export namespace Prisma {
     id: string
     jo_number: string
     date_requested: Date
-    canvass_id: string
+    canvass_id: string | null
     equipment: string
     classification_id: string | null
     department_id: string
@@ -7993,7 +8009,7 @@ export namespace Prisma {
     cancelled_at?: boolean
     created_at?: boolean
     updated_at?: boolean
-    canvass?: boolean | CanvassDefaultArgs<ExtArgs>
+    canvass?: boolean | JO$canvassArgs<ExtArgs>
     meqs?: boolean | JO$meqsArgs<ExtArgs>
     jo_approvers?: boolean | JO$jo_approversArgs<ExtArgs>
     _count?: boolean | JOCountOutputTypeDefaultArgs<ExtArgs>
@@ -8018,7 +8034,7 @@ export namespace Prisma {
   }
 
   export type JOInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    canvass?: boolean | CanvassDefaultArgs<ExtArgs>
+    canvass?: boolean | JO$canvassArgs<ExtArgs>
     meqs?: boolean | JO$meqsArgs<ExtArgs>
     jo_approvers?: boolean | JO$jo_approversArgs<ExtArgs>
     _count?: boolean | JOCountOutputTypeDefaultArgs<ExtArgs>
@@ -8028,7 +8044,7 @@ export namespace Prisma {
   export type $JOPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "JO"
     objects: {
-      canvass: Prisma.$CanvassPayload<ExtArgs>
+      canvass: Prisma.$CanvassPayload<ExtArgs> | null
       meqs: Prisma.$MEQSPayload<ExtArgs> | null
       jo_approvers: Prisma.$JOApproverPayload<ExtArgs>[]
     }
@@ -8036,7 +8052,7 @@ export namespace Prisma {
       id: string
       jo_number: string
       date_requested: Date
-      canvass_id: string
+      canvass_id: string | null
       equipment: string
       classification_id: string | null
       department_id: string
@@ -8413,7 +8429,7 @@ export namespace Prisma {
   export interface Prisma__JOClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
-    canvass<T extends CanvassDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CanvassDefaultArgs<ExtArgs>>): Prisma__CanvassClient<$Result.GetResult<Prisma.$CanvassPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+    canvass<T extends JO$canvassArgs<ExtArgs> = {}>(args?: Subset<T, JO$canvassArgs<ExtArgs>>): Prisma__CanvassClient<$Result.GetResult<Prisma.$CanvassPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
 
     meqs<T extends JO$meqsArgs<ExtArgs> = {}>(args?: Subset<T, JO$meqsArgs<ExtArgs>>): Prisma__MEQSClient<$Result.GetResult<Prisma.$MEQSPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
 
@@ -8770,6 +8786,22 @@ export namespace Prisma {
      * Filter which JOS to delete
      */
     where?: JOWhereInput
+  }
+
+
+  /**
+   * JO.canvass
+   */
+  export type JO$canvassArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Canvass
+     */
+    select?: CanvassSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: CanvassInclude<ExtArgs> | null
+    where?: CanvassWhereInput
   }
 
 
@@ -10072,7 +10104,7 @@ export namespace Prisma {
     id: string
     spr_number: string
     date_requested: Date
-    canvass_id: string
+    canvass_id: string | null
     vehicle_id: string
     classification_id: string | null
     supervisor_id: string
@@ -10117,7 +10149,7 @@ export namespace Prisma {
     cancelled_at?: boolean
     created_at?: boolean
     updated_at?: boolean
-    canvass?: boolean | CanvassDefaultArgs<ExtArgs>
+    canvass?: boolean | SPR$canvassArgs<ExtArgs>
     meqs?: boolean | SPR$meqsArgs<ExtArgs>
     vehicle?: boolean | VehicleDefaultArgs<ExtArgs>
     spr_approvers?: boolean | SPR$spr_approversArgs<ExtArgs>
@@ -10142,7 +10174,7 @@ export namespace Prisma {
   }
 
   export type SPRInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    canvass?: boolean | CanvassDefaultArgs<ExtArgs>
+    canvass?: boolean | SPR$canvassArgs<ExtArgs>
     meqs?: boolean | SPR$meqsArgs<ExtArgs>
     vehicle?: boolean | VehicleDefaultArgs<ExtArgs>
     spr_approvers?: boolean | SPR$spr_approversArgs<ExtArgs>
@@ -10153,7 +10185,7 @@ export namespace Prisma {
   export type $SPRPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "SPR"
     objects: {
-      canvass: Prisma.$CanvassPayload<ExtArgs>
+      canvass: Prisma.$CanvassPayload<ExtArgs> | null
       meqs: Prisma.$MEQSPayload<ExtArgs> | null
       vehicle: Prisma.$VehiclePayload<ExtArgs>
       spr_approvers: Prisma.$SPRApproverPayload<ExtArgs>[]
@@ -10162,7 +10194,7 @@ export namespace Prisma {
       id: string
       spr_number: string
       date_requested: Date
-      canvass_id: string
+      canvass_id: string | null
       vehicle_id: string
       classification_id: string | null
       supervisor_id: string
@@ -10538,7 +10570,7 @@ export namespace Prisma {
   export interface Prisma__SPRClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
-    canvass<T extends CanvassDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CanvassDefaultArgs<ExtArgs>>): Prisma__CanvassClient<$Result.GetResult<Prisma.$CanvassPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+    canvass<T extends SPR$canvassArgs<ExtArgs> = {}>(args?: Subset<T, SPR$canvassArgs<ExtArgs>>): Prisma__CanvassClient<$Result.GetResult<Prisma.$CanvassPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
 
     meqs<T extends SPR$meqsArgs<ExtArgs> = {}>(args?: Subset<T, SPR$meqsArgs<ExtArgs>>): Prisma__MEQSClient<$Result.GetResult<Prisma.$MEQSPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
 
@@ -10896,6 +10928,22 @@ export namespace Prisma {
      * Filter which SPRS to delete
      */
     where?: SPRWhereInput
+  }
+
+
+  /**
+   * SPR.canvass
+   */
+  export type SPR$canvassArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Canvass
+     */
+    select?: CanvassSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: CanvassInclude<ExtArgs> | null
+    where?: CanvassWhereInput
   }
 
 
@@ -17394,7 +17442,7 @@ export namespace Prisma {
 
   export type POGroupByOutputType = {
     id: string
-    meqs_supplier_id: string
+    meqs_supplier_id: string | null
     po_number: string
     fund_source_id: string | null
     po_date: Date
@@ -17437,7 +17485,7 @@ export namespace Prisma {
     cancelled_at?: boolean
     created_at?: boolean
     updated_at?: boolean
-    meqs_supplier?: boolean | MEQSSupplierDefaultArgs<ExtArgs>
+    meqs_supplier?: boolean | PO$meqs_supplierArgs<ExtArgs>
     rrs?: boolean | PO$rrsArgs<ExtArgs>
     po_approvers?: boolean | PO$po_approversArgs<ExtArgs>
     _count?: boolean | POCountOutputTypeDefaultArgs<ExtArgs>
@@ -17459,7 +17507,7 @@ export namespace Prisma {
   }
 
   export type POInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    meqs_supplier?: boolean | MEQSSupplierDefaultArgs<ExtArgs>
+    meqs_supplier?: boolean | PO$meqs_supplierArgs<ExtArgs>
     rrs?: boolean | PO$rrsArgs<ExtArgs>
     po_approvers?: boolean | PO$po_approversArgs<ExtArgs>
     _count?: boolean | POCountOutputTypeDefaultArgs<ExtArgs>
@@ -17469,13 +17517,13 @@ export namespace Prisma {
   export type $POPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "PO"
     objects: {
-      meqs_supplier: Prisma.$MEQSSupplierPayload<ExtArgs>
+      meqs_supplier: Prisma.$MEQSSupplierPayload<ExtArgs> | null
       rrs: Prisma.$RRPayload<ExtArgs>[]
       po_approvers: Prisma.$POApproverPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      meqs_supplier_id: string
+      meqs_supplier_id: string | null
       po_number: string
       fund_source_id: string | null
       po_date: Date
@@ -17851,7 +17899,7 @@ export namespace Prisma {
   export interface Prisma__POClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
-    meqs_supplier<T extends MEQSSupplierDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MEQSSupplierDefaultArgs<ExtArgs>>): Prisma__MEQSSupplierClient<$Result.GetResult<Prisma.$MEQSSupplierPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+    meqs_supplier<T extends PO$meqs_supplierArgs<ExtArgs> = {}>(args?: Subset<T, PO$meqs_supplierArgs<ExtArgs>>): Prisma__MEQSSupplierClient<$Result.GetResult<Prisma.$MEQSSupplierPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
 
     rrs<T extends PO$rrsArgs<ExtArgs> = {}>(args?: Subset<T, PO$rrsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RRPayload<ExtArgs>, T, 'findMany'> | Null>;
 
@@ -18205,6 +18253,22 @@ export namespace Prisma {
      * Filter which POS to delete
      */
     where?: POWhereInput
+  }
+
+
+  /**
+   * PO.meqs_supplier
+   */
+  export type PO$meqs_supplierArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MEQSSupplier
+     */
+    select?: MEQSSupplierSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: MEQSSupplierInclude<ExtArgs> | null
+    where?: MEQSSupplierWhereInput
   }
 
 
@@ -19554,7 +19618,7 @@ export namespace Prisma {
 
   export type RRGroupByOutputType = {
     id: string
-    po_id: string
+    po_id: string | null
     rr_number: string
     rr_date: Date
     received_by_id: string
@@ -19607,7 +19671,7 @@ export namespace Prisma {
     cancelled_at?: boolean
     created_at?: boolean
     updated_at?: boolean
-    po?: boolean | PODefaultArgs<ExtArgs>
+    po?: boolean | RR$poArgs<ExtArgs>
     rr_approvers?: boolean | RR$rr_approversArgs<ExtArgs>
     rr_items?: boolean | RR$rr_itemsArgs<ExtArgs>
     _count?: boolean | RRCountOutputTypeDefaultArgs<ExtArgs>
@@ -19633,7 +19697,7 @@ export namespace Prisma {
   }
 
   export type RRInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    po?: boolean | PODefaultArgs<ExtArgs>
+    po?: boolean | RR$poArgs<ExtArgs>
     rr_approvers?: boolean | RR$rr_approversArgs<ExtArgs>
     rr_items?: boolean | RR$rr_itemsArgs<ExtArgs>
     _count?: boolean | RRCountOutputTypeDefaultArgs<ExtArgs>
@@ -19643,13 +19707,13 @@ export namespace Prisma {
   export type $RRPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "RR"
     objects: {
-      po: Prisma.$POPayload<ExtArgs>
+      po: Prisma.$POPayload<ExtArgs> | null
       rr_approvers: Prisma.$RRApproverPayload<ExtArgs>[]
       rr_items: Prisma.$RRItemPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      po_id: string
+      po_id: string | null
       rr_number: string
       rr_date: Date
       received_by_id: string
@@ -20029,7 +20093,7 @@ export namespace Prisma {
   export interface Prisma__RRClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
-    po<T extends PODefaultArgs<ExtArgs> = {}>(args?: Subset<T, PODefaultArgs<ExtArgs>>): Prisma__POClient<$Result.GetResult<Prisma.$POPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+    po<T extends RR$poArgs<ExtArgs> = {}>(args?: Subset<T, RR$poArgs<ExtArgs>>): Prisma__POClient<$Result.GetResult<Prisma.$POPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
 
     rr_approvers<T extends RR$rr_approversArgs<ExtArgs> = {}>(args?: Subset<T, RR$rr_approversArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RRApproverPayload<ExtArgs>, T, 'findMany'> | Null>;
 
@@ -20387,6 +20451,22 @@ export namespace Prisma {
      * Filter which RRS to delete
      */
     where?: RRWhereInput
+  }
+
+
+  /**
+   * RR.po
+   */
+  export type RR$poArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PO
+     */
+    select?: POSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: POInclude<ExtArgs> | null
+    where?: POWhereInput
   }
 
 
@@ -30394,7 +30474,7 @@ export namespace Prisma {
     NOT?: RVWhereInput | RVWhereInput[]
     id?: StringFilter<"RV"> | string
     rv_number?: StringFilter<"RV"> | string
-    canvass_id?: StringFilter<"RV"> | string
+    canvass_id?: StringNullableFilter<"RV"> | string | null
     classification_id?: StringNullableFilter<"RV"> | string | null
     supervisor_id?: StringFilter<"RV"> | string
     date_requested?: DateTimeFilter<"RV"> | Date | string
@@ -30407,7 +30487,7 @@ export namespace Prisma {
     cancelled_at?: DateTimeNullableFilter<"RV"> | Date | string | null
     created_at?: DateTimeFilter<"RV"> | Date | string
     updated_at?: DateTimeFilter<"RV"> | Date | string
-    canvass?: XOR<CanvassRelationFilter, CanvassWhereInput>
+    canvass?: XOR<CanvassNullableRelationFilter, CanvassWhereInput> | null
     meqs?: XOR<MEQSNullableRelationFilter, MEQSWhereInput> | null
     rv_approvers?: RVApproverListRelationFilter
   }
@@ -30415,7 +30495,7 @@ export namespace Prisma {
   export type RVOrderByWithRelationInput = {
     id?: SortOrder
     rv_number?: SortOrder
-    canvass_id?: SortOrder
+    canvass_id?: SortOrderInput | SortOrder
     classification_id?: SortOrderInput | SortOrder
     supervisor_id?: SortOrder
     date_requested?: SortOrder
@@ -30452,7 +30532,7 @@ export namespace Prisma {
     cancelled_at?: DateTimeNullableFilter<"RV"> | Date | string | null
     created_at?: DateTimeFilter<"RV"> | Date | string
     updated_at?: DateTimeFilter<"RV"> | Date | string
-    canvass?: XOR<CanvassRelationFilter, CanvassWhereInput>
+    canvass?: XOR<CanvassNullableRelationFilter, CanvassWhereInput> | null
     meqs?: XOR<MEQSNullableRelationFilter, MEQSWhereInput> | null
     rv_approvers?: RVApproverListRelationFilter
   }, "id" | "rv_number" | "canvass_id">
@@ -30460,7 +30540,7 @@ export namespace Prisma {
   export type RVOrderByWithAggregationInput = {
     id?: SortOrder
     rv_number?: SortOrder
-    canvass_id?: SortOrder
+    canvass_id?: SortOrderInput | SortOrder
     classification_id?: SortOrderInput | SortOrder
     supervisor_id?: SortOrder
     date_requested?: SortOrder
@@ -30484,7 +30564,7 @@ export namespace Prisma {
     NOT?: RVScalarWhereWithAggregatesInput | RVScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"RV"> | string
     rv_number?: StringWithAggregatesFilter<"RV"> | string
-    canvass_id?: StringWithAggregatesFilter<"RV"> | string
+    canvass_id?: StringNullableWithAggregatesFilter<"RV"> | string | null
     classification_id?: StringNullableWithAggregatesFilter<"RV"> | string | null
     supervisor_id?: StringWithAggregatesFilter<"RV"> | string
     date_requested?: DateTimeWithAggregatesFilter<"RV"> | Date | string
@@ -30608,7 +30688,7 @@ export namespace Prisma {
     id?: StringFilter<"JO"> | string
     jo_number?: StringFilter<"JO"> | string
     date_requested?: DateTimeFilter<"JO"> | Date | string
-    canvass_id?: StringFilter<"JO"> | string
+    canvass_id?: StringNullableFilter<"JO"> | string | null
     equipment?: StringFilter<"JO"> | string
     classification_id?: StringNullableFilter<"JO"> | string | null
     department_id?: StringFilter<"JO"> | string
@@ -30620,7 +30700,7 @@ export namespace Prisma {
     cancelled_at?: DateTimeNullableFilter<"JO"> | Date | string | null
     created_at?: DateTimeFilter<"JO"> | Date | string
     updated_at?: DateTimeFilter<"JO"> | Date | string
-    canvass?: XOR<CanvassRelationFilter, CanvassWhereInput>
+    canvass?: XOR<CanvassNullableRelationFilter, CanvassWhereInput> | null
     meqs?: XOR<MEQSNullableRelationFilter, MEQSWhereInput> | null
     jo_approvers?: JOApproverListRelationFilter
   }
@@ -30629,7 +30709,7 @@ export namespace Prisma {
     id?: SortOrder
     jo_number?: SortOrder
     date_requested?: SortOrder
-    canvass_id?: SortOrder
+    canvass_id?: SortOrderInput | SortOrder
     equipment?: SortOrder
     classification_id?: SortOrderInput | SortOrder
     department_id?: SortOrder
@@ -30665,7 +30745,7 @@ export namespace Prisma {
     cancelled_at?: DateTimeNullableFilter<"JO"> | Date | string | null
     created_at?: DateTimeFilter<"JO"> | Date | string
     updated_at?: DateTimeFilter<"JO"> | Date | string
-    canvass?: XOR<CanvassRelationFilter, CanvassWhereInput>
+    canvass?: XOR<CanvassNullableRelationFilter, CanvassWhereInput> | null
     meqs?: XOR<MEQSNullableRelationFilter, MEQSWhereInput> | null
     jo_approvers?: JOApproverListRelationFilter
   }, "id" | "jo_number" | "canvass_id">
@@ -30674,7 +30754,7 @@ export namespace Prisma {
     id?: SortOrder
     jo_number?: SortOrder
     date_requested?: SortOrder
-    canvass_id?: SortOrder
+    canvass_id?: SortOrderInput | SortOrder
     equipment?: SortOrder
     classification_id?: SortOrderInput | SortOrder
     department_id?: SortOrder
@@ -30698,7 +30778,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"JO"> | string
     jo_number?: StringWithAggregatesFilter<"JO"> | string
     date_requested?: DateTimeWithAggregatesFilter<"JO"> | Date | string
-    canvass_id?: StringWithAggregatesFilter<"JO"> | string
+    canvass_id?: StringNullableWithAggregatesFilter<"JO"> | string | null
     equipment?: StringWithAggregatesFilter<"JO"> | string
     classification_id?: StringNullableWithAggregatesFilter<"JO"> | string | null
     department_id?: StringWithAggregatesFilter<"JO"> | string
@@ -30821,7 +30901,7 @@ export namespace Prisma {
     id?: StringFilter<"SPR"> | string
     spr_number?: StringFilter<"SPR"> | string
     date_requested?: DateTimeFilter<"SPR"> | Date | string
-    canvass_id?: StringFilter<"SPR"> | string
+    canvass_id?: StringNullableFilter<"SPR"> | string | null
     vehicle_id?: StringFilter<"SPR"> | string
     classification_id?: StringNullableFilter<"SPR"> | string | null
     supervisor_id?: StringFilter<"SPR"> | string
@@ -30832,7 +30912,7 @@ export namespace Prisma {
     cancelled_at?: DateTimeNullableFilter<"SPR"> | Date | string | null
     created_at?: DateTimeFilter<"SPR"> | Date | string
     updated_at?: DateTimeFilter<"SPR"> | Date | string
-    canvass?: XOR<CanvassRelationFilter, CanvassWhereInput>
+    canvass?: XOR<CanvassNullableRelationFilter, CanvassWhereInput> | null
     meqs?: XOR<MEQSNullableRelationFilter, MEQSWhereInput> | null
     vehicle?: XOR<VehicleRelationFilter, VehicleWhereInput>
     spr_approvers?: SPRApproverListRelationFilter
@@ -30842,7 +30922,7 @@ export namespace Prisma {
     id?: SortOrder
     spr_number?: SortOrder
     date_requested?: SortOrder
-    canvass_id?: SortOrder
+    canvass_id?: SortOrderInput | SortOrder
     vehicle_id?: SortOrder
     classification_id?: SortOrderInput | SortOrder
     supervisor_id?: SortOrder
@@ -30877,7 +30957,7 @@ export namespace Prisma {
     cancelled_at?: DateTimeNullableFilter<"SPR"> | Date | string | null
     created_at?: DateTimeFilter<"SPR"> | Date | string
     updated_at?: DateTimeFilter<"SPR"> | Date | string
-    canvass?: XOR<CanvassRelationFilter, CanvassWhereInput>
+    canvass?: XOR<CanvassNullableRelationFilter, CanvassWhereInput> | null
     meqs?: XOR<MEQSNullableRelationFilter, MEQSWhereInput> | null
     vehicle?: XOR<VehicleRelationFilter, VehicleWhereInput>
     spr_approvers?: SPRApproverListRelationFilter
@@ -30887,7 +30967,7 @@ export namespace Prisma {
     id?: SortOrder
     spr_number?: SortOrder
     date_requested?: SortOrder
-    canvass_id?: SortOrder
+    canvass_id?: SortOrderInput | SortOrder
     vehicle_id?: SortOrder
     classification_id?: SortOrderInput | SortOrder
     supervisor_id?: SortOrder
@@ -30910,7 +30990,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"SPR"> | string
     spr_number?: StringWithAggregatesFilter<"SPR"> | string
     date_requested?: DateTimeWithAggregatesFilter<"SPR"> | Date | string
-    canvass_id?: StringWithAggregatesFilter<"SPR"> | string
+    canvass_id?: StringNullableWithAggregatesFilter<"SPR"> | string | null
     vehicle_id?: StringWithAggregatesFilter<"SPR"> | string
     classification_id?: StringNullableWithAggregatesFilter<"SPR"> | string | null
     supervisor_id?: StringWithAggregatesFilter<"SPR"> | string
@@ -31485,7 +31565,7 @@ export namespace Prisma {
     OR?: POWhereInput[]
     NOT?: POWhereInput | POWhereInput[]
     id?: StringFilter<"PO"> | string
-    meqs_supplier_id?: StringFilter<"PO"> | string
+    meqs_supplier_id?: StringNullableFilter<"PO"> | string | null
     po_number?: StringFilter<"PO"> | string
     fund_source_id?: StringNullableFilter<"PO"> | string | null
     po_date?: DateTimeFilter<"PO"> | Date | string
@@ -31496,14 +31576,14 @@ export namespace Prisma {
     cancelled_at?: DateTimeNullableFilter<"PO"> | Date | string | null
     created_at?: DateTimeFilter<"PO"> | Date | string
     updated_at?: DateTimeFilter<"PO"> | Date | string
-    meqs_supplier?: XOR<MEQSSupplierRelationFilter, MEQSSupplierWhereInput>
+    meqs_supplier?: XOR<MEQSSupplierNullableRelationFilter, MEQSSupplierWhereInput> | null
     rrs?: RRListRelationFilter
     po_approvers?: POApproverListRelationFilter
   }
 
   export type POOrderByWithRelationInput = {
     id?: SortOrder
-    meqs_supplier_id?: SortOrder
+    meqs_supplier_id?: SortOrderInput | SortOrder
     po_number?: SortOrder
     fund_source_id?: SortOrderInput | SortOrder
     po_date?: SortOrder
@@ -31535,14 +31615,14 @@ export namespace Prisma {
     cancelled_at?: DateTimeNullableFilter<"PO"> | Date | string | null
     created_at?: DateTimeFilter<"PO"> | Date | string
     updated_at?: DateTimeFilter<"PO"> | Date | string
-    meqs_supplier?: XOR<MEQSSupplierRelationFilter, MEQSSupplierWhereInput>
+    meqs_supplier?: XOR<MEQSSupplierNullableRelationFilter, MEQSSupplierWhereInput> | null
     rrs?: RRListRelationFilter
     po_approvers?: POApproverListRelationFilter
   }, "id" | "meqs_supplier_id" | "po_number">
 
   export type POOrderByWithAggregationInput = {
     id?: SortOrder
-    meqs_supplier_id?: SortOrder
+    meqs_supplier_id?: SortOrderInput | SortOrder
     po_number?: SortOrder
     fund_source_id?: SortOrderInput | SortOrder
     po_date?: SortOrder
@@ -31563,7 +31643,7 @@ export namespace Prisma {
     OR?: POScalarWhereWithAggregatesInput[]
     NOT?: POScalarWhereWithAggregatesInput | POScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"PO"> | string
-    meqs_supplier_id?: StringWithAggregatesFilter<"PO"> | string
+    meqs_supplier_id?: StringNullableWithAggregatesFilter<"PO"> | string | null
     po_number?: StringWithAggregatesFilter<"PO"> | string
     fund_source_id?: StringNullableWithAggregatesFilter<"PO"> | string | null
     po_date?: DateTimeWithAggregatesFilter<"PO"> | Date | string
@@ -31683,7 +31763,7 @@ export namespace Prisma {
     OR?: RRWhereInput[]
     NOT?: RRWhereInput | RRWhereInput[]
     id?: StringFilter<"RR"> | string
-    po_id?: StringFilter<"RR"> | string
+    po_id?: StringNullableFilter<"RR"> | string | null
     rr_number?: StringFilter<"RR"> | string
     rr_date?: DateTimeFilter<"RR"> | Date | string
     received_by_id?: StringFilter<"RR"> | string
@@ -31698,14 +31778,14 @@ export namespace Prisma {
     cancelled_at?: DateTimeNullableFilter<"RR"> | Date | string | null
     created_at?: DateTimeFilter<"RR"> | Date | string
     updated_at?: DateTimeFilter<"RR"> | Date | string
-    po?: XOR<PORelationFilter, POWhereInput>
+    po?: XOR<PONullableRelationFilter, POWhereInput> | null
     rr_approvers?: RRApproverListRelationFilter
     rr_items?: RRItemListRelationFilter
   }
 
   export type RROrderByWithRelationInput = {
     id?: SortOrder
-    po_id?: SortOrder
+    po_id?: SortOrderInput | SortOrder
     rr_number?: SortOrder
     rr_date?: SortOrder
     received_by_id?: SortOrder
@@ -31731,7 +31811,7 @@ export namespace Prisma {
     AND?: RRWhereInput | RRWhereInput[]
     OR?: RRWhereInput[]
     NOT?: RRWhereInput | RRWhereInput[]
-    po_id?: StringFilter<"RR"> | string
+    po_id?: StringNullableFilter<"RR"> | string | null
     rr_date?: DateTimeFilter<"RR"> | Date | string
     received_by_id?: StringFilter<"RR"> | string
     invoice_number?: StringFilter<"RR"> | string
@@ -31745,14 +31825,14 @@ export namespace Prisma {
     cancelled_at?: DateTimeNullableFilter<"RR"> | Date | string | null
     created_at?: DateTimeFilter<"RR"> | Date | string
     updated_at?: DateTimeFilter<"RR"> | Date | string
-    po?: XOR<PORelationFilter, POWhereInput>
+    po?: XOR<PONullableRelationFilter, POWhereInput> | null
     rr_approvers?: RRApproverListRelationFilter
     rr_items?: RRItemListRelationFilter
   }, "id" | "rr_number">
 
   export type RROrderByWithAggregationInput = {
     id?: SortOrder
-    po_id?: SortOrder
+    po_id?: SortOrderInput | SortOrder
     rr_number?: SortOrder
     rr_date?: SortOrder
     received_by_id?: SortOrder
@@ -31779,7 +31859,7 @@ export namespace Prisma {
     OR?: RRScalarWhereWithAggregatesInput[]
     NOT?: RRScalarWhereWithAggregatesInput | RRScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"RR"> | string
-    po_id?: StringWithAggregatesFilter<"RR"> | string
+    po_id?: StringNullableWithAggregatesFilter<"RR"> | string | null
     rr_number?: StringWithAggregatesFilter<"RR"> | string
     rr_date?: DateTimeWithAggregatesFilter<"RR"> | Date | string
     received_by_id?: StringWithAggregatesFilter<"RR"> | string
@@ -32789,7 +32869,7 @@ export namespace Prisma {
     cancelled_at?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
-    canvass: CanvassCreateNestedOneWithoutRvInput
+    canvass?: CanvassCreateNestedOneWithoutRvInput
     meqs?: MEQSCreateNestedOneWithoutRvInput
     rv_approvers?: RVApproverCreateNestedManyWithoutRvInput
   }
@@ -32797,7 +32877,7 @@ export namespace Prisma {
   export type RVUncheckedCreateInput = {
     id?: string
     rv_number: string
-    canvass_id: string
+    canvass_id?: string | null
     classification_id?: string | null
     supervisor_id: string
     date_requested: Date | string
@@ -32829,7 +32909,7 @@ export namespace Prisma {
     cancelled_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    canvass?: CanvassUpdateOneRequiredWithoutRvNestedInput
+    canvass?: CanvassUpdateOneWithoutRvNestedInput
     meqs?: MEQSUpdateOneWithoutRvNestedInput
     rv_approvers?: RVApproverUpdateManyWithoutRvNestedInput
   }
@@ -32837,7 +32917,7 @@ export namespace Prisma {
   export type RVUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     rv_number?: StringFieldUpdateOperationsInput | string
-    canvass_id?: StringFieldUpdateOperationsInput | string
+    canvass_id?: NullableStringFieldUpdateOperationsInput | string | null
     classification_id?: NullableStringFieldUpdateOperationsInput | string | null
     supervisor_id?: StringFieldUpdateOperationsInput | string
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -32857,7 +32937,7 @@ export namespace Prisma {
   export type RVCreateManyInput = {
     id?: string
     rv_number: string
-    canvass_id: string
+    canvass_id?: string | null
     classification_id?: string | null
     supervisor_id: string
     date_requested: Date | string
@@ -32892,7 +32972,7 @@ export namespace Prisma {
   export type RVUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     rv_number?: StringFieldUpdateOperationsInput | string
-    canvass_id?: StringFieldUpdateOperationsInput | string
+    canvass_id?: NullableStringFieldUpdateOperationsInput | string | null
     classification_id?: NullableStringFieldUpdateOperationsInput | string | null
     supervisor_id?: StringFieldUpdateOperationsInput | string
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -33040,7 +33120,7 @@ export namespace Prisma {
     cancelled_at?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
-    canvass: CanvassCreateNestedOneWithoutJoInput
+    canvass?: CanvassCreateNestedOneWithoutJoInput
     meqs?: MEQSCreateNestedOneWithoutJoInput
     jo_approvers?: JOApproverCreateNestedManyWithoutJoInput
   }
@@ -33049,7 +33129,7 @@ export namespace Prisma {
     id?: string
     jo_number: string
     date_requested: Date | string
-    canvass_id: string
+    canvass_id?: string | null
     equipment: string
     classification_id?: string | null
     department_id: string
@@ -33080,7 +33160,7 @@ export namespace Prisma {
     cancelled_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    canvass?: CanvassUpdateOneRequiredWithoutJoNestedInput
+    canvass?: CanvassUpdateOneWithoutJoNestedInput
     meqs?: MEQSUpdateOneWithoutJoNestedInput
     jo_approvers?: JOApproverUpdateManyWithoutJoNestedInput
   }
@@ -33089,7 +33169,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     jo_number?: StringFieldUpdateOperationsInput | string
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
-    canvass_id?: StringFieldUpdateOperationsInput | string
+    canvass_id?: NullableStringFieldUpdateOperationsInput | string | null
     equipment?: StringFieldUpdateOperationsInput | string
     classification_id?: NullableStringFieldUpdateOperationsInput | string | null
     department_id?: StringFieldUpdateOperationsInput | string
@@ -33109,7 +33189,7 @@ export namespace Prisma {
     id?: string
     jo_number: string
     date_requested: Date | string
-    canvass_id: string
+    canvass_id?: string | null
     equipment: string
     classification_id?: string | null
     department_id: string
@@ -33144,7 +33224,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     jo_number?: StringFieldUpdateOperationsInput | string
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
-    canvass_id?: StringFieldUpdateOperationsInput | string
+    canvass_id?: NullableStringFieldUpdateOperationsInput | string | null
     equipment?: StringFieldUpdateOperationsInput | string
     classification_id?: NullableStringFieldUpdateOperationsInput | string | null
     department_id?: StringFieldUpdateOperationsInput | string
@@ -33289,7 +33369,7 @@ export namespace Prisma {
     cancelled_at?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
-    canvass: CanvassCreateNestedOneWithoutSprInput
+    canvass?: CanvassCreateNestedOneWithoutSprInput
     meqs?: MEQSCreateNestedOneWithoutSprInput
     vehicle: VehicleCreateNestedOneWithoutSprsInput
     spr_approvers?: SPRApproverCreateNestedManyWithoutSprInput
@@ -33299,7 +33379,7 @@ export namespace Prisma {
     id?: string
     spr_number: string
     date_requested: Date | string
-    canvass_id: string
+    canvass_id?: string | null
     vehicle_id: string
     classification_id?: string | null
     supervisor_id: string
@@ -33327,7 +33407,7 @@ export namespace Prisma {
     cancelled_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    canvass?: CanvassUpdateOneRequiredWithoutSprNestedInput
+    canvass?: CanvassUpdateOneWithoutSprNestedInput
     meqs?: MEQSUpdateOneWithoutSprNestedInput
     vehicle?: VehicleUpdateOneRequiredWithoutSprsNestedInput
     spr_approvers?: SPRApproverUpdateManyWithoutSprNestedInput
@@ -33337,7 +33417,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     spr_number?: StringFieldUpdateOperationsInput | string
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
-    canvass_id?: StringFieldUpdateOperationsInput | string
+    canvass_id?: NullableStringFieldUpdateOperationsInput | string | null
     vehicle_id?: StringFieldUpdateOperationsInput | string
     classification_id?: NullableStringFieldUpdateOperationsInput | string | null
     supervisor_id?: StringFieldUpdateOperationsInput | string
@@ -33356,7 +33436,7 @@ export namespace Prisma {
     id?: string
     spr_number: string
     date_requested: Date | string
-    canvass_id: string
+    canvass_id?: string | null
     vehicle_id: string
     classification_id?: string | null
     supervisor_id: string
@@ -33388,7 +33468,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     spr_number?: StringFieldUpdateOperationsInput | string
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
-    canvass_id?: StringFieldUpdateOperationsInput | string
+    canvass_id?: NullableStringFieldUpdateOperationsInput | string | null
     vehicle_id?: StringFieldUpdateOperationsInput | string
     classification_id?: NullableStringFieldUpdateOperationsInput | string | null
     supervisor_id?: StringFieldUpdateOperationsInput | string
@@ -34029,14 +34109,14 @@ export namespace Prisma {
     cancelled_at?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
-    meqs_supplier: MEQSSupplierCreateNestedOneWithoutPoInput
+    meqs_supplier?: MEQSSupplierCreateNestedOneWithoutPoInput
     rrs?: RRCreateNestedManyWithoutPoInput
     po_approvers?: POApproverCreateNestedManyWithoutPoInput
   }
 
   export type POUncheckedCreateInput = {
     id?: string
-    meqs_supplier_id: string
+    meqs_supplier_id?: string | null
     po_number: string
     fund_source_id?: string | null
     po_date: Date | string
@@ -34063,14 +34143,14 @@ export namespace Prisma {
     cancelled_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    meqs_supplier?: MEQSSupplierUpdateOneRequiredWithoutPoNestedInput
+    meqs_supplier?: MEQSSupplierUpdateOneWithoutPoNestedInput
     rrs?: RRUpdateManyWithoutPoNestedInput
     po_approvers?: POApproverUpdateManyWithoutPoNestedInput
   }
 
   export type POUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    meqs_supplier_id?: StringFieldUpdateOperationsInput | string
+    meqs_supplier_id?: NullableStringFieldUpdateOperationsInput | string | null
     po_number?: StringFieldUpdateOperationsInput | string
     fund_source_id?: NullableStringFieldUpdateOperationsInput | string | null
     po_date?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -34087,7 +34167,7 @@ export namespace Prisma {
 
   export type POCreateManyInput = {
     id?: string
-    meqs_supplier_id: string
+    meqs_supplier_id?: string | null
     po_number: string
     fund_source_id?: string | null
     po_date: Date | string
@@ -34116,7 +34196,7 @@ export namespace Prisma {
 
   export type POUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    meqs_supplier_id?: StringFieldUpdateOperationsInput | string
+    meqs_supplier_id?: NullableStringFieldUpdateOperationsInput | string | null
     po_number?: StringFieldUpdateOperationsInput | string
     fund_source_id?: NullableStringFieldUpdateOperationsInput | string | null
     po_date?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -34263,14 +34343,14 @@ export namespace Prisma {
     cancelled_at?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
-    po: POCreateNestedOneWithoutRrsInput
+    po?: POCreateNestedOneWithoutRrsInput
     rr_approvers?: RRApproverCreateNestedManyWithoutRrInput
     rr_items?: RRItemCreateNestedManyWithoutRrInput
   }
 
   export type RRUncheckedCreateInput = {
     id?: string
-    po_id: string
+    po_id?: string | null
     rr_number: string
     rr_date: Date | string
     received_by_id: string
@@ -34305,14 +34385,14 @@ export namespace Prisma {
     cancelled_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    po?: POUpdateOneRequiredWithoutRrsNestedInput
+    po?: POUpdateOneWithoutRrsNestedInput
     rr_approvers?: RRApproverUpdateManyWithoutRrNestedInput
     rr_items?: RRItemUpdateManyWithoutRrNestedInput
   }
 
   export type RRUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    po_id?: StringFieldUpdateOperationsInput | string
+    po_id?: NullableStringFieldUpdateOperationsInput | string | null
     rr_number?: StringFieldUpdateOperationsInput | string
     rr_date?: DateTimeFieldUpdateOperationsInput | Date | string
     received_by_id?: StringFieldUpdateOperationsInput | string
@@ -34333,7 +34413,7 @@ export namespace Prisma {
 
   export type RRCreateManyInput = {
     id?: string
-    po_id: string
+    po_id?: string | null
     rr_number: string
     rr_date: Date | string
     received_by_id: string
@@ -34370,7 +34450,7 @@ export namespace Prisma {
 
   export type RRUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    po_id?: StringFieldUpdateOperationsInput | string
+    po_id?: NullableStringFieldUpdateOperationsInput | string | null
     rr_number?: StringFieldUpdateOperationsInput | string
     rr_date?: DateTimeFieldUpdateOperationsInput | Date | string
     received_by_id?: StringFieldUpdateOperationsInput | string
@@ -35544,6 +35624,11 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
+  export type CanvassNullableRelationFilter = {
+    is?: CanvassWhereInput | null
+    isNot?: CanvassWhereInput | null
+  }
+
   export type MEQSNullableRelationFilter = {
     is?: MEQSWhereInput | null
     isNot?: MEQSWhereInput | null
@@ -36276,6 +36361,11 @@ export namespace Prisma {
   export type MEQSApproverSumOrderByAggregateInput = {
     status?: SortOrder
     order?: SortOrder
+  }
+
+  export type MEQSSupplierNullableRelationFilter = {
+    is?: MEQSSupplierWhereInput | null
+    isNot?: MEQSSupplierWhereInput | null
   }
 
   export type RRListRelationFilter = {
@@ -37248,10 +37338,12 @@ export namespace Prisma {
     connect?: RVApproverWhereUniqueInput | RVApproverWhereUniqueInput[]
   }
 
-  export type CanvassUpdateOneRequiredWithoutRvNestedInput = {
+  export type CanvassUpdateOneWithoutRvNestedInput = {
     create?: XOR<CanvassCreateWithoutRvInput, CanvassUncheckedCreateWithoutRvInput>
     connectOrCreate?: CanvassCreateOrConnectWithoutRvInput
     upsert?: CanvassUpsertWithoutRvInput
+    disconnect?: CanvassWhereInput | boolean
+    delete?: CanvassWhereInput | boolean
     connect?: CanvassWhereUniqueInput
     update?: XOR<XOR<CanvassUpdateToOneWithWhereWithoutRvInput, CanvassUpdateWithoutRvInput>, CanvassUncheckedUpdateWithoutRvInput>
   }
@@ -37350,10 +37442,12 @@ export namespace Prisma {
     connect?: JOApproverWhereUniqueInput | JOApproverWhereUniqueInput[]
   }
 
-  export type CanvassUpdateOneRequiredWithoutJoNestedInput = {
+  export type CanvassUpdateOneWithoutJoNestedInput = {
     create?: XOR<CanvassCreateWithoutJoInput, CanvassUncheckedCreateWithoutJoInput>
     connectOrCreate?: CanvassCreateOrConnectWithoutJoInput
     upsert?: CanvassUpsertWithoutJoInput
+    disconnect?: CanvassWhereInput | boolean
+    delete?: CanvassWhereInput | boolean
     connect?: CanvassWhereUniqueInput
     update?: XOR<XOR<CanvassUpdateToOneWithWhereWithoutJoInput, CanvassUpdateWithoutJoInput>, CanvassUncheckedUpdateWithoutJoInput>
   }
@@ -37458,10 +37552,12 @@ export namespace Prisma {
     connect?: SPRApproverWhereUniqueInput | SPRApproverWhereUniqueInput[]
   }
 
-  export type CanvassUpdateOneRequiredWithoutSprNestedInput = {
+  export type CanvassUpdateOneWithoutSprNestedInput = {
     create?: XOR<CanvassCreateWithoutSprInput, CanvassUncheckedCreateWithoutSprInput>
     connectOrCreate?: CanvassCreateOrConnectWithoutSprInput
     upsert?: CanvassUpsertWithoutSprInput
+    disconnect?: CanvassWhereInput | boolean
+    delete?: CanvassWhereInput | boolean
     connect?: CanvassWhereUniqueInput
     update?: XOR<XOR<CanvassUpdateToOneWithWhereWithoutSprInput, CanvassUpdateWithoutSprInput>, CanvassUncheckedUpdateWithoutSprInput>
   }
@@ -37956,10 +38052,12 @@ export namespace Prisma {
     connect?: POApproverWhereUniqueInput | POApproverWhereUniqueInput[]
   }
 
-  export type MEQSSupplierUpdateOneRequiredWithoutPoNestedInput = {
+  export type MEQSSupplierUpdateOneWithoutPoNestedInput = {
     create?: XOR<MEQSSupplierCreateWithoutPoInput, MEQSSupplierUncheckedCreateWithoutPoInput>
     connectOrCreate?: MEQSSupplierCreateOrConnectWithoutPoInput
     upsert?: MEQSSupplierUpsertWithoutPoInput
+    disconnect?: MEQSSupplierWhereInput | boolean
+    delete?: MEQSSupplierWhereInput | boolean
     connect?: MEQSSupplierWhereUniqueInput
     update?: XOR<XOR<MEQSSupplierUpdateToOneWithWhereWithoutPoInput, MEQSSupplierUpdateWithoutPoInput>, MEQSSupplierUncheckedUpdateWithoutPoInput>
   }
@@ -38068,10 +38166,12 @@ export namespace Prisma {
     connect?: RRItemWhereUniqueInput | RRItemWhereUniqueInput[]
   }
 
-  export type POUpdateOneRequiredWithoutRrsNestedInput = {
+  export type POUpdateOneWithoutRrsNestedInput = {
     create?: XOR<POCreateWithoutRrsInput, POUncheckedCreateWithoutRrsInput>
     connectOrCreate?: POCreateOrConnectWithoutRrsInput
     upsert?: POUpsertWithoutRrsInput
+    disconnect?: POWhereInput | boolean
+    delete?: POWhereInput | boolean
     connect?: POWhereUniqueInput
     update?: XOR<XOR<POUpdateToOneWithWhereWithoutRrsInput, POUpdateWithoutRrsInput>, POUncheckedUpdateWithoutRrsInput>
   }
@@ -39773,14 +39873,14 @@ export namespace Prisma {
     cancelled_at?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
-    canvass: CanvassCreateNestedOneWithoutRvInput
+    canvass?: CanvassCreateNestedOneWithoutRvInput
     meqs?: MEQSCreateNestedOneWithoutRvInput
   }
 
   export type RVUncheckedCreateWithoutRv_approversInput = {
     id?: string
     rv_number: string
-    canvass_id: string
+    canvass_id?: string | null
     classification_id?: string | null
     supervisor_id: string
     date_requested: Date | string
@@ -39827,14 +39927,14 @@ export namespace Prisma {
     cancelled_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    canvass?: CanvassUpdateOneRequiredWithoutRvNestedInput
+    canvass?: CanvassUpdateOneWithoutRvNestedInput
     meqs?: MEQSUpdateOneWithoutRvNestedInput
   }
 
   export type RVUncheckedUpdateWithoutRv_approversInput = {
     id?: StringFieldUpdateOperationsInput | string
     rv_number?: StringFieldUpdateOperationsInput | string
-    canvass_id?: StringFieldUpdateOperationsInput | string
+    canvass_id?: NullableStringFieldUpdateOperationsInput | string | null
     classification_id?: NullableStringFieldUpdateOperationsInput | string | null
     supervisor_id?: StringFieldUpdateOperationsInput | string
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -40115,7 +40215,7 @@ export namespace Prisma {
     cancelled_at?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
-    canvass: CanvassCreateNestedOneWithoutJoInput
+    canvass?: CanvassCreateNestedOneWithoutJoInput
     meqs?: MEQSCreateNestedOneWithoutJoInput
   }
 
@@ -40123,7 +40223,7 @@ export namespace Prisma {
     id?: string
     jo_number: string
     date_requested: Date | string
-    canvass_id: string
+    canvass_id?: string | null
     equipment: string
     classification_id?: string | null
     department_id: string
@@ -40169,7 +40269,7 @@ export namespace Prisma {
     cancelled_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    canvass?: CanvassUpdateOneRequiredWithoutJoNestedInput
+    canvass?: CanvassUpdateOneWithoutJoNestedInput
     meqs?: MEQSUpdateOneWithoutJoNestedInput
   }
 
@@ -40177,7 +40277,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     jo_number?: StringFieldUpdateOperationsInput | string
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
-    canvass_id?: StringFieldUpdateOperationsInput | string
+    canvass_id?: NullableStringFieldUpdateOperationsInput | string | null
     equipment?: StringFieldUpdateOperationsInput | string
     classification_id?: NullableStringFieldUpdateOperationsInput | string | null
     department_id?: StringFieldUpdateOperationsInput | string
@@ -40519,7 +40619,7 @@ export namespace Prisma {
     cancelled_at?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
-    canvass: CanvassCreateNestedOneWithoutSprInput
+    canvass?: CanvassCreateNestedOneWithoutSprInput
     meqs?: MEQSCreateNestedOneWithoutSprInput
     vehicle: VehicleCreateNestedOneWithoutSprsInput
   }
@@ -40528,7 +40628,7 @@ export namespace Prisma {
     id?: string
     spr_number: string
     date_requested: Date | string
-    canvass_id: string
+    canvass_id?: string | null
     vehicle_id: string
     classification_id?: string | null
     supervisor_id: string
@@ -40571,7 +40671,7 @@ export namespace Prisma {
     cancelled_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    canvass?: CanvassUpdateOneRequiredWithoutSprNestedInput
+    canvass?: CanvassUpdateOneWithoutSprNestedInput
     meqs?: MEQSUpdateOneWithoutSprNestedInput
     vehicle?: VehicleUpdateOneRequiredWithoutSprsNestedInput
   }
@@ -40580,7 +40680,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     spr_number?: StringFieldUpdateOperationsInput | string
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
-    canvass_id?: StringFieldUpdateOperationsInput | string
+    canvass_id?: NullableStringFieldUpdateOperationsInput | string | null
     vehicle_id?: StringFieldUpdateOperationsInput | string
     classification_id?: NullableStringFieldUpdateOperationsInput | string | null
     supervisor_id?: StringFieldUpdateOperationsInput | string
@@ -40609,7 +40709,7 @@ export namespace Prisma {
     cancelled_at?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
-    canvass: CanvassCreateNestedOneWithoutJoInput
+    canvass?: CanvassCreateNestedOneWithoutJoInput
     jo_approvers?: JOApproverCreateNestedManyWithoutJoInput
   }
 
@@ -40617,7 +40717,7 @@ export namespace Prisma {
     id?: string
     jo_number: string
     date_requested: Date | string
-    canvass_id: string
+    canvass_id?: string | null
     equipment: string
     classification_id?: string | null
     department_id: string
@@ -40652,14 +40752,14 @@ export namespace Prisma {
     cancelled_at?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
-    canvass: CanvassCreateNestedOneWithoutRvInput
+    canvass?: CanvassCreateNestedOneWithoutRvInput
     rv_approvers?: RVApproverCreateNestedManyWithoutRvInput
   }
 
   export type RVUncheckedCreateWithoutMeqsInput = {
     id?: string
     rv_number: string
-    canvass_id: string
+    canvass_id?: string | null
     classification_id?: string | null
     supervisor_id: string
     date_requested: Date | string
@@ -40693,7 +40793,7 @@ export namespace Prisma {
     cancelled_at?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
-    canvass: CanvassCreateNestedOneWithoutSprInput
+    canvass?: CanvassCreateNestedOneWithoutSprInput
     vehicle: VehicleCreateNestedOneWithoutSprsInput
     spr_approvers?: SPRApproverCreateNestedManyWithoutSprInput
   }
@@ -40702,7 +40802,7 @@ export namespace Prisma {
     id?: string
     spr_number: string
     date_requested: Date | string
-    canvass_id: string
+    canvass_id?: string | null
     vehicle_id: string
     classification_id?: string | null
     supervisor_id: string
@@ -40825,7 +40925,7 @@ export namespace Prisma {
     cancelled_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    canvass?: CanvassUpdateOneRequiredWithoutJoNestedInput
+    canvass?: CanvassUpdateOneWithoutJoNestedInput
     jo_approvers?: JOApproverUpdateManyWithoutJoNestedInput
   }
 
@@ -40833,7 +40933,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     jo_number?: StringFieldUpdateOperationsInput | string
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
-    canvass_id?: StringFieldUpdateOperationsInput | string
+    canvass_id?: NullableStringFieldUpdateOperationsInput | string | null
     equipment?: StringFieldUpdateOperationsInput | string
     classification_id?: NullableStringFieldUpdateOperationsInput | string | null
     department_id?: StringFieldUpdateOperationsInput | string
@@ -40874,14 +40974,14 @@ export namespace Prisma {
     cancelled_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    canvass?: CanvassUpdateOneRequiredWithoutRvNestedInput
+    canvass?: CanvassUpdateOneWithoutRvNestedInput
     rv_approvers?: RVApproverUpdateManyWithoutRvNestedInput
   }
 
   export type RVUncheckedUpdateWithoutMeqsInput = {
     id?: StringFieldUpdateOperationsInput | string
     rv_number?: StringFieldUpdateOperationsInput | string
-    canvass_id?: StringFieldUpdateOperationsInput | string
+    canvass_id?: NullableStringFieldUpdateOperationsInput | string | null
     classification_id?: NullableStringFieldUpdateOperationsInput | string | null
     supervisor_id?: StringFieldUpdateOperationsInput | string
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -40921,7 +41021,7 @@ export namespace Prisma {
     cancelled_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    canvass?: CanvassUpdateOneRequiredWithoutSprNestedInput
+    canvass?: CanvassUpdateOneWithoutSprNestedInput
     vehicle?: VehicleUpdateOneRequiredWithoutSprsNestedInput
     spr_approvers?: SPRApproverUpdateManyWithoutSprNestedInput
   }
@@ -40930,7 +41030,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     spr_number?: StringFieldUpdateOperationsInput | string
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
-    canvass_id?: StringFieldUpdateOperationsInput | string
+    canvass_id?: NullableStringFieldUpdateOperationsInput | string | null
     vehicle_id?: StringFieldUpdateOperationsInput | string
     classification_id?: NullableStringFieldUpdateOperationsInput | string | null
     supervisor_id?: StringFieldUpdateOperationsInput | string
@@ -41899,7 +41999,7 @@ export namespace Prisma {
     OR?: RRScalarWhereInput[]
     NOT?: RRScalarWhereInput | RRScalarWhereInput[]
     id?: StringFilter<"RR"> | string
-    po_id?: StringFilter<"RR"> | string
+    po_id?: StringNullableFilter<"RR"> | string | null
     rr_number?: StringFilter<"RR"> | string
     rr_date?: DateTimeFilter<"RR"> | Date | string
     received_by_id?: StringFilter<"RR"> | string
@@ -41964,13 +42064,13 @@ export namespace Prisma {
     cancelled_at?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
-    meqs_supplier: MEQSSupplierCreateNestedOneWithoutPoInput
+    meqs_supplier?: MEQSSupplierCreateNestedOneWithoutPoInput
     rrs?: RRCreateNestedManyWithoutPoInput
   }
 
   export type POUncheckedCreateWithoutPo_approversInput = {
     id?: string
-    meqs_supplier_id: string
+    meqs_supplier_id?: string | null
     po_number: string
     fund_source_id?: string | null
     po_date: Date | string
@@ -42012,13 +42112,13 @@ export namespace Prisma {
     cancelled_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    meqs_supplier?: MEQSSupplierUpdateOneRequiredWithoutPoNestedInput
+    meqs_supplier?: MEQSSupplierUpdateOneWithoutPoNestedInput
     rrs?: RRUpdateManyWithoutPoNestedInput
   }
 
   export type POUncheckedUpdateWithoutPo_approversInput = {
     id?: StringFieldUpdateOperationsInput | string
-    meqs_supplier_id?: StringFieldUpdateOperationsInput | string
+    meqs_supplier_id?: NullableStringFieldUpdateOperationsInput | string | null
     po_number?: StringFieldUpdateOperationsInput | string
     fund_source_id?: NullableStringFieldUpdateOperationsInput | string | null
     po_date?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -42044,13 +42144,13 @@ export namespace Prisma {
     cancelled_at?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
-    meqs_supplier: MEQSSupplierCreateNestedOneWithoutPoInput
+    meqs_supplier?: MEQSSupplierCreateNestedOneWithoutPoInput
     po_approvers?: POApproverCreateNestedManyWithoutPoInput
   }
 
   export type POUncheckedCreateWithoutRrsInput = {
     id?: string
-    meqs_supplier_id: string
+    meqs_supplier_id?: string | null
     po_number: string
     fund_source_id?: string | null
     po_date: Date | string
@@ -42166,13 +42266,13 @@ export namespace Prisma {
     cancelled_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    meqs_supplier?: MEQSSupplierUpdateOneRequiredWithoutPoNestedInput
+    meqs_supplier?: MEQSSupplierUpdateOneWithoutPoNestedInput
     po_approvers?: POApproverUpdateManyWithoutPoNestedInput
   }
 
   export type POUncheckedUpdateWithoutRrsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    meqs_supplier_id?: StringFieldUpdateOperationsInput | string
+    meqs_supplier_id?: NullableStringFieldUpdateOperationsInput | string | null
     po_number?: StringFieldUpdateOperationsInput | string
     fund_source_id?: NullableStringFieldUpdateOperationsInput | string | null
     po_date?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -42254,13 +42354,13 @@ export namespace Prisma {
     cancelled_at?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
-    po: POCreateNestedOneWithoutRrsInput
+    po?: POCreateNestedOneWithoutRrsInput
     rr_items?: RRItemCreateNestedManyWithoutRrInput
   }
 
   export type RRUncheckedCreateWithoutRr_approversInput = {
     id?: string
-    po_id: string
+    po_id?: string | null
     rr_number: string
     rr_date: Date | string
     received_by_id: string
@@ -42310,13 +42410,13 @@ export namespace Prisma {
     cancelled_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    po?: POUpdateOneRequiredWithoutRrsNestedInput
+    po?: POUpdateOneWithoutRrsNestedInput
     rr_items?: RRItemUpdateManyWithoutRrNestedInput
   }
 
   export type RRUncheckedUpdateWithoutRr_approversInput = {
     id?: StringFieldUpdateOperationsInput | string
-    po_id?: StringFieldUpdateOperationsInput | string
+    po_id?: NullableStringFieldUpdateOperationsInput | string | null
     rr_number?: StringFieldUpdateOperationsInput | string
     rr_date?: DateTimeFieldUpdateOperationsInput | Date | string
     received_by_id?: StringFieldUpdateOperationsInput | string
@@ -42350,13 +42450,13 @@ export namespace Prisma {
     cancelled_at?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
-    po: POCreateNestedOneWithoutRrsInput
+    po?: POCreateNestedOneWithoutRrsInput
     rr_approvers?: RRApproverCreateNestedManyWithoutRrInput
   }
 
   export type RRUncheckedCreateWithoutRr_itemsInput = {
     id?: string
-    po_id: string
+    po_id?: string | null
     rr_number: string
     rr_date: Date | string
     received_by_id: string
@@ -42467,13 +42567,13 @@ export namespace Prisma {
     cancelled_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    po?: POUpdateOneRequiredWithoutRrsNestedInput
+    po?: POUpdateOneWithoutRrsNestedInput
     rr_approvers?: RRApproverUpdateManyWithoutRrNestedInput
   }
 
   export type RRUncheckedUpdateWithoutRr_itemsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    po_id?: StringFieldUpdateOperationsInput | string
+    po_id?: NullableStringFieldUpdateOperationsInput | string | null
     rr_number?: StringFieldUpdateOperationsInput | string
     rr_date?: DateTimeFieldUpdateOperationsInput | Date | string
     received_by_id?: StringFieldUpdateOperationsInput | string
@@ -43281,7 +43381,7 @@ export namespace Prisma {
     cancelled_at?: Date | string | null
     created_at?: Date | string
     updated_at?: Date | string
-    canvass: CanvassCreateNestedOneWithoutSprInput
+    canvass?: CanvassCreateNestedOneWithoutSprInput
     meqs?: MEQSCreateNestedOneWithoutSprInput
     spr_approvers?: SPRApproverCreateNestedManyWithoutSprInput
   }
@@ -43290,7 +43390,7 @@ export namespace Prisma {
     id?: string
     spr_number: string
     date_requested: Date | string
-    canvass_id: string
+    canvass_id?: string | null
     classification_id?: string | null
     supervisor_id: string
     notes: string
@@ -43337,7 +43437,7 @@ export namespace Prisma {
     id?: StringFilter<"SPR"> | string
     spr_number?: StringFilter<"SPR"> | string
     date_requested?: DateTimeFilter<"SPR"> | Date | string
-    canvass_id?: StringFilter<"SPR"> | string
+    canvass_id?: StringNullableFilter<"SPR"> | string | null
     vehicle_id?: StringFilter<"SPR"> | string
     classification_id?: StringNullableFilter<"SPR"> | string | null
     supervisor_id?: StringFilter<"SPR"> | string
@@ -44545,7 +44645,7 @@ export namespace Prisma {
     id?: string
     spr_number: string
     date_requested: Date | string
-    canvass_id: string
+    canvass_id?: string | null
     classification_id?: string | null
     supervisor_id: string
     notes: string
@@ -44570,7 +44670,7 @@ export namespace Prisma {
     cancelled_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    canvass?: CanvassUpdateOneRequiredWithoutSprNestedInput
+    canvass?: CanvassUpdateOneWithoutSprNestedInput
     meqs?: MEQSUpdateOneWithoutSprNestedInput
     spr_approvers?: SPRApproverUpdateManyWithoutSprNestedInput
   }
@@ -44579,7 +44679,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     spr_number?: StringFieldUpdateOperationsInput | string
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
-    canvass_id?: StringFieldUpdateOperationsInput | string
+    canvass_id?: NullableStringFieldUpdateOperationsInput | string | null
     classification_id?: NullableStringFieldUpdateOperationsInput | string | null
     supervisor_id?: StringFieldUpdateOperationsInput | string
     notes?: StringFieldUpdateOperationsInput | string
@@ -44597,7 +44697,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     spr_number?: StringFieldUpdateOperationsInput | string
     date_requested?: DateTimeFieldUpdateOperationsInput | Date | string
-    canvass_id?: StringFieldUpdateOperationsInput | string
+    canvass_id?: NullableStringFieldUpdateOperationsInput | string | null
     classification_id?: NullableStringFieldUpdateOperationsInput | string | null
     supervisor_id?: StringFieldUpdateOperationsInput | string
     notes?: StringFieldUpdateOperationsInput | string

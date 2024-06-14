@@ -15,8 +15,8 @@ export class JO {
   @Field(() => String)
   date_requested: string;
 
-  @Field(() => String)
-  canvass_id: string;
+  @Field(() => String, { nullable: true })
+  canvass_id?: string | null;
 
   @Field(() => String)
   equipment: string;
@@ -60,8 +60,8 @@ export class JO {
 
   // =============== derived / resolvers ===============
 
-  @Field(() => Canvass)
-  canvass: Canvass;
+  @Field(() => Canvass, { nullable: true })
+  canvass?: Canvass | null;
 
   @Field(() => MEQS, { nullable: true })
   meqs?: MEQS;

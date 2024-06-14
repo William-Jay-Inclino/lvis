@@ -3,14 +3,13 @@ import { CanvassService } from '../canvass/canvass.service';
 import { PrismaService } from '../__prisma__/prisma.service';
 import { Prisma, JO, JOApprover } from 'apps/warehouse/prisma/generated/client';
 import { CreateJoInput } from './dto/create-jo.input';
-import { APPROVAL_STATUS, Role } from '../__common__/types';
+import { APPROVAL_STATUS } from '../__common__/types';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { UpdateJoInput } from './dto/update-jo.input';
 import { catchError, firstValueFrom } from 'rxjs';
 import { HttpService } from '@nestjs/axios';
 import { WarehouseCancelResponse, WarehouseRemoveResponse } from '../__common__/classes';
 import { JOsResponse } from './entities/jos-response.entity';
-import * as moment from 'moment';
 import { getDateRange, isAdmin, isNormalUser } from '../__common__/helpers';
 import { UpdateJoByBudgetOfficerInput } from './dto/update-jo-by-budget-officer.input';
 
@@ -152,11 +151,18 @@ export class JoService {
         this.logger.log('cancel()')
 
         const existingItem = await this.prisma.jO.findUnique({
-            where: { id }
+            where: { id },
+            include: {
+                canvass: true
+            }
         })
 
         if (!existingItem) {
             throw new NotFoundException('JO not found')
+        }
+
+        if (!existingItem.canvass) {
+            throw new Error('JO is not associated with a Canvass');
         }
 
         if (!this.canAccess(existingItem)) {
@@ -166,7 +172,10 @@ export class JoService {
         const updated = await this.prisma.jO.update({
             data: {
                 cancelled_at: new Date(),
-                cancelled_by: this.authUser.user.username
+                cancelled_by: this.authUser.user.username,
+                canvass: {
+                    disconnect: true
+                }
             },
             where: { id }
         })
@@ -242,8 +251,16 @@ export class JoService {
             };
         }
 
+        // if (requested_by_id) {
+        //     whereCondition = { canvass: { requested_by_id: requested_by_id } }
+        // }
+
         if (requested_by_id) {
-            whereCondition = { canvass: { requested_by_id: requested_by_id } }
+            whereCondition = { ...whereCondition, canvass: { requested_by_id: requested_by_id } }
+        }
+        
+        whereCondition.cancelled_at = {
+            equals: null,
         }
 
         const items = await this.prisma.jO.findMany({

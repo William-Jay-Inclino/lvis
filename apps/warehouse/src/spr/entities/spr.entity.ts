@@ -16,8 +16,8 @@ export class SPR {
   @Field(() => String)
   date_requested: string;
 
-  @Field(() => String)
-  canvass_id: string;
+  @Field(() => String, { nullable: true })
+  canvass_id?: string | null;
 
   @Field(() => String)
   vehicle_id: string;
@@ -58,8 +58,8 @@ export class SPR {
 
   // =============== derived / resolvers ===============
 
-  @Field(() => Canvass)
-  canvass: Canvass;
+  @Field(() => Canvass, { nullable: true })
+  canvass?: Canvass | null;
 
   @Field(() => Vehicle)
   vehicle: Vehicle;

@@ -3,8 +3,8 @@ import { AuthUser } from '../__common__/auth-user.entity';
 import { PrismaService } from '../__prisma__/prisma.service';
 import { HttpService } from '@nestjs/axios';
 import { CreateMeqsInput } from './dto/create-meqs.input';
-import { JOApprover, MEQS, MEQSApprover, Prisma } from 'apps/warehouse/prisma/generated/client';
-import { APPROVAL_STATUS, Role } from '../__common__/types';
+import { MEQS, MEQSApprover, Prisma } from 'apps/warehouse/prisma/generated/client';
+import { APPROVAL_STATUS } from '../__common__/types';
 import { UpdateMeqsInput } from './dto/update-meqs.input';
 import { catchError, firstValueFrom } from 'rxjs';
 import { MEQSsResponse } from './entities/meqs-response.entity';
@@ -226,22 +226,53 @@ export class MeqsService {
         this.logger.log('cancel()')
 
         const existingItem = await this.prisma.mEQS.findUnique({
-            where: { id }
+            where: { id },
+            include: {
+                rv: true,
+                spr: true,
+                jo: true,
+            }
         })
 
         if (!existingItem) {
             throw new NotFoundException('MEQS not found')
         }
 
+        console.log('existingItem', existingItem);
+
+        if(!existingItem.rv && !existingItem.spr && !existingItem.jo) {
+            throw new Error('MEQS is not associated with either RV, SPR, or JO');
+        }
+
         if (!this.canAccess(existingItem)) {
             throw new ForbiddenException('Only Admin and Owner can cancel this record!')
         }
 
+        const data = {
+            cancelled_at: new Date(),
+            cancelled_by: this.authUser.user.username,
+        }
+
+        if(existingItem.rv) {
+            data['rv'] = {
+                disconnect: true
+            }
+        }
+
+        if(existingItem.spr) {
+            data['spr'] = {
+                disconnect: true
+            }
+        }
+
+        if(existingItem.jo) {
+            data['jo'] = {
+                disconnect: true
+            }
+        }
+
         const updated = await this.prisma.mEQS.update({
-            data: {
-                cancelled_at: new Date(),
-                cancelled_by: this.authUser.user.username
-            },
+            data,
             where: { id }
         })
 
@@ -281,6 +312,9 @@ export class MeqsService {
             ];
         }
 
+        whereCondition.cancelled_at = {
+            equals: null,
+        };
 
         const items = await this.prisma.mEQS.findMany({
             include: this.includedFields,

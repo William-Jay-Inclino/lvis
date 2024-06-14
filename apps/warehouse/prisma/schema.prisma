@@ -26,7 +26,7 @@ model Canvass {
 
   canvass_items CanvassItem[]
   jo            JO?
-  rvs            RV[]
+  rv            RV?
   spr           SPR?
 
   @@map("canvass")
@@ -59,7 +59,7 @@ model CanvassItem {
 model RV {
   id                String    @id @default(uuid())
   rv_number         String    @unique
-  canvass_id        String    @unique
+  canvass_id        String?    @unique
   classification_id String?
   supervisor_id     String
   date_requested    DateTime
@@ -75,7 +75,7 @@ model RV {
   created_at   DateTime  @default(now())
   updated_at   DateTime  @updatedAt
 
-  canvass      Canvass      @relation(fields: [canvass_id], references: [id], onDelete: Restrict)
+  canvass      Canvass?      @relation(fields: [canvass_id], references: [id], onDelete: Restrict)
   meqs         MEQS?
   rv_approvers RVApprover[]
 
@@ -109,7 +109,7 @@ model JO {
   id                String   @id @default(uuid())
   jo_number         String   @unique
   date_requested    DateTime
-  canvass_id        String   @unique
+  canvass_id        String?   @unique
   equipment         String
   classification_id String?
   department_id     String
@@ -124,7 +124,7 @@ model JO {
   created_at   DateTime  @default(now())
   updated_at   DateTime  @updatedAt
 
-  canvass      Canvass      @relation(fields: [canvass_id], references: [id], onDelete: Restrict)
+  canvass      Canvass?      @relation(fields: [canvass_id], references: [id], onDelete: Restrict)
   meqs         MEQS?
   jo_approvers JOApprover[]
 
@@ -158,7 +158,7 @@ model SPR {
   id                String   @id @default(uuid())
   spr_number        String   @unique
   date_requested    DateTime
-  canvass_id        String   @unique
+  canvass_id        String?   @unique
   vehicle_id        String
   classification_id String?
   supervisor_id     String
@@ -172,7 +172,7 @@ model SPR {
   created_at   DateTime  @default(now())
   updated_at   DateTime  @updatedAt
 
-  canvass       Canvass       @relation(fields: [canvass_id], references: [id], onDelete: Restrict)
+  canvass       Canvass?       @relation(fields: [canvass_id], references: [id], onDelete: Restrict)
   meqs          MEQS?
   vehicle       Vehicle       @relation(fields: [vehicle_id], references: [id], onDelete: Restrict)
   spr_approvers SPRApprover[]
@@ -316,7 +316,7 @@ model MEQSApprover {
 
 model PO {
   id               String   @id @default(uuid())
-  meqs_supplier_id String   @unique
+  meqs_supplier_id String?   @unique
   po_number        String   @unique
   fund_source_id   String?
   po_date          DateTime
@@ -330,7 +330,7 @@ model PO {
   created_at   DateTime  @default(now())
   updated_at   DateTime  @updatedAt
 
-  meqs_supplier MEQSSupplier @relation(fields: [meqs_supplier_id], references: [id], onDelete: Restrict)
+  meqs_supplier MEQSSupplier? @relation(fields: [meqs_supplier_id], references: [id], onDelete: Restrict)
   rrs           RR[]
   po_approvers  POApprover[]
 
@@ -362,7 +362,7 @@ model POApprover {
 
 model RR {
   id              String   @id @default(uuid())
-  po_id           String
+  po_id           String?
   rr_number       String   @unique
   rr_date         DateTime
   received_by_id  String
@@ -380,7 +380,7 @@ model RR {
   created_at   DateTime  @default(now())
   updated_at   DateTime  @updatedAt
 
-  po           PO           @relation(fields: [po_id], references: [id], onDelete: Restrict)
+  po           PO?           @relation(fields: [po_id], references: [id], onDelete: Restrict)
   rr_approvers RRApprover[]
   rr_items     RRItem[]
 

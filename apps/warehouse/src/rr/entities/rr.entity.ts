@@ -9,8 +9,8 @@ export class RR {
   @Field(() => ID)
   id: string;
 
-  @Field()
-  po_id: string;
+  @Field({ nullable: true })
+  po_id?: string | null;
 
   @Field()
   rr_number: string;
@@ -58,8 +58,8 @@ export class RR {
   // =============== derived / resolvers =============== 
 
 
-  @Field(() => PO)
-  po: PO;
+  @Field(() => PO, { nullable: true })
+  po?: PO | null;
 
   @Field(() => [RrApprover])
   rr_approvers: RrApprover[];

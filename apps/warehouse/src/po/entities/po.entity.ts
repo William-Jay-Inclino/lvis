@@ -9,8 +9,8 @@ export class PO {
   @Field(() => String)
   id: string;
 
-  @Field(() => String)
-  meqs_supplier_id: string;
+  @Field(() => String, { nullable: true })
+  meqs_supplier_id?: string | null;
 
   @Field(() => String, { nullable: true })
   fund_source_id: string | null;
@@ -47,8 +47,8 @@ export class PO {
   // =============== derived / resolvers =============== 
 
 
-  @Field(() => MeqsSupplier)
-  meqs_supplier: MeqsSupplier
+  @Field(() => MeqsSupplier, { nullable: true })
+  meqs_supplier?: MeqsSupplier | null
 
   @Field(() => [RR])
   rrs: RR[];

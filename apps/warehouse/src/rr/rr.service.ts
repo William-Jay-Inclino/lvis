@@ -7,7 +7,7 @@ import { HttpService } from '@nestjs/axios';
 import { Prisma, RR, RRApprover } from 'apps/warehouse/prisma/generated/client';
 import { WarehouseCancelResponse } from '../__common__/classes';
 import { catchError, firstValueFrom } from 'rxjs';
-import { APPROVAL_STATUS, Role } from '../__common__/types';
+import { APPROVAL_STATUS } from '../__common__/types';
 import { RRsResponse } from './entities/rr-response.entity';
 import * as moment from 'moment';
 import { getDateRange, isAdmin, isNormalUser } from '../__common__/helpers';
@@ -183,6 +183,10 @@ export class RrService {
                 { po: { meqs_supplier: { meqs: { spr: { canvass: { requested_by_id: requested_by_id } } } } } },
             ];
         }
+
+        whereCondition.cancelled_at = {
+            equals: null,
+        };
 
         const items = await this.prisma.rR.findMany({
             include: this.includedFields,
@@ -400,11 +404,18 @@ export class RrService {
         this.logger.log('cancel()')
 
         const existingItem = await this.prisma.rR.findUnique({
-            where: { id }
+            where: { id },
+            include: {
+                po: true
+            }
         })
 
         if (!existingItem) {
             throw new NotFoundException('RR not found')
+        }
+
+        if(!existingItem.po) {
+            throw new Error('RR is not associated with PO');
         }
 
         if (!this.canAccess(existingItem)) {
@@ -414,7 +425,10 @@ export class RrService {
         const updated = await this.prisma.rR.update({
             data: {
                 cancelled_at: new Date(),
-                cancelled_by: this.authUser.user.username
+                cancelled_by: this.authUser.user.username,
+                po: {
+                    disconnect: true
+                }
             },
             where: { id }
         })
