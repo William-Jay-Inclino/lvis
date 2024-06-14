@@ -109,57 +109,54 @@ export class PoPdfService {
 
             <div style="flex-grow: 1; min-height: 65vh;">
         
-                <div style="text-align: center; margin-top: 35px">
-        
-                    <div style="display: flex; align-items: center; justify-content: center;">
-                        <img src="data:image/jpeg;base64,${logo}" alt="Logo" style="height: 50px; width: 50px; margin-right: 10px;">
-                        <h1 style="font-size: 11pt; font-weight: bold; display: inline;">LEYTE V ELECTRIC COOPERATIVE, INC.</h1>
-                    </div>
-        
-                    <div style="font-size: 9pt">
-                        <span>Brgy. San Pablo, Ormoc City, Leyte</span>
+                <div style="text-align: center; margin-top: 35px;">
+                    <div style="display: flex; flex-direction: column; align-items: center;">
+                        <div style="display: flex; align-items: center;">
+                            <img src="data:image/jpeg;base64,${logo}" alt="Logo" style="height: 50px; width: 50px; margin-right: 10px;">
+                            <div style="text-align: center;">
+                                <span style="font-size: 11pt; font-weight: bold;">LEYTE V ELECTRIC COOPERATIVE, INC.</span>
+                                <div style="font-size: 9pt;">
+                                    <span>Brgy. San Pablo, Ormoc City, Leyte</span>
+                                    <br />
+                                    <span>VAT REG. TIN 001-383-331-000</span>
+                                </div>
+                            </div>
+                        </div>
                         <br />
-                        <span>VAT REG. TIN 001-383-331-000</span>
+                        <br />
+                        <div style="font-size: 11pt; font-weight: bold;">PURCHASE ORDER</div>
                     </div>
-
-                    <br />
-
-                    <div style="font-size: 14pt; font-weight: bold;"> PURCHASE ORDER </div>
-
-                    <div style="display: flex; justify-content: end;">
-                        <table style="font-size: 10pt;">
-                            <tr>
-                                <td> PO No.: </td>
-                                <td style="border-bottom: 1px solid black;"> ${ po.po_number } </td>
-                            </tr>
-                            <tr>
-                                <td> Date: </td>
-                                <td style="border-bottom: 1px solid black;"> ${ formatDate(po.po_date) } </td>
-                            </tr>
-                        </table>
-                    </div>
-
                 </div>
 
+                <div style="display: flex; justify-content: end;">
+                    <table style="font-size: 10pt;">
+                        <tr>
+                            <td> PO No.: </td>
+                            <td style="border-bottom: 1px solid black;"> ${ po.po_number } </td>
+                        </tr>
+                        <tr>
+                            <td> Date: </td>
+                            <td style="border-bottom: 1px solid black;"> ${ formatDate(po.po_date) } </td>
+                        </tr>
+                    </table>
+                </div>
 
                 <table border="1" style="width: 100%; font-size: 10pt; border-collapse: collapse; border-color: black; margin-top: 10px;">
                     <tr>
                         <td rowspan="4" style="width: 50%; vertical-align: top;">
                             <div style="display: flex; justify-content: space-between; padding-left: 10px; padding-right: 10px;">
                                 <div> Supplier: </div>
-                                <div>
-                                    Tin #: ${ po.meqs_supplier.supplier.tin_no.trim() !== '' ? po.meqs_supplier.supplier.tin_no : 'N/A' }
-                                </div>
                             </div>
 
-                            <br />
-
                             <div style="text-align: center;">
-                                <div style="font-size: 11pt; font-weight: bold;">
+                                <div style="font-size: 12pt; font-weight: bold;">
                                     ${ po.meqs_supplier.supplier.name.toUpperCase() }
                                 </div>
                                 <div>
                                     ${ po.meqs_supplier.supplier.address.toUpperCase() }
+                                </div>
+                                <div>
+                                    TIN: ${ po.meqs_supplier.supplier.tin_no.trim() !== '' ? po.meqs_supplier.supplier.tin_no : 'N/A' }
                                 </div>
                             </div>
                         </td>

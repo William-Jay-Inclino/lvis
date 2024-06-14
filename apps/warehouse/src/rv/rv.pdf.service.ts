@@ -75,24 +75,23 @@ export class RvPdfService {
 
             <div style="flex-grow: 1; min-height: 60vh;">
         
-                <div style="text-align: center; margin-top: 35px">
-            
-                    <div style="display: flex; align-items: center; justify-content: center;">
-                        <img src="data:image/jpeg;base64,${logo}" alt="Logo" style="height: 50px; width: 50px; margin-right: 10px;">
-                        <h1 style="font-size: 11pt; font-weight: bold; display: inline;">LEYTE V ELECTRIC COOPERATIVE, INC.</h1>
-                    </div>
-
-                    <div style="font-size: 9pt">
-                        <span>Brgy. San Pablo, Ormoc City, Leyte</span>
+                <div style="text-align: center; margin-top: 35px;">
+                    <div style="display: flex; flex-direction: column; align-items: center;">
+                        <div style="display: flex; align-items: center;">
+                            <img src="data:image/jpeg;base64,${logo}" alt="Logo" style="height: 50px; width: 50px; margin-right: 10px;">
+                            <div style="text-align: center;">
+                                <span style="font-size: 11pt; font-weight: bold;">LEYTE V ELECTRIC COOPERATIVE, INC.</span>
+                                <div style="font-size: 9pt;">
+                                    <span>Brgy. San Pablo, Ormoc City, Leyte</span>
+                                    <br />
+                                    <span>VAT REG. TIN 001-383-331-000</span>
+                                </div>
+                            </div>
+                        </div>
                         <br />
-                        <span>VAT REG. TIN 001-383-331-000</span>
+                        <br />
+                        <div style="font-size: 11pt; font-weight: bold;">REQUISITION VOUCHER</div>
                     </div>
-
-                    <br />
-                    <br />
-
-                    <div style="font-size: 11pt; font-weight: bold;"> REQUISITION VOUCHER </div>
-
                 </div>
 
                 <br />
