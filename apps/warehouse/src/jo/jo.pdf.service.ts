@@ -456,6 +456,9 @@ export class JoPdfService {
                     }
                 },
                 jo_approvers: {
+                    where: {
+                        deleted_at: null,
+                    },
                     orderBy: {
                         order: 'asc'
                     }

@@ -550,6 +550,9 @@ export class RrPdfService {
                     }
                 },
                 rr_approvers: {
+                    where: {
+                        deleted_at: null,
+                    },
                     orderBy: {
                         order: 'asc'
                     }

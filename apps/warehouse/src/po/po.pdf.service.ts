@@ -632,6 +632,9 @@ export class PoPdfService {
                     }
                 },
                 po_approvers: {
+                    where: {
+                        deleted_at: null,
+                    },
                     orderBy: {
                         order: 'asc'
                     }

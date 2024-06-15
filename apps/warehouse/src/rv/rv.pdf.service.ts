@@ -393,6 +393,9 @@ export class RvPdfService {
                     }
                 },
                 rv_approvers: {
+                    where: {
+                        deleted_at: null,
+                    },
                     orderBy: {
                         order: 'asc'
                     }
