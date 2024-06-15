@@ -33109,7 +33109,7 @@ export namespace Prisma {
     id?: string
     jo_number: string
     date_requested: Date | string
-    equipment: string
+    equipment?: string
     classification_id?: string | null
     department_id: string
     supervisor_id: string
@@ -33130,7 +33130,7 @@ export namespace Prisma {
     jo_number: string
     date_requested: Date | string
     canvass_id?: string | null
-    equipment: string
+    equipment?: string
     classification_id?: string | null
     department_id: string
     supervisor_id: string
@@ -33190,7 +33190,7 @@ export namespace Prisma {
     jo_number: string
     date_requested: Date | string
     canvass_id?: string | null
-    equipment: string
+    equipment?: string
     classification_id?: string | null
     department_id: string
     supervisor_id: string
@@ -38932,7 +38932,7 @@ export namespace Prisma {
     id?: string
     jo_number: string
     date_requested: Date | string
-    equipment: string
+    equipment?: string
     classification_id?: string | null
     department_id: string
     supervisor_id: string
@@ -38951,7 +38951,7 @@ export namespace Prisma {
     id?: string
     jo_number: string
     date_requested: Date | string
-    equipment: string
+    equipment?: string
     classification_id?: string | null
     department_id: string
     supervisor_id: string
@@ -40204,7 +40204,7 @@ export namespace Prisma {
     id?: string
     jo_number: string
     date_requested: Date | string
-    equipment: string
+    equipment?: string
     classification_id?: string | null
     department_id: string
     supervisor_id: string
@@ -40224,7 +40224,7 @@ export namespace Prisma {
     jo_number: string
     date_requested: Date | string
     canvass_id?: string | null
-    equipment: string
+    equipment?: string
     classification_id?: string | null
     department_id: string
     supervisor_id: string
@@ -40698,7 +40698,7 @@ export namespace Prisma {
     id?: string
     jo_number: string
     date_requested: Date | string
-    equipment: string
+    equipment?: string
     classification_id?: string | null
     department_id: string
     supervisor_id: string
@@ -40718,7 +40718,7 @@ export namespace Prisma {
     jo_number: string
     date_requested: Date | string
     canvass_id?: string | null
-    equipment: string
+    equipment?: string
     classification_id?: string | null
     department_id: string
     supervisor_id: string

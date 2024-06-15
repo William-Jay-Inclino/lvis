@@ -18,8 +18,8 @@ export class JO {
   @Field(() => String, { nullable: true })
   canvass_id?: string | null;
 
-  @Field(() => String)
-  equipment: string;
+  @Field(() => String, {nullable: true})
+  equipment?: string | null;
 
   @Field(() => String, { nullable: true })
   classification_id: string | null;

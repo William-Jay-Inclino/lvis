@@ -110,7 +110,7 @@ model JO {
   jo_number         String   @unique
   date_requested    DateTime
   canvass_id        String?   @unique
-  equipment         String
+  equipment         String @default("")
   classification_id String?
   department_id     String
   supervisor_id     String

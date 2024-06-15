@@ -11,10 +11,10 @@ export class CreateJoInput {
   @IsString()
   canvass_id: string;
 
-  @Field(() => String)
-  @IsNotEmpty()
+  @Field(() => String, { nullable: true })
+  @IsOptional()
   @IsString()
-  equipment: string;
+  equipment?: string | null;
 
   @Field(() => String)
   @IsNotEmpty()
