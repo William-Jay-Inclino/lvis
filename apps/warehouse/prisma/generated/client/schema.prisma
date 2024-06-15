@@ -91,6 +91,7 @@ model RVApprover {
   status        Int
   label         String
   order         Int
+  is_supervisor Boolean @default(false)
 
   created_by String
   updated_by String?
@@ -140,6 +141,7 @@ model JOApprover {
   status        Int
   label         String
   order         Int
+  is_supervisor Boolean @default(false)
 
   created_by String
   updated_by String?
@@ -189,6 +191,7 @@ model SPRApprover {
   status        Int
   label         String
   order         Int
+  is_supervisor Boolean @default(false)
 
   created_by String
   updated_by String?

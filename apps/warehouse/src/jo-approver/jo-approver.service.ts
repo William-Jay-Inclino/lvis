@@ -63,6 +63,7 @@ export class JoApproverService {
       order: input.order,
       notes: '',
       status: APPROVAL_STATUS.PENDING,
+      is_supervisor: input.is_supervisor ? input.is_supervisor : false,
       created_by: this.authUser.user.username
     }
 
@@ -128,7 +129,12 @@ export class JoApproverService {
   async update(id: string, input: UpdateJoApproverInput): Promise<JOApprover> {
     this.logger.log('update()')
 
-    const existingItem = await this.findOne(id)
+    const existingItem = await this.prisma.jOApprover.findUnique({
+        where: { id },
+        include: {
+            jo: true
+        }
+    })
 
     let isApprover = false
 
@@ -159,16 +165,56 @@ export class JoApproverService {
       status: input.status ?? existingItem.status,
       label: input.label ?? existingItem.label,
       order: input.order ?? existingItem.order,
+      is_supervisor: input.is_supervisor ?? existingItem.is_supervisor,
       updated_by: this.authUser.user.username
     }
 
-    const updated = await this.prisma.jOApprover.update({
-      data,
-      where: { id },
-      include: this.includedFields,
+    const queries = []
+
+    const updateJoApproverQuery = this.prisma.jOApprover.update({
+        data,
+        where: { id },
+        include: this.includedFields,
     });
+
+    queries.push(updateJoApproverQuery)
+
+    // if approver is updated
+    if(input.approver_id) {
+
+        const isNewApprover = input.approver_id !== existingItem.approver_id
+
+        // update supervisor in rv table as well
+        if(existingItem.is_supervisor && isNewApprover) {
+
+            console.log('updating jo supervisor');
+            const updateJoSupervisorQuery = this.prisma.jO.update({
+                data: {
+                    supervisor_id: input.approver_id
+                },
+                where: {
+                    id: existingItem.jo.id
+                }
+            })
+
+            queries.push(updateJoSupervisorQuery)
+        }
+
+    }
+
+    const result = await this.prisma.$transaction(queries)
+
     this.logger.log('Successfully updated JO Approver');
-    return updated;
+
+    return result[0]
+
+    // const updated = await this.prisma.jOApprover.update({
+    //   data,
+    //   where: { id },
+    //   include: this.includedFields,
+    // });
+    // this.logger.log('Successfully updated JO Approver');
+    // return updated;
 
   }
 

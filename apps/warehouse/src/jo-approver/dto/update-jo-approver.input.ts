@@ -1,4 +1,4 @@
-import { IsDate, IsEnum, IsInt, IsOptional, IsString } from 'class-validator';
+import { IsBoolean, IsDate, IsEnum, IsInt, IsOptional, IsString } from 'class-validator';
 import { CreateJoApproverInput } from './create-jo-approver.input';
 import { InputType, Field, Int, PartialType } from '@nestjs/graphql';
 import { Transform } from 'class-transformer';
@@ -38,5 +38,9 @@ export class UpdateJoApproverInput extends PartialType(CreateJoApproverInput) {
   @IsInt()
   order?: number;
 
-
+  @Field(() => Boolean, { nullable: true })
+  @IsOptional()
+  @IsBoolean()
+  is_supervisor?: boolean;
+  
 }

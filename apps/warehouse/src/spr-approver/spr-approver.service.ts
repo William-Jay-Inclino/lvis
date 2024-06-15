@@ -63,6 +63,7 @@ export class SprApproverService {
       order: input.order,
       notes: '',
       status: APPROVAL_STATUS.PENDING,
+      is_supervisor: input.is_supervisor ? input.is_supervisor : false,
       created_by: this.authUser.user.username
     }
 
@@ -130,7 +131,12 @@ export class SprApproverService {
     this.logger.log('update()')
 
 
-    const existingItem = await this.findOne(id)
+    const existingItem = await this.prisma.sPRApprover.findUnique({
+      where: { id },
+      include: {
+          spr: true
+      }
+  })
 
     console.log('existingItem', existingItem)
     console.log('this.authUser.user.user_employee', this.authUser.user.user_employee)
@@ -164,16 +170,56 @@ export class SprApproverService {
       status: input.status ?? existingItem.status,
       label: input.label ?? existingItem.label,
       order: input.order ?? existingItem.order,
+      is_supervisor: input.is_supervisor ?? existingItem.is_supervisor,
       updated_by: this.authUser.user.username
     }
 
-    const updated = await this.prisma.sPRApprover.update({
-      data,
-      where: { id },
-      include: this.includedFields,
+    const queries = []
+
+    const updateSprApproverQuery = this.prisma.sPRApprover.update({
+        data,
+        where: { id },
+        include: this.includedFields,
     });
+
+    queries.push(updateSprApproverQuery)
+
+    // if approver is updated
+    if(input.approver_id) {
+
+        const isNewApprover = input.approver_id !== existingItem.approver_id
+
+        // update supervisor in rv table as well
+        if(existingItem.is_supervisor && isNewApprover) {
+
+            console.log('updating spr supervisor');
+            const updateSprSupervisorQuery = this.prisma.sPR.update({
+                data: {
+                    supervisor_id: input.approver_id
+                },
+                where: {
+                    id: existingItem.spr.id
+                }
+            })
+
+            queries.push(updateSprSupervisorQuery)
+        }
+
+    }
+
+    const result = await this.prisma.$transaction(queries)
+
     this.logger.log('Successfully updated SPR Approver');
-    return updated;
+
+    return result[0]
+
+    // const updated = await this.prisma.sPRApprover.update({
+    //   data,
+    //   where: { id },
+    //   include: this.includedFields,
+    // });
+    // this.logger.log('Successfully updated SPR Approver');
+    // return updated;
 
   }
 

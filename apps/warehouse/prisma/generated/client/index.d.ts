@@ -6741,6 +6741,7 @@ export namespace Prisma {
     status: number | null
     label: string | null
     order: number | null
+    is_supervisor: boolean | null
     created_by: string | null
     updated_by: string | null
     deleted_by: string | null
@@ -6758,6 +6759,7 @@ export namespace Prisma {
     status: number | null
     label: string | null
     order: number | null
+    is_supervisor: boolean | null
     created_by: string | null
     updated_by: string | null
     deleted_by: string | null
@@ -6775,6 +6777,7 @@ export namespace Prisma {
     status: number
     label: number
     order: number
+    is_supervisor: number
     created_by: number
     updated_by: number
     deleted_by: number
@@ -6804,6 +6807,7 @@ export namespace Prisma {
     status?: true
     label?: true
     order?: true
+    is_supervisor?: true
     created_by?: true
     updated_by?: true
     deleted_by?: true
@@ -6821,6 +6825,7 @@ export namespace Prisma {
     status?: true
     label?: true
     order?: true
+    is_supervisor?: true
     created_by?: true
     updated_by?: true
     deleted_by?: true
@@ -6838,6 +6843,7 @@ export namespace Prisma {
     status?: true
     label?: true
     order?: true
+    is_supervisor?: true
     created_by?: true
     updated_by?: true
     deleted_by?: true
@@ -6942,6 +6948,7 @@ export namespace Prisma {
     status: number
     label: string
     order: number
+    is_supervisor: boolean
     created_by: string
     updated_by: string | null
     deleted_by: string | null
@@ -6978,6 +6985,7 @@ export namespace Prisma {
     status?: boolean
     label?: boolean
     order?: boolean
+    is_supervisor?: boolean
     created_by?: boolean
     updated_by?: boolean
     deleted_by?: boolean
@@ -6996,6 +7004,7 @@ export namespace Prisma {
     status?: boolean
     label?: boolean
     order?: boolean
+    is_supervisor?: boolean
     created_by?: boolean
     updated_by?: boolean
     deleted_by?: boolean
@@ -7023,6 +7032,7 @@ export namespace Prisma {
       status: number
       label: string
       order: number
+      is_supervisor: boolean
       created_by: string
       updated_by: string | null
       deleted_by: string | null
@@ -7432,6 +7442,7 @@ export namespace Prisma {
     readonly status: FieldRef<"RVApprover", 'Int'>
     readonly label: FieldRef<"RVApprover", 'String'>
     readonly order: FieldRef<"RVApprover", 'Int'>
+    readonly is_supervisor: FieldRef<"RVApprover", 'Boolean'>
     readonly created_by: FieldRef<"RVApprover", 'String'>
     readonly updated_by: FieldRef<"RVApprover", 'String'>
     readonly deleted_by: FieldRef<"RVApprover", 'String'>
@@ -8889,6 +8900,7 @@ export namespace Prisma {
     status: number | null
     label: string | null
     order: number | null
+    is_supervisor: boolean | null
     created_by: string | null
     updated_by: string | null
     deleted_by: string | null
@@ -8906,6 +8918,7 @@ export namespace Prisma {
     status: number | null
     label: string | null
     order: number | null
+    is_supervisor: boolean | null
     created_by: string | null
     updated_by: string | null
     deleted_by: string | null
@@ -8923,6 +8936,7 @@ export namespace Prisma {
     status: number
     label: number
     order: number
+    is_supervisor: number
     created_by: number
     updated_by: number
     deleted_by: number
@@ -8952,6 +8966,7 @@ export namespace Prisma {
     status?: true
     label?: true
     order?: true
+    is_supervisor?: true
     created_by?: true
     updated_by?: true
     deleted_by?: true
@@ -8969,6 +8984,7 @@ export namespace Prisma {
     status?: true
     label?: true
     order?: true
+    is_supervisor?: true
     created_by?: true
     updated_by?: true
     deleted_by?: true
@@ -8986,6 +9002,7 @@ export namespace Prisma {
     status?: true
     label?: true
     order?: true
+    is_supervisor?: true
     created_by?: true
     updated_by?: true
     deleted_by?: true
@@ -9090,6 +9107,7 @@ export namespace Prisma {
     status: number
     label: string
     order: number
+    is_supervisor: boolean
     created_by: string
     updated_by: string | null
     deleted_by: string | null
@@ -9126,6 +9144,7 @@ export namespace Prisma {
     status?: boolean
     label?: boolean
     order?: boolean
+    is_supervisor?: boolean
     created_by?: boolean
     updated_by?: boolean
     deleted_by?: boolean
@@ -9144,6 +9163,7 @@ export namespace Prisma {
     status?: boolean
     label?: boolean
     order?: boolean
+    is_supervisor?: boolean
     created_by?: boolean
     updated_by?: boolean
     deleted_by?: boolean
@@ -9171,6 +9191,7 @@ export namespace Prisma {
       status: number
       label: string
       order: number
+      is_supervisor: boolean
       created_by: string
       updated_by: string | null
       deleted_by: string | null
@@ -9580,6 +9601,7 @@ export namespace Prisma {
     readonly status: FieldRef<"JOApprover", 'Int'>
     readonly label: FieldRef<"JOApprover", 'String'>
     readonly order: FieldRef<"JOApprover", 'Int'>
+    readonly is_supervisor: FieldRef<"JOApprover", 'Boolean'>
     readonly created_by: FieldRef<"JOApprover", 'String'>
     readonly updated_by: FieldRef<"JOApprover", 'String'>
     readonly deleted_by: FieldRef<"JOApprover", 'String'>
@@ -11031,6 +11053,7 @@ export namespace Prisma {
     status: number | null
     label: string | null
     order: number | null
+    is_supervisor: boolean | null
     created_by: string | null
     updated_by: string | null
     deleted_by: string | null
@@ -11048,6 +11071,7 @@ export namespace Prisma {
     status: number | null
     label: string | null
     order: number | null
+    is_supervisor: boolean | null
     created_by: string | null
     updated_by: string | null
     deleted_by: string | null
@@ -11065,6 +11089,7 @@ export namespace Prisma {
     status: number
     label: number
     order: number
+    is_supervisor: number
     created_by: number
     updated_by: number
     deleted_by: number
@@ -11094,6 +11119,7 @@ export namespace Prisma {
     status?: true
     label?: true
     order?: true
+    is_supervisor?: true
     created_by?: true
     updated_by?: true
     deleted_by?: true
@@ -11111,6 +11137,7 @@ export namespace Prisma {
     status?: true
     label?: true
     order?: true
+    is_supervisor?: true
     created_by?: true
     updated_by?: true
     deleted_by?: true
@@ -11128,6 +11155,7 @@ export namespace Prisma {
     status?: true
     label?: true
     order?: true
+    is_supervisor?: true
     created_by?: true
     updated_by?: true
     deleted_by?: true
@@ -11232,6 +11260,7 @@ export namespace Prisma {
     status: number
     label: string
     order: number
+    is_supervisor: boolean
     created_by: string
     updated_by: string | null
     deleted_by: string | null
@@ -11268,6 +11297,7 @@ export namespace Prisma {
     status?: boolean
     label?: boolean
     order?: boolean
+    is_supervisor?: boolean
     created_by?: boolean
     updated_by?: boolean
     deleted_by?: boolean
@@ -11286,6 +11316,7 @@ export namespace Prisma {
     status?: boolean
     label?: boolean
     order?: boolean
+    is_supervisor?: boolean
     created_by?: boolean
     updated_by?: boolean
     deleted_by?: boolean
@@ -11313,6 +11344,7 @@ export namespace Prisma {
       status: number
       label: string
       order: number
+      is_supervisor: boolean
       created_by: string
       updated_by: string | null
       deleted_by: string | null
@@ -11722,6 +11754,7 @@ export namespace Prisma {
     readonly status: FieldRef<"SPRApprover", 'Int'>
     readonly label: FieldRef<"SPRApprover", 'String'>
     readonly order: FieldRef<"SPRApprover", 'Int'>
+    readonly is_supervisor: FieldRef<"SPRApprover", 'Boolean'>
     readonly created_by: FieldRef<"SPRApprover", 'String'>
     readonly updated_by: FieldRef<"SPRApprover", 'String'>
     readonly deleted_by: FieldRef<"SPRApprover", 'String'>
@@ -29793,6 +29826,7 @@ export namespace Prisma {
     status: 'status',
     label: 'label',
     order: 'order',
+    is_supervisor: 'is_supervisor',
     created_by: 'created_by',
     updated_by: 'updated_by',
     deleted_by: 'deleted_by',
@@ -29834,6 +29868,7 @@ export namespace Prisma {
     status: 'status',
     label: 'label',
     order: 'order',
+    is_supervisor: 'is_supervisor',
     created_by: 'created_by',
     updated_by: 'updated_by',
     deleted_by: 'deleted_by',
@@ -29874,6 +29909,7 @@ export namespace Prisma {
     status: 'status',
     label: 'label',
     order: 'order',
+    is_supervisor: 'is_supervisor',
     created_by: 'created_by',
     updated_by: 'updated_by',
     deleted_by: 'deleted_by',
@@ -30247,6 +30283,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -30257,13 +30300,6 @@ export namespace Prisma {
    * Reference to a field of type 'Float[]'
    */
   export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'Boolean'
-   */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
   /**
    * Deep Input Types
@@ -30591,6 +30627,7 @@ export namespace Prisma {
     status?: IntFilter<"RVApprover"> | number
     label?: StringFilter<"RVApprover"> | string
     order?: IntFilter<"RVApprover"> | number
+    is_supervisor?: BoolFilter<"RVApprover"> | boolean
     created_by?: StringFilter<"RVApprover"> | string
     updated_by?: StringNullableFilter<"RVApprover"> | string | null
     deleted_by?: StringNullableFilter<"RVApprover"> | string | null
@@ -30609,6 +30646,7 @@ export namespace Prisma {
     status?: SortOrder
     label?: SortOrder
     order?: SortOrder
+    is_supervisor?: SortOrder
     created_by?: SortOrder
     updated_by?: SortOrderInput | SortOrder
     deleted_by?: SortOrderInput | SortOrder
@@ -30630,6 +30668,7 @@ export namespace Prisma {
     status?: IntFilter<"RVApprover"> | number
     label?: StringFilter<"RVApprover"> | string
     order?: IntFilter<"RVApprover"> | number
+    is_supervisor?: BoolFilter<"RVApprover"> | boolean
     created_by?: StringFilter<"RVApprover"> | string
     updated_by?: StringNullableFilter<"RVApprover"> | string | null
     deleted_by?: StringNullableFilter<"RVApprover"> | string | null
@@ -30648,6 +30687,7 @@ export namespace Prisma {
     status?: SortOrder
     label?: SortOrder
     order?: SortOrder
+    is_supervisor?: SortOrder
     created_by?: SortOrder
     updated_by?: SortOrderInput | SortOrder
     deleted_by?: SortOrderInput | SortOrder
@@ -30673,6 +30713,7 @@ export namespace Prisma {
     status?: IntWithAggregatesFilter<"RVApprover"> | number
     label?: StringWithAggregatesFilter<"RVApprover"> | string
     order?: IntWithAggregatesFilter<"RVApprover"> | number
+    is_supervisor?: BoolWithAggregatesFilter<"RVApprover"> | boolean
     created_by?: StringWithAggregatesFilter<"RVApprover"> | string
     updated_by?: StringNullableWithAggregatesFilter<"RVApprover"> | string | null
     deleted_by?: StringNullableWithAggregatesFilter<"RVApprover"> | string | null
@@ -30804,6 +30845,7 @@ export namespace Prisma {
     status?: IntFilter<"JOApprover"> | number
     label?: StringFilter<"JOApprover"> | string
     order?: IntFilter<"JOApprover"> | number
+    is_supervisor?: BoolFilter<"JOApprover"> | boolean
     created_by?: StringFilter<"JOApprover"> | string
     updated_by?: StringNullableFilter<"JOApprover"> | string | null
     deleted_by?: StringNullableFilter<"JOApprover"> | string | null
@@ -30822,6 +30864,7 @@ export namespace Prisma {
     status?: SortOrder
     label?: SortOrder
     order?: SortOrder
+    is_supervisor?: SortOrder
     created_by?: SortOrder
     updated_by?: SortOrderInput | SortOrder
     deleted_by?: SortOrderInput | SortOrder
@@ -30843,6 +30886,7 @@ export namespace Prisma {
     status?: IntFilter<"JOApprover"> | number
     label?: StringFilter<"JOApprover"> | string
     order?: IntFilter<"JOApprover"> | number
+    is_supervisor?: BoolFilter<"JOApprover"> | boolean
     created_by?: StringFilter<"JOApprover"> | string
     updated_by?: StringNullableFilter<"JOApprover"> | string | null
     deleted_by?: StringNullableFilter<"JOApprover"> | string | null
@@ -30861,6 +30905,7 @@ export namespace Prisma {
     status?: SortOrder
     label?: SortOrder
     order?: SortOrder
+    is_supervisor?: SortOrder
     created_by?: SortOrder
     updated_by?: SortOrderInput | SortOrder
     deleted_by?: SortOrderInput | SortOrder
@@ -30886,6 +30931,7 @@ export namespace Prisma {
     status?: IntWithAggregatesFilter<"JOApprover"> | number
     label?: StringWithAggregatesFilter<"JOApprover"> | string
     order?: IntWithAggregatesFilter<"JOApprover"> | number
+    is_supervisor?: BoolWithAggregatesFilter<"JOApprover"> | boolean
     created_by?: StringWithAggregatesFilter<"JOApprover"> | string
     updated_by?: StringNullableWithAggregatesFilter<"JOApprover"> | string | null
     deleted_by?: StringNullableWithAggregatesFilter<"JOApprover"> | string | null
@@ -31015,6 +31061,7 @@ export namespace Prisma {
     status?: IntFilter<"SPRApprover"> | number
     label?: StringFilter<"SPRApprover"> | string
     order?: IntFilter<"SPRApprover"> | number
+    is_supervisor?: BoolFilter<"SPRApprover"> | boolean
     created_by?: StringFilter<"SPRApprover"> | string
     updated_by?: StringNullableFilter<"SPRApprover"> | string | null
     deleted_by?: StringNullableFilter<"SPRApprover"> | string | null
@@ -31033,6 +31080,7 @@ export namespace Prisma {
     status?: SortOrder
     label?: SortOrder
     order?: SortOrder
+    is_supervisor?: SortOrder
     created_by?: SortOrder
     updated_by?: SortOrderInput | SortOrder
     deleted_by?: SortOrderInput | SortOrder
@@ -31054,6 +31102,7 @@ export namespace Prisma {
     status?: IntFilter<"SPRApprover"> | number
     label?: StringFilter<"SPRApprover"> | string
     order?: IntFilter<"SPRApprover"> | number
+    is_supervisor?: BoolFilter<"SPRApprover"> | boolean
     created_by?: StringFilter<"SPRApprover"> | string
     updated_by?: StringNullableFilter<"SPRApprover"> | string | null
     deleted_by?: StringNullableFilter<"SPRApprover"> | string | null
@@ -31072,6 +31121,7 @@ export namespace Prisma {
     status?: SortOrder
     label?: SortOrder
     order?: SortOrder
+    is_supervisor?: SortOrder
     created_by?: SortOrder
     updated_by?: SortOrderInput | SortOrder
     deleted_by?: SortOrderInput | SortOrder
@@ -31097,6 +31147,7 @@ export namespace Prisma {
     status?: IntWithAggregatesFilter<"SPRApprover"> | number
     label?: StringWithAggregatesFilter<"SPRApprover"> | string
     order?: IntWithAggregatesFilter<"SPRApprover"> | number
+    is_supervisor?: BoolWithAggregatesFilter<"SPRApprover"> | boolean
     created_by?: StringWithAggregatesFilter<"SPRApprover"> | string
     updated_by?: StringNullableWithAggregatesFilter<"SPRApprover"> | string | null
     deleted_by?: StringNullableWithAggregatesFilter<"SPRApprover"> | string | null
@@ -32995,6 +33046,7 @@ export namespace Prisma {
     status: number
     label: string
     order: number
+    is_supervisor?: boolean
     created_by: string
     updated_by?: string | null
     deleted_by?: string | null
@@ -33013,6 +33065,7 @@ export namespace Prisma {
     status: number
     label: string
     order: number
+    is_supervisor?: boolean
     created_by: string
     updated_by?: string | null
     deleted_by?: string | null
@@ -33029,6 +33082,7 @@ export namespace Prisma {
     status?: IntFieldUpdateOperationsInput | number
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    is_supervisor?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -33047,6 +33101,7 @@ export namespace Prisma {
     status?: IntFieldUpdateOperationsInput | number
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    is_supervisor?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -33064,6 +33119,7 @@ export namespace Prisma {
     status: number
     label: string
     order: number
+    is_supervisor?: boolean
     created_by: string
     updated_by?: string | null
     deleted_by?: string | null
@@ -33080,6 +33136,7 @@ export namespace Prisma {
     status?: IntFieldUpdateOperationsInput | number
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    is_supervisor?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -33097,6 +33154,7 @@ export namespace Prisma {
     status?: IntFieldUpdateOperationsInput | number
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    is_supervisor?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -33246,6 +33304,7 @@ export namespace Prisma {
     status: number
     label: string
     order: number
+    is_supervisor?: boolean
     created_by: string
     updated_by?: string | null
     deleted_by?: string | null
@@ -33264,6 +33323,7 @@ export namespace Prisma {
     status: number
     label: string
     order: number
+    is_supervisor?: boolean
     created_by: string
     updated_by?: string | null
     deleted_by?: string | null
@@ -33280,6 +33340,7 @@ export namespace Prisma {
     status?: IntFieldUpdateOperationsInput | number
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    is_supervisor?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -33298,6 +33359,7 @@ export namespace Prisma {
     status?: IntFieldUpdateOperationsInput | number
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    is_supervisor?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -33315,6 +33377,7 @@ export namespace Prisma {
     status: number
     label: string
     order: number
+    is_supervisor?: boolean
     created_by: string
     updated_by?: string | null
     deleted_by?: string | null
@@ -33331,6 +33394,7 @@ export namespace Prisma {
     status?: IntFieldUpdateOperationsInput | number
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    is_supervisor?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -33348,6 +33412,7 @@ export namespace Prisma {
     status?: IntFieldUpdateOperationsInput | number
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    is_supervisor?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -33489,6 +33554,7 @@ export namespace Prisma {
     status: number
     label: string
     order: number
+    is_supervisor?: boolean
     created_by: string
     updated_by?: string | null
     deleted_by?: string | null
@@ -33507,6 +33573,7 @@ export namespace Prisma {
     status: number
     label: string
     order: number
+    is_supervisor?: boolean
     created_by: string
     updated_by?: string | null
     deleted_by?: string | null
@@ -33523,6 +33590,7 @@ export namespace Prisma {
     status?: IntFieldUpdateOperationsInput | number
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    is_supervisor?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -33541,6 +33609,7 @@ export namespace Prisma {
     status?: IntFieldUpdateOperationsInput | number
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    is_supervisor?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -33558,6 +33627,7 @@ export namespace Prisma {
     status: number
     label: string
     order: number
+    is_supervisor?: boolean
     created_by: string
     updated_by?: string | null
     deleted_by?: string | null
@@ -33574,6 +33644,7 @@ export namespace Prisma {
     status?: IntFieldUpdateOperationsInput | number
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    is_supervisor?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -33591,6 +33662,7 @@ export namespace Prisma {
     status?: IntFieldUpdateOperationsInput | number
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    is_supervisor?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -35698,6 +35770,11 @@ export namespace Prisma {
     updated_at?: SortOrder
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type RVRelationFilter = {
     is?: RVWhereInput
     isNot?: RVWhereInput
@@ -35712,6 +35789,7 @@ export namespace Prisma {
     status?: SortOrder
     label?: SortOrder
     order?: SortOrder
+    is_supervisor?: SortOrder
     created_by?: SortOrder
     updated_by?: SortOrder
     deleted_by?: SortOrder
@@ -35734,6 +35812,7 @@ export namespace Prisma {
     status?: SortOrder
     label?: SortOrder
     order?: SortOrder
+    is_supervisor?: SortOrder
     created_by?: SortOrder
     updated_by?: SortOrder
     deleted_by?: SortOrder
@@ -35751,6 +35830,7 @@ export namespace Prisma {
     status?: SortOrder
     label?: SortOrder
     order?: SortOrder
+    is_supervisor?: SortOrder
     created_by?: SortOrder
     updated_by?: SortOrder
     deleted_by?: SortOrder
@@ -35762,6 +35842,14 @@ export namespace Prisma {
   export type RVApproverSumOrderByAggregateInput = {
     status?: SortOrder
     order?: SortOrder
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type JOApproverListRelationFilter = {
@@ -35842,6 +35930,7 @@ export namespace Prisma {
     status?: SortOrder
     label?: SortOrder
     order?: SortOrder
+    is_supervisor?: SortOrder
     created_by?: SortOrder
     updated_by?: SortOrder
     deleted_by?: SortOrder
@@ -35864,6 +35953,7 @@ export namespace Prisma {
     status?: SortOrder
     label?: SortOrder
     order?: SortOrder
+    is_supervisor?: SortOrder
     created_by?: SortOrder
     updated_by?: SortOrder
     deleted_by?: SortOrder
@@ -35881,6 +35971,7 @@ export namespace Prisma {
     status?: SortOrder
     label?: SortOrder
     order?: SortOrder
+    is_supervisor?: SortOrder
     created_by?: SortOrder
     updated_by?: SortOrder
     deleted_by?: SortOrder
@@ -35974,6 +36065,7 @@ export namespace Prisma {
     status?: SortOrder
     label?: SortOrder
     order?: SortOrder
+    is_supervisor?: SortOrder
     created_by?: SortOrder
     updated_by?: SortOrder
     deleted_by?: SortOrder
@@ -35996,6 +36088,7 @@ export namespace Prisma {
     status?: SortOrder
     label?: SortOrder
     order?: SortOrder
+    is_supervisor?: SortOrder
     created_by?: SortOrder
     updated_by?: SortOrder
     deleted_by?: SortOrder
@@ -36013,6 +36106,7 @@ export namespace Prisma {
     status?: SortOrder
     label?: SortOrder
     order?: SortOrder
+    is_supervisor?: SortOrder
     created_by?: SortOrder
     updated_by?: SortOrder
     deleted_by?: SortOrder
@@ -36168,11 +36262,6 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
   export type CanvassItemRelationFilter = {
     is?: CanvassItemWhereInput
     isNot?: CanvassItemWhereInput
@@ -36259,14 +36348,6 @@ export namespace Prisma {
     _sum?: NestedFloatFilter<$PrismaModel>
     _min?: NestedFloatFilter<$PrismaModel>
     _max?: NestedFloatFilter<$PrismaModel>
-  }
-
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type MEQSSupplierAttachmentCountOrderByAggregateInput = {
@@ -37402,6 +37483,10 @@ export namespace Prisma {
     connect?: RVWhereUniqueInput
   }
 
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
   export type RVUpdateOneRequiredWithoutRv_approversNestedInput = {
     create?: XOR<RVCreateWithoutRv_approversInput, RVUncheckedCreateWithoutRv_approversInput>
     connectOrCreate?: RVCreateOrConnectWithoutRv_approversInput
@@ -37940,10 +38025,6 @@ export namespace Prisma {
     decrement?: number
     multiply?: number
     divide?: number
-  }
-
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
   }
 
   export type CanvassItemUpdateOneRequiredWithoutMeqs_supplier_itemsNestedInput = {
@@ -38866,6 +38947,14 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
     in?: number[] | ListFloatFieldRefInput<$PrismaModel>
@@ -38880,14 +38969,6 @@ export namespace Prisma {
     _sum?: NestedFloatFilter<$PrismaModel>
     _min?: NestedFloatFilter<$PrismaModel>
     _max?: NestedFloatFilter<$PrismaModel>
-  }
-
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type CanvassItemCreateWithoutCanvassInput = {
@@ -39696,6 +39777,7 @@ export namespace Prisma {
     status: number
     label: string
     order: number
+    is_supervisor?: boolean
     created_by: string
     updated_by?: string | null
     deleted_by?: string | null
@@ -39712,6 +39794,7 @@ export namespace Prisma {
     status: number
     label: string
     order: number
+    is_supervisor?: boolean
     created_by: string
     updated_by?: string | null
     deleted_by?: string | null
@@ -39850,6 +39933,7 @@ export namespace Prisma {
     status?: IntFilter<"RVApprover"> | number
     label?: StringFilter<"RVApprover"> | string
     order?: IntFilter<"RVApprover"> | number
+    is_supervisor?: BoolFilter<"RVApprover"> | boolean
     created_by?: StringFilter<"RVApprover"> | string
     updated_by?: StringNullableFilter<"RVApprover"> | string | null
     deleted_by?: StringNullableFilter<"RVApprover"> | string | null
@@ -40038,6 +40122,7 @@ export namespace Prisma {
     status: number
     label: string
     order: number
+    is_supervisor?: boolean
     created_by: string
     updated_by?: string | null
     deleted_by?: string | null
@@ -40054,6 +40139,7 @@ export namespace Prisma {
     status: number
     label: string
     order: number
+    is_supervisor?: boolean
     created_by: string
     updated_by?: string | null
     deleted_by?: string | null
@@ -40192,6 +40278,7 @@ export namespace Prisma {
     status?: IntFilter<"JOApprover"> | number
     label?: StringFilter<"JOApprover"> | string
     order?: IntFilter<"JOApprover"> | number
+    is_supervisor?: BoolFilter<"JOApprover"> | boolean
     created_by?: StringFilter<"JOApprover"> | string
     updated_by?: StringNullableFilter<"JOApprover"> | string | null
     deleted_by?: StringNullableFilter<"JOApprover"> | string | null
@@ -40409,6 +40496,7 @@ export namespace Prisma {
     status: number
     label: string
     order: number
+    is_supervisor?: boolean
     created_by: string
     updated_by?: string | null
     deleted_by?: string | null
@@ -40425,6 +40513,7 @@ export namespace Prisma {
     status: number
     label: string
     order: number
+    is_supervisor?: boolean
     created_by: string
     updated_by?: string | null
     deleted_by?: string | null
@@ -40598,6 +40687,7 @@ export namespace Prisma {
     status?: IntFilter<"SPRApprover"> | number
     label?: StringFilter<"SPRApprover"> | string
     order?: IntFilter<"SPRApprover"> | number
+    is_supervisor?: BoolFilter<"SPRApprover"> | boolean
     created_by?: StringFilter<"SPRApprover"> | string
     updated_by?: StringNullableFilter<"SPRApprover"> | string | null
     deleted_by?: StringNullableFilter<"SPRApprover"> | string | null
@@ -43566,6 +43656,7 @@ export namespace Prisma {
     status: number
     label: string
     order: number
+    is_supervisor?: boolean
     created_by: string
     updated_by?: string | null
     deleted_by?: string | null
@@ -43582,6 +43673,7 @@ export namespace Prisma {
     status?: IntFieldUpdateOperationsInput | number
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    is_supervisor?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -43598,6 +43690,7 @@ export namespace Prisma {
     status?: IntFieldUpdateOperationsInput | number
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    is_supervisor?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -43614,6 +43707,7 @@ export namespace Prisma {
     status?: IntFieldUpdateOperationsInput | number
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    is_supervisor?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -43630,6 +43724,7 @@ export namespace Prisma {
     status: number
     label: string
     order: number
+    is_supervisor?: boolean
     created_by: string
     updated_by?: string | null
     deleted_by?: string | null
@@ -43646,6 +43741,7 @@ export namespace Prisma {
     status?: IntFieldUpdateOperationsInput | number
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    is_supervisor?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -43662,6 +43758,7 @@ export namespace Prisma {
     status?: IntFieldUpdateOperationsInput | number
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    is_supervisor?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -43678,6 +43775,7 @@ export namespace Prisma {
     status?: IntFieldUpdateOperationsInput | number
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    is_supervisor?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -43694,6 +43792,7 @@ export namespace Prisma {
     status: number
     label: string
     order: number
+    is_supervisor?: boolean
     created_by: string
     updated_by?: string | null
     deleted_by?: string | null
@@ -43710,6 +43809,7 @@ export namespace Prisma {
     status?: IntFieldUpdateOperationsInput | number
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    is_supervisor?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -43726,6 +43826,7 @@ export namespace Prisma {
     status?: IntFieldUpdateOperationsInput | number
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    is_supervisor?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -43742,6 +43843,7 @@ export namespace Prisma {
     status?: IntFieldUpdateOperationsInput | number
     label?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
+    is_supervisor?: BoolFieldUpdateOperationsInput | boolean
     created_by?: StringFieldUpdateOperationsInput | string
     updated_by?: NullableStringFieldUpdateOperationsInput | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null

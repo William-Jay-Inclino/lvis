@@ -63,6 +63,7 @@ export class RvApproverService {
             order: input.order,
             notes: '',
             status: APPROVAL_STATUS.PENDING,
+            is_supervisor: input.is_supervisor ? input.is_supervisor : false,
             created_by: this.authUser.user.username
         }
 
@@ -126,11 +127,17 @@ export class RvApproverService {
         })
     }
 
+    // RV supervisor and RV approver (is_supervisor) should always be in sync
     async update(id: string, input: UpdateRvApproverInput): Promise<RVApprover> {
         this.logger.log('update()')
 
 
-        const existingItem = await this.findOne(id)
+        const existingItem = await this.prisma.rVApprover.findUnique({
+            where: { id },
+            include: {
+                rv: true
+            }
+        })
 
         let isApprover = false
 
@@ -164,16 +171,57 @@ export class RvApproverService {
             status: input.status ?? existingItem.status,
             label: input.label ?? existingItem.label,
             order: input.order ?? existingItem.order,
+            is_supervisor: input.is_supervisor ?? existingItem.is_supervisor,
             updated_by: this.authUser.user.username
         }
 
-        const updated = await this.prisma.rVApprover.update({
+        const queries = []
+
+        const updateRvApproverQuery = this.prisma.rVApprover.update({
             data,
             where: { id },
             include: this.includedFields,
         });
+
+        queries.push(updateRvApproverQuery)
+
+        // if approver is updated
+        if(input.approver_id) {
+
+            const isNewApprover = input.approver_id !== existingItem.approver_id
+
+            // update supervisor in rv table as well
+            if(existingItem.is_supervisor && isNewApprover) {
+
+                console.log('updating rv supervisor');
+                const updateRvSupervisorQuery = this.prisma.rV.update({
+                    data: {
+                        supervisor_id: input.approver_id
+                    },
+                    where: {
+                        id: existingItem.rv.id
+                    }
+                })
+
+                queries.push(updateRvSupervisorQuery)
+            }
+
+        }
+
+        const result = await this.prisma.$transaction(queries)
+
         this.logger.log('Successfully updated RV Approver');
-        return updated;
+
+        return result[0]
+
+        // const updated = await this.prisma.rVApprover.update({
+        //     data,
+        //     where: { id },
+        //     include: this.includedFields,
+        // });
+
+        // this.logger.log('Successfully updated RV Approver');
+        // return updated;
 
     }
 

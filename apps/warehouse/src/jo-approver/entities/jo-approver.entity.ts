@@ -31,7 +31,8 @@ export class JOApprover {
   @Field(() => Int)
   order: number
 
-
+  @Field(() => Boolean)
+  is_supervisor: boolean
 
 
   // =============== audit fields =============== 

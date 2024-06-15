@@ -88,6 +88,7 @@ export class SprService {
                         order: i.order,
                         notes: '',
                         status: APPROVAL_STATUS.PENDING,
+                        is_supervisor: i.is_supervisor,
                         created_by: createdBy
                     }
                 })
@@ -110,7 +111,10 @@ export class SprService {
         this.logger.log('update()')
 
         const existingItem = await this.prisma.sPR.findUnique({
-            where: { id }
+            where: { id },
+            include: {
+                spr_approvers: true
+            }
         })
 
         if (!existingItem) {
@@ -133,15 +137,63 @@ export class SprService {
             notes: input.notes ?? existingItem.notes,
         }
 
-        const updated = await this.prisma.sPR.update({
+        const queries = []
+
+        const updateSprQuery = this.prisma.sPR.update({
             data,
             where: { id },
             include: this.includedFields
         })
 
-        this.logger.log('Successfully updated SPR')
+        queries.push(updateSprQuery)
 
-        return updated
+        // if supervisor is updated
+        if(input.supervisor_id) {
+
+            const isNewSupervisor = input.supervisor_id !== existingItem.supervisor_id
+
+            // update supervisor in rv approver as well
+            if(isNewSupervisor) {
+
+                const existingSupervisor = existingItem.spr_approvers.find(i => i.approver_id === existingItem.supervisor_id)
+    
+                if(!existingSupervisor) {
+                    throw new NotFoundException('Existing supervisor not found with id of ' + existingItem.supervisor_id)
+                }
+
+                console.log('Updating SPR Approver supervisor');
+
+                const updateSprApproverQuery = this.prisma.sPRApprover.update({
+                    where: {
+                        id: existingSupervisor.id
+                    },
+                    data: {
+                        approver_id: input.supervisor_id
+                    }
+                })
+
+                queries.push(updateSprApproverQuery)
+
+            }
+
+        }
+
+        const result = await this.prisma.$transaction(queries)
+
+        this.logger.log('Successfully updated SPR');
+
+        return result[0]
+
+
+        // const updated = await this.prisma.sPR.update({
+        //     data,
+        //     where: { id },
+        //     include: this.includedFields
+        // })
+
+        // this.logger.log('Successfully updated SPR')
+
+        // return updated
 
     }
 
