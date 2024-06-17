@@ -21,6 +21,7 @@ import { SprApproverSettingModule } from './spr-approver-setting/spr-approver-se
 import { AccountModule } from './account/account.module';
 import { SettingModule } from './setting/setting.module';
 import { PositionModule } from './position/position.module';
+import { PrometheusModule } from '@willsoto/nestjs-prometheus';
 
 
 @Module({
@@ -50,6 +51,7 @@ import { PositionModule } from './position/position.module';
     AccountModule,
     SettingModule,
     PositionModule,
+    PrometheusModule.register()
   ],
   controllers: [],
   providers: [],

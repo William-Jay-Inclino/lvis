@@ -1,0 +1,31 @@
+
+NODE_ENV=development
+
+# API
+API_GATEWAY_PORT=4000
+SYSTEM_PORT=4001
+WAREHOUSE_PORT=4002
+API_URL=http://localhost:4000/lvis/api
+API_GATEWAY_URL=http://localhost:4000/lvis/graphql
+SYSTEM_URL=http://localhost:4001/graphql
+WAREHOUSE_URL=http://localhost:4002/graphql
+
+
+# JWT
+JWT_SECRET_KEY="1<3L3y3c0"
+
+
+# DATABASE
+SYSTEM_DATABASE_URL="postgresql://jay:jay123@localhost:5435/lvis_system_db?schema=public"
+WAREHOUSE_DATABASE_URL="postgresql://jay:jay123@localhost:5437/lvis_warehouse_db?schema=public"
+DB_USER=jay
+DB_SYSTEM_NAME=lvis_system_db
+DB_WAREHOUSE_NAME=lvis_warehouse_db
+
+
+# BACKUP
+MAX_BACKUPS=5
+BACKUP_SYSTEM_DIR=/home/jay/Documents/projects/leyeco/lvis/backup/system_db
+BACKUP_SYSTEM_LOG=/home/jay/Documents/projects/leyeco/lvis/backup/logs/system_db_backup.log
+BACKUP_WAREHOUSE_DIR=/home/jay/Documents/projects/leyeco/lvis/backup/warehouse_db
+BACKUP_WAREHOUSE_LOG=/home/jay/Documents/projects/leyeco/lvis/backup/logs/warehouse_db_backup.log

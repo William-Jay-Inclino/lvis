@@ -14,38 +14,12 @@ services:
       - lvis-network
     restart: always
 
-  system-test-db:
-    image: postgres:16
-    ports:
-      - 5436:5432
-    environment:
-      NODE_ENV: testing
-      POSTGRES_USER: jay
-      POSTGRES_PASSWORD: jay123
-      POSTGRES_DB: lvis_system_db
-    networks:
-      - lvis-network
-    restart: always
-
   warehouse-db:
     image: postgres:16
     ports:
       - 5437:5432
     environment:
       NODE_ENV: development
-      POSTGRES_USER: jay
-      POSTGRES_PASSWORD: jay123
-      POSTGRES_DB: lvis_warehouse_db
-    networks:
-      - lvis-network
-    restart: always
-
-  warehouse-test-db:
-    image: postgres:16
-    ports:
-      - 5438:5432
-    environment:
-      NODE_ENV: testing
       POSTGRES_USER: jay
       POSTGRES_PASSWORD: jay123
       POSTGRES_DB: lvis_warehouse_db

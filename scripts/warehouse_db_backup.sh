@@ -1,45 +1,42 @@
 #!/bin/bash
 
-# Define database credentials and name
-DB_USER="jay"
-DB_NAME="lvis_warehouse_db"
-BACKUP_DIR="/home/jay/Documents/projects/leyeco/lvis/backup/warehouse_db"
+# Load .env file from the root directory
+source $(dirname $(dirname $0))/.env
 
 # Define backup file name with current date and time
-BACKUP_FILE="$BACKUP_DIR/warehouse_db_backup_$(date +'%Y-%m-%d_%H-%M-%S').dump"
-
-# Define log file
-LOG_FILE="/home/jay/Documents/projects/leyeco/lvis/backup/logs/warehouse_db_backup.log"
-
-# Limit the number of backup files to 5
-MAX_BACKUPS=5
+BACKUP_FILE="$BACKUP_WAREHOUSE_DIR/warehouse_db_backup_$(date +'%Y-%m-%d_%H-%M-%S').dump"
 
 # Log start of execution
-echo "$(date +'%Y-%m-%d %H:%M:%S') - Starting backup..." >> $LOG_FILE
+echo "$(date +'%Y-%m-%d %H:%M:%S') - Initializing warehouse database backup..." >> $BACKUP_WAREHOUSE_LOG
 
 # Check if the backup directory exists
-if [ ! -d "$BACKUP_DIR" ]; then
-  echo "$(date +'%Y-%m-%d %H:%M:%S') - Backup directory does not exist. Creating directory..." >> $LOG_FILE
-  mkdir -p $BACKUP_DIR
+if [ ! -d "$BACKUP_WAREHOUSE_DIR" ]; then
+  echo "$(date +'%Y-%m-%d %H:%M:%S') - Warehouse backup directory does not exist. Creating directory..." >> $BACKUP_WAREHOUSE_LOG
+  mkdir -p $BACKUP_WAREHOUSE_DIR
 fi
 
 # Remove the oldest backup files if the number of backups exceeds the limit
-while [ $(ls -1 $BACKUP_DIR | wc -l) -ge $MAX_BACKUPS ]; do
-  OLDEST_BACKUP=$(ls -t $BACKUP_DIR | tail -1)
-  rm $BACKUP_DIR/$OLDEST_BACKUP
-  echo "$(date +'%Y-%m-%d %H:%M:%S') - Removed old backup file: $OLDEST_BACKUP" >> $LOG_FILE
+while [ $(ls -1 $BACKUP_WAREHOUSE_DIR | wc -l) -ge $MAX_BACKUPS ]; do
+  OLDEST_BACKUP=$(ls -t $BACKUP_WAREHOUSE_DIR | tail -1)
+  rm $BACKUP_WAREHOUSE_DIR/$OLDEST_BACKUP
+  echo "$(date +'%Y-%m-%d %H:%M:%S') - Removed old warehouse backup file: $OLDEST_BACKUP" >> $BACKUP_WAREHOUSE_LOG
 done
 
 # Backup the database using pg_dump
-echo "$(date +'%Y-%m-%d %H:%M:%S') - Starting database backup..." >> $LOG_FILE
-(docker exec docker-warehouse-db-1 pg_dump -U $DB_USER -d $DB_NAME -Fc -E utf-8 > $BACKUP_FILE) &
+echo "$(date +'%Y-%m-%d %H:%M:%S') - Starting warehouse database backup..." >> $BACKUP_WAREHOUSE_LOG
+(docker exec docker-warehouse-db-1 pg_dump -U $DB_USER -d $DB_WAREHOUSE_NAME -Fc -E utf-8 > $BACKUP_FILE) &
 
 # Wait for backup to complete
 wait
 
 # Check if the backup was successful
 if [ $? -eq 0 ]; then
-  echo "$(date +'%Y-%m-%d %H:%M:%S') - Backup successful. File: $BACKUP_FILE" >> $LOG_FILE
+  if [ -s $BACKUP_FILE ]; then
+    echo "$(date +'%Y-%m-%d %H:%M:%S') - Warehouse database backup successful. File: $BACKUP_FILE" >> $BACKUP_WAREHOUSE_LOG
+  else
+    echo "$(date +'%Y-%m-%d %H:%M:%S') - Warehouse database backup failed. The backup file is empty." >> $BACKUP_WAREHOUSE_LOG
+    rm $BACKUP_FILE
+  fi
 else
-  echo "$(date +'%Y-%m-%d %H:%M:%S') - Backup failed." >> $LOG_FILE
+  echo "$(date +'%Y-%m-%d %H:%M:%S') - Warehouse database backup failed." >> $BACKUP_WAREHOUSE_LOG
 fi
