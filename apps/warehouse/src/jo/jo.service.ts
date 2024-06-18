@@ -156,7 +156,7 @@ export class JoService {
             // update supervisor in rv approver as well
             if(isNewSupervisor) {
 
-                const existingSupervisor = existingItem.jo_approvers.find(i => i.approver_id === existingItem.supervisor_id)
+                const existingSupervisor = existingItem.jo_approvers.find(i => i.approver_id === existingItem.supervisor_id && !!i.is_supervisor)
     
                 if(!existingSupervisor) {
                     throw new NotFoundException('Existing supervisor not found with id of ' + existingItem.supervisor_id)
