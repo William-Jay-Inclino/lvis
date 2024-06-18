@@ -83,7 +83,7 @@ import { PrometheusModule } from '@willsoto/nestjs-prometheus';
     JoApproverModule,
     SprModule,
     SprApproverModule,
-    PrometheusModule.register()
+    // PrometheusModule.register()
   ],
   controllers: [],
   providers: [RvService, MeqsService, MeqsResolver, PoService, PoResolver, PoApproverResolver],

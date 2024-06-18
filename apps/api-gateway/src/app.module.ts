@@ -7,7 +7,7 @@ import { verify } from 'jsonwebtoken'
 import { AuthModule } from './auth/auth.module';
 import { FileUploadModule } from './file-upload-warehouse/file-upload.module';
 import { FileUploadSystemModule } from './file-upload-system/file-upload-system.module';
-import { PrometheusModule } from '@willsoto/nestjs-prometheus';
+// import { PrometheusModule } from '@willsoto/nestjs-prometheus';
 
 const getToken = (authToken: string) => {
 
@@ -98,7 +98,7 @@ function handleAuth({ req }) {
     AuthModule,
     FileUploadModule,
     FileUploadSystemModule,
-    PrometheusModule.register()
+    // PrometheusModule.register()
   ],
   controllers: [],
   providers: [],
@@ -106,9 +106,3 @@ function handleAuth({ req }) {
 
 
 export class AppModule {}
-
-// export class AppModule implements NestModule {
-//   configure(consumer: MiddlewareConsumer) {
-//     consumer.apply(PrometheusMiddleware).forRoutes('*');
-//   }
-// }
