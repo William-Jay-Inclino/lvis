@@ -532,8 +532,8 @@ export const users: User[] = [
     },
     {
         id: faker.string.uuid(),
-        username: 'jannieanne.dayandayan',
-        password: 'jannieanne.dayandayan123',
+        username: 'jannieann.dayandayan',
+        password: 'jannieann.dayandayan123',
         status: UserStatus.ACTIVE,
         role: Role.USER,
         created_by: 'admin'

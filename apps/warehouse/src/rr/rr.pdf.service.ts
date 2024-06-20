@@ -273,7 +273,7 @@ export class RrPdfService {
 
                         <tr style="border: none;">
                             <td colspan="10" style="text-align: right;"><b>Total</b></td>
-                            <td align="center"><b> ${ formatToPhpCurrency(totalCost - rr.delivery_charge) } </b></td>
+                            <td align="center"><b> ${ formatToPhpCurrency(totalCost + rr.delivery_charge) } </b></td>
                         </tr>
 
                     </tbody>
@@ -575,16 +575,16 @@ export class RrPdfService {
 
         for(let item of rrItems) {
 
-            const vatAmount = getVatAmount(item.meqs_supplier_item.price, item.meqs_supplier_item.vat_type)
-            const amount = item.meqs_supplier_item.price - vatAmount
+            const unitPrice = item.meqs_supplier_item.price
+            const vatAmount = getVatAmount(unitPrice, item.meqs_supplier_item.vat_type)
 
             if(item.meqs_supplier_item.vat_type === VAT_TYPE.INC) {
-                totalVatInc -= amount
+                totalVatInc += (unitPrice - vatAmount)
                 continue
             }
 
             if(item.meqs_supplier_item.vat_type === VAT_TYPE.EXC) {
-                totalVatExc += amount
+                totalVatExc += (unitPrice + vatAmount)
                 continue
             }
 
