@@ -14,6 +14,8 @@ import { VAT } from '../__common__/constants';
 import { Classification } from '../__classification__/entities/classification.entity';
 import { VAT_TYPE } from '../__common__/types';
 import { UPLOADS_PATH } from '../__common__/config';
+import { MeqsSupplierItem } from '../meqs-supplier-item/entities/meqs-supplier-item.entity';
+import { Supplier } from '../supplier/entities/supplier.entity';
 
 @Injectable()
 export class PoPdfService {
@@ -75,6 +77,8 @@ export class PoPdfService {
 
         const classification = await this.getClassification(classification_id, this.authUser)
         const fundSource = await this.getFundSource(po.fund_source_id, this.authUser)
+
+        const items = this.getAwardedItems(po.meqs_supplier.meqs_supplier_items, po.meqs_supplier.supplier)
 
         // Set content of the PDF
         const content = `
@@ -242,7 +246,7 @@ export class PoPdfService {
                         <th style="border: 1px solid black;"> TOTAL PRICE </th>
                     </thead>
                     <tbody>
-                        ${po.meqs_supplier.meqs_supplier_items.map((item, index) => `
+                        ${items.map((item, index) => `
                         <tr style="border: 1px solid black;">
                             <td align="center">${index + 1}</td>
                             <td>${item.canvass_item.description}</td>
@@ -648,6 +652,12 @@ export class PoPdfService {
         }
 
         return item
+    }
+
+    getAwardedItems(meqsSupplierItems: MeqsSupplierItem[], supplier: Supplier): MeqsSupplierItem[] {
+
+        return meqsSupplierItems.filter(i => !!i.is_awarded)
+
     }
 
 }
