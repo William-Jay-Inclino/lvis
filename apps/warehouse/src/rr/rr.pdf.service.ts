@@ -38,7 +38,7 @@ export class RrPdfService {
 
         const totalCost = rr.rr_items.reduce((acc, item) => acc + (item.meqs_supplier_item.price * item.quantity_accepted), 0);
         const totalUnitCost = rr.rr_items.reduce((acc, item) => acc + (item.meqs_supplier_item.price), 0);
-        const totalVat = rr.rr_items.reduce((acc, item) => acc + (getVatAmount(item.meqs_supplier_item.price, item.meqs_supplier_item.vat_type)), 0);
+        const totalVat = rr.rr_items.reduce((acc, item) => acc + (getVatAmount(item.meqs_supplier_item.price * Number(item.meqs_supplier_item.canvass_item.quantity), item.meqs_supplier_item.vat_type)), 0);
         const { totalVatInc, totalVatExc } = this.getTotalVat(rr.rr_items)
 
         let requested_by_id, purpose, classification_id
@@ -231,24 +231,24 @@ export class RrPdfService {
                             <td align="center">${formatToPhpCurrency(item.meqs_supplier_item.price)}</td>
                             <td align="center"> 
                                 ${ item.meqs_supplier_item.vat_type === VAT_TYPE.NONE || item.meqs_supplier_item.vat_type === VAT_TYPE.EXEMPT ? 
-                                    formatToPhpCurrency(item.meqs_supplier_item.price) 
+                                    formatToPhpCurrency(item.meqs_supplier_item.price * Number(item.meqs_supplier_item.canvass_item.quantity) ) 
                                     : '0.00'
                                 } 
                             </td>
                             <td align="center"> 
                                 ${ item.meqs_supplier_item.vat_type === VAT_TYPE.INC ? 
-                                    formatToPhpCurrency(item.meqs_supplier_item.price - getVatAmount(item.meqs_supplier_item.price, item.meqs_supplier_item.vat_type)) 
+                                    formatToPhpCurrency((item.meqs_supplier_item.price * Number(item.meqs_supplier_item.canvass_item.quantity) ) - getVatAmount(item.meqs_supplier_item.price * Number(item.meqs_supplier_item.canvass_item.quantity), item.meqs_supplier_item.vat_type)) 
                                     : '0.00'
                                 } 
                             </td>
                             <td align="center"> 
                                 ${ item.meqs_supplier_item.vat_type === VAT_TYPE.EXC ? 
-                                    formatToPhpCurrency(item.meqs_supplier_item.price + getVatAmount(item.meqs_supplier_item.price, item.meqs_supplier_item.vat_type)) 
+                                    formatToPhpCurrency((item.meqs_supplier_item.price * Number(item.meqs_supplier_item.canvass_item.quantity)) + getVatAmount(item.meqs_supplier_item.price * Number(item.meqs_supplier_item.canvass_item.quantity), item.meqs_supplier_item.vat_type)) 
                                     : '0.00'
                                 } 
                             </td>
                             <td align="center">
-                                ${ formatToPhpCurrency(getVatAmount(item.meqs_supplier_item.price, item.meqs_supplier_item.vat_type)) }
+                                ${ formatToPhpCurrency(getVatAmount(item.meqs_supplier_item.price * Number(item.meqs_supplier_item.canvass_item.quantity), item.meqs_supplier_item.vat_type)) }
                             </td>
                             <td align="center">
                                 ${ formatToPhpCurrency(item.meqs_supplier_item.price * item.quantity_accepted) }
@@ -575,7 +575,7 @@ export class RrPdfService {
 
         for(let item of rrItems) {
 
-            const unitPrice = item.meqs_supplier_item.price
+            const unitPrice = item.meqs_supplier_item.price * Number(item.meqs_supplier_item.canvass_item.quantity)
             const vatAmount = getVatAmount(unitPrice, item.meqs_supplier_item.vat_type)
 
             if(item.meqs_supplier_item.vat_type === VAT_TYPE.INC) {
