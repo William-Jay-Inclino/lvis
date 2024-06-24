@@ -99,7 +99,7 @@ export class CanvassPdfService {
                                 <td>Purpose: ${canvass.purpose}</td>
                             </tr>     
                             <tr>
-                                <td>Listed below are the list of Item/s needed:</td>
+                                <td>Requisitioner Notes: ${canvass.notes} </td>
                             </tr>
                         </table>
                     </div>
