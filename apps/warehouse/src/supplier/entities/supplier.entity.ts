@@ -22,8 +22,8 @@ export class Supplier {
   @Field(() => Boolean)
   is_vat_registered: boolean;
 
-  // @Field(() => Int)
-  // vat_type: VAT_TYPE;
+  @Field(() => Int)
+  vat_type: VAT_TYPE;
 
 
 

@@ -29,4 +29,9 @@ export class CreateSupplierInput {
   @IsBoolean()
   is_vat_registered: boolean;
 
+  @Field(() => Int)
+  @IsNotEmpty()
+  @IsInt()
+  vat_type: VAT_TYPE;
+
 }

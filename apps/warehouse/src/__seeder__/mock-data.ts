@@ -10,7 +10,7 @@ export const suppliers: Supplier[] = [
         address: 'Brgy. Cogon, Ormoc City, Leyte',
         created_by: 'admin',
         is_vat_registered: true,
-
+        vat_type: VAT_TYPE.INC,
     },
     {
         id: faker.string.uuid(),
@@ -19,7 +19,8 @@ export const suppliers: Supplier[] = [
         tin_no: '209-609-185-00054',
         address: 'REAL ST., ORMOC CITY',
         is_vat_registered: true,
-        created_by: 'admin'
+        created_by: 'admin',
+        vat_type: VAT_TYPE.EXC,
     },
     {
         id: faker.string.uuid(),
@@ -28,7 +29,8 @@ export const suppliers: Supplier[] = [
         tin_no: '209-609-185-00054',
         address: 'REAL ST., ORMOC CITY',
         is_vat_registered: true,
-        created_by: 'admin'
+        created_by: 'admin',
+        vat_type: VAT_TYPE.INC,
     },
     {
         id: faker.string.uuid(),
@@ -37,7 +39,8 @@ export const suppliers: Supplier[] = [
         tin_no: '209-609-185-00054',
         address: 'REAL ST., ORMOC CITY',
         is_vat_registered: false,
-        created_by: 'admin'
+        created_by: 'admin',
+        vat_type: VAT_TYPE.NONE,
     }
 ]
 

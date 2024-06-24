@@ -26,6 +26,7 @@ export class SupplierService {
 			tin_no: input.tin_no,
 			address: input.address,
 			is_vat_registered: input.is_vat_registered,
+			vat_type: input.vat_type,
 			created_by: this.authUser.user.username
 		}
 
@@ -72,6 +73,7 @@ export class SupplierService {
 			tin_no: input.tin_no ?? existingItem.tin_no,
 			address: input.address ?? existingItem.address,
 			is_vat_registered: input.is_vat_registered ?? existingItem.is_vat_registered,
+			vat_type: input.vat_type ?? existingItem.vat_type,
 			updated_by: this.authUser.user.username
 		}
 

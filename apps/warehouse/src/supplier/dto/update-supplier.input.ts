@@ -31,4 +31,10 @@ export class UpdateSupplierInput extends PartialType(CreateSupplierInput) {
   @IsBoolean()
   is_vat_registered: boolean;
 
+
+  @Field(() => Int, { nullable: true })
+  @IsOptional()
+  @IsInt()
+  vat_type?: VAT_TYPE | null;
+
 }
