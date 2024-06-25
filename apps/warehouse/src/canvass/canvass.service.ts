@@ -253,18 +253,22 @@ export class CanvassService {
 
     async findRcNumbers(rcNumber: string): Promise<{ rc_number: string; }[]> {
 
+		const trimmedRcNumber = rcNumber.trim(); 
+
         const arrayOfRcNumbers = await this.prisma.canvass.findMany({
             select: {
                 rc_number: true
             },
             where: {
                 rc_number: {
-                    contains: rcNumber.trim().toLowerCase(),
-                    mode: 'insensitive',
+                    startsWith: trimmedRcNumber
                 },
                 deleted_at: null
             },
-            take: 5,
+            orderBy: {
+                rc_number: 'desc'
+            },
+            take: 10,
         });
 
         return arrayOfRcNumbers;

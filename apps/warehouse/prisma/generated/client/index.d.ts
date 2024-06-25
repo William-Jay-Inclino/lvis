@@ -31905,13 +31905,13 @@ export namespace Prisma {
   export type RRWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     rr_number?: string
+    invoice_number?: string
     AND?: RRWhereInput | RRWhereInput[]
     OR?: RRWhereInput[]
     NOT?: RRWhereInput | RRWhereInput[]
     po_id?: StringNullableFilter<"RR"> | string | null
     rr_date?: DateTimeFilter<"RR"> | Date | string
     received_by_id?: StringFilter<"RR"> | string
-    invoice_number?: StringFilter<"RR"> | string
     delivery_number?: StringNullableFilter<"RR"> | string | null
     notes?: StringFilter<"RR"> | string
     delivery_charge?: FloatFilter<"RR"> | number
@@ -31925,7 +31925,7 @@ export namespace Prisma {
     po?: XOR<PONullableRelationFilter, POWhereInput> | null
     rr_approvers?: RRApproverListRelationFilter
     rr_items?: RRItemListRelationFilter
-  }, "id" | "rr_number">
+  }, "id" | "rr_number" | "invoice_number">
 
   export type RROrderByWithAggregationInput = {
     id?: SortOrder

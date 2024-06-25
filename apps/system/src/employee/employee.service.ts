@@ -212,7 +212,8 @@ export class EmployeeService {
 		middlename: string,
 		lastname: string,
 	}[]> {
-
+		const trimmedName = name.trim(); 
+	
 		const employees = await this.prisma.employee.findMany({
 			select: {
 				id: true,
@@ -223,14 +224,13 @@ export class EmployeeService {
 			where: {
 				deleted_at: null,
 				OR: [
-					{ lastname: { contains: name.trim(), mode: 'insensitive' } },
-					{ firstname: { contains: name.trim(), mode: 'insensitive' } },
-					{ middlename: { contains: name.trim(), mode: 'insensitive' } },
+					{ lastname: { startsWith: trimmedName, mode: 'insensitive' } },
+					{ firstname: { startsWith: trimmedName, mode: 'insensitive' } },
 				],
 			},
-			take: 5,
+			take: 10,
 		});
-
+	
 		return employees;
 	}
 

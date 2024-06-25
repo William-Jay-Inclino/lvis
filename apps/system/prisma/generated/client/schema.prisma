@@ -70,7 +70,7 @@ model Account {
 
 model Employee {
   id         String  @id @default(uuid())
-  firstname  String
+  firstname  String 
   middlename String?
   lastname   String
   signature_src String?
@@ -97,6 +97,9 @@ model Employee {
   deleted_at DateTime?
 
   user_employee UserEmployee?
+
+
+  @@index([firstname, lastname])
 
   @@map("employee")
 }

@@ -11,7 +11,7 @@ datasource db {
 model Canvass {
   id              String   @id @default(uuid())
   rc_number       String   @unique
-  date_requested  DateTime
+  date_requested  DateTime 
   purpose         String
   notes           String?
   requested_by_id String
@@ -28,6 +28,8 @@ model Canvass {
   jo            JO?
   rv            RV?
   spr           SPR?
+  
+  @@index([date_requested, requested_by_id])
 
   @@map("canvass")
 }
@@ -52,6 +54,8 @@ model CanvassItem {
   brand               Brand?             @relation(fields: [brand_id], references: [id], onDelete: Restrict)
   unit                Unit?              @relation(fields: [unit_id], references: [id], onDelete: Restrict)
   item                Item?              @relation(fields: [item_id], references: [id], onDelete: Restrict)
+
+  @@index([canvass_id, brand_id, unit_id, item_id])
 
   @@map("canvass_item")
 }
@@ -79,6 +83,8 @@ model RV {
   meqs         MEQS?
   rv_approvers RVApprover[]
 
+  @@index([date_requested])
+
   @@map("request_voucher")
 }
 
@@ -102,6 +108,9 @@ model RVApprover {
   deleted_at DateTime?
 
   rv RV @relation(fields: [rv_id], references: [id], onDelete: Cascade)
+
+  @@index([rv_id])
+
 
   @@map("rv_approver")
 }
@@ -129,6 +138,8 @@ model JO {
   meqs         MEQS?
   jo_approvers JOApprover[]
 
+  @@index([date_requested])
+
   @@map("job_order")
 }
 
@@ -152,6 +163,8 @@ model JOApprover {
   deleted_at DateTime?
 
   jo JO @relation(fields: [jo_id], references: [id], onDelete: Cascade)
+
+  @@index([jo_id])
 
   @@map("jo_approver")
 }
@@ -179,6 +192,8 @@ model SPR {
   vehicle       Vehicle       @relation(fields: [vehicle_id], references: [id], onDelete: Restrict)
   spr_approvers SPRApprover[]
 
+  @@index([date_requested])
+
   @@map("spare_parts_request")
 }
 
@@ -202,6 +217,8 @@ model SPRApprover {
   deleted_at DateTime?
 
   spr SPR @relation(fields: [spr_id], references: [id], onDelete: Cascade)
+
+  @@index([spr_id])
 
   @@map("spr_approver")
 }
@@ -229,6 +246,8 @@ model MEQS {
   meqs_approvers MEQSApprover[]
   meqs_suppliers MEQSSupplier[]
 
+  @@index([meqs_date])
+
   @@map("material_equipment_quotation_summary")
 }
 
@@ -251,6 +270,9 @@ model MEQSSupplier {
   po                  PO?
 
   @@unique([meqs_id, supplier_id])
+
+  @@index([meqs_id, supplier_id])
+
   @@map("meqs_supplier")
 }
 
@@ -274,6 +296,8 @@ model MEQSSupplierItem {
 
   rr_items       RRItem[]  
 
+  @@index([meqs_supplier_id, canvass_item_id])
+
   @@map("meqs_supplier_item")
 }
 
@@ -290,6 +314,8 @@ model MEQSSupplierAttachment {
   updated_at DateTime @updatedAt
 
   meqs_supplier MEQSSupplier @relation(fields: [meqs_supplier_id], references: [id], onDelete: Cascade)
+
+  @@index([meqs_supplier_id])
 
   @@map("meqs_supplier_attachment")
 }
@@ -314,6 +340,8 @@ model MEQSApprover {
 
   meqs MEQS @relation(fields: [meqs_id], references: [id], onDelete: Cascade)
 
+  @@index([meqs_id])
+
   @@map("meqs_approver")
 }
 
@@ -336,6 +364,8 @@ model PO {
   meqs_supplier MEQSSupplier? @relation(fields: [meqs_supplier_id], references: [id], onDelete: Restrict)
   rrs           RR[]
   po_approvers  POApprover[]
+
+  @@index([po_date])
 
   @@map("purchase_order")
 }
@@ -360,6 +390,8 @@ model POApprover {
 
   po PO @relation(fields: [po_id], references: [id], onDelete: Cascade)
 
+  @@index([po_id])
+
   @@map("po_approver")
 }
 
@@ -369,7 +401,7 @@ model RR {
   rr_number       String   @unique
   rr_date         DateTime
   received_by_id  String
-  invoice_number  String
+  invoice_number  String @unique
   delivery_number String?
   notes           String
   delivery_charge Float
@@ -386,6 +418,8 @@ model RR {
   po           PO?           @relation(fields: [po_id], references: [id], onDelete: Restrict)
   rr_approvers RRApprover[]
   rr_items     RRItem[]
+
+  @@index([po_id, rr_date])
 
   @@map("receiving_report")
 }
@@ -410,6 +444,8 @@ model RRApprover {
 
   rr RR @relation(fields: [rr_id], references: [id], onDelete: Cascade)
 
+  @@index([rr_id])
+
   @@map("rr_approver")
 }
 
@@ -429,6 +465,8 @@ model RRItem {
   item_transaction   ItemTransaction?
 
   meqs_supplier_item MEQSSupplierItem @relation(fields: [meqs_supplier_item_id], references: [id], onDelete: Restrict)
+
+  @@index([rr_id, meqs_supplier_item_id])
 
   @@map("rr_item")
 }
@@ -456,6 +494,8 @@ model Item {
   item_transactions ItemTransaction[]
   unit              Unit              @relation(fields: [unit_id], references: [id], onDelete: Restrict)
   canvass_items     CanvassItem[]
+
+  @@index([item_type_id, unit_id, name, created_by])
 
   @@map("item")
 }
@@ -510,6 +550,8 @@ model ItemTransaction {
   created_at DateTime @default(now())
   created_by String   @default("admin")
 
+  @@index([item_id])
+
   @@map("item_transaction")
 }
 
@@ -548,6 +590,8 @@ model Supplier {
   deleted_at DateTime?
 
   MEQSSupplier MEQSSupplier[]
+
+  @@index([name])
 
   @@map("supplier")
 }
