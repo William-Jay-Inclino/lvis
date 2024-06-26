@@ -344,17 +344,22 @@ export class RvService {
 
     async findRvNumbers(rvNumber: string): Promise<{ rv_number: string; }[]> {
 
+		const trimmedRvNumber = rvNumber.trim(); 
+
         const arrayOfRvNumbers = await this.prisma.rV.findMany({
             select: {
                 rv_number: true
             },
             where: {
                 rv_number: {
-                    contains: rvNumber.trim().toLowerCase(),
-                    mode: 'insensitive',
+                    startsWith: trimmedRvNumber
                 },
+                cancelled_at: null
             },
-            take: 5,
+            orderBy: {
+                rv_number: 'desc'
+            },
+            take: 10,
         });
 
         return arrayOfRvNumbers;
