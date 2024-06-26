@@ -52,6 +52,13 @@ export class ItemResolver {
     }
   }
 
+  @Query(() => [Item])
+  itemsByCodeOrName(
+    @Args('input') input: string,
+  ) {
+    return this.itemService.findItemsByCodeOrName(input)
+  }
+
   @Mutation(() => Item)
   @UseGuards(AccessGuard)
   @CheckAccess(MODULES.ITEM, RESOLVERS.updateItem)

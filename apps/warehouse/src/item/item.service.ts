@@ -197,6 +197,29 @@ export class ItemService {
 
 	}
 
+	async findItemsByCodeOrName(q: string) {
+		const input = q.trim(); 
+	
+		const items = await this.prisma.item.findMany({
+			select: {
+				id: true,
+				code: true,
+				name: true,
+				description: true,
+			},
+			where: {
+				deleted_at: null,
+				OR: [
+					{ code: { startsWith: input } },
+					{ name: { startsWith: input, mode: 'insensitive' } },
+				],
+			},
+			take: 10,
+		});
+	
+		return items;
+	}
+
 	async update(id: string, input: UpdateItemInput): Promise<Item> {
 
 		const existingItem = await this.findOne(id)
