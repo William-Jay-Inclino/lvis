@@ -251,14 +251,25 @@ export class CanvassService {
 
     }
 
-    async findRcNumbers(rcNumber: string): Promise<{ rc_number: string; }[]> {
+    async findCanvassesByRcNumber(rcNumber: string, includeDetails: boolean = false) {
 
 		const trimmedRcNumber = rcNumber.trim(); 
 
-        const arrayOfRcNumbers = await this.prisma.canvass.findMany({
-            select: {
-                rc_number: true
-            },
+        let selectClause;
+        if (includeDetails) {
+            selectClause = { 
+                id: true,
+                rc_number: true, 
+                purpose: true,
+                notes: true,
+                requested_by_id: true
+            }; 
+        } else {
+            selectClause = { rc_number: true };
+        }
+
+        const items = await this.prisma.canvass.findMany({
+            select: selectClause,
             where: {
                 rc_number: {
                     startsWith: trimmedRcNumber
@@ -271,7 +282,7 @@ export class CanvassService {
             take: 10,
         });
 
-        return arrayOfRcNumbers;
+        return items;
     }
 
     private async getLatestRcNumber(): Promise<string> {

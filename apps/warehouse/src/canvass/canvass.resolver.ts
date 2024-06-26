@@ -43,11 +43,12 @@ export class CanvassResolver {
     return this.canvassService.findAll(page, pageSize, date_requested, requested_by_id);
   }
 
-  @Query(() => [RcNumber])
-  rc_numbers(
-    @Args('rc_number') rc_number: string
-  ): Promise<{ rc_number: string }[]> {
-    return this.canvassService.findRcNumbers(rc_number);
+  @Query(() => [Canvass])
+  canvasses_by_rc_number(
+    @Args('rc_number') rc_number: string,
+    @Args('is_details_included', { nullable: true }) is_details_included?: boolean,
+  ) {
+    return this.canvassService.findCanvassesByRcNumber(rc_number, is_details_included);
   }
 
   @Query(() => Canvass)
