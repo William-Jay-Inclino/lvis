@@ -49,11 +49,12 @@ export class RvResolver {
         return this.rvService.findAll(page, pageSize, date_requested, requested_by_id);
     }
 
-    @Query(() => [RvNumber])
-    rv_numbers(
-        @Args('rv_number') rv_number: string
-    ): Promise<{ rv_number: string }[]> {
-        return this.rvService.findRvNumbers(rv_number);
+    @Query(() => [RV])
+    rvs_by_rv_number(
+        @Args('rv_number') rv_number: string,
+        @Args('is_detail_included', { nullable: true }) is_detail_included?: boolean,
+    ){
+        return this.rvService.findRvsByRvNumber(rv_number, is_detail_included);
     }
 
     @Query(() => RV)

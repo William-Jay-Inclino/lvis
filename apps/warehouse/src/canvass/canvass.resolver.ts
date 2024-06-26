@@ -46,9 +46,9 @@ export class CanvassResolver {
   @Query(() => [Canvass])
   canvasses_by_rc_number(
     @Args('rc_number') rc_number: string,
-    @Args('is_details_included', { nullable: true }) is_details_included?: boolean,
+    @Args('is_detail_included', { nullable: true }) is_detail_included?: boolean,
   ) {
-    return this.canvassService.findCanvassesByRcNumber(rc_number, is_details_included);
+    return this.canvassService.findCanvassesByRcNumber(rc_number, is_detail_included);
   }
 
   @Query(() => Canvass)

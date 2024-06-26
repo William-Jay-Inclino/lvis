@@ -335,22 +335,37 @@ export class SprService {
         };
     }
 
-    async findSprNumbers(sprNumber: string): Promise<{ spr_number: string; }[]> {
+    async findSprsBySprNumber(sprNumber: string, includeDetails: boolean = false) {
 
-        const arrayOfSprNumbers = await this.prisma.sPR.findMany({
-            select: {
-                spr_number: true
-            },
+		const trimmedSprNumber = sprNumber.trim(); 
+
+        let selectClause;
+        if (includeDetails) {
+            selectClause = { 
+                id: true,
+                spr_number: true, 
+                purpose: true,
+                notes: true,
+            }; 
+        } else {
+            selectClause = { spr_number: true };
+        }
+
+        const items = await this.prisma.sPR.findMany({
+            select: selectClause,
             where: {
                 spr_number: {
-                    contains: sprNumber.trim().toLowerCase(),
-                    mode: 'insensitive',
+                    startsWith: trimmedSprNumber
                 },
+                cancelled_at: null
             },
-            take: 5,
+            orderBy: {
+                spr_number: 'desc'
+            },
+            take: 10,
         });
 
-        return arrayOfSprNumbers;
+        return items;
     }
 
     async getStatus(id: string): Promise<APPROVAL_STATUS> {

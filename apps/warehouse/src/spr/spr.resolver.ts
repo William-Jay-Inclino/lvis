@@ -49,11 +49,12 @@ export class SprResolver {
         return this.sprService.findAll(page, pageSize, date_requested, requested_by_id);
     }
 
-    @Query(() => [SprNumber])
-    spr_numbers(
-        @Args('spr_number') spr_number: string
-    ): Promise<{ spr_number: string }[]> {
-        return this.sprService.findSprNumbers(spr_number);
+    @Query(() => [SPR])
+    sprs_by_spr_number(
+        @Args('spr_number') spr_number: string,
+        @Args('is_detail_included', { nullable: true }) is_detail_included?: boolean,
+    ){
+        return this.sprService.findSprsBySprNumber(spr_number, is_detail_included);
     }
 
     @Query(() => SPR)

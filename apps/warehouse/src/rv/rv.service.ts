@@ -342,14 +342,24 @@ export class RvService {
         };
     }
 
-    async findRvNumbers(rvNumber: string): Promise<{ rv_number: string; }[]> {
+    async findRvsByRvNumber(rvNumber: string, includeDetails: boolean = false) {
 
 		const trimmedRvNumber = rvNumber.trim(); 
 
-        const arrayOfRvNumbers = await this.prisma.rV.findMany({
-            select: {
-                rv_number: true
-            },
+        let selectClause;
+        if (includeDetails) {
+            selectClause = { 
+                id: true,
+                rv_number: true, 
+                purpose: true,
+                notes: true,
+            }; 
+        } else {
+            selectClause = { rv_number: true };
+        }
+
+        const items = await this.prisma.rV.findMany({
+            select: selectClause,
             where: {
                 rv_number: {
                     startsWith: trimmedRvNumber
@@ -362,7 +372,7 @@ export class RvService {
             take: 10,
         });
 
-        return arrayOfRvNumbers;
+        return items;
     }
 
     async getStatus(id: string): Promise<APPROVAL_STATUS> {
