@@ -47,11 +47,12 @@ export class MeqsResolver {
         return this.meqsService.findAll(page, pageSize, date_requested, requested_by_id);
     }
 
-    @Query(() => [MeqsNumber])
-    meqs_numbers(
-        @Args('meqs_number') meqs_number: string
-    ): Promise<{ meqs_number: string }[]> {
-        return this.meqsService.searchByMeqsNumber(meqs_number);
+    @Query(() => [MEQS])
+    meqs_by_meqs_number(
+        @Args('meqs_number') meqs_number: string,
+        @Args('is_detail_included', { nullable: true }) is_detail_included?: boolean,
+    ){
+        return this.meqsService.findMeqsByMeqsNumber(meqs_number, is_detail_included);
     }
 
     @Query(() => MEQS)

@@ -344,8 +344,16 @@ export class SprService {
             selectClause = { 
                 id: true,
                 spr_number: true, 
-                purpose: true,
-                notes: true,
+                canvass: {
+                    include: {
+                        canvass_items: {
+                            include: {
+                                unit: true,
+                                brand: true
+                            }
+                        }
+                    }
+                }
             }; 
         } else {
             selectClause = { spr_number: true };

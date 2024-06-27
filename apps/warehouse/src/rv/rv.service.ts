@@ -351,8 +351,16 @@ export class RvService {
             selectClause = { 
                 id: true,
                 rv_number: true, 
-                purpose: true,
-                notes: true,
+                canvass: {
+                    include: {
+                        canvass_items: {
+                            include: {
+                                unit: true,
+                                brand: true
+                            }
+                        }
+                    }
+                }
             }; 
         } else {
             selectClause = { rv_number: true };

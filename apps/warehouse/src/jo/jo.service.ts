@@ -344,8 +344,16 @@ export class JoService {
             selectClause = { 
                 id: true,
                 jo_number: true, 
-                purpose: true,
-                notes: true,
+                canvass: {
+                    include: {
+                        canvass_items: {
+                            include: {
+                                unit: true,
+                                brand: true
+                            }
+                        }
+                    }
+                }
             }; 
         } else {
             selectClause = { jo_number: true };

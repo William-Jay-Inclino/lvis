@@ -435,22 +435,36 @@ export class MeqsService {
 
     }
 
-    async searchByMeqsNumber(searchKeyword: string): Promise<{ meqs_number: string; }[]> {
+    async findMeqsByMeqsNumber(meqsNumber: string, includeDetails: boolean = false) {
 
-        const arrayOfMeqsNumbers = await this.prisma.mEQS.findMany({
-            select: {
-                meqs_number: true
-            },
+		const trimmedMeqsNumber = meqsNumber.trim(); 
+
+        let selectClause;
+        if (includeDetails) {
+            selectClause = { 
+                id: true,
+                meqs_number: true, 
+                notes: true,
+            }; 
+        } else {
+            selectClause = { meqs_number: true };
+        }
+
+        const items = await this.prisma.mEQS.findMany({
+            select: selectClause,
             where: {
                 meqs_number: {
-                    contains: searchKeyword.trim().toLowerCase(),
-                    mode: 'insensitive',
-                }
+                    startsWith: trimmedMeqsNumber
+                },
+                cancelled_at: null
             },
-            take: 5,
+            orderBy: {
+                meqs_number: 'desc'
+            },
+            take: 10,
         });
 
-        return arrayOfMeqsNumbers;
+        return items;
     }
 
     async forEmployeeCanceller(username: string): Promise<MEQS[]> {
