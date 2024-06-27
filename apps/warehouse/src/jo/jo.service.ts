@@ -335,22 +335,37 @@ export class JoService {
         };
     }
 
-    async findJoNumbers(joNumber: string): Promise<{ jo_number: string; }[]> {
+    async findJOsByJoNumber(joNumber: string, includeDetails: boolean = false) {
 
-        const arrayOfJoNumbers = await this.prisma.jO.findMany({
-            select: {
-                jo_number: true
-            },
+		const trimmedJoNumber = joNumber.trim(); 
+
+        let selectClause;
+        if (includeDetails) {
+            selectClause = { 
+                id: true,
+                jo_number: true, 
+                purpose: true,
+                notes: true,
+            }; 
+        } else {
+            selectClause = { jo_number: true };
+        }
+
+        const items = await this.prisma.jO.findMany({
+            select: selectClause,
             where: {
                 jo_number: {
-                    contains: joNumber.trim().toLowerCase(),
-                    mode: 'insensitive',
+                    startsWith: trimmedJoNumber
                 },
+                cancelled_at: null
             },
-            take: 5,
+            orderBy: {
+                jo_number: 'desc'
+            },
+            take: 10,
         });
 
-        return arrayOfJoNumbers;
+        return items;
     }
 
     async getStatus(id: string): Promise<APPROVAL_STATUS> {

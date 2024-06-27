@@ -50,11 +50,12 @@ export class JoResolver {
         return this.joService.findAll(page, pageSize, date_requested, requested_by_id);
     }
 
-    @Query(() => [JoNumber])
-    jo_numbers(
-        @Args('jo_number') jo_number: string
-    ): Promise<{ jo_number: string }[]> {
-        return this.joService.findJoNumbers(jo_number);
+    @Query(() => [JO])
+    jos_by_jo_number(
+        @Args('jo_number') jo_number: string,
+        @Args('is_detail_included', { nullable: true }) is_detail_included?: boolean,
+    ){
+        return this.joService.findJOsByJoNumber(jo_number, is_detail_included);
     }
 
     @Query(() => JO)
