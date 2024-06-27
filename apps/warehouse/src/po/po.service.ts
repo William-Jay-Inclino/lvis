@@ -310,24 +310,23 @@ export class PoService {
             selectClause = { 
                 id: true,
                 po_number: true, 
-                include: {
-                    meqs_supplier: {
-                        include: {
-                            supplier: true,
-                            meqs_supplier_items: {
-                                include: {
-                                    canvass_item: {
-                                        include: {
-                                            unit: true,
-                                            brand: true,
-                                            item: true
-                                        }
+                meqs_supplier: {
+                    include: {
+                        supplier: true,
+                        meqs_supplier_items: {
+                            include: {
+                                canvass_item: {
+                                    include: {
+                                        unit: true,
+                                        brand: true,
+                                        item: true
                                     }
                                 }
                             }
                         }
-                    },
-                }
+                    }
+                },
+                rrs: true
             }; 
         } else {
             selectClause = { po_number: true };

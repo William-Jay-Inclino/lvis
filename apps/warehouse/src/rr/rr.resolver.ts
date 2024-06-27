@@ -47,11 +47,12 @@ export class RrResolver {
         return this.rrService.findAll(page, pageSize, date_requested, requested_by_id);
     }
 
-    @Query(() => [RrNumber])
-    rr_numbers(
-        @Args('rr_number') rr_number: string
-    ): Promise<{ rr_number: string }[]> {
-        return this.rrService.findRrNumbers(rr_number);
+    @Query(() => [RR])
+    rrs_by_rr_number(
+        @Args('rr_number') rr_number: string,
+        @Args('is_detail_included', { nullable: true }) is_detail_included?: boolean,
+    ){
+        return this.rrService.findRRsByRrNumber(rr_number, is_detail_included);
     }
 
     @Query(() => RR)

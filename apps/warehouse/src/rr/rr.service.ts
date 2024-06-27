@@ -315,22 +315,35 @@ export class RrService {
         return item
     }
 
-    async findRrNumbers(rrNumber: string): Promise<{ rr_number: string; }[]> {
+    async findRRsByRrNumber(rrNumber: string, includeDetails: boolean = false) {
 
-        const arrayOfRrNumbers = await this.prisma.rR.findMany({
-            select: {
-                rr_number: true
-            },
+		const trimmedRrNumber = rrNumber.trim(); 
+
+        let selectClause;
+        if (includeDetails) {
+            selectClause = { 
+                id: true,
+                rr_number: true, 
+            }; 
+        } else {
+            selectClause = { rr_number: true };
+        }
+
+        const items = await this.prisma.rR.findMany({
+            select: selectClause,
             where: {
                 rr_number: {
-                    contains: rrNumber.trim().toLowerCase(),
-                    mode: 'insensitive',
-                }
+                    startsWith: trimmedRrNumber
+                },
+                cancelled_at: null
             },
-            take: 5,
+            orderBy: {
+                rr_number: 'desc'
+            },
+            take: 10,
         });
 
-        return arrayOfRrNumbers;
+        return items;
     }
 
     async getStatus(rr_id: string): Promise<APPROVAL_STATUS> {
