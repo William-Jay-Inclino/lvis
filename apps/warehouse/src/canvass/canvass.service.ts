@@ -195,19 +195,20 @@ export class CanvassService {
             };
         }
 
-        const items = await this.prisma.canvass.findMany({
-            include: this.includedFields,
-            where: whereCondition,
-            orderBy: {
-                rc_number: 'desc'
-            },
-            skip,
-            take: pageSize,
-        });
-
-        const totalItems = await this.prisma.canvass.count({
-            where: whereCondition
-        });
+        const [items, totalItems] = await this.prisma.$transaction([
+            this.prisma.canvass.findMany({
+                include: this.includedFields,
+                where: whereCondition,
+                orderBy: {
+                    rc_number: 'desc',
+                },
+                skip,
+                take: pageSize,
+            }),
+            this.prisma.canvass.count({
+                where: whereCondition,
+            }),
+        ]);
 
         return {
             data: items,
