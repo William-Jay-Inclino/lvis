@@ -301,22 +301,53 @@ export class PoService {
         return item
     }
 
-    async findPoNumbers(poNumber: string): Promise<{ po_number: string; }[]> {
+    async findPOsByPoNumber(poNumber: string, includeDetails: boolean = false) {
 
-        const arrayOfPoNumbers = await this.prisma.pO.findMany({
-            select: {
-                po_number: true
-            },
+		const trimmedPoNumber = poNumber.trim(); 
+
+        let selectClause;
+        if (includeDetails) {
+            selectClause = { 
+                id: true,
+                po_number: true, 
+                include: {
+                    meqs_supplier: {
+                        include: {
+                            supplier: true,
+                            meqs_supplier_items: {
+                                include: {
+                                    canvass_item: {
+                                        include: {
+                                            unit: true,
+                                            brand: true,
+                                            item: true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                }
+            }; 
+        } else {
+            selectClause = { po_number: true };
+        }
+
+        const items = await this.prisma.pO.findMany({
+            select: selectClause,
             where: {
                 po_number: {
-                    contains: poNumber.trim().toLowerCase(),
-                    mode: 'insensitive',
-                }
+                    startsWith: trimmedPoNumber
+                },
+                cancelled_at: null
             },
-            take: 5,
+            orderBy: {
+                po_number: 'desc'
+            },
+            take: 10,
         });
 
-        return arrayOfPoNumbers;
+        return items;
     }
 
     async getStatus(po_id: string): Promise<APPROVAL_STATUS> {

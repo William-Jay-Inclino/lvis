@@ -49,11 +49,12 @@ export class PoResolver {
         return this.poService.findAll(page, pageSize, date_requested, requested_by_id);
     }
 
-    @Query(() => [PoNumber])
-    po_numbers(
-        @Args('po_number') po_number: string
-    ): Promise<{ po_number: string }[]> {
-        return this.poService.findPoNumbers(po_number);
+    @Query(() => [PO])
+    pos_by_po_number(
+        @Args('po_number') po_number: string,
+        @Args('is_detail_included', { nullable: true }) is_detail_included?: boolean,
+    ){
+        return this.poService.findPOsByPoNumber(po_number, is_detail_included);
     }
 
     @Query(() => PO)
