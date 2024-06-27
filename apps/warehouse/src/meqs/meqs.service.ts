@@ -316,19 +316,20 @@ export class MeqsService {
             equals: null,
         };
 
-        const items = await this.prisma.mEQS.findMany({
-            include: this.includedFields,
-            where: whereCondition,
-            orderBy: {
-                meqs_number: 'desc'
-            },
-            skip,
-            take: pageSize,
-        })
-
-        const totalItems = await this.prisma.mEQS.count({
-            where: whereCondition,
-        });
+        const [items, totalItems] = await this.prisma.$transaction([
+            this.prisma.mEQS.findMany({
+                include: this.includedFields,
+                where: whereCondition,
+                orderBy: {
+                    meqs_number: 'desc'
+                },
+                skip,
+                take: pageSize,
+            }),
+            this.prisma.mEQS.count({
+                where: whereCondition,
+            }),
+        ]);
 
         return {
             data: items,

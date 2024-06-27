@@ -308,10 +308,6 @@ export class RvService {
 
         }
 
-        // if (requested_by_id) {
-        //     whereCondition = { canvass: { requested_by_id: requested_by_id } }
-        // }
-
         if (requested_by_id) {
             whereCondition = { ...whereCondition, canvass: { requested_by_id: requested_by_id } }
         }
@@ -320,19 +316,20 @@ export class RvService {
             equals: null,
         }
 
-        const items = await this.prisma.rV.findMany({
-            include: this.includedFields,
-            where: whereCondition,
-            orderBy: {
-                rv_number: 'desc'
-            },
-            skip,
-            take: pageSize,
-        });
-
-        const totalItems = await this.prisma.rV.count({
-            where: whereCondition,
-        });
+        const [items, totalItems] = await this.prisma.$transaction([
+            this.prisma.rV.findMany({
+                include: this.includedFields,
+                where: whereCondition,
+                orderBy: {
+                    rv_number: 'desc'
+                },
+                skip,
+                take: pageSize,
+            }),
+            this.prisma.rV.count({
+                where: whereCondition,
+            })
+        ])
 
         return {
             data: items,

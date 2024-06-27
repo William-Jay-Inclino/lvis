@@ -301,10 +301,6 @@ export class JoService {
             };
         }
 
-        // if (requested_by_id) {
-        //     whereCondition = { canvass: { requested_by_id: requested_by_id } }
-        // }
-
         if (requested_by_id) {
             whereCondition = { ...whereCondition, canvass: { requested_by_id: requested_by_id } }
         }
@@ -313,19 +309,20 @@ export class JoService {
             equals: null,
         }
 
-        const items = await this.prisma.jO.findMany({
-            include: this.includedFields,
-            where: whereCondition,
-            orderBy: {
-                jo_number: 'desc'
-            },
-            skip,
-            take: pageSize,
-        });
-
-        const totalItems = await this.prisma.jO.count({
-            where: whereCondition,
-        });
+        const [items, totalItems] = await this.prisma.$transaction([
+            this.prisma.jO.findMany({
+                include: this.includedFields,
+                where: whereCondition,
+                orderBy: {
+                    jo_number: 'desc'
+                },
+                skip,
+                take: pageSize,
+            }),
+            this.prisma.jO.count({
+                where: whereCondition,
+            })
+        ]);
 
         return {
             data: items,

@@ -233,19 +233,20 @@ export class PoService {
             equals: null,
         };
 
-        const items = await this.prisma.pO.findMany({
-            include: this.includedFields,
-            where: whereCondition,
-            orderBy: {
-                po_number: 'desc'
-            },
-            skip,
-            take: pageSize,
-        })
-
-        const totalItems = await this.prisma.pO.count({
-            where: whereCondition,
-        });
+        const [items, totalItems] = await this.prisma.$transaction([
+            this.prisma.pO.findMany({
+                include: this.includedFields,
+                where: whereCondition,
+                orderBy: {
+                    po_number: 'desc'
+                },
+                skip,
+                take: pageSize,
+            }),
+            this.prisma.pO.count({
+                where: whereCondition,
+            }),
+        ]);
 
         return {
             data: items,

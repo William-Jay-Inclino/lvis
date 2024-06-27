@@ -188,19 +188,20 @@ export class RrService {
             equals: null,
         };
 
-        const items = await this.prisma.rR.findMany({
-            include: this.includedFields,
-            where: whereCondition,
-            orderBy: {
-                rr_number: 'desc'
-            },
-            skip,
-            take: pageSize
-        })
-
-        const totalItems = await this.prisma.rR.count({
-            where: whereCondition,
-        });
+        const [items, totalItems] = await this.prisma.$transaction([
+            this.prisma.rR.findMany({
+                include: this.includedFields,
+                where: whereCondition,
+                orderBy: {
+                    rr_number: 'desc'
+                },
+                skip,
+                take: pageSize
+            }),
+            this.prisma.rR.count({
+                where: whereCondition,
+            }),
+        ]);
 
         return {
             data: items,

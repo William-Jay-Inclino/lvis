@@ -301,10 +301,6 @@ export class SprService {
             };
         }
 
-        // if (requested_by_id) {
-        //     whereCondition = { canvass: { requested_by_id: requested_by_id } }
-        // }
-
         if (requested_by_id) {
             whereCondition = { ...whereCondition, canvass: { requested_by_id: requested_by_id } }
         }
@@ -313,19 +309,20 @@ export class SprService {
             equals: null,
         }
 
-        const items = await this.prisma.sPR.findMany({
-            include: this.includedFields,
-            where: whereCondition,
-            orderBy: {
-                spr_number: 'desc'
-            },
-            skip,
-            take: pageSize,
-        });
-
-        const totalItems = await this.prisma.sPR.count({
-            where: whereCondition,
-        });
+        const [items, totalItems] = await this.prisma.$transaction([
+            this.prisma.sPR.findMany({
+                include: this.includedFields,
+                where: whereCondition,
+                orderBy: {
+                    spr_number: 'desc'
+                },
+                skip,
+                take: pageSize,
+            }),
+            this.prisma.sPR.count({
+                where: whereCondition,
+            }),
+        ]);
 
         return {
             data: items,
