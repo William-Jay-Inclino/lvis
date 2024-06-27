@@ -444,17 +444,15 @@ export class MeqsService {
             selectClause = { 
                 id: true,
                 meqs_number: true, 
-                include: {
-                    meqs_suppliers: {
-                        include: {
-                            supplier: true,
-                            meqs_supplier_items: {
-                                include: {
-                                    canvass_item: {
-                                        include: {
-                                            brand: true,
-                                            unit: true
-                                        }
+                meqs_suppliers: {
+                    include: {
+                        supplier: true,
+                        meqs_supplier_items: {
+                            include: {
+                                canvass_item: {
+                                    include: {
+                                        brand: true,
+                                        unit: true
                                     }
                                 }
                             }
