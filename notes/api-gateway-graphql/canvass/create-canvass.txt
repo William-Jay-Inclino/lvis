@@ -7,13 +7,11 @@ mutation {
       canvass_items: [
         {
           description: "item 1"
-          brand_id: "65380f9d-222d-4bca-9344-6a295ad317d9"
           unit_id: "f3bc815a-42ea-4be3-8cf5-c44fb0e891ac"
           quantity: 10
         },
         {
           description: "item21"
-          brand_id: null
           unit_id: "f3bc815a-42ea-4be3-8cf5-c44fb0e891ac"
           quantity: 20
         }
@@ -28,10 +26,6 @@ mutation {
     requested_by_id
     canvass_items {
       description
-      brand {
-        id
-        name
-      }
       unit {
         id
         name

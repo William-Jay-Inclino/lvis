@@ -24,7 +24,6 @@ export class MeqsService {
                     include: {
                         canvass_items: {
                             include: {
-                                brand: true,
                                 unit: true
                             }
                         }
@@ -38,7 +37,6 @@ export class MeqsService {
                     include: {
                         canvass_items: {
                             include: {
-                                brand: true,
                                 unit: true
                             }
                         }
@@ -52,7 +50,6 @@ export class MeqsService {
                     include: {
                         canvass_items: {
                             include: {
-                                brand: true,
                                 unit: true
                             }
                         }
@@ -73,7 +70,6 @@ export class MeqsService {
                     include: {
                         canvass_item: {
                             include: {
-                                brand: true,
                                 unit: true
                             }
                         }
@@ -452,7 +448,6 @@ export class MeqsService {
                             include: {
                                 canvass_item: {
                                     include: {
-                                        brand: true,
                                         unit: true
                                     }
                                 }

@@ -10,10 +10,6 @@ query {
       canvass_items {
         id
         description
-        brand {
-          id
-          name
-        }
         unit {
           id
           name

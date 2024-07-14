@@ -12,9 +12,6 @@ query{
       meqs_supplier_items{
         canvass_item{
           description
-          brand{
-            name
-          }
           unit{
             name
           }

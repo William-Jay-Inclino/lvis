@@ -627,7 +627,6 @@ export class PoPdfService {
                                 canvass_item: {
                                     include: {
                                         unit: true,
-                                        brand: true,
                                         item: true
                                     }
                                 }

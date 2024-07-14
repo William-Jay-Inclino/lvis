@@ -21,9 +21,6 @@ query {
           rr {
             rr_number
           }
-          item_brand {
-            name
-          }
           unit {
             name
           }
@@ -44,9 +41,6 @@ query {
         id
         rr {
           rr_number
-        }
-        item_brand {
-          name
         }
         unit {
           name

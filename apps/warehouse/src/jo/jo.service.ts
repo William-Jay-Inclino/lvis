@@ -26,7 +26,6 @@ export class JoService {
                 canvass_items: {
                     include: {
                         unit: true,
-                        brand: true
                     }
                 }
             }
@@ -346,7 +345,6 @@ export class JoService {
                         canvass_items: {
                             include: {
                                 unit: true,
-                                brand: true
                             }
                         }
                     }

@@ -385,7 +385,6 @@ export class MeqsPdfService {
                             include: {
                                 canvass_items: {
                                     include: {
-                                        brand: true,
                                         unit: true
                                     }
                                 }
@@ -399,7 +398,6 @@ export class MeqsPdfService {
                             include: {
                                 canvass_items: {
                                     include: {
-                                        brand: true,
                                         unit: true
                                     }
                                 }
@@ -413,7 +411,6 @@ export class MeqsPdfService {
                             include: {
                                 canvass_items: {
                                     include: {
-                                        brand: true,
                                         unit: true
                                     }
                                 }
@@ -428,7 +425,6 @@ export class MeqsPdfService {
                             include: {
                                 canvass_item: {
                                     include: {
-                                        brand: true,
                                         unit: true
                                     }
                                 }

@@ -24,7 +24,6 @@ export class RvApproverService {
                         canvass_items: {
                             include: {
                                 unit: true,
-                                brand: true
                             }
                         }
                     }

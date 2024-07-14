@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { BrandModule } from './brand/brand.module';
 import { GraphQLModule } from '@nestjs/graphql';
 import {
   ApolloFederationDriver,
@@ -41,7 +40,7 @@ import { JoModule } from './jo/jo.module';
 import { JoApproverModule } from './jo-approver/jo-approver.module';
 import { SprModule } from './spr/spr.module';
 import { SprApproverModule } from './spr-approver/spr-approver.module';
-import { PrometheusModule } from '@willsoto/nestjs-prometheus';
+// import { PrometheusModule } from '@willsoto/nestjs-prometheus';
 
 
 @Module({
@@ -54,7 +53,6 @@ import { PrometheusModule } from '@willsoto/nestjs-prometheus';
     }),
     EventEmitterModule.forRoot(),
     HttpModule,
-    BrandModule,
     AuthModule,
     SeederModule,
     PrismaModule,

@@ -126,12 +126,6 @@ export interface WarehousePermissions {
         update?: boolean,
         delete?: boolean,
     },
-    canManageItemBrand?: {
-        create?: boolean,
-        read?: boolean,
-        update?: boolean,
-        delete?: boolean,
-    },
 }
 
 export interface UserPermissions {

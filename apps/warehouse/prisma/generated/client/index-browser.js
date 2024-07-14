@@ -17,11 +17,11 @@ exports.$Enums = {}
 
 /**
  * Prisma Client JS version: 5.8.1
- * Query Engine version: 5675a3182f972f1a8f31d16eee6abf4fd54910e3
+ * Query Engine version: 34ace0eb2704183d2c05b60b52fba5c43c13f303
  */
 Prisma.prismaVersion = {
   client: "5.8.1",
-  engine: "5675a3182f972f1a8f31d16eee6abf4fd54910e3"
+  engine: "34ace0eb2704183d2c05b60b52fba5c43c13f303"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -125,7 +125,6 @@ exports.Prisma.CanvassScalarFieldEnum = {
 exports.Prisma.CanvassItemScalarFieldEnum = {
   id: 'id',
   canvass_id: 'canvass_id',
-  brand_id: 'brand_id',
   unit_id: 'unit_id',
   item_id: 'item_id',
   description: 'description',
@@ -460,17 +459,6 @@ exports.Prisma.UnitScalarFieldEnum = {
   deleted_at: 'deleted_at'
 };
 
-exports.Prisma.BrandScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  created_by: 'created_by',
-  updated_by: 'updated_by',
-  deleted_by: 'deleted_by',
-  created_at: 'created_at',
-  updated_at: 'updated_at',
-  deleted_at: 'deleted_at'
-};
-
 exports.Prisma.VehicleScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -523,7 +511,6 @@ exports.Prisma.ModelName = {
   ItemType: 'ItemType',
   Supplier: 'Supplier',
   Unit: 'Unit',
-  Brand: 'Brand',
   Vehicle: 'Vehicle'
 };
 

@@ -340,7 +340,6 @@ export class CanvassPdfService {
                 canvass_items: {
                     include: {
                         unit: true,
-                        brand: true,
                         item: true
                     }
                 },

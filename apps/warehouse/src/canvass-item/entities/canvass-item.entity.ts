@@ -1,5 +1,4 @@
 import { ObjectType, Field, Int, ID } from '@nestjs/graphql';
-import { Brand } from '../../brand/entities/brand.entity';
 import { Unit } from '../../unit/entities/unit.entity';
 import { MeqsSupplierItem } from '../../meqs-supplier-item/entities/meqs-supplier-item.entity';
 import { Canvass } from '../../canvass/entities/canvass.entity';
@@ -13,9 +12,6 @@ export class CanvassItem {
 
   @Field(() => String)
   canvass_id: string;
-
-  @Field(() => String, { nullable: true })
-  brand_id: string | null;
 
   @Field(() => String, { nullable: true })
   unit_id: string;
@@ -49,9 +45,6 @@ export class CanvassItem {
 
   @Field(() => Canvass)
   canvass: Canvass;
-
-  @Field(() => Brand, { nullable: true })
-  brand: Brand | null;
 
   @Field(() => Unit, { nullable: true })
   unit: Unit | null;

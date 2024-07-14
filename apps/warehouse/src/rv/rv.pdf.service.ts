@@ -1,4 +1,3 @@
-// pdf.service.ts
 
 import { Injectable, NotFoundException } from '@nestjs/common';
 import puppeteer from 'puppeteer';
@@ -387,7 +386,6 @@ export class RvPdfService {
                         canvass_items: {
                             include: {
                                 unit: true,
-                                brand: true
                             }
                         }
                     }

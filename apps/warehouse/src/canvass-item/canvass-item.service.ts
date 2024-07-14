@@ -33,7 +33,6 @@ export class CanvassItemService {
 
 		const data: Prisma.CanvassItemCreateInput = {
 			canvass: { connect: { id: input.canvass_id } },
-			brand: input.brand_id ? { connect: { id: input.brand_id } } : undefined,
 			unit: input.unit_id ? { connect: { id: input.unit_id } } : undefined,
 			item: input.item_id ? { connect: { id: input.item_id } } : undefined,
 			description: input.description,
@@ -64,7 +63,6 @@ export class CanvassItemService {
 				data,
 				include: {
 					unit: true,
-					brand: true,
 					item: true
 				}
 			})
@@ -116,7 +114,6 @@ export class CanvassItemService {
 			data,
 			include: {
 				unit: true,
-				brand: true
 			}
 		})
 
@@ -131,7 +128,6 @@ export class CanvassItemService {
 		const item = await this.prisma.canvassItem.findUnique({
 			include: {
 				unit: true,
-				brand: true,
 				item: true
 			},
 			where: { id }
@@ -156,7 +152,6 @@ export class CanvassItemService {
 
 		const data: Prisma.CanvassItemUpdateInput = {
 			description: input.description ?? existingItem.description,
-			brand: input.brand_id ? { connect: { id: input.brand_id } } : { disconnect: true },
 			unit: input.unit_id ? { connect: { id: input.unit_id } } : { disconnect: true },
 			item: input.item_id ? { connect: { id: input.item_id } } : { disconnect: true },
 			quantity: input.quantity,
@@ -170,7 +165,6 @@ export class CanvassItemService {
 			},
 			include: {
 				unit: true,
-				brand: true,
 				item: true
 			}
 		})

@@ -46,7 +46,6 @@ export class PoApproverService {
                                 canvass_item: {
                                     include: {
                                         unit: true,
-                                        brand: true
                                     }
                                 }
                             }

@@ -450,7 +450,6 @@ export class JoPdfService {
                         canvass_items: {
                             include: {
                                 unit: true,
-                                brand: true
                             }
                         }
                     }

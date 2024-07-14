@@ -26,7 +26,6 @@ export class MeqsApproverService {
                                 canvass_items: {
                                     include: {
                                         unit: true,
-                                        brand: true
                                     }
                                 }
                             }
@@ -40,7 +39,6 @@ export class MeqsApproverService {
                                 canvass_items: {
                                     include: {
                                         unit: true,
-                                        brand: true
                                     }
                                 }
                             }
@@ -54,7 +52,6 @@ export class MeqsApproverService {
                                 canvass_items: {
                                     include: {
                                         unit: true,
-                                        brand: true
                                     }
                                 }
                             }

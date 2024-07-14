@@ -47,7 +47,6 @@ export class PoService {
                         canvass_item: {
                             include: {
                                 unit: true,
-                                brand: true,
                                 item: true
                             }
                         }
@@ -319,7 +318,6 @@ export class PoService {
                                 canvass_item: {
                                     include: {
                                         unit: true,
-                                        brand: true,
                                         item: true
                                     }
                                 }

@@ -22,7 +22,6 @@ export class CanvassService {
         canvass_items: {
             include: {
                 unit: true,
-                brand: true,
                 item: true
             }
         },
@@ -113,7 +112,6 @@ export class CanvassService {
             canvass_items: {
                 create: input.canvass_items.map((item) => {
                     return {
-                        brand: item.brand_id ? { connect: { id: item.brand_id } } : undefined,
                         unit: item.unit_id ? { connect: { id: item.unit_id } } : undefined,
                         item: item.item_id ? { connect: { id: item.item_id } } : undefined,
                         description: item.description,

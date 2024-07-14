@@ -206,13 +206,6 @@ export function canAccess(user: User, module: MODULES, resolver: RESOLVERS): boo
             [RESOLVERS.updateItemType]: warehousePermissions.canManageItemType?.update ?? false,
             [RESOLVERS.removeItemType]: warehousePermissions.canManageItemType?.delete ?? false,
         },
-        [MODULES.ITEM_BRAND]: {
-            [RESOLVERS.createBrand]: warehousePermissions.canManageItemBrand?.create ?? false,
-            // [RESOLVERS.brands]: warehousePermissions.canManageItemBrand?.search ?? false,
-            // [RESOLVERS.brand]: warehousePermissions.canManageItemBrand?.viewDetails ?? false,
-            [RESOLVERS.updateBrand]: warehousePermissions.canManageItemBrand?.update ?? false,
-            [RESOLVERS.removeBrand]: warehousePermissions.canManageItemBrand?.delete ?? false,
-        },
     };
 
     return accessMap[module]?.[resolver] ?? false;

@@ -26,7 +26,6 @@ export class RvService {
                 canvass_items: {
                     include: {
                         unit: true,
-                        brand: true
                     }
                 }
             }
@@ -353,7 +352,6 @@ export class RvService {
                         canvass_items: {
                             include: {
                                 unit: true,
-                                brand: true
                             }
                         }
                     }

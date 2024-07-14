@@ -16,7 +16,6 @@ export class SeederService {
                 // this.seedStation(),
                 this.seedItemType(),
                 this.seedUnit(),
-                this.seedBrand(),
                 this.seedVehicle()
             ]
 
@@ -58,15 +57,6 @@ export class SeederService {
         console.log('seeding unit table...')
         try {
             return this.prisma.unit.createMany({ data: data.units })
-        } catch (error) {
-            console.error(error)
-        }
-    }
-
-    seedBrand() {
-        console.log('seeding brand table...')
-        try {
-            return this.prisma.brand.createMany({ data: data.brands })
         } catch (error) {
             console.error(error)
         }

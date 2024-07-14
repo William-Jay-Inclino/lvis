@@ -79,7 +79,6 @@ export class MeqsSupplierService {
                         canvass_item: {
                             include: {
                                 unit: true,
-                                brand: true,
                                 item: true
                             }
                         }
@@ -167,7 +166,6 @@ export class MeqsSupplierService {
                         canvass_item: {
                             include: {
                                 unit: true,
-                                brand: true,
                                 item: true
                             }
                         }

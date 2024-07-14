@@ -249,12 +249,6 @@ export const positions: Position[] = [
 //     },
 //     {
 //         id: faker.string.uuid(),
-//         name: 'Item Brand',
-//         feature_id: features[0].id,
-//         created_by: 'admin'
-//     },
-//     {
-//         id: faker.string.uuid(),
 //         name: 'Supplier',
 //         feature_id: features[0].id,
 //         created_by: 'admin'

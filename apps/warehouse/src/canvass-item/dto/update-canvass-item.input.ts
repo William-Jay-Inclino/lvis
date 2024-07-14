@@ -3,12 +3,7 @@ import { IsInt, IsOptional, IsString } from 'class-validator';
 
 @InputType()
 export class UpdateCanvassItemInput {
-
-  @Field(() => String, { nullable: true })
-  @IsOptional()
-  @IsString()
-  brand_id?: string;
-
+  
   @Field(() => String, { nullable: true })
   @IsOptional()
   @IsString()

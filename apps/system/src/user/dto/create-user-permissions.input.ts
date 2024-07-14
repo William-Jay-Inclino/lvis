@@ -86,11 +86,6 @@ export class WarehousePermissionsInput {
     @IsOptional()
     @IsBoolean()
     canManageItemType?: boolean;
-
-    @Field({ nullable: true })
-    @IsOptional()
-    @IsBoolean()
-    canManageItemBrand?: boolean;
 }
 
 @InputType()

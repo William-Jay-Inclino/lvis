@@ -12,11 +12,6 @@ export class CreateCanvassItemInput {
   @Field(() => String, { nullable: true })
   @IsOptional()
   @IsString()
-  brand_id?: string | null;
-
-  @Field(() => String, { nullable: true })
-  @IsOptional()
-  @IsString()
   unit_id?: string | null;
 
   @Field(() => String, { nullable: true })

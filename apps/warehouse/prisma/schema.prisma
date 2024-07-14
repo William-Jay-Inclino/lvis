@@ -37,7 +37,6 @@ model Canvass {
 model CanvassItem {
   id          String  @id @default(uuid())
   canvass_id  String
-  brand_id    String?
   unit_id     String?
   item_id     String?
   description String
@@ -51,11 +50,10 @@ model CanvassItem {
 
   meqs_supplier_items MEQSSupplierItem[]
   canvass             Canvass            @relation(fields: [canvass_id], references: [id], onDelete: Cascade)
-  brand               Brand?             @relation(fields: [brand_id], references: [id], onDelete: Restrict)
   unit                Unit?              @relation(fields: [unit_id], references: [id], onDelete: Restrict)
   item                Item?              @relation(fields: [item_id], references: [id], onDelete: Restrict)
 
-  @@index([canvass_id, brand_id, unit_id, item_id])
+  @@index([canvass_id, unit_id, item_id])
 
   @@map("canvass_item")
 }
@@ -612,23 +610,6 @@ model Unit {
   items         Item[]
 
   @@map("unit")
-}
-
-model Brand {
-  id   String @id @default(uuid())
-  name String
-
-  created_by String
-  updated_by String?
-  deleted_by String?
-
-  created_at DateTime  @default(now())
-  updated_at DateTime  @updatedAt
-  deleted_at DateTime?
-
-  canvass_items CanvassItem[]
-
-  @@map("brand")
 }
 
 model Vehicle {

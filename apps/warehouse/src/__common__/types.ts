@@ -1,10 +1,4 @@
 
-export interface Brand {
-    id: string
-    name: string
-    created_by: string
-}
-
 export interface Unit {
     id: string
     name: string
@@ -108,7 +102,6 @@ export enum MODULES {
     // ========= STOCK INVENTORY ========= 
     ITEM = 'ITEM',
     ITEM_TYPE = 'ITEM_TYPE',
-    ITEM_BRAND = 'ITEM_BRAND',
 
 }
 
@@ -222,14 +215,5 @@ export enum RESOLVERS {
     item_type = 'item_type',
     updateItemType = 'updateItemType',
     removeItemType = 'removeItemType',
-
-
-    // ========= ITEM BRAND ========= 
-    createBrand = 'createBrand',
-    brands = 'brands',
-    brand = 'brand',
-    updateBrand = 'updateBrand',
-    removeBrand = 'removeBrand',
-
 
 }

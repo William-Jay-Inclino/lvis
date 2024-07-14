@@ -519,7 +519,6 @@ export class RrPdfService {
                                         canvass_item: {
                                             include: {
                                                 unit: true,
-                                                brand: true,
                                                 item: true
                                             }
                                         }
@@ -541,7 +540,6 @@ export class RrPdfService {
                                 canvass_item: {
                                     include: {
                                         unit: true,
-                                        brand: true,
                                         item: true
                                     }
                                 }

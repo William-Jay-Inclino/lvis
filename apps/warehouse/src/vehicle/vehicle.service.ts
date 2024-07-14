@@ -1,7 +1,7 @@
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { CreateVehicleInput } from './dto/create-vehicle.input';
 import { PrismaService } from '../__prisma__/prisma.service';
-import { Brand, Prisma, Vehicle } from 'apps/warehouse/prisma/generated/client';
+import { Prisma, Vehicle } from 'apps/warehouse/prisma/generated/client';
 import { UpdateVehicleInput } from './dto/update-vehicle.input';
 import { WarehouseRemoveResponse } from '../__common__/classes';
 import { AuthUser } from '../__common__/auth-user.entity';

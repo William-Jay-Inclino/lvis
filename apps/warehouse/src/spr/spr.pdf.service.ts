@@ -397,7 +397,6 @@ export class SprPdfService {
                         canvass_items: {
                             include: {
                                 unit: true,
-                                brand: true
                             }
                         }
                     }

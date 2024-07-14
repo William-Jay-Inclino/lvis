@@ -48,7 +48,6 @@ export class RrService {
                                 canvass_item: {
                                     include: {
                                         unit: true,
-                                        brand: true,
                                         item: true
                                     }
                                 }
@@ -65,7 +64,6 @@ export class RrService {
                         canvass_item: {
                             include: {
                                 unit: true,
-                                brand: true,
                                 item: true
                             }
                         }
@@ -245,7 +243,6 @@ export class RrService {
                                         canvass_item: {
                                             include: {
                                                 unit: true,
-                                                brand: true,
                                                 item: true
                                             }
                                         }
@@ -262,7 +259,6 @@ export class RrService {
                                 canvass_item: {
                                     include: {
                                         unit: true,
-                                        brand: true,
                                         item: true
                                     }
                                 }

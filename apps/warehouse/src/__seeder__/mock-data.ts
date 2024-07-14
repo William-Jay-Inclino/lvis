@@ -1,5 +1,5 @@
 import { faker } from "@faker-js/faker"
-import { Brand, ItemType, Supplier, Unit, VAT_TYPE, Vehicle } from "../__common__/types"
+import { ItemType, Supplier, Unit, VAT_TYPE, Vehicle } from "../__common__/types"
 
 export const suppliers: Supplier[] = [
     {
@@ -119,24 +119,6 @@ export const units: Unit[] = [
     {
         id: faker.string.uuid(),
         name: 'Pallets',
-        created_by: 'admin'
-    }
-]
-
-export const brands: Brand[] = [
-    {
-        id: faker.string.uuid(),
-        name: 'Brand X',
-        created_by: 'admin'
-    },
-    {
-        id: faker.string.uuid(),
-        name: 'Brand Y',
-        created_by: 'admin'
-    },
-    {
-        id: faker.string.uuid(),
-        name: 'Brand Z',
         created_by: 'admin'
     }
 ]

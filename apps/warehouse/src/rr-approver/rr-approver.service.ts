@@ -63,7 +63,6 @@ export class RrApproverService {
                                         canvass_item: {
                                             include: {
                                                 unit: true,
-                                                brand: true
                                             }
                                         }
                                     }
