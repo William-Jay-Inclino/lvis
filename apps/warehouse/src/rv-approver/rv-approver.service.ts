@@ -2,7 +2,7 @@ import { BadRequestException, ForbiddenException, Injectable, Logger, NotFoundEx
 import { CreateRvApproverInput } from './dto/create-rv-approver.input';
 import { UpdateRvApproverInput } from './dto/update-rv-approver.input';
 import { PrismaService } from '../__prisma__/prisma.service';
-import { Prisma, RVApprover } from 'apps/warehouse/prisma/generated/client';
+import { Pending, Prisma, RVApprover } from 'apps/warehouse/prisma/generated/client';
 import { APPROVAL_STATUS } from '../__common__/types';
 import { AuthUser } from '../__common__/auth-user.entity';
 import { HttpService } from '@nestjs/axios';
@@ -10,6 +10,7 @@ import { catchError, firstValueFrom } from 'rxjs';
 import { WarehouseRemoveResponse } from '../__common__/classes';
 import { isAdmin, isValidApprovalStatus } from '../__common__/helpers';
 import { UpdateRVOrderResponse } from './entities/update-rv-order-response.entity';
+import { PURCHASING_TABLE } from '../__common__/constants';
 
 @Injectable()
 export class RvApproverService {
@@ -134,7 +135,13 @@ export class RvApproverService {
         const existingItem = await this.prisma.rVApprover.findUnique({
             where: { id },
             include: {
-                rv: true
+                rv: {
+                    select: {
+                        id: true,
+                        rv_number: true,
+                        rv_approvers: true
+                    }
+                },
             }
         })
 
@@ -207,21 +214,75 @@ export class RvApproverService {
 
         }
 
+        // if status is updated, update also pendings table.
+        if(input.status) {
+            const approverId = input.approver_id ?? existingItem.approver_id
+
+            const pending = await this.prisma.pending.findUnique({
+                where: {
+                    approver_id_reference_number_reference_table: {
+                        approver_id: approverId,
+                        reference_number: existingItem.rv.rv_number,
+                        reference_table: PURCHASING_TABLE.RV
+                    }
+                }
+            })
+
+            const updatePendingQuery = this.updatePendingTblQuery(input.status, approverId, existingItem.rv.rv_number, PURCHASING_TABLE.RV, pending)
+
+            if(updatePendingQuery) {
+                queries.push(updatePendingQuery)
+            }
+        }
+
+
         const result = await this.prisma.$transaction(queries)
 
         this.logger.log('Successfully updated RV Approver');
 
         return result[0]
 
-        // const updated = await this.prisma.rVApprover.update({
-        //     data,
-        //     where: { id },
-        //     include: this.includedFields,
-        // });
+    }
 
-        // this.logger.log('Successfully updated RV Approver');
-        // return updated;
+    private updatePendingTblQuery(status: APPROVAL_STATUS, approver_id: string, reference_number: string, reference_table: string, pending: Pending) {
 
+        console.log('updatePendingTblQuery');
+
+        // do nothing since already in pending table
+        if(status === APPROVAL_STATUS.PENDING && pending) {
+            console.log('No execution: approver already in pendings table');
+            return null
+        }
+
+        // do nothing since status is not pending and not found in pendings table
+        if(status !== APPROVAL_STATUS.PENDING && !pending) {
+            console.log('No execution: Status is not pending and not found in pendings table');
+            return null
+        }
+
+        // remove 
+        if(status !== APPROVAL_STATUS.PENDING && pending) {
+            console.log('removing approver in pendings table...');
+            return this.prisma.pending.delete({
+                where: {
+                    id: pending.id
+                }
+            })
+        }
+
+        // insert in pendings
+        if(status === APPROVAL_STATUS.PENDING && !pending) {
+            console.log('adding approver in pendings table...');
+            return this.prisma.pending.create({
+                data: {
+                    approver_id,
+                    reference_number,
+                    reference_table,
+                    description: `RV no. ${reference_number}`,
+                }
+            })
+        }
+        
     }
 
     async remove(id: string): Promise<WarehouseRemoveResponse> {

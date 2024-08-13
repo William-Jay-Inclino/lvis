@@ -17,11 +17,11 @@ exports.$Enums = {}
 
 /**
  * Prisma Client JS version: 5.8.1
- * Query Engine version: 34ace0eb2704183d2c05b60b52fba5c43c13f303
+ * Query Engine version: 4c784e32044a8a016d99474bd02a3b6123742169
  */
 Prisma.prismaVersion = {
   client: "5.8.1",
-  engine: "34ace0eb2704183d2c05b60b52fba5c43c13f303"
+  engine: "4c784e32044a8a016d99474bd02a3b6123742169"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -106,6 +106,15 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   RepeatableRead: 'RepeatableRead',
   Serializable: 'Serializable'
 });
+
+exports.Prisma.PendingScalarFieldEnum = {
+  id: 'id',
+  approver_id: 'approver_id',
+  reference_number: 'reference_number',
+  reference_table: 'reference_table',
+  description: 'description',
+  transaction_date: 'transaction_date'
+};
 
 exports.Prisma.CanvassScalarFieldEnum = {
   id: 'id',
@@ -488,6 +497,7 @@ exports.Prisma.NullsOrder = {
 
 
 exports.Prisma.ModelName = {
+  Pending: 'Pending',
   Canvass: 'Canvass',
   CanvassItem: 'CanvassItem',
   RV: 'RV',

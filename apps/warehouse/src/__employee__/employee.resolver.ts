@@ -15,6 +15,8 @@ import { PendingApproval } from './entities/pending-approval.entity';
 import { SPRApprover } from '../spr-approver/entities/spr-approver.entity';
 import { SprApproverService } from '../spr-approver/spr-approver.service';
 import { JoApproverService } from '../jo-approver/jo-approver.service';
+import { Pending } from '../pending/entities/pending.entity';
+import { PendingService } from '../pending/pending.service';
 
 @Resolver(() => Employee)
 export class EmployeeResolver {
@@ -27,6 +29,7 @@ export class EmployeeResolver {
         private readonly meqsApproverService: MeqsApproverService,
         private readonly poApproverService: PoApproverService,
         private readonly rrApproverService: RrApproverService,
+        private readonly pendingService: PendingService,
     ) { }
 
     @ResolveField(() => [Canvass])
@@ -102,40 +105,56 @@ export class EmployeeResolver {
         })
     }
 
+    // @ResolveField(() => Int)
+    // async total_pending_approvals(@Parent() employee: Employee) {
+
+    //     console.log('total_pending_approvals()')
+
+    //     const [
+    //         rvPendingApprovals,
+    //         sprPendingApprovals,
+    //         joPendingApprovals,
+    //         meqsPendingApprovals,
+    //         poPendingApprovals,
+    //         rrPendingApprovals
+    //     ] = await Promise.all([
+    //         this.rvApproverService.forEmployeePendingApprovals(employee.id),
+    //         this.sprApproverService.forEmployeePendingApprovals(employee.id),
+    //         this.joApproverService.forEmployeePendingApprovals(employee.id),
+    //         this.meqsApproverService.forEmployeePendingApprovals(employee.id),
+    //         this.poApproverService.forEmployeePendingApprovals(employee.id),
+    //         this.rrApproverService.forEmployeePendingApprovals(employee.id)
+    //     ]);
+
+    //     console.log('rvPendingApprovals', rvPendingApprovals)
+
+    //     const pendingApprovals = this.employeeService.getAllPendingApprovals({
+    //         rvApprovals: rvPendingApprovals,
+    //         sprApprovals: sprPendingApprovals,
+    //         joApprovals: joPendingApprovals,
+    //         meqsApprovals: meqsPendingApprovals,
+    //         poApprovals: poPendingApprovals,
+    //         rrApprovals: rrPendingApprovals
+    //     })
+
+    //     return pendingApprovals.length
+
+    // }
+
+    @ResolveField(() => [Pending])
+    async pending_approvals2(@Parent() employee: Employee) {
+
+        console.log('pending_approvals2()')
+        return this.pendingService.findPendingsByApproverId(employee.id)
+        
+    }
+
     @ResolveField(() => Int)
     async total_pending_approvals(@Parent() employee: Employee) {
 
-        console.log('total_pending_approvals()')
-
-        const [
-            rvPendingApprovals,
-            sprPendingApprovals,
-            joPendingApprovals,
-            meqsPendingApprovals,
-            poPendingApprovals,
-            rrPendingApprovals
-        ] = await Promise.all([
-            this.rvApproverService.forEmployeePendingApprovals(employee.id),
-            this.sprApproverService.forEmployeePendingApprovals(employee.id),
-            this.joApproverService.forEmployeePendingApprovals(employee.id),
-            this.meqsApproverService.forEmployeePendingApprovals(employee.id),
-            this.poApproverService.forEmployeePendingApprovals(employee.id),
-            this.rrApproverService.forEmployeePendingApprovals(employee.id)
-        ]);
-
-        console.log('rvPendingApprovals', rvPendingApprovals)
-
-        const pendingApprovals = this.employeeService.getAllPendingApprovals({
-            rvApprovals: rvPendingApprovals,
-            sprApprovals: sprPendingApprovals,
-            joApprovals: joPendingApprovals,
-            meqsApprovals: meqsPendingApprovals,
-            poApprovals: poPendingApprovals,
-            rrApprovals: rrPendingApprovals
-        })
-
-        return pendingApprovals.length
-
+        console.log('total_pending_approvals2()')
+        return this.pendingService.getTotalPendingsByApproverId(employee.id)
+        
     }
 
 }

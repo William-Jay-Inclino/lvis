@@ -41,6 +41,7 @@ import { JoApproverModule } from './jo-approver/jo-approver.module';
 import { SprModule } from './spr/spr.module';
 import { SprApproverModule } from './spr-approver/spr-approver.module';
 // import { PrometheusModule } from '@willsoto/nestjs-prometheus';
+import { PendingModule } from './pending/pending.module';
 
 
 @Module({
@@ -81,6 +82,7 @@ import { SprApproverModule } from './spr-approver/spr-approver.module';
     JoApproverModule,
     SprModule,
     SprApproverModule,
+    PendingModule,
     // PrometheusModule.register()
   ],
   controllers: [],

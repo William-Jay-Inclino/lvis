@@ -19,3 +19,13 @@ export const VAT = {
         label: 'EXEMPT'
     },
 }
+
+
+export const enum PURCHASING_TABLE{
+    RV = 'request_voucher',
+    SPR = 'spare_parts_request',
+    JO = 'job_order',
+    MEQS = 'material_equipment_quotation_summary',
+    PO = 'purchase_order',
+    RR = 'receiving_report'
+}

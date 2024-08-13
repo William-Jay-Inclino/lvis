@@ -8,6 +8,20 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Pending {
+  id               Int      @id @default(autoincrement())
+  approver_id      String
+  reference_number      String
+  reference_table   String
+  description      String
+  transaction_date  DateTime @default(now())
+
+
+  @@unique([approver_id, reference_number, reference_table])
+  @@index([approver_id, transaction_date])
+  @@map("pending")
+}
+
 model Canvass {
   id              String   @id @default(uuid())
   rc_number       String   @unique

@@ -14,6 +14,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
 
 /**
+ * Model Pending
+ * 
+ */
+export type Pending = $Result.DefaultSelection<Prisma.$PendingPayload>
+/**
  * Model Canvass
  * 
  */
@@ -141,8 +146,8 @@ export type Vehicle = $Result.DefaultSelection<Prisma.$VehiclePayload>
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Canvasses
- * const canvasses = await prisma.canvass.findMany()
+ * // Fetch zero or more Pendings
+ * const pendings = await prisma.pending.findMany()
  * ```
  *
  * 
@@ -162,8 +167,8 @@ export class PrismaClient<
    * @example
    * ```
    * const prisma = new PrismaClient()
-   * // Fetch zero or more Canvasses
-   * const canvasses = await prisma.canvass.findMany()
+   * // Fetch zero or more Pendings
+   * const pendings = await prisma.pending.findMany()
    * ```
    *
    * 
@@ -257,6 +262,16 @@ export class PrismaClient<
   $extends: $Extensions.ExtendsHook<'extends', Prisma.TypeMapCb, ExtArgs>
 
       /**
+   * `prisma.pending`: Exposes CRUD operations for the **Pending** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Pendings
+    * const pendings = await prisma.pending.findMany()
+    * ```
+    */
+  get pending(): Prisma.PendingDelegate<ExtArgs>;
+
+  /**
    * `prisma.canvass`: Exposes CRUD operations for the **Canvass** model.
     * Example usage:
     * ```ts
@@ -553,7 +568,7 @@ export namespace Prisma {
 
   /**
    * Prisma Client JS version: 5.8.1
-   * Query Engine version: 34ace0eb2704183d2c05b60b52fba5c43c13f303
+   * Query Engine version: 4c784e32044a8a016d99474bd02a3b6123742169
    */
   export type PrismaVersion = {
     client: string
@@ -965,6 +980,7 @@ export namespace Prisma {
 
 
   export const ModelName: {
+    Pending: 'Pending',
     Canvass: 'Canvass',
     CanvassItem: 'CanvassItem',
     RV: 'RV',
@@ -1005,10 +1021,76 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'canvass' | 'canvassItem' | 'rV' | 'rVApprover' | 'jO' | 'jOApprover' | 'sPR' | 'sPRApprover' | 'mEQS' | 'mEQSSupplier' | 'mEQSSupplierItem' | 'mEQSSupplierAttachment' | 'mEQSApprover' | 'pO' | 'pOApprover' | 'rR' | 'rRApprover' | 'rRItem' | 'item' | 'itemTransaction' | 'itemType' | 'supplier' | 'unit' | 'vehicle'
+      modelProps: 'pending' | 'canvass' | 'canvassItem' | 'rV' | 'rVApprover' | 'jO' | 'jOApprover' | 'sPR' | 'sPRApprover' | 'mEQS' | 'mEQSSupplier' | 'mEQSSupplierItem' | 'mEQSSupplierAttachment' | 'mEQSApprover' | 'pO' | 'pOApprover' | 'rR' | 'rRApprover' | 'rRItem' | 'item' | 'itemTransaction' | 'itemType' | 'supplier' | 'unit' | 'vehicle'
       txIsolationLevel: Prisma.TransactionIsolationLevel
     },
     model: {
+      Pending: {
+        payload: Prisma.$PendingPayload<ExtArgs>
+        fields: Prisma.PendingFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PendingFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$PendingPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PendingFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$PendingPayload>
+          }
+          findFirst: {
+            args: Prisma.PendingFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$PendingPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PendingFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$PendingPayload>
+          }
+          findMany: {
+            args: Prisma.PendingFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$PendingPayload>[]
+          }
+          create: {
+            args: Prisma.PendingCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$PendingPayload>
+          }
+          createMany: {
+            args: Prisma.PendingCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.PendingDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$PendingPayload>
+          }
+          update: {
+            args: Prisma.PendingUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$PendingPayload>
+          }
+          deleteMany: {
+            args: Prisma.PendingDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PendingUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.PendingUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$PendingPayload>
+          }
+          aggregate: {
+            args: Prisma.PendingAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregatePending>
+          }
+          groupBy: {
+            args: Prisma.PendingGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<PendingGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PendingCountArgs<ExtArgs>,
+            result: $Utils.Optional<PendingCountAggregateOutputType> | number
+          }
+        }
+      }
       Canvass: {
         payload: Prisma.$CanvassPayload<ExtArgs>
         fields: Prisma.CanvassFieldRefs
@@ -3310,6 +3392,921 @@ export namespace Prisma {
   /**
    * Models
    */
+
+  /**
+   * Model Pending
+   */
+
+  export type AggregatePending = {
+    _count: PendingCountAggregateOutputType | null
+    _avg: PendingAvgAggregateOutputType | null
+    _sum: PendingSumAggregateOutputType | null
+    _min: PendingMinAggregateOutputType | null
+    _max: PendingMaxAggregateOutputType | null
+  }
+
+  export type PendingAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type PendingSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type PendingMinAggregateOutputType = {
+    id: number | null
+    approver_id: string | null
+    reference_number: string | null
+    reference_table: string | null
+    description: string | null
+    transaction_date: Date | null
+  }
+
+  export type PendingMaxAggregateOutputType = {
+    id: number | null
+    approver_id: string | null
+    reference_number: string | null
+    reference_table: string | null
+    description: string | null
+    transaction_date: Date | null
+  }
+
+  export type PendingCountAggregateOutputType = {
+    id: number
+    approver_id: number
+    reference_number: number
+    reference_table: number
+    description: number
+    transaction_date: number
+    _all: number
+  }
+
+
+  export type PendingAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type PendingSumAggregateInputType = {
+    id?: true
+  }
+
+  export type PendingMinAggregateInputType = {
+    id?: true
+    approver_id?: true
+    reference_number?: true
+    reference_table?: true
+    description?: true
+    transaction_date?: true
+  }
+
+  export type PendingMaxAggregateInputType = {
+    id?: true
+    approver_id?: true
+    reference_number?: true
+    reference_table?: true
+    description?: true
+    transaction_date?: true
+  }
+
+  export type PendingCountAggregateInputType = {
+    id?: true
+    approver_id?: true
+    reference_number?: true
+    reference_table?: true
+    description?: true
+    transaction_date?: true
+    _all?: true
+  }
+
+  export type PendingAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Pending to aggregate.
+     */
+    where?: PendingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Pendings to fetch.
+     */
+    orderBy?: PendingOrderByWithRelationInput | PendingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PendingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Pendings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Pendings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Pendings
+    **/
+    _count?: true | PendingCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PendingAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PendingSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PendingMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PendingMaxAggregateInputType
+  }
+
+  export type GetPendingAggregateType<T extends PendingAggregateArgs> = {
+        [P in keyof T & keyof AggregatePending]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePending[P]>
+      : GetScalarType<T[P], AggregatePending[P]>
+  }
+
+
+
+
+  export type PendingGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PendingWhereInput
+    orderBy?: PendingOrderByWithAggregationInput | PendingOrderByWithAggregationInput[]
+    by: PendingScalarFieldEnum[] | PendingScalarFieldEnum
+    having?: PendingScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PendingCountAggregateInputType | true
+    _avg?: PendingAvgAggregateInputType
+    _sum?: PendingSumAggregateInputType
+    _min?: PendingMinAggregateInputType
+    _max?: PendingMaxAggregateInputType
+  }
+
+  export type PendingGroupByOutputType = {
+    id: number
+    approver_id: string
+    reference_number: string
+    reference_table: string
+    description: string
+    transaction_date: Date
+    _count: PendingCountAggregateOutputType | null
+    _avg: PendingAvgAggregateOutputType | null
+    _sum: PendingSumAggregateOutputType | null
+    _min: PendingMinAggregateOutputType | null
+    _max: PendingMaxAggregateOutputType | null
+  }
+
+  type GetPendingGroupByPayload<T extends PendingGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PendingGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PendingGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PendingGroupByOutputType[P]>
+            : GetScalarType<T[P], PendingGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PendingSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    approver_id?: boolean
+    reference_number?: boolean
+    reference_table?: boolean
+    description?: boolean
+    transaction_date?: boolean
+  }, ExtArgs["result"]["pending"]>
+
+  export type PendingSelectScalar = {
+    id?: boolean
+    approver_id?: boolean
+    reference_number?: boolean
+    reference_table?: boolean
+    description?: boolean
+    transaction_date?: boolean
+  }
+
+
+  export type $PendingPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Pending"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      approver_id: string
+      reference_number: string
+      reference_table: string
+      description: string
+      transaction_date: Date
+    }, ExtArgs["result"]["pending"]>
+    composites: {}
+  }
+
+
+  type PendingGetPayload<S extends boolean | null | undefined | PendingDefaultArgs> = $Result.GetResult<Prisma.$PendingPayload, S>
+
+  type PendingCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<PendingFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: PendingCountAggregateInputType | true
+    }
+
+  export interface PendingDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Pending'], meta: { name: 'Pending' } }
+    /**
+     * Find zero or one Pending that matches the filter.
+     * @param {PendingFindUniqueArgs} args - Arguments to find a Pending
+     * @example
+     * // Get one Pending
+     * const pending = await prisma.pending.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends PendingFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, PendingFindUniqueArgs<ExtArgs>>
+    ): Prisma__PendingClient<$Result.GetResult<Prisma.$PendingPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one Pending that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {PendingFindUniqueOrThrowArgs} args - Arguments to find a Pending
+     * @example
+     * // Get one Pending
+     * const pending = await prisma.pending.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends PendingFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, PendingFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__PendingClient<$Result.GetResult<Prisma.$PendingPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first Pending that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PendingFindFirstArgs} args - Arguments to find a Pending
+     * @example
+     * // Get one Pending
+     * const pending = await prisma.pending.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends PendingFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, PendingFindFirstArgs<ExtArgs>>
+    ): Prisma__PendingClient<$Result.GetResult<Prisma.$PendingPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first Pending that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PendingFindFirstOrThrowArgs} args - Arguments to find a Pending
+     * @example
+     * // Get one Pending
+     * const pending = await prisma.pending.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends PendingFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, PendingFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__PendingClient<$Result.GetResult<Prisma.$PendingPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more Pendings that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PendingFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Pendings
+     * const pendings = await prisma.pending.findMany()
+     * 
+     * // Get first 10 Pendings
+     * const pendings = await prisma.pending.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const pendingWithIdOnly = await prisma.pending.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends PendingFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, PendingFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PendingPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a Pending.
+     * @param {PendingCreateArgs} args - Arguments to create a Pending.
+     * @example
+     * // Create one Pending
+     * const Pending = await prisma.pending.create({
+     *   data: {
+     *     // ... data to create a Pending
+     *   }
+     * })
+     * 
+    **/
+    create<T extends PendingCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, PendingCreateArgs<ExtArgs>>
+    ): Prisma__PendingClient<$Result.GetResult<Prisma.$PendingPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many Pendings.
+     *     @param {PendingCreateManyArgs} args - Arguments to create many Pendings.
+     *     @example
+     *     // Create many Pendings
+     *     const pending = await prisma.pending.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends PendingCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, PendingCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Pending.
+     * @param {PendingDeleteArgs} args - Arguments to delete one Pending.
+     * @example
+     * // Delete one Pending
+     * const Pending = await prisma.pending.delete({
+     *   where: {
+     *     // ... filter to delete one Pending
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends PendingDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, PendingDeleteArgs<ExtArgs>>
+    ): Prisma__PendingClient<$Result.GetResult<Prisma.$PendingPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one Pending.
+     * @param {PendingUpdateArgs} args - Arguments to update one Pending.
+     * @example
+     * // Update one Pending
+     * const pending = await prisma.pending.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends PendingUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, PendingUpdateArgs<ExtArgs>>
+    ): Prisma__PendingClient<$Result.GetResult<Prisma.$PendingPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more Pendings.
+     * @param {PendingDeleteManyArgs} args - Arguments to filter Pendings to delete.
+     * @example
+     * // Delete a few Pendings
+     * const { count } = await prisma.pending.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends PendingDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, PendingDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Pendings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PendingUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Pendings
+     * const pending = await prisma.pending.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends PendingUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, PendingUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Pending.
+     * @param {PendingUpsertArgs} args - Arguments to update or create a Pending.
+     * @example
+     * // Update or create a Pending
+     * const pending = await prisma.pending.upsert({
+     *   create: {
+     *     // ... data to create a Pending
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Pending we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends PendingUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, PendingUpsertArgs<ExtArgs>>
+    ): Prisma__PendingClient<$Result.GetResult<Prisma.$PendingPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of Pendings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PendingCountArgs} args - Arguments to filter Pendings to count.
+     * @example
+     * // Count the number of Pendings
+     * const count = await prisma.pending.count({
+     *   where: {
+     *     // ... the filter for the Pendings we want to count
+     *   }
+     * })
+    **/
+    count<T extends PendingCountArgs>(
+      args?: Subset<T, PendingCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PendingCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Pending.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PendingAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PendingAggregateArgs>(args: Subset<T, PendingAggregateArgs>): Prisma.PrismaPromise<GetPendingAggregateType<T>>
+
+    /**
+     * Group by Pending.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PendingGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PendingGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PendingGroupByArgs['orderBy'] }
+        : { orderBy?: PendingGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PendingGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPendingGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Pending model
+   */
+  readonly fields: PendingFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Pending.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PendingClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the Pending model
+   */ 
+  interface PendingFieldRefs {
+    readonly id: FieldRef<"Pending", 'Int'>
+    readonly approver_id: FieldRef<"Pending", 'String'>
+    readonly reference_number: FieldRef<"Pending", 'String'>
+    readonly reference_table: FieldRef<"Pending", 'String'>
+    readonly description: FieldRef<"Pending", 'String'>
+    readonly transaction_date: FieldRef<"Pending", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * Pending findUnique
+   */
+  export type PendingFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pending
+     */
+    select?: PendingSelect<ExtArgs> | null
+    /**
+     * Filter, which Pending to fetch.
+     */
+    where: PendingWhereUniqueInput
+  }
+
+
+  /**
+   * Pending findUniqueOrThrow
+   */
+  export type PendingFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pending
+     */
+    select?: PendingSelect<ExtArgs> | null
+    /**
+     * Filter, which Pending to fetch.
+     */
+    where: PendingWhereUniqueInput
+  }
+
+
+  /**
+   * Pending findFirst
+   */
+  export type PendingFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pending
+     */
+    select?: PendingSelect<ExtArgs> | null
+    /**
+     * Filter, which Pending to fetch.
+     */
+    where?: PendingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Pendings to fetch.
+     */
+    orderBy?: PendingOrderByWithRelationInput | PendingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Pendings.
+     */
+    cursor?: PendingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Pendings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Pendings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Pendings.
+     */
+    distinct?: PendingScalarFieldEnum | PendingScalarFieldEnum[]
+  }
+
+
+  /**
+   * Pending findFirstOrThrow
+   */
+  export type PendingFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pending
+     */
+    select?: PendingSelect<ExtArgs> | null
+    /**
+     * Filter, which Pending to fetch.
+     */
+    where?: PendingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Pendings to fetch.
+     */
+    orderBy?: PendingOrderByWithRelationInput | PendingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Pendings.
+     */
+    cursor?: PendingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Pendings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Pendings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Pendings.
+     */
+    distinct?: PendingScalarFieldEnum | PendingScalarFieldEnum[]
+  }
+
+
+  /**
+   * Pending findMany
+   */
+  export type PendingFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pending
+     */
+    select?: PendingSelect<ExtArgs> | null
+    /**
+     * Filter, which Pendings to fetch.
+     */
+    where?: PendingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Pendings to fetch.
+     */
+    orderBy?: PendingOrderByWithRelationInput | PendingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Pendings.
+     */
+    cursor?: PendingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Pendings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Pendings.
+     */
+    skip?: number
+    distinct?: PendingScalarFieldEnum | PendingScalarFieldEnum[]
+  }
+
+
+  /**
+   * Pending create
+   */
+  export type PendingCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pending
+     */
+    select?: PendingSelect<ExtArgs> | null
+    /**
+     * The data needed to create a Pending.
+     */
+    data: XOR<PendingCreateInput, PendingUncheckedCreateInput>
+  }
+
+
+  /**
+   * Pending createMany
+   */
+  export type PendingCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Pendings.
+     */
+    data: PendingCreateManyInput | PendingCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * Pending update
+   */
+  export type PendingUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pending
+     */
+    select?: PendingSelect<ExtArgs> | null
+    /**
+     * The data needed to update a Pending.
+     */
+    data: XOR<PendingUpdateInput, PendingUncheckedUpdateInput>
+    /**
+     * Choose, which Pending to update.
+     */
+    where: PendingWhereUniqueInput
+  }
+
+
+  /**
+   * Pending updateMany
+   */
+  export type PendingUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Pendings.
+     */
+    data: XOR<PendingUpdateManyMutationInput, PendingUncheckedUpdateManyInput>
+    /**
+     * Filter which Pendings to update
+     */
+    where?: PendingWhereInput
+  }
+
+
+  /**
+   * Pending upsert
+   */
+  export type PendingUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pending
+     */
+    select?: PendingSelect<ExtArgs> | null
+    /**
+     * The filter to search for the Pending to update in case it exists.
+     */
+    where: PendingWhereUniqueInput
+    /**
+     * In case the Pending found by the `where` argument doesn't exist, create a new Pending with this data.
+     */
+    create: XOR<PendingCreateInput, PendingUncheckedCreateInput>
+    /**
+     * In case the Pending was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PendingUpdateInput, PendingUncheckedUpdateInput>
+  }
+
+
+  /**
+   * Pending delete
+   */
+  export type PendingDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pending
+     */
+    select?: PendingSelect<ExtArgs> | null
+    /**
+     * Filter which Pending to delete.
+     */
+    where: PendingWhereUniqueInput
+  }
+
+
+  /**
+   * Pending deleteMany
+   */
+  export type PendingDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Pendings to delete
+     */
+    where?: PendingWhereInput
+  }
+
+
+  /**
+   * Pending without action
+   */
+  export type PendingDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Pending
+     */
+    select?: PendingSelect<ExtArgs> | null
+  }
+
+
 
   /**
    * Model Canvass
@@ -28684,6 +29681,18 @@ export namespace Prisma {
   export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
+  export const PendingScalarFieldEnum: {
+    id: 'id',
+    approver_id: 'approver_id',
+    reference_number: 'reference_number',
+    reference_table: 'reference_table',
+    description: 'description',
+    transaction_date: 'transaction_date'
+  };
+
+  export type PendingScalarFieldEnum = (typeof PendingScalarFieldEnum)[keyof typeof PendingScalarFieldEnum]
+
+
   export const CanvassScalarFieldEnum: {
     id: 'id',
     rc_number: 'rc_number',
@@ -29150,6 +30159,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Int'
+   */
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int[]'
+   */
+  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
    * Reference to a field of type 'String'
    */
   export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
@@ -29178,20 +30201,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Int'
-   */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
-    
-
-
-  /**
-   * Reference to a field of type 'Int[]'
-   */
-  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
-    
-
-
-  /**
    * Reference to a field of type 'Boolean'
    */
   export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
@@ -29214,6 +30223,66 @@ export namespace Prisma {
    * Deep Input Types
    */
 
+
+  export type PendingWhereInput = {
+    AND?: PendingWhereInput | PendingWhereInput[]
+    OR?: PendingWhereInput[]
+    NOT?: PendingWhereInput | PendingWhereInput[]
+    id?: IntFilter<"Pending"> | number
+    approver_id?: StringFilter<"Pending"> | string
+    reference_number?: StringFilter<"Pending"> | string
+    reference_table?: StringFilter<"Pending"> | string
+    description?: StringFilter<"Pending"> | string
+    transaction_date?: DateTimeFilter<"Pending"> | Date | string
+  }
+
+  export type PendingOrderByWithRelationInput = {
+    id?: SortOrder
+    approver_id?: SortOrder
+    reference_number?: SortOrder
+    reference_table?: SortOrder
+    description?: SortOrder
+    transaction_date?: SortOrder
+  }
+
+  export type PendingWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    approver_id_reference_number_reference_table?: PendingApprover_idReference_numberReference_tableCompoundUniqueInput
+    AND?: PendingWhereInput | PendingWhereInput[]
+    OR?: PendingWhereInput[]
+    NOT?: PendingWhereInput | PendingWhereInput[]
+    approver_id?: StringFilter<"Pending"> | string
+    reference_number?: StringFilter<"Pending"> | string
+    reference_table?: StringFilter<"Pending"> | string
+    description?: StringFilter<"Pending"> | string
+    transaction_date?: DateTimeFilter<"Pending"> | Date | string
+  }, "id" | "approver_id_reference_number_reference_table">
+
+  export type PendingOrderByWithAggregationInput = {
+    id?: SortOrder
+    approver_id?: SortOrder
+    reference_number?: SortOrder
+    reference_table?: SortOrder
+    description?: SortOrder
+    transaction_date?: SortOrder
+    _count?: PendingCountOrderByAggregateInput
+    _avg?: PendingAvgOrderByAggregateInput
+    _max?: PendingMaxOrderByAggregateInput
+    _min?: PendingMinOrderByAggregateInput
+    _sum?: PendingSumOrderByAggregateInput
+  }
+
+  export type PendingScalarWhereWithAggregatesInput = {
+    AND?: PendingScalarWhereWithAggregatesInput | PendingScalarWhereWithAggregatesInput[]
+    OR?: PendingScalarWhereWithAggregatesInput[]
+    NOT?: PendingScalarWhereWithAggregatesInput | PendingScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Pending"> | number
+    approver_id?: StringWithAggregatesFilter<"Pending"> | string
+    reference_number?: StringWithAggregatesFilter<"Pending"> | string
+    reference_table?: StringWithAggregatesFilter<"Pending"> | string
+    description?: StringWithAggregatesFilter<"Pending"> | string
+    transaction_date?: DateTimeWithAggregatesFilter<"Pending"> | Date | string
+  }
 
   export type CanvassWhereInput = {
     AND?: CanvassWhereInput | CanvassWhereInput[]
@@ -31522,6 +32591,66 @@ export namespace Prisma {
     created_at?: DateTimeWithAggregatesFilter<"Vehicle"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"Vehicle"> | Date | string
     deleted_at?: DateTimeNullableWithAggregatesFilter<"Vehicle"> | Date | string | null
+  }
+
+  export type PendingCreateInput = {
+    approver_id: string
+    reference_number: string
+    reference_table: string
+    description: string
+    transaction_date?: Date | string
+  }
+
+  export type PendingUncheckedCreateInput = {
+    id?: number
+    approver_id: string
+    reference_number: string
+    reference_table: string
+    description: string
+    transaction_date?: Date | string
+  }
+
+  export type PendingUpdateInput = {
+    approver_id?: StringFieldUpdateOperationsInput | string
+    reference_number?: StringFieldUpdateOperationsInput | string
+    reference_table?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    transaction_date?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PendingUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    approver_id?: StringFieldUpdateOperationsInput | string
+    reference_number?: StringFieldUpdateOperationsInput | string
+    reference_table?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    transaction_date?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PendingCreateManyInput = {
+    id?: number
+    approver_id: string
+    reference_number: string
+    reference_table: string
+    description: string
+    transaction_date?: Date | string
+  }
+
+  export type PendingUpdateManyMutationInput = {
+    approver_id?: StringFieldUpdateOperationsInput | string
+    reference_number?: StringFieldUpdateOperationsInput | string
+    reference_table?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    transaction_date?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PendingUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    approver_id?: StringFieldUpdateOperationsInput | string
+    reference_number?: StringFieldUpdateOperationsInput | string
+    reference_table?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    transaction_date?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CanvassCreateInput = {
@@ -34156,6 +35285,17 @@ export namespace Prisma {
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -34180,6 +35320,95 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type PendingApprover_idReference_numberReference_tableCompoundUniqueInput = {
+    approver_id: string
+    reference_number: string
+    reference_table: string
+  }
+
+  export type PendingCountOrderByAggregateInput = {
+    id?: SortOrder
+    approver_id?: SortOrder
+    reference_number?: SortOrder
+    reference_table?: SortOrder
+    description?: SortOrder
+    transaction_date?: SortOrder
+  }
+
+  export type PendingAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type PendingMaxOrderByAggregateInput = {
+    id?: SortOrder
+    approver_id?: SortOrder
+    reference_number?: SortOrder
+    reference_table?: SortOrder
+    description?: SortOrder
+    transaction_date?: SortOrder
+  }
+
+  export type PendingMinOrderByAggregateInput = {
+    id?: SortOrder
+    approver_id?: SortOrder
+    reference_number?: SortOrder
+    reference_table?: SortOrder
+    description?: SortOrder
+    transaction_date?: SortOrder
+  }
+
+  export type PendingSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type StringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type StringNullableFilter<$PrismaModel = never> = {
@@ -34283,38 +35512,6 @@ export namespace Prisma {
     deleted_at?: SortOrder
   }
 
-  export type StringWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[] | ListStringFieldRefInput<$PrismaModel>
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedStringFilter<$PrismaModel>
-    _max?: NestedStringFilter<$PrismaModel>
-  }
-
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
   export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -34345,17 +35542,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
-  }
-
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
   }
 
   export type MEQSSupplierItemListRelationFilter = {
@@ -34428,22 +35614,6 @@ export namespace Prisma {
 
   export type CanvassItemSumOrderByAggregateInput = {
     quantity?: SortOrder
-  }
-
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type CanvassNullableRelationFilter = {
@@ -35849,6 +37019,22 @@ export namespace Prisma {
     deleted_at?: SortOrder
   }
 
+  export type StringFieldUpdateOperationsInput = {
+    set?: string
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type CanvassItemCreateNestedManyWithoutCanvassInput = {
     create?: XOR<CanvassItemCreateWithoutCanvassInput, CanvassItemUncheckedCreateWithoutCanvassInput> | CanvassItemCreateWithoutCanvassInput[] | CanvassItemUncheckedCreateWithoutCanvassInput[]
     connectOrCreate?: CanvassItemCreateOrConnectWithoutCanvassInput | CanvassItemCreateOrConnectWithoutCanvassInput[]
@@ -35897,14 +37083,6 @@ export namespace Prisma {
     create?: XOR<SPRCreateWithoutCanvassInput, SPRUncheckedCreateWithoutCanvassInput>
     connectOrCreate?: SPRCreateOrConnectWithoutCanvassInput
     connect?: SPRWhereUniqueInput
-  }
-
-  export type StringFieldUpdateOperationsInput = {
-    set?: string
-  }
-
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
@@ -36033,14 +37211,6 @@ export namespace Prisma {
     connectOrCreate?: MEQSSupplierItemCreateOrConnectWithoutCanvass_itemInput | MEQSSupplierItemCreateOrConnectWithoutCanvass_itemInput[]
     createMany?: MEQSSupplierItemCreateManyCanvass_itemInputEnvelope
     connect?: MEQSSupplierItemWhereUniqueInput | MEQSSupplierItemWhereUniqueInput[]
-  }
-
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
   }
 
   export type MEQSSupplierItemUpdateManyWithoutCanvass_itemNestedInput = {
@@ -37451,6 +38621,17 @@ export namespace Prisma {
     deleteMany?: SPRScalarWhereInput | SPRScalarWhereInput[]
   }
 
+  export type NestedIntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -37476,6 +38657,64 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
   export type NestedStringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -37499,48 +38738,6 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
-  export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[] | ListStringFieldRefInput<$PrismaModel>
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedStringFilter<$PrismaModel>
-    _max?: NestedStringFilter<$PrismaModel>
-  }
-
-  export type NestedIntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
-  }
-
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -37583,33 +38780,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
-  }
-
-  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type NestedFloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
   }
 
   export type NestedBoolFilter<$PrismaModel = never> = {
@@ -43359,6 +44529,10 @@ export namespace Prisma {
      * @deprecated Use VehicleCountOutputTypeDefaultArgs instead
      */
     export type VehicleCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = VehicleCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use PendingDefaultArgs instead
+     */
+    export type PendingArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = PendingDefaultArgs<ExtArgs>
     /**
      * @deprecated Use CanvassDefaultArgs instead
      */

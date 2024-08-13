@@ -1,32 +1,23 @@
 version: '3.8'
 services:
 
-  system-db:
+  lvis-db:
     image: postgres:16
     ports:
       - 5435:5432
     environment:
-      NODE_ENV: development
       POSTGRES_USER: jay
       POSTGRES_PASSWORD: jay123
-      POSTGRES_DB: lvis_system_db
     networks:
       - lvis-network
     restart: always
-
-  warehouse-db:
-    image: postgres:16
-    ports:
-      - 5437:5432
-    environment:
-      NODE_ENV: development
-      POSTGRES_USER: jay
-      POSTGRES_PASSWORD: jay123
-      POSTGRES_DB: lvis_warehouse_db
-    networks:
-      - lvis-network
-    restart: always
+    volumes:
+      - lvis-db-data:/var/lib/postgresql/data
+      - ./init-db:/docker-entrypoint-initdb.d
 
 networks:
   lvis-network:
     driver: bridge
+
+volumes:
+  lvis-db-data:

@@ -12,6 +12,8 @@ import { WarehouseCancelResponse, WarehouseRemoveResponse } from '../__common__/
 import { RVsResponse } from './entities/rvs-response.entity';
 import { getDateRange, isAdmin, isNormalUser } from '../__common__/helpers';
 import { UpdateRvByBudgetOfficerInput } from './dto/update-rv-by-budget-officer.input';
+import { CreateRvApproverSubInput } from './dto/create-rv-approver.sub.input';
+import { PURCHASING_TABLE } from '../__common__/constants';
 
 @Injectable()
 export class RvService {
@@ -48,13 +50,14 @@ export class RvService {
     constructor(
         private readonly prisma: PrismaService,
         private readonly httpService: HttpService,
-        private readonly canvassService: CanvassService
+        private readonly canvassService: CanvassService,
     ) { }
 
     setAuthUser(authUser: AuthUser) {
         this.authUser = authUser
     }
 
+    // When creating rv, pendings should also be created for each approver
     async create(input: CreateRvInput): Promise<RV> {
 
         this.logger.log('create()')
@@ -66,11 +69,9 @@ export class RvService {
         }
 
         const rvNumber = await this.getLatestRvNumber()
-        // const today = moment().format('MM/DD/YYYY')
 
         const createdBy = this.authUser.user.username
 
-        // data to be inserted in database
         const data: Prisma.RVCreateInput = {
             created_by: createdBy,
             rv_number: rvNumber,
@@ -96,16 +97,42 @@ export class RvService {
             }
         }
 
-        const created = await this.prisma.rV.create({
+        const queries = []
+
+        const createRvQuery = this.prisma.rV.create({
             data,
             include: this.includedFields
         })
 
-        console.log('created', created);
+        queries.push(createRvQuery)
 
-        this.logger.log('Successfully created RV')
+        const createPendingQuery = this.getCreatePendingQuery(input.approvers, rvNumber)
 
-        return created
+        queries.push(createPendingQuery)
+
+        const result = await this.prisma.$transaction(queries)
+
+        console.log('RV created successfully');
+        console.log('Pending with associated approver created successfully');
+
+        return result[0]
+        
+    }
+
+    private getCreatePendingQuery(approvers: CreateRvApproverSubInput[], rvNumber: string) {
+
+        const firstApprover = approvers.reduce((min, obj) => {
+            return obj.order < min.order ? obj : min;
+        }, approvers[0]);
+
+        const data = {
+            approver_id: firstApprover.approver_id,
+            reference_number: rvNumber,
+            reference_table: PURCHASING_TABLE.RV,
+            description: `RV no. ${rvNumber}`
+        }
+
+        return this.prisma.pending.create({ data })
 
     }
 
