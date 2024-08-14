@@ -72,38 +72,38 @@ export class EmployeeResolver {
         return this.rrApproverService.forEmployeePendingApprovals(employee.id)
     }
 
-    @ResolveField(() => [PendingApproval])
-    async pending_approvals(@Parent() employee: Employee) {
+    // @ResolveField(() => [PendingApproval])
+    // async pending_approvals(@Parent() employee: Employee) {
 
-        console.log('pending_approvals()')
+    //     console.log('pending_approvals()')
 
-        const [
-            rvPendingApprovals,
-            sprPendingApprovals,
-            joPendingApprovals,
-            meqsPendingApprovals,
-            poPendingApprovals,
-            rrPendingApprovals
-        ] = await Promise.all([
-            this.rvApproverService.forEmployeePendingApprovals(employee.id),
-            this.sprApproverService.forEmployeePendingApprovals(employee.id),
-            this.joApproverService.forEmployeePendingApprovals(employee.id),
-            this.meqsApproverService.forEmployeePendingApprovals(employee.id),
-            this.poApproverService.forEmployeePendingApprovals(employee.id),
-            this.rrApproverService.forEmployeePendingApprovals(employee.id)
-        ]);
+    //     const [
+    //         rvPendingApprovals,
+    //         sprPendingApprovals,
+    //         joPendingApprovals,
+    //         meqsPendingApprovals,
+    //         poPendingApprovals,
+    //         rrPendingApprovals
+    //     ] = await Promise.all([
+    //         this.rvApproverService.forEmployeePendingApprovals(employee.id),
+    //         this.sprApproverService.forEmployeePendingApprovals(employee.id),
+    //         this.joApproverService.forEmployeePendingApprovals(employee.id),
+    //         this.meqsApproverService.forEmployeePendingApprovals(employee.id),
+    //         this.poApproverService.forEmployeePendingApprovals(employee.id),
+    //         this.rrApproverService.forEmployeePendingApprovals(employee.id)
+    //     ]);
 
-        console.log('rvPendingApprovals', rvPendingApprovals)
+    //     console.log('rvPendingApprovals', rvPendingApprovals)
 
-        return this.employeeService.getAllPendingApprovals({
-            rvApprovals: rvPendingApprovals,
-            sprApprovals: sprPendingApprovals,
-            joApprovals: joPendingApprovals,
-            meqsApprovals: meqsPendingApprovals,
-            poApprovals: poPendingApprovals,
-            rrApprovals: rrPendingApprovals
-        })
-    }
+    //     return this.employeeService.getAllPendingApprovals({
+    //         rvApprovals: rvPendingApprovals,
+    //         sprApprovals: sprPendingApprovals,
+    //         joApprovals: joPendingApprovals,
+    //         meqsApprovals: meqsPendingApprovals,
+    //         poApprovals: poPendingApprovals,
+    //         rrApprovals: rrPendingApprovals
+    //     })
+    // }
 
     // @ResolveField(() => Int)
     // async total_pending_approvals(@Parent() employee: Employee) {
@@ -142,7 +142,7 @@ export class EmployeeResolver {
     // }
 
     @ResolveField(() => [Pending])
-    async pending_approvals2(@Parent() employee: Employee) {
+    async pending_approvals(@Parent() employee: Employee) {
 
         console.log('pending_approvals2()')
         return this.pendingService.findPendingsByApproverId(employee.id)

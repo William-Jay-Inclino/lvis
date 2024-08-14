@@ -13,7 +13,7 @@ import { RVsResponse } from './entities/rvs-response.entity';
 import { getDateRange, isAdmin, isNormalUser } from '../__common__/helpers';
 import { UpdateRvByBudgetOfficerInput } from './dto/update-rv-by-budget-officer.input';
 import { CreateRvApproverSubInput } from './dto/create-rv-approver.sub.input';
-import { PURCHASING_TABLE } from '../__common__/constants';
+import { DB_ENTITY } from '../__common__/constants';
 
 @Injectable()
 export class RvService {
@@ -128,7 +128,7 @@ export class RvService {
         const data = {
             approver_id: firstApprover.approver_id,
             reference_number: rvNumber,
-            reference_table: PURCHASING_TABLE.RV,
+            reference_table: DB_ENTITY.RV,
             description: `RV no. ${rvNumber}`
         }
 
