@@ -11,6 +11,8 @@ import { APPROVAL_STATUS } from '../__common__/types';
 import { RRsResponse } from './entities/rr-response.entity';
 import * as moment from 'moment';
 import { getDateRange, isAdmin, isNormalUser } from '../__common__/helpers';
+import { CreateRrApproverSubInput } from './dto/create-rr-approver.sub.input';
+import { DB_ENTITY } from '../__common__/constants';
 
 @Injectable()
 export class RrService {
@@ -82,6 +84,7 @@ export class RrService {
         this.authUser = authUser
     }
 
+    // When creating rr, pendings should also be created for each approver
     async create(input: CreateRrInput): Promise<RR> {
 
         this.logger.log('create()')
@@ -150,11 +153,39 @@ export class RrService {
             }
         }
 
-        const created = await this.prisma.rR.create({ data })
+        const queries = []
 
-        this.logger.log('Successfully created RR')
+        const createRrQuery= this.prisma.rR.create({ data })
 
-        return created
+        queries.push(createRrQuery)
+
+        const createPendingQuery = this.getCreatePendingQuery(input.approvers, rrNumber)
+
+        queries.push(createPendingQuery)
+
+        const result = await this.prisma.$transaction(queries)
+
+        console.log('RR created successfully');
+        console.log('Pending with associated approver created successfully');
+
+        return result[0]
+
+    }
+
+    private getCreatePendingQuery(approvers: CreateRrApproverSubInput[], rrNumber: string) {
+
+        const firstApprover = approvers.reduce((min, obj) => {
+            return obj.order < min.order ? obj : min;
+        }, approvers[0]);
+
+        const data = {
+            approver_id: firstApprover.approver_id,
+            reference_number: rrNumber,
+            reference_table: DB_ENTITY.RR,
+            description: `RR no. ${rrNumber}`
+        }
+
+        return this.prisma.pending.create({ data })
 
     }
 

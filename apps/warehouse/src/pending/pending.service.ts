@@ -6,6 +6,8 @@ import { APPROVAL_STATUS } from '../__common__/types';
 import { DB_ENTITY, MODULE_MAPPER } from '../__common__/constants';
 import { catchError, firstValueFrom } from 'rxjs';
 import { HttpService } from '@nestjs/axios';
+import { RrApproverStatusUpdated } from '../rr-approver/events/rr-approver-status-updated.event';
+import { EventEmitter2 } from '@nestjs/event-emitter';
 
 @Injectable()
 export class PendingService {
@@ -16,6 +18,7 @@ export class PendingService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly httpService: HttpService,
+    private eventEmitter: EventEmitter2
 ) { }
 
   setAuthUser(authUser: AuthUser) {
@@ -101,7 +104,7 @@ export class PendingService {
     }
 
     // get the x-approver table by the current approver 
-    const recordToUpdate = await this.prisma[module.approverModel].findFirst({
+    const approverModel = await this.prisma[module.approverModel].findFirst({
       where: {
         approver_id: item.approver_id,
         [module.id]: model.id,
@@ -112,19 +115,19 @@ export class PendingService {
       }
     });
 
-    if(!recordToUpdate) {
+    if(!approverModel) {
       throw new NotFoundException(`record to update not found`)
     }
 
-    console.log('recordToUpdate', recordToUpdate);
+    console.log('approverModel', approverModel);
 
     const updateStatusQuery = this.prisma[module.approverModel].update({
       where: {
-        id: recordToUpdate.id  
+        id: approverModel.id  
       },
       data: {
         status,
-        notes: (!!remarks && remarks.trim().length > 0) ? remarks : recordToUpdate.notes,
+        notes: (!!remarks && remarks.trim().length > 0) ? remarks : approverModel.notes,
         date_approval: new Date(),
       },
     });
@@ -228,6 +231,13 @@ export class PendingService {
       const result = await this.prisma.$transaction(queries)
       
       this.printLogsInConsole(logs)
+
+      // emit event so that item will be transacted and stock will be added on the item inventory
+      if(status === APPROVAL_STATUS.APPROVED && module.model === 'rR') {
+        // id = rrApprover ID
+        // handler function is located at item.service.ts -> handleRrApproverStatusUpdated
+        this.eventEmitter.emit('rr-approver-status.updated', new RrApproverStatusUpdated(approverModel.id))
+      }
 
       return {
         success: true,

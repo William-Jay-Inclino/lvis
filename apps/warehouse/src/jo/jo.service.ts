@@ -12,6 +12,8 @@ import { WarehouseCancelResponse, WarehouseRemoveResponse } from '../__common__/
 import { JOsResponse } from './entities/jos-response.entity';
 import { getDateRange, isAdmin, isNormalUser } from '../__common__/helpers';
 import { UpdateJoByBudgetOfficerInput } from './dto/update-jo-by-budget-officer.input';
+import { CreateJoApproverSubInput } from './dto/create-jo-approver.sub.input';
+import { DB_ENTITY } from '../__common__/constants';
 
 @Injectable()
 export class JoService {
@@ -55,20 +57,21 @@ export class JoService {
         this.authUser = authUser
     }
 
+    // When creating jo, pendings should also be created for each approver
     async create(input: CreateJoInput): Promise<JO> {
 
         this.logger.log('create()')
+
+        console.log('input', input);
 
         if (!(await this.canCreate(input))) {
             throw new Error('Failed to create JO. Please try again')
         }
 
         const joNumber = await this.getLatestJoNumber()
-        // const today = moment().format('MM/DD/YYYY')
 
         const createdBy = this.authUser.user.username
 
-        // data to be inserted in database
         const data: Prisma.JOCreateInput = {
             created_by: createdBy,
             jo_number: joNumber,
@@ -94,14 +97,42 @@ export class JoService {
             }
         }
 
-        const created = await this.prisma.jO.create({
+        const queries = []
+
+        const createJoQuery = this.prisma.jO.create({
             data,
             include: this.includedFields
         })
 
-        this.logger.log('Successfully created JO')
+        queries.push(createJoQuery)
 
-        return created
+        const createPendingQuery = this.getCreatePendingQuery(input.approvers, joNumber)
+
+        queries.push(createPendingQuery)
+
+        const result = await this.prisma.$transaction(queries)
+
+        console.log('JO created successfully');
+        console.log('Pending with associated approver created successfully');
+
+        return result[0]
+        
+    }
+
+    private getCreatePendingQuery(approvers: CreateJoApproverSubInput[], joNumber: string) {
+
+        const firstApprover = approvers.reduce((min, obj) => {
+            return obj.order < min.order ? obj : min;
+        }, approvers[0]);
+
+        const data = {
+            approver_id: firstApprover.approver_id,
+            reference_number: joNumber,
+            reference_table: DB_ENTITY.JO,
+            description: `JO no. ${joNumber}`
+        }
+
+        return this.prisma.pending.create({ data })
 
     }
 

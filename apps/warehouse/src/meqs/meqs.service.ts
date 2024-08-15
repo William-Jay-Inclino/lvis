@@ -11,6 +11,8 @@ import { MEQSsResponse } from './entities/meqs-response.entity';
 import * as moment from 'moment';
 import { getDateRange, isAdmin, isNormalUser } from '../__common__/helpers';
 import { WarehouseCancelResponse } from '../__common__/classes';
+import { CreateMeqsApproverSubInput } from './dto/create-meqs-approver.sub.input';
+import { DB_ENTITY } from '../__common__/constants';
 
 @Injectable()
 export class MeqsService {
@@ -88,6 +90,7 @@ export class MeqsService {
         this.authUser = authUser
     }
 
+    // When creating meqs, pendings should also be created for each approver
     async create(input: CreateMeqsInput): Promise<MEQS> {
 
         this.logger.log('create()')
@@ -163,17 +166,42 @@ export class MeqsService {
             meqs_suppliers
         }
 
+        const queries = []
 
-
-        const created = await this.prisma.mEQS.create({
+        const createMeqsQuery = this.prisma.mEQS.create({
             data,
             include: this.includedFields
         })
 
-        this.logger.log('MEQS successfully created')
+        queries.push(createMeqsQuery)
 
-        return created
+        const createPendingQuery = this.getCreatePendingQuery(input.approvers, meqsNumber)
 
+        queries.push(createPendingQuery)
+
+        const result = await this.prisma.$transaction(queries)
+
+        console.log('MEQS created successfully');
+        console.log('Pending with associated approver created successfully');
+
+        return result[0]
+
+    }
+
+    private getCreatePendingQuery(approvers: CreateMeqsApproverSubInput[], meqsNumber: string) {
+
+        const firstApprover = approvers.reduce((min, obj) => {
+            return obj.order < min.order ? obj : min;
+        }, approvers[0]);
+
+        const data = {
+            approver_id: firstApprover.approver_id,
+            reference_number: meqsNumber,
+            reference_table: DB_ENTITY.MEQS,
+            description: `MEQS no. ${meqsNumber}`
+        }
+
+        return this.prisma.pending.create({ data })
 
     }
 

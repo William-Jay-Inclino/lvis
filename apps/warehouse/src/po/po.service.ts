@@ -12,6 +12,8 @@ import { POsResponse } from './entities/pos-response.entity';
 import * as moment from 'moment';
 import { getDateRange, isAdmin, isNormalUser } from '../__common__/helpers';
 import { UpdatePoByFinanceManagerInput } from './dto/update-po-by-finance-manager.input';
+import { CreatePoApproverSubInput } from './dto/create-po-approver.sub.input';
+import { DB_ENTITY } from '../__common__/constants';
 
 @Injectable()
 export class PoService {
@@ -67,6 +69,7 @@ export class PoService {
         this.authUser = authUser
     }
 
+    // When creating po, pendings should also be created for each approver
     async create(input: CreatePoInput): Promise<PO> {
 
         this.logger.log('create()')
@@ -110,14 +113,42 @@ export class PoService {
             }
         }
 
-        const created = await this.prisma.pO.create({
+        const queries = []
+
+        const createPoQuery = this.prisma.pO.create({
             data,
             include: this.includedFields
         })
 
-        this.logger.log('Successfully created PO')
+        queries.push(createPoQuery)
 
-        return created
+        const createPendingQuery = this.getCreatePendingQuery(input.approvers, poNumber)
+
+        queries.push(createPendingQuery)
+
+        const result = await this.prisma.$transaction(queries)
+
+        console.log('PO created successfully');
+        console.log('Pending with associated approver created successfully');
+
+        return result[0]
+
+    }
+
+    private getCreatePendingQuery(approvers: CreatePoApproverSubInput[], poNumber: string) {
+
+        const firstApprover = approvers.reduce((min, obj) => {
+            return obj.order < min.order ? obj : min;
+        }, approvers[0]);
+
+        const data = {
+            approver_id: firstApprover.approver_id,
+            reference_number: poNumber,
+            reference_table: DB_ENTITY.PO,
+            description: `PO no. ${poNumber}`
+        }
+
+        return this.prisma.pending.create({ data })
 
     }
 

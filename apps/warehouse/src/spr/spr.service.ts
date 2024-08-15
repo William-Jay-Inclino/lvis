@@ -12,6 +12,8 @@ import { WarehouseCancelResponse, WarehouseRemoveResponse } from '../__common__/
 import { SPRsResponse } from './entities/sprs-response.entity';
 import { getDateRange, isAdmin, isNormalUser } from '../__common__/helpers';
 import { UpdateSprByBudgetOfficerInput } from './dto/update-spr-by-budget-officer.input';
+import { CreateSprApproverSubInput } from './dto/create-spr-approver.sub.input';
+import { DB_ENTITY } from '../__common__/constants';
 
 @Injectable()
 export class SprService {
@@ -56,29 +58,30 @@ export class SprService {
         this.authUser = authUser
     }
 
+    // When creating spr, pendings should also be created for each approver
     async create(input: CreateSprInput): Promise<SPR> {
 
         this.logger.log('create()')
+
+        console.log('input', input);
 
         if (!(await this.canCreate(input))) {
             throw new Error('Failed to create SPR. Please try again')
         }
 
         const sprNumber = await this.getLatestSprNumber()
-        // const today = moment().format('MM/DD/YYYY')
 
         const createdBy = this.authUser.user.username
 
-        // data to be inserted in database
         const data: Prisma.SPRCreateInput = {
             created_by: createdBy,
             spr_number: sprNumber,
             date_requested: new Date(),
+            classification_id: input.classification_id ?? null,
+            notes: input.notes ?? null,
+            supervisor_id: input.supervisor_id,
             canvass: { connect: { id: input.canvass_id } },
             vehicle: { connect: { id: input.vehicle_id } },
-            classification_id: input.classification_id ?? null,
-            supervisor_id: input.supervisor_id,
-            notes: input.notes ?? null,
             spr_approvers: {
                 create: input.approvers.map(i => {
                     return {
@@ -94,14 +97,42 @@ export class SprService {
             }
         }
 
-        const created = await this.prisma.sPR.create({
+        const queries = []
+
+        const createSprQuery = this.prisma.sPR.create({
             data,
             include: this.includedFields
         })
 
-        this.logger.log('Successfully created SPR')
+        queries.push(createSprQuery)
 
-        return created
+        const createPendingQuery = this.getCreatePendingQuery(input.approvers, sprNumber)
+
+        queries.push(createPendingQuery)
+
+        const result = await this.prisma.$transaction(queries)
+
+        console.log('SPR created successfully');
+        console.log('Pending with associated approver created successfully');
+
+        return result[0]
+        
+    }
+
+    private getCreatePendingQuery(approvers: CreateSprApproverSubInput[], sprNumber: string) {
+
+        const firstApprover = approvers.reduce((min, obj) => {
+            return obj.order < min.order ? obj : min;
+        }, approvers[0]);
+
+        const data = {
+            approver_id: firstApprover.approver_id,
+            reference_number: sprNumber,
+            reference_table: DB_ENTITY.SPR,
+            description: `SPR no. ${sprNumber}`
+        }
+
+        return this.prisma.pending.create({ data })
 
     }
 
