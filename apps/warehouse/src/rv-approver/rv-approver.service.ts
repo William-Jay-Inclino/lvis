@@ -10,7 +10,7 @@ import { catchError, firstValueFrom } from 'rxjs';
 import { WarehouseRemoveResponse } from '../__common__/classes';
 import { isAdmin, isValidApprovalStatus } from '../__common__/helpers';
 import { UpdateRVOrderResponse } from './entities/update-rv-order-response.entity';
-import { PURCHASING_TABLE } from '../__common__/constants';
+import { DB_ENTITY } from '../__common__/constants';
 
 @Injectable()
 export class RvApproverService {
@@ -223,12 +223,12 @@ export class RvApproverService {
                     approver_id_reference_number_reference_table: {
                         approver_id: approverId,
                         reference_number: existingItem.rv.rv_number,
-                        reference_table: PURCHASING_TABLE.RV
+                        reference_table: DB_ENTITY.RV
                     }
                 }
             })
 
-            const updatePendingQuery = this.updatePendingTblQuery(input.status, approverId, existingItem.rv.rv_number, PURCHASING_TABLE.RV, pending)
+            const updatePendingQuery = this.updatePendingTblQuery(input.status, approverId, existingItem.rv.rv_number, DB_ENTITY.RV, pending)
 
             if(updatePendingQuery) {
                 queries.push(updatePendingQuery)
